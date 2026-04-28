@@ -1,0 +1,36 @@
+id: https://w3id.org/narad_linkml/schema/narad/beamline
+name: narad_beamline
+description: >-
+  Beamline schema: an ordered sequence of beamline elements defining a beam path.
+license: CC-BY-4.0
+version: 0.1.0
+
+prefixes:
+  linkml: "https://w3id.org/linkml/"
+  ro: "http://purl.obolibrary.org/obo/RO_"
+  owl: "http://www.w3.org/2002/07/owl#"
+
+imports:
+  - linkml:types
+  - narad_linkml_elements
+
+classes:
+  Beamline:
+    description: "An ordered sequence of beamline elements defining a beam path."
+    slots:
+      - inlined_name
+      - kind
+      - line
+
+slots:
+  inlined_name:
+    identifier: true
+    range: string
+    description: "Name of the beamline."
+    inlined: true
+
+  line:
+    range: BeamlineElement
+    multivalued: true
+    inlined: false
+    description: "Ordered sequence of cross-referenced element names forming a beamline."
