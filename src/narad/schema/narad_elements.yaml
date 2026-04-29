@@ -27,7 +27,7 @@ classes:
       - MagneticMultipoleP
       - SolenoidP
       - narad
-      - facility_params
+      - FacilityParams
     slot_usage:
       name:
         required: true
