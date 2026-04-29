@@ -23,7 +23,7 @@ narad:
         domain: Profile
         range: TypeSpecificCapability
       - id: has_signal
-        domain: CapabilityMixin
+        domain: Capability
         range: Signal 
       - id: implemented_by
         domain: Signal
@@ -33,10 +33,10 @@ narad:
         range: Device
       - id: located_in
         domain: Device
-        range: Facility # this needs to change
+        range: Facility # this needs to change to support a CryoCavity device located_in a CryoModule, which is located_in a Facility; however, this is sufficient for the current UITF example and can be revised when we have more complex facility structure to model
       - id: controlled_by # not currently using the elements, but could be useful for directly linking signals to control system elements in the future
-        domain: Element
-        range: PVBinding
+        domain: Device
+        range: SignalBinding
       - id: precedes # It is made explicit in the beamline; however, this may be useful for reasoning about beamline structure and signal flow in the future
         domain: Device
         range: Device
@@ -87,7 +87,7 @@ narad:
             - MagnetCurrentControlCapability
             type_specific_capabilities:
             - id: quadrupole_focusing_control
-              class: QuadrupoleStrengthCapability
+              capability_class: QuadrupoleStrengthCapability
               description: Control and observe the normalized quadrupole strength.
               signals:
               - name: strength_setpoint
@@ -105,7 +105,7 @@ narad:
             - MagnetCurrentControlCapability
             type_specific_capabilities:
             - id: corrector_kick_control
-              class: CorrectorKickCapability
+              capability_class: CorrectorKickCapability
               description: Template capability for corrector kick control.
               signals:
               - name: kick_setpoint
@@ -123,7 +123,7 @@ narad:
             - MagnetCurrentControlCapability
             type_specific_capabilities:
             - id: corrector_kick_control
-              class: CorrectorKickCapability
+              capability_class: CorrectorKickCapability
               description: Control and observe the corrector kick.
               signals:
               - name: kick_setpoint
@@ -142,7 +142,7 @@ narad:
             - MagnetCurrentControlCapability
             type_specific_capabilities:
             - id: dipole_bend_control
-              class: DipoleFieldCapability
+              capability_class: DipoleFieldCapability
               description: Template capability for dipole bend field control.
               signals:
               - name: field_setpoint
@@ -159,7 +159,7 @@ narad:
             - MagnetCurrentControlCapability
             type_specific_capabilities:
             - id: dipole_bend_control
-              class: DipoleFieldCapability
+              capability_class: DipoleFieldCapability
               description: Control and observe the dipole bend field.
               signals:
               - name: field_setpoint
@@ -237,8 +237,8 @@ narad:
     facilities:
       UITF:
         identifier:
-          type: doi
-          value: 10.1016/j.nima.2022.167093
+          - identifier_type: doi
+            identifier_value: 10.1016/j.nima.2022.167093
         control_system: epics
         naming_convention: <device><signal_code>
         signal_definitions:
@@ -292,7 +292,7 @@ narad:
                 epics_suffix: :STAT
                 description: EPICS cavity status PV (shared across all cavity types)
 beamlines:
-  - GUN_thru_MV:
+  - beamline_name: GUN_thru_MV
     kind: BeamLine
     line:
     - RF_LASER

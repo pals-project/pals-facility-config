@@ -12,7 +12,7 @@ imports:
   - linkml:types
 
 classes:
-  FacilityParams:
+  FacilityParamsBlock:
     description: "Facility-specific element parameters: type designation, accelerator model name, and open property map."
     slots:
       - facility_element_type
@@ -20,8 +20,8 @@ classes:
       - properties
 
 slots:
-  facility_params:
-    range: FacilityParams
+  FacilityParams:
+    range: FacilityParamsBlock
     inlined: true
     description: "Facility-specific element parameters block."
 
