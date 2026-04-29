@@ -3,8 +3,8 @@ requires = ["hatchling", "uv-dynamic-versioning"]
 build-backend = "hatchling.build"
 
 [project]
-name = "dmlinkml"
-description = "LinkML Tutorial 2025"
+name = "narad"
+description = "NARAD-DataService LinkML schema and utilities"
 authors = [
   {name = "Diana McSpadden", email = "dianam@jlab.org"},
 ]
