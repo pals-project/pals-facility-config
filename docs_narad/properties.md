@@ -1,0 +1,78 @@
+
+
+# Slot: properties 
+
+
+_Open-ended key-value property map for element-specific parameters._
+
+
+
+
+
+URI: [https://w3id.org/narad_linkml/schema/narad/properties](https://w3id.org/narad_linkml/schema/narad/properties)
+Alias: properties
+
+<!-- no inheritance hierarchy -->
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [FacilityParams](FacilityParams.md) | Facility-specific element parameters: type designation, accelerator model nam... |  no  |
+
+
+
+
+
+
+## Properties
+
+* Range: [AnyValue](AnyValue.md)
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/narad_linkml/schema/narad/
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | https://w3id.org/narad_linkml/schema/narad/properties |
+| native | https://w3id.org/narad_linkml/schema/narad/properties |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: properties
+description: Open-ended key-value property map for element-specific parameters.
+from_schema: https://w3id.org/narad_linkml/schema/narad/
+rank: 1000
+alias: properties
+domain_of:
+- FacilityParams
+range: AnyValue
+
+```
+</details>

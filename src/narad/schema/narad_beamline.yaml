@@ -12,25 +12,30 @@ prefixes:
 
 imports:
   - linkml:types
-  - narad_linkml_elements
+  - narad_elements
 
 classes:
   Beamline:
     description: "An ordered sequence of beamline elements defining a beam path."
     slots:
-      - inlined_name
+      - beamline_name
       - kind
       - line
+    slot_usage:
+      beamline_name:
+        range: string
+        required: true
+        identifier: true
 
 slots:
-  inlined_name:
+  beamline_name:
     identifier: true
     range: string
     description: "Name of the beamline."
-    inlined: true
 
   line:
-    range: BeamlineElement
+    range: string
     multivalued: true
     inlined: false
     description: "Ordered sequence of cross-referenced element names forming a beamline."
+    

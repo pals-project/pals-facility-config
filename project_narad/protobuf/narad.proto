@@ -1,0 +1,205 @@
+ syntax="proto3";
+ package
+// metamodel_version: 1.7.0
+// version: 0.1.0
+// An ordered sequence of beamline elements defining a beam path.
+message Beamline
+ {
+  string beamlineName = 0
+  string kind = 0
+ repeated  string line = 0
+ }
+// A single element in a beamline with optional physics parameter blocks.
+message BeamlineElement
+ {
+  string name = 0
+  elementKindEnum kind = 0
+  float length = 0
+  rFParams rFP = 0
+  bendParams bendP = 0
+  magneticMultipoleParams magneticMultipoleP = 0
+  solenoidParams solenoidP = 0
+  elementNaradRef narad = 0
+  facilityParams facilityParams = 0
+ }
+// Dipole/bend physics parameters (entry angle, exit edge angles).
+message BendParams
+ {
+  float angleRef = 0
+  float e1 = 0
+  float e2 = 0
+ }
+// A named, shared grouping of semantically related signals for a control aspect.
+message Capability
+ {
+  string name = 0
+  string description = 0
+ repeated  signal signals = 0
+ }
+// Capability-layer container for profile families and a shared default graph projection.
+message CapabilityLayer
+ {
+  graphProjection defaultGraphProjection = 0
+ repeated  controlProfileFamily profiles = 0
+ }
+// A device-type profile that reuses shared capabilities and adds specific capabilities.
+message CapabilityProfile
+ {
+  string name = 0
+  elementKindEnum deviceType = 0
+  string description = 0
+  boolean isAbstract = 0
+ repeated  capability inheritsSharedCapabilities = 0
+ repeated  typeSpecificCapability typeSpecificCapabilities = 0
+ }
+// A reusable family of control profiles sharing common semantics and structure.
+message ControlProfileFamily
+ {
+  string name = 0
+  deviceDomainEnum deviceDomain = 0
+  string description = 0
+ repeated  capability sharedCapabilities = 0
+ repeated  capabilityProfile typeProfiles = 0
+  graphProjection graphProjection = 0
+ }
+// Signal binding set scoped to a device type (for example, Quadrupole or BPM).
+message DeviceTypeSignalSet
+ {
+  string name = 0
+ repeated  signalBinding signalBindings = 0
+ }
+// NARAD semantic reference block attached to a beamline element.
+message ElementNaradRef
+ {
+  controlProfileFamily capabilityProfileFamily = 0
+  capabilityProfile capabilityProfile = 0
+ repeated  pVBinding signalBindings = 0
+ }
+// A facility with specific signal bindings.
+message Facility
+ {
+  string name = 0
+ repeated  identifier identifier = 0
+  string controlSystem = 0
+  string namingConvention = 0
+  signalDefinitions signalDefinitions = 0
+ }
+// Facility-specific element parameters: type designation, accelerator model name, and open property map.
+message FacilityParams
+ {
+  string facilityElementType = 0
+  string modeledAs = 0
+  anyValue properties = 0
+ }
+// Graph projection metadata for node labels and edge categories.
+message GraphProjection
+ {
+  nodeLabels nodeLabels = 0
+ repeated  relationship relationships = 0
+ }
+// A globally unique identifier for an entity (e.g., facility), with a specified type (e.g. DOI, ROR, ARK, local).
+message Identifier
+ {
+  identifierTypeEnum identifierType = 0
+  string identifierValue = 0
+ }
+// Magnetic multipole physics parameters.
+message MagneticMultipoleParams
+ {
+  float kn1 = 0
+ }
+// NARAD configuration block containing the capability layer.
+message NaradConfig
+ {
+  string schemaVersion = 0
+  string intent = 0
+  capabilityLayer capabilityLayer = 0
+  string facility = 0
+  string controlSystem = 0
+  signalLayer signalLayer = 0
+ }
+// Top-level NARAD document container.
+message NaradModel
+ {
+  naradConfig narad = 0
+ repeated  beamline beamlines = 0
+ repeated  beamlineElement elements = 0
+ }
+// Static node-type label strings for the graph projection, covering all node categories except Device. The device label is derived from ControlProfileFamily.device_domain and need not be repeated here.
+message NodeLabels
+ {
+  string capabilityFamily = 0
+  string profile = 0
+  string capability = 0
+  string signal = 0
+ }
+// A concrete PV (Process Variable) binding for one semantic signal on a beamline element.
+message PVBinding
+ {
+  string name = 0
+  string facility = 0
+  string controlSystem = 0
+  string pv = 0
+ }
+// A directed edge type in the NARAD graph projection, modelled after the OBO Relation Ontology (RO) ObjectProperty metamodel. Each relationship carries an identifier, human-readable label, natural-language description, and explicit domain/range node-type constraints.
+message Relationship
+ {
+  string id = 0
+  nodeTypeEnum domain = 0
+  nodeTypeEnum range = 0
+ repeated  relationship subpropertyOf = 0
+  relationship inverseOf = 0
+  boolean symmetric = 0
+  boolean transitive = 0
+  boolean asymmetric = 0
+  boolean irreflexive = 0
+  string rangeTarget = 0
+ }
+// RF cavity physics parameters (frequency, voltage, phase).
+message RFParams
+ {
+  float frequency = 0
+  float voltage = 0
+  float phase = 0
+ }
+// A named semantic signal used by a capability.
+message Signal
+ {
+  string name = 0
+  signalRoleEnum role = 0
+  dataTypeEnum dataType = 0
+  string units = 0
+  uriorcurie unitsUri = 0
+  string description = 0
+ }
+// A named EPICS suffix definition for one semantic signal.
+message SignalBinding
+ {
+  string name = 0
+  string epicsSuffix = 0
+  string description = 0
+ }
+// EPICS signal suffix templates keyed by device type or device domain. Use a domain-level key (e.g. Magnet, RFCavity) for signals shared across all types in that domain; use a device-type key (e.g. Quadrupole, BPM) for type-specific signals. New device types require no schema changes.
+message SignalDefinitions
+ {
+ repeated  deviceTypeSignalSet typeSignalSets = 0
+ }
+// Signal-layer container for facility-specific signal bindings.
+message SignalLayer
+ {
+ repeated  facility facilities = 0
+ }
+// Solenoid physics parameters.
+message SolenoidParams
+ {
+  float ksol = 0
+ }
+// An inline capability declared within a device-type profile, with its own identifier, a semantic class label, a description, and a list of signals. Distinct from the shared capabilities referenced by name; these are profile-local definitions.
+message TypeSpecificCapability
+ {
+  string id = 0
+  string capabilityClass = 0
+  uriorcurie classCurie = 0
+  string description = 0
+ repeated  signal signals = 0
+ }

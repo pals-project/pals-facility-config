@@ -23,7 +23,7 @@ narad:
         domain: Profile
         range: TypeSpecificCapability
       - id: has_signal
-        domain: Capability # capabilities and devices - NEED TO ADDRESS
+        domain: CapabilityMixin
         range: Signal 
       - id: implemented_by
         domain: Signal
@@ -34,10 +34,10 @@ narad:
       - id: located_in
         domain: Device
         range: Facility # this needs to change
-      - id: controlled_by
-        domain: Device
-        range: Signal # what should this be?
-      - id: precedes # May not match the PALS standard. It is made explicit in the beamline
+      - id: controlled_by # not currently using the elements, but could be useful for directly linking signals to control system elements in the future
+        domain: Element
+        range: PVBinding
+      - id: precedes # It is made explicit in the beamline; however, this may be useful for reasoning about beamline structure and signal flow in the future
         domain: Device
         range: Device
     profiles:
@@ -236,6 +236,9 @@ narad:
   signal_layer:
     facilities:
       UITF:
+        identifier:
+          type: doi
+          value: 10.1016/j.nima.2022.167093
         control_system: epics
         naming_convention: <device><signal_code>
         signal_definitions:
@@ -632,8 +635,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: RK11:STAT
-  JLabP:
-    jlab_type: WarmCavity
+  FacilityParams:
+    facility_element_type: WarmCavity
     modeled_as: RFCA
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -668,8 +671,8 @@ elements:
   length: 0.2
 - name: S_IS_20CM
   kind: Marker
-  JLabP:
-    jlab_type: Mark
+  FacilityParams:
+    facility_element_type: Mark
     modeled_as: MARK
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -715,8 +718,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMK101.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -728,7 +731,7 @@ elements:
       CanType: 'Stripline'
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmk101
+      controlled_by: iocipmk101
       pCentral: '.465144443755972'
       alphax: '-14.84984297191979'
       alphay: '-3.340915259171737'
@@ -783,13 +786,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK101H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK101H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -852,13 +855,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK101V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK101V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -924,13 +927,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK101AH.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK101AH
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -993,13 +996,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK101AV.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK101AV
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1040,14 +1043,14 @@ elements:
   length: 0.0762
   SolenoidP:
     Ksol: -11.6540717
-  JLabP:
-    jlab_type: Solenoid
+  FacilityParams:
+    facility_element_type: Solenoid
     modeled_as: SOLE
     properties:
       HCOSystem: UITF Solenoids
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Winding: SingleWound
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MFHK101
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1102,8 +1105,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMK102.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -1115,7 +1118,7 @@ elements:
       CanType: Stripline
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmk102
+      controlled_by: iocipmk102
       pCentral: '.465144443755972'
       alphax: '14.89750177210773'
       alphay: '1.862421495338784'
@@ -1167,13 +1170,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK102H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK102H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1236,13 +1239,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK102V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK102V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1280,8 +1283,8 @@ elements:
   length: 0.179112924
 - name: ITVK201
   kind: Instrument
-  JLabP:
-    jlab_type: Standard
+  FacilityParams:
+    facility_element_type: Standard
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -1293,7 +1296,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR1
       RetractedChannel: '2'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144307216255992'
       alphax: '1.171553470644124'
       alphay: '-2.314118176337514'
@@ -1322,8 +1325,8 @@ elements:
   length: 0.001
 - name: VIPK201
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.001'
@@ -1372,13 +1375,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MDSK201.BDL
-  JLabP:
-    jlab_type: Dipole
+  FacilityParams:
+    facility_element_type: Dipole
     modeled_as: CSBEND
     properties:
       HCOSystem: UITF Dipoles
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MDSK201
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1420,8 +1423,8 @@ elements:
   length: 0.0951987648
 - name: ITVK201A
   kind: Instrument
-  JLabP:
-    jlab_type: Standard
+  FacilityParams:
+    facility_element_type: Standard
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -1433,7 +1436,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR1
       RetractedChannel: '4'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144443755972'
       alphax: '.1894640777929577'
       alphay: '.9680702433798554'
@@ -1490,13 +1493,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK201H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK201H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1562,13 +1565,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK201V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK201V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1606,8 +1609,8 @@ elements:
   length: 0.167198827
 - name: VIPK202
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.001'
@@ -1626,14 +1629,14 @@ elements:
   length: 0.0762
   SolenoidP:
     Ksol: 9.64698252
-  JLabP:
-    jlab_type: Solenoid
+  FacilityParams:
+    facility_element_type: Solenoid
     modeled_as: SOLE
     properties:
       HCOSystem: UITF Solenoids
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Winding: SingleWound
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MFBK202
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1700,13 +1703,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK202H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK202H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1772,13 +1775,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK202V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK202V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1816,8 +1819,8 @@ elements:
   length: 0.167402607
 - name: ITVK202
   kind: Instrument
-  JLabP:
-    jlab_type: Standard
+  FacilityParams:
+    facility_element_type: Standard
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -1829,7 +1832,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR1
       RetractedChannel: '6'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144443755972'
       alphax: -.5128667506408852
       alphay: -.4280143789379571
@@ -1889,14 +1892,14 @@ elements:
         facility: UITF
         control_system: epics
         pv: MQWK202.BDL
-  JLabP:
-    jlab_type: QW
+  FacilityParams:
+    facility_element_type: QW
     modeled_as: KQUAD
     properties:
       HCOSystem: UITF Quads
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Usage: Matching
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MQWK202
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -1937,8 +1940,8 @@ elements:
   length: 0.00550564058
 - name: VIPK203
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: 1E-06
@@ -1955,13 +1958,13 @@ elements:
 - name: MWFK203
   kind: Drift
   length: 0.3095
-  JLabP:
-    jlab_type: WienFilter
+  FacilityParams:
+    facility_element_type: WienFilter
     modeled_as: MATR
     properties:
       HCOSystem: UITF Wien
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MWFK203
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2001,8 +2004,8 @@ elements:
   length: 0.058049998
 - name: ITVK203
   kind: Instrument
-  JLabP:
-    jlab_type: Standard
+  FacilityParams:
+    facility_element_type: Standard
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -2014,7 +2017,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR1
       RetractedChannel: '8'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144443755972'
       alphax: -.6482601935641887
       alphay: '-1.770743460328945'
@@ -2074,14 +2077,14 @@ elements:
         facility: UITF
         control_system: epics
         pv: MQWK203.BDL
-  JLabP:
-    jlab_type: QW
+  FacilityParams:
+    facility_element_type: QW
     modeled_as: KQUAD
     properties:
       HCOSystem: UITF Quads
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Usage: Matching
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MQWK203
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2150,13 +2153,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK203H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK203H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2219,13 +2222,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK203V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK203V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2266,14 +2269,14 @@ elements:
   length: 0.0635
   SolenoidP:
     Ksol: 3.90306685
-  JLabP:
-    jlab_type: Solenoid
+  FacilityParams:
+    facility_element_type: Solenoid
     modeled_as: SOLE
     properties:
       HCOSystem: UITF Solenoids
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Winding: CounterWound
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MFQK203
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2341,13 +2344,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK203AH.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK203AH
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2410,13 +2413,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK203AV.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK203AV
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2454,8 +2457,8 @@ elements:
   length: 0.257904568
 - name: ITVK203A
   kind: Instrument
-  JLabP:
-    jlab_type: Standard
+  FacilityParams:
+    facility_element_type: Standard
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -2467,7 +2470,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR1
       RetractedChannel: '10'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144443755972'
       alphax: '.6793535480685993'
       alphay: '-2.410769524042676'
@@ -2496,8 +2499,8 @@ elements:
   length: 1.00000008e-09
 - name: IFYK203
   kind: Instrument
-  JLabP:
-    jlab_type: FaradayCup
+  FacilityParams:
+    facility_element_type: FaradayCup
     modeled_as: MONITOR
     properties:
       InsertedMode: CW
@@ -2508,7 +2511,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR2
       RetractedChannel: '6'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144443755972'
       alphax: '.6793535478139585'
       alphay: '-2.410769525371156'
@@ -2552,8 +2555,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMK203.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -2565,7 +2568,7 @@ elements:
       CanType: none
       Rotation: '0'
       Sensitivity: '0'
-      Controlled_by: iocipmk203
+      controlled_by: iocipmk203
       pCentral: '.465144443755972'
       alphax: '.6554172381125428'
       alphay: '-2.535647037941357'
@@ -2597,14 +2600,14 @@ elements:
   length: 0.0635
   SolenoidP:
     Ksol: 9.16611694
-  JLabP:
-    jlab_type: Solenoid
+  FacilityParams:
+    facility_element_type: Solenoid
     modeled_as: SOLE
     properties:
       HCOSystem: UITF Solenoids
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Winding: SingleWound
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MFAK301
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2644,8 +2647,8 @@ elements:
 - name: RIHK301
   kind: Drift
   length: 0.0826
-  JLabP:
-    jlab_type: WarmCavity
+  FacilityParams:
+    facility_element_type: WarmCavity
     modeled_as: RFDF
     properties:
       HCOSystem: UITF Warm RF
@@ -2711,13 +2714,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK301H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK301H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2783,13 +2786,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK301V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK301V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2827,8 +2830,8 @@ elements:
   length: 0.15568411
 - name: VIPK302
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Disabled: '1'
       Usage: Beamline
@@ -2845,14 +2848,14 @@ elements:
   length: 0.05
   SolenoidP:
     Ksol: 11.98
-  JLabP:
-    jlab_type: Solenoid
+  FacilityParams:
+    facility_element_type: Solenoid
     modeled_as: SOLE
     properties:
       HCOSystem: UITF Solenoids
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Winding: CounterWound
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MFDK302A
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -2891,8 +2894,8 @@ elements:
   length: 0.322228025
 - name: ISLK302
   kind: Instrument
-  JLabP:
-    jlab_type: Aperture
+  FacilityParams:
+    facility_element_type: Aperture
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -2923,8 +2926,8 @@ elements:
   length: 0.00472272384
 - name: IYGK302
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -2936,7 +2939,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR1
       RetractedChannel: '12'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144443755972'
       alphax: '-3.984399517968124'
       alphay: -.9417037755499156
@@ -2968,14 +2971,14 @@ elements:
   length: 0.05
   SolenoidP:
     Ksol: 11.98
-  JLabP:
-    jlab_type: Solenoid
+  FacilityParams:
+    facility_element_type: Solenoid
     modeled_as: SOLE
     properties:
       HCOSystem: UITF Solenoids
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Winding: SingleWound
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MFDK302B
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3042,13 +3045,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK302H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK302H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3114,13 +3117,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK302V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK302V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3158,8 +3161,8 @@ elements:
   length: 0.0915640304
 - name: VMVK401
   kind: Drift
-  JLabP:
-    jlab_type: ManualValve
+  FacilityParams:
+    facility_element_type: ManualValve
     properties:
       RelativeSOffset: '.1363'
       RelativeSReference: MFAK303
@@ -3175,8 +3178,8 @@ elements:
 - name: RIHK302
   kind: Drift
   length: 0.0826
-  JLabP:
-    jlab_type: WarmCavity
+  FacilityParams:
+    facility_element_type: WarmCavity
     modeled_as: RFDF
     properties:
       HCOSystem: UITF Warm RF
@@ -3217,14 +3220,14 @@ elements:
   length: 0.0635
   SolenoidP:
     Ksol: -12.0
-  JLabP:
-    jlab_type: Solenoid
+  FacilityParams:
+    facility_element_type: Solenoid
     modeled_as: SOLE
     properties:
       HCOSystem: UITF Solenoids
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Winding: SingleWound
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MFAK303
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3263,8 +3266,8 @@ elements:
   length: 0.17019742
 - name: VIPK401
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.001'
@@ -3296,8 +3299,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMK401.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -3309,7 +3312,7 @@ elements:
       CanType: none
       Rotation: '0'
       Sensitivity: '0'
-      Controlled_by: iocipmk401
+      controlled_by: iocipmk401
       pCentral: '.465144443755972'
       alphax: '6.113617068270621'
       alphay: '5.20382314684219'
@@ -3366,13 +3369,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK401H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK401H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3438,13 +3441,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK401V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK401V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3482,8 +3485,8 @@ elements:
   length: 0.212674027
 - name: ITVK401
   kind: Instrument
-  JLabP:
-    jlab_type: Standard
+  FacilityParams:
+    facility_element_type: Standard
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -3495,7 +3498,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR1
       RetractedChannel: '14'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144443755972'
       alphax: '.8314315992404762'
       alphay: '2.596823105758951'
@@ -3545,8 +3548,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: RK41:STAT
-  JLabP:
-    jlab_type: WarmCavity
+  FacilityParams:
+    facility_element_type: WarmCavity
     modeled_as: RFCA
     properties:
       HCOSystem: UITF Warm RF
@@ -3609,13 +3612,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK401AH.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK401AH
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3678,13 +3681,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK401AV.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK401AV
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3722,8 +3725,8 @@ elements:
   length: 0.226888224
 - name: ISLK401
   kind: Instrument
-  JLabP:
-    jlab_type: Aperture
+  FacilityParams:
+    facility_element_type: Aperture
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -3782,13 +3785,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK401BH.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK401BH
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3854,13 +3857,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHK401BV.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHK401BV
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3931,13 +3934,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MDIK402.BDL
-  JLabP:
-    jlab_type: Dipole
+  FacilityParams:
+    facility_element_type: Dipole
     modeled_as: CSBEND
     properties:
       HCOSystem: UITF Dipoles
       SegMask: S_UITF+S_KVD+S_KV+A_KVSPEC+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MDIK402
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -3975,8 +3978,8 @@ elements:
   length: 0.171594886
 - name: VIPK402
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.001'
@@ -4008,8 +4011,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMK402.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -4021,7 +4024,7 @@ elements:
       CanType: none
       Rotation: '0'
       Sensitivity: '0'
-      Controlled_by: iocipmk402
+      controlled_by: iocipmk402
       pCentral: '.465144255654231'
       alphax: '-29.42000787120911'
       alphay: '-12.33550192289794'
@@ -4078,13 +4081,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK402H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK402H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -4150,13 +4153,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK402V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK402V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -4194,8 +4197,8 @@ elements:
   length: 0.119517575
 - name: VDPK403
   kind: Drift
-  JLabP:
-    jlab_type: DPPump
+  FacilityParams:
+    facility_element_type: DPPump
     properties:
       RelativeSOffset: '.001'
       RelativeSReference: MFQK403
@@ -4208,8 +4211,8 @@ elements:
   length: 0.001
 - name: VIPK403
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.002'
@@ -4225,8 +4228,8 @@ elements:
   length: 0.0949882728
 - name: ITVK402
   kind: Instrument
-  JLabP:
-    jlab_type: Standard
+  FacilityParams:
+    facility_element_type: Standard
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -4238,7 +4241,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR1
       RetractedChannel: '16'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '-34.70257512677006'
       alphay: '-14.94305558404113'
@@ -4267,8 +4270,8 @@ elements:
   length: 0.205767612
 - name: VIPK403A
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.001'
@@ -4284,14 +4287,14 @@ elements:
   length: 0.0635
   SolenoidP:
     Ksol: -9.39338528
-  JLabP:
-    jlab_type: Solenoid
+  FacilityParams:
+    facility_element_type: Solenoid
     modeled_as: SOLE
     properties:
       HCOSystem: UITF Solenoids
       SegMask: S_UITF+S_KV+A_UITF+A_KV
       Winding: CounterWound
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MFQK403
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -4330,8 +4333,8 @@ elements:
   length: 0.101945378
 - name: ISLK403
   kind: Instrument
-  JLabP:
-    jlab_type: Aperture
+  FacilityParams:
+    facility_element_type: Aperture
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -4362,8 +4365,8 @@ elements:
   length: 0.326195154
 - name: ICBK403
   kind: Instrument
-  JLabP:
-    jlab_type: BrockCavity
+  FacilityParams:
+    facility_element_type: BrockCavity
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -4410,8 +4413,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMK403.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
@@ -4423,7 +4426,7 @@ elements:
       CanType: none
       Rotation: '0'
       Sensitivity: '0'
-      Controlled_by: iocipmk403
+      controlled_by: iocipmk403
       pCentral: '.465144255654231'
       alphax: '26.8440007166091'
       alphay: '10.0600778209619'
@@ -4480,13 +4483,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK403H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK403H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -4552,13 +4555,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHK403V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHK403V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -4596,8 +4599,8 @@ elements:
   length: 0.170401543
 - name: IYGK403
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -4609,7 +4612,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR2
       RetractedChannel: '2'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '17.48362346668895'
       alphay: '7.127844626542927'
@@ -4638,8 +4641,8 @@ elements:
   length: 1.00000008e-09
 - name: IFYK403
   kind: Instrument
-  JLabP:
-    jlab_type: FaradayCup
+  FacilityParams:
+    facility_element_type: FaradayCup
     modeled_as: MONITOR
     properties:
       InsertedMode: CW
@@ -4650,7 +4653,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR2
       RetractedChannel: '8'
       SegMask: S_UITF+S_KV+A_UITF+A_KV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '17.48362343143306'
       alphay: '7.12784461549866'
@@ -4699,8 +4702,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: RM11:STAT
-  JLabP:
-    jlab_type: CryoCavity
+  FacilityParams:
+    facility_element_type: CryoCavity
     modeled_as: RFCA
     properties:
       HCOSystem: UITF RF Cavities
@@ -4711,7 +4714,7 @@ elements:
       Q0: 1E+09
       Qexternal: '1.15E+07'
       ROQ: '1067'
-      Controlled_by: iocitfrffcc1
+      controlled_by: iocitfrffcc1
       EPICSName: RM11
       FCC: fcc_773
       ModelGSET: '0'
@@ -4741,8 +4744,8 @@ elements:
   length: 0.000101237143
 - name: VQGM101
   kind: Drift
-  JLabP:
-    jlab_type: QuattroGauge
+  FacilityParams:
+    facility_element_type: QuattroGauge
     properties:
       RelativeSOffset: '.0001'
       RelativeSReference: RM11
@@ -4776,8 +4779,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: RM12:STAT
-  JLabP:
-    jlab_type: CryoCavity
+  FacilityParams:
+    facility_element_type: CryoCavity
     modeled_as: RFCA
     properties:
       HCOSystem: UITF RF Cavities
@@ -4788,7 +4791,7 @@ elements:
       Q0: 1E+09
       Qexternal: '2.38E+07'
       ROQ: '1067'
-      Controlled_by: iocitfrffcc2
+      controlled_by: iocitfrffcc2
       EPICSName: RM12
       FCC: fcc_354
       ModelGSET: '0'
@@ -4818,8 +4821,8 @@ elements:
   length: 0.000301237143
 - name: VIPM201
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0003'
@@ -4835,8 +4838,8 @@ elements:
   length: 1.03710181
 - name: IYGM201
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -4846,7 +4849,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR2
       RetractedChannel: '10'
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '-90.34315946395823'
       alphay: '-26.64998971868607'
@@ -4903,13 +4906,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM201H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM201H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -4975,13 +4978,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM201V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM201V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -5019,8 +5022,8 @@ elements:
   length: 0.000116602267
 - name: VMVM301
   kind: Drift
-  JLabP:
-    jlab_type: ManualValve
+  FacilityParams:
+    facility_element_type: ManualValve
     properties:
       RelativeSOffset: '.0001'
       RelativeSReference: MLHM201V
@@ -5034,8 +5037,8 @@ elements:
   length: 0.0001
 - name: VDPM301A
   kind: Drift
-  JLabP:
-    jlab_type: DPPump
+  FacilityParams:
+    facility_element_type: DPPump
     properties:
       RelativeSOffset: '.0002'
       RelativeSReference: MLHM201V
@@ -5048,8 +5051,8 @@ elements:
   length: 0.0001
 - name: VIPM301A
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0003'
@@ -5066,8 +5069,8 @@ elements:
   length: 0.0001
 - name: VDPM301B
   kind: Drift
-  JLabP:
-    jlab_type: DPPump
+  FacilityParams:
+    facility_element_type: DPPump
     properties:
       RelativeSOffset: '.0004'
       RelativeSReference: MLHM201V
@@ -5080,8 +5083,8 @@ elements:
   length: 0.0001
 - name: VIPM301B
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0005'
@@ -5098,8 +5101,8 @@ elements:
   length: 0.0001
 - name: VDPM301C
   kind: Drift
-  JLabP:
-    jlab_type: DPPump
+  FacilityParams:
+    facility_element_type: DPPump
     properties:
       RelativeSOffset: '.0006'
       RelativeSReference: MLHM201V
@@ -5112,8 +5115,8 @@ elements:
   length: 0.0001
 - name: VMVM401
   kind: Drift
-  JLabP:
-    jlab_type: ManualValve
+  FacilityParams:
+    facility_element_type: ManualValve
     properties:
       RelativeSOffset: '.0007'
       RelativeSReference: MLHM201V
@@ -5155,13 +5158,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM401H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM401H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -5227,13 +5230,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM401V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM401V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -5271,8 +5274,8 @@ elements:
   length: 0.000195477517
 - name: ILMM401
   kind: Drift
-  JLabP:
-    jlab_type: BeamLossMonitor
+  FacilityParams:
+    facility_element_type: BeamLossMonitor
     properties:
       SerialNum: MPFEB0075
       RelativeSOffset: '.0002'
@@ -5282,7 +5285,7 @@ elements:
       ScreenZ: '44.523466238757'
       HCOSystem: UITF MPS BLM
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: BLMIT01
+      controlled_by: BLMIT01
       EPICSName: ILMM401
       HVName: IHVM401BL
       Bias: '1500'
@@ -5297,8 +5300,8 @@ elements:
   length: 0.212296601
 - name: SBCM401
   kind: Instrument
-  JLabP:
-    jlab_type: BCM
+  FacilityParams:
+    facility_element_type: BCM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -5328,8 +5331,8 @@ elements:
   length: 9.75774799e-05
 - name: VIPM401
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0001'
@@ -5345,8 +5348,8 @@ elements:
   length: 0.214836836
 - name: IYGM401
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -5382,8 +5385,8 @@ elements:
   length: 0.064647384
 - name: IFYM401
   kind: Instrument
-  JLabP:
-    jlab_type: FaradayCup
+  FacilityParams:
+    facility_element_type: FaradayCup
     modeled_as: MONITOR
     properties:
       ActuatorCard: ITF12C0922ADDR1
@@ -5392,7 +5395,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR2
       RetractedChannel: '14'
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '-158.5481547020514'
       alphay: '-48.01589685282757'
@@ -5420,8 +5423,8 @@ elements:
   length: 0.117125631
 - name: ICVM501
   kind: Instrument
-  JLabP:
-    jlab_type: YaoCavity
+  FacilityParams:
+    facility_element_type: YaoCavity
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -5467,8 +5470,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM501.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -5480,7 +5483,7 @@ elements:
       CanType: Stripline
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmm501
+      controlled_by: iocipmm501
       pCentral: '.465144255654231'
       alphax: '-178.3493220498318'
       alphay: '-54.21881353397973'
@@ -5537,13 +5540,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM501H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM501H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -5609,13 +5612,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM501V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM501V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -5684,13 +5687,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MQJM501.BDL
-  JLabP:
-    jlab_type: QJ
+  FacilityParams:
+    facility_element_type: QJ
     modeled_as: KQUAD
     properties:
       HCOSystem: UITF Quads
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MQJM501
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -5759,13 +5762,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM502H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM502H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -5831,13 +5834,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM502V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM502V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -5891,8 +5894,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM502.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -5963,13 +5966,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MQJM502.BDL
-  JLabP:
-    jlab_type: QJ
+  FacilityParams:
+    facility_element_type: QJ
     modeled_as: KQUAD
     properties:
       HCOSystem: UITF Quads
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MQJM502
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6036,13 +6039,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM503H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM503H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6108,13 +6111,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM503V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM503V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6168,8 +6171,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM503.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -6181,7 +6184,7 @@ elements:
       CanType: Stripline
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmm503
+      controlled_by: iocipmm503
       pCentral: '.465144255654231'
       alphax: '-259.4220522617694'
       alphay: '210.3819119400475'
@@ -6241,13 +6244,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MQJM503.BDL
-  JLabP:
-    jlab_type: QJ
+  FacilityParams:
+    facility_element_type: QJ
     modeled_as: KQUAD
     properties:
       HCOSystem: UITF Quads
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MQJM503
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6316,13 +6319,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM504H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM504H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6388,13 +6391,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM504V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM504V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6448,8 +6451,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM504.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -6461,7 +6464,7 @@ elements:
       CanType: Stripline
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmm504
+      controlled_by: iocipmm504
       pCentral: '.465144255654231'
       alphax: '18.76015525678212'
       alphay: '55.34001666011963'
@@ -6521,13 +6524,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MQJM504.BDL
-  JLabP:
-    jlab_type: QJ
+  FacilityParams:
+    facility_element_type: QJ
     modeled_as: KQUAD
     properties:
       HCOSystem: UITF Quads
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MQJM504
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6596,13 +6599,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM504AH.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM504AH
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6668,13 +6671,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM504AV.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM504AV
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -6728,8 +6731,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM505.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       ScreenX: '0'
@@ -6744,7 +6747,7 @@ elements:
       CanType: Stripline
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmm505
+      controlled_by: iocipmm505
       pCentral: '.465144255654231'
       alphax: '81.56935747549359'
       alphay: '28.3322558755778'
@@ -6771,8 +6774,8 @@ elements:
   length: 0.101054866
 - name: IYGM505
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       ScreenZ: '1.3'
@@ -6783,7 +6786,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR2
       RetractedChannel: '16'
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '80.67288790099063'
       alphay: '28.03145281451746'
@@ -6807,8 +6810,8 @@ elements:
       Model_Yaw: '-1.15078924901353E-08'
 - name: VIPM505
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: 1E-10
@@ -6821,8 +6824,8 @@ elements:
       EPICSName: VIPM505cur
 - name: IHAM505
   kind: Instrument
-  JLabP:
-    jlab_type: AccStyle
+  FacilityParams:
+    facility_element_type: AccStyle
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Harps
@@ -6850,7 +6853,7 @@ elements:
         '3': y
       CWCurrent: 3-5 uAmps
       TuneModeCurrent: ~25 uAmps
-      Controlled_by: iocitfharp
+      controlled_by: iocitfharp
       EPICSName: IHAM505
       pCentral: '.465144255654231'
       alphax: '80.67288789211952'
@@ -6878,8 +6881,8 @@ elements:
   length: 0.735713904
 - name: RHKM506
   kind: Marker
-  JLabP:
-    jlab_type: Mark
+  FacilityParams:
+    facility_element_type: Mark
     modeled_as: MARK
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -6909,8 +6912,8 @@ elements:
   length: 0.420477191
 - name: IYGM506
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -6946,8 +6949,8 @@ elements:
   length: 9.84119341e-05
 - name: VIPM506
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0001'
@@ -6963,8 +6966,8 @@ elements:
   length: 0.0002
 - name: ILMM601
   kind: Drift
-  JLabP:
-    jlab_type: BeamLossMonitor
+  FacilityParams:
+    facility_element_type: BeamLossMonitor
     properties:
       SerialNum: MPFEB0035
       RelativeSOffset: '.0003'
@@ -6974,7 +6977,7 @@ elements:
       ScreenZ: '49.324259986214'
       HCOSystem: UITF MPS BLM
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: BLMIT01
+      controlled_by: BLMIT01
       EPICSName: ILMM601
       HVName: IHVM601BL
       Bias: '15000'
@@ -7018,13 +7021,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM601AH.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM601AH
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7093,13 +7096,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MLHM601AV.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MLHM601AV
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7156,8 +7159,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM601.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -7169,7 +7172,7 @@ elements:
       CanType: Stripline
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmm601
+      controlled_by: iocipmm601
       pCentral: '.465144255654231'
       alphax: '64.78291135264891'
       alphay: '22.69970065932753'
@@ -7231,13 +7234,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MDLM601.BDL
-  JLabP:
-    jlab_type: Dipole
+  FacilityParams:
+    facility_element_type: Dipole
     modeled_as: CSBEND
     properties:
       HCOSystem: UITF Dipoles
       SegMask: S_UITF+S_MVD+S_MV+S_Mspec+A_MVD+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MDLM601
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7303,13 +7306,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM601BH.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM601BH
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7375,13 +7378,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM601BV.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM601BV
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7419,8 +7422,8 @@ elements:
   length: 0.261998137
 - name: IHAM601
   kind: Instrument
-  JLabP:
-    jlab_type: AccStyle
+  FacilityParams:
+    facility_element_type: AccStyle
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Harps
@@ -7449,7 +7452,7 @@ elements:
       CWCurrent: 3-5 uAmps
       SemiAutoMode: '1'
       TuneModeCurrent: ~25 uAmps
-      Controlled_by: iocitfharp
+      controlled_by: iocitfharp
       EPICSName: IHAM601
       pCentral: '.465144255654231'
       alphax: '55.80808970730038'
@@ -7479,8 +7482,8 @@ elements:
   length: 0.124999246
 - name: IYGM601
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -7516,8 +7519,8 @@ elements:
   length: 0.000104541459
 - name: VIPM601
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0001'
@@ -7549,8 +7552,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM602.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       ScreenX: '0'
@@ -7565,7 +7568,7 @@ elements:
       CanType: Stripline
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmm602
+      controlled_by: iocipmm602
       pCentral: '.465144255654231'
       alphax: '52.70337674583232'
       alphay: '18.64651124915769'
@@ -7621,13 +7624,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM602H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM602H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7694,13 +7697,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM602V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM602V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7767,13 +7770,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM603H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM603H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7840,13 +7843,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM603V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM603V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7915,13 +7918,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MQJM603.BDL
-  JLabP:
-    jlab_type: QJ
+  FacilityParams:
+    facility_element_type: QJ
     modeled_as: KQUAD
     properties:
       HCOSystem: UITF Quads
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MQJM603
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -7990,13 +7993,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM604H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM604H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -8063,13 +8066,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM604V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM604V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -8107,8 +8110,8 @@ elements:
   length: 0.000104541459
 - name: ILMM604U
   kind: Drift
-  JLabP:
-    jlab_type: BeamLossMonitor
+  FacilityParams:
+    facility_element_type: BeamLossMonitor
     properties:
       SerialNum: MPFEB0030
       RelativeSOffset: '.0001'
@@ -8118,7 +8121,7 @@ elements:
       ScreenZ: '52.460754579036'
       HCOSystem: UITF MPS BLM
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: BLMIT01
+      controlled_by: BLMIT01
       EPICSName: ILMM604U
       HVName: IHVM604UBL
       Bias: '15000'
@@ -8134,8 +8137,8 @@ elements:
   length: 0.0001
 - name: ILMM604D
   kind: Drift
-  JLabP:
-    jlab_type: BeamLossMonitor
+  FacilityParams:
+    facility_element_type: BeamLossMonitor
     properties:
       SerialNum: MPFEB0025
       RelativeSOffset: '.0002'
@@ -8145,7 +8148,7 @@ elements:
       ScreenZ: '52.460854579036'
       HCOSystem: UITF MPS BLM
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: BLMIT02
+      controlled_by: BLMIT02
       EPICSName: ILMM604D
       HVName: IHVM604DBL
       Bias: '15000'
@@ -8161,8 +8164,8 @@ elements:
   length: 0.0001
 - name: ILMM604L
   kind: Drift
-  JLabP:
-    jlab_type: BeamLossMonitor
+  FacilityParams:
+    facility_element_type: BeamLossMonitor
     properties:
       SerialNum: MPFEB0024
       RelativeSOffset: '.0003'
@@ -8172,7 +8175,7 @@ elements:
       ScreenZ: '52.460954579036'
       HCOSystem: UITF MPS BLM
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: BLMIT01
+      controlled_by: BLMIT01
       EPICSName: ILMM604L
       HVName: IHVM604LBL
       Bias: '15000'
@@ -8187,8 +8190,8 @@ elements:
   length: 0.0001
 - name: ILMM604R
   kind: Drift
-  JLabP:
-    jlab_type: BeamLossMonitor
+  FacilityParams:
+    facility_element_type: BeamLossMonitor
     properties:
       SerialNum: MPFEB0027
       RelativeSOffset: '.0004'
@@ -8198,7 +8201,7 @@ elements:
       ScreenZ: '52.461054579036'
       HCOSystem: UITF MPS BLM
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: BLMIT01
+      controlled_by: BLMIT01
       EPICSName: ILMM604R
       HVName: IHVM604RBL
       Bias: '15000'
@@ -8242,8 +8245,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: MFRM604V.KICK
-  JLabP:
-    jlab_type: VDiagKicker
+  FacilityParams:
+    facility_element_type: VDiagKicker
     modeled_as: VKICK
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -8307,8 +8310,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: MFRM604H.KICK
-  JLabP:
-    jlab_type: HDiagKicker
+  FacilityParams:
+    facility_element_type: HDiagKicker
     modeled_as: HKICK
     properties:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
@@ -8374,13 +8377,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MQJM604.BDL
-  JLabP:
-    jlab_type: QJ
+  FacilityParams:
+    facility_element_type: QJ
     modeled_as: KQUAD
     properties:
       HCOSystem: UITF Quads
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: Amps
       EPICSName: MQJM604
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -8436,8 +8439,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM604.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       ScreenX: '0'
@@ -8452,7 +8455,7 @@ elements:
       CanType: Stripline
       Rotation: '45'
       Sensitivity: '9.9'
-      Controlled_by: iocipmm604
+      controlled_by: iocipmm604
       pCentral: '.465144255654231'
       alphax: '-6.363309760601958'
       alphay: '84.20362292719547'
@@ -8479,8 +8482,8 @@ elements:
   length: 0.28
 - name: IYGM604
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       ScreenZ: '2.3'
@@ -8491,7 +8494,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR4
       RetractedChannel: '10'
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '-38.33587392442753'
       alphay: '67.4706394413956'
@@ -8518,8 +8521,8 @@ elements:
   length: 0.000104541459
 - name: VIPM604
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0001'
@@ -8564,13 +8567,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM605H.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM605H
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -8637,13 +8640,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM605V.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM605V
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -8681,8 +8684,8 @@ elements:
   length: 0.000104541459
 - name: ILMM605
   kind: Drift
-  JLabP:
-    jlab_type: BeamLossMonitor
+  FacilityParams:
+    facility_element_type: BeamLossMonitor
     properties:
       RelativeSOffset: '.0001'
       RelativeSReference: MBHM605V
@@ -8691,7 +8694,7 @@ elements:
       ScreenZ: '54.080756580036'
       HCOSystem: UITF MPS BLM
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: BLMIT01
+      controlled_by: BLMIT01
       EPICSName: ILMM605
       HVName: IHVM605BL
       Bias: '1500'
@@ -8735,13 +8738,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM605AH.KICK
-  JLabP:
-    jlab_type: HCorrector
+  FacilityParams:
+    facility_element_type: HCorrector
     modeled_as: HKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM605AH
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -8805,13 +8808,13 @@ elements:
         facility: UITF
         control_system: epics
         pv: MBHM605AV.KICK
-  JLabP:
-    jlab_type: VCorrector
+  FacilityParams:
+    facility_element_type: VCorrector
     modeled_as: VKICK
     properties:
       HCOSystem: UITF Correctors
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitfmag
+      controlled_by: iocitfmag
       ControlsUnits: milliAmps
       EPICSName: MBHM605AV
       FieldMap: Data ( text/plain; charset=us-ascii )
@@ -8849,8 +8852,8 @@ elements:
   length: 0.3
 - name: IHAM605
   kind: Instrument
-  JLabP:
-    jlab_type: AccStyle
+  FacilityParams:
+    facility_element_type: AccStyle
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Harps
@@ -8878,7 +8881,7 @@ elements:
         '3': y
       CWCurrent: 3-5 uAmps
       TuneModeCurrent: ~25 uAmps
-      Controlled_by: iocitfharp
+      controlled_by: iocitfharp
       EPICSName: IHAM605
       pCentral: '.465144255654231'
       alphax: '-275.8468075492769'
@@ -8922,8 +8925,8 @@ elements:
         facility: UITF
         control_system: epics
         pv: IPMM605.STAT
-  JLabP:
-    jlab_type: DRBPM
+  FacilityParams:
+    facility_element_type: DRBPM
     modeled_as: MONITOR
     properties:
       ScreenX: '0'
@@ -8964,8 +8967,8 @@ elements:
   length: 0.3
 - name: IYGM605
   kind: Instrument
-  JLabP:
-    jlab_type: YAG
+  FacilityParams:
+    facility_element_type: YAG
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -9001,8 +9004,8 @@ elements:
   length: 0.000104541459
 - name: VIPM605
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0001'
@@ -9018,8 +9021,8 @@ elements:
   length: 0.229895459
 - name: IFYM606
   kind: Instrument
-  JLabP:
-    jlab_type: FaradayCup
+  FacilityParams:
+    facility_element_type: FaradayCup
     modeled_as: MONITOR
     properties:
       ScreenX: '0'
@@ -9031,7 +9034,7 @@ elements:
       LimitSwitchCard: ITF12C0943ADDR4
       RetractedChannel: '16'
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '-352.3525860841435'
       alphay: '-96.87140181342103'
@@ -9059,8 +9062,8 @@ elements:
   length: 4.99999997e-05
 - name: VCGM606
   kind: Drift
-  JLabP:
-    jlab_type: ColdCathode
+  FacilityParams:
+    facility_element_type: ColdCathode
     properties:
       RelativeSOffset: '.00005'
       RelativeSReference: IFYM606
@@ -9073,8 +9076,8 @@ elements:
   length: 5.4541459e-05
 - name: VIPM606
   kind: Drift
-  JLabP:
-    jlab_type: UHVPump
+  FacilityParams:
+    facility_element_type: UHVPump
     properties:
       Usage: Beamline
       RelativeSOffset: '.0001'
@@ -9090,8 +9093,8 @@ elements:
   length: 0.499895459
 - name: ITVM606
   kind: Instrument
-  JLabP:
-    jlab_type: VideoOnly
+  FacilityParams:
+    facility_element_type: VideoOnly
     modeled_as: MONITOR
     properties:
       HCOSystem: UITF Viewers
@@ -9100,7 +9103,7 @@ elements:
       VideoSwitchCard: ITF12C0922ADDR2
       VideoSwitchChannel: '16'
       SegMask: S_UITF+S_MV+A_UITF+A_MV
-      Controlled_by: iocitf2
+      controlled_by: iocitf2
       pCentral: '.465144255654231'
       alphax: '-409.4464506624025'
       alphay: '-126.7517294666346'
@@ -9126,8 +9129,8 @@ elements:
       Model_Yaw: '-1.15078924901353E-08'
 - name: VBVK201
   kind: Drift
-  JLabP:
-    jlab_type: BeamlineValve
+  FacilityParams:
+    facility_element_type: BeamlineValve
     properties:
       RelativeSOffset: -.001
       RelativeSReference: ITVK201
@@ -9141,8 +9144,8 @@ elements:
       LowLevelVacApp: vac
 - name: VGPK201
   kind: Drift
-  JLabP:
-    jlab_type: NEGPump
+  FacilityParams:
+    facility_element_type: NEGPump
     properties:
       RelativeSOffset: '.002'
       RelativeSReference: ITVK201
@@ -9152,8 +9155,8 @@ elements:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
 - name: VGPK202
   kind: Drift
-  JLabP:
-    jlab_type: NEGPump
+  FacilityParams:
+    facility_element_type: NEGPump
     properties:
       RelativeSOffset: -.0005
       RelativeSReference: MQWK202
@@ -9163,8 +9166,8 @@ elements:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
 - name: VGPK203
   kind: Drift
-  JLabP:
-    jlab_type: NEGPump
+  FacilityParams:
+    facility_element_type: NEGPump
     properties:
       RelativeSOffset: 2E-06
       RelativeSReference: ITVK203
@@ -9174,8 +9177,8 @@ elements:
       SegMask: S_UITF+S_KV+A_UITF+A_KV
 - name: VBVK403
   kind: Drift
-  JLabP:
-    jlab_type: BeamlineValve
+  FacilityParams:
+    facility_element_type: BeamlineValve
     properties:
       RelativeSOffset: -.0001
       RelativeSReference: MFQK403
@@ -9189,8 +9192,8 @@ elements:
       LowLevelVacApp: vac
 - name: VBVM101
   kind: Drift
-  JLabP:
-    jlab_type: BeamlineValve
+  FacilityParams:
+    facility_element_type: BeamlineValve
     properties:
       RelativeSOffset: -.0002
       RelativeSReference: RM11
@@ -9204,8 +9207,8 @@ elements:
       LowLevelVacApp: vac
 - name: VIPM101B
   kind: Drift
-  JLabP:
-    jlab_type: IonPump
+  FacilityParams:
+    facility_element_type: IonPump
     properties:
       RelativeSOffset: -.0001
       RelativeSReference: RM11
@@ -9217,8 +9220,8 @@ elements:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
 - name: VIPM1011
   kind: Drift
-  JLabP:
-    jlab_type: IonPump
+  FacilityParams:
+    facility_element_type: IonPump
     properties:
       RelativeSOffset: '.0002'
       RelativeSReference: RM11
@@ -9230,8 +9233,8 @@ elements:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
 - name: VIPM1012
   kind: Drift
-  JLabP:
-    jlab_type: IonPump
+  FacilityParams:
+    facility_element_type: IonPump
     properties:
       RelativeSOffset: '.0001'
       RelativeSReference: RM12
@@ -9243,8 +9246,8 @@ elements:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
 - name: VBVM201
   kind: Drift
-  JLabP:
-    jlab_type: BeamlineValve
+  FacilityParams:
+    facility_element_type: BeamlineValve
     properties:
       RelativeSOffset: '.0002'
       RelativeSReference: RM12
@@ -9258,8 +9261,8 @@ elements:
       LowLevelVacApp: vac
 - name: VFVM401
   kind: Drift
-  JLabP:
-    jlab_type: FastValve
+  FacilityParams:
+    facility_element_type: FastValve
     properties:
       RelativeSOffset: '.0001'
       RelativeSReference: MLHM401V
@@ -9272,8 +9275,8 @@ elements:
       ReadyPv: vitf2mbbid1c.B8 1
 - name: VBVM501
   kind: Drift
-  JLabP:
-    jlab_type: BeamlineValve
+  FacilityParams:
+    facility_element_type: BeamlineValve
     properties:
       RelativeSOffset: '.0001'
       RelativeSReference: IFYM401
@@ -9287,8 +9290,8 @@ elements:
       LowLevelVacApp: vac
 - name: VBVM506
   kind: Drift
-  JLabP:
-    jlab_type: BeamlineValve
+  FacilityParams:
+    facility_element_type: BeamlineValve
     properties:
       RelativeSOffset: '.0001'
       RelativeSReference: IHAM505
@@ -9302,8 +9305,8 @@ elements:
       LowLevelVacApp: vac
 - name: VGPM506
   kind: Drift
-  JLabP:
-    jlab_type: NEGPump
+  FacilityParams:
+    facility_element_type: NEGPump
     properties:
       RelativeSOffset: '.0002'
       RelativeSReference: IHAM505
@@ -9313,8 +9316,8 @@ elements:
       SegMask: S_UITF+S_MV+A_UITF+A_MV
 - name: VBVM601
   kind: Drift
-  JLabP:
-    jlab_type: BeamlineValve
+  FacilityParams:
+    facility_element_type: BeamlineValve
     properties:
       RelativeSOffset: '.0002'
       RelativeSReference: IYGM506
@@ -9328,8 +9331,8 @@ elements:
       LowLevelVacApp: vac
 - name: VBVM602
   kind: Drift
-  JLabP:
-    jlab_type: BeamlineValve
+  FacilityParams:
+    facility_element_type: BeamlineValve
     properties:
       RelativeSOffset: '.0002'
       RelativeSReference: IYGM601
