@@ -1,4 +1,4 @@
-id: https://w3id.org/narad_linkml/schema/narad/schema
+id: https://w3id.org/narad_linkml/schema/narad/
 name: narad
 description: >-
   NARAD extension for capability-layer semantics and facility-specific signal bindings
@@ -20,6 +20,7 @@ imports:
   - narad_narad
   - narad_beamline
   - narad_elements
+  - facility_params
 
 classes:
   NaradModel:
@@ -32,8 +33,10 @@ classes:
     
 slots:
   beamlines:
-    range: AnyValue
+    range: Beamline
     multivalued: true
+    inlined: true
+    inlined_as_list: true
     description: "Beamlines — open structure to accommodate the list-of-named-dict serialization format used in NARAD YAML files."
 
   elements:

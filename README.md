@@ -41,7 +41,7 @@ command-line build operations less cumbersome.
 * uv run gen-doc -d docs_narad src/narad/schema/narad.yaml
   * Example of generating documentation from the schema.
 
-* uv run linkml-validate --schema src/narad/schema/narad.yaml src/narad/schema/GUN_thru_MV.narad_v2.yaml
+* uv run linkml-validate --schema src/narad/schema/narad.yaml  src/narad/schema/example_narad_UITF.yaml
   * Example of validating an entire data file against the schema. Add --target-class [CLASS_NAME] to validate against a specific class in the schema.
 
 * Examples of invalid data files are in `tests/data/invalid/` and valid data files are in `tests/data/valid/`. You can validate these using the above command.

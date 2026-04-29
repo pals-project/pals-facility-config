@@ -12,7 +12,8 @@ prefixes:
 
 imports:
   - linkml:types
-  - narad_linkml_narad
+  - narad_narad
+  - facility_params
 
 classes:
   BeamlineElement:
@@ -26,7 +27,7 @@ classes:
       - MagneticMultipoleP
       - SolenoidP
       - narad
-      - JLabP
+      - facility_params
     slot_usage:
       name:
         required: true
@@ -77,15 +78,6 @@ classes:
     slots:
       - Ksol
 
-  JLabParams:
-    description: "JLab-specific element parameters: type designation, accelerator model name, and open property map."
-    slots:
-      - jlab_type
-      - modeled_as
-      - properties
-
-      # ElementKindEnum is defined in narad_narad (imported via narad_linkml_narad)
-
 slots:
   length:
     range: float
@@ -110,11 +102,6 @@ slots:
     range: SolenoidParams
     inlined: true
     description: "Solenoid physics parameters block."
-
-  JLabP:
-    range: JLabParams
-    inlined: true
-    description: "JLab-specific element parameters block."
 
   magnet_semantics:
     range: string
@@ -163,20 +150,3 @@ slots:
   Ksol:
     range: float
     description: "Solenoid integrated field strength."
-
-  jlab_type:
-    range: string
-    aliases:
-      - type
-    description: >-
-      JLab-specific element type designation (e.g. WarmCavity, QW, HCorrector).
-      Serialized as 'type' in source YAML; renamed here to avoid conflict with the
-      LinkML metamodel 'type' designator used for polymorphic class selection.
-
-  modeled_as:
-    range: string
-    description: "Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK)."
-
-  properties:
-    range: AnyValue
-    description: "Open-ended key-value property map for element-specific parameters."

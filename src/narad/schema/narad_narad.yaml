@@ -1,5 +1,5 @@
-id: https://w3id.org/narad_linkml/schema/narad/narad_config
-name: narad_config
+id: https://w3id.org/narad_linkml/schema/narad/narad_narad
+name: narad_narad
 description: >-
   NARAD capability-layer semantics: profiles, capabilities, signals, and facility signal bindings.
 license: CC-BY-4.0
@@ -46,6 +46,7 @@ classes:
     description: "A facility with specific signal bindings."
     slots:
       - name
+      - identifier
       - control_system
       - naming_convention
       - signal_definitions
@@ -113,7 +114,7 @@ classes:
       - CapabilityMixin
     slots:
       - id
-      - class
+      - capability_class
       - class_curie
 
   CapabilityProfile:
@@ -162,7 +163,7 @@ classes:
       - irreflexive
     slot_usage:
       id:
-        range: RelationshipTypeEnum
+        range: string
         required: true
       range:
         range: NodeTypeEnum
@@ -189,10 +190,17 @@ classes:
           Optional per-family graph projection override. If absent, the
           CapabilityLayer.default_graph_projection applies. Provide only
           when this family genuinely requires a different projection.
+  
+  Identifier:
+    description: "A globally unique identifier for an entity (e.g., facility), with a specified type (e.g. DOI, ROR, ARK, local)."
+    slots:
+      - identifier_type
+      - identifier_value
 
   AnyValue:
     class_uri: linkml:Any
     description: "Unconstrained type — accepts any YAML/JSON value (string, number, object, list, etc.)."
+  
 
 enums:
   DataTypeEnum:
@@ -363,6 +371,22 @@ enums:
       SignalBinding:
         description: "A concrete facility-specific PV binding for a semantic signal."
 
+  IdentifierTypeEnum:
+    description: "Allowed identifier types for facilities and other entities."
+    permissible_values: # doi | ark | handle | url | local | other
+      doi:
+        description: "Digital Object Identifier (DOI)."
+      ark:
+        description: "Archival Resource Key (ARK)."
+      handle:
+        description: "Handle System identifier."
+      url:
+        description: "Uniform Resource Locator (URL)."
+      local:
+        description: "Local identifier unique within a specific context or namespace."
+      other:
+        description: "Any other type of identifier not covered by the above categories."
+
 slots:
   narad:
     range: NaradConfig
@@ -429,10 +453,6 @@ slots:
     description: >-
       The specific device type this capability profile targets (e.g. Quadrupole,
       Corrector, BPM). Uses ElementKindEnum to stay in sync with BeamlineElement.kind.
-
-  class:
-    range: string
-    description: "Class label used in profile payloads (for example, QuadrupoleStrengthCapability)."
 
   class_curie:
     range: uriorcurie
@@ -634,3 +654,17 @@ slots:
     range: CapabilityProfile
     inlined: false
     description: "Cross-reference to the specific capability profile applied to this element."
+  
+  identifier:
+    range: Identifier
+    multivalued: true
+    inlined: false
+    description: "Globally unique identifier for the facility, with specified type and value."
+
+  identifier_type:
+    range: IdentifierTypeEnum
+    description: "The type of identifier used in the identifier slot (e.g. DOI, ARK, URL, local)."
+
+  identifier_value:
+    range: string
+    description: "The value of the identifier (e.g. the DOI string, ARK string, URL string, or local ID)."
