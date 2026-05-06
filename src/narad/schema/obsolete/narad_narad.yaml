@@ -429,6 +429,7 @@ slots:
 
   description:
     range: string
+    description: "Detailed description of the entity."
 
   capability_class:
     range: string

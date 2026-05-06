@@ -3,43 +3,6 @@ narad:
   intent: NARAD extension for capability-layer semantics and facility-specific signal
     bindings
   capability_layer:
-    default_graph_projection:
-      node_labels:
-        capability_family: CapabilityProfileFamily
-        profile: CapabilityProfile
-        capability: Capability
-        signal: Signal
-      relationships:
-      - id: has_shared_capability
-        domain: CapabilityFamily
-        range: Capability
-      - id: has_type_profile
-        domain: CapabilityFamily
-        range: Profile
-      - id: inherits_capability
-        domain: Profile
-        range: Capability
-      - id: has_type_specific_capability
-        domain: Profile
-        range: TypeSpecificCapability
-      - id: has_signal
-        domain: Capability
-        range: Signal 
-      - id: implemented_by
-        domain: Signal
-        range: SignalBinding
-      - id: binds_to
-        domain: SignalBinding
-        range: Device
-      - id: located_in
-        domain: Device
-        range: Facility # this needs to change to support a CryoCavity device located_in a CryoModule, which is located_in a Facility; however, this is sufficient for the current UITF example and can be revised when we have more complex facility structure to model
-      - id: controlled_by # not currently using the elements, but could be useful for directly linking signals to control system elements in the future
-        domain: Device
-        range: SignalBinding
-      - id: precedes # It is made explicit in the beamline; however, this may be useful for reasoning about beamline structure and signal flow in the future
-        domain: Device
-        range: Device
     profiles:
       MagnetCurrentControlProfileFamily:
         device_domain: Magnet

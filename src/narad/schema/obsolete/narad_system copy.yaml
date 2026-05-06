@@ -1,0 +1,336 @@
+id: https://example.org/narad/control-system-schema
+name: narad-control-system-schema
+description: >
+  LinkML schema for representing facility control-system structures using
+  NARAD domain classes aligned with SSN, SSN-System, and SOSA.
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  narad: https://example.org/narad/
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  ssn: http://www.w3.org/ns/ssn/
+  ssn-system: http://www.w3.org/ns/ssn/systems/
+  sosa: "http://www.w3.org/ns/sosa/"
+  schema: "http://schema.org/"
+  qudt: "http://qudt.org/schema/qudt/"
+  si-unit: "http://qudt.org/vocab/unit/"
+  ncit: "http://purl.obolibrary.org/obo/NCIT_"
+  ro: "http://purl.obolibrary.org/obo/RO_"
+  owl: "http://www.w3.org/2002/07/owl#"
+
+default_prefix: narad
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+  NamedThing:
+    abstract: true
+    slots:
+      - id
+      - name
+      - description
+  
+  NaradModel:
+    description: "Top-level NARAD document container."
+    tree_root: true
+    slots:
+      - narad_facility
+      - beamlines
+      - elements
+  
+  System:
+    is_a: NamedThing
+    description: >
+      A physical, logical, or cyber-physical system involved in sensing,
+      monitoring, control, or actuation.
+    exact_mappings:
+      - ssn:System
+    slots:
+      - has_sub_system
+        range: System
+        multivalued: true
+        inlined: true
+      - has_system_capability
+        range: SystemCapability
+        multivalued: true
+        inlined: true
+      - for_property
+        range: SystemCapability
+        multivalued: true
+        inlined: true
+  
+  Facility:
+    is_a: System
+    description: >
+      A facility-level system, such as UITF, CEBAF, or BTA, that organizes or contains
+      control-system assets.
+    slots:
+      - schema_version
+      - intent
+      - capability_layer
+      - facility
+      - control_system
+      - signal_layer
+  
+  ControlSystem:
+    is_a: System
+    description: >
+      A control system, such as EPICS.
+
+  # TODO: How to represent the Magnet, Quadrupole, Corrector, etc
+
+  SystemCapability:
+    is_a: NamedThing
+    description: >
+      A capability of a system. A capability describes what a system can expose,
+      monitor, control, or actuate with respect to one or more signals.
+    exact_mappings:
+      - ssn-system:SystemCapability
+    slots:
+      - for_property
+      - device_type
+      - description
+      - is_abstract
+      - inherits_shared_capabilities
+      - type_specific_capabilities
+  
+  Instrument:
+    is_a: System
+
+  Magnet:
+    is_a: System
+  
+  RF_System:
+    is_a: System
+  
+  Marker:
+    is_a: System
+  
+  RFCavity:
+    is_a: RF_System
+  
+  SystemCapability:
+    is_a: NamedThing
+    description: >
+      A capability of a system. A capability describes what a system can expose,
+      monitor, control, or actuate with respect to one or more signals.
+    exact_mappings:
+      - ssn-system:SystemCapability
+    slots:
+      - for_property
+      - subclass_of
+      - device_type
+      - description
+  
+  MagnetCapability:
+    is_a: SystemCapability
+
+  QuadrupoleCapability:
+    is_a: MagnetCapability
+
+  CorrectorCapability:
+    is_a: MagnetCapability
+
+  DipoleCapability:
+    is_a: MagnetCapability
+
+  InstrumentCapability:
+    is_a: SystemCapability
+
+  CavityGradientCapability:
+    is_a: SystemCapability
+
+  Signal:
+    is_a: NamedThing
+    description: >
+      Domain term for a control signal. A Signal represents an identifiable
+      control-system quantity, state, setpoint, readback, limit, or status.
+      In SSN/SOSA alignment, NARAD signals are treated as properties of systems.
+    aliases:
+      - epics_pv
+      - pv
+      - process_variable
+      - EPICS Process Variable
+      - control signal
+      - control-system signal
+    broad_mappings:
+      - sosa:Property
+      - ssn:Property
+      - qudt:QuantityKind
+    slots:
+      - role
+      - data_type
+      - units
+      - units_uri
+  
+  ObservableSignal:
+    is_a: Signal
+    description: >
+      A NARAD signal that is read, monitored, observed, or exposed by a system.
+      Examples include current_readback, status, horn_position, and
+      gradient_readback. This is a NARAD-specific control-system class and is
+      broadly mapped to sosa:Property.
+    broad_mappings:
+      - sosa:Property
+  
+  ActuatableSignal:
+    is_a: Signal
+    description: >
+      A NARAD signal that can be commanded, set, or acted upon. Examples include
+      current_setpoint, strength_setpoint, kick_setpoint, field_setpoint,
+      current_min, current_max, and gradient_setpoint. This is a NARAD-specific
+      control-system class and is broadly mapped to sosa:Property.
+    broad_mappings:
+      - sosa:Property
+  
+  SignalBinding:
+    is_a: NamedThing
+    description: >
+      A facility-specific binding between a NARAD signal and an implementation
+      interface, such as an EPICS process variable. This is modeled as a
+      sosa:Procedure because it describes how the signal is accessed,
+      observed, monitored, or actuated in a control system.
+    exact_mappings:
+      - sosa:Procedure
+    slots:
+      - for_property
+      - is_instance_of
+      - pv_name
+      - control_system_suffix
+
+enums:
+  ElementKindEnum:
+    description: >-
+      Controlled vocabulary for beamline element types, shared between the
+      capability layer (CapabilityProfile.device_type) and the element layer
+      (BeamlineElement.kind). Keeping the enum here ensures that profile device_type
+      values stay in sync with element kind values without circular imports.
+      Kept intentionally small; ADD new values here as the NARAD schema evolves.
+    permissible_values:
+      Drift:
+        description: "A field-free drift space between elements."
+        is_a: Marker
+      Marker:
+        description: "A zero-length reference point or survey marker."
+        is_a: Marker
+      BPM:
+        description: "Beam Position Monitor."
+        is_a: Instrument
+      Corrector:
+        description: "Dipole corrector magnet for orbit correction."
+        is_a: Magnet
+      Dipole:
+        description: "Dipole bending magnet."
+        is_a: Magnet
+      Quadrupole:
+        description: "Quadrupole focusing/defocusing magnet."
+        is_a: Magnet
+      Solenoid:
+        description: "Solenoid magnet."
+        is_a: Magnet
+      RFCavity:
+        description: "Radio-frequency accelerating or bunching cavity."
+        is_a: RF_System
+      Instrument:
+        description: "Generic beam diagnostic instrument (halo monitor, viewer, etc.)."
+        is_a: Instrument
+  
+  SignalRoleEnum:
+    description: "Controlled vocabulary for the semantic role of a signal within a capability."
+    permissible_values:
+      control:
+        description: "A writable signal that commands a device setpoint."
+        broad_mappings:
+          - sosa:ActuatableProperty
+      readback:
+        description: "A readable signal that reports a measured or monitored quantity."
+        broad_mappings:
+          - sosa:ObservableProperty
+      constraint:
+        description: "A signal that defines an operational limit or boundary on a control quantity."
+      status:
+        description: "A signal reporting the device or system operational state."
+      position:
+        description: "A signal representing a physical position of a device component, such as a horizontal position, vertical position, or aperture position."
+      interlock:
+        description: "A signal associated with a machine protection or safety interlock condition."
+      diagnostic:
+        description: "A signal providing diagnostic or debugging information about a device."
+    
+
+slots:
+  id:
+    identifier: true
+    required: true
+    range: string
+    description: "Unique identifier for the entity."
+
+  name:
+    range: string
+    description: "Human-readable name for the entity."
+
+  description:
+    range: string
+    description: "Detailed description of the entity."
+    range: string
+
+  has_sub_system:
+    description: >
+      Relates a system to a subsystem. Use this for facility, control-system,
+      instrument, device, and component decomposition.
+    exact_mappings:
+      - ssn-system:hasSubSystem
+    domain: System
+    range: System
+    multivalued: true
+
+  has_system_capability:
+    description: >
+      Relates a system to a capability it supports. This should be used instead
+      of directly attaching signals to systems when capability context matters.
+    exact_mappings:
+      - ssn-system:hasSystemCapability
+    domain: System
+    range: SystemCapability
+    multivalued: true
+
+  for_property:
+    description: >
+      SSN relationship to the property or signal associated with a capability
+      or procedure.
+
+      When used from SystemCapability to Signal, this means the capability
+      concerns that signal: the system can expose, monitor, control, actuate,
+      or otherwise interact with that signal.
+
+      When used from SignalBinding to Signal, this means the binding/procedure
+      provides the facility-specific implementation for accessing that signal,
+      such as through an EPICS PV.
+    exact_mappings:
+      - ssn:forProperty
+    range: Signal
+    multivalued: true
+
+  is_instance_of:
+    description: >
+      NARAD alias for rdf:type. This links a facility-specific instance to the
+      LinkML class or semantic class it instantiates.
+    exact_mappings:
+      - rdf:type
+    range: uriorcurie
+    multivalued: true
+
+  pv_name:
+    description: >
+      Facility-specific process variable or control-system identifier, such as
+      MQWK202:STAT or MQWK202:BDL.
+    range: string
+
+  control_system_suffix:
+    description: >
+      Facility-specific control system (e.g., EPICS) naming suffix or convention used to derive or interpret
+      the signal binding.
+    range: string
