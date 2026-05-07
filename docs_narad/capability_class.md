@@ -3,26 +3,17 @@
 # Slot: capability_class 
 
 
-_Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability). Serialized as 'class' in source YAML; renamed here to avoid conflict with reserved keywords._
+_Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability). Serialized as 'class' in source YAML._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/capability_class](https://w3id.org/narad_linkml/schema/narad/capability_class)
+URI: [narad:capability_class](https://w3id.org/narad_linkml/schema/narad/capability_class)
 Alias: capability_class
 
 <!-- no inheritance hierarchy -->
 
-
-
-
-
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [TypeSpecificCapability](TypeSpecificCapability.md) | An inline capability declared within a device-type profile, with its own iden... |  no  |
 
 
 
@@ -51,7 +42,7 @@ Alias: capability_class
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -60,8 +51,8 @@ Alias: capability_class
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/capability_class |
-| native | https://w3id.org/narad_linkml/schema/narad/capability_class |
+| self | narad:capability_class |
+| native | narad:capability_class |
 
 
 
@@ -72,15 +63,12 @@ Alias: capability_class
 ```yaml
 name: capability_class
 description: Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability).
-  Serialized as 'class' in source YAML; renamed here to avoid conflict with reserved
-  keywords.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+  Serialized as 'class' in source YAML.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 aliases:
 - class
 rank: 1000
 alias: capability_class
-domain_of:
-- TypeSpecificCapability
 range: string
 
 ```

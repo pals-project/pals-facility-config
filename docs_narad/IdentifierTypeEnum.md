@@ -7,7 +7,7 @@ _Allowed identifier types for facilities and other entities._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum](https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum)
+URI: [narad:IdentifierTypeEnum](https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum)
 
 ## Permissible Values
 
@@ -43,7 +43,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum](https://w3i
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -56,7 +56,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum](https://w3i
 ```yaml
 name: IdentifierTypeEnum
 description: Allowed identifier types for facilities and other entities.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 permissible_values:
   doi:

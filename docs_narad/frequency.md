@@ -9,7 +9,7 @@ _RF frequency in Hz._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/frequency](https://w3id.org/narad_linkml/schema/narad/frequency)
+URI: [narad:frequency](https://w3id.org/narad_linkml/schema/narad/frequency)
 Alias: frequency
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: frequency
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [RFParams](RFParams.md) | RF cavity physics parameters (frequency, voltage, phase) |  no  |
+| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: frequency
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: frequency
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/frequency |
-| native | https://w3id.org/narad_linkml/schema/narad/frequency |
+| self | narad:frequency |
+| native | narad:frequency |
 
 
 
@@ -67,11 +67,11 @@ Alias: frequency
 ```yaml
 name: frequency
 description: RF frequency in Hz.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: frequency
 domain_of:
-- RFParams
+- ElementParamSet
 range: float
 
 ```

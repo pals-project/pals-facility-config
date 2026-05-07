@@ -9,7 +9,7 @@ _Ordered sequence of cross-referenced element names forming a beamline._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/line](https://w3id.org/narad_linkml/schema/narad/line)
+URI: [narad:line](https://w3id.org/narad_linkml/schema/narad/line)
 Alias: line
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: line
 
 ## Properties
 
-* Range: [String](String.md)
+* Range: [BeamlineElement](BeamlineElement.md)
 
 * Multivalued: True
 
@@ -48,7 +48,7 @@ Alias: line
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: line
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/line |
-| native | https://w3id.org/narad_linkml/schema/narad/line |
+| self | narad:line |
+| native | narad:line |
 
 
 
@@ -69,12 +69,12 @@ Alias: line
 ```yaml
 name: line
 description: Ordered sequence of cross-referenced element names forming a beamline.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: line
 domain_of:
 - Beamline
-range: string
+range: BeamlineElement
 multivalued: true
 inlined: false
 

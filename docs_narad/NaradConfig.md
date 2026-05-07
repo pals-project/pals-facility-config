@@ -3,13 +3,13 @@
 # Class: NaradConfig 
 
 
-_NARAD configuration block containing the capability layer._
+_NARAD configuration block: capability layer + signal layer._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
+URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
 
 
 
@@ -25,7 +25,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradConfig](https://w3id.org/n
     
         
         
-        NaradConfig --> "0..1" CapabilityLayer : capability_layer
+        NaradConfig --> "1" CapabilityLayer : capability_layer
         click CapabilityLayer href "../CapabilityLayer/"
     
 
@@ -44,7 +44,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradConfig](https://w3id.org/n
     
         
         
-        NaradConfig --> "0..1" SignalLayer : signal_layer
+        NaradConfig --> "1" SignalLayer : signal_layer
         click SignalLayer href "../SignalLayer/"
     
 
@@ -62,12 +62,12 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradConfig](https://w3id.org/n
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [schema_version](schema_version.md) | 0..1 <br/> [String](String.md) |  | direct |
-| [intent](intent.md) | 0..1 <br/> [String](String.md) |  | direct |
-| [capability_layer](capability_layer.md) | 0..1 <br/> [CapabilityLayer](CapabilityLayer.md) |  | direct |
-| [facility](facility.md) | 0..1 <br/> [String](String.md) |  | direct |
-| [control_system](control_system.md) | 0..1 <br/> [String](String.md) |  | direct |
-| [signal_layer](signal_layer.md) | 0..1 <br/> [SignalLayer](SignalLayer.md) | Signal-layer container for facility-specific signal bindings | direct |
+| [schema_version](schema_version.md) | 1 <br/> [String](String.md) | Version of the NARAD schema used in this document | direct |
+| [intent](intent.md) | 0..1 <br/> [String](String.md) | A human-readable statement of the intended use or purpose of this NARAD confi... | direct |
+| [capability_layer](capability_layer.md) | 1 <br/> [CapabilityLayer](CapabilityLayer.md) | Capability-layer container for control profile families | direct |
+| [facility](facility.md) | 1 <br/> [String](String.md) | Identifier of the facility this configuration describes | direct |
+| [control_system](control_system.md) | 1 <br/> [String](String.md) | Identifier of the control system (e | direct |
+| [signal_layer](signal_layer.md) | 1 <br/> [SignalLayer](SignalLayer.md) | Signal-layer container for facility-specific signal bindings | direct |
 
 
 
@@ -77,7 +77,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradConfig](https://w3id.org/n
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [NaradModel](NaradModel.md) | [narad](narad.md) | range | [NaradConfig](NaradConfig.md) |
+| [NaradModel](NaradModel.md) | [narad_config](narad_config.md) | range | [NaradConfig](NaradConfig.md) |
 
 
 
@@ -95,7 +95,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradConfig](https://w3id.org/n
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -104,8 +104,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradConfig](https://w3id.org/n
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/NaradConfig |
-| native | https://w3id.org/narad_linkml/schema/narad/NaradConfig |
+| self | narad:NaradConfig |
+| native | narad:NaradConfig |
+| broad | ssn:System |
 
 
 
@@ -121,8 +122,10 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradConfig](https://w3id.org/n
 <details>
 ```yaml
 name: NaradConfig
-description: NARAD configuration block containing the capability layer.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: 'NARAD configuration block: capability layer + signal layer.'
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+broad_mappings:
+- ssn:System
 slots:
 - schema_version
 - intent
@@ -130,6 +133,35 @@ slots:
 - facility
 - control_system
 - signal_layer
+slot_usage:
+  schema_version:
+    name: schema_version
+    description: Version of the NARAD schema used in this document.
+    range: string
+    required: true
+  facility:
+    name: facility
+    description: Identifier of the facility this configuration describes.
+    range: string
+    required: true
+  control_system:
+    name: control_system
+    description: Identifier of the control system (e.g. epics) this configuration
+      describes.
+    range: string
+    required: true
+  capability_layer:
+    name: capability_layer
+    description: Capability-layer container for control profile families.
+    range: CapabilityLayer
+    required: true
+    inlined: false
+  signal_layer:
+    name: signal_layer
+    description: Signal-layer container for facility-specific signal bindings.
+    range: SignalLayer
+    required: true
+    inlined: false
 
 ```
 </details>
@@ -139,21 +171,56 @@ slots:
 <details>
 ```yaml
 name: NaradConfig
-description: NARAD configuration block containing the capability layer.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: 'NARAD configuration block: capability layer + signal layer.'
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+broad_mappings:
+- ssn:System
+slot_usage:
+  schema_version:
+    name: schema_version
+    description: Version of the NARAD schema used in this document.
+    range: string
+    required: true
+  facility:
+    name: facility
+    description: Identifier of the facility this configuration describes.
+    range: string
+    required: true
+  control_system:
+    name: control_system
+    description: Identifier of the control system (e.g. epics) this configuration
+      describes.
+    range: string
+    required: true
+  capability_layer:
+    name: capability_layer
+    description: Capability-layer container for control profile families.
+    range: CapabilityLayer
+    required: true
+    inlined: false
+  signal_layer:
+    name: signal_layer
+    description: Signal-layer container for facility-specific signal bindings.
+    range: SignalLayer
+    required: true
+    inlined: false
 attributes:
   schema_version:
     name: schema_version
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Version of the NARAD schema used in this document.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: schema_version
     owner: NaradConfig
     domain_of:
     - NaradConfig
     range: string
+    required: true
   intent:
     name: intent
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: A human-readable statement of the intended use or purpose of this
+      NARAD configuration.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: intent
     owner: NaradConfig
@@ -162,46 +229,52 @@ attributes:
     range: string
   capability_layer:
     name: capability_layer
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Capability-layer container for control profile families.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: capability_layer
     owner: NaradConfig
     domain_of:
     - NaradConfig
     range: CapabilityLayer
-    inlined: true
+    required: true
+    inlined: false
   facility:
     name: facility
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Identifier of the facility this configuration describes.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: facility
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    - PVBinding
     range: string
+    required: true
   control_system:
     name: control_system
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Identifier of the control system (e.g. epics) this configuration
+      describes.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: control_system
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    - Facility
-    - PVBinding
+    - FacilityConfig
     range: string
+    required: true
   signal_layer:
     name: signal_layer
     description: Signal-layer container for facility-specific signal bindings.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: signal_layer
     owner: NaradConfig
     domain_of:
     - NaradConfig
     range: SignalLayer
-    inlined: true
+    required: true
+    inlined: false
 
 ```
 </details>

@@ -3,8 +3,13 @@
 # Slot: capability_layer 
 
 
+_Capability-layer container for profile families._
 
-URI: [https://w3id.org/narad_linkml/schema/narad/capability_layer](https://w3id.org/narad_linkml/schema/narad/capability_layer)
+
+
+
+
+URI: [narad:capability_layer](https://w3id.org/narad_linkml/schema/narad/capability_layer)
 Alias: capability_layer
 
 <!-- no inheritance hierarchy -->
@@ -17,7 +22,7 @@ Alias: capability_layer
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | NARAD configuration block containing the capability layer |  no  |
+| [NaradConfig](NaradConfig.md) | NARAD configuration block: capability layer + signal layer |  yes  |
 
 
 
@@ -41,7 +46,7 @@ Alias: capability_layer
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -50,8 +55,8 @@ Alias: capability_layer
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/capability_layer |
-| native | https://w3id.org/narad_linkml/schema/narad/capability_layer |
+| self | narad:capability_layer |
+| native | narad:capability_layer |
 
 
 
@@ -61,7 +66,8 @@ Alias: capability_layer
 <details>
 ```yaml
 name: capability_layer
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Capability-layer container for profile families.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: capability_layer
 domain_of:

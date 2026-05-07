@@ -3,8 +3,13 @@
 # Slot: control_system 
 
 
+_Identifier of the control system (e.g. epics)._
 
-URI: [https://w3id.org/narad_linkml/schema/narad/control_system](https://w3id.org/narad_linkml/schema/narad/control_system)
+
+
+
+
+URI: [narad:control_system](https://w3id.org/narad_linkml/schema/narad/control_system)
 Alias: control_system
 
 <!-- no inheritance hierarchy -->
@@ -17,9 +22,8 @@ Alias: control_system
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Facility](Facility.md) | A facility with specific signal bindings |  no  |
-| [NaradConfig](NaradConfig.md) | NARAD configuration block containing the capability layer |  no  |
-| [PVBinding](PVBinding.md) | A concrete PV (Process Variable) binding for one semantic signal on a beamlin... |  no  |
+| [NaradConfig](NaradConfig.md) | NARAD configuration block: capability layer + signal layer |  yes  |
+| [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -43,7 +47,7 @@ Alias: control_system
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -52,8 +56,8 @@ Alias: control_system
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/control_system |
-| native | https://w3id.org/narad_linkml/schema/narad/control_system |
+| self | narad:control_system |
+| native | narad:control_system |
 
 
 
@@ -63,13 +67,13 @@ Alias: control_system
 <details>
 ```yaml
 name: control_system
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Identifier of the control system (e.g. epics).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: control_system
 domain_of:
 - NaradConfig
-- Facility
-- PVBinding
+- FacilityConfig
 range: string
 
 ```

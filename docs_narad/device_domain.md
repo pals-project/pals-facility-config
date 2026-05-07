@@ -9,7 +9,7 @@ _High-level device domain that this profile family governs._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/device_domain](https://w3id.org/narad_linkml/schema/narad/device_domain)
+URI: [narad:device_domain](https://w3id.org/narad_linkml/schema/narad/device_domain)
 Alias: device_domain
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: device_domain
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ControlProfileFamily](ControlProfileFamily.md) | A reusable family of control profiles sharing common semantics and structure |  no  |
+| [ControlProfileFamily](ControlProfileFamily.md) | A reusable family of control profiles sharing common semantics and structure ... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: device_domain
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: device_domain
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/device_domain |
-| native | https://w3id.org/narad_linkml/schema/narad/device_domain |
+| self | narad:device_domain |
+| native | narad:device_domain |
 
 
 
@@ -67,7 +67,7 @@ Alias: device_domain
 ```yaml
 name: device_domain
 description: High-level device domain that this profile family governs.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: device_domain
 domain_of:

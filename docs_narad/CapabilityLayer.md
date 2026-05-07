@@ -3,13 +3,13 @@
 # Class: CapabilityLayer 
 
 
-_Capability-layer container for profile families and a shared default graph projection._
+_Capability-layer container for control profile families._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/CapabilityLayer](https://w3id.org/narad_linkml/schema/narad/CapabilityLayer)
+URI: [narad:CapabilityLayer](https://w3id.org/narad_linkml/schema/narad/CapabilityLayer)
 
 
 
@@ -19,17 +19,6 @@ URI: [https://w3id.org/narad_linkml/schema/narad/CapabilityLayer](https://w3id.o
  classDiagram
     class CapabilityLayer
     click CapabilityLayer href "../CapabilityLayer/"
-      CapabilityLayer : default_graph_projection
-        
-          
-    
-        
-        
-        CapabilityLayer --> "0..1" GraphProjection : default_graph_projection
-        click GraphProjection href "../GraphProjection/"
-    
-
-        
       CapabilityLayer : profiles
         
           
@@ -54,7 +43,6 @@ URI: [https://w3id.org/narad_linkml/schema/narad/CapabilityLayer](https://w3id.o
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [default_graph_projection](default_graph_projection.md) | 0..1 <br/> [GraphProjection](GraphProjection.md) | The canonical graph projection for all profile families in this capability la... | direct |
 | [profiles](profiles.md) | * <br/> [ControlProfileFamily](ControlProfileFamily.md) | Control profile families keyed by family name | direct |
 
 
@@ -83,7 +71,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/CapabilityLayer](https://w3id.o
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -92,8 +80,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/CapabilityLayer](https://w3id.o
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/CapabilityLayer |
-| native | https://w3id.org/narad_linkml/schema/narad/CapabilityLayer |
+| self | narad:CapabilityLayer |
+| native | narad:CapabilityLayer |
 
 
 
@@ -109,11 +97,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/CapabilityLayer](https://w3id.o
 <details>
 ```yaml
 name: CapabilityLayer
-description: Capability-layer container for profile families and a shared default
-  graph projection.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Capability-layer container for control profile families.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
-- default_graph_projection
 - profiles
 
 ```
@@ -124,28 +110,13 @@ slots:
 <details>
 ```yaml
 name: CapabilityLayer
-description: Capability-layer container for profile families and a shared default
-  graph projection.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Capability-layer container for control profile families.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
-  default_graph_projection:
-    name: default_graph_projection
-    description: The canonical graph projection for all profile families in this capability
-      layer. Defines the full set of possible node labels (except device, which is
-      derived from each family's device_domain) and the complete relationship vocabulary.
-      Individual families may provide a graph_projection override when needed.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
-    rank: 1000
-    alias: default_graph_projection
-    owner: CapabilityLayer
-    domain_of:
-    - CapabilityLayer
-    range: GraphProjection
-    inlined: true
   profiles:
     name: profiles
     description: Control profile families keyed by family name.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: profiles
     owner: CapabilityLayer

@@ -3,13 +3,13 @@
 # Slot: units_uri 
 
 
-_Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere, si-unit:MegaV-PER-M for MV/m, si-unit:T-M for T*m). The si-unit: prefix maps to http://qudt.org/vocab/unit/. Companion to the human-readable symbol in the units slot. Use the narad:CustomUnit for user-defined units not in QUDT; these should be defined in the graph projection with a narad:CustomUnit class and linked to signals via the units_uri slot._
+_Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/units_uri](https://w3id.org/narad_linkml/schema/narad/units_uri)
+URI: [narad:units_uri](https://w3id.org/narad_linkml/schema/narad/units_uri)
 Alias: units_uri
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,9 @@ Alias: units_uri
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Signal](Signal.md) | A named semantic signal used by a capability |  no  |
+| [ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |  no  |
+| [Signal](Signal.md) | Domain term for a control-system signal |  no  |
+| [ObservableSignal](ObservableSignal.md) | A NARAD signal that is read, monitored, observed, or exposed by a system |  no  |
 
 
 
@@ -46,7 +48,7 @@ Alias: units_uri
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,9 +57,8 @@ Alias: units_uri
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/units_uri |
-| native | https://w3id.org/narad_linkml/schema/narad/units_uri |
-| broad | si-unit:Unit |
+| self | narad:units_uri |
+| native | narad:units_uri |
 
 
 
@@ -67,14 +68,9 @@ Alias: units_uri
 <details>
 ```yaml
 name: units_uri
-description: 'Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere, si-unit:MegaV-PER-M
-  for MV/m, si-unit:T-M for T*m). The si-unit: prefix maps to http://qudt.org/vocab/unit/.
-  Companion to the human-readable symbol in the units slot. Use the narad:CustomUnit
-  for user-defined units not in QUDT; these should be defined in the graph projection
-  with a narad:CustomUnit class and linked to signals via the units_uri slot.'
-from_schema: https://w3id.org/narad_linkml/schema/narad/
-broad_mappings:
-- si-unit:Unit
+description: 'Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere).
+  The si-unit: prefix maps to http://qudt.org/vocab/unit/.'
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: units_uri
 domain_of:

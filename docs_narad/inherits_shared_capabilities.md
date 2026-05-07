@@ -3,13 +3,13 @@
 # Slot: inherits_shared_capabilities 
 
 
-_Shared capabilities inherited by this profile, cross-referenced by name. The validator checks that referenced names exist in the parent family's shared_capabilities._
+_Shared capabilities inherited by this profile, cross-referenced by name._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/inherits_shared_capabilities](https://w3id.org/narad_linkml/schema/narad/inherits_shared_capabilities)
+URI: [narad:inherits_shared_capabilities](https://w3id.org/narad_linkml/schema/narad/inherits_shared_capabilities)
 Alias: inherits_shared_capabilities
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: inherits_shared_capabilities
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CapabilityProfile](CapabilityProfile.md) | A device-type profile that reuses shared capabilities and adds specific capab... |  no  |
+| [CapabilityProfile](CapabilityProfile.md) | A device-type profile that reuses shared capabilities and adds type-specific ... |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: inherits_shared_capabilities
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: inherits_shared_capabilities
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/inherits_shared_capabilities |
-| native | https://w3id.org/narad_linkml/schema/narad/inherits_shared_capabilities |
+| self | narad:inherits_shared_capabilities |
+| native | narad:inherits_shared_capabilities |
 
 
 
@@ -69,8 +69,7 @@ Alias: inherits_shared_capabilities
 ```yaml
 name: inherits_shared_capabilities
 description: Shared capabilities inherited by this profile, cross-referenced by name.
-  The validator checks that referenced names exist in the parent family's shared_capabilities.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: inherits_shared_capabilities
 domain_of:

@@ -9,7 +9,7 @@ _The data type of the signal's value._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/data_type](https://w3id.org/narad_linkml/schema/narad/data_type)
+URI: [narad:data_type](https://w3id.org/narad_linkml/schema/narad/data_type)
 Alias: data_type
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,9 @@ Alias: data_type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Signal](Signal.md) | A named semantic signal used by a capability |  no  |
+| [ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |  no  |
+| [Signal](Signal.md) | Domain term for a control-system signal |  no  |
+| [ObservableSignal](ObservableSignal.md) | A NARAD signal that is read, monitored, observed, or exposed by a system |  no  |
 
 
 
@@ -46,7 +48,7 @@ Alias: data_type
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,9 +57,8 @@ Alias: data_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/data_type |
-| native | https://w3id.org/narad_linkml/schema/narad/data_type |
-| broad | ncit:C42645, qudt:Datatype |
+| self | narad:data_type |
+| native | narad:data_type |
 
 
 
@@ -68,10 +69,7 @@ Alias: data_type
 ```yaml
 name: data_type
 description: The data type of the signal's value.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
-broad_mappings:
-- ncit:C42645
-- qudt:Datatype
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: data_type
 domain_of:

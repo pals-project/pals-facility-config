@@ -9,7 +9,7 @@ _Reference bend angle in radians._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/angle_ref](https://w3id.org/narad_linkml/schema/narad/angle_ref)
+URI: [narad:angle_ref](https://w3id.org/narad_linkml/schema/narad/angle_ref)
 Alias: angle_ref
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: angle_ref
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParams](BendParams.md) | Dipole/bend physics parameters (entry angle, exit edge angles) |  no  |
+| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: angle_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: angle_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/angle_ref |
-| native | https://w3id.org/narad_linkml/schema/narad/angle_ref |
+| self | narad:angle_ref |
+| native | narad:angle_ref |
 
 
 
@@ -67,11 +67,11 @@ Alias: angle_ref
 ```yaml
 name: angle_ref
 description: Reference bend angle in radians.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: angle_ref
 domain_of:
-- BendParams
+- ElementParamSet
 range: float
 
 ```

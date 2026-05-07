@@ -9,7 +9,7 @@ _Cross-reference to the specific capability profile applied to this element._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/capability_profile](https://w3id.org/narad_linkml/schema/narad/capability_profile)
+URI: [narad:capability_profile](https://w3id.org/narad_linkml/schema/narad/capability_profile)
 Alias: capability_profile
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: capability_profile
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ElementNaradRef](ElementNaradRef.md) | NARAD semantic reference block attached to a beamline element |  no  |
+| [BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: capability_profile
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: capability_profile
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/capability_profile |
-| native | https://w3id.org/narad_linkml/schema/narad/capability_profile |
+| self | narad:capability_profile |
+| native | narad:capability_profile |
 
 
 
@@ -67,11 +67,11 @@ Alias: capability_profile
 ```yaml
 name: capability_profile
 description: Cross-reference to the specific capability profile applied to this element.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: capability_profile
 domain_of:
-- ElementNaradRef
+- BeamlineElement
 range: CapabilityProfile
 inlined: false
 

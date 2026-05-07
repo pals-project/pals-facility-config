@@ -3,8 +3,13 @@
 # Slot: signal_definitions 
 
 
+_Signal suffix templates for this facility._
 
-URI: [https://w3id.org/narad_linkml/schema/narad/signal_definitions](https://w3id.org/narad_linkml/schema/narad/signal_definitions)
+
+
+
+
+URI: [narad:signal_definitions](https://w3id.org/narad_linkml/schema/narad/signal_definitions)
 Alias: signal_definitions
 
 <!-- no inheritance hierarchy -->
@@ -17,7 +22,7 @@ Alias: signal_definitions
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Facility](Facility.md) | A facility with specific signal bindings |  no  |
+| [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -41,7 +46,7 @@ Alias: signal_definitions
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -50,8 +55,8 @@ Alias: signal_definitions
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/signal_definitions |
-| native | https://w3id.org/narad_linkml/schema/narad/signal_definitions |
+| self | narad:signal_definitions |
+| native | narad:signal_definitions |
 
 
 
@@ -61,13 +66,13 @@ Alias: signal_definitions
 <details>
 ```yaml
 name: signal_definitions
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Signal suffix templates for this facility.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signal_definitions
 domain_of:
-- Facility
+- FacilityConfig
 range: SignalDefinitions
-inlined: true
 
 ```
 </details>

@@ -9,7 +9,7 @@ _RF phase in degrees._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/phase](https://w3id.org/narad_linkml/schema/narad/phase)
+URI: [narad:phase](https://w3id.org/narad_linkml/schema/narad/phase)
 Alias: phase
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: phase
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [RFParams](RFParams.md) | RF cavity physics parameters (frequency, voltage, phase) |  no  |
+| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: phase
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: phase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/phase |
-| native | https://w3id.org/narad_linkml/schema/narad/phase |
+| self | narad:phase |
+| native | narad:phase |
 
 
 
@@ -67,11 +67,11 @@ Alias: phase
 ```yaml
 name: phase
 description: RF phase in degrees.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: phase
 domain_of:
-- RFParams
+- ElementParamSet
 range: float
 
 ```

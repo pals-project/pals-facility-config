@@ -9,7 +9,7 @@ _Signal-layer container for facility-specific signal bindings._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/SignalLayer](https://w3id.org/narad_linkml/schema/narad/SignalLayer)
+URI: [narad:SignalLayer](https://w3id.org/narad_linkml/schema/narad/SignalLayer)
 
 
 
@@ -25,8 +25,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalLayer](https://w3id.org/n
     
         
         
-        SignalLayer --> "*" Facility : facilities
-        click Facility href "../Facility/"
+        SignalLayer --> "*" FacilityConfig : facilities
+        click FacilityConfig href "../FacilityConfig/"
     
 
         
@@ -43,7 +43,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalLayer](https://w3id.org/n
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [facilities](facilities.md) | * <br/> [Facility](Facility.md) | Facility identifiers for facility-specific signal bindings | direct |
+| [facilities](facilities.md) | * <br/> [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configurations keyed by facility name | direct |
 
 
 
@@ -71,7 +71,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalLayer](https://w3id.org/n
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -80,8 +80,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalLayer](https://w3id.org/n
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/SignalLayer |
-| native | https://w3id.org/narad_linkml/schema/narad/SignalLayer |
+| self | narad:SignalLayer |
+| native | narad:SignalLayer |
 
 
 
@@ -98,7 +98,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalLayer](https://w3id.org/n
 ```yaml
 name: SignalLayer
 description: Signal-layer container for facility-specific signal bindings.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
 - facilities
 
@@ -111,18 +111,19 @@ slots:
 ```yaml
 name: SignalLayer
 description: Signal-layer container for facility-specific signal bindings.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
   facilities:
     name: facilities
-    description: Facility identifiers for facility-specific signal bindings.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Facility-specific signal binding configurations keyed by facility
+      name.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: facilities
     owner: SignalLayer
     domain_of:
     - SignalLayer
-    range: Facility
+    range: FacilityConfig
     multivalued: true
     inlined: true
 

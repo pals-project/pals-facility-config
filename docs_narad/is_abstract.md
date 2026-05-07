@@ -3,13 +3,13 @@
 # Slot: is_abstract 
 
 
-_If true, this profile is a template or abstract definition not intended to be directly assigned to a beamline element. Concrete profiles that refine a template should set this to false (the default)._
+_If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default)._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/is_abstract](https://w3id.org/narad_linkml/schema/narad/is_abstract)
+URI: [narad:is_abstract](https://w3id.org/narad_linkml/schema/narad/is_abstract)
 Alias: is_abstract
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,16 @@ Alias: is_abstract
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CapabilityProfile](CapabilityProfile.md) | A device-type profile that reuses shared capabilities and adds specific capab... |  no  |
+| [SystemCapability](SystemCapability.md) | A capability of a system |  no  |
+| [MagnetCapability](MagnetCapability.md) | Generic magnet capability (current control and readback signals) |  no  |
+| [SolenoidCapability](SolenoidCapability.md) | Solenoid-specific capability extending MagnetCapability with focusing signals |  no  |
+| [BPMCapability](BPMCapability.md) | BPM-specific capability with horizontal and vertical position readback signal... |  no  |
+| [CorrectorCapability](CorrectorCapability.md) | Corrector-specific capability extending MagnetCapability with kick signals |  no  |
+| [InstrumentCapability](InstrumentCapability.md) | Generic instrument capability (position readback and status signals) |  no  |
+| [QuadrupoleCapability](QuadrupoleCapability.md) | Quadrupole-specific capability extending MagnetCapability with strength signa... |  no  |
+| [DipoleCapability](DipoleCapability.md) | Dipole-specific capability extending MagnetCapability with bend-field signals |  no  |
+| [CapabilityProfile](CapabilityProfile.md) | A device-type profile that reuses shared capabilities and adds type-specific ... |  no  |
+| [CavityGradientCapability](CavityGradientCapability.md) | RF cavity capability with gradient control, readback, and status signals |  no  |
 
 
 
@@ -46,7 +55,7 @@ Alias: is_abstract
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +64,8 @@ Alias: is_abstract
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/is_abstract |
-| native | https://w3id.org/narad_linkml/schema/narad/is_abstract |
+| self | narad:is_abstract |
+| native | narad:is_abstract |
 
 
 
@@ -66,15 +75,15 @@ Alias: is_abstract
 <details>
 ```yaml
 name: is_abstract
-description: If true, this profile is a template or abstract definition not intended
-  to be directly assigned to a beamline element. Concrete profiles that refine a template
-  should set this to false (the default).
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: If true, this profile is a template not intended to be directly assigned
+  to a beamline element. Concrete profiles set this to false (default).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 ifabsent: 'false'
 alias: is_abstract
 domain_of:
 - CapabilityProfile
+- SystemCapability
 range: boolean
 
 ```

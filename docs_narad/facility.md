@@ -3,8 +3,13 @@
 # Slot: facility 
 
 
+_Identifier of the facility this configuration describes._
 
-URI: [https://w3id.org/narad_linkml/schema/narad/facility](https://w3id.org/narad_linkml/schema/narad/facility)
+
+
+
+
+URI: [narad:facility](https://w3id.org/narad_linkml/schema/narad/facility)
 Alias: facility
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +22,7 @@ Alias: facility
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | NARAD configuration block containing the capability layer |  no  |
-| [PVBinding](PVBinding.md) | A concrete PV (Process Variable) binding for one semantic signal on a beamlin... |  no  |
+| [NaradConfig](NaradConfig.md) | NARAD configuration block: capability layer + signal layer |  yes  |
 
 
 
@@ -42,7 +46,7 @@ Alias: facility
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -51,8 +55,8 @@ Alias: facility
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/facility |
-| native | https://w3id.org/narad_linkml/schema/narad/facility |
+| self | narad:facility |
+| native | narad:facility |
 
 
 
@@ -62,12 +66,12 @@ Alias: facility
 <details>
 ```yaml
 name: facility
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Identifier of the facility this configuration describes.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: facility
 domain_of:
 - NaradConfig
-- PVBinding
 range: string
 
 ```

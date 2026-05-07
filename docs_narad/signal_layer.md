@@ -9,7 +9,7 @@ _Signal-layer container for facility-specific signal bindings._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/signal_layer](https://w3id.org/narad_linkml/schema/narad/signal_layer)
+URI: [narad:signal_layer](https://w3id.org/narad_linkml/schema/narad/signal_layer)
 Alias: signal_layer
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: signal_layer
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | NARAD configuration block containing the capability layer |  no  |
+| [NaradConfig](NaradConfig.md) | NARAD configuration block: capability layer + signal layer |  yes  |
 
 
 
@@ -46,7 +46,7 @@ Alias: signal_layer
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: signal_layer
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/signal_layer |
-| native | https://w3id.org/narad_linkml/schema/narad/signal_layer |
+| self | narad:signal_layer |
+| native | narad:signal_layer |
 
 
 
@@ -67,7 +67,7 @@ Alias: signal_layer
 ```yaml
 name: signal_layer
 description: Signal-layer container for facility-specific signal bindings.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signal_layer
 domain_of:

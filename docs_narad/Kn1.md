@@ -9,7 +9,7 @@ _First-order magnetic multipole coefficient (quadrupole strength)._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/Kn1](https://w3id.org/narad_linkml/schema/narad/Kn1)
+URI: [narad:Kn1](https://w3id.org/narad_linkml/schema/narad/Kn1)
 Alias: Kn1
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: Kn1
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MagneticMultipoleParams](MagneticMultipoleParams.md) | Magnetic multipole physics parameters |  no  |
+| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: Kn1
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: Kn1
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/Kn1 |
-| native | https://w3id.org/narad_linkml/schema/narad/Kn1 |
+| self | narad:Kn1 |
+| native | narad:Kn1 |
 
 
 
@@ -67,11 +67,11 @@ Alias: Kn1
 ```yaml
 name: Kn1
 description: First-order magnetic multipole coefficient (quadrupole strength).
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: Kn1
 domain_of:
-- MagneticMultipoleParams
+- ElementParamSet
 range: float
 
 ```

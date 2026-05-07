@@ -43,7 +43,7 @@ prefixes:
   schema: http://schema.org/
   qudt: http://qudt.org/schema/qudt/
   si-unit: http://qudt.org/vocab/unit/
-  ncit: http://purl.obolibrary.org/obo/NCIT_
+  ncit: http://purl.obolibrary.org/obo/ncit.owl
   ro: http://purl.obolibrary.org/obo/RO_
 
 default_prefix: narad
@@ -86,13 +86,36 @@ classes:
     description: "NARAD configuration block: capability layer + signal layer."
     slots:
       - schema_version
-      - description
+      - intent
       - capability_layer
       - facility
       - control_system
       - signal_layer
     broad_mappings:
       - ssn:System
+    slot_usage:
+      schema_version:
+        range: string
+        required: true
+        description: "Version of the NARAD schema used in this document."
+      facility:
+        range: string
+        required: true
+        description: "Identifier of the facility this configuration describes."
+      control_system:
+        range: string
+        required: true
+        description: "Identifier of the control system (e.g. epics) this configuration describes."
+      capability_layer:
+        range: CapabilityLayer
+        required: true
+        inlined: false
+        description: "Capability-layer container for control profile families."
+      signal_layer:
+        range: SignalLayer
+        required: true
+        inlined: false
+        description: "Signal-layer container for facility-specific signal bindings."
 
   CapabilityLayer:
     description: "Capability-layer container for control profile families."
@@ -124,10 +147,6 @@ classes:
       a generic shared Capability. The explicit link to the shared Capability
       being extended is given by inherits_from. Adds type-specific signals on
       top of those already defined in the referenced shared Capability.
-    slots:
-      - inherits_from
-      - capability_class
-      - class_curie
 
   CapabilityProfile:
     is_a: NamedThing
@@ -149,9 +168,16 @@ classes:
     is_a: NamedThing
     description: "Facility-specific signal binding configuration."
     slots:
+      - facility_identifier
       - control_system
       - naming_convention
       - signal_definitions
+  
+  FacilityIdentifier:
+    description: "A globally unique identifier for an entity (e.g., facility), with a specified type (e.g. DOI, ROR, ARK, local)."
+    slots:
+      - identifier_type
+      - identifier_value
 
   SignalDefinitions:
     description: >-
@@ -162,16 +188,59 @@ classes:
       - type_signal_sets
 
   SignalBinding:
-    is_a: NamedThing
     description: "A named EPICS suffix definition for one semantic signal."
     slots:
+      - description
       - control_system_suffix
 
-  DeviceTypeSignalSet:
-    is_a: NamedThing
-    description: "Signal binding set scoped to a device type (e.g. Quadrupole, BPM)."
+  TypeSignalSet:
+    description: >-
+      Explicit signal binding groups keyed by device domain or device type.
     slots:
-      - signal_bindings
+      - magnet_signals
+      - quadrupole_signals
+      - corrector_signals
+      - dipole_signals
+      - bpm_signals
+      - rfcavity_signals
+
+  MagnetSignalSet:
+    description: "Shared magnet signal bindings."
+    slots:
+      - current_setpoint
+      - current_readback
+      - current_min
+      - current_max
+      - status
+
+  QuadrupoleSignalSet:
+    description: "Quadrupole-specific signal bindings."
+    slots:
+      - strength_setpoint
+
+  CorrectorSignalSet:
+    description: "Corrector-specific signal bindings."
+    slots:
+      - kick_setpoint
+
+  DipoleSignalSet:
+    description: "Dipole-specific signal bindings."
+    slots:
+      - field_setpoint
+
+  BPMSignalSet:
+    description: "BPM-specific signal bindings."
+    slots:
+      - horizontal_beam_position
+      - vertical_beam_position
+      - status
+
+  RFCavitySignalSet:
+    description: "RF cavity-specific signal bindings."
+    slots:
+      - gradient_setpoint
+      - gradient_readback
+      - status
 
   # ---------------------------------------------------------------------------
   # Beamline and BeamlineElement
@@ -411,7 +480,7 @@ classes:
         multivalued: true
       is_property_of:
         range: uriorcurie # typically the ControlSystem that implements this binding
-        multivalued: true
+        multivalued: false
   
   # -------- Element Parameters and Facility Parameters --------------------------------
   # ElementParamSet holds named physics-parameter blocks (RFP, BendP, etc.).
@@ -476,32 +545,6 @@ enums:
       Instrument:
         description: "Generic beam diagnostic instrument (halo monitor, viewer, etc.)."
 
-  SignalRoleEnum:
-    description: "Controlled vocabulary for the semantic role of a signal within a capability."
-    permissible_values:
-      control:
-        description: "A writable signal that commands a device setpoint."
-        broad_mappings:
-          - sosa:ActuatableProperty
-      readback:
-        description: "A readable signal that reports a measured or monitored quantity."
-        broad_mappings:
-          - sosa:ObservableProperty
-      constraint:
-        description: "A signal that defines an operational limit or boundary on a control quantity."
-      status:
-        description: "A signal reporting the device or system operational state."
-        broad_mappings:
-          - sosa:ObservableProperty
-      position:
-        description: "A signal representing a physical position of a device component."
-        broad_mappings:
-          - sosa:ObservableProperty
-      interlock:
-        description: "A signal associated with a machine protection or safety interlock condition."
-      diagnostic:
-        description: "A signal providing diagnostic or debugging information about a device."
-
   DeviceDomainEnum:
     description: "High-level device domain for a control profile family."
     permissible_values:
@@ -533,6 +576,40 @@ enums:
       coded_value:
         description: "A code referenced from an external coding system."
         meaning: ncit:C95637
+        
+  SignalRoleEnum:
+    description: "Controlled vocabulary for the semantic role of a signal within a capability."
+    permissible_values:
+      control:
+        description: "A writable signal that commands a device setpoint."
+        broad_mappings:
+          - sosa:ActuatableProperty
+      readback:
+        description: "A readable signal that reports a measured or monitored quantity."
+        broad_mappings:
+          - sosa:ObservableProperty
+      constraint:
+        description: "A signal that defines an operational limit or boundary on a control quantity."
+      status:
+        description: "A signal reporting the device or system operational state."
+        broad_mappings:
+          - sosa:ObservableProperty
+
+  IdentifierTypeEnum:
+    description: "Allowed identifier types for facilities and other entities."
+    permissible_values: # doi | ark | handle | url | local | other
+      doi:
+        description: "Digital Object Identifier (DOI)."
+      ark:
+        description: "Archival Resource Key (ARK)."
+      handle:
+        description: "Handle System identifier."
+      url:
+        description: "Uniform Resource Locator (URL)."
+      local:
+        description: "Local identifier unique within a specific context or namespace."
+      other:
+        description: "Any other type of identifier not covered by the above categories."
 
 # ===========================================================================
 # Slots
@@ -590,6 +667,18 @@ slots:
       This is the edge that connects the signal definitions to the facility-specific bindings in the graph.
     range: uriorcurie # the rdf:type of the SignalBinding Procedure or ControlSystem that implements this Signal
     multivalued: false
+    broad_mappings:
+      - ssn:isPropertyOf
+  
+  is_hosted_by:
+    description: >
+      Links an InstanceSignalBinding to the FacilitySystem it belongs to.
+      This is the edge that connects the facility-specific bindings to the Facility node in the graph.
+    range: uriorcurie # typically the FacilitySystem this binding belongs to
+    multivalued: false
+    broad_mappings:
+      - ssn-system:hasSubSystem
+      - ssn:isHostedBy
 
   # ---- NARAD-specific slots ------------------------------------------------
 
@@ -619,8 +708,7 @@ slots:
     range: Beamline
     multivalued: true
     inlined: true
-    inlined_as_list: true
-    description: "Ordered list of beamline definitions."
+    description: "Ordered beamline definitions keyed by beamline name."
 
   elements:
     range: BeamlineElement
@@ -670,13 +758,12 @@ slots:
 
   signal_definitions:
     range: SignalDefinitions
-    inlined: true
     description: "Signal suffix templates for this facility."
 
   type_signal_sets:
-    range: DeviceTypeSignalSet
-    multivalued: true
+    range: TypeSignalSet
     inlined: true
+    multivalued: false
     description: >-
       Signal suffix groups keyed by device type or device domain name.
       Domain-level keys cover signals shared across all types in that domain;
@@ -736,7 +823,6 @@ slots:
     range: TypeSpecificCapability
     multivalued: true
     inlined: true
-    inlined_as_list: true
     description: "Type-specific capabilities declared directly in a profile."
 
   inherits_from:
@@ -766,8 +852,7 @@ slots:
     range: Signal
     multivalued: true
     inlined: true
-    inlined_as_list: true
-    description: "Signals within a capability."
+    description: "Signals within a capability, keyed by signal name."
 
   device_type:
     range: ElementKindEnum
@@ -809,9 +894,87 @@ slots:
     description: "Kind/type label for the beamline entry (e.g. BeamLine)."
     aliases:
       - kind
+  
+  magnet_signals:
+    range: MagnetSignalSet
+    inlined: true
+    description: "Shared magnet signal bindings."
+
+  quadrupole_signals:
+    range: QuadrupoleSignalSet
+    inlined: true
+    description: "Quadrupole-specific signal bindings."
+
+  corrector_signals:
+    range: CorrectorSignalSet
+    inlined: true
+    description: "Corrector-specific signal bindings."
+
+  dipole_signals:
+    range: DipoleSignalSet
+    inlined: true
+    description: "Dipole-specific signal bindings."
+
+  bpm_signals:
+    range: BPMSignalSet
+    inlined: true
+    description: "BPM-specific signal bindings."
+
+  rfcavity_signals:
+    range: RFCavitySignalSet
+    inlined: true
+    description: "RF cavity-specific signal bindings."
+
+  current_setpoint:
+    range: SignalBinding
+    inlined: true
+
+  current_readback:
+    range: SignalBinding
+    inlined: true
+
+  current_min:
+    range: SignalBinding
+    inlined: true
+
+  current_max:
+    range: SignalBinding
+    inlined: true
+
+  strength_setpoint:
+    range: SignalBinding
+    inlined: true
+
+  kick_setpoint:
+    range: SignalBinding
+    inlined: true
+
+  field_setpoint:
+    range: SignalBinding
+    inlined: true
+
+  horizontal_beam_position:
+    range: SignalBinding
+    inlined: true
+
+  vertical_beam_position:
+    range: SignalBinding
+    inlined: true
+
+  gradient_setpoint:
+    range: SignalBinding
+    inlined: true
+
+  gradient_readback:
+    range: SignalBinding
+    inlined: true
+
+  status:
+    range: SignalBinding
+    inlined: true
 
   line:
-    range: string
+    range: BeamlineElement
     multivalued: true
     inlined: false
     description: "Ordered sequence of cross-referenced element names forming a beamline."
@@ -841,7 +1004,6 @@ slots:
   properties:
     range: AnyValue
     description: "Open-ended key-value property map for element-specific or facility-specific parameters."
-    multivalued: true  
 
   modeled_as:
     range: string
@@ -887,3 +1049,21 @@ slots:
   Ksol:
     range: float
     description: "Solenoid integrated field strength."
+
+  facility_identifier:
+    range: FacilityIdentifier
+    multivalued: true
+    inlined: false
+    description: "Globally unique identifier for the facility, with specified type and value."
+
+  identifier_type:
+    range: IdentifierTypeEnum
+    description: "The type of identifier used in the identifier slot (e.g. DOI, ARK, URL, local)."
+
+  identifier_value:
+    range: string
+    description: "The value of the identifier (e.g. the DOI string, ARK string, URL string, or local ID)."
+
+  intent:
+    range: string
+    description: "A human-readable statement of the intended use or purpose of this NARAD configuration."

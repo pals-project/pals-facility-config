@@ -3,13 +3,13 @@
 # Slot: signals 
 
 
-_Signals within a capability._
+_Signals within a capability, keyed by signal name._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/signals](https://w3id.org/narad_linkml/schema/narad/signals)
+URI: [narad:signals](https://w3id.org/narad_linkml/schema/narad/signals)
 Alias: signals
 
 <!-- no inheritance hierarchy -->
@@ -22,9 +22,8 @@ Alias: signals
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [TypeSpecificCapability](TypeSpecificCapability.md) | An inline capability declared within a device-type profile, with its own iden... |  no  |
-| [Capability](Capability.md) | A named, shared grouping of semantically related signals for a control aspect |  no  |
-| [CapabilityMixin](CapabilityMixin.md) | Shared structure common to all capability types: a description and an ordered... |  no  |
+| [Capability](Capability.md) | A named, shared grouping of semantically related signals for a control aspect... |  no  |
+| [TypeSpecificCapability](TypeSpecificCapability.md) | An inline capability declared within a device-type profile that extends a gen... |  no  |
 
 
 
@@ -50,7 +49,7 @@ Alias: signals
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -59,8 +58,8 @@ Alias: signals
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/signals |
-| native | https://w3id.org/narad_linkml/schema/narad/signals |
+| self | narad:signals |
+| native | narad:signals |
 
 
 
@@ -70,16 +69,15 @@ Alias: signals
 <details>
 ```yaml
 name: signals
-description: Signals within a capability.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Signals within a capability, keyed by signal name.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signals
 domain_of:
-- CapabilityMixin
+- Capability
 range: Signal
 multivalued: true
 inlined: true
-inlined_as_list: true
 
 ```
 </details>

@@ -9,7 +9,7 @@ _Solenoid integrated field strength._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/Ksol](https://w3id.org/narad_linkml/schema/narad/Ksol)
+URI: [narad:Ksol](https://w3id.org/narad_linkml/schema/narad/Ksol)
 Alias: Ksol
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: Ksol
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [SolenoidParams](SolenoidParams.md) | Solenoid physics parameters |  no  |
+| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: Ksol
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: Ksol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/Ksol |
-| native | https://w3id.org/narad_linkml/schema/narad/Ksol |
+| self | narad:Ksol |
+| native | narad:Ksol |
 
 
 
@@ -67,11 +67,11 @@ Alias: Ksol
 ```yaml
 name: Ksol
 description: Solenoid integrated field strength.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: Ksol
 domain_of:
-- SolenoidParams
+- ElementParamSet
 range: float
 
 ```

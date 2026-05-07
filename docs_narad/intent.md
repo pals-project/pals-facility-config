@@ -3,8 +3,13 @@
 # Slot: intent 
 
 
+_A human-readable statement of the intended use or purpose of this NARAD configuration._
 
-URI: [https://w3id.org/narad_linkml/schema/narad/intent](https://w3id.org/narad_linkml/schema/narad/intent)
+
+
+
+
+URI: [narad:intent](https://w3id.org/narad_linkml/schema/narad/intent)
 Alias: intent
 
 <!-- no inheritance hierarchy -->
@@ -17,7 +22,7 @@ Alias: intent
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | NARAD configuration block containing the capability layer |  no  |
+| [NaradConfig](NaradConfig.md) | NARAD configuration block: capability layer + signal layer |  no  |
 
 
 
@@ -41,7 +46,7 @@ Alias: intent
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -50,8 +55,8 @@ Alias: intent
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/intent |
-| native | https://w3id.org/narad_linkml/schema/narad/intent |
+| self | narad:intent |
+| native | narad:intent |
 
 
 
@@ -61,7 +66,9 @@ Alias: intent
 <details>
 ```yaml
 name: intent
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: A human-readable statement of the intended use or purpose of this NARAD
+  configuration.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: intent
 domain_of:

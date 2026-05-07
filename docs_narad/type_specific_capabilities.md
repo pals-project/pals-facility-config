@@ -3,13 +3,13 @@
 # Slot: type_specific_capabilities 
 
 
-_Type-specific capabilities declared directly in a profile, each with an id, class label, description, and signals._
+_Type-specific capabilities declared directly in a profile._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/type_specific_capabilities](https://w3id.org/narad_linkml/schema/narad/type_specific_capabilities)
+URI: [narad:type_specific_capabilities](https://w3id.org/narad_linkml/schema/narad/type_specific_capabilities)
 Alias: type_specific_capabilities
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: type_specific_capabilities
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CapabilityProfile](CapabilityProfile.md) | A device-type profile that reuses shared capabilities and adds specific capab... |  no  |
+| [CapabilityProfile](CapabilityProfile.md) | A device-type profile that reuses shared capabilities and adds type-specific ... |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: type_specific_capabilities
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: type_specific_capabilities
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/type_specific_capabilities |
-| native | https://w3id.org/narad_linkml/schema/narad/type_specific_capabilities |
+| self | narad:type_specific_capabilities |
+| native | narad:type_specific_capabilities |
 
 
 
@@ -68,9 +68,8 @@ Alias: type_specific_capabilities
 <details>
 ```yaml
 name: type_specific_capabilities
-description: Type-specific capabilities declared directly in a profile, each with
-  an id, class label, description, and signals.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Type-specific capabilities declared directly in a profile.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: type_specific_capabilities
 domain_of:
@@ -78,7 +77,6 @@ domain_of:
 range: TypeSpecificCapability
 multivalued: true
 inlined: true
-inlined_as_list: true
 
 ```
 </details>

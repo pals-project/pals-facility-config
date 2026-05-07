@@ -9,7 +9,7 @@ _Top-level NARAD document container._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/NaradModel](https://w3id.org/narad_linkml/schema/narad/NaradModel)
+URI: [narad:NaradModel](https://w3id.org/narad_linkml/schema/narad/NaradModel)
 
 
 
@@ -41,13 +41,13 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradModel](https://w3id.org/na
     
 
         
-      NaradModel : narad
+      NaradModel : narad_config
         
           
     
         
         
-        NaradModel --> "0..1" NaradConfig : narad
+        NaradModel --> "0..1" NaradConfig : narad_config
         click NaradConfig href "../NaradConfig/"
     
 
@@ -65,9 +65,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradModel](https://w3id.org/na
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [narad](narad.md) | 0..1 <br/> [NaradConfig](NaradConfig.md) |  | direct |
-| [beamlines](beamlines.md) | * <br/> [Beamline](Beamline.md) | Beamlines — open structure to accommodate the list-of-named-dict serializatio... | direct |
-| [elements](elements.md) | * <br/> [BeamlineElement](BeamlineElement.md) | Beamline element definitions (referenced by name from beamline line sequences... | direct |
+| [narad_config](narad_config.md) | 0..1 <br/> [NaradConfig](NaradConfig.md) | Top-level NARAD configuration block (capability_layer + signal_layer) | direct |
+| [beamlines](beamlines.md) | * <br/> [Beamline](Beamline.md) | Ordered beamline definitions keyed by beamline name | direct |
+| [elements](elements.md) | * <br/> [BeamlineElement](BeamlineElement.md) | Beamline element definitions referenced by name from beamline sequences | direct |
 
 
 
@@ -88,7 +88,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradModel](https://w3id.org/na
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -97,8 +97,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradModel](https://w3id.org/na
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/NaradModel |
-| native | https://w3id.org/narad_linkml/schema/narad/NaradModel |
+| self | narad:NaradModel |
+| native | narad:NaradModel |
 
 
 
@@ -115,9 +115,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/NaradModel](https://w3id.org/na
 ```yaml
 name: NaradModel
 description: Top-level NARAD document container.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
-- narad
+- narad_config
 - beamlines
 - elements
 tree_root: true
@@ -131,24 +131,25 @@ tree_root: true
 ```yaml
 name: NaradModel
 description: Top-level NARAD document container.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
-  narad:
-    name: narad
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+  narad_config:
+    name: narad_config
+    description: Top-level NARAD configuration block (capability_layer + signal_layer).
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    aliases:
+    - narad
     rank: 1000
-    alias: narad
+    alias: narad_config
     owner: NaradModel
     domain_of:
     - NaradModel
-    - BeamlineElement
     range: NaradConfig
     inlined: true
   beamlines:
     name: beamlines
-    description: Beamlines — open structure to accommodate the list-of-named-dict
-      serialization format used in NARAD YAML files.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Ordered beamline definitions keyed by beamline name.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: beamlines
     owner: NaradModel
@@ -157,12 +158,10 @@ attributes:
     range: Beamline
     multivalued: true
     inlined: true
-    inlined_as_list: true
   elements:
     name: elements
-    description: Beamline element definitions (referenced by name from beamline line
-      sequences).
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Beamline element definitions referenced by name from beamline sequences.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: elements
     owner: NaradModel

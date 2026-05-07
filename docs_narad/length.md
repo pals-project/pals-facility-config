@@ -3,13 +3,13 @@
 # Slot: length 
 
 
-_Physical length of the element in meters._
+_Physical length of the element in metres._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/length](https://w3id.org/narad_linkml/schema/narad/length)
+URI: [narad:length](https://w3id.org/narad_linkml/schema/narad/length)
 Alias: length
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: length
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BeamlineElement](BeamlineElement.md) | A single element in a beamline with optional physics parameter blocks |  no  |
+| [BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: length
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: length
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/length |
-| native | https://w3id.org/narad_linkml/schema/narad/length |
+| self | narad:length |
+| native | narad:length |
 
 
 
@@ -66,8 +66,8 @@ Alias: length
 <details>
 ```yaml
 name: length
-description: Physical length of the element in meters.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Physical length of the element in metres.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: length
 domain_of:

@@ -9,7 +9,7 @@ _The type of identifier used in the identifier slot (e.g. DOI, ARK, URL, local).
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/identifier_type](https://w3id.org/narad_linkml/schema/narad/identifier_type)
+URI: [narad:identifier_type](https://w3id.org/narad_linkml/schema/narad/identifier_type)
 Alias: identifier_type
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: identifier_type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Identifier](Identifier.md) | A globally unique identifier for an entity (e |  no  |
+| [FacilityIdentifier](FacilityIdentifier.md) | A globally unique identifier for an entity (e |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: identifier_type
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: identifier_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/identifier_type |
-| native | https://w3id.org/narad_linkml/schema/narad/identifier_type |
+| self | narad:identifier_type |
+| native | narad:identifier_type |
 
 
 
@@ -68,11 +68,11 @@ Alias: identifier_type
 name: identifier_type
 description: The type of identifier used in the identifier slot (e.g. DOI, ARK, URL,
   local).
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: identifier_type
 domain_of:
-- Identifier
+- FacilityIdentifier
 range: IdentifierTypeEnum
 
 ```

@@ -9,7 +9,7 @@ _Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK)._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/modeled_as](https://w3id.org/narad_linkml/schema/narad/modeled_as)
+URI: [narad:modeled_as](https://w3id.org/narad_linkml/schema/narad/modeled_as)
 Alias: modeled_as
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: modeled_as
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilityParams](FacilityParams.md) | Facility-specific element parameters: type designation, accelerator model nam... |  no  |
+| [FacilityParamSet](FacilityParamSet.md) | Facility-specific element parameters block for beamline elements |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: modeled_as
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: modeled_as
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/modeled_as |
-| native | https://w3id.org/narad_linkml/schema/narad/modeled_as |
+| self | narad:modeled_as |
+| native | narad:modeled_as |
 
 
 
@@ -67,11 +67,11 @@ Alias: modeled_as
 ```yaml
 name: modeled_as
 description: Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK).
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: modeled_as
 domain_of:
-- FacilityParams
+- FacilityParamSet
 range: string
 
 ```

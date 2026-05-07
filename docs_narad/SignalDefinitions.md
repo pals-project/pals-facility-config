@@ -3,13 +3,13 @@
 # Class: SignalDefinitions 
 
 
-_EPICS signal suffix templates keyed by device type or device domain. Use a domain-level key (e.g. Magnet, RFCavity) for signals shared across all types in that domain; use a device-type key (e.g. Quadrupole, BPM) for type-specific signals. New device types require no schema changes._
+_EPICS signal suffix templates keyed by device type or device domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types in that domain; device-type keys are type-specific._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/SignalDefinitions](https://w3id.org/narad_linkml/schema/narad/SignalDefinitions)
+URI: [narad:SignalDefinitions](https://w3id.org/narad_linkml/schema/narad/SignalDefinitions)
 
 
 
@@ -25,8 +25,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalDefinitions](https://w3id
     
         
         
-        SignalDefinitions --> "*" DeviceTypeSignalSet : type_signal_sets
-        click DeviceTypeSignalSet href "../DeviceTypeSignalSet/"
+        SignalDefinitions --> "0..1" TypeSignalSet : type_signal_sets
+        click TypeSignalSet href "../TypeSignalSet/"
     
 
         
@@ -43,7 +43,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalDefinitions](https://w3id
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [type_signal_sets](type_signal_sets.md) | * <br/> [DeviceTypeSignalSet](DeviceTypeSignalSet.md) | Signal suffix groups keyed by device type or device domain name | direct |
+| [type_signal_sets](type_signal_sets.md) | 0..1 <br/> [TypeSignalSet](TypeSignalSet.md) | Signal suffix groups keyed by device type or device domain name | direct |
 
 
 
@@ -53,7 +53,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalDefinitions](https://w3id
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [Facility](Facility.md) | [signal_definitions](signal_definitions.md) | range | [SignalDefinitions](SignalDefinitions.md) |
+| [FacilityConfig](FacilityConfig.md) | [signal_definitions](signal_definitions.md) | range | [SignalDefinitions](SignalDefinitions.md) |
 
 
 
@@ -71,7 +71,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalDefinitions](https://w3id
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -80,8 +80,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalDefinitions](https://w3id
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/SignalDefinitions |
-| native | https://w3id.org/narad_linkml/schema/narad/SignalDefinitions |
+| self | narad:SignalDefinitions |
+| native | narad:SignalDefinitions |
 
 
 
@@ -98,10 +98,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalDefinitions](https://w3id
 ```yaml
 name: SignalDefinitions
 description: EPICS signal suffix templates keyed by device type or device domain.
-  Use a domain-level key (e.g. Magnet, RFCavity) for signals shared across all types
-  in that domain; use a device-type key (e.g. Quadrupole, BPM) for type-specific signals.
-  New device types require no schema changes.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+  Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types
+  in that domain; device-type keys are type-specific.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
 - type_signal_sets
 
@@ -114,25 +113,23 @@ slots:
 ```yaml
 name: SignalDefinitions
 description: EPICS signal suffix templates keyed by device type or device domain.
-  Use a domain-level key (e.g. Magnet, RFCavity) for signals shared across all types
-  in that domain; use a device-type key (e.g. Quadrupole, BPM) for type-specific signals.
-  New device types require no schema changes.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+  Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types
+  in that domain; device-type keys are type-specific.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
   type_signal_sets:
     name: type_signal_sets
     description: Signal suffix groups keyed by device type or device domain name.
-      Domain-level keys (e.g. Magnet, RFCavity) represent signals shared across all
-      types in that domain; device-type keys (e.g. Quadrupole, BPM) are type-specific.
-      New device types require no schema changes.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+      Domain-level keys cover signals shared across all types in that domain; device-type
+      keys are type-specific.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: type_signal_sets
     owner: SignalDefinitions
     domain_of:
     - SignalDefinitions
-    range: DeviceTypeSignalSet
-    multivalued: true
+    range: TypeSignalSet
+    multivalued: false
     inlined: true
 
 ```

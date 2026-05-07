@@ -9,7 +9,7 @@ _The semantic role of the signal within its capability._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/role](https://w3id.org/narad_linkml/schema/narad/role)
+URI: [narad:role](https://w3id.org/narad_linkml/schema/narad/role)
 Alias: role
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,9 @@ Alias: role
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Signal](Signal.md) | A named semantic signal used by a capability |  no  |
+| [ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |  no  |
+| [Signal](Signal.md) | Domain term for a control-system signal |  no  |
+| [ObservableSignal](ObservableSignal.md) | A NARAD signal that is read, monitored, observed, or exposed by a system |  no  |
 
 
 
@@ -46,7 +48,7 @@ Alias: role
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +57,8 @@ Alias: role
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/role |
-| native | https://w3id.org/narad_linkml/schema/narad/role |
+| self | narad:role |
+| native | narad:role |
 
 
 
@@ -67,7 +69,7 @@ Alias: role
 ```yaml
 name: role
 description: The semantic role of the signal within its capability.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: role
 domain_of:

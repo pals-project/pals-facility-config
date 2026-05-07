@@ -3,13 +3,13 @@
 # Slot: elements 
 
 
-_Beamline element definitions (referenced by name from beamline line sequences)._
+_Beamline element definitions referenced by name from beamline sequences._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/elements](https://w3id.org/narad_linkml/schema/narad/elements)
+URI: [narad:elements](https://w3id.org/narad_linkml/schema/narad/elements)
 Alias: elements
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: elements
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: elements
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/elements |
-| native | https://w3id.org/narad_linkml/schema/narad/elements |
+| self | narad:elements |
+| native | narad:elements |
 
 
 
@@ -68,8 +68,8 @@ Alias: elements
 <details>
 ```yaml
 name: elements
-description: Beamline element definitions (referenced by name from beamline line sequences).
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Beamline element definitions referenced by name from beamline sequences.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: elements
 domain_of:

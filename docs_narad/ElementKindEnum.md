@@ -3,11 +3,11 @@
 
 
 
-_Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here ensures that profile device_type values stay in sync with element kind values without circular imports. Kept intentionally small; ADD new values here as the NARAD schema evolves._
+_Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/ElementKindEnum](https://w3id.org/narad_linkml/schema/narad/ElementKindEnum)
+URI: [narad:ElementKindEnum](https://w3id.org/narad_linkml/schema/narad/ElementKindEnum)
 
 ## Permissible Values
 
@@ -30,8 +30,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ElementKindEnum](https://w3id.o
 
 | Name | Description |
 | ---  | --- |
-| [device_type](device_type.md) | The specific device type this capability profile targets (e |
-| [kind](kind.md) |  |
+| [device_type](device_type.md) | The specific device type this capability profile or system capability targets... |
+| [element_kind](element_kind.md) | The type of this beamline element (e |
 
 
 
@@ -47,7 +47,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ElementKindEnum](https://w3id.o
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -61,10 +61,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ElementKindEnum](https://w3id.o
 name: ElementKindEnum
 description: Controlled vocabulary for beamline element types, shared between the
   capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind).
-  Keeping the enum here ensures that profile device_type values stay in sync with
-  element kind values without circular imports. Kept intentionally small; ADD new
-  values here as the NARAD schema evolves.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+  Keeping the enum here keeps profile device_type values in sync with element kind
+  values without circular imports.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 permissible_values:
   Drift:
