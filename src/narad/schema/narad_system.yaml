@@ -50,15 +50,18 @@ description: >
       per-domain and per-device signal-set slots
 
   Additional Notes on Usage:
-  1. On the distinction between element_kind, capability_profile, and facility_element_type.
+  1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling. 
+  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the facility-specific naming convention for that signal (e.g. .R for EPICS readback), 
+  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance (e.g. MQWK202.R). The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) is captured in the SignalBinding.
+  2. On the distinction between element_kind, capability_profile, and facility_element_type.
     - element_kind (BeamlineElement.element_kind) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.
     - capability_profile (BeamlineElement.capability_profile) is the specific control profile assigned to that element, which determines what capabilities and signals are relevant for it. This is a cross-reference to a CapabilityProfile defined in the capability layer.
     - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
-  2. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
+  3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
     - is_instance_of typically points to the rdf:type of the Procedure class that implements the signal binding, e.g. narad:narad:CavityGradientControlCapability.
     - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:[ExampleFacilitySystem] (such as UITF).
     - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:[ExampleControlSystem] (such as epics).
-  3. Open and constrained vocabularies:
+  4. Open and constrained vocabularies:
     - ElementKindEnum and DeviceDomainEnum provide controlled vocabularies for key classification slots, but the schema is designed to be extensible with new enum values as needed.
     - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional facility-specific parameters that don't fit into the predefined schema structure.
 
@@ -115,7 +118,7 @@ classes:
   # ---------------------------------------------------------------------------
 
   NaradConfig:
-    description: "NARAD configuration block: capability layer + signal layer."
+    description: "A top-level NARAD-system container for the: capability layer + signal layer."
     slots:
       - schema_version
       - intent
@@ -213,14 +216,14 @@ classes:
 
   SignalDefinitions:
     description: >-
-      EPICS signal suffix templates keyed by device type or device domain.
+      Control system signal suffix templates keyed by device type or device domain.
       Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across
       all types in that domain; device-type keys are type-specific.
     slots:
       - type_signal_sets
 
   SignalBinding:
-    description: "A named EPICS suffix definition for one semantic signal."
+    description: "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance."
     slots:
       - description
       - control_system_suffix
@@ -280,7 +283,7 @@ classes:
 
   Beamline:
     is_a: NamedThing
-    description: "An ordered sequence of beamline elements defining a beam path."
+    description: "A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path."
     slots:
       - beamline_kind
       - line
@@ -535,7 +538,7 @@ classes:
       - Ksol
 
   FacilityParamSet:
-    description: "Facility-specific element parameters block for beamline elements."
+    description: "Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters."
     slots:
       - facility_element_type
       - modeled_as
@@ -557,6 +560,7 @@ enums:
       capability layer (CapabilityProfile.device_type) and the element layer
       (BeamlineElement.kind). Keeping the enum here keeps profile device_type
       values in sync with element kind values without circular imports.
+      Values must stay aligned with CapabilityProfile.device_type.
     permissible_values:
       Drift:
         description: "A field-free drift space between elements."
@@ -578,7 +582,7 @@ enums:
         description: "Generic beam diagnostic instrument (halo monitor, viewer, etc.)."
 
   DeviceDomainEnum:
-    description: "High-level device domain for a control profile family."
+    description: "High-level device domain for a control profile family. Use: groups profile families, not individual elements."
     permissible_values:
       Magnet:
         description: "Magnet devices: dipoles, quadrupoles, correctors, solenoids."
@@ -617,13 +621,13 @@ enums:
         broad_mappings:
           - sosa:ActuatableProperty
       readback:
-        description: "A readable signal that reports a measured or monitored quantity."
+        description: "A readable signal that reports a measured or monitored quantity. Differs from status in that it typically indicates a continuous measurement (e.g. current readback, beam position) rather than discrete states."
         broad_mappings:
           - sosa:ObservableProperty
       constraint:
         description: "A signal that defines an operational limit or boundary on a control quantity."
       status:
-        description: "A signal reporting the device or system operational state."
+        description: "A signal reporting the device or system operational state. Differs from readback in that it typically indicates discrete states (e.g. fault, standby, ready) rather than a continuous measurement."
         broad_mappings:
           - sosa:ObservableProperty
 
@@ -697,7 +701,8 @@ slots:
       Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it.
       This can also link the Instance of a SignalBinding to the ControlSystem that implements it.
       This is the edge that connects the signal definitions to the facility-specific bindings in the graph.
-    range: uriorcurie # the rdf:type of the SignalBinding Procedure or ControlSystem that implements this Signal
+      Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system).
+    range: uriorcurie
     multivalued: false
     broad_mappings:
       - ssn:isPropertyOf
@@ -719,6 +724,7 @@ slots:
       NARAD alias for rdf:type. Links a facility-specific instance node to
       the LinkML class or semantic class it instantiates.
       In the graph this edge is labelled narad:isInstanceOf.
+      Values are typically the rdf:type of the Procedure class that implements the signal binding, e.g. narad:CavityGradientControlCapability.
     exact_mappings:
       - rdf:type
     range: uriorcurie
@@ -740,14 +746,14 @@ slots:
     range: Beamline
     multivalued: true
     inlined: true
-    description: "Ordered beamline definitions keyed by beamline name."
+    description: "A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name."
 
   elements:
     range: BeamlineElement
     multivalued: true
     inlined: true
     inlined_as_list: true
-    description: "Beamline element definitions referenced by name from beamline sequences."
+    description: "Beamline element definitions referenced by name from beamline sequences. Serializes as a keyed map by element name."
 
   narad_config:
     range: NaradConfig
@@ -813,7 +819,9 @@ slots:
     inlined: true
     description: >-
       Facility-specific bindings of signals to control-system interfaces (e.g.
-      EPICS PVs) for a specific beamline element instance. These are the
+      EPICS PVs) for a specific beamline element instance. 
+      These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. 
+      The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the
       concrete implementations of the abstract SignalBindings referenced by the
       element's capability profile.
 
@@ -884,7 +892,7 @@ slots:
     range: Signal
     multivalued: true
     inlined: true
-    description: "Signals within a capability, keyed by signal name."
+    description: "Signals within a capability, keyed by a semantic signal name."
 
   device_type:
     range: ElementKindEnum
@@ -1009,7 +1017,7 @@ slots:
     range: BeamlineElement
     multivalued: true
     inlined: false
-    description: "Ordered sequence of cross-referenced element names forming a beamline."
+    description: "Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map."
 
   element_kind:
     range: ElementKindEnum
@@ -1035,7 +1043,7 @@ slots:
 
   properties:
     range: AnyValue
-    description: "Open-ended key-value property map for element-specific or facility-specific parameters."
+    description: "Intentionally open-ended key-value property map for element-specific or facility-specific parameters."
 
   modeled_as:
     range: string
