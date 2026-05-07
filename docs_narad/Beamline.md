@@ -3,7 +3,7 @@
 # Class: Beamline 
 
 
-_An ordered sequence of beamline elements defining a beam path._
+_A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path._
 
 
 
@@ -57,7 +57,7 @@ URI: [narad:Beamline](https://w3id.org/narad_linkml/schema/narad/Beamline)
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [beamline_kind](beamline_kind.md) | 0..1 <br/> [String](String.md) | Kind/type label for the beamline entry (e | direct |
-| [line](line.md) | * <br/> [BeamlineElement](BeamlineElement.md) | Ordered sequence of cross-referenced element names forming a beamline | direct |
+| [line](line.md) | * <br/> [BeamlineElement](BeamlineElement.md) | Ordered sequence of beamline elements in this beamline | direct |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
@@ -113,7 +113,8 @@ URI: [narad:Beamline](https://w3id.org/narad_linkml/schema/narad/Beamline)
 <details>
 ```yaml
 name: Beamline
-description: An ordered sequence of beamline elements defining a beam path.
+description: A top-level NARAD-system for an ordered sequence of beamline elements
+  defining a beam path.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 is_a: NamedThing
 slots:
@@ -128,7 +129,8 @@ slots:
 <details>
 ```yaml
 name: Beamline
-description: An ordered sequence of beamline elements defining a beam path.
+description: A top-level NARAD-system for an ordered sequence of beamline elements
+  defining a beam path.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 is_a: NamedThing
 attributes:
@@ -146,7 +148,10 @@ attributes:
     range: string
   line:
     name: line
-    description: Ordered sequence of cross-referenced element names forming a beamline.
+    description: Ordered sequence of beamline elements in this beamline. Serializes
+      as a list of element names (BeamlineElement names) referencing the keys in the
+      elements map This is not a direct containment slot; the actual element definitions
+      are in the top-level elements map.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: line

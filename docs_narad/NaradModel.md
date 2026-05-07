@@ -66,7 +66,7 @@ URI: [narad:NaradModel](https://w3id.org/narad_linkml/schema/narad/NaradModel)
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [narad_config](narad_config.md) | 0..1 <br/> [NaradConfig](NaradConfig.md) | Top-level NARAD configuration block (capability_layer + signal_layer) | direct |
-| [beamlines](beamlines.md) | * <br/> [Beamline](Beamline.md) | Ordered beamline definitions keyed by beamline name | direct |
+| [beamlines](beamlines.md) | * <br/> [Beamline](Beamline.md) | A top-level NARAD-system container for the ordered beamline definitions keyed... | direct |
 | [elements](elements.md) | * <br/> [BeamlineElement](BeamlineElement.md) | Beamline element definitions referenced by name from beamline sequences | direct |
 
 
@@ -148,7 +148,8 @@ attributes:
     inlined: true
   beamlines:
     name: beamlines
-    description: Ordered beamline definitions keyed by beamline name.
+    description: A top-level NARAD-system container for the ordered beamline definitions
+      keyed by beamline name. Serializes as a keyed map by beamline name.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: beamlines
@@ -161,6 +162,7 @@ attributes:
   elements:
     name: elements
     description: Beamline element definitions referenced by name from beamline sequences.
+      Serializes as a keyed map by element name.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: elements

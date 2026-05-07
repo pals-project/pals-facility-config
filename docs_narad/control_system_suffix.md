@@ -24,7 +24,7 @@ Alias: control_system_suffix
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [SignalBinding](SignalBinding.md) | A named EPICS suffix definition for one semantic signal |  no  |
+| [SignalBinding](SignalBinding.md) | A named control system suffix definition for one semantic signal |  no  |
 
 
 

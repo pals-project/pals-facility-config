@@ -1,32 +1,61 @@
 # narad-system-schema
 
-LinkML schema for representing facility control-system structures using NARAD domain classes aligned with SSN, SSN-System, and SOSA.
-Class hierarchy:
-  - System (ssn:System) — base for all physical/logical entities
-    - Facility — top-level facility (e.g. UITF); ssn-system:hasSubSystem → ControlSystem
-    - ControlSystem — the EPICS or other control system
-    - Magnet (ssn:System) — generic powered magnet
-      - Quadrupole, Corrector, Dipole, Solenoid
-    - Instrument (ssn:System) — generic beam diagnostic
-      - BPM
-    - RF_System (ssn:System)
-      - RFCavity
+LinkML schema for representing NARAD control-system semantics, facility-level signal templates, and facility-specific instance bindings aligned with SSN, SSN-System, and SOSA ontologies.
+Main modeling layers:
+  - NaradModel — top-level document containing narad_config, beamlines, and elements
+  - CapabilityLayer — reusable control-profile families, shared capabilities,
+    and device-type profiles
+  - SignalLayer — facility-specific signal suffix templates organized by
+    device domain and device type
+  - Beamline / BeamlineElement — ordered machine layout plus applied profiles
+    and facility-specific instance bindings
+  - Element instances — individual beamline elements with applied profiles and instance signal
+    bindings
 
-Capability hierarchy (ssn-system:SystemCapability):
-  - SystemCapability — base; linked from System via ssn-system:hasSystemCapability
-    - MagnetCapability → QuadrupoleCapability, CorrectorCapability, DipoleCapability
-    - InstrumentCapability → BPMCapability
+System hierarchy:
+  - System
+    - ControlSystem
+    - Magnet
+      - Quadrupole, Corrector, Dipole, Solenoid
+    - Instrument
+      - BPM
+    - RFCavity
+    - Marker
+    - Drift
+
+Capability hierarchy:
+  - SystemCapability
+    - MagnetCapability
+      - QuadrupoleCapability, CorrectorCapability, DipoleCapability, SolenoidCapability
+    - InstrumentCapability
+      - BPMCapability
     - CavityGradientCapability
 
-Signal alignment:
-  - Signal (broad: sosa:Property / ssn:Property) — abstract base
-    - ObservableSignal (exact: sosa:ObservableProperty) — readback, status
-    - ActuatableSignal (exact: sosa:ActuatableProperty) — setpoints, limits
+Signal modeling:
+  - Signal — abstract control-system quantity
+    - ObservableSignal — readback, constraint, and status quantities
+    - ActuatableSignal — writable/control setpoints
+  - SignalBinding — signal template or suffix definition in the signal layer
+  - InstanceSignalBinding — facility-specific PV binding attached to a beamline element
 
-SignalBinding alignment:
-  - SignalBinding (exact sosa:Procedure) — facility-specific PV binding
-    ssn:forProperty → Signal
-    narad:isInstanceOf → rdf:type of the capability class
+Serialization conventions:
+  - beamlines are keyed by beamline name
+  - signals are keyed by semantic signal name
+  - instance_signal_bindings are keyed by semantic signal name
+  - type_signal_sets is a single structured container with explicit
+    per-domain and per-device signal-set slots
+
+Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the facility-specific naming convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance (e.g. MQWK202.R). The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) is captured in the SignalBinding. 2. On the distinction between element_kind, capability_profile, and facility_element_type.
+  - element_kind (BeamlineElement.element_kind) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.
+  - capability_profile (BeamlineElement.capability_profile) is the specific control profile assigned to that element, which determines what capabilities and signals are relevant for it. This is a cross-reference to a CapabilityProfile defined in the capability layer.
+  - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
+3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
+  - is_instance_of typically points to the rdf:type of the Procedure class that implements the signal binding, e.g. narad:narad:CavityGradientControlCapability.
+  - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:[ExampleFacilitySystem] (such as UITF).
+  - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:[ExampleControlSystem] (such as epics).
+4. Open and constrained vocabularies:
+  - ElementKindEnum and DeviceDomainEnum provide controlled vocabularies for key classification slots, but the schema is designed to be extensible with new enum values as needed.
+  - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional facility-specific parameters that don't fit into the predefined schema structure.
 
 
 URI: https://w3id.org/narad_linkml/schema/narad/system
@@ -48,7 +77,7 @@ Name: narad-system-schema
 | [FacilityParamSet](FacilityParamSet.md) | Facility-specific element parameters block for beamline elements |
 | [MagnetSignalSet](MagnetSignalSet.md) | Shared magnet signal bindings |
 | [NamedThing](NamedThing.md) | Abstract base class providing identity and human-readable metadata |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Beamline](Beamline.md) | An ordered sequence of beamline elements defining a beam path |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Capability](Capability.md) | A named, shared grouping of semantically related signals for a control aspect... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TypeSpecificCapability](TypeSpecificCapability.md) | An inline capability declared within a device-type profile that extends a gen... |
@@ -80,12 +109,12 @@ Name: narad-system-schema
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DipoleCapability](DipoleCapability.md) | Dipole-specific capability extending MagnetCapability with bend-field signals |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[QuadrupoleCapability](QuadrupoleCapability.md) | Quadrupole-specific capability extending MagnetCapability with strength signa... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SolenoidCapability](SolenoidCapability.md) | Solenoid-specific capability extending MagnetCapability with focusing signals |
-| [NaradConfig](NaradConfig.md) | NARAD configuration block: capability layer + signal layer |
+| [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |
 | [NaradModel](NaradModel.md) | Top-level NARAD document container |
 | [QuadrupoleSignalSet](QuadrupoleSignalSet.md) | Quadrupole-specific signal bindings |
 | [RFCavitySignalSet](RFCavitySignalSet.md) | RF cavity-specific signal bindings |
-| [SignalBinding](SignalBinding.md) | A named EPICS suffix definition for one semantic signal |
-| [SignalDefinitions](SignalDefinitions.md) | EPICS signal suffix templates keyed by device type or device domain |
+| [SignalBinding](SignalBinding.md) | A named control system suffix definition for one semantic signal |
+| [SignalDefinitions](SignalDefinitions.md) | Control system signal suffix templates keyed by device type or device domain |
 | [SignalLayer](SignalLayer.md) | Signal-layer container for facility-specific signal bindings |
 | [TypeSignalSet](TypeSignalSet.md) | Explicit signal binding groups keyed by device domain or device type |
 
@@ -97,7 +126,7 @@ Name: narad-system-schema
 | --- | --- |
 | [angle_ref](angle_ref.md) | Reference bend angle in radians |
 | [beamline_kind](beamline_kind.md) | Kind/type label for the beamline entry (e |
-| [beamlines](beamlines.md) | Ordered beamline definitions keyed by beamline name |
+| [beamlines](beamlines.md) | A top-level NARAD-system container for the ordered beamline definitions keyed... |
 | [bpm_signals](bpm_signals.md) | BPM-specific signal bindings |
 | [capability_class](capability_class.md) | Semantic class label for a type-specific capability (e |
 | [capability_layer](capability_layer.md) | Capability-layer container for profile families |
@@ -147,7 +176,7 @@ Name: narad-system-schema
 | [Kn1](Kn1.md) | First-order magnetic multipole coefficient (quadrupole strength) |
 | [Ksol](Ksol.md) | Solenoid integrated field strength |
 | [length](length.md) | Physical length of the element in metres |
-| [line](line.md) | Ordered sequence of cross-referenced element names forming a beamline |
+| [line](line.md) | Ordered sequence of beamline elements in this beamline |
 | [magnet_signals](magnet_signals.md) | Shared magnet signal bindings |
 | [modeled_as](modeled_as.md) | Accelerator physics code model element type (e |
 | [name](name.md) | Human-readable name or local string key for the entity |
@@ -156,7 +185,7 @@ Name: narad-system-schema
 | [param_set](param_set.md) | Named physics-parameter blocks for this element (e |
 | [phase](phase.md) | RF phase in degrees |
 | [profiles](profiles.md) | Control profile families keyed by family name |
-| [properties](properties.md) | Open-ended key-value property map for element-specific or facility-specific p... |
+| [properties](properties.md) | Intentionally open-ended key-value property map for element-specific or facil... |
 | [pv_name](pv_name.md) | Fully-resolved facility-specific process variable name, e |
 | [quadrupole_signals](quadrupole_signals.md) | Quadrupole-specific signal bindings |
 | [rfcavity_signals](rfcavity_signals.md) | RF cavity-specific signal bindings |
@@ -166,7 +195,7 @@ Name: narad-system-schema
 | [signal_bindings](signal_bindings.md) | Control-system-specific, e |
 | [signal_definitions](signal_definitions.md) | Signal suffix templates for this facility |
 | [signal_layer](signal_layer.md) | Signal-layer container for facility-specific signal bindings |
-| [signals](signals.md) | Signals within a capability, keyed by signal name |
+| [signals](signals.md) | Signals within a capability, keyed by a semantic signal name |
 | [status](status.md) |  |
 | [strength_setpoint](strength_setpoint.md) |  |
 | [type_profiles](type_profiles.md) | Device-type profile definitions for this family, keyed by profile name |

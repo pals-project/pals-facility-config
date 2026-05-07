@@ -3,7 +3,7 @@
 # Slot: properties 
 
 
-_Open-ended key-value property map for element-specific or facility-specific parameters._
+_Intentionally open-ended key-value property map for element-specific or facility-specific parameters._
 
 
 
@@ -66,8 +66,8 @@ Alias: properties
 <details>
 ```yaml
 name: properties
-description: Open-ended key-value property map for element-specific or facility-specific
-  parameters.
+description: Intentionally open-ended key-value property map for element-specific
+  or facility-specific parameters.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: properties

@@ -3,7 +3,7 @@
 # Class: SignalBinding 
 
 
-_A named EPICS suffix definition for one semantic signal._
+_A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance._
 
 
 
@@ -104,7 +104,9 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 <details>
 ```yaml
 name: SignalBinding
-description: A named EPICS suffix definition for one semantic signal.
+description: A named control system suffix definition for one semantic signal. The
+  suffix is used within in a template naming convention to construct the full control
+  system PV name for a given device instance.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
 - description
@@ -118,7 +120,9 @@ slots:
 <details>
 ```yaml
 name: SignalBinding
-description: A named EPICS suffix definition for one semantic signal.
+description: A named control system suffix definition for one semantic signal. The
+  suffix is used within in a template naming convention to construct the full control
+  system PV name for a given device instance.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
   description:

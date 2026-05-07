@@ -3,7 +3,7 @@
 # Class: NaradConfig 
 
 
-_NARAD configuration block: capability layer + signal layer._
+_A top-level NARAD-system container for the: capability layer + signal layer._
 
 
 
@@ -122,7 +122,8 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
 <details>
 ```yaml
 name: NaradConfig
-description: 'NARAD configuration block: capability layer + signal layer.'
+description: 'A top-level NARAD-system container for the: capability layer + signal
+  layer.'
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 broad_mappings:
 - ssn:System
@@ -171,7 +172,8 @@ slot_usage:
 <details>
 ```yaml
 name: NaradConfig
-description: 'NARAD configuration block: capability layer + signal layer.'
+description: 'A top-level NARAD-system container for the: capability layer + signal
+  layer.'
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 broad_mappings:
 - ssn:System

@@ -3,7 +3,7 @@
 
 
 
-_Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports._
+_Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type._
 
 
 
@@ -62,7 +62,7 @@ name: ElementKindEnum
 description: Controlled vocabulary for beamline element types, shared between the
   capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind).
   Keeping the enum here keeps profile device_type values in sync with element kind
-  values without circular imports.
+  values without circular imports. Values must stay aligned with CapabilityProfile.device_type.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 permissible_values:

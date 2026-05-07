@@ -65,6 +65,8 @@ permissible_values:
   readback:
     text: readback
     description: A readable signal that reports a measured or monitored quantity.
+      Differs from status in that it typically indicates a continuous measurement
+      (e.g. current readback, beam position) rather than discrete states.
     broad_mappings:
     - sosa:ObservableProperty
   constraint:
@@ -73,7 +75,9 @@ permissible_values:
       quantity.
   status:
     text: status
-    description: A signal reporting the device or system operational state.
+    description: A signal reporting the device or system operational state. Differs
+      from readback in that it typically indicates discrete states (e.g. fault, standby,
+      ready) rather than a continuous measurement.
     broad_mappings:
     - sosa:ObservableProperty
 

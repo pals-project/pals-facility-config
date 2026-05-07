@@ -3,7 +3,7 @@
 
 
 
-_High-level device domain for a control profile family._
+_High-level device domain for a control profile family. Use: groups profile families, not individual elements._
 
 
 
@@ -52,7 +52,8 @@ URI: [narad:DeviceDomainEnum](https://w3id.org/narad_linkml/schema/narad/DeviceD
 <details>
 ```yaml
 name: DeviceDomainEnum
-description: High-level device domain for a control profile family.
+description: 'High-level device domain for a control profile family. Use: groups profile
+  families, not individual elements.'
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 permissible_values:

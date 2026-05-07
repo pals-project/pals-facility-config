@@ -22,8 +22,8 @@ Alias: units_uri
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |  no  |
 | [Signal](Signal.md) | Domain term for a control-system signal |  no  |
+| [ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |  no  |
 | [ObservableSignal](ObservableSignal.md) | A NARAD signal that is read, monitored, observed, or exposed by a system |  no  |
 
 

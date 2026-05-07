@@ -3,7 +3,7 @@
 # Slot: line 
 
 
-_Ordered sequence of cross-referenced element names forming a beamline._
+_Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map._
 
 
 
@@ -22,7 +22,7 @@ Alias: line
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Beamline](Beamline.md) | An ordered sequence of beamline elements defining a beam path |  no  |
+| [Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |  no  |
 
 
 
@@ -68,7 +68,10 @@ Alias: line
 <details>
 ```yaml
 name: line
-description: Ordered sequence of cross-referenced element names forming a beamline.
+description: Ordered sequence of beamline elements in this beamline. Serializes as
+  a list of element names (BeamlineElement names) referencing the keys in the elements
+  map This is not a direct containment slot; the actual element definitions are in
+  the top-level elements map.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: line

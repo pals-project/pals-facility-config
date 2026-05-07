@@ -3,7 +3,7 @@
 # Slot: elements 
 
 
-_Beamline element definitions referenced by name from beamline sequences._
+_Beamline element definitions referenced by name from beamline sequences. Serializes as a keyed map by element name._
 
 
 
@@ -69,6 +69,7 @@ Alias: elements
 ```yaml
 name: elements
 description: Beamline element definitions referenced by name from beamline sequences.
+  Serializes as a keyed map by element name.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: elements

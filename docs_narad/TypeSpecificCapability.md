@@ -55,7 +55,7 @@ URI: [narad:TypeSpecificCapability](https://w3id.org/narad_linkml/schema/narad/T
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [signals](signals.md) | * <br/> [Signal](Signal.md) | Signals within a capability, keyed by signal name | [Capability](Capability.md) |
+| [signals](signals.md) | * <br/> [Signal](Signal.md) | Signals within a capability, keyed by a semantic signal name | [Capability](Capability.md) |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
@@ -135,7 +135,7 @@ is_a: Capability
 attributes:
   signals:
     name: signals
-    description: Signals within a capability, keyed by signal name.
+    description: Signals within a capability, keyed by a semantic signal name.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: signals

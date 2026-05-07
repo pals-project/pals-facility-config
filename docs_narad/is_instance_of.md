@@ -3,7 +3,7 @@
 # Slot: is_instance_of 
 
 
-_NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf._
+_NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Procedure class that implements the signal binding, e.g. narad:CavityGradientControlCapability._
 
 __
 
@@ -73,7 +73,8 @@ Alias: is_instance_of
 name: is_instance_of
 description: 'NARAD alias for rdf:type. Links a facility-specific instance node to
   the LinkML class or semantic class it instantiates. In the graph this edge is labelled
-  narad:isInstanceOf.
+  narad:isInstanceOf. Values are typically the rdf:type of the Procedure class that
+  implements the signal binding, e.g. narad:CavityGradientControlCapability.
 
   '
 from_schema: https://w3id.org/narad_linkml/schema/narad/system

@@ -3,7 +3,7 @@
 # Class: SignalDefinitions 
 
 
-_EPICS signal suffix templates keyed by device type or device domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types in that domain; device-type keys are type-specific._
+_Control system signal suffix templates keyed by device type or device domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types in that domain; device-type keys are type-specific._
 
 
 
@@ -97,9 +97,9 @@ URI: [narad:SignalDefinitions](https://w3id.org/narad_linkml/schema/narad/Signal
 <details>
 ```yaml
 name: SignalDefinitions
-description: EPICS signal suffix templates keyed by device type or device domain.
-  Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types
-  in that domain; device-type keys are type-specific.
+description: Control system signal suffix templates keyed by device type or device
+  domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all
+  types in that domain; device-type keys are type-specific.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
 - type_signal_sets
@@ -112,9 +112,9 @@ slots:
 <details>
 ```yaml
 name: SignalDefinitions
-description: EPICS signal suffix templates keyed by device type or device domain.
-  Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types
-  in that domain; device-type keys are type-specific.
+description: Control system signal suffix templates keyed by device type or device
+  domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all
+  types in that domain; device-type keys are type-specific.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
   type_signal_sets:

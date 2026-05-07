@@ -22,7 +22,7 @@ Alias: beamline_kind
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Beamline](Beamline.md) | An ordered sequence of beamline elements defining a beam path |  no  |
+| [Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |  no  |
 
 
 

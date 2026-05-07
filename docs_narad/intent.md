@@ -22,7 +22,7 @@ Alias: intent
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | NARAD configuration block: capability layer + signal layer |  no  |
+| [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |  no  |
 
 
 

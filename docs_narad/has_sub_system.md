@@ -24,17 +24,17 @@ Alias: has_sub_system
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ControlSystem](ControlSystem.md) | A control system (e |  no  |
+| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
 | [Magnet](Magnet.md) | A powered magnet device (generic supertype for all magnet kinds) |  no  |
+| [ControlSystem](ControlSystem.md) | A control system (e |  no  |
+| [Marker](Marker.md) | A zero-length reference point, drift space, or survey marker |  no  |
+| [Solenoid](Solenoid.md) | A solenoid magnet |  no  |
+| [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
 | [BPM](BPM.md) | A Beam Position Monitor |  no  |
 | [Quadrupole](Quadrupole.md) | A quadrupole focusing/defocusing magnet |  no  |
-| [Marker](Marker.md) | A zero-length reference point, drift space, or survey marker |  no  |
-| [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
-| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
-| [RFCavity](RFCavity.md) | A radio-frequency accelerating or bunching cavity |  no  |
 | [Dipole](Dipole.md) | A dipole bending magnet |  no  |
 | [Corrector](Corrector.md) | A dipole corrector magnet for orbit correction |  no  |
-| [Solenoid](Solenoid.md) | A solenoid magnet |  no  |
+| [RFCavity](RFCavity.md) | A radio-frequency accelerating or bunching cavity |  no  |
 
 
 

@@ -3,7 +3,7 @@
 # Slot: signals 
 
 
-_Signals within a capability, keyed by signal name._
+_Signals within a capability, keyed by a semantic signal name._
 
 
 
@@ -22,8 +22,8 @@ Alias: signals
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Capability](Capability.md) | A named, shared grouping of semantically related signals for a control aspect... |  no  |
 | [TypeSpecificCapability](TypeSpecificCapability.md) | An inline capability declared within a device-type profile that extends a gen... |  no  |
+| [Capability](Capability.md) | A named, shared grouping of semantically related signals for a control aspect... |  no  |
 
 
 
@@ -69,7 +69,7 @@ Alias: signals
 <details>
 ```yaml
 name: signals
-description: Signals within a capability, keyed by signal name.
+description: Signals within a capability, keyed by a semantic signal name.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signals

@@ -3,7 +3,7 @@
 # Slot: is_property_of 
 
 
-_Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph._
+_Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph. Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system)._
 
 __
 
@@ -72,7 +72,9 @@ name: is_property_of
 description: 'Inverse of for_property: links the Class Signal to the Class of SignalBinding
   Procedure that implements it. This can also link the Instance of a SignalBinding
   to the ControlSystem that implements it. This is the edge that connects the signal
-  definitions to the facility-specific bindings in the graph.
+  definitions to the facility-specific bindings in the graph. Values are typically
+  the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control
+  system).
 
   '
 from_schema: https://w3id.org/narad_linkml/schema/narad/system

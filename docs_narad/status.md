@@ -18,8 +18,8 @@ Alias: status
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [BPMSignalSet](BPMSignalSet.md) | BPM-specific signal bindings |  no  |
-| [RFCavitySignalSet](RFCavitySignalSet.md) | RF cavity-specific signal bindings |  no  |
 | [MagnetSignalSet](MagnetSignalSet.md) | Shared magnet signal bindings |  no  |
+| [RFCavitySignalSet](RFCavitySignalSet.md) | RF cavity-specific signal bindings |  no  |
 
 
 

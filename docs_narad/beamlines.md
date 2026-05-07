@@ -3,7 +3,7 @@
 # Slot: beamlines 
 
 
-_Ordered beamline definitions keyed by beamline name._
+_A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name._
 
 
 
@@ -68,7 +68,8 @@ Alias: beamlines
 <details>
 ```yaml
 name: beamlines
-description: Ordered beamline definitions keyed by beamline name.
+description: A top-level NARAD-system container for the ordered beamline definitions
+  keyed by beamline name. Serializes as a keyed map by beamline name.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: beamlines

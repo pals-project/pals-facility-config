@@ -248,9 +248,12 @@ attributes:
   instance_signal_bindings:
     name: instance_signal_bindings
     description: Facility-specific bindings of signals to control-system interfaces
-      (e.g. EPICS PVs) for a specific beamline element instance. These are the concrete
-      implementations of the abstract SignalBindings referenced by the element's capability
-      profile.
+      (e.g. EPICS PVs) for a specific beamline element instance.  These are the keyed
+      by the semantic signal name (e.g. current_readback) rather than the control-system
+      suffix, which is captured in the SignalBinding.  The semantic signal name links
+      the instance binding to the abstract Signal definition and its place in the
+      capability profile, while the SignalBinding captures the concrete implementations
+      of the abstract SignalBindings referenced by the element's capability profile.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: instance_signal_bindings

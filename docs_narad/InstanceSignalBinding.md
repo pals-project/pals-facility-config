@@ -178,7 +178,8 @@ attributes:
     name: is_instance_of
     description: 'NARAD alias for rdf:type. Links a facility-specific instance node
       to the LinkML class or semantic class it instantiates. In the graph this edge
-      is labelled narad:isInstanceOf.
+      is labelled narad:isInstanceOf. Values are typically the rdf:type of the Procedure
+      class that implements the signal binding, e.g. narad:CavityGradientControlCapability.
 
       '
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
@@ -215,7 +216,8 @@ attributes:
       SignalBinding Procedure that implements it. This can also link the Instance
       of a SignalBinding to the ControlSystem that implements it. This is the edge
       that connects the signal definitions to the facility-specific bindings in the
-      graph.
+      graph. Values are typically the ControlSystem that implements this binding,
+      e.g. narad:epics (for EPICS control system).
 
       '
     from_schema: https://w3id.org/narad_linkml/schema/narad/system

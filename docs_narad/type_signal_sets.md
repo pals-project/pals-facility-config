@@ -22,7 +22,7 @@ Alias: type_signal_sets
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [SignalDefinitions](SignalDefinitions.md) | EPICS signal suffix templates keyed by device type or device domain |  no  |
+| [SignalDefinitions](SignalDefinitions.md) | Control system signal suffix templates keyed by device type or device domain |  no  |
 
 
 

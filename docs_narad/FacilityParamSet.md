@@ -3,7 +3,7 @@
 # Class: FacilityParamSet 
 
 
-_Facility-specific element parameters block for beamline elements._
+_Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters._
 
 
 
@@ -49,7 +49,7 @@ URI: [narad:FacilityParamSet](https://w3id.org/narad_linkml/schema/narad/Facilit
 | ---  | --- | --- | --- |
 | [facility_element_type](facility_element_type.md) | 0..1 <br/> [String](String.md) | Facility-specific element type designation (e | direct |
 | [modeled_as](modeled_as.md) | 0..1 <br/> [String](String.md) | Accelerator physics code model element type (e | direct |
-| [properties](properties.md) | 0..1 <br/> [AnyValue](AnyValue.md) | Open-ended key-value property map for element-specific or facility-specific p... | direct |
+| [properties](properties.md) | 0..1 <br/> [AnyValue](AnyValue.md) | Intentionally open-ended key-value property map for element-specific or facil... | direct |
 
 
 
@@ -103,7 +103,9 @@ URI: [narad:FacilityParamSet](https://w3id.org/narad_linkml/schema/narad/Facilit
 <details>
 ```yaml
 name: FacilityParamSet
-description: Facility-specific element parameters block for beamline elements.
+description: Facility-specific element parameters block for beamline elements. Differs
+  from an ElementParamSet in that it captures facility-specific metadata about the
+  element (e.g. type designation, model name) rather than physics parameters.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
 - facility_element_type
@@ -118,7 +120,9 @@ slots:
 <details>
 ```yaml
 name: FacilityParamSet
-description: Facility-specific element parameters block for beamline elements.
+description: Facility-specific element parameters block for beamline elements. Differs
+  from an ElementParamSet in that it captures facility-specific metadata about the
+  element (e.g. type designation, model name) rather than physics parameters.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
   facility_element_type:
@@ -147,8 +151,8 @@ attributes:
     range: string
   properties:
     name: properties
-    description: Open-ended key-value property map for element-specific or facility-specific
-      parameters.
+    description: Intentionally open-ended key-value property map for element-specific
+      or facility-specific parameters.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: properties
