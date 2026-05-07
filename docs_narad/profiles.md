@@ -9,7 +9,7 @@ _Control profile families keyed by family name._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/profiles](https://w3id.org/narad_linkml/schema/narad/profiles)
+URI: [narad:profiles](https://w3id.org/narad_linkml/schema/narad/profiles)
 Alias: profiles
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: profiles
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CapabilityLayer](CapabilityLayer.md) | Capability-layer container for profile families and a shared default graph pr... |  no  |
+| [CapabilityLayer](CapabilityLayer.md) | Capability-layer container for control profile families |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: profiles
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: profiles
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/profiles |
-| native | https://w3id.org/narad_linkml/schema/narad/profiles |
+| self | narad:profiles |
+| native | narad:profiles |
 
 
 
@@ -69,7 +69,7 @@ Alias: profiles
 ```yaml
 name: profiles
 description: Control profile families keyed by family name.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: profiles
 domain_of:

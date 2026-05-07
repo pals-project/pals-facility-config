@@ -3,13 +3,13 @@
 # Class: Capability 
 
 
-_A named, shared grouping of semantically related signals for a control aspect._
+_A named, shared grouping of semantically related signals for a control aspect (e.g. MagnetCurrentControlCapability)._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/Capability](https://w3id.org/narad_linkml/schema/narad/Capability)
+URI: [narad:Capability](https://w3id.org/narad_linkml/schema/narad/Capability)
 
 
 
@@ -19,9 +19,14 @@ URI: [https://w3id.org/narad_linkml/schema/narad/Capability](https://w3id.org/na
  classDiagram
     class Capability
     click Capability href "../Capability/"
-      CapabilityMixin <|-- Capability
-        click CapabilityMixin href "../CapabilityMixin/"
+      NamedThing <|-- Capability
+        click NamedThing href "../NamedThing/"
       
+
+      Capability <|-- TypeSpecificCapability
+        click TypeSpecificCapability href "../TypeSpecificCapability/"
+      
+
       Capability : description
         
       Capability : name
@@ -45,7 +50,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/Capability](https://w3id.org/na
 
 
 ## Inheritance
-* **Capability** [ [CapabilityMixin](CapabilityMixin.md)]
+* [NamedThing](NamedThing.md)
+    * **Capability**
+        * [TypeSpecificCapability](TypeSpecificCapability.md)
 
 
 
@@ -53,9 +60,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/Capability](https://w3id.org/na
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [name](name.md) | 1 <br/> [String](String.md) | Name/identifier of the entity | direct |
-| [description](description.md) | 0..1 <br/> [String](String.md) |  | [CapabilityMixin](CapabilityMixin.md) |
-| [signals](signals.md) | * <br/> [Signal](Signal.md) | Signals within a capability | [CapabilityMixin](CapabilityMixin.md) |
+| [signals](signals.md) | * <br/> [Signal](Signal.md) | Signals within a capability, keyed by a semantic signal name | direct |
+| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
+| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
 
 
@@ -65,8 +72,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/Capability](https://w3id.org/na
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [CapabilityProfile](CapabilityProfile.md) | [inherits_shared_capabilities](inherits_shared_capabilities.md) | range | [Capability](Capability.md) |
 | [ControlProfileFamily](ControlProfileFamily.md) | [shared_capabilities](shared_capabilities.md) | range | [Capability](Capability.md) |
+| [CapabilityProfile](CapabilityProfile.md) | [inherits_shared_capabilities](inherits_shared_capabilities.md) | range | [Capability](Capability.md) |
 
 
 
@@ -84,7 +91,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/Capability](https://w3id.org/na
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -93,8 +100,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/Capability](https://w3id.org/na
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/Capability |
-| native | https://w3id.org/narad_linkml/schema/narad/Capability |
+| self | narad:Capability |
+| native | narad:Capability |
 
 
 
@@ -111,12 +118,11 @@ URI: [https://w3id.org/narad_linkml/schema/narad/Capability](https://w3id.org/na
 ```yaml
 name: Capability
 description: A named, shared grouping of semantically related signals for a control
-  aspect.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
-mixins:
-- CapabilityMixin
+  aspect (e.g. MagnetCurrentControlCapability).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 slots:
-- name
+- signals
 
 ```
 </details>
@@ -127,57 +133,45 @@ slots:
 ```yaml
 name: Capability
 description: A named, shared grouping of semantically related signals for a control
-  aspect.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
-mixins:
-- CapabilityMixin
+  aspect (e.g. MagnetCurrentControlCapability).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 attributes:
+  signals:
+    name: signals
+    description: Signals within a capability, keyed by a semantic signal name.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: signals
+    owner: Capability
+    domain_of:
+    - Capability
+    range: Signal
+    multivalued: true
+    inlined: true
   name:
     name: name
-    description: Name/identifier of the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Human-readable name or local string key for the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
     alias: name
     owner: Capability
     domain_of:
-    - Facility
-    - SignalBinding
-    - DeviceTypeSignalSet
-    - Signal
-    - Capability
-    - CapabilityProfile
-    - ControlProfileFamily
-    - BeamlineElement
-    - PVBinding
+    - NamedThing
     range: string
     required: true
   description:
     name: description
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Detailed description of the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: Capability
     domain_of:
+    - NamedThing
     - SignalBinding
-    - CapabilityMixin
-    - Signal
-    - CapabilityProfile
-    - ControlProfileFamily
     range: string
-  signals:
-    name: signals
-    description: Signals within a capability.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
-    rank: 1000
-    alias: signals
-    owner: Capability
-    domain_of:
-    - CapabilityMixin
-    range: Signal
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
 
 ```
 </details>

@@ -30,7 +30,7 @@ URI: [xsd:float](http://www.w3.org/2001/XMLSchema#float)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -40,7 +40,7 @@ URI: [xsd:float](http://www.w3.org/2001/XMLSchema#float)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | xsd:float |
-| native | https://w3id.org/narad_linkml/schema/narad/float |
+| native | narad:float |
 | exact | schema:Float |
 
 

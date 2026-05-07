@@ -3,13 +3,13 @@
 # Slot: beamlines 
 
 
-_Beamlines — open structure to accommodate the list-of-named-dict serialization format used in NARAD YAML files._
+_A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/beamlines](https://w3id.org/narad_linkml/schema/narad/beamlines)
+URI: [narad:beamlines](https://w3id.org/narad_linkml/schema/narad/beamlines)
 Alias: beamlines
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: beamlines
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: beamlines
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/beamlines |
-| native | https://w3id.org/narad_linkml/schema/narad/beamlines |
+| self | narad:beamlines |
+| native | narad:beamlines |
 
 
 
@@ -68,9 +68,9 @@ Alias: beamlines
 <details>
 ```yaml
 name: beamlines
-description: Beamlines — open structure to accommodate the list-of-named-dict serialization
-  format used in NARAD YAML files.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: A top-level NARAD-system container for the ordered beamline definitions
+  keyed by beamline name. Serializes as a keyed map by beamline name.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: beamlines
 domain_of:
@@ -78,7 +78,6 @@ domain_of:
 range: Beamline
 multivalued: true
 inlined: true
-inlined_as_list: true
 
 ```
 </details>

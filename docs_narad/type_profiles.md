@@ -3,13 +3,13 @@
 # Slot: type_profiles 
 
 
-_Device-type profile definitions for this family, keyed by profile name. New device types are accommodated by adding a new entry without schema changes._
+_Device-type profile definitions for this family, keyed by profile name._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/type_profiles](https://w3id.org/narad_linkml/schema/narad/type_profiles)
+URI: [narad:type_profiles](https://w3id.org/narad_linkml/schema/narad/type_profiles)
 Alias: type_profiles
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: type_profiles
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ControlProfileFamily](ControlProfileFamily.md) | A reusable family of control profiles sharing common semantics and structure |  no  |
+| [ControlProfileFamily](ControlProfileFamily.md) | A reusable family of control profiles sharing common semantics and structure ... |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: type_profiles
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: type_profiles
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/type_profiles |
-| native | https://w3id.org/narad_linkml/schema/narad/type_profiles |
+| self | narad:type_profiles |
+| native | narad:type_profiles |
 
 
 
@@ -69,8 +69,7 @@ Alias: type_profiles
 ```yaml
 name: type_profiles
 description: Device-type profile definitions for this family, keyed by profile name.
-  New device types are accommodated by adding a new entry without schema changes.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: type_profiles
 domain_of:

@@ -7,7 +7,7 @@ _Controlled vocabulary for the semantic role of a signal within a capability._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum](https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum)
+URI: [narad:SignalRoleEnum](https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum)
 
 ## Permissible Values
 
@@ -17,8 +17,6 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum](https://w3id.or
 | readback | None | A readable signal that reports a measured or monitored quantity |
 | constraint | None | A signal that defines an operational limit or boundary on a control quantity |
 | status | None | A signal reporting the device or system operational state |
-| interlock | None | A signal associated with a machine protection or safety interlock condition |
-| diagnostic | None | A signal providing diagnostic or debugging information about a device |
 
 
 
@@ -43,7 +41,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum](https://w3id.or
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -56,7 +54,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum](https://w3id.or
 ```yaml
 name: SignalRoleEnum
 description: Controlled vocabulary for the semantic role of a signal within a capability.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 permissible_values:
   control:
@@ -67,6 +65,8 @@ permissible_values:
   readback:
     text: readback
     description: A readable signal that reports a measured or monitored quantity.
+      Differs from status in that it typically indicates a continuous measurement
+      (e.g. current readback, beam position) rather than discrete states.
     broad_mappings:
     - sosa:ObservableProperty
   constraint:
@@ -75,14 +75,11 @@ permissible_values:
       quantity.
   status:
     text: status
-    description: A signal reporting the device or system operational state.
-  interlock:
-    text: interlock
-    description: A signal associated with a machine protection or safety interlock
-      condition.
-  diagnostic:
-    text: diagnostic
-    description: A signal providing diagnostic or debugging information about a device.
+    description: A signal reporting the device or system operational state. Differs
+      from readback in that it typically indicates discrete states (e.g. fault, standby,
+      ready) rather than a continuous measurement.
+    broad_mappings:
+    - sosa:ObservableProperty
 
 ```
 </details>

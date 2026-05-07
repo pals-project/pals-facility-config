@@ -1,0 +1,265 @@
+
+
+# Class: SystemCapability 
+
+
+_A capability of a system. SystemCapability describes what a system can expose, monitor, control, or actuate with respect to one or more signals. Aligned to ssn-system:SystemCapability; linked from System instances via ssn-system:hasSystemCapability, and from Signals via ssn:forProperty. Profile-level inheritance (shared vs. type-specific signals) is expressed in CapabilityProfile, not here._
+
+__
+
+
+
+
+
+URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemCapability)
+
+
+
+
+
+```mermaid
+ classDiagram
+    class SystemCapability
+    click SystemCapability href "../SystemCapability/"
+      NamedThing <|-- SystemCapability
+        click NamedThing href "../NamedThing/"
+      
+
+      SystemCapability <|-- MagnetCapability
+        click MagnetCapability href "../MagnetCapability/"
+      SystemCapability <|-- InstrumentCapability
+        click InstrumentCapability href "../InstrumentCapability/"
+      SystemCapability <|-- CavityGradientCapability
+        click CavityGradientCapability href "../CavityGradientCapability/"
+      
+
+      SystemCapability : description
+        
+      SystemCapability : device_type
+        
+          
+    
+        
+        
+        SystemCapability --> "0..1" ElementKindEnum : device_type
+        click ElementKindEnum href "../ElementKindEnum/"
+    
+
+        
+      SystemCapability : for_property
+        
+          
+    
+        
+        
+        SystemCapability --> "*" Signal : for_property
+        click Signal href "../Signal/"
+    
+
+        
+      SystemCapability : is_abstract
+        
+      SystemCapability : name
+        
+      
+```
+
+
+
+
+
+## Inheritance
+* [NamedThing](NamedThing.md)
+    * **SystemCapability**
+        * [MagnetCapability](MagnetCapability.md)
+        * [InstrumentCapability](InstrumentCapability.md)
+        * [CavityGradientCapability](CavityGradientCapability.md)
+
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [for_property](for_property.md) | * <br/> [Signal](Signal.md) | SystemCapability → Signal: the capability can expose, monitor, control, or ac... | direct |
+| [device_type](device_type.md) | 0..1 <br/> [ElementKindEnum](ElementKindEnum.md) | The specific device type this capability profile or system capability targets... | direct |
+| [is_abstract](is_abstract.md) | 0..1 <br/> [Boolean](Boolean.md) | If true, this profile is a template not intended to be directly assigned to a... | direct |
+| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
+| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [System](System.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [ControlSystem](ControlSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [Magnet](Magnet.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [Quadrupole](Quadrupole.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [Corrector](Corrector.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [Dipole](Dipole.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [Solenoid](Solenoid.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [Instrument](Instrument.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [BPM](BPM.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [RFCavity](RFCavity.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [Marker](Marker.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | narad:SystemCapability |
+| native | narad:SystemCapability |
+| exact | ssn-system:SystemCapability |
+
+
+
+
+
+
+## LinkML Source
+
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+
+### Direct
+
+<details>
+```yaml
+name: SystemCapability
+description: 'A capability of a system. SystemCapability describes what a system can
+  expose, monitor, control, or actuate with respect to one or more signals. Aligned
+  to ssn-system:SystemCapability; linked from System instances via ssn-system:hasSystemCapability,
+  and from Signals via ssn:forProperty. Profile-level inheritance (shared vs. type-specific
+  signals) is expressed in CapabilityProfile, not here.
+
+  '
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+exact_mappings:
+- ssn-system:SystemCapability
+is_a: NamedThing
+slots:
+- for_property
+- device_type
+- is_abstract
+slot_usage:
+  for_property:
+    name: for_property
+    range: Signal
+    multivalued: true
+
+```
+</details>
+
+### Induced
+
+<details>
+```yaml
+name: SystemCapability
+description: 'A capability of a system. SystemCapability describes what a system can
+  expose, monitor, control, or actuate with respect to one or more signals. Aligned
+  to ssn-system:SystemCapability; linked from System instances via ssn-system:hasSystemCapability,
+  and from Signals via ssn:forProperty. Profile-level inheritance (shared vs. type-specific
+  signals) is expressed in CapabilityProfile, not here.
+
+  '
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+exact_mappings:
+- ssn-system:SystemCapability
+is_a: NamedThing
+slot_usage:
+  for_property:
+    name: for_property
+    range: Signal
+    multivalued: true
+attributes:
+  for_property:
+    name: for_property
+    description: 'SystemCapability → Signal: the capability can expose, monitor, control,
+      or actuate that signal.
+
+      '
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    exact_mappings:
+    - ssn:forProperty
+    rank: 1000
+    alias: for_property
+    owner: SystemCapability
+    domain_of:
+    - SystemCapability
+    range: Signal
+    multivalued: true
+  device_type:
+    name: device_type
+    description: The specific device type this capability profile or system capability
+      targets (e.g. Quadrupole, Corrector, BPM).
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: device_type
+    owner: SystemCapability
+    domain_of:
+    - CapabilityProfile
+    - SystemCapability
+    range: ElementKindEnum
+  is_abstract:
+    name: is_abstract
+    description: If true, this profile is a template not intended to be directly assigned
+      to a beamline element. Concrete profiles set this to false (default).
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    ifabsent: 'false'
+    alias: is_abstract
+    owner: SystemCapability
+    domain_of:
+    - CapabilityProfile
+    - SystemCapability
+    range: boolean
+  name:
+    name: name
+    description: Human-readable name or local string key for the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    identifier: true
+    alias: name
+    owner: SystemCapability
+    domain_of:
+    - NamedThing
+    range: string
+    required: true
+  description:
+    name: description
+    description: Detailed description of the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: description
+    owner: SystemCapability
+    domain_of:
+    - NamedThing
+    - SignalBinding
+    range: string
+
+```
+</details>

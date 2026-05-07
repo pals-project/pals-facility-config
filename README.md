@@ -26,7 +26,7 @@ command-line build operations less cumbersome.
 ## Repository Structure
 * [docs/](docs/) - mkdocs-managed documentation
 * [examples/](examples/) - Examples of using the schema
-* [project/](project/) - project files (these files are auto-generated, do not edit)
+* [project_narad/](project_narad/) - project files (these files are auto-generated, do not edit)
 * [src/](src/) - source files (edit these)
   * [narad](src/narad)
     * [schema/](src/narad/schema) -- LinkML schema (edit this)
@@ -35,13 +35,13 @@ command-line build operations less cumbersome.
   * [data/](tests/data) - Example data files for testing
 
 ## Using the Schemas
-* uv run gen-project --config-file config.yaml -d project_narad src/narad/schema/narad.yaml
+* uv run gen-project --config-file config.yaml -d project_narad src/narad/schema/narad_system.yaml
   * Example of generating the project from the schema. This will generate a Python datamodel and associated files in `project/`: (json/jsonld schemas, OWL, sqlschema, etc).
 
-* uv run gen-doc -d docs_narad src/narad/schema/narad.yaml
+* uv run gen-doc -d docs_narad src/narad/schema/narad_system.yaml
   * Example of generating documentation from the schema.
 
-* uv run linkml-validate --schema src/narad/schema/narad.yaml  src/narad/schema/example_narad_UITF.yaml
+* uv run linkml-validate --schema src/narad/schema/narad_system.yaml  src/narad/schema/narad_UITF_instance.yaml
   * Example of validating an entire data file against the schema. Add --target-class [CLASS_NAME] to validate against a specific class in the schema.
 
 * Examples of invalid data files are in `tests/data/invalid/` and valid data files are in `tests/data/valid/`. You can validate these using the above command.

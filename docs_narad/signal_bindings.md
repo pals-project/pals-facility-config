@@ -3,27 +3,17 @@
 # Slot: signal_bindings 
 
 
-_Signal definitions keyed by signal name within a device type._
+_Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device type._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/signal_bindings](https://w3id.org/narad_linkml/schema/narad/signal_bindings)
+URI: [narad:signal_bindings](https://w3id.org/narad_linkml/schema/narad/signal_bindings)
 Alias: signal_bindings
 
 <!-- no inheritance hierarchy -->
 
-
-
-
-
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [DeviceTypeSignalSet](DeviceTypeSignalSet.md) | Signal binding set scoped to a device type (for example, Quadrupole or BPM) |  no  |
-| [ElementNaradRef](ElementNaradRef.md) | NARAD semantic reference block attached to a beamline element |  yes  |
 
 
 
@@ -49,7 +39,7 @@ Alias: signal_bindings
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -58,8 +48,8 @@ Alias: signal_bindings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/signal_bindings |
-| native | https://w3id.org/narad_linkml/schema/narad/signal_bindings |
+| self | narad:signal_bindings |
+| native | narad:signal_bindings |
 
 
 
@@ -69,13 +59,11 @@ Alias: signal_bindings
 <details>
 ```yaml
 name: signal_bindings
-description: Signal definitions keyed by signal name within a device type.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Control-system-specific, e.g. EPICS, suffix definitions keyed by signal
+  name within a device type.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signal_bindings
-domain_of:
-- DeviceTypeSignalSet
-- ElementNaradRef
 range: SignalBinding
 multivalued: true
 inlined: true

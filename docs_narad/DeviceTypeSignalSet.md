@@ -3,13 +3,13 @@
 # Class: DeviceTypeSignalSet 
 
 
-_Signal binding set scoped to a device type (for example, Quadrupole or BPM)._
+_Signal binding set scoped to a device type (e.g. Quadrupole, BPM)._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet](https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet)
+URI: [narad:DeviceTypeSignalSet](https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet)
 
 
 
@@ -19,6 +19,11 @@ URI: [https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet](https://w3
  classDiagram
     class DeviceTypeSignalSet
     click DeviceTypeSignalSet href "../DeviceTypeSignalSet/"
+      NamedThing <|-- DeviceTypeSignalSet
+        click NamedThing href "../NamedThing/"
+      
+      DeviceTypeSignalSet : description
+        
       DeviceTypeSignalSet : name
         
       DeviceTypeSignalSet : signal_bindings
@@ -38,15 +43,20 @@ URI: [https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet](https://w3
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [NamedThing](NamedThing.md)
+    * **DeviceTypeSignalSet**
+
 
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [name](name.md) | 1 <br/> [String](String.md) | Name/identifier of the entity | direct |
-| [signal_bindings](signal_bindings.md) | * <br/> [SignalBinding](SignalBinding.md) | Signal definitions keyed by signal name within a device type | direct |
+| [signal_bindings](signal_bindings.md) | * <br/> [SignalBinding](SignalBinding.md) | Control-system-specific, e | direct |
+| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
+| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
 
 
@@ -74,7 +84,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet](https://w3
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -83,8 +93,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet](https://w3
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet |
-| native | https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet |
+| self | narad:DeviceTypeSignalSet |
+| native | narad:DeviceTypeSignalSet |
 
 
 
@@ -100,11 +110,10 @@ URI: [https://w3id.org/narad_linkml/schema/narad/DeviceTypeSignalSet](https://w3
 <details>
 ```yaml
 name: DeviceTypeSignalSet
-description: Signal binding set scoped to a device type (for example, Quadrupole or
-  BPM).
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Signal binding set scoped to a device type (e.g. Quadrupole, BPM).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 slots:
-- name
 - signal_bindings
 
 ```
@@ -115,43 +124,45 @@ slots:
 <details>
 ```yaml
 name: DeviceTypeSignalSet
-description: Signal binding set scoped to a device type (for example, Quadrupole or
-  BPM).
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Signal binding set scoped to a device type (e.g. Quadrupole, BPM).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 attributes:
-  name:
-    name: name
-    description: Name/identifier of the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
-    rank: 1000
-    identifier: true
-    alias: name
-    owner: DeviceTypeSignalSet
-    domain_of:
-    - Facility
-    - SignalBinding
-    - DeviceTypeSignalSet
-    - Signal
-    - Capability
-    - CapabilityProfile
-    - ControlProfileFamily
-    - BeamlineElement
-    - PVBinding
-    range: string
-    required: true
   signal_bindings:
     name: signal_bindings
-    description: Signal definitions keyed by signal name within a device type.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Control-system-specific, e.g. EPICS, suffix definitions keyed by
+      signal name within a device type.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: signal_bindings
     owner: DeviceTypeSignalSet
     domain_of:
     - DeviceTypeSignalSet
-    - ElementNaradRef
     range: SignalBinding
     multivalued: true
     inlined: true
+  name:
+    name: name
+    description: Human-readable name or local string key for the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    identifier: true
+    alias: name
+    owner: DeviceTypeSignalSet
+    domain_of:
+    - NamedThing
+    range: string
+    required: true
+  description:
+    name: description
+    description: Detailed description of the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: description
+    owner: DeviceTypeSignalSet
+    domain_of:
+    - NamedThing
+    range: string
 
 ```
 </details>

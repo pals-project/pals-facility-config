@@ -3,13 +3,13 @@
 # Slot: facility_element_type 
 
 
-_Facility-specific element type designation (e.g. WarmCavity, QW, HCorrector). named facility_element_type here to avoid conflict with the LinkML metamodel 'type' designator used for polymorphic class selection._
+_Facility-specific element type designation (e.g. WarmCavity, QW, HCorrector). named facility_element_type here to avoid conflict with the LinkML metamodel 'type'  designator used for polymorphic class selection._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/facility_element_type](https://w3id.org/narad_linkml/schema/narad/facility_element_type)
+URI: [narad:facility_element_type](https://w3id.org/narad_linkml/schema/narad/facility_element_type)
 Alias: facility_element_type
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: facility_element_type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilityParams](FacilityParams.md) | Facility-specific element parameters: type designation, accelerator model nam... |  no  |
+| [FacilityParamSet](FacilityParamSet.md) | Facility-specific element parameters block for beamline elements |  no  |
 
 
 
@@ -51,7 +51,7 @@ Alias: facility_element_type
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -60,8 +60,8 @@ Alias: facility_element_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/facility_element_type |
-| native | https://w3id.org/narad_linkml/schema/narad/facility_element_type |
+| self | narad:facility_element_type |
+| native | narad:facility_element_type |
 
 
 
@@ -72,15 +72,15 @@ Alias: facility_element_type
 ```yaml
 name: facility_element_type
 description: Facility-specific element type designation (e.g. WarmCavity, QW, HCorrector).
-  named facility_element_type here to avoid conflict with the LinkML metamodel 'type'
-  designator used for polymorphic class selection.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+  named facility_element_type here to avoid conflict with the LinkML metamodel 'type'  designator
+  used for polymorphic class selection.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 aliases:
 - type
 rank: 1000
 alias: facility_element_type
 domain_of:
-- FacilityParams
+- FacilityParamSet
 range: string
 
 ```

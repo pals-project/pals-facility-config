@@ -3,13 +3,13 @@
 # Class: ControlProfileFamily 
 
 
-_A reusable family of control profiles sharing common semantics and structure._
+_A reusable family of control profiles sharing common semantics and structure (e.g. MagnetCurrentControlProfileFamily)._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily](https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily)
+URI: [narad:ControlProfileFamily](https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily)
 
 
 
@@ -19,6 +19,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily](https://w
  classDiagram
     class ControlProfileFamily
     click ControlProfileFamily href "../ControlProfileFamily/"
+      NamedThing <|-- ControlProfileFamily
+        click NamedThing href "../NamedThing/"
+      
       ControlProfileFamily : description
         
       ControlProfileFamily : device_domain
@@ -29,17 +32,6 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily](https://w
         
         ControlProfileFamily --> "0..1" DeviceDomainEnum : device_domain
         click DeviceDomainEnum href "../DeviceDomainEnum/"
-    
-
-        
-      ControlProfileFamily : graph_projection
-        
-          
-    
-        
-        
-        ControlProfileFamily --> "0..1" GraphProjection : graph_projection
-        click GraphProjection href "../GraphProjection/"
     
 
         
@@ -73,19 +65,22 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily](https://w
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [NamedThing](NamedThing.md)
+    * **ControlProfileFamily**
+
 
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [name](name.md) | 1 <br/> [String](String.md) | Name/identifier of the entity | direct |
 | [device_domain](device_domain.md) | 0..1 <br/> [DeviceDomainEnum](DeviceDomainEnum.md) | High-level device domain that this profile family governs | direct |
-| [description](description.md) | 0..1 <br/> [String](String.md) |  | direct |
 | [shared_capabilities](shared_capabilities.md) | * <br/> [Capability](Capability.md) | Named shared capabilities reused by profile types in a family | direct |
 | [type_profiles](type_profiles.md) | * <br/> [CapabilityProfile](CapabilityProfile.md) | Device-type profile definitions for this family, keyed by profile name | direct |
-| [graph_projection](graph_projection.md) | 0..1 <br/> [GraphProjection](GraphProjection.md) | Optional per-family graph projection override | direct |
+| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
+| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
 
 
@@ -96,18 +91,12 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily](https://w
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
 | [CapabilityLayer](CapabilityLayer.md) | [profiles](profiles.md) | range | [ControlProfileFamily](ControlProfileFamily.md) |
-| [ElementNaradRef](ElementNaradRef.md) | [capability_profile_family](capability_profile_family.md) | range | [ControlProfileFamily](ControlProfileFamily.md) |
+| [BeamlineElement](BeamlineElement.md) | [capability_profile_family](capability_profile_family.md) | range | [ControlProfileFamily](ControlProfileFamily.md) |
 
 
 
 
 
-
-## Aliases
-
-
-* capability_profile_family
-* control_profile_family
 
 
 ## Identifier and Mapping Information
@@ -120,7 +109,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily](https://w
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -129,8 +118,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily](https://w
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily |
-| native | https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily |
+| self | narad:ControlProfileFamily |
+| native | narad:ControlProfileFamily |
 
 
 
@@ -146,23 +135,14 @@ URI: [https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily](https://w
 <details>
 ```yaml
 name: ControlProfileFamily
-description: A reusable family of control profiles sharing common semantics and structure.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
-aliases:
-- capability_profile_family
-- control_profile_family
+description: A reusable family of control profiles sharing common semantics and structure
+  (e.g. MagnetCurrentControlProfileFamily).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 slots:
-- name
 - device_domain
-- description
 - shared_capabilities
 - type_profiles
-- graph_projection
-slot_usage:
-  graph_projection:
-    name: graph_projection
-    description: Optional per-family graph projection override. If absent, the CapabilityLayer.default_graph_projection
-      applies. Provide only when this family genuinely requires a different projection.
 
 ```
 </details>
@@ -172,64 +152,25 @@ slot_usage:
 <details>
 ```yaml
 name: ControlProfileFamily
-description: A reusable family of control profiles sharing common semantics and structure.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
-aliases:
-- capability_profile_family
-- control_profile_family
-slot_usage:
-  graph_projection:
-    name: graph_projection
-    description: Optional per-family graph projection override. If absent, the CapabilityLayer.default_graph_projection
-      applies. Provide only when this family genuinely requires a different projection.
+description: A reusable family of control profiles sharing common semantics and structure
+  (e.g. MagnetCurrentControlProfileFamily).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 attributes:
-  name:
-    name: name
-    description: Name/identifier of the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
-    rank: 1000
-    identifier: true
-    alias: name
-    owner: ControlProfileFamily
-    domain_of:
-    - Facility
-    - SignalBinding
-    - DeviceTypeSignalSet
-    - Signal
-    - Capability
-    - CapabilityProfile
-    - ControlProfileFamily
-    - BeamlineElement
-    - PVBinding
-    range: string
-    required: true
   device_domain:
     name: device_domain
     description: High-level device domain that this profile family governs.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: device_domain
     owner: ControlProfileFamily
     domain_of:
     - ControlProfileFamily
     range: DeviceDomainEnum
-  description:
-    name: description
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
-    rank: 1000
-    alias: description
-    owner: ControlProfileFamily
-    domain_of:
-    - SignalBinding
-    - CapabilityMixin
-    - Signal
-    - CapabilityProfile
-    - ControlProfileFamily
-    range: string
   shared_capabilities:
     name: shared_capabilities
     description: Named shared capabilities reused by profile types in a family.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: shared_capabilities
     owner: ControlProfileFamily
@@ -241,9 +182,8 @@ attributes:
   type_profiles:
     name: type_profiles
     description: Device-type profile definitions for this family, keyed by profile
-      name. New device types are accommodated by adding a new entry without schema
-      changes.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+      name.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: type_profiles
     owner: ControlProfileFamily
@@ -252,18 +192,29 @@ attributes:
     range: CapabilityProfile
     multivalued: true
     inlined: true
-  graph_projection:
-    name: graph_projection
-    description: Optional per-family graph projection override. If absent, the CapabilityLayer.default_graph_projection
-      applies. Provide only when this family genuinely requires a different projection.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+  name:
+    name: name
+    description: Human-readable name or local string key for the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: graph_projection
+    identifier: true
+    alias: name
     owner: ControlProfileFamily
     domain_of:
-    - ControlProfileFamily
-    range: GraphProjection
-    inlined: true
+    - NamedThing
+    range: string
+    required: true
+  description:
+    name: description
+    description: Detailed description of the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: description
+    owner: ControlProfileFamily
+    domain_of:
+    - NamedThing
+    - SignalBinding
+    range: string
 
 ```
 </details>

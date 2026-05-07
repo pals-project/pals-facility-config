@@ -3,13 +3,13 @@
 # Slot: device_type 
 
 
-_The specific device type this capability profile targets (e.g. Quadrupole, Corrector, BPM). Uses ElementKindEnum to stay in sync with BeamlineElement.kind._
+_The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/device_type](https://w3id.org/narad_linkml/schema/narad/device_type)
+URI: [narad:device_type](https://w3id.org/narad_linkml/schema/narad/device_type)
 Alias: device_type
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,16 @@ Alias: device_type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CapabilityProfile](CapabilityProfile.md) | A device-type profile that reuses shared capabilities and adds specific capab... |  no  |
+| [CapabilityProfile](CapabilityProfile.md) | A device-type profile that reuses shared capabilities and adds type-specific ... |  no  |
+| [CavityGradientCapability](CavityGradientCapability.md) | RF cavity capability with gradient control, readback, and status signals |  no  |
+| [MagnetCapability](MagnetCapability.md) | Generic magnet capability (current control and readback signals) |  no  |
+| [QuadrupoleCapability](QuadrupoleCapability.md) | Quadrupole-specific capability extending MagnetCapability with strength signa... |  no  |
+| [DipoleCapability](DipoleCapability.md) | Dipole-specific capability extending MagnetCapability with bend-field signals |  no  |
+| [InstrumentCapability](InstrumentCapability.md) | Generic instrument capability (position readback and status signals) |  no  |
+| [SystemCapability](SystemCapability.md) | A capability of a system |  no  |
+| [BPMCapability](BPMCapability.md) | BPM-specific capability with horizontal and vertical position readback signal... |  no  |
+| [SolenoidCapability](SolenoidCapability.md) | Solenoid-specific capability extending MagnetCapability with focusing signals |  no  |
+| [CorrectorCapability](CorrectorCapability.md) | Corrector-specific capability extending MagnetCapability with kick signals |  no  |
 
 
 
@@ -46,7 +55,7 @@ Alias: device_type
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +64,8 @@ Alias: device_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/device_type |
-| native | https://w3id.org/narad_linkml/schema/narad/device_type |
+| self | narad:device_type |
+| native | narad:device_type |
 
 
 
@@ -66,13 +75,14 @@ Alias: device_type
 <details>
 ```yaml
 name: device_type
-description: The specific device type this capability profile targets (e.g. Quadrupole,
-  Corrector, BPM). Uses ElementKindEnum to stay in sync with BeamlineElement.kind.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: The specific device type this capability profile or system capability
+  targets (e.g. Quadrupole, Corrector, BPM).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: device_type
 domain_of:
 - CapabilityProfile
+- SystemCapability
 range: ElementKindEnum
 
 ```

@@ -3,13 +3,13 @@
 # Slot: line 
 
 
-_Ordered sequence of cross-referenced element names forming a beamline._
+_Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/line](https://w3id.org/narad_linkml/schema/narad/line)
+URI: [narad:line](https://w3id.org/narad_linkml/schema/narad/line)
 Alias: line
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: line
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Beamline](Beamline.md) | An ordered sequence of beamline elements defining a beam path |  no  |
+| [Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |  no  |
 
 
 
@@ -31,7 +31,7 @@ Alias: line
 
 ## Properties
 
-* Range: [String](String.md)
+* Range: [BeamlineElement](BeamlineElement.md)
 
 * Multivalued: True
 
@@ -48,7 +48,7 @@ Alias: line
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: line
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/line |
-| native | https://w3id.org/narad_linkml/schema/narad/line |
+| self | narad:line |
+| native | narad:line |
 
 
 
@@ -68,13 +68,16 @@ Alias: line
 <details>
 ```yaml
 name: line
-description: Ordered sequence of cross-referenced element names forming a beamline.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Ordered sequence of beamline elements in this beamline. Serializes as
+  a list of element names (BeamlineElement names) referencing the keys in the elements
+  map This is not a direct containment slot; the actual element definitions are in
+  the top-level elements map.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: line
 domain_of:
 - Beamline
-range: string
+range: BeamlineElement
 multivalued: true
 inlined: false
 

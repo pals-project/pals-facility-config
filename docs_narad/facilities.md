@@ -3,13 +3,13 @@
 # Slot: facilities 
 
 
-_Facility identifiers for facility-specific signal bindings._
+_Facility-specific signal binding configurations keyed by facility name._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/facilities](https://w3id.org/narad_linkml/schema/narad/facilities)
+URI: [narad:facilities](https://w3id.org/narad_linkml/schema/narad/facilities)
 Alias: facilities
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: facilities
 
 ## Properties
 
-* Range: [Facility](Facility.md)
+* Range: [FacilityConfig](FacilityConfig.md)
 
 * Multivalued: True
 
@@ -48,7 +48,7 @@ Alias: facilities
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: facilities
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/facilities |
-| native | https://w3id.org/narad_linkml/schema/narad/facilities |
+| self | narad:facilities |
+| native | narad:facilities |
 
 
 
@@ -68,13 +68,13 @@ Alias: facilities
 <details>
 ```yaml
 name: facilities
-description: Facility identifiers for facility-specific signal bindings.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Facility-specific signal binding configurations keyed by facility name.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: facilities
 domain_of:
 - SignalLayer
-range: Facility
+range: FacilityConfig
 multivalued: true
 inlined: true
 

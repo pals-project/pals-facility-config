@@ -3,13 +3,13 @@
 # Slot: properties 
 
 
-_Open-ended key-value property map for element-specific parameters._
+_Intentionally open-ended key-value property map for element-specific or facility-specific parameters._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/properties](https://w3id.org/narad_linkml/schema/narad/properties)
+URI: [narad:properties](https://w3id.org/narad_linkml/schema/narad/properties)
 Alias: properties
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: properties
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilityParams](FacilityParams.md) | Facility-specific element parameters: type designation, accelerator model nam... |  no  |
+| [FacilityParamSet](FacilityParamSet.md) | Facility-specific element parameters block for beamline elements |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: properties
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: properties
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/properties |
-| native | https://w3id.org/narad_linkml/schema/narad/properties |
+| self | narad:properties |
+| native | narad:properties |
 
 
 
@@ -66,12 +66,13 @@ Alias: properties
 <details>
 ```yaml
 name: properties
-description: Open-ended key-value property map for element-specific parameters.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Intentionally open-ended key-value property map for element-specific
+  or facility-specific parameters.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: properties
 domain_of:
-- FacilityParams
+- FacilityParamSet
 range: AnyValue
 
 ```

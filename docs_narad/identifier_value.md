@@ -9,7 +9,7 @@ _The value of the identifier (e.g. the DOI string, ARK string, URL string, or lo
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/identifier_value](https://w3id.org/narad_linkml/schema/narad/identifier_value)
+URI: [narad:identifier_value](https://w3id.org/narad_linkml/schema/narad/identifier_value)
 Alias: identifier_value
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: identifier_value
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Identifier](Identifier.md) | A globally unique identifier for an entity (e |  no  |
+| [FacilityIdentifier](FacilityIdentifier.md) | A globally unique identifier for an entity (e |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: identifier_value
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -55,8 +55,8 @@ Alias: identifier_value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/identifier_value |
-| native | https://w3id.org/narad_linkml/schema/narad/identifier_value |
+| self | narad:identifier_value |
+| native | narad:identifier_value |
 
 
 
@@ -68,11 +68,11 @@ Alias: identifier_value
 name: identifier_value
 description: The value of the identifier (e.g. the DOI string, ARK string, URL string,
   or local ID).
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: identifier_value
 domain_of:
-- Identifier
+- FacilityIdentifier
 range: string
 
 ```

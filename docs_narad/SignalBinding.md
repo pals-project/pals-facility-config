@@ -3,13 +3,13 @@
 # Class: SignalBinding 
 
 
-_A named EPICS suffix definition for one semantic signal._
+_A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance._
 
 
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBinding)
+URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBinding)
 
 
 
@@ -19,11 +19,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalBinding](https://w3id.org
  classDiagram
     class SignalBinding
     click SignalBinding href "../SignalBinding/"
+      SignalBinding : control_system_suffix
+        
       SignalBinding : description
-        
-      SignalBinding : epics_suffix
-        
-      SignalBinding : name
         
       
 ```
@@ -38,9 +36,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalBinding](https://w3id.org
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [name](name.md) | 1 <br/> [String](String.md) | Name/identifier of the entity | direct |
-| [epics_suffix](epics_suffix.md) | 0..1 <br/> [String](String.md) | Facility-specific EPICS suffix for a semantic signal | direct |
-| [description](description.md) | 0..1 <br/> [String](String.md) |  | direct |
+| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | direct |
+| [control_system_suffix](control_system_suffix.md) | 0..1 <br/> [String](String.md) | Facility-specific control-system (e | direct |
 
 
 
@@ -50,7 +47,20 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalBinding](https://w3id.org
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [DeviceTypeSignalSet](DeviceTypeSignalSet.md) | [signal_bindings](signal_bindings.md) | range | [SignalBinding](SignalBinding.md) |
+| [MagnetSignalSet](MagnetSignalSet.md) | [current_setpoint](current_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
+| [MagnetSignalSet](MagnetSignalSet.md) | [current_readback](current_readback.md) | range | [SignalBinding](SignalBinding.md) |
+| [MagnetSignalSet](MagnetSignalSet.md) | [current_min](current_min.md) | range | [SignalBinding](SignalBinding.md) |
+| [MagnetSignalSet](MagnetSignalSet.md) | [current_max](current_max.md) | range | [SignalBinding](SignalBinding.md) |
+| [MagnetSignalSet](MagnetSignalSet.md) | [status](status.md) | range | [SignalBinding](SignalBinding.md) |
+| [QuadrupoleSignalSet](QuadrupoleSignalSet.md) | [strength_setpoint](strength_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
+| [CorrectorSignalSet](CorrectorSignalSet.md) | [kick_setpoint](kick_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
+| [DipoleSignalSet](DipoleSignalSet.md) | [field_setpoint](field_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
+| [BPMSignalSet](BPMSignalSet.md) | [horizontal_beam_position](horizontal_beam_position.md) | range | [SignalBinding](SignalBinding.md) |
+| [BPMSignalSet](BPMSignalSet.md) | [vertical_beam_position](vertical_beam_position.md) | range | [SignalBinding](SignalBinding.md) |
+| [BPMSignalSet](BPMSignalSet.md) | [status](status.md) | range | [SignalBinding](SignalBinding.md) |
+| [RFCavitySignalSet](RFCavitySignalSet.md) | [gradient_setpoint](gradient_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
+| [RFCavitySignalSet](RFCavitySignalSet.md) | [gradient_readback](gradient_readback.md) | range | [SignalBinding](SignalBinding.md) |
+| [RFCavitySignalSet](RFCavitySignalSet.md) | [status](status.md) | range | [SignalBinding](SignalBinding.md) |
 
 
 
@@ -68,7 +78,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalBinding](https://w3id.org
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -77,8 +87,8 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalBinding](https://w3id.org
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/SignalBinding |
-| native | https://w3id.org/narad_linkml/schema/narad/SignalBinding |
+| self | narad:SignalBinding |
+| native | narad:SignalBinding |
 
 
 
@@ -94,12 +104,13 @@ URI: [https://w3id.org/narad_linkml/schema/narad/SignalBinding](https://w3id.org
 <details>
 ```yaml
 name: SignalBinding
-description: A named EPICS suffix definition for one semantic signal.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: A named control system suffix definition for one semantic signal. The
+  suffix is used within in a template naming convention to construct the full control
+  system PV name for a given device instance.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
-- name
-- epics_suffix
 - description
+- control_system_suffix
 
 ```
 </details>
@@ -109,51 +120,34 @@ slots:
 <details>
 ```yaml
 name: SignalBinding
-description: A named EPICS suffix definition for one semantic signal.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: A named control system suffix definition for one semantic signal. The
+  suffix is used within in a template naming convention to construct the full control
+  system PV name for a given device instance.
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
-  name:
-    name: name
-    description: Name/identifier of the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
-    rank: 1000
-    identifier: true
-    alias: name
-    owner: SignalBinding
-    domain_of:
-    - Facility
-    - SignalBinding
-    - DeviceTypeSignalSet
-    - Signal
-    - Capability
-    - CapabilityProfile
-    - ControlProfileFamily
-    - BeamlineElement
-    - PVBinding
-    range: string
-    required: true
-  epics_suffix:
-    name: epics_suffix
-    description: Facility-specific EPICS suffix for a semantic signal.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
-    rank: 1000
-    alias: epics_suffix
-    owner: SignalBinding
-    domain_of:
-    - SignalBinding
-    range: string
   description:
     name: description
-    from_schema: https://w3id.org/narad_linkml/schema/narad/
+    description: Detailed description of the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: SignalBinding
     domain_of:
+    - NamedThing
     - SignalBinding
-    - CapabilityMixin
-    - Signal
-    - CapabilityProfile
-    - ControlProfileFamily
+    range: string
+  control_system_suffix:
+    name: control_system_suffix
+    description: 'Facility-specific control-system (e.g. EPICS) naming suffix used
+      to derive or interpret the signal binding, e.g. .S, M, :GSET.
+
+      '
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: control_system_suffix
+    owner: SignalBinding
+    domain_of:
+    - SignalBinding
     range: string
 
 ```

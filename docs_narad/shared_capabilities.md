@@ -9,7 +9,7 @@ _Named shared capabilities reused by profile types in a family._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/shared_capabilities](https://w3id.org/narad_linkml/schema/narad/shared_capabilities)
+URI: [narad:shared_capabilities](https://w3id.org/narad_linkml/schema/narad/shared_capabilities)
 Alias: shared_capabilities
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: shared_capabilities
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ControlProfileFamily](ControlProfileFamily.md) | A reusable family of control profiles sharing common semantics and structure |  no  |
+| [ControlProfileFamily](ControlProfileFamily.md) | A reusable family of control profiles sharing common semantics and structure ... |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: shared_capabilities
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -57,8 +57,8 @@ Alias: shared_capabilities
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/shared_capabilities |
-| native | https://w3id.org/narad_linkml/schema/narad/shared_capabilities |
+| self | narad:shared_capabilities |
+| native | narad:shared_capabilities |
 
 
 
@@ -69,7 +69,7 @@ Alias: shared_capabilities
 ```yaml
 name: shared_capabilities
 description: Named shared capabilities reused by profile types in a family.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: shared_capabilities
 domain_of:

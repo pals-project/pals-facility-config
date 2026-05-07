@@ -3,8 +3,13 @@
 # Slot: naming_convention 
 
 
+_Signal naming convention template (e.g. <device><signal_code>)._
 
-URI: [https://w3id.org/narad_linkml/schema/narad/naming_convention](https://w3id.org/narad_linkml/schema/narad/naming_convention)
+
+
+
+
+URI: [narad:naming_convention](https://w3id.org/narad_linkml/schema/narad/naming_convention)
 Alias: naming_convention
 
 <!-- no inheritance hierarchy -->
@@ -17,7 +22,7 @@ Alias: naming_convention
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Facility](Facility.md) | A facility with specific signal bindings |  no  |
+| [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -41,7 +46,7 @@ Alias: naming_convention
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -50,8 +55,8 @@ Alias: naming_convention
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | https://w3id.org/narad_linkml/schema/narad/naming_convention |
-| native | https://w3id.org/narad_linkml/schema/narad/naming_convention |
+| self | narad:naming_convention |
+| native | narad:naming_convention |
 
 
 
@@ -61,11 +66,12 @@ Alias: naming_convention
 <details>
 ```yaml
 name: naming_convention
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: Signal naming convention template (e.g. <device><signal_code>).
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: naming_convention
 domain_of:
-- Facility
+- FacilityConfig
 range: string
 
 ```

@@ -3,18 +3,18 @@
 
 
 
-_High-level device domain for a control profile family. Intentionally kept small;  ADD new values here as the NARAD schema evolves._
+_High-level device domain for a control profile family. Use: groups profile families, not individual elements._
 
 
 
-URI: [https://w3id.org/narad_linkml/schema/narad/DeviceDomainEnum](https://w3id.org/narad_linkml/schema/narad/DeviceDomainEnum)
+URI: [narad:DeviceDomainEnum](https://w3id.org/narad_linkml/schema/narad/DeviceDomainEnum)
 
 ## Permissible Values
 
 | Value | Meaning | Description |
 | --- | --- | --- |
 | Magnet | None | Magnet devices: dipoles, quadrupoles, correctors, solenoids |
-| Instrument | None | Beam diagnostic instruments: BPMs, screens, halos, viewers, etc |
+| Instrument | None | Beam diagnostic instruments: BPMs, screens, viewers, etc |
 | RFCavity | None | RF cavity and RF-related devices |
 
 
@@ -40,7 +40,7 @@ URI: [https://w3id.org/narad_linkml/schema/narad/DeviceDomainEnum](https://w3id.
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/
+* from schema: https://w3id.org/narad_linkml/schema/narad/system
 
 
 
@@ -52,9 +52,9 @@ URI: [https://w3id.org/narad_linkml/schema/narad/DeviceDomainEnum](https://w3id.
 <details>
 ```yaml
 name: DeviceDomainEnum
-description: High-level device domain for a control profile family. Intentionally
-  kept small;  ADD new values here as the NARAD schema evolves.
-from_schema: https://w3id.org/narad_linkml/schema/narad/
+description: 'High-level device domain for a control profile family. Use: groups profile
+  families, not individual elements.'
+from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 permissible_values:
   Magnet:
@@ -62,7 +62,7 @@ permissible_values:
     description: 'Magnet devices: dipoles, quadrupoles, correctors, solenoids.'
   Instrument:
     text: Instrument
-    description: 'Beam diagnostic instruments: BPMs, screens, halos, viewers, etc.'
+    description: 'Beam diagnostic instruments: BPMs, screens, viewers, etc.'
   RFCavity:
     text: RFCavity
     description: RF cavity and RF-related devices.
