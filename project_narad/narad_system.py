@@ -1,5 +1,5 @@
 # Auto generated from narad_system.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-10T22:57:32
+# Generation date: 2026-05-10T23:02:09
 # Schema: narad-system-schema
 #
 # id: https://w3id.org/narad_linkml/schema/narad/system

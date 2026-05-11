@@ -2413,7 +2413,7 @@
   "source_file": "narad_system.yaml",
   "source_file_date": "2026-05-10T22:55:36",
   "source_file_size": 35664,
-  "generation_date": "2026-05-10T22:57:31",
+  "generation_date": "2026-05-10T23:02:08",
   "@type": "SchemaDefinition",
   "@context": [
     "project_narad/jsonld/narad_system.context.jsonld",

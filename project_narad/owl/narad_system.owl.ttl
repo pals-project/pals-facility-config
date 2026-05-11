@@ -28,10 +28,10 @@ narad:BPMCapability a owl:Class ;
 narad:CapabilityLayer a owl:Class ;
     rdfs:label "CapabilityLayer" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom narad:ControlCapability ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:control_capabilities ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom narad:ControlCapability ;
             owl:onProperty narad:control_capabilities ],
         linkml:ClassDefinition ;
     skos:definition "Capability-layer container for control profile families." ;
@@ -65,23 +65,23 @@ narad:Instrument a owl:Class ;
 narad:NaradModel a owl:Class ;
     rdfs:label "NaradModel" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:elements ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:narad_config ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:BeamlineElement ;
-            owl:onProperty narad:elements ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:beamlines ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:Beamline ;
             owl:onProperty narad:beamlines ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:beamlines ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:BeamlineElement ;
+            owl:onProperty narad:elements ],
+        [ a owl:Restriction ;
             owl:allValuesFrom narad:NaradConfig ;
             owl:onProperty narad:narad_config ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:elements ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:narad_config ],
@@ -247,20 +247,20 @@ narad:AnyValue a owl:Class ;
 narad:Beamline a owl:Class ;
     rdfs:label "Beamline" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom narad:BeamlineElement ;
-            owl:onProperty narad:line ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:beamline_kind ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:beamline_kind ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:beamline_kind ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:line ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:BeamlineElement ;
+            owl:onProperty narad:line ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:beamline_kind ],
         narad:NamedThing ;
     skos:definition "A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path." ;
     skos:inScheme narad:system .
@@ -341,85 +341,85 @@ narad:ElementParamSet a owl:Class ;
     rdfs:label "ElementParamSet" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:phase ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:e2 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:frequency ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:angle_ref ],
+            owl:onProperty narad:e1 ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty narad:facility_param_set ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty narad:Ksol ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:phase ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:frequency ],
+            owl:onProperty narad:Ksol ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty narad:Kn1 ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:voltage ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:e1 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:Ksol ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:angle_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:phase ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:e1 ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:Kn1 ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:phase ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:voltage ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:facility_param_set ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:Kn1 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:facility_param_set ],
+            owl:onProperty narad:angle_ref ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:e2 ],
+            owl:onProperty narad:e1 ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:Ksol ],
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:facility_param_set ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:frequency ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:e2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:phase ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:e1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:voltage ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:phase ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:FacilityParamSet ;
             owl:onProperty narad:facility_param_set ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:voltage ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:e1 ],
+            owl:onProperty narad:frequency ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:angle_ref ],
+            owl:onProperty narad:Ksol ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:e2 ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:Kn1 ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:frequency ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:e2 ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:angle_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:angle_ref ],
         linkml:ClassDefinition ;
     skos:definition "Named physics-parameter block for a beamline element. The name identifies the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP)." ;
     skos:inScheme narad:system .
@@ -427,20 +427,20 @@ narad:ElementParamSet a owl:Class ;
 narad:FacilityIdentifier a owl:Class ;
     rdfs:label "FacilityIdentifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:identifier_value ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty narad:identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:identifier_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:identifier_value ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:IdentifierTypeEnum ;
             owl:onProperty narad:identifier_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:identifier_value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:identifier_type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:identifier_value ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:identifier_type ],
@@ -451,32 +451,32 @@ narad:FacilityIdentifier a owl:Class ;
 narad:FacilityParamSet a owl:Class ;
     rdfs:label "FacilityParamSet" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:facility_element_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:facility_element_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:properties ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:modeled_as ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:properties ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:AnyValue ;
             owl:onProperty narad:properties ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:facility_element_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:facility_element_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:modeled_as ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:facility_element_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:properties ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty narad:modeled_as ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:properties ],
+            owl:onProperty narad:modeled_as ],
         linkml:ClassDefinition ;
     skos:definition "Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters." ;
     skos:inScheme narad:system .
@@ -521,43 +521,43 @@ narad:InstanceSignalBinding a owl:Class ;
     rdfs:label "InstanceSignalBinding" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty narad:is_hosted_by ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:is_instance_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty narad:for_property ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:is_hosted_by ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:for_property ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:pv_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:is_property_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty narad:is_property_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty narad:is_instance_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty narad:is_hosted_by ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:is_property_of ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:pv_name ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:pv_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty narad:is_instance_of ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:is_property_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty narad:is_property_of ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:is_property_of ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty narad:for_property ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:is_hosted_by ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:pv_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty narad:is_hosted_by ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:is_hosted_by ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:for_property ],
         narad:NamedThing ;
     skos:broadMatch rdf:type,
         sosa:Sensor ;
@@ -568,26 +568,26 @@ narad:InstanceSignalBinding a owl:Class ;
 narad:InstrumentSystem a owl:Class ;
     rdfs:label "InstrumentSystem" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:device_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:device_type ],
+        [ a owl:Restriction ;
             owl:allValuesFrom narad:ElementKindEnum ;
             owl:onProperty narad:device_type ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:has_system_capability ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:device_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:has_sub_system ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:System ;
             owl:onProperty narad:has_sub_system ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:SystemCapability ;
             owl:onProperty narad:has_system_capability ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:device_type ],
+            owl:allValuesFrom narad:System ;
+            owl:onProperty narad:has_sub_system ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:has_system_capability ],
         narad:System ;
     skos:definition """A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.
 """ ;
@@ -597,59 +597,59 @@ narad:InstrumentSystem a owl:Class ;
 narad:NaradConfig a owl:Class ;
     rdfs:label "NaradConfig" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:schema_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:SignalLayer ;
-            owl:onProperty narad:signal_layer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom narad:ControlSystem ;
             owl:onProperty narad:has_sub_system ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:intent ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:InstrumentSystem ;
-            owl:onProperty narad:instrument_layer ],
+            owl:minCardinality 0 ;
+            owl:onProperty narad:intent ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty narad:instrument_layer ],
+            owl:onProperty narad:deployed_system ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:intent ],
+            owl:minCardinality 1 ;
+            owl:onProperty narad:control_capability_layer ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:has_sub_system ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:ControlCapability ;
             owl:onProperty narad:control_capability_layer ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:schema_version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:schema_version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:InstrumentSystem ;
+            owl:onProperty narad:instrument_layer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:deployed_system ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:signal_layer ],
+        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty narad:signal_layer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:SignalLayer ;
+            owl:onProperty narad:signal_layer ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:FacilitySystem ;
+            owl:onProperty narad:deployed_system ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty narad:schema_version ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:schema_version ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:signal_layer ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:control_capability_layer ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:ControlSystem ;
-            owl:onProperty narad:has_sub_system ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:deployed_system ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:deployed_system ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:FacilitySystem ;
-            owl:onProperty narad:deployed_system ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty narad:intent ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:instrument_layer ],
         linkml:ClassDefinition ;
     skos:broadMatch ssn:Deployment ;
     skos:definition "A top-level NARAD-system container for the: capability layer + signal layer." ;
@@ -658,20 +658,20 @@ narad:NaradConfig a owl:Class ;
 narad:SignalDefinitions a owl:Class ;
     rdfs:label "SignalDefinitions" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom narad:SignalBinding ;
-            owl:onProperty narad:signal_bindings ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:signal_bindings ],
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:device_type ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:device_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:signal_bindings ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:ElementKindEnum ;
             owl:onProperty narad:device_type ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:device_type ],
+            owl:allValuesFrom narad:SignalBinding ;
+            owl:onProperty narad:signal_bindings ],
         narad:NamedThing ;
     skos:definition "Signal binding set scoped to a device type or device domain." ;
     skos:inScheme narad:system .
@@ -679,10 +679,10 @@ narad:SignalDefinitions a owl:Class ;
 narad:SignalLayer a owl:Class ;
     rdfs:label "SignalLayer" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom narad:FacilitySystem ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:facilities ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom narad:FacilitySystem ;
             owl:onProperty narad:facilities ],
         linkml:ClassDefinition ;
     skos:definition "Signal-layer container for facility-specific signal bindings." ;
@@ -1043,25 +1043,19 @@ narad:BeamlineElement a owl:Class ;
     rdfs:label "BeamlineElement" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:param_set ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:length ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:param_set ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:instance_signal_bindings ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:InstanceSignalBinding ;
             owl:onProperty narad:instance_signal_bindings ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:length ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:ElementParamSet ;
+            owl:onProperty narad:param_set ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:is_instance_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:length ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:anyURI ;
             owl:onProperty narad:is_instance_of ],
@@ -1069,7 +1063,13 @@ narad:BeamlineElement a owl:Class ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:length ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:ElementParamSet ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:param_set ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:InstanceSignalBinding ;
+            owl:onProperty narad:instance_signal_bindings ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:param_set ],
         narad:NamedThing ;
     skos:definition "A single element in a beamline with its kind and optional NARAD capability annotations." ;
@@ -1078,34 +1078,34 @@ narad:BeamlineElement a owl:Class ;
 narad:FacilitySystem a owl:Class ;
     rdfs:label "FacilitySystem" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom narad:FacilityIdentifier ;
-            owl:onProperty narad:facility_identifier ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:control_system ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:facility_identifier ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:naming_convention ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:ControlSystem ;
             owl:onProperty narad:control_system ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:signal_definitions ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty narad:control_system ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:FacilityIdentifier ;
+            owl:onProperty narad:facility_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:control_system ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:naming_convention ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:facility_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:SignalDefinitions ;
+            owl:onProperty narad:signal_definitions ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:naming_convention ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:SignalDefinitions ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:signal_definitions ],
         narad:System ;
     skos:definition "Facility-specific signal binding configuration." ;
@@ -1120,41 +1120,41 @@ narad:MagnetCapability a owl:Class ;
 narad:Signal a owl:Class ;
     rdfs:label "Signal" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:units_uri ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:data_type ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:data_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:role ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:units ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:SignalRoleEnum ;
-            owl:onProperty narad:role ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:DataTypeEnum ;
-            owl:onProperty narad:data_type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty narad:units_uri ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:units ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty narad:units_uri ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:units_uri ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:SignalRoleEnum ;
+            owl:onProperty narad:role ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:role ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:units_uri ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:DataTypeEnum ;
+            owl:onProperty narad:data_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:units ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:role ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:units ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:units_uri ],
+            owl:minCardinality 0 ;
+            owl:onProperty narad:data_type ],
         narad:NamedThing ;
     skos:altLabel "EPICS Process Variable",
         "control signal",
@@ -1221,16 +1221,16 @@ narad:SystemCapability a owl:Class ;
             owl:onProperty narad:device_type ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:device_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:device_type ],
+            owl:onProperty narad:for_property ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:for_property ],
+            owl:onProperty narad:device_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:for_property ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:device_type ],
         narad:NamedThing ;
     skos:definition """A capability of a system. SystemCapability describes what a system can expose, monitor, control, or actuate with respect to one or more signals. Aligned to ssn-system:SystemCapability; linked from System instances via ssn-system:hasSystemCapability, and from Signals via ssn:forProperty. Profile-level inheritance (shared vs. type-specific signals) is expressed in CapabilityProfile, not here.
 """ ;
@@ -1249,20 +1249,20 @@ narad:has_sub_system a owl:ObjectProperty ;
 narad:ControlCapability a owl:Class ;
     rdfs:label "ControlCapability" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom narad:Signal ;
-            owl:onProperty narad:signals ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:subclass_of ],
-        [ a owl:Restriction ;
             owl:allValuesFrom narad:ElementKindEnum ;
             owl:onProperty narad:device_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:subclass_of ],
+            owl:onProperty narad:device_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:device_type ],
+            owl:onProperty narad:subclass_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:subclass_of ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:signals ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:ControlCapability ;
             owl:onProperty narad:subclass_of ],
@@ -1270,7 +1270,7 @@ narad:ControlCapability a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty narad:device_type ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom narad:Signal ;
             owl:onProperty narad:signals ],
         narad:NamedThing ;
     skos:definition "A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile)." ;
@@ -1308,20 +1308,20 @@ narad:NamedThing a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:name ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:description ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:description ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:name ],
         linkml:ClassDefinition ;
     skos:definition "Abstract base class providing identity and human-readable metadata." ;
     skos:inScheme narad:system .
@@ -1332,14 +1332,8 @@ narad:System a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty narad:has_system_capability ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:SystemTypeEnum ;
-            owl:onProperty narad:system_type ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:has_sub_system ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:SystemCapability ;
-            owl:onProperty narad:has_system_capability ],
+            owl:onProperty narad:system_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:System ;
             owl:onProperty narad:has_sub_system ],
@@ -1347,8 +1341,14 @@ narad:System a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:system_type ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom narad:SystemTypeEnum ;
             owl:onProperty narad:system_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:SystemCapability ;
+            owl:onProperty narad:has_system_capability ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:has_sub_system ],
         narad:NamedThing ;
     skos:definition """A physical, logical, or cyber-physical system involved in sensing, monitoring, control, or actuation. Broadly aligned to ssn:System.
 """ ;
@@ -1364,13 +1364,13 @@ narad:device_type a owl:ObjectProperty ;
 narad:SignalBinding a owl:Class ;
     rdfs:label "SignalBinding" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:control_system_suffix ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:control_system_suffix ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty narad:control_system_suffix ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty narad:control_system_suffix ],
         narad:NamedThing ;
     skos:definition "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance." ;

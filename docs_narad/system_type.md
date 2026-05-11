@@ -23,10 +23,10 @@ Alias: system_type
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [ControlSystem](ControlSystem.md) | A control system (e |  no  |
-| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
-| [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
-| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  no  |
 | [InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
+| [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
+| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  no  |
 
 
 

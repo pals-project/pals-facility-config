@@ -370,7 +370,7 @@ CREATE TABLE "SystemCapability_for_property" (
 	for_property TEXT,
 	PRIMARY KEY ("SystemCapability_name", for_property),
 	FOREIGN KEY("SystemCapability_name") REFERENCES "SystemCapability" (name)
-);CREATE INDEX "ix_SystemCapability_for_property_for_property" ON "SystemCapability_for_property" (for_property);CREATE INDEX "ix_SystemCapability_for_property_SystemCapability_name" ON "SystemCapability_for_property" ("SystemCapability_name");
+);CREATE INDEX "ix_SystemCapability_for_property_SystemCapability_name" ON "SystemCapability_for_property" ("SystemCapability_name");CREATE INDEX "ix_SystemCapability_for_property_for_property" ON "SystemCapability_for_property" (for_property);
 CREATE TABLE "MagnetCapability_for_property" (
 	"MagnetCapability_name" TEXT,
 	for_property TEXT,
@@ -382,7 +382,7 @@ CREATE TABLE "QuadrupoleCapability_for_property" (
 	for_property TEXT,
 	PRIMARY KEY ("QuadrupoleCapability_name", for_property),
 	FOREIGN KEY("QuadrupoleCapability_name") REFERENCES "QuadrupoleCapability" (name)
-);CREATE INDEX "ix_QuadrupoleCapability_for_property_QuadrupoleCapability_name" ON "QuadrupoleCapability_for_property" ("QuadrupoleCapability_name");CREATE INDEX "ix_QuadrupoleCapability_for_property_for_property" ON "QuadrupoleCapability_for_property" (for_property);
+);CREATE INDEX "ix_QuadrupoleCapability_for_property_for_property" ON "QuadrupoleCapability_for_property" (for_property);CREATE INDEX "ix_QuadrupoleCapability_for_property_QuadrupoleCapability_name" ON "QuadrupoleCapability_for_property" ("QuadrupoleCapability_name");
 CREATE TABLE "CorrectorCapability_for_property" (
 	"CorrectorCapability_name" TEXT,
 	for_property TEXT,
@@ -400,13 +400,13 @@ CREATE TABLE "SolenoidCapability_for_property" (
 	for_property TEXT,
 	PRIMARY KEY ("SolenoidCapability_name", for_property),
 	FOREIGN KEY("SolenoidCapability_name") REFERENCES "SolenoidCapability" (name)
-);CREATE INDEX "ix_SolenoidCapability_for_property_SolenoidCapability_name" ON "SolenoidCapability_for_property" ("SolenoidCapability_name");CREATE INDEX "ix_SolenoidCapability_for_property_for_property" ON "SolenoidCapability_for_property" (for_property);
+);CREATE INDEX "ix_SolenoidCapability_for_property_for_property" ON "SolenoidCapability_for_property" (for_property);CREATE INDEX "ix_SolenoidCapability_for_property_SolenoidCapability_name" ON "SolenoidCapability_for_property" ("SolenoidCapability_name");
 CREATE TABLE "InstrumentCapability_for_property" (
 	"InstrumentCapability_name" TEXT,
 	for_property TEXT,
 	PRIMARY KEY ("InstrumentCapability_name", for_property),
 	FOREIGN KEY("InstrumentCapability_name") REFERENCES "InstrumentCapability" (name)
-);CREATE INDEX "ix_InstrumentCapability_for_property_InstrumentCapability_name" ON "InstrumentCapability_for_property" ("InstrumentCapability_name");CREATE INDEX "ix_InstrumentCapability_for_property_for_property" ON "InstrumentCapability_for_property" (for_property);
+);CREATE INDEX "ix_InstrumentCapability_for_property_for_property" ON "InstrumentCapability_for_property" (for_property);CREATE INDEX "ix_InstrumentCapability_for_property_InstrumentCapability_name" ON "InstrumentCapability_for_property" ("InstrumentCapability_name");
 CREATE TABLE "BPMCapability_for_property" (
 	"BPMCapability_name" TEXT,
 	for_property TEXT,
@@ -418,7 +418,7 @@ CREATE TABLE "CavityGradientCapability_for_property" (
 	for_property TEXT,
 	PRIMARY KEY ("CavityGradientCapability_name", for_property),
 	FOREIGN KEY("CavityGradientCapability_name") REFERENCES "CavityGradientCapability" (name)
-);CREATE INDEX "ix_CavityGradientCapability_for_property_CavityGradientCapability_name" ON "CavityGradientCapability_for_property" ("CavityGradientCapability_name");CREATE INDEX "ix_CavityGradientCapability_for_property_for_property" ON "CavityGradientCapability_for_property" (for_property);
+);CREATE INDEX "ix_CavityGradientCapability_for_property_for_property" ON "CavityGradientCapability_for_property" (for_property);CREATE INDEX "ix_CavityGradientCapability_for_property_CavityGradientCapability_name" ON "CavityGradientCapability_for_property" ("CavityGradientCapability_name");
 CREATE TABLE "NaradConfig" (
 	id INTEGER NOT NULL,
 	schema_version TEXT NOT NULL,
@@ -457,7 +457,7 @@ CREATE TABLE "FacilitySystem_facility_identifier" (
 	PRIMARY KEY ("FacilitySystem_name", facility_identifier_id),
 	FOREIGN KEY("FacilitySystem_name") REFERENCES "FacilitySystem" (name),
 	FOREIGN KEY(facility_identifier_id) REFERENCES "FacilityIdentifier" (id)
-);CREATE INDEX "ix_FacilitySystem_facility_identifier_facility_identifier_id" ON "FacilitySystem_facility_identifier" (facility_identifier_id);CREATE INDEX "ix_FacilitySystem_facility_identifier_FacilitySystem_name" ON "FacilitySystem_facility_identifier" ("FacilitySystem_name");
+);CREATE INDEX "ix_FacilitySystem_facility_identifier_FacilitySystem_name" ON "FacilitySystem_facility_identifier" ("FacilitySystem_name");CREATE INDEX "ix_FacilitySystem_facility_identifier_facility_identifier_id" ON "FacilitySystem_facility_identifier" (facility_identifier_id);
 CREATE TABLE "NaradModel" (
 	id INTEGER NOT NULL,
 	narad_config_id INTEGER,

@@ -10,41 +10,41 @@ narad:ActuatableSignal a sh:NodeShape ;
     sh:description """A NARAD signal that can be commanded, set, or acted upon. Examples: current_setpoint, strength_setpoint, kick_setpoint, field_setpoint, current_min, current_max, gradient_setpoint. Aligned to sosa:ActuatableProperty.
 """ ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:anyURI ;
+    sh:property [ sh:description "The semantic role of the signal within its capability." ;
+            sh:in ( "control" "readback" "constraint" "status" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path narad:role ],
+        [ sh:datatype xsd:anyURI ;
             sh:description "Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path narad:units_uri ],
-        [ sh:description "The data type of the signal's value." ;
-            sh:in ( ncit:C47840 ncit:C48150 ncit:C48870 ncit:C45253 ncit:C45254 ncit:C95637 ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path narad:data_type ],
-        [ sh:description "The semantic role of the signal within its capability." ;
-            sh:in ( "control" "readback" "constraint" "status" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path narad:role ],
-        [ sh:datatype xsd:string ;
-            sh:description "Conventional unit symbol (e.g. A, MV/m, T*m, G/cm)." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path narad:units ],
-        [ sh:datatype xsd:string ;
-            sh:description "Detailed description of the entity." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path narad:description ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
-            sh:path narad:name ] ;
+            sh:path narad:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Detailed description of the entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path narad:description ],
+        [ sh:description "The data type of the signal's value." ;
+            sh:in ( ncit:C47840 ncit:C48150 ncit:C48870 ncit:C45253 ncit:C45254 ncit:C95637 ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path narad:data_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Conventional unit symbol (e.g. A, MV/m, T*m, G/cm)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path narad:units ] ;
     sh:targetClass narad:ActuatableSignal .
 
 narad:BPMCapability a sh:NodeShape ;
@@ -52,12 +52,11 @@ narad:BPMCapability a sh:NodeShape ;
     sh:description "BPM-specific capability with horizontal and vertical position readback signals." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Human-readable name or local string key for the entity." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
+            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
+""" ;
             sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path narad:name ],
+            sh:order 0 ;
+            sh:path narad:for_property ],
         [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
             sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
             sh:maxCount 1 ;
@@ -70,11 +69,12 @@ narad:BPMCapability a sh:NodeShape ;
             sh:order 3 ;
             sh:path narad:description ],
         [ sh:datatype xsd:string ;
-            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
-""" ;
+            sh:description "Human-readable name or local string key for the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:for_property ] ;
+            sh:order 2 ;
+            sh:path narad:name ] ;
     sh:targetClass narad:BPMCapability .
 
 narad:CapabilityLayer a sh:NodeShape ;
@@ -92,29 +92,29 @@ narad:CavityGradientCapability a sh:NodeShape ;
     sh:description "RF cavity capability with gradient control, readback, and status signals." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Human-readable name or local string key for the entity." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
+            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
+""" ;
             sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path narad:name ],
+            sh:order 0 ;
+            sh:path narad:for_property ],
         [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path narad:description ],
-        [ sh:datatype xsd:string ;
-            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
-""" ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:for_property ],
         [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
             sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path narad:device_type ] ;
+            sh:path narad:device_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name or local string key for the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path narad:name ] ;
     sh:targetClass narad:CavityGradientCapability .
 
 narad:CorrectorCapability a sh:NodeShape ;
@@ -151,12 +151,7 @@ narad:DipoleCapability a sh:NodeShape ;
     sh:closed true ;
     sh:description "Dipole-specific capability extending MagnetCapability with bend-field signals." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
-            sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path narad:device_type ],
-        [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:string ;
             sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
 """ ;
             sh:nodeKind sh:Literal ;
@@ -168,6 +163,11 @@ narad:DipoleCapability a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path narad:description ],
+        [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
+            sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path narad:device_type ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
@@ -181,12 +181,11 @@ narad:Instrument a sh:NodeShape ;
     sh:closed true ;
     sh:description "A generic beam diagnostic instrument." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "Detailed description of the entity." ;
+    sh:property [ sh:description "High-level system type for classification and querying." ;
+            sh:in ( "Facility" "ControlSystem" "Magnet" ) ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path narad:description ],
+            sh:order 0 ;
+            sh:path narad:system_type ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
@@ -200,34 +199,35 @@ narad:Instrument a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path narad:has_system_capability ],
-        [ sh:description "High-level system type for classification and querying." ;
-            sh:in ( "Facility" "ControlSystem" "Magnet" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path narad:system_type ],
         [ sh:class narad:System ;
             sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
 """ ;
             sh:nodeKind sh:IRI ;
             sh:order 1 ;
-            sh:path narad:has_sub_system ] ;
+            sh:path narad:has_sub_system ],
+        [ sh:datatype xsd:string ;
+            sh:description "Detailed description of the entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path narad:description ] ;
     sh:targetClass narad:Instrument .
 
 narad:InstrumentCapability a sh:NodeShape ;
     sh:closed true ;
     sh:description "Generic instrument capability (position readback and status signals)." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
+""" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path narad:for_property ],
+        [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
             sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path narad:device_type ],
-        [ sh:datatype xsd:string ;
-            sh:description "Detailed description of the entity." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path narad:description ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
@@ -236,11 +236,11 @@ narad:InstrumentCapability a sh:NodeShape ;
             sh:order 2 ;
             sh:path narad:name ],
         [ sh:datatype xsd:string ;
-            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
-""" ;
+            sh:description "Detailed description of the entity." ;
+            sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:for_property ] ;
+            sh:order 3 ;
+            sh:path narad:description ] ;
     sh:targetClass narad:InstrumentCapability .
 
 narad:MagnetCapability a sh:NodeShape ;
@@ -254,12 +254,6 @@ narad:MagnetCapability a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
             sh:path narad:name ],
-        [ sh:datatype xsd:string ;
-            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
-""" ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:for_property ],
         [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
             sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
             sh:maxCount 1 ;
@@ -270,48 +264,54 @@ narad:MagnetCapability a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
-            sh:path narad:description ] ;
+            sh:path narad:description ],
+        [ sh:datatype xsd:string ;
+            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
+""" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path narad:for_property ] ;
     sh:targetClass narad:MagnetCapability .
 
 narad:NamedThing a sh:NodeShape ;
     sh:closed false ;
     sh:description "Abstract base class providing identity and human-readable metadata." ;
-    sh:ignoredProperties ( narad:subclass_of narad:system_type narad:control_system narad:line narad:units narad:pv_name narad:signal_definitions narad:role narad:for_property narad:param_set narad:instance_signal_bindings narad:device_type narad:naming_convention rdf:type narad:signals narad:length narad:has_sub_system narad:data_type narad:is_hosted_by narad:facility_identifier narad:is_property_of narad:control_system_suffix narad:has_system_capability narad:beamline_kind narad:signal_bindings narad:units_uri narad:is_instance_of ) ;
+    sh:ignoredProperties ( narad:is_hosted_by narad:naming_convention narad:system_type rdf:type narad:pv_name narad:units_uri narad:length narad:subclass_of narad:is_instance_of narad:signal_definitions narad:has_sub_system narad:line narad:device_type narad:signal_bindings narad:control_system_suffix narad:signals narad:units narad:param_set narad:facility_identifier narad:is_property_of narad:for_property narad:has_system_capability narad:data_type narad:control_system narad:beamline_kind narad:role narad:instance_signal_bindings ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:description "Detailed description of the entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path narad:description ],
+        [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path narad:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Detailed description of the entity." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path narad:description ] ;
+            sh:path narad:name ] ;
     sh:targetClass narad:NamedThing .
 
 narad:NaradModel a sh:NodeShape ;
     sh:closed true ;
     sh:description "Top-level NARAD document container." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class narad:Beamline ;
-            sh:description "A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path narad:beamlines ],
+    sh:property [ sh:class narad:NaradConfig ;
+            sh:description "Top-level NARAD configuration block (capability_layer + signal_layer)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path narad:narad_config ],
         [ sh:class narad:BeamlineElement ;
             sh:description "Beamline element definitions referenced by name from beamline sequences. Serializes as a keyed map by element name." ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path narad:elements ],
-        [ sh:class narad:NaradConfig ;
-            sh:description "Top-level NARAD configuration block (capability_layer + signal_layer)." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path narad:narad_config ] ;
+        [ sh:class narad:Beamline ;
+            sh:description "A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path narad:beamlines ] ;
     sh:targetClass narad:NaradModel .
 
 narad:ObservableSignal a sh:NodeShape ;
@@ -320,40 +320,40 @@ narad:ObservableSignal a sh:NodeShape ;
 """ ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Human-readable name or local string key for the entity." ;
+            sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path narad:name ],
+            sh:order 5 ;
+            sh:path narad:description ],
         [ sh:description "The data type of the signal's value." ;
             sh:in ( ncit:C47840 ncit:C48150 ncit:C48870 ncit:C45253 ncit:C45254 ncit:C95637 ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path narad:data_type ],
-        [ sh:datatype xsd:string ;
-            sh:description "Conventional unit symbol (e.g. A, MV/m, T*m, G/cm)." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path narad:units ],
         [ sh:datatype xsd:anyURI ;
             sh:description "Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path narad:units_uri ],
+        [ sh:datatype xsd:string ;
+            sh:description "Conventional unit symbol (e.g. A, MV/m, T*m, G/cm)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path narad:units ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name or local string key for the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path narad:name ],
         [ sh:description "The semantic role of the signal within its capability." ;
             sh:in ( "control" "readback" "constraint" "status" ) ;
             sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path narad:role ],
-        [ sh:datatype xsd:string ;
-            sh:description "Detailed description of the entity." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path narad:description ] ;
+            sh:path narad:role ] ;
     sh:targetClass narad:ObservableSignal .
 
 narad:QuadrupoleCapability a sh:NodeShape ;
@@ -361,6 +361,13 @@ narad:QuadrupoleCapability a sh:NodeShape ;
     sh:description "Quadrupole-specific capability extending MagnetCapability with strength signals." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:description "Human-readable name or local string key for the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path narad:name ],
+        [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -376,14 +383,7 @@ narad:QuadrupoleCapability a sh:NodeShape ;
             sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path narad:device_type ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable name or local string key for the entity." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path narad:name ] ;
+            sh:path narad:device_type ] ;
     sh:targetClass narad:QuadrupoleCapability .
 
 narad:SolenoidCapability a sh:NodeShape ;
@@ -398,12 +398,6 @@ narad:SolenoidCapability a sh:NodeShape ;
             sh:order 2 ;
             sh:path narad:name ],
         [ sh:datatype xsd:string ;
-            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
-""" ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:for_property ],
-        [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -413,7 +407,13 @@ narad:SolenoidCapability a sh:NodeShape ;
             sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path narad:device_type ] ;
+            sh:path narad:device_type ],
+        [ sh:datatype xsd:string ;
+            sh:description """SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
+""" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path narad:for_property ] ;
     sh:targetClass narad:SolenoidCapability .
 
 linkml:Any a sh:NodeShape ;
@@ -439,59 +439,29 @@ narad:Beamline a sh:NodeShape ;
             sh:order 2 ;
             sh:path narad:name ],
         [ sh:datatype xsd:string ;
-            sh:description "Kind/type label for the beamline entry (e.g. BeamLine)." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:beamline_kind ],
-        [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
-            sh:path narad:description ] ;
+            sh:path narad:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Kind/type label for the beamline entry (e.g. BeamLine)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path narad:beamline_kind ] ;
     sh:targetClass narad:Beamline .
 
 narad:ElementParamSet a sh:NodeShape ;
     sh:closed true ;
     sh:description "Named physics-parameter block for a beamline element. The name identifies the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP)." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:float ;
-            sh:description "First-order magnetic multipole coefficient (quadrupole strength)." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path narad:Kn1 ],
-        [ sh:datatype xsd:float ;
-            sh:description "Reference bend angle in radians." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path narad:angle_ref ],
-        [ sh:datatype xsd:float ;
-            sh:description "Entry edge angle in radians." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path narad:e1 ],
-        [ sh:class narad:FacilityParamSet ;
+    sh:property [ sh:class narad:FacilityParamSet ;
             sh:description "Facility-specific element parameters (type designation, model name, open property map)." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 8 ;
             sh:path narad:facility_param_set ],
-        [ sh:datatype xsd:float ;
-            sh:description "Exit edge angle in radians." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path narad:e2 ],
-        [ sh:datatype xsd:float ;
-            sh:description "Solenoid integrated field strength." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path narad:Ksol ],
         [ sh:datatype xsd:float ;
             sh:description "RF phase in degrees." ;
             sh:maxCount 1 ;
@@ -499,17 +469,47 @@ narad:ElementParamSet a sh:NodeShape ;
             sh:order 2 ;
             sh:path narad:phase ],
         [ sh:datatype xsd:float ;
+            sh:description "Solenoid integrated field strength." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path narad:Ksol ],
+        [ sh:datatype xsd:float ;
+            sh:description "RF frequency in Hz." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path narad:frequency ],
+        [ sh:datatype xsd:float ;
+            sh:description "Entry edge angle in radians." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path narad:e1 ],
+        [ sh:datatype xsd:float ;
             sh:description "RF voltage in volts." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path narad:voltage ],
         [ sh:datatype xsd:float ;
-            sh:description "RF frequency in Hz." ;
+            sh:description "Reference bend angle in radians." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:frequency ] ;
+            sh:order 3 ;
+            sh:path narad:angle_ref ],
+        [ sh:datatype xsd:float ;
+            sh:description "Exit edge angle in radians." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path narad:e2 ],
+        [ sh:datatype xsd:float ;
+            sh:description "First-order magnetic multipole coefficient (quadrupole strength)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path narad:Kn1 ] ;
     sh:targetClass narad:ElementParamSet .
 
 narad:FacilityIdentifier a sh:NodeShape ;
@@ -558,13 +558,20 @@ narad:InstanceSignalBinding a sh:NodeShape ;
     sh:description """A facility-specific binding between a NARAD Signal and an implementation interface (e.g. an EPICS process variable). Modeled as sosa:Sensor because it describes how a signal is observed, monitored, or actuated. ssn:forProperty → Signal; narad:isInstanceOf → the capability class.
 """ ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description """Fully-resolved facility-specific process variable name, e.g. MQWK202:STAT or MQWK202:BDL.
+    sh:property [ sh:datatype xsd:anyURI ;
+            sh:description """NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.
 """ ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:pv_name ],
+            sh:order 1 ;
+            sh:path narad:is_instance_of ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name or local string key for the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path narad:name ],
         [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
@@ -585,27 +592,20 @@ narad:InstanceSignalBinding a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
             sh:path narad:for_property ],
-        [ sh:datatype xsd:anyURI ;
-            sh:description """NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.
+        [ sh:datatype xsd:string ;
+            sh:description """Fully-resolved facility-specific process variable name, e.g. MQWK202:STAT or MQWK202:BDL.
 """ ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path narad:is_instance_of ],
+            sh:order 0 ;
+            sh:path narad:pv_name ],
         [ sh:datatype xsd:anyURI ;
             sh:description """Links an InstanceSignalBinding to the FacilitySystem it belongs to. This is the edge that connects the facility-specific bindings to the Facility node in the graph.
 """ ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
-            sh:path narad:is_hosted_by ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable name or local string key for the entity." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path narad:name ] ;
+            sh:path narad:is_hosted_by ] ;
     sh:targetClass narad:InstanceSignalBinding .
 
 narad:InstrumentSystem a sh:NodeShape ;
@@ -613,13 +613,12 @@ narad:InstrumentSystem a sh:NodeShape ;
     sh:description """A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.
 """ ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "Human-readable name or local string key for the entity." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path narad:name ],
+    sh:property [ sh:class narad:System ;
+            sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
+""" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path narad:has_sub_system ],
         [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
@@ -633,47 +632,35 @@ narad:InstrumentSystem a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path narad:has_system_capability ],
-        [ sh:description "High-level system type for classification and querying." ;
-            sh:in ( "Facility" "ControlSystem" "Magnet" ) ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path narad:system_type ],
-        [ sh:class narad:System ;
-            sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
-""" ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path narad:has_sub_system ],
         [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
             sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
             sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path narad:device_type ] ;
+            sh:path narad:device_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name or local string key for the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path narad:name ],
+        [ sh:description "High-level system type for classification and querying." ;
+            sh:in ( "Facility" "ControlSystem" "Magnet" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path narad:system_type ] ;
     sh:targetClass narad:InstrumentSystem .
 
 narad:NaradConfig a sh:NodeShape ;
     sh:closed true ;
     sh:description "A top-level NARAD-system container for the: capability layer + signal layer." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable statement of the intended use or purpose of this NARAD configuration." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path narad:intent ],
-        [ sh:class narad:SignalLayer ;
-            sh:description "Signal-layer container for facility-specific signal bindings." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 6 ;
-            sh:path narad:signal_layer ],
-        [ sh:class narad:InstrumentSystem ;
-            sh:description "Instrument Capability definitions keyed by capability name." ;
+    sh:property [ sh:class narad:ControlCapability ;
+            sh:description "Control Capability definitions for this facility." ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
-            sh:order 5 ;
-            sh:path narad:instrument_layer ],
+            sh:order 4 ;
+            sh:path narad:control_capability_layer ],
         [ sh:class narad:FacilitySystem ;
             sh:description "Identifier of the deployed system this configuration describes." ;
             sh:maxCount 1 ;
@@ -681,12 +668,12 @@ narad:NaradConfig a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path narad:deployed_system ],
-        [ sh:class narad:ControlSystem ;
-            sh:description "Identifier of the control system (e.g. epics) this configuration describes." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path narad:has_sub_system ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable statement of the intended use or purpose of this NARAD configuration." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path narad:intent ],
         [ sh:datatype xsd:string ;
             sh:description "Version of the NARAD schema used in this document." ;
             sh:maxCount 1 ;
@@ -694,12 +681,25 @@ narad:NaradConfig a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path narad:schema_version ],
-        [ sh:class narad:ControlCapability ;
-            sh:description "Control Capability definitions for this facility." ;
+        [ sh:class narad:SignalLayer ;
+            sh:description "Signal-layer container for facility-specific signal bindings." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path narad:signal_layer ],
+        [ sh:class narad:ControlSystem ;
+            sh:description "Identifier of the control system (e.g. epics) this configuration describes." ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
-            sh:order 4 ;
-            sh:path narad:control_capability_layer ] ;
+            sh:order 3 ;
+            sh:path narad:has_sub_system ],
+        [ sh:class narad:InstrumentSystem ;
+            sh:description "Instrument Capability definitions keyed by capability name." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path narad:instrument_layer ] ;
     sh:targetClass narad:NaradConfig .
 
 narad:Signal a sh:NodeShape ;
@@ -714,34 +714,34 @@ narad:Signal a sh:NodeShape ;
             sh:order 2 ;
             sh:path narad:units ],
         [ sh:datatype xsd:string ;
-            sh:description "Detailed description of the entity." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path narad:description ],
-        [ sh:description "The data type of the signal's value." ;
-            sh:in ( ncit:C47840 ncit:C48150 ncit:C48870 ncit:C45253 ncit:C45254 ncit:C95637 ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path narad:data_type ],
-        [ sh:datatype xsd:anyURI ;
-            sh:description "Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path narad:units_uri ],
-        [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path narad:name ],
+        [ sh:description "The data type of the signal's value." ;
+            sh:in ( ncit:C47840 ncit:C48150 ncit:C48870 ncit:C45253 ncit:C45254 ncit:C95637 ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path narad:data_type ],
         [ sh:description "The semantic role of the signal within its capability." ;
             sh:in ( "control" "readback" "constraint" "status" ) ;
             sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path narad:role ] ;
+            sh:path narad:role ],
+        [ sh:datatype xsd:string ;
+            sh:description "Detailed description of the entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path narad:description ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path narad:units_uri ] ;
     sh:targetClass narad:Signal .
 
 narad:SignalBinding a sh:NodeShape ;
@@ -749,12 +749,12 @@ narad:SignalBinding a sh:NodeShape ;
     sh:description "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Human-readable name or local string key for the entity." ;
+            sh:description """Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.
+""" ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path narad:name ],
+            sh:order 0 ;
+            sh:path narad:control_system_suffix ],
         [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
@@ -762,30 +762,30 @@ narad:SignalBinding a sh:NodeShape ;
             sh:order 2 ;
             sh:path narad:description ],
         [ sh:datatype xsd:string ;
-            sh:description """Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.
-""" ;
+            sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
+            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:control_system_suffix ] ;
+            sh:order 1 ;
+            sh:path narad:name ] ;
     sh:targetClass narad:SignalBinding .
 
 narad:SignalDefinitions a sh:NodeShape ;
     sh:closed true ;
     sh:description "Signal binding set scoped to a device type or device domain." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class narad:SignalBinding ;
-            sh:description "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path narad:signal_bindings ],
-        [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
             sh:path narad:name ],
+        [ sh:class narad:SignalBinding ;
+            sh:description "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path narad:signal_bindings ],
         [ sh:description "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)." ;
             sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "WarmCavity" "CavityGradient" "RFCavity" "Instrument" "Magnet" ) ;
             sh:maxCount 1 ;
@@ -814,7 +814,25 @@ narad:BeamlineElement a sh:NodeShape ;
     sh:closed true ;
     sh:description "A single element in a beamline with its kind and optional NARAD capability annotations." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class narad:ElementParamSet ;
+    sh:property [ sh:datatype xsd:anyURI ;
+            sh:description """NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.
+""" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path narad:is_instance_of ],
+        [ sh:class narad:InstanceSignalBinding ;
+            sh:description "Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path narad:instance_signal_bindings ],
+        [ sh:datatype xsd:float ;
+            sh:description "Physical length of the element in metres." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path narad:length ],
+        [ sh:class narad:ElementParamSet ;
             sh:description "Named physics-parameter blocks for this element (e.g. RFP, BendP, MagneticMultipoleP)." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
@@ -827,30 +845,12 @@ narad:BeamlineElement a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path narad:name ],
-        [ sh:datatype xsd:anyURI ;
-            sh:description """NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.
-""" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path narad:is_instance_of ],
         [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 5 ;
-            sh:path narad:description ],
-        [ sh:class narad:InstanceSignalBinding ;
-            sh:description "Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path narad:instance_signal_bindings ],
-        [ sh:datatype xsd:float ;
-            sh:description "Physical length of the element in metres." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path narad:length ] ;
+            sh:path narad:description ] ;
     sh:targetClass narad:BeamlineElement .
 
 narad:ControlSystem a sh:NodeShape ;
@@ -858,36 +858,36 @@ narad:ControlSystem a sh:NodeShape ;
     sh:description """A control system (e.g. EPICS) that manages device process variables. In the SSN graph a ControlSystem is a subsystem of the Facility.
 """ ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class narad:SystemCapability ;
-            sh:description """Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
+    sh:property [ sh:class narad:System ;
+            sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
 """ ;
             sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path narad:has_system_capability ],
+            sh:order 1 ;
+            sh:path narad:has_sub_system ],
         [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path narad:description ],
+        [ sh:description "High-level system type for classification and querying." ;
+            sh:in ( "Facility" "ControlSystem" "Magnet" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path narad:system_type ],
+        [ sh:class narad:SystemCapability ;
+            sh:description """Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
+""" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path narad:has_system_capability ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
-            sh:path narad:name ],
-        [ sh:class narad:System ;
-            sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
-""" ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path narad:has_sub_system ],
-        [ sh:description "High-level system type for classification and querying." ;
-            sh:in ( "Facility" "ControlSystem" "Magnet" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path narad:system_type ] ;
+            sh:path narad:name ] ;
     sh:targetClass narad:ControlSystem .
 
 narad:FacilitySystem a sh:NodeShape ;
@@ -895,11 +895,11 @@ narad:FacilitySystem a sh:NodeShape ;
     sh:description "Facility-specific signal binding configuration." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Detailed description of the entity." ;
+            sh:description "Signal naming convention template (e.g. <device><signal_code>)." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 8 ;
-            sh:path narad:description ],
+            sh:order 2 ;
+            sh:path narad:naming_convention ],
         [ sh:description "High-level system type for classification and querying." ;
             sh:in ( "Facility" "ControlSystem" "Magnet" ) ;
             sh:maxCount 1 ;
@@ -910,18 +910,23 @@ narad:FacilitySystem a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 3 ;
             sh:path narad:signal_definitions ],
-        [ sh:class narad:System ;
-            sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
-""" ;
-            sh:nodeKind sh:IRI ;
-            sh:order 5 ;
-            sh:path narad:has_sub_system ],
         [ sh:class narad:SystemCapability ;
             sh:description """Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
 """ ;
             sh:nodeKind sh:IRI ;
             sh:order 6 ;
             sh:path narad:has_system_capability ],
+        [ sh:class narad:FacilityIdentifier ;
+            sh:description "Globally unique identifier for the facility, with specified type and value." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path narad:facility_identifier ],
+        [ sh:class narad:System ;
+            sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
+""" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path narad:has_sub_system ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
@@ -929,17 +934,12 @@ narad:FacilitySystem a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 7 ;
             sh:path narad:name ],
-        [ sh:class narad:FacilityIdentifier ;
-            sh:description "Globally unique identifier for the facility, with specified type and value." ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path narad:facility_identifier ],
         [ sh:datatype xsd:string ;
-            sh:description "Signal naming convention template (e.g. <device><signal_code>)." ;
+            sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path narad:naming_convention ],
+            sh:order 8 ;
+            sh:path narad:description ],
         [ sh:class narad:ControlSystem ;
             sh:description "Identifier of the control system (e.g. epics)." ;
             sh:maxCount 1 ;
@@ -970,38 +970,31 @@ narad:ControlCapability a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 0 ;
             sh:path narad:device_type ],
-        [ sh:class narad:Signal ;
-            sh:description "Signals within a capability, keyed by a semantic signal name." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path narad:signals ],
         [ sh:datatype xsd:string ;
             sh:description "Detailed description of the entity." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
-            sh:path narad:description ] ;
+            sh:path narad:description ],
+        [ sh:class narad:Signal ;
+            sh:description "Signals within a capability, keyed by a semantic signal name." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path narad:signals ] ;
     sh:targetClass narad:ControlCapability .
 
 narad:System a sh:NodeShape ;
     sh:closed true ;
     sh:description """A physical, logical, or cyber-physical system involved in sensing, monitoring, control, or actuation. Broadly aligned to ssn:System.
 """ ;
-    sh:ignoredProperties ( narad:control_system rdf:type narad:signal_definitions narad:facility_identifier narad:naming_convention narad:device_type ) ;
-    sh:property [ sh:class narad:SystemCapability ;
-            sh:description """Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
+    sh:ignoredProperties ( narad:naming_convention narad:facility_identifier rdf:type narad:control_system narad:signal_definitions narad:device_type ) ;
+    sh:property [ sh:class narad:System ;
+            sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
 """ ;
             sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path narad:has_system_capability ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable name or local string key for the entity." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path narad:name ],
+            sh:order 1 ;
+            sh:path narad:has_sub_system ],
         [ sh:description "High-level system type for classification and querying." ;
             sh:in ( "Facility" "ControlSystem" "Magnet" ) ;
             sh:maxCount 1 ;
@@ -1013,12 +1006,19 @@ narad:System a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path narad:description ],
-        [ sh:class narad:System ;
-            sh:description """Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name or local string key for the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path narad:name ],
+        [ sh:class narad:SystemCapability ;
+            sh:description """Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
 """ ;
             sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path narad:has_sub_system ] ;
+            sh:order 2 ;
+            sh:path narad:has_system_capability ] ;
     sh:targetClass narad:System .
 
 narad:SystemCapability a sh:NodeShape ;
@@ -1027,6 +1027,12 @@ narad:SystemCapability a sh:NodeShape ;
 """ ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:description "Detailed description of the entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path narad:description ],
+        [ sh:datatype xsd:string ;
             sh:description "Human-readable name or local string key for the entity." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -1043,12 +1049,6 @@ narad:SystemCapability a sh:NodeShape ;
 """ ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path narad:for_property ],
-        [ sh:datatype xsd:string ;
-            sh:description "Detailed description of the entity." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path narad:description ] ;
+            sh:path narad:for_property ] ;
     sh:targetClass narad:SystemCapability .
 
