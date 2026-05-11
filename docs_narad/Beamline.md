@@ -182,7 +182,6 @@ attributes:
     owner: Beamline
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

@@ -22,8 +22,7 @@ Alias: signals
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [TypeSpecificCapability](TypeSpecificCapability.md) | An inline capability declared within a device-type profile that extends a gen... |  no  |
-| [Capability](Capability.md) | A named, shared grouping of semantically related signals for a control aspect... |  no  |
+| [ControlCapability](ControlCapability.md) | A reusable device-type control profile that extends a generic shared capabili... |  yes  |
 
 
 
@@ -74,7 +73,7 @@ from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signals
 domain_of:
-- Capability
+- ControlCapability
 range: Signal
 multivalued: true
 inlined: true

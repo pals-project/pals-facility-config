@@ -20,8 +20,11 @@ URI: [narad:ElementKindEnum](https://w3id.org/narad_linkml/schema/narad/ElementK
 | Dipole | None | Dipole bending magnet |
 | Quadrupole | None | Quadrupole focusing/defocusing magnet |
 | Solenoid | None | Solenoid magnet |
+| WarmCavity | None | Generic non-superconducting cavity |
+| CavityGradient | None | Accelerating or bunching cavity |
 | RFCavity | None | Radio-frequency accelerating or bunching cavity |
 | Instrument | None | Generic beam diagnostic instrument (halo monitor, viewer, etc |
+| Magnet | None | Generic powered magnet device (supertype for all magnet kinds) |
 
 
 
@@ -87,12 +90,21 @@ permissible_values:
   Solenoid:
     text: Solenoid
     description: Solenoid magnet.
+  WarmCavity:
+    text: WarmCavity
+    description: Generic non-superconducting cavity.
+  CavityGradient:
+    text: CavityGradient
+    description: Accelerating or bunching cavity.
   RFCavity:
     text: RFCavity
     description: Radio-frequency accelerating or bunching cavity.
   Instrument:
     text: Instrument
     description: Generic beam diagnostic instrument (halo monitor, viewer, etc.).
+  Magnet:
+    text: Magnet
+    description: Generic powered magnet device (supertype for all magnet kinds).
 
 ```
 </details>

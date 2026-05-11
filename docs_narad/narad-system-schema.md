@@ -3,8 +3,8 @@
 LinkML schema for representing NARAD control-system semantics, facility-level signal templates, and facility-specific instance bindings aligned with SSN, SSN-System, and SOSA ontologies.
 Main modeling layers:
   - NaradModel — top-level document containing narad_config, beamlines, and elements
-  - CapabilityLayer — reusable control-profile families, shared capabilities,
-    and device-type profiles
+  - CapabilityLayer — reusable control-profile families, shared capabilities
+  - ProfileLayer — device-type profiles that reuse shared capabilities and add type-specific ones
   - SignalLayer — facility-specific signal suffix templates organized by
     device domain and device type
   - Beamline / BeamlineElement — ordered machine layout plus applied profiles
@@ -26,10 +26,10 @@ System hierarchy:
 Capability hierarchy:
   - SystemCapability
     - MagnetCapability
-      - QuadrupoleCapability, CorrectorCapability, DipoleCapability, SolenoidCapability
-    - InstrumentCapability
-      - BPMCapability
-    - CavityGradientCapability
+      - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability
+    - InstrumentStatusReadbackCapability
+    - BPMPositionReadbackCapability
+    - CavityGradientControlCapability
 
 Signal modeling:
   - Signal — abstract control-system quantity
@@ -45,9 +45,8 @@ Serialization conventions:
   - type_signal_sets is a single structured container with explicit
     per-domain and per-device signal-set slots
 
-Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the facility-specific naming convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance (e.g. MQWK202.R). The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) is captured in the SignalBinding. 2. On the distinction between element_kind, capability_profile, and facility_element_type.
-  - element_kind (BeamlineElement.element_kind) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.
-  - capability_profile (BeamlineElement.capability_profile) is the specific control profile assigned to that element, which determines what capabilities and signals are relevant for it. This is a cross-reference to a CapabilityProfile defined in the capability layer.
+Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the facility-specific naming convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance (e.g. MQWK202.R). The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) is captured in the SignalBinding. 2. On the distinction between is_instance_of, capability_profile, and facility_element_type.
+  - is_instance_of (BeamlineElement.is_instance_of) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.
   - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
 3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
   - is_instance_of typically points to the rdf:type of the Procedure class that implements the signal binding, e.g. narad:narad:CavityGradientControlCapability.

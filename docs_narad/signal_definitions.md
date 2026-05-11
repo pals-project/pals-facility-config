@@ -3,7 +3,7 @@
 # Slot: signal_definitions 
 
 
-_Signal suffix templates for this facility._
+_Structured container for facility-specific signal suffix templates._
 
 
 
@@ -22,7 +22,7 @@ Alias: signal_definitions
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configuration |  no  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -32,6 +32,8 @@ Alias: signal_definitions
 ## Properties
 
 * Range: [SignalDefinitions](SignalDefinitions.md)
+
+* Multivalued: True
 
 
 
@@ -66,13 +68,15 @@ Alias: signal_definitions
 <details>
 ```yaml
 name: signal_definitions
-description: Signal suffix templates for this facility.
+description: Structured container for facility-specific signal suffix templates.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signal_definitions
 domain_of:
-- FacilityConfig
+- FacilitySystem
 range: SignalDefinitions
+multivalued: true
+inlined: true
 
 ```
 </details>

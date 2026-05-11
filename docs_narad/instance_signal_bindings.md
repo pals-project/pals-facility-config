@@ -3,7 +3,7 @@
 # Slot: instance_signal_bindings 
 
 
-_Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance.  These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding.  The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile._
+_Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile._
 
 
 
@@ -69,9 +69,9 @@ Alias: instance_signal_bindings
 ```yaml
 name: instance_signal_bindings
 description: Facility-specific bindings of signals to control-system interfaces (e.g.
-  EPICS PVs) for a specific beamline element instance.  These are the keyed by the
+  EPICS PVs) for a specific beamline element instance. These are the keyed by the
   semantic signal name (e.g. current_readback) rather than the control-system suffix,
-  which is captured in the SignalBinding.  The semantic signal name links the instance
+  which is captured in the SignalBinding. The semantic signal name links the instance
   binding to the abstract Signal definition and its place in the capability profile,
   while the SignalBinding captures the concrete implementations of the abstract SignalBindings
   referenced by the element's capability profile.

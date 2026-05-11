@@ -19,20 +19,49 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
  classDiagram
     class NaradConfig
     click NaradConfig href "../NaradConfig/"
-      NaradConfig : capability_layer
+      NaradConfig : control_capability_layer
         
           
     
         
         
-        NaradConfig --> "1" CapabilityLayer : capability_layer
-        click CapabilityLayer href "../CapabilityLayer/"
+        NaradConfig --> "1..*" ControlCapability : control_capability_layer
+        click ControlCapability href "../ControlCapability/"
     
 
         
-      NaradConfig : control_system
+      NaradConfig : deployed_system
         
-      NaradConfig : facility
+          
+    
+        
+        
+        NaradConfig --> "1" FacilitySystem : deployed_system
+        click FacilitySystem href "../FacilitySystem/"
+    
+
+        
+      NaradConfig : has_sub_system
+        
+          
+    
+        
+        
+        NaradConfig --> "1..*" ControlSystem : has_sub_system
+        click ControlSystem href "../ControlSystem/"
+    
+
+        
+      NaradConfig : instrument_layer
+        
+          
+    
+        
+        
+        NaradConfig --> "1..*" InstrumentSystem : instrument_layer
+        click InstrumentSystem href "../InstrumentSystem/"
+    
+
         
       NaradConfig : intent
         
@@ -64,9 +93,10 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
 | ---  | --- | --- | --- |
 | [schema_version](schema_version.md) | 1 <br/> [String](String.md) | Version of the NARAD schema used in this document | direct |
 | [intent](intent.md) | 0..1 <br/> [String](String.md) | A human-readable statement of the intended use or purpose of this NARAD confi... | direct |
-| [capability_layer](capability_layer.md) | 1 <br/> [CapabilityLayer](CapabilityLayer.md) | Capability-layer container for control profile families | direct |
-| [facility](facility.md) | 1 <br/> [String](String.md) | Identifier of the facility this configuration describes | direct |
-| [control_system](control_system.md) | 1 <br/> [String](String.md) | Identifier of the control system (e | direct |
+| [deployed_system](deployed_system.md) | 1 <br/> [FacilitySystem](FacilitySystem.md) | Identifier of the deployed system this configuration describes | direct |
+| [has_sub_system](has_sub_system.md) | 1..* <br/> [ControlSystem](ControlSystem.md) | Identifier of the control system (e | direct |
+| [control_capability_layer](control_capability_layer.md) | 1..* <br/> [ControlCapability](ControlCapability.md) | Control Capability definitions for this facility | direct |
+| [instrument_layer](instrument_layer.md) | 1..* <br/> [InstrumentSystem](InstrumentSystem.md) | Instrument Capability definitions keyed by capability name | direct |
 | [signal_layer](signal_layer.md) | 1 <br/> [SignalLayer](SignalLayer.md) | Signal-layer container for facility-specific signal bindings | direct |
 
 
@@ -106,7 +136,7 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
 | ---  | ---  |
 | self | narad:NaradConfig |
 | native | narad:NaradConfig |
-| broad | ssn:System |
+| broad | ssn:Deployment |
 
 
 
@@ -126,13 +156,14 @@ description: 'A top-level NARAD-system container for the: capability layer + sig
   layer.'
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 broad_mappings:
-- ssn:System
+- ssn:Deployment
 slots:
 - schema_version
 - intent
-- capability_layer
-- facility
-- control_system
+- deployed_system
+- has_sub_system
+- control_capability_layer
+- instrument_layer
 - signal_layer
 slot_usage:
   schema_version:
@@ -140,23 +171,26 @@ slot_usage:
     description: Version of the NARAD schema used in this document.
     range: string
     required: true
-  facility:
-    name: facility
-    description: Identifier of the facility this configuration describes.
-    range: string
+  deployed_system:
+    name: deployed_system
+    description: Identifier of the deployed system this configuration describes.
+    range: FacilitySystem
     required: true
-  control_system:
-    name: control_system
+    multivalued: false
+  has_sub_system:
+    name: has_sub_system
     description: Identifier of the control system (e.g. epics) this configuration
       describes.
-    range: string
+    range: ControlSystem
     required: true
-  capability_layer:
-    name: capability_layer
-    description: Capability-layer container for control profile families.
-    range: CapabilityLayer
+    multivalued: true
+  instrument_layer:
+    name: instrument_layer
+    description: Instrument Capability definitions keyed by capability name.
+    range: InstrumentSystem
     required: true
-    inlined: false
+    multivalued: true
+    inlined: true
   signal_layer:
     name: signal_layer
     description: Signal-layer container for facility-specific signal bindings.
@@ -176,30 +210,33 @@ description: 'A top-level NARAD-system container for the: capability layer + sig
   layer.'
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 broad_mappings:
-- ssn:System
+- ssn:Deployment
 slot_usage:
   schema_version:
     name: schema_version
     description: Version of the NARAD schema used in this document.
     range: string
     required: true
-  facility:
-    name: facility
-    description: Identifier of the facility this configuration describes.
-    range: string
+  deployed_system:
+    name: deployed_system
+    description: Identifier of the deployed system this configuration describes.
+    range: FacilitySystem
     required: true
-  control_system:
-    name: control_system
+    multivalued: false
+  has_sub_system:
+    name: has_sub_system
     description: Identifier of the control system (e.g. epics) this configuration
       describes.
-    range: string
+    range: ControlSystem
     required: true
-  capability_layer:
-    name: capability_layer
-    description: Capability-layer container for control profile families.
-    range: CapabilityLayer
+    multivalued: true
+  instrument_layer:
+    name: instrument_layer
+    description: Instrument Capability definitions keyed by capability name.
+    range: InstrumentSystem
     required: true
-    inlined: false
+    multivalued: true
+    inlined: true
   signal_layer:
     name: signal_layer
     description: Signal-layer container for facility-specific signal bindings.
@@ -229,42 +266,62 @@ attributes:
     domain_of:
     - NaradConfig
     range: string
-  capability_layer:
-    name: capability_layer
-    description: Capability-layer container for control profile families.
+  deployed_system:
+    name: deployed_system
+    description: Identifier of the deployed system this configuration describes.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: capability_layer
+    alias: deployed_system
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    range: CapabilityLayer
+    range: FacilitySystem
     required: true
-    inlined: false
-  facility:
-    name: facility
-    description: Identifier of the facility this configuration describes.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: facility
-    owner: NaradConfig
-    domain_of:
-    - NaradConfig
-    range: string
-    required: true
-  control_system:
-    name: control_system
+    multivalued: false
+  has_sub_system:
+    name: has_sub_system
     description: Identifier of the control system (e.g. epics) this configuration
       describes.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    exact_mappings:
+    - ssn-system:hasSubSystem
     rank: 1000
-    alias: control_system
+    domain: System
+    alias: has_sub_system
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    - FacilityConfig
-    range: string
+    - System
+    - InstrumentSystem
+    range: ControlSystem
     required: true
+    multivalued: true
+  control_capability_layer:
+    name: control_capability_layer
+    description: Control Capability definitions for this facility.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: control_capability_layer
+    owner: NaradConfig
+    domain_of:
+    - NaradConfig
+    range: ControlCapability
+    required: true
+    multivalued: true
+    inlined: true
+  instrument_layer:
+    name: instrument_layer
+    description: Instrument Capability definitions keyed by capability name.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: instrument_layer
+    owner: NaradConfig
+    domain_of:
+    - NaradConfig
+    range: InstrumentSystem
+    required: true
+    multivalued: true
+    inlined: true
   signal_layer:
     name: signal_layer
     description: Signal-layer container for facility-specific signal bindings.

@@ -3,7 +3,7 @@
 # Slot: signal_bindings 
 
 
-_Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device type._
+_Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set._
 
 
 
@@ -14,6 +14,15 @@ Alias: signal_bindings
 
 <!-- no inheritance hierarchy -->
 
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [SignalDefinitions](SignalDefinitions.md) | Signal binding set scoped to a device type or device domain |  yes  |
 
 
 
@@ -60,10 +69,12 @@ Alias: signal_bindings
 ```yaml
 name: signal_bindings
 description: Control-system-specific, e.g. EPICS, suffix definitions keyed by signal
-  name within a device type.
+  name within a device/domain set.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signal_bindings
+domain_of:
+- SignalDefinitions
 range: SignalBinding
 multivalued: true
 inlined: true

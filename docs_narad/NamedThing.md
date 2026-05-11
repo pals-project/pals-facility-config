@@ -21,14 +21,12 @@ URI: [narad:NamedThing](https://w3id.org/narad_linkml/schema/narad/NamedThing)
  classDiagram
     class NamedThing
     click NamedThing href "../NamedThing/"
-      NamedThing <|-- ControlProfileFamily
-        click ControlProfileFamily href "../ControlProfileFamily/"
-      NamedThing <|-- Capability
-        click Capability href "../Capability/"
-      NamedThing <|-- CapabilityProfile
-        click CapabilityProfile href "../CapabilityProfile/"
-      NamedThing <|-- FacilityConfig
-        click FacilityConfig href "../FacilityConfig/"
+      NamedThing <|-- ControlCapability
+        click ControlCapability href "../ControlCapability/"
+      NamedThing <|-- SignalDefinitions
+        click SignalDefinitions href "../SignalDefinitions/"
+      NamedThing <|-- SignalBinding
+        click SignalBinding href "../SignalBinding/"
       NamedThing <|-- Beamline
         click Beamline href "../Beamline/"
       NamedThing <|-- BeamlineElement
@@ -41,8 +39,6 @@ URI: [narad:NamedThing](https://w3id.org/narad_linkml/schema/narad/NamedThing)
         click Signal href "../Signal/"
       NamedThing <|-- InstanceSignalBinding
         click InstanceSignalBinding href "../InstanceSignalBinding/"
-      NamedThing <|-- ElementParamSet
-        click ElementParamSet href "../ElementParamSet/"
       
       NamedThing : description
         
@@ -57,17 +53,15 @@ URI: [narad:NamedThing](https://w3id.org/narad_linkml/schema/narad/NamedThing)
 
 ## Inheritance
 * **NamedThing**
-    * [ControlProfileFamily](ControlProfileFamily.md)
-    * [Capability](Capability.md)
-    * [CapabilityProfile](CapabilityProfile.md)
-    * [FacilityConfig](FacilityConfig.md)
+    * [ControlCapability](ControlCapability.md)
+    * [SignalDefinitions](SignalDefinitions.md)
+    * [SignalBinding](SignalBinding.md)
     * [Beamline](Beamline.md)
     * [BeamlineElement](BeamlineElement.md)
     * [System](System.md)
     * [SystemCapability](SystemCapability.md)
     * [Signal](Signal.md)
     * [InstanceSignalBinding](InstanceSignalBinding.md)
-    * [ElementParamSet](ElementParamSet.md)
 
 
 
@@ -163,7 +157,6 @@ attributes:
     owner: NamedThing
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

@@ -13,15 +13,6 @@ Alias: current_setpoint
 
 
 
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [MagnetSignalSet](MagnetSignalSet.md) | Shared magnet signal bindings |  no  |
-
-
-
-
 
 
 ## Properties
@@ -64,8 +55,6 @@ name: current_setpoint
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: current_setpoint
-domain_of:
-- MagnetSignalSet
 range: SignalBinding
 inlined: true
 

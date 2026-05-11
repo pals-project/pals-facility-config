@@ -1,6 +1,6 @@
 {
   "name": "narad-system-schema",
-  "description": "LinkML schema for representing facility control-system structures using NARAD domain classes aligned with SSN, SSN-System, and SOSA.\nClass hierarchy:\n  - System (ssn:System) \u2014 base for all physical/logical entities\n    - Facility \u2014 top-level facility (e.g. UITF); ssn-system:hasSubSystem \u2192 ControlSystem\n    - ControlSystem \u2014 the EPICS or other control system\n    - Magnet (ssn:System) \u2014 generic powered magnet\n      - Quadrupole, Corrector, Dipole, Solenoid\n    - Instrument (ssn:System) \u2014 generic beam diagnostic\n      - BPM\n    - RF_System (ssn:System)\n      - RFCavity\n\nCapability hierarchy (ssn-system:SystemCapability):\n  - SystemCapability \u2014 base; linked from System via ssn-system:hasSystemCapability\n    - MagnetCapability \u2192 QuadrupoleCapability, CorrectorCapability, DipoleCapability\n    - InstrumentCapability \u2192 BPMCapability\n    - CavityGradientCapability\n\nSignal alignment:\n  - Signal (broad: sosa:Property / ssn:Property) \u2014 abstract base\n    - ObservableSignal (exact: sosa:ObservableProperty) \u2014 readback, status\n    - ActuatableSignal (exact: sosa:ActuatableProperty) \u2014 setpoints, limits\n\nSignalBinding alignment:\n  - SignalBinding (exact sosa:Procedure) \u2014 facility-specific PV binding\n    ssn:forProperty \u2192 Signal\n    narad:isInstanceOf \u2192 rdf:type of the capability class\n",
+  "description": "LinkML schema for representing NARAD control-system semantics, facility-level signal templates, and facility-specific instance bindings aligned with SSN, SSN-System, and SOSA ontologies.\nMain modeling layers:\n  - NaradModel \u2014 top-level document containing narad_config, beamlines, and elements\n  - CapabilityLayer \u2014 reusable control-profile families, shared capabilities\n  - ProfileLayer \u2014 device-type profiles that reuse shared capabilities and add type-specific ones\n  - SignalLayer \u2014 facility-specific signal suffix templates organized by\n    device domain and device type\n  - Beamline / BeamlineElement \u2014 ordered machine layout plus applied profiles\n    and facility-specific instance bindings\n  - Element instances \u2014 individual beamline elements with applied profiles and instance signal\n    bindings\n\nSystem hierarchy:\n  - System\n    - ControlSystem\n    - Magnet\n      - Quadrupole, Corrector, Dipole, Solenoid\n    - Instrument\n      - BPM\n    - RFCavity\n    - Marker\n    - Drift\n\nCapability hierarchy:\n  - SystemCapability\n    - MagnetCapability\n      - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability\n    - InstrumentStatusReadbackCapability\n    - BPMPositionReadbackCapability\n    - CavityGradientControlCapability\n\nSignal modeling:\n  - Signal \u2014 abstract control-system quantity\n    - ObservableSignal \u2014 readback, constraint, and status quantities\n    - ActuatableSignal \u2014 writable/control setpoints\n  - SignalBinding \u2014 signal template or suffix definition in the signal layer\n  - InstanceSignalBinding \u2014 facility-specific PV binding attached to a beamline element\n\nSerialization conventions:\n  - beamlines are keyed by beamline name\n  - signals are keyed by semantic signal name\n  - instance_signal_bindings are keyed by semantic signal name\n  - type_signal_sets is a single structured container with explicit\n    per-domain and per-device signal-set slots\n\nAdditional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the facility-specific naming convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance (e.g. MQWK202.R). The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) is captured in the SignalBinding. 2. On the distinction between is_instance_of, capability_profile, and facility_element_type.\n  - is_instance_of (BeamlineElement.is_instance_of) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.\n  - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.\n3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: \n  - is_instance_of typically points to the rdf:type of the Procedure class that implements the signal binding, e.g. narad:narad:CavityGradientControlCapability.\n  - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:[ExampleFacilitySystem] (such as UITF).\n  - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:[ExampleControlSystem] (such as epics).\n4. Open and constrained vocabularies:\n  - ElementKindEnum and DeviceDomainEnum provide controlled vocabularies for key classification slots, but the schema is designed to be extensible with new enum values as needed.\n  - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional facility-specific parameters that don't fit into the predefined schema structure.\n",
   "id": "https://w3id.org/narad_linkml/schema/narad/system",
   "imports": [
     "linkml:types"
@@ -376,7 +376,7 @@
     {
       "name": "ElementKindEnum",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/ElementKindEnum",
-      "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports.",
+      "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "permissible_values": [
         {
@@ -408,33 +408,48 @@
           "description": "Solenoid magnet."
         },
         {
+          "text": "WarmCavity",
+          "description": "Generic non-superconducting cavity."
+        },
+        {
+          "text": "CavityGradient",
+          "description": "Accelerating or bunching cavity."
+        },
+        {
           "text": "RFCavity",
           "description": "Radio-frequency accelerating or bunching cavity."
         },
         {
           "text": "Instrument",
           "description": "Generic beam diagnostic instrument (halo monitor, viewer, etc.)."
+        },
+        {
+          "text": "Magnet",
+          "description": "Generic powered magnet device (supertype for all magnet kinds)."
         }
       ]
     },
     {
-      "name": "DeviceDomainEnum",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/DeviceDomainEnum",
-      "description": "High-level device domain for a control profile family.",
+      "name": "SystemTypeEnum",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/SystemTypeEnum",
+      "description": "High-level system type for classification and querying. This is a broad categorization that can be used for filtering or grouping systems without needing to traverse the has_sub_system and has_system_capability edges.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "permissible_values": [
         {
+          "text": "Facility",
+          "description": "A physical facility or installation (e.g. BTA, CEBAF, or UITF)."
+        },
+        {
+          "text": "ControlSystem",
+          "description": "A control system (e.g. epics) that manages device process variables."
+        },
+        {
           "text": "Magnet",
-          "description": "Magnet devices: dipoles, quadrupoles, correctors, solenoids."
-        },
-        {
-          "text": "Instrument",
-          "description": "Beam diagnostic instruments: BPMs, screens, viewers, etc."
-        },
-        {
-          "text": "RFCavity",
-          "description": "RF cavity and RF-related devices."
+          "description": "A powered magnet device/system (generic supertype for all magnet kinds)."
         }
+      ],
+      "inherits": [
+        "ElementKindEnum"
       ]
     },
     {
@@ -490,7 +505,7 @@
         },
         {
           "text": "readback",
-          "description": "A readable signal that reports a measured or monitored quantity.",
+          "description": "A readable signal that reports a measured or monitored quantity. Differs from status in that it typically indicates a continuous measurement (e.g. current readback, beam position) rather than discrete states.",
           "broad_mappings": [
             "sosa:ObservableProperty"
           ]
@@ -501,7 +516,7 @@
         },
         {
           "text": "status",
-          "description": "A signal reporting the device or system operational state.",
+          "description": "A signal reporting the device or system operational state. Differs from readback in that it typically indicates discrete states (e.g. fault, standby, ready) rather than a continuous measurement.",
           "broad_mappings": [
             "sosa:ObservableProperty"
           ]
@@ -563,10 +578,9 @@
       "description": "Detailed description of the entity.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/description",
-      "owner": "SignalBinding",
+      "owner": "NamedThing",
       "domain_of": [
-        "NamedThing",
-        "SignalBinding"
+        "NamedThing"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -581,12 +595,23 @@
       ],
       "domain": "System",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/has_sub_system",
-      "owner": "System",
+      "owner": "InstrumentSystem",
       "domain_of": [
-        "System"
+        "NaradConfig",
+        "System",
+        "InstrumentSystem"
       ],
       "range": "System",
       "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "control_capability",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/control_capability",
+      "description": "Cross-reference to the specific control capability applied to this element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/control_capability",
+      "range": "ControlCapability",
       "@type": "SlotDefinition"
     },
     {
@@ -599,9 +624,10 @@
       ],
       "domain": "System",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/has_system_capability",
-      "owner": "System",
+      "owner": "InstrumentSystem",
       "domain_of": [
-        "System"
+        "System",
+        "InstrumentSystem"
       ],
       "range": "SystemCapability",
       "multivalued": true,
@@ -616,18 +642,19 @@
         "http://www.w3.org/ns/ssn/forProperty"
       ],
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/for_property",
-      "owner": "SystemCapability",
+      "owner": "InstanceSignalBinding",
       "domain_of": [
-        "SystemCapability"
+        "SystemCapability",
+        "InstanceSignalBinding"
       ],
-      "range": "Signal",
+      "range": "string",
       "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "is_property_of",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/is_property_of",
-      "description": "Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph.\n",
+      "description": "Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph. Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system).\n",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "broad_mappings": [
         "http://www.w3.org/ns/ssn/isPropertyOf"
@@ -660,7 +687,7 @@
     {
       "name": "is_instance_of",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/is_instance_of",
-      "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf.\n",
+      "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.\n",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "exact_mappings": [
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
@@ -668,10 +695,27 @@
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/is_instance_of",
       "owner": "InstanceSignalBinding",
       "domain_of": [
+        "BeamlineElement",
         "InstanceSignalBinding"
       ],
       "range": "uriorcurie",
       "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "subclass_of",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/subclass_of",
+      "description": "-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "exact_mappings": [
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+      ],
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/subclass_of",
+      "owner": "ControlCapability",
+      "domain_of": [
+        "ControlCapability"
+      ],
+      "range": "ControlCapability",
       "@type": "SlotDefinition"
     },
     {
@@ -703,7 +747,7 @@
     {
       "name": "beamlines",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/beamlines",
-      "description": "Ordered beamline definitions keyed by beamline name.",
+      "description": "A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/beamlines",
       "owner": "NaradModel",
@@ -718,7 +762,7 @@
     {
       "name": "elements",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/elements",
-      "description": "Beamline element definitions referenced by name from beamline sequences.",
+      "description": "Beamline element definitions referenced by name from beamline sequences. Serializes as a keyed map by element name.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/elements",
       "owner": "NaradModel",
@@ -763,16 +807,29 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "facility",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/facility",
-      "description": "Identifier of the facility this configuration describes.",
+      "name": "deployed_system",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/deployed_system",
+      "description": "Identifier of the deployed system this configuration describes.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/facility",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/deployed_system",
       "owner": "NaradConfig",
       "domain_of": [
         "NaradConfig"
       ],
-      "range": "string",
+      "range": "FacilitySystem",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "system_type",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/system_type",
+      "description": "High-level system type for classification and querying.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/system_type",
+      "owner": "System",
+      "domain_of": [
+        "System"
+      ],
+      "range": "SystemTypeEnum",
       "@type": "SlotDefinition"
     },
     {
@@ -781,12 +838,11 @@
       "description": "Identifier of the control system (e.g. epics).",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/control_system",
-      "owner": "FacilityConfig",
+      "owner": "FacilitySystem",
       "domain_of": [
-        "NaradConfig",
-        "FacilityConfig"
+        "FacilitySystem"
       ],
-      "range": "string",
+      "range": "ControlSystem",
       "@type": "SlotDefinition"
     },
     {
@@ -795,41 +851,56 @@
       "description": "Signal naming convention template (e.g. <device><signal_code>).",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/naming_convention",
-      "owner": "FacilityConfig",
+      "owner": "FacilitySystem",
       "domain_of": [
-        "FacilityConfig"
+        "FacilitySystem"
       ],
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "capability_layer",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/capability_layer",
-      "description": "Capability-layer container for profile families.",
+      "name": "control_capability_layer",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/control_capability_layer",
+      "description": "Control Capability definitions for this facility.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/capability_layer",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/control_capability_layer",
       "owner": "NaradConfig",
       "domain_of": [
         "NaradConfig"
       ],
-      "range": "CapabilityLayer",
+      "range": "ControlCapability",
+      "required": true,
+      "multivalued": true,
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "signal_layer",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/signal_layer",
-      "description": "Signal-layer container for facility-specific signal bindings.",
+      "name": "control_capabilities",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/control_capabilities",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/signal_layer",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/control_capabilities",
+      "owner": "CapabilityLayer",
+      "domain_of": [
+        "CapabilityLayer"
+      ],
+      "range": "ControlCapability",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "instrument_layer",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/instrument_layer",
+      "description": "Instrument definitions for this facility.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/instrument_layer",
       "owner": "NaradConfig",
       "domain_of": [
         "NaradConfig"
       ],
-      "range": "SignalLayer",
+      "range": "InstrumentSystem",
+      "multivalued": true,
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -842,57 +913,60 @@
       "domain_of": [
         "SignalLayer"
       ],
-      "range": "FacilityConfig",
+      "range": "FacilitySystem",
       "multivalued": true,
       "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "signal_layer",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/signal_layer",
+      "description": "Signal suffix templates for this facility.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/signal_layer",
+      "owner": "NaradConfig",
+      "domain_of": [
+        "NaradConfig"
+      ],
+      "range": "SignalLayer",
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "signal_definitions",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/signal_definitions",
-      "description": "Signal suffix templates for this facility.",
+      "description": "Structured container for facility-specific signal suffix templates.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/signal_definitions",
-      "owner": "FacilityConfig",
+      "owner": "FacilitySystem",
       "domain_of": [
-        "FacilityConfig"
+        "FacilitySystem"
       ],
       "range": "SignalDefinitions",
+      "multivalued": true,
       "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "type_signal_sets",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/type_signal_sets",
-      "description": "Signal suffix groups keyed by device type or device domain name. Domain-level keys cover signals shared across all types in that domain; device-type keys are type-specific.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/type_signal_sets",
-      "owner": "SignalDefinitions",
-      "domain_of": [
-        "SignalDefinitions"
-      ],
-      "range": "TypeSignalSet",
-      "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "signal_bindings",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/signal_bindings",
-      "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device type.",
+      "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/signal_bindings",
+      "owner": "SignalDefinitions",
+      "domain_of": [
+        "SignalDefinitions"
+      ],
       "range": "SignalBinding",
       "multivalued": true,
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "instance_signal_bindings",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/instance_signal_bindings",
-      "description": "Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.",
+      "description": "Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/instance_signal_bindings",
       "owner": "BeamlineElement",
@@ -902,118 +976,6 @@
       "range": "InstanceSignalBinding",
       "multivalued": true,
       "inlined": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "capability_profile_family",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/capability_profile_family",
-      "description": "Cross-reference to the control profile family for this element.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/capability_profile_family",
-      "owner": "BeamlineElement",
-      "domain_of": [
-        "BeamlineElement"
-      ],
-      "range": "ControlProfileFamily",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "capability_profile",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/capability_profile",
-      "description": "Cross-reference to the specific capability profile applied to this element.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/capability_profile",
-      "owner": "BeamlineElement",
-      "domain_of": [
-        "BeamlineElement"
-      ],
-      "range": "CapabilityProfile",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "profiles",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/profiles",
-      "description": "Control profile families keyed by family name.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/profiles",
-      "owner": "CapabilityLayer",
-      "domain_of": [
-        "CapabilityLayer"
-      ],
-      "range": "ControlProfileFamily",
-      "multivalued": true,
-      "inlined": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "shared_capabilities",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/shared_capabilities",
-      "description": "Named shared capabilities reused by profile types in a family.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/shared_capabilities",
-      "owner": "ControlProfileFamily",
-      "domain_of": [
-        "ControlProfileFamily"
-      ],
-      "range": "Capability",
-      "multivalued": true,
-      "inlined": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "type_profiles",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/type_profiles",
-      "description": "Device-type profile definitions for this family, keyed by profile name.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/type_profiles",
-      "owner": "ControlProfileFamily",
-      "domain_of": [
-        "ControlProfileFamily"
-      ],
-      "range": "CapabilityProfile",
-      "multivalued": true,
-      "inlined": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "inherits_shared_capabilities",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/inherits_shared_capabilities",
-      "description": "Shared capabilities inherited by this profile, cross-referenced by name.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/inherits_shared_capabilities",
-      "owner": "CapabilityProfile",
-      "domain_of": [
-        "CapabilityProfile"
-      ],
-      "range": "Capability",
-      "multivalued": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "type_specific_capabilities",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/type_specific_capabilities",
-      "description": "Type-specific capabilities declared directly in a profile.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/type_specific_capabilities",
-      "owner": "CapabilityProfile",
-      "domain_of": [
-        "CapabilityProfile"
-      ],
-      "range": "TypeSpecificCapability",
-      "multivalued": true,
-      "inlined": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "inherits_from",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/inherits_from",
-      "description": "Explicit cross-reference from a TypeSpecificCapability to the generic shared Capability it extends. Makes the \"type-specific inherits generic\" relationship machine-readable and navigable.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "broad_mappings": [
-        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-      ],
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/inherits_from",
-      "range": "Capability",
       "@type": "SlotDefinition"
     },
     {
@@ -1040,12 +1002,12 @@
     {
       "name": "signals",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/signals",
-      "description": "Signals within a capability, keyed by signal name.",
+      "description": "Signals within a capability, keyed by a semantic signal name.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/signals",
-      "owner": "Capability",
+      "owner": "ControlCapability",
       "domain_of": [
-        "Capability"
+        "ControlCapability"
       ],
       "range": "Signal",
       "multivalued": true,
@@ -1060,38 +1022,12 @@
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/device_type",
       "owner": "SystemCapability",
       "domain_of": [
-        "CapabilityProfile",
+        "ControlCapability",
+        "SignalDefinitions",
+        "InstrumentSystem",
         "SystemCapability"
       ],
       "range": "ElementKindEnum",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "device_domain",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/device_domain",
-      "description": "High-level device domain that this profile family governs.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/device_domain",
-      "owner": "ControlProfileFamily",
-      "domain_of": [
-        "ControlProfileFamily"
-      ],
-      "range": "DeviceDomainEnum",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "is_abstract",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/is_abstract",
-      "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/is_abstract",
-      "ifabsent": "false",
-      "owner": "SystemCapability",
-      "domain_of": [
-        "CapabilityProfile",
-        "SystemCapability"
-      ],
-      "range": "boolean",
       "@type": "SlotDefinition"
     },
     {
@@ -1163,107 +1099,12 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "magnet_signals",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/magnet_signals",
-      "description": "Shared magnet signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/magnet_signals",
-      "owner": "TypeSignalSet",
-      "domain_of": [
-        "TypeSignalSet"
-      ],
-      "range": "MagnetSignalSet",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "quadrupole_signals",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/quadrupole_signals",
-      "description": "Quadrupole-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/quadrupole_signals",
-      "owner": "TypeSignalSet",
-      "domain_of": [
-        "TypeSignalSet"
-      ],
-      "range": "QuadrupoleSignalSet",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "corrector_signals",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/corrector_signals",
-      "description": "Corrector-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/corrector_signals",
-      "owner": "TypeSignalSet",
-      "domain_of": [
-        "TypeSignalSet"
-      ],
-      "range": "CorrectorSignalSet",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "dipole_signals",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/dipole_signals",
-      "description": "Dipole-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/dipole_signals",
-      "owner": "TypeSignalSet",
-      "domain_of": [
-        "TypeSignalSet"
-      ],
-      "range": "DipoleSignalSet",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "bpm_signals",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/bpm_signals",
-      "description": "BPM-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/bpm_signals",
-      "owner": "TypeSignalSet",
-      "domain_of": [
-        "TypeSignalSet"
-      ],
-      "range": "BPMSignalSet",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "rfcavity_signals",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/rfcavity_signals",
-      "description": "RF cavity-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/rfcavity_signals",
-      "owner": "TypeSignalSet",
-      "domain_of": [
-        "TypeSignalSet"
-      ],
-      "range": "RFCavitySignalSet",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "current_setpoint",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/current_setpoint",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/current_setpoint",
-      "owner": "MagnetSignalSet",
-      "domain_of": [
-        "MagnetSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1271,13 +1112,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/current_readback",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/current_readback",
-      "owner": "MagnetSignalSet",
-      "domain_of": [
-        "MagnetSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1285,13 +1121,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/current_min",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/current_min",
-      "owner": "MagnetSignalSet",
-      "domain_of": [
-        "MagnetSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1299,13 +1130,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/current_max",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/current_max",
-      "owner": "MagnetSignalSet",
-      "domain_of": [
-        "MagnetSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1313,13 +1139,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/strength_setpoint",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/strength_setpoint",
-      "owner": "QuadrupoleSignalSet",
-      "domain_of": [
-        "QuadrupoleSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1327,13 +1148,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/kick_setpoint",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/kick_setpoint",
-      "owner": "CorrectorSignalSet",
-      "domain_of": [
-        "CorrectorSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1341,13 +1157,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/field_setpoint",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/field_setpoint",
-      "owner": "DipoleSignalSet",
-      "domain_of": [
-        "DipoleSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1355,13 +1166,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/horizontal_beam_position",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/horizontal_beam_position",
-      "owner": "BPMSignalSet",
-      "domain_of": [
-        "BPMSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1369,13 +1175,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/vertical_beam_position",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/vertical_beam_position",
-      "owner": "BPMSignalSet",
-      "domain_of": [
-        "BPMSignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1383,13 +1184,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/gradient_setpoint",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/gradient_setpoint",
-      "owner": "RFCavitySignalSet",
-      "domain_of": [
-        "RFCavitySignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1397,13 +1193,8 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/gradient_readback",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/gradient_readback",
-      "owner": "RFCavitySignalSet",
-      "domain_of": [
-        "RFCavitySignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1411,21 +1202,14 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/status",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/status",
-      "owner": "RFCavitySignalSet",
-      "domain_of": [
-        "MagnetSignalSet",
-        "BPMSignalSet",
-        "RFCavitySignalSet"
-      ],
       "range": "SignalBinding",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "line",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/line",
-      "description": "Ordered sequence of cross-referenced element names forming a beamline.",
+      "description": "Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/line",
       "owner": "Beamline",
@@ -1445,10 +1229,6 @@
         "kind"
       ],
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/element_kind",
-      "owner": "BeamlineElement",
-      "domain_of": [
-        "BeamlineElement"
-      ],
       "range": "ElementKindEnum",
       "@type": "SlotDefinition"
     },
@@ -1476,7 +1256,6 @@
         "BeamlineElement"
       ],
       "range": "ElementParamSet",
-      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -1487,9 +1266,9 @@
       "description": "Facility-specific element parameters (type designation, model name, open property map).",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/facility_param_set",
-      "owner": "BeamlineElement",
+      "owner": "ElementParamSet",
       "domain_of": [
-        "BeamlineElement"
+        "ElementParamSet"
       ],
       "range": "FacilityParamSet",
       "inlined": true,
@@ -1499,7 +1278,7 @@
     {
       "name": "properties",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/properties",
-      "description": "Open-ended key-value property map for element-specific or facility-specific parameters.",
+      "description": "Intentionally open-ended key-value property map for element-specific or facility-specific parameters.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/properties",
       "owner": "FacilityParamSet",
@@ -1650,9 +1429,9 @@
       "description": "Globally unique identifier for the facility, with specified type and value.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slot_uri": "https://w3id.org/narad_linkml/schema/narad/facility_identifier",
-      "owner": "FacilityConfig",
+      "owner": "FacilitySystem",
       "domain_of": [
-        "FacilityConfig"
+        "FacilitySystem"
       ],
       "range": "FacilityIdentifier",
       "multivalued": true,
@@ -1718,62 +1497,66 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "NaradConfig_facility",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/facility",
-      "description": "Identifier of the facility this configuration describes.",
+      "name": "NaradConfig_deployed_system",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/deployed_system",
+      "description": "Identifier of the deployed system this configuration describes.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "facility",
+      "is_a": "deployed_system",
       "domain": "NaradConfig",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/facility",
-      "alias": "facility",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/deployed_system",
+      "alias": "deployed_system",
       "owner": "NaradConfig",
       "domain_of": [
         "NaradConfig"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "facility",
-      "range": "string",
+      "usage_slot_name": "deployed_system",
+      "range": "FacilitySystem",
       "required": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "NaradConfig_control_system",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/control_system",
+      "name": "NaradConfig_has_sub_system",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/has_sub_system",
       "description": "Identifier of the control system (e.g. epics) this configuration describes.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "control_system",
+      "exact_mappings": [
+        "http://www.w3.org/ns/ssn/systems/hasSubSystem"
+      ],
+      "is_a": "has_sub_system",
       "domain": "NaradConfig",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/control_system",
-      "alias": "control_system",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/has_sub_system",
+      "alias": "has_sub_system",
       "owner": "NaradConfig",
       "domain_of": [
         "NaradConfig"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "control_system",
-      "range": "string",
+      "usage_slot_name": "has_sub_system",
+      "range": "ControlSystem",
       "required": true,
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "NaradConfig_capability_layer",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/capability_layer",
-      "description": "Capability-layer container for control profile families.",
+      "name": "NaradConfig_instrument_layer",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/instrument_layer",
+      "description": "Instrument Capability definitions keyed by capability name.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "capability_layer",
+      "is_a": "instrument_layer",
       "domain": "NaradConfig",
-      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/capability_layer",
-      "alias": "capability_layer",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/instrument_layer",
+      "alias": "instrument_layer",
       "owner": "NaradConfig",
       "domain_of": [
         "NaradConfig"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "capability_layer",
-      "range": "CapabilityLayer",
+      "usage_slot_name": "instrument_layer",
+      "range": "InstrumentSystem",
       "required": true,
+      "multivalued": true,
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1794,7 +1577,69 @@
       "range": "SignalLayer",
       "required": true,
       "inlined": true,
-      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ControlCapability_signals",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/signals",
+      "description": "Signals within a capability, keyed by a semantic signal name.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "is_a": "signals",
+      "domain": "ControlCapability",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/signals",
+      "alias": "signals",
+      "owner": "ControlCapability",
+      "domain_of": [
+        "ControlCapability"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "signals",
+      "range": "Signal",
+      "required": true,
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "SignalDefinitions_signal_bindings",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/signal_bindings",
+      "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "is_a": "signal_bindings",
+      "domain": "SignalDefinitions",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/signal_bindings",
+      "alias": "signal_bindings",
+      "owner": "SignalDefinitions",
+      "domain_of": [
+        "SignalDefinitions"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "signal_bindings",
+      "range": "SignalBinding",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BeamlineElement_is_instance_of",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/is_instance_of",
+      "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.\n",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "exact_mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "is_a": "is_instance_of",
+      "domain": "BeamlineElement",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/is_instance_of",
+      "alias": "is_instance_of",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "is_instance_of",
+      "range": "uriorcurie",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1817,6 +1662,8 @@
       "usage_slot_name": "has_sub_system",
       "range": "System",
       "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1834,6 +1681,53 @@
       "owner": "System",
       "domain_of": [
         "System"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "has_system_capability",
+      "range": "SystemCapability",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "InstrumentSystem_has_sub_system",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/has_sub_system",
+      "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "exact_mappings": [
+        "http://www.w3.org/ns/ssn/systems/hasSubSystem"
+      ],
+      "is_a": "System_has_sub_system",
+      "domain": "InstrumentSystem",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/has_sub_system",
+      "alias": "has_sub_system",
+      "owner": "InstrumentSystem",
+      "domain_of": [
+        "InstrumentSystem"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "has_sub_system",
+      "range": "System",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "InstrumentSystem_has_system_capability",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/has_system_capability",
+      "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "exact_mappings": [
+        "http://www.w3.org/ns/ssn/systems/hasSystemCapability"
+      ],
+      "is_a": "System_has_system_capability",
+      "domain": "InstrumentSystem",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/has_system_capability",
+      "alias": "has_system_capability",
+      "owner": "InstrumentSystem",
+      "domain_of": [
+        "InstrumentSystem"
       ],
       "is_usage_slot": true,
       "usage_slot_name": "has_system_capability",
@@ -1859,14 +1753,14 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "for_property",
-      "range": "Signal",
+      "range": "string",
       "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "InstanceSignalBinding_is_instance_of",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/is_instance_of",
-      "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf.\n",
+      "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.\n",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "exact_mappings": [
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
@@ -1905,13 +1799,12 @@
       "is_usage_slot": true,
       "usage_slot_name": "is_hosted_by",
       "range": "uriorcurie",
-      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "InstanceSignalBinding_is_property_of",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/is_property_of",
-      "description": "Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph.\n",
+      "description": "Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph. Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system).\n",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "broad_mappings": [
         "http://www.w3.org/ns/ssn/isPropertyOf"
@@ -1927,6 +1820,28 @@
       "is_usage_slot": true,
       "usage_slot_name": "is_property_of",
       "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "InstanceSignalBinding_for_property",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/for_property",
+      "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "exact_mappings": [
+        "http://www.w3.org/ns/ssn/forProperty"
+      ],
+      "is_a": "for_property",
+      "domain": "InstanceSignalBinding",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/for_property",
+      "alias": "for_property",
+      "owner": "InstanceSignalBinding",
+      "domain_of": [
+        "InstanceSignalBinding"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "for_property",
+      "range": "uriorcurie",
+      "multivalued": true,
       "@type": "SlotDefinition"
     }
   ],
@@ -1963,17 +1878,18 @@
     {
       "name": "NaradConfig",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/NaradConfig",
-      "description": "NARAD configuration block: capability layer + signal layer.",
+      "description": "A top-level NARAD-system container for the: capability layer + signal layer.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "broad_mappings": [
-        "ssn:System"
+        "ssn:Deployment"
       ],
       "slots": [
         "NaradConfig_schema_version",
         "intent",
-        "NaradConfig_capability_layer",
-        "NaradConfig_facility",
-        "NaradConfig_control_system",
+        "NaradConfig_deployed_system",
+        "NaradConfig_has_sub_system",
+        "control_capability_layer",
+        "NaradConfig_instrument_layer",
         "NaradConfig_signal_layer"
       ],
       "slot_usage": {},
@@ -1986,75 +1902,27 @@
       "description": "Capability-layer container for control profile families.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slots": [
-        "profiles"
+        "control_capabilities"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/CapabilityLayer",
       "@type": "ClassDefinition"
     },
     {
-      "name": "ControlProfileFamily",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily",
-      "description": "A reusable family of control profiles sharing common semantics and structure (e.g. MagnetCurrentControlProfileFamily).",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "NamedThing",
-      "slots": [
-        "name",
-        "description",
-        "device_domain",
-        "shared_capabilities",
-        "type_profiles"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/ControlProfileFamily",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Capability",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/Capability",
-      "description": "A named, shared grouping of semantically related signals for a control aspect (e.g. MagnetCurrentControlCapability).",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "NamedThing",
-      "slots": [
-        "name",
-        "description",
-        "signals"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/Capability",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "TypeSpecificCapability",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/TypeSpecificCapability",
-      "description": "An inline capability declared within a device-type profile that extends a generic shared Capability. The explicit link to the shared Capability being extended is given by inherits_from. Adds type-specific signals on top of those already defined in the referenced shared Capability.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "Capability",
-      "slots": [
-        "name",
-        "description",
-        "signals"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/TypeSpecificCapability",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "CapabilityProfile",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/CapabilityProfile",
-      "description": "A device-type profile that reuses shared capabilities and adds type-specific ones (e.g. QuadrupoleProfile).",
+      "name": "ControlCapability",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/ControlCapability",
+      "description": "A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "is_a": "NamedThing",
       "slots": [
         "name",
         "description",
         "device_type",
-        "is_abstract",
-        "inherits_shared_capabilities",
-        "type_specific_capabilities"
+        "subclass_of",
+        "ControlCapability_signals"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/CapabilityProfile",
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/ControlCapability",
       "@type": "ClassDefinition"
     },
     {
@@ -2070,21 +1938,24 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "FacilityConfig",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/FacilityConfig",
+      "name": "FacilitySystem",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/FacilitySystem",
       "description": "Facility-specific signal binding configuration.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "NamedThing",
+      "is_a": "System",
       "slots": [
         "name",
         "description",
+        "system_type",
+        "System_has_sub_system",
+        "System_has_system_capability",
         "facility_identifier",
         "control_system",
         "naming_convention",
         "signal_definitions"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/FacilityConfig",
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/FacilitySystem",
       "@type": "ClassDefinition"
     },
     {
@@ -2103,10 +1974,14 @@
     {
       "name": "SignalDefinitions",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/SignalDefinitions",
-      "description": "EPICS signal suffix templates keyed by device type or device domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types in that domain; device-type keys are type-specific.",
+      "description": "Signal binding set scoped to a device type or device domain.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "is_a": "NamedThing",
       "slots": [
-        "type_signal_sets"
+        "name",
+        "description",
+        "device_type",
+        "SignalDefinitions_signal_bindings"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/SignalDefinitions",
@@ -2115,9 +1990,11 @@
     {
       "name": "SignalBinding",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/SignalBinding",
-      "description": "A named EPICS suffix definition for one semantic signal.",
+      "description": "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
+      "is_a": "NamedThing",
       "slots": [
+        "name",
         "description",
         "control_system_suffix"
       ],
@@ -2126,106 +2003,9 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "TypeSignalSet",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/TypeSignalSet",
-      "description": "Explicit signal binding groups keyed by device domain or device type.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slots": [
-        "magnet_signals",
-        "quadrupole_signals",
-        "corrector_signals",
-        "dipole_signals",
-        "bpm_signals",
-        "rfcavity_signals"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/TypeSignalSet",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "MagnetSignalSet",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/MagnetSignalSet",
-      "description": "Shared magnet signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slots": [
-        "current_setpoint",
-        "current_readback",
-        "current_min",
-        "current_max",
-        "status"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/MagnetSignalSet",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "QuadrupoleSignalSet",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/QuadrupoleSignalSet",
-      "description": "Quadrupole-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slots": [
-        "strength_setpoint"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/QuadrupoleSignalSet",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "CorrectorSignalSet",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/CorrectorSignalSet",
-      "description": "Corrector-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slots": [
-        "kick_setpoint"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/CorrectorSignalSet",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "DipoleSignalSet",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/DipoleSignalSet",
-      "description": "Dipole-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slots": [
-        "field_setpoint"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/DipoleSignalSet",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "BPMSignalSet",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/BPMSignalSet",
-      "description": "BPM-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slots": [
-        "horizontal_beam_position",
-        "vertical_beam_position",
-        "status"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/BPMSignalSet",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "RFCavitySignalSet",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/RFCavitySignalSet",
-      "description": "RF cavity-specific signal bindings.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "slots": [
-        "gradient_setpoint",
-        "gradient_readback",
-        "status"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/RFCavitySignalSet",
-      "@type": "ClassDefinition"
-    },
-    {
       "name": "Beamline",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/Beamline",
-      "description": "An ordered sequence of beamline elements defining a beam path.",
+      "description": "A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "is_a": "NamedThing",
       "slots": [
@@ -2247,13 +2027,10 @@
       "slots": [
         "name",
         "description",
-        "element_kind",
+        "BeamlineElement_is_instance_of",
         "length",
-        "capability_profile_family",
-        "capability_profile",
         "instance_signal_bindings",
-        "param_set",
-        "facility_param_set"
+        "param_set"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/BeamlineElement",
@@ -2271,6 +2048,7 @@
       "slots": [
         "name",
         "description",
+        "system_type",
         "System_has_sub_system",
         "System_has_system_capability"
       ],
@@ -2290,6 +2068,7 @@
       "slots": [
         "name",
         "description",
+        "system_type",
         "System_has_sub_system",
         "System_has_system_capability"
       ],
@@ -2298,9 +2077,9 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "Magnet",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/Magnet",
-      "description": "A powered magnet device (generic supertype for all magnet kinds).",
+      "name": "InstrumentSystem",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/InstrumentSystem",
+      "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.\n",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "exact_mappings": [
         "ssn:System"
@@ -2309,75 +2088,15 @@
       "slots": [
         "name",
         "description",
-        "System_has_sub_system",
-        "System_has_system_capability"
+        "system_type",
+        "device_type",
+        "has_sub_system",
+        "has_system_capability",
+        "InstrumentSystem_has_sub_system",
+        "InstrumentSystem_has_system_capability"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/Magnet",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Quadrupole",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/Quadrupole",
-      "description": "A quadrupole focusing/defocusing magnet.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "Magnet",
-      "slots": [
-        "name",
-        "description",
-        "System_has_sub_system",
-        "System_has_system_capability"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/Quadrupole",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Corrector",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/Corrector",
-      "description": "A dipole corrector magnet for orbit correction.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "Magnet",
-      "slots": [
-        "name",
-        "description",
-        "System_has_sub_system",
-        "System_has_system_capability"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/Corrector",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Dipole",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/Dipole",
-      "description": "A dipole bending magnet.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "Magnet",
-      "slots": [
-        "name",
-        "description",
-        "System_has_sub_system",
-        "System_has_system_capability"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/Dipole",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Solenoid",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/Solenoid",
-      "description": "A solenoid magnet.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "Magnet",
-      "slots": [
-        "name",
-        "description",
-        "System_has_sub_system",
-        "System_has_system_capability"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/Solenoid",
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/InstrumentSystem",
       "@type": "ClassDefinition"
     },
     {
@@ -2392,59 +2111,12 @@
       "slots": [
         "name",
         "description",
+        "system_type",
         "System_has_sub_system",
         "System_has_system_capability"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/Instrument",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "BPM",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/BPM",
-      "description": "A Beam Position Monitor.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "Instrument",
-      "slots": [
-        "name",
-        "description",
-        "System_has_sub_system",
-        "System_has_system_capability"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/BPM",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "RFCavity",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/RFCavity",
-      "description": "A radio-frequency accelerating or bunching cavity.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "System",
-      "slots": [
-        "name",
-        "description",
-        "System_has_sub_system",
-        "System_has_system_capability"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/RFCavity",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Marker",
-      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/Marker",
-      "description": "A zero-length reference point, drift space, or survey marker.",
-      "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "System",
-      "slots": [
-        "name",
-        "description",
-        "System_has_sub_system",
-        "System_has_system_capability"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/narad_linkml/schema/narad/Marker",
       "@type": "ClassDefinition"
     },
     {
@@ -2460,8 +2132,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/SystemCapability",
@@ -2477,8 +2148,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/MagnetCapability",
@@ -2494,8 +2164,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/QuadrupoleCapability",
@@ -2511,8 +2180,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/CorrectorCapability",
@@ -2528,8 +2196,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/DipoleCapability",
@@ -2545,8 +2212,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/SolenoidCapability",
@@ -2562,8 +2228,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/InstrumentCapability",
@@ -2579,8 +2244,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/BPMCapability",
@@ -2596,8 +2260,7 @@
         "name",
         "description",
         "SystemCapability_for_property",
-        "device_type",
-        "is_abstract"
+        "device_type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/CavityGradientCapability",
@@ -2682,16 +2345,18 @@
       "description": "A facility-specific binding between a NARAD Signal and an implementation interface (e.g. an EPICS process variable). Modeled as sosa:Sensor because it describes how a signal is observed, monitored, or actuated. ssn:forProperty \u2192 Signal; narad:isInstanceOf \u2192 the capability class.\n",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "broad_mappings": [
+        "rdf:type",
         "sosa:Sensor"
       ],
       "is_a": "NamedThing",
       "slots": [
         "name",
         "description",
+        "pv_name",
         "InstanceSignalBinding_is_instance_of",
+        "InstanceSignalBinding_for_property",
         "InstanceSignalBinding_is_hosted_by",
-        "InstanceSignalBinding_is_property_of",
-        "pv_name"
+        "InstanceSignalBinding_is_property_of"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/InstanceSignalBinding",
@@ -2702,10 +2367,7 @@
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/ElementParamSet",
       "description": "Named physics-parameter block for a beamline element. The name identifies the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
-      "is_a": "NamedThing",
       "slots": [
-        "name",
-        "description",
         "frequency",
         "voltage",
         "phase",
@@ -2713,7 +2375,8 @@
         "e1",
         "e2",
         "Kn1",
-        "Ksol"
+        "Ksol",
+        "facility_param_set"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/narad_linkml/schema/narad/ElementParamSet",
@@ -2722,7 +2385,7 @@
     {
       "name": "FacilityParamSet",
       "definition_uri": "https://w3id.org/narad_linkml/schema/narad/FacilityParamSet",
-      "description": "Facility-specific element parameters block for beamline elements.",
+      "description": "Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters.",
       "from_schema": "https://w3id.org/narad_linkml/schema/narad/system",
       "slots": [
         "facility_element_type",
@@ -2748,9 +2411,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "narad_system.yaml",
-  "source_file_date": "2026-05-07T13:24:16",
-  "source_file_size": 32992,
-  "generation_date": "2026-05-07T13:24:22",
+  "source_file_date": "2026-05-10T22:55:36",
+  "source_file_size": 35664,
+  "generation_date": "2026-05-10T22:57:31",
   "@type": "SchemaDefinition",
   "@context": [
     "project_narad/jsonld/narad_system.context.jsonld",

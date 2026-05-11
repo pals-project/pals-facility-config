@@ -3,7 +3,7 @@
 # Class: SignalDefinitions 
 
 
-_Control system signal suffix templates keyed by device type or device domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types in that domain; device-type keys are type-specific._
+_Signal binding set scoped to a device type or device domain._
 
 
 
@@ -19,14 +19,32 @@ URI: [narad:SignalDefinitions](https://w3id.org/narad_linkml/schema/narad/Signal
  classDiagram
     class SignalDefinitions
     click SignalDefinitions href "../SignalDefinitions/"
-      SignalDefinitions : type_signal_sets
+      NamedThing <|-- SignalDefinitions
+        click NamedThing href "../NamedThing/"
+      
+      SignalDefinitions : description
+        
+      SignalDefinitions : device_type
         
           
     
         
         
-        SignalDefinitions --> "0..1" TypeSignalSet : type_signal_sets
-        click TypeSignalSet href "../TypeSignalSet/"
+        SignalDefinitions --> "0..1" ElementKindEnum : device_type
+        click ElementKindEnum href "../ElementKindEnum/"
+    
+
+        
+      SignalDefinitions : name
+        
+      SignalDefinitions : signal_bindings
+        
+          
+    
+        
+        
+        SignalDefinitions --> "*" SignalBinding : signal_bindings
+        click SignalBinding href "../SignalBinding/"
     
 
         
@@ -36,14 +54,21 @@ URI: [narad:SignalDefinitions](https://w3id.org/narad_linkml/schema/narad/Signal
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [NamedThing](NamedThing.md)
+    * **SignalDefinitions**
+
 
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [type_signal_sets](type_signal_sets.md) | 0..1 <br/> [TypeSignalSet](TypeSignalSet.md) | Signal suffix groups keyed by device type or device domain name | direct |
+| [device_type](device_type.md) | 0..1 <br/> [ElementKindEnum](ElementKindEnum.md) | The specific device type this capability profile or system capability targets... | direct |
+| [signal_bindings](signal_bindings.md) | * <br/> [SignalBinding](SignalBinding.md) | Control-system-specific, e | direct |
+| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
+| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
 
 
@@ -53,7 +78,7 @@ URI: [narad:SignalDefinitions](https://w3id.org/narad_linkml/schema/narad/Signal
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [FacilityConfig](FacilityConfig.md) | [signal_definitions](signal_definitions.md) | range | [SignalDefinitions](SignalDefinitions.md) |
+| [FacilitySystem](FacilitySystem.md) | [signal_definitions](signal_definitions.md) | range | [SignalDefinitions](SignalDefinitions.md) |
 
 
 
@@ -97,12 +122,17 @@ URI: [narad:SignalDefinitions](https://w3id.org/narad_linkml/schema/narad/Signal
 <details>
 ```yaml
 name: SignalDefinitions
-description: Control system signal suffix templates keyed by device type or device
-  domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all
-  types in that domain; device-type keys are type-specific.
+description: Signal binding set scoped to a device type or device domain.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 slots:
-- type_signal_sets
+- device_type
+- signal_bindings
+slot_usage:
+  signal_bindings:
+    name: signal_bindings
+    multivalued: true
+    inlined: true
 
 ```
 </details>
@@ -112,25 +142,64 @@ slots:
 <details>
 ```yaml
 name: SignalDefinitions
-description: Control system signal suffix templates keyed by device type or device
-  domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all
-  types in that domain; device-type keys are type-specific.
+description: Signal binding set scoped to a device type or device domain.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
+slot_usage:
+  signal_bindings:
+    name: signal_bindings
+    multivalued: true
+    inlined: true
 attributes:
-  type_signal_sets:
-    name: type_signal_sets
-    description: Signal suffix groups keyed by device type or device domain name.
-      Domain-level keys cover signals shared across all types in that domain; device-type
-      keys are type-specific.
+  device_type:
+    name: device_type
+    description: The specific device type this capability profile or system capability
+      targets (e.g. Quadrupole, Corrector, BPM).
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: type_signal_sets
+    alias: device_type
+    owner: SignalDefinitions
+    domain_of:
+    - ControlCapability
+    - SignalDefinitions
+    - InstrumentSystem
+    - SystemCapability
+    range: ElementKindEnum
+  signal_bindings:
+    name: signal_bindings
+    description: Control-system-specific, e.g. EPICS, suffix definitions keyed by
+      signal name within a device/domain set.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: signal_bindings
     owner: SignalDefinitions
     domain_of:
     - SignalDefinitions
-    range: TypeSignalSet
-    multivalued: false
+    range: SignalBinding
+    multivalued: true
     inlined: true
+  name:
+    name: name
+    description: Human-readable name or local string key for the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    identifier: true
+    alias: name
+    owner: SignalDefinitions
+    domain_of:
+    - NamedThing
+    range: string
+    required: true
+  description:
+    name: description
+    description: Detailed description of the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: description
+    owner: SignalDefinitions
+    domain_of:
+    - NamedThing
+    range: string
 
 ```
 </details>

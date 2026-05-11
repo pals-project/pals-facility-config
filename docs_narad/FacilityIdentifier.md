@@ -56,7 +56,7 @@ URI: [narad:FacilityIdentifier](https://w3id.org/narad_linkml/schema/narad/Facil
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [FacilityConfig](FacilityConfig.md) | [facility_identifier](facility_identifier.md) | range | [FacilityIdentifier](FacilityIdentifier.md) |
+| [FacilitySystem](FacilitySystem.md) | [facility_identifier](facility_identifier.md) | range | [FacilityIdentifier](FacilityIdentifier.md) |
 
 
 

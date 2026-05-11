@@ -13,15 +13,6 @@ Alias: field_setpoint
 
 
 
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [DipoleSignalSet](DipoleSignalSet.md) | Dipole-specific signal bindings |  no  |
-
-
-
-
 
 
 ## Properties
@@ -64,8 +55,6 @@ name: field_setpoint
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: field_setpoint
-domain_of:
-- DipoleSignalSet
 range: SignalBinding
 inlined: true
 

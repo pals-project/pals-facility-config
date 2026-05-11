@@ -31,7 +31,7 @@ Alias: facilities
 
 ## Properties
 
-* Range: [FacilityConfig](FacilityConfig.md)
+* Range: [FacilitySystem](FacilitySystem.md)
 
 * Multivalued: True
 
@@ -74,7 +74,7 @@ rank: 1000
 alias: facilities
 domain_of:
 - SignalLayer
-range: FacilityConfig
+range: FacilitySystem
 multivalued: true
 inlined: true
 

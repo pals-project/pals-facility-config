@@ -22,7 +22,7 @@ Alias: naming_convention
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configuration |  no  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -71,7 +71,7 @@ from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: naming_convention
 domain_of:
-- FacilityConfig
+- FacilitySystem
 range: string
 
 ```

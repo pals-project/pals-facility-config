@@ -59,7 +59,7 @@ URI: [narad:FacilityParamSet](https://w3id.org/narad_linkml/schema/narad/Facilit
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [BeamlineElement](BeamlineElement.md) | [facility_param_set](facility_param_set.md) | range | [FacilityParamSet](FacilityParamSet.md) |
+| [ElementParamSet](ElementParamSet.md) | [facility_param_set](facility_param_set.md) | range | [FacilityParamSet](FacilityParamSet.md) |
 
 
 

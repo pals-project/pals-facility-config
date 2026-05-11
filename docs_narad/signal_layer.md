@@ -3,7 +3,7 @@
 # Slot: signal_layer 
 
 
-_Signal-layer container for facility-specific signal bindings._
+_Signal suffix templates for this facility._
 
 
 
@@ -66,14 +66,13 @@ Alias: signal_layer
 <details>
 ```yaml
 name: signal_layer
-description: Signal-layer container for facility-specific signal bindings.
+description: Signal suffix templates for this facility.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: signal_layer
 domain_of:
 - NaradConfig
 range: SignalLayer
-inlined: true
 
 ```
 </details>

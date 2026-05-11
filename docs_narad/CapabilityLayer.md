@@ -19,14 +19,14 @@ URI: [narad:CapabilityLayer](https://w3id.org/narad_linkml/schema/narad/Capabili
  classDiagram
     class CapabilityLayer
     click CapabilityLayer href "../CapabilityLayer/"
-      CapabilityLayer : profiles
+      CapabilityLayer : control_capabilities
         
           
     
         
         
-        CapabilityLayer --> "*" ControlProfileFamily : profiles
-        click ControlProfileFamily href "../ControlProfileFamily/"
+        CapabilityLayer --> "*" ControlCapability : control_capabilities
+        click ControlCapability href "../ControlCapability/"
     
 
         
@@ -43,17 +43,10 @@ URI: [narad:CapabilityLayer](https://w3id.org/narad_linkml/schema/narad/Capabili
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [profiles](profiles.md) | * <br/> [ControlProfileFamily](ControlProfileFamily.md) | Control profile families keyed by family name | direct |
+| [control_capabilities](control_capabilities.md) | * <br/> [ControlCapability](ControlCapability.md) |  | direct |
 
 
 
-
-
-## Usages
-
-| used by | used in | type | used |
-| ---  | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | [capability_layer](capability_layer.md) | range | [CapabilityLayer](CapabilityLayer.md) |
 
 
 
@@ -100,7 +93,7 @@ name: CapabilityLayer
 description: Capability-layer container for control profile families.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
-- profiles
+- control_capabilities
 
 ```
 </details>
@@ -113,16 +106,15 @@ name: CapabilityLayer
 description: Capability-layer container for control profile families.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
-  profiles:
-    name: profiles
-    description: Control profile families keyed by family name.
+  control_capabilities:
+    name: control_capabilities
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: profiles
+    alias: control_capabilities
     owner: CapabilityLayer
     domain_of:
     - CapabilityLayer
-    range: ControlProfileFamily
+    range: ControlCapability
     multivalued: true
     inlined: true
 

@@ -1,16 +1,16 @@
 
 
-# Slot: facility 
+# Slot: deployed_system 
 
 
-_Identifier of the facility this configuration describes._
+_Identifier of the deployed system this configuration describes._
 
 
 
 
 
-URI: [narad:facility](https://w3id.org/narad_linkml/schema/narad/facility)
-Alias: facility
+URI: [narad:deployed_system](https://w3id.org/narad_linkml/schema/narad/deployed_system)
+Alias: deployed_system
 
 <!-- no inheritance hierarchy -->
 
@@ -31,7 +31,7 @@ Alias: facility
 
 ## Properties
 
-* Range: [String](String.md)
+* Range: [FacilitySystem](FacilitySystem.md)
 
 
 
@@ -55,8 +55,8 @@ Alias: facility
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:facility |
-| native | narad:facility |
+| self | narad:deployed_system |
+| native | narad:deployed_system |
 
 
 
@@ -65,14 +65,14 @@ Alias: facility
 
 <details>
 ```yaml
-name: facility
-description: Identifier of the facility this configuration describes.
+name: deployed_system
+description: Identifier of the deployed system this configuration describes.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
-alias: facility
+alias: deployed_system
 domain_of:
 - NaradConfig
-range: string
+range: FacilitySystem
 
 ```
 </details>

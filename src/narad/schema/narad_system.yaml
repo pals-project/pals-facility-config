@@ -7,8 +7,8 @@ description: >
 
   Main modeling layers:
     - NaradModel — top-level document containing narad_config, beamlines, and elements
-    - CapabilityLayer — reusable control-profile families, shared capabilities,
-      and device-type profiles
+    - CapabilityLayer — reusable control-profile families, shared capabilities
+    - ProfileLayer — device-type profiles that reuse shared capabilities and add type-specific ones
     - SignalLayer — facility-specific signal suffix templates organized by
       device domain and device type
     - Beamline / BeamlineElement — ordered machine layout plus applied profiles
@@ -30,10 +30,10 @@ description: >
   Capability hierarchy:
     - SystemCapability
       - MagnetCapability
-        - QuadrupoleCapability, CorrectorCapability, DipoleCapability, SolenoidCapability
-      - InstrumentCapability
-        - BPMCapability
-      - CavityGradientCapability
+        - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability
+      - InstrumentStatusReadbackCapability
+      - BPMPositionReadbackCapability
+      - CavityGradientControlCapability
 
   Signal modeling:
     - Signal — abstract control-system quantity
@@ -53,9 +53,8 @@ description: >
   1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling. 
   Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the facility-specific naming convention for that signal (e.g. .R for EPICS readback), 
   and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance (e.g. MQWK202.R). The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) is captured in the SignalBinding.
-  2. On the distinction between element_kind, capability_profile, and facility_element_type.
-    - element_kind (BeamlineElement.element_kind) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.
-    - capability_profile (BeamlineElement.capability_profile) is the specific control profile assigned to that element, which determines what capabilities and signals are relevant for it. This is a cross-reference to a CapabilityProfile defined in the capability layer.
+  2. On the distinction between is_instance_of, capability_profile, and facility_element_type.
+    - is_instance_of (BeamlineElement.is_instance_of) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.
     - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
   3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
     - is_instance_of typically points to the rdf:type of the Procedure class that implements the signal binding, e.g. narad:narad:CavityGradientControlCapability.
@@ -122,85 +121,65 @@ classes:
     slots:
       - schema_version
       - intent
-      - capability_layer
-      - facility
-      - control_system
+      - deployed_system
+      - has_sub_system 
+      - control_capability_layer
+      - instrument_layer
       - signal_layer
     broad_mappings:
-      - ssn:System
+      - ssn:Deployment
     slot_usage:
       schema_version:
         range: string
         required: true
         description: "Version of the NARAD schema used in this document."
-      facility:
-        range: string
+      deployed_system:
+        range: FacilitySystem
         required: true
-        description: "Identifier of the facility this configuration describes."
-      control_system:
-        range: string
+        multivalued: false
+        description: "Identifier of the deployed system this configuration describes."
+      has_sub_system:
+        range: ControlSystem
         required: true
+        multivalued: true
         description: "Identifier of the control system (e.g. epics) this configuration describes."
-      capability_layer:
-        range: CapabilityLayer
+      instrument_layer:
+        range: InstrumentSystem
         required: true
-        inlined: false
-        description: "Capability-layer container for control profile families."
+        multivalued: true
+        inlined: true
+        description: "Instrument Capability definitions keyed by capability name."
       signal_layer:
-        range: SignalLayer
         required: true
+        range: SignalLayer
         inlined: false
         description: "Signal-layer container for facility-specific signal bindings."
 
   CapabilityLayer:
     description: "Capability-layer container for control profile families."
     slots:
-      - profiles
+      - control_capabilities
 
-  ControlProfileFamily:
+  ControlCapability:
     is_a: NamedThing
     description: >-
-      A reusable family of control profiles sharing common semantics and
-      structure (e.g. MagnetCurrentControlProfileFamily).
-    slots:
-      - device_domain
-      - shared_capabilities
-      - type_profiles
-
-  Capability:
-    is_a: NamedThing
-    description: >-
-      A named, shared grouping of semantically related signals for a control
-      aspect (e.g. MagnetCurrentControlCapability).
-    slots:
-      - signals
-
-  TypeSpecificCapability:
-    is_a: Capability
-    description: >-
-      An inline capability declared within a device-type profile that extends
-      a generic shared Capability. The explicit link to the shared Capability
-      being extended is given by inherits_from. Adds type-specific signals on
-      top of those already defined in the referenced shared Capability.
-
-  CapabilityProfile:
-    is_a: NamedThing
-    description: >-
-      A device-type profile that reuses shared capabilities and adds
-      type-specific ones (e.g. QuadrupoleProfile).
+      A reusable device-type control profile that extends a generic shared
+      capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).
     slots:
       - device_type
-      - is_abstract
-      - inherits_shared_capabilities
-      - type_specific_capabilities
+      - subclass_of
+      - signals
+    slot_usage:
+      signals:
+        required: true
 
   SignalLayer:
     description: "Signal-layer container for facility-specific signal bindings."
     slots:
       - facilities
 
-  FacilityConfig:
-    is_a: NamedThing
+  FacilitySystem:
+    is_a: System
     description: "Facility-specific signal binding configuration."
     slots:
       - facility_identifier
@@ -215,68 +194,23 @@ classes:
       - identifier_value
 
   SignalDefinitions:
+    is_a: NamedThing
     description: >-
-      Control system signal suffix templates keyed by device type or device domain.
-      Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across
-      all types in that domain; device-type keys are type-specific.
+      Signal binding set scoped to a device type or device domain.
     slots:
-      - type_signal_sets
+      - device_type
+      - signal_bindings
+    slot_usage:
+      signal_bindings:
+        multivalued: true
+        inlined: true
 
   SignalBinding:
+    is_a: NamedThing
     description: "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance."
     slots:
-      - description
       - control_system_suffix
-
-  TypeSignalSet:
-    description: >-
-      Explicit signal binding groups keyed by device domain or device type.
-    slots:
-      - magnet_signals
-      - quadrupole_signals
-      - corrector_signals
-      - dipole_signals
-      - bpm_signals
-      - rfcavity_signals
-
-  MagnetSignalSet:
-    description: "Shared magnet signal bindings."
-    slots:
-      - current_setpoint
-      - current_readback
-      - current_min
-      - current_max
-      - status
-
-  QuadrupoleSignalSet:
-    description: "Quadrupole-specific signal bindings."
-    slots:
-      - strength_setpoint
-
-  CorrectorSignalSet:
-    description: "Corrector-specific signal bindings."
-    slots:
-      - kick_setpoint
-
-  DipoleSignalSet:
-    description: "Dipole-specific signal bindings."
-    slots:
-      - field_setpoint
-
-  BPMSignalSet:
-    description: "BPM-specific signal bindings."
-    slots:
-      - horizontal_beam_position
-      - vertical_beam_position
-      - status
-
-  RFCavitySignalSet:
-    description: "RF cavity-specific signal bindings."
-    slots:
-      - gradient_setpoint
-      - gradient_readback
-      - status
-
+  
   # ---------------------------------------------------------------------------
   # Beamline and BeamlineElement
   # ---------------------------------------------------------------------------
@@ -294,13 +228,13 @@ classes:
       A single element in a beamline with its kind and optional NARAD
       capability annotations.
     slots:
-      - element_kind
+      - is_instance_of
       - length
-      - capability_profile_family
-      - capability_profile
       - instance_signal_bindings
       - param_set
-      - facility_param_set
+    slot_usage:
+      is_instance_of:
+        multivalued: false
 
   # ---- System hierarchy (SSN alignment) ------------------------------------
 
@@ -312,17 +246,17 @@ classes:
     exact_mappings:
       - ssn:System
     slots:
+      - system_type
       - has_sub_system
       - has_system_capability
     slot_usage:
       has_sub_system:
         range: System
-        multivalued: true
-        inlined: false
+        inlined_as_list: true
       has_system_capability:
         range: SystemCapability
         multivalued: true
-        inlined: false
+        inlined: true
 
   ControlSystem:
     is_a: System
@@ -331,33 +265,56 @@ classes:
       In the SSN graph a ControlSystem is a subsystem of the Facility.
     exact_mappings:
       - ssn:System
+  
+  InstrumentSystem:
+    is_a: System
+    description: >
+      A system representing a beam diagnostic instrument, magnet, or other non-magnet device.
+      It represents the instrument as a whole rather than the
+      control system for that instrument. In the SSN graph an InstrumentSystem is
+      a subsystem of the Facility and a sibling to the ControlSystem.
+    exact_mappings:
+      - ssn:System
+    slots:
+      - device_type
+      - has_sub_system
+      - has_system_capability
+    slot_usage:
+      has_sub_system:
+        range: System
+        multivalued: true
+        inlined_as_list: true
+      has_system_capability:
+        range: SystemCapability
+        multivalued: false
+        inlined: false
 
   # ---- Physical device subclasses ------------------------------------------
   # These are the nodes labelled [Cls. Magnet], [Cls. Instrument] etc. in the
   # controls_scehma_SOSA_SSN diagram. Each is a ssn:System subtype that
   # ssn-system:hasSystemCapability its associated capability class.
 
-  Magnet:
-    is_a: System
-    description: "A powered magnet device (generic supertype for all magnet kinds)."
-    exact_mappings:
-      - ssn:System
+  #Magnet:
+  #  is_a: System
+  #  description: "A powered magnet device (generic supertype for all magnet kinds)."
+  #  exact_mappings:
+  #    - ssn:System
 
-  Quadrupole:
-    is_a: Magnet
-    description: "A quadrupole focusing/defocusing magnet."
+  #Quadrupole:
+  #  is_a: Magnet
+  #  description: "A quadrupole focusing/defocusing magnet."
 
-  Corrector:
-    is_a: Magnet
-    description: "A dipole corrector magnet for orbit correction."
+  #Corrector:
+  #  is_a: Magnet
+  #  description: "A dipole corrector magnet for orbit correction."
 
-  Dipole:
-    is_a: Magnet
-    description: "A dipole bending magnet."
+  #Dipole:
+  #  is_a: Magnet
+  #  description: "A dipole bending magnet."
 
-  Solenoid:
-    is_a: Magnet
-    description: "A solenoid magnet."
+  #Solenoid:
+  #  is_a: Magnet
+  #  description: "A solenoid magnet."
 
   Instrument:
     is_a: System
@@ -365,17 +322,17 @@ classes:
     exact_mappings:
       - ssn:System
 
-  BPM:
-    is_a: Instrument
-    description: "A Beam Position Monitor."
+  #BPM:
+  #  is_a: Instrument
+  #   description: "A Beam Position Monitor."
 
-  RFCavity:
-    is_a: System
-    description: "A radio-frequency accelerating or bunching cavity."
+  #RFCavity:
+  #  is_a: System
+  #  description: "A radio-frequency accelerating or bunching cavity."
 
-  Marker:
-    is_a: System
-    description: "A zero-length reference point, drift space, or survey marker."
+  #Marker:
+  #  is_a: System
+  #  description: "A zero-length reference point, drift space, or survey marker."
 
   # ---- SystemCapability hierarchy (SSN-System alignment) -------------------
   # ssn-system:SystemCapability describes what a system can expose, monitor,
@@ -398,10 +355,8 @@ classes:
     slots:
       - for_property
       - device_type
-      - is_abstract
     slot_usage:
       for_property:
-        range: Signal
         multivalued: true
 
   MagnetCapability:
@@ -499,22 +454,27 @@ classes:
       interface (e.g. an EPICS process variable). Modeled as sosa:Sensor
       because it describes how a signal is observed, monitored, or actuated.
       ssn:forProperty → Signal; narad:isInstanceOf → the capability class.
-    broad_mappings:
-      - sosa:Sensor
     slots:
+      - pv_name
       - is_instance_of
+      - for_property
       - is_hosted_by
       - is_property_of
-      - pv_name
+    broad_mappings:
+      - rdf:type
+      - sosa:Sensor
     slot_usage:
       is_instance_of:
-        range: uriorcurie # typically rdf:type of the Procedure class this binding implements 
-        multivalued: true
+        range: uriorcurie
+        multivalued: false
       is_hosted_by:
-        range: uriorcurie # typically the FacilitySystem this binding belongs to
-        multivalued: true
+        range: uriorcurie
+        multivalued: false
       is_property_of:
-        range: uriorcurie # typically the ControlSystem that implements this binding
+        range: uriorcurie
+        multivalued: false
+      for_property:
+        range: uriorcurie
         multivalued: false
   
   # -------- Element Parameters and Facility Parameters --------------------------------
@@ -523,7 +483,6 @@ classes:
   # and an open-ended property map).
 
   ElementParamSet:
-    is_a: NamedThing
     description: >-
       Named physics-parameter block for a beamline element. The name identifies
       the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
@@ -536,6 +495,7 @@ classes:
       - e2
       - Kn1
       - Ksol
+      - facility_param_set
 
   FacilityParamSet:
     description: "Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters."
@@ -576,21 +536,32 @@ enums:
         description: "Quadrupole focusing/defocusing magnet."
       Solenoid:
         description: "Solenoid magnet."
+      WarmCavity:
+        description: "Generic non-superconducting cavity."
+      CavityGradient:
+        description: "Accelerating or bunching cavity."
       RFCavity:
         description: "Radio-frequency accelerating or bunching cavity."
       Instrument:
         description: "Generic beam diagnostic instrument (halo monitor, viewer, etc.)."
-
-  DeviceDomainEnum:
-    description: "High-level device domain for a control profile family. Use: groups profile families, not individual elements."
-    permissible_values:
       Magnet:
-        description: "Magnet devices: dipoles, quadrupoles, correctors, solenoids."
-      Instrument:
-        description: "Beam diagnostic instruments: BPMs, screens, viewers, etc."
-      RFCavity:
-        description: "RF cavity and RF-related devices."
+        description: "Generic powered magnet device (supertype for all magnet kinds)."
 
+  SystemTypeEnum:
+    description: >-
+      High-level system type for classification and querying. This is a broad
+      categorization that can be used for filtering or grouping systems without
+      needing to traverse the has_sub_system and has_system_capability edges.
+    inherits: 
+      - ElementKindEnum
+    permissible_values:
+      Facility:
+        description: "A physical facility or installation (e.g. BTA, CEBAF, or UITF)."
+      ControlSystem:
+        description: "A control system (e.g. epics) that manages device process variables."
+      Magnet:
+        description: "A powered magnet device/system (generic supertype for all magnet kinds)."
+      
   DataTypeEnum:
     description: "Allowed data types for signal values."
     permissible_values:
@@ -676,6 +647,16 @@ slots:
     range: System
     multivalued: true
 
+  #capability_profile_family:
+  #  range: ControlProfileFamily
+  #  inlined: false
+  #  description: "Cross-reference to the control profile family for this element."
+
+  control_capability:
+    range: ControlCapability
+    inlined: false
+    description: "Cross-reference to the specific control capability applied to this element."
+
   has_system_capability:
     description: >
       Relates a System to a SystemCapability it supports (SSN-System alignment).
@@ -693,7 +674,6 @@ slots:
       or actuate that signal.
     exact_mappings:
       - ssn:forProperty
-    range: Signal
     multivalued: true
 
   is_property_of:
@@ -724,11 +704,21 @@ slots:
       NARAD alias for rdf:type. Links a facility-specific instance node to
       the LinkML class or semantic class it instantiates.
       In the graph this edge is labelled narad:isInstanceOf.
-      Values are typically the rdf:type of the Procedure class that implements the signal binding, e.g. narad:CavityGradientControlCapability.
+      Values are typically the rdf:type of the Class that implements the signal binding.
     exact_mappings:
       - rdf:type
     range: uriorcurie
     multivalued: true
+
+  subclass_of:
+    description: ->
+      NARAD alias for rdfs:subClassOf. Links a type-specific capability to the
+      generic capability it extends. In the graph this edge is labelled
+      narad:subclassOf.
+    exact_mappings:
+      - rdfs:subClassOf
+    range: ControlCapability
+    multivalued: false
 
   pv_name:
     description: >
@@ -766,52 +756,76 @@ slots:
     range: string
     description: "Version of the NARAD schema used in this document."
 
-  facility:
-    range: string
-    description: "Identifier of the facility this configuration describes."
+  deployed_system:
+    range: FacilitySystem
+    description: "Identifier of the deployed system this configuration describes."
+
+  system_type:
+    range: SystemTypeEnum
+    description: "High-level system type for classification and querying."
 
   control_system:
-    range: string
+    range: ControlSystem
     description: "Identifier of the control system (e.g. epics)."
 
   naming_convention:
     range: string
     description: "Signal naming convention template (e.g. <device><signal_code>)."
 
-  capability_layer:
-    range: CapabilityLayer
+  control_capability_layer:
+    range: ControlCapability
+    required: true
+    multivalued: true
     inlined: true
-    description: "Capability-layer container for profile families."
+    description: "Control Capability definitions for this facility."
+  
+  control_capabilities:
+    range: ControlCapability
+    inlined: true
+    multivalued: true
 
-  signal_layer:
-    range: SignalLayer
+  #profile_layer:
+  #  range: ControlProfile
+  #  multivalued: true
+  #  inlined: true
+  #  description: "System/Device-type profiles referenced from beamline elements. This is a denormalized convenience slot to make it easier to query for all profiles without needing to traverse the capability layer hierarchy."
+
+  instrument_layer:
+    range: InstrumentSystem
+    multivalued: true
     inlined: true
-    description: "Signal-layer container for facility-specific signal bindings."
+    description: "Instrument definitions for this facility."
 
   facilities:
-    range: FacilityConfig
+    range: FacilitySystem
     multivalued: true
     inlined: true
     description: "Facility-specific signal binding configurations keyed by facility name."
 
+  signal_layer:
+    range: SignalLayer
+    description: "Signal suffix templates for this facility."
+  
   signal_definitions:
     range: SignalDefinitions
-    description: "Signal suffix templates for this facility."
-
-  type_signal_sets:
-    range: TypeSignalSet
+    multivalued: true
     inlined: true
-    multivalued: false
-    description: >-
-      Signal suffix groups keyed by device type or device domain name.
-      Domain-level keys cover signals shared across all types in that domain;
-      device-type keys are type-specific.
+    description: "Structured container for facility-specific signal suffix templates."
+
+  #type_signal_sets:
+  #  range: TypeSignalSet
+  #  multivalued: true
+  #  inlined: true
+  #  description: >-
+  #    Signal suffix groups keyed by device type or device domain name.
+  #    Domain-level keys cover signals shared across all types in that domain;
+  #    device-type keys are type-specific.
 
   signal_bindings:
     range: SignalBinding
     multivalued: true
     inlined: true
-    description: "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device type."
+    description: "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set."
   
   instance_signal_bindings:
     range: InstanceSignalBinding
@@ -819,62 +833,13 @@ slots:
     inlined: true
     description: >-
       Facility-specific bindings of signals to control-system interfaces (e.g.
-      EPICS PVs) for a specific beamline element instance. 
-      These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. 
-      The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the
-      concrete implementations of the abstract SignalBindings referenced by the
-      element's capability profile.
-
-  capability_profile_family:
-    range: ControlProfileFamily
-    inlined: false
-    description: "Cross-reference to the control profile family for this element."
-
-  capability_profile:
-    range: CapabilityProfile
-    inlined: false
-    description: "Cross-reference to the specific capability profile applied to this element."
-
-  profiles:
-    range: ControlProfileFamily
-    multivalued: true
-    inlined: true
-    description: "Control profile families keyed by family name."
-
-  shared_capabilities:
-    range: Capability
-    multivalued: true
-    inlined: true
-    description: "Named shared capabilities reused by profile types in a family."
-
-  type_profiles:
-    range: CapabilityProfile
-    multivalued: true
-    inlined: true
-    description: "Device-type profile definitions for this family, keyed by profile name."
-
-  inherits_shared_capabilities:
-    range: Capability
-    multivalued: true
-    inlined: false
-    description: "Shared capabilities inherited by this profile, cross-referenced by name."
-
-  type_specific_capabilities:
-    range: TypeSpecificCapability
-    multivalued: true
-    inlined: true
-    description: "Type-specific capabilities declared directly in a profile."
-
-  inherits_from:
-    range: Capability
-    multivalued: false
-    inlined: false
-    description: >-
-      Explicit cross-reference from a TypeSpecificCapability to the generic
-      shared Capability it extends. Makes the "type-specific inherits generic"
-      relationship machine-readable and navigable.
-    broad_mappings:
-      - rdf:type
+      EPICS PVs) for a specific beamline element instance.
+      These are the keyed by the semantic signal name (e.g. current_readback)
+      rather than the control-system suffix, which is captured in the SignalBinding.
+      The semantic signal name links the instance binding to the abstract Signal
+      definition and its place in the capability profile, while the SignalBinding
+      captures the concrete implementations of the abstract SignalBindings
+      referenced by the element's capability profile.
 
   capability_class:
     range: string
@@ -900,16 +865,9 @@ slots:
       The specific device type this capability profile or system capability
       targets (e.g. Quadrupole, Corrector, BPM).
 
-  device_domain:
-    range: DeviceDomainEnum
-    description: "High-level device domain that this profile family governs."
-
-  is_abstract:
-    range: boolean
-    ifabsent: "false"
-    description: >-
-      If true, this profile is a template not intended to be directly assigned
-      to a beamline element. Concrete profiles set this to false (default).
+  #device_domain:
+  #  range: DeviceDomainEnum
+  #  description: "High-level device domain that this profile family governs."
 
   role:
     range: SignalRoleEnum
@@ -934,36 +892,6 @@ slots:
     description: "Kind/type label for the beamline entry (e.g. BeamLine)."
     aliases:
       - kind
-  
-  magnet_signals:
-    range: MagnetSignalSet
-    inlined: true
-    description: "Shared magnet signal bindings."
-
-  quadrupole_signals:
-    range: QuadrupoleSignalSet
-    inlined: true
-    description: "Quadrupole-specific signal bindings."
-
-  corrector_signals:
-    range: CorrectorSignalSet
-    inlined: true
-    description: "Corrector-specific signal bindings."
-
-  dipole_signals:
-    range: DipoleSignalSet
-    inlined: true
-    description: "Dipole-specific signal bindings."
-
-  bpm_signals:
-    range: BPMSignalSet
-    inlined: true
-    description: "BPM-specific signal bindings."
-
-  rfcavity_signals:
-    range: RFCavitySignalSet
-    inlined: true
-    description: "RF cavity-specific signal bindings."
 
   current_setpoint:
     range: SignalBinding
@@ -1031,9 +959,8 @@ slots:
 
   param_set:
     range: ElementParamSet
-    multivalued: true
+    multivalued: false
     inlined: true
-    inlined_as_list: true
     description: "Named physics-parameter blocks for this element (e.g. RFP, BendP, MagneticMultipoleP)."
 
   facility_param_set:

@@ -22,8 +22,7 @@ Alias: control_system
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |  yes  |
-| [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configuration |  no  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -32,7 +31,7 @@ Alias: control_system
 
 ## Properties
 
-* Range: [String](String.md)
+* Range: [ControlSystem](ControlSystem.md)
 
 
 
@@ -72,9 +71,8 @@ from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: control_system
 domain_of:
-- NaradConfig
-- FacilityConfig
-range: string
+- FacilitySystem
+range: ControlSystem
 
 ```
 </details>

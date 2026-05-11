@@ -1,16 +1,16 @@
 
 
-# Slot: capability_layer 
+# Slot: instrument_layer 
 
 
-_Capability-layer container for profile families._
+_Instrument definitions for this facility._
 
 
 
 
 
-URI: [narad:capability_layer](https://w3id.org/narad_linkml/schema/narad/capability_layer)
-Alias: capability_layer
+URI: [narad:instrument_layer](https://w3id.org/narad_linkml/schema/narad/instrument_layer)
+Alias: instrument_layer
 
 <!-- no inheritance hierarchy -->
 
@@ -31,7 +31,9 @@ Alias: capability_layer
 
 ## Properties
 
-* Range: [CapabilityLayer](CapabilityLayer.md)
+* Range: [InstrumentSystem](InstrumentSystem.md)
+
+* Multivalued: True
 
 
 
@@ -55,8 +57,8 @@ Alias: capability_layer
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:capability_layer |
-| native | narad:capability_layer |
+| self | narad:instrument_layer |
+| native | narad:instrument_layer |
 
 
 
@@ -65,14 +67,15 @@ Alias: capability_layer
 
 <details>
 ```yaml
-name: capability_layer
-description: Capability-layer container for profile families.
+name: instrument_layer
+description: Instrument definitions for this facility.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
-alias: capability_layer
+alias: instrument_layer
 domain_of:
 - NaradConfig
-range: CapabilityLayer
+range: InstrumentSystem
+multivalued: true
 inlined: true
 
 ```

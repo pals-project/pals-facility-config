@@ -3,7 +3,7 @@
 # Slot: is_instance_of 
 
 
-_NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Procedure class that implements the signal binding, e.g. narad:CavityGradientControlCapability._
+_NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding._
 
 __
 
@@ -25,6 +25,7 @@ Alias: is_instance_of
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [InstanceSignalBinding](InstanceSignalBinding.md) | A facility-specific binding between a NARAD Signal and an implementation inte... |  yes  |
+| [BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |  yes  |
 
 
 
@@ -73,8 +74,8 @@ Alias: is_instance_of
 name: is_instance_of
 description: 'NARAD alias for rdf:type. Links a facility-specific instance node to
   the LinkML class or semantic class it instantiates. In the graph this edge is labelled
-  narad:isInstanceOf. Values are typically the rdf:type of the Procedure class that
-  implements the signal binding, e.g. narad:CavityGradientControlCapability.
+  narad:isInstanceOf. Values are typically the rdf:type of the Class that implements
+  the signal binding.
 
   '
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
@@ -83,6 +84,7 @@ exact_mappings:
 rank: 1000
 alias: is_instance_of
 domain_of:
+- BeamlineElement
 - InstanceSignalBinding
 range: uriorcurie
 multivalued: true

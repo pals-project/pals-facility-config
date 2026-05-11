@@ -13,15 +13,6 @@ Alias: kick_setpoint
 
 
 
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [CorrectorSignalSet](CorrectorSignalSet.md) | Corrector-specific signal bindings |  no  |
-
-
-
-
 
 
 ## Properties
@@ -64,8 +55,6 @@ name: kick_setpoint
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: kick_setpoint
-domain_of:
-- CorrectorSignalSet
 range: SignalBinding
 inlined: true
 

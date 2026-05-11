@@ -22,7 +22,7 @@ Alias: facility_identifier
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configuration |  no  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -74,7 +74,7 @@ from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: facility_identifier
 domain_of:
-- FacilityConfig
+- FacilitySystem
 range: FacilityIdentifier
 multivalued: true
 inlined: false

@@ -13,15 +13,6 @@ Alias: horizontal_beam_position
 
 
 
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [BPMSignalSet](BPMSignalSet.md) | BPM-specific signal bindings |  no  |
-
-
-
-
 
 
 ## Properties
@@ -64,8 +55,6 @@ name: horizontal_beam_position
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: horizontal_beam_position
-domain_of:
-- BPMSignalSet
 range: SignalBinding
 inlined: true
 
