@@ -86,38 +86,6 @@
 --     * Slot: System_name Description: Autocreated FK slot
 --     * Slot: ControlSystem_name Description: Autocreated FK slot
 --     * Slot: Instrument_name Description: Autocreated FK slot
--- # Class: MagnetCapability Description: Generic magnet capability (current control and readback signals).
---     * Slot: device_type Description: The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM).
---     * Slot: name Description: Human-readable name or local string key for the entity.
---     * Slot: description Description: Detailed description of the entity.
--- # Class: QuadrupoleCapability Description: Quadrupole-specific capability extending MagnetCapability with strength signals.
---     * Slot: device_type Description: The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM).
---     * Slot: name Description: Human-readable name or local string key for the entity.
---     * Slot: description Description: Detailed description of the entity.
--- # Class: CorrectorCapability Description: Corrector-specific capability extending MagnetCapability with kick signals.
---     * Slot: device_type Description: The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM).
---     * Slot: name Description: Human-readable name or local string key for the entity.
---     * Slot: description Description: Detailed description of the entity.
--- # Class: DipoleCapability Description: Dipole-specific capability extending MagnetCapability with bend-field signals.
---     * Slot: device_type Description: The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM).
---     * Slot: name Description: Human-readable name or local string key for the entity.
---     * Slot: description Description: Detailed description of the entity.
--- # Class: SolenoidCapability Description: Solenoid-specific capability extending MagnetCapability with focusing signals.
---     * Slot: device_type Description: The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM).
---     * Slot: name Description: Human-readable name or local string key for the entity.
---     * Slot: description Description: Detailed description of the entity.
--- # Class: InstrumentCapability Description: Generic instrument capability (position readback and status signals).
---     * Slot: device_type Description: The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM).
---     * Slot: name Description: Human-readable name or local string key for the entity.
---     * Slot: description Description: Detailed description of the entity.
--- # Class: BPMCapability Description: BPM-specific capability with horizontal and vertical position readback signals.
---     * Slot: device_type Description: The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM).
---     * Slot: name Description: Human-readable name or local string key for the entity.
---     * Slot: description Description: Detailed description of the entity.
--- # Class: CavityGradientCapability Description: RF cavity capability with gradient control, readback, and status signals.
---     * Slot: device_type Description: The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM).
---     * Slot: name Description: Human-readable name or local string key for the entity.
---     * Slot: description Description: Detailed description of the entity.
 -- # Class: Signal Description: Domain term for a control-system signal. A Signal represents an identifiable quantity, state, setpoint, readback, limit, or status. In SSN/SOSA alignment, NARAD Signals are treated as properties of systems (ssn:forProperty). The concrete facility binding is captured in SignalBinding.
 --     * Slot: role Description: The semantic role of the signal within its capability.
 --     * Slot: data_type Description: The data type of the signal's value.
@@ -178,30 +146,6 @@
 --     * Slot: line_name Description: Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map.
 -- # Class: SystemCapability_for_property
 --     * Slot: SystemCapability_name Description: Autocreated FK slot
---     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
--- # Class: MagnetCapability_for_property
---     * Slot: MagnetCapability_name Description: Autocreated FK slot
---     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
--- # Class: QuadrupoleCapability_for_property
---     * Slot: QuadrupoleCapability_name Description: Autocreated FK slot
---     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
--- # Class: CorrectorCapability_for_property
---     * Slot: CorrectorCapability_name Description: Autocreated FK slot
---     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
--- # Class: DipoleCapability_for_property
---     * Slot: DipoleCapability_name Description: Autocreated FK slot
---     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
--- # Class: SolenoidCapability_for_property
---     * Slot: SolenoidCapability_name Description: Autocreated FK slot
---     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
--- # Class: InstrumentCapability_for_property
---     * Slot: InstrumentCapability_name Description: Autocreated FK slot
---     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
--- # Class: BPMCapability_for_property
---     * Slot: BPMCapability_name Description: Autocreated FK slot
---     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
--- # Class: CavityGradientCapability_for_property
---     * Slot: CavityGradientCapability_name Description: Autocreated FK slot
 --     * Slot: for_property Description: SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
 
 CREATE TABLE "NamedThing" (
@@ -276,54 +220,6 @@ CREATE TABLE "SystemCapability" (
 	FOREIGN KEY("ControlSystem_name") REFERENCES "ControlSystem" (name),
 	FOREIGN KEY("Instrument_name") REFERENCES "Instrument" (name)
 );CREATE INDEX "ix_SystemCapability_name" ON "SystemCapability" (name);
-CREATE TABLE "MagnetCapability" (
-	device_type VARCHAR(14),
-	name TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (name)
-);CREATE INDEX "ix_MagnetCapability_name" ON "MagnetCapability" (name);
-CREATE TABLE "QuadrupoleCapability" (
-	device_type VARCHAR(14),
-	name TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (name)
-);CREATE INDEX "ix_QuadrupoleCapability_name" ON "QuadrupoleCapability" (name);
-CREATE TABLE "CorrectorCapability" (
-	device_type VARCHAR(14),
-	name TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (name)
-);CREATE INDEX "ix_CorrectorCapability_name" ON "CorrectorCapability" (name);
-CREATE TABLE "DipoleCapability" (
-	device_type VARCHAR(14),
-	name TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (name)
-);CREATE INDEX "ix_DipoleCapability_name" ON "DipoleCapability" (name);
-CREATE TABLE "SolenoidCapability" (
-	device_type VARCHAR(14),
-	name TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (name)
-);CREATE INDEX "ix_SolenoidCapability_name" ON "SolenoidCapability" (name);
-CREATE TABLE "InstrumentCapability" (
-	device_type VARCHAR(14),
-	name TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (name)
-);CREATE INDEX "ix_InstrumentCapability_name" ON "InstrumentCapability" (name);
-CREATE TABLE "BPMCapability" (
-	device_type VARCHAR(14),
-	name TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (name)
-);CREATE INDEX "ix_BPMCapability_name" ON "BPMCapability" (name);
-CREATE TABLE "CavityGradientCapability" (
-	device_type VARCHAR(14),
-	name TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (name)
-);CREATE INDEX "ix_CavityGradientCapability_name" ON "CavityGradientCapability" (name);
 CREATE TABLE "ObservableSignal" (
 	role VARCHAR(10),
 	data_type VARCHAR(11),
@@ -371,54 +267,6 @@ CREATE TABLE "SystemCapability_for_property" (
 	PRIMARY KEY ("SystemCapability_name", for_property),
 	FOREIGN KEY("SystemCapability_name") REFERENCES "SystemCapability" (name)
 );CREATE INDEX "ix_SystemCapability_for_property_SystemCapability_name" ON "SystemCapability_for_property" ("SystemCapability_name");CREATE INDEX "ix_SystemCapability_for_property_for_property" ON "SystemCapability_for_property" (for_property);
-CREATE TABLE "MagnetCapability_for_property" (
-	"MagnetCapability_name" TEXT,
-	for_property TEXT,
-	PRIMARY KEY ("MagnetCapability_name", for_property),
-	FOREIGN KEY("MagnetCapability_name") REFERENCES "MagnetCapability" (name)
-);CREATE INDEX "ix_MagnetCapability_for_property_MagnetCapability_name" ON "MagnetCapability_for_property" ("MagnetCapability_name");CREATE INDEX "ix_MagnetCapability_for_property_for_property" ON "MagnetCapability_for_property" (for_property);
-CREATE TABLE "QuadrupoleCapability_for_property" (
-	"QuadrupoleCapability_name" TEXT,
-	for_property TEXT,
-	PRIMARY KEY ("QuadrupoleCapability_name", for_property),
-	FOREIGN KEY("QuadrupoleCapability_name") REFERENCES "QuadrupoleCapability" (name)
-);CREATE INDEX "ix_QuadrupoleCapability_for_property_for_property" ON "QuadrupoleCapability_for_property" (for_property);CREATE INDEX "ix_QuadrupoleCapability_for_property_QuadrupoleCapability_name" ON "QuadrupoleCapability_for_property" ("QuadrupoleCapability_name");
-CREATE TABLE "CorrectorCapability_for_property" (
-	"CorrectorCapability_name" TEXT,
-	for_property TEXT,
-	PRIMARY KEY ("CorrectorCapability_name", for_property),
-	FOREIGN KEY("CorrectorCapability_name") REFERENCES "CorrectorCapability" (name)
-);CREATE INDEX "ix_CorrectorCapability_for_property_CorrectorCapability_name" ON "CorrectorCapability_for_property" ("CorrectorCapability_name");CREATE INDEX "ix_CorrectorCapability_for_property_for_property" ON "CorrectorCapability_for_property" (for_property);
-CREATE TABLE "DipoleCapability_for_property" (
-	"DipoleCapability_name" TEXT,
-	for_property TEXT,
-	PRIMARY KEY ("DipoleCapability_name", for_property),
-	FOREIGN KEY("DipoleCapability_name") REFERENCES "DipoleCapability" (name)
-);CREATE INDEX "ix_DipoleCapability_for_property_for_property" ON "DipoleCapability_for_property" (for_property);CREATE INDEX "ix_DipoleCapability_for_property_DipoleCapability_name" ON "DipoleCapability_for_property" ("DipoleCapability_name");
-CREATE TABLE "SolenoidCapability_for_property" (
-	"SolenoidCapability_name" TEXT,
-	for_property TEXT,
-	PRIMARY KEY ("SolenoidCapability_name", for_property),
-	FOREIGN KEY("SolenoidCapability_name") REFERENCES "SolenoidCapability" (name)
-);CREATE INDEX "ix_SolenoidCapability_for_property_for_property" ON "SolenoidCapability_for_property" (for_property);CREATE INDEX "ix_SolenoidCapability_for_property_SolenoidCapability_name" ON "SolenoidCapability_for_property" ("SolenoidCapability_name");
-CREATE TABLE "InstrumentCapability_for_property" (
-	"InstrumentCapability_name" TEXT,
-	for_property TEXT,
-	PRIMARY KEY ("InstrumentCapability_name", for_property),
-	FOREIGN KEY("InstrumentCapability_name") REFERENCES "InstrumentCapability" (name)
-);CREATE INDEX "ix_InstrumentCapability_for_property_for_property" ON "InstrumentCapability_for_property" (for_property);CREATE INDEX "ix_InstrumentCapability_for_property_InstrumentCapability_name" ON "InstrumentCapability_for_property" ("InstrumentCapability_name");
-CREATE TABLE "BPMCapability_for_property" (
-	"BPMCapability_name" TEXT,
-	for_property TEXT,
-	PRIMARY KEY ("BPMCapability_name", for_property),
-	FOREIGN KEY("BPMCapability_name") REFERENCES "BPMCapability" (name)
-);CREATE INDEX "ix_BPMCapability_for_property_BPMCapability_name" ON "BPMCapability_for_property" ("BPMCapability_name");CREATE INDEX "ix_BPMCapability_for_property_for_property" ON "BPMCapability_for_property" (for_property);
-CREATE TABLE "CavityGradientCapability_for_property" (
-	"CavityGradientCapability_name" TEXT,
-	for_property TEXT,
-	PRIMARY KEY ("CavityGradientCapability_name", for_property),
-	FOREIGN KEY("CavityGradientCapability_name") REFERENCES "CavityGradientCapability" (name)
-);CREATE INDEX "ix_CavityGradientCapability_for_property_for_property" ON "CavityGradientCapability_for_property" (for_property);CREATE INDEX "ix_CavityGradientCapability_for_property_CavityGradientCapability_name" ON "CavityGradientCapability_for_property" ("CavityGradientCapability_name");
 CREATE TABLE "NaradConfig" (
 	id INTEGER NOT NULL,
 	schema_version TEXT NOT NULL,
@@ -490,7 +338,7 @@ CREATE TABLE "NaradConfig_has_sub_system" (
 	PRIMARY KEY ("NaradConfig_id", has_sub_system_name),
 	FOREIGN KEY("NaradConfig_id") REFERENCES "NaradConfig" (id),
 	FOREIGN KEY(has_sub_system_name) REFERENCES "ControlSystem" (name)
-);CREATE INDEX "ix_NaradConfig_has_sub_system_NaradConfig_id" ON "NaradConfig_has_sub_system" ("NaradConfig_id");CREATE INDEX "ix_NaradConfig_has_sub_system_has_sub_system_name" ON "NaradConfig_has_sub_system" (has_sub_system_name);
+);CREATE INDEX "ix_NaradConfig_has_sub_system_has_sub_system_name" ON "NaradConfig_has_sub_system" (has_sub_system_name);CREATE INDEX "ix_NaradConfig_has_sub_system_NaradConfig_id" ON "NaradConfig_has_sub_system" ("NaradConfig_id");
 CREATE TABLE "Beamline" (
 	beamline_kind TEXT,
 	name TEXT NOT NULL,

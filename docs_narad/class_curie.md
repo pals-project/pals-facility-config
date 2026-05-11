@@ -3,7 +3,7 @@
 # Slot: class_curie 
 
 
-_Optional URI or CURIE for a TypeSpecificCapability class._
+_Optional URI or CURIE._
 
 
 
@@ -57,7 +57,7 @@ Alias: class_curie
 <details>
 ```yaml
 name: class_curie
-description: Optional URI or CURIE for a TypeSpecificCapability class.
+description: Optional URI or CURIE.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: class_curie

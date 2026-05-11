@@ -26,9 +26,9 @@ Alias: has_system_capability
 | --- | --- | --- |
 | [ControlSystem](ControlSystem.md) | A control system (e |  no  |
 | [InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  yes  |
+| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
 | [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
 | [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
-| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
 
 
 

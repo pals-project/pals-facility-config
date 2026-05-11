@@ -24,15 +24,6 @@ URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemC
       NamedThing <|-- SystemCapability
         click NamedThing href "../NamedThing/"
       
-
-      SystemCapability <|-- MagnetCapability
-        click MagnetCapability href "../MagnetCapability/"
-      SystemCapability <|-- InstrumentCapability
-        click InstrumentCapability href "../InstrumentCapability/"
-      SystemCapability <|-- CavityGradientCapability
-        click CavityGradientCapability href "../CavityGradientCapability/"
-      
-
       SystemCapability : description
         
       SystemCapability : device_type
@@ -60,9 +51,6 @@ URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemC
 ## Inheritance
 * [NamedThing](NamedThing.md)
     * **SystemCapability**
-        * [MagnetCapability](MagnetCapability.md)
-        * [InstrumentCapability](InstrumentCapability.md)
-        * [CavityGradientCapability](CavityGradientCapability.md)
 
 
 

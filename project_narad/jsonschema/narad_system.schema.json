@@ -56,42 +56,6 @@
                 "string"
             ]
         },
-        "BPMCapability": {
-            "additionalProperties": false,
-            "description": "BPM-specific capability with horizontal and vertical position readback signals.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "for_property": {
-                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "BPMCapability",
-            "type": "object"
-        },
         "Beamline": {
             "additionalProperties": false,
             "description": "A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.",
@@ -267,42 +231,6 @@
             "title": "CapabilityLayer",
             "type": "object"
         },
-        "CavityGradientCapability": {
-            "additionalProperties": false,
-            "description": "RF cavity capability with gradient control, readback, and status signals.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "for_property": {
-                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "CavityGradientCapability",
-            "type": "object"
-        },
         "ControlCapability": {
             "additionalProperties": false,
             "description": "A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).",
@@ -451,42 +379,6 @@
             "title": "ControlSystem",
             "type": "object"
         },
-        "CorrectorCapability": {
-            "additionalProperties": false,
-            "description": "Corrector-specific capability extending MagnetCapability with kick signals.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "for_property": {
-                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "CorrectorCapability",
-            "type": "object"
-        },
         "DataTypeEnum": {
             "description": "Allowed data types for signal values.",
             "enum": [
@@ -500,42 +392,6 @@
             "title": "DataTypeEnum",
             "type": "string"
         },
-        "DipoleCapability": {
-            "additionalProperties": false,
-            "description": "Dipole-specific capability extending MagnetCapability with bend-field signals.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "for_property": {
-                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "DipoleCapability",
-            "type": "object"
-        },
         "ElementKindEnum": {
             "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type.",
             "enum": [
@@ -546,7 +402,6 @@
                 "Dipole",
                 "Quadrupole",
                 "Solenoid",
-                "WarmCavity",
                 "CavityGradient",
                 "RFCavity",
                 "Instrument",
@@ -1046,42 +901,6 @@
             "title": "Instrument",
             "type": "object"
         },
-        "InstrumentCapability": {
-            "additionalProperties": false,
-            "description": "Generic instrument capability (position readback and status signals).",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "for_property": {
-                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "InstrumentCapability",
-            "type": "object"
-        },
         "InstrumentSystem": {
             "additionalProperties": false,
             "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
@@ -1172,42 +991,6 @@
             },
             "required": [],
             "title": "InstrumentSystem",
-            "type": "object"
-        },
-        "MagnetCapability": {
-            "additionalProperties": false,
-            "description": "Generic magnet capability (current control and readback signals).",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "for_property": {
-                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "MagnetCapability",
             "type": "object"
         },
         "NaradConfig": {
@@ -1379,42 +1162,6 @@
                 "name"
             ],
             "title": "ObservableSignal",
-            "type": "object"
-        },
-        "QuadrupoleCapability": {
-            "additionalProperties": false,
-            "description": "Quadrupole-specific capability extending MagnetCapability with strength signals.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "for_property": {
-                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "QuadrupoleCapability",
             "type": "object"
         },
         "Signal": {
@@ -1677,42 +1424,6 @@
             },
             "required": [],
             "title": "Signal",
-            "type": "object"
-        },
-        "SolenoidCapability": {
-            "additionalProperties": false,
-            "description": "Solenoid-specific capability extending MagnetCapability with focusing signals.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "for_property": {
-                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "SolenoidCapability",
             "type": "object"
         },
         "System": {

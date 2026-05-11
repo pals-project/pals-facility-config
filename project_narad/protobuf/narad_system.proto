@@ -30,26 +30,10 @@ message BeamlineElement
  repeated  instanceSignalBinding instanceSignalBindings = 0
   elementParamSet paramSet = 0
  }
-// BPM-specific capability with horizontal and vertical position readback signals.
-message BPMCapability
- {
-  string name = 0
-  string description = 0
- repeated  string forProperty = 0
-  elementKindEnum deviceType = 0
- }
 // Capability-layer container for control profile families.
 message CapabilityLayer
  {
  repeated  controlCapability controlCapabilities = 0
- }
-// RF cavity capability with gradient control, readback, and status signals.
-message CavityGradientCapability
- {
-  string name = 0
-  string description = 0
- repeated  string forProperty = 0
-  elementKindEnum deviceType = 0
  }
 // A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).
 message ControlCapability
@@ -69,22 +53,6 @@ message ControlSystem
   systemTypeEnum systemType = 0
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
- }
-// Corrector-specific capability extending MagnetCapability with kick signals.
-message CorrectorCapability
- {
-  string name = 0
-  string description = 0
- repeated  string forProperty = 0
-  elementKindEnum deviceType = 0
- }
-// Dipole-specific capability extending MagnetCapability with bend-field signals.
-message DipoleCapability
- {
-  string name = 0
-  string description = 0
- repeated  string forProperty = 0
-  elementKindEnum deviceType = 0
  }
 // Named physics-parameter block for a beamline element. The name identifies the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
 message ElementParamSet
@@ -146,14 +114,6 @@ message Instrument
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
  }
-// Generic instrument capability (position readback and status signals).
-message InstrumentCapability
- {
-  string name = 0
-  string description = 0
- repeated  string forProperty = 0
-  elementKindEnum deviceType = 0
- }
 // A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.
 // 
 message InstrumentSystem
@@ -164,14 +124,6 @@ message InstrumentSystem
   elementKindEnum deviceType = 0
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
- }
-// Generic magnet capability (current control and readback signals).
-message MagnetCapability
- {
-  string name = 0
-  string description = 0
- repeated  string forProperty = 0
-  elementKindEnum deviceType = 0
  }
 // A top-level NARAD-system container for the: capability layer + signal layer.
 message NaradConfig
@@ -201,14 +153,6 @@ message ObservableSignal
   dataTypeEnum dataType = 0
   string units = 0
   uriorcurie unitsUri = 0
- }
-// Quadrupole-specific capability extending MagnetCapability with strength signals.
-message QuadrupoleCapability
- {
-  string name = 0
-  string description = 0
- repeated  string forProperty = 0
-  elementKindEnum deviceType = 0
  }
 // Domain term for a control-system signal. A Signal represents an identifiable quantity, state, setpoint, readback, limit, or status. In SSN/SOSA alignment, NARAD Signals are treated as properties of systems (ssn:forProperty). The concrete facility binding is captured in SignalBinding.
 // 
@@ -240,14 +184,6 @@ message SignalDefinitions
 message SignalLayer
  {
  repeated  facilitySystem facilities = 0
- }
-// Solenoid-specific capability extending MagnetCapability with focusing signals.
-message SolenoidCapability
- {
-  string name = 0
-  string description = 0
- repeated  string forProperty = 0
-  elementKindEnum deviceType = 0
  }
 // A physical, logical, or cyber-physical system involved in sensing, monitoring, control, or actuation. Broadly aligned to ssn:System.
 // 
