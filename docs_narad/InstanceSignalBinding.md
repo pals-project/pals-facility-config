@@ -26,6 +26,8 @@ URI: [narad:InstanceSignalBinding](https://w3id.org/narad_linkml/schema/narad/In
       
       InstanceSignalBinding : description
         
+      InstanceSignalBinding : for_property
+        
       InstanceSignalBinding : is_hosted_by
         
       InstanceSignalBinding : is_instance_of
@@ -53,10 +55,11 @@ URI: [narad:InstanceSignalBinding](https://w3id.org/narad_linkml/schema/narad/In
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [is_instance_of](is_instance_of.md) | * <br/> [Uriorcurie](Uriorcurie.md) | NARAD alias for rdf:type | direct |
-| [is_hosted_by](is_hosted_by.md) | * <br/> [Uriorcurie](Uriorcurie.md) | Links an InstanceSignalBinding to the FacilitySystem it belongs to | direct |
-| [is_property_of](is_property_of.md) | 0..1 <br/> [Uriorcurie](Uriorcurie.md) | Inverse of for_property: links the Class Signal to the Class of SignalBinding... | direct |
 | [pv_name](pv_name.md) | 0..1 <br/> [String](String.md) | Fully-resolved facility-specific process variable name, e | direct |
+| [is_instance_of](is_instance_of.md) | 0..1 <br/> [Uriorcurie](Uriorcurie.md) | NARAD alias for rdf:type | direct |
+| [for_property](for_property.md) | 0..1 <br/> [Uriorcurie](Uriorcurie.md) | SystemCapability → Signal: the capability can expose, monitor, control, or ac... | direct |
+| [is_hosted_by](is_hosted_by.md) | 0..1 <br/> [Uriorcurie](Uriorcurie.md) | Links an InstanceSignalBinding to the FacilitySystem it belongs to | direct |
+| [is_property_of](is_property_of.md) | 0..1 <br/> [Uriorcurie](Uriorcurie.md) | Inverse of for_property: links the Class Signal to the Class of SignalBinding... | direct |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
@@ -97,7 +100,7 @@ URI: [narad:InstanceSignalBinding](https://w3id.org/narad_linkml/schema/narad/In
 | ---  | ---  |
 | self | narad:InstanceSignalBinding |
 | native | narad:InstanceSignalBinding |
-| broad | sosa:Sensor |
+| broad | rdf:type, sosa:Sensor |
 
 
 
@@ -121,24 +124,30 @@ description: 'A facility-specific binding between a NARAD Signal and an implemen
   '
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 broad_mappings:
+- rdf:type
 - sosa:Sensor
 is_a: NamedThing
 slots:
+- pv_name
 - is_instance_of
+- for_property
 - is_hosted_by
 - is_property_of
-- pv_name
 slot_usage:
   is_instance_of:
     name: is_instance_of
     range: uriorcurie
-    multivalued: true
+    multivalued: false
   is_hosted_by:
     name: is_hosted_by
     range: uriorcurie
-    multivalued: true
+    multivalued: false
   is_property_of:
     name: is_property_of
+    range: uriorcurie
+    multivalued: false
+  for_property:
+    name: for_property
     range: uriorcurie
     multivalued: false
 
@@ -158,28 +167,46 @@ description: 'A facility-specific binding between a NARAD Signal and an implemen
   '
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 broad_mappings:
+- rdf:type
 - sosa:Sensor
 is_a: NamedThing
 slot_usage:
   is_instance_of:
     name: is_instance_of
     range: uriorcurie
-    multivalued: true
+    multivalued: false
   is_hosted_by:
     name: is_hosted_by
     range: uriorcurie
-    multivalued: true
+    multivalued: false
   is_property_of:
     name: is_property_of
     range: uriorcurie
     multivalued: false
+  for_property:
+    name: for_property
+    range: uriorcurie
+    multivalued: false
 attributes:
+  pv_name:
+    name: pv_name
+    description: 'Fully-resolved facility-specific process variable name, e.g. MQWK202:STAT
+      or MQWK202:BDL.
+
+      '
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: pv_name
+    owner: InstanceSignalBinding
+    domain_of:
+    - InstanceSignalBinding
+    range: string
   is_instance_of:
     name: is_instance_of
     description: 'NARAD alias for rdf:type. Links a facility-specific instance node
       to the LinkML class or semantic class it instantiates. In the graph this edge
-      is labelled narad:isInstanceOf. Values are typically the rdf:type of the Procedure
-      class that implements the signal binding, e.g. narad:CavityGradientControlCapability.
+      is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class
+      that implements the signal binding.
 
       '
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
@@ -189,9 +216,27 @@ attributes:
     alias: is_instance_of
     owner: InstanceSignalBinding
     domain_of:
+    - BeamlineElement
     - InstanceSignalBinding
     range: uriorcurie
-    multivalued: true
+    multivalued: false
+  for_property:
+    name: for_property
+    description: 'SystemCapability → Signal: the capability can expose, monitor, control,
+      or actuate that signal.
+
+      '
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    exact_mappings:
+    - ssn:forProperty
+    rank: 1000
+    alias: for_property
+    owner: InstanceSignalBinding
+    domain_of:
+    - SystemCapability
+    - InstanceSignalBinding
+    range: uriorcurie
+    multivalued: false
   is_hosted_by:
     name: is_hosted_by
     description: 'Links an InstanceSignalBinding to the FacilitySystem it belongs
@@ -209,7 +254,7 @@ attributes:
     domain_of:
     - InstanceSignalBinding
     range: uriorcurie
-    multivalued: true
+    multivalued: false
   is_property_of:
     name: is_property_of
     description: 'Inverse of for_property: links the Class Signal to the Class of
@@ -230,19 +275,6 @@ attributes:
     - InstanceSignalBinding
     range: uriorcurie
     multivalued: false
-  pv_name:
-    name: pv_name
-    description: 'Fully-resolved facility-specific process variable name, e.g. MQWK202:STAT
-      or MQWK202:BDL.
-
-      '
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: pv_name
-    owner: InstanceSignalBinding
-    domain_of:
-    - InstanceSignalBinding
-    range: string
   name:
     name: name
     description: Human-readable name or local string key for the entity.
@@ -264,7 +296,6 @@ attributes:
     owner: InstanceSignalBinding
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

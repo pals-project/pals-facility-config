@@ -24,17 +24,11 @@ Alias: has_system_capability
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
-| [Magnet](Magnet.md) | A powered magnet device (generic supertype for all magnet kinds) |  no  |
 | [ControlSystem](ControlSystem.md) | A control system (e |  no  |
-| [Marker](Marker.md) | A zero-length reference point, drift space, or survey marker |  no  |
-| [Solenoid](Solenoid.md) | A solenoid magnet |  no  |
+| [InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  yes  |
 | [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
-| [BPM](BPM.md) | A Beam Position Monitor |  no  |
-| [Quadrupole](Quadrupole.md) | A quadrupole focusing/defocusing magnet |  no  |
-| [Dipole](Dipole.md) | A dipole bending magnet |  no  |
-| [Corrector](Corrector.md) | A dipole corrector magnet for orbit correction |  no  |
-| [RFCavity](RFCavity.md) | A radio-frequency accelerating or bunching cavity |  no  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
+| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
 
 
 
@@ -93,6 +87,7 @@ domain: System
 alias: has_system_capability
 domain_of:
 - System
+- InstrumentSystem
 range: SystemCapability
 multivalued: true
 

@@ -25,16 +25,14 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
         click NamedThing href "../NamedThing/"
       
 
+      System <|-- FacilitySystem
+        click FacilitySystem href "../FacilitySystem/"
       System <|-- ControlSystem
         click ControlSystem href "../ControlSystem/"
-      System <|-- Magnet
-        click Magnet href "../Magnet/"
+      System <|-- InstrumentSystem
+        click InstrumentSystem href "../InstrumentSystem/"
       System <|-- Instrument
         click Instrument href "../Instrument/"
-      System <|-- RFCavity
-        click RFCavity href "../RFCavity/"
-      System <|-- Marker
-        click Marker href "../Marker/"
       
 
       System : description
@@ -63,6 +61,17 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
         
       System : name
         
+      System : system_type
+        
+          
+    
+        
+        
+        System --> "0..1" SystemTypeEnum : system_type
+        click SystemTypeEnum href "../SystemTypeEnum/"
+    
+
+        
       
 ```
 
@@ -73,11 +82,10 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
 ## Inheritance
 * [NamedThing](NamedThing.md)
     * **System**
+        * [FacilitySystem](FacilitySystem.md)
         * [ControlSystem](ControlSystem.md)
-        * [Magnet](Magnet.md)
+        * [InstrumentSystem](InstrumentSystem.md)
         * [Instrument](Instrument.md)
-        * [RFCavity](RFCavity.md)
-        * [Marker](Marker.md)
 
 
 
@@ -85,6 +93,7 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
+| [system_type](system_type.md) | 0..1 <br/> [SystemTypeEnum](SystemTypeEnum.md) | High-level system type for classification and querying | direct |
 | [has_sub_system](has_sub_system.md) | * <br/> [System](System.md) | Relates a System to one of its subsystems (SSN alignment) | direct |
 | [has_system_capability](has_system_capability.md) | * <br/> [SystemCapability](SystemCapability.md) | Relates a System to a SystemCapability it supports (SSN-System alignment) | direct |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
@@ -98,39 +107,22 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
+| [NaradConfig](NaradConfig.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
+| [FacilitySystem](FacilitySystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
+| [FacilitySystem](FacilitySystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
+| [FacilitySystem](FacilitySystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
 | [System](System.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [System](System.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [System](System.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
 | [ControlSystem](ControlSystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [ControlSystem](ControlSystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [ControlSystem](ControlSystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [Magnet](Magnet.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [Magnet](Magnet.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [Magnet](Magnet.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [Quadrupole](Quadrupole.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [Quadrupole](Quadrupole.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [Quadrupole](Quadrupole.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [Corrector](Corrector.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [Corrector](Corrector.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [Corrector](Corrector.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [Dipole](Dipole.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [Dipole](Dipole.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [Dipole](Dipole.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [Solenoid](Solenoid.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [Solenoid](Solenoid.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [Solenoid](Solenoid.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
+| [InstrumentSystem](InstrumentSystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
+| [InstrumentSystem](InstrumentSystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
+| [InstrumentSystem](InstrumentSystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
 | [Instrument](Instrument.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [Instrument](Instrument.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [Instrument](Instrument.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [BPM](BPM.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [BPM](BPM.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [BPM](BPM.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [RFCavity](RFCavity.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [RFCavity](RFCavity.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [RFCavity](RFCavity.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [Marker](Marker.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [Marker](Marker.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [Marker](Marker.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
 
 
 
@@ -184,19 +176,19 @@ exact_mappings:
 - ssn:System
 is_a: NamedThing
 slots:
+- system_type
 - has_sub_system
 - has_system_capability
 slot_usage:
   has_sub_system:
     name: has_sub_system
     range: System
-    multivalued: true
-    inlined: false
+    inlined_as_list: true
   has_system_capability:
     name: has_system_capability
     range: SystemCapability
     multivalued: true
-    inlined: false
+    inlined: true
 
 ```
 </details>
@@ -218,14 +210,23 @@ slot_usage:
   has_sub_system:
     name: has_sub_system
     range: System
-    multivalued: true
-    inlined: false
+    inlined_as_list: true
   has_system_capability:
     name: has_system_capability
     range: SystemCapability
     multivalued: true
-    inlined: false
+    inlined: true
 attributes:
+  system_type:
+    name: system_type
+    description: High-level system type for classification and querying.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: system_type
+    owner: System
+    domain_of:
+    - System
+    range: SystemTypeEnum
   has_sub_system:
     name: has_sub_system
     description: 'Relates a System to one of its subsystems (SSN alignment). Use for
@@ -240,10 +241,12 @@ attributes:
     alias: has_sub_system
     owner: System
     domain_of:
+    - NaradConfig
     - System
+    - InstrumentSystem
     range: System
     multivalued: true
-    inlined: false
+    inlined_as_list: true
   has_system_capability:
     name: has_system_capability
     description: 'Relates a System to a SystemCapability it supports (SSN-System alignment).
@@ -260,9 +263,10 @@ attributes:
     owner: System
     domain_of:
     - System
+    - InstrumentSystem
     range: SystemCapability
     multivalued: true
-    inlined: false
+    inlined: true
   name:
     name: name
     description: Human-readable name or local string key for the entity.
@@ -284,7 +288,6 @@ attributes:
     owner: System
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

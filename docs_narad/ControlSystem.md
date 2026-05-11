@@ -50,6 +50,17 @@ URI: [narad:ControlSystem](https://w3id.org/narad_linkml/schema/narad/ControlSys
         
       ControlSystem : name
         
+      ControlSystem : system_type
+        
+          
+    
+        
+        
+        ControlSystem --> "0..1" SystemTypeEnum : system_type
+        click SystemTypeEnum href "../SystemTypeEnum/"
+    
+
+        
       
 ```
 
@@ -68,6 +79,7 @@ URI: [narad:ControlSystem](https://w3id.org/narad_linkml/schema/narad/ControlSys
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
+| [system_type](system_type.md) | 0..1 <br/> [SystemTypeEnum](SystemTypeEnum.md) | High-level system type for classification and querying | [System](System.md) |
 | [has_sub_system](has_sub_system.md) | * <br/> [System](System.md) | Relates a System to one of its subsystems (SSN alignment) | [System](System.md) |
 | [has_system_capability](has_system_capability.md) | * <br/> [SystemCapability](SystemCapability.md) | Relates a System to a SystemCapability it supports (SSN-System alignment) | [System](System.md) |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
@@ -75,6 +87,14 @@ URI: [narad:ControlSystem](https://w3id.org/narad_linkml/schema/narad/ControlSys
 
 
 
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [NaradConfig](NaradConfig.md) | [has_sub_system](has_sub_system.md) | range | [ControlSystem](ControlSystem.md) |
+| [FacilitySystem](FacilitySystem.md) | [control_system](control_system.md) | range | [ControlSystem](ControlSystem.md) |
 
 
 
@@ -145,6 +165,16 @@ exact_mappings:
 - ssn:System
 is_a: System
 attributes:
+  system_type:
+    name: system_type
+    description: High-level system type for classification and querying.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: system_type
+    owner: ControlSystem
+    domain_of:
+    - System
+    range: SystemTypeEnum
   has_sub_system:
     name: has_sub_system
     description: 'Relates a System to one of its subsystems (SSN alignment). Use for
@@ -159,10 +189,12 @@ attributes:
     alias: has_sub_system
     owner: ControlSystem
     domain_of:
+    - NaradConfig
     - System
+    - InstrumentSystem
     range: System
     multivalued: true
-    inlined: false
+    inlined_as_list: true
   has_system_capability:
     name: has_system_capability
     description: 'Relates a System to a SystemCapability it supports (SSN-System alignment).
@@ -179,9 +211,10 @@ attributes:
     owner: ControlSystem
     domain_of:
     - System
+    - InstrumentSystem
     range: SystemCapability
     multivalued: true
-    inlined: false
+    inlined: true
   name:
     name: name
     description: Human-readable name or local string key for the entity.
@@ -203,7 +236,6 @@ attributes:
     owner: ControlSystem
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

@@ -22,11 +22,6 @@ URI: [narad:Instrument](https://w3id.org/narad_linkml/schema/narad/Instrument)
       System <|-- Instrument
         click System href "../System/"
       
-
-      Instrument <|-- BPM
-        click BPM href "../BPM/"
-      
-
       Instrument : description
         
       Instrument : has_sub_system
@@ -53,6 +48,17 @@ URI: [narad:Instrument](https://w3id.org/narad_linkml/schema/narad/Instrument)
         
       Instrument : name
         
+      Instrument : system_type
+        
+          
+    
+        
+        
+        Instrument --> "0..1" SystemTypeEnum : system_type
+        click SystemTypeEnum href "../SystemTypeEnum/"
+    
+
+        
       
 ```
 
@@ -64,7 +70,6 @@ URI: [narad:Instrument](https://w3id.org/narad_linkml/schema/narad/Instrument)
 * [NamedThing](NamedThing.md)
     * [System](System.md)
         * **Instrument**
-            * [BPM](BPM.md)
 
 
 
@@ -72,6 +77,7 @@ URI: [narad:Instrument](https://w3id.org/narad_linkml/schema/narad/Instrument)
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
+| [system_type](system_type.md) | 0..1 <br/> [SystemTypeEnum](SystemTypeEnum.md) | High-level system type for classification and querying | [System](System.md) |
 | [has_sub_system](has_sub_system.md) | * <br/> [System](System.md) | Relates a System to one of its subsystems (SSN alignment) | [System](System.md) |
 | [has_system_capability](has_system_capability.md) | * <br/> [SystemCapability](SystemCapability.md) | Relates a System to a SystemCapability it supports (SSN-System alignment) | [System](System.md) |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
@@ -143,6 +149,16 @@ exact_mappings:
 - ssn:System
 is_a: System
 attributes:
+  system_type:
+    name: system_type
+    description: High-level system type for classification and querying.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: system_type
+    owner: Instrument
+    domain_of:
+    - System
+    range: SystemTypeEnum
   has_sub_system:
     name: has_sub_system
     description: 'Relates a System to one of its subsystems (SSN alignment). Use for
@@ -157,10 +173,12 @@ attributes:
     alias: has_sub_system
     owner: Instrument
     domain_of:
+    - NaradConfig
     - System
+    - InstrumentSystem
     range: System
     multivalued: true
-    inlined: false
+    inlined_as_list: true
   has_system_capability:
     name: has_system_capability
     description: 'Relates a System to a SystemCapability it supports (SSN-System alignment).
@@ -177,9 +195,10 @@ attributes:
     owner: Instrument
     domain_of:
     - System
+    - InstrumentSystem
     range: SystemCapability
     multivalued: true
-    inlined: false
+    inlined: true
   name:
     name: name
     description: Human-readable name or local string key for the entity.
@@ -201,7 +220,6 @@ attributes:
     owner: Instrument
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

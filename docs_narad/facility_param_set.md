@@ -22,7 +22,7 @@ Alias: facility_param_set
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |  no  |
+| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
 
 
 
@@ -72,7 +72,7 @@ from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: facility_param_set
 domain_of:
-- BeamlineElement
+- ElementParamSet
 range: FacilityParamSet
 inlined: true
 

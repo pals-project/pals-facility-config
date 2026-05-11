@@ -56,48 +56,6 @@
                 "string"
             ]
         },
-        "BPM": {
-            "additionalProperties": false,
-            "description": "A Beam Position Monitor.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "BPM",
-            "type": "object"
-        },
         "BPMCapability": {
             "additionalProperties": false,
             "description": "BPM-specific capability with horizontal and vertical position readback signals.",
@@ -123,13 +81,6 @@
                         "null"
                     ]
                 },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -141,47 +92,9 @@
             "title": "BPMCapability",
             "type": "object"
         },
-        "BPMSignalSet": {
-            "additionalProperties": false,
-            "description": "BPM-specific signal bindings.",
-            "properties": {
-                "horizontal_beam_position": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "status": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "vertical_beam_position": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                }
-            },
-            "title": "BPMSignalSet",
-            "type": "object"
-        },
         "Beamline": {
             "additionalProperties": false,
-            "description": "An ordered sequence of beamline elements defining a beam path.",
+            "description": "A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.",
             "properties": {
                 "beamline_kind": {
                     "description": "Kind/type label for the beamline entry (e.g. BeamLine).",
@@ -198,7 +111,7 @@
                     ]
                 },
                 "line": {
-                    "description": "Ordered sequence of cross-referenced element names forming a beamline.",
+                    "description": "Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map.",
                     "items": {
                         "type": "string"
                     },
@@ -222,41 +135,12 @@
             "additionalProperties": false,
             "description": "A single element in a beamline with its kind and optional NARAD capability annotations.",
             "properties": {
-                "capability_profile": {
-                    "description": "Cross-reference to the specific capability profile applied to this element.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "capability_profile_family": {
-                    "description": "Cross-reference to the control profile family for this element.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
                 "description": {
                     "description": "Detailed description of the entity.",
                     "type": [
                         "string",
                         "null"
                     ]
-                },
-                "element_kind": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The type of this beamline element (e.g. Quadrupole, BPM, RFCavity)."
-                },
-                "facility_param_set": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/FacilityParamSet"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Facility-specific element parameters (type designation, model name, open property map)."
                 },
                 "instance_signal_bindings": {
                     "additionalProperties": {
@@ -269,9 +153,16 @@
                             }
                         ]
                     },
-                    "description": "Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.",
+                    "description": "Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.",
                     "type": [
                         "object",
+                        "null"
+                    ]
+                },
+                "is_instance_of": {
+                    "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.\n",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -287,14 +178,15 @@
                     "type": "string"
                 },
                 "param_set": {
-                    "description": "Named physics-parameter blocks for this element (e.g. RFP, BendP, MagneticMultipoleP).",
-                    "items": {
-                        "$ref": "#/$defs/ElementParamSet"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElementParamSet"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Named physics-parameter blocks for this element (e.g. RFP, BendP, MagneticMultipoleP)."
                 }
             },
             "required": [
@@ -305,7 +197,7 @@
         },
         "Beamline__identifier_optional": {
             "additionalProperties": false,
-            "description": "An ordered sequence of beamline elements defining a beam path.",
+            "description": "A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.",
             "properties": {
                 "beamline_kind": {
                     "description": "Kind/type label for the beamline entry (e.g. BeamLine).",
@@ -322,7 +214,7 @@
                     ]
                 },
                 "line": {
-                    "description": "Ordered sequence of cross-referenced element names forming a beamline.",
+                    "description": "Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map.",
                     "items": {
                         "type": "string"
                     },
@@ -340,61 +232,32 @@
             "title": "Beamline",
             "type": "object"
         },
-        "Capability": {
-            "additionalProperties": false,
-            "description": "A named, shared grouping of semantically related signals for a control aspect (e.g. MagnetCurrentControlCapability).",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "signals": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Signal__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Signals within a capability, keyed by signal name.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "Capability",
-            "type": "object"
-        },
         "CapabilityLayer": {
             "additionalProperties": false,
             "description": "Capability-layer container for control profile families.",
             "properties": {
-                "profiles": {
+                "control_capabilities": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/ControlProfileFamily__identifier_optional"
+                                "$ref": "#/$defs/ControlCapability__identifier_optional"
                             },
                             {
-                                "type": "null"
+                                "additionalProperties": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/$defs/Signal__identifier_optional"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ]
+                                },
+                                "description": "Signals within a capability, keyed by a semantic signal name.",
+                                "type": "object"
                             }
                         ]
                     },
-                    "description": "Control profile families keyed by family name.",
                     "type": [
                         "object",
                         "null"
@@ -402,161 +265,6 @@
                 }
             },
             "title": "CapabilityLayer",
-            "type": "object"
-        },
-        "CapabilityProfile": {
-            "additionalProperties": false,
-            "description": "A device-type profile that reuses shared capabilities and adds type-specific ones (e.g. QuadrupoleProfile).",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "inherits_shared_capabilities": {
-                    "description": "Shared capabilities inherited by this profile, cross-referenced by name.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "type_specific_capabilities": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/TypeSpecificCapability__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Type-specific capabilities declared directly in a profile.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "CapabilityProfile",
-            "type": "object"
-        },
-        "CapabilityProfile__identifier_optional": {
-            "additionalProperties": false,
-            "description": "A device-type profile that reuses shared capabilities and adds type-specific ones (e.g. QuadrupoleProfile).",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
-                },
-                "inherits_shared_capabilities": {
-                    "description": "Shared capabilities inherited by this profile, cross-referenced by name.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "type_specific_capabilities": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/TypeSpecificCapability__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Type-specific capabilities declared directly in a profile.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
-                }
-            },
-            "required": [],
-            "title": "CapabilityProfile",
-            "type": "object"
-        },
-        "Capability__identifier_optional": {
-            "additionalProperties": false,
-            "description": "A named, shared grouping of semantically related signals for a control aspect (e.g. MagnetCurrentControlCapability).",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "signals": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Signal__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Signals within a capability, keyed by signal name.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
-                }
-            },
-            "required": [],
-            "title": "Capability",
             "type": "object"
         },
         "CavityGradientCapability": {
@@ -584,13 +292,6 @@
                         "null"
                     ]
                 },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -602,9 +303,9 @@
             "title": "CavityGradientCapability",
             "type": "object"
         },
-        "ControlProfileFamily": {
+        "ControlCapability": {
             "additionalProperties": false,
-            "description": "A reusable family of control profiles sharing common semantics and structure (e.g. MagnetCurrentControlProfileFamily).",
+            "description": "A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).",
             "properties": {
                 "description": {
                     "description": "Detailed description of the entity.",
@@ -613,58 +314,46 @@
                         "null"
                     ]
                 },
-                "device_domain": {
-                    "$ref": "#/$defs/DeviceDomainEnum",
-                    "description": "High-level device domain that this profile family governs."
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
                 },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
                 },
-                "shared_capabilities": {
+                "signals": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/Capability__identifier_optional"
+                                "$ref": "#/$defs/Signal__identifier_optional"
                             },
                             {
                                 "type": "null"
                             }
                         ]
                     },
-                    "description": "Named shared capabilities reused by profile types in a family.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
+                    "description": "Signals within a capability, keyed by a semantic signal name.",
+                    "type": "object"
                 },
-                "type_profiles": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/CapabilityProfile__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Device-type profile definitions for this family, keyed by profile name.",
+                "subclass_of": {
+                    "description": "-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.",
                     "type": [
-                        "object",
+                        "string",
                         "null"
                     ]
                 }
             },
             "required": [
+                "signals",
                 "name"
             ],
-            "title": "ControlProfileFamily",
+            "title": "ControlCapability",
             "type": "object"
         },
-        "ControlProfileFamily__identifier_optional": {
+        "ControlCapability__identifier_optional": {
             "additionalProperties": false,
-            "description": "A reusable family of control profiles sharing common semantics and structure (e.g. MagnetCurrentControlProfileFamily).",
+            "description": "A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).",
             "properties": {
                 "description": {
                     "description": "Detailed description of the entity.",
@@ -673,51 +362,40 @@
                         "null"
                     ]
                 },
-                "device_domain": {
-                    "$ref": "#/$defs/DeviceDomainEnum",
-                    "description": "High-level device domain that this profile family governs."
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
                 },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
                 },
-                "shared_capabilities": {
+                "signals": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/Capability__identifier_optional"
+                                "$ref": "#/$defs/Signal__identifier_optional"
                             },
                             {
                                 "type": "null"
                             }
                         ]
                     },
-                    "description": "Named shared capabilities reused by profile types in a family.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
+                    "description": "Signals within a capability, keyed by a semantic signal name.",
+                    "type": "object"
                 },
-                "type_profiles": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/CapabilityProfile__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Device-type profile definitions for this family, keyed by profile name.",
+                "subclass_of": {
+                    "description": "-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.",
                     "type": [
-                        "object",
+                        "string",
                         "null"
                     ]
                 }
             },
-            "required": [],
-            "title": "ControlProfileFamily",
+            "required": [
+                "signals"
+            ],
+            "title": "ControlCapability",
             "type": "object"
         },
         "ControlSystem": {
@@ -734,7 +412,7 @@
                 "has_sub_system": {
                     "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/$defs/System"
                     },
                     "type": [
                         "array",
@@ -742,66 +420,35 @@
                     ]
                 },
                 "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SystemCapability__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
                     "type": [
-                        "array",
+                        "object",
                         "null"
                     ]
                 },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
                 }
             },
             "required": [
                 "name"
             ],
             "title": "ControlSystem",
-            "type": "object"
-        },
-        "Corrector": {
-            "additionalProperties": false,
-            "description": "A dipole corrector magnet for orbit correction.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "Corrector",
             "type": "object"
         },
         "CorrectorCapability": {
@@ -829,13 +476,6 @@
                         "null"
                     ]
                 },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -845,24 +485,6 @@
                 "name"
             ],
             "title": "CorrectorCapability",
-            "type": "object"
-        },
-        "CorrectorSignalSet": {
-            "additionalProperties": false,
-            "description": "Corrector-specific signal bindings.",
-            "properties": {
-                "kick_setpoint": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                }
-            },
-            "title": "CorrectorSignalSet",
             "type": "object"
         },
         "DataTypeEnum": {
@@ -877,58 +499,6 @@
             ],
             "title": "DataTypeEnum",
             "type": "string"
-        },
-        "DeviceDomainEnum": {
-            "description": "High-level device domain for a control profile family.",
-            "enum": [
-                "Magnet",
-                "Instrument",
-                "RFCavity"
-            ],
-            "title": "DeviceDomainEnum",
-            "type": "string"
-        },
-        "Dipole": {
-            "additionalProperties": false,
-            "description": "A dipole bending magnet.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "Dipole",
-            "type": "object"
         },
         "DipoleCapability": {
             "additionalProperties": false,
@@ -955,13 +525,6 @@
                         "null"
                     ]
                 },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -973,26 +536,8 @@
             "title": "DipoleCapability",
             "type": "object"
         },
-        "DipoleSignalSet": {
-            "additionalProperties": false,
-            "description": "Dipole-specific signal bindings.",
-            "properties": {
-                "field_setpoint": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                }
-            },
-            "title": "DipoleSignalSet",
-            "type": "object"
-        },
         "ElementKindEnum": {
-            "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports.",
+            "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type.",
             "enum": [
                 "Drift",
                 "Marker",
@@ -1001,8 +546,11 @@
                 "Dipole",
                 "Quadrupole",
                 "Solenoid",
+                "WarmCavity",
+                "CavityGradient",
                 "RFCavity",
-                "Instrument"
+                "Instrument",
+                "Magnet"
             ],
             "title": "ElementKindEnum",
             "type": "string"
@@ -1032,13 +580,6 @@
                         "null"
                     ]
                 },
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
                 "e1": {
                     "description": "Entry edge angle in radians.",
                     "type": [
@@ -1053,16 +594,23 @@
                         "null"
                     ]
                 },
+                "facility_param_set": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FacilityParamSet"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Facility-specific element parameters (type designation, model name, open property map)."
+                },
                 "frequency": {
                     "description": "RF frequency in Hz.",
                     "type": [
                         "number",
                         "null"
                     ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
                 },
                 "phase": {
                     "description": "RF phase in degrees.",
@@ -1079,122 +627,7 @@
                     ]
                 }
             },
-            "required": [
-                "name"
-            ],
             "title": "ElementParamSet",
-            "type": "object"
-        },
-        "FacilityConfig": {
-            "additionalProperties": false,
-            "description": "Facility-specific signal binding configuration.",
-            "properties": {
-                "control_system": {
-                    "description": "Identifier of the control system (e.g. epics).",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "facility_identifier": {
-                    "description": "Globally unique identifier for the facility, with specified type and value.",
-                    "items": {
-                        "$ref": "#/$defs/FacilityIdentifier"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "naming_convention": {
-                    "description": "Signal naming convention template (e.g. <device><signal_code>).",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "signal_definitions": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalDefinitions"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Signal suffix templates for this facility."
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "FacilityConfig",
-            "type": "object"
-        },
-        "FacilityConfig__identifier_optional": {
-            "additionalProperties": false,
-            "description": "Facility-specific signal binding configuration.",
-            "properties": {
-                "control_system": {
-                    "description": "Identifier of the control system (e.g. epics).",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "facility_identifier": {
-                    "description": "Globally unique identifier for the facility, with specified type and value.",
-                    "items": {
-                        "$ref": "#/$defs/FacilityIdentifier"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "naming_convention": {
-                    "description": "Signal naming convention template (e.g. <device><signal_code>).",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "signal_definitions": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalDefinitions"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Signal suffix templates for this facility."
-                }
-            },
-            "required": [],
-            "title": "FacilityConfig",
             "type": "object"
         },
         "FacilityIdentifier": {
@@ -1218,7 +651,7 @@
         },
         "FacilityParamSet": {
             "additionalProperties": false,
-            "description": "Facility-specific element parameters block for beamline elements.",
+            "description": "Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters.",
             "properties": {
                 "facility_element_type": {
                     "description": "Facility-specific element type designation (e.g. WarmCavity, QW, HCorrector). named facility_element_type here to avoid conflict with the LinkML metamodel 'type'  designator used for polymorphic class selection.",
@@ -1243,10 +676,196 @@
                             "type": "null"
                         }
                     ],
-                    "description": "Open-ended key-value property map for element-specific or facility-specific parameters."
+                    "description": "Intentionally open-ended key-value property map for element-specific or facility-specific parameters."
                 }
             },
             "title": "FacilityParamSet",
+            "type": "object"
+        },
+        "FacilitySystem": {
+            "additionalProperties": false,
+            "description": "Facility-specific signal binding configuration.",
+            "properties": {
+                "control_system": {
+                    "description": "Identifier of the control system (e.g. epics).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility_identifier": {
+                    "description": "Globally unique identifier for the facility, with specified type and value.",
+                    "items": {
+                        "$ref": "#/$defs/FacilityIdentifier"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_sub_system": {
+                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
+                    "items": {
+                        "$ref": "#/$defs/System"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_system_capability": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SystemCapability__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "naming_convention": {
+                    "description": "Signal naming convention template (e.g. <device><signal_code>).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signal_definitions": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalDefinitions__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Structured container for facility-specific signal suffix templates.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "FacilitySystem",
+            "type": "object"
+        },
+        "FacilitySystem__identifier_optional": {
+            "additionalProperties": false,
+            "description": "Facility-specific signal binding configuration.",
+            "properties": {
+                "control_system": {
+                    "description": "Identifier of the control system (e.g. epics).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility_identifier": {
+                    "description": "Globally unique identifier for the facility, with specified type and value.",
+                    "items": {
+                        "$ref": "#/$defs/FacilityIdentifier"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_sub_system": {
+                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
+                    "items": {
+                        "$ref": "#/$defs/System"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_system_capability": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SystemCapability__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "naming_convention": {
+                    "description": "Signal naming convention template (e.g. <device><signal_code>).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signal_definitions": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalDefinitions__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Structured container for facility-specific signal suffix templates.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
+                }
+            },
+            "required": [],
+            "title": "FacilitySystem",
             "type": "object"
         },
         "IdentifierTypeEnum": {
@@ -1273,28 +892,29 @@
                         "null"
                     ]
                 },
+                "for_property": {
+                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "is_hosted_by": {
                     "description": "Links an InstanceSignalBinding to the FacilitySystem it belongs to. This is the edge that connects the facility-specific bindings to the Facility node in the graph.\n",
-                    "items": {
-                        "type": "string"
-                    },
                     "type": [
-                        "array",
+                        "string",
                         "null"
                     ]
                 },
                 "is_instance_of": {
-                    "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf.\n",
-                    "items": {
-                        "type": "string"
-                    },
+                    "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.\n",
                     "type": [
-                        "array",
+                        "string",
                         "null"
                     ]
                 },
                 "is_property_of": {
-                    "description": "Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph.\n",
+                    "description": "Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph. Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system).\n",
                     "type": [
                         "string",
                         "null"
@@ -1329,28 +949,29 @@
                         "null"
                     ]
                 },
+                "for_property": {
+                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "is_hosted_by": {
                     "description": "Links an InstanceSignalBinding to the FacilitySystem it belongs to. This is the edge that connects the facility-specific bindings to the Facility node in the graph.\n",
-                    "items": {
-                        "type": "string"
-                    },
                     "type": [
-                        "array",
+                        "string",
                         "null"
                     ]
                 },
                 "is_instance_of": {
-                    "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf.\n",
-                    "items": {
-                        "type": "string"
-                    },
+                    "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.\n",
                     "type": [
-                        "array",
+                        "string",
                         "null"
                     ]
                 },
                 "is_property_of": {
-                    "description": "Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph.\n",
+                    "description": "Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph. Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system).\n",
                     "type": [
                         "string",
                         "null"
@@ -1386,7 +1007,7 @@
                 "has_sub_system": {
                     "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/$defs/System"
                     },
                     "type": [
                         "array",
@@ -1394,18 +1015,29 @@
                     ]
                 },
                 "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SystemCapability__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
                     "type": [
-                        "array",
+                        "object",
                         "null"
                     ]
                 },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
                 }
             },
             "required": [
@@ -1439,13 +1071,6 @@
                         "null"
                     ]
                 },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -1457,9 +1082,9 @@
             "title": "InstrumentCapability",
             "type": "object"
         },
-        "Magnet": {
+        "InstrumentSystem": {
             "additionalProperties": false,
-            "description": "A powered magnet device (generic supertype for all magnet kinds).",
+            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
             "properties": {
                 "description": {
                     "description": "Detailed description of the entity.",
@@ -1468,10 +1093,14 @@
                         "null"
                     ]
                 },
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
+                },
                 "has_sub_system": {
                     "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/$defs/System"
                     },
                     "type": [
                         "array",
@@ -1480,23 +1109,69 @@
                 },
                 "has_system_capability": {
                     "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
-                    },
                     "type": [
-                        "array",
+                        "string",
                         "null"
                     ]
                 },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
                 }
             },
             "required": [
                 "name"
             ],
-            "title": "Magnet",
+            "title": "InstrumentSystem",
+            "type": "object"
+        },
+        "InstrumentSystem__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
+                },
+                "has_sub_system": {
+                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
+                    "items": {
+                        "$ref": "#/$defs/System"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_system_capability": {
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
+                }
+            },
+            "required": [],
+            "title": "InstrumentSystem",
             "type": "object"
         },
         "MagnetCapability": {
@@ -1524,13 +1199,6 @@
                         "null"
                     ]
                 },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -1542,121 +1210,59 @@
             "title": "MagnetCapability",
             "type": "object"
         },
-        "MagnetSignalSet": {
-            "additionalProperties": false,
-            "description": "Shared magnet signal bindings.",
-            "properties": {
-                "current_max": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "current_min": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "current_readback": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "current_setpoint": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "status": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                }
-            },
-            "title": "MagnetSignalSet",
-            "type": "object"
-        },
-        "Marker": {
-            "additionalProperties": false,
-            "description": "A zero-length reference point, drift space, or survey marker.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "Marker",
-            "type": "object"
-        },
         "NaradConfig": {
             "additionalProperties": false,
-            "description": "NARAD configuration block: capability layer + signal layer.",
+            "description": "A top-level NARAD-system container for the: capability layer + signal layer.",
             "properties": {
-                "capability_layer": {
-                    "$ref": "#/$defs/CapabilityLayer",
-                    "description": "Capability-layer container for control profile families."
+                "control_capability_layer": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/ControlCapability__identifier_optional"
+                            },
+                            {
+                                "additionalProperties": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/$defs/Signal__identifier_optional"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ]
+                                },
+                                "description": "Signals within a capability, keyed by a semantic signal name.",
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "description": "Control Capability definitions for this facility.",
+                    "type": "object"
                 },
-                "control_system": {
+                "deployed_system": {
+                    "description": "Identifier of the deployed system this configuration describes.",
+                    "type": "string"
+                },
+                "has_sub_system": {
                     "description": "Identifier of the control system (e.g. epics) this configuration describes.",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
-                "facility": {
-                    "description": "Identifier of the facility this configuration describes.",
-                    "type": "string"
+                "instrument_layer": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/InstrumentSystem__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Instrument Capability definitions keyed by capability name.",
+                    "type": "object"
                 },
                 "intent": {
                     "description": "A human-readable statement of the intended use or purpose of this NARAD configuration.",
@@ -1676,9 +1282,10 @@
             },
             "required": [
                 "schema_version",
-                "capability_layer",
-                "facility",
-                "control_system",
+                "deployed_system",
+                "has_sub_system",
+                "control_capability_layer",
+                "instrument_layer",
                 "signal_layer"
             ],
             "title": "NaradConfig",
@@ -1699,14 +1306,14 @@
                             }
                         ]
                     },
-                    "description": "Ordered beamline definitions keyed by beamline name.",
+                    "description": "A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name.",
                     "type": [
                         "object",
                         "null"
                     ]
                 },
                 "elements": {
-                    "description": "Beamline element definitions referenced by name from beamline sequences.",
+                    "description": "Beamline element definitions referenced by name from beamline sequences. Serializes as a keyed map by element name.",
                     "items": {
                         "$ref": "#/$defs/BeamlineElement"
                     },
@@ -1774,48 +1381,6 @@
             "title": "ObservableSignal",
             "type": "object"
         },
-        "Quadrupole": {
-            "additionalProperties": false,
-            "description": "A quadrupole focusing/defocusing magnet.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "Quadrupole",
-            "type": "object"
-        },
         "QuadrupoleCapability": {
             "additionalProperties": false,
             "description": "Quadrupole-specific capability extending MagnetCapability with strength signals.",
@@ -1841,13 +1406,6 @@
                         "null"
                     ]
                 },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -1857,104 +1415,6 @@
                 "name"
             ],
             "title": "QuadrupoleCapability",
-            "type": "object"
-        },
-        "QuadrupoleSignalSet": {
-            "additionalProperties": false,
-            "description": "Quadrupole-specific signal bindings.",
-            "properties": {
-                "strength_setpoint": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                }
-            },
-            "title": "QuadrupoleSignalSet",
-            "type": "object"
-        },
-        "RFCavity": {
-            "additionalProperties": false,
-            "description": "A radio-frequency accelerating or bunching cavity.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "RFCavity",
-            "type": "object"
-        },
-        "RFCavitySignalSet": {
-            "additionalProperties": false,
-            "description": "RF cavity-specific signal bindings.",
-            "properties": {
-                "gradient_readback": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "gradient_setpoint": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "status": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/SignalBinding"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                }
-            },
-            "title": "RFCavitySignalSet",
             "type": "object"
         },
         "Signal": {
@@ -2003,7 +1463,7 @@
         },
         "SignalBinding": {
             "additionalProperties": false,
-            "description": "A named EPICS suffix definition for one semantic signal.",
+            "description": "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.",
             "properties": {
                 "control_system_suffix": {
                     "description": "Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.\n",
@@ -2018,27 +1478,126 @@
                         "string",
                         "null"
                     ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
                 }
             },
+            "required": [
+                "name"
+            ],
+            "title": "SignalBinding",
+            "type": "object"
+        },
+        "SignalBinding__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.",
+            "properties": {
+                "control_system_suffix": {
+                    "description": "Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.\n",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                }
+            },
+            "required": [],
             "title": "SignalBinding",
             "type": "object"
         },
         "SignalDefinitions": {
             "additionalProperties": false,
-            "description": "EPICS signal suffix templates keyed by device type or device domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types in that domain; device-type keys are type-specific.",
+            "description": "Signal binding set scoped to a device type or device domain.",
             "properties": {
-                "type_signal_sets": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/TypeSignalSet"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Signal suffix groups keyed by device type or device domain name. Domain-level keys cover signals shared across all types in that domain; device-type keys are type-specific."
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "signal_bindings": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
                 }
             },
+            "required": [
+                "name"
+            ],
+            "title": "SignalDefinitions",
+            "type": "object"
+        },
+        "SignalDefinitions__identifier_optional": {
+            "additionalProperties": false,
+            "description": "Signal binding set scoped to a device type or device domain.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "signal_bindings": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "required": [],
             "title": "SignalDefinitions",
             "type": "object"
         },
@@ -2050,7 +1609,7 @@
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/FacilityConfig__identifier_optional"
+                                "$ref": "#/$defs/FacilitySystem__identifier_optional"
                             },
                             {
                                 "type": "null"
@@ -2120,48 +1679,6 @@
             "title": "Signal",
             "type": "object"
         },
-        "Solenoid": {
-            "additionalProperties": false,
-            "description": "A solenoid magnet.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "Solenoid",
-            "type": "object"
-        },
         "SolenoidCapability": {
             "additionalProperties": false,
             "description": "Solenoid-specific capability extending MagnetCapability with focusing signals.",
@@ -2184,13 +1701,6 @@
                     },
                     "type": [
                         "array",
-                        "null"
-                    ]
-                },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
                         "null"
                     ]
                 },
@@ -2219,7 +1729,7 @@
                 "has_sub_system": {
                     "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/$defs/System"
                     },
                     "type": [
                         "array",
@@ -2227,18 +1737,29 @@
                     ]
                 },
                 "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "items": {
-                        "type": "string"
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SystemCapability__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
                     "type": [
-                        "array",
+                        "object",
                         "null"
                     ]
                 },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
                 }
             },
             "required": [
@@ -2272,13 +1793,6 @@
                         "null"
                     ]
                 },
-                "is_abstract": {
-                    "description": "If true, this profile is a template not intended to be directly assigned to a beamline element. Concrete profiles set this to false (default).",
-                    "type": [
-                        "boolean",
-                        "null"
-                    ]
-                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -2290,83 +1804,9 @@
             "title": "SystemCapability",
             "type": "object"
         },
-        "TypeSignalSet": {
+        "SystemCapability__identifier_optional": {
             "additionalProperties": false,
-            "description": "Explicit signal binding groups keyed by device domain or device type.",
-            "properties": {
-                "bpm_signals": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/BPMSignalSet"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "BPM-specific signal bindings."
-                },
-                "corrector_signals": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/CorrectorSignalSet"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Corrector-specific signal bindings."
-                },
-                "dipole_signals": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/DipoleSignalSet"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Dipole-specific signal bindings."
-                },
-                "magnet_signals": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/MagnetSignalSet"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Shared magnet signal bindings."
-                },
-                "quadrupole_signals": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/QuadrupoleSignalSet"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Quadrupole-specific signal bindings."
-                },
-                "rfcavity_signals": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/RFCavitySignalSet"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "RF cavity-specific signal bindings."
-                }
-            },
-            "title": "TypeSignalSet",
-            "type": "object"
-        },
-        "TypeSpecificCapability": {
-            "additionalProperties": false,
-            "description": "An inline capability declared within a device-type profile that extends a generic shared Capability. The explicit link to the shared Capability being extended is given by inherits_from. Adds type-specific signals on top of those already defined in the referenced shared Capability.",
+            "description": "A capability of a system. SystemCapability describes what a system can expose, monitor, control, or actuate with respect to one or more signals. Aligned to ssn-system:SystemCapability; linked from System instances via ssn-system:hasSystemCapability, and from Signals via ssn:forProperty. Profile-level inheritance (shared vs. type-specific signals) is expressed in CapabilityProfile, not here.",
             "properties": {
                 "description": {
                     "description": "Detailed description of the entity.",
@@ -2375,70 +1815,38 @@
                         "null"
                     ]
                 },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "The specific device type this capability profile or system capability targets (e.g. Quadrupole, Corrector, BPM)."
                 },
-                "signals": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Signal__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                "for_property": {
+                    "description": "SystemCapability \u2192 Signal: the capability can expose, monitor, control, or actuate that signal.\n",
+                    "items": {
+                        "type": "string"
                     },
-                    "description": "Signals within a capability, keyed by signal name.",
                     "type": [
-                        "object",
-                        "null"
-                    ]
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "TypeSpecificCapability",
-            "type": "object"
-        },
-        "TypeSpecificCapability__identifier_optional": {
-            "additionalProperties": false,
-            "description": "An inline capability declared within a device-type profile that extends a generic shared Capability. The explicit link to the shared Capability being extended is given by inherits_from. Adds type-specific signals on top of those already defined in the referenced shared Capability.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
+                        "array",
                         "null"
                     ]
                 },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
-                },
-                "signals": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Signal__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Signals within a capability, keyed by signal name.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
                 }
             },
             "required": [],
-            "title": "TypeSpecificCapability",
+            "title": "SystemCapability",
             "type": "object"
+        },
+        "SystemTypeEnum": {
+            "description": "High-level system type for classification and querying. This is a broad categorization that can be used for filtering or grouping systems without needing to traverse the has_sub_system and has_system_capability edges.",
+            "enum": [
+                "Facility",
+                "ControlSystem",
+                "Magnet"
+            ],
+            "title": "SystemTypeEnum",
+            "type": "string"
         }
     },
     "$id": "https://w3id.org/narad_linkml/schema/narad/system",
@@ -2458,14 +1866,14 @@
                     }
                 ]
             },
-            "description": "Ordered beamline definitions keyed by beamline name.",
+            "description": "A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name.",
             "type": [
                 "object",
                 "null"
             ]
         },
         "elements": {
-            "description": "Beamline element definitions referenced by name from beamline sequences.",
+            "description": "Beamline element definitions referenced by name from beamline sequences. Serializes as a keyed map by element name.",
             "items": {
                 "$ref": "#/$defs/BeamlineElement"
             },

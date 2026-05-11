@@ -48,17 +48,6 @@ URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemC
         
       SystemCapability : for_property
         
-          
-    
-        
-        
-        SystemCapability --> "*" Signal : for_property
-        click Signal href "../Signal/"
-    
-
-        
-      SystemCapability : is_abstract
-        
       SystemCapability : name
         
       
@@ -81,9 +70,8 @@ URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemC
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [for_property](for_property.md) | * <br/> [Signal](Signal.md) | SystemCapability → Signal: the capability can expose, monitor, control, or ac... | direct |
+| [for_property](for_property.md) | * <br/> [String](String.md) | SystemCapability → Signal: the capability can expose, monitor, control, or ac... | direct |
 | [device_type](device_type.md) | 0..1 <br/> [ElementKindEnum](ElementKindEnum.md) | The specific device type this capability profile or system capability targets... | direct |
-| [is_abstract](is_abstract.md) | 0..1 <br/> [Boolean](Boolean.md) | If true, this profile is a template not intended to be directly assigned to a... | direct |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
@@ -95,17 +83,11 @@ URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemC
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
+| [FacilitySystem](FacilitySystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [System](System.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [ControlSystem](ControlSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [Magnet](Magnet.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [Quadrupole](Quadrupole.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [Corrector](Corrector.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [Dipole](Dipole.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [Solenoid](Solenoid.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [InstrumentSystem](InstrumentSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [Instrument](Instrument.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [BPM](BPM.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [RFCavity](RFCavity.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [Marker](Marker.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 
 
 
@@ -164,11 +146,9 @@ is_a: NamedThing
 slots:
 - for_property
 - device_type
-- is_abstract
 slot_usage:
   for_property:
     name: for_property
-    range: Signal
     multivalued: true
 
 ```
@@ -193,7 +173,6 @@ is_a: NamedThing
 slot_usage:
   for_property:
     name: for_property
-    range: Signal
     multivalued: true
 attributes:
   for_property:
@@ -210,7 +189,8 @@ attributes:
     owner: SystemCapability
     domain_of:
     - SystemCapability
-    range: Signal
+    - InstanceSignalBinding
+    range: string
     multivalued: true
   device_type:
     name: device_type
@@ -221,22 +201,11 @@ attributes:
     alias: device_type
     owner: SystemCapability
     domain_of:
-    - CapabilityProfile
+    - ControlCapability
+    - SignalDefinitions
+    - InstrumentSystem
     - SystemCapability
     range: ElementKindEnum
-  is_abstract:
-    name: is_abstract
-    description: If true, this profile is a template not intended to be directly assigned
-      to a beamline element. Concrete profiles set this to false (default).
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    ifabsent: 'false'
-    alias: is_abstract
-    owner: SystemCapability
-    domain_of:
-    - CapabilityProfile
-    - SystemCapability
-    range: boolean
   name:
     name: name
     description: Human-readable name or local string key for the entity.
@@ -258,7 +227,6 @@ attributes:
     owner: SystemCapability
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

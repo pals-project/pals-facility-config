@@ -13,15 +13,6 @@ Alias: gradient_readback
 
 
 
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [RFCavitySignalSet](RFCavitySignalSet.md) | RF cavity-specific signal bindings |  no  |
-
-
-
-
 
 
 ## Properties
@@ -64,8 +55,6 @@ name: gradient_readback
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: gradient_readback
-domain_of:
-- RFCavitySignalSet
 range: SignalBinding
 inlined: true
 

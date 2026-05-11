@@ -19,24 +19,28 @@ URI: [narad:ElementParamSet](https://w3id.org/narad_linkml/schema/narad/ElementP
  classDiagram
     class ElementParamSet
     click ElementParamSet href "../ElementParamSet/"
-      NamedThing <|-- ElementParamSet
-        click NamedThing href "../NamedThing/"
-      
       ElementParamSet : angle_ref
-        
-      ElementParamSet : description
         
       ElementParamSet : e1
         
       ElementParamSet : e2
+        
+      ElementParamSet : facility_param_set
+        
+          
+    
+        
+        
+        ElementParamSet --> "0..1" FacilityParamSet : facility_param_set
+        click FacilityParamSet href "../FacilityParamSet/"
+    
+
         
       ElementParamSet : frequency
         
       ElementParamSet : Kn1
         
       ElementParamSet : Ksol
-        
-      ElementParamSet : name
         
       ElementParamSet : phase
         
@@ -48,11 +52,7 @@ URI: [narad:ElementParamSet](https://w3id.org/narad_linkml/schema/narad/ElementP
 
 
 
-
-## Inheritance
-* [NamedThing](NamedThing.md)
-    * **ElementParamSet**
-
+<!-- no inheritance hierarchy -->
 
 
 ## Slots
@@ -67,8 +67,7 @@ URI: [narad:ElementParamSet](https://w3id.org/narad_linkml/schema/narad/ElementP
 | [e2](e2.md) | 0..1 <br/> [Float](Float.md) | Exit edge angle in radians | direct |
 | [Kn1](Kn1.md) | 0..1 <br/> [Float](Float.md) | First-order magnetic multipole coefficient (quadrupole strength) | direct |
 | [Ksol](Ksol.md) | 0..1 <br/> [Float](Float.md) | Solenoid integrated field strength | direct |
-| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
-| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
+| [facility_param_set](facility_param_set.md) | 0..1 <br/> [FacilityParamSet](FacilityParamSet.md) | Facility-specific element parameters (type designation, model name, open prop... | direct |
 
 
 
@@ -125,7 +124,6 @@ name: ElementParamSet
 description: Named physics-parameter block for a beamline element. The name identifies
   the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
-is_a: NamedThing
 slots:
 - frequency
 - voltage
@@ -135,6 +133,7 @@ slots:
 - e2
 - Kn1
 - Ksol
+- facility_param_set
 
 ```
 </details>
@@ -147,7 +146,6 @@ name: ElementParamSet
 description: Named physics-parameter block for a beamline element. The name identifies
   the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
-is_a: NamedThing
 attributes:
   frequency:
     name: frequency
@@ -229,29 +227,18 @@ attributes:
     domain_of:
     - ElementParamSet
     range: float
-  name:
-    name: name
-    description: Human-readable name or local string key for the entity.
+  facility_param_set:
+    name: facility_param_set
+    description: Facility-specific element parameters (type designation, model name,
+      open property map).
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    identifier: true
-    alias: name
+    alias: facility_param_set
     owner: ElementParamSet
     domain_of:
-    - NamedThing
-    range: string
-    required: true
-  description:
-    name: description
-    description: Detailed description of the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: description
-    owner: ElementParamSet
-    domain_of:
-    - NamedThing
-    - SignalBinding
-    range: string
+    - ElementParamSet
+    range: FacilityParamSet
+    inlined: true
 
 ```
 </details>

@@ -25,8 +25,8 @@ URI: [narad:SignalLayer](https://w3id.org/narad_linkml/schema/narad/SignalLayer)
     
         
         
-        SignalLayer --> "*" FacilityConfig : facilities
-        click FacilityConfig href "../FacilityConfig/"
+        SignalLayer --> "*" FacilitySystem : facilities
+        click FacilitySystem href "../FacilitySystem/"
     
 
         
@@ -43,7 +43,7 @@ URI: [narad:SignalLayer](https://w3id.org/narad_linkml/schema/narad/SignalLayer)
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [facilities](facilities.md) | * <br/> [FacilityConfig](FacilityConfig.md) | Facility-specific signal binding configurations keyed by facility name | direct |
+| [facilities](facilities.md) | * <br/> [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configurations keyed by facility name | direct |
 
 
 
@@ -123,7 +123,7 @@ attributes:
     owner: SignalLayer
     domain_of:
     - SignalLayer
-    range: FacilityConfig
+    range: FacilitySystem
     multivalued: true
     inlined: true
 

@@ -95,17 +95,7 @@ URI: [narad:Signal](https://w3id.org/narad_linkml/schema/narad/Signal)
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [Capability](Capability.md) | [signals](signals.md) | range | [Signal](Signal.md) |
-| [TypeSpecificCapability](TypeSpecificCapability.md) | [signals](signals.md) | range | [Signal](Signal.md) |
-| [SystemCapability](SystemCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
-| [MagnetCapability](MagnetCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
-| [QuadrupoleCapability](QuadrupoleCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
-| [CorrectorCapability](CorrectorCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
-| [DipoleCapability](DipoleCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
-| [SolenoidCapability](SolenoidCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
-| [InstrumentCapability](InstrumentCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
-| [BPMCapability](BPMCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
-| [CavityGradientCapability](CavityGradientCapability.md) | [for_property](for_property.md) | range | [Signal](Signal.md) |
+| [ControlCapability](ControlCapability.md) | [signals](signals.md) | range | [Signal](Signal.md) |
 
 
 
@@ -275,7 +265,6 @@ attributes:
     owner: Signal
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

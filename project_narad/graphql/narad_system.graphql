@@ -9,13 +9,6 @@ enum DataTypeEnum
     coded_value
   }
 
-enum DeviceDomainEnum
-  {
-    Magnet
-    Instrument
-    RFCavity
-  }
-
 enum ElementKindEnum
   {
     Drift
@@ -25,8 +18,11 @@ enum ElementKindEnum
     Dipole
     Quadrupole
     Solenoid
+    WarmCavity
+    CavityGradient
     RFCavity
     Instrument
+    Magnet
   }
 
 enum IdentifierTypeEnum
@@ -45,6 +41,13 @@ enum SignalRoleEnum
     readback
     constraint
     status
+  }
+
+enum SystemTypeEnum
+  {
+    Facility
+    ControlSystem
+    Magnet
   }
 
 type ActuatableSignal
@@ -71,91 +74,47 @@ type BeamlineElement
   {
     name: String!
     description: String
-    elementKind: ElementKindEnum
+    isInstanceOf: [String]
     length: Float
-    capabilityProfileFamily: ControlProfileFamily
-    capabilityProfile: CapabilityProfile
     instanceSignalBindings: [InstanceSignalBinding]
-    paramSet: [ElementParamSet]
-    facilityParamSet: FacilityParamSet
-  }
-
-type BPM
-  {
-    name: String!
-    description: String
-    hasSubSystem: [System]
-    hasSystemCapability: [SystemCapability]
+    paramSet: ElementParamSet
   }
 
 type BPMCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
-  }
-
-type BPMSignalSet
-  {
-    horizontalBeamPosition: SignalBinding
-    verticalBeamPosition: SignalBinding
-    status: SignalBinding
-  }
-
-type Capability
-  {
-    name: String!
-    description: String
-    signals: [Signal]
   }
 
 type CapabilityLayer
   {
-    profiles: [ControlProfileFamily]
-  }
-
-type CapabilityProfile
-  {
-    name: String!
-    description: String
-    deviceType: ElementKindEnum
-    isAbstract: Boolean
-    inheritsSharedCapabilities: [Capability]
-    typeSpecificCapabilities: [TypeSpecificCapability]
+    controlCapabilities: [ControlCapability]
   }
 
 type CavityGradientCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
   }
 
-type ControlProfileFamily
+type ControlCapability
   {
     name: String!
     description: String
-    deviceDomain: DeviceDomainEnum
-    sharedCapabilities: [Capability]
-    typeProfiles: [CapabilityProfile]
+    deviceType: ElementKindEnum
+    subclassOf: ControlCapability
+    signals: [Signal]!
   }
 
 type ControlSystem
   {
     name: String!
     description: String
-    hasSubSystem: [System]
-    hasSystemCapability: [SystemCapability]
-  }
-
-type Corrector
-  {
-    name: String!
-    description: String
+    systemType: SystemTypeEnum
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
   }
@@ -164,42 +123,20 @@ type CorrectorCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
-  }
-
-type CorrectorSignalSet
-  {
-    kickSetpoint: SignalBinding
-  }
-
-type Dipole
-  {
-    name: String!
-    description: String
-    hasSubSystem: [System]
-    hasSystemCapability: [SystemCapability]
   }
 
 type DipoleCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
-  }
-
-type DipoleSignalSet
-  {
-    fieldSetpoint: SignalBinding
   }
 
 type ElementParamSet
   {
-    name: String!
-    description: String
     frequency: Float
     voltage: Float
     phase: Float
@@ -208,16 +145,7 @@ type ElementParamSet
     e2: Float
     kn1: Float
     ksol: Float
-  }
-
-type FacilityConfig
-  {
-    name: String!
-    description: String
-    facilityIdentifier: [FacilityIdentifier]
-    controlSystem: String
-    namingConvention: String
-    signalDefinitions: SignalDefinitions
+    facilityParamSet: FacilityParamSet
   }
 
 type FacilityIdentifier
@@ -233,20 +161,35 @@ type FacilityParamSet
     properties: AnyValue
   }
 
+type FacilitySystem
+  {
+    name: String!
+    description: String
+    systemType: SystemTypeEnum
+    hasSubSystem: [System]
+    hasSystemCapability: [SystemCapability]
+    facilityIdentifier: [FacilityIdentifier]
+    controlSystem: ControlSystem
+    namingConvention: String
+    signalDefinitions: [SignalDefinitions]
+  }
+
 type InstanceSignalBinding
   {
     name: String!
     description: String
-    isInstanceOf: [String]
-    isHostedBy: [String]
-    isPropertyOf: String
     pvName: String
+    isInstanceOf: [String]
+    forProperty: [String]
+    isHostedBy: String
+    isPropertyOf: String
   }
 
 type Instrument
   {
     name: String!
     description: String
+    systemType: SystemTypeEnum
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
   }
@@ -255,15 +198,16 @@ type InstrumentCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
   }
 
-type Magnet
+type InstrumentSystem
   {
     name: String!
     description: String
+    systemType: SystemTypeEnum
+    deviceType: ElementKindEnum
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
   }
@@ -272,26 +216,8 @@ type MagnetCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
-  }
-
-type MagnetSignalSet
-  {
-    currentSetpoint: SignalBinding
-    currentReadback: SignalBinding
-    currentMin: SignalBinding
-    currentMax: SignalBinding
-    status: SignalBinding
-  }
-
-type Marker
-  {
-    name: String!
-    description: String
-    hasSubSystem: [System]
-    hasSystemCapability: [SystemCapability]
   }
 
 interface NamedThing
@@ -304,9 +230,10 @@ type NaradConfig
   {
     schemaVersion: String!
     intent: String
-    capabilityLayer: CapabilityLayer!
-    facility: String!
-    controlSystem: String!
+    deployedSystem: FacilitySystem!
+    hasSubSystem: [ControlSystem]!
+    controlCapabilityLayer: [ControlCapability]!
+    instrumentLayer: [InstrumentSystem]!
     signalLayer: SignalLayer!
   }
 
@@ -327,41 +254,12 @@ type ObservableSignal
     unitsUri: String
   }
 
-type Quadrupole
-  {
-    name: String!
-    description: String
-    hasSubSystem: [System]
-    hasSystemCapability: [SystemCapability]
-  }
-
 type QuadrupoleCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
-  }
-
-type QuadrupoleSignalSet
-  {
-    strengthSetpoint: SignalBinding
-  }
-
-type RFCavity
-  {
-    name: String!
-    description: String
-    hasSubSystem: [System]
-    hasSystemCapability: [SystemCapability]
-  }
-
-type RFCavitySignalSet
-  {
-    gradientSetpoint: SignalBinding
-    gradientReadback: SignalBinding
-    status: SignalBinding
   }
 
 type Signal
@@ -376,41 +274,37 @@ type Signal
 
 type SignalBinding
   {
+    name: String!
     description: String
     controlSystemSuffix: String
   }
 
 type SignalDefinitions
   {
-    typeSignalSets: TypeSignalSet
+    name: String!
+    description: String
+    deviceType: ElementKindEnum
+    signalBindings: [SignalBinding]
   }
 
 type SignalLayer
   {
-    facilities: [FacilityConfig]
-  }
-
-type Solenoid
-  {
-    name: String!
-    description: String
-    hasSubSystem: [System]
-    hasSystemCapability: [SystemCapability]
+    facilities: [FacilitySystem]
   }
 
 type SolenoidCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
   }
 
 type System
   {
     name: String!
     description: String
+    systemType: SystemTypeEnum
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
   }
@@ -419,24 +313,6 @@ type SystemCapability
   {
     name: String!
     description: String
-    forProperty: [Signal]
+    forProperty: [String]
     deviceType: ElementKindEnum
-    isAbstract: Boolean
-  }
-
-type TypeSignalSet
-  {
-    magnetSignals: MagnetSignalSet
-    quadrupoleSignals: QuadrupoleSignalSet
-    correctorSignals: CorrectorSignalSet
-    dipoleSignals: DipoleSignalSet
-    bpmSignals: BPMSignalSet
-    rfcavitySignals: RFCavitySignalSet
-  }
-
-type TypeSpecificCapability
-  {
-    name: String!
-    description: String
-    signals: [Signal]
   }

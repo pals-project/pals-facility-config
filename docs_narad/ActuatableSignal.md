@@ -215,7 +215,6 @@ attributes:
     owner: ActuatableSignal
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

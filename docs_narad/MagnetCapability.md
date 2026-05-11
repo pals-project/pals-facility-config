@@ -48,17 +48,6 @@ URI: [narad:MagnetCapability](https://w3id.org/narad_linkml/schema/narad/MagnetC
         
       MagnetCapability : for_property
         
-          
-    
-        
-        
-        MagnetCapability --> "*" Signal : for_property
-        click Signal href "../Signal/"
-    
-
-        
-      MagnetCapability : is_abstract
-        
       MagnetCapability : name
         
       
@@ -83,9 +72,8 @@ URI: [narad:MagnetCapability](https://w3id.org/narad_linkml/schema/narad/MagnetC
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [for_property](for_property.md) | * <br/> [Signal](Signal.md) | SystemCapability → Signal: the capability can expose, monitor, control, or ac... | [SystemCapability](SystemCapability.md) |
+| [for_property](for_property.md) | * <br/> [String](String.md) | SystemCapability → Signal: the capability can expose, monitor, control, or ac... | [SystemCapability](SystemCapability.md) |
 | [device_type](device_type.md) | 0..1 <br/> [ElementKindEnum](ElementKindEnum.md) | The specific device type this capability profile or system capability targets... | [SystemCapability](SystemCapability.md) |
-| [is_abstract](is_abstract.md) | 0..1 <br/> [Boolean](Boolean.md) | If true, this profile is a template not intended to be directly assigned to a... | [SystemCapability](SystemCapability.md) |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
@@ -164,7 +152,8 @@ attributes:
     owner: MagnetCapability
     domain_of:
     - SystemCapability
-    range: Signal
+    - InstanceSignalBinding
+    range: string
     multivalued: true
   device_type:
     name: device_type
@@ -175,22 +164,11 @@ attributes:
     alias: device_type
     owner: MagnetCapability
     domain_of:
-    - CapabilityProfile
+    - ControlCapability
+    - SignalDefinitions
+    - InstrumentSystem
     - SystemCapability
     range: ElementKindEnum
-  is_abstract:
-    name: is_abstract
-    description: If true, this profile is a template not intended to be directly assigned
-      to a beamline element. Concrete profiles set this to false (default).
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    ifabsent: 'false'
-    alias: is_abstract
-    owner: MagnetCapability
-    domain_of:
-    - CapabilityProfile
-    - SystemCapability
-    range: boolean
   name:
     name: name
     description: Human-readable name or local string key for the entity.
@@ -212,7 +190,6 @@ attributes:
     owner: MagnetCapability
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

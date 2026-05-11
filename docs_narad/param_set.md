@@ -33,8 +33,6 @@ Alias: param_set
 
 * Range: [ElementParamSet](ElementParamSet.md)
 
-* Multivalued: True
-
 
 
 
@@ -75,9 +73,8 @@ alias: param_set
 domain_of:
 - BeamlineElement
 range: ElementParamSet
-multivalued: true
+multivalued: false
 inlined: true
-inlined_as_list: true
 
 ```
 </details>

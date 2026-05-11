@@ -12,7 +12,7 @@ message ActuatableSignal
   string units = 0
   uriorcurie unitsUri = 0
  }
-// An ordered sequence of beamline elements defining a beam path.
+// A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
 message Beamline
  {
   string name = 0
@@ -25,77 +25,40 @@ message BeamlineElement
  {
   string name = 0
   string description = 0
-  elementKindEnum elementKind = 0
+ repeated  uriorcurie isInstanceOf = 0
   float length = 0
-  controlProfileFamily capabilityProfileFamily = 0
-  capabilityProfile capabilityProfile = 0
  repeated  instanceSignalBinding instanceSignalBindings = 0
- repeated  elementParamSet paramSet = 0
-  facilityParamSet facilityParamSet = 0
- }
-// A Beam Position Monitor.
-message BPM
- {
-  string name = 0
-  string description = 0
- repeated  system hasSubSystem = 0
- repeated  systemCapability hasSystemCapability = 0
+  elementParamSet paramSet = 0
  }
 // BPM-specific capability with horizontal and vertical position readback signals.
 message BPMCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
- }
-// BPM-specific signal bindings.
-message BPMSignalSet
- {
-  signalBinding horizontalBeamPosition = 0
-  signalBinding verticalBeamPosition = 0
-  signalBinding status = 0
- }
-// A named, shared grouping of semantically related signals for a control aspect (e.g. MagnetCurrentControlCapability).
-message Capability
- {
-  string name = 0
-  string description = 0
- repeated  signal signals = 0
  }
 // Capability-layer container for control profile families.
 message CapabilityLayer
  {
- repeated  controlProfileFamily profiles = 0
- }
-// A device-type profile that reuses shared capabilities and adds type-specific ones (e.g. QuadrupoleProfile).
-message CapabilityProfile
- {
-  string name = 0
-  string description = 0
-  elementKindEnum deviceType = 0
-  boolean isAbstract = 0
- repeated  capability inheritsSharedCapabilities = 0
- repeated  typeSpecificCapability typeSpecificCapabilities = 0
+ repeated  controlCapability controlCapabilities = 0
  }
 // RF cavity capability with gradient control, readback, and status signals.
 message CavityGradientCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
  }
-// A reusable family of control profiles sharing common semantics and structure (e.g. MagnetCurrentControlProfileFamily).
-message ControlProfileFamily
+// A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).
+message ControlCapability
  {
   string name = 0
   string description = 0
-  deviceDomainEnum deviceDomain = 0
- repeated  capability sharedCapabilities = 0
- repeated  capabilityProfile typeProfiles = 0
+  elementKindEnum deviceType = 0
+  controlCapability subclassOf = 0
+ repeated  signal signals = 0
  }
 // A control system (e.g. EPICS) that manages device process variables. In the SSN graph a ControlSystem is a subsystem of the Facility.
 // 
@@ -103,14 +66,7 @@ message ControlSystem
  {
   string name = 0
   string description = 0
- repeated  system hasSubSystem = 0
- repeated  systemCapability hasSystemCapability = 0
- }
-// A dipole corrector magnet for orbit correction.
-message Corrector
- {
-  string name = 0
-  string description = 0
+  systemTypeEnum systemType = 0
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
  }
@@ -119,42 +75,20 @@ message CorrectorCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
- }
-// Corrector-specific signal bindings.
-message CorrectorSignalSet
- {
-  signalBinding kickSetpoint = 0
- }
-// A dipole bending magnet.
-message Dipole
- {
-  string name = 0
-  string description = 0
- repeated  system hasSubSystem = 0
- repeated  systemCapability hasSystemCapability = 0
  }
 // Dipole-specific capability extending MagnetCapability with bend-field signals.
 message DipoleCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
- }
-// Dipole-specific signal bindings.
-message DipoleSignalSet
- {
-  signalBinding fieldSetpoint = 0
  }
 // Named physics-parameter block for a beamline element. The name identifies the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
 message ElementParamSet
  {
-  string name = 0
-  string description = 0
   float frequency = 0
   float voltage = 0
   float phase = 0
@@ -163,16 +97,7 @@ message ElementParamSet
   float e2 = 0
   float kn1 = 0
   float ksol = 0
- }
-// Facility-specific signal binding configuration.
-message FacilityConfig
- {
-  string name = 0
-  string description = 0
- repeated  facilityIdentifier facilityIdentifier = 0
-  string controlSystem = 0
-  string namingConvention = 0
-  signalDefinitions signalDefinitions = 0
+  facilityParamSet facilityParamSet = 0
  }
 // A globally unique identifier for an entity (e.g., facility), with a specified type (e.g. DOI, ROR, ARK, local).
 message FacilityIdentifier
@@ -180,12 +105,25 @@ message FacilityIdentifier
   identifierTypeEnum identifierType = 0
   string identifierValue = 0
  }
-// Facility-specific element parameters block for beamline elements.
+// Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters.
 message FacilityParamSet
  {
   string facilityElementType = 0
   string modeledAs = 0
   anyValue properties = 0
+ }
+// Facility-specific signal binding configuration.
+message FacilitySystem
+ {
+  string name = 0
+  string description = 0
+  systemTypeEnum systemType = 0
+ repeated  system hasSubSystem = 0
+ repeated  systemCapability hasSystemCapability = 0
+ repeated  facilityIdentifier facilityIdentifier = 0
+  controlSystem controlSystem = 0
+  string namingConvention = 0
+ repeated  signalDefinitions signalDefinitions = 0
  }
 // A facility-specific binding between a NARAD Signal and an implementation interface (e.g. an EPICS process variable). Modeled as sosa:Sensor because it describes how a signal is observed, monitored, or actuated. ssn:forProperty → Signal; narad:isInstanceOf → the capability class.
 // 
@@ -193,16 +131,18 @@ message InstanceSignalBinding
  {
   string name = 0
   string description = 0
- repeated  uriorcurie isInstanceOf = 0
- repeated  uriorcurie isHostedBy = 0
-  uriorcurie isPropertyOf = 0
   string pvName = 0
+ repeated  uriorcurie isInstanceOf = 0
+ repeated  uriorcurie forProperty = 0
+  uriorcurie isHostedBy = 0
+  uriorcurie isPropertyOf = 0
  }
 // A generic beam diagnostic instrument.
 message Instrument
  {
   string name = 0
   string description = 0
+  systemTypeEnum systemType = 0
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
  }
@@ -211,15 +151,17 @@ message InstrumentCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
  }
-// A powered magnet device (generic supertype for all magnet kinds).
-message Magnet
+// A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.
+// 
+message InstrumentSystem
  {
   string name = 0
   string description = 0
+  systemTypeEnum systemType = 0
+  elementKindEnum deviceType = 0
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
  }
@@ -228,35 +170,18 @@ message MagnetCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
  }
-// Shared magnet signal bindings.
-message MagnetSignalSet
- {
-  signalBinding currentSetpoint = 0
-  signalBinding currentReadback = 0
-  signalBinding currentMin = 0
-  signalBinding currentMax = 0
-  signalBinding status = 0
- }
-// A zero-length reference point, drift space, or survey marker.
-message Marker
- {
-  string name = 0
-  string description = 0
- repeated  system hasSubSystem = 0
- repeated  systemCapability hasSystemCapability = 0
- }
-// NARAD configuration block: capability layer + signal layer.
+// A top-level NARAD-system container for the: capability layer + signal layer.
 message NaradConfig
  {
   string schemaVersion = 0
   string intent = 0
-  capabilityLayer capabilityLayer = 0
-  string facility = 0
-  string controlSystem = 0
+  facilitySystem deployedSystem = 0
+ repeated  controlSystem hasSubSystem = 0
+ repeated  controlCapability controlCapabilityLayer = 0
+ repeated  instrumentSystem instrumentLayer = 0
   signalLayer signalLayer = 0
  }
 // Top-level NARAD document container.
@@ -277,42 +202,13 @@ message ObservableSignal
   string units = 0
   uriorcurie unitsUri = 0
  }
-// A quadrupole focusing/defocusing magnet.
-message Quadrupole
- {
-  string name = 0
-  string description = 0
- repeated  system hasSubSystem = 0
- repeated  systemCapability hasSystemCapability = 0
- }
 // Quadrupole-specific capability extending MagnetCapability with strength signals.
 message QuadrupoleCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
- }
-// Quadrupole-specific signal bindings.
-message QuadrupoleSignalSet
- {
-  signalBinding strengthSetpoint = 0
- }
-// A radio-frequency accelerating or bunching cavity.
-message RFCavity
- {
-  string name = 0
-  string description = 0
- repeated  system hasSubSystem = 0
- repeated  systemCapability hasSystemCapability = 0
- }
-// RF cavity-specific signal bindings.
-message RFCavitySignalSet
- {
-  signalBinding gradientSetpoint = 0
-  signalBinding gradientReadback = 0
-  signalBinding status = 0
  }
 // Domain term for a control-system signal. A Signal represents an identifiable quantity, state, setpoint, readback, limit, or status. In SSN/SOSA alignment, NARAD Signals are treated as properties of systems (ssn:forProperty). The concrete facility binding is captured in SignalBinding.
 // 
@@ -325,38 +221,33 @@ message Signal
   string units = 0
   uriorcurie unitsUri = 0
  }
-// A named EPICS suffix definition for one semantic signal.
+// A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.
 message SignalBinding
  {
+  string name = 0
   string description = 0
   string controlSystemSuffix = 0
  }
-// EPICS signal suffix templates keyed by device type or device domain. Domain-level keys (e.g. Magnet, RFCavity) cover signals shared across all types in that domain; device-type keys are type-specific.
+// Signal binding set scoped to a device type or device domain.
 message SignalDefinitions
  {
-  typeSignalSet typeSignalSets = 0
+  string name = 0
+  string description = 0
+  elementKindEnum deviceType = 0
+ repeated  signalBinding signalBindings = 0
  }
 // Signal-layer container for facility-specific signal bindings.
 message SignalLayer
  {
- repeated  facilityConfig facilities = 0
- }
-// A solenoid magnet.
-message Solenoid
- {
-  string name = 0
-  string description = 0
- repeated  system hasSubSystem = 0
- repeated  systemCapability hasSystemCapability = 0
+ repeated  facilitySystem facilities = 0
  }
 // Solenoid-specific capability extending MagnetCapability with focusing signals.
 message SolenoidCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
  }
 // A physical, logical, or cyber-physical system involved in sensing, monitoring, control, or actuation. Broadly aligned to ssn:System.
 // 
@@ -364,6 +255,7 @@ message System
  {
   string name = 0
   string description = 0
+  systemTypeEnum systemType = 0
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
  }
@@ -373,24 +265,6 @@ message SystemCapability
  {
   string name = 0
   string description = 0
- repeated  signal forProperty = 0
+ repeated  string forProperty = 0
   elementKindEnum deviceType = 0
-  boolean isAbstract = 0
- }
-// Explicit signal binding groups keyed by device domain or device type.
-message TypeSignalSet
- {
-  magnetSignalSet magnetSignals = 0
-  quadrupoleSignalSet quadrupoleSignals = 0
-  correctorSignalSet correctorSignals = 0
-  dipoleSignalSet dipoleSignals = 0
-  bPMSignalSet bpmSignals = 0
-  rFCavitySignalSet rfcavitySignals = 0
- }
-// An inline capability declared within a device-type profile that extends a generic shared Capability. The explicit link to the shared Capability being extended is given by inherits_from. Adds type-specific signals on top of those already defined in the referenced shared Capability.
-message TypeSpecificCapability
- {
-  string name = 0
-  string description = 0
- repeated  signal signals = 0
  }

@@ -1,16 +1,11 @@
 
 
-# Slot: profiles 
-
-
-_Control profile families keyed by family name._
+# Slot: control_capabilities 
 
 
 
-
-
-URI: [narad:profiles](https://w3id.org/narad_linkml/schema/narad/profiles)
-Alias: profiles
+URI: [narad:control_capabilities](https://w3id.org/narad_linkml/schema/narad/control_capabilities)
+Alias: control_capabilities
 
 <!-- no inheritance hierarchy -->
 
@@ -31,7 +26,7 @@ Alias: profiles
 
 ## Properties
 
-* Range: [ControlProfileFamily](ControlProfileFamily.md)
+* Range: [ControlCapability](ControlCapability.md)
 
 * Multivalued: True
 
@@ -57,8 +52,8 @@ Alias: profiles
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:profiles |
-| native | narad:profiles |
+| self | narad:control_capabilities |
+| native | narad:control_capabilities |
 
 
 
@@ -67,14 +62,13 @@ Alias: profiles
 
 <details>
 ```yaml
-name: profiles
-description: Control profile families keyed by family name.
+name: control_capabilities
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
-alias: profiles
+alias: control_capabilities
 domain_of:
 - CapabilityLayer
-range: ControlProfileFamily
+range: ControlCapability
 multivalued: true
 inlined: true
 

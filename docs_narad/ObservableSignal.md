@@ -215,7 +215,6 @@ attributes:
     owner: ObservableSignal
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

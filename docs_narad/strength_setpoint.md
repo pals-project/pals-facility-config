@@ -13,15 +13,6 @@ Alias: strength_setpoint
 
 
 
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [QuadrupoleSignalSet](QuadrupoleSignalSet.md) | Quadrupole-specific signal bindings |  no  |
-
-
-
-
 
 
 ## Properties
@@ -64,8 +55,6 @@ name: strength_setpoint
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: strength_setpoint
-domain_of:
-- QuadrupoleSignalSet
 range: SignalBinding
 inlined: true
 

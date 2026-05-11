@@ -22,51 +22,7 @@ URI: [narad:BeamlineElement](https://w3id.org/narad_linkml/schema/narad/Beamline
       NamedThing <|-- BeamlineElement
         click NamedThing href "../NamedThing/"
       
-      BeamlineElement : capability_profile
-        
-          
-    
-        
-        
-        BeamlineElement --> "0..1" CapabilityProfile : capability_profile
-        click CapabilityProfile href "../CapabilityProfile/"
-    
-
-        
-      BeamlineElement : capability_profile_family
-        
-          
-    
-        
-        
-        BeamlineElement --> "0..1" ControlProfileFamily : capability_profile_family
-        click ControlProfileFamily href "../ControlProfileFamily/"
-    
-
-        
       BeamlineElement : description
-        
-      BeamlineElement : element_kind
-        
-          
-    
-        
-        
-        BeamlineElement --> "0..1" ElementKindEnum : element_kind
-        click ElementKindEnum href "../ElementKindEnum/"
-    
-
-        
-      BeamlineElement : facility_param_set
-        
-          
-    
-        
-        
-        BeamlineElement --> "0..1" FacilityParamSet : facility_param_set
-        click FacilityParamSet href "../FacilityParamSet/"
-    
-
         
       BeamlineElement : instance_signal_bindings
         
@@ -79,6 +35,8 @@ URI: [narad:BeamlineElement](https://w3id.org/narad_linkml/schema/narad/Beamline
     
 
         
+      BeamlineElement : is_instance_of
+        
       BeamlineElement : length
         
       BeamlineElement : name
@@ -89,7 +47,7 @@ URI: [narad:BeamlineElement](https://w3id.org/narad_linkml/schema/narad/Beamline
     
         
         
-        BeamlineElement --> "*" ElementParamSet : param_set
+        BeamlineElement --> "0..1" ElementParamSet : param_set
         click ElementParamSet href "../ElementParamSet/"
     
 
@@ -111,13 +69,10 @@ URI: [narad:BeamlineElement](https://w3id.org/narad_linkml/schema/narad/Beamline
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [element_kind](element_kind.md) | 0..1 <br/> [ElementKindEnum](ElementKindEnum.md) | The type of this beamline element (e | direct |
+| [is_instance_of](is_instance_of.md) | 0..1 <br/> [Uriorcurie](Uriorcurie.md) | NARAD alias for rdf:type | direct |
 | [length](length.md) | 0..1 <br/> [Float](Float.md) | Physical length of the element in metres | direct |
-| [capability_profile_family](capability_profile_family.md) | 0..1 <br/> [ControlProfileFamily](ControlProfileFamily.md) | Cross-reference to the control profile family for this element | direct |
-| [capability_profile](capability_profile.md) | 0..1 <br/> [CapabilityProfile](CapabilityProfile.md) | Cross-reference to the specific capability profile applied to this element | direct |
 | [instance_signal_bindings](instance_signal_bindings.md) | * <br/> [InstanceSignalBinding](InstanceSignalBinding.md) | Facility-specific bindings of signals to control-system interfaces (e | direct |
-| [param_set](param_set.md) | * <br/> [ElementParamSet](ElementParamSet.md) | Named physics-parameter blocks for this element (e | direct |
-| [facility_param_set](facility_param_set.md) | 0..1 <br/> [FacilityParamSet](FacilityParamSet.md) | Facility-specific element parameters (type designation, model name, open prop... | direct |
+| [param_set](param_set.md) | 0..1 <br/> [ElementParamSet](ElementParamSet.md) | Named physics-parameter blocks for this element (e | direct |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
@@ -179,13 +134,14 @@ description: A single element in a beamline with its kind and optional NARAD cap
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 is_a: NamedThing
 slots:
-- element_kind
+- is_instance_of
 - length
-- capability_profile_family
-- capability_profile
 - instance_signal_bindings
 - param_set
-- facility_param_set
+slot_usage:
+  is_instance_of:
+    name: is_instance_of
+    multivalued: false
 
 ```
 </details>
@@ -199,19 +155,30 @@ description: A single element in a beamline with its kind and optional NARAD cap
   annotations.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 is_a: NamedThing
+slot_usage:
+  is_instance_of:
+    name: is_instance_of
+    multivalued: false
 attributes:
-  element_kind:
-    name: element_kind
-    description: The type of this beamline element (e.g. Quadrupole, BPM, RFCavity).
+  is_instance_of:
+    name: is_instance_of
+    description: 'NARAD alias for rdf:type. Links a facility-specific instance node
+      to the LinkML class or semantic class it instantiates. In the graph this edge
+      is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class
+      that implements the signal binding.
+
+      '
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    aliases:
-    - kind
+    exact_mappings:
+    - rdf:type
     rank: 1000
-    alias: element_kind
+    alias: is_instance_of
     owner: BeamlineElement
     domain_of:
     - BeamlineElement
-    range: ElementKindEnum
+    - InstanceSignalBinding
+    range: uriorcurie
+    multivalued: false
   length:
     name: length
     description: Physical length of the element in metres.
@@ -222,35 +189,12 @@ attributes:
     domain_of:
     - BeamlineElement
     range: float
-  capability_profile_family:
-    name: capability_profile_family
-    description: Cross-reference to the control profile family for this element.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: capability_profile_family
-    owner: BeamlineElement
-    domain_of:
-    - BeamlineElement
-    range: ControlProfileFamily
-    inlined: false
-  capability_profile:
-    name: capability_profile
-    description: Cross-reference to the specific capability profile applied to this
-      element.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: capability_profile
-    owner: BeamlineElement
-    domain_of:
-    - BeamlineElement
-    range: CapabilityProfile
-    inlined: false
   instance_signal_bindings:
     name: instance_signal_bindings
     description: Facility-specific bindings of signals to control-system interfaces
-      (e.g. EPICS PVs) for a specific beamline element instance.  These are the keyed
+      (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed
       by the semantic signal name (e.g. current_readback) rather than the control-system
-      suffix, which is captured in the SignalBinding.  The semantic signal name links
+      suffix, which is captured in the SignalBinding. The semantic signal name links
       the instance binding to the abstract Signal definition and its place in the
       capability profile, while the SignalBinding captures the concrete implementations
       of the abstract SignalBindings referenced by the element's capability profile.
@@ -274,20 +218,7 @@ attributes:
     domain_of:
     - BeamlineElement
     range: ElementParamSet
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  facility_param_set:
-    name: facility_param_set
-    description: Facility-specific element parameters (type designation, model name,
-      open property map).
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: facility_param_set
-    owner: BeamlineElement
-    domain_of:
-    - BeamlineElement
-    range: FacilityParamSet
+    multivalued: false
     inlined: true
   name:
     name: name
@@ -310,7 +241,6 @@ attributes:
     owner: BeamlineElement
     domain_of:
     - NamedThing
-    - SignalBinding
     range: string
 
 ```

@@ -18,15 +18,6 @@ Alias: element_kind
 
 
 
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |  no  |
-
-
-
-
 
 
 ## Properties
@@ -77,8 +68,6 @@ aliases:
 - kind
 rank: 1000
 alias: element_kind
-domain_of:
-- BeamlineElement
 range: ElementKindEnum
 
 ```

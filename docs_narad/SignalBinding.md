@@ -19,9 +19,14 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
  classDiagram
     class SignalBinding
     click SignalBinding href "../SignalBinding/"
+      NamedThing <|-- SignalBinding
+        click NamedThing href "../NamedThing/"
+      
       SignalBinding : control_system_suffix
         
       SignalBinding : description
+        
+      SignalBinding : name
         
       
 ```
@@ -29,15 +34,20 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [NamedThing](NamedThing.md)
+    * **SignalBinding**
+
 
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | direct |
 | [control_system_suffix](control_system_suffix.md) | 0..1 <br/> [String](String.md) | Facility-specific control-system (e | direct |
+| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
+| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
 
 
@@ -47,20 +57,7 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [MagnetSignalSet](MagnetSignalSet.md) | [current_setpoint](current_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
-| [MagnetSignalSet](MagnetSignalSet.md) | [current_readback](current_readback.md) | range | [SignalBinding](SignalBinding.md) |
-| [MagnetSignalSet](MagnetSignalSet.md) | [current_min](current_min.md) | range | [SignalBinding](SignalBinding.md) |
-| [MagnetSignalSet](MagnetSignalSet.md) | [current_max](current_max.md) | range | [SignalBinding](SignalBinding.md) |
-| [MagnetSignalSet](MagnetSignalSet.md) | [status](status.md) | range | [SignalBinding](SignalBinding.md) |
-| [QuadrupoleSignalSet](QuadrupoleSignalSet.md) | [strength_setpoint](strength_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
-| [CorrectorSignalSet](CorrectorSignalSet.md) | [kick_setpoint](kick_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
-| [DipoleSignalSet](DipoleSignalSet.md) | [field_setpoint](field_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
-| [BPMSignalSet](BPMSignalSet.md) | [horizontal_beam_position](horizontal_beam_position.md) | range | [SignalBinding](SignalBinding.md) |
-| [BPMSignalSet](BPMSignalSet.md) | [vertical_beam_position](vertical_beam_position.md) | range | [SignalBinding](SignalBinding.md) |
-| [BPMSignalSet](BPMSignalSet.md) | [status](status.md) | range | [SignalBinding](SignalBinding.md) |
-| [RFCavitySignalSet](RFCavitySignalSet.md) | [gradient_setpoint](gradient_setpoint.md) | range | [SignalBinding](SignalBinding.md) |
-| [RFCavitySignalSet](RFCavitySignalSet.md) | [gradient_readback](gradient_readback.md) | range | [SignalBinding](SignalBinding.md) |
-| [RFCavitySignalSet](RFCavitySignalSet.md) | [status](status.md) | range | [SignalBinding](SignalBinding.md) |
+| [SignalDefinitions](SignalDefinitions.md) | [signal_bindings](signal_bindings.md) | range | [SignalBinding](SignalBinding.md) |
 
 
 
@@ -108,8 +105,8 @@ description: A named control system suffix definition for one semantic signal. T
   suffix is used within in a template naming convention to construct the full control
   system PV name for a given device instance.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 slots:
-- description
 - control_system_suffix
 
 ```
@@ -124,18 +121,8 @@ description: A named control system suffix definition for one semantic signal. T
   suffix is used within in a template naming convention to construct the full control
   system PV name for a given device instance.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
+is_a: NamedThing
 attributes:
-  description:
-    name: description
-    description: Detailed description of the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: description
-    owner: SignalBinding
-    domain_of:
-    - NamedThing
-    - SignalBinding
-    range: string
   control_system_suffix:
     name: control_system_suffix
     description: 'Facility-specific control-system (e.g. EPICS) naming suffix used
@@ -148,6 +135,28 @@ attributes:
     owner: SignalBinding
     domain_of:
     - SignalBinding
+    range: string
+  name:
+    name: name
+    description: Human-readable name or local string key for the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    identifier: true
+    alias: name
+    owner: SignalBinding
+    domain_of:
+    - NamedThing
+    range: string
+    required: true
+  description:
+    name: description
+    description: Detailed description of the entity.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    rank: 1000
+    alias: description
+    owner: SignalBinding
+    domain_of:
+    - NamedThing
     range: string
 
 ```
