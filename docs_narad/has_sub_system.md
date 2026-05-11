@@ -24,12 +24,12 @@ Alias: has_sub_system
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |  yes  |
 | [ControlSystem](ControlSystem.md) | A control system (e |  no  |
 | [InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  yes  |
-| [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |  yes  |
+| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
 | [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
 | [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
-| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
 
 
 

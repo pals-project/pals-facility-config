@@ -18,7 +18,6 @@ enum ElementKindEnum
     Dipole
     Quadrupole
     Solenoid
-    WarmCavity
     CavityGradient
     RFCavity
     Instrument
@@ -80,25 +79,9 @@ type BeamlineElement
     paramSet: ElementParamSet
   }
 
-type BPMCapability
-  {
-    name: String!
-    description: String
-    forProperty: [String]
-    deviceType: ElementKindEnum
-  }
-
 type CapabilityLayer
   {
     controlCapabilities: [ControlCapability]
-  }
-
-type CavityGradientCapability
-  {
-    name: String!
-    description: String
-    forProperty: [String]
-    deviceType: ElementKindEnum
   }
 
 type ControlCapability
@@ -117,22 +100,6 @@ type ControlSystem
     systemType: SystemTypeEnum
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
-  }
-
-type CorrectorCapability
-  {
-    name: String!
-    description: String
-    forProperty: [String]
-    deviceType: ElementKindEnum
-  }
-
-type DipoleCapability
-  {
-    name: String!
-    description: String
-    forProperty: [String]
-    deviceType: ElementKindEnum
   }
 
 type ElementParamSet
@@ -194,14 +161,6 @@ type Instrument
     hasSystemCapability: [SystemCapability]
   }
 
-type InstrumentCapability
-  {
-    name: String!
-    description: String
-    forProperty: [String]
-    deviceType: ElementKindEnum
-  }
-
 type InstrumentSystem
   {
     name: String!
@@ -210,14 +169,6 @@ type InstrumentSystem
     deviceType: ElementKindEnum
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
-  }
-
-type MagnetCapability
-  {
-    name: String!
-    description: String
-    forProperty: [String]
-    deviceType: ElementKindEnum
   }
 
 interface NamedThing
@@ -254,14 +205,6 @@ type ObservableSignal
     unitsUri: String
   }
 
-type QuadrupoleCapability
-  {
-    name: String!
-    description: String
-    forProperty: [String]
-    deviceType: ElementKindEnum
-  }
-
 type Signal
   {
     name: String!
@@ -290,14 +233,6 @@ type SignalDefinitions
 type SignalLayer
   {
     facilities: [FacilitySystem]
-  }
-
-type SolenoidCapability
-  {
-    name: String!
-    description: String
-    forProperty: [String]
-    deviceType: ElementKindEnum
   }
 
 type System

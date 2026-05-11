@@ -147,8 +147,6 @@ narad_config:
     BPM:
       device_type: BPM
       has_system_capability: BPMControlCapability
-    WarmCavity:
-      device_type: WarmCavity
     CavityGradient:
       device_type: CavityGradient
       has_sub_system: 

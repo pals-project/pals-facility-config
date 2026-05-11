@@ -1,19 +1,19 @@
 # Auto generated from narad_system.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-10T23:02:09
+# Generation date: 2026-05-11T12:41:11
 # Schema: narad-system-schema
 #
 # id: https://w3id.org/narad_linkml/schema/narad/system
 # description: LinkML schema for representing NARAD control-system semantics, facility-level signal templates, and facility-specific instance bindings aligned with SSN, SSN-System, and SOSA ontologies.
 #   Main modeling layers:
-#     - NaradModel — top-level document containing narad_config, beamlines, and elements
-#     - CapabilityLayer — reusable control-profile families, shared capabilities
-#     - ProfileLayer — device-type profiles that reuse shared capabilities and add type-specific ones
-#     - SignalLayer — facility-specific signal suffix templates organized by
-#       device domain and device type
-#     - Beamline / BeamlineElement — ordered machine layout plus applied profiles
-#       and facility-specific instance bindings
+#     - NaradModel — top-level document containing NaradConfig, beamlines, and elements
+#       - NaradConfig — top-level NARAD-system container for the capability layer and signal layer
+#         - ControlCapabilityLayer — reusable control-profile families, shared capabilities
+#         - InstrumentLayer — facility-specific instrument definitions -> their  capabilities
+#         - SignalLayer — facility-specific signal suffix templates for system/device types and instance bindings keyed by semantic signal name, linked to the
+#           device type
+#     - Beamline / BeamlineElement — ordered machine layout of the beamline/line
 #     - Element instances — individual beamline elements with applied profiles and instance signal
-#       bindings
+#       bindings, parameters, and optional facility-specific parameters
 #
 #   System hierarchy:
 #     - System
@@ -26,12 +26,12 @@
 #       - Marker
 #       - Drift
 #
-#   Capability hierarchy:
+#   Control Capability hierarchy:
 #     - SystemCapability
-#       - MagnetCapability
+#       - MagnetControlCapability
 #         - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability
-#       - InstrumentStatusReadbackCapability
-#       - BPMPositionReadbackCapability
+#       - InstrumentControlCapability
+#       - BPMControlCapability
 #       - CavityGradientControlCapability
 #
 #   Signal modeling:
@@ -45,19 +45,29 @@
 #     - beamlines are keyed by beamline name
 #     - signals are keyed by semantic signal name
 #     - instance_signal_bindings are keyed by semantic signal name
-#     - type_signal_sets is a single structured container with explicit
-#       per-domain and per-device signal-set slots
 #
-#   Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the facility-specific naming convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance (e.g. MQWK202.R). The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) is captured in the SignalBinding. 2. On the distinction between is_instance_of, capability_profile, and facility_element_type.
-#     - is_instance_of (BeamlineElement.is_instance_of) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.
-#     - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
+#   Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention.  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R)  is captured in the SignalBinding. 2. On the distinction between is_instance_of, facility_element_type, and device_type:
+#     - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
+#     - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind.
+#     - device_type (ControlCapability.device_type) is the generic element type used for capability profile matching
+#     and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention
+#     or for other facility-specific purposes.
+#     For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
 #   3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of:
-#     - is_instance_of typically points to the rdf:type of the Procedure class that implements the signal binding, e.g. narad:narad:CavityGradientControlCapability.
-#     - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:[ExampleFacilitySystem] (such as UITF).
-#     - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:[ExampleControlSystem] (such as epics).
+#     - is_instance_of typically points to the semantic class instantiated by the binding or element, using a CURIE such as narad:CavityGradientCapability if that is your intended convention.
+#     - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:UITF.
+#     - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:epics.
 #   4. Open and constrained vocabularies:
-#     - ElementKindEnum and DeviceDomainEnum provide controlled vocabularies for key classification slots, but the schema is designed to be extensible with new enum values as needed.
-#     - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional facility-specific parameters that don't fit into the predefined schema structure.
+#     - ElementKindEnum provides a controlled vocabulary for key classification slots, but the schema is designed to be extensible
+#     with new enum values as needed.
+#     - SystemTypeEnum is a high-level classification for systems that can be used for querying and filtering,
+#     but it is not intended to capture all the nuance of device types or capabilities.
+#     - DataTypeEnum and SignalRoleEnum provide a controlled vocabulary for signal data types and roles,
+#     but the schema allows for additional values to be added as needed.
+#     - IdentifierTypeEnum provides a controlled vocabulary for types of identifiers used in FacilityIdentifier,
+#     but it can be extended to apply to other entities, and with additional identifier types as needed.
+#     - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional
+#     facility-specific parameters that don't fit into the predefined schema structure.
 #
 # license: https://creativecommons.org/publicdomain/zero/1.0/
 
@@ -182,38 +192,6 @@ class InstrumentName(SystemName):
 
 
 class SystemCapabilityName(NamedThingName):
-    pass
-
-
-class MagnetCapabilityName(SystemCapabilityName):
-    pass
-
-
-class QuadrupoleCapabilityName(MagnetCapabilityName):
-    pass
-
-
-class CorrectorCapabilityName(MagnetCapabilityName):
-    pass
-
-
-class DipoleCapabilityName(MagnetCapabilityName):
-    pass
-
-
-class SolenoidCapabilityName(MagnetCapabilityName):
-    pass
-
-
-class InstrumentCapabilityName(SystemCapabilityName):
-    pass
-
-
-class BPMCapabilityName(InstrumentCapabilityName):
-    pass
-
-
-class CavityGradientCapabilityName(SystemCapabilityName):
     pass
 
 
@@ -775,190 +753,6 @@ class SystemCapability(NamedThing):
 
 
 @dataclass(repr=False)
-class MagnetCapability(SystemCapability):
-    """
-    Generic magnet capability (current control and readback signals).
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["MagnetCapability"]
-    class_class_curie: ClassVar[str] = "narad:MagnetCapability"
-    class_name: ClassVar[str] = "MagnetCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.MagnetCapability
-
-    name: Union[str, MagnetCapabilityName] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, MagnetCapabilityName):
-            self.name = MagnetCapabilityName(self.name)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class QuadrupoleCapability(MagnetCapability):
-    """
-    Quadrupole-specific capability extending MagnetCapability with strength signals.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["QuadrupoleCapability"]
-    class_class_curie: ClassVar[str] = "narad:QuadrupoleCapability"
-    class_name: ClassVar[str] = "QuadrupoleCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.QuadrupoleCapability
-
-    name: Union[str, QuadrupoleCapabilityName] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, QuadrupoleCapabilityName):
-            self.name = QuadrupoleCapabilityName(self.name)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class CorrectorCapability(MagnetCapability):
-    """
-    Corrector-specific capability extending MagnetCapability with kick signals.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["CorrectorCapability"]
-    class_class_curie: ClassVar[str] = "narad:CorrectorCapability"
-    class_name: ClassVar[str] = "CorrectorCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.CorrectorCapability
-
-    name: Union[str, CorrectorCapabilityName] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, CorrectorCapabilityName):
-            self.name = CorrectorCapabilityName(self.name)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class DipoleCapability(MagnetCapability):
-    """
-    Dipole-specific capability extending MagnetCapability with bend-field signals.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["DipoleCapability"]
-    class_class_curie: ClassVar[str] = "narad:DipoleCapability"
-    class_name: ClassVar[str] = "DipoleCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.DipoleCapability
-
-    name: Union[str, DipoleCapabilityName] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, DipoleCapabilityName):
-            self.name = DipoleCapabilityName(self.name)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class SolenoidCapability(MagnetCapability):
-    """
-    Solenoid-specific capability extending MagnetCapability with focusing signals.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["SolenoidCapability"]
-    class_class_curie: ClassVar[str] = "narad:SolenoidCapability"
-    class_name: ClassVar[str] = "SolenoidCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.SolenoidCapability
-
-    name: Union[str, SolenoidCapabilityName] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, SolenoidCapabilityName):
-            self.name = SolenoidCapabilityName(self.name)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class InstrumentCapability(SystemCapability):
-    """
-    Generic instrument capability (position readback and status signals).
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["InstrumentCapability"]
-    class_class_curie: ClassVar[str] = "narad:InstrumentCapability"
-    class_name: ClassVar[str] = "InstrumentCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.InstrumentCapability
-
-    name: Union[str, InstrumentCapabilityName] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, InstrumentCapabilityName):
-            self.name = InstrumentCapabilityName(self.name)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class BPMCapability(InstrumentCapability):
-    """
-    BPM-specific capability with horizontal and vertical position readback signals.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["BPMCapability"]
-    class_class_curie: ClassVar[str] = "narad:BPMCapability"
-    class_name: ClassVar[str] = "BPMCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.BPMCapability
-
-    name: Union[str, BPMCapabilityName] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, BPMCapabilityName):
-            self.name = BPMCapabilityName(self.name)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class CavityGradientCapability(SystemCapability):
-    """
-    RF cavity capability with gradient control, readback, and status signals.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["CavityGradientCapability"]
-    class_class_curie: ClassVar[str] = "narad:CavityGradientCapability"
-    class_name: ClassVar[str] = "CavityGradientCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.CavityGradientCapability
-
-    name: Union[str, CavityGradientCapabilityName] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, CavityGradientCapabilityName):
-            self.name = CavityGradientCapabilityName(self.name)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
 class Signal(NamedThing):
     """
     Domain term for a control-system signal. A Signal represents an identifiable quantity, state, setpoint, readback,
@@ -1207,9 +1001,6 @@ class ElementKindEnum(EnumDefinitionImpl):
     Solenoid = PermissibleValue(
         text="Solenoid",
         description="Solenoid magnet.")
-    WarmCavity = PermissibleValue(
-        text="WarmCavity",
-        description="Generic non-superconducting cavity.")
     CavityGradient = PermissibleValue(
         text="CavityGradient",
         description="Accelerating or bunching cavity.")

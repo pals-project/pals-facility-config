@@ -2,15 +2,15 @@
 
 LinkML schema for representing NARAD control-system semantics, facility-level signal templates, and facility-specific instance bindings aligned with SSN, SSN-System, and SOSA ontologies.
 Main modeling layers:
-  - NaradModel — top-level document containing narad_config, beamlines, and elements
-  - CapabilityLayer — reusable control-profile families, shared capabilities
-  - ProfileLayer — device-type profiles that reuse shared capabilities and add type-specific ones
-  - SignalLayer — facility-specific signal suffix templates organized by
-    device domain and device type
-  - Beamline / BeamlineElement — ordered machine layout plus applied profiles
-    and facility-specific instance bindings
+  - NaradModel — top-level document containing NaradConfig, beamlines, and elements
+    - NaradConfig — top-level NARAD-system container for the capability layer and signal layer
+      - ControlCapabilityLayer — reusable control-profile families, shared capabilities
+      - InstrumentLayer — facility-specific instrument definitions -> their  capabilities
+      - SignalLayer — facility-specific signal suffix templates for system/device types and instance bindings keyed by semantic signal name, linked to the
+        device type
+  - Beamline / BeamlineElement — ordered machine layout of the beamline/line
   - Element instances — individual beamline elements with applied profiles and instance signal
-    bindings
+    bindings, parameters, and optional facility-specific parameters
 
 System hierarchy:
   - System
@@ -23,12 +23,12 @@ System hierarchy:
     - Marker
     - Drift
 
-Capability hierarchy:
+Control Capability hierarchy:
   - SystemCapability
-    - MagnetCapability
+    - MagnetControlCapability
       - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability
-    - InstrumentStatusReadbackCapability
-    - BPMPositionReadbackCapability
+    - InstrumentControlCapability
+    - BPMControlCapability
     - CavityGradientControlCapability
 
 Signal modeling:
@@ -42,19 +42,29 @@ Serialization conventions:
   - beamlines are keyed by beamline name
   - signals are keyed by semantic signal name
   - instance_signal_bindings are keyed by semantic signal name
-  - type_signal_sets is a single structured container with explicit
-    per-domain and per-device signal-set slots
 
-Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the facility-specific naming convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance (e.g. MQWK202.R). The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) is captured in the SignalBinding. 2. On the distinction between is_instance_of, capability_profile, and facility_element_type.
-  - is_instance_of (BeamlineElement.is_instance_of) is the high-level type of the beamline element, drawn from ElementKindEnum. This is used for sequencing and general classification of elements in the beamline.
-  - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
+Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention.  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R)  is captured in the SignalBinding. 2. On the distinction between is_instance_of, facility_element_type, and device_type:
+  - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
+  - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. 
+  - device_type (ControlCapability.device_type) is the generic element type used for capability profile matching 
+  and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention 
+  or for other facility-specific purposes.
+  For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
 3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
-  - is_instance_of typically points to the rdf:type of the Procedure class that implements the signal binding, e.g. narad:narad:CavityGradientControlCapability.
-  - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:[ExampleFacilitySystem] (such as UITF).
-  - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:[ExampleControlSystem] (such as epics).
+  - is_instance_of typically points to the semantic class instantiated by the binding or element, using a CURIE such as narad:CavityGradientCapability if that is your intended convention.
+  - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:UITF.
+  - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:epics.
 4. Open and constrained vocabularies:
-  - ElementKindEnum and DeviceDomainEnum provide controlled vocabularies for key classification slots, but the schema is designed to be extensible with new enum values as needed.
-  - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional facility-specific parameters that don't fit into the predefined schema structure.
+  - ElementKindEnum provides a controlled vocabulary for key classification slots, but the schema is designed to be extensible 
+  with new enum values as needed.
+  - SystemTypeEnum is a high-level classification for systems that can be used for querying and filtering, 
+  but it is not intended to capture all the nuance of device types or capabilities.
+  - DataTypeEnum and SignalRoleEnum provide a controlled vocabulary for signal data types and roles, 
+  but the schema allows for additional values to be added as needed.
+  - IdentifierTypeEnum provides a controlled vocabulary for types of identifiers used in FacilityIdentifier, 
+  but it can be extended to apply to other entities, and with additional identifier types as needed.
+  - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional 
+  facility-specific parameters that don't fit into the predefined schema structure.
 
 
 URI: https://w3id.org/narad_linkml/schema/narad/system
@@ -88,14 +98,6 @@ Name: narad-system-schema
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Instrument](Instrument.md) | A generic beam diagnostic instrument |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SystemCapability](SystemCapability.md) | A capability of a system |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CavityGradientCapability](CavityGradientCapability.md) | RF cavity capability with gradient control, readback, and status signals |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[InstrumentCapability](InstrumentCapability.md) | Generic instrument capability (position readback and status signals) |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[BPMCapability](BPMCapability.md) | BPM-specific capability with horizontal and vertical position readback signal... |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MagnetCapability](MagnetCapability.md) | Generic magnet capability (current control and readback signals) |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CorrectorCapability](CorrectorCapability.md) | Corrector-specific capability extending MagnetCapability with kick signals |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DipoleCapability](DipoleCapability.md) | Dipole-specific capability extending MagnetCapability with bend-field signals |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[QuadrupoleCapability](QuadrupoleCapability.md) | Quadrupole-specific capability extending MagnetCapability with strength signa... |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SolenoidCapability](SolenoidCapability.md) | Solenoid-specific capability extending MagnetCapability with focusing signals |
 | [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |
 | [NaradModel](NaradModel.md) | Top-level NARAD document container |
 | [SignalLayer](SignalLayer.md) | Signal-layer container for facility-specific signal bindings |
@@ -110,7 +112,7 @@ Name: narad-system-schema
 | [beamline_kind](beamline_kind.md) | Kind/type label for the beamline entry (e |
 | [beamlines](beamlines.md) | A top-level NARAD-system container for the ordered beamline definitions keyed... |
 | [capability_class](capability_class.md) | Semantic class label for a type-specific capability (e |
-| [class_curie](class_curie.md) | Optional URI or CURIE for a TypeSpecificCapability class |
+| [class_curie](class_curie.md) | Optional URI or CURIE |
 | [control_capabilities](control_capabilities.md) |  |
 | [control_capability](control_capability.md) | Cross-reference to the specific control capability applied to this element |
 | [control_capability_layer](control_capability_layer.md) | Control Capability definitions for this facility |
