@@ -16,7 +16,7 @@ import lombok.*;
 public class ControlCapability extends NamedThing {
 
   private String deviceType;
-  private ControlCapability subclassOf;
+  private System subclassOf;
   private List<Signal> signals;
 
 }

@@ -41,6 +41,17 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
     
 
         
+      NaradConfig : device_layer
+        
+          
+    
+        
+        
+        NaradConfig --> "1..*" DeviceSystem : device_layer
+        click DeviceSystem href "../DeviceSystem/"
+    
+
+        
       NaradConfig : has_sub_system
         
           
@@ -49,17 +60,6 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
         
         NaradConfig --> "1..*" ControlSystem : has_sub_system
         click ControlSystem href "../ControlSystem/"
-    
-
-        
-      NaradConfig : instrument_layer
-        
-          
-    
-        
-        
-        NaradConfig --> "1..*" InstrumentSystem : instrument_layer
-        click InstrumentSystem href "../InstrumentSystem/"
     
 
         
@@ -96,7 +96,7 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
 | [deployed_system](deployed_system.md) | 1 <br/> [FacilitySystem](FacilitySystem.md) | Identifier of the deployed system this configuration describes | direct |
 | [has_sub_system](has_sub_system.md) | 1..* <br/> [ControlSystem](ControlSystem.md) | Identifier of the control system (e | direct |
 | [control_capability_layer](control_capability_layer.md) | 1..* <br/> [ControlCapability](ControlCapability.md) | Control Capability definitions for this facility | direct |
-| [instrument_layer](instrument_layer.md) | 1..* <br/> [InstrumentSystem](InstrumentSystem.md) | Instrument Capability definitions keyed by capability name | direct |
+| [device_layer](device_layer.md) | 1..* <br/> [DeviceSystem](DeviceSystem.md) | Device Capability definitions keyed by capability name | direct |
 | [signal_layer](signal_layer.md) | 1 <br/> [SignalLayer](SignalLayer.md) | Signal-layer container for facility-specific signal bindings | direct |
 
 
@@ -163,7 +163,7 @@ slots:
 - deployed_system
 - has_sub_system
 - control_capability_layer
-- instrument_layer
+- device_layer
 - signal_layer
 slot_usage:
   schema_version:
@@ -184,10 +184,10 @@ slot_usage:
     range: ControlSystem
     required: true
     multivalued: true
-  instrument_layer:
-    name: instrument_layer
-    description: Instrument Capability definitions keyed by capability name.
-    range: InstrumentSystem
+  device_layer:
+    name: device_layer
+    description: Device Capability definitions keyed by capability name.
+    range: DeviceSystem
     required: true
     multivalued: true
     inlined: true
@@ -230,10 +230,10 @@ slot_usage:
     range: ControlSystem
     required: true
     multivalued: true
-  instrument_layer:
-    name: instrument_layer
-    description: Instrument Capability definitions keyed by capability name.
-    range: InstrumentSystem
+  device_layer:
+    name: device_layer
+    description: Device Capability definitions keyed by capability name.
+    range: DeviceSystem
     required: true
     multivalued: true
     inlined: true
@@ -292,7 +292,7 @@ attributes:
     domain_of:
     - NaradConfig
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: ControlSystem
     required: true
     multivalued: true
@@ -309,16 +309,16 @@ attributes:
     required: true
     multivalued: true
     inlined: true
-  instrument_layer:
-    name: instrument_layer
-    description: Instrument Capability definitions keyed by capability name.
+  device_layer:
+    name: device_layer
+    description: Device Capability definitions keyed by capability name.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: instrument_layer
+    alias: device_layer
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    range: InstrumentSystem
+    range: DeviceSystem
     required: true
     multivalued: true
     inlined: true

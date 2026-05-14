@@ -74,7 +74,7 @@ URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemC
 | [FacilitySystem](FacilitySystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [System](System.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [ControlSystem](ControlSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [InstrumentSystem](InstrumentSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [DeviceSystem](DeviceSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [Instrument](Instrument.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 
 
@@ -191,7 +191,7 @@ attributes:
     domain_of:
     - ControlCapability
     - SignalDefinitions
-    - InstrumentSystem
+    - DeviceSystem
     - SystemCapability
     range: ElementKindEnum
   name:

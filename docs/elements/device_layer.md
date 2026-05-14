@@ -1,16 +1,16 @@
 
 
-# Slot: instrument_layer 
+# Slot: device_layer 
 
 
-_Instrument definitions for this facility._
+_Device definitions for this facility._
 
 
 
 
 
-URI: [narad:instrument_layer](https://w3id.org/narad_linkml/schema/narad/instrument_layer)
-Alias: instrument_layer
+URI: [narad:device_layer](https://w3id.org/narad_linkml/schema/narad/device_layer)
+Alias: device_layer
 
 <!-- no inheritance hierarchy -->
 
@@ -31,7 +31,7 @@ Alias: instrument_layer
 
 ## Properties
 
-* Range: [InstrumentSystem](InstrumentSystem.md)
+* Range: [DeviceSystem](DeviceSystem.md)
 
 * Multivalued: True
 
@@ -57,8 +57,8 @@ Alias: instrument_layer
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:instrument_layer |
-| native | narad:instrument_layer |
+| self | narad:device_layer |
+| native | narad:device_layer |
 
 
 
@@ -67,14 +67,14 @@ Alias: instrument_layer
 
 <details>
 ```yaml
-name: instrument_layer
-description: Instrument definitions for this facility.
+name: device_layer
+description: Device definitions for this facility.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
-alias: instrument_layer
+alias: device_layer
 domain_of:
 - NaradConfig
-range: InstrumentSystem
+range: DeviceSystem
 multivalued: true
 inlined: true
 

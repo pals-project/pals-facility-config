@@ -162,7 +162,7 @@ attributes:
     domain_of:
     - ControlCapability
     - SignalDefinitions
-    - InstrumentSystem
+    - DeviceSystem
     - SystemCapability
     range: ElementKindEnum
   signal_bindings:

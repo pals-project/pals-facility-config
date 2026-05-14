@@ -441,8 +441,114 @@
             "title": "DataTypeEnum",
             "type": "string"
         },
+        "DeviceSystem": {
+            "additionalProperties": false,
+            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
+                },
+                "has_sub_system": {
+                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
+                    "items": {
+                        "$ref": "#/$defs/System"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_system_capability": {
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "subclass_of": {
+                    "description": "-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "DeviceSystem",
+            "type": "object"
+        },
+        "DeviceSystem__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
+                },
+                "has_sub_system": {
+                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
+                    "items": {
+                        "$ref": "#/$defs/System"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_system_capability": {
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "subclass_of": {
+                    "description": "-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying."
+                }
+            },
+            "required": [],
+            "title": "DeviceSystem",
+            "type": "object"
+        },
         "ElementKindEnum": {
-            "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the InstrumentSystem referenced by is_instance_of.",
+            "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of.",
             "enum": [
                 "Drift",
                 "Marker",
@@ -958,98 +1064,6 @@
             "title": "Instrument",
             "type": "object"
         },
-        "InstrumentSystem": {
-            "additionalProperties": false,
-            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "$ref": "#/$defs/System"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "system_type": {
-                    "$ref": "#/$defs/SystemTypeEnum",
-                    "description": "High-level system type for classification and querying."
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "InstrumentSystem",
-            "type": "object"
-        },
-        "InstrumentSystem__identifier_optional": {
-            "additionalProperties": false,
-            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
-                },
-                "has_sub_system": {
-                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
-                    "items": {
-                        "$ref": "#/$defs/System"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "has_system_capability": {
-                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "system_type": {
-                    "$ref": "#/$defs/SystemTypeEnum",
-                    "description": "High-level system type for classification and querying."
-                }
-            },
-            "required": [],
-            "title": "InstrumentSystem",
-            "type": "object"
-        },
         "NaradConfig": {
             "additionalProperties": false,
             "description": "A top-level NARAD-system container for the: capability layer + signal layer.",
@@ -1083,26 +1097,26 @@
                     "description": "Identifier of the deployed system this configuration describes.",
                     "type": "string"
                 },
-                "has_sub_system": {
-                    "description": "Identifier of the control system (e.g. epics) this configuration describes.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "instrument_layer": {
+                "device_layer": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/InstrumentSystem__identifier_optional"
+                                "$ref": "#/$defs/DeviceSystem__identifier_optional"
                             },
                             {
                                 "type": "null"
                             }
                         ]
                     },
-                    "description": "Instrument Capability definitions keyed by capability name.",
+                    "description": "Device Capability definitions keyed by capability name.",
                     "type": "object"
+                },
+                "has_sub_system": {
+                    "description": "Identifier of the control system (e.g. epics) this configuration describes.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "intent": {
                     "description": "A human-readable statement of the intended use or purpose of this NARAD configuration.",
@@ -1125,7 +1139,7 @@
                 "deployed_system",
                 "has_sub_system",
                 "control_capability_layer",
-                "instrument_layer",
+                "device_layer",
                 "signal_layer"
             ],
             "title": "NaradConfig",

@@ -102,7 +102,7 @@ linkml:Sparqlpath xsd:string
              <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
              <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
              <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ? ;
-          <subclass_of> @<ControlCapability> ? ;
+          <subclass_of> @<System> ? ;
           <signals> @<Signal> +
        ) ;
        rdf:type [ <ControlCapability> ]
@@ -115,6 +115,28 @@ linkml:Sparqlpath xsd:string
           <naming_convention> @linkml:String ?
        ) ;
        rdf:type [ <ControlSystem> ]
+    )
+}
+
+<DeviceSystem> CLOSED {
+    (  $<DeviceSystem_tes> (  &<System_tes> ;
+          rdf:type [ <System> ] ? ;
+          <device_type> [ <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
+             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ? ;
+          <has_sub_system> @<System> * ;
+          <subclass_of> @<System> ? ;
+          <has_system_capability> @<SystemCapability> *
+       ) ;
+       rdf:type [ <DeviceSystem> ]
     )
 }
 
@@ -188,27 +210,6 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<InstrumentSystem> CLOSED {
-    (  $<InstrumentSystem_tes> (  &<System_tes> ;
-          rdf:type [ <System> ] ? ;
-          <device_type> [ <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ? ;
-          <has_sub_system> @<System> * ;
-          <has_system_capability> @<SystemCapability> *
-       ) ;
-       rdf:type [ <InstrumentSystem> ]
-    )
-}
-
 <NamedThing>  (
     @<Beamline> OR @<BeamlineElement> OR @<ControlCapability> OR @<InstanceSignalBinding> OR @<Signal> OR @<SignalBinding> OR
     @<SignalDefinitions> OR @<System> OR @<SystemCapability>
@@ -226,7 +227,7 @@ linkml:Sparqlpath xsd:string
           <deployed_system> @<FacilitySystem> ;
           <has_sub_system> @<ControlSystem> + ;
           <control_capability_layer> @<ControlCapability> + ;
-          <instrument_layer> @<InstrumentSystem> + ;
+          <device_layer> @<DeviceSystem> + ;
           <signal_layer> @<SignalLayer>
        ) ;
        rdf:type [ <NaradConfig> ] ?
@@ -316,7 +317,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <System> ]
        )
-    } OR @<ControlSystem> OR @<FacilitySystem> OR @<Instrument> OR @<InstrumentSystem>
+    } OR @<ControlSystem> OR @<DeviceSystem> OR @<FacilitySystem> OR @<Instrument>
 )
 
 <SystemCapability> CLOSED {

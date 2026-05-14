@@ -20,7 +20,7 @@ public class NaradConfig  {
   private FacilitySystem deployedSystem;
   private List<ControlSystem> hasSubSystem;
   private List<ControlCapability> controlCapabilityLayer;
-  private List<InstrumentSystem> instrumentLayer;
+  private List<DeviceSystem> deviceLayer;
   private SignalLayer signalLayer;
 
 }

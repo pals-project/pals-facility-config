@@ -64,15 +64,16 @@
 --     * Slot: FacilitySystem_name Description: Autocreated FK slot
 --     * Slot: System_name Description: Autocreated FK slot
 --     * Slot: ControlSystem_name Description: Autocreated FK slot
---     * Slot: InstrumentSystem_name Description: Autocreated FK slot
+--     * Slot: DeviceSystem_name Description: Autocreated FK slot
 --     * Slot: Instrument_name Description: Autocreated FK slot
 -- # Class: ControlSystem Description: A control system (e.g. EPICS) that manages device process variables. In the SSN graph a ControlSystem is a subsystem of the Facility.
 --     * Slot: naming_convention Description: Signal naming convention template (e.g. <device><signal_code>).
 --     * Slot: system_type Description: High-level system type for classification and querying.
 --     * Slot: name Description: Human-readable name or local string key for the entity.
 --     * Slot: description Description: Detailed description of the entity.
--- # Class: InstrumentSystem Description: A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.
+-- # Class: DeviceSystem Description: A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.
 --     * Slot: device_type Description: Represents the generic, semantic class of the device (e.g., "Quadrupole", "BPM") and is used for capability, instrument, and signal profile matching.
+--     * Slot: subclass_of Description: -> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.
 --     * Slot: has_system_capability Description: Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
 --     * Slot: system_type Description: High-level system type for classification and querying.
 --     * Slot: name Description: Human-readable name or local string key for the entity.
@@ -178,13 +179,13 @@ CREATE TABLE "System" (
 	"FacilitySystem_name" TEXT,
 	"System_name" TEXT,
 	"ControlSystem_name" TEXT,
-	"InstrumentSystem_name" TEXT,
+	"DeviceSystem_name" TEXT,
 	"Instrument_name" TEXT,
 	PRIMARY KEY (name),
 	FOREIGN KEY("FacilitySystem_name") REFERENCES "FacilitySystem" (name),
 	FOREIGN KEY("System_name") REFERENCES "System" (name),
 	FOREIGN KEY("ControlSystem_name") REFERENCES "ControlSystem" (name),
-	FOREIGN KEY("InstrumentSystem_name") REFERENCES "InstrumentSystem" (name),
+	FOREIGN KEY("DeviceSystem_name") REFERENCES "DeviceSystem" (name),
 	FOREIGN KEY("Instrument_name") REFERENCES "Instrument" (name)
 );CREATE INDEX "ix_System_name" ON "System" (name);
 CREATE TABLE "ControlSystem" (
@@ -194,17 +195,19 @@ CREATE TABLE "ControlSystem" (
 	description TEXT,
 	PRIMARY KEY (name)
 );CREATE INDEX "ix_ControlSystem_name" ON "ControlSystem" (name);
-CREATE TABLE "InstrumentSystem" (
+CREATE TABLE "DeviceSystem" (
 	device_type VARCHAR(14),
+	subclass_of TEXT,
 	has_system_capability TEXT,
 	system_type VARCHAR(13),
 	name TEXT NOT NULL,
 	description TEXT,
 	"NaradConfig_id" INTEGER,
 	PRIMARY KEY (name),
+	FOREIGN KEY(subclass_of) REFERENCES "System" (name),
 	FOREIGN KEY(has_system_capability) REFERENCES "SystemCapability" (name),
 	FOREIGN KEY("NaradConfig_id") REFERENCES "NaradConfig" (id)
-);CREATE INDEX "ix_InstrumentSystem_name" ON "InstrumentSystem" (name);
+);CREATE INDEX "ix_DeviceSystem_name" ON "DeviceSystem" (name);
 CREATE TABLE "Instrument" (
 	system_type VARCHAR(13),
 	name TEXT NOT NULL,
@@ -325,7 +328,7 @@ CREATE TABLE "ControlCapability" (
 	"NaradConfig_id" INTEGER,
 	"CapabilityLayer_id" INTEGER,
 	PRIMARY KEY (name),
-	FOREIGN KEY(subclass_of) REFERENCES "ControlCapability" (name),
+	FOREIGN KEY(subclass_of) REFERENCES "System" (name),
 	FOREIGN KEY("NaradConfig_id") REFERENCES "NaradConfig" (id),
 	FOREIGN KEY("CapabilityLayer_id") REFERENCES "CapabilityLayer" (id)
 );CREATE INDEX "ix_ControlCapability_name" ON "ControlCapability" (name);
@@ -343,7 +346,7 @@ CREATE TABLE "NaradConfig_has_sub_system" (
 	PRIMARY KEY ("NaradConfig_id", has_sub_system_name),
 	FOREIGN KEY("NaradConfig_id") REFERENCES "NaradConfig" (id),
 	FOREIGN KEY(has_sub_system_name) REFERENCES "ControlSystem" (name)
-);CREATE INDEX "ix_NaradConfig_has_sub_system_NaradConfig_id" ON "NaradConfig_has_sub_system" ("NaradConfig_id");CREATE INDEX "ix_NaradConfig_has_sub_system_has_sub_system_name" ON "NaradConfig_has_sub_system" (has_sub_system_name);
+);CREATE INDEX "ix_NaradConfig_has_sub_system_has_sub_system_name" ON "NaradConfig_has_sub_system" (has_sub_system_name);CREATE INDEX "ix_NaradConfig_has_sub_system_NaradConfig_id" ON "NaradConfig_has_sub_system" ("NaradConfig_id");
 CREATE TABLE "BeamlineElement" (
 	is_instance_of TEXT,
 	length FLOAT,

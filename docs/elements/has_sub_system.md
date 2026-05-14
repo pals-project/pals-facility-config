@@ -24,12 +24,12 @@ Alias: has_sub_system
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
-| [ControlSystem](ControlSystem.md) | A control system (e |  no  |
-| [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |  yes  |
-| [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
-| [InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  yes  |
 | [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
+| [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |  yes  |
+| [ControlSystem](ControlSystem.md) | A control system (e |  no  |
+| [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
+| [DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  yes  |
 
 
 
@@ -89,7 +89,7 @@ alias: has_sub_system
 domain_of:
 - NaradConfig
 - System
-- InstrumentSystem
+- DeviceSystem
 range: System
 multivalued: true
 

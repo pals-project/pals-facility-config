@@ -22,10 +22,10 @@ Alias: device_type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [ControlCapability](ControlCapability.md) | A reusable device-type control profile that extends a generic shared capabili... |  no  |
 | [SignalDefinitions](SignalDefinitions.md) | Signal binding set scoped to a device type or device domain |  no  |
 | [SystemCapability](SystemCapability.md) | A capability of a system |  no  |
-| [ControlCapability](ControlCapability.md) | A reusable device-type control profile that extends a generic shared capabili... |  no  |
-| [InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
+| [DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
 
 
 
@@ -77,7 +77,7 @@ alias: device_type
 domain_of:
 - ControlCapability
 - SignalDefinitions
-- InstrumentSystem
+- DeviceSystem
 - SystemCapability
 range: ElementKindEnum
 

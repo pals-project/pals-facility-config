@@ -24,8 +24,8 @@ Alias: for_property
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [SystemCapability](SystemCapability.md) | A capability of a system |  yes  |
 | [InstanceSignalBinding](InstanceSignalBinding.md) | A facility-specific binding between a NARAD Signal and an implementation inte... |  yes  |
+| [SystemCapability](SystemCapability.md) | A capability of a system |  yes  |
 
 
 

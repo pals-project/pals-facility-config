@@ -92,7 +92,7 @@ type ControlCapability
     name: String!
     description: String
     deviceType: ElementKindEnum
-    subclassOf: ControlCapability
+    subclassOf: System
     signals: [Signal]!
   }
 
@@ -104,6 +104,17 @@ type ControlSystem
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
     namingConvention: String
+  }
+
+type DeviceSystem
+  {
+    name: String!
+    description: String
+    systemType: SystemTypeEnum
+    deviceType: ElementKindEnum
+    hasSubSystem: [System]
+    subclassOf: System
+    hasSystemCapability: [SystemCapability]
   }
 
 type ElementParamSet
@@ -165,16 +176,6 @@ type Instrument
     hasSystemCapability: [SystemCapability]
   }
 
-type InstrumentSystem
-  {
-    name: String!
-    description: String
-    systemType: SystemTypeEnum
-    deviceType: ElementKindEnum
-    hasSubSystem: [System]
-    hasSystemCapability: [SystemCapability]
-  }
-
 interface NamedThing
   {
     name: String!
@@ -188,7 +189,7 @@ type NaradConfig
     deployedSystem: FacilitySystem!
     hasSubSystem: [ControlSystem]!
     controlCapabilityLayer: [ControlCapability]!
-    instrumentLayer: [InstrumentSystem]!
+    deviceLayer: [DeviceSystem]!
     signalLayer: SignalLayer!
   }
 
