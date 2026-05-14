@@ -1,0 +1,23 @@
+package None;
+
+import java.util.List;
+import lombok.*;
+
+
+
+
+
+
+/**
+  Facility-specific signal binding configuration.
+**/
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class FacilitySystem extends System {
+
+  private List<FacilityIdentifier> facilityIdentifier;
+  private ControlSystem controlSystem;
+  private String namingConvention;
+  private List<SignalDefinitions> signalDefinitions;
+
+}

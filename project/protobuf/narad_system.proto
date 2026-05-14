@@ -1,0 +1,210 @@
+ syntax="proto3";
+ package
+// metamodel_version: 1.7.0
+// A NARAD signal that can be commanded, set, or acted upon. Examples: current_setpoint, strength_setpoint, kick_setpoint, field_setpoint, current_min, current_max, gradient_setpoint. Aligned to sosa:ActuatableProperty.
+// 
+message ActuatableSignal
+ {
+  string name = 0
+  string description = 0
+  signalRoleEnum role = 0
+  dataTypeEnum dataType = 0
+  string units = 0
+  uriorcurie unitsUri = 0
+ }
+// A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
+message Beamline
+ {
+  string name = 0
+  string description = 0
+  boolean multipass = 0
+  float length = 0
+  beamlineElement zeroPoint = 0
+  boolean periodic = 0
+ repeated  beamlineElement line = 0
+ }
+// A single element in a beamline with its kind and optional NARAD capability annotations.
+message BeamlineElement
+ {
+  string name = 0
+  string description = 0
+ repeated  string isInstanceOf = 0
+  float length = 0
+ repeated  instanceSignalBinding instanceSignalBindings = 0
+  elementParamSet paramSet = 0
+ }
+// Capability-layer container for control profile families.
+message CapabilityLayer
+ {
+ repeated  controlCapability controlCapabilities = 0
+ }
+// A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).
+message ControlCapability
+ {
+  string name = 0
+  string description = 0
+  elementKindEnum deviceType = 0
+  controlCapability subclassOf = 0
+ repeated  signal signals = 0
+ }
+// A control system (e.g. EPICS) that manages device process variables. In the SSN graph a ControlSystem is a subsystem of the Facility.
+// 
+message ControlSystem
+ {
+  string name = 0
+  string description = 0
+  systemTypeEnum systemType = 0
+ repeated  system hasSubSystem = 0
+ repeated  systemCapability hasSystemCapability = 0
+  string namingConvention = 0
+ }
+// Named physics-parameter block for a beamline element. The name identifies the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
+message ElementParamSet
+ {
+  float frequency = 0
+  float voltage = 0
+  float phase = 0
+  float angleRef = 0
+  float e1 = 0
+  float e2 = 0
+  float kn1 = 0
+  float ksol = 0
+  facilityParamSet facilityParamSet = 0
+ }
+// A globally unique identifier for an entity (e.g., facility), with a specified type (e.g. DOI, ROR, ARK, local).
+message FacilityIdentifier
+ {
+  identifierTypeEnum identifierType = 0
+  string identifierValue = 0
+ }
+// Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters.
+message FacilityParamSet
+ {
+  string facilityElementType = 0
+  string modeledAs = 0
+  anyValue properties = 0
+ }
+// Facility-specific signal binding configuration.
+message FacilitySystem
+ {
+  string name = 0
+  string description = 0
+  systemTypeEnum systemType = 0
+ repeated  system hasSubSystem = 0
+ repeated  systemCapability hasSystemCapability = 0
+ repeated  facilityIdentifier facilityIdentifier = 0
+  controlSystem controlSystem = 0
+  string namingConvention = 0
+ repeated  signalDefinitions signalDefinitions = 0
+ }
+// A facility-specific binding between a NARAD Signal and an implementation interface (e.g. an EPICS process variable). Modeled as sosa:Sensor because it describes how a signal is observed, monitored, or actuated. ssn:forProperty → Signal; narad:isInstanceOf → the capability class.
+// 
+message InstanceSignalBinding
+ {
+  string name = 0
+  string description = 0
+  string pvName = 0
+ repeated  string isInstanceOf = 0
+ repeated  string forProperty = 0
+  string isHostedBy = 0
+  string isPropertyOf = 0
+ }
+// A generic beam diagnostic instrument.
+message Instrument
+ {
+  string name = 0
+  string description = 0
+  systemTypeEnum systemType = 0
+ repeated  system hasSubSystem = 0
+ repeated  systemCapability hasSystemCapability = 0
+ }
+// A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.
+// 
+message InstrumentSystem
+ {
+  string name = 0
+  string description = 0
+  systemTypeEnum systemType = 0
+  elementKindEnum deviceType = 0
+ repeated  system hasSubSystem = 0
+ repeated  systemCapability hasSystemCapability = 0
+ }
+// A top-level NARAD-system container for the: capability layer + signal layer.
+message NaradConfig
+ {
+  string schemaVersion = 0
+  string intent = 0
+  facilitySystem deployedSystem = 0
+ repeated  controlSystem hasSubSystem = 0
+ repeated  controlCapability controlCapabilityLayer = 0
+ repeated  instrumentSystem instrumentLayer = 0
+  signalLayer signalLayer = 0
+ }
+// Top-level NARAD document container.
+message NaradModel
+ {
+  naradConfig naradConfig = 0
+ repeated  beamline beamlines = 0
+ repeated  beamlineElement elements = 0
+ }
+// A NARAD signal that is read, monitored, observed, or exposed by a system. Examples: current_readback, status, horizontal_beam_position, gradient_readback. Aligned to sosa:ObservableProperty.
+// 
+message ObservableSignal
+ {
+  string name = 0
+  string description = 0
+  signalRoleEnum role = 0
+  dataTypeEnum dataType = 0
+  string units = 0
+  uriorcurie unitsUri = 0
+ }
+// Domain term for a control-system signal. A Signal represents an identifiable quantity, state, setpoint, readback, limit, or status. In SSN/SOSA alignment, NARAD Signals are treated as properties of systems (ssn:forProperty). The concrete facility binding is captured in SignalBinding.
+// 
+message Signal
+ {
+  string name = 0
+  string description = 0
+  signalRoleEnum role = 0
+  dataTypeEnum dataType = 0
+  string units = 0
+  uriorcurie unitsUri = 0
+ }
+// A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.
+message SignalBinding
+ {
+  string name = 0
+  string description = 0
+  string controlSystemSuffix = 0
+ }
+// Signal binding set scoped to a device type or device domain.
+message SignalDefinitions
+ {
+  string name = 0
+  string description = 0
+  elementKindEnum deviceType = 0
+ repeated  signalBinding signalBindings = 0
+ }
+// Signal-layer container for facility-specific signal bindings.
+message SignalLayer
+ {
+ repeated  facilitySystem facilities = 0
+ }
+// A physical, logical, or cyber-physical system involved in sensing, monitoring, control, or actuation. Broadly aligned to ssn:System.
+// 
+message System
+ {
+  string name = 0
+  string description = 0
+  systemTypeEnum systemType = 0
+ repeated  system hasSubSystem = 0
+ repeated  systemCapability hasSystemCapability = 0
+ }
+// A capability of a system. SystemCapability describes what a system can expose, monitor, control, or actuate with respect to one or more signals. Aligned to ssn-system:SystemCapability; linked from System instances via ssn-system:hasSystemCapability, and from Signals via ssn:forProperty. Profile-level inheritance (shared vs. type-specific signals) is expressed in CapabilityProfile, not here.
+// 
+message SystemCapability
+ {
+  string name = 0
+  string description = 0
+ repeated  string forProperty = 0
+  elementKindEnum deviceType = 0
+ }
