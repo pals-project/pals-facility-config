@@ -175,7 +175,7 @@ attributes:
     domain_of:
     - NaradConfig
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: System
     multivalued: true
     inlined_as_list: true
@@ -195,7 +195,7 @@ attributes:
     owner: Instrument
     domain_of:
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: SystemCapability
     multivalued: true
     inlined: true

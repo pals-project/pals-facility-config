@@ -1,9 +1,9 @@
 
 
-# Class: InstrumentSystem 
+# Class: DeviceSystem 
 
 
-_A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem._
+_A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem._
 
 __
 
@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:InstrumentSystem](https://w3id.org/narad_linkml/schema/narad/InstrumentSystem)
+URI: [narad:DeviceSystem](https://w3id.org/narad_linkml/schema/narad/DeviceSystem)
 
 
 
@@ -19,55 +19,66 @@ URI: [narad:InstrumentSystem](https://w3id.org/narad_linkml/schema/narad/Instrum
 
 ```mermaid
  classDiagram
-    class InstrumentSystem
-    click InstrumentSystem href "../InstrumentSystem/"
-      System <|-- InstrumentSystem
+    class DeviceSystem
+    click DeviceSystem href "../DeviceSystem/"
+      System <|-- DeviceSystem
         click System href "../System/"
       
-      InstrumentSystem : description
+      DeviceSystem : description
         
-      InstrumentSystem : device_type
+      DeviceSystem : device_type
         
           
     
         
         
-        InstrumentSystem --> "0..1" ElementKindEnum : device_type
+        DeviceSystem --> "0..1" ElementKindEnum : device_type
         click ElementKindEnum href "../ElementKindEnum/"
     
 
         
-      InstrumentSystem : has_sub_system
+      DeviceSystem : has_sub_system
         
           
     
         
         
-        InstrumentSystem --> "*" System : has_sub_system
+        DeviceSystem --> "*" System : has_sub_system
         click System href "../System/"
     
 
         
-      InstrumentSystem : has_system_capability
+      DeviceSystem : has_system_capability
         
           
     
         
         
-        InstrumentSystem --> "0..1" SystemCapability : has_system_capability
+        DeviceSystem --> "0..1" SystemCapability : has_system_capability
         click SystemCapability href "../SystemCapability/"
     
 
         
-      InstrumentSystem : name
+      DeviceSystem : name
         
-      InstrumentSystem : system_type
+      DeviceSystem : subclass_of
         
           
     
         
         
-        InstrumentSystem --> "0..1" SystemTypeEnum : system_type
+        DeviceSystem --> "0..1" System : subclass_of
+        click System href "../System/"
+    
+
+        
+      DeviceSystem : system_type
+        
+          
+    
+        
+        
+        DeviceSystem --> "0..1" SystemTypeEnum : system_type
         click SystemTypeEnum href "../SystemTypeEnum/"
     
 
@@ -82,7 +93,7 @@ URI: [narad:InstrumentSystem](https://w3id.org/narad_linkml/schema/narad/Instrum
 ## Inheritance
 * [NamedThing](NamedThing.md)
     * [System](System.md)
-        * **InstrumentSystem**
+        * **DeviceSystem**
 
 
 
@@ -92,6 +103,7 @@ URI: [narad:InstrumentSystem](https://w3id.org/narad_linkml/schema/narad/Instrum
 | ---  | --- | --- | --- |
 | [device_type](device_type.md) | 0..1 <br/> [ElementKindEnum](ElementKindEnum.md) | Represents the generic, semantic class of the device (e | direct |
 | [has_sub_system](has_sub_system.md) | * <br/> [System](System.md) | Relates a System to one of its subsystems (SSN alignment) | direct |
+| [subclass_of](subclass_of.md) | 0..1 <br/> [System](System.md) | -> NARAD alias for rdfs:subClassOf | direct |
 | [has_system_capability](has_system_capability.md) | 0..1 <br/> [SystemCapability](SystemCapability.md) | Relates a System to a SystemCapability it supports (SSN-System alignment) | direct |
 | [system_type](system_type.md) | 0..1 <br/> [SystemTypeEnum](SystemTypeEnum.md) | High-level system type for classification and querying | [System](System.md) |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
@@ -105,7 +117,7 @@ URI: [narad:InstrumentSystem](https://w3id.org/narad_linkml/schema/narad/Instrum
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | [instrument_layer](instrument_layer.md) | range | [InstrumentSystem](InstrumentSystem.md) |
+| [NaradConfig](NaradConfig.md) | [device_layer](device_layer.md) | range | [DeviceSystem](DeviceSystem.md) |
 
 
 
@@ -132,8 +144,8 @@ URI: [narad:InstrumentSystem](https://w3id.org/narad_linkml/schema/narad/Instrum
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:InstrumentSystem |
-| native | narad:InstrumentSystem |
+| self | narad:DeviceSystem |
+| native | narad:DeviceSystem |
 | exact | ssn:System |
 | broad | pals:Element |
 
@@ -150,11 +162,11 @@ URI: [narad:InstrumentSystem](https://w3id.org/narad_linkml/schema/narad/Instrum
 
 <details>
 ```yaml
-name: InstrumentSystem
+name: DeviceSystem
 description: 'A system representing a beam diagnostic instrument, magnet, or other
   non-magnet device. It represents the instrument as a whole rather than the control
-  system for that instrument. In the SSN graph an InstrumentSystem is a subsystem
-  of the Facility and a sibling to the ControlSystem.
+  system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the
+  Facility and a sibling to the ControlSystem.
 
   '
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
@@ -166,6 +178,7 @@ is_a: System
 slots:
 - device_type
 - has_sub_system
+- subclass_of
 - has_system_capability
 slot_usage:
   has_sub_system:
@@ -186,11 +199,11 @@ slot_usage:
 
 <details>
 ```yaml
-name: InstrumentSystem
+name: DeviceSystem
 description: 'A system representing a beam diagnostic instrument, magnet, or other
   non-magnet device. It represents the instrument as a whole rather than the control
-  system for that instrument. In the SSN graph an InstrumentSystem is a subsystem
-  of the Facility and a sibling to the ControlSystem.
+  system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the
+  Facility and a sibling to the ControlSystem.
 
   '
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
@@ -218,11 +231,11 @@ attributes:
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: device_type
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
     - ControlCapability
     - SignalDefinitions
-    - InstrumentSystem
+    - DeviceSystem
     - SystemCapability
     range: ElementKindEnum
   has_sub_system:
@@ -237,14 +250,29 @@ attributes:
     rank: 1000
     domain: System
     alias: has_sub_system
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
     - NaradConfig
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: System
     multivalued: true
     inlined_as_list: true
+  subclass_of:
+    name: subclass_of
+    description: -> NARAD alias for rdfs:subClassOf. Links a type-specific capability
+      to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.
+    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    exact_mappings:
+    - rdfs:subClassOf
+    rank: 1000
+    alias: subclass_of
+    owner: DeviceSystem
+    domain_of:
+    - ControlCapability
+    - DeviceSystem
+    range: System
+    multivalued: false
   has_system_capability:
     name: has_system_capability
     description: 'Relates a System to a SystemCapability it supports (SSN-System alignment).
@@ -258,10 +286,10 @@ attributes:
     rank: 1000
     domain: System
     alias: has_system_capability
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: SystemCapability
     multivalued: false
     inlined: false
@@ -271,7 +299,7 @@ attributes:
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: system_type
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
     - System
     range: SystemTypeEnum
@@ -282,7 +310,7 @@ attributes:
     rank: 1000
     identifier: true
     alias: name
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
     - NamedThing
     range: string
@@ -293,7 +321,7 @@ attributes:
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
     - NamedThing
     range: string

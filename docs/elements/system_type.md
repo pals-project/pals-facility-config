@@ -22,11 +22,11 @@ Alias: system_type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  no  |
 | [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
 | [ControlSystem](ControlSystem.md) | A control system (e |  no  |
-| [InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
 | [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
-| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  no  |
+| [DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
 
 
 

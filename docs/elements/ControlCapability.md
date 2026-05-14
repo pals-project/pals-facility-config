@@ -54,8 +54,8 @@ URI: [narad:ControlCapability](https://w3id.org/narad_linkml/schema/narad/Contro
     
         
         
-        ControlCapability --> "0..1" ControlCapability : subclass_of
-        click ControlCapability href "../ControlCapability/"
+        ControlCapability --> "0..1" System : subclass_of
+        click System href "../System/"
     
 
         
@@ -77,7 +77,7 @@ URI: [narad:ControlCapability](https://w3id.org/narad_linkml/schema/narad/Contro
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [device_type](device_type.md) | 0..1 <br/> [ElementKindEnum](ElementKindEnum.md) | Represents the generic, semantic class of the device (e | direct |
-| [subclass_of](subclass_of.md) | 0..1 <br/> [ControlCapability](ControlCapability.md) | -> NARAD alias for rdfs:subClassOf | direct |
+| [subclass_of](subclass_of.md) | 0..1 <br/> [System](System.md) | -> NARAD alias for rdfs:subClassOf | direct |
 | [signals](signals.md) | 1..* <br/> [Signal](Signal.md) | Signals within a capability, keyed by a semantic signal name | direct |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
@@ -92,7 +92,6 @@ URI: [narad:ControlCapability](https://w3id.org/narad_linkml/schema/narad/Contro
 | ---  | --- | --- | --- |
 | [NaradConfig](NaradConfig.md) | [control_capability_layer](control_capability_layer.md) | range | [ControlCapability](ControlCapability.md) |
 | [CapabilityLayer](CapabilityLayer.md) | [control_capabilities](control_capabilities.md) | range | [ControlCapability](ControlCapability.md) |
-| [ControlCapability](ControlCapability.md) | [subclass_of](subclass_of.md) | range | [ControlCapability](ControlCapability.md) |
 
 
 
@@ -177,7 +176,7 @@ attributes:
     domain_of:
     - ControlCapability
     - SignalDefinitions
-    - InstrumentSystem
+    - DeviceSystem
     - SystemCapability
     range: ElementKindEnum
   subclass_of:
@@ -192,7 +191,8 @@ attributes:
     owner: ControlCapability
     domain_of:
     - ControlCapability
-    range: ControlCapability
+    - DeviceSystem
+    range: System
     multivalued: false
   signals:
     name: signals

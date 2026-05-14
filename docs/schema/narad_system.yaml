@@ -67,7 +67,7 @@ description: "LinkML schema for representing NARAD control-system semantics, fac
   \ key-value pairs to capture any additional \n  facility-specific parameters that\
   \ don't fit into the predefined schema structure.\n\nNeeded Custom Validations:\n\
   \  - Validation to ensure that the element_kind of a BeamlineElement matches the\
-  \ device_type of the InstrumentSystem it is an instance of.\n  - Validation to ensure\
+  \ device_type of the DeviceSystem it is an instance of.\n  - Validation to ensure\
   \ that the value of is_property_of in InstanceSignalBinding matches one of the control\
   \ systems listed in narad_config.has_sub_system.\n  - Validation that each signal_layer\
   \ -> facilities -> FacilitySystem -> control_system value has a corresponding entry\
@@ -403,7 +403,7 @@ enums:
       Keeping the enum here keeps profile device_type values in sync with element
       kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type.
       NOTE: The element_kind of this BeamlineElement must match the device_type of
-      the InstrumentSystem referenced by is_instance_of.'
+      the DeviceSystem referenced by is_instance_of.'
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     permissible_values:
       Drift:
@@ -593,11 +593,11 @@ slots:
     - ssn-system:hasSubSystem
     domain: System
     slot_uri: narad:has_sub_system
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
     - NaradConfig
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: System
     multivalued: true
   control_capability:
@@ -622,10 +622,10 @@ slots:
     - ssn-system:hasSystemCapability
     domain: System
     slot_uri: narad:has_system_capability
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: SystemCapability
     multivalued: true
   for_property:
@@ -710,10 +710,11 @@ slots:
     exact_mappings:
     - rdfs:subClassOf
     slot_uri: narad:subclass_of
-    owner: ControlCapability
+    owner: DeviceSystem
     domain_of:
     - ControlCapability
-    range: ControlCapability
+    - DeviceSystem
+    range: System
     multivalued: false
   pv_name:
     name: pv_name
@@ -862,16 +863,16 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: false
-  instrument_layer:
-    name: instrument_layer
-    definition_uri: https://w3id.org/narad_linkml/schema/narad/instrument_layer
-    description: Instrument definitions for this facility.
+  device_layer:
+    name: device_layer
+    definition_uri: https://w3id.org/narad_linkml/schema/narad/device_layer
+    description: Device definitions for this facility.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    slot_uri: narad:instrument_layer
+    slot_uri: narad:device_layer
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    range: InstrumentSystem
+    range: DeviceSystem
     multivalued: true
     inlined: true
     inlined_as_list: false
@@ -988,7 +989,7 @@ slots:
     domain_of:
     - ControlCapability
     - SignalDefinitions
-    - InstrumentSystem
+    - DeviceSystem
     - SystemCapability
     range: ElementKindEnum
   role:
@@ -1445,21 +1446,21 @@ slots:
     range: ControlSystem
     required: true
     multivalued: true
-  NaradConfig_instrument_layer:
-    name: NaradConfig_instrument_layer
-    definition_uri: https://w3id.org/narad_linkml/schema/narad/instrument_layer
-    description: Instrument Capability definitions keyed by capability name.
+  NaradConfig_device_layer:
+    name: NaradConfig_device_layer
+    definition_uri: https://w3id.org/narad_linkml/schema/narad/device_layer
+    description: Device Capability definitions keyed by capability name.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    is_a: instrument_layer
+    is_a: device_layer
     domain: NaradConfig
-    slot_uri: narad:instrument_layer
-    alias: instrument_layer
+    slot_uri: narad:device_layer
+    alias: device_layer
     owner: NaradConfig
     domain_of:
     - NaradConfig
     is_usage_slot: true
-    usage_slot_name: instrument_layer
-    range: InstrumentSystem
+    usage_slot_name: device_layer
+    range: DeviceSystem
     required: true
     multivalued: true
     inlined: true
@@ -1588,8 +1589,8 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: false
-  InstrumentSystem_has_sub_system:
-    name: InstrumentSystem_has_sub_system
+  DeviceSystem_has_sub_system:
+    name: DeviceSystem_has_sub_system
     definition_uri: https://w3id.org/narad_linkml/schema/narad/has_sub_system
     description: "Relates a System to one of its subsystems (SSN alignment). Use for\
       \ facility \u2192 control-system, facility \u2192 device, and device \u2192\
@@ -1598,20 +1599,20 @@ slots:
     exact_mappings:
     - ssn-system:hasSubSystem
     is_a: System_has_sub_system
-    domain: InstrumentSystem
+    domain: DeviceSystem
     slot_uri: narad:has_sub_system
     alias: has_sub_system
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
-    - InstrumentSystem
+    - DeviceSystem
     is_usage_slot: true
     usage_slot_name: has_sub_system
     range: System
     multivalued: true
     inlined: true
     inlined_as_list: true
-  InstrumentSystem_has_system_capability:
-    name: InstrumentSystem_has_system_capability
+  DeviceSystem_has_system_capability:
+    name: DeviceSystem_has_system_capability
     definition_uri: https://w3id.org/narad_linkml/schema/narad/has_system_capability
     description: 'Relates a System to a SystemCapability it supports (SSN-System alignment).
       Prefer this over directly attaching signals to systems when capability context
@@ -1622,12 +1623,12 @@ slots:
     exact_mappings:
     - ssn-system:hasSystemCapability
     is_a: System_has_system_capability
-    domain: InstrumentSystem
+    domain: DeviceSystem
     slot_uri: narad:has_system_capability
     alias: has_system_capability
-    owner: InstrumentSystem
+    owner: DeviceSystem
     domain_of:
-    - InstrumentSystem
+    - DeviceSystem
     is_usage_slot: true
     usage_slot_name: has_system_capability
     range: SystemCapability
@@ -1779,7 +1780,7 @@ classes:
     - NaradConfig_deployed_system
     - NaradConfig_has_sub_system
     - control_capability_layer
-    - NaradConfig_instrument_layer
+    - NaradConfig_device_layer
     - NaradConfig_signal_layer
     slot_usage:
       schema_version:
@@ -1800,10 +1801,10 @@ classes:
         range: ControlSystem
         required: true
         multivalued: true
-      instrument_layer:
-        name: instrument_layer
-        description: Instrument Capability definitions keyed by capability name.
-        range: InstrumentSystem
+      device_layer:
+        name: device_layer
+        description: Device Capability definitions keyed by capability name.
+        range: DeviceSystem
         required: true
         multivalued: true
         inlined: true
@@ -1991,13 +1992,13 @@ classes:
     - System_has_system_capability
     - naming_convention
     class_uri: narad:ControlSystem
-  InstrumentSystem:
-    name: InstrumentSystem
-    definition_uri: https://w3id.org/narad_linkml/schema/narad/InstrumentSystem
+  DeviceSystem:
+    name: DeviceSystem
+    definition_uri: https://w3id.org/narad_linkml/schema/narad/DeviceSystem
     description: 'A system representing a beam diagnostic instrument, magnet, or other
       non-magnet device. It represents the instrument as a whole rather than the control
-      system for that instrument. In the SSN graph an InstrumentSystem is a subsystem
-      of the Facility and a sibling to the ControlSystem.
+      system for that instrument. In the SSN graph a DeviceSystem is a subsystem of
+      the Facility and a sibling to the ControlSystem.
 
       '
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
@@ -2012,9 +2013,10 @@ classes:
     - system_type
     - device_type
     - has_sub_system
+    - subclass_of
     - has_system_capability
-    - InstrumentSystem_has_sub_system
-    - InstrumentSystem_has_system_capability
+    - DeviceSystem_has_sub_system
+    - DeviceSystem_has_system_capability
     slot_usage:
       has_sub_system:
         name: has_sub_system
@@ -2026,7 +2028,7 @@ classes:
         range: SystemCapability
         multivalued: false
         inlined: false
-    class_uri: narad:InstrumentSystem
+    class_uri: narad:DeviceSystem
   Instrument:
     name: Instrument
     definition_uri: https://w3id.org/narad_linkml/schema/narad/Instrument
@@ -2214,7 +2216,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: narad_system.yaml
-source_file_date: '2026-05-12T15:15:22'
-source_file_size: 36154
-generation_date: '2026-05-12T15:16:28'
+source_file_date: '2026-05-14T12:08:56'
+source_file_size: 36118
+generation_date: '2026-05-14T12:11:55'
 

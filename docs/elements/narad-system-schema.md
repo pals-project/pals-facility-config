@@ -76,7 +76,7 @@ Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBindin
   facility-specific parameters that don't fit into the predefined schema structure.
 
 Needed Custom Validations:
-  - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the InstrumentSystem it is an instance of.
+  - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the DeviceSystem it is an instance of.
   - Validation to ensure that the value of is_property_of in InstanceSignalBinding matches one of the control systems listed in narad_config.has_sub_system.
   - Validation that each signal_layer -> facilities -> FacilitySystem -> control_system value has a corresponding entry in narad_config.has_sub_system to ensure that all control systems referenced in the signal layer are defined in the capability layer.
   - Validation that the signal_bindings defined for a given device_type in the signal layer align with the signals defined in the capability profiles and instrument systems for that device type.

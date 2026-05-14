@@ -29,8 +29,8 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
         click FacilitySystem href "../FacilitySystem/"
       System <|-- ControlSystem
         click ControlSystem href "../ControlSystem/"
-      System <|-- InstrumentSystem
-        click InstrumentSystem href "../InstrumentSystem/"
+      System <|-- DeviceSystem
+        click DeviceSystem href "../DeviceSystem/"
       System <|-- Instrument
         click Instrument href "../Instrument/"
       
@@ -84,7 +84,7 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
     * **System**
         * [FacilitySystem](FacilitySystem.md)
         * [ControlSystem](ControlSystem.md)
-        * [InstrumentSystem](InstrumentSystem.md)
+        * [DeviceSystem](DeviceSystem.md)
         * [Instrument](Instrument.md)
 
 
@@ -108,6 +108,7 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
 | [NaradConfig](NaradConfig.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
+| [ControlCapability](ControlCapability.md) | [subclass_of](subclass_of.md) | range | [System](System.md) |
 | [FacilitySystem](FacilitySystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [FacilitySystem](FacilitySystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [FacilitySystem](FacilitySystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
@@ -117,9 +118,10 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
 | [ControlSystem](ControlSystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [ControlSystem](ControlSystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [ControlSystem](ControlSystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [InstrumentSystem](InstrumentSystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [InstrumentSystem](InstrumentSystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [InstrumentSystem](InstrumentSystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
+| [DeviceSystem](DeviceSystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
+| [DeviceSystem](DeviceSystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
+| [DeviceSystem](DeviceSystem.md) | [subclass_of](subclass_of.md) | range | [System](System.md) |
+| [DeviceSystem](DeviceSystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
 | [Instrument](Instrument.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [Instrument](Instrument.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [Instrument](Instrument.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
@@ -243,7 +245,7 @@ attributes:
     domain_of:
     - NaradConfig
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: System
     multivalued: true
     inlined_as_list: true
@@ -263,7 +265,7 @@ attributes:
     owner: System
     domain_of:
     - System
-    - InstrumentSystem
+    - DeviceSystem
     range: SystemCapability
     multivalued: true
     inlined: true

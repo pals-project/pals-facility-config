@@ -23,6 +23,7 @@ Alias: subclass_of
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [ControlCapability](ControlCapability.md) | A reusable device-type control profile that extends a generic shared capabili... |  no  |
+| [DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
 
 
 
@@ -31,7 +32,7 @@ Alias: subclass_of
 
 ## Properties
 
-* Range: [ControlCapability](ControlCapability.md)
+* Range: [System](System.md)
 
 
 
@@ -76,7 +77,8 @@ rank: 1000
 alias: subclass_of
 domain_of:
 - ControlCapability
-range: ControlCapability
+- DeviceSystem
+range: System
 multivalued: false
 
 ```

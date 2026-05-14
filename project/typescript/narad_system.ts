@@ -7,7 +7,7 @@ export type BeamlineName = string;
 export type BeamlineElementName = string;
 export type SystemName = string;
 export type ControlSystemName = string;
-export type InstrumentSystemName = string;
+export type DeviceSystemName = string;
 export type InstrumentName = string;
 export type SystemCapabilityName = string;
 export type SignalName = string;
@@ -15,7 +15,7 @@ export type ObservableSignalName = string;
 export type ActuatableSignalName = string;
 export type InstanceSignalBindingName = string;
 /**
-* Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the InstrumentSystem referenced by is_instance_of.
+* Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of.
 */
 export enum ElementKindEnum {
     
@@ -144,8 +144,8 @@ export interface NaradConfig {
     has_sub_system: ControlSystemName[],
     /** Control Capability definitions for this facility. */
     control_capability_layer: {[index: ControlCapabilityName]: ControlCapability },
-    /** Instrument Capability definitions keyed by capability name. */
-    instrument_layer: {[index: InstrumentSystemName]: InstrumentSystem },
+    /** Device Capability definitions keyed by capability name. */
+    device_layer: {[index: DeviceSystemName]: DeviceSystem },
     /** Signal-layer container for facility-specific signal bindings. */
     signal_layer: SignalLayer,
 }
@@ -166,7 +166,7 @@ export interface ControlCapability extends NamedThing {
     /** Represents the generic, semantic class of the device (e.g., "Quadrupole", "BPM") and is used for capability, instrument, and signal profile matching. */
     device_type?: string,
     /** -> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf. */
-    subclass_of?: ControlCapabilityName,
+    subclass_of?: SystemName,
     /** Signals within a capability, keyed by a semantic signal name. */
     signals: {[index: SignalName]: Signal },
 }
@@ -288,15 +288,17 @@ export interface ControlSystem extends System {
 
 
 /**
- * A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.
+ * A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.
 
  */
-export interface InstrumentSystem extends System {
+export interface DeviceSystem extends System {
     /** Represents the generic, semantic class of the device (e.g., "Quadrupole", "BPM") and is used for capability, instrument, and signal profile matching. */
     device_type?: string,
     /** Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
  */
     has_sub_system?: SystemName[],
+    /** -> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf. */
+    subclass_of?: SystemName,
     /** Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
  */
     has_system_capability?: SystemCapabilityName,

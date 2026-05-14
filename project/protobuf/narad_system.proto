@@ -44,7 +44,7 @@ message ControlCapability
   string name = 0
   string description = 0
   elementKindEnum deviceType = 0
-  controlCapability subclassOf = 0
+  system subclassOf = 0
  repeated  signal signals = 0
  }
 // A control system (e.g. EPICS) that manages device process variables. In the SSN graph a ControlSystem is a subsystem of the Facility.
@@ -57,6 +57,18 @@ message ControlSystem
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
   string namingConvention = 0
+ }
+// A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.
+// 
+message DeviceSystem
+ {
+  string name = 0
+  string description = 0
+  systemTypeEnum systemType = 0
+  elementKindEnum deviceType = 0
+ repeated  system hasSubSystem = 0
+  system subclassOf = 0
+ repeated  systemCapability hasSystemCapability = 0
  }
 // Named physics-parameter block for a beamline element. The name identifies the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
 message ElementParamSet
@@ -118,17 +130,6 @@ message Instrument
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
  }
-// A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is a subsystem of the Facility and a sibling to the ControlSystem.
-// 
-message InstrumentSystem
- {
-  string name = 0
-  string description = 0
-  systemTypeEnum systemType = 0
-  elementKindEnum deviceType = 0
- repeated  system hasSubSystem = 0
- repeated  systemCapability hasSystemCapability = 0
- }
 // A top-level NARAD-system container for the: capability layer + signal layer.
 message NaradConfig
  {
@@ -137,7 +138,7 @@ message NaradConfig
   facilitySystem deployedSystem = 0
  repeated  controlSystem hasSubSystem = 0
  repeated  controlCapability controlCapabilityLayer = 0
- repeated  instrumentSystem instrumentLayer = 0
+ repeated  deviceSystem deviceLayer = 0
   signalLayer signalLayer = 0
  }
 // Top-level NARAD document container.

@@ -3,7 +3,7 @@
 
 
 
-_Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the InstrumentSystem referenced by is_instance_of._
+_Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of._
 
 
 
@@ -66,7 +66,7 @@ description: 'Controlled vocabulary for beamline element types, shared between t
   Keeping the enum here keeps profile device_type values in sync with element kind
   values without circular imports. Values must stay aligned with CapabilityProfile.device_type.
   NOTE: The element_kind of this BeamlineElement must match the device_type of the
-  InstrumentSystem referenced by is_instance_of.'
+  DeviceSystem referenced by is_instance_of.'
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 permissible_values:

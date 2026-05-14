@@ -76,7 +76,7 @@ Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBindin
   facility-specific parameters that don't fit into the predefined schema structure.
 
 Needed Custom Validations:
-  - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the InstrumentSystem it is an instance of.
+  - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the DeviceSystem it is an instance of.
   - Validation to ensure that the value of is_property_of in InstanceSignalBinding matches one of the control systems listed in narad_config.has_sub_system.
   - Validation that each signal_layer -> facilities -> FacilitySystem -> control_system value has a corresponding entry in narad_config.has_sub_system to ensure that all control systems referenced in the signal layer are defined in the capability layer.
   - Validation that the signal_bindings defined for a given device_type in the signal layer align with the signals defined in the capability profiles and instrument systems for that device type.
@@ -109,9 +109,9 @@ Name: narad-system-schema
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SignalDefinitions](SignalDefinitions.md) | Signal binding set scoped to a device type or device domain |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ControlSystem](ControlSystem.md) | A control system (e |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Instrument](Instrument.md) | A generic beam diagnostic instrument |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[InstrumentSystem](InstrumentSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SystemCapability](SystemCapability.md) | A capability of a system |
 | [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |
 | [NaradModel](NaradModel.md) | Top-level NARAD document container |
@@ -139,6 +139,7 @@ Name: narad-system-schema
 | [data_type](data_type.md) | The data type of the signal's value |
 | [deployed_system](deployed_system.md) | Identifier of the deployed system this configuration describes |
 | [description](description.md) | Detailed description of the entity |
+| [device_layer](device_layer.md) | Device definitions for this facility |
 | [device_type](device_type.md) | Represents the generic, semantic class of the device (e |
 | [e1](e1.md) | Entry edge angle in radians |
 | [e2](e2.md) | Exit edge angle in radians |
@@ -159,7 +160,6 @@ Name: narad-system-schema
 | [identifier_type](identifier_type.md) | The type of identifier used in the identifier slot (e |
 | [identifier_value](identifier_value.md) | The value of the identifier (e |
 | [instance_signal_bindings](instance_signal_bindings.md) | Facility-specific bindings of signals to control-system interfaces (e |
-| [instrument_layer](instrument_layer.md) | Instrument definitions for this facility |
 | [intent](intent.md) | A human-readable statement of the intended use or purpose of this NARAD confi... |
 | [is_hosted_by](is_hosted_by.md) | Links an InstanceSignalBinding to the FacilitySystem it belongs to |
 | [is_instance_of](is_instance_of.md) | NARAD alias for rdf:type |

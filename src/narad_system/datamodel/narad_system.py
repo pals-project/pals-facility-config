@@ -1,5 +1,5 @@
 # Auto generated from narad_system.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-12T15:13:11
+# Generation date: 2026-05-14T12:12:17
 # Schema: narad-system-schema
 #
 # id: https://w3id.org/narad_linkml/schema/narad/system
@@ -79,7 +79,7 @@
 #     facility-specific parameters that don't fit into the predefined schema structure.
 #
 #   Needed Custom Validations:
-#     - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the InstrumentSystem it is an instance of.
+#     - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the DeviceSystem it is an instance of.
 #     - Validation to ensure that the value of is_property_of in InstanceSignalBinding matches one of the control systems listed in narad_config.has_sub_system.
 #     - Validation that each signal_layer -> facilities -> FacilitySystem -> control_system value has a corresponding entry in narad_config.has_sub_system to ensure that all control systems referenced in the signal layer are defined in the capability layer.
 #     - Validation that the signal_bindings defined for a given device_type in the signal layer align with the signals defined in the capability profiles and instrument systems for that device type.
@@ -199,7 +199,7 @@ class ControlSystemName(SystemName):
     pass
 
 
-class InstrumentSystemName(SystemName):
+class DeviceSystemName(SystemName):
     pass
 
 
@@ -297,7 +297,7 @@ class NaradConfig(YAMLRoot):
     deployed_system: Union[str, FacilitySystemName] = None
     has_sub_system: Union[Union[str, ControlSystemName], list[Union[str, ControlSystemName]]] = None
     control_capability_layer: Union[dict[Union[str, ControlCapabilityName], Union[dict, "ControlCapability"]], list[Union[dict, "ControlCapability"]]] = empty_dict()
-    instrument_layer: Union[dict[Union[str, InstrumentSystemName], Union[dict, "InstrumentSystem"]], list[Union[dict, "InstrumentSystem"]]] = empty_dict()
+    device_layer: Union[dict[Union[str, DeviceSystemName], Union[dict, "DeviceSystem"]], list[Union[dict, "DeviceSystem"]]] = empty_dict()
     signal_layer: Union[dict, "SignalLayer"] = None
     intent: Optional[str] = None
 
@@ -322,9 +322,9 @@ class NaradConfig(YAMLRoot):
             self.MissingRequiredField("control_capability_layer")
         self._normalize_inlined_as_dict(slot_name="control_capability_layer", slot_type=ControlCapability, key_name="name", keyed=True)
 
-        if self._is_empty(self.instrument_layer):
-            self.MissingRequiredField("instrument_layer")
-        self._normalize_inlined_as_dict(slot_name="instrument_layer", slot_type=InstrumentSystem, key_name="name", keyed=True)
+        if self._is_empty(self.device_layer):
+            self.MissingRequiredField("device_layer")
+        self._normalize_inlined_as_dict(slot_name="device_layer", slot_type=DeviceSystem, key_name="name", keyed=True)
 
         if self._is_empty(self.signal_layer):
             self.MissingRequiredField("signal_layer")
@@ -373,7 +373,7 @@ class ControlCapability(NamedThing):
     name: Union[str, ControlCapabilityName] = None
     signals: Union[dict[Union[str, SignalName], Union[dict, "Signal"]], list[Union[dict, "Signal"]]] = empty_dict()
     device_type: Optional[Union[str, "ElementKindEnum"]] = None
-    subclass_of: Optional[Union[str, ControlCapabilityName]] = None
+    subclass_of: Optional[Union[str, SystemName]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
@@ -388,8 +388,8 @@ class ControlCapability(NamedThing):
         if self.device_type is not None and not isinstance(self.device_type, ElementKindEnum):
             self.device_type = ElementKindEnum(self.device_type)
 
-        if self.subclass_of is not None and not isinstance(self.subclass_of, ControlCapabilityName):
-            self.subclass_of = ControlCapabilityName(self.subclass_of)
+        if self.subclass_of is not None and not isinstance(self.subclass_of, SystemName):
+            self.subclass_of = SystemName(self.subclass_of)
 
         super().__post_init__(**kwargs)
 
@@ -682,29 +682,30 @@ class ControlSystem(System):
 
 
 @dataclass(repr=False)
-class InstrumentSystem(System):
+class DeviceSystem(System):
     """
     A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the
-    instrument as a whole rather than the control system for that instrument. In the SSN graph an InstrumentSystem is
-    a subsystem of the Facility and a sibling to the ControlSystem.
+    instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a
+    subsystem of the Facility and a sibling to the ControlSystem.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = NARAD["InstrumentSystem"]
-    class_class_curie: ClassVar[str] = "narad:InstrumentSystem"
-    class_name: ClassVar[str] = "InstrumentSystem"
-    class_model_uri: ClassVar[URIRef] = NARAD.InstrumentSystem
+    class_class_uri: ClassVar[URIRef] = NARAD["DeviceSystem"]
+    class_class_curie: ClassVar[str] = "narad:DeviceSystem"
+    class_name: ClassVar[str] = "DeviceSystem"
+    class_model_uri: ClassVar[URIRef] = NARAD.DeviceSystem
 
-    name: Union[str, InstrumentSystemName] = None
+    name: Union[str, DeviceSystemName] = None
     device_type: Optional[Union[str, "ElementKindEnum"]] = None
     has_sub_system: Optional[Union[Union[str, SystemName], list[Union[str, SystemName]]]] = empty_list()
+    subclass_of: Optional[Union[str, SystemName]] = None
     has_system_capability: Optional[Union[Union[str, SystemCapabilityName], list[Union[str, SystemCapabilityName]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
             self.MissingRequiredField("name")
-        if not isinstance(self.name, InstrumentSystemName):
-            self.name = InstrumentSystemName(self.name)
+        if not isinstance(self.name, DeviceSystemName):
+            self.name = DeviceSystemName(self.name)
 
         if self.device_type is not None and not isinstance(self.device_type, ElementKindEnum):
             self.device_type = ElementKindEnum(self.device_type)
@@ -712,6 +713,9 @@ class InstrumentSystem(System):
         if not isinstance(self.has_sub_system, list):
             self.has_sub_system = [self.has_sub_system] if self.has_sub_system is not None else []
         self.has_sub_system = [v if isinstance(v, SystemName) else SystemName(v) for v in self.has_sub_system]
+
+        if self.subclass_of is not None and not isinstance(self.subclass_of, SystemName):
+            self.subclass_of = SystemName(self.subclass_of)
 
         if not isinstance(self.has_system_capability, list):
             self.has_system_capability = [self.has_system_capability] if self.has_system_capability is not None else []
@@ -1011,7 +1015,7 @@ class ElementKindEnum(EnumDefinitionImpl):
     (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile
     device_type values in sync with element kind values without circular imports. Values must stay aligned with
     CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the
-    InstrumentSystem referenced by is_instance_of.
+    DeviceSystem referenced by is_instance_of.
     """
     Drift = PermissibleValue(
         text="Drift",
@@ -1049,7 +1053,7 @@ class ElementKindEnum(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="ElementKindEnum",
-        description="""Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the InstrumentSystem referenced by is_instance_of.""",
+        description="""Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of.""",
     )
 
 class SystemTypeEnum(EnumDefinitionImpl):
@@ -1188,7 +1192,7 @@ slots.is_instance_of = Slot(uri=NARAD.is_instance_of, name="is_instance_of", cur
                    model_uri=NARAD.is_instance_of, domain=None, range=Optional[Union[str, list[str]]])
 
 slots.subclass_of = Slot(uri=NARAD.subclass_of, name="subclass_of", curie=NARAD.curie('subclass_of'),
-                   model_uri=NARAD.subclass_of, domain=None, range=Optional[Union[str, ControlCapabilityName]])
+                   model_uri=NARAD.subclass_of, domain=None, range=Optional[Union[str, SystemName]])
 
 slots.pv_name = Slot(uri=NARAD.pv_name, name="pv_name", curie=NARAD.curie('pv_name'),
                    model_uri=NARAD.pv_name, domain=None, range=Optional[str])
@@ -1226,8 +1230,8 @@ slots.control_capability_layer = Slot(uri=NARAD.control_capability_layer, name="
 slots.control_capabilities = Slot(uri=NARAD.control_capabilities, name="control_capabilities", curie=NARAD.curie('control_capabilities'),
                    model_uri=NARAD.control_capabilities, domain=None, range=Optional[Union[dict[Union[str, ControlCapabilityName], Union[dict, ControlCapability]], list[Union[dict, ControlCapability]]]])
 
-slots.instrument_layer = Slot(uri=NARAD.instrument_layer, name="instrument_layer", curie=NARAD.curie('instrument_layer'),
-                   model_uri=NARAD.instrument_layer, domain=None, range=Optional[Union[dict[Union[str, InstrumentSystemName], Union[dict, InstrumentSystem]], list[Union[dict, InstrumentSystem]]]])
+slots.device_layer = Slot(uri=NARAD.device_layer, name="device_layer", curie=NARAD.curie('device_layer'),
+                   model_uri=NARAD.device_layer, domain=None, range=Optional[Union[dict[Union[str, DeviceSystemName], Union[dict, DeviceSystem]], list[Union[dict, DeviceSystem]]]])
 
 slots.facilities = Slot(uri=NARAD.facilities, name="facilities", curie=NARAD.curie('facilities'),
                    model_uri=NARAD.facilities, domain=None, range=Optional[Union[dict[Union[str, FacilitySystemName], Union[dict, FacilitySystem]], list[Union[dict, FacilitySystem]]]])
@@ -1382,8 +1386,8 @@ slots.NaradConfig_deployed_system = Slot(uri=NARAD.deployed_system, name="NaradC
 slots.NaradConfig_has_sub_system = Slot(uri=NARAD.has_sub_system, name="NaradConfig_has_sub_system", curie=NARAD.curie('has_sub_system'),
                    model_uri=NARAD.NaradConfig_has_sub_system, domain=NaradConfig, range=Union[Union[str, ControlSystemName], list[Union[str, ControlSystemName]]])
 
-slots.NaradConfig_instrument_layer = Slot(uri=NARAD.instrument_layer, name="NaradConfig_instrument_layer", curie=NARAD.curie('instrument_layer'),
-                   model_uri=NARAD.NaradConfig_instrument_layer, domain=NaradConfig, range=Union[dict[Union[str, InstrumentSystemName], Union[dict, "InstrumentSystem"]], list[Union[dict, "InstrumentSystem"]]])
+slots.NaradConfig_device_layer = Slot(uri=NARAD.device_layer, name="NaradConfig_device_layer", curie=NARAD.curie('device_layer'),
+                   model_uri=NARAD.NaradConfig_device_layer, domain=NaradConfig, range=Union[dict[Union[str, DeviceSystemName], Union[dict, "DeviceSystem"]], list[Union[dict, "DeviceSystem"]]])
 
 slots.NaradConfig_signal_layer = Slot(uri=NARAD.signal_layer, name="NaradConfig_signal_layer", curie=NARAD.curie('signal_layer'),
                    model_uri=NARAD.NaradConfig_signal_layer, domain=NaradConfig, range=Union[dict, "SignalLayer"])
@@ -1403,11 +1407,11 @@ slots.System_has_sub_system = Slot(uri=NARAD.has_sub_system, name="System_has_su
 slots.System_has_system_capability = Slot(uri=NARAD.has_system_capability, name="System_has_system_capability", curie=NARAD.curie('has_system_capability'),
                    model_uri=NARAD.System_has_system_capability, domain=System, range=Optional[Union[dict[Union[str, SystemCapabilityName], Union[dict, "SystemCapability"]], list[Union[dict, "SystemCapability"]]]])
 
-slots.InstrumentSystem_has_sub_system = Slot(uri=NARAD.has_sub_system, name="InstrumentSystem_has_sub_system", curie=NARAD.curie('has_sub_system'),
-                   model_uri=NARAD.InstrumentSystem_has_sub_system, domain=InstrumentSystem, range=Optional[Union[dict[Union[str, SystemName], Union[dict, System]], list[Union[dict, System]]]])
+slots.DeviceSystem_has_sub_system = Slot(uri=NARAD.has_sub_system, name="DeviceSystem_has_sub_system", curie=NARAD.curie('has_sub_system'),
+                   model_uri=NARAD.DeviceSystem_has_sub_system, domain=DeviceSystem, range=Optional[Union[dict[Union[str, SystemName], Union[dict, System]], list[Union[dict, System]]]])
 
-slots.InstrumentSystem_has_system_capability = Slot(uri=NARAD.has_system_capability, name="InstrumentSystem_has_system_capability", curie=NARAD.curie('has_system_capability'),
-                   model_uri=NARAD.InstrumentSystem_has_system_capability, domain=InstrumentSystem, range=Optional[Union[Union[str, SystemCapabilityName], list[Union[str, SystemCapabilityName]]]])
+slots.DeviceSystem_has_system_capability = Slot(uri=NARAD.has_system_capability, name="DeviceSystem_has_system_capability", curie=NARAD.curie('has_system_capability'),
+                   model_uri=NARAD.DeviceSystem_has_system_capability, domain=DeviceSystem, range=Optional[Union[Union[str, SystemCapabilityName], list[Union[str, SystemCapabilityName]]]])
 
 slots.SystemCapability_for_property = Slot(uri=NARAD.for_property, name="SystemCapability_for_property", curie=NARAD.curie('for_property'),
                    model_uri=NARAD.SystemCapability_for_property, domain=SystemCapability, range=Optional[Union[str, list[str]]])
