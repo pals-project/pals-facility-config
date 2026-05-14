@@ -6,7 +6,7 @@ narad_config:
   has_sub_system: 
     - epics
   control_capability_layer:
-    MagnetControlCapability:
+    MagnetCapability:
       description: Shared current-control semantics for powered magnets.
       device_type: Magnet
       signals:
@@ -39,10 +39,10 @@ narad_config:
           units: A
           units_uri: si-unit:A
           description: Power-supply or device state summary.
-    QuadrupoleControlCapability:
+    QuadrupoleCapability:
       description: Control and observe the normalized quadrupole strength.
       device_type: Quadrupole
-      subclass_of: MagnetControlCapability
+      subclass_of: MagnetCapability
       signals:
         strength_setpoint:
           role: control
@@ -50,10 +50,10 @@ narad_config:
           units: G/cm
           units_uri: si-unit:Gs
           description: Desired integrated quadrupole strength or equivalent model quantity.
-    DipoleControlCapability:
+    DipoleCapability:
       description: Control and observe the dipole bend field.
       device_type: Dipole
-      subclass_of: MagnetControlCapability
+      subclass_of: MagnetCapability
       signals:
         field_setpoint:
           role: control
@@ -61,10 +61,10 @@ narad_config:
           units: T*m
           units_uri: si-unit:T-M
           description: Desired dipole bend field or equivalent model quantity.
-    CorrectorKickControlCapability:
+    CorrectorKickCapability:
       description: Control and observe the corrector kick.
       device_type: Corrector
-      subclass_of: MagnetControlCapability
+      subclass_of: MagnetCapability
       signals:
         kick_setpoint:
           role: control
@@ -72,7 +72,7 @@ narad_config:
           units: T*m
           units_uri: si-unit:T-M
           description: Desired integrated corrector kick or equivalent model quantity.
-    InstrumentControlCapability:
+    InstrumentCapability:
       description: Shared readback semantics generic instruments.
       device_type: Instrument
       signals:
@@ -82,9 +82,10 @@ narad_config:
           units: mm
           units_uri: si-unit:MilliM
           description: generic instrument status readback.
-    BPMControlCapability:
+    BPMCapability:
       description: Shared readback semantics for beam position monitor instruments.
       device_type: BPM
+      subclass_of: InstrumentCapability
       signals:
         horizontal_beam_position:
           role: readback
@@ -98,14 +99,9 @@ narad_config:
           units: mm
           units_uri: si-unit:MilliM
           description: Measured vertical beam position.
-        status:
-          role: readback
-          data_type: string
-          units:
-          description: Beam position monitor status readback.
-    CavityGradientControlCapability:
-      description: Shared gradient-control semantics for RF cavities.
-      device_type: RFCavity
+    CavityGradientCapability:
+      description: Shared gradient-control semantics for CavityGradient devices.
+      device_type: CavityGradient
       signals:
         gradient_setpoint:
           role: control
@@ -117,43 +113,54 @@ narad_config:
           data_type: float
           units: MV/m
           description: Measured cavity gradient readback.
-        status:
+        cavity_status:
           role: status
           data_type: string
           units:
-          description: RF cavity status summary.
-  instrument_layer:
+          description: Cavity status summary.
+    RFCavityCapability:
+      description: Shared gradient-control semantics for RF cavity devices.
+      device_type: RFCavity
+      subclass_of: CavityGradientCapability
+      signals: {}
+  device_layer:
     Magnet:
       device_type: Magnet
       has_sub_system:
         - name: Quadrupole
         - name: Dipole
         - name: Corrector
-      has_system_capability: MagnetControlCapability
+      has_system_capability: MagnetCapability
     Quadrupole:
       device_type: Quadrupole
-      has_system_capability: QuadrupoleControlCapability
+      subclass_of: Magnet
+      has_system_capability: QuadrupoleCapability
     Dipole:
       device_type: Dipole
-      has_system_capability: DipoleControlCapability
+      subclass_of: Magnet
+      has_system_capability: DipoleCapability
     Corrector:
       device_type: Corrector
-      has_system_capability: CorrectorKickControlCapability
+      subclass_of: Magnet
+      has_system_capability: CorrectorKickCapability
     Instrument:
       device_type: Instrument
       has_sub_system: 
         - name: BPM
-      has_system_capability: InstrumentControlCapability
+      has_system_capability: InstrumentCapability
     BPM:
       device_type: BPM
-      has_system_capability: BPMControlCapability
+      subclass_of: Instrument
+      has_system_capability: BPMCapability
     CavityGradient:
       device_type: CavityGradient
       has_sub_system: 
         - name: RFCavity
+      has_system_capability: CavityGradientCapability
     RFCavity:
       device_type: RFCavity
-      has_system_capability: CavityGradientControlCapability
+      subclass_of: CavityGradient
+      has_system_capability: RFCavityCapability
   signal_layer:
     facilities:
       UITF:
@@ -551,19 +558,19 @@ elements:
   instance_signal_bindings:
     gradient_setpoint:
       pv_name: RK11:GSET
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.gradient_setpoint
       for_property: gradient_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     gradient_readback:
       pv_name: RK11:GMES
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.gradient_readback
       for_property: gradient_readback
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: RK11:STAT
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.cavity_status
       for_property: cavity_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -642,19 +649,19 @@ elements:
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMK101.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMK101.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMK101.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -702,37 +709,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK101H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK101HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK101H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK101H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK101H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK101H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -781,37 +788,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK101V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK101VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK101V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK101V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK101V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK101V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -863,37 +870,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK101AH.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK101AHM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK101AH.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK101AH.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK101AH.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK101AH.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -942,37 +949,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK101AV.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK101AVM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK101AV.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK101AV.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK101AV.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK101AV.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -1073,19 +1080,19 @@ elements:
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMK102.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMK102.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMK102.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -1130,37 +1137,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK102H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK102HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK102H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK102H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK102H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK102H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -1209,37 +1216,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK102V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK102VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK102V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK102V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK102V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK102V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -1353,37 +1360,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MDSK201.S
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MDSK201M
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MDSK201.HMIN
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MDSK201.HMAX
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MDSK201.STAT
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     field_setpoint:
       pv_name: MDSK201.BDL
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.field_setpoint
       for_property: field_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -1485,37 +1492,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK201H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK201HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK201H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK201H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK201H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK201H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -1567,37 +1574,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK201V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK201VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK201V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK201V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK201V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK201V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -1716,37 +1723,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK202H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK202HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK202H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK202H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK202H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK202H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -1798,37 +1805,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK202V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK202VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK202V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK202V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK202V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK202V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -1924,37 +1931,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MQWK202.S
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MQWK202M
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MQWK202.HMIN
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MQWK202.HMAX
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MQWK202.STAT
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     strength_setpoint:
       pv_name: MQWK202.BDL
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.strength_setpoint
       for_property: strength_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -2121,37 +2128,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MQWK203.S
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MQWK203M
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MQWK203.HMIN
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MQWK203.HMAX
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MQWK203.STAT
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     strength_setpoint:
       pv_name: MQWK203.BDL
-      is_instance_of: QuadrupoleControlCapability
+      is_instance_of: QuadrupoleCapability.signals.strength_setpoint
       for_property: strength_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -2208,37 +2215,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK203H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK203HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK203H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK203H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK203H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK203H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -2287,37 +2294,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK203V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK203VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK203V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK203V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK203V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK203V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -2419,37 +2426,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK203AH.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK203AHM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK203AH.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK203AH.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK203AH.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK203AH.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -2498,37 +2505,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK203AV.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK203AVM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK203AV.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK203AV.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK203AV.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK203AV.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -2661,23 +2668,22 @@ elements:
   length: 0.0940003021
 - name: IPMK203
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMK203.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMK203.YPOS
-      is_instance_of: BPMCpontrolCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMK203.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -2817,37 +2823,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK301H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK301HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK301H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK301H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK301H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK301H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -2899,37 +2905,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK301V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK301VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK301V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK301V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK301V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK301V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -3171,37 +3177,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK302H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK302HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK302H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK302H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK302H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK302H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -3253,37 +3259,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK302V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK302VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK302V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK302V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK302V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK302V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -3457,23 +3463,22 @@ elements:
   length: 0.0895472723
 - name: IPMK401
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMK401.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMK401.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMK401.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -3523,37 +3528,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK401H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK401HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK401H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK401H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK401H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK401H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -3605,37 +3610,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK401V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK401VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK401V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK401V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK401V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK401V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -3731,19 +3736,19 @@ elements:
   instance_signal_bindings:
     gradient_setpoint:
       pv_name: RK41:GSET
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.gradient_setpoint
       for_property: gradient_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     gradient_readback:
       pv_name: RK41:GMES
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.gradient_readback
       for_property: gradient_readback
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: RK41:STAT
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.cavity_status
       for_property: cavity_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -3790,37 +3795,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK401AH.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK401AHM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK401AH.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK401AH.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK401AH.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK401AH.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -3869,37 +3874,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK401AV.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK401AVM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK401AV.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK401AV.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK401AV.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK401AV.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -3984,37 +3989,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK401BH.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK401BHM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK401BH.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK401BH.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK401BH.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK401BH.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -4066,37 +4071,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHK401BV.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHK401BVM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHK401BV.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHK401BV.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHK401BV.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHK401BV.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -4149,37 +4154,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MDIK402.S
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MDIK402M
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MDIK402.HMIN
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MDIK402.HMAX
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MDIK402.STAT
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     field_setpoint:
       pv_name: MDIK402.BDL
-      is_instance_of: DipoleControlCapability
+      is_instance_of: DipoleCapability.signals.field_setpoint
       for_property: field_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -4249,23 +4254,22 @@ elements:
   length: 0.0925295594
 - name: IPMK402
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMK402.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMK402.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMK402.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -4315,37 +4319,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK402H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK402HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK402H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK402H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK402H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK402H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -4397,37 +4401,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK402V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK402VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK402V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK402V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK402V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK402V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -4682,23 +4686,22 @@ elements:
   length: 0.106597234
 - name: IPMK403
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMK403.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMK403.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMK403.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -4748,36 +4751,36 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK403H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK403HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK403H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK403H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK403H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK403H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -4829,37 +4832,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHK403V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHK403VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHK403V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHK403V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHK403V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHK403V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -4996,19 +4999,19 @@ elements:
   instance_signal_bindings:
     gradient_setpoint:
       pv_name: RM11:GSET
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.gradient_setpoint
       for_property: gradient_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     gradient_readback:
       pv_name: RM11:GMES
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.gradient_readback
       for_property: gradient_readback
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: RM11:STAT
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.cavity_status
       for_property: cavity_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -5077,20 +5080,20 @@ elements:
   instance_signal_bindings:
     gradient_setpoint:
       pv_name: RM12:GSET
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.gradient_setpoint
       for_property: gradient_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     gradient_readback:
       pv_name: RM12:GMES
-      is_instance_of: CavityGradientControlCapability
+      is_instance_of: RFCavityCapability.signals.gradient_readback
       for_property: gradient_readback
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: RM12:STAT
-      is_instance_of: CavityGradientControlCapability
-      for_property: magnet_status
+      is_instance_of: RFCavityCapability.signals.cavity_status
+      for_property: cavity_status
       is_hosted_by: UITF
       is_property_of: epics
   param_set:
@@ -5201,37 +5204,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM201H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM201HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM201H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM201H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM201H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM201H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -5283,37 +5286,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM201V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM201VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM201V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM201V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM201V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM201V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -5480,37 +5483,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM401H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM401HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM401H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM401H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM401H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM401H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -5562,37 +5565,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM401V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM401VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM401V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM401V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM401V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM401V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -5827,23 +5830,22 @@ elements:
   length: 0.444515634
 - name: IPMM501
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM501.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM501.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM501.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -5893,37 +5895,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM501H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM501HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM501H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM501H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM501H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM501H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -5975,37 +5977,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM501V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM501VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM501V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM501V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM501V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM501V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6058,37 +6060,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MQJM501.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MQJM501M
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MQJM501.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MQJM501.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MQJM501.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     strength_setpoint:
       pv_name: MQJM501.BDL
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.strength_setpoint
       for_property: strength_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6144,37 +6146,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM502H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM502HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM502H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM502H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM502H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM502H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6226,37 +6228,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM502V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM502VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM502V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM502V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM502V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM502V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6305,23 +6307,22 @@ elements:
   length: 1.00000008e-09
 - name: IPMM502
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM502.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM502.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM502.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -6371,37 +6372,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MQJM502.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MQJM502M
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MQJM502.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MQJM502.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MQJM502.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     strength_setpoint:
       pv_name: MQJM502.BDL
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.strength_setpoint
       for_property: strength_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6455,36 +6456,36 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM503H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM503HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM503H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM503H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM503H.STAT
-      is_instance_of: SystemCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM503H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -6536,37 +6537,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM503V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM503VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM503V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM503V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM503V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM503V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6615,23 +6616,22 @@ elements:
   length: 1.00000008e-09
 - name: IPMM503
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM503.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM503.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM503.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -6682,37 +6682,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MQJM503.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MQJM503M
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MQJM503.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MQJM503.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MQJM503.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     strength_setpoint:
       pv_name: MQJM503.BDL
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.strength_setpoint
       for_property: strength_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6768,37 +6768,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM504H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM504HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM504H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM504H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM504H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM504H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6850,36 +6850,36 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM504V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM504VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM504V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM504V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM504V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM504V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -6928,23 +6928,22 @@ elements:
   length: 1.00000008e-09
 - name: IPMM504
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM504.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM504.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM504.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -6995,37 +6994,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MQJM504.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MQJM504M
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MQJM504.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MQJM504.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MQJM504.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     strength_setpoint:
       pv_name: MQJM504.BDL
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.strength_setpoint
       for_property: strength_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -7081,37 +7080,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM504AH.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM504AHM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM504AH.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM504AH.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM504AH.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM504AH.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -7163,37 +7162,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM504AV.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM504AVM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM504AV.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM504AV.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM504AV.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM504AV.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -7242,23 +7241,22 @@ elements:
   length: 0.0239385383
 - name: IPMM505
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM505.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM505.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM505.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -7535,37 +7533,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM601AH.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM601AHM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM601AH.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM601AH.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM601AH.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM601AH.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -7620,37 +7618,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MLHM601AV.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MLHM601AVM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM601AV.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM601AV.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MLHM601AV.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MLHM601AV.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -7702,23 +7700,22 @@ elements:
   length: 0.391493384
 - name: IPMM601
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM601.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM601.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM601.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -7769,37 +7766,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MDLM601.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: DipoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MDLM601M
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: DipoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MDLM601.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: DipoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MDLM601.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: DipoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MDLM601.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: DipoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     field_setpoint:
       pv_name: MDLM601.BDL
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: DipoleCapability.signals.field_setpoint
       for_property: field_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -7854,37 +7851,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM601BH.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM601BHM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM601BH.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM601BH.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM601BH.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM601BH.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -7936,37 +7933,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM601BV.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM601BVM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM601BV.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM601BV.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM601BV.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM601BV.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8132,23 +8129,22 @@ elements:
   length: 0.224876137
 - name: IPMM602
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM602.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM602.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM602.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -8200,37 +8196,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM602H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM602HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM602H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM602H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM602H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM602H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8283,37 +8279,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM602V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM602VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM602V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM602V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM602V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM602V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8366,37 +8362,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM603H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM603HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM603H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM603H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM603H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM603H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8449,37 +8445,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM603V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM603VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM603V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM603V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM603V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM603V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8532,37 +8528,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MQJM603.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MQJM603M
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MQJM603.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MQJM603.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MQJM603.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     strength_setpoint:
       pv_name: MQJM603.BDL
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.strength_setpoint
       for_property: strength_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8618,37 +8614,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM604H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM604HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM604H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM604H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM604H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM604H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8701,37 +8697,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM604V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM604VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM604V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM604V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM604V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM604V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8894,37 +8890,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MFRM604V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MFRM604VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MFRM604V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MFRM604V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MFRM604V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MFRM604V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -8969,37 +8965,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MFRM604H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MFRM604HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MFRM604H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MFRM604H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MFRM604H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MFRM604H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -9044,37 +9040,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MQJM604.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MQJM604M
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MQJM604.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MQJM604.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MQJM604.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     strength_setpoint:
       pv_name: MQJM604.BDL
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: QuadrupoleCapability.signals.strength_setpoint
       for_property: strength_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -9126,23 +9122,22 @@ elements:
   length: 0.3
 - name: IPMM604
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM604.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM604.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM604.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -9252,37 +9247,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM605H.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM605HM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM605H.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM605H.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM605H.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM605H.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -9335,37 +9330,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM605V.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM605VM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM605V.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM605V.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM605V.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM605V.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -9444,37 +9439,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM605AH.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM605AHM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM605AH.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM605AH.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM605AH.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM605AH.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -9524,37 +9519,37 @@ elements:
   instance_signal_bindings:
     current_setpoint:
       pv_name: MBHM605AV.S
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_setpoint
       for_property: current_setpoint
       is_hosted_by: UITF
       is_property_of: epics
     current_readback:
       pv_name: MBHM605AVM
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_readback
       for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MBHM605AV.HMIN
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_min
       for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MBHM605AV.HMAX
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: MBHM605AV.STAT
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
       is_hosted_by: UITF
       is_property_of: epics
     kick_setpoint:
       pv_name: MBHM605AV.KICK
-      is_instance_of: CorrectorKickControlCapability
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
       for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
@@ -9661,23 +9656,22 @@ elements:
   length: 0.14
 - name: IPMM605
   is_instance_of: BPM
-  is_instance_of: BPM
   instance_signal_bindings:
     horizontal_beam_position:
       pv_name: IPMM605.XPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.horizontal_beam_position
       for_property: horizontal_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     vertical_beam_position:
       pv_name: IPMM605.YPOS
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.vertical_beam_position
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
     status:
       pv_name: IPMM605.STAT
-      is_instance_of: BPMControlCapability
+      is_instance_of: BPMCapability.signals.status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics

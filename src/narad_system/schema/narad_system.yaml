@@ -86,7 +86,7 @@ description: >
     facility-specific parameters that don't fit into the predefined schema structure.
 
   Needed Custom Validations:
-    - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the InstrumentSystem it is an instance of.
+    - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the DeviceSystem it is an instance of.
     - Validation to ensure that the value of is_property_of in InstanceSignalBinding matches one of the control systems listed in narad_config.has_sub_system.
     - Validation that each signal_layer -> facilities -> FacilitySystem -> control_system value has a corresponding entry in narad_config.has_sub_system to ensure that all control systems referenced in the signal layer are defined in the capability layer.
     - Validation that the signal_bindings defined for a given device_type in the signal layer align with the signals defined in the capability profiles and instrument systems for that device type.
@@ -151,7 +151,7 @@ classes:
       - deployed_system
       - has_sub_system 
       - control_capability_layer
-      - instrument_layer
+      - device_layer
       - signal_layer
     broad_mappings:
       - ssn:Deployment
@@ -170,12 +170,12 @@ classes:
         required: true
         multivalued: true
         description: "Identifier of the control system (e.g. epics) this configuration describes."
-      instrument_layer:
-        range: InstrumentSystem
+      device_layer:
+        range: DeviceSystem
         required: true
         multivalued: true
         inlined: true
-        description: "Instrument Capability definitions keyed by capability name."
+        description: "Device Capability definitions keyed by capability name."
       signal_layer:
         required: true
         range: SignalLayer
@@ -301,12 +301,12 @@ classes:
     slots:
       - naming_convention
   
-  InstrumentSystem:
+  DeviceSystem:
     is_a: System
     description: >
       A system representing a beam diagnostic instrument, magnet, or other non-magnet device.
       It represents the instrument as a whole rather than the
-      control system for that instrument. In the SSN graph an InstrumentSystem is
+      control system for that instrument. In the SSN graph a DeviceSystem is
       a subsystem of the Facility and a sibling to the ControlSystem.
     exact_mappings:
       - ssn:System
@@ -315,6 +315,7 @@ classes:
     slots:
       - device_type
       - has_sub_system
+      - subclass_of
       - has_system_capability
     slot_usage:
       has_sub_system:
@@ -485,7 +486,7 @@ enums:
       values in sync with element kind values without circular imports.
       Values must stay aligned with CapabilityProfile.device_type.
       NOTE: The element_kind of this BeamlineElement must match the device_type
-      of the InstrumentSystem referenced by is_instance_of.
+      of the DeviceSystem referenced by is_instance_of.
     permissible_values:
       Drift:
         description: "A field-free drift space between elements."
@@ -691,7 +692,7 @@ slots:
       narad:subclassOf.
     exact_mappings:
       - rdfs:subClassOf
-    range: ControlCapability
+    range: System
     multivalued: false
 
   pv_name:
@@ -759,11 +760,11 @@ slots:
     inlined: true
     multivalued: true
 
-  instrument_layer:
-    range: InstrumentSystem
+  device_layer:
+    range: DeviceSystem
     multivalued: true
     inlined: true
-    description: "Instrument definitions for this facility."
+    description: "Device definitions for this facility."
 
   facilities:
     range: FacilitySystem
