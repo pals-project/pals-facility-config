@@ -1,0 +1,36 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# python package artifacts
+*.egg-info/
+dist/
+build/
+
+# type checking and linting artifacts
+.mypy_cache/
+.pytype/
+.pylint.d/
+.ruff_cache/
+.coverage.*
+
+
+# Ignore virtual environment directories
+venv/
+env/
+.venv/
+ENV/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore pytest cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ignore macOS Finder metadata
+.DS_Store
+**/.DS_Store
