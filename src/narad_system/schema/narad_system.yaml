@@ -86,7 +86,7 @@ description: >
     facility-specific parameters that don't fit into the predefined schema structure.
 
   Needed Custom Validations:
-    - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the DeviceSystem it is an instance of.
+    - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the Device it is an instance of.
     - Validation to ensure that the value of is_property_of in InstanceSignalBinding matches one of the control systems listed in narad_config.has_sub_system.
     - Validation that each signal_layer -> facilities -> FacilitySystem -> control_system value has a corresponding entry in narad_config.has_sub_system to ensure that all control systems referenced in the signal layer are defined in the capability layer.
     - Validation that the signal_bindings defined for a given device_type in the signal layer align with the signals defined in the capability profiles and instrument systems for that device type.
@@ -172,7 +172,7 @@ classes:
         multivalued: false
         description: "Identifier of the control system (e.g. epics) this configuration describes."
       device_layer:
-        range: DeviceSystem
+        range: Device
         required: true
         multivalued: true
         inlined: true
@@ -230,23 +230,7 @@ classes:
     slots:
       - identifier_type
       - identifier_value
-
-  Device:
-    is_a: NamedThing
-    description: >-
-      Signal binding set scoped to a device type or device domain.
-    slots:
-      - device_type
-      - subclass_of
-      - is_observed_by
-    slot_usage:
-      device_type:
-        required: true
-      is_observed_by:
-        multivalued: true
-        inlined: true
       
-
   SignalBinding:
     is_a: NamedThing
     description: "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance."
@@ -350,13 +334,14 @@ classes:
       has_system_capability:
         required: false
   
-  DeviceSystem:
+  Device:
     is_a: System
     description: >
       A system representing a beam diagnostic instrument, magnet, or other non-magnet device.
       It represents the instrument as a whole rather than the
-      control system for that instrument. In the SSN graph a DeviceSystem is
+      control system for that instrument. In the SSN graph a Device is
       a subsystem of the Facility and a sibling to the ControlSystem.
+      Also used in the SignalLayer to group signal bindings by device type. Aligned to ssn:System.
     exact_mappings:
       - ssn:System
     broad_mappings:
@@ -366,7 +351,13 @@ classes:
       - has_sub_system
       - subclass_of
       - has_system_capability
+      - is_observed_by
     slot_usage:
+      device_type:
+        required: true
+      is_observed_by:
+        multivalued: true
+        inlined: true  
       has_sub_system:
         range: System
         multivalued: true
@@ -376,7 +367,7 @@ classes:
         multivalued: false
         inlined: false
         inlined_as_list: false
-  
+ 
   # ---- Physical device subclasses ------------------------------------------
   # These are the nodes labelled [Cls. Magnet], [Cls. Instrument] etc. in the
   # controls_scehma_SOSA_SSN diagram. Each is a ssn:System subtype that
@@ -588,7 +579,7 @@ enums:
       values in sync with element kind values without circular imports.
       Values must stay aligned with CapabilityProfile.device_type.
       NOTE: The element_kind of this BeamlineElement must match the device_type
-      of the DeviceSystem referenced by is_instance_of.
+      of the Device referenced by is_instance_of.
     permissible_values:
       Drift:
         description: "A field-free drift space between elements."
@@ -973,7 +964,7 @@ slots:
     multivalued: true
 
   device_layer:
-    range: DeviceSystem
+    range: Device
     multivalued: true
     inlined: true
     description: "Device definitions for this facility."
