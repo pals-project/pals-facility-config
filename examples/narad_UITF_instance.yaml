@@ -210,11 +210,12 @@ narad_config:
   signal_layer:
     facilities:
       UITF:
+        system_type: Facility
         has_control_system: epics
-        signal_definitions:
-          magnet_signals:
+        hosts_device:
+          Magnet:
             device_type: Magnet
-            signal_bindings:
+            is_observed_by:
               current_setpoint:
                 description: EPICS current setpoint PV
                 signal_code_suffix: .S
@@ -230,27 +231,30 @@ narad_config:
               magnet_status:
                 description: EPICS status PV
                 signal_code_suffix: .STAT
-          quadrupole_signals:
+          Quadrupole:
             device_type: Quadrupole
-            signal_bindings:
+            subclass_of: Magnet
+            is_observed_by:
               strength_setpoint:
                 description: EPICS quadrupole strength setpoint PV
                 signal_code_suffix: .BDL
-          corrector_signals:
-            device_type: Corrector
-            signal_bindings:
-              kick_setpoint:
-                description: Template EPICS corrector kick setpoint PV
-                signal_code_suffix: .KICK
-          dipole_signals:
+          Dipole:
             device_type: Dipole
-            signal_bindings:
+            subclass_of: Magnet
+            is_observed_by:
               field_setpoint:
                 description: Template EPICS dipole bend field setpoint PV
                 signal_code_suffix: .BDL
-          bpm_signals:
+          Corrector:
+            device_type: Corrector
+            subclass_of: Magnet
+            is_observed_by:
+              kick_setpoint:
+                description: Template EPICS corrector kick setpoint PV
+                signal_code_suffix: .KICK
+          BPM:
             device_type: BPM
-            signal_bindings:
+            is_observed_by:
               horizontal_beam_position:
                 description: EPICS BPM horizontal beam position readback PV
                 signal_code_suffix: .XPOS
@@ -260,9 +264,9 @@ narad_config:
               bpm_status:
                 description: EPICS BPM status readback PV
                 signal_code_suffix: .STAT
-          rfcavity_signals:
+          RFCavity:
             device_type: RFCavity
-            signal_bindings:
+            is_observed_by:
               gradient_setpoint:
                 description: EPICS cavity gradient setpoint PV
                 signal_code_suffix: .GET

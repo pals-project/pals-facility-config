@@ -223,7 +223,7 @@ classes:
     description: "Facility-specific signal binding configuration."
     slots:
       - has_control_system
-      - signal_definitions
+      - hosts_device
   
   FacilityIdentifier:
     description: "A globally unique identifier for an entity (e.g., facility), with a specified type (e.g. DOI, ROR, ARK, local)."
@@ -231,17 +231,21 @@ classes:
       - identifier_type
       - identifier_value
 
-  SignalDefinitions:
+  Device:
     is_a: NamedThing
     description: >-
       Signal binding set scoped to a device type or device domain.
     slots:
       - device_type
-      - signal_bindings
+      - subclass_of
+      - is_observed_by
     slot_usage:
-      signal_bindings:
+      device_type:
+        required: true
+      is_observed_by:
         multivalued: true
         inlined: true
+      
 
   SignalBinding:
     is_a: NamedThing
@@ -566,6 +570,8 @@ subsets:
     description: "Base classes that are not intended to be instantiated directly but provide shared properties for subclasses."
   instance:
     description: "Instances of systems, capabilities, and signals that represent concrete entities in the graph."
+  label:
+    description: "Slots that serve as labels or properties of base classes or instances rather than relationships between entities."
 
 
 # ---------------------------------------------------------------------------
@@ -704,10 +710,14 @@ slots:
     identifier: true
     required: true
     range: string
+    in_subset:
+      - label
     description: "Human-readable name or local string key for the entity."
 
   description:
     range: string
+    in_subset:
+      - label
     description: "Detailed description of the entity."
 
   # ---- SSN/SSN-System relationship slots -----------------------------------
@@ -835,12 +845,16 @@ slots:
       Fully-resolved facility-specific process variable name,
       e.g. MQWK202:STAT or MQWK202:BDL.
     range: string
+    in_subset:
+      - label
 
   signal_code_suffix:
     description: >
       Facility-specific control-system (e.g. EPICS) naming suffix used to
       derive or interpret the signal binding, e.g. .S, M, :GSET.
     range: string
+    in_subset:
+      - label
 
   beamlines:
     range: Beamline
@@ -864,6 +878,8 @@ slots:
 
   schema_version:
     range: string
+    in_subset:
+      - label
     description: "Version of the NARAD schema used in this document."
 
   deployed_system:
@@ -876,6 +892,8 @@ slots:
 
   system_type:
     range: SystemTypeEnum
+    in_subset:
+      - label
     description: "High-level system type for classification and querying."
 
   control_system:
@@ -898,6 +916,8 @@ slots:
 
   template:
     range: string
+    in_subset:
+      - label
     description: "A template string for constructing control system PV names based on the semantic signal name and device instance. This can include placeholders for the device name and signal suffix, e.g. {device_name}{signal_suffix}."
 
   template_components:
@@ -911,14 +931,20 @@ slots:
 
   required:
     range: boolean
+    in_subset:
+      - label
     description: "Indicates whether this configuration element is required for a valid configuration."
 
   pattern:
     range: string
+    in_subset:
+      - label
     description: "A regex pattern that the value of this slot must match for validation."
 
   full_pattern:
     range: string
+    in_subset:
+      - label
     description: "A regex pattern that the full resolved value (e.g. after template substitution) must match for validation."
 
   examples:
@@ -930,6 +956,8 @@ slots:
 
   example:
     range: string
+    in_subset:
+      - label
     description: "A single example of how this naming convention is applied to a specific device instance and signal."
 
   capability_layer:
@@ -960,20 +988,27 @@ slots:
     range: SignalLayer
     description: "Signal suffix templates for this facility."
   
-  signal_definitions:
-    range: SignalDefinitions
+  hosts_device:
+    domain: FacilitySystem
+    range: Device
+    in_subset:
+      - relationship
     multivalued: true
     inlined: true
     description: "Structured container for facility-specific signal suffix templates."
 
-  signal_bindings:
+  is_observed_by:
     range: SignalBinding
+    in_subset:
+      - relationship
     multivalued: true
     inlined: true
     description: "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set."
   
   instance_signal_bindings:
     range: InstanceSignalBinding
+    in_subset:
+      - relationship
     multivalued: true
     inlined: true
     description: >-
