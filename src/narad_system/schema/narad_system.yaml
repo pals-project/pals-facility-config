@@ -45,7 +45,7 @@ description: >
   Serialization conventions:
     - beamlines are keyed by beamline name
     - signals are keyed by semantic signal name
-    - instance_signal_bindings are keyed by semantic signal name
+    - signal bindings are created through the is_observed_by relationship to  and are keyed by semantic signal name
   
   Alignments with PALS (Particle Accelerator Language Standard):
     - Beamline aligns with pals:BeamLine
@@ -57,11 +57,11 @@ description: >
     - RFCavity aligns with pals:RFCavity
 
   Additional Notes on Usage:
-  1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling. 
+  1. On Signal, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling. 
   Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback), 
   and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention. 
   The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) 
-  is captured in the SignalBinding.
+  is captured in the InstanceSignalBinding.
   2. On the distinction between is_instance_of, facility_element_type, and device_type:
     - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
     - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. 
@@ -263,11 +263,13 @@ classes:
     slots:
       - is_instance_of
       - length
-      - instance_signal_bindings
+      - is_observed_by
       - param_set
     slot_usage:
       is_instance_of:
         multivalued: false
+      is_observed_by:
+        range: InstanceSignalBinding
   # ---- System hierarchy (SSN alignment) ------------------------------------
 
   System:
@@ -480,7 +482,7 @@ classes:
     broad_mappings:
       - sosa:ActuatableProperty
 
-  # ---- SignalBinding (SOSA:Sensor alignment) ----------------------------
+  # ---- InstanceSignalBinding (SOSA:Sensor alignment) ----------------------------
   # sosa:Sensor describes *how* a property is observed or actuated.
   # SignalBinding is the facility/control-system binding template fragment for that semantic signal, 
   # and InstanceSignalBinding is the fully instantiated binding on an element.
@@ -759,16 +761,6 @@ slots:
     range: SystemCapability
     multivalued: true
 
-  #has_signal_type:
-  #  description: >
-  #    Relates a SignalBinding to the semantic signal it defines the binding for.
-  #    This is the edge that connects the control-system-specific signal template
-  #    to the abstract semantic signal definition in the graph.
-  #  range: Signal
-  #  multivalued: false
-  #  broad_mappings:
-  #    - ssn:forProperty
-
   for_property:
     description: >
       SystemCapability → Signal: the capability can expose, monitor, control,
@@ -994,15 +986,10 @@ slots:
       - relationship
     multivalued: true
     inlined: true
-    description: "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set."
-  
-  instance_signal_bindings:
-    range: InstanceSignalBinding
-    in_subset:
-      - relationship
-    multivalued: true
-    inlined: true
     description: >-
+      Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.
+      Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it, 
+      since the instance of the element is directly observed or controlled through a Device.
       Facility-specific bindings of signals to control-system interfaces (e.g.
       EPICS PVs) for a specific beamline element instance.
       These are the keyed by the semantic signal name (e.g. current_readback)
@@ -1053,54 +1040,6 @@ slots:
     description: >-
       Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere).
       The si-unit: prefix maps to http://qudt.org/vocab/unit/.
-
-  current_setpoint:
-    range: SignalBinding
-    inlined: true
-
-  current_readback:
-    range: SignalBinding
-    inlined: true
-
-  current_min:
-    range: SignalBinding
-    inlined: true
-
-  current_max:
-    range: SignalBinding
-    inlined: true
-
-  strength_setpoint:
-    range: SignalBinding
-    inlined: true
-
-  kick_setpoint:
-    range: SignalBinding
-    inlined: true
-
-  field_setpoint:
-    range: SignalBinding
-    inlined: true
-
-  horizontal_beam_position:
-    range: SignalBinding
-    inlined: true
-
-  vertical_beam_position:
-    range: SignalBinding
-    inlined: true
-
-  gradient_setpoint:
-    range: SignalBinding
-    inlined: true
-
-  gradient_readback:
-    range: SignalBinding
-    inlined: true
-
-  status:
-    range: SignalBinding
-    inlined: true
 
   line:
     range: BeamlineElement

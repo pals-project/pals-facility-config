@@ -600,7 +600,7 @@ beamlines:
 elements:
   - name: RF_LASER
     is_instance_of: RFCavity
-    instance_signal_bindings:
+    is_observed_by:
       gradient_setpoint:
         pv_name: RK11.GET
         is_instance_of: RFCavityCapability.signals.gradient_setpoint
@@ -691,7 +691,7 @@ elements:
     length: 0.203715817
   - name: IPMK101
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMK101.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -751,7 +751,7 @@ elements:
     length: 1.00000003e-09
   - name: MBHK101H 
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK101H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -830,7 +830,7 @@ elements:
           Model_Yaw: '-15.0000000115079'
   - name: MBHK101V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK101V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -912,7 +912,7 @@ elements:
     length: 0.103202419
   - name: MBHK101AH
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK101AH.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -991,7 +991,7 @@ elements:
           Model_Yaw: '-15.0000000115079004'
   - name: MBHK101AV
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK101AV.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -1122,7 +1122,7 @@ elements:
     length: 0.107398704
   - name: IPMK102
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMK102.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -1179,7 +1179,7 @@ elements:
           Model_Yaw: '-15.0000000115079004'
   - name: MBHK102H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK102H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -1258,7 +1258,7 @@ elements:
           Model_Yaw: '-15.0000000115079'
   - name: MBHK102V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK102V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -1402,7 +1402,7 @@ elements:
   - name: MDSK201
     is_instance_of: Dipole
     length: 0.1027699
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MDSK201.S
         is_instance_of: DipoleCapability.signals.current_setpoint
@@ -1534,7 +1534,7 @@ elements:
     length: 0.286751784
   - name: MLHK201H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK201H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -1616,7 +1616,7 @@ elements:
     length: 0.01
   - name: MLHK201V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK201V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -1765,7 +1765,7 @@ elements:
     length: 0.124995161
   - name: MBHK202H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK202H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -1847,7 +1847,7 @@ elements:
     length: 1.00000008e-09
   - name: MBHK202V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK202V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -1973,7 +1973,7 @@ elements:
   - name: MQWK202
     length: 0.125
     is_instance_of: Quadrupole
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MQWK202.S
         is_instance_of: QuadrupoleCapability.signals.current_setpoint
@@ -2170,7 +2170,7 @@ elements:
   - name: MQWK203
     length: 0.125
     is_instance_of: Quadrupole
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MQWK203.S
         is_instance_of: QuadrupoleCapability.signals.current_setpoint
@@ -2257,7 +2257,7 @@ elements:
     length: 0.204469884
   - name: MBHK203H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK203H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -2336,7 +2336,7 @@ elements:
           Model_Yaw: '-1.15078924901353E-08'
   - name: MBHK203V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK203V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -2468,7 +2468,7 @@ elements:
     length: 0.104497638
   - name: MBHK203AH
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK203AH.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -2547,7 +2547,7 @@ elements:
           Model_Yaw: '-1.15078924901353E-08'
   - name: MBHK203AV
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK203AV.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -2713,7 +2713,7 @@ elements:
     length: 0.0940003021
   - name: IPMK203
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMK203.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -2865,7 +2865,7 @@ elements:
     length: 0.131259918
   - name: MLHK301H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK301H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -2947,7 +2947,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHK301V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK301V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -3219,7 +3219,7 @@ elements:
     length: 0.0663695246
   - name: MLHK302H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK302H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -3301,7 +3301,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHK302V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK302V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -3508,7 +3508,7 @@ elements:
     length: 0.0895472723
   - name: IPMK401
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMK401.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -3570,7 +3570,7 @@ elements:
     length: 0.00279557348
   - name: MLHK401H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK401H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -3652,7 +3652,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHK401V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK401V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -3778,7 +3778,7 @@ elements:
   - name: RIBK401
     is_instance_of: RFCavity
     length: 0.152
-    instance_signal_bindings:
+    is_observed_by:
       gradient_setpoint:
         pv_name: RK41.GET
         is_instance_of: RFCavityCapability.signals.gradient_setpoint
@@ -3837,7 +3837,7 @@ elements:
     length: 0.0961066329
   - name: MBHK401AH
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK401AH.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -3916,7 +3916,7 @@ elements:
           Model_Yaw: '-1.15078924901353E-08'
   - name: MBHK401AV
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK401AV.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -4031,7 +4031,7 @@ elements:
     length: 0.253200696
   - name: MBHK401BH
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK401BH.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -4113,7 +4113,7 @@ elements:
     length: 1.00000008e-09
   - name: MBHK401BV
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHK401BV.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -4196,7 +4196,7 @@ elements:
   - name: MDIK402
     is_instance_of: Dipole
     length: 0.1
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MDIK402.S
         is_instance_of: DipoleCapability.signals.current_setpoint
@@ -4299,7 +4299,7 @@ elements:
     length: 0.0925295594
   - name: IPMK402
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMK402.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -4361,7 +4361,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHK402H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK402H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -4443,7 +4443,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHK402V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK402V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -4731,7 +4731,7 @@ elements:
     length: 0.106597234
   - name: IPMK403
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMK403.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -4793,7 +4793,7 @@ elements:
     length: 0.0950966475
   - name: MLHK403H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK403H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -4874,7 +4874,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHK403V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHK403V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -5041,7 +5041,7 @@ elements:
   - name: RM11
     is_instance_of: RFCavity
     length: 0.5
-    instance_signal_bindings:
+    is_observed_by:
       gradient_setpoint:
         pv_name: RM11.GET
         is_instance_of: RFCavityCapability.signals.gradient_setpoint
@@ -5122,7 +5122,7 @@ elements:
   - name: RM12
     is_instance_of: RFCavity
     length: 0.5
-    instance_signal_bindings:
+    is_observed_by:
       gradient_setpoint:
         pv_name: RM12.GET
         is_instance_of: RFCavityCapability.signals.gradient_setpoint
@@ -5246,7 +5246,7 @@ elements:
     length: 1.01308563
   - name: MLHM201H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM201H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -5328,7 +5328,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHM201V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM201V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -5525,7 +5525,7 @@ elements:
     length: 0.428693661
   - name: MLHM401H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM401H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -5607,7 +5607,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHM401V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM401V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -5875,7 +5875,7 @@ elements:
     length: 0.444515634
   - name: IPMM501
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM501.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -5937,7 +5937,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHM501H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM501H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -6019,7 +6019,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHM501V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM501V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -6102,7 +6102,7 @@ elements:
   - name: MQJM501
     length: 0.15
     is_instance_of: Quadrupole
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MQJM501.S
         is_instance_of: QuadrupoleCapability.signals.current_setpoint
@@ -6188,7 +6188,7 @@ elements:
     length: 0.381764636
   - name: MLHM502H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM502H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -6270,7 +6270,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHM502V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM502V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -6352,7 +6352,7 @@ elements:
     length: 1.00000008e-09
   - name: IPMM502
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM502.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -6414,7 +6414,7 @@ elements:
   - name: MQJM502
     length: 0.15
     is_instance_of: Quadrupole
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MQJM502.S
         is_instance_of: QuadrupoleCapability.signals.current_setpoint
@@ -6498,7 +6498,7 @@ elements:
     length: 0.381764636
   - name: MLHM503H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM503H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -6579,7 +6579,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHM503V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM503V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -6661,7 +6661,7 @@ elements:
     length: 1.00000008e-09
   - name: IPMM503
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM503.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -6724,7 +6724,7 @@ elements:
   - name: MQJM503
     length: 0.15
     is_instance_of: Quadrupole
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MQJM503.S
         is_instance_of: QuadrupoleCapability.signals.current_setpoint
@@ -6810,7 +6810,7 @@ elements:
     length: 0.381764636
   - name: MLHM504H
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM504H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -6892,7 +6892,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHM504V
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM504V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -6973,7 +6973,7 @@ elements:
     length: 1.00000008e-09
   - name: IPMM504
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM504.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -7036,7 +7036,7 @@ elements:
   - name: MQJM504
     length: 0.15
     is_instance_of: Quadrupole
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MQJM504.S
         is_instance_of: QuadrupoleCapability.signals.current_setpoint
@@ -7122,7 +7122,7 @@ elements:
     length: 0.299609931
   - name: MBHM504AH
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM504AH.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -7204,7 +7204,7 @@ elements:
     length: 1.00000008e-09
   - name: MBHM504AV
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM504AV.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -7286,7 +7286,7 @@ elements:
     length: 0.0239385383
   - name: IPMM505
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM505.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -7575,7 +7575,7 @@ elements:
     length: 0.243220629
   - name: MLHM601AH
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM601AH.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -7660,7 +7660,7 @@ elements:
     length: 1.00000008e-09
   - name: MLHM601AV
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MLHM601AV.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -7745,7 +7745,7 @@ elements:
     length: 0.391493384
   - name: IPMM601
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM601.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -7808,7 +7808,7 @@ elements:
   - name: MDLM601
     is_instance_of: Dipole
     length: 0.15
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MDLM601.S
         is_instance_of: DipoleCapability.signals.current_setpoint
@@ -7893,7 +7893,7 @@ elements:
     length: 0.326900908
   - name: MBHM601BH
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM601BH.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -7975,7 +7975,7 @@ elements:
     length: 1.00000008e-09
   - name: MBHM601BV
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM601BV.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -8174,7 +8174,7 @@ elements:
     length: 0.224876137
   - name: IPMM602
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM602.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -8238,7 +8238,7 @@ elements:
   - name: MBHM602H
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM602H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -8321,7 +8321,7 @@ elements:
   - name: MBHM602V
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM602V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -8404,7 +8404,7 @@ elements:
   - name: MBHM603H
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM603H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -8487,7 +8487,7 @@ elements:
   - name: MBHM603V
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM603V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -8570,7 +8570,7 @@ elements:
   - name: MQJM603
     length: 0.15
     is_instance_of: Quadrupole
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MQJM603.S
         is_instance_of: QuadrupoleCapability.signals.current_setpoint
@@ -8656,7 +8656,7 @@ elements:
   - name: MBHM604H
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM604H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -8739,7 +8739,7 @@ elements:
   - name: MBHM604V
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM604V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -8932,7 +8932,7 @@ elements:
   - name: MFRM604V
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MFRM604V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -9007,7 +9007,7 @@ elements:
   - name: MFRM604H
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MFRM604H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -9082,7 +9082,7 @@ elements:
   - name: MQJM604
     length: 0.15
     is_instance_of: Quadrupole
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MQJM604.S
         is_instance_of: QuadrupoleCapability.signals.current_setpoint
@@ -9167,7 +9167,7 @@ elements:
     length: 0.3
   - name: IPMM604
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM604.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
@@ -9289,7 +9289,7 @@ elements:
   - name: MBHM605H
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM605H.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -9372,7 +9372,7 @@ elements:
   - name: MBHM605V
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM605V.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -9481,7 +9481,7 @@ elements:
   - name: MBHM605AH
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM605AH.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -9561,7 +9561,7 @@ elements:
   - name: MBHM605AV
     length: 1.0e-06
     is_instance_of: Corrector
-    instance_signal_bindings:
+    is_observed_by:
       current_setpoint:
         pv_name: MBHM605AV.S
         is_instance_of: CorrectorKickCapability.signals.current_setpoint
@@ -9701,7 +9701,7 @@ elements:
     length: 0.14
   - name: IPMM605
     is_instance_of: BPM
-    instance_signal_bindings:
+    is_observed_by:
       horizontal_beam_position:
         pv_name: IPMM605.XPOS
         is_instance_of: BPMCapability.signals.horizontal_beam_position
