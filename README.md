@@ -12,10 +12,6 @@ pipx install uv
 * https://docs.astral.sh/uv/getting-started/installation/
   * For detailed best practices for working with Python in UV, please see:
 https://berkeleybop.org/best_practice/python_environments.
-
-Then add Copier, a templating system for building repositories with predefined dependencies.
-  * uv tool install --with jinja2-time copier
-  * https://copier.readthedocs.io/en/stable/
    
 Then add Just, a build and deployment tool that helps make
 command-line build operations less cumbersome.
