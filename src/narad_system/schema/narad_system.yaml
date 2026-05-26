@@ -29,11 +29,11 @@ description: >
 
   Control Capability hierarchy:
     - SystemCapability
-      - MagnetControlCapability
-        - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability
-      - InstrumentControlCapability
-      - BPMControlCapability
-      - CavityGradientControlCapability
+      - MagnetCapability
+        - QuadrupoleCapability, CorrectorKickCapability, DipoleCapability
+      - InstrumentCapability
+      - BPMCapability
+      - CavityGradientCapability
 
   Signal modeling:
     - Signal — abstract control-system quantity
@@ -65,7 +65,7 @@ description: >
   2. On the distinction between is_instance_of, facility_element_type, and device_type:
     - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
     - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. 
-    - device_type (ControlCapability.device_type) is the generic element type used for capability profile matching 
+    - device_type (Capability.device_type) is the generic element type used for capability profile matching 
     and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention 
     or for other facility-specific purposes.
     For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
@@ -93,7 +93,7 @@ description: >
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  narad: https://w3id.org/narad_linkml/schema/narad/
+  narad: https://example.org/narad_linkml/schema/narad/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
   owl: http://www.w3.org/2002/07/owl#
@@ -104,8 +104,8 @@ prefixes:
   qudt: http://qudt.org/schema/qudt/
   si-unit: http://qudt.org/vocab/unit/
   ncit: http://purl.obolibrary.org/obo/ncit.owl
-  ro: http://purl.obolibrary.org/obo/RO_
-  pals: https://pals-project.readthedocs.io/en/latest/overview.html
+  pals: https://pals-project.readthedocs.io/en/latest/
+  acc-core: https://example.org/acc-core/schema/acc-core/
 
 default_prefix: narad
 default_range: string
@@ -149,8 +149,8 @@ classes:
       - schema_version
       - intent
       - deployed_system
-      - has_sub_system 
-      - control_capability_layer
+      - control_system 
+      - capability_layer
       - device_layer
       - signal_layer
     broad_mappings:
@@ -161,14 +161,15 @@ classes:
         required: true
         description: "Version of the NARAD schema used in this document."
       deployed_system:
-        range: FacilitySystem
+        range: DeployedSystem
         required: true
         multivalued: false
+        inlined: true
         description: "Identifier of the deployed system this configuration describes."
-      has_sub_system:
+      control_system:
         range: ControlSystem
         required: true
-        multivalued: true
+        multivalued: false
         description: "Identifier of the control system (e.g. epics) this configuration describes."
       device_layer:
         range: DeviceSystem
@@ -185,9 +186,10 @@ classes:
   CapabilityLayer:
     description: "Capability-layer container for control profile families."
     slots:
-      - control_capabilities
+      - capabilities
+   
 
-  ControlCapability:
+  Capability:
     is_a: NamedThing
     description: >-
       A reusable device-type control profile that extends a generic shared
@@ -195,10 +197,21 @@ classes:
     slots:
       - device_type
       - subclass_of
-      - signals
+      - has_signal
+      - is_property_of
     slot_usage:
-      signals:
+      has_signal:
         required: true
+      is_property_of:
+        range: ControlSystem
+        inlined: false
+        multivalued: false
+        description: "Links the capability layer to the control systems it applies to via ssn:isPropertyOf."
+      subclass_of:
+        range: Capability
+        inlined: false
+        multivalued: false
+        description: "Links a type-specific capability to the generic capability it extends via rdfs:subClassOf."
 
   SignalLayer:
     description: "Signal-layer container for facility-specific signal bindings."
@@ -209,9 +222,7 @@ classes:
     is_a: System
     description: "Facility-specific signal binding configuration."
     slots:
-      - facility_identifier
-      - control_system
-      - naming_convention
+      - has_control_system
       - signal_definitions
   
   FacilityIdentifier:
@@ -236,7 +247,7 @@ classes:
     is_a: NamedThing
     description: "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance."
     slots:
-      - control_system_suffix
+      - signal_code_suffix
   
   # ---------------------------------------------------------------------------
   # Beamline and BeamlineElement
@@ -290,6 +301,28 @@ classes:
         range: SystemCapability
         multivalued: true
         inlined: true
+        inlined_as_list: true
+  
+  DeployedSystem:
+    is_a: System
+    description: >
+      A deployed system, with an identified facility, that is the subject of a NARAD configuration. 
+      This is the child of the target of the narad_config.deployed_system slot. In the SSN graph a
+      DeployedSystem is a broad mapping to the ssn:Deployment and also is equivalent to the signal_layers.facilities entries.
+    broad_mappings:
+      - ssn:Deployment
+      - ssn-system:System
+    slots:
+      - facility_identifier
+      - has_control_system
+    slot_usage:
+      system_type: 
+        range: SystemTypeEnum
+        description: "High-level system type for classification and querying - set to Facility for all DeployedSystem instances."
+      has_control_system:
+        required: false
+      has_system_capability:
+        required: true
 
   ControlSystem:
     is_a: System
@@ -299,7 +332,19 @@ classes:
     exact_mappings:
       - ssn:System
     slots:
-      - naming_convention
+      - has_naming_convention
+    slot_usage:
+      has_naming_convention:
+        range: NamingConvention
+        multivalued: true
+        inlined: true
+      system_type:
+        range: SystemTypeEnum
+        description: "High-level system type for classification and querying - set to ControlSystem for all ControlSystem instances."
+      has_sub_system:
+        required: false
+      has_system_capability:
+        required: false
   
   DeviceSystem:
     is_a: System
@@ -326,7 +371,8 @@ classes:
         range: SystemCapability
         multivalued: false
         inlined: false
-
+        inlined_as_list: false
+  
   # ---- Physical device subclasses ------------------------------------------
   # These are the nodes labelled [Cls. Magnet], [Cls. Instrument] etc. in the
   # controls_scehma_SOSA_SSN diagram. Each is a ssn:System subtype that
@@ -355,6 +401,39 @@ classes:
     slot_usage:
       for_property:
         multivalued: true
+
+  # ---- Naming Convention ---------------------------------------------------------------
+  NamingConvention:
+    is_a: NamedThing
+    description: >
+      A template for constructing facility-specific signal names from a semantic signal name and a control-system-specific suffix. 
+      The template is used to generate the full control system PV name for a given device instance and semantic signal by substituting the device name and signal code suffix into the template.
+    slots:
+      - template
+      - template_components
+      - full_pattern
+      - examples
+   
+  
+  TemplateComponent:
+    is_a: NamedThing
+    description: >
+      A component of a naming convention template, representing a variable part of the control system PV name that is substituted based on the device instance and signal definition. 
+      For example, in the template "{device_name}{signal_code_suffix}", "device_name" and "signal_code_suffix" would be TemplateComponents that are replaced with the actual device name and signal code suffix for each specific binding.
+    slots:
+      - required
+      - pattern
+
+  TemplateExample:
+    description: >
+      An example of a control system PV name generated from a naming convention template, along with a description of what it represents. 
+      This can be used to illustrate how the template works in practice and to provide concrete examples of the expected PV naming convention for different device types and signals.
+    slots:
+      - example
+      - description
+    slot_usage:
+      example:
+        identifier: true
 
   # ---- Signal hierarchy (SOSA/SSN alignment) --------------------------------
   # In SSN/SOSA, a sosa:Property / ssn:Property describes a feature of interest.
@@ -471,6 +550,23 @@ classes:
   AnyValue:
     class_uri: linkml:Any
     description: "Unconstrained type — accepts any YAML/JSON value (string, number, object, list, etc.)."
+
+# ---------------------------------------------------------------------------
+# Subsets
+# ---------------------------------------------------------------------------
+subsets:
+  # Subsets of narad classes for documentation and enabling validation of partial graphs. 
+  # These are not intended to be used as types for slot range constraints, 
+  # but rather as a way to document and validate expected usage patterns in the graph. 
+  physical_device:
+    description: "Physical beamline devices that interact with the beam, including magnets and instruments."
+  relationship:
+    description: "Relationships between systems, capabilities, and signals, including system decomposition and capability assignment."
+  base_class:
+    description: "Base classes that are not intended to be instantiated directly but provide shared properties for subclasses."
+  instance:
+    description: "Instances of systems, capabilities, and signals that represent concrete entities in the graph."
+
 
 # ---------------------------------------------------------------------------
 # Enumerations
@@ -621,14 +717,31 @@ slots:
       Relates a System to one of its subsystems (SSN alignment).
       Use for facility → control-system, facility → device, and
       device → component decomposition.
+    in_subset:
+      - relationship
     exact_mappings:
       - ssn-system:hasSubSystem
     domain: System
     range: System
     multivalued: true
 
-  control_capability:
-    range: ControlCapability
+  has_control_system:
+    description: >
+      Relates a System to one of its control systems (SSN alignment to sub system).
+      Use for facility → control-system, facility → device, and
+      device → component decomposition.
+    in_subset:
+      - relationship
+    broad_mappings:
+      - ssn-system:hasSubSystem
+    domain: System
+    range: ControlSystem
+    multivalued: false
+
+  capability:
+    range: Capability
+    in_subset:
+      - base_class
     inlined: false
     description: "Cross-reference to the specific control capability applied to this element."
 
@@ -637,16 +750,30 @@ slots:
       Relates a System to a SystemCapability it supports (SSN-System alignment).
       Prefer this over directly attaching signals to systems when capability
       context matters.
+    in_subset:
+      - relationship
     exact_mappings:
       - ssn-system:hasSystemCapability
     domain: System
     range: SystemCapability
     multivalued: true
 
+  #has_signal_type:
+  #  description: >
+  #    Relates a SignalBinding to the semantic signal it defines the binding for.
+  #    This is the edge that connects the control-system-specific signal template
+  #    to the abstract semantic signal definition in the graph.
+  #  range: Signal
+  #  multivalued: false
+  #  broad_mappings:
+  #    - ssn:forProperty
+
   for_property:
     description: >
       SystemCapability → Signal: the capability can expose, monitor, control,
       or actuate that signal.
+    in_subset:
+      - relationship
     exact_mappings:
       - ssn:forProperty
     multivalued: true
@@ -658,6 +785,8 @@ slots:
       This is the edge that connects the signal definitions to the facility-specific bindings in the graph.
       Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system).
       NOTE: The value of this slot must match one of the values in narad_config.has_sub_system.
+    in_subset:
+      - relationship
     multivalued: false
     broad_mappings:
       - ssn:isPropertyOf
@@ -666,7 +795,9 @@ slots:
     description: >
       Links an InstanceSignalBinding to the FacilitySystem it belongs to.
       This is the edge that connects the facility-specific bindings to the Facility node in the graph.
-    range: string
+    in_subset:
+      - relationship
+    range: DeployedSystem
     multivalued: false
     broad_mappings:
       - ssn-system:hasSubSystem
@@ -680,6 +811,8 @@ slots:
       the LinkML class or semantic class it instantiates.
       In the graph this edge is labelled narad:isInstanceOf.
       Values are typically the rdf:type of the Class that implements the signal binding.
+    in_subset:
+      - relationship
     exact_mappings:
       - rdf:type
     range: string
@@ -690,6 +823,8 @@ slots:
       NARAD alias for rdfs:subClassOf. Links a type-specific capability to the
       generic capability it extends. In the graph this edge is labelled
       narad:subclassOf.
+    in_subset:
+      - relationship
     exact_mappings:
       - rdfs:subClassOf
     range: System
@@ -701,7 +836,7 @@ slots:
       e.g. MQWK202:STAT or MQWK202:BDL.
     range: string
 
-  control_system_suffix:
+  signal_code_suffix:
     description: >
       Facility-specific control-system (e.g. EPICS) naming suffix used to
       derive or interpret the signal binding, e.g. .S, M, :GSET.
@@ -732,7 +867,11 @@ slots:
     description: "Version of the NARAD schema used in this document."
 
   deployed_system:
-    range: FacilitySystem
+    range: DeployedSystem
+    in_subset:
+      - instance
+    required: true
+    multivalued: false
     description: "Identifier of the deployed system this configuration describes."
 
   system_type:
@@ -741,22 +880,67 @@ slots:
 
   control_system:
     range: ControlSystem
+    in_subset:
+      - instance
     inlined: true
     description: "Identifier of the control system (e.g. epics)."
 
-  naming_convention:
-    range: string
-    description: "Signal naming convention template (e.g. <device><signal_code>)."
+  has_naming_convention:
+    range: NamingConvention
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: >-
+      Signal naming conventions used by this control system defined in a machine actionable manner. 
+      This is where you would capture the patterns/templates for how control system PVs or signals are constructed for this control system, 
+      for example, the EPICS convention of using suffixes like .R, .S, :GSET to indicate readback, status, and setpoint signals.
+      Multiple naming conventions can be captured if a control system uses more than one convention for different device types or domains.
 
-  control_capability_layer:
-    range: ControlCapability
+  template:
+    range: string
+    description: "A template string for constructing control system PV names based on the semantic signal name and device instance. This can include placeholders for the device name and signal suffix, e.g. {device_name}{signal_suffix}."
+
+  template_components:
+    range: TemplateComponent
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: >-
+      Structured components of the naming convention template, for capturing the template in a more machine-actionable way than a raw string. 
+      For example, you could have components for the device name, signal suffix, and any fixed parts of the naming convention.
+
+  required:
+    range: boolean
+    description: "Indicates whether this configuration element is required for a valid configuration."
+
+  pattern:
+    range: string
+    description: "A regex pattern that the value of this slot must match for validation."
+
+  full_pattern:
+    range: string
+    description: "A regex pattern that the full resolved value (e.g. after template substitution) must match for validation."
+
+  examples:
+    range: NamingConventionExample
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: "Examples of how this naming convention is applied to specific device instances and signals."
+
+  example:
+    range: string
+    description: "A single example of how this naming convention is applied to a specific device instance and signal."
+
+  capability_layer:
+    range: Capability
     required: true
     multivalued: true
     inlined: true
     description: "Control Capability definitions for this facility."
   
-  control_capabilities:
-    range: ControlCapability
+  capabilities:
+    range: Capability
     inlined: true
     multivalued: true
 
@@ -781,15 +965,6 @@ slots:
     multivalued: true
     inlined: true
     description: "Structured container for facility-specific signal suffix templates."
-
-  #type_signal_sets:
-  #  range: TypeSignalSet
-  #  multivalued: true
-  #  inlined: true
-  #  description: >-
-  #    Signal suffix groups keyed by device type or device domain name.
-  #    Domain-level keys cover signals shared across all types in that domain;
-  #    device-type keys are type-specific.
 
   signal_bindings:
     range: SignalBinding
@@ -823,7 +998,7 @@ slots:
     range: uriorcurie
     description: "Optional URI or CURIE."
 
-  signals:
+  has_signal:
     range: Signal
     multivalued: true
     inlined: true
