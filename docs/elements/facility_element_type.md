@@ -9,7 +9,7 @@ _capture the facility-specific or local designation (e.g., "QW", "WarmCavity", "
 
 
 
-URI: [narad:facility_element_type](https://w3id.org/narad_linkml/schema/narad/facility_element_type)
+URI: [narad:facility_element_type](https://example.org/narad_linkml/schema/narad/facility_element_type)
 Alias: facility_element_type
 
 <!-- no inheritance hierarchy -->
@@ -75,6 +75,8 @@ description: capture the facility-specific or local designation (e.g., "QW", "Wa
   "HCorrector").  Isused for local naming, inventory, or legacy mapping of instances
   of facility elements (within elements:)  to the facility-specific type designations
   used in the control system or elsewhere at the facility.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 aliases:
 - type

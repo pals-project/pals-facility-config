@@ -9,7 +9,7 @@ _A top-level NARAD-system container for the ordered beamline definitions keyed b
 
 
 
-URI: [narad:beamlines](https://w3id.org/narad_linkml/schema/narad/beamlines)
+URI: [narad:beamlines](https://example.org/narad_linkml/schema/narad/beamlines)
 Alias: beamlines
 
 <!-- no inheritance hierarchy -->

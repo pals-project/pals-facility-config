@@ -9,7 +9,7 @@ _Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCap
 
 
 
-URI: [narad:capability_class](https://w3id.org/narad_linkml/schema/narad/capability_class)
+URI: [narad:capability_class](https://example.org/narad_linkml/schema/narad/capability_class)
 Alias: capability_class
 
 <!-- no inheritance hierarchy -->
@@ -64,6 +64,8 @@ Alias: capability_class
 name: capability_class
 description: Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability).
   Serialized as 'class' in source YAML.
+in_subset:
+- base_class
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 aliases:
 - class

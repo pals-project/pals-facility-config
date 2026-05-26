@@ -9,7 +9,7 @@ _Facility-specific element parameters (type designation, model name, open proper
 
 
 
-URI: [narad:facility_param_set](https://w3id.org/narad_linkml/schema/narad/facility_param_set)
+URI: [narad:facility_param_set](https://example.org/narad_linkml/schema/narad/facility_param_set)
 Alias: facility_param_set
 
 <!-- no inheritance hierarchy -->

@@ -117,12 +117,12 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
                     '\n'
                     'Control Capability hierarchy:\n'
                     '  - SystemCapability\n'
-                    '    - MagnetControlCapability\n'
-                    '      - QuadrupoleStrengthControlCapability, '
-                    'CorrectorKickControlCapability, DipoleBendControlCapability\n'
-                    '    - InstrumentControlCapability\n'
-                    '    - BPMControlCapability\n'
-                    '    - CavityGradientControlCapability\n'
+                    '    - MagnetCapability\n'
+                    '      - QuadrupoleCapability, CorrectorKickCapability, '
+                    'DipoleCapability\n'
+                    '    - InstrumentCapability\n'
+                    '    - BPMCapability\n'
+                    '    - CavityGradientCapability\n'
                     '\n'
                     'Signal modeling:\n'
                     '  - Signal — abstract control-system quantity\n'
@@ -137,8 +137,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
                     'Serialization conventions:\n'
                     '  - beamlines are keyed by beamline name\n'
                     '  - signals are keyed by semantic signal name\n'
-                    '  - instance_signal_bindings are keyed by semantic signal '
-                    'name\n'
+                    '  - signal bindings are created through the is_observed_by '
+                    'relationship to  and are keyed by semantic signal name\n'
                     '\n'
                     'Alignments with PALS (Particle Accelerator Language '
                     'Standard):\n'
@@ -150,7 +150,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
                     '  - Solenoid aligns with pals:Solenoid\n'
                     '  - RFCavity aligns with pals:RFCavity\n'
                     '\n'
-                    'Additional Notes on Usage: 1. On Signal, SignalBinding, and '
+                    'Additional Notes on Usage: 1. On Signal, and '
                     'InstanceSignalBinding: These classes represent different '
                     'levels of abstraction in the signal modeling.  Signal defines '
                     'the abstract control-system quantity (e.g. current_readback), '
@@ -162,8 +162,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
                     'convention.  The semantic signal name (e.g. current_readback) '
                     'is the key that links these layers together, while the '
                     'control-system suffix (e.g. .R)  is captured in the '
-                    'SignalBinding. 2. On the distinction between is_instance_of, '
-                    'facility_element_type, and device_type:\n'
+                    'InstanceSignalBinding. 2. On the distinction between '
+                    'is_instance_of, facility_element_type, and device_type:\n'
                     '  - BeamlineElement.is_instance_of identifies the element’s '
                     'semantic class, device_type classifies capability or '
                     'signal-definition scope, and facility_element_type records '
@@ -172,8 +172,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
                     '(FacilityParamSet.facility_element_type) is an optional slot '
                     'for recording the facility-specific type designation for this '
                     'element, if it differs from the generic element_kind. \n'
-                    '  - device_type (ControlCapability.device_type) is the '
-                    'generic element type used for capability profile matching \n'
+                    '  - device_type (Capability.device_type) is the generic '
+                    'element type used for capability profile matching \n'
                     '  and signal definition scoping, while facility_element_type '
                     'captures the facility-specific type designation that may be '
                     'used in the control system naming convention \n'
@@ -215,8 +215,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
                     '\n'
                     'Needed Custom Validations:\n'
                     '  - Validation to ensure that the element_kind of a '
-                    'BeamlineElement matches the device_type of the DeviceSystem '
-                    'it is an instance of.\n'
+                    'BeamlineElement matches the device_type of the Device it is '
+                    'an instance of.\n'
                     '  - Validation to ensure that the value of is_property_of in '
                     'InstanceSignalBinding matches one of the control systems '
                     'listed in narad_config.has_sub_system.\n'
@@ -232,24 +232,24 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
      'id': 'https://w3id.org/narad_linkml/schema/narad/system',
      'imports': ['linkml:types'],
      'name': 'narad-system-schema',
-     'prefixes': {'linkml': {'prefix_prefix': 'linkml',
+     'prefixes': {'acc-core': {'prefix_prefix': 'acc-core',
+                               'prefix_reference': 'https://example.org/acc-core/schema/acc-core/'},
+                  'linkml': {'prefix_prefix': 'linkml',
                              'prefix_reference': 'https://w3id.org/linkml/'},
                   'narad': {'prefix_prefix': 'narad',
-                            'prefix_reference': 'https://w3id.org/narad_linkml/schema/narad/'},
+                            'prefix_reference': 'https://example.org/narad_linkml/schema/narad/'},
                   'ncit': {'prefix_prefix': 'ncit',
                            'prefix_reference': 'http://purl.obolibrary.org/obo/ncit.owl'},
                   'owl': {'prefix_prefix': 'owl',
                           'prefix_reference': 'http://www.w3.org/2002/07/owl#'},
                   'pals': {'prefix_prefix': 'pals',
-                           'prefix_reference': 'https://pals-project.readthedocs.io/en/latest/overview.html'},
+                           'prefix_reference': 'https://pals-project.readthedocs.io/en/latest/'},
                   'qudt': {'prefix_prefix': 'qudt',
                            'prefix_reference': 'http://qudt.org/schema/qudt/'},
                   'rdf': {'prefix_prefix': 'rdf',
                           'prefix_reference': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'},
                   'rdfs': {'prefix_prefix': 'rdfs',
                            'prefix_reference': 'http://www.w3.org/2000/01/rdf-schema#'},
-                  'ro': {'prefix_prefix': 'ro',
-                         'prefix_reference': 'http://purl.obolibrary.org/obo/RO_'},
                   'schema': {'prefix_prefix': 'schema',
                              'prefix_reference': 'http://schema.org/'},
                   'si-unit': {'prefix_prefix': 'si-unit',
@@ -260,11 +260,40 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
                           'prefix_reference': 'http://www.w3.org/ns/ssn/'},
                   'ssn-system': {'prefix_prefix': 'ssn-system',
                                  'prefix_reference': 'http://www.w3.org/ns/ssn/systems/'}},
-     'source_file': 'src/narad_system/schema/narad_system.yaml'} )
+     'source_file': 'src/narad_system/schema/narad_system.yaml',
+     'subsets': {'base_class': {'description': 'Base classes that are not intended '
+                                               'to be instantiated directly but '
+                                               'provide shared properties for '
+                                               'subclasses.',
+                                'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+                                'name': 'base_class'},
+                 'instance': {'description': 'Instances of systems, capabilities, '
+                                             'and signals that represent concrete '
+                                             'entities in the graph.',
+                              'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+                              'name': 'instance'},
+                 'label': {'description': 'Slots that serve as labels or '
+                                          'properties of base classes or instances '
+                                          'rather than relationships between '
+                                          'entities.',
+                           'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+                           'name': 'label'},
+                 'physical_device': {'description': 'Physical beamline devices '
+                                                    'that interact with the beam, '
+                                                    'including magnets and '
+                                                    'instruments.',
+                                     'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+                                     'name': 'physical_device'},
+                 'relationship': {'description': 'Relationships between systems, '
+                                                 'capabilities, and signals, '
+                                                 'including system decomposition '
+                                                 'and capability assignment.',
+                                  'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+                                  'name': 'relationship'}}} )
 
 class ElementKindEnum(str, Enum):
     """
-    Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of.
+    Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The kind of a BeamlineElement must match the device_type of the Device referenced by is_instance_of.
     """
     Drift = "Drift"
     """
@@ -420,8 +449,9 @@ class NamedThing(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class NaradModel(ConfiguredBaseModel):
@@ -442,27 +472,28 @@ class NaradConfig(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['ssn:Deployment'],
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
-         'slot_usage': {'deployed_system': {'description': 'Identifier of the deployed '
+         'slot_usage': {'control_system': {'description': 'Identifier of the control '
+                                                          'system (e.g. epics) this '
+                                                          'configuration describes.',
+                                           'multivalued': False,
+                                           'name': 'control_system',
+                                           'range': 'ControlSystem',
+                                           'required': True},
+                        'deployed_system': {'description': 'Identifier of the deployed '
                                                            'system this configuration '
                                                            'describes.',
+                                            'inlined': True,
                                             'multivalued': False,
                                             'name': 'deployed_system',
-                                            'range': 'FacilitySystem',
+                                            'range': 'DeployedSystem',
                                             'required': True},
                         'device_layer': {'description': 'Device Capability definitions '
                                                         'keyed by capability name.',
                                          'inlined': True,
                                          'multivalued': True,
                                          'name': 'device_layer',
-                                         'range': 'DeviceSystem',
+                                         'range': 'Device',
                                          'required': True},
-                        'has_sub_system': {'description': 'Identifier of the control '
-                                                          'system (e.g. epics) this '
-                                                          'configuration describes.',
-                                           'multivalued': True,
-                                           'name': 'has_sub_system',
-                                           'range': 'ControlSystem',
-                                           'required': True},
                         'schema_version': {'description': 'Version of the NARAD schema '
                                                           'used in this document.',
                                            'name': 'schema_version',
@@ -476,14 +507,12 @@ class NaradConfig(ConfiguredBaseModel):
                                          'range': 'SignalLayer',
                                          'required': True}}})
 
-    schema_version: str = Field(default=..., description="""Version of the NARAD schema used in this document.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig']} })
-    intent: Optional[str] = Field(default=None, description="""A human-readable statement of the intended use or purpose of this NARAD configuration.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig']} })
-    deployed_system: str = Field(default=..., description="""Identifier of the deployed system this configuration describes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig']} })
-    has_sub_system: list[str] = Field(default=..., description="""Identifier of the control system (e.g. epics) this configuration describes.""", json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['NaradConfig', 'System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSubSystem']} })
-    control_capability_layer: dict[str, ControlCapability] = Field(default=..., description="""Control Capability definitions for this facility.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig']} })
-    device_layer: dict[str, DeviceSystem] = Field(default=..., description="""Device Capability definitions keyed by capability name.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig']} })
+    schema_version: str = Field(default=..., description="""Version of the NARAD schema used in this document.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig'], 'in_subset': ['label']} })
+    intent: Optional[str] = Field(default=None, description="""A human-readable statement of the intended use or purpose of this NARAD configuration.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig'], 'in_subset': ['label']} })
+    deployed_system: DeployedSystem = Field(default=..., description="""Identifier of the deployed system this configuration describes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig'], 'in_subset': ['instance']} })
+    control_system: ControlSystem = Field(default=..., description="""Identifier of the control system (e.g. epics) this configuration describes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig'], 'in_subset': ['instance']} })
+    capability_layer: dict[str, Capability] = Field(default=..., description="""Control Capability definitions for this facility.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig']} })
+    device_layer: dict[str, Device] = Field(default=..., description="""Device Capability definitions keyed by capability name.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig']} })
     signal_layer: SignalLayer = Field(default=..., description="""Signal-layer container for facility-specific signal bindings.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NaradConfig']} })
 
 
@@ -493,25 +522,44 @@ class CapabilityLayer(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    control_capabilities: Optional[dict[str, ControlCapability]] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['CapabilityLayer']} })
+    capabilities: Optional[dict[str, Capability]] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['CapabilityLayer']} })
 
 
-class ControlCapability(NamedThing):
+class Capability(NamedThing):
     """
     A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
-         'slot_usage': {'signals': {'name': 'signals', 'required': True}}})
+         'slot_usage': {'has_signal': {'name': 'has_signal', 'required': True},
+                        'is_property_of': {'description': 'Links the capability layer '
+                                                          'to the control systems it '
+                                                          'applies to via '
+                                                          'ssn:isPropertyOf.',
+                                           'inlined': False,
+                                           'multivalued': False,
+                                           'name': 'is_property_of',
+                                           'range': 'ControlSystem'},
+                        'subclass_of': {'description': 'Links a type-specific '
+                                                       'capability to the generic '
+                                                       'capability it extends via '
+                                                       'rdfs:subClassOf.',
+                                        'inlined': False,
+                                        'multivalued': False,
+                                        'name': 'subclass_of',
+                                        'range': 'Capability'}}})
 
-    device_type: Optional[ElementKindEnum] = Field(default=None, description="""Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlCapability',
-                       'SignalDefinitions',
-                       'DeviceSystem',
-                       'SystemCapability']} })
-    subclass_of: Optional[str] = Field(default=None, description="""-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlCapability', 'DeviceSystem'],
-         'exact_mappings': ['rdfs:subClassOf']} })
-    signals: dict[str, Signal] = Field(default=..., description="""Signals within a capability, keyed by a semantic signal name.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlCapability']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    device_type: Optional[ElementKindEnum] = Field(default=None, description="""Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Capability', 'Device', 'SystemCapability'],
+         'in_subset': ['label']} })
+    subclass_of: Optional[str] = Field(default=None, description="""Links a type-specific capability to the generic capability it extends via rdfs:subClassOf.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Capability', 'Device'],
+         'exact_mappings': ['rdfs:subClassOf'],
+         'in_subset': ['relationship']} })
+    has_signal: dict[str, Signal] = Field(default=..., description="""Signals within a capability, keyed by a semantic signal name.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Capability'], 'in_subset': ['relationship']} })
+    is_property_of: Optional[str] = Field(default=None, description="""Links the capability layer to the control systems it applies to via ssn:isPropertyOf.""", json_schema_extra = { "linkml_meta": {'broad_mappings': ['ssn:isPropertyOf'],
+         'domain_of': ['Capability', 'InstanceSignalBinding'],
+         'in_subset': ['relationship']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class SignalLayer(ConfiguredBaseModel):
@@ -529,26 +577,8 @@ class FacilityIdentifier(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    identifier_type: Optional[IdentifierTypeEnum] = Field(default=None, description="""The type of identifier used in the identifier slot (e.g. DOI, ARK, URL, local).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilityIdentifier']} })
-    identifier_value: Optional[str] = Field(default=None, description="""The value of the identifier (e.g. the DOI string, ARK string, URL string, or local ID).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilityIdentifier']} })
-
-
-class SignalDefinitions(NamedThing):
-    """
-    Signal binding set scoped to a device type or device domain.
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
-         'slot_usage': {'signal_bindings': {'inlined': True,
-                                            'multivalued': True,
-                                            'name': 'signal_bindings'}}})
-
-    device_type: Optional[ElementKindEnum] = Field(default=None, description="""Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlCapability',
-                       'SignalDefinitions',
-                       'DeviceSystem',
-                       'SystemCapability']} })
-    signal_bindings: Optional[dict[str, SignalBinding]] = Field(default=None, description="""Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SignalDefinitions']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    identifier_type: Optional[IdentifierTypeEnum] = Field(default=None, description="""The type of identifier used in the identifier slot (e.g. DOI, ARK, URL, local).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilityIdentifier'], 'in_subset': ['label']} })
+    identifier_value: Optional[str] = Field(default=None, description="""The value of the identifier (e.g. the DOI string, ARK string, URL string, or local ID).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilityIdentifier'], 'in_subset': ['label']} })
 
 
 class SignalBinding(NamedThing):
@@ -557,10 +587,11 @@ class SignalBinding(NamedThing):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    control_system_suffix: Optional[str] = Field(default=None, description="""Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.
-""", json_schema_extra = { "linkml_meta": {'domain_of': ['SignalBinding']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    signal_code_suffix: Optional[str] = Field(default=None, description="""Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.
+""", json_schema_extra = { "linkml_meta": {'domain_of': ['SignalBinding'], 'in_subset': ['label']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class Beamline(NamedThing):
@@ -570,13 +601,14 @@ class Beamline(NamedThing):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['pals:BeamLine'],
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    multipass: Optional[bool] = Field(default=None, description="""Indicates whether this beamline is a multipass recirculating line (true) or a single-pass line (false).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline']} })
-    length: Optional[float] = Field(default=None, description="""Physical length of the element in meters.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline', 'BeamlineElement']} })
-    zero_point: Optional[str] = Field(default=None, description="""Name of a line item used as a reference point when  the beamline is used as a subline.\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline']} })
-    periodic: Optional[bool] = Field(default=None, description="""For a beamline, indicates whether the orbit and Twiss parameters are periodic (true) or non-periodic (false).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline']} })
+    multipass: Optional[bool] = Field(default=None, description="""Indicates whether this beamline is a multipass recirculating line (true) or a single-pass line (false).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline'], 'in_subset': ['label']} })
+    length: Optional[float] = Field(default=None, description="""Physical length of the element in meters.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline', 'BeamlineElement'], 'in_subset': ['label']} })
+    zero_point: Optional[str] = Field(default=None, description="""Name of a line item used as a reference point when  the beamline is used as a subline.\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline'], 'in_subset': ['label']} })
+    periodic: Optional[bool] = Field(default=None, description="""For a beamline, indicates whether the orbit and Twiss parameters are periodic (true) or non-periodic (false).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline'], 'in_subset': ['label']} })
     line: Optional[list[str]] = Field(default=[], description="""Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class BeamlineElement(NamedThing):
@@ -586,16 +618,21 @@ class BeamlineElement(NamedThing):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['pals:Element'],
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
          'slot_usage': {'is_instance_of': {'multivalued': False,
-                                           'name': 'is_instance_of'}}})
+                                           'name': 'is_instance_of',
+                                           'range': 'ElementKindEnum'},
+                        'is_observed_by': {'name': 'is_observed_by',
+                                           'range': 'InstanceSignalBinding'}}})
 
-    is_instance_of: Optional[str] = Field(default=None, description="""NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.
+    is_instance_of: Optional[ElementKindEnum] = Field(default=None, description="""NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.
 """, json_schema_extra = { "linkml_meta": {'domain_of': ['BeamlineElement', 'InstanceSignalBinding'],
-         'exact_mappings': ['rdf:type']} })
-    length: Optional[float] = Field(default=None, description="""Physical length of the element in meters.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline', 'BeamlineElement']} })
-    instance_signal_bindings: Optional[dict[str, InstanceSignalBinding]] = Field(default=None, description="""Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BeamlineElement']} })
+         'exact_mappings': ['rdf:type'],
+         'in_subset': ['relationship']} })
+    length: Optional[float] = Field(default=None, description="""Physical length of the element in meters.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline', 'BeamlineElement'], 'in_subset': ['label']} })
+    is_observed_by: Optional[dict[str, InstanceSignalBinding]] = Field(default=None, description="""Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set. Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it,  since the instance of the element is directly observed or controlled through a Device. Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BeamlineElement', 'Device'], 'in_subset': ['relationship']} })
     param_set: Optional[ElementParamSet] = Field(default=None, description="""Named physics-parameter blocks for this element (e.g. RFP, BendP, MagneticMultipoleP).""", json_schema_extra = { "linkml_meta": {'domain_of': ['BeamlineElement']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class System(NamedThing):
@@ -613,17 +650,20 @@ class System(NamedThing):
                                                   'name': 'has_system_capability',
                                                   'range': 'SystemCapability'}}})
 
-    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System']} })
+    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System'], 'in_subset': ['label']} })
     has_sub_system: Optional[list[System]] = Field(default=[], description="""Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['NaradConfig', 'System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSubSystem']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSubSystem'],
+         'in_subset': ['relationship']} })
     has_system_capability: Optional[dict[str, SystemCapability]] = Field(default=None, description="""Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSystemCapability']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSystemCapability'],
+         'in_subset': ['relationship']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class FacilitySystem(System):
@@ -632,21 +672,69 @@ class FacilitySystem(System):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    facility_identifier: Optional[list[FacilityIdentifier]] = Field(default=[], description="""Globally unique identifier for the facility, with specified type and value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilitySystem']} })
-    control_system: Optional[ControlSystem] = Field(default=None, description="""Identifier of the control system (e.g. epics).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilitySystem']} })
-    naming_convention: Optional[str] = Field(default=None, description="""Signal naming convention template (e.g. <device><signal_code>).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilitySystem', 'ControlSystem']} })
-    signal_definitions: Optional[dict[str, SignalDefinitions]] = Field(default=None, description="""Structured container for facility-specific signal suffix templates.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilitySystem']} })
-    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System']} })
+    has_control_system: Optional[str] = Field(default=None, description="""Relates a System to one of its control systems (SSN alignment to sub system). Use for facility → control-system, facility → device, and device → component decomposition.
+""", json_schema_extra = { "linkml_meta": {'broad_mappings': ['ssn-system:hasSubSystem'],
+         'domain': 'System',
+         'domain_of': ['FacilitySystem', 'DeployedSystem'],
+         'in_subset': ['relationship']} })
+    hosts_device: Optional[dict[str, Device]] = Field(default=None, description="""Structured container for facility-specific signal suffix templates.""", json_schema_extra = { "linkml_meta": {'domain': 'FacilitySystem',
+         'domain_of': ['FacilitySystem'],
+         'in_subset': ['relationship']} })
+    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System'], 'in_subset': ['label']} })
     has_sub_system: Optional[list[System]] = Field(default=[], description="""Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['NaradConfig', 'System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSubSystem']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSubSystem'],
+         'in_subset': ['relationship']} })
     has_system_capability: Optional[dict[str, SystemCapability]] = Field(default=None, description="""Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSystemCapability']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSystemCapability'],
+         'in_subset': ['relationship']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
+
+
+class DeployedSystem(System):
+    """
+    A deployed system, with an identified facility, that is the subject of a NARAD configuration.  This is the child of the target of the narad_config.deployed_system slot. In the SSN graph a DeployedSystem is a broad mapping to the ssn:Deployment and also is equivalent to the signal_layers.facilities entries.
+
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['ssn:Deployment', 'ssn-system:System'],
+         'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+         'slot_usage': {'has_control_system': {'name': 'has_control_system',
+                                               'required': False},
+                        'has_system_capability': {'multivalued': True,
+                                                  'name': 'has_system_capability',
+                                                  'required': True},
+                        'system_type': {'description': 'High-level system type for '
+                                                       'classification and querying - '
+                                                       'set to Facility for all '
+                                                       'DeployedSystem instances.',
+                                        'name': 'system_type',
+                                        'range': 'SystemTypeEnum'}}})
+
+    facility_identifier: Optional[list[FacilityIdentifier]] = Field(default=[], description="""Globally unique identifier for the facility, with specified type and value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['DeployedSystem']} })
+    has_control_system: Optional[str] = Field(default=None, description="""Relates a System to one of its control systems (SSN alignment to sub system). Use for facility → control-system, facility → device, and device → component decomposition.
+""", json_schema_extra = { "linkml_meta": {'broad_mappings': ['ssn-system:hasSubSystem'],
+         'domain': 'System',
+         'domain_of': ['FacilitySystem', 'DeployedSystem'],
+         'in_subset': ['relationship']} })
+    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying - set to Facility for all DeployedSystem instances.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System'], 'in_subset': ['label']} })
+    has_sub_system: Optional[list[System]] = Field(default=[], description="""Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
+""", json_schema_extra = { "linkml_meta": {'domain': 'System',
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSubSystem'],
+         'in_subset': ['relationship']} })
+    has_system_capability: dict[str, SystemCapability] = Field(default=..., description="""Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
+""", json_schema_extra = { "linkml_meta": {'domain': 'System',
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSystemCapability'],
+         'in_subset': ['relationship']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class ControlSystem(System):
@@ -655,56 +743,93 @@ class ControlSystem(System):
 
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['ssn:System'],
-         'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
+         'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+         'slot_usage': {'has_naming_convention': {'inlined': True,
+                                                  'multivalued': True,
+                                                  'name': 'has_naming_convention',
+                                                  'range': 'NamingConvention'},
+                        'has_sub_system': {'name': 'has_sub_system', 'required': False},
+                        'has_system_capability': {'name': 'has_system_capability',
+                                                  'required': False},
+                        'system_type': {'description': 'High-level system type for '
+                                                       'classification and querying - '
+                                                       'set to ControlSystem for all '
+                                                       'ControlSystem instances.',
+                                        'name': 'system_type',
+                                        'range': 'SystemTypeEnum'}}})
 
-    naming_convention: Optional[str] = Field(default=None, description="""Signal naming convention template (e.g. <device><signal_code>).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilitySystem', 'ControlSystem']} })
-    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System']} })
+    has_naming_convention: Optional[list[NamingConvention]] = Field(default=[], description="""Signal naming conventions used by this control system defined in a machine actionable manner.  This is where you would capture the patterns/templates for how control system PVs or signals are constructed for this control system,  for example, the EPICS convention of using suffixes like .R, .S, :GSET to indicate readback, status, and setpoint signals. Multiple naming conventions can be captured if a control system uses more than one convention for different device types or domains.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlSystem']} })
+    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying - set to ControlSystem for all ControlSystem instances.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System'], 'in_subset': ['label']} })
     has_sub_system: Optional[list[System]] = Field(default=[], description="""Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['NaradConfig', 'System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSubSystem']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSubSystem'],
+         'in_subset': ['relationship']} })
     has_system_capability: Optional[dict[str, SystemCapability]] = Field(default=None, description="""Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSystemCapability']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSystemCapability'],
+         'in_subset': ['relationship']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
-class DeviceSystem(System):
+class Device(System):
     """
-    A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.
+    A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a Device is a subsystem of the Facility and a sibling to the ControlSystem. Also used in the SignalLayer to group signal bindings by device type. Aligned to ssn:System.
 
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['pals:Element'],
          'exact_mappings': ['ssn:System'],
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
-         'slot_usage': {'has_sub_system': {'inlined_as_list': True,
+         'slot_usage': {'device_type': {'name': 'device_type', 'required': True},
+                        'has_sub_system': {'inlined_as_list': True,
                                            'multivalued': True,
                                            'name': 'has_sub_system',
                                            'range': 'System'},
                         'has_system_capability': {'inlined': False,
                                                   'multivalued': False,
                                                   'name': 'has_system_capability',
-                                                  'range': 'SystemCapability'}}})
+                                                  'range': 'SystemCapability'},
+                        'is_observed_by': {'inlined': True,
+                                           'multivalued': True,
+                                           'name': 'is_observed_by'}}})
 
-    device_type: Optional[ElementKindEnum] = Field(default=None, description="""Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlCapability',
-                       'SignalDefinitions',
-                       'DeviceSystem',
-                       'SystemCapability']} })
+    device_type: ElementKindEnum = Field(default=..., description="""Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Capability', 'Device', 'SystemCapability'],
+         'in_subset': ['label']} })
     has_sub_system: Optional[list[System]] = Field(default=[], description="""Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['NaradConfig', 'System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSubSystem']} })
-    subclass_of: Optional[str] = Field(default=None, description="""-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlCapability', 'DeviceSystem'],
-         'exact_mappings': ['rdfs:subClassOf']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSubSystem'],
+         'in_subset': ['relationship']} })
+    subclass_of: Optional[str] = Field(default=None, description="""-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Capability', 'Device'],
+         'exact_mappings': ['rdfs:subClassOf'],
+         'in_subset': ['relationship']} })
     has_system_capability: Optional[str] = Field(default=None, description="""Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSystemCapability']} })
-    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSystemCapability'],
+         'in_subset': ['relationship']} })
+    is_observed_by: Optional[dict[str, SignalBinding]] = Field(default=None, description="""Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set. Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it,  since the instance of the element is directly observed or controlled through a Device. Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BeamlineElement', 'Device'], 'in_subset': ['relationship']} })
+    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System'], 'in_subset': ['label']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
+
+
+class NamingConventionExample(ConfiguredBaseModel):
+    """
+    An example of a control system naming convention, illustrating how the template is used to generate full control system PV names from semantic signal names and device instance information.  This can be used to provide concrete examples of the expected PV naming convention for different device types and signals based on the defined NamingConvention template.
+
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+         'slot_usage': {'example': {'identifier': True, 'name': 'example'}}})
+
+    example: str = Field(default=..., description="""A single example of how this naming convention is applied to a specific device instance and signal.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class Instrument(System):
@@ -714,17 +839,20 @@ class Instrument(System):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['ssn:System'],
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System']} })
+    system_type: Optional[SystemTypeEnum] = Field(default=None, description="""High-level system type for classification and querying.""", json_schema_extra = { "linkml_meta": {'domain_of': ['System'], 'in_subset': ['label']} })
     has_sub_system: Optional[list[System]] = Field(default=[], description="""Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['NaradConfig', 'System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSubSystem']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSubSystem'],
+         'in_subset': ['relationship']} })
     has_system_capability: Optional[dict[str, SystemCapability]] = Field(default=None, description="""Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
 """, json_schema_extra = { "linkml_meta": {'domain': 'System',
-         'domain_of': ['System', 'DeviceSystem'],
-         'exact_mappings': ['ssn-system:hasSystemCapability']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+         'domain_of': ['System', 'Device'],
+         'exact_mappings': ['ssn-system:hasSystemCapability'],
+         'in_subset': ['relationship']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class SystemCapability(NamedThing):
@@ -738,13 +866,57 @@ class SystemCapability(NamedThing):
 
     for_property: Optional[list[str]] = Field(default=[], description="""SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
 """, json_schema_extra = { "linkml_meta": {'domain_of': ['SystemCapability', 'InstanceSignalBinding'],
-         'exact_mappings': ['ssn:forProperty']} })
-    device_type: Optional[ElementKindEnum] = Field(default=None, description="""Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlCapability',
-                       'SignalDefinitions',
-                       'DeviceSystem',
-                       'SystemCapability']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+         'exact_mappings': ['ssn:forProperty'],
+         'in_subset': ['relationship']} })
+    device_type: Optional[ElementKindEnum] = Field(default=None, description="""Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Capability', 'Device', 'SystemCapability'],
+         'in_subset': ['label']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
+
+
+class NamingConvention(NamedThing):
+    """
+    A template for constructing facility-specific signal names from a semantic signal name and a control-system-specific suffix.  The template is used to generate the full control system PV name for a given device instance and semantic signal by substituting the device name and signal code suffix into the template.
+
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
+
+    template: Optional[str] = Field(default=None, description="""A template string for constructing control system PV names based on the semantic signal name and device instance. This can include placeholders for the device name and signal suffix, e.g. {device_name}{signal_suffix}.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamingConvention'], 'in_subset': ['label']} })
+    template_components: Optional[list[TemplateComponent]] = Field(default=[], description="""Structured components of the naming convention template, for capturing the template in a more machine-actionable way than a raw string.  For example, you could have components for the device name, signal suffix, and any fixed parts of the naming convention.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamingConvention']} })
+    full_pattern: Optional[str] = Field(default=None, description="""A regex pattern that the full resolved value (e.g. after template substitution) must match for validation.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamingConvention'], 'in_subset': ['label']} })
+    examples: Optional[list[NamingConventionExample]] = Field(default=[], description="""Examples of how this naming convention is applied to specific device instances and signals.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamingConvention']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
+
+
+class TemplateComponent(NamedThing):
+    """
+    A component of a naming convention template, representing a variable part of the control system PV name that is substituted based on the device instance and signal definition.  For example, in the template \"{device_name}{signal_code_suffix}\", \"device_name\" and \"signal_code_suffix\" would be TemplateComponents that are replaced with the actual device name and signal code suffix for each specific binding.
+
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
+
+    required: Optional[bool] = Field(default=None, description="""Indicates whether this configuration element is required for a valid configuration.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemplateComponent'], 'in_subset': ['label']} })
+    pattern: Optional[str] = Field(default=None, description="""A regex pattern that the value of this slot must match for validation.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemplateComponent'], 'in_subset': ['label']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
+
+
+class TemplateExample(ConfiguredBaseModel):
+    """
+    An example of a control system PV name generated from a naming convention template, along with a description of what it represents.  This can be used to illustrate how the template works in practice and to provide concrete examples of the expected PV naming convention for different device types and signals.
+
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
+         'slot_usage': {'example': {'identifier': True, 'name': 'example'}}})
+
+    example: str = Field(default=..., description="""A single example of how this naming convention is applied to a specific device instance and signal.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class Signal(NamedThing):
@@ -761,12 +933,13 @@ class Signal(NamedThing):
          'broad_mappings': ['sosa:Property', 'ssn:Property', 'qudt:QuantityKind'],
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    role: Optional[SignalRoleEnum] = Field(default=None, description="""The semantic role of the signal within its capability.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    data_type: Optional[DataTypeEnum] = Field(default=None, description="""The data type of the signal's value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    units: Optional[str] = Field(default=None, description="""Conventional unit symbol (e.g. A, MV/m, T*m, G/cm).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    units_uri: Optional[str] = Field(default=None, description="""Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    role: Optional[SignalRoleEnum] = Field(default=None, description="""The semantic role of the signal within its capability.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    data_type: Optional[DataTypeEnum] = Field(default=None, description="""The data type of the signal's value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    units: Optional[str] = Field(default=None, description="""Conventional unit symbol (e.g. A, MV/m, T*m, G/cm).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    units_uri: Optional[str] = Field(default=None, description="""Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class ObservableSignal(Signal):
@@ -777,12 +950,13 @@ class ObservableSignal(Signal):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['sosa:ObservableProperty'],
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    role: Optional[SignalRoleEnum] = Field(default=None, description="""The semantic role of the signal within its capability.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    data_type: Optional[DataTypeEnum] = Field(default=None, description="""The data type of the signal's value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    units: Optional[str] = Field(default=None, description="""Conventional unit symbol (e.g. A, MV/m, T*m, G/cm).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    units_uri: Optional[str] = Field(default=None, description="""Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    role: Optional[SignalRoleEnum] = Field(default=None, description="""The semantic role of the signal within its capability.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    data_type: Optional[DataTypeEnum] = Field(default=None, description="""The data type of the signal's value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    units: Optional[str] = Field(default=None, description="""Conventional unit symbol (e.g. A, MV/m, T*m, G/cm).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    units_uri: Optional[str] = Field(default=None, description="""Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class ActuatableSignal(Signal):
@@ -793,12 +967,13 @@ class ActuatableSignal(Signal):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['sosa:ActuatableProperty'],
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    role: Optional[SignalRoleEnum] = Field(default=None, description="""The semantic role of the signal within its capability.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    data_type: Optional[DataTypeEnum] = Field(default=None, description="""The data type of the signal's value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    units: Optional[str] = Field(default=None, description="""Conventional unit symbol (e.g. A, MV/m, T*m, G/cm).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    units_uri: Optional[str] = Field(default=None, description="""Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+    role: Optional[SignalRoleEnum] = Field(default=None, description="""The semantic role of the signal within its capability.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    data_type: Optional[DataTypeEnum] = Field(default=None, description="""The data type of the signal's value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    units: Optional[str] = Field(default=None, description="""Conventional unit symbol (e.g. A, MV/m, T*m, G/cm).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    units_uri: Optional[str] = Field(default=None, description="""Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit: prefix maps to http://qudt.org/vocab/unit/.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal'], 'in_subset': ['label']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class InstanceSignalBinding(NamedThing):
@@ -810,32 +985,38 @@ class InstanceSignalBinding(NamedThing):
          'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system',
          'slot_usage': {'for_property': {'multivalued': False,
                                          'name': 'for_property',
-                                         'range': 'string'},
+                                         'range': 'SignalBinding'},
                         'is_hosted_by': {'multivalued': False,
                                          'name': 'is_hosted_by',
                                          'range': 'string'},
                         'is_instance_of': {'multivalued': False,
                                            'name': 'is_instance_of',
-                                           'range': 'string'},
+                                           'range': 'Signal'},
                         'is_property_of': {'multivalued': False,
                                            'name': 'is_property_of',
-                                           'range': 'string'}}})
+                                           'range': 'ControlSystem'}}})
 
     pv_name: Optional[str] = Field(default=None, description="""Fully-resolved facility-specific process variable name, e.g. MQWK202:STAT or MQWK202:BDL.
-""", json_schema_extra = { "linkml_meta": {'domain_of': ['InstanceSignalBinding']} })
+""", json_schema_extra = { "linkml_meta": {'domain_of': ['InstanceSignalBinding'], 'in_subset': ['label']} })
     is_instance_of: Optional[str] = Field(default=None, description="""NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.
 """, json_schema_extra = { "linkml_meta": {'domain_of': ['BeamlineElement', 'InstanceSignalBinding'],
-         'exact_mappings': ['rdf:type']} })
+         'exact_mappings': ['rdf:type'],
+         'in_subset': ['relationship']} })
     for_property: Optional[str] = Field(default=None, description="""SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
 """, json_schema_extra = { "linkml_meta": {'domain_of': ['SystemCapability', 'InstanceSignalBinding'],
-         'exact_mappings': ['ssn:forProperty']} })
+         'exact_mappings': ['ssn:forProperty'],
+         'in_subset': ['relationship']} })
     is_hosted_by: Optional[str] = Field(default=None, description="""Links an InstanceSignalBinding to the FacilitySystem it belongs to. This is the edge that connects the facility-specific bindings to the Facility node in the graph.
 """, json_schema_extra = { "linkml_meta": {'broad_mappings': ['ssn-system:hasSubSystem', 'ssn:isHostedBy'],
-         'domain_of': ['InstanceSignalBinding']} })
+         'domain_of': ['InstanceSignalBinding'],
+         'in_subset': ['relationship']} })
     is_property_of: Optional[str] = Field(default=None, description="""Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph. Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system). NOTE: The value of this slot must match one of the values in narad_config.has_sub_system.
-""", json_schema_extra = { "linkml_meta": {'broad_mappings': ['ssn:isPropertyOf'], 'domain_of': ['InstanceSignalBinding']} })
-    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
-    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing']} })
+""", json_schema_extra = { "linkml_meta": {'broad_mappings': ['ssn:isPropertyOf'],
+         'domain_of': ['Capability', 'InstanceSignalBinding'],
+         'in_subset': ['relationship']} })
+    name: str = Field(default=..., description="""Human-readable name or local string key for the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing'], 'in_subset': ['label']} })
+    description: Optional[str] = Field(default=None, description="""Detailed description of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NamedThing', 'NamingConventionExample', 'TemplateExample'],
+         'in_subset': ['label']} })
 
 
 class ElementParamSet(ConfiguredBaseModel):
@@ -844,14 +1025,14 @@ class ElementParamSet(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    frequency: Optional[float] = Field(default=None, description="""RF frequency in Hz.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
-    voltage: Optional[float] = Field(default=None, description="""RF voltage in volts.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
-    phase: Optional[float] = Field(default=None, description="""RF phase in degrees.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
-    angle_ref: Optional[float] = Field(default=None, description="""Reference bend angle in radians.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
-    e1: Optional[float] = Field(default=None, description="""Entry edge angle in radians.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
-    e2: Optional[float] = Field(default=None, description="""Exit edge angle in radians.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
-    Kn1: Optional[float] = Field(default=None, description="""First-order magnetic multipole coefficient (quadrupole strength).""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
-    Ksol: Optional[float] = Field(default=None, description="""Solenoid integrated field strength.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
+    frequency: Optional[float] = Field(default=None, description="""RF frequency in Hz.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet'], 'in_subset': ['label']} })
+    voltage: Optional[float] = Field(default=None, description="""RF voltage in volts.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet'], 'in_subset': ['label']} })
+    phase: Optional[float] = Field(default=None, description="""RF phase in degrees.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet'], 'in_subset': ['label']} })
+    angle_ref: Optional[float] = Field(default=None, description="""Reference bend angle in radians.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet'], 'in_subset': ['label']} })
+    e1: Optional[float] = Field(default=None, description="""Entry edge angle in radians.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet'], 'in_subset': ['label']} })
+    e2: Optional[float] = Field(default=None, description="""Exit edge angle in radians.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet'], 'in_subset': ['label']} })
+    Kn1: Optional[float] = Field(default=None, description="""First-order magnetic multipole coefficient (quadrupole strength).""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet'], 'in_subset': ['label']} })
+    Ksol: Optional[float] = Field(default=None, description="""Solenoid integrated field strength.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet'], 'in_subset': ['label']} })
     facility_param_set: Optional[FacilityParamSet] = Field(default=None, description="""Facility-specific element parameters (type designation, model name, open property map).""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElementParamSet']} })
 
 
@@ -861,8 +1042,8 @@ class FacilityParamSet(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/narad_linkml/schema/narad/system'})
 
-    facility_element_type: Optional[str] = Field(default=None, description="""capture the facility-specific or local designation (e.g., \"QW\", \"WarmCavity\", \"HCorrector\").  Isused for local naming, inventory, or legacy mapping of instances of facility elements (within elements:)  to the facility-specific type designations used in the control system or elsewhere at the facility.""", json_schema_extra = { "linkml_meta": {'aliases': ['type'], 'domain_of': ['FacilityParamSet']} })
-    modeled_as: Optional[str] = Field(default=None, description="""Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilityParamSet']} })
+    facility_element_type: Optional[str] = Field(default=None, description="""capture the facility-specific or local designation (e.g., \"QW\", \"WarmCavity\", \"HCorrector\").  Isused for local naming, inventory, or legacy mapping of instances of facility elements (within elements:)  to the facility-specific type designations used in the control system or elsewhere at the facility.""", json_schema_extra = { "linkml_meta": {'aliases': ['type'], 'domain_of': ['FacilityParamSet'], 'in_subset': ['label']} })
+    modeled_as: Optional[str] = Field(default=None, description="""Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK).""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilityParamSet'], 'in_subset': ['label']} })
     properties: Optional[Any] = Field(default=None, description="""Intentionally open-ended key-value property map for element-specific or facility-specific parameters.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FacilityParamSet']} })
 
 
@@ -872,19 +1053,23 @@ NamedThing.model_rebuild()
 NaradModel.model_rebuild()
 NaradConfig.model_rebuild()
 CapabilityLayer.model_rebuild()
-ControlCapability.model_rebuild()
+Capability.model_rebuild()
 SignalLayer.model_rebuild()
 FacilityIdentifier.model_rebuild()
-SignalDefinitions.model_rebuild()
 SignalBinding.model_rebuild()
 Beamline.model_rebuild()
 BeamlineElement.model_rebuild()
 System.model_rebuild()
 FacilitySystem.model_rebuild()
+DeployedSystem.model_rebuild()
 ControlSystem.model_rebuild()
-DeviceSystem.model_rebuild()
+Device.model_rebuild()
+NamingConventionExample.model_rebuild()
 Instrument.model_rebuild()
 SystemCapability.model_rebuild()
+NamingConvention.model_rebuild()
+TemplateComponent.model_rebuild()
+TemplateExample.model_rebuild()
 Signal.model_rebuild()
 ObservableSignal.model_rebuild()
 ActuatableSignal.model_rebuild()

@@ -9,7 +9,7 @@ _Reference bend angle in radians._
 
 
 
-URI: [narad:angle_ref](https://w3id.org/narad_linkml/schema/narad/angle_ref)
+URI: [narad:angle_ref](https://example.org/narad_linkml/schema/narad/angle_ref)
 Alias: angle_ref
 
 <!-- no inheritance hierarchy -->
@@ -67,6 +67,8 @@ Alias: angle_ref
 ```yaml
 name: angle_ref
 description: Reference bend angle in radians.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: angle_ref

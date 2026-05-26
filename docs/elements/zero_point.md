@@ -9,7 +9,7 @@ _Name of a line item used as a reference point when  the beamline is used as a s
 
 
 
-URI: [narad:zero_point](https://w3id.org/narad_linkml/schema/narad/zero_point)
+URI: [narad:zero_point](https://example.org/narad_linkml/schema/narad/zero_point)
 Alias: zero_point
 
 <!-- no inheritance hierarchy -->
@@ -68,6 +68,8 @@ Alias: zero_point
 name: zero_point
 description: Name of a line item used as a reference point when  the beamline is used
   as a subline."
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: zero_point

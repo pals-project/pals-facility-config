@@ -15,6 +15,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class SignalBinding extends NamedThing {
 
-  private String controlSystemSuffix;
+  private String signalCodeSuffix;
 
 }

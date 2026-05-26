@@ -9,7 +9,7 @@ _Intentionally open-ended key-value property map for element-specific or facilit
 
 
 
-URI: [narad:properties](https://w3id.org/narad_linkml/schema/narad/properties)
+URI: [narad:properties](https://example.org/narad_linkml/schema/narad/properties)
 Alias: properties
 
 <!-- no inheritance hierarchy -->

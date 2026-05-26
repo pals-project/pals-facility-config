@@ -267,6 +267,7 @@ classes:
       - param_set
     slot_usage:
       is_instance_of:
+        range: ElementKindEnum
         multivalued: false
       is_observed_by:
         range: InstanceSignalBinding
@@ -291,7 +292,6 @@ classes:
         range: SystemCapability
         multivalued: true
         inlined: true
-        inlined_as_list: true
   
   DeployedSystem:
     is_a: System
@@ -312,6 +312,7 @@ classes:
       has_control_system:
         required: false
       has_system_capability:
+        multivalued: true
         required: true
 
   ControlSystem:
@@ -368,7 +369,17 @@ classes:
         range: SystemCapability
         multivalued: false
         inlined: false
-        inlined_as_list: false
+  
+  NamingConventionExample:
+    description: >
+      An example of a control system naming convention, illustrating how the template is used to generate full control system PV names from semantic signal names and device instance information. 
+      This can be used to provide concrete examples of the expected PV naming convention for different device types and signals based on the defined NamingConvention template.
+    slots:
+      - example
+      - description
+    slot_usage:
+      example:
+        identifier: true
  
   # ---- Physical device subclasses ------------------------------------------
   # These are the nodes labelled [Cls. Magnet], [Cls. Instrument] etc. in the
@@ -505,16 +516,16 @@ classes:
       - sosa:Sensor
     slot_usage:
       is_instance_of:
-        range: string
+        range: Signal
         multivalued: false
       is_hosted_by:
         range: string
         multivalued: false
       is_property_of:
-        range: string
+        range: ControlSystem
         multivalued: false
       for_property:
-        range: string
+        range: SignalBinding
         multivalued: false
   
   # -------- Element Parameters and Facility Parameters --------------------------------
@@ -580,7 +591,7 @@ enums:
       (BeamlineElement.kind). Keeping the enum here keeps profile device_type
       values in sync with element kind values without circular imports.
       Values must stay aligned with CapabilityProfile.device_type.
-      NOTE: The element_kind of this BeamlineElement must match the device_type
+      NOTE: The kind of a BeamlineElement must match the device_type
       of the Device referenced by is_instance_of.
     permissible_values:
       Drift:
@@ -772,6 +783,7 @@ slots:
     multivalued: true
 
   is_property_of:
+    range: ControlSystem
     description: >
       Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it.
       This can also link the Instance of a SignalBinding to the ControlSystem that implements it.
@@ -1001,42 +1013,52 @@ slots:
 
   capability_class:
     range: string
+    in_subset:
+      - base_class
     aliases:
       - class
     description: >-
       Semantic class label for a type-specific capability
       (e.g. QuadrupoleStrengthCapability). Serialized as 'class' in source YAML.
 
-  class_curie:
-    range: uriorcurie
-    description: "Optional URI or CURIE."
-
   has_signal:
     range: Signal
+    in_subset:
+      - relationship
     multivalued: true
     inlined: true
     description: "Signals within a capability, keyed by a semantic signal name."
 
   device_type:
     range: ElementKindEnum
+    in_subset:
+      - label
     description: >-
       Represents the generic, semantic class of the device (e.g., "Quadrupole", "BPM") and is
       used for capability, instrument, and signal profile matching.
 
   role:
     range: SignalRoleEnum
+    in_subset:
+      - label
     description: "The semantic role of the signal within its capability."
 
   data_type:
     range: DataTypeEnum
+    in_subset:
+      - label
     description: "The data type of the signal's value."
 
   units:
     range: string
+    in_subset:
+      - label
     description: "Conventional unit symbol (e.g. A, MV/m, T*m, G/cm)."
 
   units_uri:
-    range: uriorcurie
+    range: string
+    in_subset:
+      - label
     description: >-
       Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere).
       The si-unit: prefix maps to http://qudt.org/vocab/unit/.
@@ -1049,10 +1071,14 @@ slots:
 
   multipass:
     range: boolean
+    in_subset:
+      - label
     description: "Indicates whether this beamline is a multipass recirculating line (true) or a single-pass line (false)."
   
   zero_point:
     range: BeamlineElement
+    in_subset:
+      - label
     multivalued: false
     inlined: false
     description: >-
@@ -1061,20 +1087,14 @@ slots:
   
   periodic:
     range: boolean
+    in_subset:
+      - label
     description: "For a beamline, indicates whether the orbit and Twiss parameters are periodic (true) or non-periodic (false)."
-
-  element_kind:
-    range: ElementKindEnum
-    description: >-
-     The controlled vocabulary for the physical kind of element (e.g., "Quadrupole", "Dipole", "Solenoid").
-     It is used for classification and filtering.
-    aliases:
-      - kind
-    broad_mappings:
-      - pals:ElementKind
   
   length:
     range: float
+    in_subset:
+      - label
     description: "Physical length of the element in meters."
 
   param_set:
@@ -1094,10 +1114,14 @@ slots:
 
   modeled_as:
     range: string
+    in_subset:
+      - label
     description: "Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK)."
 
   facility_element_type:
     range: string
+    in_subset:
+      - label
     aliases:
       - type
     description: >-
@@ -1107,34 +1131,50 @@ slots:
 
   frequency:
     range: float
+    in_subset:
+      - label
     description: "RF frequency in Hz."
 
   voltage:
     range: float
+    in_subset:
+      - label
     description: "RF voltage in volts."
 
   phase:
     range: float
+    in_subset:
+      - label
     description: "RF phase in degrees."
 
   angle_ref:
     range: float
+    in_subset:
+      - label
     description: "Reference bend angle in radians."
 
   e1:
     range: float
+    in_subset:
+      - label
     description: "Entry edge angle in radians."
 
   e2:
     range: float
+    in_subset:
+      - label
     description: "Exit edge angle in radians."
 
   Kn1:
     range: float
+    in_subset:
+      - label
     description: "First-order magnetic multipole coefficient (quadrupole strength)."
 
   Ksol:
     range: float
+    in_subset:
+      - label
     description: "Solenoid integrated field strength."
 
   facility_identifier:
@@ -1145,12 +1185,18 @@ slots:
 
   identifier_type:
     range: IdentifierTypeEnum
+    in_subset:
+      - label
     description: "The type of identifier used in the identifier slot (e.g. DOI, ARK, URL, local)."
 
   identifier_value:
     range: string
+    in_subset:
+      - label
     description: "The value of the identifier (e.g. the DOI string, ARK string, URL string, or local ID)."
 
   intent:
     range: string
+    in_subset:
+      - label
     description: "A human-readable statement of the intended use or purpose of this NARAD configuration."

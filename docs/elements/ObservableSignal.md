@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:ObservableSignal](https://w3id.org/narad_linkml/schema/narad/ObservableSignal)
+URI: [narad:ObservableSignal](https://example.org/narad_linkml/schema/narad/ObservableSignal)
 
 
 
@@ -75,7 +75,7 @@ URI: [narad:ObservableSignal](https://w3id.org/narad_linkml/schema/narad/Observa
 | [role](role.md) | 0..1 <br/> [SignalRoleEnum](SignalRoleEnum.md) | The semantic role of the signal within its capability | [Signal](Signal.md) |
 | [data_type](data_type.md) | 0..1 <br/> [DataTypeEnum](DataTypeEnum.md) | The data type of the signal's value | [Signal](Signal.md) |
 | [units](units.md) | 0..1 <br/> [String](String.md) | Conventional unit symbol (e | [Signal](Signal.md) |
-| [units_uri](units_uri.md) | 0..1 <br/> [Uriorcurie](Uriorcurie.md) | Machine-resolvable QUDT unit reference (e | [Signal](Signal.md) |
+| [units_uri](units_uri.md) | 0..1 <br/> [String](String.md) | Machine-resolvable QUDT unit reference (e | [Signal](Signal.md) |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
@@ -156,6 +156,8 @@ attributes:
   role:
     name: role
     description: The semantic role of the signal within its capability.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: role
@@ -166,6 +168,8 @@ attributes:
   data_type:
     name: data_type
     description: The data type of the signal's value.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: data_type
@@ -176,6 +180,8 @@ attributes:
   units:
     name: units
     description: Conventional unit symbol (e.g. A, MV/m, T*m, G/cm).
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: units
@@ -187,16 +193,20 @@ attributes:
     name: units_uri
     description: 'Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere).
       The si-unit: prefix maps to http://qudt.org/vocab/unit/.'
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: units_uri
     owner: ObservableSignal
     domain_of:
     - Signal
-    range: uriorcurie
+    range: string
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -209,12 +219,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: ObservableSignal
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

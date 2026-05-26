@@ -9,7 +9,7 @@ _High-level system type for classification and querying._
 
 
 
-URI: [narad:system_type](https://w3id.org/narad_linkml/schema/narad/system_type)
+URI: [narad:system_type](https://example.org/narad_linkml/schema/narad/system_type)
 Alias: system_type
 
 <!-- no inheritance hierarchy -->
@@ -22,11 +22,12 @@ Alias: system_type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [DeployedSystem](DeployedSystem.md) | A deployed system, with an identified facility, that is the subject of a NARA... |  yes  |
 | [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  no  |
-| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
-| [ControlSystem](ControlSystem.md) | A control system (e |  no  |
+| [Device](Device.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
 | [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
-| [DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
+| [ControlSystem](ControlSystem.md) | A control system (e |  yes  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -71,6 +72,8 @@ Alias: system_type
 ```yaml
 name: system_type
 description: High-level system type for classification and querying.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: system_type

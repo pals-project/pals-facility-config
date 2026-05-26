@@ -25,11 +25,11 @@ System hierarchy:
 
 Control Capability hierarchy:
   - SystemCapability
-    - MagnetControlCapability
-      - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability
-    - InstrumentControlCapability
-    - BPMControlCapability
-    - CavityGradientControlCapability
+    - MagnetCapability
+      - QuadrupoleCapability, CorrectorKickCapability, DipoleCapability
+    - InstrumentCapability
+    - BPMCapability
+    - CavityGradientCapability
 
 Signal modeling:
   - Signal — abstract control-system quantity
@@ -41,7 +41,7 @@ Signal modeling:
 Serialization conventions:
   - beamlines are keyed by beamline name
   - signals are keyed by semantic signal name
-  - instance_signal_bindings are keyed by semantic signal name
+  - signal bindings are created through the is_observed_by relationship to  and are keyed by semantic signal name
 
 Alignments with PALS (Particle Accelerator Language Standard):
   - Beamline aligns with pals:BeamLine
@@ -52,10 +52,10 @@ Alignments with PALS (Particle Accelerator Language Standard):
   - Solenoid aligns with pals:Solenoid
   - RFCavity aligns with pals:RFCavity
 
-Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention.  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R)  is captured in the SignalBinding. 2. On the distinction between is_instance_of, facility_element_type, and device_type:
+Additional Notes on Usage: 1. On Signal, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention.  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R)  is captured in the InstanceSignalBinding. 2. On the distinction between is_instance_of, facility_element_type, and device_type:
   - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
   - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. 
-  - device_type (ControlCapability.device_type) is the generic element type used for capability profile matching 
+  - device_type (Capability.device_type) is the generic element type used for capability profile matching 
   and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention 
   or for other facility-specific purposes.
   For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
@@ -76,7 +76,7 @@ Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBindin
   facility-specific parameters that don't fit into the predefined schema structure.
 
 Needed Custom Validations:
-  - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the DeviceSystem it is an instance of.
+  - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the Device it is an instance of.
   - Validation to ensure that the value of is_property_of in InstanceSignalBinding matches one of the control systems listed in narad_config.has_sub_system.
   - Validation that each signal_layer -> facilities -> FacilitySystem -> control_system value has a corresponding entry in narad_config.has_sub_system to ensure that all control systems referenced in the signal layer are defined in the capability layer.
   - Validation that the signal_bindings defined for a given device_type in the signal layer align with the signals defined in the capability profiles and instrument systems for that device type.

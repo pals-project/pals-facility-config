@@ -9,7 +9,7 @@ _Identifier of the deployed system this configuration describes._
 
 
 
-URI: [narad:deployed_system](https://w3id.org/narad_linkml/schema/narad/deployed_system)
+URI: [narad:deployed_system](https://example.org/narad_linkml/schema/narad/deployed_system)
 Alias: deployed_system
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,9 @@ Alias: deployed_system
 
 ## Properties
 
-* Range: [FacilitySystem](FacilitySystem.md)
+* Range: [DeployedSystem](DeployedSystem.md)
+
+* Required: True
 
 
 
@@ -67,12 +69,16 @@ Alias: deployed_system
 ```yaml
 name: deployed_system
 description: Identifier of the deployed system this configuration describes.
+in_subset:
+- instance
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: deployed_system
 domain_of:
 - NaradConfig
-range: FacilitySystem
+range: DeployedSystem
+required: true
+multivalued: false
 
 ```
 </details>

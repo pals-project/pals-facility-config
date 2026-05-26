@@ -9,7 +9,7 @@ _RF frequency in Hz._
 
 
 
-URI: [narad:frequency](https://w3id.org/narad_linkml/schema/narad/frequency)
+URI: [narad:frequency](https://example.org/narad_linkml/schema/narad/frequency)
 Alias: frequency
 
 <!-- no inheritance hierarchy -->
@@ -67,6 +67,8 @@ Alias: frequency
 ```yaml
 name: frequency
 description: RF frequency in Hz.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: frequency

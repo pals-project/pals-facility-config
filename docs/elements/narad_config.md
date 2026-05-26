@@ -9,7 +9,7 @@ _Top-level NARAD configuration block (capability_layer + signal_layer)._
 
 
 
-URI: [narad:narad_config](https://w3id.org/narad_linkml/schema/narad/narad_config)
+URI: [narad:narad_config](https://example.org/narad_linkml/schema/narad/narad_config)
 Alias: narad_config
 
 <!-- no inheritance hierarchy -->

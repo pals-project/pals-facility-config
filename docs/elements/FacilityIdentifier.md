@@ -9,7 +9,7 @@ _A globally unique identifier for an entity (e.g., facility), with a specified t
 
 
 
-URI: [narad:FacilityIdentifier](https://w3id.org/narad_linkml/schema/narad/FacilityIdentifier)
+URI: [narad:FacilityIdentifier](https://example.org/narad_linkml/schema/narad/FacilityIdentifier)
 
 
 
@@ -56,7 +56,7 @@ URI: [narad:FacilityIdentifier](https://w3id.org/narad_linkml/schema/narad/Facil
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [FacilitySystem](FacilitySystem.md) | [facility_identifier](facility_identifier.md) | range | [FacilityIdentifier](FacilityIdentifier.md) |
+| [DeployedSystem](DeployedSystem.md) | [facility_identifier](facility_identifier.md) | range | [FacilityIdentifier](FacilityIdentifier.md) |
 
 
 
@@ -123,6 +123,8 @@ attributes:
     name: identifier_type
     description: The type of identifier used in the identifier slot (e.g. DOI, ARK,
       URL, local).
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: identifier_type
@@ -134,6 +136,8 @@ attributes:
     name: identifier_value
     description: The value of the identifier (e.g. the DOI string, ARK string, URL
       string, or local ID).
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: identifier_value

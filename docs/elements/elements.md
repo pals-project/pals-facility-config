@@ -9,7 +9,7 @@ _Beamline element definitions referenced by name from beamline sequences. Serial
 
 
 
-URI: [narad:elements](https://w3id.org/narad_linkml/schema/narad/elements)
+URI: [narad:elements](https://example.org/narad_linkml/schema/narad/elements)
 Alias: elements
 
 <!-- no inheritance hierarchy -->

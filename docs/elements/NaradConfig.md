@@ -9,7 +9,7 @@ _A top-level NARAD-system container for the: capability layer + signal layer._
 
 
 
-URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
+URI: [narad:NaradConfig](https://example.org/narad_linkml/schema/narad/NaradConfig)
 
 
 
@@ -19,14 +19,25 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
  classDiagram
     class NaradConfig
     click NaradConfig href "../NaradConfig/"
-      NaradConfig : control_capability_layer
+      NaradConfig : capability_layer
         
           
     
         
         
-        NaradConfig --> "1..*" ControlCapability : control_capability_layer
-        click ControlCapability href "../ControlCapability/"
+        NaradConfig --> "1..*" Capability : capability_layer
+        click Capability href "../Capability/"
+    
+
+        
+      NaradConfig : control_system
+        
+          
+    
+        
+        
+        NaradConfig --> "1" ControlSystem : control_system
+        click ControlSystem href "../ControlSystem/"
     
 
         
@@ -36,8 +47,8 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
     
         
         
-        NaradConfig --> "1" FacilitySystem : deployed_system
-        click FacilitySystem href "../FacilitySystem/"
+        NaradConfig --> "1" DeployedSystem : deployed_system
+        click DeployedSystem href "../DeployedSystem/"
     
 
         
@@ -47,19 +58,8 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
     
         
         
-        NaradConfig --> "1..*" DeviceSystem : device_layer
-        click DeviceSystem href "../DeviceSystem/"
-    
-
-        
-      NaradConfig : has_sub_system
-        
-          
-    
-        
-        
-        NaradConfig --> "1..*" ControlSystem : has_sub_system
-        click ControlSystem href "../ControlSystem/"
+        NaradConfig --> "1..*" Device : device_layer
+        click Device href "../Device/"
     
 
         
@@ -93,10 +93,10 @@ URI: [narad:NaradConfig](https://w3id.org/narad_linkml/schema/narad/NaradConfig)
 | ---  | --- | --- | --- |
 | [schema_version](schema_version.md) | 1 <br/> [String](String.md) | Version of the NARAD schema used in this document | direct |
 | [intent](intent.md) | 0..1 <br/> [String](String.md) | A human-readable statement of the intended use or purpose of this NARAD confi... | direct |
-| [deployed_system](deployed_system.md) | 1 <br/> [FacilitySystem](FacilitySystem.md) | Identifier of the deployed system this configuration describes | direct |
-| [has_sub_system](has_sub_system.md) | 1..* <br/> [ControlSystem](ControlSystem.md) | Identifier of the control system (e | direct |
-| [control_capability_layer](control_capability_layer.md) | 1..* <br/> [ControlCapability](ControlCapability.md) | Control Capability definitions for this facility | direct |
-| [device_layer](device_layer.md) | 1..* <br/> [DeviceSystem](DeviceSystem.md) | Device Capability definitions keyed by capability name | direct |
+| [deployed_system](deployed_system.md) | 1 <br/> [DeployedSystem](DeployedSystem.md) | Identifier of the deployed system this configuration describes | direct |
+| [control_system](control_system.md) | 1 <br/> [ControlSystem](ControlSystem.md) | Identifier of the control system (e | direct |
+| [capability_layer](capability_layer.md) | 1..* <br/> [Capability](Capability.md) | Control Capability definitions for this facility | direct |
+| [device_layer](device_layer.md) | 1..* <br/> [Device](Device.md) | Device Capability definitions keyed by capability name | direct |
 | [signal_layer](signal_layer.md) | 1 <br/> [SignalLayer](SignalLayer.md) | Signal-layer container for facility-specific signal bindings | direct |
 
 
@@ -161,8 +161,8 @@ slots:
 - schema_version
 - intent
 - deployed_system
-- has_sub_system
-- control_capability_layer
+- control_system
+- capability_layer
 - device_layer
 - signal_layer
 slot_usage:
@@ -174,20 +174,21 @@ slot_usage:
   deployed_system:
     name: deployed_system
     description: Identifier of the deployed system this configuration describes.
-    range: FacilitySystem
+    range: DeployedSystem
     required: true
     multivalued: false
-  has_sub_system:
-    name: has_sub_system
+    inlined: true
+  control_system:
+    name: control_system
     description: Identifier of the control system (e.g. epics) this configuration
       describes.
     range: ControlSystem
     required: true
-    multivalued: true
+    multivalued: false
   device_layer:
     name: device_layer
     description: Device Capability definitions keyed by capability name.
-    range: DeviceSystem
+    range: Device
     required: true
     multivalued: true
     inlined: true
@@ -220,20 +221,21 @@ slot_usage:
   deployed_system:
     name: deployed_system
     description: Identifier of the deployed system this configuration describes.
-    range: FacilitySystem
+    range: DeployedSystem
     required: true
     multivalued: false
-  has_sub_system:
-    name: has_sub_system
+    inlined: true
+  control_system:
+    name: control_system
     description: Identifier of the control system (e.g. epics) this configuration
       describes.
     range: ControlSystem
     required: true
-    multivalued: true
+    multivalued: false
   device_layer:
     name: device_layer
     description: Device Capability definitions keyed by capability name.
-    range: DeviceSystem
+    range: Device
     required: true
     multivalued: true
     inlined: true
@@ -247,6 +249,8 @@ attributes:
   schema_version:
     name: schema_version
     description: Version of the NARAD schema used in this document.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: schema_version
@@ -259,6 +263,8 @@ attributes:
     name: intent
     description: A human-readable statement of the intended use or purpose of this
       NARAD configuration.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: intent
@@ -269,43 +275,44 @@ attributes:
   deployed_system:
     name: deployed_system
     description: Identifier of the deployed system this configuration describes.
+    in_subset:
+    - instance
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: deployed_system
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    range: FacilitySystem
+    range: DeployedSystem
     required: true
     multivalued: false
-  has_sub_system:
-    name: has_sub_system
+    inlined: true
+  control_system:
+    name: control_system
     description: Identifier of the control system (e.g. epics) this configuration
       describes.
+    in_subset:
+    - instance
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    exact_mappings:
-    - ssn-system:hasSubSystem
     rank: 1000
-    domain: System
-    alias: has_sub_system
+    alias: control_system
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    - System
-    - DeviceSystem
     range: ControlSystem
     required: true
-    multivalued: true
-  control_capability_layer:
-    name: control_capability_layer
+    multivalued: false
+    inlined: true
+  capability_layer:
+    name: capability_layer
     description: Control Capability definitions for this facility.
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: control_capability_layer
+    alias: capability_layer
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    range: ControlCapability
+    range: Capability
     required: true
     multivalued: true
     inlined: true
@@ -318,7 +325,7 @@ attributes:
     owner: NaradConfig
     domain_of:
     - NaradConfig
-    range: DeviceSystem
+    range: Device
     required: true
     multivalued: true
     inlined: true

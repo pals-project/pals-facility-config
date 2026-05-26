@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:pv_name](https://w3id.org/narad_linkml/schema/narad/pv_name)
+URI: [narad:pv_name](https://example.org/narad_linkml/schema/narad/pv_name)
 Alias: pv_name
 
 <!-- no inheritance hierarchy -->
@@ -72,6 +72,8 @@ description: 'Fully-resolved facility-specific process variable name, e.g. MQWK2
   or MQWK202:BDL.
 
   '
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: pv_name

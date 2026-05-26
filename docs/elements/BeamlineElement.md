@@ -9,7 +9,7 @@ _A single element in a beamline with its kind and optional NARAD capability anno
 
 
 
-URI: [narad:BeamlineElement](https://w3id.org/narad_linkml/schema/narad/BeamlineElement)
+URI: [narad:BeamlineElement](https://example.org/narad_linkml/schema/narad/BeamlineElement)
 
 
 
@@ -24,18 +24,27 @@ URI: [narad:BeamlineElement](https://w3id.org/narad_linkml/schema/narad/Beamline
       
       BeamlineElement : description
         
-      BeamlineElement : instance_signal_bindings
+      BeamlineElement : is_instance_of
         
           
     
         
         
-        BeamlineElement --> "*" InstanceSignalBinding : instance_signal_bindings
-        click InstanceSignalBinding href "../InstanceSignalBinding/"
+        BeamlineElement --> "0..1" ElementKindEnum : is_instance_of
+        click ElementKindEnum href "../ElementKindEnum/"
     
 
         
-      BeamlineElement : is_instance_of
+      BeamlineElement : is_observed_by
+        
+          
+    
+        
+        
+        BeamlineElement --> "*" InstanceSignalBinding : is_observed_by
+        click InstanceSignalBinding href "../InstanceSignalBinding/"
+    
+
         
       BeamlineElement : length
         
@@ -69,9 +78,9 @@ URI: [narad:BeamlineElement](https://w3id.org/narad_linkml/schema/narad/Beamline
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [is_instance_of](is_instance_of.md) | 0..1 <br/> [String](String.md) | NARAD alias for rdf:type | direct |
+| [is_instance_of](is_instance_of.md) | 0..1 <br/> [ElementKindEnum](ElementKindEnum.md) | NARAD alias for rdf:type | direct |
 | [length](length.md) | 0..1 <br/> [Float](Float.md) | Physical length of the element in meters | direct |
-| [instance_signal_bindings](instance_signal_bindings.md) | * <br/> [InstanceSignalBinding](InstanceSignalBinding.md) | Facility-specific bindings of signals to control-system interfaces (e | direct |
+| [is_observed_by](is_observed_by.md) | * <br/> [InstanceSignalBinding](InstanceSignalBinding.md) | Control-system-specific, e | direct |
 | [param_set](param_set.md) | 0..1 <br/> [ElementParamSet](ElementParamSet.md) | Named physics-parameter blocks for this element (e | direct |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
@@ -140,12 +149,16 @@ is_a: NamedThing
 slots:
 - is_instance_of
 - length
-- instance_signal_bindings
+- is_observed_by
 - param_set
 slot_usage:
   is_instance_of:
     name: is_instance_of
+    range: ElementKindEnum
     multivalued: false
+  is_observed_by:
+    name: is_observed_by
+    range: InstanceSignalBinding
 
 ```
 </details>
@@ -164,7 +177,11 @@ is_a: NamedThing
 slot_usage:
   is_instance_of:
     name: is_instance_of
+    range: ElementKindEnum
     multivalued: false
+  is_observed_by:
+    name: is_observed_by
+    range: InstanceSignalBinding
 attributes:
   is_instance_of:
     name: is_instance_of
@@ -174,6 +191,8 @@ attributes:
       that implements the signal binding.
 
       '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     exact_mappings:
     - rdf:type
@@ -183,11 +202,13 @@ attributes:
     domain_of:
     - BeamlineElement
     - InstanceSignalBinding
-    range: string
+    range: ElementKindEnum
     multivalued: false
   length:
     name: length
     description: Physical length of the element in meters.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: length
@@ -196,21 +217,28 @@ attributes:
     - Beamline
     - BeamlineElement
     range: float
-  instance_signal_bindings:
-    name: instance_signal_bindings
-    description: Facility-specific bindings of signals to control-system interfaces
-      (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed
-      by the semantic signal name (e.g. current_readback) rather than the control-system
-      suffix, which is captured in the SignalBinding. The semantic signal name links
-      the instance binding to the abstract Signal definition and its place in the
-      capability profile, while the SignalBinding captures the concrete implementations
-      of the abstract SignalBindings referenced by the element's capability profile.
+  is_observed_by:
+    name: is_observed_by
+    description: Control-system-specific, e.g. EPICS, suffix definitions keyed by
+      signal name within a device/domain set. Can also be used to link a BeamlineElement
+      instance to the signal bindings that observe or actuate it,  since the instance
+      of the element is directly observed or controlled through a Device. Facility-specific
+      bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific
+      beamline element instance. These are the keyed by the semantic signal name (e.g.
+      current_readback) rather than the control-system suffix, which is captured in
+      the SignalBinding. The semantic signal name links the instance binding to the
+      abstract Signal definition and its place in the capability profile, while the
+      SignalBinding captures the concrete implementations of the abstract SignalBindings
+      referenced by the element's capability profile.
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: instance_signal_bindings
+    alias: is_observed_by
     owner: BeamlineElement
     domain_of:
     - BeamlineElement
+    - Device
     range: InstanceSignalBinding
     multivalued: true
     inlined: true
@@ -230,6 +258,8 @@ attributes:
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -242,12 +272,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: BeamlineElement
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

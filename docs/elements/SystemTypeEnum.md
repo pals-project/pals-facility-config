@@ -7,7 +7,7 @@ _High-level system type for classification and querying. This is a broad categor
 
 
 
-URI: [narad:SystemTypeEnum](https://w3id.org/narad_linkml/schema/narad/SystemTypeEnum)
+URI: [narad:SystemTypeEnum](https://example.org/narad_linkml/schema/narad/SystemTypeEnum)
 
 ## Permissible Values
 
@@ -25,6 +25,8 @@ URI: [narad:SystemTypeEnum](https://w3id.org/narad_linkml/schema/narad/SystemTyp
 | Name | Description |
 | ---  | --- |
 | [system_type](system_type.md) | High-level system type for classification and querying |
+| [system_type](system_type.md) | High-level system type for classification and querying - set to Facility for ... |
+| [system_type](system_type.md) | High-level system type for classification and querying - set to ControlSystem... |
 
 
 

@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:is_instance_of](https://w3id.org/narad_linkml/schema/narad/is_instance_of)
+URI: [narad:is_instance_of](https://example.org/narad_linkml/schema/narad/is_instance_of)
 Alias: is_instance_of
 
 <!-- no inheritance hierarchy -->
@@ -78,6 +78,8 @@ description: 'NARAD alias for rdf:type. Links a facility-specific instance node 
   the signal binding.
 
   '
+in_subset:
+- relationship
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 exact_mappings:
 - rdf:type

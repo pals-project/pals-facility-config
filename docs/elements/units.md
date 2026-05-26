@@ -9,7 +9,7 @@ _Conventional unit symbol (e.g. A, MV/m, T*m, G/cm)._
 
 
 
-URI: [narad:units](https://w3id.org/narad_linkml/schema/narad/units)
+URI: [narad:units](https://example.org/narad_linkml/schema/narad/units)
 Alias: units
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,8 @@ Alias: units
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Signal](Signal.md) | Domain term for a control-system signal |  no  |
 | [ObservableSignal](ObservableSignal.md) | A NARAD signal that is read, monitored, observed, or exposed by a system |  no  |
+| [Signal](Signal.md) | Domain term for a control-system signal |  no  |
 | [ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |  no  |
 
 
@@ -69,6 +69,8 @@ Alias: units
 ```yaml
 name: units
 description: Conventional unit symbol (e.g. A, MV/m, T*m, G/cm).
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: units

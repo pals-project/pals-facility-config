@@ -9,7 +9,7 @@ _Named physics-parameter block for a beamline element. The name identifies the b
 
 
 
-URI: [narad:ElementParamSet](https://w3id.org/narad_linkml/schema/narad/ElementParamSet)
+URI: [narad:ElementParamSet](https://example.org/narad_linkml/schema/narad/ElementParamSet)
 
 
 
@@ -150,6 +150,8 @@ attributes:
   frequency:
     name: frequency
     description: RF frequency in Hz.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: frequency
@@ -160,6 +162,8 @@ attributes:
   voltage:
     name: voltage
     description: RF voltage in volts.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: voltage
@@ -170,6 +174,8 @@ attributes:
   phase:
     name: phase
     description: RF phase in degrees.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: phase
@@ -180,6 +186,8 @@ attributes:
   angle_ref:
     name: angle_ref
     description: Reference bend angle in radians.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: angle_ref
@@ -190,6 +198,8 @@ attributes:
   e1:
     name: e1
     description: Entry edge angle in radians.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: e1
@@ -200,6 +210,8 @@ attributes:
   e2:
     name: e2
     description: Exit edge angle in radians.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: e2
@@ -210,6 +222,8 @@ attributes:
   Kn1:
     name: Kn1
     description: First-order magnetic multipole coefficient (quadrupole strength).
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: Kn1
@@ -220,6 +234,8 @@ attributes:
   Ksol:
     name: Ksol
     description: Solenoid integrated field strength.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: Ksol

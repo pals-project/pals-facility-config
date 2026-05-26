@@ -9,7 +9,7 @@ _Ordered sequence of beamline elements in this beamline. Serializes as a list of
 
 
 
-URI: [narad:line](https://w3id.org/narad_linkml/schema/narad/line)
+URI: [narad:line](https://example.org/narad_linkml/schema/narad/line)
 Alias: line
 
 <!-- no inheritance hierarchy -->

@@ -9,7 +9,7 @@ _RF voltage in volts._
 
 
 
-URI: [narad:voltage](https://w3id.org/narad_linkml/schema/narad/voltage)
+URI: [narad:voltage](https://example.org/narad_linkml/schema/narad/voltage)
 Alias: voltage
 
 <!-- no inheritance hierarchy -->
@@ -67,6 +67,8 @@ Alias: voltage
 ```yaml
 name: voltage
 description: RF voltage in volts.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: voltage

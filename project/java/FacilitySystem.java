@@ -15,9 +15,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class FacilitySystem extends System {
 
-  private List<FacilityIdentifier> facilityIdentifier;
-  private ControlSystem controlSystem;
-  private String namingConvention;
-  private List<SignalDefinitions> signalDefinitions;
+  private ControlSystem hasControlSystem;
+  private List<Device> hostsDevice;
 
 }

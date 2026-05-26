@@ -10,7 +10,7 @@ message ActuatableSignal
   signalRoleEnum role = 0
   dataTypeEnum dataType = 0
   string units = 0
-  uriorcurie unitsUri = 0
+  string unitsUri = 0
  }
 // A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
 message Beamline
@@ -28,24 +28,25 @@ message BeamlineElement
  {
   string name = 0
   string description = 0
- repeated  string isInstanceOf = 0
+ repeated  elementKindEnum isInstanceOf = 0
   float length = 0
- repeated  instanceSignalBinding instanceSignalBindings = 0
+ repeated  instanceSignalBinding isObservedBy = 0
   elementParamSet paramSet = 0
  }
-// Capability-layer container for control profile families.
-message CapabilityLayer
- {
- repeated  controlCapability controlCapabilities = 0
- }
 // A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).
-message ControlCapability
+message Capability
  {
   string name = 0
   string description = 0
   elementKindEnum deviceType = 0
-  system subclassOf = 0
- repeated  signal signals = 0
+  capability subclassOf = 0
+ repeated  signal hasSignal = 0
+  controlSystem isPropertyOf = 0
+ }
+// Capability-layer container for control profile families.
+message CapabilityLayer
+ {
+ repeated  capability capabilities = 0
  }
 // A control system (e.g. EPICS) that manages device process variables. In the SSN graph a ControlSystem is a subsystem of the Facility.
 // 
@@ -53,14 +54,26 @@ message ControlSystem
  {
   string name = 0
   string description = 0
+ repeated  namingConvention hasNamingConvention = 0
   systemTypeEnum systemType = 0
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
-  string namingConvention = 0
  }
-// A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.
+// A deployed system, with an identified facility, that is the subject of a NARAD configuration.  This is the child of the target of the narad_config.deployed_system slot. In the SSN graph a DeployedSystem is a broad mapping to the ssn:Deployment and also is equivalent to the signal_layers.facilities entries.
 // 
-message DeviceSystem
+message DeployedSystem
+ {
+  string name = 0
+  string description = 0
+ repeated  system hasSubSystem = 0
+ repeated  facilityIdentifier facilityIdentifier = 0
+  controlSystem hasControlSystem = 0
+  systemTypeEnum systemType = 0
+ repeated  systemCapability hasSystemCapability = 0
+ }
+// A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a Device is a subsystem of the Facility and a sibling to the ControlSystem. Also used in the SignalLayer to group signal bindings by device type. Aligned to ssn:System.
+// 
+message Device
  {
   string name = 0
   string description = 0
@@ -69,6 +82,7 @@ message DeviceSystem
  repeated  system hasSubSystem = 0
   system subclassOf = 0
  repeated  systemCapability hasSystemCapability = 0
+ repeated  signalBinding isObservedBy = 0
  }
 // Named physics-parameter block for a beamline element. The name identifies the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
 message ElementParamSet
@@ -104,10 +118,8 @@ message FacilitySystem
   systemTypeEnum systemType = 0
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
- repeated  facilityIdentifier facilityIdentifier = 0
-  controlSystem controlSystem = 0
-  string namingConvention = 0
- repeated  signalDefinitions signalDefinitions = 0
+  controlSystem hasControlSystem = 0
+ repeated  device hostsDevice = 0
  }
 // A facility-specific binding between a NARAD Signal and an implementation interface (e.g. an EPICS process variable). Modeled as sosa:Sensor because it describes how a signal is observed, monitored, or actuated. ssn:forProperty → Signal; narad:isInstanceOf → the capability class.
 // 
@@ -116,10 +128,10 @@ message InstanceSignalBinding
   string name = 0
   string description = 0
   string pvName = 0
- repeated  string isInstanceOf = 0
- repeated  string forProperty = 0
+ repeated  signal isInstanceOf = 0
+ repeated  signalBinding forProperty = 0
   string isHostedBy = 0
-  string isPropertyOf = 0
+  controlSystem isPropertyOf = 0
  }
 // A generic beam diagnostic instrument.
 message Instrument
@@ -130,15 +142,33 @@ message Instrument
  repeated  system hasSubSystem = 0
  repeated  systemCapability hasSystemCapability = 0
  }
+// A template for constructing facility-specific signal names from a semantic signal name and a control-system-specific suffix.  The template is used to generate the full control system PV name for a given device instance and semantic signal by substituting the device name and signal code suffix into the template.
+// 
+message NamingConvention
+ {
+  string name = 0
+  string description = 0
+  string template = 0
+ repeated  templateComponent templateComponents = 0
+  string fullPattern = 0
+ repeated  namingConventionExample examples = 0
+ }
+// An example of a control system naming convention, illustrating how the template is used to generate full control system PV names from semantic signal names and device instance information.  This can be used to provide concrete examples of the expected PV naming convention for different device types and signals based on the defined NamingConvention template.
+// 
+message NamingConventionExample
+ {
+  string example = 0
+  string description = 0
+ }
 // A top-level NARAD-system container for the: capability layer + signal layer.
 message NaradConfig
  {
   string schemaVersion = 0
   string intent = 0
-  facilitySystem deployedSystem = 0
- repeated  controlSystem hasSubSystem = 0
- repeated  controlCapability controlCapabilityLayer = 0
- repeated  deviceSystem deviceLayer = 0
+  deployedSystem deployedSystem = 0
+  controlSystem controlSystem = 0
+ repeated  capability capabilityLayer = 0
+ repeated  device deviceLayer = 0
   signalLayer signalLayer = 0
  }
 // Top-level NARAD document container.
@@ -157,7 +187,7 @@ message ObservableSignal
   signalRoleEnum role = 0
   dataTypeEnum dataType = 0
   string units = 0
-  uriorcurie unitsUri = 0
+  string unitsUri = 0
  }
 // Domain term for a control-system signal. A Signal represents an identifiable quantity, state, setpoint, readback, limit, or status. In SSN/SOSA alignment, NARAD Signals are treated as properties of systems (ssn:forProperty). The concrete facility binding is captured in SignalBinding.
 // 
@@ -168,22 +198,14 @@ message Signal
   signalRoleEnum role = 0
   dataTypeEnum dataType = 0
   string units = 0
-  uriorcurie unitsUri = 0
+  string unitsUri = 0
  }
 // A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.
 message SignalBinding
  {
   string name = 0
   string description = 0
-  string controlSystemSuffix = 0
- }
-// Signal binding set scoped to a device type or device domain.
-message SignalDefinitions
- {
-  string name = 0
-  string description = 0
-  elementKindEnum deviceType = 0
- repeated  signalBinding signalBindings = 0
+  string signalCodeSuffix = 0
  }
 // Signal-layer container for facility-specific signal bindings.
 message SignalLayer
@@ -208,4 +230,20 @@ message SystemCapability
   string description = 0
  repeated  string forProperty = 0
   elementKindEnum deviceType = 0
+ }
+// A component of a naming convention template, representing a variable part of the control system PV name that is substituted based on the device instance and signal definition.  For example, in the template "{device_name}{signal_code_suffix}", "device_name" and "signal_code_suffix" would be TemplateComponents that are replaced with the actual device name and signal code suffix for each specific binding.
+// 
+message TemplateComponent
+ {
+  string name = 0
+  string description = 0
+  boolean required = 0
+  string pattern = 0
+ }
+// An example of a control system PV name generated from a naming convention template, along with a description of what it represents.  This can be used to illustrate how the template works in practice and to provide concrete examples of the expected PV naming convention for different device types and signals.
+// 
+message TemplateExample
+ {
+  string example = 0
+  string description = 0
  }

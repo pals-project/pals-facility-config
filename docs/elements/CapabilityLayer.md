@@ -9,7 +9,7 @@ _Capability-layer container for control profile families._
 
 
 
-URI: [narad:CapabilityLayer](https://w3id.org/narad_linkml/schema/narad/CapabilityLayer)
+URI: [narad:CapabilityLayer](https://example.org/narad_linkml/schema/narad/CapabilityLayer)
 
 
 
@@ -19,14 +19,14 @@ URI: [narad:CapabilityLayer](https://w3id.org/narad_linkml/schema/narad/Capabili
  classDiagram
     class CapabilityLayer
     click CapabilityLayer href "../CapabilityLayer/"
-      CapabilityLayer : control_capabilities
+      CapabilityLayer : capabilities
         
           
     
         
         
-        CapabilityLayer --> "*" ControlCapability : control_capabilities
-        click ControlCapability href "../ControlCapability/"
+        CapabilityLayer --> "*" Capability : capabilities
+        click Capability href "../Capability/"
     
 
         
@@ -43,7 +43,7 @@ URI: [narad:CapabilityLayer](https://w3id.org/narad_linkml/schema/narad/Capabili
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [control_capabilities](control_capabilities.md) | * <br/> [ControlCapability](ControlCapability.md) |  | direct |
+| [capabilities](capabilities.md) | * <br/> [Capability](Capability.md) |  | direct |
 
 
 
@@ -93,7 +93,7 @@ name: CapabilityLayer
 description: Capability-layer container for control profile families.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 slots:
-- control_capabilities
+- capabilities
 
 ```
 </details>
@@ -106,15 +106,15 @@ name: CapabilityLayer
 description: Capability-layer container for control profile families.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 attributes:
-  control_capabilities:
-    name: control_capabilities
+  capabilities:
+    name: capabilities
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: control_capabilities
+    alias: capabilities
     owner: CapabilityLayer
     domain_of:
     - CapabilityLayer
-    range: ControlCapability
+    range: Capability
     multivalued: true
     inlined: true
 

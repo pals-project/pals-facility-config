@@ -9,7 +9,7 @@ _First-order magnetic multipole coefficient (quadrupole strength)._
 
 
 
-URI: [narad:Kn1](https://w3id.org/narad_linkml/schema/narad/Kn1)
+URI: [narad:Kn1](https://example.org/narad_linkml/schema/narad/Kn1)
 Alias: Kn1
 
 <!-- no inheritance hierarchy -->
@@ -67,6 +67,8 @@ Alias: Kn1
 ```yaml
 name: Kn1
 description: First-order magnetic multipole coefficient (quadrupole strength).
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: Kn1

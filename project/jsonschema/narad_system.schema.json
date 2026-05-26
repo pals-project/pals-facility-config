@@ -127,7 +127,11 @@
                         "null"
                     ]
                 },
-                "instance_signal_bindings": {
+                "is_instance_of": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.\n"
+                },
+                "is_observed_by": {
                     "additionalProperties": {
                         "anyOf": [
                             {
@@ -138,16 +142,9 @@
                             }
                         ]
                     },
-                    "description": "Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.",
+                    "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set. Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it,  since the instance of the element is directly observed or controlled through a Device. Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.",
                     "type": [
                         "object",
-                        "null"
-                    ]
-                },
-                "is_instance_of": {
-                    "description": "NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.\n",
-                    "type": [
-                        "string",
                         "null"
                     ]
                 },
@@ -238,15 +235,70 @@
             "title": "Beamline",
             "type": "object"
         },
+        "Capability": {
+            "additionalProperties": false,
+            "description": "A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "device_type": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
+                },
+                "has_signal": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Signal__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Signals within a capability, keyed by a semantic signal name.",
+                    "type": "object"
+                },
+                "is_property_of": {
+                    "description": "Links the capability layer to the control systems it applies to via ssn:isPropertyOf.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "subclass_of": {
+                    "description": "Links a type-specific capability to the generic capability it extends via rdfs:subClassOf.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "has_signal",
+                "name"
+            ],
+            "title": "Capability",
+            "type": "object"
+        },
         "CapabilityLayer": {
             "additionalProperties": false,
             "description": "Capability-layer container for control profile families.",
             "properties": {
-                "control_capabilities": {
+                "capabilities": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/ControlCapability__identifier_optional"
+                                "$ref": "#/$defs/Capability__identifier_optional"
                             },
                             {
                                 "additionalProperties": {
@@ -273,7 +325,7 @@
             "title": "CapabilityLayer",
             "type": "object"
         },
-        "ControlCapability": {
+        "Capability__identifier_optional": {
             "additionalProperties": false,
             "description": "A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).",
             "properties": {
@@ -288,11 +340,7 @@
                     "$ref": "#/$defs/ElementKindEnum",
                     "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
                 },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "signals": {
+                "has_signal": {
                     "additionalProperties": {
                         "anyOf": [
                             {
@@ -306,56 +354,19 @@
                     "description": "Signals within a capability, keyed by a semantic signal name.",
                     "type": "object"
                 },
-                "subclass_of": {
-                    "description": "-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.",
+                "is_property_of": {
+                    "description": "Links the capability layer to the control systems it applies to via ssn:isPropertyOf.",
                     "type": [
                         "string",
                         "null"
                     ]
-                }
-            },
-            "required": [
-                "signals",
-                "name"
-            ],
-            "title": "ControlCapability",
-            "type": "object"
-        },
-        "ControlCapability__identifier_optional": {
-            "additionalProperties": false,
-            "description": "A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
                 },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
                 },
-                "signals": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Signal__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Signals within a capability, keyed by a semantic signal name.",
-                    "type": "object"
-                },
                 "subclass_of": {
-                    "description": "-> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf.",
+                    "description": "Links a type-specific capability to the generic capability it extends via rdfs:subClassOf.",
                     "type": [
                         "string",
                         "null"
@@ -363,9 +374,9 @@
                 }
             },
             "required": [
-                "signals"
+                "has_signal"
             ],
-            "title": "ControlCapability",
+            "title": "Capability",
             "type": "object"
         },
         "ControlSystem": {
@@ -376,6 +387,16 @@
                     "description": "Detailed description of the entity.",
                     "type": [
                         "string",
+                        "null"
+                    ]
+                },
+                "has_naming_convention": {
+                    "description": "Signal naming conventions used by this control system defined in a machine actionable manner.  This is where you would capture the patterns/templates for how control system PVs or signals are constructed for this control system,  for example, the EPICS convention of using suffixes like .R, .S, :GSET to indicate readback, status, and setpoint signals. Multiple naming conventions can be captured if a control system uses more than one convention for different device types or domains.",
+                    "items": {
+                        "$ref": "#/$defs/NamingConvention"
+                    },
+                    "type": [
+                        "array",
                         "null"
                     ]
                 },
@@ -410,16 +431,9 @@
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
                 },
-                "naming_convention": {
-                    "description": "Signal naming convention template (e.g. <device><signal_code>).",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
                 "system_type": {
                     "$ref": "#/$defs/SystemTypeEnum",
-                    "description": "High-level system type for classification and querying."
+                    "description": "High-level system type for classification and querying - set to ControlSystem for all ControlSystem instances."
                 }
             },
             "required": [
@@ -441,9 +455,77 @@
             "title": "DataTypeEnum",
             "type": "string"
         },
-        "DeviceSystem": {
+        "DeployedSystem": {
             "additionalProperties": false,
-            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
+            "description": "A deployed system, with an identified facility, that is the subject of a NARAD configuration.  This is the child of the target of the narad_config.deployed_system slot. In the SSN graph a DeployedSystem is a broad mapping to the ssn:Deployment and also is equivalent to the signal_layers.facilities entries.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility_identifier": {
+                    "description": "Globally unique identifier for the facility, with specified type and value.",
+                    "items": {
+                        "$ref": "#/$defs/FacilityIdentifier"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_control_system": {
+                    "description": "Relates a System to one of its control systems (SSN alignment to sub system). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "has_sub_system": {
+                    "description": "Relates a System to one of its subsystems (SSN alignment). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
+                    "items": {
+                        "$ref": "#/$defs/System"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "has_system_capability": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SystemCapability__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "system_type": {
+                    "$ref": "#/$defs/SystemTypeEnum",
+                    "description": "High-level system type for classification and querying - set to Facility for all DeployedSystem instances."
+                }
+            },
+            "required": [
+                "has_system_capability",
+                "name"
+            ],
+            "title": "DeployedSystem",
+            "type": "object"
+        },
+        "Device": {
+            "additionalProperties": false,
+            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a Device is a subsystem of the Facility and a sibling to the ControlSystem. Also used in the SignalLayer to group signal bindings by device type. Aligned to ssn:System.",
             "properties": {
                 "description": {
                     "description": "Detailed description of the entity.",
@@ -470,6 +552,23 @@
                     "description": "Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.\n",
                     "type": [
                         "string",
+                        "null"
+                    ]
+                },
+                "is_observed_by": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set. Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it,  since the instance of the element is directly observed or controlled through a Device. Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.",
+                    "type": [
+                        "object",
                         "null"
                     ]
                 },
@@ -490,14 +589,15 @@
                 }
             },
             "required": [
+                "device_type",
                 "name"
             ],
-            "title": "DeviceSystem",
+            "title": "Device",
             "type": "object"
         },
-        "DeviceSystem__identifier_optional": {
+        "Device__identifier_optional": {
             "additionalProperties": false,
-            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.",
+            "description": "A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a Device is a subsystem of the Facility and a sibling to the ControlSystem. Also used in the SignalLayer to group signal bindings by device type. Aligned to ssn:System.",
             "properties": {
                 "description": {
                     "description": "Detailed description of the entity.",
@@ -527,6 +627,23 @@
                         "null"
                     ]
                 },
+                "is_observed_by": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set. Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it,  since the instance of the element is directly observed or controlled through a Device. Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
@@ -543,12 +660,14 @@
                     "description": "High-level system type for classification and querying."
                 }
             },
-            "required": [],
-            "title": "DeviceSystem",
+            "required": [
+                "device_type"
+            ],
+            "title": "Device",
             "type": "object"
         },
         "ElementKindEnum": {
-            "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of.",
+            "description": "Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The kind of a BeamlineElement must match the device_type of the Device referenced by is_instance_of.",
             "enum": [
                 "Drift",
                 "Marker",
@@ -696,17 +815,6 @@
             "additionalProperties": false,
             "description": "Facility-specific signal binding configuration.",
             "properties": {
-                "control_system": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/ControlSystem"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Identifier of the control system (e.g. epics)."
-                },
                 "description": {
                     "description": "Detailed description of the entity.",
                     "type": [
@@ -714,13 +822,10 @@
                         "null"
                     ]
                 },
-                "facility_identifier": {
-                    "description": "Globally unique identifier for the facility, with specified type and value.",
-                    "items": {
-                        "$ref": "#/$defs/FacilityIdentifier"
-                    },
+                "has_control_system": {
+                    "description": "Relates a System to one of its control systems (SSN alignment to sub system). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
                     "type": [
-                        "array",
+                        "string",
                         "null"
                     ]
                 },
@@ -751,25 +856,15 @@
                         "null"
                     ]
                 },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "naming_convention": {
-                    "description": "Signal naming convention template (e.g. <device><signal_code>).",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "signal_definitions": {
+                "hosts_device": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/SignalDefinitions__identifier_optional"
+                                "$ref": "#/$defs/Device__identifier_optional"
                             },
                             {
-                                "type": "null"
+                                "$ref": "#/$defs/ElementKindEnum",
+                                "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
                             }
                         ]
                     },
@@ -778,6 +873,10 @@
                         "object",
                         "null"
                     ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
                 },
                 "system_type": {
                     "$ref": "#/$defs/SystemTypeEnum",
@@ -794,17 +893,6 @@
             "additionalProperties": false,
             "description": "Facility-specific signal binding configuration.",
             "properties": {
-                "control_system": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/ControlSystem"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Identifier of the control system (e.g. epics)."
-                },
                 "description": {
                     "description": "Detailed description of the entity.",
                     "type": [
@@ -812,13 +900,10 @@
                         "null"
                     ]
                 },
-                "facility_identifier": {
-                    "description": "Globally unique identifier for the facility, with specified type and value.",
-                    "items": {
-                        "$ref": "#/$defs/FacilityIdentifier"
-                    },
+                "has_control_system": {
+                    "description": "Relates a System to one of its control systems (SSN alignment to sub system). Use for facility \u2192 control-system, facility \u2192 device, and device \u2192 component decomposition.\n",
                     "type": [
-                        "array",
+                        "string",
                         "null"
                     ]
                 },
@@ -849,25 +934,15 @@
                         "null"
                     ]
                 },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "naming_convention": {
-                    "description": "Signal naming convention template (e.g. <device><signal_code>).",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "signal_definitions": {
+                "hosts_device": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/SignalDefinitions__identifier_optional"
+                                "$ref": "#/$defs/Device__identifier_optional"
                             },
                             {
-                                "type": "null"
+                                "$ref": "#/$defs/ElementKindEnum",
+                                "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
                             }
                         ]
                     },
@@ -876,6 +951,10 @@
                         "object",
                         "null"
                     ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
                 },
                 "system_type": {
                     "$ref": "#/$defs/SystemTypeEnum",
@@ -1064,15 +1143,96 @@
             "title": "Instrument",
             "type": "object"
         },
+        "NamingConvention": {
+            "additionalProperties": false,
+            "description": "A template for constructing facility-specific signal names from a semantic signal name and a control-system-specific suffix.  The template is used to generate the full control system PV name for a given device instance and semantic signal by substituting the device name and signal code suffix into the template.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "examples": {
+                    "description": "Examples of how this naming convention is applied to specific device instances and signals.",
+                    "items": {
+                        "$ref": "#/$defs/NamingConventionExample"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "full_pattern": {
+                    "description": "A regex pattern that the full resolved value (e.g. after template substitution) must match for validation.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "template": {
+                    "description": "A template string for constructing control system PV names based on the semantic signal name and device instance. This can include placeholders for the device name and signal suffix, e.g. {device_name}{signal_suffix}.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "template_components": {
+                    "description": "Structured components of the naming convention template, for capturing the template in a more machine-actionable way than a raw string.  For example, you could have components for the device name, signal suffix, and any fixed parts of the naming convention.",
+                    "items": {
+                        "$ref": "#/$defs/TemplateComponent"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "NamingConvention",
+            "type": "object"
+        },
+        "NamingConventionExample": {
+            "additionalProperties": false,
+            "description": "An example of a control system naming convention, illustrating how the template is used to generate full control system PV names from semantic signal names and device instance information.  This can be used to provide concrete examples of the expected PV naming convention for different device types and signals based on the defined NamingConvention template.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "example": {
+                    "description": "A single example of how this naming convention is applied to a specific device instance and signal.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "example"
+            ],
+            "title": "NamingConventionExample",
+            "type": "object"
+        },
         "NaradConfig": {
             "additionalProperties": false,
             "description": "A top-level NARAD-system container for the: capability layer + signal layer.",
             "properties": {
-                "control_capability_layer": {
+                "capability_layer": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/ControlCapability__identifier_optional"
+                                "$ref": "#/$defs/Capability__identifier_optional"
                             },
                             {
                                 "additionalProperties": {
@@ -1093,30 +1253,28 @@
                     "description": "Control Capability definitions for this facility.",
                     "type": "object"
                 },
+                "control_system": {
+                    "$ref": "#/$defs/ControlSystem",
+                    "description": "Identifier of the control system (e.g. epics) this configuration describes."
+                },
                 "deployed_system": {
-                    "description": "Identifier of the deployed system this configuration describes.",
-                    "type": "string"
+                    "$ref": "#/$defs/DeployedSystem",
+                    "description": "Identifier of the deployed system this configuration describes."
                 },
                 "device_layer": {
                     "additionalProperties": {
                         "anyOf": [
                             {
-                                "$ref": "#/$defs/DeviceSystem__identifier_optional"
+                                "$ref": "#/$defs/Device__identifier_optional"
                             },
                             {
-                                "type": "null"
+                                "$ref": "#/$defs/ElementKindEnum",
+                                "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
                             }
                         ]
                     },
                     "description": "Device Capability definitions keyed by capability name.",
                     "type": "object"
-                },
-                "has_sub_system": {
-                    "description": "Identifier of the control system (e.g. epics) this configuration describes.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "intent": {
                     "description": "A human-readable statement of the intended use or purpose of this NARAD configuration.",
@@ -1137,8 +1295,8 @@
             "required": [
                 "schema_version",
                 "deployed_system",
-                "has_sub_system",
-                "control_capability_layer",
+                "control_system",
+                "capability_layer",
                 "device_layer",
                 "signal_layer"
             ],
@@ -1283,13 +1441,6 @@
             "additionalProperties": false,
             "description": "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.",
             "properties": {
-                "control_system_suffix": {
-                    "description": "Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.\n",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
                 "description": {
                     "description": "Detailed description of the entity.",
                     "type": [
@@ -1300,6 +1451,13 @@
                 "name": {
                     "description": "Human-readable name or local string key for the entity.",
                     "type": "string"
+                },
+                "signal_code_suffix": {
+                    "description": "Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.\n",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 }
             },
             "required": [
@@ -1312,111 +1470,27 @@
             "additionalProperties": false,
             "description": "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.",
             "properties": {
-                "control_system_suffix": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "signal_code_suffix": {
                     "description": "Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.\n",
                     "type": [
                         "string",
                         "null"
                     ]
-                },
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
                 }
             },
             "required": [],
             "title": "SignalBinding",
-            "type": "object"
-        },
-        "SignalDefinitions": {
-            "additionalProperties": false,
-            "description": "Signal binding set scoped to a device type or device domain.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "signal_bindings": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/SignalBinding__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "title": "SignalDefinitions",
-            "type": "object"
-        },
-        "SignalDefinitions__identifier_optional": {
-            "additionalProperties": false,
-            "description": "Signal binding set scoped to a device type or device domain.",
-            "properties": {
-                "description": {
-                    "description": "Detailed description of the entity.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "device_type": {
-                    "$ref": "#/$defs/ElementKindEnum",
-                    "description": "Represents the generic, semantic class of the device (e.g., \"Quadrupole\", \"BPM\") and is used for capability, instrument, and signal profile matching."
-                },
-                "name": {
-                    "description": "Human-readable name or local string key for the entity.",
-                    "type": "string"
-                },
-                "signal_bindings": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/SignalBinding__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.",
-                    "type": [
-                        "object",
-                        "null"
-                    ]
-                }
-            },
-            "required": [],
-            "title": "SignalDefinitions",
             "type": "object"
         },
         "SignalLayer": {
@@ -1629,6 +1703,67 @@
             ],
             "title": "SystemTypeEnum",
             "type": "string"
+        },
+        "TemplateComponent": {
+            "additionalProperties": false,
+            "description": "A component of a naming convention template, representing a variable part of the control system PV name that is substituted based on the device instance and signal definition.  For example, in the template \"{device_name}{signal_code_suffix}\", \"device_name\" and \"signal_code_suffix\" would be TemplateComponents that are replaced with the actual device name and signal code suffix for each specific binding.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name or local string key for the entity.",
+                    "type": "string"
+                },
+                "pattern": {
+                    "description": "A regex pattern that the value of this slot must match for validation.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "required": {
+                    "description": "Indicates whether this configuration element is required for a valid configuration.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "TemplateComponent",
+            "type": "object"
+        },
+        "TemplateExample": {
+            "additionalProperties": false,
+            "description": "An example of a control system PV name generated from a naming convention template, along with a description of what it represents.  This can be used to illustrate how the template works in practice and to provide concrete examples of the expected PV naming convention for different device types and signals.",
+            "properties": {
+                "description": {
+                    "description": "Detailed description of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "example": {
+                    "description": "A single example of how this naming convention is applied to a specific device instance and signal.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "example"
+            ],
+            "title": "TemplateExample",
+            "type": "object"
         }
     },
     "$id": "https://w3id.org/narad_linkml/schema/narad/system",

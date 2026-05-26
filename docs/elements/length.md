@@ -9,7 +9,7 @@ _Physical length of the element in meters._
 
 
 
-URI: [narad:length](https://w3id.org/narad_linkml/schema/narad/length)
+URI: [narad:length](https://example.org/narad_linkml/schema/narad/length)
 Alias: length
 
 <!-- no inheritance hierarchy -->
@@ -68,6 +68,8 @@ Alias: length
 ```yaml
 name: length
 description: Physical length of the element in meters.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: length

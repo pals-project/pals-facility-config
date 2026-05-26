@@ -9,7 +9,7 @@ _For a beamline, indicates whether the orbit and Twiss parameters are periodic (
 
 
 
-URI: [narad:periodic](https://w3id.org/narad_linkml/schema/narad/periodic)
+URI: [narad:periodic](https://example.org/narad_linkml/schema/narad/periodic)
 Alias: periodic
 
 <!-- no inheritance hierarchy -->
@@ -68,6 +68,8 @@ Alias: periodic
 name: periodic
 description: For a beamline, indicates whether the orbit and Twiss parameters are
   periodic (true) or non-periodic (false).
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: periodic

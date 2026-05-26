@@ -9,7 +9,7 @@ _Solenoid integrated field strength._
 
 
 
-URI: [narad:Ksol](https://w3id.org/narad_linkml/schema/narad/Ksol)
+URI: [narad:Ksol](https://example.org/narad_linkml/schema/narad/Ksol)
 Alias: Ksol
 
 <!-- no inheritance hierarchy -->
@@ -67,6 +67,8 @@ Alias: Ksol
 ```yaml
 name: Ksol
 description: Solenoid integrated field strength.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: Ksol

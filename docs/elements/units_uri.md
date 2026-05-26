@@ -9,7 +9,7 @@ _Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere). The si-unit
 
 
 
-URI: [narad:units_uri](https://w3id.org/narad_linkml/schema/narad/units_uri)
+URI: [narad:units_uri](https://example.org/narad_linkml/schema/narad/units_uri)
 Alias: units_uri
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,8 @@ Alias: units_uri
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Signal](Signal.md) | Domain term for a control-system signal |  no  |
 | [ObservableSignal](ObservableSignal.md) | A NARAD signal that is read, monitored, observed, or exposed by a system |  no  |
+| [Signal](Signal.md) | Domain term for a control-system signal |  no  |
 | [ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |  no  |
 
 
@@ -33,7 +33,7 @@ Alias: units_uri
 
 ## Properties
 
-* Range: [Uriorcurie](Uriorcurie.md)
+* Range: [String](String.md)
 
 
 
@@ -70,12 +70,14 @@ Alias: units_uri
 name: units_uri
 description: 'Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere).
   The si-unit: prefix maps to http://qudt.org/vocab/unit/.'
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: units_uri
 domain_of:
 - Signal
-range: uriorcurie
+range: string
 
 ```
 </details>

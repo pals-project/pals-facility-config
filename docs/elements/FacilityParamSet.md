@@ -9,7 +9,7 @@ _Facility-specific element parameters block for beamline elements. Differs from 
 
 
 
-URI: [narad:FacilityParamSet](https://w3id.org/narad_linkml/schema/narad/FacilityParamSet)
+URI: [narad:FacilityParamSet](https://example.org/narad_linkml/schema/narad/FacilityParamSet)
 
 
 
@@ -131,6 +131,8 @@ attributes:
       "HCorrector").  Isused for local naming, inventory, or legacy mapping of instances
       of facility elements (within elements:)  to the facility-specific type designations
       used in the control system or elsewhere at the facility.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     aliases:
     - type
@@ -143,6 +145,8 @@ attributes:
   modeled_as:
     name: modeled_as
     description: Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK).
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: modeled_as

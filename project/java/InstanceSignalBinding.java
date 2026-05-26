@@ -17,9 +17,9 @@ import lombok.*;
 public class InstanceSignalBinding extends NamedThing {
 
   private String pvName;
-  private String isInstanceOf;
-  private String forProperty;
+  private Signal isInstanceOf;
+  private SignalBinding forProperty;
   private String isHostedBy;
-  private String isPropertyOf;
+  private ControlSystem isPropertyOf;
 
 }

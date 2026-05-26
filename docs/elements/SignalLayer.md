@@ -9,7 +9,7 @@ _Signal-layer container for facility-specific signal bindings._
 
 
 
-URI: [narad:SignalLayer](https://w3id.org/narad_linkml/schema/narad/SignalLayer)
+URI: [narad:SignalLayer](https://example.org/narad_linkml/schema/narad/SignalLayer)
 
 
 

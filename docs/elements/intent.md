@@ -9,7 +9,7 @@ _A human-readable statement of the intended use or purpose of this NARAD configu
 
 
 
-URI: [narad:intent](https://w3id.org/narad_linkml/schema/narad/intent)
+URI: [narad:intent](https://example.org/narad_linkml/schema/narad/intent)
 Alias: intent
 
 <!-- no inheritance hierarchy -->
@@ -68,6 +68,8 @@ Alias: intent
 name: intent
 description: A human-readable statement of the intended use or purpose of this NARAD
   configuration.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: intent

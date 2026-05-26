@@ -15,6 +15,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class CapabilityLayer  {
 
-  private List<ControlCapability> controlCapabilities;
+  private List<Capability> capabilities;
 
 }

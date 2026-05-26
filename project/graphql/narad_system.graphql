@@ -76,45 +76,58 @@ type BeamlineElement
   {
     name: String!
     description: String
-    isInstanceOf: [String]
+    isInstanceOf: [ElementKindEnum]
     length: Float
-    instanceSignalBindings: [InstanceSignalBinding]
+    isObservedBy: [InstanceSignalBinding]
     paramSet: ElementParamSet
   }
 
-type CapabilityLayer
-  {
-    controlCapabilities: [ControlCapability]
-  }
-
-type ControlCapability
+type Capability
   {
     name: String!
     description: String
     deviceType: ElementKindEnum
-    subclassOf: System
-    signals: [Signal]!
+    subclassOf: Capability
+    hasSignal: [Signal]!
+    isPropertyOf: ControlSystem
+  }
+
+type CapabilityLayer
+  {
+    capabilities: [Capability]
   }
 
 type ControlSystem
   {
     name: String!
     description: String
+    hasNamingConvention: [NamingConvention]
     systemType: SystemTypeEnum
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
-    namingConvention: String
   }
 
-type DeviceSystem
+type DeployedSystem
+  {
+    name: String!
+    description: String
+    hasSubSystem: [System]
+    facilityIdentifier: [FacilityIdentifier]
+    hasControlSystem: ControlSystem
+    systemType: SystemTypeEnum
+    hasSystemCapability: [SystemCapability]!
+  }
+
+type Device
   {
     name: String!
     description: String
     systemType: SystemTypeEnum
-    deviceType: ElementKindEnum
+    deviceType: ElementKindEnum!
     hasSubSystem: [System]
     subclassOf: System
     hasSystemCapability: [SystemCapability]
+    isObservedBy: [SignalBinding]
   }
 
 type ElementParamSet
@@ -150,10 +163,8 @@ type FacilitySystem
     systemType: SystemTypeEnum
     hasSubSystem: [System]
     hasSystemCapability: [SystemCapability]
-    facilityIdentifier: [FacilityIdentifier]
-    controlSystem: ControlSystem
-    namingConvention: String
-    signalDefinitions: [SignalDefinitions]
+    hasControlSystem: ControlSystem
+    hostsDevice: [Device]
   }
 
 type InstanceSignalBinding
@@ -161,10 +172,10 @@ type InstanceSignalBinding
     name: String!
     description: String
     pvName: String
-    isInstanceOf: [String]
-    forProperty: [String]
+    isInstanceOf: [Signal]
+    forProperty: [SignalBinding]
     isHostedBy: String
-    isPropertyOf: String
+    isPropertyOf: ControlSystem
   }
 
 type Instrument
@@ -182,14 +193,30 @@ interface NamedThing
     description: String
   }
 
+type NamingConvention
+  {
+    name: String!
+    description: String
+    template: String
+    templateComponents: [TemplateComponent]
+    fullPattern: String
+    examples: [NamingConventionExample]
+  }
+
+type NamingConventionExample
+  {
+    example: String!
+    description: String
+  }
+
 type NaradConfig
   {
     schemaVersion: String!
     intent: String
-    deployedSystem: FacilitySystem!
-    hasSubSystem: [ControlSystem]!
-    controlCapabilityLayer: [ControlCapability]!
-    deviceLayer: [DeviceSystem]!
+    deployedSystem: DeployedSystem!
+    controlSystem: ControlSystem!
+    capabilityLayer: [Capability]!
+    deviceLayer: [Device]!
     signalLayer: SignalLayer!
   }
 
@@ -224,15 +251,7 @@ type SignalBinding
   {
     name: String!
     description: String
-    controlSystemSuffix: String
-  }
-
-type SignalDefinitions
-  {
-    name: String!
-    description: String
-    deviceType: ElementKindEnum
-    signalBindings: [SignalBinding]
+    signalCodeSuffix: String
   }
 
 type SignalLayer
@@ -255,4 +274,18 @@ type SystemCapability
     description: String
     forProperty: [String]
     deviceType: ElementKindEnum
+  }
+
+type TemplateComponent
+  {
+    name: String!
+    description: String
+    required: Boolean
+    pattern: String
+  }
+
+type TemplateExample
+  {
+    example: String!
+    description: String
   }

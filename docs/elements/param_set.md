@@ -9,7 +9,7 @@ _Named physics-parameter blocks for this element (e.g. RFP, BendP, MagneticMulti
 
 
 
-URI: [narad:param_set](https://w3id.org/narad_linkml/schema/narad/param_set)
+URI: [narad:param_set](https://example.org/narad_linkml/schema/narad/param_set)
 Alias: param_set
 
 <!-- no inheritance hierarchy -->

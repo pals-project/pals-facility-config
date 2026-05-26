@@ -1,21 +1,25 @@
 export type NamedThingName = string;
-export type ControlCapabilityName = string;
+export type CapabilityName = string;
 export type FacilitySystemName = string;
-export type SignalDefinitionsName = string;
 export type SignalBindingName = string;
 export type BeamlineName = string;
 export type BeamlineElementName = string;
 export type SystemName = string;
+export type DeployedSystemName = string;
 export type ControlSystemName = string;
-export type DeviceSystemName = string;
+export type DeviceName = string;
+export type NamingConventionExampleExample = string;
 export type InstrumentName = string;
 export type SystemCapabilityName = string;
+export type NamingConventionName = string;
+export type TemplateComponentName = string;
+export type TemplateExampleExample = string;
 export type SignalName = string;
 export type ObservableSignalName = string;
 export type ActuatableSignalName = string;
 export type InstanceSignalBindingName = string;
 /**
-* Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of.
+* Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The kind of a BeamlineElement must match the device_type of the Device referenced by is_instance_of.
 */
 export enum ElementKindEnum {
     
@@ -139,13 +143,13 @@ export interface NaradConfig {
     /** A human-readable statement of the intended use or purpose of this NARAD configuration. */
     intent?: string,
     /** Identifier of the deployed system this configuration describes. */
-    deployed_system: FacilitySystemName,
+    deployed_system: DeployedSystem,
     /** Identifier of the control system (e.g. epics) this configuration describes. */
-    has_sub_system: ControlSystemName[],
+    control_system: ControlSystem,
     /** Control Capability definitions for this facility. */
-    control_capability_layer: {[index: ControlCapabilityName]: ControlCapability },
+    capability_layer: {[index: CapabilityName]: Capability },
     /** Device Capability definitions keyed by capability name. */
-    device_layer: {[index: DeviceSystemName]: DeviceSystem },
+    device_layer: {[index: DeviceName]: Device },
     /** Signal-layer container for facility-specific signal bindings. */
     signal_layer: SignalLayer,
 }
@@ -155,20 +159,22 @@ export interface NaradConfig {
  * Capability-layer container for control profile families.
  */
 export interface CapabilityLayer {
-    control_capabilities?: {[index: ControlCapabilityName]: ControlCapability },
+    capabilities?: {[index: CapabilityName]: Capability },
 }
 
 
 /**
  * A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g. QuadrupoleCurrentControlProfile).
  */
-export interface ControlCapability extends NamedThing {
+export interface Capability extends NamedThing {
     /** Represents the generic, semantic class of the device (e.g., "Quadrupole", "BPM") and is used for capability, instrument, and signal profile matching. */
     device_type?: string,
-    /** -> NARAD alias for rdfs:subClassOf. Links a type-specific capability to the generic capability it extends. In the graph this edge is labelled narad:subclassOf. */
-    subclass_of?: SystemName,
+    /** Links a type-specific capability to the generic capability it extends via rdfs:subClassOf. */
+    subclass_of?: CapabilityName,
     /** Signals within a capability, keyed by a semantic signal name. */
-    signals: {[index: SignalName]: Signal },
+    has_signal: {[index: SignalName]: Signal },
+    /** Links the capability layer to the control systems it applies to via ssn:isPropertyOf. */
+    is_property_of?: ControlSystemName,
 }
 
 
@@ -185,14 +191,11 @@ export interface SignalLayer {
  * Facility-specific signal binding configuration.
  */
 export interface FacilitySystem extends System {
-    /** Globally unique identifier for the facility, with specified type and value. */
-    facility_identifier?: FacilityIdentifier[],
-    /** Identifier of the control system (e.g. epics). */
-    control_system?: ControlSystem,
-    /** Signal naming convention template (e.g. <device><signal_code>). */
-    naming_convention?: string,
+    /** Relates a System to one of its control systems (SSN alignment to sub system). Use for facility → control-system, facility → device, and device → component decomposition.
+ */
+    has_control_system?: ControlSystemName,
     /** Structured container for facility-specific signal suffix templates. */
-    signal_definitions?: {[index: SignalDefinitionsName]: SignalDefinitions },
+    hosts_device?: {[index: DeviceName]: Device },
 }
 
 
@@ -208,23 +211,12 @@ export interface FacilityIdentifier {
 
 
 /**
- * Signal binding set scoped to a device type or device domain.
- */
-export interface SignalDefinitions extends NamedThing {
-    /** Represents the generic, semantic class of the device (e.g., "Quadrupole", "BPM") and is used for capability, instrument, and signal profile matching. */
-    device_type?: string,
-    /** Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set. */
-    signal_bindings?: {[index: SignalBindingName]: SignalBinding },
-}
-
-
-/**
  * A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.
  */
 export interface SignalBinding extends NamedThing {
     /** Facility-specific control-system (e.g. EPICS) naming suffix used to derive or interpret the signal binding, e.g. .S, M, :GSET.
  */
-    control_system_suffix?: string,
+    signal_code_suffix?: string,
 }
 
 
@@ -254,8 +246,8 @@ export interface BeamlineElement extends NamedThing {
     is_instance_of?: string,
     /** Physical length of the element in meters. */
     length?: number,
-    /** Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile. */
-    instance_signal_bindings?: {[index: InstanceSignalBindingName]: InstanceSignalBinding },
+    /** Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set. Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it,  since the instance of the element is directly observed or controlled through a Device. Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile. */
+    is_observed_by?: {[index: InstanceSignalBindingName]: InstanceSignalBinding },
     /** Named physics-parameter blocks for this element (e.g. RFP, BendP, MagneticMultipoleP). */
     param_set?: ElementParamSet,
 }
@@ -278,22 +270,35 @@ export interface System extends NamedThing {
 
 
 /**
- * A control system (e.g. EPICS) that manages device process variables. In the SSN graph a ControlSystem is a subsystem of the Facility.
+ * A deployed system, with an identified facility, that is the subject of a NARAD configuration.  This is the child of the target of the narad_config.deployed_system slot. In the SSN graph a DeployedSystem is a broad mapping to the ssn:Deployment and also is equivalent to the signal_layers.facilities entries.
 
  */
-export interface ControlSystem extends System {
-    /** Signal naming convention template (e.g. <device><signal_code>). */
-    naming_convention?: string,
+export interface DeployedSystem extends System {
+    /** Globally unique identifier for the facility, with specified type and value. */
+    facility_identifier?: FacilityIdentifier[],
+    /** Relates a System to one of its control systems (SSN alignment to sub system). Use for facility → control-system, facility → device, and device → component decomposition.
+ */
+    has_control_system?: ControlSystemName,
 }
 
 
 /**
- * A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a subsystem of the Facility and a sibling to the ControlSystem.
+ * A control system (e.g. EPICS) that manages device process variables. In the SSN graph a ControlSystem is a subsystem of the Facility.
 
  */
-export interface DeviceSystem extends System {
+export interface ControlSystem extends System {
+    /** Signal naming conventions used by this control system defined in a machine actionable manner.  This is where you would capture the patterns/templates for how control system PVs or signals are constructed for this control system,  for example, the EPICS convention of using suffixes like .R, .S, :GSET to indicate readback, status, and setpoint signals. Multiple naming conventions can be captured if a control system uses more than one convention for different device types or domains. */
+    has_naming_convention?: NamingConvention[],
+}
+
+
+/**
+ * A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the instrument as a whole rather than the control system for that instrument. In the SSN graph a Device is a subsystem of the Facility and a sibling to the ControlSystem. Also used in the SignalLayer to group signal bindings by device type. Aligned to ssn:System.
+
+ */
+export interface Device extends System {
     /** Represents the generic, semantic class of the device (e.g., "Quadrupole", "BPM") and is used for capability, instrument, and signal profile matching. */
-    device_type?: string,
+    device_type: string,
     /** Relates a System to one of its subsystems (SSN alignment). Use for facility → control-system, facility → device, and device → component decomposition.
  */
     has_sub_system?: SystemName[],
@@ -302,6 +307,20 @@ export interface DeviceSystem extends System {
     /** Relates a System to a SystemCapability it supports (SSN-System alignment). Prefer this over directly attaching signals to systems when capability context matters.
  */
     has_system_capability?: SystemCapabilityName,
+    /** Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set. Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it,  since the instance of the element is directly observed or controlled through a Device. Facility-specific bindings of signals to control-system interfaces (e.g. EPICS PVs) for a specific beamline element instance. These are the keyed by the semantic signal name (e.g. current_readback) rather than the control-system suffix, which is captured in the SignalBinding. The semantic signal name links the instance binding to the abstract Signal definition and its place in the capability profile, while the SignalBinding captures the concrete implementations of the abstract SignalBindings referenced by the element's capability profile. */
+    is_observed_by?: {[index: SignalBindingName]: SignalBinding },
+}
+
+
+/**
+ * An example of a control system naming convention, illustrating how the template is used to generate full control system PV names from semantic signal names and device instance information.  This can be used to provide concrete examples of the expected PV naming convention for different device types and signals based on the defined NamingConvention template.
+
+ */
+export interface NamingConventionExample {
+    /** A single example of how this naming convention is applied to a specific device instance and signal. */
+    example?: string,
+    /** Detailed description of the entity. */
+    description?: string,
 }
 
 
@@ -322,6 +341,46 @@ export interface SystemCapability extends NamedThing {
     for_property?: string[],
     /** Represents the generic, semantic class of the device (e.g., "Quadrupole", "BPM") and is used for capability, instrument, and signal profile matching. */
     device_type?: string,
+}
+
+
+/**
+ * A template for constructing facility-specific signal names from a semantic signal name and a control-system-specific suffix.  The template is used to generate the full control system PV name for a given device instance and semantic signal by substituting the device name and signal code suffix into the template.
+
+ */
+export interface NamingConvention extends NamedThing {
+    /** A template string for constructing control system PV names based on the semantic signal name and device instance. This can include placeholders for the device name and signal suffix, e.g. {device_name}{signal_suffix}. */
+    template?: string,
+    /** Structured components of the naming convention template, for capturing the template in a more machine-actionable way than a raw string.  For example, you could have components for the device name, signal suffix, and any fixed parts of the naming convention. */
+    template_components?: TemplateComponent[],
+    /** A regex pattern that the full resolved value (e.g. after template substitution) must match for validation. */
+    full_pattern?: string,
+    /** Examples of how this naming convention is applied to specific device instances and signals. */
+    examples?: NamingConventionExample[],
+}
+
+
+/**
+ * A component of a naming convention template, representing a variable part of the control system PV name that is substituted based on the device instance and signal definition.  For example, in the template "{device_name}{signal_code_suffix}", "device_name" and "signal_code_suffix" would be TemplateComponents that are replaced with the actual device name and signal code suffix for each specific binding.
+
+ */
+export interface TemplateComponent extends NamedThing {
+    /** Indicates whether this configuration element is required for a valid configuration. */
+    required?: boolean,
+    /** A regex pattern that the value of this slot must match for validation. */
+    pattern?: string,
+}
+
+
+/**
+ * An example of a control system PV name generated from a naming convention template, along with a description of what it represents.  This can be used to illustrate how the template works in practice and to provide concrete examples of the expected PV naming convention for different device types and signals.
+
+ */
+export interface TemplateExample {
+    /** A single example of how this naming convention is applied to a specific device instance and signal. */
+    example?: string,
+    /** Detailed description of the entity. */
+    description?: string,
 }
 
 
@@ -367,16 +426,16 @@ export interface InstanceSignalBinding extends NamedThing {
     pv_name?: string,
     /** NARAD alias for rdf:type. Links a facility-specific instance node to the LinkML class or semantic class it instantiates. In the graph this edge is labelled narad:isInstanceOf. Values are typically the rdf:type of the Class that implements the signal binding.
  */
-    is_instance_of?: string,
+    is_instance_of?: SignalName,
     /** SystemCapability → Signal: the capability can expose, monitor, control, or actuate that signal.
  */
-    for_property?: string,
+    for_property?: SignalBindingName,
     /** Links an InstanceSignalBinding to the FacilitySystem it belongs to. This is the edge that connects the facility-specific bindings to the Facility node in the graph.
  */
     is_hosted_by?: string,
     /** Inverse of for_property: links the Class Signal to the Class of SignalBinding Procedure that implements it. This can also link the Instance of a SignalBinding to the ControlSystem that implements it. This is the edge that connects the signal definitions to the facility-specific bindings in the graph. Values are typically the ControlSystem that implements this binding, e.g. narad:epics (for EPICS control system). NOTE: The value of this slot must match one of the values in narad_config.has_sub_system.
  */
-    is_property_of?: string,
+    is_property_of?: ControlSystemName,
 }
 
 

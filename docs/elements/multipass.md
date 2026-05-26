@@ -9,7 +9,7 @@ _Indicates whether this beamline is a multipass recirculating line (true) or a s
 
 
 
-URI: [narad:multipass](https://w3id.org/narad_linkml/schema/narad/multipass)
+URI: [narad:multipass](https://example.org/narad_linkml/schema/narad/multipass)
 Alias: multipass
 
 <!-- no inheritance hierarchy -->
@@ -68,6 +68,8 @@ Alias: multipass
 name: multipass
 description: Indicates whether this beamline is a multipass recirculating line (true)
   or a single-pass line (false).
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: multipass

@@ -9,7 +9,7 @@ _A top-level NARAD-system for an ordered sequence of beamline elements defining 
 
 
 
-URI: [narad:Beamline](https://w3id.org/narad_linkml/schema/narad/Beamline)
+URI: [narad:Beamline](https://example.org/narad_linkml/schema/narad/Beamline)
 
 
 
@@ -164,6 +164,8 @@ attributes:
     name: multipass
     description: Indicates whether this beamline is a multipass recirculating line
       (true) or a single-pass line (false).
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: multipass
@@ -174,6 +176,8 @@ attributes:
   length:
     name: length
     description: Physical length of the element in meters.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: length
@@ -186,6 +190,8 @@ attributes:
     name: zero_point
     description: Name of a line item used as a reference point when  the beamline
       is used as a subline."
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: zero_point
@@ -199,6 +205,8 @@ attributes:
     name: periodic
     description: For a beamline, indicates whether the orbit and Twiss parameters
       are periodic (true) or non-periodic (false).
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: periodic
@@ -224,6 +232,8 @@ attributes:
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -236,12 +246,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: Beamline
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

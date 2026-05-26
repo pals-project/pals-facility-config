@@ -7,7 +7,7 @@ _Allowed data types for signal values._
 
 
 
-URI: [narad:DataTypeEnum](https://w3id.org/narad_linkml/schema/narad/DataTypeEnum)
+URI: [narad:DataTypeEnum](https://example.org/narad_linkml/schema/narad/DataTypeEnum)
 
 ## Permissible Values
 

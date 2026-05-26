@@ -9,7 +9,7 @@ _The type of identifier used in the identifier slot (e.g. DOI, ARK, URL, local).
 
 
 
-URI: [narad:identifier_type](https://w3id.org/narad_linkml/schema/narad/identifier_type)
+URI: [narad:identifier_type](https://example.org/narad_linkml/schema/narad/identifier_type)
 Alias: identifier_type
 
 <!-- no inheritance hierarchy -->
@@ -68,6 +68,8 @@ Alias: identifier_type
 name: identifier_type
 description: The type of identifier used in the identifier slot (e.g. DOI, ARK, URL,
   local).
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: identifier_type

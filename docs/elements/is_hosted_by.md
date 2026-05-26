@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:is_hosted_by](https://w3id.org/narad_linkml/schema/narad/is_hosted_by)
+URI: [narad:is_hosted_by](https://example.org/narad_linkml/schema/narad/is_hosted_by)
 Alias: is_hosted_by
 
 <!-- no inheritance hierarchy -->
@@ -33,7 +33,7 @@ Alias: is_hosted_by
 
 ## Properties
 
-* Range: [String](String.md)
+* Range: [DeployedSystem](DeployedSystem.md)
 
 
 
@@ -74,6 +74,8 @@ description: 'Links an InstanceSignalBinding to the FacilitySystem it belongs to
   in the graph.
 
   '
+in_subset:
+- relationship
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 broad_mappings:
 - ssn-system:hasSubSystem
@@ -82,7 +84,7 @@ rank: 1000
 alias: is_hosted_by
 domain_of:
 - InstanceSignalBinding
-range: string
+range: DeployedSystem
 multivalued: false
 
 ```

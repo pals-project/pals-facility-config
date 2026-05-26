@@ -17,7 +17,7 @@ public class BeamlineElement extends NamedThing {
 
   private String isInstanceOf;
   private Float length;
-  private List<InstanceSignalBinding> instanceSignalBindings;
+  private List<InstanceSignalBinding> isObservedBy;
   private ElementParamSet paramSet;
 
 }

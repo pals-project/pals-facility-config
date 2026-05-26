@@ -9,7 +9,7 @@ _Facility-specific signal binding configuration._
 
 
 
-URI: [narad:FacilitySystem](https://w3id.org/narad_linkml/schema/narad/FacilitySystem)
+URI: [narad:FacilitySystem](https://example.org/narad_linkml/schema/narad/FacilitySystem)
 
 
 
@@ -22,27 +22,16 @@ URI: [narad:FacilitySystem](https://w3id.org/narad_linkml/schema/narad/FacilityS
       System <|-- FacilitySystem
         click System href "../System/"
       
-      FacilitySystem : control_system
-        
-          
-    
-        
-        
-        FacilitySystem --> "0..1" ControlSystem : control_system
-        click ControlSystem href "../ControlSystem/"
-    
-
-        
       FacilitySystem : description
         
-      FacilitySystem : facility_identifier
+      FacilitySystem : has_control_system
         
           
     
         
         
-        FacilitySystem --> "*" FacilityIdentifier : facility_identifier
-        click FacilityIdentifier href "../FacilityIdentifier/"
+        FacilitySystem --> "0..1" ControlSystem : has_control_system
+        click ControlSystem href "../ControlSystem/"
     
 
         
@@ -68,20 +57,18 @@ URI: [narad:FacilitySystem](https://w3id.org/narad_linkml/schema/narad/FacilityS
     
 
         
-      FacilitySystem : name
-        
-      FacilitySystem : naming_convention
-        
-      FacilitySystem : signal_definitions
+      FacilitySystem : hosts_device
         
           
     
         
         
-        FacilitySystem --> "*" SignalDefinitions : signal_definitions
-        click SignalDefinitions href "../SignalDefinitions/"
+        FacilitySystem --> "*" Device : hosts_device
+        click Device href "../Device/"
     
 
+        
+      FacilitySystem : name
         
       FacilitySystem : system_type
         
@@ -112,10 +99,8 @@ URI: [narad:FacilitySystem](https://w3id.org/narad_linkml/schema/narad/FacilityS
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [facility_identifier](facility_identifier.md) | * <br/> [FacilityIdentifier](FacilityIdentifier.md) | Globally unique identifier for the facility, with specified type and value | direct |
-| [control_system](control_system.md) | 0..1 <br/> [ControlSystem](ControlSystem.md) | Identifier of the control system (e | direct |
-| [naming_convention](naming_convention.md) | 0..1 <br/> [String](String.md) | Signal naming convention template (e | direct |
-| [signal_definitions](signal_definitions.md) | * <br/> [SignalDefinitions](SignalDefinitions.md) | Structured container for facility-specific signal suffix templates | direct |
+| [has_control_system](has_control_system.md) | 0..1 <br/> [ControlSystem](ControlSystem.md) | Relates a System to one of its control systems (SSN alignment to sub system) | direct |
+| [hosts_device](hosts_device.md) | * <br/> [Device](Device.md) | Structured container for facility-specific signal suffix templates | direct |
 | [system_type](system_type.md) | 0..1 <br/> [SystemTypeEnum](SystemTypeEnum.md) | High-level system type for classification and querying | [System](System.md) |
 | [has_sub_system](has_sub_system.md) | * <br/> [System](System.md) | Relates a System to one of its subsystems (SSN alignment) | [System](System.md) |
 | [has_system_capability](has_system_capability.md) | * <br/> [SystemCapability](SystemCapability.md) | Relates a System to a SystemCapability it supports (SSN-System alignment) | [System](System.md) |
@@ -130,8 +115,8 @@ URI: [narad:FacilitySystem](https://w3id.org/narad_linkml/schema/narad/FacilityS
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | [deployed_system](deployed_system.md) | range | [FacilitySystem](FacilitySystem.md) |
 | [SignalLayer](SignalLayer.md) | [facilities](facilities.md) | range | [FacilitySystem](FacilitySystem.md) |
+| [FacilitySystem](FacilitySystem.md) | [hosts_device](hosts_device.md) | domain | [FacilitySystem](FacilitySystem.md) |
 
 
 
@@ -179,10 +164,8 @@ description: Facility-specific signal binding configuration.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 is_a: System
 slots:
-- facility_identifier
-- control_system
-- naming_convention
-- signal_definitions
+- has_control_system
+- hosts_device
 
 ```
 </details>
@@ -196,56 +179,47 @@ description: Facility-specific signal binding configuration.
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 is_a: System
 attributes:
-  facility_identifier:
-    name: facility_identifier
-    description: Globally unique identifier for the facility, with specified type
-      and value.
+  has_control_system:
+    name: has_control_system
+    description: 'Relates a System to one of its control systems (SSN alignment to
+      sub system). Use for facility → control-system, facility → device, and device
+      → component decomposition.
+
+      '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
+    broad_mappings:
+    - ssn-system:hasSubSystem
     rank: 1000
-    alias: facility_identifier
+    domain: System
+    alias: has_control_system
     owner: FacilitySystem
     domain_of:
     - FacilitySystem
-    range: FacilityIdentifier
-    multivalued: true
-    inlined: false
-  control_system:
-    name: control_system
-    description: Identifier of the control system (e.g. epics).
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: control_system
-    owner: FacilitySystem
-    domain_of:
-    - FacilitySystem
+    - DeployedSystem
     range: ControlSystem
-    inlined: true
-  naming_convention:
-    name: naming_convention
-    description: Signal naming convention template (e.g. <device><signal_code>).
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: naming_convention
-    owner: FacilitySystem
-    domain_of:
-    - FacilitySystem
-    - ControlSystem
-    range: string
-  signal_definitions:
-    name: signal_definitions
+    multivalued: false
+  hosts_device:
+    name: hosts_device
     description: Structured container for facility-specific signal suffix templates.
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: signal_definitions
+    domain: FacilitySystem
+    alias: hosts_device
     owner: FacilitySystem
     domain_of:
     - FacilitySystem
-    range: SignalDefinitions
+    range: Device
     multivalued: true
     inlined: true
   system_type:
     name: system_type
     description: High-level system type for classification and querying.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: system_type
@@ -259,6 +233,8 @@ attributes:
       facility → control-system, facility → device, and device → component decomposition.
 
       '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     exact_mappings:
     - ssn-system:hasSubSystem
@@ -267,9 +243,8 @@ attributes:
     alias: has_sub_system
     owner: FacilitySystem
     domain_of:
-    - NaradConfig
     - System
-    - DeviceSystem
+    - Device
     range: System
     multivalued: true
     inlined_as_list: true
@@ -280,6 +255,8 @@ attributes:
       matters.
 
       '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     exact_mappings:
     - ssn-system:hasSystemCapability
@@ -289,13 +266,15 @@ attributes:
     owner: FacilitySystem
     domain_of:
     - System
-    - DeviceSystem
+    - Device
     range: SystemCapability
     multivalued: true
     inlined: true
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -308,12 +287,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: FacilitySystem
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

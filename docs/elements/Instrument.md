@@ -9,7 +9,7 @@ _A generic beam diagnostic instrument._
 
 
 
-URI: [narad:Instrument](https://w3id.org/narad_linkml/schema/narad/Instrument)
+URI: [narad:Instrument](https://example.org/narad_linkml/schema/narad/Instrument)
 
 
 
@@ -152,6 +152,8 @@ attributes:
   system_type:
     name: system_type
     description: High-level system type for classification and querying.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: system_type
@@ -165,6 +167,8 @@ attributes:
       facility → control-system, facility → device, and device → component decomposition.
 
       '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     exact_mappings:
     - ssn-system:hasSubSystem
@@ -173,9 +177,8 @@ attributes:
     alias: has_sub_system
     owner: Instrument
     domain_of:
-    - NaradConfig
     - System
-    - DeviceSystem
+    - Device
     range: System
     multivalued: true
     inlined_as_list: true
@@ -186,6 +189,8 @@ attributes:
       matters.
 
       '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     exact_mappings:
     - ssn-system:hasSystemCapability
@@ -195,13 +200,15 @@ attributes:
     owner: Instrument
     domain_of:
     - System
-    - DeviceSystem
+    - Device
     range: SystemCapability
     multivalued: true
     inlined: true
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -214,12 +221,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: Instrument
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

@@ -7,7 +7,7 @@ _Controlled vocabulary for the semantic role of a signal within a capability._
 
 
 
-URI: [narad:SignalRoleEnum](https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum)
+URI: [narad:SignalRoleEnum](https://example.org/narad_linkml/schema/narad/SignalRoleEnum)
 
 ## Permissible Values
 

@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:for_property](https://w3id.org/narad_linkml/schema/narad/for_property)
+URI: [narad:for_property](https://example.org/narad_linkml/schema/narad/for_property)
 Alias: for_property
 
 <!-- no inheritance hierarchy -->
@@ -24,8 +24,8 @@ Alias: for_property
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [InstanceSignalBinding](InstanceSignalBinding.md) | A facility-specific binding between a NARAD Signal and an implementation inte... |  yes  |
 | [SystemCapability](SystemCapability.md) | A capability of a system |  yes  |
+| [InstanceSignalBinding](InstanceSignalBinding.md) | A facility-specific binding between a NARAD Signal and an implementation inte... |  yes  |
 
 
 
@@ -76,6 +76,8 @@ description: 'SystemCapability → Signal: the capability can expose, monitor, c
   or actuate that signal.
 
   '
+in_subset:
+- relationship
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 exact_mappings:
 - ssn:forProperty

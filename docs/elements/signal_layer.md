@@ -9,7 +9,7 @@ _Signal suffix templates for this facility._
 
 
 
-URI: [narad:signal_layer](https://w3id.org/narad_linkml/schema/narad/signal_layer)
+URI: [narad:signal_layer](https://example.org/narad_linkml/schema/narad/signal_layer)
 Alias: signal_layer
 
 <!-- no inheritance hierarchy -->

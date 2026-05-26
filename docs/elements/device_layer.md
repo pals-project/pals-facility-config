@@ -9,7 +9,7 @@ _Device definitions for this facility._
 
 
 
-URI: [narad:device_layer](https://w3id.org/narad_linkml/schema/narad/device_layer)
+URI: [narad:device_layer](https://example.org/narad_linkml/schema/narad/device_layer)
 Alias: device_layer
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: device_layer
 
 ## Properties
 
-* Range: [DeviceSystem](DeviceSystem.md)
+* Range: [Device](Device.md)
 
 * Multivalued: True
 
@@ -74,7 +74,7 @@ rank: 1000
 alias: device_layer
 domain_of:
 - NaradConfig
-range: DeviceSystem
+range: Device
 multivalued: true
 inlined: true
 

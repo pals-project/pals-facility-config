@@ -9,7 +9,7 @@ _Top-level NARAD document container._
 
 
 
-URI: [narad:NaradModel](https://w3id.org/narad_linkml/schema/narad/NaradModel)
+URI: [narad:NaradModel](https://example.org/narad_linkml/schema/narad/NaradModel)
 
 
 

@@ -1,5 +1,5 @@
 # metamodel_version: 1.7.0
-BASE <https://w3id.org/narad_linkml/schema/narad/>
+BASE <https://example.org/narad_linkml/schema/narad/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
@@ -73,70 +73,101 @@ linkml:Sparqlpath xsd:string
 <BeamlineElement> CLOSED {
     (  $<BeamlineElement_tes> (  &<NamedThing_tes> ;
           rdf:type [ <NamedThing> ] ? ;
-          <is_instance_of> @linkml:String * ;
+          <is_instance_of> [ <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] * ;
           <length> @linkml:Float ? ;
-          <instance_signal_bindings> @<InstanceSignalBinding> * ;
+          <is_observed_by> @<InstanceSignalBinding> * ;
           <param_set> @<ElementParamSet> ?
        ) ;
        rdf:type [ <BeamlineElement> ]
     )
 }
 
-<CapabilityLayer> CLOSED {
-    (  $<CapabilityLayer_tes> <control_capabilities> @<ControlCapability> * ;
-       rdf:type [ <CapabilityLayer> ] ?
+<Capability> CLOSED {
+    (  $<Capability_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ? ;
+          <device_type> [ <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ? ;
+          <subclass_of> @<Capability> ? ;
+          <has_signal> @<Signal> + ;
+          <is_property_of> @<ControlSystem> ?
+       ) ;
+       rdf:type [ <Capability> ]
     )
 }
 
-<ControlCapability> CLOSED {
-    (  $<ControlCapability_tes> (  &<NamedThing_tes> ;
-          rdf:type [ <NamedThing> ] ? ;
-          <device_type> [ <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ? ;
-          <subclass_of> @<System> ? ;
-          <signals> @<Signal> +
-       ) ;
-       rdf:type [ <ControlCapability> ]
+<CapabilityLayer> CLOSED {
+    (  $<CapabilityLayer_tes> <capabilities> @<Capability> * ;
+       rdf:type [ <CapabilityLayer> ] ?
     )
 }
 
 <ControlSystem> CLOSED {
     (  $<ControlSystem_tes> (  &<System_tes> ;
           rdf:type [ <System> ] ? ;
-          <naming_convention> @linkml:String ?
+          <has_naming_convention> @<NamingConvention> * ;
+          <system_type> [ <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#Facility>
+             <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#ControlSystem>
+             <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#Magnet> ] ? ;
+          <has_sub_system> @<System> * ;
+          <has_system_capability> @<SystemCapability> *
        ) ;
        rdf:type [ <ControlSystem> ]
     )
 }
 
-<DeviceSystem> CLOSED {
-    (  $<DeviceSystem_tes> (  &<System_tes> ;
+<DeployedSystem> CLOSED {
+    (  $<DeployedSystem_tes> (  &<System_tes> ;
           rdf:type [ <System> ] ? ;
-          <device_type> [ <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ? ;
+          <facility_identifier> @<FacilityIdentifier> * ;
+          <has_control_system> @<ControlSystem> ? ;
+          <system_type> [ <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#Facility>
+             <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#ControlSystem>
+             <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#Magnet> ] ? ;
+          <has_system_capability> @<SystemCapability> +
+       ) ;
+       rdf:type [ <DeployedSystem> ]
+    )
+}
+
+<Device> CLOSED {
+    (  $<Device_tes> (  &<System_tes> ;
+          rdf:type [ <System> ] ? ;
+          <device_type> [ <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ;
           <has_sub_system> @<System> * ;
           <subclass_of> @<System> ? ;
-          <has_system_capability> @<SystemCapability> *
+          <has_system_capability> @<SystemCapability> * ;
+          <is_observed_by> @<SignalBinding> *
        ) ;
-       rdf:type [ <DeviceSystem> ]
+       rdf:type [ <Device> ]
     )
 }
 
@@ -156,12 +187,12 @@ linkml:Sparqlpath xsd:string
 }
 
 <FacilityIdentifier> CLOSED {
-    (  $<FacilityIdentifier_tes> (  <identifier_type> [ <https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum#doi>
-             <https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum#ark>
-             <https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum#handle>
-             <https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum#url>
-             <https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum#local>
-             <https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum#other> ] ? ;
+    (  $<FacilityIdentifier_tes> (  <identifier_type> [ <https://example.org/narad_linkml/schema/narad/IdentifierTypeEnum#doi>
+             <https://example.org/narad_linkml/schema/narad/IdentifierTypeEnum#ark>
+             <https://example.org/narad_linkml/schema/narad/IdentifierTypeEnum#handle>
+             <https://example.org/narad_linkml/schema/narad/IdentifierTypeEnum#url>
+             <https://example.org/narad_linkml/schema/narad/IdentifierTypeEnum#local>
+             <https://example.org/narad_linkml/schema/narad/IdentifierTypeEnum#other> ] ? ;
           <identifier_value> @linkml:String ?
        ) ;
        rdf:type [ <FacilityIdentifier> ] ?
@@ -180,10 +211,8 @@ linkml:Sparqlpath xsd:string
 <FacilitySystem> CLOSED {
     (  $<FacilitySystem_tes> (  &<System_tes> ;
           rdf:type [ <System> ] ? ;
-          <facility_identifier> @<FacilityIdentifier> * ;
-          <control_system> @<ControlSystem> ? ;
-          <naming_convention> @linkml:String ? ;
-          <signal_definitions> @<SignalDefinitions> *
+          <has_control_system> @<ControlSystem> ? ;
+          <hosts_device> @<Device> *
        ) ;
        rdf:type [ <FacilitySystem> ]
     )
@@ -193,10 +222,10 @@ linkml:Sparqlpath xsd:string
     (  $<InstanceSignalBinding_tes> (  &<NamedThing_tes> ;
           rdf:type [ <NamedThing> ] ? ;
           <pv_name> @linkml:String ? ;
-          <is_instance_of> @linkml:String * ;
-          <for_property> @linkml:String * ;
+          <is_instance_of> @<Signal> * ;
+          <for_property> @<SignalBinding> * ;
           <is_hosted_by> @linkml:String ? ;
-          <is_property_of> @linkml:String ?
+          <is_property_of> @<ControlSystem> ?
        ) ;
        rdf:type [ <InstanceSignalBinding> ]
     )
@@ -211,8 +240,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <NamedThing>  (
-    @<Beamline> OR @<BeamlineElement> OR @<ControlCapability> OR @<InstanceSignalBinding> OR @<Signal> OR @<SignalBinding> OR
-    @<SignalDefinitions> OR @<System> OR @<SystemCapability>
+    @<Beamline> OR @<BeamlineElement> OR @<Capability> OR @<InstanceSignalBinding> OR @<NamingConvention> OR @<Signal> OR
+    @<SignalBinding> OR @<System> OR @<SystemCapability> OR @<TemplateComponent>
 )
 
 <NamedThing_struct> {
@@ -221,13 +250,31 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<NamingConvention> CLOSED {
+    (  $<NamingConvention_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ? ;
+          <template> @linkml:String ? ;
+          <template_components> @<TemplateComponent> * ;
+          <full_pattern> @linkml:String ? ;
+          <examples> @<NamingConventionExample> *
+       ) ;
+       rdf:type [ <NamingConvention> ]
+    )
+}
+
+<NamingConventionExample> CLOSED {
+    (  $<NamingConventionExample_tes> <description> @linkml:String ? ;
+       rdf:type [ <NamingConventionExample> ]
+    )
+}
+
 <NaradConfig> CLOSED {
     (  $<NaradConfig_tes> (  <schema_version> @linkml:String ;
           <intent> @linkml:String ? ;
-          <deployed_system> @<FacilitySystem> ;
-          <has_sub_system> @<ControlSystem> + ;
-          <control_capability_layer> @<ControlCapability> + ;
-          <device_layer> @<DeviceSystem> + ;
+          <deployed_system> @<DeployedSystem> ;
+          <control_system> @<ControlSystem> ;
+          <capability_layer> @<Capability> + ;
+          <device_layer> @<Device> + ;
           <signal_layer> @<SignalLayer>
        ) ;
        rdf:type [ <NaradConfig> ] ?
@@ -255,15 +302,15 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<Signal_tes> (  &<NamedThing_tes> ;
              rdf:type [ <NamedThing> ] ? ;
-             <role> [ <https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum#control>
-                <https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum#readback>
-                <https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum#constraint>
-                <https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum#status> ] ? ;
+             <role> [ <https://example.org/narad_linkml/schema/narad/SignalRoleEnum#control>
+                <https://example.org/narad_linkml/schema/narad/SignalRoleEnum#readback>
+                <https://example.org/narad_linkml/schema/narad/SignalRoleEnum#constraint>
+                <https://example.org/narad_linkml/schema/narad/SignalRoleEnum#status> ] ? ;
              <data_type> [ <http://purl.obolibrary.org/obo/ncit.owlC47840> <http://purl.obolibrary.org/obo/ncit.owlC48150>
                 <http://purl.obolibrary.org/obo/ncit.owlC48870> <http://purl.obolibrary.org/obo/ncit.owlC45253>
                 <http://purl.obolibrary.org/obo/ncit.owlC45254> <http://purl.obolibrary.org/obo/ncit.owlC95637> ] ? ;
              <units> @linkml:String ? ;
-             <units_uri> @linkml:Uriorcurie ?
+             <units_uri> @linkml:String ?
           ) ;
           rdf:type [ <Signal> ]
        )
@@ -273,29 +320,9 @@ linkml:Sparqlpath xsd:string
 <SignalBinding> CLOSED {
     (  $<SignalBinding_tes> (  &<NamedThing_tes> ;
           rdf:type [ <NamedThing> ] ? ;
-          <control_system_suffix> @linkml:String ?
+          <signal_code_suffix> @linkml:String ?
        ) ;
        rdf:type [ <SignalBinding> ]
-    )
-}
-
-<SignalDefinitions> CLOSED {
-    (  $<SignalDefinitions_tes> (  &<NamedThing_tes> ;
-          rdf:type [ <NamedThing> ] ? ;
-          <device_type> [ <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ? ;
-          <signal_bindings> @<SignalBinding> *
-       ) ;
-       rdf:type [ <SignalDefinitions> ]
     )
 }
 
@@ -309,33 +336,49 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<System_tes> (  &<NamedThing_tes> ;
              rdf:type [ <NamedThing> ] ? ;
-             <system_type> [ <https://w3id.org/narad_linkml/schema/narad/SystemTypeEnum#Facility>
-                <https://w3id.org/narad_linkml/schema/narad/SystemTypeEnum#ControlSystem>
-                <https://w3id.org/narad_linkml/schema/narad/SystemTypeEnum#Magnet> ] ? ;
+             <system_type> [ <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#Facility>
+                <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#ControlSystem>
+                <https://example.org/narad_linkml/schema/narad/SystemTypeEnum#Magnet> ] ? ;
              <has_sub_system> @<System> * ;
              <has_system_capability> @<SystemCapability> *
           ) ;
           rdf:type [ <System> ]
        )
-    } OR @<ControlSystem> OR @<DeviceSystem> OR @<FacilitySystem> OR @<Instrument>
+    } OR @<ControlSystem> OR @<DeployedSystem> OR @<Device> OR @<FacilitySystem> OR @<Instrument>
 )
 
 <SystemCapability> CLOSED {
     (  $<SystemCapability_tes> (  &<NamedThing_tes> ;
           rdf:type [ <NamedThing> ] ? ;
           <for_property> @linkml:String * ;
-          <device_type> [ <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
-             <https://w3id.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ?
+          <device_type> [ <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Drift>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Marker>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#BPM>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Corrector>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Dipole>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Quadrupole>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Solenoid>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#CavityGradient>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#RFCavity>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Instrument>
+             <https://example.org/narad_linkml/schema/narad/ElementKindEnum#Magnet> ] ?
        ) ;
        rdf:type [ <SystemCapability> ]
+    )
+}
+
+<TemplateComponent> CLOSED {
+    (  $<TemplateComponent_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ? ;
+          <required> @linkml:Boolean ? ;
+          <pattern> @linkml:String ?
+       ) ;
+       rdf:type [ <TemplateComponent> ]
+    )
+}
+
+<TemplateExample> CLOSED {
+    (  $<TemplateExample_tes> <description> @linkml:String ? ;
+       rdf:type [ <TemplateExample> ]
     )
 }

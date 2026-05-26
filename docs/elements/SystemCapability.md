@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemCapability)
+URI: [narad:SystemCapability](https://example.org/narad_linkml/schema/narad/SystemCapability)
 
 
 
@@ -73,8 +73,9 @@ URI: [narad:SystemCapability](https://w3id.org/narad_linkml/schema/narad/SystemC
 | ---  | --- | --- | --- |
 | [FacilitySystem](FacilitySystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [System](System.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [DeployedSystem](DeployedSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [ControlSystem](ControlSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
-| [DeviceSystem](DeviceSystem.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
+| [Device](Device.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 | [Instrument](Instrument.md) | [has_system_capability](has_system_capability.md) | range | [SystemCapability](SystemCapability.md) |
 
 
@@ -169,6 +170,8 @@ attributes:
       or actuate that signal.
 
       '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     exact_mappings:
     - ssn:forProperty
@@ -184,19 +187,22 @@ attributes:
     name: device_type
     description: Represents the generic, semantic class of the device (e.g., "Quadrupole",
       "BPM") and is used for capability, instrument, and signal profile matching.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: device_type
     owner: SystemCapability
     domain_of:
-    - ControlCapability
-    - SignalDefinitions
-    - DeviceSystem
+    - Capability
+    - Device
     - SystemCapability
     range: ElementKindEnum
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -209,12 +215,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: SystemCapability
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

@@ -16,6 +16,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class ControlSystem extends System {
 
-  private String namingConvention;
+  private List<NamingConvention> hasNamingConvention;
 
 }

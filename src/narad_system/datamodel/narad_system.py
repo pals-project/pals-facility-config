@@ -1,5 +1,5 @@
 # Auto generated from narad_system.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-14T12:12:17
+# Generation date: 2026-05-26T18:28:54
 # Schema: narad-system-schema
 #
 # id: https://w3id.org/narad_linkml/schema/narad/system
@@ -28,11 +28,11 @@
 #
 #   Control Capability hierarchy:
 #     - SystemCapability
-#       - MagnetControlCapability
-#         - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability
-#       - InstrumentControlCapability
-#       - BPMControlCapability
-#       - CavityGradientControlCapability
+#       - MagnetCapability
+#         - QuadrupoleCapability, CorrectorKickCapability, DipoleCapability
+#       - InstrumentCapability
+#       - BPMCapability
+#       - CavityGradientCapability
 #
 #   Signal modeling:
 #     - Signal — abstract control-system quantity
@@ -44,7 +44,7 @@
 #   Serialization conventions:
 #     - beamlines are keyed by beamline name
 #     - signals are keyed by semantic signal name
-#     - instance_signal_bindings are keyed by semantic signal name
+#     - signal bindings are created through the is_observed_by relationship to  and are keyed by semantic signal name
 #
 #   Alignments with PALS (Particle Accelerator Language Standard):
 #     - Beamline aligns with pals:BeamLine
@@ -55,10 +55,10 @@
 #     - Solenoid aligns with pals:Solenoid
 #     - RFCavity aligns with pals:RFCavity
 #
-#   Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention.  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R)  is captured in the SignalBinding. 2. On the distinction between is_instance_of, facility_element_type, and device_type:
+#   Additional Notes on Usage: 1. On Signal, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention.  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R)  is captured in the InstanceSignalBinding. 2. On the distinction between is_instance_of, facility_element_type, and device_type:
 #     - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
 #     - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind.
-#     - device_type (ControlCapability.device_type) is the generic element type used for capability profile matching
+#     - device_type (Capability.device_type) is the generic element type used for capability profile matching
 #     and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention
 #     or for other facility-specific purposes.
 #     For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
@@ -79,7 +79,7 @@
 #     facility-specific parameters that don't fit into the predefined schema structure.
 #
 #   Needed Custom Validations:
-#     - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the DeviceSystem it is an instance of.
+#     - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the Device it is an instance of.
 #     - Validation to ensure that the value of is_property_of in InstanceSignalBinding matches one of the control systems listed in narad_config.has_sub_system.
 #     - Validation that each signal_layer -> facilities -> FacilitySystem -> control_system value has a corresponding entry in narad_config.has_sub_system to ensure that all control systems referenced in the signal layer are defined in the capability layer.
 #     - Validation that the signal_bindings defined for a given device_type in the signal layer align with the signals defined in the capability profiles and instrument systems for that device type.
@@ -136,22 +136,22 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Boolean, Float, String, Uriorcurie
-from linkml_runtime.utils.metamodelcore import Bool, URIorCURIE
+from linkml_runtime.linkml_model.types import Boolean, Float, String
+from linkml_runtime.utils.metamodelcore import Bool
 
 metamodel_version = "1.7.0"
 version = None
 
 # Namespaces
+ACC_CORE = CurieNamespace('acc-core', 'https://example.org/acc-core/schema/acc-core/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
-NARAD = CurieNamespace('narad', 'https://w3id.org/narad_linkml/schema/narad/')
+NARAD = CurieNamespace('narad', 'https://example.org/narad_linkml/schema/narad/')
 NCIT = CurieNamespace('ncit', 'http://purl.obolibrary.org/obo/ncit.owl')
 OWL = CurieNamespace('owl', 'http://www.w3.org/2002/07/owl#')
-PALS = CurieNamespace('pals', 'https://pals-project.readthedocs.io/en/latest/overview.html')
+PALS = CurieNamespace('pals', 'https://pals-project.readthedocs.io/en/latest/')
 QUDT = CurieNamespace('qudt', 'http://qudt.org/schema/qudt/')
 RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
-RO = CurieNamespace('ro', 'http://purl.obolibrary.org/obo/RO_')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 SI_UNIT = CurieNamespace('si-unit', 'http://qudt.org/vocab/unit/')
 SOSA = CurieNamespace('sosa', 'http://www.w3.org/ns/sosa/')
@@ -167,11 +167,7 @@ class NamedThingName(extended_str):
     pass
 
 
-class ControlCapabilityName(NamedThingName):
-    pass
-
-
-class SignalDefinitionsName(NamedThingName):
+class CapabilityName(NamedThingName):
     pass
 
 
@@ -195,11 +191,19 @@ class FacilitySystemName(SystemName):
     pass
 
 
+class DeployedSystemName(SystemName):
+    pass
+
+
 class ControlSystemName(SystemName):
     pass
 
 
-class DeviceSystemName(SystemName):
+class DeviceName(SystemName):
+    pass
+
+
+class NamingConventionExampleExample(extended_str):
     pass
 
 
@@ -208,6 +212,18 @@ class InstrumentName(SystemName):
 
 
 class SystemCapabilityName(NamedThingName):
+    pass
+
+
+class NamingConventionName(NamedThingName):
+    pass
+
+
+class TemplateComponentName(NamedThingName):
+    pass
+
+
+class TemplateExampleExample(extended_str):
     pass
 
 
@@ -294,10 +310,10 @@ class NaradConfig(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = NARAD.NaradConfig
 
     schema_version: str = None
-    deployed_system: Union[str, FacilitySystemName] = None
-    has_sub_system: Union[Union[str, ControlSystemName], list[Union[str, ControlSystemName]]] = None
-    control_capability_layer: Union[dict[Union[str, ControlCapabilityName], Union[dict, "ControlCapability"]], list[Union[dict, "ControlCapability"]]] = empty_dict()
-    device_layer: Union[dict[Union[str, DeviceSystemName], Union[dict, "DeviceSystem"]], list[Union[dict, "DeviceSystem"]]] = empty_dict()
+    deployed_system: Union[dict, "DeployedSystem"] = None
+    control_system: Union[dict, "ControlSystem"] = None
+    capability_layer: Union[dict[Union[str, CapabilityName], Union[dict, "Capability"]], list[Union[dict, "Capability"]]] = empty_dict()
+    device_layer: Union[dict[Union[str, DeviceName], Union[dict, "Device"]], list[Union[dict, "Device"]]] = empty_dict()
     signal_layer: Union[dict, "SignalLayer"] = None
     intent: Optional[str] = None
 
@@ -309,22 +325,21 @@ class NaradConfig(YAMLRoot):
 
         if self._is_empty(self.deployed_system):
             self.MissingRequiredField("deployed_system")
-        if not isinstance(self.deployed_system, FacilitySystemName):
-            self.deployed_system = FacilitySystemName(self.deployed_system)
+        if not isinstance(self.deployed_system, DeployedSystem):
+            self.deployed_system = DeployedSystem(**as_dict(self.deployed_system))
 
-        if self._is_empty(self.has_sub_system):
-            self.MissingRequiredField("has_sub_system")
-        if not isinstance(self.has_sub_system, list):
-            self.has_sub_system = [self.has_sub_system] if self.has_sub_system is not None else []
-        self.has_sub_system = [v if isinstance(v, ControlSystemName) else ControlSystemName(v) for v in self.has_sub_system]
+        if self._is_empty(self.control_system):
+            self.MissingRequiredField("control_system")
+        if not isinstance(self.control_system, ControlSystem):
+            self.control_system = ControlSystem(**as_dict(self.control_system))
 
-        if self._is_empty(self.control_capability_layer):
-            self.MissingRequiredField("control_capability_layer")
-        self._normalize_inlined_as_dict(slot_name="control_capability_layer", slot_type=ControlCapability, key_name="name", keyed=True)
+        if self._is_empty(self.capability_layer):
+            self.MissingRequiredField("capability_layer")
+        self._normalize_inlined_as_dict(slot_name="capability_layer", slot_type=Capability, key_name="name", keyed=True)
 
         if self._is_empty(self.device_layer):
             self.MissingRequiredField("device_layer")
-        self._normalize_inlined_as_dict(slot_name="device_layer", slot_type=DeviceSystem, key_name="name", keyed=True)
+        self._normalize_inlined_as_dict(slot_name="device_layer", slot_type=Device, key_name="name", keyed=True)
 
         if self._is_empty(self.signal_layer):
             self.MissingRequiredField("signal_layer")
@@ -349,47 +364,51 @@ class CapabilityLayer(YAMLRoot):
     class_name: ClassVar[str] = "CapabilityLayer"
     class_model_uri: ClassVar[URIRef] = NARAD.CapabilityLayer
 
-    control_capabilities: Optional[Union[dict[Union[str, ControlCapabilityName], Union[dict, "ControlCapability"]], list[Union[dict, "ControlCapability"]]]] = empty_dict()
+    capabilities: Optional[Union[dict[Union[str, CapabilityName], Union[dict, "Capability"]], list[Union[dict, "Capability"]]]] = empty_dict()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        self._normalize_inlined_as_dict(slot_name="control_capabilities", slot_type=ControlCapability, key_name="name", keyed=True)
+        self._normalize_inlined_as_dict(slot_name="capabilities", slot_type=Capability, key_name="name", keyed=True)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass(repr=False)
-class ControlCapability(NamedThing):
+class Capability(NamedThing):
     """
     A reusable device-type control profile that extends a generic shared capability with type-specific signals (e.g.
     QuadrupoleCurrentControlProfile).
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = NARAD["ControlCapability"]
-    class_class_curie: ClassVar[str] = "narad:ControlCapability"
-    class_name: ClassVar[str] = "ControlCapability"
-    class_model_uri: ClassVar[URIRef] = NARAD.ControlCapability
+    class_class_uri: ClassVar[URIRef] = NARAD["Capability"]
+    class_class_curie: ClassVar[str] = "narad:Capability"
+    class_name: ClassVar[str] = "Capability"
+    class_model_uri: ClassVar[URIRef] = NARAD.Capability
 
-    name: Union[str, ControlCapabilityName] = None
-    signals: Union[dict[Union[str, SignalName], Union[dict, "Signal"]], list[Union[dict, "Signal"]]] = empty_dict()
+    name: Union[str, CapabilityName] = None
+    has_signal: Union[dict[Union[str, SignalName], Union[dict, "Signal"]], list[Union[dict, "Signal"]]] = empty_dict()
     device_type: Optional[Union[str, "ElementKindEnum"]] = None
-    subclass_of: Optional[Union[str, SystemName]] = None
+    subclass_of: Optional[Union[str, CapabilityName]] = None
+    is_property_of: Optional[Union[str, ControlSystemName]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
             self.MissingRequiredField("name")
-        if not isinstance(self.name, ControlCapabilityName):
-            self.name = ControlCapabilityName(self.name)
+        if not isinstance(self.name, CapabilityName):
+            self.name = CapabilityName(self.name)
 
-        if self._is_empty(self.signals):
-            self.MissingRequiredField("signals")
-        self._normalize_inlined_as_dict(slot_name="signals", slot_type=Signal, key_name="name", keyed=True)
+        if self._is_empty(self.has_signal):
+            self.MissingRequiredField("has_signal")
+        self._normalize_inlined_as_dict(slot_name="has_signal", slot_type=Signal, key_name="name", keyed=True)
 
         if self.device_type is not None and not isinstance(self.device_type, ElementKindEnum):
             self.device_type = ElementKindEnum(self.device_type)
 
-        if self.subclass_of is not None and not isinstance(self.subclass_of, SystemName):
-            self.subclass_of = SystemName(self.subclass_of)
+        if self.subclass_of is not None and not isinstance(self.subclass_of, CapabilityName):
+            self.subclass_of = CapabilityName(self.subclass_of)
+
+        if self.is_property_of is not None and not isinstance(self.is_property_of, ControlSystemName):
+            self.is_property_of = ControlSystemName(self.is_property_of)
 
         super().__post_init__(**kwargs)
 
@@ -440,36 +459,6 @@ class FacilityIdentifier(YAMLRoot):
 
 
 @dataclass(repr=False)
-class SignalDefinitions(NamedThing):
-    """
-    Signal binding set scoped to a device type or device domain.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["SignalDefinitions"]
-    class_class_curie: ClassVar[str] = "narad:SignalDefinitions"
-    class_name: ClassVar[str] = "SignalDefinitions"
-    class_model_uri: ClassVar[URIRef] = NARAD.SignalDefinitions
-
-    name: Union[str, SignalDefinitionsName] = None
-    device_type: Optional[Union[str, "ElementKindEnum"]] = None
-    signal_bindings: Optional[Union[dict[Union[str, SignalBindingName], Union[dict, "SignalBinding"]], list[Union[dict, "SignalBinding"]]]] = empty_dict()
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, SignalDefinitionsName):
-            self.name = SignalDefinitionsName(self.name)
-
-        if self.device_type is not None and not isinstance(self.device_type, ElementKindEnum):
-            self.device_type = ElementKindEnum(self.device_type)
-
-        self._normalize_inlined_as_dict(slot_name="signal_bindings", slot_type=SignalBinding, key_name="name", keyed=True)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
 class SignalBinding(NamedThing):
     """
     A named control system suffix definition for one semantic signal. The suffix is used within in a template naming
@@ -483,7 +472,7 @@ class SignalBinding(NamedThing):
     class_model_uri: ClassVar[URIRef] = NARAD.SignalBinding
 
     name: Union[str, SignalBindingName] = None
-    control_system_suffix: Optional[str] = None
+    signal_code_suffix: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
@@ -491,8 +480,8 @@ class SignalBinding(NamedThing):
         if not isinstance(self.name, SignalBindingName):
             self.name = SignalBindingName(self.name)
 
-        if self.control_system_suffix is not None and not isinstance(self.control_system_suffix, str):
-            self.control_system_suffix = str(self.control_system_suffix)
+        if self.signal_code_suffix is not None and not isinstance(self.signal_code_suffix, str):
+            self.signal_code_suffix = str(self.signal_code_suffix)
 
         super().__post_init__(**kwargs)
 
@@ -554,9 +543,9 @@ class BeamlineElement(NamedThing):
     class_model_uri: ClassVar[URIRef] = NARAD.BeamlineElement
 
     name: Union[str, BeamlineElementName] = None
-    is_instance_of: Optional[Union[str, list[str]]] = empty_list()
+    is_instance_of: Optional[Union[Union[str, "ElementKindEnum"], list[Union[str, "ElementKindEnum"]]]] = empty_list()
     length: Optional[float] = None
-    instance_signal_bindings: Optional[Union[dict[Union[str, InstanceSignalBindingName], Union[dict, "InstanceSignalBinding"]], list[Union[dict, "InstanceSignalBinding"]]]] = empty_dict()
+    is_observed_by: Optional[Union[dict[Union[str, InstanceSignalBindingName], Union[dict, "InstanceSignalBinding"]], list[Union[dict, "InstanceSignalBinding"]]]] = empty_dict()
     param_set: Optional[Union[dict, "ElementParamSet"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -567,12 +556,12 @@ class BeamlineElement(NamedThing):
 
         if not isinstance(self.is_instance_of, list):
             self.is_instance_of = [self.is_instance_of] if self.is_instance_of is not None else []
-        self.is_instance_of = [v if isinstance(v, str) else str(v) for v in self.is_instance_of]
+        self.is_instance_of = [v if isinstance(v, ElementKindEnum) else ElementKindEnum(v) for v in self.is_instance_of]
 
         if self.length is not None and not isinstance(self.length, float):
             self.length = float(self.length)
 
-        self._normalize_inlined_as_dict(slot_name="instance_signal_bindings", slot_type=InstanceSignalBinding, key_name="name", keyed=True)
+        self._normalize_inlined_as_dict(slot_name="is_observed_by", slot_type=InstanceSignalBinding, key_name="name", keyed=True)
 
         if self.param_set is not None and not isinstance(self.param_set, ElementParamSet):
             self.param_set = ElementParamSet(**as_dict(self.param_set))
@@ -627,10 +616,8 @@ class FacilitySystem(System):
     class_model_uri: ClassVar[URIRef] = NARAD.FacilitySystem
 
     name: Union[str, FacilitySystemName] = None
-    facility_identifier: Optional[Union[Union[dict, FacilityIdentifier], list[Union[dict, FacilityIdentifier]]]] = empty_list()
-    control_system: Optional[Union[dict, "ControlSystem"]] = None
-    naming_convention: Optional[str] = None
-    signal_definitions: Optional[Union[dict[Union[str, SignalDefinitionsName], Union[dict, SignalDefinitions]], list[Union[dict, SignalDefinitions]]]] = empty_dict()
+    has_control_system: Optional[Union[str, ControlSystemName]] = None
+    hosts_device: Optional[Union[dict[Union[str, DeviceName], Union[dict, "Device"]], list[Union[dict, "Device"]]]] = empty_dict()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
@@ -638,17 +625,53 @@ class FacilitySystem(System):
         if not isinstance(self.name, FacilitySystemName):
             self.name = FacilitySystemName(self.name)
 
+        if self.has_control_system is not None and not isinstance(self.has_control_system, ControlSystemName):
+            self.has_control_system = ControlSystemName(self.has_control_system)
+
+        self._normalize_inlined_as_dict(slot_name="hosts_device", slot_type=Device, key_name="name", keyed=True)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class DeployedSystem(System):
+    """
+    A deployed system, with an identified facility, that is the subject of a NARAD configuration. This is the child of
+    the target of the narad_config.deployed_system slot. In the SSN graph a DeployedSystem is a broad mapping to the
+    ssn:Deployment and also is equivalent to the signal_layers.facilities entries.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["DeployedSystem"]
+    class_class_curie: ClassVar[str] = "narad:DeployedSystem"
+    class_name: ClassVar[str] = "DeployedSystem"
+    class_model_uri: ClassVar[URIRef] = NARAD.DeployedSystem
+
+    name: Union[str, DeployedSystemName] = None
+    has_system_capability: Union[dict[Union[str, SystemCapabilityName], Union[dict, "SystemCapability"]], list[Union[dict, "SystemCapability"]]] = empty_dict()
+    facility_identifier: Optional[Union[Union[dict, FacilityIdentifier], list[Union[dict, FacilityIdentifier]]]] = empty_list()
+    has_control_system: Optional[Union[str, ControlSystemName]] = None
+    system_type: Optional[Union[str, "SystemTypeEnum"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.name):
+            self.MissingRequiredField("name")
+        if not isinstance(self.name, DeployedSystemName):
+            self.name = DeployedSystemName(self.name)
+
+        if self._is_empty(self.has_system_capability):
+            self.MissingRequiredField("has_system_capability")
+        self._normalize_inlined_as_dict(slot_name="has_system_capability", slot_type=SystemCapability, key_name="name", keyed=True)
+
         if not isinstance(self.facility_identifier, list):
             self.facility_identifier = [self.facility_identifier] if self.facility_identifier is not None else []
         self.facility_identifier = [v if isinstance(v, FacilityIdentifier) else FacilityIdentifier(**as_dict(v)) for v in self.facility_identifier]
 
-        if self.control_system is not None and not isinstance(self.control_system, ControlSystem):
-            self.control_system = ControlSystem(**as_dict(self.control_system))
+        if self.has_control_system is not None and not isinstance(self.has_control_system, ControlSystemName):
+            self.has_control_system = ControlSystemName(self.has_control_system)
 
-        if self.naming_convention is not None and not isinstance(self.naming_convention, str):
-            self.naming_convention = str(self.naming_convention)
-
-        self._normalize_inlined_as_dict(slot_name="signal_definitions", slot_type=SignalDefinitions, key_name="name", keyed=True)
+        if self.system_type is not None and not isinstance(self.system_type, SystemTypeEnum):
+            self.system_type = SystemTypeEnum(self.system_type)
 
         super().__post_init__(**kwargs)
 
@@ -667,7 +690,10 @@ class ControlSystem(System):
     class_model_uri: ClassVar[URIRef] = NARAD.ControlSystem
 
     name: Union[str, ControlSystemName] = None
-    naming_convention: Optional[str] = None
+    has_naming_convention: Optional[Union[dict[Union[str, NamingConventionName], Union[dict, "NamingConvention"]], list[Union[dict, "NamingConvention"]]]] = empty_dict()
+    system_type: Optional[Union[str, "SystemTypeEnum"]] = None
+    has_sub_system: Optional[Union[dict[Union[str, SystemName], Union[dict, System]], list[Union[dict, System]]]] = empty_dict()
+    has_system_capability: Optional[Union[dict[Union[str, SystemCapabilityName], Union[dict, "SystemCapability"]], list[Union[dict, "SystemCapability"]]]] = empty_dict()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
@@ -675,39 +701,49 @@ class ControlSystem(System):
         if not isinstance(self.name, ControlSystemName):
             self.name = ControlSystemName(self.name)
 
-        if self.naming_convention is not None and not isinstance(self.naming_convention, str):
-            self.naming_convention = str(self.naming_convention)
+        self._normalize_inlined_as_list(slot_name="has_naming_convention", slot_type=NamingConvention, key_name="name", keyed=True)
+
+        if self.system_type is not None and not isinstance(self.system_type, SystemTypeEnum):
+            self.system_type = SystemTypeEnum(self.system_type)
+
+        self._normalize_inlined_as_list(slot_name="has_sub_system", slot_type=System, key_name="name", keyed=True)
+
+        self._normalize_inlined_as_dict(slot_name="has_system_capability", slot_type=SystemCapability, key_name="name", keyed=True)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass(repr=False)
-class DeviceSystem(System):
+class Device(System):
     """
     A system representing a beam diagnostic instrument, magnet, or other non-magnet device. It represents the
-    instrument as a whole rather than the control system for that instrument. In the SSN graph a DeviceSystem is a
-    subsystem of the Facility and a sibling to the ControlSystem.
+    instrument as a whole rather than the control system for that instrument. In the SSN graph a Device is a subsystem
+    of the Facility and a sibling to the ControlSystem. Also used in the SignalLayer to group signal bindings by
+    device type. Aligned to ssn:System.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = NARAD["DeviceSystem"]
-    class_class_curie: ClassVar[str] = "narad:DeviceSystem"
-    class_name: ClassVar[str] = "DeviceSystem"
-    class_model_uri: ClassVar[URIRef] = NARAD.DeviceSystem
+    class_class_uri: ClassVar[URIRef] = NARAD["Device"]
+    class_class_curie: ClassVar[str] = "narad:Device"
+    class_name: ClassVar[str] = "Device"
+    class_model_uri: ClassVar[URIRef] = NARAD.Device
 
-    name: Union[str, DeviceSystemName] = None
-    device_type: Optional[Union[str, "ElementKindEnum"]] = None
+    name: Union[str, DeviceName] = None
+    device_type: Union[str, "ElementKindEnum"] = None
     has_sub_system: Optional[Union[Union[str, SystemName], list[Union[str, SystemName]]]] = empty_list()
     subclass_of: Optional[Union[str, SystemName]] = None
     has_system_capability: Optional[Union[Union[str, SystemCapabilityName], list[Union[str, SystemCapabilityName]]]] = empty_list()
+    is_observed_by: Optional[Union[dict[Union[str, SignalBindingName], Union[dict, SignalBinding]], list[Union[dict, SignalBinding]]]] = empty_dict()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
             self.MissingRequiredField("name")
-        if not isinstance(self.name, DeviceSystemName):
-            self.name = DeviceSystemName(self.name)
+        if not isinstance(self.name, DeviceName):
+            self.name = DeviceName(self.name)
 
-        if self.device_type is not None and not isinstance(self.device_type, ElementKindEnum):
+        if self._is_empty(self.device_type):
+            self.MissingRequiredField("device_type")
+        if not isinstance(self.device_type, ElementKindEnum):
             self.device_type = ElementKindEnum(self.device_type)
 
         if not isinstance(self.has_sub_system, list):
@@ -721,11 +757,43 @@ class DeviceSystem(System):
             self.has_system_capability = [self.has_system_capability] if self.has_system_capability is not None else []
         self.has_system_capability = [v if isinstance(v, SystemCapabilityName) else SystemCapabilityName(v) for v in self.has_system_capability]
 
+        self._normalize_inlined_as_dict(slot_name="is_observed_by", slot_type=SignalBinding, key_name="name", keyed=True)
+
         self._normalize_inlined_as_list(slot_name="has_sub_system", slot_type=System, key_name="name", keyed=True)
 
         if not isinstance(self.has_system_capability, list):
             self.has_system_capability = [self.has_system_capability] if self.has_system_capability is not None else []
         self.has_system_capability = [v if isinstance(v, SystemCapabilityName) else SystemCapabilityName(v) for v in self.has_system_capability]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class NamingConventionExample(YAMLRoot):
+    """
+    An example of a control system naming convention, illustrating how the template is used to generate full control
+    system PV names from semantic signal names and device instance information. This can be used to provide concrete
+    examples of the expected PV naming convention for different device types and signals based on the defined
+    NamingConvention template.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["NamingConventionExample"]
+    class_class_curie: ClassVar[str] = "narad:NamingConventionExample"
+    class_name: ClassVar[str] = "NamingConventionExample"
+    class_model_uri: ClassVar[URIRef] = NARAD.NamingConventionExample
+
+    example: Union[str, NamingConventionExampleExample] = None
+    description: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.example):
+            self.MissingRequiredField("example")
+        if not isinstance(self.example, NamingConventionExampleExample):
+            self.example = NamingConventionExampleExample(self.example)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
 
         super().__post_init__(**kwargs)
 
@@ -789,6 +857,108 @@ class SystemCapability(NamedThing):
 
 
 @dataclass(repr=False)
+class NamingConvention(NamedThing):
+    """
+    A template for constructing facility-specific signal names from a semantic signal name and a
+    control-system-specific suffix. The template is used to generate the full control system PV name for a given
+    device instance and semantic signal by substituting the device name and signal code suffix into the template.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["NamingConvention"]
+    class_class_curie: ClassVar[str] = "narad:NamingConvention"
+    class_name: ClassVar[str] = "NamingConvention"
+    class_model_uri: ClassVar[URIRef] = NARAD.NamingConvention
+
+    name: Union[str, NamingConventionName] = None
+    template: Optional[str] = None
+    template_components: Optional[Union[dict[Union[str, TemplateComponentName], Union[dict, "TemplateComponent"]], list[Union[dict, "TemplateComponent"]]]] = empty_dict()
+    full_pattern: Optional[str] = None
+    examples: Optional[Union[dict[Union[str, NamingConventionExampleExample], Union[dict, NamingConventionExample]], list[Union[dict, NamingConventionExample]]]] = empty_dict()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.name):
+            self.MissingRequiredField("name")
+        if not isinstance(self.name, NamingConventionName):
+            self.name = NamingConventionName(self.name)
+
+        if self.template is not None and not isinstance(self.template, str):
+            self.template = str(self.template)
+
+        self._normalize_inlined_as_list(slot_name="template_components", slot_type=TemplateComponent, key_name="name", keyed=True)
+
+        if self.full_pattern is not None and not isinstance(self.full_pattern, str):
+            self.full_pattern = str(self.full_pattern)
+
+        self._normalize_inlined_as_list(slot_name="examples", slot_type=NamingConventionExample, key_name="example", keyed=True)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class TemplateComponent(NamedThing):
+    """
+    A component of a naming convention template, representing a variable part of the control system PV name that is
+    substituted based on the device instance and signal definition. For example, in the template
+    "{device_name}{signal_code_suffix}", "device_name" and "signal_code_suffix" would be TemplateComponents that are
+    replaced with the actual device name and signal code suffix for each specific binding.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["TemplateComponent"]
+    class_class_curie: ClassVar[str] = "narad:TemplateComponent"
+    class_name: ClassVar[str] = "TemplateComponent"
+    class_model_uri: ClassVar[URIRef] = NARAD.TemplateComponent
+
+    name: Union[str, TemplateComponentName] = None
+    required: Optional[Union[bool, Bool]] = None
+    pattern: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.name):
+            self.MissingRequiredField("name")
+        if not isinstance(self.name, TemplateComponentName):
+            self.name = TemplateComponentName(self.name)
+
+        if self.required is not None and not isinstance(self.required, Bool):
+            self.required = Bool(self.required)
+
+        if self.pattern is not None and not isinstance(self.pattern, str):
+            self.pattern = str(self.pattern)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class TemplateExample(YAMLRoot):
+    """
+    An example of a control system PV name generated from a naming convention template, along with a description of
+    what it represents. This can be used to illustrate how the template works in practice and to provide concrete
+    examples of the expected PV naming convention for different device types and signals.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["TemplateExample"]
+    class_class_curie: ClassVar[str] = "narad:TemplateExample"
+    class_name: ClassVar[str] = "TemplateExample"
+    class_model_uri: ClassVar[URIRef] = NARAD.TemplateExample
+
+    example: Union[str, TemplateExampleExample] = None
+    description: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.example):
+            self.MissingRequiredField("example")
+        if not isinstance(self.example, TemplateExampleExample):
+            self.example = TemplateExampleExample(self.example)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class Signal(NamedThing):
     """
     Domain term for a control-system signal. A Signal represents an identifiable quantity, state, setpoint, readback,
@@ -806,7 +976,7 @@ class Signal(NamedThing):
     role: Optional[Union[str, "SignalRoleEnum"]] = None
     data_type: Optional[Union[str, "DataTypeEnum"]] = None
     units: Optional[str] = None
-    units_uri: Optional[Union[str, URIorCURIE]] = None
+    units_uri: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
@@ -823,8 +993,8 @@ class Signal(NamedThing):
         if self.units is not None and not isinstance(self.units, str):
             self.units = str(self.units)
 
-        if self.units_uri is not None and not isinstance(self.units_uri, URIorCURIE):
-            self.units_uri = URIorCURIE(self.units_uri)
+        if self.units_uri is not None and not isinstance(self.units_uri, str):
+            self.units_uri = str(self.units_uri)
 
         super().__post_init__(**kwargs)
 
@@ -893,10 +1063,10 @@ class InstanceSignalBinding(NamedThing):
 
     name: Union[str, InstanceSignalBindingName] = None
     pv_name: Optional[str] = None
-    is_instance_of: Optional[Union[str, list[str]]] = empty_list()
-    for_property: Optional[Union[str, list[str]]] = empty_list()
+    is_instance_of: Optional[Union[Union[str, SignalName], list[Union[str, SignalName]]]] = empty_list()
+    for_property: Optional[Union[Union[str, SignalBindingName], list[Union[str, SignalBindingName]]]] = empty_list()
     is_hosted_by: Optional[str] = None
-    is_property_of: Optional[str] = None
+    is_property_of: Optional[Union[str, ControlSystemName]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
@@ -909,17 +1079,17 @@ class InstanceSignalBinding(NamedThing):
 
         if not isinstance(self.is_instance_of, list):
             self.is_instance_of = [self.is_instance_of] if self.is_instance_of is not None else []
-        self.is_instance_of = [v if isinstance(v, str) else str(v) for v in self.is_instance_of]
+        self.is_instance_of = [v if isinstance(v, SignalName) else SignalName(v) for v in self.is_instance_of]
 
         if not isinstance(self.for_property, list):
             self.for_property = [self.for_property] if self.for_property is not None else []
-        self.for_property = [v if isinstance(v, str) else str(v) for v in self.for_property]
+        self.for_property = [v if isinstance(v, SignalBindingName) else SignalBindingName(v) for v in self.for_property]
 
         if self.is_hosted_by is not None and not isinstance(self.is_hosted_by, str):
             self.is_hosted_by = str(self.is_hosted_by)
 
-        if self.is_property_of is not None and not isinstance(self.is_property_of, str):
-            self.is_property_of = str(self.is_property_of)
+        if self.is_property_of is not None and not isinstance(self.is_property_of, ControlSystemName):
+            self.is_property_of = ControlSystemName(self.is_property_of)
 
         super().__post_init__(**kwargs)
 
@@ -1014,8 +1184,8 @@ class ElementKindEnum(EnumDefinitionImpl):
     Controlled vocabulary for beamline element types, shared between the capability layer
     (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile
     device_type values in sync with element kind values without circular imports. Values must stay aligned with
-    CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the
-    DeviceSystem referenced by is_instance_of.
+    CapabilityProfile.device_type. NOTE: The kind of a BeamlineElement must match the device_type of the Device
+    referenced by is_instance_of.
     """
     Drift = PermissibleValue(
         text="Drift",
@@ -1053,7 +1223,7 @@ class ElementKindEnum(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="ElementKindEnum",
-        description="""Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of.""",
+        description="""Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The kind of a BeamlineElement must match the device_type of the Device referenced by is_instance_of.""",
     )
 
 class SystemTypeEnum(EnumDefinitionImpl):
@@ -1173,8 +1343,11 @@ slots.description = Slot(uri=NARAD.description, name="description", curie=NARAD.
 slots.has_sub_system = Slot(uri=NARAD.has_sub_system, name="has_sub_system", curie=NARAD.curie('has_sub_system'),
                    model_uri=NARAD.has_sub_system, domain=System, range=Optional[Union[Union[str, SystemName], list[Union[str, SystemName]]]])
 
-slots.control_capability = Slot(uri=NARAD.control_capability, name="control_capability", curie=NARAD.curie('control_capability'),
-                   model_uri=NARAD.control_capability, domain=None, range=Optional[Union[str, ControlCapabilityName]])
+slots.has_control_system = Slot(uri=NARAD.has_control_system, name="has_control_system", curie=NARAD.curie('has_control_system'),
+                   model_uri=NARAD.has_control_system, domain=System, range=Optional[Union[str, ControlSystemName]])
+
+slots.capability = Slot(uri=NARAD.capability, name="capability", curie=NARAD.curie('capability'),
+                   model_uri=NARAD.capability, domain=None, range=Optional[Union[str, CapabilityName]])
 
 slots.has_system_capability = Slot(uri=NARAD.has_system_capability, name="has_system_capability", curie=NARAD.curie('has_system_capability'),
                    model_uri=NARAD.has_system_capability, domain=System, range=Optional[Union[Union[str, SystemCapabilityName], list[Union[str, SystemCapabilityName]]]])
@@ -1183,10 +1356,10 @@ slots.for_property = Slot(uri=NARAD.for_property, name="for_property", curie=NAR
                    model_uri=NARAD.for_property, domain=None, range=Optional[Union[str, list[str]]])
 
 slots.is_property_of = Slot(uri=NARAD.is_property_of, name="is_property_of", curie=NARAD.curie('is_property_of'),
-                   model_uri=NARAD.is_property_of, domain=None, range=Optional[str])
+                   model_uri=NARAD.is_property_of, domain=None, range=Optional[Union[str, ControlSystemName]])
 
 slots.is_hosted_by = Slot(uri=NARAD.is_hosted_by, name="is_hosted_by", curie=NARAD.curie('is_hosted_by'),
-                   model_uri=NARAD.is_hosted_by, domain=None, range=Optional[str])
+                   model_uri=NARAD.is_hosted_by, domain=None, range=Optional[Union[str, DeployedSystemName]])
 
 slots.is_instance_of = Slot(uri=NARAD.is_instance_of, name="is_instance_of", curie=NARAD.curie('is_instance_of'),
                    model_uri=NARAD.is_instance_of, domain=None, range=Optional[Union[str, list[str]]])
@@ -1197,8 +1370,8 @@ slots.subclass_of = Slot(uri=NARAD.subclass_of, name="subclass_of", curie=NARAD.
 slots.pv_name = Slot(uri=NARAD.pv_name, name="pv_name", curie=NARAD.curie('pv_name'),
                    model_uri=NARAD.pv_name, domain=None, range=Optional[str])
 
-slots.control_system_suffix = Slot(uri=NARAD.control_system_suffix, name="control_system_suffix", curie=NARAD.curie('control_system_suffix'),
-                   model_uri=NARAD.control_system_suffix, domain=None, range=Optional[str])
+slots.signal_code_suffix = Slot(uri=NARAD.signal_code_suffix, name="signal_code_suffix", curie=NARAD.curie('signal_code_suffix'),
+                   model_uri=NARAD.signal_code_suffix, domain=None, range=Optional[str])
 
 slots.beamlines = Slot(uri=NARAD.beamlines, name="beamlines", curie=NARAD.curie('beamlines'),
                    model_uri=NARAD.beamlines, domain=None, range=Optional[Union[dict[Union[str, BeamlineName], Union[dict, Beamline]], list[Union[dict, Beamline]]]])
@@ -1213,7 +1386,7 @@ slots.schema_version = Slot(uri=NARAD.schema_version, name="schema_version", cur
                    model_uri=NARAD.schema_version, domain=None, range=Optional[str])
 
 slots.deployed_system = Slot(uri=NARAD.deployed_system, name="deployed_system", curie=NARAD.curie('deployed_system'),
-                   model_uri=NARAD.deployed_system, domain=None, range=Optional[Union[str, FacilitySystemName]])
+                   model_uri=NARAD.deployed_system, domain=None, range=Union[str, DeployedSystemName])
 
 slots.system_type = Slot(uri=NARAD.system_type, name="system_type", curie=NARAD.curie('system_type'),
                    model_uri=NARAD.system_type, domain=None, range=Optional[Union[str, "SystemTypeEnum"]])
@@ -1221,17 +1394,38 @@ slots.system_type = Slot(uri=NARAD.system_type, name="system_type", curie=NARAD.
 slots.control_system = Slot(uri=NARAD.control_system, name="control_system", curie=NARAD.curie('control_system'),
                    model_uri=NARAD.control_system, domain=None, range=Optional[Union[dict, ControlSystem]])
 
-slots.naming_convention = Slot(uri=NARAD.naming_convention, name="naming_convention", curie=NARAD.curie('naming_convention'),
-                   model_uri=NARAD.naming_convention, domain=None, range=Optional[str])
+slots.has_naming_convention = Slot(uri=NARAD.has_naming_convention, name="has_naming_convention", curie=NARAD.curie('has_naming_convention'),
+                   model_uri=NARAD.has_naming_convention, domain=None, range=Optional[Union[dict[Union[str, NamingConventionName], Union[dict, NamingConvention]], list[Union[dict, NamingConvention]]]])
 
-slots.control_capability_layer = Slot(uri=NARAD.control_capability_layer, name="control_capability_layer", curie=NARAD.curie('control_capability_layer'),
-                   model_uri=NARAD.control_capability_layer, domain=None, range=Union[dict[Union[str, ControlCapabilityName], Union[dict, ControlCapability]], list[Union[dict, ControlCapability]]])
+slots.template = Slot(uri=NARAD.template, name="template", curie=NARAD.curie('template'),
+                   model_uri=NARAD.template, domain=None, range=Optional[str])
 
-slots.control_capabilities = Slot(uri=NARAD.control_capabilities, name="control_capabilities", curie=NARAD.curie('control_capabilities'),
-                   model_uri=NARAD.control_capabilities, domain=None, range=Optional[Union[dict[Union[str, ControlCapabilityName], Union[dict, ControlCapability]], list[Union[dict, ControlCapability]]]])
+slots.template_components = Slot(uri=NARAD.template_components, name="template_components", curie=NARAD.curie('template_components'),
+                   model_uri=NARAD.template_components, domain=None, range=Optional[Union[dict[Union[str, TemplateComponentName], Union[dict, TemplateComponent]], list[Union[dict, TemplateComponent]]]])
+
+slots.required = Slot(uri=NARAD.required, name="required", curie=NARAD.curie('required'),
+                   model_uri=NARAD.required, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.pattern = Slot(uri=NARAD.pattern, name="pattern", curie=NARAD.curie('pattern'),
+                   model_uri=NARAD.pattern, domain=None, range=Optional[str])
+
+slots.full_pattern = Slot(uri=NARAD.full_pattern, name="full_pattern", curie=NARAD.curie('full_pattern'),
+                   model_uri=NARAD.full_pattern, domain=None, range=Optional[str])
+
+slots.examples = Slot(uri=NARAD.examples, name="examples", curie=NARAD.curie('examples'),
+                   model_uri=NARAD.examples, domain=None, range=Optional[Union[dict[Union[str, NamingConventionExampleExample], Union[dict, NamingConventionExample]], list[Union[dict, NamingConventionExample]]]])
+
+slots.example = Slot(uri=NARAD.example, name="example", curie=NARAD.curie('example'),
+                   model_uri=NARAD.example, domain=None, range=Optional[str])
+
+slots.capability_layer = Slot(uri=NARAD.capability_layer, name="capability_layer", curie=NARAD.curie('capability_layer'),
+                   model_uri=NARAD.capability_layer, domain=None, range=Union[dict[Union[str, CapabilityName], Union[dict, Capability]], list[Union[dict, Capability]]])
+
+slots.capabilities = Slot(uri=NARAD.capabilities, name="capabilities", curie=NARAD.curie('capabilities'),
+                   model_uri=NARAD.capabilities, domain=None, range=Optional[Union[dict[Union[str, CapabilityName], Union[dict, Capability]], list[Union[dict, Capability]]]])
 
 slots.device_layer = Slot(uri=NARAD.device_layer, name="device_layer", curie=NARAD.curie('device_layer'),
-                   model_uri=NARAD.device_layer, domain=None, range=Optional[Union[dict[Union[str, DeviceSystemName], Union[dict, DeviceSystem]], list[Union[dict, DeviceSystem]]]])
+                   model_uri=NARAD.device_layer, domain=None, range=Optional[Union[dict[Union[str, DeviceName], Union[dict, Device]], list[Union[dict, Device]]]])
 
 slots.facilities = Slot(uri=NARAD.facilities, name="facilities", curie=NARAD.curie('facilities'),
                    model_uri=NARAD.facilities, domain=None, range=Optional[Union[dict[Union[str, FacilitySystemName], Union[dict, FacilitySystem]], list[Union[dict, FacilitySystem]]]])
@@ -1239,23 +1433,17 @@ slots.facilities = Slot(uri=NARAD.facilities, name="facilities", curie=NARAD.cur
 slots.signal_layer = Slot(uri=NARAD.signal_layer, name="signal_layer", curie=NARAD.curie('signal_layer'),
                    model_uri=NARAD.signal_layer, domain=None, range=Optional[Union[dict, SignalLayer]])
 
-slots.signal_definitions = Slot(uri=NARAD.signal_definitions, name="signal_definitions", curie=NARAD.curie('signal_definitions'),
-                   model_uri=NARAD.signal_definitions, domain=None, range=Optional[Union[dict[Union[str, SignalDefinitionsName], Union[dict, SignalDefinitions]], list[Union[dict, SignalDefinitions]]]])
+slots.hosts_device = Slot(uri=NARAD.hosts_device, name="hosts_device", curie=NARAD.curie('hosts_device'),
+                   model_uri=NARAD.hosts_device, domain=FacilitySystem, range=Optional[Union[dict[Union[str, DeviceName], Union[dict, "Device"]], list[Union[dict, "Device"]]]])
 
-slots.signal_bindings = Slot(uri=NARAD.signal_bindings, name="signal_bindings", curie=NARAD.curie('signal_bindings'),
-                   model_uri=NARAD.signal_bindings, domain=None, range=Optional[Union[dict[Union[str, SignalBindingName], Union[dict, SignalBinding]], list[Union[dict, SignalBinding]]]])
-
-slots.instance_signal_bindings = Slot(uri=NARAD.instance_signal_bindings, name="instance_signal_bindings", curie=NARAD.curie('instance_signal_bindings'),
-                   model_uri=NARAD.instance_signal_bindings, domain=None, range=Optional[Union[dict[Union[str, InstanceSignalBindingName], Union[dict, InstanceSignalBinding]], list[Union[dict, InstanceSignalBinding]]]])
+slots.is_observed_by = Slot(uri=NARAD.is_observed_by, name="is_observed_by", curie=NARAD.curie('is_observed_by'),
+                   model_uri=NARAD.is_observed_by, domain=None, range=Optional[Union[dict[Union[str, SignalBindingName], Union[dict, SignalBinding]], list[Union[dict, SignalBinding]]]])
 
 slots.capability_class = Slot(uri=NARAD.capability_class, name="capability_class", curie=NARAD.curie('capability_class'),
                    model_uri=NARAD.capability_class, domain=None, range=Optional[str])
 
-slots.class_curie = Slot(uri=NARAD.class_curie, name="class_curie", curie=NARAD.curie('class_curie'),
-                   model_uri=NARAD.class_curie, domain=None, range=Optional[Union[str, URIorCURIE]])
-
-slots.signals = Slot(uri=NARAD.signals, name="signals", curie=NARAD.curie('signals'),
-                   model_uri=NARAD.signals, domain=None, range=Optional[Union[dict[Union[str, SignalName], Union[dict, Signal]], list[Union[dict, Signal]]]])
+slots.has_signal = Slot(uri=NARAD.has_signal, name="has_signal", curie=NARAD.curie('has_signal'),
+                   model_uri=NARAD.has_signal, domain=None, range=Optional[Union[dict[Union[str, SignalName], Union[dict, Signal]], list[Union[dict, Signal]]]])
 
 slots.device_type = Slot(uri=NARAD.device_type, name="device_type", curie=NARAD.curie('device_type'),
                    model_uri=NARAD.device_type, domain=None, range=Optional[Union[str, "ElementKindEnum"]])
@@ -1270,43 +1458,7 @@ slots.units = Slot(uri=NARAD.units, name="units", curie=NARAD.curie('units'),
                    model_uri=NARAD.units, domain=None, range=Optional[str])
 
 slots.units_uri = Slot(uri=NARAD.units_uri, name="units_uri", curie=NARAD.curie('units_uri'),
-                   model_uri=NARAD.units_uri, domain=None, range=Optional[Union[str, URIorCURIE]])
-
-slots.current_setpoint = Slot(uri=NARAD.current_setpoint, name="current_setpoint", curie=NARAD.curie('current_setpoint'),
-                   model_uri=NARAD.current_setpoint, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.current_readback = Slot(uri=NARAD.current_readback, name="current_readback", curie=NARAD.curie('current_readback'),
-                   model_uri=NARAD.current_readback, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.current_min = Slot(uri=NARAD.current_min, name="current_min", curie=NARAD.curie('current_min'),
-                   model_uri=NARAD.current_min, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.current_max = Slot(uri=NARAD.current_max, name="current_max", curie=NARAD.curie('current_max'),
-                   model_uri=NARAD.current_max, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.strength_setpoint = Slot(uri=NARAD.strength_setpoint, name="strength_setpoint", curie=NARAD.curie('strength_setpoint'),
-                   model_uri=NARAD.strength_setpoint, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.kick_setpoint = Slot(uri=NARAD.kick_setpoint, name="kick_setpoint", curie=NARAD.curie('kick_setpoint'),
-                   model_uri=NARAD.kick_setpoint, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.field_setpoint = Slot(uri=NARAD.field_setpoint, name="field_setpoint", curie=NARAD.curie('field_setpoint'),
-                   model_uri=NARAD.field_setpoint, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.horizontal_beam_position = Slot(uri=NARAD.horizontal_beam_position, name="horizontal_beam_position", curie=NARAD.curie('horizontal_beam_position'),
-                   model_uri=NARAD.horizontal_beam_position, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.vertical_beam_position = Slot(uri=NARAD.vertical_beam_position, name="vertical_beam_position", curie=NARAD.curie('vertical_beam_position'),
-                   model_uri=NARAD.vertical_beam_position, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.gradient_setpoint = Slot(uri=NARAD.gradient_setpoint, name="gradient_setpoint", curie=NARAD.curie('gradient_setpoint'),
-                   model_uri=NARAD.gradient_setpoint, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.gradient_readback = Slot(uri=NARAD.gradient_readback, name="gradient_readback", curie=NARAD.curie('gradient_readback'),
-                   model_uri=NARAD.gradient_readback, domain=None, range=Optional[Union[dict, SignalBinding]])
-
-slots.status = Slot(uri=NARAD.status, name="status", curie=NARAD.curie('status'),
-                   model_uri=NARAD.status, domain=None, range=Optional[Union[dict, SignalBinding]])
+                   model_uri=NARAD.units_uri, domain=None, range=Optional[str])
 
 slots.line = Slot(uri=NARAD.line, name="line", curie=NARAD.curie('line'),
                    model_uri=NARAD.line, domain=None, range=Optional[Union[Union[str, BeamlineElementName], list[Union[str, BeamlineElementName]]]])
@@ -1319,9 +1471,6 @@ slots.zero_point = Slot(uri=NARAD.zero_point, name="zero_point", curie=NARAD.cur
 
 slots.periodic = Slot(uri=NARAD.periodic, name="periodic", curie=NARAD.curie('periodic'),
                    model_uri=NARAD.periodic, domain=None, range=Optional[Union[bool, Bool]])
-
-slots.element_kind = Slot(uri=NARAD.element_kind, name="element_kind", curie=NARAD.curie('element_kind'),
-                   model_uri=NARAD.element_kind, domain=None, range=Optional[Union[str, "ElementKindEnum"]])
 
 slots.length = Slot(uri=NARAD.length, name="length", curie=NARAD.curie('length'),
                    model_uri=NARAD.length, domain=None, range=Optional[float])
@@ -1381,25 +1530,31 @@ slots.NaradConfig_schema_version = Slot(uri=NARAD.schema_version, name="NaradCon
                    model_uri=NARAD.NaradConfig_schema_version, domain=NaradConfig, range=str)
 
 slots.NaradConfig_deployed_system = Slot(uri=NARAD.deployed_system, name="NaradConfig_deployed_system", curie=NARAD.curie('deployed_system'),
-                   model_uri=NARAD.NaradConfig_deployed_system, domain=NaradConfig, range=Union[str, FacilitySystemName])
+                   model_uri=NARAD.NaradConfig_deployed_system, domain=NaradConfig, range=Union[dict, "DeployedSystem"])
 
-slots.NaradConfig_has_sub_system = Slot(uri=NARAD.has_sub_system, name="NaradConfig_has_sub_system", curie=NARAD.curie('has_sub_system'),
-                   model_uri=NARAD.NaradConfig_has_sub_system, domain=NaradConfig, range=Union[Union[str, ControlSystemName], list[Union[str, ControlSystemName]]])
+slots.NaradConfig_control_system = Slot(uri=NARAD.control_system, name="NaradConfig_control_system", curie=NARAD.curie('control_system'),
+                   model_uri=NARAD.NaradConfig_control_system, domain=NaradConfig, range=Union[dict, "ControlSystem"])
 
 slots.NaradConfig_device_layer = Slot(uri=NARAD.device_layer, name="NaradConfig_device_layer", curie=NARAD.curie('device_layer'),
-                   model_uri=NARAD.NaradConfig_device_layer, domain=NaradConfig, range=Union[dict[Union[str, DeviceSystemName], Union[dict, "DeviceSystem"]], list[Union[dict, "DeviceSystem"]]])
+                   model_uri=NARAD.NaradConfig_device_layer, domain=NaradConfig, range=Union[dict[Union[str, DeviceName], Union[dict, "Device"]], list[Union[dict, "Device"]]])
 
 slots.NaradConfig_signal_layer = Slot(uri=NARAD.signal_layer, name="NaradConfig_signal_layer", curie=NARAD.curie('signal_layer'),
                    model_uri=NARAD.NaradConfig_signal_layer, domain=NaradConfig, range=Union[dict, "SignalLayer"])
 
-slots.ControlCapability_signals = Slot(uri=NARAD.signals, name="ControlCapability_signals", curie=NARAD.curie('signals'),
-                   model_uri=NARAD.ControlCapability_signals, domain=ControlCapability, range=Union[dict[Union[str, SignalName], Union[dict, "Signal"]], list[Union[dict, "Signal"]]])
+slots.Capability_has_signal = Slot(uri=NARAD.has_signal, name="Capability_has_signal", curie=NARAD.curie('has_signal'),
+                   model_uri=NARAD.Capability_has_signal, domain=Capability, range=Union[dict[Union[str, SignalName], Union[dict, "Signal"]], list[Union[dict, "Signal"]]])
 
-slots.SignalDefinitions_signal_bindings = Slot(uri=NARAD.signal_bindings, name="SignalDefinitions_signal_bindings", curie=NARAD.curie('signal_bindings'),
-                   model_uri=NARAD.SignalDefinitions_signal_bindings, domain=SignalDefinitions, range=Optional[Union[dict[Union[str, SignalBindingName], Union[dict, "SignalBinding"]], list[Union[dict, "SignalBinding"]]]])
+slots.Capability_is_property_of = Slot(uri=NARAD.is_property_of, name="Capability_is_property_of", curie=NARAD.curie('is_property_of'),
+                   model_uri=NARAD.Capability_is_property_of, domain=Capability, range=Optional[Union[str, ControlSystemName]])
+
+slots.Capability_subclass_of = Slot(uri=NARAD.subclass_of, name="Capability_subclass_of", curie=NARAD.curie('subclass_of'),
+                   model_uri=NARAD.Capability_subclass_of, domain=Capability, range=Optional[Union[str, CapabilityName]])
 
 slots.BeamlineElement_is_instance_of = Slot(uri=NARAD.is_instance_of, name="BeamlineElement_is_instance_of", curie=NARAD.curie('is_instance_of'),
-                   model_uri=NARAD.BeamlineElement_is_instance_of, domain=BeamlineElement, range=Optional[Union[str, list[str]]])
+                   model_uri=NARAD.BeamlineElement_is_instance_of, domain=BeamlineElement, range=Optional[Union[Union[str, "ElementKindEnum"], list[Union[str, "ElementKindEnum"]]]])
+
+slots.BeamlineElement_is_observed_by = Slot(uri=NARAD.is_observed_by, name="BeamlineElement_is_observed_by", curie=NARAD.curie('is_observed_by'),
+                   model_uri=NARAD.BeamlineElement_is_observed_by, domain=BeamlineElement, range=Optional[Union[dict[Union[str, InstanceSignalBindingName], Union[dict, "InstanceSignalBinding"]], list[Union[dict, "InstanceSignalBinding"]]]])
 
 slots.System_has_sub_system = Slot(uri=NARAD.has_sub_system, name="System_has_sub_system", curie=NARAD.curie('has_sub_system'),
                    model_uri=NARAD.System_has_sub_system, domain=System, range=Optional[Union[dict[Union[str, SystemName], Union[dict, "System"]], list[Union[dict, "System"]]]])
@@ -1407,23 +1562,56 @@ slots.System_has_sub_system = Slot(uri=NARAD.has_sub_system, name="System_has_su
 slots.System_has_system_capability = Slot(uri=NARAD.has_system_capability, name="System_has_system_capability", curie=NARAD.curie('has_system_capability'),
                    model_uri=NARAD.System_has_system_capability, domain=System, range=Optional[Union[dict[Union[str, SystemCapabilityName], Union[dict, "SystemCapability"]], list[Union[dict, "SystemCapability"]]]])
 
-slots.DeviceSystem_has_sub_system = Slot(uri=NARAD.has_sub_system, name="DeviceSystem_has_sub_system", curie=NARAD.curie('has_sub_system'),
-                   model_uri=NARAD.DeviceSystem_has_sub_system, domain=DeviceSystem, range=Optional[Union[dict[Union[str, SystemName], Union[dict, System]], list[Union[dict, System]]]])
+slots.DeployedSystem_system_type = Slot(uri=NARAD.system_type, name="DeployedSystem_system_type", curie=NARAD.curie('system_type'),
+                   model_uri=NARAD.DeployedSystem_system_type, domain=DeployedSystem, range=Optional[Union[str, "SystemTypeEnum"]])
 
-slots.DeviceSystem_has_system_capability = Slot(uri=NARAD.has_system_capability, name="DeviceSystem_has_system_capability", curie=NARAD.curie('has_system_capability'),
-                   model_uri=NARAD.DeviceSystem_has_system_capability, domain=DeviceSystem, range=Optional[Union[Union[str, SystemCapabilityName], list[Union[str, SystemCapabilityName]]]])
+slots.DeployedSystem_has_control_system = Slot(uri=NARAD.has_control_system, name="DeployedSystem_has_control_system", curie=NARAD.curie('has_control_system'),
+                   model_uri=NARAD.DeployedSystem_has_control_system, domain=DeployedSystem, range=Optional[Union[str, ControlSystemName]])
+
+slots.DeployedSystem_has_system_capability = Slot(uri=NARAD.has_system_capability, name="DeployedSystem_has_system_capability", curie=NARAD.curie('has_system_capability'),
+                   model_uri=NARAD.DeployedSystem_has_system_capability, domain=DeployedSystem, range=Union[dict[Union[str, SystemCapabilityName], Union[dict, "SystemCapability"]], list[Union[dict, "SystemCapability"]]])
+
+slots.ControlSystem_has_naming_convention = Slot(uri=NARAD.has_naming_convention, name="ControlSystem_has_naming_convention", curie=NARAD.curie('has_naming_convention'),
+                   model_uri=NARAD.ControlSystem_has_naming_convention, domain=ControlSystem, range=Optional[Union[dict[Union[str, NamingConventionName], Union[dict, "NamingConvention"]], list[Union[dict, "NamingConvention"]]]])
+
+slots.ControlSystem_system_type = Slot(uri=NARAD.system_type, name="ControlSystem_system_type", curie=NARAD.curie('system_type'),
+                   model_uri=NARAD.ControlSystem_system_type, domain=ControlSystem, range=Optional[Union[str, "SystemTypeEnum"]])
+
+slots.ControlSystem_has_sub_system = Slot(uri=NARAD.has_sub_system, name="ControlSystem_has_sub_system", curie=NARAD.curie('has_sub_system'),
+                   model_uri=NARAD.ControlSystem_has_sub_system, domain=ControlSystem, range=Optional[Union[dict[Union[str, SystemName], Union[dict, System]], list[Union[dict, System]]]])
+
+slots.ControlSystem_has_system_capability = Slot(uri=NARAD.has_system_capability, name="ControlSystem_has_system_capability", curie=NARAD.curie('has_system_capability'),
+                   model_uri=NARAD.ControlSystem_has_system_capability, domain=ControlSystem, range=Optional[Union[dict[Union[str, SystemCapabilityName], Union[dict, "SystemCapability"]], list[Union[dict, "SystemCapability"]]]])
+
+slots.Device_device_type = Slot(uri=NARAD.device_type, name="Device_device_type", curie=NARAD.curie('device_type'),
+                   model_uri=NARAD.Device_device_type, domain=Device, range=Union[str, "ElementKindEnum"])
+
+slots.Device_is_observed_by = Slot(uri=NARAD.is_observed_by, name="Device_is_observed_by", curie=NARAD.curie('is_observed_by'),
+                   model_uri=NARAD.Device_is_observed_by, domain=Device, range=Optional[Union[dict[Union[str, SignalBindingName], Union[dict, SignalBinding]], list[Union[dict, SignalBinding]]]])
+
+slots.Device_has_sub_system = Slot(uri=NARAD.has_sub_system, name="Device_has_sub_system", curie=NARAD.curie('has_sub_system'),
+                   model_uri=NARAD.Device_has_sub_system, domain=Device, range=Optional[Union[dict[Union[str, SystemName], Union[dict, System]], list[Union[dict, System]]]])
+
+slots.Device_has_system_capability = Slot(uri=NARAD.has_system_capability, name="Device_has_system_capability", curie=NARAD.curie('has_system_capability'),
+                   model_uri=NARAD.Device_has_system_capability, domain=Device, range=Optional[Union[Union[str, SystemCapabilityName], list[Union[str, SystemCapabilityName]]]])
+
+slots.NamingConventionExample_example = Slot(uri=NARAD.example, name="NamingConventionExample_example", curie=NARAD.curie('example'),
+                   model_uri=NARAD.NamingConventionExample_example, domain=NamingConventionExample, range=Union[str, NamingConventionExampleExample])
 
 slots.SystemCapability_for_property = Slot(uri=NARAD.for_property, name="SystemCapability_for_property", curie=NARAD.curie('for_property'),
                    model_uri=NARAD.SystemCapability_for_property, domain=SystemCapability, range=Optional[Union[str, list[str]]])
 
+slots.TemplateExample_example = Slot(uri=NARAD.example, name="TemplateExample_example", curie=NARAD.curie('example'),
+                   model_uri=NARAD.TemplateExample_example, domain=TemplateExample, range=Union[str, TemplateExampleExample])
+
 slots.InstanceSignalBinding_is_instance_of = Slot(uri=NARAD.is_instance_of, name="InstanceSignalBinding_is_instance_of", curie=NARAD.curie('is_instance_of'),
-                   model_uri=NARAD.InstanceSignalBinding_is_instance_of, domain=InstanceSignalBinding, range=Optional[Union[str, list[str]]])
+                   model_uri=NARAD.InstanceSignalBinding_is_instance_of, domain=InstanceSignalBinding, range=Optional[Union[Union[str, SignalName], list[Union[str, SignalName]]]])
 
 slots.InstanceSignalBinding_is_hosted_by = Slot(uri=NARAD.is_hosted_by, name="InstanceSignalBinding_is_hosted_by", curie=NARAD.curie('is_hosted_by'),
                    model_uri=NARAD.InstanceSignalBinding_is_hosted_by, domain=InstanceSignalBinding, range=Optional[str])
 
 slots.InstanceSignalBinding_is_property_of = Slot(uri=NARAD.is_property_of, name="InstanceSignalBinding_is_property_of", curie=NARAD.curie('is_property_of'),
-                   model_uri=NARAD.InstanceSignalBinding_is_property_of, domain=InstanceSignalBinding, range=Optional[str])
+                   model_uri=NARAD.InstanceSignalBinding_is_property_of, domain=InstanceSignalBinding, range=Optional[Union[str, ControlSystemName]])
 
 slots.InstanceSignalBinding_for_property = Slot(uri=NARAD.for_property, name="InstanceSignalBinding_for_property", curie=NARAD.curie('for_property'),
-                   model_uri=NARAD.InstanceSignalBinding_for_property, domain=InstanceSignalBinding, range=Optional[Union[str, list[str]]])
+                   model_uri=NARAD.InstanceSignalBinding_for_property, domain=InstanceSignalBinding, range=Optional[Union[Union[str, SignalBindingName], list[Union[str, SignalBindingName]]]])

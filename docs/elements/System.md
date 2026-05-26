@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
+URI: [narad:System](https://example.org/narad_linkml/schema/narad/System)
 
 
 
@@ -27,10 +27,12 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
 
       System <|-- FacilitySystem
         click FacilitySystem href "../FacilitySystem/"
+      System <|-- DeployedSystem
+        click DeployedSystem href "../DeployedSystem/"
       System <|-- ControlSystem
         click ControlSystem href "../ControlSystem/"
-      System <|-- DeviceSystem
-        click DeviceSystem href "../DeviceSystem/"
+      System <|-- Device
+        click Device href "../Device/"
       System <|-- Instrument
         click Instrument href "../Instrument/"
       
@@ -83,8 +85,9 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
 * [NamedThing](NamedThing.md)
     * **System**
         * [FacilitySystem](FacilitySystem.md)
+        * [DeployedSystem](DeployedSystem.md)
         * [ControlSystem](ControlSystem.md)
-        * [DeviceSystem](DeviceSystem.md)
+        * [Device](Device.md)
         * [Instrument](Instrument.md)
 
 
@@ -107,21 +110,24 @@ URI: [narad:System](https://w3id.org/narad_linkml/schema/narad/System)
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [NaradConfig](NaradConfig.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [ControlCapability](ControlCapability.md) | [subclass_of](subclass_of.md) | range | [System](System.md) |
+| [FacilitySystem](FacilitySystem.md) | [has_control_system](has_control_system.md) | domain | [System](System.md) |
 | [FacilitySystem](FacilitySystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [FacilitySystem](FacilitySystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [FacilitySystem](FacilitySystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
 | [System](System.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [System](System.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [System](System.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
+| [DeployedSystem](DeployedSystem.md) | [has_control_system](has_control_system.md) | domain | [System](System.md) |
+| [DeployedSystem](DeployedSystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
+| [DeployedSystem](DeployedSystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
+| [DeployedSystem](DeployedSystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
 | [ControlSystem](ControlSystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [ControlSystem](ControlSystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [ControlSystem](ControlSystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
-| [DeviceSystem](DeviceSystem.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
-| [DeviceSystem](DeviceSystem.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
-| [DeviceSystem](DeviceSystem.md) | [subclass_of](subclass_of.md) | range | [System](System.md) |
-| [DeviceSystem](DeviceSystem.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
+| [Device](Device.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
+| [Device](Device.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
+| [Device](Device.md) | [subclass_of](subclass_of.md) | range | [System](System.md) |
+| [Device](Device.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
 | [Instrument](Instrument.md) | [has_sub_system](has_sub_system.md) | domain | [System](System.md) |
 | [Instrument](Instrument.md) | [has_sub_system](has_sub_system.md) | range | [System](System.md) |
 | [Instrument](Instrument.md) | [has_system_capability](has_system_capability.md) | domain | [System](System.md) |
@@ -222,6 +228,8 @@ attributes:
   system_type:
     name: system_type
     description: High-level system type for classification and querying.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: system_type
@@ -235,6 +243,8 @@ attributes:
       facility → control-system, facility → device, and device → component decomposition.
 
       '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     exact_mappings:
     - ssn-system:hasSubSystem
@@ -243,9 +253,8 @@ attributes:
     alias: has_sub_system
     owner: System
     domain_of:
-    - NaradConfig
     - System
-    - DeviceSystem
+    - Device
     range: System
     multivalued: true
     inlined_as_list: true
@@ -256,6 +265,8 @@ attributes:
       matters.
 
       '
+    in_subset:
+    - relationship
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     exact_mappings:
     - ssn-system:hasSystemCapability
@@ -265,13 +276,15 @@ attributes:
     owner: System
     domain_of:
     - System
-    - DeviceSystem
+    - Device
     range: SystemCapability
     multivalued: true
     inlined: true
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -284,12 +297,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: System
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

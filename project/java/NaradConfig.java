@@ -17,10 +17,10 @@ public class NaradConfig  {
 
   private String schemaVersion;
   private String intent;
-  private FacilitySystem deployedSystem;
-  private List<ControlSystem> hasSubSystem;
-  private List<ControlCapability> controlCapabilityLayer;
-  private List<DeviceSystem> deviceLayer;
+  private DeployedSystem deployedSystem;
+  private ControlSystem controlSystem;
+  private List<Capability> capabilityLayer;
+  private List<Device> deviceLayer;
   private SignalLayer signalLayer;
 
 }

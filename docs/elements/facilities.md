@@ -9,7 +9,7 @@ _Facility-specific signal binding configurations keyed by facility name._
 
 
 
-URI: [narad:facilities](https://w3id.org/narad_linkml/schema/narad/facilities)
+URI: [narad:facilities](https://example.org/narad_linkml/schema/narad/facilities)
 Alias: facilities
 
 <!-- no inheritance hierarchy -->

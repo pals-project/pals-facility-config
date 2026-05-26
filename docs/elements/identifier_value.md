@@ -9,7 +9,7 @@ _The value of the identifier (e.g. the DOI string, ARK string, URL string, or lo
 
 
 
-URI: [narad:identifier_value](https://w3id.org/narad_linkml/schema/narad/identifier_value)
+URI: [narad:identifier_value](https://example.org/narad_linkml/schema/narad/identifier_value)
 Alias: identifier_value
 
 <!-- no inheritance hierarchy -->
@@ -68,6 +68,8 @@ Alias: identifier_value
 name: identifier_value
 description: The value of the identifier (e.g. the DOI string, ARK string, URL string,
   or local ID).
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: identifier_value

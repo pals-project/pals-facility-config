@@ -3,11 +3,11 @@
 
 
 
-_Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The element_kind of this BeamlineElement must match the device_type of the DeviceSystem referenced by is_instance_of._
+_Controlled vocabulary for beamline element types, shared between the capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind). Keeping the enum here keeps profile device_type values in sync with element kind values without circular imports. Values must stay aligned with CapabilityProfile.device_type. NOTE: The kind of a BeamlineElement must match the device_type of the Device referenced by is_instance_of._
 
 
 
-URI: [narad:ElementKindEnum](https://w3id.org/narad_linkml/schema/narad/ElementKindEnum)
+URI: [narad:ElementKindEnum](https://example.org/narad_linkml/schema/narad/ElementKindEnum)
 
 ## Permissible Values
 
@@ -33,7 +33,7 @@ URI: [narad:ElementKindEnum](https://w3id.org/narad_linkml/schema/narad/ElementK
 | Name | Description |
 | ---  | --- |
 | [device_type](device_type.md) | Represents the generic, semantic class of the device (e |
-| [element_kind](element_kind.md) | The controlled vocabulary for the physical kind of element (e |
+| [is_instance_of](is_instance_of.md) |  |
 
 
 
@@ -65,8 +65,8 @@ description: 'Controlled vocabulary for beamline element types, shared between t
   capability layer (CapabilityProfile.device_type) and the element layer (BeamlineElement.kind).
   Keeping the enum here keeps profile device_type values in sync with element kind
   values without circular imports. Values must stay aligned with CapabilityProfile.device_type.
-  NOTE: The element_kind of this BeamlineElement must match the device_type of the
-  DeviceSystem referenced by is_instance_of.'
+  NOTE: The kind of a BeamlineElement must match the device_type of the Device referenced
+  by is_instance_of.'
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 permissible_values:

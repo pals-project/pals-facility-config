@@ -11,7 +11,7 @@ _Abstract base class providing identity and human-readable metadata._
 * __NOTE__: this is an abstract class and should not be instantiated directly
 
 
-URI: [narad:NamedThing](https://w3id.org/narad_linkml/schema/narad/NamedThing)
+URI: [narad:NamedThing](https://example.org/narad_linkml/schema/narad/NamedThing)
 
 
 
@@ -21,10 +21,8 @@ URI: [narad:NamedThing](https://w3id.org/narad_linkml/schema/narad/NamedThing)
  classDiagram
     class NamedThing
     click NamedThing href "../NamedThing/"
-      NamedThing <|-- ControlCapability
-        click ControlCapability href "../ControlCapability/"
-      NamedThing <|-- SignalDefinitions
-        click SignalDefinitions href "../SignalDefinitions/"
+      NamedThing <|-- Capability
+        click Capability href "../Capability/"
       NamedThing <|-- SignalBinding
         click SignalBinding href "../SignalBinding/"
       NamedThing <|-- Beamline
@@ -35,6 +33,10 @@ URI: [narad:NamedThing](https://w3id.org/narad_linkml/schema/narad/NamedThing)
         click System href "../System/"
       NamedThing <|-- SystemCapability
         click SystemCapability href "../SystemCapability/"
+      NamedThing <|-- NamingConvention
+        click NamingConvention href "../NamingConvention/"
+      NamedThing <|-- TemplateComponent
+        click TemplateComponent href "../TemplateComponent/"
       NamedThing <|-- Signal
         click Signal href "../Signal/"
       NamedThing <|-- InstanceSignalBinding
@@ -53,13 +55,14 @@ URI: [narad:NamedThing](https://w3id.org/narad_linkml/schema/narad/NamedThing)
 
 ## Inheritance
 * **NamedThing**
-    * [ControlCapability](ControlCapability.md)
-    * [SignalDefinitions](SignalDefinitions.md)
+    * [Capability](Capability.md)
     * [SignalBinding](SignalBinding.md)
     * [Beamline](Beamline.md)
     * [BeamlineElement](BeamlineElement.md)
     * [System](System.md)
     * [SystemCapability](SystemCapability.md)
+    * [NamingConvention](NamingConvention.md)
+    * [TemplateComponent](TemplateComponent.md)
     * [Signal](Signal.md)
     * [InstanceSignalBinding](InstanceSignalBinding.md)
 
@@ -139,6 +142,8 @@ attributes:
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -151,12 +156,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: NamedThing
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

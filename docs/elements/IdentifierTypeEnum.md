@@ -7,7 +7,7 @@ _Allowed identifier types for facilities and other entities._
 
 
 
-URI: [narad:IdentifierTypeEnum](https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum)
+URI: [narad:IdentifierTypeEnum](https://example.org/narad_linkml/schema/narad/IdentifierTypeEnum)
 
 ## Permissible Values
 

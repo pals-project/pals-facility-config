@@ -9,7 +9,7 @@ _A named control system suffix definition for one semantic signal. The suffix is
 
 
 
-URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBinding)
+URI: [narad:SignalBinding](https://example.org/narad_linkml/schema/narad/SignalBinding)
 
 
 
@@ -22,11 +22,11 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
       NamedThing <|-- SignalBinding
         click NamedThing href "../NamedThing/"
       
-      SignalBinding : control_system_suffix
-        
       SignalBinding : description
         
       SignalBinding : name
+        
+      SignalBinding : signal_code_suffix
         
       
 ```
@@ -45,7 +45,7 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [control_system_suffix](control_system_suffix.md) | 0..1 <br/> [String](String.md) | Facility-specific control-system (e | direct |
+| [signal_code_suffix](signal_code_suffix.md) | 0..1 <br/> [String](String.md) | Facility-specific control-system (e | direct |
 | [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
 | [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
 
@@ -57,7 +57,8 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [SignalDefinitions](SignalDefinitions.md) | [signal_bindings](signal_bindings.md) | range | [SignalBinding](SignalBinding.md) |
+| [Device](Device.md) | [is_observed_by](is_observed_by.md) | range | [SignalBinding](SignalBinding.md) |
+| [InstanceSignalBinding](InstanceSignalBinding.md) | [for_property](for_property.md) | range | [SignalBinding](SignalBinding.md) |
 
 
 
@@ -107,7 +108,7 @@ description: A named control system suffix definition for one semantic signal. T
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 is_a: NamedThing
 slots:
-- control_system_suffix
+- signal_code_suffix
 
 ```
 </details>
@@ -123,15 +124,17 @@ description: A named control system suffix definition for one semantic signal. T
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 is_a: NamedThing
 attributes:
-  control_system_suffix:
-    name: control_system_suffix
+  signal_code_suffix:
+    name: signal_code_suffix
     description: 'Facility-specific control-system (e.g. EPICS) naming suffix used
       to derive or interpret the signal binding, e.g. .S, M, :GSET.
 
       '
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
-    alias: control_system_suffix
+    alias: signal_code_suffix
     owner: SignalBinding
     domain_of:
     - SignalBinding
@@ -139,6 +142,8 @@ attributes:
   name:
     name: name
     description: Human-readable name or local string key for the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     identifier: true
@@ -151,12 +156,16 @@ attributes:
   description:
     name: description
     description: Detailed description of the entity.
+    in_subset:
+    - label
     from_schema: https://w3id.org/narad_linkml/schema/narad/system
     rank: 1000
     alias: description
     owner: SignalBinding
     domain_of:
     - NamedThing
+    - NamingConventionExample
+    - TemplateExample
     range: string
 
 ```

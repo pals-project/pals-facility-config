@@ -11,7 +11,7 @@ __
 
 
 
-URI: [narad:has_system_capability](https://w3id.org/narad_linkml/schema/narad/has_system_capability)
+URI: [narad:has_system_capability](https://example.org/narad_linkml/schema/narad/has_system_capability)
 Alias: has_system_capability
 
 <!-- no inheritance hierarchy -->
@@ -24,11 +24,12 @@ Alias: has_system_capability
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [DeployedSystem](DeployedSystem.md) | A deployed system, with an identified facility, that is the subject of a NARA... |  yes  |
 | [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  yes  |
-| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
-| [ControlSystem](ControlSystem.md) | A control system (e |  no  |
+| [Device](Device.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  yes  |
 | [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
-| [DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  yes  |
+| [ControlSystem](ControlSystem.md) | A control system (e |  yes  |
+| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
 
 
 
@@ -79,6 +80,8 @@ description: 'Relates a System to a SystemCapability it supports (SSN-System ali
   Prefer this over directly attaching signals to systems when capability context matters.
 
   '
+in_subset:
+- relationship
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 exact_mappings:
 - ssn-system:hasSystemCapability
@@ -87,7 +90,7 @@ domain: System
 alias: has_system_capability
 domain_of:
 - System
-- DeviceSystem
+- Device
 range: SystemCapability
 multivalued: true
 

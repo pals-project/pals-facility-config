@@ -9,7 +9,7 @@ _RF phase in degrees._
 
 
 
-URI: [narad:phase](https://w3id.org/narad_linkml/schema/narad/phase)
+URI: [narad:phase](https://example.org/narad_linkml/schema/narad/phase)
 Alias: phase
 
 <!-- no inheritance hierarchy -->
@@ -67,6 +67,8 @@ Alias: phase
 ```yaml
 name: phase
 description: RF phase in degrees.
+in_subset:
+- label
 from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: phase

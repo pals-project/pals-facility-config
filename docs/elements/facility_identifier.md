@@ -9,7 +9,7 @@ _Globally unique identifier for the facility, with specified type and value._
 
 
 
-URI: [narad:facility_identifier](https://w3id.org/narad_linkml/schema/narad/facility_identifier)
+URI: [narad:facility_identifier](https://example.org/narad_linkml/schema/narad/facility_identifier)
 Alias: facility_identifier
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: facility_identifier
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
+| [DeployedSystem](DeployedSystem.md) | A deployed system, with an identified facility, that is the subject of a NARA... |  no  |
 
 
 
@@ -74,7 +74,7 @@ from_schema: https://w3id.org/narad_linkml/schema/narad/system
 rank: 1000
 alias: facility_identifier
 domain_of:
-- FacilitySystem
+- DeployedSystem
 range: FacilityIdentifier
 multivalued: true
 inlined: false
