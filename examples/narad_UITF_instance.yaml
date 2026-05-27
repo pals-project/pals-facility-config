@@ -218,33 +218,54 @@ narad_config:
             is_observed_by:
               current_setpoint:
                 description: EPICS current setpoint PV
-                signal_code_suffix: .S
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .S
               current_readback:
                 description: EPICS current readback PV
-                signal_code_suffix: M
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: M
               current_min:
                 description: EPICS minimum current limit PV
-                signal_code_suffix: .HMIN
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .HMIN
               current_max:
                 description: EPICS maximum current limit PV
-                signal_code_suffix: .HMAX
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .HMAX
               magnet_status:
                 description: EPICS status PV
-                signal_code_suffix: .STAT
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .STAT
           Quadrupole:
             device_type: Quadrupole
             subclass_of: Magnet
             is_observed_by:
               strength_setpoint:
                 description: EPICS quadrupole strength setpoint PV
-                signal_code_suffix: .BDL
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .BDL
           Dipole:
             device_type: Dipole
             subclass_of: Magnet
             is_observed_by:
               field_setpoint:
                 description: Template EPICS dipole bend field setpoint PV
-                signal_code_suffix: .BDL
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .BDL
           Corrector:
             device_type: Corrector
             subclass_of: Magnet
@@ -252,30 +273,49 @@ narad_config:
               kick_setpoint:
                 description: Template EPICS corrector kick setpoint PV
                 signal_code_suffix: .KICK
+                has_override_naming_convention: {}
           BPM:
             device_type: BPM
             is_observed_by:
               horizontal_beam_position:
                 description: EPICS BPM horizontal beam position readback PV
-                signal_code_suffix: .XPOS
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .XPOS
               vertical_beam_position:
                 description: EPICS BPM vertical beam position readback PV
-                signal_code_suffix: .YPOS
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .YPOS
               bpm_status:
                 description: EPICS BPM status readback PV
-                signal_code_suffix: .STAT
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .STAT
           RFCavity:
             device_type: RFCavity
             is_observed_by:
               gradient_setpoint:
                 description: EPICS cavity gradient setpoint PV
-                signal_code_suffix: .GET
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .GET
               gradient_readback:
                 description: EPICS cavity gradient readback PV
-                signal_code_suffix: .GMES
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .GMES
               cavity_status:
                 description: EPICS cavity status PV
-                signal_code_suffix: .STAT
+                has_override_naming_convention: {}
+                binding_template_components:
+                  - component_name: signal_code_suffix
+                    value: .STAT
 beamlines:
   GUN_thru_MV:
     multipass: true

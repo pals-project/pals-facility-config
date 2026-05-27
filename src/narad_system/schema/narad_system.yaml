@@ -235,7 +235,8 @@ classes:
     is_a: NamedThing
     description: "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance."
     slots:
-      - signal_code_suffix
+      - binding_template_components
+      - has_override_naming_convention
   
   # ---------------------------------------------------------------------------
   # Beamline and BeamlineElement
@@ -431,6 +432,15 @@ classes:
     slots:
       - required
       - pattern
+
+  BindingTemplateComponent:
+    description: >
+      A template component specifically for signal bindings, with a name corresponding to a given TemplateComponent, 
+      and the value that should be substituted for that component in the naming convention template for this specific signal binding.
+      This is used to link a SignalBinding to the specific part of the naming convention template that defines how the semantic signal maps to the control system PV name.
+    slots:
+      - component_name
+      - value
 
   TemplateExample:
     description: >
@@ -843,13 +853,30 @@ slots:
     in_subset:
       - label
 
-  signal_code_suffix:
+  binding_template_components:
     description: >
-      Facility-specific control-system (e.g. EPICS) naming suffix used to
-      derive or interpret the signal binding, e.g. .S, M, :GSET.
+      The components of the naming convention template used to construct the full control system PV name for this signal binding. 
+      This can include components such as device_name, signal_code_suffix, and any fixed parts of the naming convention.
+    range: BindingTemplateComponent
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  component_name:
+    description: >
+      The name of the template component that this binding template component corresponds to in the naming convention template, e.g. device_name or signal_code_suffix.
     range: string
+    identifier: true
     in_subset:
       - label
+
+  #signal_code_suffix:
+  #  description: >
+  #    Facility-specific control-system (e.g. EPICS) naming suffix used to
+  #    derive or interpret the signal binding, e.g. .S, M, :GSET.
+  #  range: string
+  #  in_subset:
+  #    - label
 
   beamlines:
     range: Beamline
@@ -908,6 +935,18 @@ slots:
       This is where you would capture the patterns/templates for how control system PVs or signals are constructed for this control system, 
       for example, the EPICS convention of using suffixes like .R, .S, :GSET to indicate readback, status, and setpoint signals.
       Multiple naming conventions can be captured if a control system uses more than one convention for different device types or domains.
+
+  has_override_naming_convention:
+    range: NamingConvention
+    in_subset:
+      - relationship
+    multivalued: false
+    inlined: true
+    description: >-
+      An optional override naming convention that can be used to capture exceptions to the general naming convention for specific cases. 
+      For example, if most devices of a certain type follow a standard naming convention but there are known exceptions for certain devices or signals, 
+      this slot can be used to capture the specific naming convention for those exceptions without affecting the general convention captured in has_naming_convention.
+      Override naming conventions can be linked directly to specific SignalBindings.
 
   template:
     range: string
