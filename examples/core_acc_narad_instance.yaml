@@ -1,0 +1,634 @@
+type: AcceleratorCoreDataset
+control_system:
+    name: EPICS
+    description: "EPICS control system instance at the NARAD UITF facility."
+    source_system: EPICS
+    system_type: ControlAndMonitoring
+    naming_conventions: 
+      - name: EPICSSuffixConvention
+        description: "Template for EPICS PV naming convention for device signals at UITF using the format {device_name}{signal_code_suffix}."
+        template: "{device_name}{signal_code_suffix}"
+        template_components:
+          - name: device_name
+            description: "The name of the device instance as defined in the device layer."
+            required: true
+            pattern: "^[A-Za-z0-9_]+$"
+          - name: signal_code_suffix
+            description: "A suffix defined for each signal in the capability layer that maps to the corresponding EPICS PV for that signal at UITF."
+            required: true
+            pattern: ":(.S|M|.HMIN|.HMAX|.KICK|.BDL|.XPOS|.YPOS|.GET|.GMES|.STAT)$"
+        full_pattern: "^[A-Z][A-Z0-9_]*:(.S|M|.HMIN|.HMAX|.KICK|.BDL|.XPOS|.YPOS|.GET|.GMES|.STAT)$"
+        examples:
+          - example: "MBHK101H.S"
+            description: "EPICS PV for the current setpoint signal of the MBHK101H corrector magnet at UITF."
+          - example: "IPMK101.XPOS"
+            description: "EPICS PV for the horizontal beam position readback signal of the IPMK101 BPM at UITF."
+components:
+  - Magnet:
+    type: PhysicalComponent
+    name: Magnet
+    synonyms: 
+      - generic_magnet
+      - magnet
+    description: "Generic magnet component type. Superclass for specific magnet types such as dipoles, quadrupoles, and correctors."
+    has_beamline_relation: Inline
+    located_in: Beamline
+    superclass_of:
+      - HCorrector
+      - VCorrector
+      - Dipole
+      - Quadrupole
+      - Solenoid
+    has_signal:
+      - current_setpoint
+      - current_readback
+      - current_min
+      - current_max
+      - magnet_status
+  - HCorrector:
+    type: PhysicalComponent
+    name: HorizontalCorrector
+    synonyms:
+      - HCorrector
+      - HorizontalCorrector
+      - horizontal corrector
+      - corrector magnet
+    description: "Corrector magnet component type. Subclass of Magnet."
+    has_beamline_relation: Inline
+    has_function: Steering
+    has_plane: Horizontal
+    located_in: Beamline
+    subclass_of: Magnet
+    has_signal:
+      - kick_setpoint
+  - VCorrector:
+    type: PhysicalComponent
+    name: VerticalCorrector
+    synonyms:
+      - VCorrector
+      - VerticalCorrector
+      - vertical corrector
+      - corrector magnet
+    description: "Corrector magnet component type. Subclass of Magnet."
+    has_beamline_relation: Inline
+    has_function: Steering
+    has_plane: Vertical
+    located_in: Beamline
+    subclass_of: Magnet
+    has_signal:
+      - kick_setpoint
+  - Dipole:
+    type: PhysicalComponent
+    name: Dipole
+    synonyms:
+      - dipole magnet
+    description: "Dipole magnet component type. Subclass of Magnet."
+    has_beamline_relation: inline
+    has_function: Bending
+    located_in: Beamline
+    subclass_of: Magnet
+    has_signal:
+      
+  - Quadrupole:
+    type: PhysicalComponent
+    name: Quadrupole
+    synonyms:
+      - quadrupole magnet
+    description: "Quadrupole magnet component type. Subclass of Magnet."
+    has_beamline_relation: Inline
+    has_function: Focusing
+    located_in: Beamline
+    subclass_of: Magnet
+  - Solenoid:
+    type: PhysicalComponent
+    name: Solenoid
+    synonyms:
+      - solenoid magnet
+    description: "Solenoid magnet component type. Subclass of Magnet."
+    has_beamline_relation: Inline
+    has_function: Focusing
+    located_in: Beamline
+    subclass_of: Magnet
+signals:
+  kick_setpoint:
+    type: ControlSystemSignal
+    synonyms:
+      - integrated_field_setpoint
+      - integrated_kick_setpoint
+    description: Desired integrated corrector kick or equivalent model quantity.
+    observes: 
+      - HCorrector
+      - VCorrector
+    has_signal_role: Setpoint
+    has_canonical_signal_type: IntegratedFieldSetpoint
+    has_quantity_kind: IntegratedMagneticField
+    data_type: float
+    has_unit: T_m
+    has_binding: kick_setpoint
+  current_setpoint:
+    type: ControlSystemSignal
+    synonyms:
+      - magnet_current_setpoint
+      - current_command
+    description: Desired magnet current command.
+    observes: 
+      - HCorrector
+      - VCorrector
+    has_signal_role: Setpoint
+    has_canonical_signal_type: MagnetCurrentSetpoint
+    has_quantity_kind: ElectricCurrent
+    data_type: float
+    has_unit: A
+    has_binding: current_setpoint
+  current_readback:
+    type: ControlSystemSignal
+    synonyms:
+      - magnet_current_readback
+      - current_feedback
+    description: Measured magnet current.
+    observes: 
+      - HCorrector
+      - VCorrector
+    has_signal_role: Readback
+    has_canonical_signal_type: MagnetCurrentReadback
+    has_quantity_kind: ElectricCurrent
+    data_type: float
+    has_unit: A
+    has_binding: current_readback
+  current_min:
+    type: ControlSystemSignal
+    synonyms:
+      - magnet_current_min
+      - minimum_current_limit
+    description: Minimum allowed magnet current.
+    observes: 
+      - HCorrector
+      - VCorrector
+    has_signal_role: Limit
+    has_canonical_signal_type: MagnetCurrent
+    has_quantity_kind: ElectricCurrent
+    data_type: float
+    has_unit: A
+    has_binding: # TODO
+  current_max:
+    type: ControlSystemSignal
+    synonyms:
+      - magnet_current_max
+      - maximum_current_limit
+    description: Maximum allowed magnet current.
+    observes: 
+      - HCorrector
+      - VCorrector
+    has_signal_role: Limit
+    has_canonical_signal_type: MagnetCurrent
+    has_quantity_kind: ElectricCurrent
+    data_type: float
+    has_unit: A
+    has_binding: # TODO
+  magnet_status:
+    type: ControlSystemSignal
+    synonyms:
+      - corrector_status
+      - magnet_state
+      - status
+    description: Power-supply or device state summary.
+    observes: 
+      - HCorrector
+      - VCorrector
+    has_signal_role: Status
+    data_type: string
+    has_canonical_signal_type: Status
+    has_binding: # TODO
+signal_bindings:
+  kick_setpoint:
+    type: SignalBinding
+    binds_signal: kick_setpoint
+    naming_convention: EPICSSuffixConvention
+    native_identifier: "{device_name}.KICK"
+    source_system: EPICS
+    native_description: EPICS PV for the integrated corrector kick setpoint signal, following the EPICSSuffixConvention naming convention with the .KICK suffix.
+    native_unit: T_m
+    access_protocol: # TODO
+    archive_identifier: # TODO
+  current_setpoint:
+    type: SignalBinding
+    binds_signal: current_setpoint
+    naming_convention: EPICSSuffixConvention
+    native_identifier: "{device_name}.S"
+    source_system: EPICS
+    native_description: EPICS PV for the magnet current setpoint signal, following the EPICSSuffixConvention naming convention with the .S suffix.
+    native_unit: A
+    access_protocol: # TODO
+    archive_identifier: # TODO
+  current_readback:
+    type: SignalBinding
+    binds_signal: current_readback
+    naming_convention: EPICSSuffixConvention
+    native_identifier: "{device_name}.M"
+    source_system: EPICS
+    native_description: EPICS PV for the magnet current readback signal, following the EPICSSuffixConvention naming convention with the .R suffix.
+    native_unit: A
+    access_protocol: # TODO
+    archive_identifier: # TODO
+  current_min:
+    type: SignalBinding
+    binds_signal: current_min
+    naming_convention: EPICSSuffixConvention
+    native_identifier: "{device_name}.HMIN"
+    source_system: EPICS
+    native_description: EPICS PV for the magnet current minimum limit signal, following the EPICSSuffixConvention naming convention with the .HMIN suffix.
+    native_unit: A
+    access_protocol: # TODO
+    archive_identifier: # TODO
+  current_max:
+    type: SignalBinding
+    binds_signal: current_max
+    naming_convention: EPICSSuffixConvention
+    native_identifier: "{device_name}.HMAX"
+    source_system: EPICS
+    native_description: EPICS PV for the magnet current maximum limit signal, following the EPICSSuffixConvention naming convention with the .HMAX suffix.
+    native_unit: A
+    access_protocol: # TODO
+    archive_identifier: # TODO
+  magnet_status:
+    type: SignalBinding
+    binds_signal: magnet_status
+    naming_convention: EPICSSuffixConvention
+    native_identifier: "{device_name}.STAT"
+    source_system: EPICS
+    native_description: EPICS PV for the magnet status signal, following the EPICSSuffixConvention naming convention with the .STAT suffix.
+    native_unit: 
+    access_protocol: # TODO
+    archive_identifier: # TODO
+elements:
+  MBHK101H:
+      type: BeamlineElement
+      location:
+        beamline_name: GUN_thru_MV
+        section_id: # TODO, is the right name section?
+        girder_id: # TODO, is the right name girder?
+        hall_name: UITF
+      description: "MBHK101H horizontal corrector magnet in the GUN_thru_MV beamline at the UITF."
+      element_instance_of: HCorrector
+      signal_bindings:
+        - kick_setpoint:
+          type: SignalBinding
+          binds_signal: kick_setpoint
+          signal_binding_instance_of: kick_setpoint # added this to link to the signal binding defined in the signal_bindings slot.
+          naming_convention: EPICSSuffixConvention # This allows flexibility if a particle element has an override for the naming convention used for a particular signal, which is common for EPICS PVs. In this case, we are using the same EPICSSuffixConvention for all signals, but this structure allows for different conventions to be used for different signals if needed.
+          native_identifier: "MBHK101H.KICK" # native_convention and native_identifier are a bit duplicative, but I think it is okay
+        - current_setpoint:
+          type: SignalBinding
+          binds_signal: current_setpoint
+          signal_binding_instance_of: current_setpoint
+          naming_convention: EPICSSuffixConvention
+          native_identifier: "MBHK101H.S"
+        - current_readback:
+          type: SignalBinding
+          binds_signal: current_readback
+          signal_binding_instance_of: current_readback
+          naming_convention: EPICSSuffixConvention
+          native_identifier: "MBHK101H.R"
+        - current_min:
+          type: SignalBinding
+          binds_signal: current_min
+          signal_binding_instance_of: current_min
+          naming_convention: EPICSSuffixConvention
+          native_identifier: "MBHK101H.HMIN"
+        - current_max:
+          type: SignalBinding
+          binds_signal: current_max
+          signal_binding_instance_of: current_max
+          naming_convention: EPICSSuffixConvention
+          native_identifier: "MBHK101H.HMAX"
+        - magnet_status:
+          type: SignalBinding
+          binds_signal: magnet_status
+          signal_binding_instance_of: magnet_status
+          naming_convention: EPICSSuffixConvention
+          native_identifier: "MBHK101H.STAT"
+beamlines:
+  GUN_thru_MV:
+    type: Beamline
+    multipass: true
+    line:
+    - RF_LASER
+    - D0
+    - S_IS_20CM
+    - D1
+    - IPMK101
+    - D2
+    - MBHK101H
+    - MBHK101V
+    - D3
+    - MBHK101AH
+    - MBHK101AV
+    - D4
+    - MFHK101
+    - D5
+    - IPMK102
+    - MBHK102H
+    - MBHK102V
+    - D6
+    - ITVK201
+    - D7
+    - VIPK201
+    - D8
+    - MDSK201
+    - D9
+    - ITVK201A
+    - D10
+    - MLHK201H
+    - D11
+    - MLHK201V
+    - D12
+    - VIPK202
+    - D13
+    - MFBK202
+    - D14
+    - MBHK202H
+    - D15
+    - MBHK202V
+    - D16
+    - ITVK202
+    - D17
+    - MQWK202
+    - D18
+    - VIPK203
+    - D19
+    - MWFK203
+    - D20
+    - ITVK203
+    - D21
+    - MQWK203
+    - D22
+    - MBHK203H
+    - MBHK203V
+    - D23
+    - MFQK203
+    - D24
+    - MBHK203AH
+    - MBHK203AV
+    - D25
+    - ITVK203A
+    - D26
+    - IFYK203
+    - D27
+    - IPMK203
+    - D28
+    - MFAK301
+    - D29
+    - RIHK301
+    - D30
+    - MLHK301H
+    - D31
+    - MLHK301V
+    - D32
+    - VIPK302
+    - MFDK302A
+    - D33
+    - ISLK302
+    - D34
+    - IYGK302
+    - D35
+    - MFDK302B
+    - D36
+    - MLHK302H
+    - D37
+    - MLHK302V
+    - D38
+    - VMVK401
+    - D39
+    - RIHK302
+    - D40
+    - MFAK303
+    - D41
+    - VIPK401
+    - D42
+    - IPMK401
+    - D43
+    - MLHK401H
+    - D44
+    - MLHK401V
+    - D45
+    - ITVK401
+    - D46
+    - RIBK401
+    - D47
+    - MBHK401AH
+    - MBHK401AV
+    - D48
+    - ISLK401
+    - D49
+    - MBHK401BH
+    - D50
+    - MBHK401BV
+    - D51
+    - MDIK402
+    - D52
+    - VIPK402
+    - D53
+    - IPMK402
+    - D54
+    - MLHK402H
+    - D55
+    - MLHK402V
+    - D56
+    - VDPK403
+    - D57
+    - VIPK403
+    - D58
+    - ITVK402
+    - D59
+    - VIPK403A
+    - MFQK403
+    - D60
+    - ISLK403
+    - D61
+    - ICBK403
+    - D62
+    - IPMK403
+    - D63
+    - MLHK403H
+    - D64
+    - MLHK403V
+    - D65
+    - IYGK403
+    - D66
+    - IFYK403
+    - D67
+    - RM11
+    - D68
+    - VQGM101
+    - D69
+    - RM12
+    - D70
+    - VIPM201
+    - D71
+    - IYGM201
+    - D72
+    - MLHM201H
+    - D73
+    - MLHM201V
+    - D74
+    - VMVM301
+    - D75
+    - VDPM301A
+    - D76
+    - VIPM301A
+    - D77
+    - VDPM301B
+    - D78
+    - VIPM301B
+    - D79
+    - VDPM301C
+    - D80
+    - VMVM401
+    - D81
+    - MLHM401H
+    - D82
+    - MLHM401V
+    - D83
+    - ILMM401
+    - D84
+    - SBCM401
+    - D85
+    - VIPM401
+    - D86
+    - IYGM401
+    - D87
+    - IFYM401
+    - D88
+    - ICVM501
+    - D89
+    - IPMM501
+    - D90
+    - MLHM501H
+    - D91
+    - MLHM501V
+    - D92
+    - MQJM501
+    - D93
+    - MLHM502H
+    - D94
+    - MLHM502V
+    - D95
+    - IPMM502
+    - D96
+    - MQJM502
+    - D97
+    - MLHM503H
+    - D98
+    - MLHM503V
+    - D99
+    - IPMM503
+    - D100
+    - MQJM503
+    - D101
+    - MLHM504H
+    - D102
+    - MLHM504V
+    - D103
+    - IPMM504
+    - D104
+    - MQJM504
+    - D105
+    - MBHM504AH
+    - D106
+    - MBHM504AV
+    - D107
+    - IPMM505
+    - D108
+    - IYGM505
+    - VIPM505
+    - IHAM505
+    - D109
+    - RHKM506
+    - D110
+    - IYGM506
+    - D111
+    - VIPM506
+    - D112
+    - ILMM601
+    - D113
+    - MLHM601AH
+    - D114
+    - MLHM601AV
+    - D115
+    - IPMM601
+    - D116
+    - MDLM601
+    - D117
+    - MBHM601BH
+    - D118
+    - MBHM601BV
+    - D119
+    - IHAM601
+    - D120
+    - IYGM601
+    - D121
+    - VIPM601
+    - D122
+    - IPMM602
+    - D123
+    - MBHM602H
+    - D124
+    - MBHM602V
+    - D125
+    - MBHM603H
+    - D126
+    - MBHM603V
+    - D127
+    - MQJM603
+    - D128
+    - MBHM604H
+    - D129
+    - MBHM604V
+    - D130
+    - ILMM604U
+    - D131
+    - ILMM604D
+    - D132
+    - ILMM604L
+    - D133
+    - ILMM604R
+    - D134
+    - MFRM604V
+    - D135
+    - MFRM604H
+    - D136
+    - MQJM604
+    - D137
+    - IPMM604
+    - D138
+    - IYGM604
+    - D139
+    - VIPM604
+    - D140
+    - MBHM605H
+    - D141
+    - MBHM605V
+    - D142
+    - ILMM605
+    - D143
+    - MBHM605AH
+    - MBHM605AV
+    - D144
+    - IHAM605
+    - D145
+    - IPMM605
+    - D146
+    - IYGM605
+    - D147
+    - VIPM605
+    - D148
+    - IFYM606
+    - D149
+    - VCGM606
+    - D150
+    - VIPM606
+    - D151
+    - ITVM606
+sections:
+girders:
+hall:

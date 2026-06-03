@@ -12,7 +12,7 @@ description: >
         - InstrumentLayer — facility-specific instrument definitions -> their  capabilities
         - SignalLayer — facility-specific signal suffix templates for system/device types and instance bindings keyed by semantic signal name, linked to the
           device type
-    - Beamline / BeamlineElement — ordered machine layout of the beamline/line
+    - Beamline / BeamlineElementInstance — ordered machine layout of the beamline/line
     - Element instances — individual beamline elements with applied profiles and instance signal
       bindings, parameters, and optional facility-specific parameters
 
@@ -21,7 +21,7 @@ description: >
       - ControlSystem
       - Magnet
         - Quadrupole, Corrector, Dipole, Solenoid
-      - Instrument
+      - DiagnosticDevice
         - BPM
       - RFCavity
       - Marker
@@ -31,9 +31,9 @@ description: >
     - SystemCapability
       - MagnetCapability
         - QuadrupoleCapability, CorrectorKickCapability, DipoleCapability
-      - InstrumentCapability
+      - DiagnosticDeviceCapability
       - BPMCapability
-      - CavityGradientCapability
+      - CavityCapability
 
   Signal modeling:
     - Signal — abstract control-system quantity
@@ -49,8 +49,8 @@ description: >
   
   Alignments with PALS (Particle Accelerator Language Standard):
     - Beamline aligns with pals:BeamLine
-    - BeamlineElement aligns with pals:Element
-    - Instrument aligns with pals:Instrument
+    - BeamlineElementInstance aligns with pals:Element
+    - DiagnosticDevice aligns with pals:Instrument
     - Dipole aligns with pals:Multipole
     - Quadrupole aligns with pals:Quadrupole
     - Solenoid aligns with pals:Solenoid
@@ -63,18 +63,18 @@ description: >
   The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) 
   is captured in the InstanceSignalBinding.
   2. On the distinction between is_instance_of, facility_element_type, and device_type:
-    - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
+    - BeamlineElementInstance.is_instance_of identifies the element’s semantic class, i.e., BeamlineElement, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
     - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. 
     - device_type (Capability.device_type) is the generic element type used for capability profile matching 
     and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention 
     or for other facility-specific purposes.
-    For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
+    For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the AcceleratorElementTypeEnum values.
   3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
-    - is_instance_of typically points to the semantic class instantiated by the binding or element, using a CURIE such as narad:CavityGradientCapability if that is your intended convention.
+    - is_instance_of typically points to the semantic class instantiated by the binding or element, using a CURIE such as narad:CavityCapability if that is your intended convention.
     - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:UITF.
     - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:epics.
   4. Open and constrained vocabularies:
-    - ElementKindEnum provides a controlled vocabulary for key classification slots, but the schema is designed to be extensible 
+    - AcceleratorElementTypeEnum provides a controlled vocabulary for key classification slots, but the schema is designed to be extensible 
     with new enum values as needed.
     - SystemTypeEnum is a high-level classification for systems that can be used for querying and filtering, 
     but it is not intended to capture all the nuance of device types or capabilities.
@@ -93,7 +93,7 @@ description: >
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  narad: https://example.org/narad_linkml/schema/narad/
+  narad: https://example.org/narad_linkml/schema/narad/acc: https://w3id.org/accelerator-core/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
   owl: http://www.w3.org/2002/07/owl#
@@ -102,10 +102,10 @@ prefixes:
   sosa: http://www.w3.org/ns/sosa/
   schema: http://schema.org/
   qudt: http://qudt.org/schema/qudt/
-  si-unit: http://qudt.org/vocab/unit/
+  unit: http://qudt.org/vocab/unit/
   ncit: http://purl.obolibrary.org/obo/ncit.owl
   pals: https://pals-project.readthedocs.io/en/latest/
-  acc-core: https://example.org/acc-core/schema/acc-core/
+  acc: https://w3id.org/accelerator-core/
 
 default_prefix: narad
 default_range: string
@@ -120,7 +120,6 @@ imports:
 classes:
 
   # ---- Abstract base -------------------------------------------------------
-
   NamedThing:
     abstract: true
     description: "Abstract base class providing identity and human-readable metadata."
@@ -188,7 +187,6 @@ classes:
     slots:
       - capabilities
    
-
   Capability:
     is_a: NamedThing
     description: >-
@@ -237,10 +235,6 @@ classes:
     slots:
       - binding_template_components
       - has_override_naming_convention
-  
-  # ---------------------------------------------------------------------------
-  # Beamline and BeamlineElement
-  # ---------------------------------------------------------------------------
 
   Beamline:
     is_a: NamedThing
@@ -254,7 +248,7 @@ classes:
     exact_mappings:
       - pals:BeamLine
 
-  BeamlineElement:
+  BeamlineElementInstance:
     is_a: NamedThing
     description: >-
       A single element in a beamline with its kind and optional NARAD
@@ -268,11 +262,31 @@ classes:
       - param_set
     slot_usage:
       is_instance_of:
-        range: ElementKindEnum
+        range: AcceleratorElementTypeEnum
         multivalued: false
       is_observed_by:
         range: InstanceSignalBinding
-  # ---- System hierarchy (SSN alignment) ------------------------------------
+  
+  AcceleratorDeviceInstance:
+    is_a: BeamlineElementInstance
+    description: >-
+      An instance of a physical accelerator beamline device (e.g. a specific quadrupole magnet) with its kind and optional NARAD capability annotations. 
+      
+      This class is intended to represent the physical device as an entity in the graph, which can be linked to its control system signals through the is_observed_by relationship to InstanceSignalBinding.
+    broad_mappings:
+      - pals:Element
+  
+  MagnetInstance:
+    is_a: AcceleratorDeviceInstance
+    description: "An instance of a magnet device (e.g. a specific quadrupole or dipole) with its kind and optional NARAD capability annotations."
+    broad_mappings:
+      - acc:Magnet
+      - pals:Multipole
+    slot_usage:
+      param_set:
+        range: MagnetParamSet
+        inlined: true
+        multivalued: false
 
   System:
     is_a: NamedThing
@@ -381,13 +395,14 @@ classes:
     slot_usage:
       example:
         identifier: true
- 
+        
+  
   # ---- Physical device subclasses ------------------------------------------
-  # These are the nodes labelled [Cls. Magnet], [Cls. Instrument] etc. in the
+  # These are the nodes labelled [Cls. Magnet], [Cls. DiagnosticDevice] etc. in the
   # controls_scehma_SOSA_SSN diagram. Each is a ssn:System subtype that
   # ssn-system:hasSystemCapability its associated capability class.
 
-  Instrument:
+  DiagnosticDevice:
     is_a: System
     description: "A generic beam diagnostic instrument."
     exact_mappings:
@@ -539,31 +554,377 @@ classes:
         multivalued: false
   
   # -------- Element Parameters and Facility Parameters --------------------------------
-  # ElementParamSet holds named physics-parameter blocks (RFP, BendP, etc.).
+  # AcceleratorDeviceParamSet holds named physics-parameter blocks (RFP, BendP, etc.).
   # FacilityParamSet holds facility-specific metadata (type designation, model name,
   # and an open-ended property map).
 
-  ElementParamSet:
+  LatticeElementParamSet:
+    description: >-
+      A named physics-parameter block for a lattice element (e.g. Drift, Marker).
+      The name identifies the block type (e.g. DriftP, MarkerP).
+
+  AcceleratorDeviceParamSet:
     description: >-
       Named physics-parameter block for a beamline element. The name identifies
       the block type (e.g. RFP, BendP, MagneticMultipoleP, SolenoidP).
     slots:
-      - frequency
-      - voltage
-      - phase
+      - facility_param_set
+  
+  MagnetParamSet:
+    is_a: AcceleratorDeviceParamSet
+    description: >-
+      A specialized AcceleratorDeviceParamSet for magnet elements, with slots for common magnet parameters such as current, gradient, and multipole coefficients. This provides a more structured way to capture the key physics parameters of magnet elements while still allowing for facility-specific extensions through the facility_param_set slot.
+    slot_usage:
+      facility_param_set:
+        range: MagnetFacilityParamSet
+        inlined: true
+        multivalued: false
+
+  QuadrupoleParamSet:
+    is_a: MagnetParamSet
+    description: >-
+      A specialized MagnetParamSet for quadrupole magnets, with specific slots for quadrupole parameters such as gradient and effective length. This allows for more precise modeling of quadrupole elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - Kn1
+    slot_usage:
+      facility_param_set:
+        range: QuadrupoleFacilityParamSet
+        inlined: true
+        multivalued: false
+  
+  DipoleParamSet:
+    is_a: MagnetParamSet
+    description: >-
+      A specialized MagnetParamSet for dipole magnets, with specific slots for dipole parameters such as bending angle and effective length. This allows for more precise modeling of dipole elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
       - angle_ref
       - e1
       - e2
-      - Kn1
+    slot_usage:
+      facility_param_set:
+        range: DipoleFacilityParamSet
+        inlined: true
+        multivalued: false
+
+  SolenoidParamSet:
+    is_a: MagnetParamSet
+    description: >-
+      A specialized MagnetParamSet for solenoid magnets, with specific slots for solenoid parameters such as field strength and effective length. This allows for more precise modeling of solenoid elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
       - Ksol
-      - facility_param_set
+
+  CorrectorParamSet:
+    is_a: MagnetParamSet
+    description: >-
+      A specialized MagnetParamSet for corrector magnets, with specific slots for corrector parameters such as kick strength and effective length. This allows for more precise modeling of corrector elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+
+  DiagnosticParamSet:
+    is_a: AcceleratorDeviceParamSet
+    description: >-
+      A specialized AcceleratorDeviceParamSet for beam diagnostic instruments, with slots for common instrument parameters such as resolution, dynamic range, and measurement type. This provides a more structured way to capture the key parameters of diagnostic instruments while still allowing for facility-specific extensions through the facility_param_set slot.
+
+  BPMParamSet:
+    is_a: DiagnosticParamSet
+    description: >-
+      A specialized DiagnosticParamSet for beam position monitors (BPMs), with specific slots for BPM parameters such as position resolution, button geometry, and measurement type. This allows for more precise modeling of BPM elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+
+  RadiationMonitorParamSet:
+    is_a: DiagnosticParamSet
+    description: >-
+      A specialized DiagnosticParamSet for radiation monitors, with specific slots for radiation monitor parameters such as sensitivity, energy range, and measurement type. This allows for more precise modeling of radiation monitor elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+
+  CavityParamSet:
+    is_a: AcceleratorDeviceParamSet
+    description: >-
+      A specialized AcceleratorDeviceParamSet for accelerating cavities, with slots for common cavity parameters such as resonant frequency, quality factor, and accelerating gradient. This provides a more structured way to capture the key parameters of cavity elements while still allowing for facility-specific extensions through the facility_param_set slot.
+
+  RFCavityParamSet:
+    is_a: CavityParamSet
+    description: >-
+      A specialized CavityParamSet for radio-frequency (RF) cavities, with specific slots for RF cavity parameters such as frequency, quality factor, and accelerating gradient. This allows for more precise modeling of RF cavity elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - frequency
+      - voltage
+      - phase
+
+  LatticeParamSet:
+    description: >-
+      A specialized ParamSet for lattice elements, such as Drift and Marker, with slots for common lattice parameters such as length and periodicity. This provides a more structured way to capture the key parameters of lattice elements while still allowing for facility-specific extensions through the facility_param_set slot.
+
+  DriftParamSet:
+    is_a: LatticeParamSet
+    description: >-
+      A specialized LatticeParamSet for drift spaces, with specific slots for drift parameters such as length and periodicity. This allows for more precise modeling of drift elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+
+  MarkerParamSet:
+    is_a: LatticeParamSet
+    description: >-
+      A specialized LatticeParamSet for markers, with specific slots for marker parameters such as survey coordinates and reference point designation. This allows for more precise modeling of marker elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
 
   FacilityParamSet:
-    description: "Facility-specific element parameters block for beamline elements. Differs from an ElementParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters."
+    description: "Facility-specific element parameters block for beamline elements. Differs from an AcceleratorDeviceParamSet in that it captures facility-specific metadata about the element (e.g. type designation, model name) rather than physics parameters."
     slots:
       - facility_element_type
       - modeled_as
+
+  MagnetFacilityParamSet:
+    is_a: FacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for magnet elements, with specific slots for magnet-related facility parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for magnet elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slots:
       - properties
+    slot_usage:
+      properties:
+        is_a: MagnetProperties
+  
+  QuadrupoleFacilityParamSet:
+    is_a: MagnetFacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for quadrupole magnets, with specific slots for quadrupole-related facility parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for quadrupole elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: QuadrupoleProperties
+  
+  DipoleFacilityParamSet:
+    is_a: MagnetFacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for dipole magnets, with specific slots for dipole-related facility
+      parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for dipole elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: DipoleProperties
+
+  SolenoidFacilityParamSet:
+    is_a: MagnetFacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for solenoid magnets, with specific slots for solenoid-related facility parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture
+      of facility-specific metadata for solenoid elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: SolenoidProperties
+  
+  CorrectorFacilityParamSet:
+    is_a: MagnetFacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for corrector magnets, with specific slots for corrector-related facility
+      parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for corrector elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: CorrectorProperties
+
+  MagnetProperties:
+    description: >-
+      A structured slot for capturing magnet-specific properties such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of key metadata for magnet elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - HCOSystem
+      - SegMask
+      - Controlled_by
+      - ControlsUnits
+      - control_system_parameter_name
+      - FieldMap
+      - HystDwellTime
+      - HystRampTime
+      - Housed_by
+      - Hmax
+      - Powered_by
+      - TrimCardType
+      - pCentral
+      - alphax
+      - alphay
+      - betax
+      - betay
+      - emitx
+      - emity
+      - etapx
+      - etapy
+      - etax
+      - etay
+      - psix
+      - psiy
+      - sigmax
+      - sigmay
+      - ModelX
+      - ModelY
+      - Model_Pitch
+      - Model_Roll
+      - Model_Yaw
+
+  QuadrupoleProperties:
+    is_a: MagnetProperties
+    description: >-
+      A specialized MagnetProperties slot for quadrupole magnets, with specific properties relevant to quadrupole elements such as gradient, effective length, and field quality. This allows for more detailed capture of key metadata for quadrupole elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - Usage
+      - Limit
+      - NoHyst
+      - Resistance
+      - Radius
+      - BORE
+  
+  DipoleProperties:
+    is_a: MagnetProperties
+    description: >-
+      A specialized MagnetProperties slot for dipole magnets, with specific properties relevant to dipole elements such as bending angle, effective length, and field quality. This allows for more detailed capture of key metadata for dipole elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - HGAP
+      - K1
+
+  SolenoidProperties:
+    is_a: MagnetProperties
+    description: >-
+      A specialized MagnetProperties slot for solenoid magnets, with specific properties relevant to solenoid elements such as maximum field strength, effective length, and field quality. This allows for more detailed capture of key metadata for solenoid elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - Winding
+      - Tilt
+      - SurveyDate
+      - SurveyZ
+
+  CorrectorProperties:
+    is_a: MagnetProperties
+    description: >-
+      A specialized MagnetProperties slot for corrector magnets, with specific properties relevant to corrector elements such as kick strength, effective length, and field quality. This allows for more detailed capture of key metadata for corrector elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - NoHyst
+      - KICK
+    
+  DiagnosticFacilityParamSet:
+    is_a: FacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for beam diagnostic instruments, with specific slots for diagnostic-related facility parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for diagnostic elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: DiagnosticProperties
+  
+  BPMFacilityParamSet:
+    is_a: DiagnosticFacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for beam position monitors (BPMs), with specific slots for BPM-related facility parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for BPM elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: BPMProperties
+
+  RadiationMonitorFacilityParamSet:
+    is_a: DiagnosticFacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for radiation monitors, with specific slots for radiation monitor-related facility parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for radiation monitor elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: RadiationMonitorProperties
+  
+  DiagnosticProperties:
+    description: >-
+      A structured slot for capturing diagnostic instrument-specific properties such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of key metadata for diagnostic elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+
+  BPMProperties:
+    is_a: DiagnosticProperties
+    description: >-
+      A specialized DiagnosticProperties slot for beam position monitors (BPMs), with specific properties relevant
+      to BPM elements such as position resolution, button geometry, and measurement type. 
+      
+      This allows for more detailed capture of key metadata for BPM elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - SegMask
+      - GlobalOffsetX
+      - GlobalOffsetY
+      - Pass
+      - SurveyOffsetX
+      - SurveyOffsetY
+      - CanType
+      - Rotation
+      - Sensitivity
+      - Controlled_by
+      - pCentral
+      - alphax
+      - alphay
+      - betax
+      - betay
+      - emitx
+      - emity
+      - etapx
+      - etapy
+      - etax
+      - etay
+      - psix
+      - psiy
+      - sigmax
+      - sigmay
+      - ModelX
+      - ModelY
+      - Model_Pitch
+      - Model_Roll
+      - Model_Yaw
+
+  RadiationMonitorProperties:
+    is_a: DiagnosticProperties
+    description: >-
+      A specialized DiagnosticProperties slot for radiation monitors, with specific properties relevant to radiation monitor elements such
+      as sensitivity, energy range, and measurement type. 
+      
+      This allows for more detailed capture of key metadata for radiation monitor elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+
+  CavityFacilityParamSet:
+    is_a: FacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for accelerating cavities, with specific slots for cavity-related facility parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for cavity elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: CavityProperties
+
+  RFCavityFacilityParamSet:
+    is_a: CavityFacilityParamSet
+    description: >-
+      A specialized FacilityParamSet for radio-frequency (RF) cavities, with specific slots for RF cavity-related facility parameters such as model name, manufacturer, and facility-specific type designation. This allows for more detailed capture of facility-specific metadata for RF cavity elements while still maintaining the ability to capture additional parameters through the inherited facility_param_set slot.
+    slot_usage:
+      properties:
+        is_a: RFCavityProperties
+
+  CavityProperties:
+    description: >-
+      A structured slot for capturing cavity-specific properties such as model name, manufacturer, and facility-specific type designation. 
+      
+      This allows for more detailed capture of key metadata for cavity elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+
+  RFCavityProperties:
+    is_a: CavityProperties
+    description: >-
+      A specialized CavityProperties slot for radio-frequency (RF) cavities, with specific properties relevant to RF cavity elements such as frequency, quality factor, and accelerating gradient. 
+      
+      This allows for more detailed capture of key metadata for RF cavity elements while still maintaining the ability to capture additional facility-specific parameters through the inherited facility_param_set slot.
+    slots:
+      - HCOSystem
+      - SegMask
+      - CavityType
+      - MaxGSET
+      - PhaseRMS
+      - Q0
+      - Qexternal
+      - ROQ
+      - Controlled_by
+      - control_system_parameter_name
+      - FCC
+      - ModelGSET
+      - pCentral
+      - alphax
+      - alphay
+      - betax
+      - betay
+      - emitx
+      - emity
+      - etapx
+      - etapy
+      - etax
+      - etay
+      - psix
+      - psiy
+      - sigmax
+      - sigmay
+      - SurveyDate
+      - SurveyZ
+      - ModelX
+      - ModelY
+      - Model_Pitch
+      - Model_Roll
+      - Model_Yaw
 
   AnyValue:
     class_uri: linkml:Any
@@ -594,15 +955,18 @@ subsets:
 
 enums:
 
-  ElementKindEnum:
+  AcceleratorElementTypeEnum:
     description: >-
       Controlled vocabulary for beamline element types, shared between the
       capability layer (CapabilityProfile.device_type) and the element layer
-      (BeamlineElement.kind). Keeping the enum here keeps profile device_type
+      (BeamlineElementInstance.is_instance_of). 
+      
+      Keeping the enum here keeps profile device_type
       values in sync with element kind values without circular imports.
+      
       Values must stay aligned with CapabilityProfile.device_type.
-      NOTE: The kind of a BeamlineElement must match the device_type
-      of the Device referenced by is_instance_of.
+      
+      NOTE: The kind of a BeamlineElementInstance.is_instance_of corresponds to the BeamlineElementClass.
     permissible_values:
       Drift:
         description: "A field-free drift space between elements."
@@ -614,34 +978,53 @@ enums:
           - pals:Marker
       BPM:
         description: "Beam Position Monitor."
+        exact_mappings:
+          - acc:BeamPositionMonitor
         broad_mappings:
           - pals:Instrument
+          - acc:DiagnosticDevice
+      Cavity:
+        description: "Accelerating or bunching cavity."
       Corrector:
         description: "Dipole corrector magnet for orbit correction."
+        exact_mappings:
+          - acc:Corrector
+      DiagnosticDevice:
+        description: "Generic beam diagnostic instrument (halo monitor, viewer, etc.)."
+        exact_mappings:
+          - pals:Instrument
+          - acc:AcceleratorDevice
       Dipole:
         description: "Dipole bending magnet."
         broad_mappings:
           - pals:Multipole
+          - acc:Magnet
+      Magnet:
+        description: "Generic powered magnet device (supertype for all magnet kinds)."
+        exact_mappings:
+            - acc:Magnet
       Quadrupole:
         description: "Quadrupole focusing/defocusing magnet."
         exact_mappings:
           - pals:Quadrupole
-      Solenoid:
-        description: "Solenoid magnet."
+          - acc:Quadrupole
+      RadiationMonitor:
+        description: "Radiation monitor device."
         exact_mappings:
-          - pals:Solenoid
-      CavityGradient:
-        description: "Accelerating or bunching cavity."
+          - acc:RadiationMonitor
+        broad_mappings:
+          - pals:Instrument
+          - acc:DiagnosticDevice
       RFCavity:
         description: "Radio-frequency accelerating or bunching cavity."
         exact_mappings:
           - pals:RFCavity
-      Instrument:
-        description: "Generic beam diagnostic instrument (halo monitor, viewer, etc.)."
+          - acc:AcceleratorDevice
+      Solenoid:
+        description: "Solenoid magnet."
         exact_mappings:
-          - pals:Instrument
-      Magnet:
-        description: "Generic powered magnet device (supertype for all magnet kinds)."
+          - pals:Solenoid
+          - acc:Magnet
 
   SystemTypeEnum:
     description: >-
@@ -649,7 +1032,7 @@ enums:
       categorization that can be used for filtering or grouping systems without
       needing to traverse the has_sub_system and has_system_capability edges.
     inherits: 
-      - ElementKindEnum
+      - AcceleratorElementTypeEnum
     permissible_values:
       Facility:
         description: "A physical facility or installation (e.g. BTA, CEBAF, or UITF)."
@@ -885,7 +1268,7 @@ slots:
     description: "A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name."
 
   elements:
-    range: BeamlineElement
+    range: BeamlineElementInstance
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -1039,7 +1422,7 @@ slots:
     inlined: true
     description: >-
       Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set.
-      Can also be used to link a BeamlineElement instance to the signal bindings that observe or actuate it, 
+      Can also be used to link a BeamlineElementInstance to the signal bindings that observe or actuate it, 
       since the instance of the element is directly observed or controlled through a Device.
       Facility-specific bindings of signals to control-system interfaces (e.g.
       EPICS PVs) for a specific beamline element instance.
@@ -1069,7 +1452,7 @@ slots:
     description: "Signals within a capability, keyed by a semantic signal name."
 
   device_type:
-    range: ElementKindEnum
+    range: AcceleratorElementTypeEnum
     in_subset:
       - label
     description: >-
@@ -1099,11 +1482,11 @@ slots:
     in_subset:
       - label
     description: >-
-      Machine-resolvable QUDT unit reference (e.g. si-unit:A for Ampere).
-      The si-unit: prefix maps to http://qudt.org/vocab/unit/.
+      Machine-resolvable QUDT unit reference (e.g. unit:A for Ampere).
+      The unit: prefix maps to http://qudt.org/vocab/unit/.
 
   line:
-    range: BeamlineElement
+    range: BeamlineElementInstance
     multivalued: true
     inlined: false
     description: "Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map."
@@ -1115,7 +1498,7 @@ slots:
     description: "Indicates whether this beamline is a multipass recirculating line (true) or a single-pass line (false)."
   
   zero_point:
-    range: BeamlineElement
+    range: BeamlineElementInstance
     in_subset:
       - label
     multivalued: false
@@ -1137,7 +1520,7 @@ slots:
     description: "Physical length of the element in meters."
 
   param_set:
-    range: ElementParamSet
+    range: AcceleratorDeviceParamSet
     multivalued: false
     inlined: true
     description: "Named physics-parameter blocks for this element (e.g. RFP, BendP, MagneticMultipoleP)."
@@ -1239,3 +1622,19 @@ slots:
     in_subset:
       - label
     description: "A human-readable statement of the intended use or purpose of this NARAD configuration."
+
+  # ------
+  # Slots Related to FacilityParamSet and its subclasses
+  # ------
+
+  control_system_parameter_name:
+    range: string
+    aliases:
+      - sensor_name
+      - EPICSName
+      - epics_name
+      - PVName
+      - pv_name
+    in_subset:
+      - label
+    description: "Name of the control system (e.g. EPICS, TANGO) that this parameter set is relevant for. This can be used to link facility-specific parameters to the control system they pertain to, especially in cases where a facility has multiple control systems or when certain parameters are only relevant for specific control systems."

@@ -12,10 +12,18 @@ narad_config:
         template: "{device_name}{signal_code_suffix}"
         template_components:
           - name: device_name
+            synonyms:
+              - EPICSName
+              - PVName
+              - pv_name
             description: "The name of the device instance as defined in the device layer."
             required: true
             pattern: "^[A-Za-z0-9_]+$"
           - name: signal_code_suffix
+            synonyms:
+              - signal_suffix
+              - PV_suffix
+              - EPICSName_suffix
             description: "A suffix defined for each signal in the capability layer that maps to the corresponding EPICS PV for that signal at UITF."
             required: true
             pattern: ":(.S|M|.HMIN|.HMAX|.KICK|.BDL|.XPOS|.YPOS|.GET|.GMES|.STAT)$"
@@ -38,9 +46,9 @@ narad_config:
       QuadrupoleCapability: {}
       DipoleCapability: {}
       CorrectorKickCapability: {}
-      InstrumentCapability: {}
+      DiagnosticDeviceCapability: {}
       BPMCapability: {}
-      CavityGradientCapability: {}
+      CavityCapability: {}
       RFCavityCapability: {}
   capability_layer:
     MagnetCapability:
@@ -75,8 +83,6 @@ narad_config:
         magnet_status:
           role: status
           data_type: string
-          units: A
-          units_uri: si-unit:A
           description: Power-supply or device state summary.
     QuadrupoleCapability:
       description: Control and observe the normalized quadrupole strength.
@@ -114,10 +120,10 @@ narad_config:
           units: T*m
           units_uri: si-unit:T-M
           description: Desired integrated corrector kick or equivalent model quantity.
-    InstrumentCapability:
+    DiagnosticDeviceCapability:
       description: Shared readback semantics generic instruments.
       is_property_of: epics
-      device_type: Instrument
+      device_type: DiagnosticDevice
       has_signal:
         status:
           role: readback
@@ -129,7 +135,7 @@ narad_config:
       description: Shared readback semantics for beam position monitor instruments.
       is_property_of: epics
       device_type: BPM
-      subclass_of: InstrumentCapability
+      subclass_of: DiagnosticDeviceCapability
       has_signal:
         horizontal_beam_position:
           role: readback
@@ -143,10 +149,10 @@ narad_config:
           units: mm
           units_uri: si-unit:MilliM
           description: Measured vertical beam position.
-    CavityGradientCapability:
-      description: Shared gradient-control semantics for CavityGradient devices.
+    CavityCapability:
+      description: Shared gradient-control semantics for Cavity devices.
       is_property_of: epics
-      device_type: CavityGradient
+      device_type: Cavity
       has_signal:
         gradient_setpoint:
           role: control
@@ -167,7 +173,7 @@ narad_config:
       description: Shared gradient-control semantics for RF cavity devices.
       is_property_of: epics
       device_type: RFCavity
-      subclass_of: CavityGradientCapability
+      subclass_of: CavityCapability
       has_signal: {}
   device_layer:
     Magnet:
@@ -176,6 +182,7 @@ narad_config:
         - name: Quadrupole
         - name: Dipole
         - name: Corrector
+        - name: Solenoid
       has_system_capability: MagnetCapability
     Quadrupole:
       device_type: Quadrupole
@@ -185,27 +192,30 @@ narad_config:
       device_type: Dipole
       subclass_of: Magnet
       has_system_capability: DipoleCapability
+    Solenoid:
+      device_type: Solenoid
+      subclass_of: Magnet
     Corrector:
       device_type: Corrector
       subclass_of: Magnet
       has_system_capability: CorrectorKickCapability
-    Instrument:
-      device_type: Instrument
+    DiagnosticDevice:
+      device_type: DiagnosticDevice
       has_sub_system: 
         - name: BPM
-      has_system_capability: InstrumentCapability
+      has_system_capability: DiagnosticDeviceCapability
     BPM:
       device_type: BPM
-      subclass_of: Instrument
+      subclass_of: DiagnosticDevice
       has_system_capability: BPMCapability
-    CavityGradient:
-      device_type: CavityGradient
+    Cavity:
+      device_type: Cavity
       has_sub_system: 
         - name: RFCavity
-      has_system_capability: CavityGradientCapability
+      has_system_capability: CavityCapability
     RFCavity:
       device_type: RFCavity
-      subclass_of: CavityGradient
+      subclass_of: Cavity
       has_system_capability: RFCavityCapability
   signal_layer:
     facilities:
@@ -746,7 +756,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMK101.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -1177,7 +1187,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMK102.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -1379,7 +1389,7 @@ elements:
     is_instance_of: Drift
     length: 0.179112924
   - name: ITVK201
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Standard
@@ -1530,7 +1540,7 @@ elements:
     is_instance_of: Drift
     length: 0.0951987648
   - name: ITVK201A
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Standard
@@ -1968,7 +1978,7 @@ elements:
     is_instance_of: Drift
     length: 0.167402607
   - name: ITVK202
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Standard
@@ -2165,7 +2175,7 @@ elements:
     is_instance_of: Drift
     length: 0.058049998
   - name: ITVK203
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Standard
@@ -2668,7 +2678,7 @@ elements:
     is_instance_of: Drift
     length: 0.257904568
   - name: ITVK203A
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Standard
@@ -2711,7 +2721,7 @@ elements:
     is_instance_of: Drift
     length: 1.00000008e-09
   - name: IFYK203
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: FaradayCup
@@ -2768,7 +2778,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMK203.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -3133,7 +3143,7 @@ elements:
     is_instance_of: Drift
     length: 0.322228025
   - name: ISLK302
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Aperture
@@ -3166,7 +3176,7 @@ elements:
     is_instance_of: Drift
     length: 0.00472272384
   - name: IYGK302
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -3563,7 +3573,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMK401.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -3773,7 +3783,7 @@ elements:
     is_instance_of: Drift
     length: 0.212674027
   - name: ITVK401
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Standard
@@ -4037,7 +4047,7 @@ elements:
     is_instance_of: Drift
     length: 0.226888224
   - name: ISLK401
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Aperture
@@ -4354,7 +4364,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMK402.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -4597,7 +4607,7 @@ elements:
     is_instance_of: Drift
     length: 0.0949882728
   - name: ITVK402
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Standard
@@ -4704,7 +4714,7 @@ elements:
     is_instance_of: Drift
     length: 0.101945378
   - name: ISLK403
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: Aperture
@@ -4737,7 +4747,7 @@ elements:
     is_instance_of: Drift
     length: 0.326195154
   - name: ICBK403
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: BrockCavity
@@ -4786,7 +4796,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMK403.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -4995,7 +5005,7 @@ elements:
     is_instance_of: Drift
     length: 0.170401543
   - name: IYGK403
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -5038,7 +5048,7 @@ elements:
     is_instance_of: Drift
     length: 1.00000008e-09
   - name: IFYK403
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: FaradayCup
@@ -5244,7 +5254,7 @@ elements:
     is_instance_of: Drift
     length: 1.03710181
   - name: IYGM201
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -5755,7 +5765,7 @@ elements:
     is_instance_of: Drift
     length: 0.212296601
   - name: SBCM401
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: BCM
@@ -5805,7 +5815,7 @@ elements:
     is_instance_of: Drift
     length: 0.214836836
   - name: IYGM401
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -5843,7 +5853,7 @@ elements:
     is_instance_of: Drift
     length: 0.064647384
   - name: IFYM401
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: FaradayCup
@@ -5882,7 +5892,7 @@ elements:
     is_instance_of: Drift
     length: 0.117125631
   - name: ICVM501
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YaoCavity
@@ -5930,7 +5940,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM501.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -6407,7 +6417,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM502.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -6716,7 +6726,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM503.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -7028,7 +7038,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM504.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -7341,7 +7351,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM505.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -7388,7 +7398,7 @@ elements:
     is_instance_of: Drift
     length: 0.101054866
   - name: IYGM505
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -7440,7 +7450,7 @@ elements:
           SegMask: S_UITF+S_MV+A_UITF+A_MV
           EPICSName: VIPM505cur
   - name: IHAM505
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: AccStyle
@@ -7530,7 +7540,7 @@ elements:
     is_instance_of: Drift
     length: 0.420477191
   - name: IYGM506
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -7800,7 +7810,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM601.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -8096,7 +8106,7 @@ elements:
     is_instance_of: Drift
     length: 0.261998137
   - name: IHAM601
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: AccStyle
@@ -8157,7 +8167,7 @@ elements:
     is_instance_of: Drift
     length: 0.124999246
   - name: IYGM601
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -8229,7 +8239,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM602.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -9222,7 +9232,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM604.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -9269,7 +9279,7 @@ elements:
     is_instance_of: Drift
     length: 0.28
   - name: IYGM604
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -9682,7 +9692,7 @@ elements:
     is_instance_of: Drift
     length: 0.3
   - name: IHAM605
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: AccStyle
@@ -9756,7 +9766,7 @@ elements:
         is_property_of: epics
       status:
         pv_name: IPMM605.STAT
-        is_instance_of: capability_layer.InstrumentCapability.signals.status
+        is_instance_of: capability_layer.DiagnosticDeviceCapability.signals.status
         for_property: signal_layer.facilities.UITF.hosts_device.BPM.bpm_status
         is_hosted_by: UITF
         is_property_of: epics
@@ -9802,7 +9812,7 @@ elements:
     is_instance_of: Drift
     length: 0.3
   - name: IYGM605
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: YAG
@@ -9858,7 +9868,7 @@ elements:
     is_instance_of: Drift
     length: 0.229895459
   - name: IFYM606
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: FaradayCup
@@ -9933,7 +9943,7 @@ elements:
     is_instance_of: Drift
     length: 0.499895459
   - name: ITVM606
-    is_instance_of: Instrument
+    is_instance_of: DiagnosticDevice
     param_set:
       facility_param_set:
         facility_element_type: VideoOnly
