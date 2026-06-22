@@ -1,36 +1,24 @@
 type: AcceleratorCoreDataset
-control_system:
-    name: EPICS
-    description: "EPICS control system instance at the NARAD UITF facility."
-    source_system: EPICS
-    system_type: ControlAndMonitoring
-    naming_conventions: 
-      - name: EPICSSuffixConvention
-        description: "Template for EPICS PV naming convention for device signals at UITF using the format {device_name}{signal_code_suffix}."
-        template: "{device_name}{signal_code_suffix}"
-        template_components:
-          - name: device_name
-            description: "The name of the device instance as defined in the device layer."
-            required: true
-            pattern: "^[A-Za-z0-9_]+$"
-          - name: signal_code_suffix
-            description: "A suffix defined for each signal in the capability layer that maps to the corresponding EPICS PV for that signal at UITF."
-            required: true
-            pattern: ":(.S|M|.HMIN|.HMAX|.KICK|.BDL|.XPOS|.YPOS|.GET|.GMES|.STAT)$"
-        full_pattern: "^[A-Z][A-Z0-9_]*:(.S|M|.HMIN|.HMAX|.KICK|.BDL|.XPOS|.YPOS|.GET|.GMES|.STAT)$"
-        examples:
-          - example: "MBHK101H.S"
-            description: "EPICS PV for the current setpoint signal of the MBHK101H corrector magnet at UITF."
-          - example: "IPMK101.XPOS"
-            description: "EPICS PV for the horizontal beam position readback signal of the IPMK101 BPM at UITF."
-components:
+physical_components:
+  - Lightswitch:
+    type: InfrastructureComponent
+    name: Lightswitch
+    has_synonyms:
+      - lightswitch
+      - light
+      - light switch
+    description: Environmental component type representing a lightswitch in the UED.
+    has_beamline_relation: Infrastructure
+    has_function: EnvironmentalControl
+    has_parameters: # need to add these
+      - SegMask
   - Magnet:
-    type: PhysicalComponent
+    type: Magnet
     name: Magnet
-    synonyms: 
-      - generic_magnet
+    has_synonyms: 
       - magnet
-    description: "Generic magnet component type. Superclass for specific magnet types such as dipoles, quadrupoles, and correctors."
+      - control_magnet
+    description: Generic magnet component type. Superclass for specific magnet types such as dipoles, quadrupoles, and correctors.
     has_beamline_relation: Inline
     located_in: Beamline
     superclass_of:
@@ -45,15 +33,16 @@ components:
       - current_min
       - current_max
       - magnet_status
+    has_parameters: # need to add parameters that all Magnets have in UITF
   - HCorrector:
-    type: PhysicalComponent
+    type: Corrector
     name: HorizontalCorrector
-    synonyms:
+    has_synonyms:
       - HCorrector
       - HorizontalCorrector
       - horizontal corrector
       - corrector magnet
-    description: "Corrector magnet component type. Subclass of Magnet."
+    description: Corrector magnet component type. Subclass of Magnet.
     has_beamline_relation: Inline
     has_function: Steering
     has_plane: Horizontal
@@ -61,15 +50,56 @@ components:
     subclass_of: Magnet
     has_signal:
       - kick_setpoint
+      - current_setpoint
+      - current_readback
+      - current_min
+      - current_max
+      - magnet_status
+    has_parameters:
+      - HCOSystem
+      - SegMask
+      - Controlled_by
+      - ControlsUnits
+      - EPICSName
+      - FieldMap
+      - HystDwellTime
+      - HystRampTime
+      - NoHyst
+      - Housed_by
+      - Hmax
+      - Powered_by
+      - TrimCardType
+      - KICK
+      - pCentral
+      - alphax
+      - alphay
+      - betax
+      - betay
+      - emitx
+      - emity
+      - etapx
+      - etapy
+      - etax
+      - etay
+      - psix
+      - psiy
+      - sigmax
+      - sigmay
+      - ModelX
+      - ModelY
+      - ModelZ
+      - Model_Pitch
+      - Model_Roll
+      - Model_Yaw
   - VCorrector:
-    type: PhysicalComponent
+    type: Corrector
     name: VerticalCorrector
-    synonyms:
+    has_synonyms:
       - VCorrector
       - VerticalCorrector
       - vertical corrector
       - corrector magnet
-    description: "Corrector magnet component type. Subclass of Magnet."
+    description: Corrector magnet component type. Subclass of Magnet.
     has_beamline_relation: Inline
     has_function: Steering
     has_plane: Vertical
@@ -77,57 +107,281 @@ components:
     subclass_of: Magnet
     has_signal:
       - kick_setpoint
+      - current_setpoint
+      - current_readback
+      - current_min
+      - current_max
+      - magnet_status
+    has_parameters:
+      - HCOSystem
+      - SegMask
+      - Controlled_by
+      - ControlsUnits
+      - EPICSName
+      - FieldMap
+      - HystDwellTime
+      - HystRampTime
+      - NoHyst
+      - Housed_by
+      - Hmax
+      - Powered_by
+      - TrimCardType
+      - KICK
+      - pCentral
+      - alphax
+      - alphay
+      - betax
+      - betay
+      - emitx
+      - emity
+      - etapx
+      - etapy
+      - etax
+      - etay
+      - psix
+      - psiy
+      - sigmax
+      - sigmay
+      - ModelX
+      - ModelY
+      - ModelZ
+      - Model_Pitch
+      - Model_Roll
+      - Model_Yaw
   - Dipole:
-    type: PhysicalComponent
+    type: Multipole
     name: Dipole
-    synonyms:
+    has_synonyms:
       - dipole magnet
-    description: "Dipole magnet component type. Subclass of Magnet."
+      - multipole magnet
+    description: Dipole magnet component type. Type of Multipole magnet.
+    number_poles: 2
     has_beamline_relation: inline
-    has_function: Bending
+    has_function: Bending # DM: Is this correct? Check all functions.
     located_in: Beamline
     subclass_of: Magnet
     has_signal:
-      
+      - field_setpoint
+      - current_setpoint
+      - current_readback
+      - current_min
+      - current_max
+      - magnet_status
+    has_parameters:
+      - angle_ref
+      - e1
+      - e2
+      - HCOSystem
+      - SegMask
+      - Controlled_by
+      - ControlsUnits
+      - EPICSName
+      - FieldMap
+      - HystDwellTime
+      - HystRampTime
+      - NoHyst
+      - Housed_by
+      - Hmax
+      - Powered_by
+      - TrimCardType
+      - HGAP
+      - K1
+      - pCentral
+      - alphax
+      - alphay
+      - betax
+      - betay
+      - emitx
+      - emity
+      - etapx
+      - etapy
+      - etax
+      - etay
+      - psix
+      - psiy
+      - sigmax
+      - sigmay
+      - SurveyDate
+      - SurveyZ
+      - ModelX
+      - ModelY
+      - ModelZ
+      - Model_Pitch
+      - Model_Roll
+      - Model_Yaw
+      - NameAlias
   - Quadrupole:
-    type: PhysicalComponent
+    type: Quadrupole
     name: Quadrupole
-    synonyms:
+    has_synonyms:
       - quadrupole magnet
-    description: "Quadrupole magnet component type. Subclass of Magnet."
+    description: Quadrupole magnet component type. Subclass of Multipole.
+    number_poles: 4
     has_beamline_relation: Inline
     has_function: Focusing
     located_in: Beamline
     subclass_of: Magnet
+    has_signal:
+      - strength_setpoint
+      - current_setpoint
+      - current_readback
+      - current_min
+      - current_max
+      - magnet_status
+    has_parameters:
+      - Kn1
+      - HCOSystem
+      - SegMask
+      - Usage
+      - Controlled_by
+      -  ControlsUnits
+      - EPICSName
+      - FieldMap
+      - HystDwellTime
+      - HystRampTime
+      - Limit
+      - NoHyst
+      - Housed_by
+      - Resistance
+      - Hmax
+      - Powered_by
+      - TrimCardType
+      - Radius
+      - BORE
+      - pCentral
+      - alphax
+      - alphay
+      - betax
+      - betay
+      - emitx
+      - emity
+      - etapx
+      - etapy
+      - etax
+      - etay
+      - psix
+      - psiy
+      - sigmax
+      - sigmay
+      - ModelX
+      - ModelY
+      - ModelZ
+      - Model_Pitch
+      - Model_Roll
+      - Model_Yaw
   - Solenoid:
-    type: PhysicalComponent
+    type: Solenoid
     name: Solenoid
-    synonyms:
+    has_synonyms:
       - solenoid magnet
-    description: "Solenoid magnet component type. Subclass of Magnet."
+    description: Solenoid magnet component type. Subclass of Magnet.
     has_beamline_relation: Inline
     has_function: Focusing
     located_in: Beamline
     subclass_of: Magnet
+    has_signal:
+  - DiagnosticDevice:
+    type: DiagnosticDevice
+    name: DiagnosticDevice
+    has_synonyms:
+      - diagnostic device
+      - diagnostic
+    description: >-
+      Generic diagnostic device component type. 
+      Superclass for specific diagnostic types such as screens, BPMs, and spectrometers.
+    has_beamline_relation: Inline
+    has_function: Measurement
+    located_in: Beamline
+    superclass_of:
+      - BPM
+  - BeamPositionMonitor:
+    type: BeamPositionMonitor
+    name: BeamPositionMonitor
+    has_synonyms:
+      - BPM
+      - beam position monitor
+      - position monitor
+      - PUE
+      - pickup
+    description: >-
+      Beam position monitor (BPM) component type. Subclass of DiagnosticDevice.
+    has_beamline_relation: Inline
+    has_function: Measurement
+    located_in: Beamline
+    subclass_of: DiagnosticDevice
+    has_signal:
+      - horizontal_beam_position
+      - vertical_beam_position
+      - bpm_status
+virtual_components:
+  - Marker:
+    type: VirtualComponent
+    name: Marker
+    has_synonyms:
+      - marker
+      - beamline marker
+      - reference point
+    description: Virtual component type representing a marker or reference point along the beamline. This is a virtual component because it doesn't correspond to a physical device, but it is important for understanding the beamline structure and for defining the locations of signals and other components in relation to the beamline.
+    has_beamline_relation: Inline
+    has_function: Mark
+    has_parameters: # need to add these
+      - SegMask
+      - pCentral
 signals:
   kick_setpoint:
     type: ControlSystemSignal
-    synonyms:
-      - integrated_field_setpoint
-      - integrated_kick_setpoint
+    has_synonyms:
+      - integrated field setpoint
+      - integrated kick setpoint
+      - setpoint
+      - kick
+      - corrector strength
+      - setting
     description: Desired integrated corrector kick or equivalent model quantity.
     observes: 
-      - HCorrector
-      - VCorrector
+      - HCorrector # DM: should this be the LinkML Classes (e.g. Corrector), the physical_component in this yaml file (e.g. HCorrector), or the specific component instances like MBHK101H?
+      - VCorrector # SM: Same question for this one
     has_signal_role: Setpoint
     has_canonical_signal_type: IntegratedFieldSetpoint
     has_quantity_kind: IntegratedMagneticField
-    data_type: float
+    has_data_type: Float
     has_unit: T_m
-    has_binding: kick_setpoint
+  strength_setpoint:
+    type: ControlSystemSignal
+    has_synonyms:
+      - strength setpoint
+      - setpoint
+      - strength
+      - magnet strength
+      - setting
+    description: Desired magnet strength setpoint, such as k1 for a quadrupole.
+    observes: 
+      - Quadrupole
+    has_signal_role: Setpoint
+    has_canonical_signal_type: MagnetCurrentSetpoint
+    has_quantity_kind: ElectricCurrent
+    has_data_type: Float
+    has_unit: G_per_cm # I added this to the UnitEnum. Is this correct?
+  field_setpoint:
+    type: ControlSystemSignal
+    has_synonyms:
+      - field setpoint
+      - setpoint
+      - field
+      - field strength
+      - magnetic field
+      - setting
+    description: Desired magnetic field setpoint, such as for a dipole.
+    observes: 
+      - Dipole # DM: should this be the LinkML Classes (e.g. Magnet, unless we add Multipole/Dipole), the physical_component in this yaml file (e.g. Dipole), or the specific component instances like MDSK201?
+    has_signal_role: Setpoint
+    has_canonical_signal_type: MagnetFieldSetpoint
+    has_quantity_kind: MagneticField
+    has_data_type: Float
+    has_unit: unit:PER-T-M 
   current_setpoint:
     type: ControlSystemSignal
-    synonyms:
+    has_synonyms:
       - magnet_current_setpoint
       - current_command
     description: Desired magnet current command.
@@ -137,14 +391,14 @@ signals:
     has_signal_role: Setpoint
     has_canonical_signal_type: MagnetCurrentSetpoint
     has_quantity_kind: ElectricCurrent
-    data_type: float
+    has_data_type: Float
     has_unit: A
-    has_binding: current_setpoint
   current_readback:
     type: ControlSystemSignal
-    synonyms:
-      - magnet_current_readback
-      - current_feedback
+    has_synonyms:
+      - magnet current readback
+      - current feedback
+      - readback
     description: Measured magnet current.
     observes: 
       - HCorrector
@@ -152,14 +406,17 @@ signals:
     has_signal_role: Readback
     has_canonical_signal_type: MagnetCurrentReadback
     has_quantity_kind: ElectricCurrent
-    data_type: float
+    has_data_type: Float
     has_unit: A
-    has_binding: current_readback
   current_min:
     type: ControlSystemSignal
-    synonyms:
-      - magnet_current_min
-      - minimum_current_limit
+    has_synonyms:
+      - magnet current min
+      - min current
+      - minimum current
+      - minimum current limit
+      - min limit
+      - limit
     description: Minimum allowed magnet current.
     observes: 
       - HCorrector
@@ -167,14 +424,17 @@ signals:
     has_signal_role: Limit
     has_canonical_signal_type: MagnetCurrent
     has_quantity_kind: ElectricCurrent
-    data_type: float
+    has_data_type: Float
     has_unit: A
-    has_binding: # TODO
   current_max:
     type: ControlSystemSignal
-    synonyms:
-      - magnet_current_max
-      - maximum_current_limit
+    has_synonyms:
+      - magnet current max
+      - max current
+      - maximum current
+      - maximum current limit
+      - max limit
+      - limit
     description: Maximum allowed magnet current.
     observes: 
       - HCorrector
@@ -182,12 +442,11 @@ signals:
     has_signal_role: Limit
     has_canonical_signal_type: MagnetCurrent
     has_quantity_kind: ElectricCurrent
-    data_type: float
+    has_data_type: Float
     has_unit: A
-    has_binding: # TODO
   magnet_status:
     type: ControlSystemSignal
-    synonyms:
+    has_synonyms:
       - corrector_status
       - magnet_state
       - status
@@ -196,129 +455,617 @@ signals:
       - HCorrector
       - VCorrector
     has_signal_role: Status
-    data_type: string
+    has_data_type: String
     has_canonical_signal_type: Status
-    has_binding: # TODO
-signal_bindings:
-  kick_setpoint:
-    type: SignalBinding
-    binds_signal: kick_setpoint
-    naming_convention: EPICSSuffixConvention
-    native_identifier: "{device_name}.KICK"
-    source_system: EPICS
-    native_description: EPICS PV for the integrated corrector kick setpoint signal, following the EPICSSuffixConvention naming convention with the .KICK suffix.
-    native_unit: T_m
-    access_protocol: # TODO
-    archive_identifier: # TODO
-  current_setpoint:
-    type: SignalBinding
-    binds_signal: current_setpoint
-    naming_convention: EPICSSuffixConvention
-    native_identifier: "{device_name}.S"
-    source_system: EPICS
-    native_description: EPICS PV for the magnet current setpoint signal, following the EPICSSuffixConvention naming convention with the .S suffix.
-    native_unit: A
-    access_protocol: # TODO
-    archive_identifier: # TODO
-  current_readback:
-    type: SignalBinding
-    binds_signal: current_readback
-    naming_convention: EPICSSuffixConvention
-    native_identifier: "{device_name}.M"
-    source_system: EPICS
-    native_description: EPICS PV for the magnet current readback signal, following the EPICSSuffixConvention naming convention with the .R suffix.
-    native_unit: A
-    access_protocol: # TODO
-    archive_identifier: # TODO
-  current_min:
-    type: SignalBinding
-    binds_signal: current_min
-    naming_convention: EPICSSuffixConvention
-    native_identifier: "{device_name}.HMIN"
-    source_system: EPICS
-    native_description: EPICS PV for the magnet current minimum limit signal, following the EPICSSuffixConvention naming convention with the .HMIN suffix.
-    native_unit: A
-    access_protocol: # TODO
-    archive_identifier: # TODO
-  current_max:
-    type: SignalBinding
-    binds_signal: current_max
-    naming_convention: EPICSSuffixConvention
-    native_identifier: "{device_name}.HMAX"
-    source_system: EPICS
-    native_description: EPICS PV for the magnet current maximum limit signal, following the EPICSSuffixConvention naming convention with the .HMAX suffix.
-    native_unit: A
-    access_protocol: # TODO
-    archive_identifier: # TODO
-  magnet_status:
-    type: SignalBinding
-    binds_signal: magnet_status
-    naming_convention: EPICSSuffixConvention
-    native_identifier: "{device_name}.STAT"
-    source_system: EPICS
-    native_description: EPICS PV for the magnet status signal, following the EPICSSuffixConvention naming convention with the .STAT suffix.
-    native_unit: 
-    access_protocol: # TODO
-    archive_identifier: # TODO
-elements:
-  MBHK101H:
-      type: BeamlineElement
-      location:
-        beamline_name: GUN_thru_MV
-        section_id: # TODO, is the right name section?
-        girder_id: # TODO, is the right name girder?
-        hall_name: UITF
-      description: "MBHK101H horizontal corrector magnet in the GUN_thru_MV beamline at the UITF."
-      element_instance_of: HCorrector
-      signal_bindings:
-        - kick_setpoint:
-          type: SignalBinding
-          binds_signal: kick_setpoint
-          signal_binding_instance_of: kick_setpoint # added this to link to the signal binding defined in the signal_bindings slot.
-          naming_convention: EPICSSuffixConvention # This allows flexibility if a particle element has an override for the naming convention used for a particular signal, which is common for EPICS PVs. In this case, we are using the same EPICSSuffixConvention for all signals, but this structure allows for different conventions to be used for different signals if needed.
-          native_identifier: "MBHK101H.KICK" # native_convention and native_identifier are a bit duplicative, but I think it is okay
-        - current_setpoint:
-          type: SignalBinding
-          binds_signal: current_setpoint
-          signal_binding_instance_of: current_setpoint
-          naming_convention: EPICSSuffixConvention
-          native_identifier: "MBHK101H.S"
-        - current_readback:
-          type: SignalBinding
-          binds_signal: current_readback
-          signal_binding_instance_of: current_readback
-          naming_convention: EPICSSuffixConvention
-          native_identifier: "MBHK101H.R"
-        - current_min:
-          type: SignalBinding
-          binds_signal: current_min
-          signal_binding_instance_of: current_min
-          naming_convention: EPICSSuffixConvention
-          native_identifier: "MBHK101H.HMIN"
-        - current_max:
-          type: SignalBinding
-          binds_signal: current_max
-          signal_binding_instance_of: current_max
-          naming_convention: EPICSSuffixConvention
-          native_identifier: "MBHK101H.HMAX"
-        - magnet_status:
-          type: SignalBinding
-          binds_signal: magnet_status
-          signal_binding_instance_of: magnet_status
-          naming_convention: EPICSSuffixConvention
-          native_identifier: "MBHK101H.STAT"
+  horizontal_beam_position:
+    type: ControlSystemSignal
+    has_synonyms:
+      - horizontal_position
+      - x_position
+    description: Measured horizontal beam position from a BPM.
+    observes: 
+      - BeamPositionMonitor
+    has_signal_role: Readback
+    has_canonical_signal_type: HorizontalBeamPosition
+    has_quantity_kind: BeamPosition
+    has_data_type: Float
+    has_unit: mm
+  vertical_beam_position:
+    type: ControlSystemSignal
+    has_synonyms:
+      - vertical_position
+      - y_position
+    description: Measured vertical beam position from a BPM.
+    observes: 
+      - BeamPositionMonitor
+    has_signal_role: Readback
+    has_canonical_signal_type: VerticalBeamPosition
+    has_quantity_kind: BeamPosition
+    has_data_type: Float
+    has_unit: mm
+  bpm_status:
+    type: ControlSystemSignal
+    has_synonyms:
+      - bpm_device_status
+      - bpm_status
+    description: Status signal from a BPM, such as a summary of the health of the device or the quality of the position measurement.
+    observes: 
+      - BeamPositionMonitor
+    has_signal_role: Status
+    has_data_type: String
+    has_canonical_signal_type: Status
+  gradient_setpoint:
+    type: ControlSystemSignal
+    has_synonyms:
+      - gradient setpoint
+      - rf cavity setpoint
+      - gradient
+      - setpoint
+    description: Desired RF Cavity gradient setpoint.
+    observes: 
+      - RFCavity
+    has_signal_role: Setpoint
+    has_canonical_signal_type: GradientSetpoint
+    has_quantity_kind: CavityGradient
+    has_data_type: Float
+    has_unit: MV_per_m
+  gradient_readback:
+    type: ControlSystemSignal
+    has_synonyms:
+      - gradient readback
+      - rf cavity readback
+      - gradient
+      - readback
+    description: Measured RF Cavity gradient.
+    observes: 
+      - RFCavity
+    has_signal_role: Readback
+    has_canonical_signal_type: GradientReadback
+    has_quantity_kind: CavityGradient
+    has_data_type: Float
+    has_unit: MV_per_m
+  rf_cavity_status:
+    type: ControlSystemSignal
+    has_synonyms:
+      - rf cavity status
+      - cavity status
+      - status
+    description: Status signal from an RF Cavity, such as a summary of the health of the device or the quality of the gradient measurement.
+    observes: 
+      - RFCavity
+    has_signal_role: Status
+    has_data_type: String
+    has_canonical_signal_type: Status
+parameters: # need to add these
+  - Acceleration:
+    type: Parameter
+    has_data_type: Float
+    has_synonyms:
+      - acceleration
+      - accel
+    pals_parameter_group: # UNKNOWN
+    pals_parameter_name: # UNKNOWN
+    parameter_of:
+      - DiagnosticDevice
+  - ActuatorCard:
+    type: Parameter
+    has_data_type: String
+    has_synonyms:
+      - actuator card
+      - card
+    pals_parameter_group: # UNKNOWN
+    pals_parameter_name: # UNKNOWN
+    parameter_of:
+      - DiagnosticDevice
+  - ActuatorChannel:
+    type: Parameter
+    has_data_type: Integer
+    has_synonyms:
+      - actuator channel
+      - channel
+    pals_parameter_group: # UNKNOWN
+    pals_parameter_name: # UNKNOWN
+    parameter_of:
+      - DiagnosticDevice
+  - AcquisitionTime:
+    type: Parameter
+    has_data_type: String
+    has_synonyms:
+      - acquisition time
+      - acquisition_time
+      - acquisition
+      - time
+    pals_parameter_group: # UNKNOWN
+    pals_parameter_name: # UNKNOWN
+    parameter_of:
+      - DiagnosticDevice
+  - alphax:
+    type: Parameter
+    has_data_type: Float
+    has_synonyms:
+      - alphax
+      - alpha_x
+      - alpha x
+      - alpha_a
+      - alpha a
+      - alphaa
+    pals_parameter_group: TwissP # UNKNOWN
+    pals_parameter_name: alpha_a # UNKNOWN
+    parameter_of:
+      - RFCavity
+      - Marker
+      - DiagnosticDevice
+      - Corrector
+      - Solenoid
+      - Dipole
+      - Quadrupole
+      - BeamPositionMonitor
+  - alphay:
+    type: Parameter
+    has_data_type: Float
+    has_synonyms:
+      - alphay
+      - alpha_y
+      - alpha y
+      - alpha_b
+      - alpha b
+    pals_parameter_group: TwissP # UNKNOWN
+    pals_parameter_name: alpha_b # UNKNOWN
+    parameter_of:
+      - RFCavity
+      - Marker
+      - DiagnosticDevice
+      - Corrector
+      - Solenoid
+      - Dipole
+      - Quadrupole
+      - BeamPositionMonitor
+    type: Parameter
+  - angle_ref:
+    type: Parameter
+    has_data_type: String
+    has_synonyms:
+      - angle reference
+      - angle ref
+      - angle
+      - reference angle
+    pals_parameter_group: # UNKNOWN
+    pals_parameter_name: # UNKNOWN
+    parameter_of:
+      - Dipole # should this be Dipole (only in the UITF file) or Multipole, which is in the LinkML?
+  - betax:
+    type: Parameter
+    has_data_type: Float
+    has_synonyms:
+      - betax
+      - beta_x
+      - beta x
+      - beta_a
+      - beta a
+      - betaa
+    pals_parameter_group: TwissP # UNKNOWN
+    pals_parameter_name: beta_a # UNKNOWN
+    parameter_of:
+      - RFCavity
+      - Marker
+      - DiagnosticDevice
+      - Corrector
+      - Solenoid
+      - Dipole
+      - Quadrupole
+      - BeamPositionMonitor
+  - betay:
+    type: Parameter
+    has_data_type: Float
+    has_synonyms:
+      - betay
+      - beta_y
+      - beta y
+      - beta_b
+      - beta b
+    pals_parameter_group: TwissP # UNKNOWN
+    pals_parameter_name: beta_b # UNKNOWN
+  - BoardName:
+    type: Parameter
+  - BORE:
+    type: Parameter
+  - CanType:
+    type: Parameter
+  - CavityType:
+    type: Parameter
+  - Comments:
+    type: Parameter
+  - Controlled_by:
+    type: Parameter
+  - ControlsUnits:
+    type: Parameter
+  - CWCurrent:
+    type: Parameter
+  - Deceleration:
+    type: Parameter
+  - e1:
+    type: Parameter
+  - e2:
+    type: Parameter
+  - emitX:
+    type: Parameter
+  - emitY:
+    type: Parameter
+  - EPICSName:
+    type: Parameter
+    has_data_type: String
+    description: EPICS base name for the device, used for constructing EPICS PV names for signals associated with the device.
+    has_synonyms:
+      - EPICS name
+      - EPICS base name
+      - base name
+      - control system name
+    parameter_of: # need to make sure these are complete and correct
+      - HCorrector
+      - VCorrector
+      - Solenoid
+      - Dipole
+      - Quadrupole
+      - BeamPositionMonitor
+      - RFCavity
+  - etapX:
+    type: Parameter
+  - etapY:
+    type: Parameter
+  - etax:
+    type: Parameter
+  - etay:
+    type: Parameter
+  - FCC:
+    type: Parameter
+  - FieldMap:
+    type: Parameter
+  - GlobalOffsetX:
+    type: Parameter
+    has_data_type: Float
+    description: Global horizontal offset of the beam at this location.
+    has_synonyms:
+      - global offset x
+      - x offset
+      - horizontal offset
+    parameter_of:
+      - BeamPositionMonitor
+  - GlobalOffsetY:
+    type: Parameter
+    has_data_type: Float
+    description: Global vertical offset of the beam at this location.
+    has_synonyms:
+      - global offset y
+      - y offset
+      - vertical offset
+    parameter_of:
+      - BeamPositionMonitor
+  - HarpAxis:
+    type: Parameter
+  - HCOSystem:
+    type: Parameter
+  - HGAP:
+    type: Parameter
+  - Housed_by:
+    type: Parameter
+  - Hmax:
+    type: Parameter
+  - HystDwellTime:
+    type: Parameter
+  - HystRampTime:
+    type: Parameter
+  - InsertedChannel:
+    type: Parameter
+  - InsertedMode:
+    type: Parameter
+  - Interface:
+    type: Parameter
+  - jlab_type: # DM: I am turning the jlab_type field from JLab-specific parameters into a property. This will need to be coded in the schema generation.
+    type: Parameter
+  - Kn1: # DM: added Kn1 one as a parameter
+    type: Parameter
+  - Ksol:
+    type: Parameter
+  - K1:
+    type: Parameter
+  - KICK:
+    type: Parameter
+  - Limit:
+    type: Parameter
+  - LimitSwitchCard:
+    type: Parameter
+  - MaxGSET:
+    type: Parameter
+  - MaxStroke:
+    type: Parameter
+  - ModelFrequency:
+    type: Parameter
+  - ModelGSET:
+    type: Parameter
+  - ModelPhase:
+    type: Parameter
+  - Model_Pitch:
+    type: Parameter
+  - Model_Roll:
+    type: Parameter
+  - Model_Yaw:
+    type: Parameter
+  - ModelX:
+    type: Parameter
+  - ModelY:
+    type: Parameter
+  - ModelZ:
+    type: Parameter
+  - NameAlias:
+    type: Parameter
+  - NoHyst:
+    type: Parameter
+  - NumWires:
+    type: Parameter
+  - Pass:
+    type: Parameter
+    has_data_type: String
+    description: # DM: what is Pass?
+    has_synonyms:
+      - pass # what are synonyms?
+    parameter_of:
+      - BeamPositionMonitor
+  - pCentral:
+    type: Parameter
+    has_data_type: Float
+    description: Central momentum of the beam at this location, used for converting between magnetic field strengths and beam deflections.
+    has_synonyms:
+      - p_central
+      - central_momentum
+    parameter_of: # need to make sure these are complete
+      - BeamPositionMonitor
+      - HCorrector
+      - VCorrector
+      - Solenoid
+      - Dipole
+      - Quadrupole
+      - DiagnosticDevice # what is the Faraday Cup modeled as?
+  - PhaseRMS:
+    type: Parameter
+  - PosConv:
+    type: Parameter
+  - Powered_by:
+    type: Parameter
+  - psix:
+    type: Parameter
+  - psiy:
+    type: Parameter
+  - Q0:
+    type: Parameter
+  - Qexternal:
+    type: Parameter
+  - Radius:
+    type: Parameter
+  - Readout:
+    type: Parameter
+  - Resistance:
+    type: Parameter
+  - RetractedChannel:
+    type: Parameter
+  - ROQ:
+    type: Parameter
+  - Rotation:
+    type: Parameter
+  - ScreenX:
+    type: Parameter
+  - ScreenY:
+    type: Parameter
+  - ScreenZ:
+    type: Parameter
+  - SegMask:
+    type: Parameter
+    has_data_type: String
+    description: Segment mask indicating which segments of the screen are active or relevant for measurements.
+    has_synonyms:
+      - segment mask
+      - segmentmask
+      - applies to segments
+    parameter_of: # need to add these
+      - Marker
+      - HCorrector
+      - VCorrector
+      - Solenoid
+      - Dipole
+      - Quadrupole
+      - BeamPositionMonitor
+  - Sensitivity:
+    type: Parameter
+  - SurveyZ:
+    type: Parameter
+  - sigmax:
+    type: Parameter
+  - sigmay:
+    type: Parameter
+  - Speed:
+    type: Parameter
+  - spinx:
+    type: Parameter
+  - spiny:
+    type: Parameter
+  - spinz:
+    type: Parameter
+  - SurveyDate:
+    type: Parameter
+  - SurveyOffsetX:
+    type: Parameter
+  - SurveyOffsetY:
+    type: Parameter
+  - Tilt:
+    type: Parameter
+  - TransitionMode:
+    type: Parameter
+  - TrimCardType:
+    type: Parameter
+  - TuneModeCurrent:
+    type: Parameter
+  - Usage:
+    type: Parameter
+  - Winding:
+    type: Parameter
+  - WireDiameter:
+    type: Parameter
+  - WireMaterial:
+    type: Parameter
+  - WireOrientation:
+    type: Parameter
+  - WireView:
+     type: Parameter
 beamlines:
   GUN_thru_MV:
     type: Beamline
-    multipass: true
+    multipass: false
     line:
     - RF_LASER
     - D0
-    - S_IS_20CM
+    - S_IS_20CM:
+      type: VirtualComponentBinding
+      in_region: K1
+      description: >-
+        Virtual component representing the location of the 20 cm diagnostic screen in the G
+        UN_thru_MV beamline at the UITF. This is a virtual component because it doesn't correspond to a physical device, but it is important for understanding the beamline structure and for defining the locations of signals and other components in relation to the beamline.
+      instance_of_component: Marker
+      has_parameter_bindings:
+        SegMask:
+          type: ParameterBinding
+          instance_of_parameter: SegMask
+          value: S_UITF+S_KV+A_UITF+A_KV
+        pCentral:
+          type: ParameterBinding
+          instance_of_parameter: PCentral
+          has_data_type: Float
+          value: .465144443755972 # changed the value from an explicit string to float
     - D1
-    - IPMK101
+    - IPMK101:
+        type: PhysicalComponentBinding
+        in_region: K1
+        description: >-
+          IPMK101 BPM monitor in the K1 region of the GUN_thru_MV beamline at the UITF.
+          Is in the KV section of the beamline.
+        instance_of_component: BeamPositionMonitor
+        has_signal_bindings:
+          - horizontal_beam_position:
+              type: SignalBinding
+              instance_of_signal: horizontal_beam_position
+              native_identifier: IPMK101.XPOS
+              source_system: EPICS
+              native_description: >-
+                EPICS PV for the horizontal beam position readback signal from the IPMK101 BPM in the GUN_thru_MV beamline at the UITF.
+              native_unit: mm
+              access_protocol:
+              archive_identifier:
+          - vertical_beam_position:
+              type: SignalBinding
+              instance_of_signal: vertical_beam_position
+              native_identifier: IPMK101.YPOS
+              source_system: EPICS
+              native_description: >-
+                EPICS PV for the vertical beam position readback signal from the IPMK101 BPM in the GUN_thru_MV beamline at the UITF.
+              native_unit: mm
+              access_protocol:
+              archive_identifier:
+          - bpm_status:
+              type: SignalBinding
+              instance_of_signal: bpm_status
+              native_identifier: IPMK101.STAT
+              source_system: EPICS
+              native_description: >-
+                EPICS PV for the status signal from the IPMK101 BPM in the GUN_thru_MV beamline at the UITF, providing a summary of the health of the device or the quality of the position measurement.
+              native_unit: 
+              access_protocol:
+              archive_identifier:
+        has_parameter_bindings:
+          - SegMask:
+              type: ParameterBinding
+              instance_of_parameter: SegMask
+              value: S_UITF+S_KV+A_UITF+A_KV
+          - GlobalOffsetX:
+              type: ParameterBinding
+              instance_of_parameter: GlobalOffsetX
+              has_data_type: Float
+              value: 0
+          - GlobalOffsetY:
+              type: ParameterBinding
+              instance_of_parameter: GlobalOffsetY
+              has_data_type: Float
+              value: 0 
+          - Pass:
+              type: ParameterBinding
+              instance_of_parameter: Pass
+              value: non-muxed
+              # NEED TO INCLUDE THE OTHER PROPERTIES FOR THIS COMPONENT BINDING
     - D2
-    - MBHK101H
+    - MBHK101H:
+      type: PhysicalComponentBinding
+      in_region: K1
+      description: MBHK101H horizontal corrector magnet in the GUN_thru_MV beamline at the UITF.
+      instance_of_component: HCorrector
+      has_signal_bindings:
+        - kick_setpoint:
+          type: SignalBinding
+          instance_of_signal: kick_setpoint
+          native_identifier: MBHK101H.KICK # native_convention and native_identifier are a bit duplicative, but I think it is okay
+          source_system: EPICS
+          native_description: EPICS PV for the integrated corrector kick setpoint signal for the MBHK101H horizontal corrector magnet.
+          native_unit: T_m
+          access_protocol:
+          archive_identifier:
+        - current_setpoint:
+          type: SignalBinding
+          instance_of_signal: current_setpoint
+          naming_convention: EPICSSuffixConvention
+          native_identifier: MBHK101H.S
+          source_system: EPICS
+          native_description: EPICS PV for the magnet current setpoint signal for the MBHK101H horizontal corrector magnet.
+          native_unit: A
+          access_protocol:
+          archive_identifier:
+        - current_readback:
+          type: SignalBinding
+          instance_of_signal: current_readback
+          naming_convention: EPICSSuffixConvention
+          native_identifier: MBHK101H.R
+          source_system: EPICS
+          native_description: EPICS PV for the magnet current readback signal for the MBHK101H horizontal corrector magnet.
+          native_unit: A
+          access_protocol:
+          archive_identifier:
+        - current_min:
+          type: SignalBinding
+          instance_of_signal: current_min
+          naming_convention: EPICSSuffixConvention
+          native_identifier: MBHK101H.HMIN
+          source_system: EPICS
+          native_description: EPICS PV for the magnet current minimum limit signal for the MBHK101H horizontal corrector magnet.
+          native_unit: A
+          access_protocol:
+          archive_identifier:
+        - current_max:
+          type: SignalBinding
+          instance_of_signal: current_max
+          naming_convention: EPICSSuffixConvention
+          native_identifier: MBHK101H.HMAX
+          source_system: EPICS
+          native_description: EPICS PV for the magnet current maximum limit signal for the MBHK101H horizontal corrector magnet.
+          native_unit: A
+          access_protocol:
+          archive_identifier:
+        - magnet_status:
+          type: SignalBinding
+          instance_of_signal: magnet_status
+          naming_convention: EPICSSuffixConvention
+          native_identifier: MBHK101H.STAT
+          source_system: EPICS
+          native_description: EPICS PV for the magnet status signal, following the EPICSSuffixConvention naming convention with the .STAT suffix.
+          native_unit: 
+          access_protocol:
+          archive_identifier:
+      has_parameter_bindings:
+        # NEED TO INCLUDE THE OTHER PROPERTIES FOR THIS COMPONENT BINDING
     - MBHK101V
     - D3
     - MBHK101AH
@@ -629,6 +1376,35 @@ beamlines:
     - VIPM606
     - D151
     - ITVM606
-sections:
-girders:
-hall:
+non_beamline:
+  - ITF12C0922ADDR1LT:
+      type: PhysicalComponentBinding # Notice, there isn't a "Binding" LinkML class for InfrastructureComponents. 
+      in_region: Equipement Rack ITF12
+      relative_to: # Talk to Chris and Todd: need to add to the LinkML schema for PhysicalComponentBinding, and VirtualComponentBinding
+        relation:
+          relationship:
+            - upstream_of
+            - within 10 meters of
+          description: Spatial relation between the component and the reference point.
+          component: S_IS_20CM
+        relation:
+          relationship:
+            - downstream_of
+            - near_to
+            - within 3 meters of
+          description: Spatial relation between the component and the reference point.
+          component: IPMK101
+        relation:
+          relationship:
+            - across_from
+            - within 2 meters of
+          description: Spatial relation between the component and the reference point.
+          component: MBHK101H
+      description: >-
+        Light switch for UITF
+      instance_of_component: Lightswitch
+      has_parameter_bindings:
+        SegMask:
+          type: ParameterBinding
+          instance_of_parameter: SegMask
+          value: A_Site+A_UITF

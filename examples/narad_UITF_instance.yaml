@@ -128,8 +128,8 @@ narad_config:
         status:
           role: readback
           data_type: string
-          units: mm
-          units_uri: si-unit:MilliM
+          units: 
+          units_uri:
           description: generic instrument status readback.
     BPMCapability:
       description: Shared readback semantics for beam position monitor instruments.

@@ -15,6 +15,7 @@ prefixes:
   ssn: http://www.w3.org/ns/ssn/
   ssn-system: http://www.w3.org/ns/ssn/systems/
   sosa: http://www.w3.org/ns/sosa/
+  pals: https://pals-project.readthedocs.io/
 
 default_prefix: narad # DM: changed to narad
 default_range: string
@@ -24,16 +25,13 @@ imports:
 
 classes:
   # ---- Abstract base -------------------------------------------------------
-  NamedThing: # DM: added NamedThing as a common parent for all named entities in the schema, to support generic handling of name and description metadata.
+  IDThing: # DM: added IDedThing as a common parent for all named entities in the schema, to support generic handling of name and description metadata.
     abstract: true
     description: "Abstract base class providing identity and human-readable metadata."
     slots:
-      - name
+      - id
       - description
     slot_usage:
-      name:
-        identifier: true
-        required: true
       description:
         required: false
 
@@ -43,15 +41,16 @@ classes:
     tree_root: true
     slots:
       - type
-      - control_system
-      - components
+      - physical_components
+      - virtual_components
       - signals
-      - signal_bindings
-      - beamline
+      - properties
+      - beamlines
+      - non_beamline
 
   #---- System and Control System classes ------------------------------------------------
-  System: # Added System (NamedThing) as a general class for physical, logical, or cyber-physical systems involved in accelerator operation, aligned to SSN System.
-    is_a: NamedThing
+  System: # Added System (IDThing) as a general class for physical, logical, or cyber-physical systems involved in accelerator operation, aligned to SSN System.
+    is_a: IDThing
     description: >
       A physical, logical, or cyber-physical system involved in sensing,
       monitoring, control, or actuation. Broadly aligned to ssn:System.
@@ -76,43 +75,10 @@ classes:
       - source_system
       - naming_convention
 
-  NamingConvention: # DM: Added NamingConvention as a class to represent facility-specific templates for constructing control system signal names, which can be associated with ControlSystem instances.
-    is_a: NamedThing
-    description: >
-      A template for constructing facility-specific signal names from a semantic signal name and a control-system-specific suffix. 
-      The template is used to generate the full control system PV name for a given device instance and semantic signal by substituting the device name and signal code suffix into the template.
-    slots:
-      - template
-      - template_components
-      - full_pattern
-      - examples
-
-  NamingConventionExample: # Added NamingConventionExample to provide concrete examples of how a NamingConvention is applied to generate control system PV names from semantic signal names and device instance information.
-    is_a: NamedThing
-    description: >
-      An example of a control or monitoring system naming convention, illustrating how the template is used to generate full control system PV names from semantic signal names and device instance information. 
-      This can be used to provide concrete examples of the expected PV naming convention for different device types and signals based on the defined NamingConvention template.
-    slots:
-      - example
-      - description
-    slot_usage:
-      example:
-        identifier: true
-  
-  TemplateComponent: # DM Added TemplateComponent to represent the variable parts of a NamingConvention template, such as device name and signal code suffix, which are substituted to generate full control system PV names. 
-    is_a: NamedThing
-    description: >
-      A component of a naming convention template, representing a variable part of the control system PV name that is substituted based on the device instance and signal definition. 
-      For example, in the template "{device_name}{signal_code_suffix}", "device_name" and "signal_code_suffix" would be TemplateComponents that are replaced with the actual device name and signal code suffix for each specific binding.
-    slots:
-      - synonyms
-      - required
-      - pattern
-
   # ---- Beamline and beamline element classes ------------------------------------------------
   # DM: added Beamline and BeamlineElement classes to represent the structure of accelerator beamlines and their elements, which can be linked to components and signals to capture their physical relationships to the beam path.
   Beamline:
-    is_a: NamedThing
+    is_a: IDThing
     description: "A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path."
     slots:
       - type
@@ -124,21 +90,48 @@ classes:
     exact_mappings:
       - pals:BeamLine
   
-  BeamlineElement:
-    is_a: NamedThing
+  ComponentBinding: # DM: added ComponentBinding to represent the facility-specific binding of a physical component to a beamline element, which allows for capturing the physical placement of components in the beamline structure.
+    is_a: IDThing
     description: >-
-      A single element in a beamline with its kind and optional NARAD
-      capability annotations.
+      A single element of the beamline that binds a component 
+      to a specific location in the beamline sequence. 
+      This allows for capturing the physical placement of components in the beamline structure, which is important for understanding their relationship to the beam path and other components.
     broad_mappings:
       - pals:Element
     slots:
       - type
-      - element_instance_of
-      - signal_bindings
+      - in_region
+      - instance_of_component
+      - has_parameter_binding
+
+  PhysicalComponentBinding: # DM: added PhysicalComponentBinding as a specific type of ComponentBinding that represents the binding of a physical component to a beamline element, which can be used to capture the physical placement of actual devices in the beamline structure.
+    is_a: ComponentBinding
+    description: >
+      A facility-specific binding that describes how a physical accelerator component is placed or located in the beamline structure. 
+      This can be used to capture the physical placement of actual devices in the beamline structure, which is important for understanding their relationship to the beam path and other components.
+    broad_mappings:
+      - pals:Element
+    slots:
+      - has_signal_binding
+    slot_usage:
+      instance_of_component:
+        range: PhysicalComponent
+
+  VirtualComponentBinding: # DM: added VirtualComponentBinding as a specific type of ComponentBinding that represents the binding of a virtual component to a beamline element, which can be used to capture the placement of abstract components like Markers or BeamlineSections in the beamline structure.
+    is_a: ComponentBinding
+    description: >
+      A facility-specific binding that describes how a virtual component, such as a Marker or BeamlineSection, is placed or located in the beamline structure. 
+      This can be used to capture the placement of abstract components in the beamline structure, which is important for understanding the overall structure and function of the accelerator system even for components that don't have a physical instantiation.
+    broad_mappings:
+      - pals:Element
+    slot_usage:
+      instance_of_component:
+        range: VirtualComponent
 
   # ---- Element Classes ------------------------------------------------
   # DM: Added specific classes for common accelerator component types such as Magnet, Quadrupole
   ElementLocation:
+    is_a: IDThing
     description: Facility-specific location information for beamline elements and components.
     slots:
       - beamline_name
@@ -147,52 +140,144 @@ classes:
       - hall_name
 
   # ---- Accelerator component and signal classes ------------------------------------------------
-  PhysicalComponent:
-    description: A physical item that participates in or supports accelerator operation.
+  Component: # DM: added Component as a general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
+    is_a: IDThing
+    description: A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
     slots:
-      - id
       - type
       - name
-      - synonyms
-      - description
-      - has_beamline_relation
-      - has_function
-      - has_plane # DM: Should this be at the beamline element level instead? DM: For now we will allow has_plane to be used at the component level for any components that have a specific plane association, such as horizontal or vertical corrector magnets, BPMs, etc. We can always add more specific plane association slots at the beamline element level later if needed.
-      - located_in
-      - has_signal
+      - has_synonyms
+      - has_beamline_relation # DM: notice Physical and Virtual Components have different Enums
+      - has_function # DM: notice that Physical and Virtual Components have different Enums for function, since virtual components may have more abstract functions or roles that don't fit into the physical device function categories.
       - superclass_of # DM: added superclass_of slot to link to more specific component types like Quadrupole, etc.
       - subclass_of # DM: added subclass_of slot to link to more general component types like Magnet, etc.
+      - has_parameters # DM: added has_parameters slot to link components to their important properties or attributes that are not captured by the other specific slots in the schema, which allows for capturing important metadata about components that may be relevant for understanding their behavior or operation.
     slot_usage:
+      type:
+        required: true
+      name:
+        required: true
       has_beamline_relation:
         required: true
+      located_in:
+        required: true
+    broad_mappings:
+      - pals:Element
+  
+  PhysicalComponent:
+    is_a: Component
+    slots:
+      - has_signals # DM: added has_signals slot to link components to their associated semantic signals, which is important for understanding the operational meaning of the signals in relation to the physical components.
+      - located_in
+    slot_usage:
+      has_beamline_relation:
+        range: PhysicalBeamlineRelationEnum
+      has_function:
+        range: PhysicalFunctionEnum
+    broad_mappings:
+      - pals:Element
+      
+    description: A physical item that participates in or supports accelerator operation.
 
-  AcceleratorDevice:
-    description: A physical accelerator device, independent of facility-specific naming.
-    is_a: PhysicalComponent
+  VirtualComponent:
+    is_a: Component
+    description: >-
+      A virtual or logical component that represents a concept, function, or role in the accelerator beamline operation but does not have a physical instantiation. 
+      This can be used to capture abstract components, such as Markers or BeamlineSections, that are important for understanding the structure and function of the accelerator system but are not physical devices.
+    slot_usage:
+      has_beamline_relation:
+        range: VirtualBeamlineRelationEnum
+      has_function:
+        range: VirtualFunctionEnum
+    broad_mappings:
+      - pals:Element
+      - pals:BookkeepingElement
+
+  ComponentBinding:
+    is_a: IDThing
+    slots:
+      - type
+      - instance_of_component
+      - in_region
+      - has_parameter_binding
+    description: >-
+      A single element of the beamline that binds a physical or virtual component 
+      to a specific facility-specific instance of the component.
+      This allows for capturing the physical placement of components in the beamline structure, which is important for understanding their relationship to the beam path and other components.
+    slots:
+      - type
+    
+  PhysicalComponentBinding:
+    is_a: ComponentBinding
+    description: A physical item that participates in or supports accelerator operation.
+    slots:
+      - has_signal_binding
+
+  VirtualComponentBinding:
+    is_a: ComponentBinding
+    description: >-
+      A virtual or logical component that represents a concept, function, or role in accelerator operation but does not have a physical instantiation. 
+      This can be used to capture abstract components, such as Markers or BeamlineSections, that are important for understanding the structure and function of the accelerator system but are not physical devices.
+
+  #AcceleratorDevice:
+  #  description: A physical accelerator device, independent of facility-specific naming.
+  #  is_a: PhysicalComponent
+  #  broad_mappings:
+  #    - pals:Element
 
   Magnet:
     description: An accelerator device that produces a magnetic field for beam control.
-    is_a: AcceleratorDevice
-
-  Quadrupole:
-    description: A magnet primarily used to focus or defocus the beam.
+    is_a: PhysicalComponent
+    broad_mappings:
+      - pals:Element
+  
+  Solenoid: # DM: added Solenoid as a specific type of Magnet with a primarily longitudinal magnetic field used for focusing, which is a common component type in accelerators that has distinct characteristics from other types of magnets like dipoles or quadrupoles.
+    description: A magnet with a primarily longitudinal magnetic field used for focusing. # DM: placeholder description
     is_a: Magnet
     slot_usage:
       has_function:
         required: true
+    exact_mappings:
+      - pals:Solenoid
+
+  Multipole: # DM: added Multipole as a general class for magnets with higher-order multipole fields, which can be specialized into specific types like Quadrupole, Sextupole, Octupole, etc., and can capture the number of poles as an important parameter.
+    description: A general magnet with a higher-order multipole field, such as a sextupole or octupole.
+    is_a: Magnet
+    slots:
+      - has_number_poles
+    slot_usage:
+      has_function:
+        required: true
+    broad_mappings:
+      - pals:Multipole
+
+  Quadrupole:
+    description: A magnet primarily used to focus or defocus the beam. 4 poles.
+    is_a: Multipole
+    slot_usage:
+      has_function:
+        required: true
+    exact_mappings:
+      - pals:Quadrupole
 
   Corrector:
     description: A magnet primarily used to steer the beam in a transverse plane.
     is_a: Magnet
+    slots:
+      - has_plane # DM: moved has_plane from PhysicalComponent and PhysicalComponentBinding to Corrector since it's more specific to correctors, which can be horizontal or vertical, whereas other magnet types may not have a specific plane association.
     slot_usage:
       has_function:
         required: true
       has_plane:
         required: true
+    broad_mappings:
+      - pals:Kicker
 
   DiagnosticDevice:
     description: An accelerator device used to measure beam or machine state.
-    is_a: AcceleratorDevice
+    is_a: PhysicalComponent
+    broad_mappings:
+      - pals:Instrument
 
   BeamPositionMonitor:
     description: A diagnostic device used to measure transverse beam position.
@@ -200,6 +285,8 @@ classes:
     slot_usage:
       has_function:
         required: true
+    broad_mappings:
+      - pals:Instrument
 
   RadiationMonitor:
     description: A diagnostic device used to monitor radiation dose or dose rate.
@@ -207,10 +294,35 @@ classes:
     slot_usage:
       has_function:
         required: true
+  
+  Cavity:
+    description: A cavity used for beam acceleration or manipulation.
+    is_a: PhysicalComponent
+    slot_usage:
+      has_function:
+        required: true
+  
+  CrabCavity:
+    description: A cavity used for transverse beam manipulation, such as crabbing or deflecting.
+    is_a: Cavity
+    slot_usage:
+      has_function:
+        required: true
+    exact_mappings:
+      - pals:CrabCavity
+
+  RFCavity:
+    description: A cavity used for RF acceleration or longitudinal manipulation.
+    is_a: Cavity
+    slot_usage:
+      has_function:
+        required: true
+    exact_mappings:
+      - pals:RFCavity
 
   VacuumDevice:
     description: An accelerator device associated with the vacuum system.
-    is_a: AcceleratorDevice
+    is_a: PhysicalComponent
 
   VacuumPump:
     description: A vacuum device used to generate or maintain vacuum.
@@ -218,22 +330,33 @@ classes:
     slot_usage:
       has_function:
         required: true
+  
+  InfrastructureComponent: # DM: added InfrastructureComponent to represent important physical components that support accelerator operation but don't have a specific physical relationship to the beamline structure, which allows for capturing important infrastructure components that are not inline with the beamline but are still critical for accelerator operation.
+    is_a: PhysicalComponent
+    description: A physical component that supports accelerator operation without a specific beam-pipe placement, such as a power supply, control rack, or radiation detector.
+  
+  Marker:
+    description: A virtual component used as a reference point or marker in the beamline structure.
+    is_a: VirtualComponent
+    slot_usage:
+      has_function:
+        required: true
+    exact_mappings:
+      - pals:Marker
 
+  # ---- Signal and Signal Binding classes ------------------------------------------------
   ControlSystemSignal:
+    is_a: IDThing
     description: Semantic meaning of a control-system signal associated with a component.
     slots:
-      - id
       - type
-      - name
-      - synonyms
-      - description
+      - has_synonyms # DM: added synonyms to ControlSystemSignal to allow for alternative labels for signals, which can be important for capturing different naming conventions or aliases used in different facilities or contexts.
       - observes
       - has_signal_role
       - has_canonical_signal_type
       - has_quantity_kind
+      - has_data_type
       - has_unit
-      - has_plane
-      - has_binding
     slot_usage:
       observes:
         required: true
@@ -254,15 +377,39 @@ classes:
     slots:
       - id
       - type
-      - binds_signal
-      - signal_binding_instance_of # added this to provide a link to the signal binding defined in the signal_bindings slot.
-      - naming_convention # added naming_convention slot to link to the naming convention used for this binding, which can be used to generate the full native identifier based on the semantic signal and device instance information.
+      - instance_of_signal
       - native_identifier
       - source_system
       - native_description
       - native_unit
       - access_protocol
       - archive_identifier
+
+  Parameter:
+    is_a: IDThing
+    description: >-
+      A parameter, property or attribute of a component (physical or virtual) that is important 
+      for understanding its behavior, operation, or relationships.
+      This allows for capturing important metadata about components 
+      that may not be covered by the other specific slots in the schema.
+    slots:
+      - type
+      - has_data_type
+      - has_synonyms
+      - pals_parameter_group
+      - pals_parameter_name
+      - parameter_of
+
+  ParameterBinding:
+    is_a: IDThing
+    description: >-
+      A facility-specific binding that describes how a semantic Parameter is 
+      locally identified and realized in a source system 
+      such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service.
+    slots:
+      - type
+      - instance_of_parameter
+      - value
 
 #---- Subsets ----------------------------------------------------------
   # Subsets of narad classes for documentation and enabling validation of partial graphs. 
@@ -301,7 +448,7 @@ slots:
     in_subset:
       - ontological # DM: added in_subset to indicate that this is a key ontological metadata slot that specifies the specific type of component or signal being described, which can be used for validation and querying of the graph.
 
-  synonyms:
+  has_synonyms:
     description: Alternative human-readable labels.
     range: string
     multivalued: true
@@ -315,13 +462,6 @@ slots:
     multivalued: true
     inlined: true
     description: "A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name."
-
-  elements:
-    #range: BeamlineElement # TODO: Change this. Needs to be an instance of a component
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    description: "Beamline element definitions referenced by name from beamline sequences. Serializes as a keyed map by element name."
 
   multipass:
     range: boolean
@@ -345,61 +485,6 @@ slots:
     range: SystemTypeEnum
     description: "Type of control system, such as Control, Monitoring, or ControlAndMonitoring."
     required: true
-
-  naming_conventions:
-    range: NamingConvention
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    description: >-
-      Signal naming conventions used by this control system defined in a machine actionable manner. 
-      This is where you would capture the patterns/templates for how control system PVs or signals are constructed for this control system, 
-      for example, the EPICS convention of using suffixes like .R, .S, :GSET to indicate readback, status, and setpoint signals.
-      Multiple naming conventions can be captured if a control system uses more than one convention for different device types or domains.
-
-  naming_convention:
-    range: NamingConvention
-    multivalued: false
-    inlined: true
-    description: >-
-      A single naming convention used by this control system for constructing control system PV names. 
-      This is a simplified slot for cases where there is only one naming convention used for all signals in the control system, while the more general naming_conventions slot can be used to capture multiple conventions if needed.
-
-  override_naming_convention:
-    range: NamingConvention
-    in_subset:
-      - relationship
-    multivalued: false
-    inlined: true
-    description: >-
-      An optional override naming convention that can be used to capture exceptions to the general naming convention for specific cases. 
-      For example, if most devices of a certain type follow a standard naming convention but there are known exceptions for certain devices or signals, 
-      this slot can be used to capture the specific naming convention for those exceptions without affecting the general convention captured in has_naming_convention.
-      Override naming conventions can be linked directly to specific SignalBindings.
-
-  template:
-    range: string
-    description: "A template string for constructing control system PV names based on the semantic signal name and device instance. This can include placeholders for the device name and signal suffix, e.g. {device_name}{signal_suffix}."
-
-  template_components:
-    range: TemplateComponent
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    description: >-
-      Structured components of the naming convention template, for capturing the template in a more machine-actionable way than a raw string. 
-      For example, you could have components for the device name, signal suffix, and any fixed parts of the naming convention.
-  
-  examples:
-    range: NamingConventionExample
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    description: "Examples of how this naming convention is applied to specific device instances and signals."
-
-  example:
-    range: string
-    description: "A single example of how this naming convention is applied to a specific device instance and signal."
 
   # ---- Component relationship slots ------------------------------------------------
   superclass_of:
@@ -446,26 +531,61 @@ slots:
       - pals:length
 
   line:
-    range: BeamlineElement
+    range: ComponentBinding
     multivalued: true
     inlined: false
-    description: "Ordered sequence of beamline elements in this beamline. Serializes as a list of element names (BeamlineElement names) referencing the keys in the elements map This is not a direct containment slot; the actual element definitions are in the top-level elements map."
+    description: _.
+      Ordered sequence of beamline elements in this beamline. 
+      Each element represents a specific component binding at a specific location in the beamline sequence, which can be used to capture the physical placement of components in the beamline structure and their relationship to the beam path. 
+      The line is ordered according to the beam path, so that the first element in the line corresponds to the first component encountered by the beam, and so on.
     exact_mappings:
       - pals:line
 
-  element_instance_of:
+  non_beamline:
+    range: ComponentBinding
+    multivalued: true
+    inlined: false
     description: >
-      NARAD alias for rdf:type. Links a facility-specific instance element to
+      Components that are not physically (or virtually) on the beamline but are still important for understanding the overall accelerator system, such as power supplies, control racks, radiation detectors, or other infrastructure. 
+      This allows for capturing important components that support accelerator operation but don't have a specific physical relationship to the beamline structure.
+
+  instance_of_component:
+    description: >
+      Links a facility-specific instance element to
       the PhysicalComponent that defines it.
+
+      Broadly maps to rdf:type, but is specifically intended to link a facility-specific instance of a beamline element, 
+      or environmental monitor element to the canonical PhysicalComponent, VirtualComponent, or EnvironmentalMonitor class that defines its type.
       Values are typically the specific component or signal type, such as kick_setpoint, or Quadrupole, or BeamPositionMonitor, etc.
     in_subset:
       - relationship
     broad_mappings:
       - rdf:type
-    range: PhysicalComponent
+    range: Component
     multivalued: false
 
-  # ---- Accelerator component and signal slots ------------------------------------------------
+  in_region:
+    description: >
+      The region, area, or section of the accelerator facility where this component is located or operates. 
+      This can be used to capture location information that is important for understanding the operational context of the component, such as which hall, sector, or region it is in.
+    range: string
+
+  has_signal_binding:
+    description: Facility-specific bindings for semantic signals associated with this component.
+    multivalued: true
+    inlined_as_list: true
+    is_subset:
+      - relationship
+    range: SignalBinding
+  
+  has_parameter_binding:
+    description: Facility-specific bindings for semantic parameters associated with this component.
+    multivalued: true
+    inlined_as_list: true
+    in_subset:
+      - relationship
+    range: ParameterBinding
+
   components:
     description: Physical accelerator components in the dataset.
     range: PhysicalComponent
@@ -480,41 +600,14 @@ slots:
     inlined_as_list: true
     required: true
 
-  signal_bindings:
-    description: Facility-specific source-system bindings for semantic signals in the dataset.
-    range: SignalBinding
-    multivalued: true
-    inlined_as_list: true
-
-  signal_binding_instance_of:
-    description: >
-      NARAD alias for rdf:type. Links a facility-specific signal binding instance node to
-      the class id/name that defines its type.
-      Values are typically the specific binding type, such as EPICS PV, PALS-Ext channel, MYA channel, element database key, etc.
-    in_subset:
-      - relationship
-    broad_mappings:
-      - rdf:type
-    range: ControlSystemSignal
-    multivalued: false
-
-  has_signal:
+  has_signals:
     description: Signal associated with this physical component.
     range: ControlSystemSignal
     multivalued: true
     in_subset: # DM: added in_subset relationship to indicate that this is a key relationship linking components to their semantic signals, which can be used for validation and querying of the graph.
       - relationship
 
-  has_binding:
-    description: >
-      Connects a semantic ControlSystemSignal to one or more facility-specific
-      SignalBinding records that identify how the signal is accessed locally.
-    range: SignalBinding
-    multivalued: true
-    in_subset: # DM: added in_subset relationship to indicate that this is a key relationship linking components to their semantic signals, which can be used for validation and querying of the graph.
-      - relationship
-
-  binds_signal:
+  instance_of_signal:
     description: >
       The semantic ControlSystemSignal that this local binding realizes or accesses.
     range: ControlSystemSignal
@@ -524,23 +617,34 @@ slots:
 
   observes:
     description: Physical component that this signal describes or controls.
-    range: PhysicalComponent
+    range: Component
     multivalued: true # DM: added multivalued to allow a signal to be associated with multiple components if needed, such as corrector_status being associated with both HCorrector and VCorrector.
     in_subset: # DM: added in_subset relationship to indicate that this is a key relationship linking components to their semantic signals, which can be used for validation and querying of the graph.
       - relationship
 
   has_beamline_relation:
     description: Physical or deployment relationship to the beamline or beam pipe.
-    range: BeamlineRelationEnum
+    range: PhysicalBeamlineRelationEnum
 
   has_function:
     description: Broad device-level purpose.
-    range: FunctionEnum
+    range: PhysicalFunctionEnum
     multivalued: true
 
   has_plane:
     description: Transverse plane associated with a component or signal.
     range: PlaneEnum
+  
+  has_number_poles:
+    description: Number of poles for a multipole magnet, such as 2 for a dipole, 6 for a sextupole, 8 for an octupole, etc.
+    range: integer
+  
+  has_parameters:
+    description: Important properties or attributes of a component that are not captured by the other specific slots in the schema.
+    multivalued: true
+    inlined_as_list: true
+    range: Parameter
+  
 
   located_in: # Changing this to a Class definition and slot to allow for more structured location information in the future, such as specific areas, regions, or organizational units within a facility, rather than just a free-text string.
     description: Facility-local location, area, region, or organizational placement.
@@ -609,6 +713,50 @@ slots:
       from the native identifier.
     range: string
 
+  #----- Parameter and ParameterBinding slots ------------------------------------------------
+  has_data_type:
+    description: Data type of a parameter value, such as string, integer, float, boolean, etc.
+    range: DataTypeEnum
+    multivalued: false
+
+  pals_parameter_group:
+    description: >-
+      Optional grouping or category for a parameter based on the Particle Accelerator Language Standard (PALS)
+      lattice element parameter groups. Examples include "ApertureP" for Aperture Parameters, and "BendP" for Bend Parameters.
+    range: string
+
+  pals_parameter_name:
+    description: >-
+      Optional standardized parameter name based on the Particle Accelerator Language Standard (PALS) lattice 
+      element parameter name. Examples include "rho_ref" for the radian reference bend angle, and
+      "aperture_x" for the horizontal aperture size, or
+      "alias" for an alternate name of the element.
+    range: string
+
+  parameter_of:
+    description: The component (physical or virtual) that this parameter describes or is associated with.
+    range: Component
+    multivalued: true
+    inlined_as_list: true
+
+  instance_of_parameter:
+    description: >
+      Links a facility-specific parameter binding to the canonical Parameter that defines its type and meaning.
+
+      Broadly maps to rdf:type, but is specifically intended to link a facility-specific instance of a parameter binding to the canonical Parameter class that defines its type and meaning.
+      Values are typically the specific parameter type, such as horizontal_aperture, or rho_ref, or alias, etc.
+    in_subset:
+      - relationship
+    broad_mappings:
+      - rdf:type
+    range: Parameter
+    multivalued: false
+
+  value:
+    description: The value of this parameter binding, which can be a string, number, boolean, or other data type depending on the parameter.
+    range: string
+
+
 # ---- Enums ---------------------------------------------------------------
 enums:
   SourceSystemEnum:
@@ -645,11 +793,11 @@ enums:
       #MachineProtection:
       #  description: A system that provides machine protection functions, such as a machine protection system or interlock system.
 
-  BeamlineRelationEnum:
+  PhysicalBeamlineRelationEnum:
     description: Controlled values for physical relation to the beamline.
     permissible_values:
       Inline:
-        description: Beam passes through the component or beamline aperture.
+        description: Beam passes through the physical component or beamline aperture. The physical component is physically on the beamline.
       AttachedToPipe:
         description: Mechanically attached to the beam pipe or vacuum envelope.
       NearBeamline:
@@ -657,7 +805,27 @@ enums:
       Infrastructure:
         description: Supports accelerator operation without a specific beam-pipe placement.
 
-  FunctionEnum:
+  VirtualBeamlineRelationEnum: # Chris and Todd need to evaluate this idea and ontology
+    description: Controlled values for virtual relation to the beamline.
+    permissible_values:
+      Inline:
+        description: >-
+          Beam passes through the virtual component or beamline aperture. 
+          Used for virtual components like Markers that represent important locations on the beamline but don't have a physical instantiation.
+      AssociatedWithBeamline:
+        description: >-
+          Not inline with the beamline but still operationally associated with it. 
+          Used for virtual components that are important for understanding the beamline structure and function but don't have a direct physical relationship to the beam path, 
+          such as BeamlineSections or Markers that are not inline with the beam.
+      NotAssociatedWithBeamline:
+        description: >-
+          Not inline with the beamline and not operationally associated with it. 
+          Used for virtual components that are more abstract and don't have a specific relationship 
+          to the beamline, such as a virtual component representing a control system function 
+          or role that is important for understanding the overall accelerator system but doesn't have a direct relationship to the beamline structure.
+
+
+  PhysicalFunctionEnum:
     description: Broad device-level functions.
     permissible_values:
       Focusing:
@@ -670,6 +838,8 @@ enums:
         description: Generates or maintains vacuum.
       RadiationMonitoring:
         description: Monitors radiation dose or dose rate.
+      Measurement:
+        description: Measures beam or machine state.
 #      BeamAcceleration:
 #        description: Accelerates the beam.
 #      BeamLossDetection:
@@ -682,6 +852,24 @@ enums:
 #        description: Supports machine protection.
 #      TimingSynchronization:
 #        description: Supports timing or synchronization.
+
+  VirtualFunctionEnum: # Chris and Todd need to evaluate this idea and ontology
+    description: Broad virtual component functions or roles.
+    permissible_values:
+      BeamlineSection:
+        description: >-
+          A section of the beamline used for organizational or functional grouping of components, such as a linac section, transfer line, or ring sector.
+      Mark:
+        description: >-
+          A virtual component representing an important location on the beamline, 
+          such as a reference point for beam-based alignment, a location of a known aperture restriction, 
+          or a location of a critical diagnostic device.
+      ControlFunction:
+        description: >-
+          A virtual component representing a control system function or role
+          that is important for understanding the overall accelerator system 
+          but doesn't have a direct relationship to the beamline structure, 
+          such as the EPICS control system that manages device process variables across the accelerator.
 
   PlaneEnum:
     description: Controlled values for transverse plane.
@@ -720,10 +908,16 @@ enums:
         description: Beam intensity or current signal.
       DeviceStatus:
         description: Device status signal.
+      GradientSetpoint: # DM: added this for the RF Cavity setpoint. Is this correct?
+        description: Cavity accelerating gradient setpoint signal.
+      GradientReadback: # DM: added this for the RF Cavity readback. Is this correct?
+        description: Cavity accelerating gradient readback signal.
       MagnetCurrentSetpoint:
         description: Magnet current setpoint signal.
       MagnetCurrentReadback:
         description: Magnet current readback signal.
+      MagnetFieldSetpoint: # DM: I added this for the Dipole.
+        description: Magnet field setpoint signal.
       IntegratedFieldSetpoint:
         description: Integrated magnetic field setpoint signal.
       IntegratedFieldReadback:
@@ -754,6 +948,8 @@ enums:
         description: Electric current.
       IntegratedMagneticField:
         description: Integrated magnetic field.
+      MagneticField:
+        description: Magnetic field. # DM: added this for the Dipole field_setpoint. Is this correct?
       Pressure:
         description: Gas or vacuum pressure.
       DoseRate:
@@ -764,8 +960,8 @@ enums:
 #        description: Power.
 #      CavityPhase:
 #        description: Cavity phase.
-#      CavityGradient:
-#        description: Cavity accelerating gradient.
+      CavityGradient:
+        description: Cavity accelerating gradient.
 
   UnitEnum:
     description: >-
@@ -809,6 +1005,25 @@ enums:
       MV_per_m:
         description: megavolt per meter
         meaning: unit:MegaV-PER-M
+      G_per_cm: # DM: I added this for the Quadrupole setpoint. Is this correct?
+        description: gauss per centimeter
+        meaning: unit:Gs
       unitless:
         description: dimensionless value
         meaning: unit:NUM
+
+  DataTypeEnum:
+    description: Data types for parameter values.
+    permissible_values:
+      String:
+        description: string data type
+        meaning: type:STRING
+      Integer:
+        description: integer data type
+        meaning: type:INT
+      Float:
+        description: floating-point data type
+        meaning: type:FLOAT
+      Boolean:
+        description: boolean data type
+        meaning: type:BOOLEAN
