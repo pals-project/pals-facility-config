@@ -3,8 +3,8 @@ narad_config:
   intent: NARAD extension for capability-layer semantics and facility-specific signal
     bindings
   deployed_system: UITF
-  has_sub_system: 
-    - epics
+  has_sub_system:
+  - epics
   control_capability_layer:
     MagnetCapability:
       description: Shared current-control semantics for powered magnets.
@@ -49,7 +49,8 @@ narad_config:
           data_type: float
           units: G/cm
           units_uri: si-unit:Gs
-          description: Desired integrated quadrupole strength or equivalent model quantity.
+          description: Desired integrated quadrupole strength or equivalent model
+            quantity.
     DipoleCapability:
       description: Control and observe the dipole bend field.
       device_type: Dipole
@@ -116,20 +117,33 @@ narad_config:
         cavity_status:
           role: status
           data_type: string
-          units:
+          units: null
           description: Cavity status summary.
     RFCavityCapability:
       description: Shared gradient-control semantics for RF cavity devices.
       device_type: RFCavity
       subclass_of: CavityGradientCapability
       signals: {}
+    SolenoidCapability:
+      description: Control and observe the solenoid integrated field strength.
+      device_type: Solenoid
+      subclass_of: MagnetCapability
+      signals:
+        solenoid_setpoint:
+          role: control
+          data_type: float
+          units: T*m
+          units_uri: si-unit:T-M
+          description: Desired solenoid integrated field strength (Ksol) or equivalent
+            model quantity.
   device_layer:
     Magnet:
       device_type: Magnet
       has_sub_system:
-        - name: Quadrupole
-        - name: Dipole
-        - name: Corrector
+      - name: Quadrupole
+      - name: Dipole
+      - name: Corrector
+      - name: Solenoid
       has_system_capability: MagnetCapability
     Quadrupole:
       device_type: Quadrupole
@@ -145,8 +159,8 @@ narad_config:
       has_system_capability: CorrectorKickCapability
     Instrument:
       device_type: Instrument
-      has_sub_system: 
-        - name: BPM
+      has_sub_system:
+      - name: BPM
       has_system_capability: InstrumentCapability
     BPM:
       device_type: BPM
@@ -154,20 +168,24 @@ narad_config:
       has_system_capability: BPMCapability
     CavityGradient:
       device_type: CavityGradient
-      has_sub_system: 
-        - name: RFCavity
+      has_sub_system:
+      - name: RFCavity
       has_system_capability: CavityGradientCapability
     RFCavity:
       device_type: RFCavity
       subclass_of: CavityGradient
       has_system_capability: RFCavityCapability
+    Solenoid:
+      device_type: Solenoid
+      subclass_of: Magnet
+      has_system_capability: SolenoidCapability
   signal_layer:
     facilities:
       UITF:
         facility_identifier:
-          - identifier_type: doi
-            identifier_value: 10.1016/j.nima.2022.167093
-        control_system: 
+        - identifier_type: doi
+          identifier_value: 10.1016/j.nima.2022.167093
+        control_system:
           name: epics
           naming_convention: <device><signal_code>
         signal_definitions:
@@ -231,6 +249,12 @@ narad_config:
               cavity_status:
                 description: EPICS cavity status PV
                 control_system_suffix: :STAT
+          solenoid_signals:
+            device_type: Solenoid
+            signal_bindings:
+              solenoid_setpoint:
+                description: EPICS solenoid integrated field strength setpoint PV
+                control_system_suffix: .BDL
 beamlines:
   GUN_thru_MV:
     multipass: true
@@ -568,7 +592,7 @@ elements:
       for_property: gradient_readback
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    cavity_status:
       pv_name: RK11:STAT
       is_instance_of: RFCavityCapability.signals.cavity_status
       for_property: cavity_status
@@ -622,7 +646,7 @@ elements:
         SegMask: S_UITF+S_KV+A_UITF+A_KV
         pCentral: '.465144443755972'
         alphax: '-8.359604379977313'
-        alphay: '-.8539187577256651'
+        alphay: -.8539187577256651
         betax: '2.224877414151352'
         betay: '.1416410334157079'
         emitx: '2.154959018473714E-07'
@@ -659,9 +683,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMK101.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -676,7 +700,7 @@ elements:
         Pass: non-muxed
         SurveyOffsetX: '0'
         SurveyOffsetY: '0'
-        CanType: 'Stripline'
+        CanType: Stripline
         Rotation: '45'
         Sensitivity: '9.9'
         Controlled_by: iocipmk101
@@ -704,7 +728,7 @@ elements:
 - name: D2
   is_instance_of: Drift
   length: 1.00000003e-09
-- name: MBHK101H 
+- name: MBHK101H
   is_instance_of: Corrector
   instance_signal_bindings:
     current_setpoint:
@@ -731,7 +755,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK101H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -810,7 +834,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK101V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -892,7 +916,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK101AH.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -971,7 +995,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK101AV.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -1072,6 +1096,43 @@ elements:
         Model_Pitch: '0'
         Model_Roll: '0'
         Model_Yaw: '-15.0000000115079'
+  instance_signal_bindings:
+    current_setpoint:
+      pv_name: MFHK101.S
+      is_instance_of: SolenoidCapability.signals.current_setpoint
+      for_property: current_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_readback:
+      pv_name: MFHK101M
+      is_instance_of: SolenoidCapability.signals.current_readback
+      for_property: current_readback
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_min:
+      pv_name: MFHK101.HMIN
+      is_instance_of: SolenoidCapability.signals.current_min
+      for_property: current_min
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_max:
+      pv_name: MFHK101.HMAX
+      is_instance_of: SolenoidCapability.signals.current_max
+      for_property: current_max
+      is_hosted_by: UITF
+      is_property_of: epics
+    magnet_status:
+      pv_name: MFHK101.STAT
+      is_instance_of: SolenoidCapability.signals.magnet_status
+      for_property: magnet_status
+      is_hosted_by: UITF
+      is_property_of: epics
+    solenoid_setpoint:
+      pv_name: MFHK101.BDL
+      is_instance_of: SolenoidCapability.signals.solenoid_setpoint
+      for_property: solenoid_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
 - name: D5
   is_instance_of: Drift
   length: 0.107398704
@@ -1090,9 +1151,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMK102.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -1159,7 +1220,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK102H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -1238,7 +1299,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK102V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -1382,7 +1443,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MDSK201.STAT
       is_instance_of: DipoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -1424,9 +1485,9 @@ elements:
         betay: '.9718599589904877'
         emitx: '4.134193326931078E-07'
         emity: '3.936634656459702E-07'
-        etapx: '-.2660525403059775'
+        etapx: -.2660525403059775
         etapy: '1.869237913056299E-16'
-        etax: '-.01344596285648782'
+        etax: -.01344596285648782
         etay: '7.666874501197557E-18'
         psix: '.8537295440373742'
         psiy: '2.879105169640403'
@@ -1468,9 +1529,9 @@ elements:
         betay: '.764580015951825'
         emitx: '4.134193326931078E-07'
         emity: '3.936634656459702E-07'
-        etapx: '-.2660525403059775'
+        etapx: -.2660525403059775
         etapy: '1.869237913056299E-16'
-        etax: '-.03877383607218592'
+        etax: -.03877383607218592
         etay: '2.546178854991048E-17'
         psix: '1.714368755460966'
         psiy: '2.989768767574726'
@@ -1514,7 +1575,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK201H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -1552,9 +1613,9 @@ elements:
         betay: '.4177197128025455'
         emitx: '4.134193326931078E-07'
         emity: '3.936634656459702E-07'
-        etapx: '-.2660525403059775'
+        etapx: -.2660525403059775
         etapy: '1.869237913056299E-16'
-        etax: '-.1150648766524735'
+        etax: -.1150648766524735
         etay: '7.906251918574055E-17'
         psix: '3.252095675296018'
         psiy: '3.521935931224404'
@@ -1596,7 +1657,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK201V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -1634,9 +1695,9 @@ elements:
         betay: '.4131421074860945'
         emitx: '4.134193326931078E-07'
         emity: '3.936634656459702E-07'
-        etapx: '-.2660525403059775'
+        etapx: -.2660525403059775
         etapy: '1.869237913056299E-16'
-        etax: '-.1177254020555334'
+        etax: -.1177254020555334
         etay: '8.093175709879689E-17'
         psix: '3.259588577308949'
         psiy: '3.546010013210183'
@@ -1693,15 +1754,15 @@ elements:
         TrimCardType: 10Amp
         Tilt: '0'
         pCentral: '.465144443755972'
-        alphax: '-.4409656592287655'
+        alphax: -.4409656592287655
         alphay: '.2850459018135577'
         betax: '4.857432860742378'
         betay: '.4433782637794548'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299509E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1715368363208148'
+        etapy: -.02022964211444155
+        etax: -.1715368363208148
         etay: '.06604979538700827'
         psix: '3.367120673608112'
         psiy: '4.252860030757511'
@@ -1715,6 +1776,43 @@ elements:
         Model_Pitch: '0'
         Model_Roll: '0'
         Model_Yaw: '-1.15078924901353E-08'
+  instance_signal_bindings:
+    current_setpoint:
+      pv_name: MFBK202.S
+      is_instance_of: SolenoidCapability.signals.current_setpoint
+      for_property: current_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_readback:
+      pv_name: MFBK202M
+      is_instance_of: SolenoidCapability.signals.current_readback
+      for_property: current_readback
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_min:
+      pv_name: MFBK202.HMIN
+      is_instance_of: SolenoidCapability.signals.current_min
+      for_property: current_min
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_max:
+      pv_name: MFBK202.HMAX
+      is_instance_of: SolenoidCapability.signals.current_max
+      for_property: current_max
+      is_hosted_by: UITF
+      is_property_of: epics
+    magnet_status:
+      pv_name: MFBK202.STAT
+      is_instance_of: SolenoidCapability.signals.magnet_status
+      for_property: magnet_status
+      is_hosted_by: UITF
+      is_property_of: epics
+    solenoid_setpoint:
+      pv_name: MFBK202.BDL
+      is_instance_of: SolenoidCapability.signals.solenoid_setpoint
+      for_property: solenoid_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
 - name: D14
   is_instance_of: Drift
   length: 0.124995161
@@ -1745,7 +1843,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK202H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -1777,15 +1875,15 @@ elements:
         TrimCardType: 1Amp
         KICK: '0'
         pCentral: '.465144443755972'
-        alphax: '-.4717021745789783'
-        alphay: '-.01977545533835451'
+        alphax: -.4717021745789783
+        alphay: -.01977545533835451
         betax: '4.971511923993878'
         betay: '.4102207414901647'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299508E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1649698317124201'
+        etapy: -.02022964211444155
+        etax: -.1649698317124201
         etay: '.06352118800451699'
         psix: '3.39255922619743'
         psiy: '4.55031451897903'
@@ -1827,7 +1925,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK202V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -1859,15 +1957,15 @@ elements:
         TrimCardType: 1Amp
         KICK: '0'
         pCentral: '.465144443755972'
-        alphax: '-.47170217482488'
-        alphay: '-.01977545777701976'
+        alphax: -.47170217482488
+        alphay: -.01977545777701976
         betax: '4.971511924937283'
         betay: '.4102207415297156'
         emitx: '2.533688968336419E-07'
         emity: '2.518604918299509E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.164969831659882'
+        etapy: -.02022964211444155
+        etax: -.164969831659882
         etay: '.06352118798428735'
         psix: '3.392559226398577'
         psiy: '4.550314521416742'
@@ -1900,15 +1998,15 @@ elements:
         SegMask: S_UITF+S_KV+A_UITF+A_KV
         Controlled_by: iocitf2
         pCentral: '.465144443755972'
-        alphax: '-.5128667506408852'
-        alphay: '-.4280143789379571'
+        alphax: -.5128667506408852
+        alphay: -.4280143789379571
         betax: '5.136331329865851'
         betay: '.4851819275995575'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299508E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1561748216853877'
+        etapy: -.02022964211444155
+        etax: -.1561748216853877
         etay: '.06013469315494581'
         psix: '3.425693001998646'
         psiy: '4.934962721375172'
@@ -1953,7 +2051,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MQWK202.STAT
       is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -1990,15 +2088,15 @@ elements:
         Radius: '.0159'
         BORE: '0'
         pCentral: '.465144443755972'
-        alphax: '-.5436044560404847'
-        alphay: '-.7328475380936091'
+        alphax: -.5436044560404847
+        alphay: -.7328475380936091
         betax: '5.268390231757493'
         betay: '.6302896683893651'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299508E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1496075628172073'
+        etapy: -.02022964211444155
+        etax: -.1496075628172073
         etay: '.05760598787041097'
         psix: '3.449724803972426'
         psiy: '5.1629744953913'
@@ -2055,15 +2153,15 @@ elements:
         Tilt: '0'
         MatrixFile: /usr/opsdata/wienfields/w_v_p00_180keV.dat
         pCentral: '.465144443755972'
-        alphax: '-.6339856037826147'
+        alphax: -.6339856037826147
         alphay: '-1.629178947226907'
         betax: '5.701213455890294'
         betay: '1.498452498344868'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299508E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1302971951007687'
+        etapy: -.02022964211444155
+        etax: -.1302971951007687
         etay: '.05017058295170726'
         psix: '3.516839850640151'
         psiy: '5.550828712881858'
@@ -2097,15 +2195,15 @@ elements:
         SegMask: S_UITF+S_KV+A_UITF+A_KV
         Controlled_by: iocitf2
         pCentral: '.465144443755972'
-        alphax: '-.6482601935641887'
+        alphax: -.6482601935641887
         alphay: '-1.770743460328945'
         betax: '5.775647821861784'
         betay: '1.69581798730364'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299508E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1272473602118605'
+        etapy: -.02022964211444155
+        etax: -.1272473602118605
         etay: '.04899625226742321'
         psix: '3.52695624182043'
         psiy: '5.587252670724212'
@@ -2150,7 +2248,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MQWK203.STAT
       is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -2187,15 +2285,15 @@ elements:
         Radius: '.0159'
         BORE: '0'
         pCentral: '.465144443755972'
-        alphax: '-.6789978989637883'
+        alphax: -.6789978989637883
         alphay: '-2.075576619484597'
         betax: '5.94155508475504'
         betay: '2.176608001126653'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299508E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1206801013436801'
+        etapy: -.02022964211444155
+        etax: -.1206801013436801
         etay: '.04646754698288837'
         psix: '3.548296150842302'
         psiy: '5.652361092356444'
@@ -2237,7 +2335,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK203H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -2269,15 +2367,15 @@ elements:
         TrimCardType: 1Amp
         KICK: '0'
         pCentral: '.465144443755972'
-        alphax: '-.7292773790902565'
+        alphax: -.7292773790902565
         alphay: '-2.574210221713565'
         betax: '6.229504967893096'
         betay: '3.12734937847298'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299509E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1099376481431119'
+        etapy: -.02022964211444155
+        etax: -.1099376481431119
         etay: '.04233119440072325'
         psix: '3.581911243474912'
         psiy: '5.730811753680204'
@@ -2316,7 +2414,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK203V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -2348,15 +2446,15 @@ elements:
         TrimCardType: 1Amp
         KICK: '0'
         pCentral: '.465144443755972'
-        alphax: '-.7292773793361581'
+        alphax: -.7292773793361581
         alphay: '-2.57421022415223'
         betax: '6.229504969351651'
         betay: '3.1273493836214'
         emitx: '2.53368896833642E-07'
         emity: '2.518604918299508E-07'
         etapx: '.0525380705251388'
-        etapy: '-.02022964211444155'
-        etax: '-.1099376480905739'
+        etapy: -.02022964211444155
+        etax: -.1099376480905739
         etay: '.0423311943804936'
         psix: '3.581911243635438'
         psiy: '5.730811753999963'
@@ -2403,8 +2501,8 @@ elements:
         emitx: '2.533681975409941E-07'
         emity: '2.518609161178217E-07'
         etapx: '.07832412649498344'
-        etapy: '-.03015849329985609'
-        etax: '-.1044084541814642'
+        etapy: -.03015849329985609
+        etax: -.1044084541814642
         etay: '.04020219320392549'
         psix: '3.596188819220108'
         psiy: '5.757566742343504'
@@ -2418,6 +2516,43 @@ elements:
         Model_Pitch: '0'
         Model_Roll: '0'
         Model_Yaw: '-1.15078924901353E-08'
+  instance_signal_bindings:
+    current_setpoint:
+      pv_name: MFQK203.S
+      is_instance_of: SolenoidCapability.signals.current_setpoint
+      for_property: current_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_readback:
+      pv_name: MFQK203M
+      is_instance_of: SolenoidCapability.signals.current_readback
+      for_property: current_readback
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_min:
+      pv_name: MFQK203.HMIN
+      is_instance_of: SolenoidCapability.signals.current_min
+      for_property: current_min
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_max:
+      pv_name: MFQK203.HMAX
+      is_instance_of: SolenoidCapability.signals.current_max
+      for_property: current_max
+      is_hosted_by: UITF
+      is_property_of: epics
+    magnet_status:
+      pv_name: MFQK203.STAT
+      is_instance_of: SolenoidCapability.signals.magnet_status
+      for_property: magnet_status
+      is_hosted_by: UITF
+      is_property_of: epics
+    solenoid_setpoint:
+      pv_name: MFQK203.BDL
+      is_instance_of: SolenoidCapability.signals.solenoid_setpoint
+      for_property: solenoid_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
 - name: D24
   is_instance_of: Drift
   length: 0.104497638
@@ -2448,7 +2583,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK203AH.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -2487,8 +2622,8 @@ elements:
         emitx: '2.533681975409941E-07'
         emity: '2.518609161178217E-07'
         etapx: '.07832412649498344'
-        etapy: '-.03015849329985609'
-        etax: '-.09622376793293305'
+        etapy: -.03015849329985609
+        etax: -.09622376793293305
         etay: '.03705070187636424'
         psix: '3.613083231065581'
         psiy: '5.785379078540683'
@@ -2527,7 +2662,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK203AV.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -2566,8 +2701,8 @@ elements:
         emitx: '2.533681975409941E-07'
         emity: '2.518609161178217E-07'
         etapx: '.07832412649498344'
-        etapy: '-.03015849329985609'
-        etax: '-.09622376785460893'
+        etapy: -.03015849329985609
+        etax: -.09622376785460893
         etay: '.03705070184620575'
         psix: '3.61308323122933'
         psiy: '5.78537907879242'
@@ -2607,8 +2742,8 @@ elements:
         emitx: '2.533681975409941E-07'
         emity: '2.518609161178218E-07'
         etapx: '.07832412649498344'
-        etapy: '-.03015849329985609'
-        etax: '-.07602361787876689'
+        etapy: -.03015849329985609
+        etax: -.07602361787876689
         etay: '.02927268867242922'
         psix: '3.656659260252432'
         psiy: '5.842555382529879'
@@ -2649,8 +2784,8 @@ elements:
         emitx: '2.533681975409941E-07'
         emity: '2.518609161178217E-07'
         etapx: '.07832412649498344'
-        etapy: '-.03015849329985609'
-        etax: '-.07602361780044277'
+        etapy: -.03015849329985609
+        etax: -.07602361780044277
         etay: '.02927268864227073'
         psix: '3.656659260426662'
         psiy: '5.842555382724905'
@@ -2681,9 +2816,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMK203.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -2710,8 +2845,8 @@ elements:
         emitx: '2.533681975409941E-07'
         emity: '2.518609161178216E-07'
         etapx: '.07832412649498344'
-        etapy: '-.03015849329985609'
-        etax: '-.06866112624532364'
+        etapy: -.03015849329985609
+        etax: -.06866112624532364
         etay: '.02643778116009755'
         psix: '3.673219686281759'
         psiy: '5.860110160103131'
@@ -2759,8 +2894,8 @@ elements:
         emitx: '2.342768287985185E-07'
         emity: '2.58544815549865E-07'
         etapx: '.1249420803419617'
-        etapy: '-.09668304255270677'
-        etax: '-.04053979678299139'
+        etapy: -.09668304255270677
+        etax: -.04053979678299139
         etay: '.03137062298563057'
         psix: '3.71699837674114'
         psiy: '5.898658889601531'
@@ -2774,6 +2909,43 @@ elements:
         Model_Pitch: '0'
         Model_Roll: '0'
         Model_Yaw: '-1.15078924901353E-08'
+  instance_signal_bindings:
+    current_setpoint:
+      pv_name: MFAK301.S
+      is_instance_of: SolenoidCapability.signals.current_setpoint
+      for_property: current_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_readback:
+      pv_name: MFAK301M
+      is_instance_of: SolenoidCapability.signals.current_readback
+      for_property: current_readback
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_min:
+      pv_name: MFAK301.HMIN
+      is_instance_of: SolenoidCapability.signals.current_min
+      for_property: current_min
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_max:
+      pv_name: MFAK301.HMAX
+      is_instance_of: SolenoidCapability.signals.current_max
+      for_property: current_max
+      is_hosted_by: UITF
+      is_property_of: epics
+    magnet_status:
+      pv_name: MFAK301.STAT
+      is_instance_of: SolenoidCapability.signals.magnet_status
+      for_property: magnet_status
+      is_hosted_by: UITF
+      is_property_of: epics
+    solenoid_setpoint:
+      pv_name: MFAK301.BDL
+      is_instance_of: SolenoidCapability.signals.solenoid_setpoint
+      for_property: solenoid_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
 - name: D29
   is_instance_of: Drift
   length: 1.5857823e-05
@@ -2799,8 +2971,8 @@ elements:
         emitx: '2.342768287985185E-07'
         emity: '2.58544815549865E-07'
         etapx: '.1249420803419617'
-        etapy: '-.09668304255270677'
-        etax: '-.03021759963734738'
+        etapy: -.09668304255270677
+        etax: -.03021759963734738
         etay: '.02338307048819904'
         psix: '3.736319789979064'
         psiy: '5.91281925187238'
@@ -2845,7 +3017,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK301H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -2884,8 +3056,8 @@ elements:
         emitx: '2.342768287985185E-07'
         emity: '2.585448155498645E-07'
         etapx: '.1249420803419617'
-        etapy: '-.09668304255270677'
-        etax: '-.01381771240808719'
+        etapy: -.09668304255270677
+        etax: -.01381771240808719
         etay: '.01069246224391134'
         psix: '3.781360683964206'
         psiy: '5.940812907367799'
@@ -2927,7 +3099,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK301V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -2966,8 +3138,8 @@ elements:
         emitx: '2.34276828798519E-07'
         emity: '2.58544815549865E-07'
         etapx: '.1249420803419617'
-        etapy: '-.09668304255270677'
-        etax: '-.01381771228314511'
+        etapy: -.09668304255270677
+        etax: -.01381771228314511
         etay: '.0106924621472283'
         psix: '3.781360684405318'
         psiy: '5.940812907612944'
@@ -3029,9 +3201,9 @@ elements:
         emitx: '2.342821575971979E-07'
         emity: '2.585503105840315E-07'
         etapx: '.1194074695296224'
-        etapy: '-.09240023398078684'
+        etapy: -.09240023398078684
         etax: '.006139370838842542'
-        etay: '-.004750785727547268'
+        etay: -.004750785727547268
         psix: '3.891098045794024'
         psiy: '5.9894561793334'
         sigmax: '.0004484590754319583'
@@ -3044,6 +3216,43 @@ elements:
         Model_Pitch: '0'
         Model_Roll: '0'
         Model_Yaw: '-1.15078924901353E-08'
+  instance_signal_bindings:
+    current_setpoint:
+      pv_name: MFDK302A.S
+      is_instance_of: SolenoidCapability.signals.current_setpoint
+      for_property: current_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_readback:
+      pv_name: MFDK302AM
+      is_instance_of: SolenoidCapability.signals.current_readback
+      for_property: current_readback
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_min:
+      pv_name: MFDK302A.HMIN
+      is_instance_of: SolenoidCapability.signals.current_min
+      for_property: current_min
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_max:
+      pv_name: MFDK302A.HMAX
+      is_instance_of: SolenoidCapability.signals.current_max
+      for_property: current_max
+      is_hosted_by: UITF
+      is_property_of: epics
+    magnet_status:
+      pv_name: MFDK302A.STAT
+      is_instance_of: SolenoidCapability.signals.magnet_status
+      for_property: magnet_status
+      is_hosted_by: UITF
+      is_property_of: epics
+    solenoid_setpoint:
+      pv_name: MFDK302A.BDL
+      is_instance_of: SolenoidCapability.signals.solenoid_setpoint
+      for_property: solenoid_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
 - name: D33
   is_instance_of: Drift
   length: 0.322228025
@@ -3057,15 +3266,15 @@ elements:
         SegMask: S_UITF+S_KV+A_UITF+A_KV
         pCentral: '.465144443755972'
         alphax: '-3.858268006057215'
-        alphay: '-.8076529802215013'
+        alphay: -.8076529802215013
         betax: '.5948258722684887'
         betay: '.05821205562820486'
         emitx: '2.342821575971977E-07'
         emity: '2.585503105840317E-07'
         etapx: '.1194074695296224'
-        etapy: '-.09240023398078684'
+        etapy: -.09240023398078684
         etax: '.04461580387531681'
-        etay: '-.03452473060152621'
+        etay: -.03452473060152621
         psix: '6.571489045228137'
         psiy: '8.120287388608761'
         sigmax: '.0003703117987226922'
@@ -3099,15 +3308,15 @@ elements:
         Controlled_by: iocitf2
         pCentral: '.465144443755972'
         alphax: '-3.984399517968124'
-        alphay: '-.9417037755499156'
+        alphay: -.9417037755499156
         betax: '.6318646251374885'
         betay: '.06647378447980312'
         emitx: '2.342821575971975E-07'
         emity: '2.585503105840317E-07'
         etapx: '.1194074695296224'
-        etapy: '-.09240023398078684'
+        etapy: -.09240023398078684
         etax: '.04517973237809621'
-        etay: '-.03496111138918142'
+        etay: -.03496111138918142
         psix: '6.579192577393345'
         psiy: '8.196281331011901'
         sigmax: '.0003816054056749501'
@@ -3153,10 +3362,10 @@ elements:
         betay: '3.374419719208641'
         emitx: '3.580400735952898E-07'
         emity: '3.861184664011428E-07'
-        etapx: '-.01720670077087363'
+        etapx: -.01720670077087363
         etapy: '.02447685635490381'
         etax: '.05843399965864633'
-        etay: '-.08312346654556066'
+        etay: -.08312346654556066
         psix: '6.746451876673607'
         psiy: '8.913907446153155'
         sigmax: '.001100334452981703'
@@ -3169,6 +3378,43 @@ elements:
         Model_Pitch: '0'
         Model_Roll: '0'
         Model_Yaw: '-1.15078924901353E-08'
+  instance_signal_bindings:
+    current_setpoint:
+      pv_name: MFDK302B.S
+      is_instance_of: SolenoidCapability.signals.current_setpoint
+      for_property: current_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_readback:
+      pv_name: MFDK302BM
+      is_instance_of: SolenoidCapability.signals.current_readback
+      for_property: current_readback
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_min:
+      pv_name: MFDK302B.HMIN
+      is_instance_of: SolenoidCapability.signals.current_min
+      for_property: current_min
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_max:
+      pv_name: MFDK302B.HMAX
+      is_instance_of: SolenoidCapability.signals.current_max
+      for_property: current_max
+      is_hosted_by: UITF
+      is_property_of: epics
+    magnet_status:
+      pv_name: MFDK302B.STAT
+      is_instance_of: SolenoidCapability.signals.magnet_status
+      for_property: magnet_status
+      is_hosted_by: UITF
+      is_property_of: epics
+    solenoid_setpoint:
+      pv_name: MFDK302B.BDL
+      is_instance_of: SolenoidCapability.signals.solenoid_setpoint
+      for_property: solenoid_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
 - name: D36
   is_instance_of: Drift
   length: 0.0663695246
@@ -3199,7 +3445,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK302H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -3237,10 +3483,10 @@ elements:
         betay: '3.920740177788911'
         emitx: '3.580400735952898E-07'
         emity: '3.861184664011428E-07'
-        etapx: '-.01720670077087363'
+        etapx: -.01720670077087363
         etapy: '.02447685635490381'
         etax: '.05729199910897796'
-        etay: '-.08149894922619343'
+        etay: -.08149894922619343
         psix: '6.758092831694786'
         psiy: '8.932155192152868'
         sigmax: '.001139169786111823'
@@ -3281,7 +3527,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK302V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -3319,10 +3565,10 @@ elements:
         betay: '3.920740186347309'
         emitx: '3.580400735952898E-07'
         emity: '3.861184664011425E-07'
-        etapx: '-.01720670077087363'
+        etapx: -.01720670077087363
         etapy: '.02447685635490381'
         etax: '.05729199909177126'
-        etay: '-.08149894920171658'
+        etay: -.08149894920171658
         psix: '6.758092831865175'
         psiy: '8.932155192407922'
         sigmax: '.00113916978669994'
@@ -3374,10 +3620,10 @@ elements:
         betay: '6.039613323594489'
         emitx: '3.580400735952898E-07'
         emity: '3.86118466401143E-07'
-        etapx: '-.01720670077087363'
+        etapx: -.01720670077087363
         etapy: '.02447685635490381'
         etax: '.05351032388259513'
-        etay: '-.07611944489647579'
+        etay: -.07611944489647579
         psix: '6.792288087656782'
         psiy: '8.977335145953949'
         sigmax: '.00127030529382268'
@@ -3424,10 +3670,10 @@ elements:
         betay: '5.840432971050808'
         emitx: '2.176611267231952E-07'
         emity: '2.366369864187656E-07'
-        etapx: '-.1972527699326993'
+        etapx: -.1972527699326993
         etapy: '.1284105308878257'
         etax: '.07083246132234909'
-        etay: '-.04611156520436986'
+        etay: -.04611156520436986
         psix: '6.801524808532259'
         psiy: '8.987771520329932'
         sigmax: '.001204460499590079'
@@ -3440,6 +3686,43 @@ elements:
         Model_Pitch: '0'
         Model_Roll: '0'
         Model_Yaw: '-1.15078924901353E-08'
+  instance_signal_bindings:
+    current_setpoint:
+      pv_name: MFAK303.S
+      is_instance_of: SolenoidCapability.signals.current_setpoint
+      for_property: current_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_readback:
+      pv_name: MFAK303M
+      is_instance_of: SolenoidCapability.signals.current_readback
+      for_property: current_readback
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_min:
+      pv_name: MFAK303.HMIN
+      is_instance_of: SolenoidCapability.signals.current_min
+      for_property: current_min
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_max:
+      pv_name: MFAK303.HMAX
+      is_instance_of: SolenoidCapability.signals.current_max
+      for_property: current_max
+      is_hosted_by: UITF
+      is_property_of: epics
+    magnet_status:
+      pv_name: MFAK303.STAT
+      is_instance_of: SolenoidCapability.signals.magnet_status
+      for_property: magnet_status
+      is_hosted_by: UITF
+      is_property_of: epics
+    solenoid_setpoint:
+      pv_name: MFAK303.BDL
+      is_instance_of: SolenoidCapability.signals.solenoid_setpoint
+      for_property: solenoid_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
 - name: D41
   is_instance_of: Drift
   length: 0.17019742
@@ -3476,9 +3759,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMK401.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -3504,10 +3787,10 @@ elements:
         betay: '2.32080471786829'
         emitx: '2.176611267231943E-07'
         emity: '2.36636986418766E-07'
-        etapx: '-.1972527699326993'
+        etapx: -.1972527699326993
         etapy: '.1284105308878257'
         etax: '.01959710122535248'
-        etay: '-.01275761132818855'
+        etay: -.01275761132818855
         psix: '6.883708569792088'
         psiy: '9.058381453844184'
         sigmax: '.0005917659511432218'
@@ -3550,7 +3833,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK401H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -3588,10 +3871,10 @@ elements:
         betay: '2.291803935576502'
         emitx: '2.176611267231934E-07'
         emity: '2.36636986418766E-07'
-        etapx: '-.1972527699326993'
+        etapx: -.1972527699326993
         etapy: '.1284105308878257'
         etax: '.01904566661260624'
-        etay: '-.01239863025331276'
+        etay: -.01239863025331276
         psix: '6.885514090274632'
         psiy: '9.059593622329347'
         sigmax: '.0005852134066617938'
@@ -3632,7 +3915,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK401V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -3670,10 +3953,10 @@ elements:
         betay: '2.291803925236504'
         emitx: '2.176611267231934E-07'
         emity: '2.366369864187652E-07'
-        etapx: '-.1972527699326993'
+        etapx: -.1972527699326993
         etapy: '.1284105308878257'
         etax: '.01904566641535347'
-        etay: '-.01239863012490223'
+        etay: -.01239863012490223
         psix: '6.885514090927609'
         psiy: '9.059593622765684'
         sigmax: '.0005852134043182205'
@@ -3711,9 +3994,9 @@ elements:
         betay: '.6400025807859847'
         emitx: '2.176611267231938E-07'
         emity: '2.366369864187656E-07'
-        etapx: '-.1972527699326993'
+        etapx: -.1972527699326993
         etapy: '.1284105308878257'
-        etax: '-.02290487444592368'
+        etax: -.02290487444592368
         etay: '.01491095455097319'
         psix: '7.598756497666676'
         psiy: '9.236113079117512'
@@ -3746,7 +4029,7 @@ elements:
       for_property: gradient_readback
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    cavity_status:
       pv_name: RK41:STAT
       is_instance_of: RFCavityCapability.signals.cavity_status
       for_property: cavity_status
@@ -3766,14 +4049,14 @@ elements:
         ModelGSET: '.0986842105263158'
         pCentral: '.465144255654231'
         alphax: '-4.897458749644919'
-        alphay: '-.2308074345911919'
+        alphay: -.2308074345911919
         betax: '1.019283888354791'
         betay: '.08704951952251833'
         emitx: '2.176621383729282E-07'
         emity: '2.366382491165599E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.06900231141141738'
+        etax: -.06900231141141738
         etay: '.04492014709780925'
         psix: '9.661764755443215'
         psiy: '10.66619288988346'
@@ -3817,7 +4100,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK401AH.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -3855,9 +4138,9 @@ elements:
         betay: '.2431723603994659'
         emitx: '2.176621383729286E-07'
         emity: '2.366382491165598E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.08795759937175085'
+        etax: -.08795759937175085
         etay: '.05725994131691457'
         psix: '9.72617825542093'
         psiy: '11.38775891647942'
@@ -3896,7 +4179,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK401AV.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -3934,9 +4217,9 @@ elements:
         betay: '.2431723631868014'
         emitx: '2.176621383729286E-07'
         emity: '2.366382491165598E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.08795759956898269'
+        etax: -.08795759956898269
         etay: '.05725994144531147'
         psix: '9.726178255878168'
         psiy: '11.38775892059173'
@@ -3966,9 +4249,9 @@ elements:
         betay: '1.498456957778482'
         emitx: '2.176621383729305E-07'
         emity: '2.366382491165597E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.1327071812322739'
+        etax: -.1327071812322739
         etay: '.08639168717619233'
         psix: '9.785306815322986'
         psiy: '11.77308973404667'
@@ -4011,7 +4294,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK401BH.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -4049,9 +4332,9 @@ elements:
         betay: '4.370142473152471'
         emitx: '2.176621383729305E-07'
         emity: '2.366382491165597E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.1826464202694263'
+        etax: -.1826464202694263
         etay: '.1189018729600611'
         psix: '9.810659509328282'
         psiy: '11.87219715047269'
@@ -4093,7 +4376,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHK401BV.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -4131,9 +4414,9 @@ elements:
         betay: '4.370142487557659'
         emitx: '2.176621383729305E-07'
         emity: '2.366382491165597E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.1826464204666581'
+        etax: -.1826464204666581
         etay: '.118901873088458'
         psix: '9.810659509395844'
         psiy: '11.87219715070151'
@@ -4176,7 +4459,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MDIK402.STAT
       is_instance_of: DipoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -4217,9 +4500,9 @@ elements:
         betay: '6.98643780099257'
         emitx: '2.176621383729379E-07'
         emity: '2.366382491165588E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.214222000549445'
+        etax: -.214222000549445
         etay: '.1394574120697616'
         psix: '9.819629899051639'
         psiy: '11.9011745494284'
@@ -4267,9 +4550,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMK402.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -4295,9 +4578,9 @@ elements:
         betay: '12.65855790107139'
         emitx: '2.176621383729305E-07'
         emity: '2.366382491165597E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.2663157507540667'
+        etax: -.2663157507540667
         etay: '.1733701734570699'
         psix: '9.82920613148919'
         psiy: '11.92926415863337'
@@ -4341,7 +4624,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK402H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -4379,9 +4662,9 @@ elements:
         betay: '12.65855792574239'
         emitx: '2.176621383729305E-07'
         emity: '2.366382491165597E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.2663157509512986'
+        etax: -.2663157509512986
         etay: '.1733701735854668'
         psix: '9.829206131517479'
         psiy: '11.92926415871237'
@@ -4423,7 +4706,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK402V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -4461,9 +4744,9 @@ elements:
         betay: '12.6585579504134'
         emitx: '2.176621383729305E-07'
         emity: '2.366382491165597E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.2663157511485304'
+        etax: -.2663157511485304
         etay: '.1733701737138637'
         psix: '9.829206131545767'
         psiy: '11.92926415879137'
@@ -4535,9 +4818,9 @@ elements:
         betay: '18.53724662865364'
         emitx: '2.176621383729305E-07'
         emity: '2.366382491165597E-07'
-        etapx: '-.1972318391649047'
+        etapx: -.1972318391649047
         etapy: '.1283969050664732'
-        etax: '-.3088203659385059'
+        etax: -.3088203659385059
         etay: '.2010404576456205'
         psix: '9.834375190674397'
         psiy: '11.94333301062812'
@@ -4600,8 +4883,8 @@ elements:
         emitx: '2.192978785831596E-07'
         emity: '2.36912130228507E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
-        etax: '-.3348529799524367'
+        etapy: -.1804047694567548
+        etax: -.3348529799524367
         etay: '.2179875544446528'
         psix: '9.838100950518053'
         psiy: '11.95303688959134'
@@ -4615,6 +4898,43 @@ elements:
         Model_Pitch: '0'
         Model_Roll: '0'
         Model_Yaw: '-1.15078924901353E-08'
+  instance_signal_bindings:
+    current_setpoint:
+      pv_name: MFQK403.S
+      is_instance_of: SolenoidCapability.signals.current_setpoint
+      for_property: current_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_readback:
+      pv_name: MFQK403M
+      is_instance_of: SolenoidCapability.signals.current_readback
+      for_property: current_readback
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_min:
+      pv_name: MFQK403.HMIN
+      is_instance_of: SolenoidCapability.signals.current_min
+      for_property: current_min
+      is_hosted_by: UITF
+      is_property_of: epics
+    current_max:
+      pv_name: MFQK403.HMAX
+      is_instance_of: SolenoidCapability.signals.current_max
+      for_property: current_max
+      is_hosted_by: UITF
+      is_property_of: epics
+    magnet_status:
+      pv_name: MFQK403.STAT
+      is_instance_of: SolenoidCapability.signals.magnet_status
+      for_property: magnet_status
+      is_hosted_by: UITF
+      is_property_of: epics
+    solenoid_setpoint:
+      pv_name: MFQK403.BDL
+      is_instance_of: SolenoidCapability.signals.solenoid_setpoint
+      for_property: solenoid_setpoint
+      is_hosted_by: UITF
+      is_property_of: epics
 - name: D60
   is_instance_of: Drift
   length: 0.101945378
@@ -4634,8 +4954,8 @@ elements:
         emitx: '2.192978785832185E-07'
         emity: '2.36912130228507E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
-        etax: '-.3066017067098617'
+        etapy: -.1804047694567548
+        etax: -.3066017067098617
         etay: '.199596121986828'
         psix: '9.839968108000843'
         psiy: '11.95776891568163'
@@ -4667,8 +4987,8 @@ elements:
         emitx: '2.192978785831449E-07'
         emity: '2.36912130228507E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
-        etax: '-.216205961533844'
+        etapy: -.1804047694567548
+        etax: -.216205961533844
         etay: '.1407489603879643'
         psix: '9.848886790593667'
         psiy: '11.97924000797064'
@@ -4699,9 +5019,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMK403.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -4728,8 +5048,8 @@ elements:
         emitx: '2.192978785831596E-07'
         emity: '2.369121302285035E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
-        etax: '-.1866655582726197'
+        etapy: -.1804047694567548
+        etax: -.1866655582726197
         etay: '.1215183109694111'
         psix: '9.853456059472535'
         psiy: '11.98956231586827'
@@ -4766,13 +5086,14 @@ elements:
       is_instance_of: CorrectorKickCapability.signals.current_min
       is_hosted_by: UITF
       is_property_of: epics
+      for_property: current_min
     current_max:
       pv_name: MLHK403H.HMAX
       is_instance_of: CorrectorKickCapability.signals.current_max
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK403H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -4811,8 +5132,8 @@ elements:
         emitx: '2.192978785831301E-07'
         emity: '2.369121302285061E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
-        etax: '-.160312216710762'
+        etapy: -.1804047694567548
+        etax: -.160312216710762
         etay: '.1043624221989723'
         psix: '9.858764302276494'
         psiy: '12.00102275300394'
@@ -4854,7 +5175,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHK403V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -4893,8 +5214,8 @@ elements:
         emitx: '2.192978785831449E-07'
         emity: '2.369121302285044E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
-        etax: '-.1603122164336404'
+        etapy: -.1804047694567548
+        etax: -.1603122164336404
         etay: '.1043624220185675'
         psix: '9.858764302340267'
         psiy: '12.00102275313834'
@@ -4934,8 +5255,8 @@ elements:
         emitx: '2.192978785831522E-07'
         emity: '2.369121302285052E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
-        etax: '-.1130902566197579'
+        etapy: -.1804047694567548
+        etax: -.1130902566197579
         etay: '.07362117092570263'
         psix: '9.873355138318823'
         psiy: '12.02987010247594'
@@ -4976,8 +5297,8 @@ elements:
         emitx: '2.192978785831449E-07'
         emity: '2.369121302285052E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
-        etax: '-.1130902563426362'
+        etapy: -.1804047694567548
+        etax: -.1130902563426362
         etay: '.07362117074529785'
         psix: '9.873355138433784'
         psiy: '12.02987010268912'
@@ -5009,7 +5330,7 @@ elements:
       for_property: gradient_readback
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    cavity_status:
       pv_name: RM11:STAT
       is_instance_of: RFCavityCapability.signals.cavity_status
       for_property: cavity_status
@@ -5043,9 +5364,9 @@ elements:
         emitx: '2.192978785831596E-07'
         emity: '2.369121302285052E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '.239131666316787'
-        etay: '-.1556734753803759'
+        etay: -.1556734753803759
         psix: '12.92123568016702'
         psiy: '14.88834594146045'
         sigmax: '.002220990725297965'
@@ -5090,7 +5411,7 @@ elements:
       for_property: gradient_readback
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    cavity_status:
       pv_name: RM12:STAT
       is_instance_of: RFCavityCapability.signals.cavity_status
       for_property: cavity_status
@@ -5124,9 +5445,9 @@ elements:
         emitx: '2.192978785831891E-07'
         emity: '2.369121302285035E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '.4469729171767'
-        etay: '-.290977052472942'
+        etay: -.290977052472942
         psix: '12.93921758211316'
         psiy: '14.96635106113464'
         sigmax: '.004362123271003402'
@@ -5181,9 +5502,9 @@ elements:
         emitx: '2.192978785833658E-07'
         emity: '2.369121302285103E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '.7344597799396866'
-        etay: '-.4781295101203863'
+        etay: -.4781295101203863
         psix: '12.94674520474492'
         psiy: '14.99457175915301'
         sigmax: '.007324374919506695'
@@ -5226,7 +5547,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM201H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -5265,9 +5586,9 @@ elements:
         emitx: '2.192978785834837E-07'
         emity: '2.369121302285172E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.015207759734678'
-        etay: '-.6608949898825189'
+        etay: -.6608949898825189
         psix: '12.94988112072154'
         psiy: '15.00565586557042'
         sigmax: '.01021734244106321'
@@ -5308,7 +5629,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM201V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -5347,9 +5668,9 @@ elements:
         emitx: '2.19297878583248E-07'
         emity: '2.369121302284899E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.015207760011799'
-        etay: '-.6608949900629237'
+        etay: -.6608949900629237
         psix: '12.94988112072376'
         psiy: '15.00565586557812'
         sigmax: '.01021734244391885'
@@ -5505,7 +5826,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM401H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -5544,9 +5865,9 @@ elements:
         emitx: '2.192978785839552E-07'
         emity: '2.369121302284763E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.134206648426749'
-        etay: '-.7383626496635394'
+        etay: -.7383626496635394
         psix: '12.95073160716681'
         psiy: '15.00859745873174'
         sigmax: '.01144358386651218'
@@ -5587,7 +5908,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM401V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -5626,9 +5947,9 @@ elements:
         emitx: '2.192978785834837E-07'
         emity: '2.369121302285035E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.134206648703871'
-        etay: '-.7383626498439442'
+        etay: -.7383626498439442
         psix: '12.95073160716858'
         psiy: '15.00859745873783'
         sigmax: '.01144358386936783'
@@ -5685,9 +6006,9 @@ elements:
         emitx: '2.192978785834837E-07'
         emity: '2.369121302285308E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.193092807960268'
-        etay: '-.776697234319685'
+        etay: -.776697234319685
         psix: '12.95108841535317'
         psiy: '15.00982352893492'
         sigmax: '.01205038722415212'
@@ -5741,9 +6062,9 @@ elements:
         emitx: '2.192978785830122E-07'
         emity: '2.369121302285035E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.252655791078676'
-        etay: '-.8154724276216957'
+        etay: -.8154724276216957
         psix: '12.95141452295956'
         psiy: '15.01093998450041'
         sigmax: '.01266416630094217'
@@ -5779,9 +6100,9 @@ elements:
         emitx: '2.192978785830122E-07'
         emity: '2.369121302284763E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.270570981966026'
-        etay: '-.8271351240369919'
+        etay: -.8271351240369919
         psix: '12.9515065109893'
         psiy: '15.01125420386807'
         sigmax: '.0128487773118342'
@@ -5812,9 +6133,9 @@ elements:
         emitx: '2.192978785830122E-07'
         emity: '2.369121302285308E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.303029032206475'
-        etay: '-.8482651465171922'
+        etay: -.8482651465171922
         psix: '12.95166660612701'
         psiy: '15.01180032643697'
         sigmax: '.01318324864287341'
@@ -5843,9 +6164,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM501.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -5872,9 +6193,9 @@ elements:
         emitx: '2.192978785830122E-07'
         emity: '2.369121302285035E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.426213946110892'
-        etay: '-.9284578870157635'
+        etay: -.9284578870157635
         psix: '12.95220674420909'
         psiy: '15.01363593801511'
         sigmax: '.01445263794400357'
@@ -5917,7 +6238,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM501H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -5956,9 +6277,9 @@ elements:
         emitx: '2.192978785839552E-07'
         emity: '2.369121302285308E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.426213946388014'
-        etay: '-.9284578871961683'
+        etay: -.9284578871961683
         psix: '12.9522067442102'
         psiy: '15.01363593801886'
         sigmax: '.01445263794685924'
@@ -5999,7 +6320,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM501V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -6038,9 +6359,9 @@ elements:
         emitx: '2.192978785834837E-07'
         emity: '2.369121302285308E-07'
         etapx: '.2771216678132173'
-        etapy: '-.1804047694567548'
+        etapy: -.1804047694567548
         etax: '1.426213946665135'
-        etay: '-.9284578873765731'
+        etay: -.9284578873765731
         psix: '12.95220674421131'
         psiy: '15.01363593802262'
         sigmax: '.01445263794971491'
@@ -6082,7 +6403,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MQJM501.STAT
       is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -6122,8 +6443,8 @@ elements:
         betay: '316.7783893637978'
         emitx: '2.354248830617155E-07'
         emity: '2.366243913870926E-07'
-        etapx: '-.5950356258416312'
-        etapy: '-.7654642705084885'
+        etapx: -.5950356258416312
+        etapy: -.7654642705084885
         etax: '1.420506830587212'
         etay: '-1.010792111141944'
         psix: '12.95244123621084'
@@ -6168,7 +6489,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM502H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -6206,8 +6527,8 @@ elements:
         betay: '528.8734378528233'
         emitx: '2.354248830599587E-07'
         emity: '2.366243913870926E-07'
-        etapx: '-.5950356258416312'
-        etapy: '-.7654642705084885'
+        etapx: -.5950356258416312
+        etapy: -.7654642705084885
         etax: '1.193343271216552'
         etay: '-1.303019300083491'
         psix: '12.95294746128414'
@@ -6250,7 +6571,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM502V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -6288,8 +6609,8 @@ elements:
         betay: '528.8734384791903'
         emitx: '2.354248830599587E-07'
         emity: '2.366243913862186E-07'
-        etapx: '-.5950356258416312'
-        etapy: '-.7654642705084885'
+        etapx: -.5950356258416312
+        etapy: -.7654642705084885
         etax: '1.193343270621516'
         etay: '-1.303019300848955'
         psix: '12.95294746128572'
@@ -6320,9 +6641,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM502.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -6347,8 +6668,8 @@ elements:
         betay: '528.8734391055574'
         emitx: '2.354248830599587E-07'
         emity: '2.366243913870926E-07'
-        etapx: '-.5950356258416312'
-        etapy: '-.7654642705084885'
+        etapx: -.5950356258416312
+        etapy: -.7654642705084885
         etax: '1.193343270026481'
         etay: '-1.30301930161442'
         psix: '12.95294746128729'
@@ -6394,7 +6715,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MQJM502.STAT
       is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -6478,15 +6799,16 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM503H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       is_hosted_by: UITF
       is_property_of: epics
+      for_property: magnet_status
     kick_setpoint:
       pv_name: MLHM503H.KICK
-      is_instance_of: CorrectorKickCapability.signals.
-      for_property: magnet_status
+      is_instance_of: CorrectorKickCapability.signals.kick_setpoint
+      for_property: kick_setpoint
       is_hosted_by: UITF
       is_property_of: epics
   param_set:
@@ -6559,7 +6881,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM503V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -6629,9 +6951,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM503.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -6704,7 +7026,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MQJM503.STAT
       is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -6744,7 +7066,7 @@ elements:
         betay: '357.7492880262415'
         emitx: '2.271968749692904E-07'
         emity: '2.398612171677056E-07'
-        etapx: '-.0358180708551798'
+        etapx: -.0358180708551798
         etapy: '.1835890192111305'
         etax: '1.365690743374516'
         etay: '-1.06670228829286'
@@ -6790,7 +7112,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM504H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -6828,10 +7150,10 @@ elements:
         betay: '314.0739574432735'
         emitx: '2.271968749692975E-07'
         emity: '2.398612171676247E-07'
-        etapx: '-.0358180708551798'
+        etapx: -.0358180708551798
         etapy: '.1835890192111305'
         etax: '1.352016670576363'
-        etay: '-.9966144931186116'
+        etay: -.9966144931186116
         psix: '12.95481418221018'
         psiy: '15.01833043522661'
         sigmax: '.01380281820680076'
@@ -6859,6 +7181,7 @@ elements:
       is_instance_of: CorrectorKickCapability.signals.current_readback
       is_hosted_by: UITF
       is_property_of: epics
+      for_property: current_readback
     current_min:
       pv_name: MLHM504V.HMIN
       is_instance_of: CorrectorKickCapability.signals.current_min
@@ -6871,7 +7194,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM504V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -6909,10 +7232,10 @@ elements:
         betay: '314.0739573325935'
         emitx: '2.271968749692904E-07'
         emity: '2.398612171676247E-07'
-        etapx: '-.0358180708551798'
+        etapx: -.0358180708551798
         etapy: '.1835890192111305'
         etax: '1.352016670540545'
-        etay: '-.9966144929350226'
+        etay: -.9966144929350226
         psix: '12.95481418221139'
         psiy: '15.0183304352298'
         sigmax: '.01380281820647762'
@@ -6941,9 +7264,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM504.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -6969,10 +7292,10 @@ elements:
         betay: '314.0739572219134'
         emitx: '2.271968749692975E-07'
         emity: '2.398612171676786E-07'
-        etapx: '-.0358180708551798'
+        etapx: -.0358180708551798
         etapy: '.1835890192111305'
         etax: '1.352016670504727'
-        etay: '-.9966144927514335'
+        etay: -.9966144927514335
         psix: '12.9548141822126'
         psiy: '15.01833043523298'
         sigmax: '.01380281820615448'
@@ -7016,7 +7339,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MQJM504.STAT
       is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -7056,10 +7379,10 @@ elements:
         betay: '288.6541624014285'
         emitx: '2.294381263672339E-07'
         emity: '2.394885261080232E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.334189000324772'
-        etay: '-.9532824765295292'
+        etay: -.9532824765295292
         psix: '12.95514252059351'
         psiy: '15.01922466593992'
         sigmax: '.01363217697555829'
@@ -7102,7 +7425,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM504AH.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -7140,10 +7463,10 @@ elements:
         betay: '271.3670132387097'
         emitx: '2.294381263670086E-07'
         emity: '2.394885261080164E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.290673432967505'
-        etay: '-.9217994165591606'
+        etay: -.9217994165591606
         psix: '12.95552735088322'
         psiy: '15.02029517130301'
         sigmax: '.01320045670490248'
@@ -7184,7 +7507,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM504AV.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -7222,10 +7545,10 @@ elements:
         betay: '271.3670131819026'
         emitx: '2.294381263672339E-07'
         emity: '2.394885261080367E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.290673432822264'
-        etay: '-.9217994164540805'
+        etay: -.9217994164540805
         psix: '12.95552735088455'
         psiy: '15.0202951713067'
         sigmax: '.01320045670346155'
@@ -7254,9 +7577,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM505.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -7285,10 +7608,10 @@ elements:
         betay: '270.0088418287436'
         emitx: '2.294381263670086E-07'
         emity: '2.394885261080232E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.287196581861153'
-        etay: '-.919283950978978'
+        etay: -.919283950978978
         psix: '12.9555591802203'
         psiy: '15.02038360751392'
         sigmax: '.01316596276520513'
@@ -7325,10 +7648,10 @@ elements:
         betay: '264.3130147723966'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080097E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.272519298499441'
-        etay: '-.9086650892625467'
+        etay: -.9086650892625467
         psix: '12.95569539207728'
         psiy: '15.02076188367748'
         sigmax: '.01302034916229431'
@@ -7395,10 +7718,10 @@ elements:
         betay: '264.3130147163337'
         emitx: '2.294381263668959E-07'
         emity: '2.394885261080299E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.272519298354201'
-        etay: '-.9086650891574666'
+        etay: -.9086650891574666
         psix: '12.95569539207864'
         psiy: '15.02076188368127'
         sigmax: '.01302034916085337'
@@ -7427,10 +7750,10 @@ elements:
         betay: '224.6779314251726'
         emitx: '2.294381263670086E-07'
         emity: '2.394885261080299E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.165663668205179'
-        etay: '-.8313561531499621'
+        etay: -.8313561531499621
         psix: '12.95678632368054'
         psiy: '15.02378093253522'
         sigmax: '.01196024035754273'
@@ -7465,10 +7788,10 @@ elements:
         betay: '203.4726770273507'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080299E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.104593250737052'
-        etay: '-.7871723418766522'
+        etay: -.7871723418766522
         psix: '12.95750061547682'
         psiy: '15.02574750278369'
         sigmax: '.011354371356589'
@@ -7540,22 +7863,22 @@ elements:
     current_readback:
       pv_name: MLHM601AHM
       is_instance_of: CorrectorKickCapability.signals.current_readback
-      for_property: current_setpoint
+      for_property: current_readback
       is_hosted_by: UITF
       is_property_of: epics
     current_min:
       pv_name: MLHM601AH.HMIN
       is_instance_of: CorrectorKickCapability.signals.current_min
-      for_property: current_setpoint
+      for_property: current_min
       is_hosted_by: UITF
       is_property_of: epics
     current_max:
       pv_name: MLHM601AH.HMAX
       is_instance_of: CorrectorKickCapability.signals.current_max
-      for_property: current_setpoint
+      for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM601AH.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -7593,10 +7916,10 @@ elements:
         betay: '191.6729788416326'
         emitx: '2.294381263672339E-07'
         emity: '2.394885261080367E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.069224365603457'
-        etay: '-.7615833216852353'
+        etay: -.7615833216852353
         psix: '12.95794998977882'
         psiy: '15.02698060630716'
         sigmax: '.01100348564055905'
@@ -7640,7 +7963,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MLHM601AV.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -7678,10 +8001,10 @@ elements:
         betay: '191.6729787939026'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080299E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.069224365458216'
-        etay: '-.7615833215801552'
+        etay: -.7615833215801552
         psix: '12.95794998978073'
         psiy: '15.02698060631238'
         sigmax: '.01100348563911815'
@@ -7713,9 +8036,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM601.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -7741,10 +8064,10 @@ elements:
         betay: '173.4431940318957'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080232E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '1.01236357760922'
-        etay: '-.7204451335125369'
+        etay: -.7204451335125369
         psix: '12.95873523233393'
         psiy: '15.02912777261544'
         sigmax: '.01043938923802299'
@@ -7788,7 +8111,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MDLM601.STAT
       is_instance_of: DipoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -7829,10 +8152,10 @@ elements:
         betay: '154.7808124507866'
         emitx: '2.294381263670649E-07'
         emity: '2.394885261080232E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.9509570915443958'
-        etay: '-.6760181801081108'
+        etay: -.6760181801081108
         psix: '12.95968359422244'
         psiy: '15.03170818483221'
         sigmax: '.009830204546679523'
@@ -7873,7 +8196,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM601BH.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -7911,10 +8234,10 @@ elements:
         betay: '141.0806072785771'
         emitx: '2.294381263671776E-07'
         emity: '2.394885261080232E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.9034777624624043'
-        etay: '-.6416673797940805'
+        etay: -.6416673797940805
         psix: '12.96050073108325'
         psiy: '15.03392038418138'
         sigmax: '.009359191305790842'
@@ -7955,7 +8278,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM601BV.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -7993,10 +8316,10 @@ elements:
         betay: '141.0806072376408'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080232E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.9034777623171636'
-        etay: '-.6416673796890003'
+        etay: -.6416673796890003
         psix: '12.96050073108587'
         psiy: '15.03392038418847'
         sigmax: '.009359191304350008'
@@ -8052,10 +8375,10 @@ elements:
         betay: '130.5597008880337'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080266E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.8654249595499957'
-        etay: '-.6141365730302358'
+        etay: -.6141365730302358
         psix: '12.9612169205025'
         psiy: '15.03585084166799'
         sigmax: '.008981697751583164'
@@ -8092,10 +8415,10 @@ elements:
         betay: '125.6841717970219'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080266E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.8472699768997343'
-        etay: '-.6010016320826319'
+        etay: -.6010016320826319
         psix: '12.96158005312436'
         psiy: '15.03682664566754'
         sigmax: '.008801597393207204'
@@ -8142,9 +8465,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM602.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -8173,10 +8496,10 @@ elements:
         betay: '117.1432962145249'
         emitx: '2.294381263671776E-07'
         emity: '2.394885261080198E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.814593617150549'
-        etay: '-.5773606259766838'
+        etay: -.5773606259766838
         psix: '12.96227212847733'
         psiy: '15.03868080246414'
         sigmax: '.008477445722506921'
@@ -8218,7 +8541,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM602H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -8256,10 +8579,10 @@ elements:
         betay: '108.0060442306433'
         emitx: '2.294381263671776E-07'
         emity: '2.394885261080266E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.7782832874722528'
-        etay: '-.5510904804579501'
+        etay: -.5510904804579501
         psix: '12.96310533164196'
         psiy: '15.04090339244999'
         sigmax: '.008117249987862684'
@@ -8301,7 +8624,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM602V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -8339,10 +8662,10 @@ elements:
         betay: '108.0060083901406'
         emitx: '2.294381263671776E-07'
         emity: '2.394885261080266E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.7782831420862744'
-        etay: '-.5510903752727081'
+        etay: -.5510903752727081
         psix: '12.96310533512459'
         psiy: '15.04090340171799'
         sigmax: '.008117248545656522'
@@ -8384,7 +8707,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM603H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -8422,10 +8745,10 @@ elements:
         betay: '95.83896872416003'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080266E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.727448738632957'
-        etay: '-.5143122135785472'
+        etay: -.5143122135785472
         psix: '12.96440280477851'
         psiy: '15.04434353380375'
         sigmax: '.007612985644524935'
@@ -8467,7 +8790,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM603V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -8505,10 +8828,10 @@ elements:
         betay: '95.83893496939467'
         emitx: '2.294381263671212E-07'
         emity: '2.394885261080299E-07'
-        etapx: '-.1452407377502202'
+        etapx: -.1452407377502202
         etapy: '.1050801617542777'
         etax: '.7274485932469785'
-        etay: '-.5143121083933052'
+        etay: -.5143121083933052
         psix: '12.96440280873233'
         psiy: '15.04434354424836'
         sigmax: '.00761298420235676'
@@ -8550,7 +8873,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MQJM603.STAT
       is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -8591,10 +8914,10 @@ elements:
         betay: '94.44808085541952'
         emitx: '2.359000298694431E-07'
         emity: '2.384977323770887E-07'
-        etapx: '-.6511814262301719'
-        etapy: '-.2659016158366157'
+        etapx: -.6511814262301719
+        etapy: -.2659016158366157
         etax: '.6381024266970721'
-        etay: '-.5052458653179885'
+        etay: -.5052458653179885
         psix: '12.96590883388185'
         psiy: '15.04817139182152'
         sigmax: '.006705307300911036'
@@ -8636,7 +8959,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM604H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -8674,10 +8997,10 @@ elements:
         betay: '115.4349823558724'
         emitx: '2.359000298703197E-07'
         emity: '2.384977323770887E-07'
-        etapx: '-.6511814262301719'
-        etapy: '-.2659016158366157'
+        etapx: -.6511814262301719
+        etapy: -.2659016158366157
         etax: '.514377304531905'
-        etay: '-.5557674382285647'
+        etay: -.5557674382285647
         psix: '12.96710271883696'
         psiy: '15.04999105428781'
         sigmax: '.005423720187857027'
@@ -8719,7 +9042,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM604V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -8757,10 +9080,10 @@ elements:
         betay: '115.435098466855'
         emitx: '2.359000298698814E-07'
         emity: '2.384977323771429E-07'
-        etapx: '-.6511814262301719'
-        etapy: '-.2659016158366157'
+        etapx: -.6511814262301719
+        etapy: -.2659016158366157
         etax: '.5143766526992973'
-        etay: '-.5557677043960821'
+        etay: -.5557677043960821
         psix: '12.96710272661008'
         psiy: '15.04999106295936'
         sigmax: '.005423713435978865'
@@ -8912,7 +9235,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MFRM604V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -8941,10 +9264,10 @@ elements:
         betay: '135.1585989417374'
         emitx: '2.359000298698814E-07'
         emity: '2.384977323771429E-07'
-        etapx: '-.6511814262301719'
-        etapy: '-.2659016158366157'
+        etapx: -.6511814262301719
+        etapy: -.2659016158366157
         etax: '.4080168026878965'
-        etay: '-.5991983902832668'
+        etay: -.5991983902832668
         psix: '12.96869356373805'
         psiy: '15.0512986935019'
         sigmax: '.004322011964727155'
@@ -8987,7 +9310,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MFRM604H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -9016,10 +9339,10 @@ elements:
         betay: '156.4373175342656'
         emitx: '2.359000298698814E-07'
         emity: '2.384977323770887E-07'
-        etapx: '-.6511814262301719'
-        etapy: '-.2659016158366157'
+        etapx: -.6511814262301719
+        etapy: -.2659016158366157
         etax: '.3016569526764957'
-        etay: '-.6426290761704515'
+        etay: -.6426290761704515
         psix: '12.97136918635243'
         psiy: '15.05242196252455'
         sigmax: '.00322033015992375'
@@ -9062,7 +9385,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MQJM604.STAT
       is_instance_of: QuadrupoleCapability.signals.magnet_status
       for_property: magnet_status
@@ -9103,10 +9426,10 @@ elements:
         betay: '174.5614820452769'
         emitx: '2.353750099631889E-07'
         emity: '2.415762279260094E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
         etax: '.1096782373388632'
-        etay: '-.6754199704277437'
+        etay: -.6754199704277437
         psix: '12.99004484057177'
         psiy: '15.05422470002379'
         sigmax: '.00123949700942048'
@@ -9135,9 +9458,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM604.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -9166,10 +9489,10 @@ elements:
         betay: '118.660849311381'
         emitx: '2.353750099631983E-07'
         emity: '2.415762279261164E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
-        etax: '-.04160921354414576'
-        etay: '-.5536113283363404'
+        etax: -.04160921354414576
+        etay: -.5536113283363404
         psix: '15.93992549254504'
         psiy: '15.05630916034614'
         sigmax: '.0003042489624027333'
@@ -9206,10 +9529,10 @@ elements:
         betay: '76.19205584817476'
         emitx: '2.353750099631889E-07'
         emity: '2.415762279259024E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
-        etax: '-.1828108343682895'
-        etay: '-.4399232623843624'
+        etax: -.1828108343682895
+        etay: -.4399232623843624
         psix: '16.06972225143965'
         psiy: '15.05925392157677'
         sigmax: '.001738168098218161'
@@ -9269,7 +9592,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM605H.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -9307,10 +9630,10 @@ elements:
         betay: '31.77716201139251'
         emitx: '2.353750099632987E-07'
         emity: '2.415762279260094E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
-        etax: '-.3845279398371326'
-        etay: '-.2775113335670218'
+        etax: -.3845279398371326
+        etay: -.2775113335670218
         psix: '16.08389893534895'
         psiy: '15.06738322737086'
         sigmax: '.003790404565975426'
@@ -9352,7 +9675,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM605V.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -9390,10 +9713,10 @@ elements:
         betay: '31.77707479168464'
         emitx: '2.353750099631889E-07'
         emity: '2.415762279260094E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
-        etax: '-.384528444632927'
-        etay: '-.277510927132186'
+        etax: -.384528444632927
+        etay: -.277510927132186
         psix: '16.08389895154161'
         psiy: '15.06738325887151'
         sigmax: '.003790409702128514'
@@ -9461,7 +9784,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM605AH.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -9499,7 +9822,7 @@ elements:
         betay: '25.34247320799662'
         emitx: '2.353750099619808E-07'
         emity: '2.415762279260227E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
         etax: '-1.080451222986274'
         etay: '.2828092325170781'
@@ -9541,7 +9864,7 @@ elements:
       for_property: current_max
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    magnet_status:
       pv_name: MBHM605AV.STAT
       is_instance_of: CorrectorKickCapability.signals.magnet_status
       for_property: magnet_status
@@ -9579,7 +9902,7 @@ elements:
         betay: '25.3425510928762'
         emitx: '2.353750099619808E-07'
         emity: '2.415762279260227E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
         etax: '-1.080451727782068'
         etay: '.2828096389519139'
@@ -9637,7 +9960,7 @@ elements:
         betay: '54.06314977016685'
         emitx: '2.353750099628594E-07'
         emity: '2.415762279260094E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
         etax: '-1.231739178665077'
         etay: '.4046182810433169'
@@ -9669,9 +9992,9 @@ elements:
       for_property: vertical_beam_position
       is_hosted_by: UITF
       is_property_of: epics
-    status:
+    bpm_status:
       pv_name: IPMM605.STAT
-      is_instance_of: BPMCapability.signals.status
+      is_instance_of: BPMCapability.signals.bpm_status
       for_property: bpm_status
       is_hosted_by: UITF
       is_property_of: epics
@@ -9699,7 +10022,7 @@ elements:
         betay: '71.14735218644445'
         emitx: '2.353750099646166E-07'
         emity: '2.415762279260629E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
         etax: '-1.302339989077145'
         etay: '.461462314019303'
@@ -9737,7 +10060,7 @@ elements:
         betay: '115.6447638646313'
         emitx: '2.353750099628594E-07'
         emity: '2.415762279259024E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
         etax: '-1.453627439960152'
         etay: '.5832709561107049'
@@ -9796,7 +10119,7 @@ elements:
         betay: '157.0442700330954'
         emitx: '2.353750099611023E-07'
         emity: '2.415762279260094E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
         etax: '-1.569614485637127'
         etay: '.6766575817141149'
@@ -9868,7 +10191,7 @@ elements:
         betay: '268.8558356731232'
         emitx: '2.353750099611023E-07'
         emity: '2.415762279257954E-07'
-        etapx: '-.5042915029433617'
+        etapx: -.5042915029433617
         etapy: '.4060288069713431'
         etax: '-1.821760237108808'
         etay: '.8796719851997865'

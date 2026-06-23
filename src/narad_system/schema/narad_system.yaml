@@ -266,6 +266,7 @@ classes:
       - length
       - instance_signal_bindings
       - param_set
+      - placement
     slot_usage:
       is_instance_of:
         multivalued: false
@@ -468,6 +469,21 @@ classes:
       - modeled_as
       - properties
 
+  ElementPlacement:
+    description: >-
+      Survey-relative placement of a beamline element that is not positioned
+      purely by accumulating the lengths of preceding line items (for example,
+      a side-mounted diagnostic or vacuum component whose surveyed position is
+      expressed as an offset from another, already-placed element). Use only
+      when the element's position cannot be derived from the ordinary
+      drift-length accumulation along Beamline.line; elements positioned
+      normally should omit this slot.
+    slots:
+      - placement_offset
+      - placement_base_item
+      - placement_from_point
+      - placement_to_point
+
   AnyValue:
     class_uri: linkml:Any
     description: "Unconstrained type — accepts any YAML/JSON value (string, number, object, list, etc.)."
@@ -524,6 +540,14 @@ enums:
         description: "Generic beam diagnostic instrument (halo monitor, viewer, etc.)."
         exact_mappings:
           - pals:Instrument
+      FaradayCup:
+        description: "Beam current monitor that intercepts and measures the full beam via charge collection."
+        broad_mappings:
+          - pals:Instrument
+      RFDeflector:
+        description: "RF-driven transverse deflecting cavity used to chop, sweep, or otherwise actively steer the beam in time (e.g. a chopper)."
+        broad_mappings:
+          - pals:RFCavity
       Magnet:
         description: "Generic powered magnet device (supertype for all magnet kinds)."
 
@@ -597,6 +621,19 @@ enums:
         description: "Local identifier unique within a specific context or namespace."
       other:
         description: "Any other type of identifier not covered by the above categories."
+
+  ElementReferencePointEnum:
+    description: >-
+      Controlled vocabulary for the longitudinal reference point on a
+      beamline element used when expressing one element's placement as an
+      offset from another (see ElementPlacement).
+    permissible_values:
+      ENTRANCE_END:
+        description: "The upstream (beam-entry) face of the element."
+      EXIT_END:
+        description: "The downstream (beam-exit) face of the element."
+      CENTER:
+        description: "The longitudinal center of the element."
 
 # ===========================================================================
 # Slots
@@ -947,6 +984,36 @@ slots:
     range: FacilityParamSet
     inlined: true
     description: "Facility-specific element parameters (type designation, model name, open property map)."
+
+  placement:
+    range: ElementPlacement
+    inlined: true
+    description: >-
+      Survey-relative placement for a BeamlineElement whose position is not
+      derivable purely by accumulating preceding line-item lengths. Omit for
+      elements positioned normally within Beamline.line.
+
+  placement_offset:
+    range: float
+    description: >-
+      Longitudinal offset, in meters, from placement_base_item's
+      placement_from_point to this element's placement_to_point. Positive
+      values are downstream of the reference point.
+
+  placement_base_item:
+    range: BeamlineElement
+    inlined: false
+    description: >-
+      The other BeamlineElement this element's position is expressed
+      relative to.
+
+  placement_from_point:
+    range: ElementReferencePointEnum
+    description: "The reference point on placement_base_item that the offset is measured from."
+
+  placement_to_point:
+    range: ElementReferencePointEnum
+    description: "The reference point on this element that the offset is measured to."
 
   properties:
     range: AnyValue
