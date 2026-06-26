@@ -6,10 +6,10 @@
 
 # Note:
 # - just works fine with quoted variables of dot-env files like this one
-LINKML_SCHEMA_NAME="narad_system"
+LINKML_SCHEMA_NAME="narad_core_accelerator"
 LINKML_SCHEMA_AUTHOR="Diana McSpadden <dianam@jlab.org>"
 LINKML_SCHEMA_DESCRIPTION="NARAD Data Services"
-LINKML_SCHEMA_SOURCE_DIR="src/narad_system/schema"
+LINKML_SCHEMA_SOURCE_DIR="src/narad_core_accelerator/schema"
 
 ###### linkml generator variables, used by justfile
 

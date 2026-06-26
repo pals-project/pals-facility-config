@@ -4,7 +4,7 @@ import glob
 import pytest
 from pathlib import Path
 
-from narad_system.datamodel import narad_system_pydantic
+from archived.narad_system.datamodel import narad_system_pydantic
 from linkml_runtime.loaders import yaml_loader
 
 DATA_DIR_VALID = Path(__file__).parent / "valid"

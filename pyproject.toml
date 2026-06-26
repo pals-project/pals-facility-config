@@ -3,7 +3,7 @@ requires = ["hatchling", "uv-dynamic-versioning"]
 build-backend = "hatchling.build"
 
 [project]
-name = "narad"
+name = "narad_core_accelerator"
 description = "NARAD-DataService LinkML schema and utilities"
 authors = [
   {name = "Diana McSpadden", email = "dianam@jlab.org"},
@@ -32,7 +32,7 @@ dev = [
 # explicitly include files other than default into the build distributions.
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/narad"]
+packages = ["src/narad_core_accelerator"]
 
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
@@ -54,8 +54,8 @@ skip = [
   "pyproject.toml",
   "uv.lock",
   "project/*",
-  "src/narad/datamodel/narad_pydantic.py",
-  "src/narad/datamodel/narad.py",
+  "src/narad_core_accelerator/datamodel/narad_core_acc_pydantic.py",
+  "src/narad_core_accelerator/datamodel/narad_core_acc.py",
 ]
 
 # Reminder: words have to be lowercased for the ignore-words-list
@@ -71,6 +71,6 @@ extend-exclude = [
   "uv.lock",
   "pyproject.toml",
   "project/*",
-  "src/narad/datamodel/narad_pydantic.py",
-  "src/narad/datamodel/narad.py",
+  "src/narad_core_accelerator/datamodel/narad_core_acc_pydantic.py",
+  "src/narad_core_accelerator/datamodel/narad_core_acc.py",
 ]
