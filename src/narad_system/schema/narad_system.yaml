@@ -3,7 +3,7 @@ name: narad-system-schema
 description: >
   LinkML schema for representing NARAD control-system semantics, facility-level
   signal templates, and facility-specific instance bindings aligned with SSN,
-  SSN-System, and SOSA ontologies. 
+  SSN-System, and SOSA ontologies.
 
   Main modeling layers:
     - NaradModel — top-level document containing NaradConfig, beamlines, and elements
@@ -46,7 +46,7 @@ description: >
     - beamlines are keyed by beamline name
     - signals are keyed by semantic signal name
     - instance_signal_bindings are keyed by semantic signal name
-  
+
   Alignments with PALS (Particle Accelerator Language Standard):
     - Beamline aligns with pals:BeamLine
     - BeamlineElement aligns with pals:Element
@@ -57,32 +57,32 @@ description: >
     - RFCavity aligns with pals:RFCavity
 
   Additional Notes on Usage:
-  1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling. 
-  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback), 
-  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention. 
-  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R) 
+  1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.
+  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback),
+  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention.
+  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R)
   is captured in the SignalBinding.
   2. On the distinction between is_instance_of, facility_element_type, and device_type:
     - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
-    - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. 
-    - device_type (ControlCapability.device_type) is the generic element type used for capability profile matching 
-    and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention 
+    - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind.
+    - device_type (ControlCapability.device_type) is the generic element type used for capability profile matching
+    and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention
     or for other facility-specific purposes.
     For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
-  3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
+  3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of:
     - is_instance_of typically points to the semantic class instantiated by the binding or element, using a CURIE such as narad:CavityGradientCapability if that is your intended convention.
     - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:UITF.
     - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:epics.
   4. Open and constrained vocabularies:
-    - ElementKindEnum provides a controlled vocabulary for key classification slots, but the schema is designed to be extensible 
+    - ElementKindEnum provides a controlled vocabulary for key classification slots, but the schema is designed to be extensible
     with new enum values as needed.
-    - SystemTypeEnum is a high-level classification for systems that can be used for querying and filtering, 
+    - SystemTypeEnum is a high-level classification for systems that can be used for querying and filtering,
     but it is not intended to capture all the nuance of device types or capabilities.
-    - DataTypeEnum and SignalRoleEnum provide a controlled vocabulary for signal data types and roles, 
+    - DataTypeEnum and SignalRoleEnum provide a controlled vocabulary for signal data types and roles,
     but the schema allows for additional values to be added as needed.
-    - IdentifierTypeEnum provides a controlled vocabulary for types of identifiers used in FacilityIdentifier, 
+    - IdentifierTypeEnum provides a controlled vocabulary for types of identifiers used in FacilityIdentifier,
     but it can be extended to apply to other entities, and with additional identifier types as needed.
-    - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional 
+    - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional
     facility-specific parameters that don't fit into the predefined schema structure.
 
   Needed Custom Validations:
@@ -149,7 +149,7 @@ classes:
       - schema_version
       - intent
       - deployed_system
-      - has_sub_system 
+      - has_sub_system
       - control_capability_layer
       - device_layer
       - signal_layer
@@ -213,7 +213,7 @@ classes:
       - control_system
       - naming_convention
       - signal_definitions
-  
+
   FacilityIdentifier:
     description: "A globally unique identifier for an entity (e.g., facility), with a specified type (e.g. DOI, ROR, ARK, local)."
     slots:
@@ -237,7 +237,7 @@ classes:
     description: "A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance."
     slots:
       - control_system_suffix
-  
+
   # ---------------------------------------------------------------------------
   # Beamline and BeamlineElement
   # ---------------------------------------------------------------------------
@@ -300,7 +300,7 @@ classes:
       - ssn:System
     slots:
       - naming_convention
-  
+
   DeviceSystem:
     is_a: System
     description: >
@@ -408,7 +408,7 @@ classes:
 
   # ---- SignalBinding (SOSA:Sensor alignment) ----------------------------
   # sosa:Sensor describes *how* a property is observed or actuated.
-  # SignalBinding is the facility/control-system binding template fragment for that semantic signal, 
+  # SignalBinding is the facility/control-system binding template fragment for that semantic signal,
   # and InstanceSignalBinding is the fully instantiated binding on an element.
 
   InstanceSignalBinding:
@@ -440,7 +440,7 @@ classes:
       for_property:
         range: string
         multivalued: false
-  
+
   # -------- Element Parameters and Facility Parameters --------------------------------
   # ElementParamSet holds named physics-parameter blocks (RFP, BendP, etc.).
   # FacilityParamSet holds facility-specific metadata (type designation, model name,
@@ -455,9 +455,15 @@ classes:
       - voltage
       - phase
       - angle_ref
+      - g_ref
       - e1
       - e2
+      - edge_int1
+      - edge_int2
+      - Kn0
+      - Ks0
       - Kn1
+      - Kn2
       - Ksol
       - facility_param_set
 
@@ -500,6 +506,10 @@ enums:
         description: "Beam Position Monitor."
         broad_mappings:
           - pals:Instrument
+      Multiwire:
+        description: "Multi-wire beam profile monitor."
+        broad_mappings:
+          - pals:Instrument
       Corrector:
         description: "Dipole corrector magnet for orbit correction."
       Dipole:
@@ -532,7 +542,7 @@ enums:
       High-level system type for classification and querying. This is a broad
       categorization that can be used for filtering or grouping systems without
       needing to traverse the has_sub_system and has_system_capability edges.
-    inherits: 
+    inherits:
       - ElementKindEnum
     permissible_values:
       Facility:
@@ -541,7 +551,7 @@ enums:
         description: "A control system (e.g. epics) that manages device process variables."
       Magnet:
         description: "A powered magnet device/system (generic supertype for all magnet kinds)."
-      
+
   DataTypeEnum:
     description: "Allowed data types for signal values."
     permissible_values:
@@ -563,7 +573,7 @@ enums:
       coded_value:
         description: "A code referenced from an external coding system."
         meaning: ncit:C95637
-        
+
   SignalRoleEnum:
     description: "Controlled vocabulary for the semantic role of a signal within a capability."
     permissible_values:
@@ -661,7 +671,7 @@ slots:
     multivalued: false
     broad_mappings:
       - ssn:isPropertyOf
-  
+
   is_hosted_by:
     description: >
       Links an InstanceSignalBinding to the FacilitySystem it belongs to.
@@ -754,7 +764,7 @@ slots:
     multivalued: true
     inlined: true
     description: "Control Capability definitions for this facility."
-  
+
   control_capabilities:
     range: ControlCapability
     inlined: true
@@ -775,7 +785,7 @@ slots:
   signal_layer:
     range: SignalLayer
     description: "Signal suffix templates for this facility."
-  
+
   signal_definitions:
     range: SignalDefinitions
     multivalued: true
@@ -796,7 +806,7 @@ slots:
     multivalued: true
     inlined: true
     description: "Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set."
-  
+
   instance_signal_bindings:
     range: InstanceSignalBinding
     multivalued: true
@@ -910,15 +920,15 @@ slots:
   multipass:
     range: boolean
     description: "Indicates whether this beamline is a multipass recirculating line (true) or a single-pass line (false)."
-  
+
   zero_point:
     range: BeamlineElement
     multivalued: false
     inlined: false
     description: >-
-      Name of a line item used as a reference point when 
+      Name of a line item used as a reference point when
       the beamline is used as a subline."
-  
+
   periodic:
     range: boolean
     description: "For a beamline, indicates whether the orbit and Twiss parameters are periodic (true) or non-periodic (false)."
@@ -932,7 +942,7 @@ slots:
       - kind
     broad_mappings:
       - pals:ElementKind
-  
+
   length:
     range: float
     description: "Physical length of the element in meters."
@@ -961,8 +971,8 @@ slots:
     aliases:
       - type
     description: >-
-      capture the facility-specific or local designation (e.g., "QW", "WarmCavity", "HCorrector"). 
-      Isused for local naming, inventory, or legacy mapping of instances of facility elements (within elements:) 
+      capture the facility-specific or local designation (e.g., "QW", "WarmCavity", "HCorrector").
+      Isused for local naming, inventory, or legacy mapping of instances of facility elements (within elements:)
       to the facility-specific type designations used in the control system or elsewhere at the facility.
 
   frequency:
@@ -981,6 +991,10 @@ slots:
     range: float
     description: "Reference bend angle in radians."
 
+  g_ref:
+    range: float
+    description: "Reference bend strength in 1/meter."
+
   e1:
     range: float
     description: "Entry edge angle in radians."
@@ -989,9 +1003,29 @@ slots:
     range: float
     description: "Exit edge angle in radians."
 
+  edge_int1:
+    range: float
+    description: "Entrance end fringe field integral in Tesla/meter."
+
+  edge_int2:
+    range: float
+    description: "Exit end fringe field integral in Tesla/meter."
+
+  Kn0:
+    range: float
+    description: "Zero-order magnetic multipole coefficient (horizontal corrector strength)."
+
+  Ks0:
+    range: float
+    description: "Zero-order skew magnetic multipole coefficient (vertical corrector strength)."
+
   Kn1:
     range: float
     description: "First-order magnetic multipole coefficient (quadrupole strength)."
+
+  Kn2:
+    range: float
+    description: "Second-order magnetic multipole coefficient (sextupole strength)."
 
   Ksol:
     range: float
