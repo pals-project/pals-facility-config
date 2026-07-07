@@ -1,1410 +1,1496 @@
-type: AcceleratorCoreDataset
-physical_components:
-  - Lightswitch:
-    type: InfrastructureComponent
-    name: Lightswitch
-    has_synonyms:
-      - lightswitch
-      - light
-      - light switch
-    description: Environmental component type representing a lightswitch in the UED.
-    has_beamline_relation: Infrastructure
-    has_function: EnvironmentalControl
-    has_parameters: # need to add these
-      - SegMask
-  - Magnet:
-    type: Magnet
-    name: Magnet
-    has_synonyms: 
-      - magnet
-      - control_magnet
-    description: Generic magnet component type. Superclass for specific magnet types such as dipoles, quadrupoles, and correctors.
-    has_beamline_relation: Inline
-    located_in: Beamline
-    superclass_of:
-      - HCorrector
-      - VCorrector
-      - Dipole
-      - Quadrupole
-      - Solenoid
-    has_signal:
-      - current_setpoint
-      - current_readback
-      - current_min
-      - current_max
-      - magnet_status
-    has_parameters: # need to add parameters that all Magnets have in UITF
-  - HCorrector:
-    type: Corrector
-    name: HorizontalCorrector
-    has_synonyms:
-      - HCorrector
-      - HorizontalCorrector
-      - horizontal corrector
-      - corrector magnet
-    description: Corrector magnet component type. Subclass of Magnet.
-    has_beamline_relation: Inline
-    has_function: Steering
-    has_plane: Horizontal
-    located_in: Beamline
-    subclass_of: Magnet
-    has_signal:
-      - kick_setpoint
-      - current_setpoint
-      - current_readback
-      - current_min
-      - current_max
-      - magnet_status
-    has_parameters:
-      - HCOSystem
-      - SegMask
-      - Controlled_by
-      - ControlsUnits
-      - EPICSName
-      - FieldMap
-      - HystDwellTime
-      - HystRampTime
-      - NoHyst
-      - Housed_by
-      - Hmax
-      - Powered_by
-      - TrimCardType
-      - KICK
-      - pCentral
-      - alphax
-      - alphay
-      - betax
-      - betay
-      - emitx
-      - emity
-      - etapx
-      - etapy
-      - etax
-      - etay
-      - psix
-      - psiy
-      - sigmax
-      - sigmay
-      - ModelX
-      - ModelY
-      - ModelZ
-      - Model_Pitch
-      - Model_Roll
-      - Model_Yaw
-  - VCorrector:
-    type: Corrector
-    name: VerticalCorrector
-    has_synonyms:
-      - VCorrector
-      - VerticalCorrector
-      - vertical corrector
-      - corrector magnet
-    description: Corrector magnet component type. Subclass of Magnet.
-    has_beamline_relation: Inline
-    has_function: Steering
-    has_plane: Vertical
-    located_in: Beamline
-    subclass_of: Magnet
-    has_signal:
-      - kick_setpoint
-      - current_setpoint
-      - current_readback
-      - current_min
-      - current_max
-      - magnet_status
-    has_parameters:
-      - HCOSystem
-      - SegMask
-      - Controlled_by
-      - ControlsUnits
-      - EPICSName
-      - FieldMap
-      - HystDwellTime
-      - HystRampTime
-      - NoHyst
-      - Housed_by
-      - Hmax
-      - Powered_by
-      - TrimCardType
-      - KICK
-      - pCentral
-      - alphax
-      - alphay
-      - betax
-      - betay
-      - emitx
-      - emity
-      - etapx
-      - etapy
-      - etax
-      - etay
-      - psix
-      - psiy
-      - sigmax
-      - sigmay
-      - ModelX
-      - ModelY
-      - ModelZ
-      - Model_Pitch
-      - Model_Roll
-      - Model_Yaw
-  - Dipole:
-    type: Multipole
-    name: Dipole
-    has_synonyms:
-      - dipole magnet
-      - multipole magnet
-    description: Dipole magnet component type. Type of Multipole magnet.
-    number_poles: 2
-    has_beamline_relation: inline
-    has_function: Bending # DM: Is this correct? Check all functions.
-    located_in: Beamline
-    subclass_of: Magnet
-    has_signal:
-      - field_setpoint
-      - current_setpoint
-      - current_readback
-      - current_min
-      - current_max
-      - magnet_status
-    has_parameters:
-      - angle_ref
-      - e1
-      - e2
-      - HCOSystem
-      - SegMask
-      - Controlled_by
-      - ControlsUnits
-      - EPICSName
-      - FieldMap
-      - HystDwellTime
-      - HystRampTime
-      - NoHyst
-      - Housed_by
-      - Hmax
-      - Powered_by
-      - TrimCardType
-      - HGAP
-      - K1
-      - pCentral
-      - alphax
-      - alphay
-      - betax
-      - betay
-      - emitx
-      - emity
-      - etapx
-      - etapy
-      - etax
-      - etay
-      - psix
-      - psiy
-      - sigmax
-      - sigmay
-      - SurveyDate
-      - SurveyZ
-      - ModelX
-      - ModelY
-      - ModelZ
-      - Model_Pitch
-      - Model_Roll
-      - Model_Yaw
-      - NameAlias
-  - Quadrupole:
-    type: Quadrupole
-    name: Quadrupole
-    has_synonyms:
-      - quadrupole magnet
-    description: Quadrupole magnet component type. Subclass of Multipole.
-    number_poles: 4
-    has_beamline_relation: Inline
-    has_function: Focusing
-    located_in: Beamline
-    subclass_of: Magnet
-    has_signal:
-      - strength_setpoint
-      - current_setpoint
-      - current_readback
-      - current_min
-      - current_max
-      - magnet_status
-    has_parameters:
-      - Kn1
-      - HCOSystem
-      - SegMask
-      - Usage
-      - Controlled_by
-      -  ControlsUnits
-      - EPICSName
-      - FieldMap
-      - HystDwellTime
-      - HystRampTime
-      - Limit
-      - NoHyst
-      - Housed_by
-      - Resistance
-      - Hmax
-      - Powered_by
-      - TrimCardType
-      - Radius
-      - BORE
-      - pCentral
-      - alphax
-      - alphay
-      - betax
-      - betay
-      - emitx
-      - emity
-      - etapx
-      - etapy
-      - etax
-      - etay
-      - psix
-      - psiy
-      - sigmax
-      - sigmay
-      - ModelX
-      - ModelY
-      - ModelZ
-      - Model_Pitch
-      - Model_Roll
-      - Model_Yaw
-  - Solenoid:
-    type: Solenoid
-    name: Solenoid
-    has_synonyms:
-      - solenoid magnet
-    description: Solenoid magnet component type. Subclass of Magnet.
-    has_beamline_relation: Inline
-    has_function: Focusing
-    located_in: Beamline
-    subclass_of: Magnet
-    has_signal:
-  - DiagnosticDevice:
-    type: DiagnosticDevice
-    name: DiagnosticDevice
-    has_synonyms:
-      - diagnostic device
-      - diagnostic
-    description: >-
-      Generic diagnostic device component type. 
-      Superclass for specific diagnostic types such as screens, BPMs, and spectrometers.
-    has_beamline_relation: Inline
-    has_function: Measurement
-    located_in: Beamline
-    superclass_of:
-      - BPM
-  - BeamPositionMonitor:
+NARAD:
+  description: NARAD representation of a validated subset of the Jefferson Lab UITF injector beamline,
+    ported from a prior instance format to conform to the accelerator_core LinkML schema.
+  type: NARAD
+  physical_components:
+  - id: RF_LASER
+    type: RFCavity
+    native_types:
+    - RFCavity
+    - WarmCavity
+    - RFCA
+    function: BeamAcceleration
+    beamline_relation: Inline
+    x: 10.6125874
+    y: 21.0668
+    z: 31.65814
+    theta: -15.0000000115079
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    species_ref: electron
+    pc_ref: 0.465144443755972
+    alpha_a: -1.987749019418206
+    alpha_b: 1.587714437254934
+    beta_a: 0.155406734272248
+    beta_b: 0.2884001693215617
+    eta_x: -1.195344089290542e-16
+    eta_y: 2.250864348451503e-17
+    etap_x: -1.23859828244279e-15
+    etap_y: 3.967937356187314e-16
+    phi_a: 0.0
+    phi_b: 0.0
+    description: RF laser-heater style cavity at the start of the UITF injector line.
+    additional_metadata:
+      rf_frequency_Hz: 1497000000.0
+      rf_voltage_V: 0.0
+      rf_phase_rad: 0.0
+      _note: frequency/voltage/phase preserved here because no RFP mixin exists in the schema yet.
+  - id: IPMK101
     type: BeamPositionMonitor
-    name: BeamPositionMonitor
-    has_synonyms:
-      - BPM
-      - beam position monitor
-      - position monitor
-      - PUE
-      - pickup
-    description: >-
-      Beam position monitor (BPM) component type. Subclass of DiagnosticDevice.
-    has_beamline_relation: Inline
-    has_function: Measurement
-    located_in: Beamline
-    subclass_of: DiagnosticDevice
-    has_signal:
-      - horizontal_beam_position
-      - vertical_beam_position
-      - bpm_status
-virtual_components:
-  - Marker:
-    type: VirtualComponent
-    name: Marker
-    has_synonyms:
-      - marker
-      - beamline marker
-      - reference point
-    description: Virtual component type representing a marker or reference point along the beamline. This is a virtual component because it doesn't correspond to a physical device, but it is important for understanding the beamline structure and for defining the locations of signals and other components in relation to the beamline.
-    has_beamline_relation: Inline
-    has_function: Mark
-    has_parameters: # need to add these
-      - SegMask
-      - pCentral
-signals:
-  kick_setpoint:
-    type: ControlSystemSignal
-    has_synonyms:
-      - integrated field setpoint
-      - integrated kick setpoint
-      - setpoint
-      - kick
-      - corrector strength
-      - setting
-    description: Desired integrated corrector kick or equivalent model quantity.
-    observes: 
-      - HCorrector # DM: should this be the LinkML Classes (e.g. Corrector), the physical_component in this yaml file (e.g. HCorrector), or the specific component instances like MBHK101H?
-      - VCorrector # SM: Same question for this one
-    has_signal_role: Setpoint
-    has_canonical_signal_type: IntegratedFieldSetpoint
-    has_quantity_kind: IntegratedMagneticField
-    has_data_type: Float
-    has_unit: T_m
-  strength_setpoint:
-    type: ControlSystemSignal
-    has_synonyms:
-      - strength setpoint
-      - setpoint
-      - strength
-      - magnet strength
-      - setting
-    description: Desired magnet strength setpoint, such as k1 for a quadrupole.
-    observes: 
-      - Quadrupole
-    has_signal_role: Setpoint
-    has_canonical_signal_type: MagnetCurrentSetpoint
-    has_quantity_kind: ElectricCurrent
-    has_data_type: Float
-    has_unit: G_per_cm # I added this to the UnitEnum. Is this correct?
-  field_setpoint:
-    type: ControlSystemSignal
-    has_synonyms:
-      - field setpoint
-      - setpoint
-      - field
-      - field strength
-      - magnetic field
-      - setting
-    description: Desired magnetic field setpoint, such as for a dipole.
-    observes: 
-      - Dipole # DM: should this be the LinkML Classes (e.g. Magnet, unless we add Multipole/Dipole), the physical_component in this yaml file (e.g. Dipole), or the specific component instances like MDSK201?
-    has_signal_role: Setpoint
-    has_canonical_signal_type: MagnetFieldSetpoint
-    has_quantity_kind: MagneticField
-    has_data_type: Float
-    has_unit: unit:PER-T-M 
-  current_setpoint:
-    type: ControlSystemSignal
-    has_synonyms:
-      - magnet_current_setpoint
-      - current_command
-    description: Desired magnet current command.
-    observes: 
-      - HCorrector
-      - VCorrector
-    has_signal_role: Setpoint
-    has_canonical_signal_type: MagnetCurrentSetpoint
-    has_quantity_kind: ElectricCurrent
-    has_data_type: Float
-    has_unit: A
-  current_readback:
-    type: ControlSystemSignal
-    has_synonyms:
-      - magnet current readback
-      - current feedback
-      - readback
-    description: Measured magnet current.
-    observes: 
-      - HCorrector
-      - VCorrector
-    has_signal_role: Readback
-    has_canonical_signal_type: MagnetCurrentReadback
-    has_quantity_kind: ElectricCurrent
-    has_data_type: Float
-    has_unit: A
-  current_min:
-    type: ControlSystemSignal
-    has_synonyms:
-      - magnet current min
-      - min current
-      - minimum current
-      - minimum current limit
-      - min limit
-      - limit
-    description: Minimum allowed magnet current.
-    observes: 
-      - HCorrector
-      - VCorrector
-    has_signal_role: Limit
-    has_canonical_signal_type: MagnetCurrent
-    has_quantity_kind: ElectricCurrent
-    has_data_type: Float
-    has_unit: A
-  current_max:
-    type: ControlSystemSignal
-    has_synonyms:
-      - magnet current max
-      - max current
-      - maximum current
-      - maximum current limit
-      - max limit
-      - limit
-    description: Maximum allowed magnet current.
-    observes: 
-      - HCorrector
-      - VCorrector
-    has_signal_role: Limit
-    has_canonical_signal_type: MagnetCurrent
-    has_quantity_kind: ElectricCurrent
-    has_data_type: Float
-    has_unit: A
-  magnet_status:
-    type: ControlSystemSignal
-    has_synonyms:
-      - corrector_status
-      - magnet_state
-      - status
-    description: Power-supply or device state summary.
-    observes: 
-      - HCorrector
-      - VCorrector
-    has_signal_role: Status
-    has_data_type: String
-    has_canonical_signal_type: Status
-  horizontal_beam_position:
-    type: ControlSystemSignal
-    has_synonyms:
-      - horizontal_position
-      - x_position
-    description: Measured horizontal beam position from a BPM.
-    observes: 
-      - BeamPositionMonitor
-    has_signal_role: Readback
-    has_canonical_signal_type: HorizontalBeamPosition
-    has_quantity_kind: BeamPosition
-    has_data_type: Float
-    has_unit: mm
-  vertical_beam_position:
-    type: ControlSystemSignal
-    has_synonyms:
-      - vertical_position
-      - y_position
-    description: Measured vertical beam position from a BPM.
-    observes: 
-      - BeamPositionMonitor
-    has_signal_role: Readback
-    has_canonical_signal_type: VerticalBeamPosition
-    has_quantity_kind: BeamPosition
-    has_data_type: Float
-    has_unit: mm
-  bpm_status:
-    type: ControlSystemSignal
-    has_synonyms:
-      - bpm_device_status
-      - bpm_status
-    description: Status signal from a BPM, such as a summary of the health of the device or the quality of the position measurement.
-    observes: 
-      - BeamPositionMonitor
-    has_signal_role: Status
-    has_data_type: String
-    has_canonical_signal_type: Status
-  gradient_setpoint:
-    type: ControlSystemSignal
-    has_synonyms:
-      - gradient setpoint
-      - rf cavity setpoint
-      - gradient
-      - setpoint
-    description: Desired RF Cavity gradient setpoint.
-    observes: 
-      - RFCavity
-    has_signal_role: Setpoint
-    has_canonical_signal_type: GradientSetpoint
-    has_quantity_kind: CavityGradient
-    has_data_type: Float
-    has_unit: MV_per_m
-  gradient_readback:
-    type: ControlSystemSignal
-    has_synonyms:
-      - gradient readback
-      - rf cavity readback
-      - gradient
-      - readback
-    description: Measured RF Cavity gradient.
-    observes: 
-      - RFCavity
-    has_signal_role: Readback
-    has_canonical_signal_type: GradientReadback
-    has_quantity_kind: CavityGradient
-    has_data_type: Float
-    has_unit: MV_per_m
-  rf_cavity_status:
-    type: ControlSystemSignal
-    has_synonyms:
-      - rf cavity status
-      - cavity status
-      - status
-    description: Status signal from an RF Cavity, such as a summary of the health of the device or the quality of the gradient measurement.
-    observes: 
-      - RFCavity
-    has_signal_role: Status
-    has_data_type: String
-    has_canonical_signal_type: Status
-parameters: # need to add these
-  - Acceleration:
-    type: Parameter
-    has_data_type: Float
-    has_synonyms:
-      - acceleration
-      - accel
-    pals_parameter_group: # UNKNOWN
-    pals_parameter_name: # UNKNOWN
-    parameter_of:
-      - DiagnosticDevice
-  - ActuatorCard:
-    type: Parameter
-    has_data_type: String
-    has_synonyms:
-      - actuator card
-      - card
-    pals_parameter_group: # UNKNOWN
-    pals_parameter_name: # UNKNOWN
-    parameter_of:
-      - DiagnosticDevice
-  - ActuatorChannel:
-    type: Parameter
-    has_data_type: Integer
-    has_synonyms:
-      - actuator channel
-      - channel
-    pals_parameter_group: # UNKNOWN
-    pals_parameter_name: # UNKNOWN
-    parameter_of:
-      - DiagnosticDevice
-  - AcquisitionTime:
-    type: Parameter
-    has_data_type: String
-    has_synonyms:
-      - acquisition time
-      - acquisition_time
-      - acquisition
-      - time
-    pals_parameter_group: # UNKNOWN
-    pals_parameter_name: # UNKNOWN
-    parameter_of:
-      - DiagnosticDevice
-  - alphax:
-    type: Parameter
-    has_data_type: Float
-    has_synonyms:
-      - alphax
-      - alpha_x
-      - alpha x
-      - alpha_a
-      - alpha a
-      - alphaa
-    pals_parameter_group: TwissP # UNKNOWN
-    pals_parameter_name: alpha_a # UNKNOWN
-    parameter_of:
-      - RFCavity
-      - Marker
-      - DiagnosticDevice
-      - Corrector
-      - Solenoid
-      - Dipole
-      - Quadrupole
-      - BeamPositionMonitor
-  - alphay:
-    type: Parameter
-    has_data_type: Float
-    has_synonyms:
-      - alphay
-      - alpha_y
-      - alpha y
-      - alpha_b
-      - alpha b
-    pals_parameter_group: TwissP # UNKNOWN
-    pals_parameter_name: alpha_b # UNKNOWN
-    parameter_of:
-      - RFCavity
-      - Marker
-      - DiagnosticDevice
-      - Corrector
-      - Solenoid
-      - Dipole
-      - Quadrupole
-      - BeamPositionMonitor
-    type: Parameter
-  - angle_ref:
-    type: Parameter
-    has_data_type: String
-    has_synonyms:
-      - angle reference
-      - angle ref
-      - angle
-      - reference angle
-    pals_parameter_group: # UNKNOWN
-    pals_parameter_name: # UNKNOWN
-    parameter_of:
-      - Dipole # should this be Dipole (only in the UITF file) or Multipole, which is in the LinkML?
-  - betax:
-    type: Parameter
-    has_data_type: Float
-    has_synonyms:
-      - betax
-      - beta_x
-      - beta x
-      - beta_a
-      - beta a
-      - betaa
-    pals_parameter_group: TwissP # UNKNOWN
-    pals_parameter_name: beta_a # UNKNOWN
-    parameter_of:
-      - RFCavity
-      - Marker
-      - DiagnosticDevice
-      - Corrector
-      - Solenoid
-      - Dipole
-      - Quadrupole
-      - BeamPositionMonitor
-  - betay:
-    type: Parameter
-    has_data_type: Float
-    has_synonyms:
-      - betay
-      - beta_y
-      - beta y
-      - beta_b
-      - beta b
-    pals_parameter_group: TwissP # UNKNOWN
-    pals_parameter_name: beta_b # UNKNOWN
-  - BoardName:
-    type: Parameter
-  - BORE:
-    type: Parameter
-  - CanType:
-    type: Parameter
-  - CavityType:
-    type: Parameter
-  - Comments:
-    type: Parameter
-  - Controlled_by:
-    type: Parameter
-  - ControlsUnits:
-    type: Parameter
-  - CWCurrent:
-    type: Parameter
-  - Deceleration:
-    type: Parameter
-  - e1:
-    type: Parameter
-  - e2:
-    type: Parameter
-  - emitX:
-    type: Parameter
-  - emitY:
-    type: Parameter
-  - EPICSName:
-    type: Parameter
-    has_data_type: String
-    description: EPICS base name for the device, used for constructing EPICS PV names for signals associated with the device.
-    has_synonyms:
-      - EPICS name
-      - EPICS base name
-      - base name
-      - control system name
-    parameter_of: # need to make sure these are complete and correct
-      - HCorrector
-      - VCorrector
-      - Solenoid
-      - Dipole
-      - Quadrupole
-      - BeamPositionMonitor
-      - RFCavity
-  - etapX:
-    type: Parameter
-  - etapY:
-    type: Parameter
-  - etax:
-    type: Parameter
-  - etay:
-    type: Parameter
-  - FCC:
-    type: Parameter
-  - FieldMap:
-    type: Parameter
-  - GlobalOffsetX:
-    type: Parameter
-    has_data_type: Float
-    description: Global horizontal offset of the beam at this location.
-    has_synonyms:
-      - global offset x
-      - x offset
-      - horizontal offset
-    parameter_of:
-      - BeamPositionMonitor
-  - GlobalOffsetY:
-    type: Parameter
-    has_data_type: Float
-    description: Global vertical offset of the beam at this location.
-    has_synonyms:
-      - global offset y
-      - y offset
-      - vertical offset
-    parameter_of:
-      - BeamPositionMonitor
-  - HarpAxis:
-    type: Parameter
-  - HCOSystem:
-    type: Parameter
-  - HGAP:
-    type: Parameter
-  - Housed_by:
-    type: Parameter
-  - Hmax:
-    type: Parameter
-  - HystDwellTime:
-    type: Parameter
-  - HystRampTime:
-    type: Parameter
-  - InsertedChannel:
-    type: Parameter
-  - InsertedMode:
-    type: Parameter
-  - Interface:
-    type: Parameter
-  - jlab_type: # DM: I am turning the jlab_type field from JLab-specific parameters into a property. This will need to be coded in the schema generation.
-    type: Parameter
-  - Kn1: # DM: added Kn1 one as a parameter
-    type: Parameter
-  - Ksol:
-    type: Parameter
-  - K1:
-    type: Parameter
-  - KICK:
-    type: Parameter
-  - Limit:
-    type: Parameter
-  - LimitSwitchCard:
-    type: Parameter
-  - MaxGSET:
-    type: Parameter
-  - MaxStroke:
-    type: Parameter
-  - ModelFrequency:
-    type: Parameter
-  - ModelGSET:
-    type: Parameter
-  - ModelPhase:
-    type: Parameter
-  - Model_Pitch:
-    type: Parameter
-  - Model_Roll:
-    type: Parameter
-  - Model_Yaw:
-    type: Parameter
-  - ModelX:
-    type: Parameter
-  - ModelY:
-    type: Parameter
-  - ModelZ:
-    type: Parameter
-  - NameAlias:
-    type: Parameter
-  - NoHyst:
-    type: Parameter
-  - NumWires:
-    type: Parameter
-  - Pass:
-    type: Parameter
-    has_data_type: String
-    description: # DM: what is Pass?
-    has_synonyms:
-      - pass # what are synonyms?
-    parameter_of:
-      - BeamPositionMonitor
-  - pCentral:
-    type: Parameter
-    has_data_type: Float
-    description: Central momentum of the beam at this location, used for converting between magnetic field strengths and beam deflections.
-    has_synonyms:
-      - p_central
-      - central_momentum
-    parameter_of: # need to make sure these are complete
-      - BeamPositionMonitor
-      - HCorrector
-      - VCorrector
-      - Solenoid
-      - Dipole
-      - Quadrupole
-      - DiagnosticDevice # what is the Faraday Cup modeled as?
-  - PhaseRMS:
-    type: Parameter
-  - PosConv:
-    type: Parameter
-  - Powered_by:
-    type: Parameter
-  - psix:
-    type: Parameter
-  - psiy:
-    type: Parameter
-  - Q0:
-    type: Parameter
-  - Qexternal:
-    type: Parameter
-  - Radius:
-    type: Parameter
-  - Readout:
-    type: Parameter
-  - Resistance:
-    type: Parameter
-  - RetractedChannel:
-    type: Parameter
-  - ROQ:
-    type: Parameter
-  - Rotation:
-    type: Parameter
-  - ScreenX:
-    type: Parameter
-  - ScreenY:
-    type: Parameter
-  - ScreenZ:
-    type: Parameter
-  - SegMask:
-    type: Parameter
-    has_data_type: String
-    description: Segment mask indicating which segments of the screen are active or relevant for measurements.
-    has_synonyms:
-      - segment mask
-      - segmentmask
-      - applies to segments
-    parameter_of: # need to add these
-      - Marker
-      - HCorrector
-      - VCorrector
-      - Solenoid
-      - Dipole
-      - Quadrupole
-      - BeamPositionMonitor
-  - Sensitivity:
-    type: Parameter
-  - SurveyZ:
-    type: Parameter
-  - sigmax:
-    type: Parameter
-  - sigmay:
-    type: Parameter
-  - Speed:
-    type: Parameter
-  - spinx:
-    type: Parameter
-  - spiny:
-    type: Parameter
-  - spinz:
-    type: Parameter
-  - SurveyDate:
-    type: Parameter
-  - SurveyOffsetX:
-    type: Parameter
-  - SurveyOffsetY:
-    type: Parameter
-  - Tilt:
-    type: Parameter
-  - TransitionMode:
-    type: Parameter
-  - TrimCardType:
-    type: Parameter
-  - TuneModeCurrent:
-    type: Parameter
-  - Usage:
-    type: Parameter
-  - Winding:
-    type: Parameter
-  - WireDiameter:
-    type: Parameter
-  - WireMaterial:
-    type: Parameter
-  - WireOrientation:
-    type: Parameter
-  - WireView:
-     type: Parameter
-beamlines:
-  GUN_thru_MV:
+    native_types:
+    - BPM
+    - DRBPM
+    - MONITOR
+    function: BeamPositionMeasurement
+    beamline_relation: Inline
+    x: 10.50809805776206
+    y: 21.0668
+    z: 32.04809953376817
+    theta: -15.0000000115079
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    x_offset: 0.0
+    y_offset: 0.0
+    species_ref: electron
+    pc_ref: 0.465144443755972
+    alpha_a: -14.84984297191979
+    alpha_b: -3.340915259171737
+    beta_a: 6.953008935571263
+    beta_b: 0.9961950709032026
+    eta_x: -6.195761260338309e-16
+    eta_y: 1.827005505037094e-16
+    etap_x: -1.23859828244279e-15
+    etap_y: 3.967937356187314e-16
+    phi_a: 0.3988706025888786
+    phi_b: 2.288691122909796
+    description: Digital receiver (stripline) beam position monitor.
+    additional_metadata:
+      Pass: non-muxed
+      CanType: Stripline
+      Sensitivity: '9.9'
+      Controlled_by: iocipmk101
+      electrode_rotation_deg: 45.0
+      _note: 'Rotation kept as metadata: reflects stripline electrode X-configuration, not a floor-plan
+        or body-shift rotation (GlobalOffset/SurveyOffset are all zero here).'
+  - id: IPMK102
+    type: BeamPositionMonitor
+    native_types:
+    - BPM
+    - DRBPM
+    - MONITOR
+    function: BeamPositionMeasurement
+    beamline_relation: Inline
+    x: 10.40715771291403
+    y: 21.0668
+    z: 32.42481402897189
+    theta: -15.0000000115079
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    x_offset: 0.0
+    y_offset: 0.0
+    species_ref: electron
+    pc_ref: 0.465144443755972
+    alpha_a: 14.89750177210773
+    alpha_b: 1.862421495338784
+    beta_a: 11.37559232654712
+    beta_b: 2.789302935981829
+    eta_x: -7.933607584001334e-16
+    eta_y: -1.165656573211613e-16
+    etap_x: 1.098940560030332e-15
+    etap_y: 1.861070952494128e-16
+    phi_a: 0.4327902197303953
+    phi_b: 2.470627522339067
+    description: Digital receiver (stripline) beam position monitor.
+    additional_metadata:
+      Pass: non-muxed
+      CanType: Stripline
+      Sensitivity: '9.9'
+      Controlled_by: iocipmk102
+      electrode_rotation_deg: 45.0
+      _note: 'Rotation kept as metadata: reflects stripline electrode X-configuration, not a floor-plan
+        or body-shift rotation (GlobalOffset/SurveyOffset are all zero here).'
+  - id: MBHK101H
+    type: Kicker
+    native_types:
+    - Corrector
+    - HCorrector
+    - HKICK
+    function: Steering
+    beamline_relation: Inline
+    plane: Horizontal
+    x: 10.50809805750324
+    y: 21.0668
+    z: 32.04809953473409
+    theta: -15.0000000115079
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    species_ref: electron
+    pc_ref: 0.465144443755972
+    alpha_a: -14.84984300377907
+    alpha_b: -3.340915271379903
+    beta_a: 6.953008965270949
+    beta_b: 0.9961950775850331
+    eta_x: -6.195761272724292e-16
+    eta_y: 1.827005509005031e-16
+    etap_x: -1.23859828244279e-15
+    etap_y: 3.967937356187314e-16
+    phi_a: 0.3988706027327012
+    phi_b: 2.288691123913615
+    description: horizontal steering corrector magnet.
+    additional_metadata:
+      HCOSystem: UITF Correctors
+      Controlled_by: iocitfmag
+      ControlsUnits: milliAmps
+      FieldMap: Data ( text/plain; charset=us-ascii )
+      HystDwellTime: '4'
+      HystRampTime: '4'
+      NoHyst: '1'
+      Housed_by: ITF02
+      Hmax: '.999'
+      Powered_by: ITF02
+      TrimCardType: 1Amp
+      KICK: '0'
+  - id: MBHK101V
+    type: Kicker
+    native_types:
+    - Corrector
+    - VCorrector
+    - VKICK
+    function: Steering
+    beamline_relation: Inline
+    plane: Vertical
+    x: 10.50809805724442
+    y: 21.0668
+    z: 32.04809953570002
+    theta: -15.0000000115079
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    species_ref: electron
+    pc_ref: 0.465144443755972
+    alpha_a: -14.84984303563834
+    alpha_b: -3.340915283588069
+    beta_a: 6.953008994970635
+    beta_b: 0.9961950842668637
+    eta_x: -6.195761285110275e-16
+    eta_y: 1.827005512972969e-16
+    etap_x: -1.23859828244279e-15
+    etap_y: 3.967937356187314e-16
+    phi_a: 0.3988706028765238
+    phi_b: 2.288691124917435
+    description: vertical steering corrector magnet.
+    additional_metadata:
+      HCOSystem: UITF Correctors
+      Controlled_by: iocitfmag
+      ControlsUnits: milliAmps
+      FieldMap: Data ( text/plain; charset=us-ascii )
+      HystDwellTime: '4'
+      HystRampTime: '4'
+      NoHyst: '1'
+      Housed_by: ITF02
+      Hmax: '.999'
+      Powered_by: ITF02
+      TrimCardType: 1Amp
+      KICK: '0'
+  - id: MFRM604V
+    type: Kicker
+    native_types:
+    - Corrector
+    - VDiagKicker
+    - VKICK
+    function: Steering
+    beamline_relation: Inline
+    plane: Vertical
+    x: 10.24767958498776
+    y: 21.0668
+    z: 52.62398370424354
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 1.0e-06
+    species_ref: electron
+    pc_ref: 0.465144255654231
+    alpha_a: 127.4277193468357
+    alpha_b: -62.7583704942617
+    beta_a: 81.85819717045146
+    beta_b: 135.1585989417374
+    eta_x: 0.4080168026878965
+    eta_y: -0.5991983902832668
+    etap_x: -0.651181426230172
+    etap_y: -0.2659016158366157
+    phi_a: 12.96869356373805
+    phi_b: 15.0512986935019
+    description: vertical steering corrector magnet.
+    additional_metadata:
+      ControlsUnits: milliAmps
+      NoHyst: '1'
+      TrimCardType: NA
+      KICK: '0'
+      Comments: Raster
+  - id: MFRM604H
+    type: Kicker
+    native_types:
+    - Corrector
+    - HDiagKicker
+    - HKICK
+    function: Steering
+    beamline_relation: Inline
+    plane: Horizontal
+    x: 10.24767958495496
+    y: 21.0668
+    z: 52.78731737091019
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 1.0e-06
+    species_ref: electron
+    pc_ref: 0.465144255654231
+    alpha_a: 95.02599658618053
+    alpha_b: -67.51923256692868
+    beta_a: 45.52401608348776
+    beta_b: 156.4373175342656
+    eta_x: 0.3016569526764957
+    eta_y: -0.6426290761704515
+    etap_x: -0.651181426230172
+    etap_y: -0.2659016158366157
+    phi_a: 12.97136918635243
+    phi_b: 15.05242196252455
+    description: horizontal steering corrector magnet.
+    additional_metadata:
+      ControlsUnits: milliAmps
+      NoHyst: '1'
+      TrimCardType: NA
+      KICK: '0'
+      Comments: Raster
+  - id: MFHK101
+    type: Solenoid
+    native_types:
+    - Solenoid
+    - SOLE
+    function: Focusing
+    beamline_relation: Inline
+    x: 10.43495454283887
+    y: 21.0668
+    z: 32.32107484748639
+    theta: -15.0000000115079
+    phi: 0.0
+    psi: 0.0
+    length: 0.0762
+    Ksol: -11.6540717
+    species_ref: electron
+    pc_ref: 0.465144443755972
+    alpha_a: 17.00227041491529
+    alpha_b: 2.034480014161481
+    beta_a: 14.80158650370627
+    beta_b: 3.207825106053682
+    eta_x: -9.113855498511374e-16
+    eta_y: -1.365533180766782e-16
+    etap_x: 1.098940560030332e-15
+    etap_y: 1.861070952494128e-16
+    phi_a: 0.4245134122427604
+    phi_b: 2.434715554013777
+    description: Focusing solenoid in the injector line.
+    additional_metadata:
+      HCOSystem: UITF Solenoids
+      Winding: SingleWound
+      Controlled_by: iocitfmag
+      ControlsUnits: Amps
+      FieldMap: Data ( text/plain; charset=us-ascii )
+      HystDwellTime: '4'
+      HystRampTime: '4'
+      Housed_by: ITF02
+      Hmax: '3'
+      Powered_by: ITF02
+      TrimCardType: 10Amp
+      Tilt: '0'
+      SurveyDate: '2021-03-15'
+      SurveyZ: '.576'
+  - id: ITVK201
+    type: DiagnosticDevice
+    native_types:
+    - DiagnosticDevice
+    - Standard
+    - MONITOR
+    function: BeamProfileMeasurement
+    beamline_relation: Inline
+    x: 10.36079987637277
+    y: 21.0668
+    z: 32.59782383013385
+    theta: -15.0000000115079
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    description: Beam viewer/screen (ITV).
+    additional_metadata:
+      HCOSystem: UITF Viewers
+      InsertedMode: Viewer Limited
+      TransitionMode: Viewer Limited
+      ActuatorCard: ITF12C0922ADDR1
+      ActuatorChannel: '1'
+      InsertedChannel: '1'
+      LimitSwitchCard: ITF12C0943ADDR1
+      RetractedChannel: '2'
+      Controlled_by: iocitf2
+      SurveyDate: '2021-03-15'
+      SurveyZ: '1.173'
+      pCentral_MeV: 0.465144307216256
+      twiss_alpha_x: 1.171553470644124
+      twiss_alpha_y: -2.314118176337514
+      twiss_beta_x: 4.601746608248333
+      twiss_beta_y: 2.773229855167892
+      twiss_eta_x: -4.710678300625306e-16
+      twiss_eta_y: -5.600027578757882e-17
+      twiss_etap_x: 2.220575170188978e-16
+      twiss_etap_y: 6.790236489597769e-17
+      twiss_phi_x: 0.5069577519370357
+      twiss_phi_y: 2.66460447810394
+      _note: pCentral/Twiss preserved here because plain DiagnosticDevice has no ReferenceP/TwissP mixin
+        in the current schema (unlike BeamPositionMonitor).
+  - id: IFYK203
+    type: DiagnosticDevice
+    native_types:
+    - DiagnosticDevice
+    - FaradayCup
+    - MONITOR
+    function: BeamCurrentMeasurement
+    beamline_relation: Inline
+    x: 10.24767958845076
+    y: 21.0668
+    z: 35.38227495834539
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    description: Faraday cup beam-current diagnostic.
+    additional_metadata:
+      InsertedMode: CW
+      TransitionMode: CW
+      ActuatorCard: ITF12C0922ADDR1
+      ActuatorChannel: '11'
+      InsertedChannel: '5'
+      LimitSwitchCard: ITF12C0943ADDR2
+      RetractedChannel: '6'
+      Controlled_by: iocitf2
+      NameAlias: FC1
+      pCentral_MeV: 0.465144443755972
+      twiss_alpha_x: 0.6793535478139585
+      twiss_alpha_y: -2.410769525371156
+      twiss_beta_x: 5.739541313096026
+      twiss_beta_y: 5.12752181828262
+      twiss_eta_x: -0.07602361780044277
+      twiss_eta_y: 0.02927268864227073
+      twiss_etap_x: 0.07832412649498344
+      twiss_etap_y: -0.03015849329985609
+      twiss_phi_x: 3.656659260426662
+      twiss_phi_y: 5.842555382724905
+      _note: pCentral/Twiss preserved here because plain DiagnosticDevice has no ReferenceP/TwissP mixin
+        in the current schema (unlike BeamPositionMonitor).
+  - id: ISLK302
+    type: DiagnosticDevice
+    native_types:
+    - DiagnosticDevice
+    - Aperture
+    - MONITOR
+    function: Measurement
+    beamline_relation: Inline
+    x: 10.24767958824433
+    y: 21.0668
+    z: 36.41006257925551
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    description: Fixed physical aperture / collimating restriction. (No dedicated PhysicalFunctionEnum
+      value for a passive aperture; "Measurement" used as best-available fallback.)
+    additional_metadata:
+      NameAlias: Aperture 2
+      pCentral_MeV: 0.465144443755972
+      twiss_alpha_x: -3.858268006057215
+      twiss_alpha_y: -0.8076529802215013
+      twiss_beta_x: 0.5948258722684887
+      twiss_beta_y: 0.05821205562820486
+      twiss_eta_x: 0.04461580387531681
+      twiss_eta_y: -0.03452473060152621
+      twiss_etap_x: 0.1194074695296224
+      twiss_etap_y: -0.09240023398078684
+      twiss_phi_x: 6.571489045228137
+      twiss_phi_y: 8.12028738860876
+      _note: pCentral/Twiss preserved here because plain DiagnosticDevice has no ReferenceP/TwissP mixin
+        in the current schema (unlike BeamPositionMonitor).
+  - id: IYGK302
+    type: DiagnosticDevice
+    native_types:
+    - DiagnosticDevice
+    - YAG
+    - MONITOR
+    function: BeamProfileMeasurement
+    beamline_relation: Inline
+    x: 10.24767958824338
+    y: 21.0668
+    z: 36.41478530309348
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    description: YAG scintillator beam-profile viewer.
+    additional_metadata:
+      HCOSystem: UITF Viewers
+      InsertedMode: Viewer Limited
+      TransitionMode: Viewer Limited
+      ActuatorCard: ITF12C0922ADDR1
+      ActuatorChannel: '6'
+      InsertedChannel: '11'
+      LimitSwitchCard: ITF12C0943ADDR1
+      RetractedChannel: '12'
+      Controlled_by: iocitf2
+      SurveyDate: '2021-03-15'
+      SurveyZ: '4.6462'
+      pCentral_MeV: 0.465144443755972
+      twiss_alpha_x: -3.984399517968124
+      twiss_alpha_y: -0.9417037755499156
+      twiss_beta_x: 0.6318646251374885
+      twiss_beta_y: 0.06647378447980312
+      twiss_eta_x: 0.04517973237809621
+      twiss_eta_y: -0.03496111138918142
+      twiss_etap_x: 0.1194074695296224
+      twiss_etap_y: -0.09240023398078684
+      twiss_phi_x: 6.579192577393345
+      twiss_phi_y: 8.196281331011901
+      _note: pCentral/Twiss preserved here because plain DiagnosticDevice has no ReferenceP/TwissP mixin
+        in the current schema (unlike BeamPositionMonitor).
+  - id: ICBK403
+    type: DiagnosticDevice
+    native_types:
+    - DiagnosticDevice
+    - BrockCavity
+    - MONITOR
+    function: BeamPositionMeasurement
+    beamline_relation: Inline
+    x: 10.24767958759353
+    y: 21.0668
+    z: 39.65027536938226
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 0.0
+    description: Cavity beam-position monitor (resonant RF pickup used purely as a diagnostic sensor;
+      not an accelerating RF cavity despite "Cavity" in its facility name).
+    additional_metadata:
+      NameAlias: YAO Cavity
+      pCentral_MeV: 0.465144255654231
+      twiss_alpha_x: 30.60218195988063
+      twiss_alpha_y: 11.23736624619686
+      twiss_beta_x: 26.59111198538222
+      twiss_beta_y: 11.5243852815062
+      twiss_eta_x: -0.216205961533844
+      twiss_eta_y: 0.1407489603879643
+      twiss_etap_x: 0.2771216678132173
+      twiss_etap_y: -0.1804047694567548
+      twiss_phi_x: 9.848886790593667
+      twiss_phi_y: 11.97924000797064
+      _note: pCentral/Twiss preserved here because plain DiagnosticDevice has no ReferenceP/TwissP mixin
+        in the current schema (unlike BeamPositionMonitor).
+  - id: MDSK201
+    type: Dipole
+    native_types:
+    - Dipole
+    - CSBEND
+    function: Steering
+    beamline_relation: Inline
+    x: 10.24767958891485
+    y: 21.0668
+    z: 33.07167495458577
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 0.1027699
+    species_ref: electron
+    pc_ref: 0.465144443755972
+    alpha_a: 1.734799300973817
+    alpha_b: 1.209268332594004
+    beta_a: 0.2470028288493974
+    beta_b: 0.9718599589904877
+    eta_x: -0.01344596285648782
+    eta_y: 7.666874501197557e-18
+    etap_x: -0.2660525403059775
+    etap_y: 1.869237913056299e-16
+    phi_a: 0.8537295440373742
+    phi_b: 2.879105169640403
+    components:
+    - order: 1
+      Kn: -5.933092236836
+    description: '15-degree dipole bending magnet. (function=Steering used as best-available fallback:
+      PhysicalFunctionEnum has no dedicated "Bending" value.)'
+    additional_metadata:
+      HCOSystem: UITF Dipoles
+      Controlled_by: iocitfmag
+      ControlsUnits: Amps
+      FieldMap: Data ( text/plain; charset=us-ascii )
+      HystDwellTime: '4'
+      HystRampTime: '4'
+      NoHyst: '1'
+      Housed_by: ITF02
+      Hmax: '3.5'
+      Powered_by: ITF02
+      TrimCardType: 10Amp
+      HGAP: '.0641927050701428'
+      K1: '-5.933092236836'
+      SurveyDate: '2021-03-15'
+      SurveyZ: '1.338'
+      NameAlias: 15 Deg Bend
+      angle_ref_rad: -0.261799388
+      e1_rad: -0.130899694
+      e2_rad: -0.130899694
+      _note: angle_ref/e1/e2 (bend angle, entrance/exit edge angles) preserved here because no BendP mixin
+        exists in the schema yet.
+  - id: MQWK202
+    type: Quadrupole
+    native_types:
+    - Quadrupole
+    - QW
+    - KQUAD
+    function: Focusing
+    beamline_relation: Inline
+    x: 10.2476795886932
+    y: 21.0668
+    z: 34.17524568998951
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 0.125
+    species_ref: electron
+    pc_ref: 0.465144443755972
+    alpha_a: -0.5436044560404847
+    alpha_b: -0.7328475380936091
+    beta_a: 5.268390231757493
+    beta_b: 0.6302896683893651
+    eta_x: -0.1496075628172073
+    eta_y: 0.05760598787041097
+    etap_x: 0.0525380705251388
+    etap_y: -0.02022964211444155
+    phi_a: 3.449724803972426
+    phi_b: 5.1629744953913
+    components:
+    - order: 1
+      Kn: 0.0
+    description: Focusing/defocusing quadrupole magnet.
+    additional_metadata:
+      HCOSystem: UITF Quads
+      Usage: Matching
+      Controlled_by: iocitfmag
+      ControlsUnits: Amps
+      FieldMap: Data ( text/plain; charset=us-ascii )
+      HystDwellTime: '4'
+      HystRampTime: '4'
+      Limit: '24.25'
+      NoHyst: '1'
+      Housed_by: ITF03
+      Resistance: '1.01'
+      Hmax: '9.9'
+      Powered_by: ITF03
+      TrimCardType: 10Amp
+      Radius: '.0159'
+      BORE: '0'
+  - id: RM11
+    type: RFCavity
+    native_types:
+    - RFCavity
+    - CryoCavity
+    - RFCA
+    function: BeamAcceleration
+    beamline_relation: Inline
+    x: 10.24767958726352
+    y: 21.0668
+    z: 41.293371816671
+    theta: -1.15078924901353e-08
+    phi: 0.0
+    psi: 0.0
+    length: 0.5
+    species_ref: electron
+    pc_ref: 0.465144255654231
+    alpha_a: -27.32665933627831
+    alpha_b: -6.909431348341881
+    beta_a: 21.20911239952727
+    beta_b: 4.413170826743687
+    eta_x: 0.239131666316787
+    eta_y: -0.1556734753803759
+    etap_x: 0.2771216678132173
+    etap_y: -0.1804047694567548
+    phi_a: 12.92123568016702
+    phi_b: 14.88834594146045
+    description: Superconducting (cryomodule) RF accelerating cavity.
+    additional_metadata:
+      HCOSystem: UITF RF Cavities
+      CavityType: C75
+      MaxGSET: '11'
+      PhaseRMS: '.04'
+      Q0: 1E+09
+      Qexternal: '1.15E+07'
+      ROQ: '1067'
+      Controlled_by: iocitfrffcc1
+      FCC: fcc_773
+      rf_frequency_Hz: 500000000.0
+      rf_voltage_V: 0.0
+      rf_phase_rad: 0.0
+      _note: frequency/voltage/phase preserved here because no RFP mixin exists in the schema yet.
+  virtual_components:
+  - id: S_IS_20CM
+    type: Marker
+    native_types:
+    - Marker
+    - Mark
+    function: Mark
+    beamline_relation: Inline
+    x: 10.56082359094069
+    y: 21.0668
+    z: 31.85132516524742
+    theta: -15.0000000115079
+    phi: 0.0
+    psi: 0.0
+    alpha_a: -8.359604379977313
+    alpha_b: -0.8539187577256651
+    beta_a: 2.224877414151352
+    beta_b: 0.1416410334157079
+    eta_x: -3.672540654176122e-16
+    eta_y: 1.018673906082613e-16
+    etap_x: -1.23859828244279e-15
+    etap_y: 3.967937356187314e-16
+    phi_a: 0.347052717594763
+    phi_b: 1.715491573922409
+    description: Reference marker 20 cm downstream of the gun.
+    additional_metadata: {}
+  beamlines:
+  - id: GUN_thru_MV
     type: Beamline
-    multipass: false
-    line:
-    - RF_LASER
-    - D0
-    - S_IS_20CM:
-      type: VirtualComponentBinding
-      in_region: K1
-      description: >-
-        Virtual component representing the location of the 20 cm diagnostic screen in the G
-        UN_thru_MV beamline at the UITF. This is a virtual component because it doesn't correspond to a physical device, but it is important for understanding the beamline structure and for defining the locations of signals and other components in relation to the beamline.
-      instance_of_component: Marker
-      has_parameter_bindings:
-        SegMask:
-          type: ParameterBinding
-          instance_of_parameter: SegMask
-          value: S_UITF+S_KV+A_UITF+A_KV
-        pCentral:
-          type: ParameterBinding
-          instance_of_parameter: PCentral
-          has_data_type: Float
-          value: .465144443755972 # changed the value from an explicit string to float
-    - D1
-    - IPMK101:
-        type: PhysicalComponentBinding
-        in_region: K1
-        description: >-
-          IPMK101 BPM monitor in the K1 region of the GUN_thru_MV beamline at the UITF.
-          Is in the KV section of the beamline.
-        instance_of_component: BeamPositionMonitor
-        has_signal_bindings:
-          - horizontal_beam_position:
-              type: SignalBinding
-              instance_of_signal: horizontal_beam_position
-              native_identifier: IPMK101.XPOS
-              source_system: EPICS
-              native_description: >-
-                EPICS PV for the horizontal beam position readback signal from the IPMK101 BPM in the GUN_thru_MV beamline at the UITF.
-              native_unit: mm
-              access_protocol:
-              archive_identifier:
-          - vertical_beam_position:
-              type: SignalBinding
-              instance_of_signal: vertical_beam_position
-              native_identifier: IPMK101.YPOS
-              source_system: EPICS
-              native_description: >-
-                EPICS PV for the vertical beam position readback signal from the IPMK101 BPM in the GUN_thru_MV beamline at the UITF.
-              native_unit: mm
-              access_protocol:
-              archive_identifier:
-          - bpm_status:
-              type: SignalBinding
-              instance_of_signal: bpm_status
-              native_identifier: IPMK101.STAT
-              source_system: EPICS
-              native_description: >-
-                EPICS PV for the status signal from the IPMK101 BPM in the GUN_thru_MV beamline at the UITF, providing a summary of the health of the device or the quality of the position measurement.
-              native_unit: 
-              access_protocol:
-              archive_identifier:
-        has_parameter_bindings:
-          - SegMask:
-              type: ParameterBinding
-              instance_of_parameter: SegMask
-              value: S_UITF+S_KV+A_UITF+A_KV
-          - GlobalOffsetX:
-              type: ParameterBinding
-              instance_of_parameter: GlobalOffsetX
-              has_data_type: Float
-              value: 0
-          - GlobalOffsetY:
-              type: ParameterBinding
-              instance_of_parameter: GlobalOffsetY
-              has_data_type: Float
-              value: 0 
-          - Pass:
-              type: ParameterBinding
-              instance_of_parameter: Pass
-              value: non-muxed
-              # NEED TO INCLUDE THE OTHER PROPERTIES FOR THIS COMPONENT BINDING
-    - D2
-    - MBHK101H:
-      type: PhysicalComponentBinding
-      in_region: K1
-      description: MBHK101H horizontal corrector magnet in the GUN_thru_MV beamline at the UITF.
-      instance_of_component: HCorrector
-      has_signal_bindings:
-        - kick_setpoint:
-          type: SignalBinding
-          instance_of_signal: kick_setpoint
-          native_identifier: MBHK101H.KICK # native_convention and native_identifier are a bit duplicative, but I think it is okay
-          source_system: EPICS
-          native_description: EPICS PV for the integrated corrector kick setpoint signal for the MBHK101H horizontal corrector magnet.
-          native_unit: T_m
-          access_protocol:
-          archive_identifier:
-        - current_setpoint:
-          type: SignalBinding
-          instance_of_signal: current_setpoint
-          naming_convention: EPICSSuffixConvention
-          native_identifier: MBHK101H.S
-          source_system: EPICS
-          native_description: EPICS PV for the magnet current setpoint signal for the MBHK101H horizontal corrector magnet.
-          native_unit: A
-          access_protocol:
-          archive_identifier:
-        - current_readback:
-          type: SignalBinding
-          instance_of_signal: current_readback
-          naming_convention: EPICSSuffixConvention
-          native_identifier: MBHK101H.R
-          source_system: EPICS
-          native_description: EPICS PV for the magnet current readback signal for the MBHK101H horizontal corrector magnet.
-          native_unit: A
-          access_protocol:
-          archive_identifier:
-        - current_min:
-          type: SignalBinding
-          instance_of_signal: current_min
-          naming_convention: EPICSSuffixConvention
-          native_identifier: MBHK101H.HMIN
-          source_system: EPICS
-          native_description: EPICS PV for the magnet current minimum limit signal for the MBHK101H horizontal corrector magnet.
-          native_unit: A
-          access_protocol:
-          archive_identifier:
-        - current_max:
-          type: SignalBinding
-          instance_of_signal: current_max
-          naming_convention: EPICSSuffixConvention
-          native_identifier: MBHK101H.HMAX
-          source_system: EPICS
-          native_description: EPICS PV for the magnet current maximum limit signal for the MBHK101H horizontal corrector magnet.
-          native_unit: A
-          access_protocol:
-          archive_identifier:
-        - magnet_status:
-          type: SignalBinding
-          instance_of_signal: magnet_status
-          naming_convention: EPICSSuffixConvention
-          native_identifier: MBHK101H.STAT
-          source_system: EPICS
-          native_description: EPICS PV for the magnet status signal, following the EPICSSuffixConvention naming convention with the .STAT suffix.
-          native_unit: 
-          access_protocol:
-          archive_identifier:
-      has_parameter_bindings:
-        # NEED TO INCLUDE THE OTHER PROPERTIES FOR THIS COMPONENT BINDING
-    - MBHK101V
-    - D3
-    - MBHK101AH
-    - MBHK101AV
-    - D4
-    - MFHK101
-    - D5
-    - IPMK102
-    - MBHK102H
-    - MBHK102V
-    - D6
-    - ITVK201
-    - D7
-    - VIPK201
-    - D8
-    - MDSK201
-    - D9
-    - ITVK201A
-    - D10
-    - MLHK201H
-    - D11
-    - MLHK201V
-    - D12
-    - VIPK202
-    - D13
-    - MFBK202
-    - D14
-    - MBHK202H
-    - D15
-    - MBHK202V
-    - D16
-    - ITVK202
-    - D17
-    - MQWK202
-    - D18
-    - VIPK203
-    - D19
-    - MWFK203
-    - D20
-    - ITVK203
-    - D21
-    - MQWK203
-    - D22
-    - MBHK203H
-    - MBHK203V
-    - D23
-    - MFQK203
-    - D24
-    - MBHK203AH
-    - MBHK203AV
-    - D25
-    - ITVK203A
-    - D26
-    - IFYK203
-    - D27
-    - IPMK203
-    - D28
-    - MFAK301
-    - D29
-    - RIHK301
-    - D30
-    - MLHK301H
-    - D31
-    - MLHK301V
-    - D32
-    - VIPK302
-    - MFDK302A
-    - D33
-    - ISLK302
-    - D34
-    - IYGK302
-    - D35
-    - MFDK302B
-    - D36
-    - MLHK302H
-    - D37
-    - MLHK302V
-    - D38
-    - VMVK401
-    - D39
-    - RIHK302
-    - D40
-    - MFAK303
-    - D41
-    - VIPK401
-    - D42
-    - IPMK401
-    - D43
-    - MLHK401H
-    - D44
-    - MLHK401V
-    - D45
-    - ITVK401
-    - D46
-    - RIBK401
-    - D47
-    - MBHK401AH
-    - MBHK401AV
-    - D48
-    - ISLK401
-    - D49
-    - MBHK401BH
-    - D50
-    - MBHK401BV
-    - D51
-    - MDIK402
-    - D52
-    - VIPK402
-    - D53
-    - IPMK402
-    - D54
-    - MLHK402H
-    - D55
-    - MLHK402V
-    - D56
-    - VDPK403
-    - D57
-    - VIPK403
-    - D58
-    - ITVK402
-    - D59
-    - VIPK403A
-    - MFQK403
-    - D60
-    - ISLK403
-    - D61
-    - ICBK403
-    - D62
-    - IPMK403
-    - D63
-    - MLHK403H
-    - D64
-    - MLHK403V
-    - D65
-    - IYGK403
-    - D66
-    - IFYK403
-    - D67
-    - RM11
-    - D68
-    - VQGM101
-    - D69
-    - RM12
-    - D70
-    - VIPM201
-    - D71
-    - IYGM201
-    - D72
-    - MLHM201H
-    - D73
-    - MLHM201V
-    - D74
-    - VMVM301
-    - D75
-    - VDPM301A
-    - D76
-    - VIPM301A
-    - D77
-    - VDPM301B
-    - D78
-    - VIPM301B
-    - D79
-    - VDPM301C
-    - D80
-    - VMVM401
-    - D81
-    - MLHM401H
-    - D82
-    - MLHM401V
-    - D83
-    - ILMM401
-    - D84
-    - SBCM401
-    - D85
-    - VIPM401
-    - D86
-    - IYGM401
-    - D87
-    - IFYM401
-    - D88
-    - ICVM501
-    - D89
-    - IPMM501
-    - D90
-    - MLHM501H
-    - D91
-    - MLHM501V
-    - D92
-    - MQJM501
-    - D93
-    - MLHM502H
-    - D94
-    - MLHM502V
-    - D95
-    - IPMM502
-    - D96
-    - MQJM502
-    - D97
-    - MLHM503H
-    - D98
-    - MLHM503V
-    - D99
-    - IPMM503
-    - D100
-    - MQJM503
-    - D101
-    - MLHM504H
-    - D102
-    - MLHM504V
-    - D103
-    - IPMM504
-    - D104
-    - MQJM504
-    - D105
-    - MBHM504AH
-    - D106
-    - MBHM504AV
-    - D107
-    - IPMM505
-    - D108
-    - IYGM505
-    - VIPM505
-    - IHAM505
-    - D109
-    - RHKM506
-    - D110
-    - IYGM506
-    - D111
-    - VIPM506
-    - D112
-    - ILMM601
-    - D113
-    - MLHM601AH
-    - D114
-    - MLHM601AV
-    - D115
-    - IPMM601
-    - D116
-    - MDLM601
-    - D117
-    - MBHM601BH
-    - D118
-    - MBHM601BV
-    - D119
-    - IHAM601
-    - D120
-    - IYGM601
-    - D121
-    - VIPM601
-    - D122
-    - IPMM602
-    - D123
-    - MBHM602H
-    - D124
-    - MBHM602V
-    - D125
-    - MBHM603H
-    - D126
-    - MBHM603V
-    - D127
-    - MQJM603
-    - D128
-    - MBHM604H
-    - D129
-    - MBHM604V
-    - D130
-    - ILMM604U
-    - D131
-    - ILMM604D
-    - D132
-    - ILMM604L
-    - D133
-    - ILMM604R
-    - D134
-    - MFRM604V
-    - D135
-    - MFRM604H
-    - D136
-    - MQJM604
-    - D137
-    - IPMM604
-    - D138
-    - IYGM604
-    - D139
-    - VIPM604
-    - D140
-    - MBHM605H
-    - D141
-    - MBHM605V
-    - D142
-    - ILMM605
-    - D143
-    - MBHM605AH
-    - MBHM605AV
-    - D144
-    - IHAM605
-    - D145
-    - IPMM605
-    - D146
-    - IYGM605
-    - D147
-    - VIPM605
-    - D148
-    - IFYM606
-    - D149
-    - VCGM606
-    - D150
-    - VIPM606
-    - D151
-    - ITVM606
-non_beamline:
-  - ITF12C0922ADDR1LT:
-      type: PhysicalComponentBinding # Notice, there isn't a "Binding" LinkML class for InfrastructureComponents. 
-      in_region: Equipement Rack ITF12
-      relative_to: # Talk to Chris and Todd: need to add to the LinkML schema for PhysicalComponentBinding, and VirtualComponentBinding
-        relation:
-          relationship:
-            - upstream_of
-            - within 10 meters of
-          description: Spatial relation between the component and the reference point.
-          component: S_IS_20CM
-        relation:
-          relationship:
-            - downstream_of
-            - near_to
-            - within 3 meters of
-          description: Spatial relation between the component and the reference point.
-          component: IPMK101
-        relation:
-          relationship:
-            - across_from
-            - within 2 meters of
-          description: Spatial relation between the component and the reference point.
-          component: MBHK101H
-      description: >-
-        Light switch for UITF
-      instance_of_component: Lightswitch
-      has_parameter_bindings:
-        SegMask:
-          type: ParameterBinding
-          instance_of_parameter: SegMask
-          value: A_Site+A_UITF
+    function: BeamlineSection
+    beamline_relation: Inline
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    theta: 0.0
+    phi: 0.0
+    psi: 0.0
+    multipass: true
+    description: UITF injector beamline from the gun/laser through the MV (medium-velocity) section.
+  signals:
+  - id: RK11.GET
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Requested cavity gradient setpoint.
+    canonical_signal_type: GradientSetpoint
+    quantity_kind: CavityGradient
+    native_data_type: Float
+    native_unit: MV_per_m
+    access_protocol: EPICS Channel Access
+    alias: gradient_setpoint
+  - id: RK11.GMES
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured cavity gradient readback.
+    canonical_signal_type: GradientReadback
+    quantity_kind: CavityGradient
+    native_data_type: Float
+    native_unit: MV_per_m
+    access_protocol: EPICS Channel Access
+    alias: gradient_readback
+  - id: RK11.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: IPMK101.XPOS
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured horizontal beam position.
+    canonical_signal_type: HorizontalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: Float
+    native_unit: mm
+    access_protocol: EPICS Channel Access
+    alias: horizontal_beam_position
+  - id: IPMK101.YPOS
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured vertical beam position.
+    canonical_signal_type: VerticalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: Float
+    native_unit: mm
+    access_protocol: EPICS Channel Access
+    alias: vertical_beam_position
+  - id: IPMK101.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: IPMK102.XPOS
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured horizontal beam position.
+    canonical_signal_type: HorizontalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: Float
+    native_unit: mm
+    access_protocol: EPICS Channel Access
+    alias: horizontal_beam_position
+  - id: IPMK102.YPOS
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured vertical beam position.
+    canonical_signal_type: VerticalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: Float
+    native_unit: mm
+    access_protocol: EPICS Channel Access
+    alias: vertical_beam_position
+  - id: IPMK102.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: MBHK101H.S
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_setpoint
+  - id: MBHK101HM
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_readback
+  - id: MBHK101H.HMIN
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_min
+  - id: MBHK101H.HMAX
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_max
+  - id: MBHK101H.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: MBHK101H.KICK
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired integrated corrector kick or equivalent model quantity.
+    canonical_signal_type: IntegratedFieldSetpoint
+    quantity_kind: IntegratedMagneticField
+    native_data_type: Float
+    native_unit: T_m
+    access_protocol: EPICS Channel Access
+    alias: kick_setpoint
+  - id: MBHK101V.S
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_setpoint
+  - id: MBHK101VM
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_readback
+  - id: MBHK101V.HMIN
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_min
+  - id: MBHK101V.HMAX
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_max
+  - id: MBHK101V.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: MBHK101V.KICK
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired integrated corrector kick or equivalent model quantity.
+    canonical_signal_type: IntegratedFieldSetpoint
+    quantity_kind: IntegratedMagneticField
+    native_data_type: Float
+    native_unit: T_m
+    access_protocol: EPICS Channel Access
+    alias: kick_setpoint
+  - id: MFRM604V.S
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_setpoint
+  - id: MFRM604VM
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_readback
+  - id: MFRM604V.HMIN
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_min
+  - id: MFRM604V.HMAX
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_max
+  - id: MFRM604V.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: MFRM604V.KICK
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired integrated corrector kick or equivalent model quantity.
+    canonical_signal_type: IntegratedFieldSetpoint
+    quantity_kind: IntegratedMagneticField
+    native_data_type: Float
+    native_unit: T_m
+    access_protocol: EPICS Channel Access
+    alias: kick_setpoint
+  - id: MFRM604H.S
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_setpoint
+  - id: MFRM604HM
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_readback
+  - id: MFRM604H.HMIN
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_min
+  - id: MFRM604H.HMAX
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_max
+  - id: MFRM604H.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: MFRM604H.KICK
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired integrated corrector kick or equivalent model quantity.
+    canonical_signal_type: IntegratedFieldSetpoint
+    quantity_kind: IntegratedMagneticField
+    native_data_type: Float
+    native_unit: T_m
+    access_protocol: EPICS Channel Access
+    alias: kick_setpoint
+  - id: MDSK201.S
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_setpoint
+  - id: MDSK201M
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_readback
+  - id: MDSK201.HMIN
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_min
+  - id: MDSK201.HMAX
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_max
+  - id: MDSK201.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: MDSK201.BDL
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired dipole bend field or equivalent model quantity.
+    canonical_signal_type: IntegratedFieldSetpoint
+    quantity_kind: IntegratedMagneticField
+    native_data_type: Float
+    native_unit: T_m
+    access_protocol: EPICS Channel Access
+    alias: field_setpoint
+  - id: MQWK202.S
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_setpoint
+  - id: MQWK202M
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_readback
+  - id: MQWK202.HMIN
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_min
+  - id: MQWK202.HMAX
+    type: Signal
+    signal_role: Limit
+    source_system: EPICS
+    native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
+      using closest available.)
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: EPICS Channel Access
+    alias: current_max
+  - id: MQWK202.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  - id: MQWK202.BDL
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Desired integrated quadrupole strength or equivalent model quantity. (Gradient
+      quantity; no dedicated canonical/quantity-kind exists yet.)
+    canonical_signal_type: MagnetFieldSetpoint
+    quantity_kind: IntegratedMagneticField
+    native_data_type: Float
+    native_unit: G_per_cm
+    access_protocol: EPICS Channel Access
+    alias: strength_setpoint
+  - id: RM11.GET
+    type: Signal
+    signal_role: Setpoint
+    source_system: EPICS
+    native_description: Requested cavity gradient setpoint.
+    canonical_signal_type: GradientSetpoint
+    quantity_kind: CavityGradient
+    native_data_type: Float
+    native_unit: MV_per_m
+    access_protocol: EPICS Channel Access
+    alias: gradient_setpoint
+  - id: RM11.GMES
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Measured cavity gradient readback.
+    canonical_signal_type: GradientReadback
+    quantity_kind: CavityGradient
+    native_data_type: Float
+    native_unit: MV_per_m
+    access_protocol: EPICS Channel Access
+    alias: gradient_readback
+  - id: RM11.STAT
+    type: Signal
+    signal_role: Readback
+    source_system: EPICS
+    native_description: Generic instrument status readback. (Old capability role="readback"; semantic
+      meaning is a status value.)
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: EPICS Channel Access
+    alias: status
+  signal_bindings:
+  - id: RF_LASER.gradient_setpoint_binding
+    subject: RF_LASER
+    predicate: has_setpoint_signal
+    object: RK11.GET
+  - id: RF_LASER.gradient_readback_binding
+    subject: RF_LASER
+    predicate: has_readback_signal
+    object: RK11.GMES
+  - id: RF_LASER.status_binding
+    subject: RF_LASER
+    predicate: has_readback_signal
+    object: RK11.STAT
+  - id: IPMK101.horizontal_beam_position_binding
+    subject: IPMK101
+    predicate: has_readback_signal
+    object: IPMK101.XPOS
+  - id: IPMK101.vertical_beam_position_binding
+    subject: IPMK101
+    predicate: has_readback_signal
+    object: IPMK101.YPOS
+  - id: IPMK101.status_binding
+    subject: IPMK101
+    predicate: has_readback_signal
+    object: IPMK101.STAT
+  - id: IPMK102.horizontal_beam_position_binding
+    subject: IPMK102
+    predicate: has_readback_signal
+    object: IPMK102.XPOS
+  - id: IPMK102.vertical_beam_position_binding
+    subject: IPMK102
+    predicate: has_readback_signal
+    object: IPMK102.YPOS
+  - id: IPMK102.status_binding
+    subject: IPMK102
+    predicate: has_readback_signal
+    object: IPMK102.STAT
+  - id: MBHK101H.current_setpoint_binding
+    subject: MBHK101H
+    predicate: has_setpoint_signal
+    object: MBHK101H.S
+  - id: MBHK101H.current_readback_binding
+    subject: MBHK101H
+    predicate: has_readback_signal
+    object: MBHK101HM
+  - id: MBHK101H.current_min_binding
+    subject: MBHK101H
+    predicate: has_limit_signal
+    object: MBHK101H.HMIN
+  - id: MBHK101H.current_max_binding
+    subject: MBHK101H
+    predicate: has_limit_signal
+    object: MBHK101H.HMAX
+  - id: MBHK101H.status_binding
+    subject: MBHK101H
+    predicate: has_readback_signal
+    object: MBHK101H.STAT
+  - id: MBHK101H.kick_setpoint_binding
+    subject: MBHK101H
+    predicate: has_setpoint_signal
+    object: MBHK101H.KICK
+  - id: MBHK101V.current_setpoint_binding
+    subject: MBHK101V
+    predicate: has_setpoint_signal
+    object: MBHK101V.S
+  - id: MBHK101V.current_readback_binding
+    subject: MBHK101V
+    predicate: has_readback_signal
+    object: MBHK101VM
+  - id: MBHK101V.current_min_binding
+    subject: MBHK101V
+    predicate: has_limit_signal
+    object: MBHK101V.HMIN
+  - id: MBHK101V.current_max_binding
+    subject: MBHK101V
+    predicate: has_limit_signal
+    object: MBHK101V.HMAX
+  - id: MBHK101V.status_binding
+    subject: MBHK101V
+    predicate: has_readback_signal
+    object: MBHK101V.STAT
+  - id: MBHK101V.kick_setpoint_binding
+    subject: MBHK101V
+    predicate: has_setpoint_signal
+    object: MBHK101V.KICK
+  - id: MFRM604V.current_setpoint_binding
+    subject: MFRM604V
+    predicate: has_setpoint_signal
+    object: MFRM604V.S
+  - id: MFRM604V.current_readback_binding
+    subject: MFRM604V
+    predicate: has_readback_signal
+    object: MFRM604VM
+  - id: MFRM604V.current_min_binding
+    subject: MFRM604V
+    predicate: has_limit_signal
+    object: MFRM604V.HMIN
+  - id: MFRM604V.current_max_binding
+    subject: MFRM604V
+    predicate: has_limit_signal
+    object: MFRM604V.HMAX
+  - id: MFRM604V.status_binding
+    subject: MFRM604V
+    predicate: has_readback_signal
+    object: MFRM604V.STAT
+  - id: MFRM604V.kick_setpoint_binding
+    subject: MFRM604V
+    predicate: has_setpoint_signal
+    object: MFRM604V.KICK
+  - id: MFRM604H.current_setpoint_binding
+    subject: MFRM604H
+    predicate: has_setpoint_signal
+    object: MFRM604H.S
+  - id: MFRM604H.current_readback_binding
+    subject: MFRM604H
+    predicate: has_readback_signal
+    object: MFRM604HM
+  - id: MFRM604H.current_min_binding
+    subject: MFRM604H
+    predicate: has_limit_signal
+    object: MFRM604H.HMIN
+  - id: MFRM604H.current_max_binding
+    subject: MFRM604H
+    predicate: has_limit_signal
+    object: MFRM604H.HMAX
+  - id: MFRM604H.status_binding
+    subject: MFRM604H
+    predicate: has_readback_signal
+    object: MFRM604H.STAT
+  - id: MFRM604H.kick_setpoint_binding
+    subject: MFRM604H
+    predicate: has_setpoint_signal
+    object: MFRM604H.KICK
+  - id: MDSK201.current_setpoint_binding
+    subject: MDSK201
+    predicate: has_setpoint_signal
+    object: MDSK201.S
+  - id: MDSK201.current_readback_binding
+    subject: MDSK201
+    predicate: has_readback_signal
+    object: MDSK201M
+  - id: MDSK201.current_min_binding
+    subject: MDSK201
+    predicate: has_limit_signal
+    object: MDSK201.HMIN
+  - id: MDSK201.current_max_binding
+    subject: MDSK201
+    predicate: has_limit_signal
+    object: MDSK201.HMAX
+  - id: MDSK201.status_binding
+    subject: MDSK201
+    predicate: has_readback_signal
+    object: MDSK201.STAT
+  - id: MDSK201.field_setpoint_binding
+    subject: MDSK201
+    predicate: has_setpoint_signal
+    object: MDSK201.BDL
+  - id: MQWK202.current_setpoint_binding
+    subject: MQWK202
+    predicate: has_setpoint_signal
+    object: MQWK202.S
+  - id: MQWK202.current_readback_binding
+    subject: MQWK202
+    predicate: has_readback_signal
+    object: MQWK202M
+  - id: MQWK202.current_min_binding
+    subject: MQWK202
+    predicate: has_limit_signal
+    object: MQWK202.HMIN
+  - id: MQWK202.current_max_binding
+    subject: MQWK202
+    predicate: has_limit_signal
+    object: MQWK202.HMAX
+  - id: MQWK202.status_binding
+    subject: MQWK202
+    predicate: has_readback_signal
+    object: MQWK202.STAT
+  - id: MQWK202.strength_setpoint_binding
+    subject: MQWK202
+    predicate: has_setpoint_signal
+    object: MQWK202.BDL
+  - id: RM11.gradient_setpoint_binding
+    subject: RM11
+    predicate: has_setpoint_signal
+    object: RM11.GET
+  - id: RM11.gradient_readback_binding
+    subject: RM11
+    predicate: has_readback_signal
+    object: RM11.GMES
+  - id: RM11.status_binding
+    subject: RM11
+    predicate: has_readback_signal
+    object: RM11.STAT
+  component_relations:
+  - id: RF_LASER_precedes_S_IS_20CM
+    subject: RF_LASER
+    predicate: precedes
+    object: S_IS_20CM
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: S_IS_20CM_precedes_IPMK101
+    subject: S_IS_20CM
+    predicate: precedes
+    object: IPMK101
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: IPMK101_precedes_MBHK101H
+    subject: IPMK101
+    predicate: precedes
+    object: MBHK101H
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: MBHK101H_precedes_MBHK101V
+    subject: MBHK101H
+    predicate: precedes
+    object: MBHK101V
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: MBHK101V_precedes_MFHK101
+    subject: MBHK101V
+    predicate: precedes
+    object: MFHK101
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: MFHK101_precedes_IPMK102
+    subject: MFHK101
+    predicate: precedes
+    object: IPMK102
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: IPMK102_precedes_ITVK201
+    subject: IPMK102
+    predicate: precedes
+    object: ITVK201
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: ITVK201_precedes_MDSK201
+    subject: ITVK201
+    predicate: precedes
+    object: MDSK201
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: MDSK201_precedes_MQWK202
+    subject: MDSK201
+    predicate: precedes
+    object: MQWK202
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: MQWK202_precedes_IFYK203
+    subject: MQWK202
+    predicate: precedes
+    object: IFYK203
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: IFYK203_precedes_ISLK302
+    subject: IFYK203
+    predicate: precedes
+    object: ISLK302
+    context: beamline_order
+    beamline_context: GUN_thru_MV
+  - id: ISLK302_precedes_IYGK302
+    subject: ISLK302
+    predicate: precedes
+    object: IYGK302
+    context: beamline_order
+    beamline_context: GUN_thru_MV
