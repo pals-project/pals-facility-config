@@ -18,9 +18,11 @@ None &#8594;  <sub>0..\*</sub> [String](types/String.md)
 
 ## Used by
 
+ * [ACKicker](ACKicker.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
  * [Beamline](Beamline.md)
  * [BeamlineSection](BeamlineSection.md)
+ * [Bend](Bend.md)
  * [BookkeepingComponent](BookkeepingComponent.md)
  * [Cavity](Cavity.md)
  * [Component](Component.md)
@@ -38,5 +40,6 @@ None &#8594;  <sub>0..\*</sub> [String](types/String.md)
  * [RadiationMonitor](RadiationMonitor.md)
  * [Sextupole](Sextupole.md)
  * [Solenoid](Solenoid.md)
+ * [SuperconductingRFCavity](SuperconductingRFCavity.md)
  * [SupportingFacilityComponent](SupportingFacilityComponent.md)
  * [VirtualComponent](VirtualComponent.md)

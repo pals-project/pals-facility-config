@@ -105,6 +105,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'narad',
                            'prefix_reference': 'http://qudt.org/schema/qudt/'},
                   'rdf': {'prefix_prefix': 'rdf',
                           'prefix_reference': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'},
+                  'saref': {'prefix_prefix': 'saref',
+                            'prefix_reference': 'https://saref.etsi.org/core/v4.1.1/'},
                   'sosa': {'prefix_prefix': 'sosa',
                            'prefix_reference': 'http://www.w3.org/ns/sosa/'},
                   'ssn': {'prefix_prefix': 'ssn',
@@ -274,9 +276,13 @@ class FacilityFunctionEnum(str, Enum):
     """
     Provides cooling for accelerator components.
     """
+    Diagnostics = "Diagnostics"
+    """
+    Provides diagnostic capabilities for accelerator components, such as monitoring or measurement.
+    """
     Detection = "Detection"
     """
-    Provides detection or monitoring of environmental conditions,  such as radiation or temperature.
+    Provides detection capabilities for accelerator components, such as radiation or particle detection.
     """
 
 
@@ -583,6 +589,22 @@ class ComponentRelationPredicateEnum(str, Enum):
     """
     Subject and object are physically connected. a is connected to b if and only if a and b are discrete structure,  and there exists some connecting structure c, such that c connects a and b
     """
+    controls = "controls"
+    """
+    Subject controls the state or behavior of object.
+    """
+    is_controlled_by = "is_controlled_by"
+    """
+    Subject is controlled by object.
+    """
+    is_part_of = "is_part_of"
+    """
+    Subject is a part of object.
+    """
+    has_part = "has_part"
+    """
+    Subject has part object.
+    """
     adjacent_to = "adjacent_to"
     """
     Subject and object are spatially adjacent, without overlapping.
@@ -663,6 +685,58 @@ class DirectionEnum(str, Enum):
     downstream = "downstream"
     positive = "positive"
     negative = "negative"
+
+
+class MultipoleGeometryEnum(str, Enum):
+    """
+    The geometric configuration of the multipole field.  Sets the geometry used to calculate multipoles.
+    """
+    follows_ref_geometry = "follows_ref_geometry"
+    """
+    Use geometry equivalent to the setting of `ref_geometry`.
+    """
+    vertically_pure = "vertically_pure"
+    """
+    Vertically pure multipoles with arc geometry.
+    """
+    horizontally_pure = "horizontally_pure"
+    """
+    Horizontally pure multipoles with arc geometry.
+    """
+    chord = "chord"
+    """
+    Z-axis is the chord connecting the entrance origin point to the exit origin point.
+    """
+    entrance_coords = "entrance_coords"
+    """
+    Rectangular coordinates commensurate with the entrance coordinates.
+    """
+    exit_coords = "exit_coords"
+    """
+    Rectangular coordinates commensurate with the exit coordinates.
+    """
+
+
+class ReferenceGeometryEnum(str, Enum):
+    """
+    The reference geometry used to calculate multipoles.  Sets the geometry used to calculate multipoles.
+    """
+    arc = "arc"
+    """
+    Default. Reference are the curvelinear arc coordinates.
+    """
+    chord = "chord"
+    """
+    Z-axis is the chord connecting the entrance origin point to the exit origin point.
+    """
+    entrance_coords = "entrance_coords"
+    """
+    Rectangular coordinates commensurate with the entrance coordinates.
+    """
+    exit_coords = "exit_coords"
+    """
+    Rectangular coordinates commensurate with the exit coordinates.
+    """
 
 
 
@@ -891,11 +965,69 @@ class MagneticMultipoleP(ConfiguredBaseModel):
     ```
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['pals:MagneticMultipoleP'],
-         'exact_mappings': ['pals:MagneticMultipoleP'],
          'from_schema': 'https://w3id.org/accelerator-core',
          'mixin': True})
 
     components: Optional[list[MultipoleComponent]] = Field(default=[], description="""Magnetic multipole components, one per order N.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElectricMultipoleP', 'MagneticMultipoleP']} })
+
+
+class BendP(ConfiguredBaseModel):
+    """
+    Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
+    This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['pals:BendP'],
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'mixin': True,
+         'rules': [{'description': 'multipole_geometry must be follows_ref_geometry',
+                    'postconditions': {'slot_conditions': {'multipole_geometry': {'equals_expression': 'follows_ref_geometry',
+                                                                                  'name': 'multipole_geometry'}}}},
+                   {'description': 'ref_geometry must be arc',
+                    'postconditions': {'slot_conditions': {'ref_geometry': {'equals_expression': 'arc',
+                                                                            'name': 'ref_geometry'}}}}]})
+
+    angle_ref: Optional[float] = Field(default=None, description="""Reference bend angle.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:angle_ref',
+         'unit': {'ucum_code': 'rad'}} })
+    bend_field_ref: Optional[float] = Field(default=None, description="""Reference bend field.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:bend_field_ref',
+         'unit': {'ucum_code': 'T'}} })
+    bend_field_actual: Optional[float] = Field(default=None, description="""Actual bend field.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:bend_field_actual',
+         'unit': {'ucum_code': 'T'}} })
+    e1: Optional[float] = Field(default=None, description="""Entrance end pole face rotation with respect to a sector geometry.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:e1', 'unit': {'ucum_code': 'rad'}} })
+    e2: Optional[float] = Field(default=None, description="""Exit end pole face rotation with respect to a sector geometry.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:e2', 'unit': {'ucum_code': 'rad'}} })
+    e1_rect: Optional[float] = Field(default=None, description="""Entrance end pole face rotation with respect to a rectangular geometry.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:e1_rect',
+         'unit': {'ucum_code': 'rad'}} })
+    e2_rect: Optional[float] = Field(default=None, description="""Exit end pole face rotation with respect to a rectangular geometry.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:e2_rect',
+         'unit': {'ucum_code': 'rad'}} })
+    edge1_int: Optional[float] = Field(default=None, description="""Entrance end fringe field integral.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:edge1_int',
+         'unit': {'ucum_code': 'T.m'}} })
+    edge2_int: Optional[float] = Field(default=None, description="""Exit end fringe field integral.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:edge2_int',
+         'unit': {'ucum_code': 'T.m'}} })
+    g_ref: Optional[float] = Field(default=None, description="""Reference bend strength = 1/radius_ref""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:g_ref', 'unit': {'ucum_code': '1/m'}} })
+    g_actual: Optional[float] = Field(default=None, description="""Actual bend strength = 1/radius_actual""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:g_actual',
+         'unit': {'ucum_code': '1/m'}} })
+    h1: Optional[float] = Field(default=None, description="""Entrance end pole face curvature""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:h1', 'unit': {'ucum_code': '1/m'}} })
+    h2: Optional[float] = Field(default=None, description="""Exit end pole face curvature""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:h2', 'unit': {'ucum_code': '1/m'}} })
+    L_chord: Optional[float] = Field(default=None, description="""Chord length of the bend.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:L_chord', 'unit': {'ucum_code': 'm'}} })
+    L_sagitta: Optional[float] = Field(default=None, description="""Output parameter. Sagitta length.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:L_sagitta',
+         'unit': {'ucum_code': 'm'}} })
+    L_rectangle: Optional[float] = Field(default=None, description="""Rectangular length.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:L_rectangle',
+         'unit': {'ucum_code': 'm'}} })
+    multipole_geometry: Optional[MultipoleGeometryEnum] = Field(default=None, description="""Multipole geometry type. Must be `follows_ref_geometry`.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:multipole_geometry'} })
+    ref_geometry: Optional[ReferenceGeometryEnum] = Field(default=None, description="""Reference geometry type. Must be `arc`.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:ref_geometry'} })
+    rho_ref: Optional[float] = Field(default=None, description="""Reference bend radius.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'], 'slot_uri': 'pals:rho_ref', 'unit': {'ucum_code': 'm'}} })
+    tilt_ref: Optional[float] = Field(default=None, description="""Reference tilt of the bend.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendP'],
+         'slot_uri': 'pals:tilt_ref',
+         'unit': {'ucum_code': 'rad'}} })
 
 
 class MultipoleComponent(ConfiguredBaseModel):
@@ -1042,7 +1174,7 @@ class PhysicalComponent(Component, HasLongitudinalPlacement, FloorP):
          'from_schema': 'https://w3id.org/accelerator-core',
          'mixins': ['FloorP', 'HasLongitudinalPlacement']})
 
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -1089,7 +1221,7 @@ class VirtualComponent(Component, FloorP):
          'from_schema': 'https://w3id.org/accelerator-core',
          'mixins': ['FloorP']})
 
-    function: VirtualFunctionEnum = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[VirtualFunctionEnum] = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:virtual_function'} })
@@ -1141,7 +1273,7 @@ If not provided, the default assumption is that the beamline is not periodic."""
 If value is greater than 1, the beamline is repeated that many times.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline'], 'slot_uri': 'pals:repeat'} })
     direction: Optional[int] = Field(default=None, description="""Beam direction along the beamline: +1 or -1. 
 Longitudinal orientation. Default is +1.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Beamline', 'ComponentRelation'], 'slot_uri': 'pals:direction'} })
-    function: VirtualFunctionEnum = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[VirtualFunctionEnum] = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:virtual_function'} })
@@ -1260,7 +1392,7 @@ class Magnet(PhysicalComponent, TwissP, ReferenceP, BodyShiftP):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -1364,7 +1496,7 @@ class Solenoid(Magnet, SolenoidP):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -1465,7 +1597,7 @@ class Multipole(Magnet, MagneticMultipoleP, ElectricMultipoleP):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -1565,7 +1697,106 @@ class Dipole(Multipole):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+                       'VirtualComponent',
+                       'SupportingFacilityComponent'],
+         'slot_uri': 'narad:physical_function'} })
+    beamline_relation: PhysicalRelationEnum = Field(default=..., description="""The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
+         'slot_uri': 'narad:physical_beamline_relation'} })
+    x: Optional[float] = Field(default=None, description="""Global X coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['x_coordinate', 'ModelX', 'x coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:x'} })
+    y: Optional[float] = Field(default=None, description="""Global Y coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['y_coordinate', 'ModelY', 'y coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:y'} })
+    z: Optional[float] = Field(default=None, description="""Global Z coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['z_coordinate', 'ModelZ', 'z coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:z'} })
+    theta: Optional[float] = Field(default=None, description="""Orientation angle around the Y-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['theta_angle', 'ModelYaw', 'Model_Yaw'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:theta'} })
+    phi: Optional[float] = Field(default=None, description="""Rotation around the X-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_angle', 'ModelPitch', 'Model_Pitch'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:phi'} })
+    psi: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['psi_angle', 'Model_Roll', 'Rotation'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:psi'} })
+    length: Optional[float] = Field(default=None, description="""Length of the element (arc length for bends).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacement', 'Beamline'],
+         'slot_uri': 'pals:length',
+         'unit': {'ucum_code': 'm'}} })
+    s_position: Optional[float] = Field(default=None, description="""Longitudinal position of the element along the beamline.""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacement'],
+         'slot_uri': 'pals:s_position',
+         'unit': {'ucum_code': 'm'}} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component', 'Signal', 'Relationship'], 'slot_uri': 'narad:id'} })
+    type: str = Field(default=..., description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NARAD', 'Component', 'Signal'], 'slot_uri': 'narad:type'} })
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    description: Optional[str] = Field(default=None, description="""Human-readable description.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NARAD', 'MetaP'], 'slot_uri': 'pals:description'} })
+    label: Optional[str] = Field(default=None, description="""A label string.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP'], 'slot_uri': 'pals:label'} })
+    alias: Optional[str] = Field(default=None, description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP'], 'slot_uri': 'pals:alias'} })
+    additional_metadata: Optional[list[MetadataEntry]] = Field(default=[], description="""Additional metadata or annotations for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP']} })
+
+
+class Bend(Multipole):
+    """
+    Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['pals:Bend'],
+         'from_schema': 'https://w3id.org/accelerator-core'})
+
+    components: Optional[list[MultipoleComponent]] = Field(default=[], description="""Electric multipole components, one per order N.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElectricMultipoleP', 'MagneticMultipoleP']} })
+    species_ref: Optional[str] = Field(default=None, description="""A reference to a species or particle type, such as an ion, electron, or proton.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ReferenceP'], 'slot_uri': 'pals:species_ref'} })
+    pc_ref: Optional[float] = Field(default=None, description="""[momentum*c] Reference momentum times speed of light.""", json_schema_extra = { "linkml_meta": {'aliases': ['pCentral'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:pc_ref'} })
+    E_tot_ref: Optional[float] = Field(default=None, description="""[eV] Reference total energy""", json_schema_extra = { "linkml_meta": {'aliases': ['ETotal'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:E_tot_ref',
+         'unit': {'ucum_code': 'eV'}} })
+    time_ref: Optional[float] = Field(default=None, description="""[s] Reference time""", json_schema_extra = { "linkml_meta": {'aliases': ['tRef'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:time_ref',
+         'unit': {'ucum_code': 's'}} })
+    x_offset: Optional[float] = Field(default=None, description="""Shift in the X direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_x', 'x_shift', 'GlobalOffsetX'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:x_offset'} })
+    y_offset: Optional[float] = Field(default=None, description="""Shift in the Y direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_y', 'y_shift', 'GlobalOffsetY'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:y_offset'} })
+    z_offset: Optional[float] = Field(default=None, description="""Shift in the Z direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_z', 'z_shift', 'GlobalOffsetZ'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:z_offset'} })
+    x_rot: Optional[float] = Field(default=None, description="""Rotation around the X-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_phi', 'phi_shift', 'GlobalOffsetPhi'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:x_rot'} })
+    y_rot: Optional[float] = Field(default=None, description="""Rotation around the Y-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_theta', 'theta_shift', 'GlobalOffsetTheta'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:y_rot'} })
+    z_rot: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_psi', 'psi_shift', 'GlobalOffsetPsi'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:z_rot'} })
+    alpha_a: Optional[float] = Field(default=None, description="""Twiss alpha parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['alpha_x', 'alphax'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:alpha_a'} })
+    alpha_b: Optional[float] = Field(default=None, description="""Twiss alpha parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['alpha_y', 'alphay'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:alpha_b'} })
+    beta_a: Optional[float] = Field(default=None, description="""Twiss beta parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['beta_x', 'betax'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:beta_a'} })
+    beta_b: Optional[float] = Field(default=None, description="""Twiss beta parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['beta_y', 'betay'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:beta_b'} })
+    eta_x: Optional[float] = Field(default=None, description="""Twiss dispersion parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etax'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:eta_x'} })
+    eta_y: Optional[float] = Field(default=None, description="""Twiss dispersion parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etay'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:eta_y'} })
+    etap_x: Optional[float] = Field(default=None, description="""Twiss dispersion slope parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etapx'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:etap_x'} })
+    etap_y: Optional[float] = Field(default=None, description="""Twiss dispersion slope parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etapy'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:etap_y'} })
+    phi_a: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_x', 'phix', 'psi_x', 'psix'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:phi_a'} })
+    phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:phi_b'} })
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -1665,7 +1896,7 @@ class Quadrupole(Multipole):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -1765,7 +1996,7 @@ class Octupole(Multipole):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -1865,7 +2096,7 @@ class Sextupole(Multipole):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -1973,7 +2204,107 @@ class Kicker(Magnet, MagneticMultipoleP, ElectricMultipoleP):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+                       'VirtualComponent',
+                       'SupportingFacilityComponent'],
+         'slot_uri': 'narad:physical_function'} })
+    beamline_relation: PhysicalRelationEnum = Field(default=..., description="""The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
+         'slot_uri': 'narad:physical_beamline_relation'} })
+    x: Optional[float] = Field(default=None, description="""Global X coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['x_coordinate', 'ModelX', 'x coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:x'} })
+    y: Optional[float] = Field(default=None, description="""Global Y coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['y_coordinate', 'ModelY', 'y coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:y'} })
+    z: Optional[float] = Field(default=None, description="""Global Z coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['z_coordinate', 'ModelZ', 'z coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:z'} })
+    theta: Optional[float] = Field(default=None, description="""Orientation angle around the Y-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['theta_angle', 'ModelYaw', 'Model_Yaw'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:theta'} })
+    phi: Optional[float] = Field(default=None, description="""Rotation around the X-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_angle', 'ModelPitch', 'Model_Pitch'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:phi'} })
+    psi: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['psi_angle', 'Model_Roll', 'Rotation'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:psi'} })
+    length: Optional[float] = Field(default=None, description="""Length of the element (arc length for bends).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacement', 'Beamline'],
+         'slot_uri': 'pals:length',
+         'unit': {'ucum_code': 'm'}} })
+    s_position: Optional[float] = Field(default=None, description="""Longitudinal position of the element along the beamline.""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacement'],
+         'slot_uri': 'pals:s_position',
+         'unit': {'ucum_code': 'm'}} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component', 'Signal', 'Relationship'], 'slot_uri': 'narad:id'} })
+    type: str = Field(default=..., description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NARAD', 'Component', 'Signal'], 'slot_uri': 'narad:type'} })
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    description: Optional[str] = Field(default=None, description="""Human-readable description.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NARAD', 'MetaP'], 'slot_uri': 'pals:description'} })
+    label: Optional[str] = Field(default=None, description="""A label string.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP'], 'slot_uri': 'pals:label'} })
+    alias: Optional[str] = Field(default=None, description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP'], 'slot_uri': 'pals:alias'} })
+    additional_metadata: Optional[list[MetadataEntry]] = Field(default=[], description="""Additional metadata or annotations for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP']} })
+
+
+class ACKicker(Kicker):
+    """
+    An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['pals:ACKicker'],
+         'from_schema': 'https://w3id.org/accelerator-core'})
+
+    plane: Optional[PlaneEnum] = Field(default=None, description="""The transverse plane in which the kicker operates, either horizontal or vertical.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Kicker']} })
+    components: Optional[list[MultipoleComponent]] = Field(default=[], description="""Electric multipole components, one per order N.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElectricMultipoleP', 'MagneticMultipoleP']} })
+    species_ref: Optional[str] = Field(default=None, description="""A reference to a species or particle type, such as an ion, electron, or proton.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ReferenceP'], 'slot_uri': 'pals:species_ref'} })
+    pc_ref: Optional[float] = Field(default=None, description="""[momentum*c] Reference momentum times speed of light.""", json_schema_extra = { "linkml_meta": {'aliases': ['pCentral'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:pc_ref'} })
+    E_tot_ref: Optional[float] = Field(default=None, description="""[eV] Reference total energy""", json_schema_extra = { "linkml_meta": {'aliases': ['ETotal'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:E_tot_ref',
+         'unit': {'ucum_code': 'eV'}} })
+    time_ref: Optional[float] = Field(default=None, description="""[s] Reference time""", json_schema_extra = { "linkml_meta": {'aliases': ['tRef'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:time_ref',
+         'unit': {'ucum_code': 's'}} })
+    x_offset: Optional[float] = Field(default=None, description="""Shift in the X direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_x', 'x_shift', 'GlobalOffsetX'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:x_offset'} })
+    y_offset: Optional[float] = Field(default=None, description="""Shift in the Y direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_y', 'y_shift', 'GlobalOffsetY'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:y_offset'} })
+    z_offset: Optional[float] = Field(default=None, description="""Shift in the Z direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_z', 'z_shift', 'GlobalOffsetZ'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:z_offset'} })
+    x_rot: Optional[float] = Field(default=None, description="""Rotation around the X-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_phi', 'phi_shift', 'GlobalOffsetPhi'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:x_rot'} })
+    y_rot: Optional[float] = Field(default=None, description="""Rotation around the Y-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_theta', 'theta_shift', 'GlobalOffsetTheta'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:y_rot'} })
+    z_rot: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_psi', 'psi_shift', 'GlobalOffsetPsi'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:z_rot'} })
+    alpha_a: Optional[float] = Field(default=None, description="""Twiss alpha parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['alpha_x', 'alphax'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:alpha_a'} })
+    alpha_b: Optional[float] = Field(default=None, description="""Twiss alpha parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['alpha_y', 'alphay'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:alpha_b'} })
+    beta_a: Optional[float] = Field(default=None, description="""Twiss beta parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['beta_x', 'betax'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:beta_a'} })
+    beta_b: Optional[float] = Field(default=None, description="""Twiss beta parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['beta_y', 'betay'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:beta_b'} })
+    eta_x: Optional[float] = Field(default=None, description="""Twiss dispersion parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etax'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:eta_x'} })
+    eta_y: Optional[float] = Field(default=None, description="""Twiss dispersion parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etay'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:eta_y'} })
+    etap_x: Optional[float] = Field(default=None, description="""Twiss dispersion slope parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etapx'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:etap_x'} })
+    etap_y: Optional[float] = Field(default=None, description="""Twiss dispersion slope parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etapy'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:etap_y'} })
+    phi_a: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_x', 'phix', 'psi_x', 'psix'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:phi_a'} })
+    phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:phi_b'} })
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -2019,7 +2350,7 @@ class DiagnosticDevice(PhysicalComponent):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['pals:Instrument'],
          'from_schema': 'https://w3id.org/accelerator-core'})
 
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -2118,7 +2449,7 @@ class BeamPositionMonitor(DiagnosticDevice, TwissP, ReferenceP, BodyShiftP):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -2183,7 +2514,7 @@ class RadiationMonitor(DiagnosticDevice, BodyShiftP):
     z_rot: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_psi', 'psi_shift', 'GlobalOffsetPsi'],
          'domain_of': ['BodyShiftP'],
          'slot_uri': 'pals:z_rot'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -2286,7 +2617,7 @@ class Cavity(PhysicalComponent, MagneticMultipoleP, ElectricMultipoleP, TwissP, 
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -2385,7 +2716,7 @@ class CrabCavity(Cavity):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -2484,7 +2815,106 @@ class RFCavity(Cavity):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissP'],
          'slot_uri': 'pals:phi_b'} })
-    function: PhysicalFunctionEnum = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+                       'VirtualComponent',
+                       'SupportingFacilityComponent'],
+         'slot_uri': 'narad:physical_function'} })
+    beamline_relation: PhysicalRelationEnum = Field(default=..., description="""The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
+         'slot_uri': 'narad:physical_beamline_relation'} })
+    x: Optional[float] = Field(default=None, description="""Global X coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['x_coordinate', 'ModelX', 'x coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:x'} })
+    y: Optional[float] = Field(default=None, description="""Global Y coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['y_coordinate', 'ModelY', 'y coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:y'} })
+    z: Optional[float] = Field(default=None, description="""Global Z coordinate in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['z_coordinate', 'ModelZ', 'z coordinate'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:z'} })
+    theta: Optional[float] = Field(default=None, description="""Orientation angle around the Y-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['theta_angle', 'ModelYaw', 'Model_Yaw'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:theta'} })
+    phi: Optional[float] = Field(default=None, description="""Rotation around the X-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_angle', 'ModelPitch', 'Model_Pitch'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:phi'} })
+    psi: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['psi_angle', 'Model_Roll', 'Rotation'],
+         'domain_of': ['FloorP'],
+         'slot_uri': 'pals:psi'} })
+    length: Optional[float] = Field(default=None, description="""Length of the element (arc length for bends).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacement', 'Beamline'],
+         'slot_uri': 'pals:length',
+         'unit': {'ucum_code': 'm'}} })
+    s_position: Optional[float] = Field(default=None, description="""Longitudinal position of the element along the beamline.""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacement'],
+         'slot_uri': 'pals:s_position',
+         'unit': {'ucum_code': 'm'}} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component', 'Signal', 'Relationship'], 'slot_uri': 'narad:id'} })
+    type: str = Field(default=..., description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NARAD', 'Component', 'Signal'], 'slot_uri': 'narad:type'} })
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    description: Optional[str] = Field(default=None, description="""Human-readable description.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NARAD', 'MetaP'], 'slot_uri': 'pals:description'} })
+    label: Optional[str] = Field(default=None, description="""A label string.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP'], 'slot_uri': 'pals:label'} })
+    alias: Optional[str] = Field(default=None, description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP'], 'slot_uri': 'pals:alias'} })
+    additional_metadata: Optional[list[MetadataEntry]] = Field(default=[], description="""Additional metadata or annotations for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaP']} })
+
+
+class SuperconductingRFCavity(RFCavity):
+    """
+    A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['pals:RFCavity'],
+         'from_schema': 'https://w3id.org/accelerator-core'})
+
+    species_ref: Optional[str] = Field(default=None, description="""A reference to a species or particle type, such as an ion, electron, or proton.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ReferenceP'], 'slot_uri': 'pals:species_ref'} })
+    pc_ref: Optional[float] = Field(default=None, description="""[momentum*c] Reference momentum times speed of light.""", json_schema_extra = { "linkml_meta": {'aliases': ['pCentral'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:pc_ref'} })
+    E_tot_ref: Optional[float] = Field(default=None, description="""[eV] Reference total energy""", json_schema_extra = { "linkml_meta": {'aliases': ['ETotal'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:E_tot_ref',
+         'unit': {'ucum_code': 'eV'}} })
+    time_ref: Optional[float] = Field(default=None, description="""[s] Reference time""", json_schema_extra = { "linkml_meta": {'aliases': ['tRef'],
+         'domain_of': ['ReferenceP'],
+         'slot_uri': 'pals:time_ref',
+         'unit': {'ucum_code': 's'}} })
+    components: Optional[list[MultipoleComponent]] = Field(default=[], description="""Electric multipole components, one per order N.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElectricMultipoleP', 'MagneticMultipoleP']} })
+    x_offset: Optional[float] = Field(default=None, description="""Shift in the X direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_x', 'x_shift', 'GlobalOffsetX'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:x_offset'} })
+    y_offset: Optional[float] = Field(default=None, description="""Shift in the Y direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_y', 'y_shift', 'GlobalOffsetY'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:y_offset'} })
+    z_offset: Optional[float] = Field(default=None, description="""Shift in the Z direction in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_z', 'z_shift', 'GlobalOffsetZ'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:z_offset'} })
+    x_rot: Optional[float] = Field(default=None, description="""Rotation around the X-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_phi', 'phi_shift', 'GlobalOffsetPhi'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:x_rot'} })
+    y_rot: Optional[float] = Field(default=None, description="""Rotation around the Y-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_theta', 'theta_shift', 'GlobalOffsetTheta'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:y_rot'} })
+    z_rot: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_psi', 'psi_shift', 'GlobalOffsetPsi'],
+         'domain_of': ['BodyShiftP'],
+         'slot_uri': 'pals:z_rot'} })
+    alpha_a: Optional[float] = Field(default=None, description="""Twiss alpha parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['alpha_x', 'alphax'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:alpha_a'} })
+    alpha_b: Optional[float] = Field(default=None, description="""Twiss alpha parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['alpha_y', 'alphay'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:alpha_b'} })
+    beta_a: Optional[float] = Field(default=None, description="""Twiss beta parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['beta_x', 'betax'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:beta_a'} })
+    beta_b: Optional[float] = Field(default=None, description="""Twiss beta parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['beta_y', 'betay'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:beta_b'} })
+    eta_x: Optional[float] = Field(default=None, description="""Twiss dispersion parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etax'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:eta_x'} })
+    eta_y: Optional[float] = Field(default=None, description="""Twiss dispersion parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etay'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:eta_y'} })
+    etap_x: Optional[float] = Field(default=None, description="""Twiss dispersion slope parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etapx'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:etap_x'} })
+    etap_y: Optional[float] = Field(default=None, description="""Twiss dispersion slope parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etapy'], 'domain_of': ['TwissP'], 'slot_uri': 'pals:etap_y'} })
+    phi_a: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_x', 'phix', 'psi_x', 'psix'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:phi_a'} })
+    phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
+         'domain_of': ['TwissP'],
+         'slot_uri': 'pals:phi_b'} })
+    functions: list[PhysicalFunctionEnum] = Field(default=..., description="""The function of the physical component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:physical_function'} })
@@ -2536,7 +2966,7 @@ class SupportingFacilityComponent(PhysicalComponent, HasLongitudinalPlacement, B
          'from_schema': 'https://w3id.org/accelerator-core',
          'mixins': ['FloorP', 'HasLongitudinalPlacement', 'BodyShiftP']})
 
-    function: FacilityFunctionEnum = Field(default=..., description="""The function of the supporting facility component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[FacilityFunctionEnum] = Field(default=..., description="""The function of the supporting facility component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:supporting_facility_function'} })
@@ -2623,7 +3053,7 @@ class BookkeepingComponent(VirtualComponent, BodyShiftP):
     z_rot: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_psi', 'psi_shift', 'GlobalOffsetPsi'],
          'domain_of': ['BodyShiftP'],
          'slot_uri': 'pals:z_rot'} })
-    function: VirtualFunctionEnum = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[VirtualFunctionEnum] = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:virtual_function'} })
@@ -2704,7 +3134,7 @@ class Marker(BookkeepingComponent, TwissP):
     z_rot: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_psi', 'psi_shift', 'GlobalOffsetPsi'],
          'domain_of': ['BodyShiftP'],
          'slot_uri': 'pals:z_rot'} })
-    function: VirtualFunctionEnum = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[VirtualFunctionEnum] = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:virtual_function'} })
@@ -2763,7 +3193,7 @@ class BeamlineSection(BookkeepingComponent):
     z_rot: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_psi', 'psi_shift', 'GlobalOffsetPsi'],
          'domain_of': ['BodyShiftP'],
          'slot_uri': 'pals:z_rot'} })
-    function: VirtualFunctionEnum = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
+    functions: list[VirtualFunctionEnum] = Field(default=..., description="""The function of the virtual component,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent',
                        'VirtualComponent',
                        'SupportingFacilityComponent'],
          'slot_uri': 'narad:virtual_function'} })
@@ -2892,6 +3322,7 @@ SolenoidP.model_rebuild()
 TwissP.model_rebuild()
 ElectricMultipoleP.model_rebuild()
 MagneticMultipoleP.model_rebuild()
+BendP.model_rebuild()
 MultipoleComponent.model_rebuild()
 Component.model_rebuild()
 PhysicalComponent.model_rebuild()
@@ -2902,16 +3333,19 @@ Magnet.model_rebuild()
 Solenoid.model_rebuild()
 Multipole.model_rebuild()
 Dipole.model_rebuild()
+Bend.model_rebuild()
 Quadrupole.model_rebuild()
 Octupole.model_rebuild()
 Sextupole.model_rebuild()
 Kicker.model_rebuild()
+ACKicker.model_rebuild()
 DiagnosticDevice.model_rebuild()
 BeamPositionMonitor.model_rebuild()
 RadiationMonitor.model_rebuild()
 Cavity.model_rebuild()
 CrabCavity.model_rebuild()
 RFCavity.model_rebuild()
+SuperconductingRFCavity.model_rebuild()
 SupportingFacilityComponent.model_rebuild()
 BookkeepingComponent.model_rebuild()
 Marker.model_rebuild()

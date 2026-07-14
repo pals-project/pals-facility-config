@@ -53,6 +53,28 @@
 --     * Slot: id
 -- # Class: MagneticMultipoleP Description: Mixin for magnetic multipole parameters, which can be used to describe the magnetic field components of an accelerator element.This mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).Example with three multipole components (N=0,1,2): ```yaml components: - order: 7  tilt: 0.7- order: 3  Bn: 27.3- order: 2  BnL: 3.47e1- order: 1  Kn: 0.85     # normalized form, e.g. a quadrupole's k1-like strength```
 --     * Slot: id
+-- # Class: BendP Description: Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+--     * Slot: id
+--     * Slot: angle_ref Description: Reference bend angle.
+--     * Slot: bend_field_ref Description: Reference bend field.
+--     * Slot: bend_field_actual Description: Actual bend field.
+--     * Slot: e1 Description: Entrance end pole face rotation with respect to a sector geometry.
+--     * Slot: e2 Description: Exit end pole face rotation with respect to a sector geometry.
+--     * Slot: e1_rect Description: Entrance end pole face rotation with respect to a rectangular geometry.
+--     * Slot: e2_rect Description: Exit end pole face rotation with respect to a rectangular geometry.
+--     * Slot: edge1_int Description: Entrance end fringe field integral.
+--     * Slot: edge2_int Description: Exit end fringe field integral.
+--     * Slot: g_ref Description: Reference bend strength = 1/radius_ref
+--     * Slot: g_actual Description: Actual bend strength = 1/radius_actual
+--     * Slot: h1 Description: Entrance end pole face curvature
+--     * Slot: h2 Description: Exit end pole face curvature
+--     * Slot: L_chord Description: Chord length of the bend.
+--     * Slot: L_sagitta Description: Output parameter. Sagitta length.
+--     * Slot: L_rectangle Description: Rectangular length.
+--     * Slot: multipole_geometry Description: Multipole geometry type. Must be `follows_ref_geometry`.
+--     * Slot: ref_geometry Description: Reference geometry type. Must be `arc`.
+--     * Slot: rho_ref Description: Reference bend radius.
+--     * Slot: tilt_ref Description: Reference tilt of the bend.
 -- # Class: MultipoleComponent Description: A single order's electric (or magnetic) multipole component.Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
 --     * Slot: id
 --     * Slot: order Description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
@@ -69,13 +91,16 @@
 --     * Slot: MagneticMultipoleP_id Description: Autocreated FK slot
 --     * Slot: Multipole_id Description: Autocreated FK slot
 --     * Slot: Dipole_id Description: Autocreated FK slot
+--     * Slot: Bend_id Description: Autocreated FK slot
 --     * Slot: Quadrupole_id Description: Autocreated FK slot
 --     * Slot: Octupole_id Description: Autocreated FK slot
 --     * Slot: Sextupole_id Description: Autocreated FK slot
 --     * Slot: Kicker_id Description: Autocreated FK slot
+--     * Slot: ACKicker_id Description: Autocreated FK slot
 --     * Slot: Cavity_id Description: Autocreated FK slot
 --     * Slot: CrabCavity_id Description: Autocreated FK slot
 --     * Slot: RFCavity_id Description: Autocreated FK slot
+--     * Slot: SuperconductingRFCavity_id Description: Autocreated FK slot
 -- # Abstract Class: Component Description: A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
 --     * Slot: id Description: A unique identifier for the instance.
 --     * Slot: type Description: The LinkML class name of this instance.
@@ -83,7 +108,6 @@
 --     * Slot: label Description: A label string.
 --     * Slot: alias Description: An alternative name or identifier for the instance.
 -- # Class: PhysicalComponent Description: A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -100,7 +124,6 @@
 --     * Slot: alias Description: An alternative name or identifier for the instance.
 --     * Slot: NARAD_id Description: Autocreated FK slot
 -- # Class: VirtualComponent Description: A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamlineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
---     * Slot: function Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -121,7 +144,6 @@
 --     * Slot: periodic Description: Indicates whether orbit and Twiss parameters periodic.If not provided, the default assumption is that the beamline is not periodic.
 --     * Slot: repeat Description: Repetition count. If not provided, the default assumption is that the beamline is not repeated and the value is 1.If value is greater than 1, the beamline is repeated that many times.
 --     * Slot: direction Description: Beam direction along the beamline: +1 or -1. Longitudinal orientation. Default is +1.
---     * Slot: function Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -172,7 +194,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -210,7 +231,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -246,7 +266,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -282,7 +301,41 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
+--     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
+--     * Slot: x Description: Global X coordinate in the facility floor plan.
+--     * Slot: y Description: Global Y coordinate in the facility floor plan.
+--     * Slot: z Description: Global Z coordinate in the facility floor plan.
+--     * Slot: theta Description: Orientation angle around the Y-axis in the facility floor plan.
+--     * Slot: phi Description: Rotation around the X-axis in the facility floor plan.
+--     * Slot: psi Description: Rotation around the Z-axis in the facility floor plan.
+--     * Slot: length Description: Length of the element (arc length for bends).
+--     * Slot: s_position Description: Longitudinal position of the element along the beamline.
+--     * Slot: id Description: A unique identifier for the instance.
+--     * Slot: type Description: The LinkML class name of this instance.
+--     * Slot: description Description: Human-readable description.
+--     * Slot: label Description: A label string.
+--     * Slot: alias Description: An alternative name or identifier for the instance.
+-- # Class: Bend Description: Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
+--     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
+--     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
+--     * Slot: E_tot_ref Description: [eV] Reference total energy
+--     * Slot: time_ref Description: [s] Reference time
+--     * Slot: x_offset Description: Shift in the X direction in the facility floor plan.
+--     * Slot: y_offset Description: Shift in the Y direction in the facility floor plan.
+--     * Slot: z_offset Description: Shift in the Z direction in the facility floor plan.
+--     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
+--     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
+--     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
+--     * Slot: alpha_a Description: Twiss alpha parameter in the horizontal plane.
+--     * Slot: alpha_b Description: Twiss alpha parameter in the vertical plane.
+--     * Slot: beta_a Description: Twiss beta parameter in the horizontal plane.
+--     * Slot: beta_b Description: Twiss beta parameter in the vertical plane.
+--     * Slot: eta_x Description: Twiss dispersion parameter in the horizontal plane.
+--     * Slot: eta_y Description: Twiss dispersion parameter in the vertical plane.
+--     * Slot: etap_x Description: Twiss dispersion slope parameter in the horizontal plane.
+--     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
+--     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
+--     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -318,7 +371,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -354,7 +406,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -390,7 +441,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -427,7 +477,42 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
+--     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
+--     * Slot: x Description: Global X coordinate in the facility floor plan.
+--     * Slot: y Description: Global Y coordinate in the facility floor plan.
+--     * Slot: z Description: Global Z coordinate in the facility floor plan.
+--     * Slot: theta Description: Orientation angle around the Y-axis in the facility floor plan.
+--     * Slot: phi Description: Rotation around the X-axis in the facility floor plan.
+--     * Slot: psi Description: Rotation around the Z-axis in the facility floor plan.
+--     * Slot: length Description: Length of the element (arc length for bends).
+--     * Slot: s_position Description: Longitudinal position of the element along the beamline.
+--     * Slot: id Description: A unique identifier for the instance.
+--     * Slot: type Description: The LinkML class name of this instance.
+--     * Slot: description Description: Human-readable description.
+--     * Slot: label Description: A label string.
+--     * Slot: alias Description: An alternative name or identifier for the instance.
+-- # Class: ACKicker Description: An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.
+--     * Slot: plane Description: The transverse plane in which the kicker operates, either horizontal or vertical.
+--     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
+--     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
+--     * Slot: E_tot_ref Description: [eV] Reference total energy
+--     * Slot: time_ref Description: [s] Reference time
+--     * Slot: x_offset Description: Shift in the X direction in the facility floor plan.
+--     * Slot: y_offset Description: Shift in the Y direction in the facility floor plan.
+--     * Slot: z_offset Description: Shift in the Z direction in the facility floor plan.
+--     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
+--     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
+--     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
+--     * Slot: alpha_a Description: Twiss alpha parameter in the horizontal plane.
+--     * Slot: alpha_b Description: Twiss alpha parameter in the vertical plane.
+--     * Slot: beta_a Description: Twiss beta parameter in the horizontal plane.
+--     * Slot: beta_b Description: Twiss beta parameter in the vertical plane.
+--     * Slot: eta_x Description: Twiss dispersion parameter in the horizontal plane.
+--     * Slot: eta_y Description: Twiss dispersion parameter in the vertical plane.
+--     * Slot: etap_x Description: Twiss dispersion slope parameter in the horizontal plane.
+--     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
+--     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
+--     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -443,7 +528,6 @@
 --     * Slot: label Description: A label string.
 --     * Slot: alias Description: An alternative name or identifier for the instance.
 -- # Class: DiagnosticDevice Description: An accelerator device used to measure beam or machine state.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -479,7 +563,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -501,7 +584,6 @@
 --     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
 --     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
 --     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -537,7 +619,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -573,7 +654,6 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -609,7 +689,41 @@
 --     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
 --     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
 --     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: function Description: The function of the physical component,  which can be used to identify the component across different source systems.
+--     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
+--     * Slot: x Description: Global X coordinate in the facility floor plan.
+--     * Slot: y Description: Global Y coordinate in the facility floor plan.
+--     * Slot: z Description: Global Z coordinate in the facility floor plan.
+--     * Slot: theta Description: Orientation angle around the Y-axis in the facility floor plan.
+--     * Slot: phi Description: Rotation around the X-axis in the facility floor plan.
+--     * Slot: psi Description: Rotation around the Z-axis in the facility floor plan.
+--     * Slot: length Description: Length of the element (arc length for bends).
+--     * Slot: s_position Description: Longitudinal position of the element along the beamline.
+--     * Slot: id Description: A unique identifier for the instance.
+--     * Slot: type Description: The LinkML class name of this instance.
+--     * Slot: description Description: Human-readable description.
+--     * Slot: label Description: A label string.
+--     * Slot: alias Description: An alternative name or identifier for the instance.
+-- # Class: SuperconductingRFCavity Description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
+--     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
+--     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
+--     * Slot: E_tot_ref Description: [eV] Reference total energy
+--     * Slot: time_ref Description: [s] Reference time
+--     * Slot: x_offset Description: Shift in the X direction in the facility floor plan.
+--     * Slot: y_offset Description: Shift in the Y direction in the facility floor plan.
+--     * Slot: z_offset Description: Shift in the Z direction in the facility floor plan.
+--     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
+--     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
+--     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
+--     * Slot: alpha_a Description: Twiss alpha parameter in the horizontal plane.
+--     * Slot: alpha_b Description: Twiss alpha parameter in the vertical plane.
+--     * Slot: beta_a Description: Twiss beta parameter in the horizontal plane.
+--     * Slot: beta_b Description: Twiss beta parameter in the vertical plane.
+--     * Slot: eta_x Description: Twiss dispersion parameter in the horizontal plane.
+--     * Slot: eta_y Description: Twiss dispersion parameter in the vertical plane.
+--     * Slot: etap_x Description: Twiss dispersion slope parameter in the horizontal plane.
+--     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
+--     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
+--     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -625,7 +739,6 @@
 --     * Slot: label Description: A label string.
 --     * Slot: alias Description: An alternative name or identifier for the instance.
 -- # Class: SupportingFacilityComponent Description: A physical component that supports accelerator operation without a specific beam-pipe placement, such as a power supply, control rack, or radiation detector.These can include Girders, Racks, Power Supplies, and other physical infrastructure components that are important for understanding the structure and function of the accelerator system but are not inline with the beamline.
---     * Slot: function Description: The function of the supporting facility component,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
 --     * Slot: z Description: Global Z coordinate in the facility floor plan.
@@ -654,7 +767,6 @@
 --     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
 --     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
 --     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
---     * Slot: function Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -684,7 +796,6 @@
 --     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
 --     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
 --     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
---     * Slot: function Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -704,7 +815,6 @@
 --     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
 --     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
 --     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
---     * Slot: function Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: x Description: Global X coordinate in the facility floor plan.
 --     * Slot: y Description: Global Y coordinate in the facility floor plan.
@@ -731,16 +841,19 @@
 --     * Slot: Solenoid_id Description: Autocreated FK slot
 --     * Slot: Multipole_id Description: Autocreated FK slot
 --     * Slot: Dipole_id Description: Autocreated FK slot
+--     * Slot: Bend_id Description: Autocreated FK slot
 --     * Slot: Quadrupole_id Description: Autocreated FK slot
 --     * Slot: Octupole_id Description: Autocreated FK slot
 --     * Slot: Sextupole_id Description: Autocreated FK slot
 --     * Slot: Kicker_id Description: Autocreated FK slot
+--     * Slot: ACKicker_id Description: Autocreated FK slot
 --     * Slot: DiagnosticDevice_id Description: Autocreated FK slot
 --     * Slot: BeamPositionMonitor_id Description: Autocreated FK slot
 --     * Slot: RadiationMonitor_id Description: Autocreated FK slot
 --     * Slot: Cavity_id Description: Autocreated FK slot
 --     * Slot: CrabCavity_id Description: Autocreated FK slot
 --     * Slot: RFCavity_id Description: Autocreated FK slot
+--     * Slot: SuperconductingRFCavity_id Description: Autocreated FK slot
 --     * Slot: SupportingFacilityComponent_id Description: Autocreated FK slot
 --     * Slot: BookkeepingComponent_id Description: Autocreated FK slot
 --     * Slot: Marker_id Description: Autocreated FK slot
@@ -774,66 +887,147 @@
 -- # Class: Component_native_types
 --     * Slot: Component_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: PhysicalComponent_functions
+--     * Slot: PhysicalComponent_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: PhysicalComponent_native_types
 --     * Slot: PhysicalComponent_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: VirtualComponent_functions
+--     * Slot: VirtualComponent_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 -- # Class: VirtualComponent_native_types
 --     * Slot: VirtualComponent_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Beamline_functions
+--     * Slot: Beamline_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 -- # Class: Beamline_native_types
 --     * Slot: Beamline_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Magnet_functions
+--     * Slot: Magnet_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Magnet_native_types
 --     * Slot: Magnet_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Solenoid_functions
+--     * Slot: Solenoid_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Solenoid_native_types
 --     * Slot: Solenoid_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Multipole_functions
+--     * Slot: Multipole_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Multipole_native_types
 --     * Slot: Multipole_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Dipole_functions
+--     * Slot: Dipole_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Dipole_native_types
 --     * Slot: Dipole_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Bend_functions
+--     * Slot: Bend_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
+-- # Class: Bend_native_types
+--     * Slot: Bend_id Description: Autocreated FK slot
+--     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Quadrupole_functions
+--     * Slot: Quadrupole_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Quadrupole_native_types
 --     * Slot: Quadrupole_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Octupole_functions
+--     * Slot: Octupole_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Octupole_native_types
 --     * Slot: Octupole_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Sextupole_functions
+--     * Slot: Sextupole_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Sextupole_native_types
 --     * Slot: Sextupole_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Kicker_functions
+--     * Slot: Kicker_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Kicker_native_types
 --     * Slot: Kicker_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: ACKicker_functions
+--     * Slot: ACKicker_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
+-- # Class: ACKicker_native_types
+--     * Slot: ACKicker_id Description: Autocreated FK slot
+--     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: DiagnosticDevice_functions
+--     * Slot: DiagnosticDevice_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: DiagnosticDevice_native_types
 --     * Slot: DiagnosticDevice_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: BeamPositionMonitor_functions
+--     * Slot: BeamPositionMonitor_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: BeamPositionMonitor_native_types
 --     * Slot: BeamPositionMonitor_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: RadiationMonitor_functions
+--     * Slot: RadiationMonitor_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: RadiationMonitor_native_types
 --     * Slot: RadiationMonitor_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Cavity_functions
+--     * Slot: Cavity_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Cavity_native_types
 --     * Slot: Cavity_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: CrabCavity_functions
+--     * Slot: CrabCavity_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: CrabCavity_native_types
 --     * Slot: CrabCavity_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: RFCavity_functions
+--     * Slot: RFCavity_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: RFCavity_native_types
 --     * Slot: RFCavity_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: SuperconductingRFCavity_functions
+--     * Slot: SuperconductingRFCavity_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
+-- # Class: SuperconductingRFCavity_native_types
+--     * Slot: SuperconductingRFCavity_id Description: Autocreated FK slot
+--     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: SupportingFacilityComponent_functions
+--     * Slot: SupportingFacilityComponent_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the supporting facility component,  which can be used to identify the component across different source systems.
 -- # Class: SupportingFacilityComponent_native_types
 --     * Slot: SupportingFacilityComponent_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: BookkeepingComponent_functions
+--     * Slot: BookkeepingComponent_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 -- # Class: BookkeepingComponent_native_types
 --     * Slot: BookkeepingComponent_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Marker_functions
+--     * Slot: Marker_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 -- # Class: Marker_native_types
 --     * Slot: Marker_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: BeamlineSection_functions
+--     * Slot: BeamlineSection_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the virtual component,  which can be used to identify the component across different source systems.
 -- # Class: BeamlineSection_native_types
 --     * Slot: BeamlineSection_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
@@ -913,6 +1107,30 @@ CREATE TABLE "MagneticMultipoleP" (
 	id INTEGER NOT NULL,
 	PRIMARY KEY (id)
 );CREATE INDEX "ix_MagneticMultipoleP_id" ON "MagneticMultipoleP" (id);
+CREATE TABLE "BendP" (
+	id INTEGER NOT NULL,
+	angle_ref FLOAT,
+	bend_field_ref FLOAT,
+	bend_field_actual FLOAT,
+	e1 FLOAT,
+	e2 FLOAT,
+	e1_rect FLOAT,
+	e2_rect FLOAT,
+	edge1_int FLOAT,
+	edge2_int FLOAT,
+	g_ref FLOAT,
+	g_actual FLOAT,
+	h1 FLOAT,
+	h2 FLOAT,
+	"L_chord" FLOAT,
+	"L_sagitta" FLOAT,
+	"L_rectangle" FLOAT,
+	multipole_geometry VARCHAR(20),
+	ref_geometry VARCHAR(15),
+	rho_ref FLOAT,
+	tilt_ref FLOAT,
+	PRIMARY KEY (id)
+);CREATE INDEX "ix_BendP_id" ON "BendP" (id);
 CREATE TABLE "Component" (
 	id TEXT NOT NULL,
 	type TEXT NOT NULL,
@@ -942,7 +1160,6 @@ CREATE TABLE "Magnet" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -982,7 +1199,6 @@ CREATE TABLE "Solenoid" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1020,7 +1236,6 @@ CREATE TABLE "Multipole" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1058,7 +1273,6 @@ CREATE TABLE "Dipole" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1075,6 +1289,43 @@ CREATE TABLE "Dipole" (
 	alias TEXT,
 	PRIMARY KEY (id)
 );CREATE INDEX "ix_Dipole_id" ON "Dipole" (id);
+CREATE TABLE "Bend" (
+	species_ref TEXT,
+	pc_ref FLOAT,
+	"E_tot_ref" FLOAT,
+	time_ref FLOAT,
+	x_offset FLOAT,
+	y_offset FLOAT,
+	z_offset FLOAT,
+	x_rot FLOAT,
+	y_rot FLOAT,
+	z_rot FLOAT,
+	alpha_a FLOAT,
+	alpha_b FLOAT,
+	beta_a FLOAT,
+	beta_b FLOAT,
+	eta_x FLOAT,
+	eta_y FLOAT,
+	etap_x FLOAT,
+	etap_y FLOAT,
+	phi_a FLOAT,
+	phi_b FLOAT,
+	beamline_relation VARCHAR(18) NOT NULL,
+	x FLOAT,
+	y FLOAT,
+	z FLOAT,
+	theta FLOAT,
+	phi FLOAT,
+	psi FLOAT,
+	length FLOAT,
+	s_position FLOAT,
+	id TEXT NOT NULL,
+	type TEXT NOT NULL,
+	description TEXT,
+	label TEXT,
+	alias TEXT,
+	PRIMARY KEY (id)
+);CREATE INDEX "ix_Bend_id" ON "Bend" (id);
 CREATE TABLE "Quadrupole" (
 	species_ref TEXT,
 	pc_ref FLOAT,
@@ -1096,7 +1347,6 @@ CREATE TABLE "Quadrupole" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1134,7 +1384,6 @@ CREATE TABLE "Octupole" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1172,7 +1421,6 @@ CREATE TABLE "Sextupole" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1211,7 +1459,6 @@ CREATE TABLE "Kicker" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1228,8 +1475,45 @@ CREATE TABLE "Kicker" (
 	alias TEXT,
 	PRIMARY KEY (id)
 );CREATE INDEX "ix_Kicker_id" ON "Kicker" (id);
+CREATE TABLE "ACKicker" (
+	plane VARCHAR(10),
+	species_ref TEXT,
+	pc_ref FLOAT,
+	"E_tot_ref" FLOAT,
+	time_ref FLOAT,
+	x_offset FLOAT,
+	y_offset FLOAT,
+	z_offset FLOAT,
+	x_rot FLOAT,
+	y_rot FLOAT,
+	z_rot FLOAT,
+	alpha_a FLOAT,
+	alpha_b FLOAT,
+	beta_a FLOAT,
+	beta_b FLOAT,
+	eta_x FLOAT,
+	eta_y FLOAT,
+	etap_x FLOAT,
+	etap_y FLOAT,
+	phi_a FLOAT,
+	phi_b FLOAT,
+	beamline_relation VARCHAR(18) NOT NULL,
+	x FLOAT,
+	y FLOAT,
+	z FLOAT,
+	theta FLOAT,
+	phi FLOAT,
+	psi FLOAT,
+	length FLOAT,
+	s_position FLOAT,
+	id TEXT NOT NULL,
+	type TEXT NOT NULL,
+	description TEXT,
+	label TEXT,
+	alias TEXT,
+	PRIMARY KEY (id)
+);CREATE INDEX "ix_ACKicker_id" ON "ACKicker" (id);
 CREATE TABLE "DiagnosticDevice" (
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1267,7 +1551,6 @@ CREATE TABLE "BeamPositionMonitor" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1291,7 +1574,6 @@ CREATE TABLE "RadiationMonitor" (
 	x_rot FLOAT,
 	y_rot FLOAT,
 	z_rot FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1329,7 +1611,6 @@ CREATE TABLE "Cavity" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1367,7 +1648,6 @@ CREATE TABLE "CrabCavity" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1405,7 +1685,6 @@ CREATE TABLE "RFCavity" (
 	etap_y FLOAT,
 	phi_a FLOAT,
 	phi_b FLOAT,
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1422,6 +1701,43 @@ CREATE TABLE "RFCavity" (
 	alias TEXT,
 	PRIMARY KEY (id)
 );CREATE INDEX "ix_RFCavity_id" ON "RFCavity" (id);
+CREATE TABLE "SuperconductingRFCavity" (
+	species_ref TEXT,
+	pc_ref FLOAT,
+	"E_tot_ref" FLOAT,
+	time_ref FLOAT,
+	x_offset FLOAT,
+	y_offset FLOAT,
+	z_offset FLOAT,
+	x_rot FLOAT,
+	y_rot FLOAT,
+	z_rot FLOAT,
+	alpha_a FLOAT,
+	alpha_b FLOAT,
+	beta_a FLOAT,
+	beta_b FLOAT,
+	eta_x FLOAT,
+	eta_y FLOAT,
+	etap_x FLOAT,
+	etap_y FLOAT,
+	phi_a FLOAT,
+	phi_b FLOAT,
+	beamline_relation VARCHAR(18) NOT NULL,
+	x FLOAT,
+	y FLOAT,
+	z FLOAT,
+	theta FLOAT,
+	phi FLOAT,
+	psi FLOAT,
+	length FLOAT,
+	s_position FLOAT,
+	id TEXT NOT NULL,
+	type TEXT NOT NULL,
+	description TEXT,
+	label TEXT,
+	alias TEXT,
+	PRIMARY KEY (id)
+);CREATE INDEX "ix_SuperconductingRFCavity_id" ON "SuperconductingRFCavity" (id);
 CREATE TABLE "BookkeepingComponent" (
 	x_offset FLOAT,
 	y_offset FLOAT,
@@ -1429,7 +1745,6 @@ CREATE TABLE "BookkeepingComponent" (
 	x_rot FLOAT,
 	y_rot FLOAT,
 	z_rot FLOAT,
-	function VARCHAR(15) NOT NULL,
 	beamline_relation VARCHAR(25) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1461,7 +1776,6 @@ CREATE TABLE "Marker" (
 	x_rot FLOAT,
 	y_rot FLOAT,
 	z_rot FLOAT,
-	function VARCHAR(15) NOT NULL,
 	beamline_relation VARCHAR(25) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1483,7 +1797,6 @@ CREATE TABLE "BeamlineSection" (
 	x_rot FLOAT,
 	y_rot FLOAT,
 	z_rot FLOAT,
-	function VARCHAR(15) NOT NULL,
 	beamline_relation VARCHAR(25) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1521,28 +1834,33 @@ CREATE TABLE "MultipoleComponent" (
 	"MagneticMultipoleP_id" INTEGER,
 	"Multipole_id" TEXT,
 	"Dipole_id" TEXT,
+	"Bend_id" TEXT,
 	"Quadrupole_id" TEXT,
 	"Octupole_id" TEXT,
 	"Sextupole_id" TEXT,
 	"Kicker_id" TEXT,
+	"ACKicker_id" TEXT,
 	"Cavity_id" TEXT,
 	"CrabCavity_id" TEXT,
 	"RFCavity_id" TEXT,
+	"SuperconductingRFCavity_id" TEXT,
 	PRIMARY KEY (id),
 	FOREIGN KEY("ElectricMultipoleP_id") REFERENCES "ElectricMultipoleP" (id),
 	FOREIGN KEY("MagneticMultipoleP_id") REFERENCES "MagneticMultipoleP" (id),
 	FOREIGN KEY("Multipole_id") REFERENCES "Multipole" (id),
 	FOREIGN KEY("Dipole_id") REFERENCES "Dipole" (id),
+	FOREIGN KEY("Bend_id") REFERENCES "Bend" (id),
 	FOREIGN KEY("Quadrupole_id") REFERENCES "Quadrupole" (id),
 	FOREIGN KEY("Octupole_id") REFERENCES "Octupole" (id),
 	FOREIGN KEY("Sextupole_id") REFERENCES "Sextupole" (id),
 	FOREIGN KEY("Kicker_id") REFERENCES "Kicker" (id),
+	FOREIGN KEY("ACKicker_id") REFERENCES "ACKicker" (id),
 	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id),
 	FOREIGN KEY("CrabCavity_id") REFERENCES "CrabCavity" (id),
-	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id)
+	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id),
+	FOREIGN KEY("SuperconductingRFCavity_id") REFERENCES "SuperconductingRFCavity" (id)
 );CREATE INDEX "ix_MultipoleComponent_id" ON "MultipoleComponent" (id);
 CREATE TABLE "PhysicalComponent" (
-	function VARCHAR(23) NOT NULL,
 	beamline_relation VARCHAR(18) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1562,7 +1880,6 @@ CREATE TABLE "PhysicalComponent" (
 	FOREIGN KEY("NARAD_id") REFERENCES "NARAD" (id)
 );CREATE INDEX "ix_PhysicalComponent_id" ON "PhysicalComponent" (id);
 CREATE TABLE "VirtualComponent" (
-	function VARCHAR(15) NOT NULL,
 	beamline_relation VARCHAR(25) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1586,7 +1903,6 @@ CREATE TABLE "Beamline" (
 	periodic BOOLEAN,
 	repeat INTEGER,
 	direction INTEGER,
-	function VARCHAR(15) NOT NULL,
 	beamline_relation VARCHAR(25) NOT NULL,
 	x FLOAT,
 	y FLOAT,
@@ -1623,7 +1939,6 @@ CREATE TABLE "Signal" (
 	FOREIGN KEY("NARAD_id") REFERENCES "NARAD" (id)
 );CREATE INDEX "ix_Signal_id" ON "Signal" (id);
 CREATE TABLE "SupportingFacilityComponent" (
-	function VARCHAR(11) NOT NULL,
 	x FLOAT,
 	y FLOAT,
 	z FLOAT,
@@ -1654,102 +1969,240 @@ CREATE TABLE "Component_native_types" (
 	PRIMARY KEY ("Component_id", native_types),
 	FOREIGN KEY("Component_id") REFERENCES "Component" (id)
 );CREATE INDEX "ix_Component_native_types_Component_id" ON "Component_native_types" ("Component_id");CREATE INDEX "ix_Component_native_types_native_types" ON "Component_native_types" (native_types);
+CREATE TABLE "Magnet_functions" (
+	"Magnet_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Magnet_id", functions),
+	FOREIGN KEY("Magnet_id") REFERENCES "Magnet" (id)
+);CREATE INDEX "ix_Magnet_functions_functions" ON "Magnet_functions" (functions);CREATE INDEX "ix_Magnet_functions_Magnet_id" ON "Magnet_functions" ("Magnet_id");
 CREATE TABLE "Magnet_native_types" (
 	"Magnet_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Magnet_id", native_types),
 	FOREIGN KEY("Magnet_id") REFERENCES "Magnet" (id)
-);CREATE INDEX "ix_Magnet_native_types_Magnet_id" ON "Magnet_native_types" ("Magnet_id");CREATE INDEX "ix_Magnet_native_types_native_types" ON "Magnet_native_types" (native_types);
+);CREATE INDEX "ix_Magnet_native_types_native_types" ON "Magnet_native_types" (native_types);CREATE INDEX "ix_Magnet_native_types_Magnet_id" ON "Magnet_native_types" ("Magnet_id");
+CREATE TABLE "Solenoid_functions" (
+	"Solenoid_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Solenoid_id", functions),
+	FOREIGN KEY("Solenoid_id") REFERENCES "Solenoid" (id)
+);CREATE INDEX "ix_Solenoid_functions_Solenoid_id" ON "Solenoid_functions" ("Solenoid_id");CREATE INDEX "ix_Solenoid_functions_functions" ON "Solenoid_functions" (functions);
 CREATE TABLE "Solenoid_native_types" (
 	"Solenoid_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Solenoid_id", native_types),
 	FOREIGN KEY("Solenoid_id") REFERENCES "Solenoid" (id)
 );CREATE INDEX "ix_Solenoid_native_types_Solenoid_id" ON "Solenoid_native_types" ("Solenoid_id");CREATE INDEX "ix_Solenoid_native_types_native_types" ON "Solenoid_native_types" (native_types);
+CREATE TABLE "Multipole_functions" (
+	"Multipole_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Multipole_id", functions),
+	FOREIGN KEY("Multipole_id") REFERENCES "Multipole" (id)
+);CREATE INDEX "ix_Multipole_functions_functions" ON "Multipole_functions" (functions);CREATE INDEX "ix_Multipole_functions_Multipole_id" ON "Multipole_functions" ("Multipole_id");
 CREATE TABLE "Multipole_native_types" (
 	"Multipole_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Multipole_id", native_types),
 	FOREIGN KEY("Multipole_id") REFERENCES "Multipole" (id)
-);CREATE INDEX "ix_Multipole_native_types_Multipole_id" ON "Multipole_native_types" ("Multipole_id");CREATE INDEX "ix_Multipole_native_types_native_types" ON "Multipole_native_types" (native_types);
+);CREATE INDEX "ix_Multipole_native_types_native_types" ON "Multipole_native_types" (native_types);CREATE INDEX "ix_Multipole_native_types_Multipole_id" ON "Multipole_native_types" ("Multipole_id");
+CREATE TABLE "Dipole_functions" (
+	"Dipole_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Dipole_id", functions),
+	FOREIGN KEY("Dipole_id") REFERENCES "Dipole" (id)
+);CREATE INDEX "ix_Dipole_functions_functions" ON "Dipole_functions" (functions);CREATE INDEX "ix_Dipole_functions_Dipole_id" ON "Dipole_functions" ("Dipole_id");
 CREATE TABLE "Dipole_native_types" (
 	"Dipole_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Dipole_id", native_types),
 	FOREIGN KEY("Dipole_id") REFERENCES "Dipole" (id)
 );CREATE INDEX "ix_Dipole_native_types_native_types" ON "Dipole_native_types" (native_types);CREATE INDEX "ix_Dipole_native_types_Dipole_id" ON "Dipole_native_types" ("Dipole_id");
+CREATE TABLE "Bend_functions" (
+	"Bend_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Bend_id", functions),
+	FOREIGN KEY("Bend_id") REFERENCES "Bend" (id)
+);CREATE INDEX "ix_Bend_functions_functions" ON "Bend_functions" (functions);CREATE INDEX "ix_Bend_functions_Bend_id" ON "Bend_functions" ("Bend_id");
+CREATE TABLE "Bend_native_types" (
+	"Bend_id" TEXT,
+	native_types TEXT,
+	PRIMARY KEY ("Bend_id", native_types),
+	FOREIGN KEY("Bend_id") REFERENCES "Bend" (id)
+);CREATE INDEX "ix_Bend_native_types_Bend_id" ON "Bend_native_types" ("Bend_id");CREATE INDEX "ix_Bend_native_types_native_types" ON "Bend_native_types" (native_types);
+CREATE TABLE "Quadrupole_functions" (
+	"Quadrupole_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Quadrupole_id", functions),
+	FOREIGN KEY("Quadrupole_id") REFERENCES "Quadrupole" (id)
+);CREATE INDEX "ix_Quadrupole_functions_functions" ON "Quadrupole_functions" (functions);CREATE INDEX "ix_Quadrupole_functions_Quadrupole_id" ON "Quadrupole_functions" ("Quadrupole_id");
 CREATE TABLE "Quadrupole_native_types" (
 	"Quadrupole_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Quadrupole_id", native_types),
 	FOREIGN KEY("Quadrupole_id") REFERENCES "Quadrupole" (id)
 );CREATE INDEX "ix_Quadrupole_native_types_native_types" ON "Quadrupole_native_types" (native_types);CREATE INDEX "ix_Quadrupole_native_types_Quadrupole_id" ON "Quadrupole_native_types" ("Quadrupole_id");
+CREATE TABLE "Octupole_functions" (
+	"Octupole_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Octupole_id", functions),
+	FOREIGN KEY("Octupole_id") REFERENCES "Octupole" (id)
+);CREATE INDEX "ix_Octupole_functions_Octupole_id" ON "Octupole_functions" ("Octupole_id");CREATE INDEX "ix_Octupole_functions_functions" ON "Octupole_functions" (functions);
 CREATE TABLE "Octupole_native_types" (
 	"Octupole_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Octupole_id", native_types),
 	FOREIGN KEY("Octupole_id") REFERENCES "Octupole" (id)
-);CREATE INDEX "ix_Octupole_native_types_Octupole_id" ON "Octupole_native_types" ("Octupole_id");CREATE INDEX "ix_Octupole_native_types_native_types" ON "Octupole_native_types" (native_types);
+);CREATE INDEX "ix_Octupole_native_types_native_types" ON "Octupole_native_types" (native_types);CREATE INDEX "ix_Octupole_native_types_Octupole_id" ON "Octupole_native_types" ("Octupole_id");
+CREATE TABLE "Sextupole_functions" (
+	"Sextupole_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Sextupole_id", functions),
+	FOREIGN KEY("Sextupole_id") REFERENCES "Sextupole" (id)
+);CREATE INDEX "ix_Sextupole_functions_functions" ON "Sextupole_functions" (functions);CREATE INDEX "ix_Sextupole_functions_Sextupole_id" ON "Sextupole_functions" ("Sextupole_id");
 CREATE TABLE "Sextupole_native_types" (
 	"Sextupole_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Sextupole_id", native_types),
 	FOREIGN KEY("Sextupole_id") REFERENCES "Sextupole" (id)
 );CREATE INDEX "ix_Sextupole_native_types_native_types" ON "Sextupole_native_types" (native_types);CREATE INDEX "ix_Sextupole_native_types_Sextupole_id" ON "Sextupole_native_types" ("Sextupole_id");
+CREATE TABLE "Kicker_functions" (
+	"Kicker_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Kicker_id", functions),
+	FOREIGN KEY("Kicker_id") REFERENCES "Kicker" (id)
+);CREATE INDEX "ix_Kicker_functions_Kicker_id" ON "Kicker_functions" ("Kicker_id");CREATE INDEX "ix_Kicker_functions_functions" ON "Kicker_functions" (functions);
 CREATE TABLE "Kicker_native_types" (
 	"Kicker_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Kicker_id", native_types),
 	FOREIGN KEY("Kicker_id") REFERENCES "Kicker" (id)
 );CREATE INDEX "ix_Kicker_native_types_native_types" ON "Kicker_native_types" (native_types);CREATE INDEX "ix_Kicker_native_types_Kicker_id" ON "Kicker_native_types" ("Kicker_id");
+CREATE TABLE "ACKicker_functions" (
+	"ACKicker_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("ACKicker_id", functions),
+	FOREIGN KEY("ACKicker_id") REFERENCES "ACKicker" (id)
+);CREATE INDEX "ix_ACKicker_functions_functions" ON "ACKicker_functions" (functions);CREATE INDEX "ix_ACKicker_functions_ACKicker_id" ON "ACKicker_functions" ("ACKicker_id");
+CREATE TABLE "ACKicker_native_types" (
+	"ACKicker_id" TEXT,
+	native_types TEXT,
+	PRIMARY KEY ("ACKicker_id", native_types),
+	FOREIGN KEY("ACKicker_id") REFERENCES "ACKicker" (id)
+);CREATE INDEX "ix_ACKicker_native_types_native_types" ON "ACKicker_native_types" (native_types);CREATE INDEX "ix_ACKicker_native_types_ACKicker_id" ON "ACKicker_native_types" ("ACKicker_id");
+CREATE TABLE "DiagnosticDevice_functions" (
+	"DiagnosticDevice_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("DiagnosticDevice_id", functions),
+	FOREIGN KEY("DiagnosticDevice_id") REFERENCES "DiagnosticDevice" (id)
+);CREATE INDEX "ix_DiagnosticDevice_functions_DiagnosticDevice_id" ON "DiagnosticDevice_functions" ("DiagnosticDevice_id");CREATE INDEX "ix_DiagnosticDevice_functions_functions" ON "DiagnosticDevice_functions" (functions);
 CREATE TABLE "DiagnosticDevice_native_types" (
 	"DiagnosticDevice_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("DiagnosticDevice_id", native_types),
 	FOREIGN KEY("DiagnosticDevice_id") REFERENCES "DiagnosticDevice" (id)
 );CREATE INDEX "ix_DiagnosticDevice_native_types_native_types" ON "DiagnosticDevice_native_types" (native_types);CREATE INDEX "ix_DiagnosticDevice_native_types_DiagnosticDevice_id" ON "DiagnosticDevice_native_types" ("DiagnosticDevice_id");
+CREATE TABLE "BeamPositionMonitor_functions" (
+	"BeamPositionMonitor_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("BeamPositionMonitor_id", functions),
+	FOREIGN KEY("BeamPositionMonitor_id") REFERENCES "BeamPositionMonitor" (id)
+);CREATE INDEX "ix_BeamPositionMonitor_functions_functions" ON "BeamPositionMonitor_functions" (functions);CREATE INDEX "ix_BeamPositionMonitor_functions_BeamPositionMonitor_id" ON "BeamPositionMonitor_functions" ("BeamPositionMonitor_id");
 CREATE TABLE "BeamPositionMonitor_native_types" (
 	"BeamPositionMonitor_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("BeamPositionMonitor_id", native_types),
 	FOREIGN KEY("BeamPositionMonitor_id") REFERENCES "BeamPositionMonitor" (id)
-);CREATE INDEX "ix_BeamPositionMonitor_native_types_BeamPositionMonitor_id" ON "BeamPositionMonitor_native_types" ("BeamPositionMonitor_id");CREATE INDEX "ix_BeamPositionMonitor_native_types_native_types" ON "BeamPositionMonitor_native_types" (native_types);
+);CREATE INDEX "ix_BeamPositionMonitor_native_types_native_types" ON "BeamPositionMonitor_native_types" (native_types);CREATE INDEX "ix_BeamPositionMonitor_native_types_BeamPositionMonitor_id" ON "BeamPositionMonitor_native_types" ("BeamPositionMonitor_id");
+CREATE TABLE "RadiationMonitor_functions" (
+	"RadiationMonitor_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("RadiationMonitor_id", functions),
+	FOREIGN KEY("RadiationMonitor_id") REFERENCES "RadiationMonitor" (id)
+);CREATE INDEX "ix_RadiationMonitor_functions_RadiationMonitor_id" ON "RadiationMonitor_functions" ("RadiationMonitor_id");CREATE INDEX "ix_RadiationMonitor_functions_functions" ON "RadiationMonitor_functions" (functions);
 CREATE TABLE "RadiationMonitor_native_types" (
 	"RadiationMonitor_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("RadiationMonitor_id", native_types),
 	FOREIGN KEY("RadiationMonitor_id") REFERENCES "RadiationMonitor" (id)
-);CREATE INDEX "ix_RadiationMonitor_native_types_RadiationMonitor_id" ON "RadiationMonitor_native_types" ("RadiationMonitor_id");CREATE INDEX "ix_RadiationMonitor_native_types_native_types" ON "RadiationMonitor_native_types" (native_types);
+);CREATE INDEX "ix_RadiationMonitor_native_types_native_types" ON "RadiationMonitor_native_types" (native_types);CREATE INDEX "ix_RadiationMonitor_native_types_RadiationMonitor_id" ON "RadiationMonitor_native_types" ("RadiationMonitor_id");
+CREATE TABLE "Cavity_functions" (
+	"Cavity_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("Cavity_id", functions),
+	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id)
+);CREATE INDEX "ix_Cavity_functions_functions" ON "Cavity_functions" (functions);CREATE INDEX "ix_Cavity_functions_Cavity_id" ON "Cavity_functions" ("Cavity_id");
 CREATE TABLE "Cavity_native_types" (
 	"Cavity_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Cavity_id", native_types),
 	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id)
-);CREATE INDEX "ix_Cavity_native_types_Cavity_id" ON "Cavity_native_types" ("Cavity_id");CREATE INDEX "ix_Cavity_native_types_native_types" ON "Cavity_native_types" (native_types);
+);CREATE INDEX "ix_Cavity_native_types_native_types" ON "Cavity_native_types" (native_types);CREATE INDEX "ix_Cavity_native_types_Cavity_id" ON "Cavity_native_types" ("Cavity_id");
+CREATE TABLE "CrabCavity_functions" (
+	"CrabCavity_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("CrabCavity_id", functions),
+	FOREIGN KEY("CrabCavity_id") REFERENCES "CrabCavity" (id)
+);CREATE INDEX "ix_CrabCavity_functions_functions" ON "CrabCavity_functions" (functions);CREATE INDEX "ix_CrabCavity_functions_CrabCavity_id" ON "CrabCavity_functions" ("CrabCavity_id");
 CREATE TABLE "CrabCavity_native_types" (
 	"CrabCavity_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("CrabCavity_id", native_types),
 	FOREIGN KEY("CrabCavity_id") REFERENCES "CrabCavity" (id)
-);CREATE INDEX "ix_CrabCavity_native_types_CrabCavity_id" ON "CrabCavity_native_types" ("CrabCavity_id");CREATE INDEX "ix_CrabCavity_native_types_native_types" ON "CrabCavity_native_types" (native_types);
+);CREATE INDEX "ix_CrabCavity_native_types_native_types" ON "CrabCavity_native_types" (native_types);CREATE INDEX "ix_CrabCavity_native_types_CrabCavity_id" ON "CrabCavity_native_types" ("CrabCavity_id");
+CREATE TABLE "RFCavity_functions" (
+	"RFCavity_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("RFCavity_id", functions),
+	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id)
+);CREATE INDEX "ix_RFCavity_functions_functions" ON "RFCavity_functions" (functions);CREATE INDEX "ix_RFCavity_functions_RFCavity_id" ON "RFCavity_functions" ("RFCavity_id");
 CREATE TABLE "RFCavity_native_types" (
 	"RFCavity_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("RFCavity_id", native_types),
 	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id)
 );CREATE INDEX "ix_RFCavity_native_types_native_types" ON "RFCavity_native_types" (native_types);CREATE INDEX "ix_RFCavity_native_types_RFCavity_id" ON "RFCavity_native_types" ("RFCavity_id");
+CREATE TABLE "SuperconductingRFCavity_functions" (
+	"SuperconductingRFCavity_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("SuperconductingRFCavity_id", functions),
+	FOREIGN KEY("SuperconductingRFCavity_id") REFERENCES "SuperconductingRFCavity" (id)
+);CREATE INDEX "ix_SuperconductingRFCavity_functions_SuperconductingRFCavity_id" ON "SuperconductingRFCavity_functions" ("SuperconductingRFCavity_id");CREATE INDEX "ix_SuperconductingRFCavity_functions_functions" ON "SuperconductingRFCavity_functions" (functions);
+CREATE TABLE "SuperconductingRFCavity_native_types" (
+	"SuperconductingRFCavity_id" TEXT,
+	native_types TEXT,
+	PRIMARY KEY ("SuperconductingRFCavity_id", native_types),
+	FOREIGN KEY("SuperconductingRFCavity_id") REFERENCES "SuperconductingRFCavity" (id)
+);CREATE INDEX "ix_SuperconductingRFCavity_native_types_native_types" ON "SuperconductingRFCavity_native_types" (native_types);CREATE INDEX "ix_SuperconductingRFCavity_native_types_SuperconductingRFCavity_id" ON "SuperconductingRFCavity_native_types" ("SuperconductingRFCavity_id");
+CREATE TABLE "BookkeepingComponent_functions" (
+	"BookkeepingComponent_id" TEXT,
+	functions VARCHAR(15) NOT NULL,
+	PRIMARY KEY ("BookkeepingComponent_id", functions),
+	FOREIGN KEY("BookkeepingComponent_id") REFERENCES "BookkeepingComponent" (id)
+);CREATE INDEX "ix_BookkeepingComponent_functions_BookkeepingComponent_id" ON "BookkeepingComponent_functions" ("BookkeepingComponent_id");CREATE INDEX "ix_BookkeepingComponent_functions_functions" ON "BookkeepingComponent_functions" (functions);
 CREATE TABLE "BookkeepingComponent_native_types" (
 	"BookkeepingComponent_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("BookkeepingComponent_id", native_types),
 	FOREIGN KEY("BookkeepingComponent_id") REFERENCES "BookkeepingComponent" (id)
 );CREATE INDEX "ix_BookkeepingComponent_native_types_BookkeepingComponent_id" ON "BookkeepingComponent_native_types" ("BookkeepingComponent_id");CREATE INDEX "ix_BookkeepingComponent_native_types_native_types" ON "BookkeepingComponent_native_types" (native_types);
+CREATE TABLE "Marker_functions" (
+	"Marker_id" TEXT,
+	functions VARCHAR(15) NOT NULL,
+	PRIMARY KEY ("Marker_id", functions),
+	FOREIGN KEY("Marker_id") REFERENCES "Marker" (id)
+);CREATE INDEX "ix_Marker_functions_Marker_id" ON "Marker_functions" ("Marker_id");CREATE INDEX "ix_Marker_functions_functions" ON "Marker_functions" (functions);
 CREATE TABLE "Marker_native_types" (
 	"Marker_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Marker_id", native_types),
 	FOREIGN KEY("Marker_id") REFERENCES "Marker" (id)
-);CREATE INDEX "ix_Marker_native_types_native_types" ON "Marker_native_types" (native_types);CREATE INDEX "ix_Marker_native_types_Marker_id" ON "Marker_native_types" ("Marker_id");
+);CREATE INDEX "ix_Marker_native_types_Marker_id" ON "Marker_native_types" ("Marker_id");CREATE INDEX "ix_Marker_native_types_native_types" ON "Marker_native_types" (native_types);
+CREATE TABLE "BeamlineSection_functions" (
+	"BeamlineSection_id" TEXT,
+	functions VARCHAR(15) NOT NULL,
+	PRIMARY KEY ("BeamlineSection_id", functions),
+	FOREIGN KEY("BeamlineSection_id") REFERENCES "BeamlineSection" (id)
+);CREATE INDEX "ix_BeamlineSection_functions_functions" ON "BeamlineSection_functions" (functions);CREATE INDEX "ix_BeamlineSection_functions_BeamlineSection_id" ON "BeamlineSection_functions" ("BeamlineSection_id");
 CREATE TABLE "BeamlineSection_native_types" (
 	"BeamlineSection_id" TEXT,
 	native_types TEXT,
@@ -1770,16 +2223,19 @@ CREATE TABLE "MetadataEntry" (
 	"Solenoid_id" TEXT,
 	"Multipole_id" TEXT,
 	"Dipole_id" TEXT,
+	"Bend_id" TEXT,
 	"Quadrupole_id" TEXT,
 	"Octupole_id" TEXT,
 	"Sextupole_id" TEXT,
 	"Kicker_id" TEXT,
+	"ACKicker_id" TEXT,
 	"DiagnosticDevice_id" TEXT,
 	"BeamPositionMonitor_id" TEXT,
 	"RadiationMonitor_id" TEXT,
 	"Cavity_id" TEXT,
 	"CrabCavity_id" TEXT,
 	"RFCavity_id" TEXT,
+	"SuperconductingRFCavity_id" TEXT,
 	"SupportingFacilityComponent_id" TEXT,
 	"BookkeepingComponent_id" TEXT,
 	"Marker_id" TEXT,
@@ -1795,16 +2251,19 @@ CREATE TABLE "MetadataEntry" (
 	FOREIGN KEY("Solenoid_id") REFERENCES "Solenoid" (id),
 	FOREIGN KEY("Multipole_id") REFERENCES "Multipole" (id),
 	FOREIGN KEY("Dipole_id") REFERENCES "Dipole" (id),
+	FOREIGN KEY("Bend_id") REFERENCES "Bend" (id),
 	FOREIGN KEY("Quadrupole_id") REFERENCES "Quadrupole" (id),
 	FOREIGN KEY("Octupole_id") REFERENCES "Octupole" (id),
 	FOREIGN KEY("Sextupole_id") REFERENCES "Sextupole" (id),
 	FOREIGN KEY("Kicker_id") REFERENCES "Kicker" (id),
+	FOREIGN KEY("ACKicker_id") REFERENCES "ACKicker" (id),
 	FOREIGN KEY("DiagnosticDevice_id") REFERENCES "DiagnosticDevice" (id),
 	FOREIGN KEY("BeamPositionMonitor_id") REFERENCES "BeamPositionMonitor" (id),
 	FOREIGN KEY("RadiationMonitor_id") REFERENCES "RadiationMonitor" (id),
 	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id),
 	FOREIGN KEY("CrabCavity_id") REFERENCES "CrabCavity" (id),
 	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id),
+	FOREIGN KEY("SuperconductingRFCavity_id") REFERENCES "SuperconductingRFCavity" (id),
 	FOREIGN KEY("SupportingFacilityComponent_id") REFERENCES "SupportingFacilityComponent" (id),
 	FOREIGN KEY("BookkeepingComponent_id") REFERENCES "BookkeepingComponent" (id),
 	FOREIGN KEY("Marker_id") REFERENCES "Marker" (id),
@@ -1833,7 +2292,7 @@ CREATE TABLE "ComponentRelation" (
 	tolerance_unit VARCHAR(10),
 	id TEXT NOT NULL,
 	subject TEXT NOT NULL,
-	predicate VARCHAR(12) NOT NULL,
+	predicate VARCHAR(16) NOT NULL,
 	object TEXT NOT NULL,
 	"NARAD_id" INTEGER,
 	PRIMARY KEY (id),
@@ -1842,24 +2301,48 @@ CREATE TABLE "ComponentRelation" (
 	FOREIGN KEY(object) REFERENCES "Component" (id),
 	FOREIGN KEY("NARAD_id") REFERENCES "NARAD" (id)
 );CREATE INDEX "ix_ComponentRelation_id" ON "ComponentRelation" (id);
+CREATE TABLE "PhysicalComponent_functions" (
+	"PhysicalComponent_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("PhysicalComponent_id", functions),
+	FOREIGN KEY("PhysicalComponent_id") REFERENCES "PhysicalComponent" (id)
+);CREATE INDEX "ix_PhysicalComponent_functions_PhysicalComponent_id" ON "PhysicalComponent_functions" ("PhysicalComponent_id");CREATE INDEX "ix_PhysicalComponent_functions_functions" ON "PhysicalComponent_functions" (functions);
 CREATE TABLE "PhysicalComponent_native_types" (
 	"PhysicalComponent_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("PhysicalComponent_id", native_types),
 	FOREIGN KEY("PhysicalComponent_id") REFERENCES "PhysicalComponent" (id)
-);CREATE INDEX "ix_PhysicalComponent_native_types_PhysicalComponent_id" ON "PhysicalComponent_native_types" ("PhysicalComponent_id");CREATE INDEX "ix_PhysicalComponent_native_types_native_types" ON "PhysicalComponent_native_types" (native_types);
+);CREATE INDEX "ix_PhysicalComponent_native_types_native_types" ON "PhysicalComponent_native_types" (native_types);CREATE INDEX "ix_PhysicalComponent_native_types_PhysicalComponent_id" ON "PhysicalComponent_native_types" ("PhysicalComponent_id");
+CREATE TABLE "VirtualComponent_functions" (
+	"VirtualComponent_id" TEXT,
+	functions VARCHAR(15) NOT NULL,
+	PRIMARY KEY ("VirtualComponent_id", functions),
+	FOREIGN KEY("VirtualComponent_id") REFERENCES "VirtualComponent" (id)
+);CREATE INDEX "ix_VirtualComponent_functions_VirtualComponent_id" ON "VirtualComponent_functions" ("VirtualComponent_id");CREATE INDEX "ix_VirtualComponent_functions_functions" ON "VirtualComponent_functions" (functions);
 CREATE TABLE "VirtualComponent_native_types" (
 	"VirtualComponent_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("VirtualComponent_id", native_types),
 	FOREIGN KEY("VirtualComponent_id") REFERENCES "VirtualComponent" (id)
 );CREATE INDEX "ix_VirtualComponent_native_types_VirtualComponent_id" ON "VirtualComponent_native_types" ("VirtualComponent_id");CREATE INDEX "ix_VirtualComponent_native_types_native_types" ON "VirtualComponent_native_types" (native_types);
+CREATE TABLE "Beamline_functions" (
+	"Beamline_id" TEXT,
+	functions VARCHAR(15) NOT NULL,
+	PRIMARY KEY ("Beamline_id", functions),
+	FOREIGN KEY("Beamline_id") REFERENCES "Beamline" (id)
+);CREATE INDEX "ix_Beamline_functions_Beamline_id" ON "Beamline_functions" ("Beamline_id");CREATE INDEX "ix_Beamline_functions_functions" ON "Beamline_functions" (functions);
 CREATE TABLE "Beamline_native_types" (
 	"Beamline_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Beamline_id", native_types),
 	FOREIGN KEY("Beamline_id") REFERENCES "Beamline" (id)
 );CREATE INDEX "ix_Beamline_native_types_native_types" ON "Beamline_native_types" (native_types);CREATE INDEX "ix_Beamline_native_types_Beamline_id" ON "Beamline_native_types" ("Beamline_id");
+CREATE TABLE "SupportingFacilityComponent_functions" (
+	"SupportingFacilityComponent_id" TEXT,
+	functions VARCHAR(11) NOT NULL,
+	PRIMARY KEY ("SupportingFacilityComponent_id", functions),
+	FOREIGN KEY("SupportingFacilityComponent_id") REFERENCES "SupportingFacilityComponent" (id)
+);CREATE INDEX "ix_SupportingFacilityComponent_functions_SupportingFacilityComponent_id" ON "SupportingFacilityComponent_functions" ("SupportingFacilityComponent_id");CREATE INDEX "ix_SupportingFacilityComponent_functions_functions" ON "SupportingFacilityComponent_functions" (functions);
 CREATE TABLE "SupportingFacilityComponent_native_types" (
 	"SupportingFacilityComponent_id" TEXT,
 	native_types TEXT,

@@ -18,9 +18,11 @@ None &#8594;  <sub>1..1</sub> [String](types/String.md)
 
 ## Used by
 
+ * [ACKicker](ACKicker.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
  * [Beamline](Beamline.md)
  * [BeamlineSection](BeamlineSection.md)
+ * [Bend](Bend.md)
  * [BookkeepingComponent](BookkeepingComponent.md)
  * [Cavity](Cavity.md)
  * [Component](Component.md)
@@ -42,6 +44,7 @@ None &#8594;  <sub>1..1</sub> [String](types/String.md)
  * [Signal](Signal.md)
  * [SignalBinding](SignalBinding.md)
  * [Solenoid](Solenoid.md)
+ * [SuperconductingRFCavity](SuperconductingRFCavity.md)
  * [SupportingFacilityComponent](SupportingFacilityComponent.md)
  * [VirtualComponent](VirtualComponent.md)
 

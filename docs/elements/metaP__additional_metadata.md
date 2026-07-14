@@ -18,9 +18,11 @@ None &#8594;  <sub>0..\*</sub> [MetadataEntry](MetadataEntry.md)
 
 ## Used by
 
+ * [ACKicker](ACKicker.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
  * [Beamline](Beamline.md)
  * [BeamlineSection](BeamlineSection.md)
+ * [Bend](Bend.md)
  * [BookkeepingComponent](BookkeepingComponent.md)
  * [Cavity](Cavity.md)
  * [Component](Component.md)
@@ -40,5 +42,6 @@ None &#8594;  <sub>0..\*</sub> [MetadataEntry](MetadataEntry.md)
  * [Sextupole](Sextupole.md)
  * [Signal](Signal.md)
  * [Solenoid](Solenoid.md)
+ * [SuperconductingRFCavity](SuperconductingRFCavity.md)
  * [SupportingFacilityComponent](SupportingFacilityComponent.md)
  * [VirtualComponent](VirtualComponent.md)

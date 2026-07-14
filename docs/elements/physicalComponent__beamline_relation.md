@@ -18,7 +18,9 @@ None &#8594;  <sub>1..1</sub> [PhysicalRelationEnum](PhysicalRelationEnum.md)
 
 ## Used by
 
+ * [ACKicker](ACKicker.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
+ * [Bend](Bend.md)
  * [Cavity](Cavity.md)
  * [CrabCavity](CrabCavity.md)
  * [DiagnosticDevice](DiagnosticDevice.md)
@@ -33,6 +35,7 @@ None &#8594;  <sub>1..1</sub> [PhysicalRelationEnum](PhysicalRelationEnum.md)
  * [RadiationMonitor](RadiationMonitor.md)
  * [Sextupole](Sextupole.md)
  * [Solenoid](Solenoid.md)
+ * [SuperconductingRFCavity](SuperconductingRFCavity.md)
  * [SupportingFacilityComponent](SupportingFacilityComponent.md)
 
 ## Other properties

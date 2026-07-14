@@ -53,6 +53,10 @@
       "prefix_reference": "http://purl.obolibrary.org/obo/BFO_"
     },
     {
+      "prefix_prefix": "saref",
+      "prefix_reference": "https://saref.etsi.org/core/v4.1.1/"
+    },
+    {
       "prefix_prefix": "pals",
       "prefix_reference": "https://pals-project.readthedocs.io/"
     },
@@ -545,8 +549,12 @@
           "description": "Provides cooling for accelerator components."
         },
         {
+          "text": "Diagnostics",
+          "description": "Provides diagnostic capabilities for accelerator components, such as monitoring or measurement."
+        },
+        {
           "text": "Detection",
-          "description": "Provides detection or monitoring of environmental conditions,  such as radiation or temperature."
+          "description": "Provides detection capabilities for accelerator components, such as radiation or particle detection."
         }
       ]
     },
@@ -910,6 +918,26 @@
           "meaning": "RO:0002170"
         },
         {
+          "text": "controls",
+          "description": "Subject controls the state or behavior of object.",
+          "meaning": "saref:controls"
+        },
+        {
+          "text": "is_controlled_by",
+          "description": "Subject is controlled by object.",
+          "meaning": "saref:isControlledBy"
+        },
+        {
+          "text": "is_part_of",
+          "description": "Subject is a part of object.",
+          "meaning": "BFO:0000050"
+        },
+        {
+          "text": "has_part",
+          "description": "Subject has part object.",
+          "meaning": "BFO:0000051"
+        },
+        {
           "text": "adjacent_to",
           "description": "Subject and object are spatially adjacent, without overlapping.",
           "meaning": "RO:0002220"
@@ -1047,6 +1075,62 @@
         },
         {
           "text": "negative"
+        }
+      ]
+    },
+    {
+      "name": "MultipoleGeometryEnum",
+      "definition_uri": "https://example.org/narad/MultipoleGeometryEnum",
+      "description": "The geometric configuration of the multipole field.  Sets the geometry used to calculate multipoles.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "permissible_values": [
+        {
+          "text": "follows_ref_geometry",
+          "description": "Use geometry equivalent to the setting of `ref_geometry`."
+        },
+        {
+          "text": "vertically_pure",
+          "description": "Vertically pure multipoles with arc geometry."
+        },
+        {
+          "text": "horizontally_pure",
+          "description": "Horizontally pure multipoles with arc geometry."
+        },
+        {
+          "text": "chord",
+          "description": "Z-axis is the chord connecting the entrance origin point to the exit origin point."
+        },
+        {
+          "text": "entrance_coords",
+          "description": "Rectangular coordinates commensurate with the entrance coordinates."
+        },
+        {
+          "text": "exit_coords",
+          "description": "Rectangular coordinates commensurate with the exit coordinates."
+        }
+      ]
+    },
+    {
+      "name": "ReferenceGeometryEnum",
+      "definition_uri": "https://example.org/narad/ReferenceGeometryEnum",
+      "description": "The reference geometry used to calculate multipoles.  Sets the geometry used to calculate multipoles.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "permissible_values": [
+        {
+          "text": "arc",
+          "description": "Default. Reference are the curvelinear arc coordinates."
+        },
+        {
+          "text": "chord",
+          "description": "Z-axis is the chord connecting the entrance origin point to the exit origin point."
+        },
+        {
+          "text": "entrance_coords",
+          "description": "Rectangular coordinates commensurate with the entrance coordinates."
+        },
+        {
+          "text": "exit_coords",
+          "description": "Rectangular coordinates commensurate with the exit coordinates."
         }
       ]
     }
@@ -1988,6 +2072,398 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "bendP__angle_ref",
+      "description": "Reference bend angle.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/angle_ref"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/angle_ref",
+      "alias": "angle_ref",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__bend_field_ref",
+      "description": "Reference bend field.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/bend_field_ref"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/bend_field_ref",
+      "alias": "bend_field_ref",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "T",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__bend_field_actual",
+      "description": "Actual bend field.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/bend_field_actual"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/bend_field_actual",
+      "alias": "bend_field_actual",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "T",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__e1",
+      "description": "Entrance end pole face rotation with respect to a sector geometry.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/e1"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/e1",
+      "alias": "e1",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__e2",
+      "description": "Exit end pole face rotation with respect to a sector geometry.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/e2"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/e2",
+      "alias": "e2",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__e1_rect",
+      "description": "Entrance end pole face rotation with respect to a rectangular geometry.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/e1_rect"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/e1_rect",
+      "alias": "e1_rect",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__e2_rect",
+      "description": "Exit end pole face rotation with respect to a rectangular geometry.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/e2_rect"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/e2_rect",
+      "alias": "e2_rect",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__edge1_int",
+      "description": "Entrance end fringe field integral.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/edge1_int"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/edge1_int",
+      "alias": "edge1_int",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "T.m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__edge2_int",
+      "description": "Exit end fringe field integral.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/edge2_int"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/edge2_int",
+      "alias": "edge2_int",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "T.m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__g_ref",
+      "description": "Reference bend strength = 1/radius_ref",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/g_ref"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/g_ref",
+      "alias": "g_ref",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "1/m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__g_actual",
+      "description": "Actual bend strength = 1/radius_actual",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/g_actual"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/g_actual",
+      "alias": "g_actual",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "1/m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__h1",
+      "description": "Entrance end pole face curvature",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/h1"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/h1",
+      "alias": "h1",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "1/m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__h2",
+      "description": "Exit end pole face curvature",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/h2"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/h2",
+      "alias": "h2",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "1/m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__L_chord",
+      "description": "Chord length of the bend.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/L_chord"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/L_chord",
+      "alias": "L_chord",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__L_sagitta",
+      "description": "Output parameter. Sagitta length.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/L_sagitta"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/L_sagitta",
+      "alias": "L_sagitta",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__L_rectangle",
+      "description": "Rectangular length.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/L_rectangle"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/L_rectangle",
+      "alias": "L_rectangle",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__multipole_geometry",
+      "description": "Multipole geometry type. Must be `follows_ref_geometry`.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/multipole_geometry"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/multipole_geometry",
+      "alias": "multipole_geometry",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "MultipoleGeometryEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__ref_geometry",
+      "description": "Reference geometry type. Must be `arc`.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/ref_geometry"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/ref_geometry",
+      "alias": "ref_geometry",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "ReferenceGeometryEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__rho_ref",
+      "description": "Reference bend radius.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/rho_ref"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/rho_ref",
+      "alias": "rho_ref",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bendP__tilt_ref",
+      "description": "Reference tilt of the bend.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "https://pals-project.readthedocs.io/tilt_ref"
+      ],
+      "slot_uri": "https://pals-project.readthedocs.io/tilt_ref",
+      "alias": "tilt_ref",
+      "owner": "BendP",
+      "domain_of": [
+        "BendP"
+      ],
+      "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "multipoleComponent__order",
       "description": "Multipole order N (0 = dipole, 1 = quadrupole, etc.)",
       "from_schema": "https://w3id.org/accelerator-core",
@@ -2164,20 +2640,21 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "physicalComponent__function",
+      "name": "physicalComponent__functions",
       "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
         "https://example.org/narad/physical_function"
       ],
       "slot_uri": "https://example.org/narad/physical_function",
-      "alias": "function",
+      "alias": "functions",
       "owner": "PhysicalComponent",
       "domain_of": [
         "PhysicalComponent"
       ],
       "range": "PhysicalFunctionEnum",
       "required": true,
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2198,20 +2675,21 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "virtualComponent__function",
+      "name": "virtualComponent__functions",
       "description": "The function of the virtual component,  which can be used to identify the component across different source systems.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
         "https://example.org/narad/virtual_function"
       ],
       "slot_uri": "https://example.org/narad/virtual_function",
-      "alias": "function",
+      "alias": "functions",
       "owner": "VirtualComponent",
       "domain_of": [
         "VirtualComponent"
       ],
       "range": "VirtualFunctionEnum",
       "required": true,
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2461,20 +2939,21 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "supportingFacilityComponent__function",
+      "name": "supportingFacilityComponent__functions",
       "description": "The function of the supporting facility component,  which can be used to identify the component across different source systems.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
         "https://example.org/narad/supporting_facility_function"
       ],
       "slot_uri": "https://example.org/narad/supporting_facility_function",
-      "alias": "function",
+      "alias": "functions",
       "owner": "SupportingFacilityComponent",
       "domain_of": [
         "SupportingFacilityComponent"
       ],
       "range": "FacilityFunctionEnum",
       "required": true,
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3531,9 +4010,6 @@
       "definition_uri": "https://example.org/narad/MagneticMultipoleP",
       "description": "Mixin for magnetic multipole parameters, \nwhich can be used to describe the magnetic field components of an accelerator element.\nThis mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).\nExample with three multipole components (N=0,1,2): ```yaml components: - order: 7\n  tilt: 0.7\n- order: 3\n  Bn: 27.3\n- order: 2\n  BnL: 3.47e1\n- order: 1\n  Kn: 0.85     # normalized form, e.g. a quadrupole's k1-like strength\n```",
       "from_schema": "https://w3id.org/accelerator-core",
-      "exact_mappings": [
-        "pals:MagneticMultipoleP"
-      ],
       "broad_mappings": [
         "pals:MagneticMultipoleP"
       ],
@@ -3553,6 +4029,285 @@
         }
       ],
       "class_uri": "https://example.org/narad/MagneticMultipoleP",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BendP",
+      "definition_uri": "https://example.org/narad/BendP",
+      "description": "Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.\nThis mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "exact_mappings": [
+        "pals:BendP"
+      ],
+      "mixin": true,
+      "slots": [
+        "bendP__angle_ref",
+        "bendP__bend_field_ref",
+        "bendP__bend_field_actual",
+        "bendP__e1",
+        "bendP__e2",
+        "bendP__e1_rect",
+        "bendP__e2_rect",
+        "bendP__edge1_int",
+        "bendP__edge2_int",
+        "bendP__g_ref",
+        "bendP__g_actual",
+        "bendP__h1",
+        "bendP__h2",
+        "bendP__L_chord",
+        "bendP__L_sagitta",
+        "bendP__L_rectangle",
+        "bendP__multipole_geometry",
+        "bendP__ref_geometry",
+        "bendP__rho_ref",
+        "bendP__tilt_ref"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "angle_ref",
+          "description": "Reference bend angle.",
+          "slot_uri": "pals:angle_ref",
+          "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "bend_field_ref",
+          "description": "Reference bend field.",
+          "slot_uri": "pals:bend_field_ref",
+          "range": "float",
+          "unit": {
+            "ucum_code": "T",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "bend_field_actual",
+          "description": "Actual bend field.",
+          "slot_uri": "pals:bend_field_actual",
+          "range": "float",
+          "unit": {
+            "ucum_code": "T",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "e1",
+          "description": "Entrance end pole face rotation with respect to a sector geometry.",
+          "slot_uri": "pals:e1",
+          "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "e2",
+          "description": "Exit end pole face rotation with respect to a sector geometry.",
+          "slot_uri": "pals:e2",
+          "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "e1_rect",
+          "description": "Entrance end pole face rotation with respect to a rectangular geometry.",
+          "slot_uri": "pals:e1_rect",
+          "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "e2_rect",
+          "description": "Exit end pole face rotation with respect to a rectangular geometry.",
+          "slot_uri": "pals:e2_rect",
+          "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "edge1_int",
+          "description": "Entrance end fringe field integral.",
+          "slot_uri": "pals:edge1_int",
+          "range": "float",
+          "unit": {
+            "ucum_code": "T.m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "edge2_int",
+          "description": "Exit end fringe field integral.",
+          "slot_uri": "pals:edge2_int",
+          "range": "float",
+          "unit": {
+            "ucum_code": "T.m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "g_ref",
+          "description": "Reference bend strength = 1/radius_ref",
+          "slot_uri": "pals:g_ref",
+          "range": "float",
+          "unit": {
+            "ucum_code": "1/m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "g_actual",
+          "description": "Actual bend strength = 1/radius_actual",
+          "slot_uri": "pals:g_actual",
+          "range": "float",
+          "unit": {
+            "ucum_code": "1/m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "h1",
+          "description": "Entrance end pole face curvature",
+          "slot_uri": "pals:h1",
+          "range": "float",
+          "unit": {
+            "ucum_code": "1/m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "h2",
+          "description": "Exit end pole face curvature",
+          "slot_uri": "pals:h2",
+          "range": "float",
+          "unit": {
+            "ucum_code": "1/m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "L_chord",
+          "description": "Chord length of the bend.",
+          "slot_uri": "pals:L_chord",
+          "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "L_sagitta",
+          "description": "Output parameter. Sagitta length.",
+          "slot_uri": "pals:L_sagitta",
+          "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "L_rectangle",
+          "description": "Rectangular length.",
+          "slot_uri": "pals:L_rectangle",
+          "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "multipole_geometry",
+          "description": "Multipole geometry type. Must be `follows_ref_geometry`.",
+          "slot_uri": "pals:multipole_geometry",
+          "range": "MultipoleGeometryEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "ref_geometry",
+          "description": "Reference geometry type. Must be `arc`.",
+          "slot_uri": "pals:ref_geometry",
+          "range": "ReferenceGeometryEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "rho_ref",
+          "description": "Reference bend radius.",
+          "slot_uri": "pals:rho_ref",
+          "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "tilt_ref",
+          "description": "Reference tilt of the bend.",
+          "slot_uri": "pals:tilt_ref",
+          "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://example.org/narad/BendP",
+      "rules": [
+        {
+          "postconditions": {
+            "slot_conditions": [
+              {
+                "name": "multipole_geometry",
+                "equals_expression": "follows_ref_geometry",
+                "@type": "SlotDefinition"
+              }
+            ],
+            "@type": "AnonymousClassExpression"
+          },
+          "description": "multipole_geometry must be follows_ref_geometry",
+          "@type": "ClassRule"
+        },
+        {
+          "postconditions": {
+            "slot_conditions": [
+              {
+                "name": "ref_geometry",
+                "equals_expression": "arc",
+                "@type": "SlotDefinition"
+              }
+            ],
+            "@type": "AnonymousClassExpression"
+          },
+          "description": "ref_geometry must be arc",
+          "@type": "ClassRule"
+        }
+      ],
       "@type": "ClassDefinition"
     },
     {
@@ -4159,7 +4914,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4173,11 +4928,12 @@
       "slot_usage": {},
       "attributes": [
         {
-          "name": "function",
+          "name": "functions",
           "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
           "slot_uri": "narad:physical_function",
           "range": "PhysicalFunctionEnum",
           "required": true,
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
@@ -4213,7 +4969,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "virtualComponent__function",
+        "virtualComponent__functions",
         "virtualComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4225,11 +4981,12 @@
       "slot_usage": {},
       "attributes": [
         {
-          "name": "function",
+          "name": "functions",
           "description": "The function of the virtual component,  which can be used to identify the component across different source systems.",
           "slot_uri": "narad:virtual_function",
           "range": "VirtualFunctionEnum",
           "required": true,
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
@@ -4261,7 +5018,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "virtualComponent__function",
+        "virtualComponent__functions",
         "virtualComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4441,7 +5198,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4496,7 +5253,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4554,7 +5311,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4607,7 +5364,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4644,6 +5401,59 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Bend",
+      "definition_uri": "https://example.org/narad/Bend",
+      "description": "Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "exact_mappings": [
+        "pals:Bend"
+      ],
+      "is_a": "Multipole",
+      "slots": [
+        "id",
+        "type",
+        "component__native_types",
+        "metaP__description",
+        "metaP__label",
+        "metaP__alias",
+        "metaP__additional_metadata",
+        "physicalComponent__functions",
+        "physicalComponent__beamline_relation",
+        "floorP__x",
+        "floorP__y",
+        "floorP__z",
+        "floorP__theta",
+        "floorP__phi",
+        "floorP__psi",
+        "hasLongitudinalPlacement__length",
+        "hasLongitudinalPlacement__s_position",
+        "referenceP__species_ref",
+        "referenceP__pc_ref",
+        "referenceP__E_tot_ref",
+        "referenceP__time_ref",
+        "bodyShiftP__x_offset",
+        "bodyShiftP__y_offset",
+        "bodyShiftP__z_offset",
+        "bodyShiftP__x_rot",
+        "bodyShiftP__y_rot",
+        "bodyShiftP__z_rot",
+        "twissP__alpha_a",
+        "twissP__alpha_b",
+        "twissP__beta_a",
+        "twissP__beta_b",
+        "twissP__eta_x",
+        "twissP__eta_y",
+        "twissP__etap_x",
+        "twissP__etap_y",
+        "twissP__phi_a",
+        "twissP__phi_b",
+        "electricMultipoleP__components"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://example.org/narad/Bend",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Quadrupole",
       "definition_uri": "https://example.org/narad/Quadrupole",
       "description": "A magnet primarily used to focus or defocus the beam. 4 poles.\nOnly one of the electric or magnetic multipole components should be present, not both.",
@@ -4660,7 +5470,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4713,7 +5523,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4766,7 +5576,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4830,7 +5640,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4876,6 +5686,60 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "ACKicker",
+      "definition_uri": "https://example.org/narad/ACKicker",
+      "description": "An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "exact_mappings": [
+        "pals:ACKicker"
+      ],
+      "is_a": "Kicker",
+      "slots": [
+        "id",
+        "type",
+        "component__native_types",
+        "metaP__description",
+        "metaP__label",
+        "metaP__alias",
+        "metaP__additional_metadata",
+        "physicalComponent__functions",
+        "physicalComponent__beamline_relation",
+        "floorP__x",
+        "floorP__y",
+        "floorP__z",
+        "floorP__theta",
+        "floorP__phi",
+        "floorP__psi",
+        "hasLongitudinalPlacement__length",
+        "hasLongitudinalPlacement__s_position",
+        "referenceP__species_ref",
+        "referenceP__pc_ref",
+        "referenceP__E_tot_ref",
+        "referenceP__time_ref",
+        "bodyShiftP__x_offset",
+        "bodyShiftP__y_offset",
+        "bodyShiftP__z_offset",
+        "bodyShiftP__x_rot",
+        "bodyShiftP__y_rot",
+        "bodyShiftP__z_rot",
+        "twissP__alpha_a",
+        "twissP__alpha_b",
+        "twissP__beta_a",
+        "twissP__beta_b",
+        "twissP__eta_x",
+        "twissP__eta_y",
+        "twissP__etap_x",
+        "twissP__etap_y",
+        "twissP__phi_a",
+        "twissP__phi_b",
+        "kicker__plane",
+        "electricMultipoleP__components"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://example.org/narad/ACKicker",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "DiagnosticDevice",
       "definition_uri": "https://example.org/narad/DiagnosticDevice",
       "description": "An accelerator device used to measure beam or machine state.",
@@ -4892,7 +5756,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4929,7 +5793,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -4984,7 +5848,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -5026,7 +5890,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -5079,7 +5943,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -5132,7 +5996,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "physicalComponent__function",
+        "physicalComponent__functions",
         "physicalComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -5169,6 +6033,59 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "SuperconductingRFCavity",
+      "definition_uri": "https://example.org/narad/SuperconductingRFCavity",
+      "description": "A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "broad_mappings": [
+        "pals:RFCavity"
+      ],
+      "is_a": "RFCavity",
+      "slots": [
+        "id",
+        "type",
+        "component__native_types",
+        "metaP__description",
+        "metaP__label",
+        "metaP__alias",
+        "metaP__additional_metadata",
+        "physicalComponent__functions",
+        "physicalComponent__beamline_relation",
+        "floorP__x",
+        "floorP__y",
+        "floorP__z",
+        "floorP__theta",
+        "floorP__phi",
+        "floorP__psi",
+        "hasLongitudinalPlacement__length",
+        "hasLongitudinalPlacement__s_position",
+        "referenceP__species_ref",
+        "referenceP__pc_ref",
+        "referenceP__E_tot_ref",
+        "referenceP__time_ref",
+        "electricMultipoleP__components",
+        "bodyShiftP__x_offset",
+        "bodyShiftP__y_offset",
+        "bodyShiftP__z_offset",
+        "bodyShiftP__x_rot",
+        "bodyShiftP__y_rot",
+        "bodyShiftP__z_rot",
+        "twissP__alpha_a",
+        "twissP__alpha_b",
+        "twissP__beta_a",
+        "twissP__beta_b",
+        "twissP__eta_x",
+        "twissP__eta_y",
+        "twissP__etap_x",
+        "twissP__etap_y",
+        "twissP__phi_a",
+        "twissP__phi_b"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://example.org/narad/SuperconductingRFCavity",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "SupportingFacilityComponent",
       "definition_uri": "https://example.org/narad/SupportingFacilityComponent",
       "description": "A physical component that supports accelerator operation \nwithout a specific beam-pipe placement, \nsuch as a power supply, control rack, or radiation detector.\nThese can include Girders, Racks, Power Supplies, \nand other physical infrastructure components that are important for understanding \nthe structure and function of the accelerator system but are not inline with the beamline.",
@@ -5199,7 +6116,7 @@
         "floorP__psi",
         "hasLongitudinalPlacement__length",
         "hasLongitudinalPlacement__s_position",
-        "supportingFacilityComponent__function",
+        "supportingFacilityComponent__functions",
         "bodyShiftP__x_offset",
         "bodyShiftP__y_offset",
         "bodyShiftP__z_offset",
@@ -5210,11 +6127,12 @@
       "slot_usage": {},
       "attributes": [
         {
-          "name": "function",
+          "name": "functions",
           "description": "The function of the supporting facility component,  which can be used to identify the component across different source systems.",
           "slot_uri": "narad:supporting_facility_function",
           "range": "FacilityFunctionEnum",
           "required": true,
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -5241,7 +6159,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "virtualComponent__function",
+        "virtualComponent__functions",
         "virtualComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -5280,7 +6198,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "virtualComponent__function",
+        "virtualComponent__functions",
         "virtualComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -5326,7 +6244,7 @@
         "metaP__label",
         "metaP__alias",
         "metaP__additional_metadata",
-        "virtualComponent__function",
+        "virtualComponent__functions",
         "virtualComponent__beamline_relation",
         "floorP__x",
         "floorP__y",
@@ -5492,9 +6410,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "narad.yaml",
-  "source_file_date": "2026-07-07T19:38:22",
-  "source_file_size": 50793,
-  "generation_date": "2026-07-07T19:39:12",
+  "source_file_date": "2026-07-14T12:50:14",
+  "source_file_size": 57893,
+  "generation_date": "2026-07-14T12:50:17",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/narad.context.jsonld",

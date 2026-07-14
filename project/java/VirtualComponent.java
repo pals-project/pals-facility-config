@@ -15,7 +15,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class VirtualComponent extends Component {
 
-  private String function;
+  private List<String> functions;
   private String beamlineRelation;
   private Float x;
   private Float y;

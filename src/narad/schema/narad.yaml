@@ -18,6 +18,7 @@ prefixes:
   sosa: http://www.w3.org/ns/sosa/
   RO: http://purl.obolibrary.org/obo/RO_
   BFO: http://purl.obolibrary.org/obo/BFO_
+  saref: https://saref.etsi.org/core/v4.1.1/
   pals: https://pals-project.readthedocs.io/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -490,8 +491,6 @@ classes:
         Kn: 0.85     # normalized form, e.g. a quadrupole's k1-like strength
       ```
     mixin: true
-    exact_mappings:
-      - pals:MagneticMultipoleP
     attributes:
       components:
         description: Magnetic multipole components, one per order N.
@@ -500,6 +499,143 @@ classes:
         inlined_as_list: true
     broad_mappings:
       - pals:MagneticMultipoleP
+  
+  BendP:
+    description: >-
+      Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
+
+      This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+    mixin: true
+    attributes:
+      angle_ref:
+        description: Reference bend angle.
+        range: float
+        slot_uri: pals:angle_ref
+        unit:
+          ucum_code: rad
+      bend_field_ref:
+        description: Reference bend field.
+        range: float
+        slot_uri: pals:bend_field_ref
+        unit:
+          ucum_code: T
+      bend_field_actual:
+        description: Actual bend field.
+        range: float
+        slot_uri: pals:bend_field_actual
+        unit:
+          ucum_code: T
+      e1:
+        description: Entrance end pole face rotation with respect to a sector geometry.
+        range: float
+        slot_uri: pals:e1
+        unit:
+          ucum_code: rad
+      e2:
+        description: Exit end pole face rotation with respect to a sector geometry.
+        range: float
+        slot_uri: pals:e2
+        unit:
+          ucum_code: rad
+      e1_rect:
+        description: Entrance end pole face rotation with respect to a rectangular geometry.
+        range: float
+        slot_uri: pals:e1_rect
+        unit:
+          ucum_code: rad
+      e2_rect:
+        description: Exit end pole face rotation with respect to a rectangular geometry.
+        range: float
+        slot_uri: pals:e2_rect
+        unit:
+          ucum_code: rad
+      edge1_int:
+        description: Entrance end fringe field integral.
+        range: float
+        slot_uri: pals:edge1_int
+        unit:
+          ucum_code: T.m
+      edge2_int:
+        description: Exit end fringe field integral.
+        range: float
+        slot_uri: pals:edge2_int
+        unit:
+          ucum_code: T.m
+      g_ref:
+        description: Reference bend strength = 1/radius_ref
+        range: float
+        slot_uri: pals:g_ref
+        unit:
+          ucum_code: 1/m
+      g_actual:
+        description: Actual bend strength = 1/radius_actual
+        range: float
+        slot_uri: pals:g_actual
+        unit:
+          ucum_code: 1/m
+      h1:
+        description: Entrance end pole face curvature
+        range: float
+        slot_uri: pals:h1
+        unit:
+          ucum_code: 1/m
+      h2:
+        description: Exit end pole face curvature
+        range: float
+        slot_uri: pals:h2
+        unit:
+          ucum_code: 1/m
+      L_chord:
+        description: Chord length of the bend.
+        range: float
+        slot_uri: pals:L_chord
+        unit:
+          ucum_code: m
+      L_sagitta:
+        description: Output parameter. Sagitta length.
+        range: float
+        slot_uri: pals:L_sagitta
+        unit:
+          ucum_code: m
+      L_rectangle:
+        description: Rectangular length. 
+        range: float
+        slot_uri: pals:L_rectangle
+        unit:
+          ucum_code: m
+      multipole_geometry:
+        description: Multipole geometry type. Must be `follows_ref_geometry`.
+        range: MultipoleGeometryEnum
+        slot_uri: pals:multipole_geometry
+      ref_geometry:
+        description: Reference geometry type. Must be `arc`.
+        range: ReferenceGeometryEnum
+        slot_uri: pals:ref_geometry
+      rho_ref:
+        description: Reference bend radius.
+        range: float
+        slot_uri: pals:rho_ref
+        unit:
+          ucum_code: m
+      tilt_ref:
+        description: Reference tilt of the bend.
+        range: float
+        slot_uri: pals:tilt_ref
+        unit:
+          ucum_code: rad
+    rules:
+      - description: "multipole_geometry must be follows_ref_geometry"
+        postconditions:
+          slot_conditions:
+            multipole_geometry:
+              equals_expression: follows_ref_geometry
+      - description: "ref_geometry must be arc"
+        postconditions:
+          slot_conditions:
+            ref_geometry:
+              equals_expression: arc
+    exact_mappings:
+      - pals:BendP
 
   MultipoleComponent:
     description: >-
@@ -710,11 +846,12 @@ classes:
       This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks
       that are important for understanding the structure and function of the accelerator system.
     attributes:
-      function:
+      functions:
         description: >-
           The function of the physical component, 
           which can be used to identify the component across different source systems.
         required: true
+        multivalued: true
         slot_uri: narad:physical_function
         range: PhysicalFunctionEnum
       beamline_relation:
@@ -737,11 +874,12 @@ classes:
       This can be used to capture abstract components, such as Markers, BeamlineSections, and FacilitySpaces
       that are important for understanding the structure and function of the accelerator system but are not physical devices.
     attributes:
-      function:
+      functions:
         description: >-
           The function of the virtual component, 
           which can be used to identify the component across different source systems.
         required: true
+        multivalued: true
         slot_uri: narad:virtual_function
         range: VirtualFunctionEnum
       beamline_relation:
@@ -898,7 +1036,17 @@ classes:
       Only one of the electric or magnetic multipole components should be present, not both.
     is_a: Multipole
     broad_mappings:
-      - pals:Multipole
+      - pals:Multipole # DM: not in PALS
+  
+  Bend:
+    description: >-
+      Dipole magnet used to bend the beam. 2 poles.
+      The major difference between this element and other physical elements is that with a Bend 
+      the curvilinear coordinate system is an arc with finite curvature 
+      and for the other elements the curvilinear coordinate system is straight.
+    is_a: Multipole
+    exact_mappings:
+      - pals:Bend
   
   Quadrupole:
     description: >-
@@ -951,6 +1099,16 @@ classes:
       - VDiagKicker
       - HDiagKicker # DM: made this one up
 
+  ACKicker:
+    description: >-
+      An ACKicker element simulates a time-dependent kicker. 
+      It is like a Kicker element except that the field varies in time. 
+      This element requires a user supplied time-dependent expression.
+    # DM: what additional parameters/attributes/slots are needed for an ACKicker from a vanilla Kicker?
+    is_a: Kicker
+    exact_mappings:
+      - pals:ACKicker
+
   DiagnosticDevice:
     description: An accelerator device used to measure beam or machine state.
     is_a: PhysicalComponent
@@ -997,6 +1155,12 @@ classes:
     exact_mappings:
       - pals:RFCavity
   
+  SuperconductingRFCavity:
+    description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
+    is_a: RFCavity
+    broad_mappings:
+      - pals:RFCavity # DM: not in PALS
+  
   SupportingFacilityComponent:
     is_a: PhysicalComponent
     description: >-
@@ -1016,11 +1180,12 @@ classes:
       - HasLongitudinalPlacement
       - BodyShiftP
     attributes:
-      function:
+      functions:
         description: >-
           The function of the supporting facility component, 
           which can be used to identify the component across different source systems.
         required: true
+        multivalued: true
         slot_uri: narad:supporting_facility_function
         range: FacilityFunctionEnum
     broad_mappings:
@@ -1083,7 +1248,7 @@ classes:
           (e.g. float, integer, boolean) rather than treating everything as
           an opaque string.
 
-  # ---- Relationships: SignalBindings and ComponentRelations ------------------------------------------------
+  # ---- Relationships: SignalBindings and Component Relations ------------------------------------------------
 
   Relationship:
     abstract: true
@@ -1237,10 +1402,12 @@ enums:
         description: Houses control electronics for accelerator components.
       Cooling:
         description: Provides cooling for accelerator components.
+      Diagnostics:
+        description: >-
+          Provides diagnostic capabilities for accelerator components, such as monitoring or measurement.
       Detection:
         description: >-
-          Provides detection or monitoring of environmental conditions, 
-          such as radiation or temperature.
+          Provides detection capabilities for accelerator components, such as radiation or particle detection.
 
   VirtualFunctionEnum: # Chris and Todd need to evaluate this idea and ontology
     description: Broad virtual component functions or roles.
@@ -1461,6 +1628,18 @@ enums:
           a is connected to b if and only if a and b are discrete structure, 
           and there exists some connecting structure c, such that c connects a and b
         meaning: RO:0002170
+      controls:
+        description: Subject controls the state or behavior of object.
+        meaning: saref:controls
+      is_controlled_by:
+        description: Subject is controlled by object.
+        meaning: saref:isControlledBy
+      is_part_of:
+        description: Subject is a part of object.
+        meaning: BFO:0000050
+      has_part:
+        description: Subject has part object.
+        meaning: BFO:0000051
       adjacent_to:
         description: Subject and object are spatially adjacent, without overlapping.
         meaning: RO:0002220
@@ -1526,3 +1705,35 @@ enums:
       downstream:
       positive:
       negative:
+
+  MultipoleGeometryEnum:
+    description: >-
+      The geometric configuration of the multipole field. 
+      Sets the geometry used to calculate multipoles.
+    permissible_values:
+      follows_ref_geometry:
+        description: Use geometry equivalent to the setting of `ref_geometry`.
+      vertically_pure:
+        description: Vertically pure multipoles with arc geometry.
+      horizontally_pure:
+        description: Horizontally pure multipoles with arc geometry.
+      chord:
+        description: Z-axis is the chord connecting the entrance origin point to the exit origin point.
+      entrance_coords:
+        description: Rectangular coordinates commensurate with the entrance coordinates.
+      exit_coords:
+        description: Rectangular coordinates commensurate with the exit coordinates.
+
+  ReferenceGeometryEnum:
+    description: >-
+      The reference geometry used to calculate multipoles. 
+      Sets the geometry used to calculate multipoles.
+    permissible_values:
+      arc:
+        description: Default. Reference are the curvelinear arc coordinates.
+      chord:
+        description: Z-axis is the chord connecting the entrance origin point to the exit origin point.
+      entrance_coords:
+        description: Rectangular coordinates commensurate with the entrance coordinates.
+      exit_coords:
+        description: Rectangular coordinates commensurate with the exit coordinates.

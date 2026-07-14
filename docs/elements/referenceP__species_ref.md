@@ -18,7 +18,9 @@ None &#8594;  <sub>0..1</sub> [String](types/String.md)
 
 ## Used by
 
+ * [ACKicker](ACKicker.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
+ * [Bend](Bend.md)
  * [Cavity](Cavity.md)
  * [CrabCavity](CrabCavity.md)
  * [Dipole](Dipole.md)
@@ -31,6 +33,7 @@ None &#8594;  <sub>0..1</sub> [String](types/String.md)
  * [ReferenceP](ReferenceP.md)
  * [Sextupole](Sextupole.md)
  * [Solenoid](Solenoid.md)
+ * [SuperconductingRFCavity](SuperconductingRFCavity.md)
 
 ## Other properties
 

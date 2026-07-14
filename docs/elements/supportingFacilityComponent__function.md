@@ -8,7 +8,7 @@ URI: [narad:supportingFacilityComponent__function](https://example.org/narad/sup
 
 ## Domain and Range
 
-None &#8594;  <sub>1..1</sub> [FacilityFunctionEnum](FacilityFunctionEnum.md)
+None &#8594;  <sub>1..\*</sub> [FacilityFunctionEnum](FacilityFunctionEnum.md)
 
 ## Parents
 

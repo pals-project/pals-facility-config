@@ -18,6 +18,8 @@ None &#8594;  <sub>0..\*</sub> [MultipoleComponent](MultipoleComponent.md)
 
 ## Used by
 
+ * [ACKicker](ACKicker.md)
+ * [Bend](Bend.md)
  * [Cavity](Cavity.md)
  * [CrabCavity](CrabCavity.md)
  * [Dipole](Dipole.md)
@@ -28,3 +30,4 @@ None &#8594;  <sub>0..\*</sub> [MultipoleComponent](MultipoleComponent.md)
  * [Quadrupole](Quadrupole.md)
  * [RFCavity](RFCavity.md)
  * [Sextupole](Sextupole.md)
+ * [SuperconductingRFCavity](SuperconductingRFCavity.md)

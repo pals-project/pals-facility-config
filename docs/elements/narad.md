@@ -17,12 +17,15 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
          * [Cavity](Cavity.md) - A cavity used for beam acceleration or manipulation.
              * [CrabCavity](CrabCavity.md) - A cavity used for transverse beam manipulation, such as crabbing or deflecting.
              * [RFCavity](RFCavity.md) - A cavity used for RF acceleration or longitudinal manipulation.
+                 * [SuperconductingRFCavity](SuperconductingRFCavity.md) - A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
          * [DiagnosticDevice](DiagnosticDevice.md) - An accelerator device used to measure beam or machine state.
              * [BeamPositionMonitor](BeamPositionMonitor.md) - A diagnostic device used to measure transverse beam position.
              * [RadiationMonitor](RadiationMonitor.md) - A diagnostic device used to monitor radiation dose or dose rate.
          * [Magnet](Magnet.md) - An accelerator device that produces a magnetic field for beam control.
              * [Kicker](Kicker.md) - A magnet primarily used to steer the beam.
+                 * [ACKicker](ACKicker.md) - An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.
              * [Multipole](Multipole.md) - A general magnet with a higher-order multipole field, such as a sextupole or octupole.
+                 * [Bend](Bend.md) - Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
                  * [Dipole](Dipole.md) - A magnet primarily used to bend the beam. 2 poles.
                  * [Octupole](Octupole.md) - A magnet primarily used to focus or defocus the beam. 8 poles.
                  * [Quadrupole](Quadrupole.md) - A magnet primarily used to focus or defocus the beam. 4 poles.
@@ -44,6 +47,7 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
 
 ### Mixins
 
+ * [BendP](BendP.md) - Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
  * [BodyShiftP](BodyShiftP.md) - Mixin class for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
  * [ElectricMultipoleP](ElectricMultipoleP.md) - Mixin for electric multipole parameters,
  * [FloorP](FloorP.md) - Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -62,6 +66,26 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
  * [➞periodic](beamline__periodic.md) - Indicates whether orbit and Twiss parameters periodic.
  * [➞repeat](beamline__repeat.md) - Repetition count. If not provided, the default assumption is that the beamline is not repeated and the value is 1.
  * [➞zero_point](beamline__zero_point.md) - Name of a line item used as a reference point when the BeamLine is used as a subline.
+ * [➞L_chord](bendP__L_chord.md) - Chord length of the bend.
+ * [➞L_rectangle](bendP__L_rectangle.md) - Rectangular length.
+ * [➞L_sagitta](bendP__L_sagitta.md) - Output parameter. Sagitta length.
+ * [➞angle_ref](bendP__angle_ref.md) - Reference bend angle.
+ * [➞bend_field_actual](bendP__bend_field_actual.md) - Actual bend field.
+ * [➞bend_field_ref](bendP__bend_field_ref.md) - Reference bend field.
+ * [➞e1](bendP__e1.md) - Entrance end pole face rotation with respect to a sector geometry.
+ * [➞e1_rect](bendP__e1_rect.md) - Entrance end pole face rotation with respect to a rectangular geometry.
+ * [➞e2](bendP__e2.md) - Exit end pole face rotation with respect to a sector geometry.
+ * [➞e2_rect](bendP__e2_rect.md) - Exit end pole face rotation with respect to a rectangular geometry.
+ * [➞edge1_int](bendP__edge1_int.md) - Entrance end fringe field integral.
+ * [➞edge2_int](bendP__edge2_int.md) - Exit end fringe field integral.
+ * [➞g_actual](bendP__g_actual.md) - Actual bend strength = 1/radius_actual
+ * [➞g_ref](bendP__g_ref.md) - Reference bend strength = 1/radius_ref
+ * [➞h1](bendP__h1.md) - Entrance end pole face curvature
+ * [➞h2](bendP__h2.md) - Exit end pole face curvature
+ * [➞multipole_geometry](bendP__multipole_geometry.md) - Multipole geometry type. Must be `follows_ref_geometry`.
+ * [➞ref_geometry](bendP__ref_geometry.md) - Reference geometry type. Must be `arc`.
+ * [➞rho_ref](bendP__rho_ref.md) - Reference bend radius.
+ * [➞tilt_ref](bendP__tilt_ref.md) - Reference tilt of the bend.
  * [➞x_offset](bodyShiftP__x_offset.md) - Shift in the X direction in the facility floor plan.
  * [➞x_rot](bodyShiftP__x_rot.md) - Rotation around the X-axis in the facility floor plan.
  * [➞y_offset](bodyShiftP__y_offset.md) - Shift in the Y direction in the facility floor plan.
@@ -119,7 +143,7 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
      * [ComponentRelation➞object](ComponentRelation_object.md)
      * [SignalBinding➞object](SignalBinding_object.md)
  * [➞beamline_relation](physicalComponent__beamline_relation.md) - The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
- * [➞function](physicalComponent__function.md) - The function of the physical component,  which can be used to identify the component across different source systems.
+ * [➞functions](physicalComponent__functions.md) - The function of the physical component,  which can be used to identify the component across different source systems.
  * [predicate](predicate.md)
      * [ComponentRelation➞predicate](ComponentRelation_predicate.md)
      * [SignalBinding➞predicate](SignalBinding_predicate.md)
@@ -141,7 +165,7 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
  * [subject](subject.md)
      * [ComponentRelation➞subject](ComponentRelation_subject.md)
      * [SignalBinding➞subject](SignalBinding_subject.md)
- * [➞function](supportingFacilityComponent__function.md) - The function of the supporting facility component,  which can be used to identify the component across different source systems.
+ * [➞functions](supportingFacilityComponent__functions.md) - The function of the supporting facility component,  which can be used to identify the component across different source systems.
  * [➞alpha_a](twissP__alpha_a.md) - Twiss alpha parameter in the horizontal plane.
  * [➞alpha_b](twissP__alpha_b.md) - Twiss alpha parameter in the vertical plane.
  * [➞beta_a](twissP__beta_a.md) - Twiss beta parameter in the horizontal plane.
@@ -154,7 +178,7 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
  * [➞phi_b](twissP__phi_b.md) - Twiss phase advance parameter in the vertical plane.
  * [type](type.md) - The LinkML class name of this instance.
  * [➞beamline_relation](virtualComponent__beamline_relation.md) - The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
- * [➞function](virtualComponent__function.md) - The function of the virtual component,  which can be used to identify the component across different source systems.
+ * [➞functions](virtualComponent__functions.md) - The function of the virtual component,  which can be used to identify the component across different source systems.
 
 ### Enums
 
@@ -164,11 +188,13 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
  * [DataTypeEnum](DataTypeEnum.md) - Data types for parameter values.
  * [DirectionEnum](DirectionEnum.md)
  * [FacilityFunctionEnum](FacilityFunctionEnum.md) - Broad structural or support functions.
+ * [MultipoleGeometryEnum](MultipoleGeometryEnum.md) - The geometric configuration of the multipole field.  Sets the geometry used to calculate multipoles.
  * [PhysicalFunctionEnum](PhysicalFunctionEnum.md) - Broad device-level functions.
  * [PhysicalRelationEnum](PhysicalRelationEnum.md) - Controlled values for physical relation to the beamline.
  * [PlaneEnum](PlaneEnum.md) - Controlled values for transverse plane.
  * [QuantityKindEnum](QuantityKindEnum.md) - Physical quantity kinds for signals.
  * [ReferenceFrameEnum](ReferenceFrameEnum.md)
+ * [ReferenceGeometryEnum](ReferenceGeometryEnum.md) - The reference geometry used to calculate multipoles.  Sets the geometry used to calculate multipoles.
  * [RelationContextEnum](RelationContextEnum.md)
  * [SignalBindingPredicateEnum](SignalBindingPredicateEnum.md) - Controlled predicates for Component-to-Signal bindings.
  * [SignalRoleEnum](SignalRoleEnum.md) - Roles for control-system signals.

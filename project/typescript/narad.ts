@@ -7,16 +7,19 @@ export type MagnetId = string;
 export type SolenoidId = string;
 export type MultipoleId = string;
 export type DipoleId = string;
+export type BendId = string;
 export type QuadrupoleId = string;
 export type OctupoleId = string;
 export type SextupoleId = string;
 export type KickerId = string;
+export type ACKickerId = string;
 export type DiagnosticDeviceId = string;
 export type BeamPositionMonitorId = string;
 export type RadiationMonitorId = string;
 export type CavityId = string;
 export type CrabCavityId = string;
 export type RFCavityId = string;
+export type SuperconductingRFCavityId = string;
 export type SupportingFacilityComponentId = string;
 export type BookkeepingComponentId = string;
 export type MarkerId = string;
@@ -118,7 +121,9 @@ export enum FacilityFunctionEnum {
     ControlRack = "ControlRack",
     /** Provides cooling for accelerator components. */
     Cooling = "Cooling",
-    /** Provides detection or monitoring of environmental conditions,  such as radiation or temperature. */
+    /** Provides diagnostic capabilities for accelerator components, such as monitoring or measurement. */
+    Diagnostics = "Diagnostics",
+    /** Provides detection capabilities for accelerator components, such as radiation or particle detection. */
     Detection = "Detection",
 };
 /**
@@ -296,6 +301,14 @@ export enum ComponentRelationPredicateEnum {
     contained_in = "contained_in",
     /** Subject and object are physically connected. a is connected to b if and only if a and b are discrete structure,  and there exists some connecting structure c, such that c connects a and b */
     connected_to = "connected_to",
+    /** Subject controls the state or behavior of object. */
+    controls = "controls",
+    /** Subject is controlled by object. */
+    is_controlled_by = "is_controlled_by",
+    /** Subject is a part of object. */
+    is_part_of = "is_part_of",
+    /** Subject has part object. */
+    has_part = "has_part",
     /** Subject and object are spatially adjacent, without overlapping. */
     adjacent_to = "adjacent_to",
     /** Subject and object share at least one part in common. */
@@ -358,6 +371,38 @@ export enum DirectionEnum {
     downstream = "downstream",
     positive = "positive",
     negative = "negative",
+};
+/**
+* The geometric configuration of the multipole field.  Sets the geometry used to calculate multipoles.
+*/
+export enum MultipoleGeometryEnum {
+    
+    /** Use geometry equivalent to the setting of `ref_geometry`. */
+    follows_ref_geometry = "follows_ref_geometry",
+    /** Vertically pure multipoles with arc geometry. */
+    vertically_pure = "vertically_pure",
+    /** Horizontally pure multipoles with arc geometry. */
+    horizontally_pure = "horizontally_pure",
+    /** Z-axis is the chord connecting the entrance origin point to the exit origin point. */
+    chord = "chord",
+    /** Rectangular coordinates commensurate with the entrance coordinates. */
+    entrance_coords = "entrance_coords",
+    /** Rectangular coordinates commensurate with the exit coordinates. */
+    exit_coords = "exit_coords",
+};
+/**
+* The reference geometry used to calculate multipoles.  Sets the geometry used to calculate multipoles.
+*/
+export enum ReferenceGeometryEnum {
+    
+    /** Default. Reference are the curvelinear arc coordinates. */
+    arc = "arc",
+    /** Z-axis is the chord connecting the entrance origin point to the exit origin point. */
+    chord = "chord",
+    /** Rectangular coordinates commensurate with the entrance coordinates. */
+    entrance_coords = "entrance_coords",
+    /** Rectangular coordinates commensurate with the exit coordinates. */
+    exit_coords = "exit_coords",
 };
 
 
@@ -544,6 +589,54 @@ export interface MagneticMultipoleP {
 
 
 /**
+ * Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
+This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+ */
+export interface BendP {
+    /** Reference bend angle. */
+    angle_ref?: number,
+    /** Reference bend field. */
+    bend_field_ref?: number,
+    /** Actual bend field. */
+    bend_field_actual?: number,
+    /** Entrance end pole face rotation with respect to a sector geometry. */
+    e1?: number,
+    /** Exit end pole face rotation with respect to a sector geometry. */
+    e2?: number,
+    /** Entrance end pole face rotation with respect to a rectangular geometry. */
+    e1_rect?: number,
+    /** Exit end pole face rotation with respect to a rectangular geometry. */
+    e2_rect?: number,
+    /** Entrance end fringe field integral. */
+    edge1_int?: number,
+    /** Exit end fringe field integral. */
+    edge2_int?: number,
+    /** Reference bend strength = 1/radius_ref */
+    g_ref?: number,
+    /** Actual bend strength = 1/radius_actual */
+    g_actual?: number,
+    /** Entrance end pole face curvature */
+    h1?: number,
+    /** Exit end pole face curvature */
+    h2?: number,
+    /** Chord length of the bend. */
+    L_chord?: number,
+    /** Output parameter. Sagitta length. */
+    L_sagitta?: number,
+    /** Rectangular length. */
+    L_rectangle?: number,
+    /** Multipole geometry type. Must be `follows_ref_geometry`. */
+    multipole_geometry?: string,
+    /** Reference geometry type. Must be `arc`. */
+    ref_geometry?: string,
+    /** Reference bend radius. */
+    rho_ref?: number,
+    /** Reference tilt of the bend. */
+    tilt_ref?: number,
+}
+
+
+/**
  * A single order's electric (or magnetic) multipole component.
 Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.
 Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
@@ -590,7 +683,7 @@ export interface Component extends MetaP {
  */
 export interface PhysicalComponent extends Component, FloorP, HasLongitudinalPlacement {
     /** The function of the physical component,  which can be used to identify the component across different source systems. */
-    function: string,
+    functions: string,
     /** The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems. */
     beamline_relation: string,
 }
@@ -601,7 +694,7 @@ export interface PhysicalComponent extends Component, FloorP, HasLongitudinalPla
  */
 export interface VirtualComponent extends Component, FloorP {
     /** The function of the virtual component,  which can be used to identify the component across different source systems. */
-    function: string,
+    functions: string,
     /** The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems. */
     beamline_relation: string,
 }
@@ -692,6 +785,13 @@ export interface Dipole extends Multipole {
 
 
 /**
+ * Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
+ */
+export interface Bend extends Multipole {
+}
+
+
+/**
  * A magnet primarily used to focus or defocus the beam. 4 poles.
 Only one of the electric or magnetic multipole components should be present, not both.
  */
@@ -723,6 +823,13 @@ Only one of the electric or magnetic multipole components should be present, not
 export interface Kicker extends Magnet, ElectricMultipoleP, MagneticMultipoleP {
     /** The transverse plane in which the kicker operates, either horizontal or vertical. */
     plane?: string,
+}
+
+
+/**
+ * An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.
+ */
+export interface ACKicker extends Kicker {
 }
 
 
@@ -769,6 +876,13 @@ export interface RFCavity extends Cavity {
 
 
 /**
+ * A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
+ */
+export interface SuperconductingRFCavity extends RFCavity {
+}
+
+
+/**
  * A physical component that supports accelerator operation 
 without a specific beam-pipe placement, 
 such as a power supply, control rack, or radiation detector.
@@ -778,7 +892,7 @@ the structure and function of the accelerator system but are not inline with the
  */
 export interface SupportingFacilityComponent extends PhysicalComponent, FloorP, HasLongitudinalPlacement, BodyShiftP {
     /** The function of the supporting facility component,  which can be used to identify the component across different source systems. */
-    function: string,
+    functions: string,
 }
 
 

@@ -8,7 +8,7 @@ URI: [narad:virtualComponent__function](https://example.org/narad/virtualCompone
 
 ## Domain and Range
 
-None &#8594;  <sub>1..1</sub> [VirtualFunctionEnum](VirtualFunctionEnum.md)
+None &#8594;  <sub>1..\*</sub> [VirtualFunctionEnum](VirtualFunctionEnum.md)
 
 ## Parents
 

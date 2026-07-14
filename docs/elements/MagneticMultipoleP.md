@@ -41,5 +41,4 @@ URI: [narad:MagneticMultipoleP](https://example.org/narad/MagneticMultipoleP)
 
 |  |  |  |
 | --- | --- | --- |
-| **Exact Mappings:** | | pals:MagneticMultipoleP |
 | **Broad Mappings:** | | pals:MagneticMultipoleP |

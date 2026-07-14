@@ -1,5 +1,5 @@
 # Auto generated from narad.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-07-07T19:39:17
+# Generation date: 2026-07-14T12:50:21
 # Schema: accelerator_core
 #
 # id: https://w3id.org/accelerator-core
@@ -72,6 +72,7 @@ PALS = CurieNamespace('pals', 'https://pals-project.readthedocs.io/')
 QUANTITYKIND = CurieNamespace('quantitykind', 'http://qudt.org/vocab/quantitykind/')
 QUDT = CurieNamespace('qudt', 'http://qudt.org/schema/qudt/')
 RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
+SAREF = CurieNamespace('saref', 'https://saref.etsi.org/core/v4.1.1/')
 SOSA = CurieNamespace('sosa', 'http://www.w3.org/ns/sosa/')
 SSN = CurieNamespace('ssn', 'http://www.w3.org/ns/ssn/')
 SSN_SYSTEM = CurieNamespace('ssn-system', 'http://www.w3.org/ns/ssn/systems/')
@@ -119,6 +120,10 @@ class DipoleId(MultipoleId):
     pass
 
 
+class BendId(MultipoleId):
+    pass
+
+
 class QuadrupoleId(MultipoleId):
     pass
 
@@ -132,6 +137,10 @@ class SextupoleId(MultipoleId):
 
 
 class KickerId(MagnetId):
+    pass
+
+
+class ACKickerId(KickerId):
     pass
 
 
@@ -156,6 +165,10 @@ class CrabCavityId(CavityId):
 
 
 class RFCavityId(CavityId):
+    pass
+
+
+class SuperconductingRFCavityId(RFCavityId):
     pass
 
 
@@ -566,6 +579,104 @@ class MagneticMultipoleP(YAMLRoot):
 
 
 @dataclass(repr=False)
+class BendP(YAMLRoot):
+    """
+    Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
+    This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["BendP"]
+    class_class_curie: ClassVar[str] = "narad:BendP"
+    class_name: ClassVar[str] = "BendP"
+    class_model_uri: ClassVar[URIRef] = NARAD.BendP
+
+    angle_ref: Optional[float] = None
+    bend_field_ref: Optional[float] = None
+    bend_field_actual: Optional[float] = None
+    e1: Optional[float] = None
+    e2: Optional[float] = None
+    e1_rect: Optional[float] = None
+    e2_rect: Optional[float] = None
+    edge1_int: Optional[float] = None
+    edge2_int: Optional[float] = None
+    g_ref: Optional[float] = None
+    g_actual: Optional[float] = None
+    h1: Optional[float] = None
+    h2: Optional[float] = None
+    L_chord: Optional[float] = None
+    L_sagitta: Optional[float] = None
+    L_rectangle: Optional[float] = None
+    multipole_geometry: Optional[Union[str, "MultipoleGeometryEnum"]] = None
+    ref_geometry: Optional[Union[str, "ReferenceGeometryEnum"]] = None
+    rho_ref: Optional[float] = None
+    tilt_ref: Optional[float] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.angle_ref is not None and not isinstance(self.angle_ref, float):
+            self.angle_ref = float(self.angle_ref)
+
+        if self.bend_field_ref is not None and not isinstance(self.bend_field_ref, float):
+            self.bend_field_ref = float(self.bend_field_ref)
+
+        if self.bend_field_actual is not None and not isinstance(self.bend_field_actual, float):
+            self.bend_field_actual = float(self.bend_field_actual)
+
+        if self.e1 is not None and not isinstance(self.e1, float):
+            self.e1 = float(self.e1)
+
+        if self.e2 is not None and not isinstance(self.e2, float):
+            self.e2 = float(self.e2)
+
+        if self.e1_rect is not None and not isinstance(self.e1_rect, float):
+            self.e1_rect = float(self.e1_rect)
+
+        if self.e2_rect is not None and not isinstance(self.e2_rect, float):
+            self.e2_rect = float(self.e2_rect)
+
+        if self.edge1_int is not None and not isinstance(self.edge1_int, float):
+            self.edge1_int = float(self.edge1_int)
+
+        if self.edge2_int is not None and not isinstance(self.edge2_int, float):
+            self.edge2_int = float(self.edge2_int)
+
+        if self.g_ref is not None and not isinstance(self.g_ref, float):
+            self.g_ref = float(self.g_ref)
+
+        if self.g_actual is not None and not isinstance(self.g_actual, float):
+            self.g_actual = float(self.g_actual)
+
+        if self.h1 is not None and not isinstance(self.h1, float):
+            self.h1 = float(self.h1)
+
+        if self.h2 is not None and not isinstance(self.h2, float):
+            self.h2 = float(self.h2)
+
+        if self.L_chord is not None and not isinstance(self.L_chord, float):
+            self.L_chord = float(self.L_chord)
+
+        if self.L_sagitta is not None and not isinstance(self.L_sagitta, float):
+            self.L_sagitta = float(self.L_sagitta)
+
+        if self.L_rectangle is not None and not isinstance(self.L_rectangle, float):
+            self.L_rectangle = float(self.L_rectangle)
+
+        if self.multipole_geometry is not None and not isinstance(self.multipole_geometry, MultipoleGeometryEnum):
+            self.multipole_geometry = MultipoleGeometryEnum(self.multipole_geometry)
+
+        if self.ref_geometry is not None and not isinstance(self.ref_geometry, ReferenceGeometryEnum):
+            self.ref_geometry = ReferenceGeometryEnum(self.ref_geometry)
+
+        if self.rho_ref is not None and not isinstance(self.rho_ref, float):
+            self.rho_ref = float(self.rho_ref)
+
+        if self.tilt_ref is not None and not isinstance(self.tilt_ref, float):
+            self.tilt_ref = float(self.tilt_ref)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class MultipoleComponent(YAMLRoot):
     """
     A single order's electric (or magnetic) multipole component.
@@ -693,7 +804,7 @@ class PhysicalComponent(Component):
 
     id: Union[str, PhysicalComponentId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     x: Optional[float] = None
     y: Optional[float] = None
@@ -710,10 +821,11 @@ class PhysicalComponent(Component):
         if not isinstance(self.id, PhysicalComponentId):
             self.id = PhysicalComponentId(self.id)
 
-        if self._is_empty(self.function):
-            self.MissingRequiredField("function")
-        if not isinstance(self.function, PhysicalFunctionEnum):
-            self.function = PhysicalFunctionEnum(self.function)
+        if self._is_empty(self.functions):
+            self.MissingRequiredField("functions")
+        if not isinstance(self.functions, list):
+            self.functions = [self.functions] if self.functions is not None else []
+        self.functions = [v if isinstance(v, PhysicalFunctionEnum) else PhysicalFunctionEnum(v) for v in self.functions]
 
         if self._is_empty(self.beamline_relation):
             self.MissingRequiredField("beamline_relation")
@@ -764,7 +876,7 @@ class VirtualComponent(Component):
 
     id: Union[str, VirtualComponentId] = None
     type: str = None
-    function: Union[str, "VirtualFunctionEnum"] = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
     x: Optional[float] = None
     y: Optional[float] = None
@@ -779,10 +891,11 @@ class VirtualComponent(Component):
         if not isinstance(self.id, VirtualComponentId):
             self.id = VirtualComponentId(self.id)
 
-        if self._is_empty(self.function):
-            self.MissingRequiredField("function")
-        if not isinstance(self.function, VirtualFunctionEnum):
-            self.function = VirtualFunctionEnum(self.function)
+        if self._is_empty(self.functions):
+            self.MissingRequiredField("functions")
+        if not isinstance(self.functions, list):
+            self.functions = [self.functions] if self.functions is not None else []
+        self.functions = [v if isinstance(v, VirtualFunctionEnum) else VirtualFunctionEnum(v) for v in self.functions]
 
         if self._is_empty(self.beamline_relation):
             self.MissingRequiredField("beamline_relation")
@@ -824,7 +937,7 @@ class Beamline(VirtualComponent):
 
     id: Union[str, BeamlineId] = None
     type: str = None
-    function: Union[str, "VirtualFunctionEnum"] = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
     multipass: Optional[Union[bool, Bool]] = None
     length: Optional[float] = None
@@ -966,7 +1079,7 @@ class Magnet(PhysicalComponent):
 
     id: Union[str, MagnetId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     species_ref: Optional[str] = None
     pc_ref: Optional[float] = None
@@ -1069,7 +1182,7 @@ class Solenoid(Magnet):
 
     id: Union[str, SolenoidId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     Ksol: Optional[float] = None
     Bsol: Optional[float] = None
@@ -1104,7 +1217,7 @@ class Multipole(Magnet):
 
     id: Union[str, MultipoleId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     components: Optional[Union[Union[dict, MultipoleComponent], list[Union[dict, MultipoleComponent]]]] = empty_list()
 
@@ -1136,7 +1249,7 @@ class Dipole(Multipole):
 
     id: Union[str, DipoleId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1144,6 +1257,34 @@ class Dipole(Multipole):
             self.MissingRequiredField("id")
         if not isinstance(self.id, DipoleId):
             self.id = DipoleId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Bend(Multipole):
+    """
+    Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical
+    elements is that with a Bend the curvilinear coordinate system is an arc with finite curvature and for the other
+    elements the curvilinear coordinate system is straight.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["Bend"]
+    class_class_curie: ClassVar[str] = "narad:Bend"
+    class_name: ClassVar[str] = "Bend"
+    class_model_uri: ClassVar[URIRef] = NARAD.Bend
+
+    id: Union[str, BendId] = None
+    type: str = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
+    beamline_relation: Union[str, "PhysicalRelationEnum"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, BendId):
+            self.id = BendId(self.id)
 
         super().__post_init__(**kwargs)
 
@@ -1163,7 +1304,7 @@ class Quadrupole(Multipole):
 
     id: Union[str, QuadrupoleId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1190,7 +1331,7 @@ class Octupole(Multipole):
 
     id: Union[str, OctupoleId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1217,7 +1358,7 @@ class Sextupole(Multipole):
 
     id: Union[str, SextupoleId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1246,7 +1387,7 @@ class Kicker(Magnet):
 
     id: Union[str, KickerId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     plane: Optional[Union[str, "PlaneEnum"]] = None
     components: Optional[Union[Union[dict, MultipoleComponent], list[Union[dict, MultipoleComponent]]]] = empty_list()
@@ -1268,6 +1409,33 @@ class Kicker(Magnet):
 
 
 @dataclass(repr=False)
+class ACKicker(Kicker):
+    """
+    An ACKicker element simulates a time-dependent kicker. It is like a Kicker element except that the field varies in
+    time. This element requires a user supplied time-dependent expression.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["ACKicker"]
+    class_class_curie: ClassVar[str] = "narad:ACKicker"
+    class_name: ClassVar[str] = "ACKicker"
+    class_model_uri: ClassVar[URIRef] = NARAD.ACKicker
+
+    id: Union[str, ACKickerId] = None
+    type: str = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
+    beamline_relation: Union[str, "PhysicalRelationEnum"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ACKickerId):
+            self.id = ACKickerId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class DiagnosticDevice(PhysicalComponent):
     """
     An accelerator device used to measure beam or machine state.
@@ -1281,7 +1449,7 @@ class DiagnosticDevice(PhysicalComponent):
 
     id: Union[str, DiagnosticDeviceId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1307,7 +1475,7 @@ class BeamPositionMonitor(DiagnosticDevice):
 
     id: Union[str, BeamPositionMonitorId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     species_ref: Optional[str] = None
     pc_ref: Optional[float] = None
@@ -1413,7 +1581,7 @@ class RadiationMonitor(DiagnosticDevice):
 
     id: Union[str, RadiationMonitorId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     x_offset: Optional[float] = None
     y_offset: Optional[float] = None
@@ -1463,7 +1631,7 @@ class Cavity(PhysicalComponent):
 
     id: Union[str, CavityId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     species_ref: Optional[str] = None
     pc_ref: Optional[float] = None
@@ -1574,7 +1742,7 @@ class CrabCavity(Cavity):
 
     id: Union[str, CrabCavityId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1600,7 +1768,7 @@ class RFCavity(Cavity):
 
     id: Union[str, RFCavityId] = None
     type: str = None
-    function: Union[str, "PhysicalFunctionEnum"] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1608,6 +1776,32 @@ class RFCavity(Cavity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, RFCavityId):
             self.id = RFCavityId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class SuperconductingRFCavity(RFCavity):
+    """
+    A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["SuperconductingRFCavity"]
+    class_class_curie: ClassVar[str] = "narad:SuperconductingRFCavity"
+    class_name: ClassVar[str] = "SuperconductingRFCavity"
+    class_model_uri: ClassVar[URIRef] = NARAD.SuperconductingRFCavity
+
+    id: Union[str, SuperconductingRFCavityId] = None
+    type: str = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
+    beamline_relation: Union[str, "PhysicalRelationEnum"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SuperconductingRFCavityId):
+            self.id = SuperconductingRFCavityId(self.id)
 
         super().__post_init__(**kwargs)
 
@@ -1632,7 +1826,7 @@ class SupportingFacilityComponent(PhysicalComponent):
     id: Union[str, SupportingFacilityComponentId] = None
     type: str = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
-    function: Union[str, "FacilityFunctionEnum"] = None
+    functions: Union[Union[str, "FacilityFunctionEnum"], list[Union[str, "FacilityFunctionEnum"]]] = None
     x: Optional[float] = None
     y: Optional[float] = None
     z: Optional[float] = None
@@ -1654,10 +1848,11 @@ class SupportingFacilityComponent(PhysicalComponent):
         if not isinstance(self.id, SupportingFacilityComponentId):
             self.id = SupportingFacilityComponentId(self.id)
 
-        if self._is_empty(self.function):
-            self.MissingRequiredField("function")
-        if not isinstance(self.function, FacilityFunctionEnum):
-            self.function = FacilityFunctionEnum(self.function)
+        if self._is_empty(self.functions):
+            self.MissingRequiredField("functions")
+        if not isinstance(self.functions, list):
+            self.functions = [self.functions] if self.functions is not None else []
+        self.functions = [v if isinstance(v, FacilityFunctionEnum) else FacilityFunctionEnum(v) for v in self.functions]
 
         if self.x is not None and not isinstance(self.x, float):
             self.x = float(self.x)
@@ -1722,7 +1917,7 @@ class BookkeepingComponent(VirtualComponent):
 
     id: Union[str, BookkeepingComponentId] = None
     type: str = None
-    function: Union[str, "VirtualFunctionEnum"] = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
     x_offset: Optional[float] = None
     y_offset: Optional[float] = None
@@ -1772,7 +1967,7 @@ class Marker(BookkeepingComponent):
 
     id: Union[str, MarkerId] = None
     type: str = None
-    function: Union[str, "VirtualFunctionEnum"] = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
     alpha_a: Optional[float] = None
     alpha_b: Optional[float] = None
@@ -1839,7 +2034,7 @@ class BeamlineSection(BookkeepingComponent):
 
     id: Union[str, BeamlineSectionId] = None
     type: str = None
-    function: Union[str, "VirtualFunctionEnum"] = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -2186,9 +2381,12 @@ class FacilityFunctionEnum(EnumDefinitionImpl):
     Cooling = PermissibleValue(
         text="Cooling",
         description="Provides cooling for accelerator components.")
+    Diagnostics = PermissibleValue(
+        text="Diagnostics",
+        description="""Provides diagnostic capabilities for accelerator components, such as monitoring or measurement.""")
     Detection = PermissibleValue(
         text="Detection",
-        description="""Provides detection or monitoring of environmental conditions,  such as radiation or temperature.""")
+        description="""Provides detection capabilities for accelerator components, such as radiation or particle detection.""")
 
     _defn = EnumDefinition(
         name="FacilityFunctionEnum",
@@ -2501,6 +2699,22 @@ class ComponentRelationPredicateEnum(EnumDefinitionImpl):
         text="connected_to",
         description="""Subject and object are physically connected. a is connected to b if and only if a and b are discrete structure,  and there exists some connecting structure c, such that c connects a and b""",
         meaning=RO["0002170"])
+    controls = PermissibleValue(
+        text="controls",
+        description="Subject controls the state or behavior of object.",
+        meaning=SAREF["controls"])
+    is_controlled_by = PermissibleValue(
+        text="is_controlled_by",
+        description="Subject is controlled by object.",
+        meaning=SAREF["isControlledBy"])
+    is_part_of = PermissibleValue(
+        text="is_part_of",
+        description="Subject is a part of object.",
+        meaning=BFO["0000050"])
+    has_part = PermissibleValue(
+        text="has_part",
+        description="Subject has part object.",
+        meaning=BFO["0000051"])
     adjacent_to = PermissibleValue(
         text="adjacent_to",
         description="Subject and object are spatially adjacent, without overlapping.",
@@ -2598,6 +2812,56 @@ class DirectionEnum(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="DirectionEnum",
+    )
+
+class MultipoleGeometryEnum(EnumDefinitionImpl):
+    """
+    The geometric configuration of the multipole field.  Sets the geometry used to calculate multipoles.
+    """
+    follows_ref_geometry = PermissibleValue(
+        text="follows_ref_geometry",
+        description="Use geometry equivalent to the setting of `ref_geometry`.")
+    vertically_pure = PermissibleValue(
+        text="vertically_pure",
+        description="Vertically pure multipoles with arc geometry.")
+    horizontally_pure = PermissibleValue(
+        text="horizontally_pure",
+        description="Horizontally pure multipoles with arc geometry.")
+    chord = PermissibleValue(
+        text="chord",
+        description="Z-axis is the chord connecting the entrance origin point to the exit origin point.")
+    entrance_coords = PermissibleValue(
+        text="entrance_coords",
+        description="Rectangular coordinates commensurate with the entrance coordinates.")
+    exit_coords = PermissibleValue(
+        text="exit_coords",
+        description="Rectangular coordinates commensurate with the exit coordinates.")
+
+    _defn = EnumDefinition(
+        name="MultipoleGeometryEnum",
+        description="The geometric configuration of the multipole field.  Sets the geometry used to calculate multipoles.",
+    )
+
+class ReferenceGeometryEnum(EnumDefinitionImpl):
+    """
+    The reference geometry used to calculate multipoles.  Sets the geometry used to calculate multipoles.
+    """
+    arc = PermissibleValue(
+        text="arc",
+        description="Default. Reference are the curvelinear arc coordinates.")
+    chord = PermissibleValue(
+        text="chord",
+        description="Z-axis is the chord connecting the entrance origin point to the exit origin point.")
+    entrance_coords = PermissibleValue(
+        text="entrance_coords",
+        description="Rectangular coordinates commensurate with the entrance coordinates.")
+    exit_coords = PermissibleValue(
+        text="exit_coords",
+        description="Rectangular coordinates commensurate with the exit coordinates.")
+
+    _defn = EnumDefinition(
+        name="ReferenceGeometryEnum",
+        description="""The reference geometry used to calculate multipoles.  Sets the geometry used to calculate multipoles.""",
     )
 
 # Slots
@@ -2751,6 +3015,66 @@ slots.electricMultipoleP__components = Slot(uri=NARAD.components, name="electric
 slots.magneticMultipoleP__components = Slot(uri=NARAD.components, name="magneticMultipoleP__components", curie=NARAD.curie('components'),
                    model_uri=NARAD.magneticMultipoleP__components, domain=None, range=Optional[Union[Union[dict, MultipoleComponent], list[Union[dict, MultipoleComponent]]]])
 
+slots.bendP__angle_ref = Slot(uri=PALS.angle_ref, name="bendP__angle_ref", curie=PALS.curie('angle_ref'),
+                   model_uri=NARAD.bendP__angle_ref, domain=None, range=Optional[float])
+
+slots.bendP__bend_field_ref = Slot(uri=PALS.bend_field_ref, name="bendP__bend_field_ref", curie=PALS.curie('bend_field_ref'),
+                   model_uri=NARAD.bendP__bend_field_ref, domain=None, range=Optional[float])
+
+slots.bendP__bend_field_actual = Slot(uri=PALS.bend_field_actual, name="bendP__bend_field_actual", curie=PALS.curie('bend_field_actual'),
+                   model_uri=NARAD.bendP__bend_field_actual, domain=None, range=Optional[float])
+
+slots.bendP__e1 = Slot(uri=PALS.e1, name="bendP__e1", curie=PALS.curie('e1'),
+                   model_uri=NARAD.bendP__e1, domain=None, range=Optional[float])
+
+slots.bendP__e2 = Slot(uri=PALS.e2, name="bendP__e2", curie=PALS.curie('e2'),
+                   model_uri=NARAD.bendP__e2, domain=None, range=Optional[float])
+
+slots.bendP__e1_rect = Slot(uri=PALS.e1_rect, name="bendP__e1_rect", curie=PALS.curie('e1_rect'),
+                   model_uri=NARAD.bendP__e1_rect, domain=None, range=Optional[float])
+
+slots.bendP__e2_rect = Slot(uri=PALS.e2_rect, name="bendP__e2_rect", curie=PALS.curie('e2_rect'),
+                   model_uri=NARAD.bendP__e2_rect, domain=None, range=Optional[float])
+
+slots.bendP__edge1_int = Slot(uri=PALS.edge1_int, name="bendP__edge1_int", curie=PALS.curie('edge1_int'),
+                   model_uri=NARAD.bendP__edge1_int, domain=None, range=Optional[float])
+
+slots.bendP__edge2_int = Slot(uri=PALS.edge2_int, name="bendP__edge2_int", curie=PALS.curie('edge2_int'),
+                   model_uri=NARAD.bendP__edge2_int, domain=None, range=Optional[float])
+
+slots.bendP__g_ref = Slot(uri=PALS.g_ref, name="bendP__g_ref", curie=PALS.curie('g_ref'),
+                   model_uri=NARAD.bendP__g_ref, domain=None, range=Optional[float])
+
+slots.bendP__g_actual = Slot(uri=PALS.g_actual, name="bendP__g_actual", curie=PALS.curie('g_actual'),
+                   model_uri=NARAD.bendP__g_actual, domain=None, range=Optional[float])
+
+slots.bendP__h1 = Slot(uri=PALS.h1, name="bendP__h1", curie=PALS.curie('h1'),
+                   model_uri=NARAD.bendP__h1, domain=None, range=Optional[float])
+
+slots.bendP__h2 = Slot(uri=PALS.h2, name="bendP__h2", curie=PALS.curie('h2'),
+                   model_uri=NARAD.bendP__h2, domain=None, range=Optional[float])
+
+slots.bendP__L_chord = Slot(uri=PALS.L_chord, name="bendP__L_chord", curie=PALS.curie('L_chord'),
+                   model_uri=NARAD.bendP__L_chord, domain=None, range=Optional[float])
+
+slots.bendP__L_sagitta = Slot(uri=PALS.L_sagitta, name="bendP__L_sagitta", curie=PALS.curie('L_sagitta'),
+                   model_uri=NARAD.bendP__L_sagitta, domain=None, range=Optional[float])
+
+slots.bendP__L_rectangle = Slot(uri=PALS.L_rectangle, name="bendP__L_rectangle", curie=PALS.curie('L_rectangle'),
+                   model_uri=NARAD.bendP__L_rectangle, domain=None, range=Optional[float])
+
+slots.bendP__multipole_geometry = Slot(uri=PALS.multipole_geometry, name="bendP__multipole_geometry", curie=PALS.curie('multipole_geometry'),
+                   model_uri=NARAD.bendP__multipole_geometry, domain=None, range=Optional[Union[str, "MultipoleGeometryEnum"]])
+
+slots.bendP__ref_geometry = Slot(uri=PALS.ref_geometry, name="bendP__ref_geometry", curie=PALS.curie('ref_geometry'),
+                   model_uri=NARAD.bendP__ref_geometry, domain=None, range=Optional[Union[str, "ReferenceGeometryEnum"]])
+
+slots.bendP__rho_ref = Slot(uri=PALS.rho_ref, name="bendP__rho_ref", curie=PALS.curie('rho_ref'),
+                   model_uri=NARAD.bendP__rho_ref, domain=None, range=Optional[float])
+
+slots.bendP__tilt_ref = Slot(uri=PALS.tilt_ref, name="bendP__tilt_ref", curie=PALS.curie('tilt_ref'),
+                   model_uri=NARAD.bendP__tilt_ref, domain=None, range=Optional[float])
+
 slots.multipoleComponent__order = Slot(uri=NARAD.order, name="multipoleComponent__order", curie=NARAD.curie('order'),
                    model_uri=NARAD.multipoleComponent__order, domain=None, range=int)
 
@@ -2784,14 +3108,14 @@ slots.multipoleComponent__Ks = Slot(uri=NARAD.Ks, name="multipoleComponent__Ks",
 slots.component__native_types = Slot(uri=NARAD.native_types, name="component__native_types", curie=NARAD.curie('native_types'),
                    model_uri=NARAD.component__native_types, domain=None, range=Optional[Union[str, list[str]]])
 
-slots.physicalComponent__function = Slot(uri=NARAD.physical_function, name="physicalComponent__function", curie=NARAD.curie('physical_function'),
-                   model_uri=NARAD.physicalComponent__function, domain=None, range=Union[str, "PhysicalFunctionEnum"])
+slots.physicalComponent__functions = Slot(uri=NARAD.physical_function, name="physicalComponent__functions", curie=NARAD.curie('physical_function'),
+                   model_uri=NARAD.physicalComponent__functions, domain=None, range=Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]])
 
 slots.physicalComponent__beamline_relation = Slot(uri=NARAD.physical_beamline_relation, name="physicalComponent__beamline_relation", curie=NARAD.curie('physical_beamline_relation'),
                    model_uri=NARAD.physicalComponent__beamline_relation, domain=None, range=Union[str, "PhysicalRelationEnum"])
 
-slots.virtualComponent__function = Slot(uri=NARAD.virtual_function, name="virtualComponent__function", curie=NARAD.curie('virtual_function'),
-                   model_uri=NARAD.virtualComponent__function, domain=None, range=Union[str, "VirtualFunctionEnum"])
+slots.virtualComponent__functions = Slot(uri=NARAD.virtual_function, name="virtualComponent__functions", curie=NARAD.curie('virtual_function'),
+                   model_uri=NARAD.virtualComponent__functions, domain=None, range=Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]])
 
 slots.virtualComponent__beamline_relation = Slot(uri=NARAD.virtual_beamline_relation, name="virtualComponent__beamline_relation", curie=NARAD.curie('virtual_beamline_relation'),
                    model_uri=NARAD.virtualComponent__beamline_relation, domain=None, range=Union[str, "VirtualRelationEnum"])
@@ -2844,8 +3168,8 @@ slots.signal__archive_identifier = Slot(uri=NARAD.archive_identifier, name="sign
 slots.kicker__plane = Slot(uri=NARAD.plane, name="kicker__plane", curie=NARAD.curie('plane'),
                    model_uri=NARAD.kicker__plane, domain=None, range=Optional[Union[str, "PlaneEnum"]])
 
-slots.supportingFacilityComponent__function = Slot(uri=NARAD.supporting_facility_function, name="supportingFacilityComponent__function", curie=NARAD.curie('supporting_facility_function'),
-                   model_uri=NARAD.supportingFacilityComponent__function, domain=None, range=Union[str, "FacilityFunctionEnum"])
+slots.supportingFacilityComponent__functions = Slot(uri=NARAD.supporting_facility_function, name="supportingFacilityComponent__functions", curie=NARAD.curie('supporting_facility_function'),
+                   model_uri=NARAD.supportingFacilityComponent__functions, domain=None, range=Union[Union[str, "FacilityFunctionEnum"], list[Union[str, "FacilityFunctionEnum"]]])
 
 slots.metadataEntry__key = Slot(uri=NARAD.key, name="metadataEntry__key", curie=NARAD.curie('key'),
                    model_uri=NARAD.metadataEntry__key, domain=None, range=URIRef)

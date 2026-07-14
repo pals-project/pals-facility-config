@@ -18,8 +18,10 @@ None &#8594;  <sub>0..1</sub> [Float](types/Float.md)
 
 ## Used by
 
+ * [ACKicker](ACKicker.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
  * [BeamlineSection](BeamlineSection.md)
+ * [Bend](Bend.md)
  * [BodyShiftP](BodyShiftP.md)
  * [BookkeepingComponent](BookkeepingComponent.md)
  * [Cavity](Cavity.md)
@@ -35,6 +37,7 @@ None &#8594;  <sub>0..1</sub> [Float](types/Float.md)
  * [RadiationMonitor](RadiationMonitor.md)
  * [Sextupole](Sextupole.md)
  * [Solenoid](Solenoid.md)
+ * [SuperconductingRFCavity](SuperconductingRFCavity.md)
  * [SupportingFacilityComponent](SupportingFacilityComponent.md)
 
 ## Other properties

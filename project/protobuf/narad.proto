@@ -1,6 +1,49 @@
  syntax="proto3";
  package
 // metamodel_version: 1.7.0
+// An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.
+message ACKicker
+ {
+  string id = 0
+  string type = 0
+ repeated  string nativeTypes = 0
+  string description = 0
+  string label = 0
+  string alias = 0
+ repeated  metadataEntry additionalMetadata = 0
+ repeated  physicalFunctionEnum functions = 0
+  physicalRelationEnum beamlineRelation = 0
+  float x = 0
+  float y = 0
+  float z = 0
+  float theta = 0
+  float phi = 0
+  float psi = 0
+  float length = 0
+  float sPosition = 0
+  string speciesRef = 0
+  float pcRef = 0
+  float eTotRef = 0
+  float timeRef = 0
+  float xOffset = 0
+  float yOffset = 0
+  float zOffset = 0
+  float xRot = 0
+  float yRot = 0
+  float zRot = 0
+  float alphaA = 0
+  float alphaB = 0
+  float betaA = 0
+  float betaB = 0
+  float etaX = 0
+  float etaY = 0
+  float etapX = 0
+  float etapY = 0
+  float phiA = 0
+  float phiB = 0
+  planeEnum plane = 0
+ repeated  multipoleComponent components = 0
+ }
 // A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
 message Beamline
  {
@@ -11,7 +54,7 @@ message Beamline
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  virtualFunctionEnum function = 0
+ repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -37,7 +80,7 @@ message BeamlineSection
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  virtualFunctionEnum function = 0
+ repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -62,7 +105,7 @@ message BeamPositionMonitor
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -93,6 +136,48 @@ message BeamPositionMonitor
   float phiA = 0
   float phiB = 0
  }
+// Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
+message Bend
+ {
+  string id = 0
+  string type = 0
+ repeated  string nativeTypes = 0
+  string description = 0
+  string label = 0
+  string alias = 0
+ repeated  metadataEntry additionalMetadata = 0
+ repeated  physicalFunctionEnum functions = 0
+  physicalRelationEnum beamlineRelation = 0
+  float x = 0
+  float y = 0
+  float z = 0
+  float theta = 0
+  float phi = 0
+  float psi = 0
+  float length = 0
+  float sPosition = 0
+  string speciesRef = 0
+  float pcRef = 0
+  float eTotRef = 0
+  float timeRef = 0
+  float xOffset = 0
+  float yOffset = 0
+  float zOffset = 0
+  float xRot = 0
+  float yRot = 0
+  float zRot = 0
+  float alphaA = 0
+  float alphaB = 0
+  float betaA = 0
+  float betaB = 0
+  float etaX = 0
+  float etaY = 0
+  float etapX = 0
+  float etapY = 0
+  float phiA = 0
+  float phiB = 0
+ repeated  multipoleComponent components = 0
+ }
 // A virtual component that represents a bookkeeping or organizational role in the accelerator system, 
 // such as a BeamlineSection, Marker or a Fork.
 // These can include BeamlineSections, Markers, Forks, 
@@ -107,7 +192,7 @@ message BookkeepingComponent
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  virtualFunctionEnum function = 0
+ repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -132,7 +217,7 @@ message Cavity
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -191,7 +276,7 @@ message CrabCavity
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -233,7 +318,7 @@ message DiagnosticDevice
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -255,7 +340,7 @@ message Dipole
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -299,7 +384,7 @@ message Kicker
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -342,7 +427,7 @@ message Marker
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  virtualFunctionEnum function = 0
+ repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -385,7 +470,7 @@ message Multipole
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -457,7 +542,7 @@ message Octupole
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -499,7 +584,7 @@ message PhysicalComponent
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -521,7 +606,7 @@ message Quadrupole
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -563,7 +648,7 @@ message RadiationMonitor
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -590,7 +675,7 @@ message RFCavity
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -633,7 +718,7 @@ message Sextupole
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -703,7 +788,7 @@ message Solenoid
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  physicalFunctionEnum function = 0
+ repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0
@@ -736,6 +821,48 @@ message Solenoid
   float ksol = 0
   float bsol = 0
  }
+// A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
+message SuperconductingRFCavity
+ {
+  string id = 0
+  string type = 0
+ repeated  string nativeTypes = 0
+  string description = 0
+  string label = 0
+  string alias = 0
+ repeated  metadataEntry additionalMetadata = 0
+ repeated  physicalFunctionEnum functions = 0
+  physicalRelationEnum beamlineRelation = 0
+  float x = 0
+  float y = 0
+  float z = 0
+  float theta = 0
+  float phi = 0
+  float psi = 0
+  float length = 0
+  float sPosition = 0
+  string speciesRef = 0
+  float pcRef = 0
+  float eTotRef = 0
+  float timeRef = 0
+ repeated  multipoleComponent components = 0
+  float xOffset = 0
+  float yOffset = 0
+  float zOffset = 0
+  float xRot = 0
+  float yRot = 0
+  float zRot = 0
+  float alphaA = 0
+  float alphaB = 0
+  float betaA = 0
+  float betaB = 0
+  float etaX = 0
+  float etaY = 0
+  float etapX = 0
+  float etapY = 0
+  float phiA = 0
+  float phiB = 0
+ }
 // A physical component that supports accelerator operation 
 // without a specific beam-pipe placement, 
 // such as a power supply, control rack, or radiation detector.
@@ -760,7 +887,7 @@ message SupportingFacilityComponent
   float psi = 0
   float length = 0
   float sPosition = 0
-  facilityFunctionEnum function = 0
+ repeated  facilityFunctionEnum functions = 0
   float xOffset = 0
   float yOffset = 0
   float zOffset = 0
@@ -778,7 +905,7 @@ message VirtualComponent
   string label = 0
   string alias = 0
  repeated  metadataEntry additionalMetadata = 0
-  virtualFunctionEnum function = 0
+ repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
   float x = 0
   float y = 0

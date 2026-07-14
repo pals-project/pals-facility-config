@@ -38,10 +38,10 @@ command-line build operations less cumbersome.
   * Example of generating documentation from the schema.
 
 * ```just gen-python```
-  * Example of generating the Python datamodel from the schema. This will generate Python classes in `src/narad_system/datamodel/` that correspond to the classes defined in the LinkML schema.
+  * Example of generating the Python datamodel from the schema. This will generate Python classes in `src/narad/datamodel/` that correspond to the classes defined in the LinkML schema.
 
-* ```uv run linkml-validate --schema src/narad_system/schema/narad_system.yaml  examples/narad_UITF_instance.yaml```
+* ```uv run linkml-validate --schema src/narad/schema/narad.yaml  examples/core_acc_narad_instance.yaml```
   * Example of validating an entire data file against the schema. Add --target-class [CLASS_NAME] to validate against a specific class in the schema.
 
 * Examples of invalid data files are in `tests/data/invalid/` and valid data files are in `tests/data/valid/`. You can validate these using the above command.
-  * ```uv run linkml-validate --schema src/narad_system/schema/narad_system.yaml tests/data/invalid/narad_invalid.yaml --target-class NaradCapability```
+  * ```uv run linkml-validate --schema src/narad/schema/narad.yaml tests/data/invalid/narad_invalid.yaml --target-class NaradCapability```
