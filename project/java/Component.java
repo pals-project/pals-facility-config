@@ -16,7 +16,7 @@ import lombok.*;
 public abstract class Component  {
 
   private String id;
-  private String type;
+  private Component type;
   private List<String> nativeTypes;
   private String description;
   private String label;

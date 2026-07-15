@@ -15,7 +15,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class NARAD  {
 
-  private String type;
+  private Component type;
   private String description;
   private List<PhysicalComponent> physicalComponents;
   private List<VirtualComponent> virtualComponents;

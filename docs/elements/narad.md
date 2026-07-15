@@ -17,7 +17,8 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
          * [Cavity](Cavity.md) - A cavity used for beam acceleration or manipulation.
              * [CrabCavity](CrabCavity.md) - A cavity used for transverse beam manipulation, such as crabbing or deflecting.
              * [RFCavity](RFCavity.md) - A cavity used for RF acceleration or longitudinal manipulation.
-                 * [SuperconductingRFCavity](SuperconductingRFCavity.md) - A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
+                 * [NormalConductingRFCavity](NormalConductingRFCavity.md) - A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
+                 * [SuperConductingRFCavity](SuperConductingRFCavity.md) - A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
          * [DiagnosticDevice](DiagnosticDevice.md) - An accelerator device used to measure beam or machine state.
              * [BeamPositionMonitor](BeamPositionMonitor.md) - A diagnostic device used to measure transverse beam position.
              * [RadiationMonitor](RadiationMonitor.md) - A diagnostic device used to monitor radiation dose or dose rate.
@@ -26,7 +27,6 @@ A lightweight LinkML schema for facility-agnostic accelerator components, their 
                  * [ACKicker](ACKicker.md) - An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.
              * [Multipole](Multipole.md) - A general magnet with a higher-order multipole field, such as a sextupole or octupole.
                  * [Bend](Bend.md) - Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
-                 * [Dipole](Dipole.md) - A magnet primarily used to bend the beam. 2 poles.
                  * [Octupole](Octupole.md) - A magnet primarily used to focus or defocus the beam. 8 poles.
                  * [Quadrupole](Quadrupole.md) - A magnet primarily used to focus or defocus the beam. 4 poles.
                  * [Sextupole](Sextupole.md) - A magnet primarily used to focus or defocus the beam. 6 poles.

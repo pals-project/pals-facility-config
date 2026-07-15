@@ -1033,7 +1033,7 @@ signals:
     alias: current_readback
   - id: MBHK101H.HMIN
     type: Signal
-    signal_role: Limit
+    signal_role: MinimumLimit
     source_system: EPICS
     native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1045,7 +1045,7 @@ signals:
     alias: current_min
   - id: MBHK101H.HMAX
     type: Signal
-    signal_role: Limit
+    signal_role: MaximumLimit
     source_system: EPICS
     native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1102,7 +1102,7 @@ signals:
     alias: current_readback
   - id: MBHK101V.HMIN
     type: Signal
-    signal_role: Limit
+    signal_role: MinimumLimit
     source_system: EPICS
     native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1114,7 +1114,7 @@ signals:
     alias: current_min
   - id: MBHK101V.HMAX
     type: Signal
-    signal_role: Limit
+    signal_role: MaximumLimit
     source_system: EPICS
     native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1171,7 +1171,7 @@ signals:
     alias: current_readback
   - id: MFRM604V.HMIN
     type: Signal
-    signal_role: Limit
+    signal_role: MinimumLimit
     source_system: EPICS
     native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1183,7 +1183,7 @@ signals:
     alias: current_min
   - id: MFRM604V.HMAX
     type: Signal
-    signal_role: Limit
+    signal_role: MaximumLimit
     source_system: EPICS
     native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1240,7 +1240,7 @@ signals:
     alias: current_readback
   - id: MFRM604H.HMIN
     type: Signal
-    signal_role: Limit
+    signal_role: MinimumLimit
     source_system: EPICS
     native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1252,7 +1252,7 @@ signals:
     alias: current_min
   - id: MFRM604H.HMAX
     type: Signal
-    signal_role: Limit
+    signal_role: MaximumLimit
     source_system: EPICS
     native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1309,7 +1309,7 @@ signals:
     alias: current_readback
   - id: MDSK201.HMIN
     type: Signal
-    signal_role: Limit
+    signal_role: MinimumLimit
     source_system: EPICS
     native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1321,7 +1321,7 @@ signals:
     alias: current_min
   - id: MDSK201.HMAX
     type: Signal
-    signal_role: Limit
+    signal_role: MaximumLimit
     source_system: EPICS
     native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1378,7 +1378,7 @@ signals:
     alias: current_readback
   - id: MQWK202.HMIN
     type: Signal
-    signal_role: Limit
+    signal_role: MinimumLimit
     source_system: EPICS
     native_description: Minimum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)
@@ -1390,7 +1390,7 @@ signals:
     alias: current_min
   - id: MQWK202.HMAX
     type: Signal
-    signal_role: Limit
+    signal_role: MaximumLimit
     source_system: EPICS
     native_description: Maximum allowed current setting. (No dedicated canonical "limit" type exists yet;
       using closest available.)

@@ -1,5 +1,5 @@
 # Auto generated from narad.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-07-14T12:50:21
+# Generation date: 2026-07-15T12:59:28
 # Schema: accelerator_core
 #
 # id: https://w3id.org/accelerator-core
@@ -65,7 +65,7 @@ version = None
 # Namespaces
 BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
 RO = CurieNamespace('RO', 'http://purl.obolibrary.org/obo/RO_')
-ACC = CurieNamespace('acc', 'https://w3id.org/accelerator-core/')
+ACC = CurieNamespace('acc', 'https://example.org/accelerator-core/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NARAD = CurieNamespace('narad', 'https://example.org/narad/')
 PALS = CurieNamespace('pals', 'https://pals-project.readthedocs.io/')
@@ -113,10 +113,6 @@ class SolenoidId(MagnetId):
 
 
 class MultipoleId(MagnetId):
-    pass
-
-
-class DipoleId(MultipoleId):
     pass
 
 
@@ -168,7 +164,11 @@ class RFCavityId(CavityId):
     pass
 
 
-class SuperconductingRFCavityId(RFCavityId):
+class NormalConductingRFCavityId(RFCavityId):
+    pass
+
+
+class SuperConductingRFCavityId(RFCavityId):
     pass
 
 
@@ -216,7 +216,7 @@ class NARAD(YAMLRoot):
     class_name: ClassVar[str] = "NARAD"
     class_model_uri: ClassVar[URIRef] = NARAD.NARAD
 
-    type: str = None
+    type: Union[str, ComponentId] = None
     description: Optional[str] = None
     physical_components: Optional[Union[dict[Union[str, PhysicalComponentId], Union[dict, "PhysicalComponent"]], list[Union[dict, "PhysicalComponent"]]]] = empty_dict()
     virtual_components: Optional[Union[dict[Union[str, VirtualComponentId], Union[dict, "VirtualComponent"]], list[Union[dict, "VirtualComponent"]]]] = empty_dict()
@@ -229,8 +229,8 @@ class NARAD(YAMLRoot):
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.type):
             self.MissingRequiredField("type")
-        if not isinstance(self.type, str):
-            self.type = str(self.type)
+        if not isinstance(self.type, ComponentId):
+            self.type = ComponentId(self.type)
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
@@ -752,7 +752,7 @@ class Component(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = NARAD.Component
 
     id: Union[str, ComponentId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     native_types: Optional[Union[str, list[str]]] = empty_list()
     description: Optional[str] = None
     label: Optional[str] = None
@@ -767,8 +767,8 @@ class Component(YAMLRoot):
 
         if self._is_empty(self.type):
             self.MissingRequiredField("type")
-        if not isinstance(self.type, str):
-            self.type = str(self.type)
+        if not isinstance(self.type, ComponentId):
+            self.type = ComponentId(self.type)
 
         if not isinstance(self.native_types, list):
             self.native_types = [self.native_types] if self.native_types is not None else []
@@ -803,7 +803,7 @@ class PhysicalComponent(Component):
     class_model_uri: ClassVar[URIRef] = NARAD.PhysicalComponent
 
     id: Union[str, PhysicalComponentId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     x: Optional[float] = None
@@ -875,7 +875,7 @@ class VirtualComponent(Component):
     class_model_uri: ClassVar[URIRef] = NARAD.VirtualComponent
 
     id: Union[str, VirtualComponentId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
     x: Optional[float] = None
@@ -936,7 +936,7 @@ class Beamline(VirtualComponent):
     class_model_uri: ClassVar[URIRef] = NARAD.Beamline
 
     id: Union[str, BeamlineId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
     multipass: Optional[Union[bool, Bool]] = None
@@ -986,7 +986,7 @@ class Signal(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = NARAD.Signal
 
     id: Union[str, SignalId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     signal_role: Union[str, "SignalRoleEnum"] = None
     source_system: Union[str, "SourceSystemEnum"] = None
     canonical_signal_type: Union[str, "CanonicalSignalTypeEnum"] = None
@@ -1009,8 +1009,8 @@ class Signal(YAMLRoot):
 
         if self._is_empty(self.type):
             self.MissingRequiredField("type")
-        if not isinstance(self.type, str):
-            self.type = str(self.type)
+        if not isinstance(self.type, ComponentId):
+            self.type = ComponentId(self.type)
 
         if self._is_empty(self.signal_role):
             self.MissingRequiredField("signal_role")
@@ -1078,7 +1078,7 @@ class Magnet(PhysicalComponent):
     class_model_uri: ClassVar[URIRef] = NARAD.Magnet
 
     id: Union[str, MagnetId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     species_ref: Optional[str] = None
@@ -1181,7 +1181,7 @@ class Solenoid(Magnet):
     class_model_uri: ClassVar[URIRef] = NARAD.Solenoid
 
     id: Union[str, SolenoidId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     Ksol: Optional[float] = None
@@ -1216,7 +1216,7 @@ class Multipole(Magnet):
     class_model_uri: ClassVar[URIRef] = NARAD.Multipole
 
     id: Union[str, MultipoleId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     components: Optional[Union[Union[dict, MultipoleComponent], list[Union[dict, MultipoleComponent]]]] = empty_list()
@@ -1230,33 +1230,6 @@ class Multipole(Magnet):
         if not isinstance(self.components, list):
             self.components = [self.components] if self.components is not None else []
         self.components = [v if isinstance(v, MultipoleComponent) else MultipoleComponent(**as_dict(v)) for v in self.components]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class Dipole(Multipole):
-    """
-    A magnet primarily used to bend the beam. 2 poles.
-    Only one of the electric or magnetic multipole components should be present, not both.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NARAD["Dipole"]
-    class_class_curie: ClassVar[str] = "narad:Dipole"
-    class_name: ClassVar[str] = "Dipole"
-    class_model_uri: ClassVar[URIRef] = NARAD.Dipole
-
-    id: Union[str, DipoleId] = None
-    type: str = None
-    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
-    beamline_relation: Union[str, "PhysicalRelationEnum"] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, DipoleId):
-            self.id = DipoleId(self.id)
 
         super().__post_init__(**kwargs)
 
@@ -1276,7 +1249,7 @@ class Bend(Multipole):
     class_model_uri: ClassVar[URIRef] = NARAD.Bend
 
     id: Union[str, BendId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
@@ -1303,7 +1276,7 @@ class Quadrupole(Multipole):
     class_model_uri: ClassVar[URIRef] = NARAD.Quadrupole
 
     id: Union[str, QuadrupoleId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
@@ -1330,7 +1303,7 @@ class Octupole(Multipole):
     class_model_uri: ClassVar[URIRef] = NARAD.Octupole
 
     id: Union[str, OctupoleId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
@@ -1357,7 +1330,7 @@ class Sextupole(Multipole):
     class_model_uri: ClassVar[URIRef] = NARAD.Sextupole
 
     id: Union[str, SextupoleId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
@@ -1386,7 +1359,7 @@ class Kicker(Magnet):
     class_model_uri: ClassVar[URIRef] = NARAD.Kicker
 
     id: Union[str, KickerId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     plane: Optional[Union[str, "PlaneEnum"]] = None
@@ -1422,7 +1395,7 @@ class ACKicker(Kicker):
     class_model_uri: ClassVar[URIRef] = NARAD.ACKicker
 
     id: Union[str, ACKickerId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
@@ -1448,7 +1421,7 @@ class DiagnosticDevice(PhysicalComponent):
     class_model_uri: ClassVar[URIRef] = NARAD.DiagnosticDevice
 
     id: Union[str, DiagnosticDeviceId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
@@ -1474,7 +1447,7 @@ class BeamPositionMonitor(DiagnosticDevice):
     class_model_uri: ClassVar[URIRef] = NARAD.BeamPositionMonitor
 
     id: Union[str, BeamPositionMonitorId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     species_ref: Optional[str] = None
@@ -1580,7 +1553,7 @@ class RadiationMonitor(DiagnosticDevice):
     class_model_uri: ClassVar[URIRef] = NARAD.RadiationMonitor
 
     id: Union[str, RadiationMonitorId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     x_offset: Optional[float] = None
@@ -1630,7 +1603,7 @@ class Cavity(PhysicalComponent):
     class_model_uri: ClassVar[URIRef] = NARAD.Cavity
 
     id: Union[str, CavityId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     species_ref: Optional[str] = None
@@ -1656,11 +1629,6 @@ class Cavity(PhysicalComponent):
     phi_b: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, CavityId):
-            self.id = CavityId(self.id)
-
         if self.species_ref is not None and not isinstance(self.species_ref, str):
             self.species_ref = str(self.species_ref)
 
@@ -1741,7 +1709,7 @@ class CrabCavity(Cavity):
     class_model_uri: ClassVar[URIRef] = NARAD.CrabCavity
 
     id: Union[str, CrabCavityId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
@@ -1767,41 +1735,58 @@ class RFCavity(Cavity):
     class_model_uri: ClassVar[URIRef] = NARAD.RFCavity
 
     id: Union[str, RFCavityId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
+    beamline_relation: Union[str, "PhysicalRelationEnum"] = None
+
+@dataclass(repr=False)
+class NormalConductingRFCavity(RFCavity):
+    """
+    A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = NARAD["NormalConductingRFCavity"]
+    class_class_curie: ClassVar[str] = "narad:NormalConductingRFCavity"
+    class_name: ClassVar[str] = "NormalConductingRFCavity"
+    class_model_uri: ClassVar[URIRef] = NARAD.NormalConductingRFCavity
+
+    id: Union[str, NormalConductingRFCavityId] = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, RFCavityId):
-            self.id = RFCavityId(self.id)
+        if not isinstance(self.id, NormalConductingRFCavityId):
+            self.id = NormalConductingRFCavityId(self.id)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass(repr=False)
-class SuperconductingRFCavity(RFCavity):
+class SuperConductingRFCavity(RFCavity):
     """
     A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = NARAD["SuperconductingRFCavity"]
-    class_class_curie: ClassVar[str] = "narad:SuperconductingRFCavity"
-    class_name: ClassVar[str] = "SuperconductingRFCavity"
-    class_model_uri: ClassVar[URIRef] = NARAD.SuperconductingRFCavity
+    class_class_uri: ClassVar[URIRef] = NARAD["SuperConductingRFCavity"]
+    class_class_curie: ClassVar[str] = "narad:SuperConductingRFCavity"
+    class_name: ClassVar[str] = "SuperConductingRFCavity"
+    class_model_uri: ClassVar[URIRef] = NARAD.SuperConductingRFCavity
 
-    id: Union[str, SuperconductingRFCavityId] = None
-    type: str = None
+    id: Union[str, SuperConductingRFCavityId] = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, SuperconductingRFCavityId):
-            self.id = SuperconductingRFCavityId(self.id)
+        if not isinstance(self.id, SuperConductingRFCavityId):
+            self.id = SuperConductingRFCavityId(self.id)
 
         super().__post_init__(**kwargs)
 
@@ -1824,7 +1809,7 @@ class SupportingFacilityComponent(PhysicalComponent):
     class_model_uri: ClassVar[URIRef] = NARAD.SupportingFacilityComponent
 
     id: Union[str, SupportingFacilityComponentId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     beamline_relation: Union[str, "PhysicalRelationEnum"] = None
     functions: Union[Union[str, "FacilityFunctionEnum"], list[Union[str, "FacilityFunctionEnum"]]] = None
     x: Optional[float] = None
@@ -1916,7 +1901,7 @@ class BookkeepingComponent(VirtualComponent):
     class_model_uri: ClassVar[URIRef] = NARAD.BookkeepingComponent
 
     id: Union[str, BookkeepingComponentId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
     x_offset: Optional[float] = None
@@ -1966,7 +1951,7 @@ class Marker(BookkeepingComponent):
     class_model_uri: ClassVar[URIRef] = NARAD.Marker
 
     id: Union[str, MarkerId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
     alpha_a: Optional[float] = None
@@ -2033,7 +2018,7 @@ class BeamlineSection(BookkeepingComponent):
     class_model_uri: ClassVar[URIRef] = NARAD.BeamlineSection
 
     id: Union[str, BeamlineSectionId] = None
-    type: str = None
+    type: Union[str, ComponentId] = None
     functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
     beamline_relation: Union[str, "VirtualRelationEnum"] = None
 
@@ -2453,9 +2438,12 @@ class SignalRoleEnum(EnumDefinitionImpl):
         text="Command",
         description="Command or action trigger.",
         meaning=SOSA["ActuatableProperty"])
-    Limit = PermissibleValue(
-        text="Limit",
-        description="Minimum, maximum, or other constraints for an allowed signal value.")
+    MinimumLimit = PermissibleValue(
+        text="MinimumLimit",
+        description="Minimum allowed signal value.")
+    MaximumLimit = PermissibleValue(
+        text="MaximumLimit",
+        description="Maximum allowed signal value.")
 
     _defn = EnumDefinition(
         name="SignalRoleEnum",
@@ -2872,7 +2860,7 @@ slots.id = Slot(uri=NARAD.id, name="id", curie=NARAD.curie('id'),
                    model_uri=NARAD.id, domain=None, range=URIRef)
 
 slots.type = Slot(uri=NARAD.type, name="type", curie=NARAD.curie('type'),
-                   model_uri=NARAD.type, domain=None, range=str)
+                   model_uri=NARAD.type, domain=None, range=Union[str, ComponentId])
 
 slots.subject = Slot(uri=RDF.subject, name="subject", curie=RDF.curie('subject'),
                    model_uri=NARAD.subject, domain=None, range=str)

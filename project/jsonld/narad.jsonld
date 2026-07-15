@@ -18,7 +18,7 @@
     },
     {
       "prefix_prefix": "acc",
-      "prefix_reference": "https://w3id.org/accelerator-core/"
+      "prefix_reference": "https://example.org/accelerator-core/"
     },
     {
       "prefix_prefix": "qudt",
@@ -627,8 +627,12 @@
           "meaning": "sosa:ActuatableProperty"
         },
         {
-          "text": "Limit",
-          "description": "Minimum, maximum, or other constraints for an allowed signal value."
+          "text": "MinimumLimit",
+          "description": "Minimum allowed signal value."
+        },
+        {
+          "text": "MaximumLimit",
+          "description": "Maximum allowed signal value."
         }
       ]
     },
@@ -1171,7 +1175,7 @@
         "Component",
         "Signal"
       ],
-      "range": "string",
+      "range": "Component",
       "required": true,
       "@type": "SlotDefinition"
     },
@@ -5348,63 +5352,13 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "Dipole",
-      "definition_uri": "https://example.org/narad/Dipole",
-      "description": "A magnet primarily used to bend the beam. 2 poles.\nOnly one of the electric or magnetic multipole components should be present, not both.",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "broad_mappings": [
-        "pals:Multipole"
-      ],
-      "is_a": "Multipole",
-      "slots": [
-        "id",
-        "type",
-        "component__native_types",
-        "metaP__description",
-        "metaP__label",
-        "metaP__alias",
-        "metaP__additional_metadata",
-        "physicalComponent__functions",
-        "physicalComponent__beamline_relation",
-        "floorP__x",
-        "floorP__y",
-        "floorP__z",
-        "floorP__theta",
-        "floorP__phi",
-        "floorP__psi",
-        "hasLongitudinalPlacement__length",
-        "hasLongitudinalPlacement__s_position",
-        "referenceP__species_ref",
-        "referenceP__pc_ref",
-        "referenceP__E_tot_ref",
-        "referenceP__time_ref",
-        "bodyShiftP__x_offset",
-        "bodyShiftP__y_offset",
-        "bodyShiftP__z_offset",
-        "bodyShiftP__x_rot",
-        "bodyShiftP__y_rot",
-        "bodyShiftP__z_rot",
-        "twissP__alpha_a",
-        "twissP__alpha_b",
-        "twissP__beta_a",
-        "twissP__beta_b",
-        "twissP__eta_x",
-        "twissP__eta_y",
-        "twissP__etap_x",
-        "twissP__etap_y",
-        "twissP__phi_a",
-        "twissP__phi_b",
-        "electricMultipoleP__components"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://example.org/narad/Dipole",
-      "@type": "ClassDefinition"
-    },
-    {
       "name": "Bend",
       "definition_uri": "https://example.org/narad/Bend",
       "description": "Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.",
       "from_schema": "https://w3id.org/accelerator-core",
+      "aliases": [
+        "Dipole"
+      ],
       "exact_mappings": [
         "pals:Bend"
       ],
@@ -5875,6 +5829,7 @@
       "description": "A cavity used for beam acceleration or manipulation.",
       "from_schema": "https://w3id.org/accelerator-core",
       "is_a": "PhysicalComponent",
+      "abstract": true,
       "mixins": [
         "ReferenceP",
         "ElectricMultipoleP",
@@ -5988,6 +5943,7 @@
         "pals:RFCavity"
       ],
       "is_a": "Cavity",
+      "abstract": true,
       "slots": [
         "id",
         "type",
@@ -6033,8 +5989,61 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "SuperconductingRFCavity",
-      "definition_uri": "https://example.org/narad/SuperconductingRFCavity",
+      "name": "NormalConductingRFCavity",
+      "definition_uri": "https://example.org/narad/NormalConductingRFCavity",
+      "description": "A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "broad_mappings": [
+        "pals:RFCavity"
+      ],
+      "is_a": "RFCavity",
+      "slots": [
+        "id",
+        "type",
+        "component__native_types",
+        "metaP__description",
+        "metaP__label",
+        "metaP__alias",
+        "metaP__additional_metadata",
+        "physicalComponent__functions",
+        "physicalComponent__beamline_relation",
+        "floorP__x",
+        "floorP__y",
+        "floorP__z",
+        "floorP__theta",
+        "floorP__phi",
+        "floorP__psi",
+        "hasLongitudinalPlacement__length",
+        "hasLongitudinalPlacement__s_position",
+        "referenceP__species_ref",
+        "referenceP__pc_ref",
+        "referenceP__E_tot_ref",
+        "referenceP__time_ref",
+        "electricMultipoleP__components",
+        "bodyShiftP__x_offset",
+        "bodyShiftP__y_offset",
+        "bodyShiftP__z_offset",
+        "bodyShiftP__x_rot",
+        "bodyShiftP__y_rot",
+        "bodyShiftP__z_rot",
+        "twissP__alpha_a",
+        "twissP__alpha_b",
+        "twissP__beta_a",
+        "twissP__beta_b",
+        "twissP__eta_x",
+        "twissP__eta_y",
+        "twissP__etap_x",
+        "twissP__etap_y",
+        "twissP__phi_a",
+        "twissP__phi_b"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://example.org/narad/NormalConductingRFCavity",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SuperConductingRFCavity",
+      "definition_uri": "https://example.org/narad/SuperConductingRFCavity",
       "description": "A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.",
       "from_schema": "https://w3id.org/accelerator-core",
       "broad_mappings": [
@@ -6082,7 +6091,7 @@
         "twissP__phi_b"
       ],
       "slot_usage": {},
-      "class_uri": "https://example.org/narad/SuperconductingRFCavity",
+      "class_uri": "https://example.org/narad/SuperConductingRFCavity",
       "@type": "ClassDefinition"
     },
     {
@@ -6410,9 +6419,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "narad.yaml",
-  "source_file_date": "2026-07-14T12:50:14",
-  "source_file_size": 57893,
-  "generation_date": "2026-07-14T12:50:17",
+  "source_file_date": "2026-07-15T12:59:18",
+  "source_file_size": 57998,
+  "generation_date": "2026-07-15T12:59:24",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/narad.context.jsonld",

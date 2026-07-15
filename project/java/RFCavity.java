@@ -13,7 +13,7 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class RFCavity extends Cavity {
+public abstract class RFCavity extends Cavity {
 
 
 }

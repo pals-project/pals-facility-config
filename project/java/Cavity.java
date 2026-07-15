@@ -13,7 +13,7 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Cavity extends PhysicalComponent {
+public abstract class Cavity extends PhysicalComponent {
 
   private String speciesRef;
   private Float pcRef;

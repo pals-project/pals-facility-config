@@ -6,7 +6,7 @@ A virtual or logical component that represents a concept, function, or role in t
 URI: [narad:VirtualComponent](https://example.org/narad/VirtualComponent)
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[NARAD]++-%20virtual_components%200..*>[VirtualComponent&#124;functions:VirtualFunctionEnum%20%2B;beamline_relation:VirtualRelationEnum;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F;id(i):string;type(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[VirtualComponent]uses%20-.->[FloorP],[VirtualComponent]^-[BookkeepingComponent],[VirtualComponent]^-[Beamline],[Component]^-[VirtualComponent],[NARAD],[MetadataEntry],[FloorP],[Component],[BookkeepingComponent],[Beamline])](https://yuml.me/diagram/nofunky;dir:TB/class/[NARAD]++-%20virtual_components%200..*>[VirtualComponent&#124;functions:VirtualFunctionEnum%20%2B;beamline_relation:VirtualRelationEnum;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F;id(i):string;type(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[VirtualComponent]uses%20-.->[FloorP],[VirtualComponent]^-[BookkeepingComponent],[VirtualComponent]^-[Beamline],[Component]^-[VirtualComponent],[NARAD],[MetadataEntry],[FloorP],[Component],[BookkeepingComponent],[Beamline])
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[NARAD]++-%20virtual_components%200..*>[VirtualComponent&#124;functions:VirtualFunctionEnum%20%2B;beamline_relation:VirtualRelationEnum;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[VirtualComponent]uses%20-.->[FloorP],[VirtualComponent]^-[BookkeepingComponent],[VirtualComponent]^-[Beamline],[Component]^-[VirtualComponent],[NARAD],[MetadataEntry],[FloorP],[Component],[BookkeepingComponent],[Beamline])](https://yuml.me/diagram/nofunky;dir:TB/class/[NARAD]++-%20virtual_components%200..*>[VirtualComponent&#124;functions:VirtualFunctionEnum%20%2B;beamline_relation:VirtualRelationEnum;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[VirtualComponent]uses%20-.->[FloorP],[VirtualComponent]^-[BookkeepingComponent],[VirtualComponent]^-[Beamline],[Component]^-[VirtualComponent],[NARAD],[MetadataEntry],[FloorP],[Component],[BookkeepingComponent],[Beamline])
 
 ## Parents
 
@@ -44,7 +44,7 @@ URI: [narad:VirtualComponent](https://example.org/narad/VirtualComponent)
      * Range: [String](types/String.md)
  * [type](type.md)  <sub>1..1</sub>
      * Description: The LinkML class name of this instance.
-     * Range: [String](types/String.md)
+     * Range: [Component](Component.md)
  * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
      * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
      * Range: [String](types/String.md)

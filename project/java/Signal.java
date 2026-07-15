@@ -16,7 +16,7 @@ import lombok.*;
 public class Signal  {
 
   private String id;
-  private String type;
+  private Component type;
   private String signalRole;
   private String sourceSystem;
   private String nativeDescription;

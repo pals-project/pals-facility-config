@@ -185,45 +185,47 @@ linkml:Sparqlpath xsd:string
 )
 
 <Cavity>  (
-    CLOSED {
-       (  $<Cavity_tes> (  &<PhysicalComponent_tes> ;
-             rdf:type [ <PhysicalComponent> ] ? ;
-             &<ReferenceP_tes> ;
-             rdf:type [ <ReferenceP> ] ? ;
-             &<ElectricMultipoleP_tes> ;
-             rdf:type [ <ElectricMultipoleP> ] ? ;
-             &<MagneticMultipoleP_tes> ;
-             rdf:type [ <MagneticMultipoleP> ] ? ;
-             &<BodyShiftP_tes> ;
-             rdf:type [ <BodyShiftP> ] ? ;
-             &<TwissP_tes> ;
-             rdf:type [ <TwissP> ] ? ;
-             pals:species_ref @linkml:String ? ;
-             pals:pc_ref @linkml:Float ? ;
-             pals:E_tot_ref @linkml:Float ? ;
-             pals:time_ref @linkml:Float ? ;
-             <components> @<MultipoleComponent> * ;
-             pals:x_offset @linkml:Float ? ;
-             pals:y_offset @linkml:Float ? ;
-             pals:z_offset @linkml:Float ? ;
-             pals:x_rot @linkml:Float ? ;
-             pals:y_rot @linkml:Float ? ;
-             pals:z_rot @linkml:Float ? ;
-             pals:alpha_a @linkml:Float ? ;
-             pals:alpha_b @linkml:Float ? ;
-             pals:beta_a @linkml:Float ? ;
-             pals:beta_b @linkml:Float ? ;
-             pals:eta_x @linkml:Float ? ;
-             pals:eta_y @linkml:Float ? ;
-             pals:etap_x @linkml:Float ? ;
-             pals:etap_y @linkml:Float ? ;
-             pals:phi_a @linkml:Float ? ;
-             pals:phi_b @linkml:Float ?
-          ) ;
-          rdf:type [ <Cavity> ]
-       )
-    } OR @<CrabCavity> OR @<RFCavity>
+    @<CrabCavity> OR @<RFCavity>
 )
+
+<Cavity_struct> {
+    (  $<Cavity_tes> (  &<PhysicalComponent_tes> ;
+          rdf:type [ <PhysicalComponent> ] ? ;
+          &<ReferenceP_tes> ;
+          rdf:type [ <ReferenceP> ] ? ;
+          &<ElectricMultipoleP_tes> ;
+          rdf:type [ <ElectricMultipoleP> ] ? ;
+          &<MagneticMultipoleP_tes> ;
+          rdf:type [ <MagneticMultipoleP> ] ? ;
+          &<BodyShiftP_tes> ;
+          rdf:type [ <BodyShiftP> ] ? ;
+          &<TwissP_tes> ;
+          rdf:type [ <TwissP> ] ? ;
+          pals:species_ref @linkml:String ? ;
+          pals:pc_ref @linkml:Float ? ;
+          pals:E_tot_ref @linkml:Float ? ;
+          pals:time_ref @linkml:Float ? ;
+          <components> @<MultipoleComponent> * ;
+          pals:x_offset @linkml:Float ? ;
+          pals:y_offset @linkml:Float ? ;
+          pals:z_offset @linkml:Float ? ;
+          pals:x_rot @linkml:Float ? ;
+          pals:y_rot @linkml:Float ? ;
+          pals:z_rot @linkml:Float ? ;
+          pals:alpha_a @linkml:Float ? ;
+          pals:alpha_b @linkml:Float ? ;
+          pals:beta_a @linkml:Float ? ;
+          pals:beta_b @linkml:Float ? ;
+          pals:eta_x @linkml:Float ? ;
+          pals:eta_y @linkml:Float ? ;
+          pals:etap_x @linkml:Float ? ;
+          pals:etap_y @linkml:Float ? ;
+          pals:phi_a @linkml:Float ? ;
+          pals:phi_b @linkml:Float ?
+       ) ;
+       rdf:type [ <Cavity> ]
+    )
+}
 
 <Component>  (
     @<PhysicalComponent> OR @<VirtualComponent>
@@ -232,7 +234,7 @@ linkml:Sparqlpath xsd:string
 <Component_struct> {
     (  $<Component_tes> (  &<MetaP_tes> ;
           rdf:type [ <MetaP> ] ? ;
-          <type> @linkml:String ;
+          <type> @<Component> ;
           <native_types> @linkml:String * ;
           pals:description @linkml:String ? ;
           pals:label @linkml:String ? ;
@@ -298,14 +300,6 @@ linkml:Sparqlpath xsd:string
        )
     } OR @<BeamPositionMonitor> OR @<RadiationMonitor>
 )
-
-<Dipole> CLOSED {
-    (  $<Dipole_tes> (  &<Multipole_tes> ;
-          rdf:type [ <Multipole> ] ?
-       ) ;
-       rdf:type [ <Dipole> ]
-    )
-}
 
 <ElectricMultipoleP> {
     (  $<ElectricMultipoleP_tes> <components> @<MultipoleComponent> * ;
@@ -443,7 +437,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <Multipole> ]
        )
-    } OR @<Bend> OR @<Dipole> OR @<Octupole> OR @<Quadrupole> OR @<Sextupole>
+    } OR @<Bend> OR @<Octupole> OR @<Quadrupole> OR @<Sextupole>
 )
 
 <MultipoleComponent> CLOSED {
@@ -463,7 +457,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <NARAD> CLOSED {
-    (  $<NARAD_tes> (  <type> @linkml:String ;
+    (  $<NARAD_tes> (  <type> @<Component> ;
           <description> @linkml:String ? ;
           <physical_components> @<PhysicalComponent> * ;
           <virtual_components> @<VirtualComponent> * ;
@@ -474,6 +468,14 @@ linkml:Sparqlpath xsd:string
           <component_relations> @<ComponentRelation> *
        ) ;
        rdf:type [ <NARAD> ] ?
+    )
+}
+
+<NormalConductingRFCavity> CLOSED {
+    (  $<NormalConductingRFCavity_tes> (  &<RFCavity_tes> ;
+          rdf:type [ <RFCavity> ] ?
+       ) ;
+       rdf:type [ <NormalConductingRFCavity> ]
     )
 }
 
@@ -571,14 +573,16 @@ linkml:Sparqlpath xsd:string
 }
 
 <RFCavity>  (
-    CLOSED {
-       (  $<RFCavity_tes> (  &<Cavity_tes> ;
-             rdf:type [ <Cavity> ] ?
-          ) ;
-          rdf:type [ <RFCavity> ]
-       )
-    } OR @<SuperconductingRFCavity>
+    @<NormalConductingRFCavity> OR @<SuperConductingRFCavity>
 )
+
+<RFCavity_struct> {
+    (  $<RFCavity_tes> (  &<Cavity_tes> ;
+          rdf:type [ <Cavity> ] ?
+       ) ;
+       rdf:type [ <RFCavity> ]
+    )
+}
 
 <Sextupole> CLOSED {
     (  $<Sextupole_tes> (  &<Multipole_tes> ;
@@ -591,9 +595,10 @@ linkml:Sparqlpath xsd:string
 <Signal> CLOSED {
     (  $<Signal_tes> (  &<MetaP_tes> ;
           rdf:type [ <MetaP> ] ? ;
-          <type> @linkml:String ;
+          <type> @<Component> ;
           <signal_role> [ sosa:ActuatableProperty sosa:ObservableProperty <https://example.org/narad/SignalRoleEnum#Status>
-             sosa:ActuatableProperty <https://example.org/narad/SignalRoleEnum#Limit> ] ;
+             sosa:ActuatableProperty <https://example.org/narad/SignalRoleEnum#MinimumLimit>
+             <https://example.org/narad/SignalRoleEnum#MaximumLimit> ] ;
           <source_system> [ <https://example.org/narad/SourceSystemEnum#EPICS>
              <https://example.org/narad/SourceSystemEnum#EPICS_ChannelAccess> <https://example.org/narad/SourceSystemEnum#PALS_Ext>
              <https://example.org/narad/SourceSystemEnum#MYA> <https://example.org/narad/SourceSystemEnum#ElementDatabase>
@@ -674,11 +679,11 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<SuperconductingRFCavity> CLOSED {
-    (  $<SuperconductingRFCavity_tes> (  &<RFCavity_tes> ;
+<SuperConductingRFCavity> CLOSED {
+    (  $<SuperConductingRFCavity_tes> (  &<RFCavity_tes> ;
           rdf:type [ <RFCavity> ] ?
        ) ;
-       rdf:type [ <SuperconductingRFCavity> ]
+       rdf:type [ <SuperConductingRFCavity> ]
     )
 }
 

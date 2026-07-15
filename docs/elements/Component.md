@@ -6,7 +6,7 @@ A general class for accelerator components, which can be specialized into more s
 URI: [narad:Component](https://example.org/narad/Component)
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[VirtualComponent],[PhysicalComponent],[MetadataEntry],[MetaP],[ComponentRelation],[ComponentRelation]-%20object%201..1>[Component&#124;id:string;type:string;native_types:string%20*;description:string%20%3F;label:string%20%3F;alias:string%20%3F],[ComponentRelation]-%20subject%201..1>[Component],[Component]uses%20-.->[MetaP],[Component]^-[VirtualComponent],[Component]^-[PhysicalComponent])](https://yuml.me/diagram/nofunky;dir:TB/class/[VirtualComponent],[PhysicalComponent],[MetadataEntry],[MetaP],[ComponentRelation],[ComponentRelation]-%20object%201..1>[Component&#124;id:string;type:string;native_types:string%20*;description:string%20%3F;label:string%20%3F;alias:string%20%3F],[ComponentRelation]-%20subject%201..1>[Component],[Component]uses%20-.->[MetaP],[Component]^-[VirtualComponent],[Component]^-[PhysicalComponent])
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[VirtualComponent],[PhysicalComponent],[MetadataEntry],[MetaP],[ComponentRelation],[Component]<type%201..1-%20[Component&#124;id:string;native_types:string%20*;description:string%20%3F;label:string%20%3F;alias:string%20%3F],[ComponentRelation]-%20object%201..1>[Component],[ComponentRelation]-%20subject%201..1>[Component],[Component]uses%20-.->[MetaP],[Component]^-[VirtualComponent],[Component]^-[PhysicalComponent])](https://yuml.me/diagram/nofunky;dir:TB/class/[VirtualComponent],[PhysicalComponent],[MetadataEntry],[MetaP],[ComponentRelation],[Component]<type%201..1-%20[Component&#124;id:string;native_types:string%20*;description:string%20%3F;label:string%20%3F;alias:string%20%3F],[ComponentRelation]-%20object%201..1>[Component],[ComponentRelation]-%20subject%201..1>[Component],[Component]uses%20-.->[MetaP],[Component]^-[VirtualComponent],[Component]^-[PhysicalComponent])
 
 ## Uses Mixin
 
@@ -21,6 +21,7 @@ URI: [narad:Component](https://example.org/narad/Component)
 
  *  **[ComponentRelation](ComponentRelation.md)** *[ComponentRelation➞object](ComponentRelation_object.md)*  <sub>1..1</sub>  **[Component](Component.md)**
  *  **[ComponentRelation](ComponentRelation.md)** *[ComponentRelation➞subject](ComponentRelation_subject.md)*  <sub>1..1</sub>  **[Component](Component.md)**
+ *  **None** *[type](type.md)*  <sub>1..1</sub>  **[Component](Component.md)**
 
 ## Attributes
 
@@ -32,7 +33,7 @@ URI: [narad:Component](https://example.org/narad/Component)
      * Range: [String](types/String.md)
  * [type](type.md)  <sub>1..1</sub>
      * Description: The LinkML class name of this instance.
-     * Range: [String](types/String.md)
+     * Range: [Component](Component.md)
  * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
      * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
      * Range: [String](types/String.md)

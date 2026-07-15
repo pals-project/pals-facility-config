@@ -6,7 +6,7 @@ Semantic meaning of a control-system signal associated with a component.
 URI: [narad:Signal](https://example.org/narad/Signal)
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[SignalBinding],[SignalBinding]-%20object%201..1>[Signal&#124;id:string;type:string;signal_role:SignalRoleEnum;source_system:SourceSystemEnum;native_description:string%20%3F;canonical_signal_type:CanonicalSignalTypeEnum;quantity_kind:QuantityKindEnum;native_data_type:DataTypeEnum;native_unit:UnitEnum;access_protocol:string%20%3F;archive_identifier:string%20%3F;description:string%20%3F;label:string%20%3F;alias:string%20%3F],[NARAD]++-%20signals%200..*>[Signal],[Signal]uses%20-.->[MetaP],[NARAD],[MetadataEntry],[MetaP])](https://yuml.me/diagram/nofunky;dir:TB/class/[SignalBinding],[SignalBinding]-%20object%201..1>[Signal&#124;id:string;type:string;signal_role:SignalRoleEnum;source_system:SourceSystemEnum;native_description:string%20%3F;canonical_signal_type:CanonicalSignalTypeEnum;quantity_kind:QuantityKindEnum;native_data_type:DataTypeEnum;native_unit:UnitEnum;access_protocol:string%20%3F;archive_identifier:string%20%3F;description:string%20%3F;label:string%20%3F;alias:string%20%3F],[NARAD]++-%20signals%200..*>[Signal],[Signal]uses%20-.->[MetaP],[NARAD],[MetadataEntry],[MetaP])
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[SignalBinding],[Component]<type%201..1-%20[Signal&#124;id:string;signal_role:SignalRoleEnum;source_system:SourceSystemEnum;native_description:string%20%3F;canonical_signal_type:CanonicalSignalTypeEnum;quantity_kind:QuantityKindEnum;native_data_type:DataTypeEnum;native_unit:UnitEnum;access_protocol:string%20%3F;archive_identifier:string%20%3F;description:string%20%3F;label:string%20%3F;alias:string%20%3F],[SignalBinding]-%20object%201..1>[Signal],[NARAD]++-%20signals%200..*>[Signal],[Signal]uses%20-.->[MetaP],[NARAD],[MetadataEntry],[MetaP],[Component])](https://yuml.me/diagram/nofunky;dir:TB/class/[SignalBinding],[Component]<type%201..1-%20[Signal&#124;id:string;signal_role:SignalRoleEnum;source_system:SourceSystemEnum;native_description:string%20%3F;canonical_signal_type:CanonicalSignalTypeEnum;quantity_kind:QuantityKindEnum;native_data_type:DataTypeEnum;native_unit:UnitEnum;access_protocol:string%20%3F;archive_identifier:string%20%3F;description:string%20%3F;label:string%20%3F;alias:string%20%3F],[SignalBinding]-%20object%201..1>[Signal],[NARAD]++-%20signals%200..*>[Signal],[Signal]uses%20-.->[MetaP],[NARAD],[MetadataEntry],[MetaP],[Component])
 
 ## Uses Mixin
 
@@ -27,7 +27,7 @@ URI: [narad:Signal](https://example.org/narad/Signal)
      * Range: [String](types/String.md)
  * [type](type.md)  <sub>1..1</sub>
      * Description: The LinkML class name of this instance.
-     * Range: [String](types/String.md)
+     * Range: [Component](Component.md)
  * [➞signal_role](signal__signal_role.md)  <sub>1..1</sub>
      * Description: The role of the signal in the control system, such as setpoint, readback, status, command, or limit.
      * Range: [SignalRoleEnum](SignalRoleEnum.md)

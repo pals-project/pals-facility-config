@@ -5,7 +5,7 @@
 message ACKicker
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -48,7 +48,7 @@ message ACKicker
 message Beamline
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -74,7 +74,7 @@ message Beamline
 message BeamlineSection
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -99,7 +99,7 @@ message BeamlineSection
 message BeamPositionMonitor
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -140,7 +140,7 @@ message BeamPositionMonitor
 message Bend
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -186,7 +186,7 @@ message Bend
 message BookkeepingComponent
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -206,48 +206,6 @@ message BookkeepingComponent
   float xRot = 0
   float yRot = 0
   float zRot = 0
- }
-// A cavity used for beam acceleration or manipulation.
-message Cavity
- {
-  string id = 0
-  string type = 0
- repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
- repeated  physicalFunctionEnum functions = 0
-  physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
- repeated  multipoleComponent components = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
  }
 // Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds.
 message ComponentRelation
@@ -270,7 +228,7 @@ message ComponentRelation
 message CrabCavity
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -312,7 +270,7 @@ message CrabCavity
 message DiagnosticDevice
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -328,49 +286,6 @@ message DiagnosticDevice
   float psi = 0
   float length = 0
   float sPosition = 0
- }
-// A magnet primarily used to bend the beam. 2 poles.
-// Only one of the electric or magnetic multipole components should be present, not both.
-message Dipole
- {
-  string id = 0
-  string type = 0
- repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
- repeated  physicalFunctionEnum functions = 0
-  physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
- repeated  multipoleComponent components = 0
  }
 // A magnet primarily used to steer the beam.
 // Can deflect the beam transversely in both planes, or a single plane, depending on the design and parameters of the kicker. 
@@ -378,7 +293,7 @@ message Dipole
 message Kicker
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -421,7 +336,7 @@ message Kicker
 message Marker
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -464,7 +379,7 @@ message MetadataEntry
 message Multipole
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -521,7 +436,7 @@ message MultipoleComponent
 // Root container for accelerator core components, semantic signals, and local bindings.
 message NARAD
  {
-  string type = 0
+  component type = 0
   string description = 0
  repeated  physicalComponent physicalComponents = 0
  repeated  virtualComponent virtualComponents = 0
@@ -531,12 +446,54 @@ message NARAD
  repeated  signalBinding signalBindings = 0
  repeated  componentRelation componentRelations = 0
  }
+// A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
+message NormalConductingRFCavity
+ {
+  string id = 0
+  component type = 0
+ repeated  string nativeTypes = 0
+  string description = 0
+  string label = 0
+  string alias = 0
+ repeated  metadataEntry additionalMetadata = 0
+ repeated  physicalFunctionEnum functions = 0
+  physicalRelationEnum beamlineRelation = 0
+  float x = 0
+  float y = 0
+  float z = 0
+  float theta = 0
+  float phi = 0
+  float psi = 0
+  float length = 0
+  float sPosition = 0
+  string speciesRef = 0
+  float pcRef = 0
+  float eTotRef = 0
+  float timeRef = 0
+ repeated  multipoleComponent components = 0
+  float xOffset = 0
+  float yOffset = 0
+  float zOffset = 0
+  float xRot = 0
+  float yRot = 0
+  float zRot = 0
+  float alphaA = 0
+  float alphaB = 0
+  float betaA = 0
+  float betaB = 0
+  float etaX = 0
+  float etaY = 0
+  float etapX = 0
+  float etapY = 0
+  float phiA = 0
+  float phiB = 0
+ }
 // A magnet primarily used to focus or defocus the beam. 8 poles.
 // Only one of the electric or magnetic multipole components should be present, not both.
 message Octupole
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -578,7 +535,7 @@ message Octupole
 message PhysicalComponent
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -600,7 +557,7 @@ message PhysicalComponent
 message Quadrupole
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -642,7 +599,7 @@ message Quadrupole
 message RadiationMonitor
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -664,55 +621,13 @@ message RadiationMonitor
   float xRot = 0
   float yRot = 0
   float zRot = 0
- }
-// A cavity used for RF acceleration or longitudinal manipulation.
-message RFCavity
- {
-  string id = 0
-  string type = 0
- repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
- repeated  physicalFunctionEnum functions = 0
-  physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
- repeated  multipoleComponent components = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
  }
 // A magnet primarily used to focus or defocus the beam. 6 poles.
 // Only one of the electric or magnetic multipole components should be present, not both.
 message Sextupole
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -754,7 +669,7 @@ message Sextupole
 message Signal
  {
   string id = 0
-  string type = 0
+  component type = 0
   signalRoleEnum signalRole = 0
   sourceSystemEnum sourceSystem = 0
   string nativeDescription = 0
@@ -782,7 +697,7 @@ message SignalBinding
 message Solenoid
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -822,10 +737,10 @@ message Solenoid
   float bsol = 0
  }
 // A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
-message SuperconductingRFCavity
+message SuperConductingRFCavity
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -872,7 +787,7 @@ message SuperconductingRFCavity
 message SupportingFacilityComponent
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0
@@ -899,7 +814,7 @@ message SupportingFacilityComponent
 message VirtualComponent
  {
   string id = 0
-  string type = 0
+  component type = 0
  repeated  string nativeTypes = 0
   string description = 0
   string label = 0

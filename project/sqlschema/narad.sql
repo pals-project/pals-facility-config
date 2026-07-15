@@ -90,7 +90,6 @@
 --     * Slot: ElectricMultipoleP_id Description: Autocreated FK slot
 --     * Slot: MagneticMultipoleP_id Description: Autocreated FK slot
 --     * Slot: Multipole_id Description: Autocreated FK slot
---     * Slot: Dipole_id Description: Autocreated FK slot
 --     * Slot: Bend_id Description: Autocreated FK slot
 --     * Slot: Quadrupole_id Description: Autocreated FK slot
 --     * Slot: Octupole_id Description: Autocreated FK slot
@@ -100,7 +99,8 @@
 --     * Slot: Cavity_id Description: Autocreated FK slot
 --     * Slot: CrabCavity_id Description: Autocreated FK slot
 --     * Slot: RFCavity_id Description: Autocreated FK slot
---     * Slot: SuperconductingRFCavity_id Description: Autocreated FK slot
+--     * Slot: NormalConductingRFCavity_id Description: Autocreated FK slot
+--     * Slot: SuperConductingRFCavity_id Description: Autocreated FK slot
 -- # Abstract Class: Component Description: A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
 --     * Slot: id Description: A unique identifier for the instance.
 --     * Slot: type Description: The LinkML class name of this instance.
@@ -246,41 +246,6 @@
 --     * Slot: label Description: A label string.
 --     * Slot: alias Description: An alternative name or identifier for the instance.
 -- # Class: Multipole Description: A general magnet with a higher-order multipole field, such as a sextupole or octupole.Only one of the electric or magnetic multipole components should be present, not both.
---     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
---     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
---     * Slot: E_tot_ref Description: [eV] Reference total energy
---     * Slot: time_ref Description: [s] Reference time
---     * Slot: x_offset Description: Shift in the X direction in the facility floor plan.
---     * Slot: y_offset Description: Shift in the Y direction in the facility floor plan.
---     * Slot: z_offset Description: Shift in the Z direction in the facility floor plan.
---     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
---     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
---     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
---     * Slot: alpha_a Description: Twiss alpha parameter in the horizontal plane.
---     * Slot: alpha_b Description: Twiss alpha parameter in the vertical plane.
---     * Slot: beta_a Description: Twiss beta parameter in the horizontal plane.
---     * Slot: beta_b Description: Twiss beta parameter in the vertical plane.
---     * Slot: eta_x Description: Twiss dispersion parameter in the horizontal plane.
---     * Slot: eta_y Description: Twiss dispersion parameter in the vertical plane.
---     * Slot: etap_x Description: Twiss dispersion slope parameter in the horizontal plane.
---     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
---     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
---     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
---     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
---     * Slot: x Description: Global X coordinate in the facility floor plan.
---     * Slot: y Description: Global Y coordinate in the facility floor plan.
---     * Slot: z Description: Global Z coordinate in the facility floor plan.
---     * Slot: theta Description: Orientation angle around the Y-axis in the facility floor plan.
---     * Slot: phi Description: Rotation around the X-axis in the facility floor plan.
---     * Slot: psi Description: Rotation around the Z-axis in the facility floor plan.
---     * Slot: length Description: Length of the element (arc length for bends).
---     * Slot: s_position Description: Longitudinal position of the element along the beamline.
---     * Slot: id Description: A unique identifier for the instance.
---     * Slot: type Description: The LinkML class name of this instance.
---     * Slot: description Description: Human-readable description.
---     * Slot: label Description: A label string.
---     * Slot: alias Description: An alternative name or identifier for the instance.
--- # Class: Dipole Description: A magnet primarily used to bend the beam. 2 poles.Only one of the electric or magnetic multipole components should be present, not both.
 --     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
 --     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
 --     * Slot: E_tot_ref Description: [eV] Reference total energy
@@ -598,7 +563,7 @@
 --     * Slot: description Description: Human-readable description.
 --     * Slot: label Description: A label string.
 --     * Slot: alias Description: An alternative name or identifier for the instance.
--- # Class: Cavity Description: A cavity used for beam acceleration or manipulation.
+-- # Abstract Class: Cavity Description: A cavity used for beam acceleration or manipulation.
 --     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
 --     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
 --     * Slot: E_tot_ref Description: [eV] Reference total energy
@@ -668,7 +633,7 @@
 --     * Slot: description Description: Human-readable description.
 --     * Slot: label Description: A label string.
 --     * Slot: alias Description: An alternative name or identifier for the instance.
--- # Class: RFCavity Description: A cavity used for RF acceleration or longitudinal manipulation.
+-- # Abstract Class: RFCavity Description: A cavity used for RF acceleration or longitudinal manipulation.
 --     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
 --     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
 --     * Slot: E_tot_ref Description: [eV] Reference total energy
@@ -703,7 +668,42 @@
 --     * Slot: description Description: Human-readable description.
 --     * Slot: label Description: A label string.
 --     * Slot: alias Description: An alternative name or identifier for the instance.
--- # Class: SuperconductingRFCavity Description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
+-- # Class: NormalConductingRFCavity Description: A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
+--     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
+--     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
+--     * Slot: E_tot_ref Description: [eV] Reference total energy
+--     * Slot: time_ref Description: [s] Reference time
+--     * Slot: x_offset Description: Shift in the X direction in the facility floor plan.
+--     * Slot: y_offset Description: Shift in the Y direction in the facility floor plan.
+--     * Slot: z_offset Description: Shift in the Z direction in the facility floor plan.
+--     * Slot: x_rot Description: Rotation around the X-axis in the facility floor plan.
+--     * Slot: y_rot Description: Rotation around the Y-axis in the facility floor plan.
+--     * Slot: z_rot Description: Rotation around the Z-axis in the facility floor plan.
+--     * Slot: alpha_a Description: Twiss alpha parameter in the horizontal plane.
+--     * Slot: alpha_b Description: Twiss alpha parameter in the vertical plane.
+--     * Slot: beta_a Description: Twiss beta parameter in the horizontal plane.
+--     * Slot: beta_b Description: Twiss beta parameter in the vertical plane.
+--     * Slot: eta_x Description: Twiss dispersion parameter in the horizontal plane.
+--     * Slot: eta_y Description: Twiss dispersion parameter in the vertical plane.
+--     * Slot: etap_x Description: Twiss dispersion slope parameter in the horizontal plane.
+--     * Slot: etap_y Description: Twiss dispersion slope parameter in the vertical plane.
+--     * Slot: phi_a Description: Twiss phase advance parameter in the horizontal plane.
+--     * Slot: phi_b Description: Twiss phase advance parameter in the vertical plane.
+--     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
+--     * Slot: x Description: Global X coordinate in the facility floor plan.
+--     * Slot: y Description: Global Y coordinate in the facility floor plan.
+--     * Slot: z Description: Global Z coordinate in the facility floor plan.
+--     * Slot: theta Description: Orientation angle around the Y-axis in the facility floor plan.
+--     * Slot: phi Description: Rotation around the X-axis in the facility floor plan.
+--     * Slot: psi Description: Rotation around the Z-axis in the facility floor plan.
+--     * Slot: length Description: Length of the element (arc length for bends).
+--     * Slot: s_position Description: Longitudinal position of the element along the beamline.
+--     * Slot: id Description: A unique identifier for the instance.
+--     * Slot: type Description: The LinkML class name of this instance.
+--     * Slot: description Description: Human-readable description.
+--     * Slot: label Description: A label string.
+--     * Slot: alias Description: An alternative name or identifier for the instance.
+-- # Class: SuperConductingRFCavity Description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
 --     * Slot: species_ref Description: A reference to a species or particle type, such as an ion, electron, or proton.
 --     * Slot: pc_ref Description: [momentum*c] Reference momentum times speed of light.
 --     * Slot: E_tot_ref Description: [eV] Reference total energy
@@ -840,7 +840,6 @@
 --     * Slot: Magnet_id Description: Autocreated FK slot
 --     * Slot: Solenoid_id Description: Autocreated FK slot
 --     * Slot: Multipole_id Description: Autocreated FK slot
---     * Slot: Dipole_id Description: Autocreated FK slot
 --     * Slot: Bend_id Description: Autocreated FK slot
 --     * Slot: Quadrupole_id Description: Autocreated FK slot
 --     * Slot: Octupole_id Description: Autocreated FK slot
@@ -853,7 +852,8 @@
 --     * Slot: Cavity_id Description: Autocreated FK slot
 --     * Slot: CrabCavity_id Description: Autocreated FK slot
 --     * Slot: RFCavity_id Description: Autocreated FK slot
---     * Slot: SuperconductingRFCavity_id Description: Autocreated FK slot
+--     * Slot: NormalConductingRFCavity_id Description: Autocreated FK slot
+--     * Slot: SuperConductingRFCavity_id Description: Autocreated FK slot
 --     * Slot: SupportingFacilityComponent_id Description: Autocreated FK slot
 --     * Slot: BookkeepingComponent_id Description: Autocreated FK slot
 --     * Slot: Marker_id Description: Autocreated FK slot
@@ -922,12 +922,6 @@
 --     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
 -- # Class: Multipole_native_types
 --     * Slot: Multipole_id Description: Autocreated FK slot
---     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
--- # Class: Dipole_functions
---     * Slot: Dipole_id Description: Autocreated FK slot
---     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
--- # Class: Dipole_native_types
---     * Slot: Dipole_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
 -- # Class: Bend_functions
 --     * Slot: Bend_id Description: Autocreated FK slot
@@ -1001,11 +995,17 @@
 -- # Class: RFCavity_native_types
 --     * Slot: RFCavity_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
--- # Class: SuperconductingRFCavity_functions
---     * Slot: SuperconductingRFCavity_id Description: Autocreated FK slot
+-- # Class: NormalConductingRFCavity_functions
+--     * Slot: NormalConductingRFCavity_id Description: Autocreated FK slot
 --     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
--- # Class: SuperconductingRFCavity_native_types
---     * Slot: SuperconductingRFCavity_id Description: Autocreated FK slot
+-- # Class: NormalConductingRFCavity_native_types
+--     * Slot: NormalConductingRFCavity_id Description: Autocreated FK slot
+--     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: SuperConductingRFCavity_functions
+--     * Slot: SuperConductingRFCavity_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the physical component,  which can be used to identify the component across different source systems.
+-- # Class: SuperConductingRFCavity_native_types
+--     * Slot: SuperConductingRFCavity_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
 -- # Class: SupportingFacilityComponent_functions
 --     * Slot: SupportingFacilityComponent_id Description: Autocreated FK slot
@@ -1032,12 +1032,6 @@
 --     * Slot: BeamlineSection_id Description: Autocreated FK slot
 --     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
 
-CREATE TABLE "NARAD" (
-	id INTEGER NOT NULL,
-	type TEXT NOT NULL,
-	description TEXT,
-	PRIMARY KEY (id)
-);CREATE INDEX "ix_NARAD_id" ON "NARAD" (id);
 CREATE TABLE "MetaP" (
 	id INTEGER NOT NULL,
 	description TEXT,
@@ -1137,8 +1131,23 @@ CREATE TABLE "Component" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Component_id" ON "Component" (id);
+CREATE TABLE "Relationship" (
+	id TEXT NOT NULL,
+	subject TEXT NOT NULL,
+	predicate TEXT NOT NULL,
+	object TEXT NOT NULL,
+	PRIMARY KEY (id)
+);CREATE INDEX "ix_Relationship_id" ON "Relationship" (id);
+CREATE TABLE "NARAD" (
+	id INTEGER NOT NULL,
+	type TEXT NOT NULL,
+	description TEXT,
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
+);CREATE INDEX "ix_NARAD_id" ON "NARAD" (id);
 CREATE TABLE "Magnet" (
 	species_ref TEXT,
 	pc_ref FLOAT,
@@ -1174,7 +1183,8 @@ CREATE TABLE "Magnet" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Magnet_id" ON "Magnet" (id);
 CREATE TABLE "Solenoid" (
 	"Ksol" FLOAT,
@@ -1213,7 +1223,8 @@ CREATE TABLE "Solenoid" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Solenoid_id" ON "Solenoid" (id);
 CREATE TABLE "Multipole" (
 	species_ref TEXT,
@@ -1250,45 +1261,9 @@ CREATE TABLE "Multipole" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Multipole_id" ON "Multipole" (id);
-CREATE TABLE "Dipole" (
-	species_ref TEXT,
-	pc_ref FLOAT,
-	"E_tot_ref" FLOAT,
-	time_ref FLOAT,
-	x_offset FLOAT,
-	y_offset FLOAT,
-	z_offset FLOAT,
-	x_rot FLOAT,
-	y_rot FLOAT,
-	z_rot FLOAT,
-	alpha_a FLOAT,
-	alpha_b FLOAT,
-	beta_a FLOAT,
-	beta_b FLOAT,
-	eta_x FLOAT,
-	eta_y FLOAT,
-	etap_x FLOAT,
-	etap_y FLOAT,
-	phi_a FLOAT,
-	phi_b FLOAT,
-	beamline_relation VARCHAR(18) NOT NULL,
-	x FLOAT,
-	y FLOAT,
-	z FLOAT,
-	theta FLOAT,
-	phi FLOAT,
-	psi FLOAT,
-	length FLOAT,
-	s_position FLOAT,
-	id TEXT NOT NULL,
-	type TEXT NOT NULL,
-	description TEXT,
-	label TEXT,
-	alias TEXT,
-	PRIMARY KEY (id)
-);CREATE INDEX "ix_Dipole_id" ON "Dipole" (id);
 CREATE TABLE "Bend" (
 	species_ref TEXT,
 	pc_ref FLOAT,
@@ -1324,7 +1299,8 @@ CREATE TABLE "Bend" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Bend_id" ON "Bend" (id);
 CREATE TABLE "Quadrupole" (
 	species_ref TEXT,
@@ -1361,7 +1337,8 @@ CREATE TABLE "Quadrupole" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Quadrupole_id" ON "Quadrupole" (id);
 CREATE TABLE "Octupole" (
 	species_ref TEXT,
@@ -1398,7 +1375,8 @@ CREATE TABLE "Octupole" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Octupole_id" ON "Octupole" (id);
 CREATE TABLE "Sextupole" (
 	species_ref TEXT,
@@ -1435,7 +1413,8 @@ CREATE TABLE "Sextupole" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Sextupole_id" ON "Sextupole" (id);
 CREATE TABLE "Kicker" (
 	plane VARCHAR(10),
@@ -1473,7 +1452,8 @@ CREATE TABLE "Kicker" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Kicker_id" ON "Kicker" (id);
 CREATE TABLE "ACKicker" (
 	plane VARCHAR(10),
@@ -1511,7 +1491,8 @@ CREATE TABLE "ACKicker" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_ACKicker_id" ON "ACKicker" (id);
 CREATE TABLE "DiagnosticDevice" (
 	beamline_relation VARCHAR(18) NOT NULL,
@@ -1528,7 +1509,8 @@ CREATE TABLE "DiagnosticDevice" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_DiagnosticDevice_id" ON "DiagnosticDevice" (id);
 CREATE TABLE "BeamPositionMonitor" (
 	species_ref TEXT,
@@ -1565,7 +1547,8 @@ CREATE TABLE "BeamPositionMonitor" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_BeamPositionMonitor_id" ON "BeamPositionMonitor" (id);
 CREATE TABLE "RadiationMonitor" (
 	x_offset FLOAT,
@@ -1588,7 +1571,8 @@ CREATE TABLE "RadiationMonitor" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_RadiationMonitor_id" ON "RadiationMonitor" (id);
 CREATE TABLE "Cavity" (
 	species_ref TEXT,
@@ -1625,7 +1609,8 @@ CREATE TABLE "Cavity" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Cavity_id" ON "Cavity" (id);
 CREATE TABLE "CrabCavity" (
 	species_ref TEXT,
@@ -1662,7 +1647,8 @@ CREATE TABLE "CrabCavity" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_CrabCavity_id" ON "CrabCavity" (id);
 CREATE TABLE "RFCavity" (
 	species_ref TEXT,
@@ -1699,9 +1685,10 @@ CREATE TABLE "RFCavity" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_RFCavity_id" ON "RFCavity" (id);
-CREATE TABLE "SuperconductingRFCavity" (
+CREATE TABLE "NormalConductingRFCavity" (
 	species_ref TEXT,
 	pc_ref FLOAT,
 	"E_tot_ref" FLOAT,
@@ -1736,8 +1723,47 @@ CREATE TABLE "SuperconductingRFCavity" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
-);CREATE INDEX "ix_SuperconductingRFCavity_id" ON "SuperconductingRFCavity" (id);
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
+);CREATE INDEX "ix_NormalConductingRFCavity_id" ON "NormalConductingRFCavity" (id);
+CREATE TABLE "SuperConductingRFCavity" (
+	species_ref TEXT,
+	pc_ref FLOAT,
+	"E_tot_ref" FLOAT,
+	time_ref FLOAT,
+	x_offset FLOAT,
+	y_offset FLOAT,
+	z_offset FLOAT,
+	x_rot FLOAT,
+	y_rot FLOAT,
+	z_rot FLOAT,
+	alpha_a FLOAT,
+	alpha_b FLOAT,
+	beta_a FLOAT,
+	beta_b FLOAT,
+	eta_x FLOAT,
+	eta_y FLOAT,
+	etap_x FLOAT,
+	etap_y FLOAT,
+	phi_a FLOAT,
+	phi_b FLOAT,
+	beamline_relation VARCHAR(18) NOT NULL,
+	x FLOAT,
+	y FLOAT,
+	z FLOAT,
+	theta FLOAT,
+	phi FLOAT,
+	psi FLOAT,
+	length FLOAT,
+	s_position FLOAT,
+	id TEXT NOT NULL,
+	type TEXT NOT NULL,
+	description TEXT,
+	label TEXT,
+	alias TEXT,
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
+);CREATE INDEX "ix_SuperConductingRFCavity_id" ON "SuperConductingRFCavity" (id);
 CREATE TABLE "BookkeepingComponent" (
 	x_offset FLOAT,
 	y_offset FLOAT,
@@ -1757,7 +1783,8 @@ CREATE TABLE "BookkeepingComponent" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_BookkeepingComponent_id" ON "BookkeepingComponent" (id);
 CREATE TABLE "Marker" (
 	alpha_a FLOAT,
@@ -1788,7 +1815,8 @@ CREATE TABLE "Marker" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_Marker_id" ON "Marker" (id);
 CREATE TABLE "BeamlineSection" (
 	x_offset FLOAT,
@@ -1809,15 +1837,15 @@ CREATE TABLE "BeamlineSection" (
 	description TEXT,
 	label TEXT,
 	alias TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id)
 );CREATE INDEX "ix_BeamlineSection_id" ON "BeamlineSection" (id);
-CREATE TABLE "Relationship" (
-	id TEXT NOT NULL,
-	subject TEXT NOT NULL,
-	predicate TEXT NOT NULL,
-	object TEXT NOT NULL,
-	PRIMARY KEY (id)
-);CREATE INDEX "ix_Relationship_id" ON "Relationship" (id);
+CREATE TABLE "Component_native_types" (
+	"Component_id" TEXT,
+	native_types TEXT,
+	PRIMARY KEY ("Component_id", native_types),
+	FOREIGN KEY("Component_id") REFERENCES "Component" (id)
+);CREATE INDEX "ix_Component_native_types_native_types" ON "Component_native_types" (native_types);CREATE INDEX "ix_Component_native_types_Component_id" ON "Component_native_types" ("Component_id");
 CREATE TABLE "MultipoleComponent" (
 	id INTEGER NOT NULL,
 	"order" INTEGER NOT NULL,
@@ -1833,7 +1861,6 @@ CREATE TABLE "MultipoleComponent" (
 	"ElectricMultipoleP_id" INTEGER,
 	"MagneticMultipoleP_id" INTEGER,
 	"Multipole_id" TEXT,
-	"Dipole_id" TEXT,
 	"Bend_id" TEXT,
 	"Quadrupole_id" TEXT,
 	"Octupole_id" TEXT,
@@ -1843,12 +1870,12 @@ CREATE TABLE "MultipoleComponent" (
 	"Cavity_id" TEXT,
 	"CrabCavity_id" TEXT,
 	"RFCavity_id" TEXT,
-	"SuperconductingRFCavity_id" TEXT,
+	"NormalConductingRFCavity_id" TEXT,
+	"SuperConductingRFCavity_id" TEXT,
 	PRIMARY KEY (id),
 	FOREIGN KEY("ElectricMultipoleP_id") REFERENCES "ElectricMultipoleP" (id),
 	FOREIGN KEY("MagneticMultipoleP_id") REFERENCES "MagneticMultipoleP" (id),
 	FOREIGN KEY("Multipole_id") REFERENCES "Multipole" (id),
-	FOREIGN KEY("Dipole_id") REFERENCES "Dipole" (id),
 	FOREIGN KEY("Bend_id") REFERENCES "Bend" (id),
 	FOREIGN KEY("Quadrupole_id") REFERENCES "Quadrupole" (id),
 	FOREIGN KEY("Octupole_id") REFERENCES "Octupole" (id),
@@ -1858,7 +1885,8 @@ CREATE TABLE "MultipoleComponent" (
 	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id),
 	FOREIGN KEY("CrabCavity_id") REFERENCES "CrabCavity" (id),
 	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id),
-	FOREIGN KEY("SuperconductingRFCavity_id") REFERENCES "SuperconductingRFCavity" (id)
+	FOREIGN KEY("NormalConductingRFCavity_id") REFERENCES "NormalConductingRFCavity" (id),
+	FOREIGN KEY("SuperConductingRFCavity_id") REFERENCES "SuperConductingRFCavity" (id)
 );CREATE INDEX "ix_MultipoleComponent_id" ON "MultipoleComponent" (id);
 CREATE TABLE "PhysicalComponent" (
 	beamline_relation VARCHAR(18) NOT NULL,
@@ -1877,6 +1905,7 @@ CREATE TABLE "PhysicalComponent" (
 	alias TEXT,
 	"NARAD_id" INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id),
 	FOREIGN KEY("NARAD_id") REFERENCES "NARAD" (id)
 );CREATE INDEX "ix_PhysicalComponent_id" ON "PhysicalComponent" (id);
 CREATE TABLE "VirtualComponent" (
@@ -1894,6 +1923,7 @@ CREATE TABLE "VirtualComponent" (
 	alias TEXT,
 	"NARAD_id" INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id),
 	FOREIGN KEY("NARAD_id") REFERENCES "NARAD" (id)
 );CREATE INDEX "ix_VirtualComponent_id" ON "VirtualComponent" (id);
 CREATE TABLE "Beamline" (
@@ -1917,12 +1947,13 @@ CREATE TABLE "Beamline" (
 	alias TEXT,
 	"NARAD_id" INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id),
 	FOREIGN KEY("NARAD_id") REFERENCES "NARAD" (id)
 );CREATE INDEX "ix_Beamline_id" ON "Beamline" (id);
 CREATE TABLE "Signal" (
 	id TEXT NOT NULL,
 	type TEXT NOT NULL,
-	signal_role VARCHAR(8) NOT NULL,
+	signal_role VARCHAR(12) NOT NULL,
 	source_system VARCHAR(19) NOT NULL,
 	native_description TEXT,
 	canonical_signal_type VARCHAR(28) NOT NULL,
@@ -1936,6 +1967,7 @@ CREATE TABLE "Signal" (
 	alias TEXT,
 	"NARAD_id" INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id),
 	FOREIGN KEY("NARAD_id") REFERENCES "NARAD" (id)
 );CREATE INDEX "ix_Signal_id" ON "Signal" (id);
 CREATE TABLE "SupportingFacilityComponent" (
@@ -1961,14 +1993,9 @@ CREATE TABLE "SupportingFacilityComponent" (
 	alias TEXT,
 	"NARAD_id" INTEGER,
 	PRIMARY KEY (id),
+	FOREIGN KEY(type) REFERENCES "Component" (id),
 	FOREIGN KEY("NARAD_id") REFERENCES "NARAD" (id)
 );CREATE INDEX "ix_SupportingFacilityComponent_id" ON "SupportingFacilityComponent" (id);
-CREATE TABLE "Component_native_types" (
-	"Component_id" TEXT,
-	native_types TEXT,
-	PRIMARY KEY ("Component_id", native_types),
-	FOREIGN KEY("Component_id") REFERENCES "Component" (id)
-);CREATE INDEX "ix_Component_native_types_Component_id" ON "Component_native_types" ("Component_id");CREATE INDEX "ix_Component_native_types_native_types" ON "Component_native_types" (native_types);
 CREATE TABLE "Magnet_functions" (
 	"Magnet_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -1986,13 +2013,13 @@ CREATE TABLE "Solenoid_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("Solenoid_id", functions),
 	FOREIGN KEY("Solenoid_id") REFERENCES "Solenoid" (id)
-);CREATE INDEX "ix_Solenoid_functions_Solenoid_id" ON "Solenoid_functions" ("Solenoid_id");CREATE INDEX "ix_Solenoid_functions_functions" ON "Solenoid_functions" (functions);
+);CREATE INDEX "ix_Solenoid_functions_functions" ON "Solenoid_functions" (functions);CREATE INDEX "ix_Solenoid_functions_Solenoid_id" ON "Solenoid_functions" ("Solenoid_id");
 CREATE TABLE "Solenoid_native_types" (
 	"Solenoid_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Solenoid_id", native_types),
 	FOREIGN KEY("Solenoid_id") REFERENCES "Solenoid" (id)
-);CREATE INDEX "ix_Solenoid_native_types_Solenoid_id" ON "Solenoid_native_types" ("Solenoid_id");CREATE INDEX "ix_Solenoid_native_types_native_types" ON "Solenoid_native_types" (native_types);
+);CREATE INDEX "ix_Solenoid_native_types_native_types" ON "Solenoid_native_types" (native_types);CREATE INDEX "ix_Solenoid_native_types_Solenoid_id" ON "Solenoid_native_types" ("Solenoid_id");
 CREATE TABLE "Multipole_functions" (
 	"Multipole_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -2004,19 +2031,7 @@ CREATE TABLE "Multipole_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Multipole_id", native_types),
 	FOREIGN KEY("Multipole_id") REFERENCES "Multipole" (id)
-);CREATE INDEX "ix_Multipole_native_types_native_types" ON "Multipole_native_types" (native_types);CREATE INDEX "ix_Multipole_native_types_Multipole_id" ON "Multipole_native_types" ("Multipole_id");
-CREATE TABLE "Dipole_functions" (
-	"Dipole_id" TEXT,
-	functions VARCHAR(23) NOT NULL,
-	PRIMARY KEY ("Dipole_id", functions),
-	FOREIGN KEY("Dipole_id") REFERENCES "Dipole" (id)
-);CREATE INDEX "ix_Dipole_functions_functions" ON "Dipole_functions" (functions);CREATE INDEX "ix_Dipole_functions_Dipole_id" ON "Dipole_functions" ("Dipole_id");
-CREATE TABLE "Dipole_native_types" (
-	"Dipole_id" TEXT,
-	native_types TEXT,
-	PRIMARY KEY ("Dipole_id", native_types),
-	FOREIGN KEY("Dipole_id") REFERENCES "Dipole" (id)
-);CREATE INDEX "ix_Dipole_native_types_native_types" ON "Dipole_native_types" (native_types);CREATE INDEX "ix_Dipole_native_types_Dipole_id" ON "Dipole_native_types" ("Dipole_id");
+);CREATE INDEX "ix_Multipole_native_types_Multipole_id" ON "Multipole_native_types" ("Multipole_id");CREATE INDEX "ix_Multipole_native_types_native_types" ON "Multipole_native_types" (native_types);
 CREATE TABLE "Bend_functions" (
 	"Bend_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -2052,7 +2067,7 @@ CREATE TABLE "Octupole_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Octupole_id", native_types),
 	FOREIGN KEY("Octupole_id") REFERENCES "Octupole" (id)
-);CREATE INDEX "ix_Octupole_native_types_native_types" ON "Octupole_native_types" (native_types);CREATE INDEX "ix_Octupole_native_types_Octupole_id" ON "Octupole_native_types" ("Octupole_id");
+);CREATE INDEX "ix_Octupole_native_types_Octupole_id" ON "Octupole_native_types" ("Octupole_id");CREATE INDEX "ix_Octupole_native_types_native_types" ON "Octupole_native_types" (native_types);
 CREATE TABLE "Sextupole_functions" (
 	"Sextupole_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -2064,25 +2079,25 @@ CREATE TABLE "Sextupole_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Sextupole_id", native_types),
 	FOREIGN KEY("Sextupole_id") REFERENCES "Sextupole" (id)
-);CREATE INDEX "ix_Sextupole_native_types_native_types" ON "Sextupole_native_types" (native_types);CREATE INDEX "ix_Sextupole_native_types_Sextupole_id" ON "Sextupole_native_types" ("Sextupole_id");
+);CREATE INDEX "ix_Sextupole_native_types_Sextupole_id" ON "Sextupole_native_types" ("Sextupole_id");CREATE INDEX "ix_Sextupole_native_types_native_types" ON "Sextupole_native_types" (native_types);
 CREATE TABLE "Kicker_functions" (
 	"Kicker_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("Kicker_id", functions),
 	FOREIGN KEY("Kicker_id") REFERENCES "Kicker" (id)
-);CREATE INDEX "ix_Kicker_functions_Kicker_id" ON "Kicker_functions" ("Kicker_id");CREATE INDEX "ix_Kicker_functions_functions" ON "Kicker_functions" (functions);
+);CREATE INDEX "ix_Kicker_functions_functions" ON "Kicker_functions" (functions);CREATE INDEX "ix_Kicker_functions_Kicker_id" ON "Kicker_functions" ("Kicker_id");
 CREATE TABLE "Kicker_native_types" (
 	"Kicker_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Kicker_id", native_types),
 	FOREIGN KEY("Kicker_id") REFERENCES "Kicker" (id)
-);CREATE INDEX "ix_Kicker_native_types_native_types" ON "Kicker_native_types" (native_types);CREATE INDEX "ix_Kicker_native_types_Kicker_id" ON "Kicker_native_types" ("Kicker_id");
+);CREATE INDEX "ix_Kicker_native_types_Kicker_id" ON "Kicker_native_types" ("Kicker_id");CREATE INDEX "ix_Kicker_native_types_native_types" ON "Kicker_native_types" (native_types);
 CREATE TABLE "ACKicker_functions" (
 	"ACKicker_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("ACKicker_id", functions),
 	FOREIGN KEY("ACKicker_id") REFERENCES "ACKicker" (id)
-);CREATE INDEX "ix_ACKicker_functions_functions" ON "ACKicker_functions" (functions);CREATE INDEX "ix_ACKicker_functions_ACKicker_id" ON "ACKicker_functions" ("ACKicker_id");
+);CREATE INDEX "ix_ACKicker_functions_ACKicker_id" ON "ACKicker_functions" ("ACKicker_id");CREATE INDEX "ix_ACKicker_functions_functions" ON "ACKicker_functions" (functions);
 CREATE TABLE "ACKicker_native_types" (
 	"ACKicker_id" TEXT,
 	native_types TEXT,
@@ -2118,19 +2133,19 @@ CREATE TABLE "RadiationMonitor_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("RadiationMonitor_id", functions),
 	FOREIGN KEY("RadiationMonitor_id") REFERENCES "RadiationMonitor" (id)
-);CREATE INDEX "ix_RadiationMonitor_functions_RadiationMonitor_id" ON "RadiationMonitor_functions" ("RadiationMonitor_id");CREATE INDEX "ix_RadiationMonitor_functions_functions" ON "RadiationMonitor_functions" (functions);
+);CREATE INDEX "ix_RadiationMonitor_functions_functions" ON "RadiationMonitor_functions" (functions);CREATE INDEX "ix_RadiationMonitor_functions_RadiationMonitor_id" ON "RadiationMonitor_functions" ("RadiationMonitor_id");
 CREATE TABLE "RadiationMonitor_native_types" (
 	"RadiationMonitor_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("RadiationMonitor_id", native_types),
 	FOREIGN KEY("RadiationMonitor_id") REFERENCES "RadiationMonitor" (id)
-);CREATE INDEX "ix_RadiationMonitor_native_types_native_types" ON "RadiationMonitor_native_types" (native_types);CREATE INDEX "ix_RadiationMonitor_native_types_RadiationMonitor_id" ON "RadiationMonitor_native_types" ("RadiationMonitor_id");
+);CREATE INDEX "ix_RadiationMonitor_native_types_RadiationMonitor_id" ON "RadiationMonitor_native_types" ("RadiationMonitor_id");CREATE INDEX "ix_RadiationMonitor_native_types_native_types" ON "RadiationMonitor_native_types" (native_types);
 CREATE TABLE "Cavity_functions" (
 	"Cavity_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("Cavity_id", functions),
 	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id)
-);CREATE INDEX "ix_Cavity_functions_functions" ON "Cavity_functions" (functions);CREATE INDEX "ix_Cavity_functions_Cavity_id" ON "Cavity_functions" ("Cavity_id");
+);CREATE INDEX "ix_Cavity_functions_Cavity_id" ON "Cavity_functions" ("Cavity_id");CREATE INDEX "ix_Cavity_functions_functions" ON "Cavity_functions" (functions);
 CREATE TABLE "Cavity_native_types" (
 	"Cavity_id" TEXT,
 	native_types TEXT,
@@ -2148,7 +2163,7 @@ CREATE TABLE "CrabCavity_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("CrabCavity_id", native_types),
 	FOREIGN KEY("CrabCavity_id") REFERENCES "CrabCavity" (id)
-);CREATE INDEX "ix_CrabCavity_native_types_native_types" ON "CrabCavity_native_types" (native_types);CREATE INDEX "ix_CrabCavity_native_types_CrabCavity_id" ON "CrabCavity_native_types" ("CrabCavity_id");
+);CREATE INDEX "ix_CrabCavity_native_types_CrabCavity_id" ON "CrabCavity_native_types" ("CrabCavity_id");CREATE INDEX "ix_CrabCavity_native_types_native_types" ON "CrabCavity_native_types" (native_types);
 CREATE TABLE "RFCavity_functions" (
 	"RFCavity_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -2161,18 +2176,30 @@ CREATE TABLE "RFCavity_native_types" (
 	PRIMARY KEY ("RFCavity_id", native_types),
 	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id)
 );CREATE INDEX "ix_RFCavity_native_types_native_types" ON "RFCavity_native_types" (native_types);CREATE INDEX "ix_RFCavity_native_types_RFCavity_id" ON "RFCavity_native_types" ("RFCavity_id");
-CREATE TABLE "SuperconductingRFCavity_functions" (
-	"SuperconductingRFCavity_id" TEXT,
+CREATE TABLE "NormalConductingRFCavity_functions" (
+	"NormalConductingRFCavity_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
-	PRIMARY KEY ("SuperconductingRFCavity_id", functions),
-	FOREIGN KEY("SuperconductingRFCavity_id") REFERENCES "SuperconductingRFCavity" (id)
-);CREATE INDEX "ix_SuperconductingRFCavity_functions_SuperconductingRFCavity_id" ON "SuperconductingRFCavity_functions" ("SuperconductingRFCavity_id");CREATE INDEX "ix_SuperconductingRFCavity_functions_functions" ON "SuperconductingRFCavity_functions" (functions);
-CREATE TABLE "SuperconductingRFCavity_native_types" (
-	"SuperconductingRFCavity_id" TEXT,
+	PRIMARY KEY ("NormalConductingRFCavity_id", functions),
+	FOREIGN KEY("NormalConductingRFCavity_id") REFERENCES "NormalConductingRFCavity" (id)
+);CREATE INDEX "ix_NormalConductingRFCavity_functions_NormalConductingRFCavity_id" ON "NormalConductingRFCavity_functions" ("NormalConductingRFCavity_id");CREATE INDEX "ix_NormalConductingRFCavity_functions_functions" ON "NormalConductingRFCavity_functions" (functions);
+CREATE TABLE "NormalConductingRFCavity_native_types" (
+	"NormalConductingRFCavity_id" TEXT,
 	native_types TEXT,
-	PRIMARY KEY ("SuperconductingRFCavity_id", native_types),
-	FOREIGN KEY("SuperconductingRFCavity_id") REFERENCES "SuperconductingRFCavity" (id)
-);CREATE INDEX "ix_SuperconductingRFCavity_native_types_native_types" ON "SuperconductingRFCavity_native_types" (native_types);CREATE INDEX "ix_SuperconductingRFCavity_native_types_SuperconductingRFCavity_id" ON "SuperconductingRFCavity_native_types" ("SuperconductingRFCavity_id");
+	PRIMARY KEY ("NormalConductingRFCavity_id", native_types),
+	FOREIGN KEY("NormalConductingRFCavity_id") REFERENCES "NormalConductingRFCavity" (id)
+);CREATE INDEX "ix_NormalConductingRFCavity_native_types_NormalConductingRFCavity_id" ON "NormalConductingRFCavity_native_types" ("NormalConductingRFCavity_id");CREATE INDEX "ix_NormalConductingRFCavity_native_types_native_types" ON "NormalConductingRFCavity_native_types" (native_types);
+CREATE TABLE "SuperConductingRFCavity_functions" (
+	"SuperConductingRFCavity_id" TEXT,
+	functions VARCHAR(23) NOT NULL,
+	PRIMARY KEY ("SuperConductingRFCavity_id", functions),
+	FOREIGN KEY("SuperConductingRFCavity_id") REFERENCES "SuperConductingRFCavity" (id)
+);CREATE INDEX "ix_SuperConductingRFCavity_functions_SuperConductingRFCavity_id" ON "SuperConductingRFCavity_functions" ("SuperConductingRFCavity_id");CREATE INDEX "ix_SuperConductingRFCavity_functions_functions" ON "SuperConductingRFCavity_functions" (functions);
+CREATE TABLE "SuperConductingRFCavity_native_types" (
+	"SuperConductingRFCavity_id" TEXT,
+	native_types TEXT,
+	PRIMARY KEY ("SuperConductingRFCavity_id", native_types),
+	FOREIGN KEY("SuperConductingRFCavity_id") REFERENCES "SuperConductingRFCavity" (id)
+);CREATE INDEX "ix_SuperConductingRFCavity_native_types_SuperConductingRFCavity_id" ON "SuperConductingRFCavity_native_types" ("SuperConductingRFCavity_id");CREATE INDEX "ix_SuperConductingRFCavity_native_types_native_types" ON "SuperConductingRFCavity_native_types" (native_types);
 CREATE TABLE "BookkeepingComponent_functions" (
 	"BookkeepingComponent_id" TEXT,
 	functions VARCHAR(15) NOT NULL,
@@ -2184,19 +2211,19 @@ CREATE TABLE "BookkeepingComponent_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("BookkeepingComponent_id", native_types),
 	FOREIGN KEY("BookkeepingComponent_id") REFERENCES "BookkeepingComponent" (id)
-);CREATE INDEX "ix_BookkeepingComponent_native_types_BookkeepingComponent_id" ON "BookkeepingComponent_native_types" ("BookkeepingComponent_id");CREATE INDEX "ix_BookkeepingComponent_native_types_native_types" ON "BookkeepingComponent_native_types" (native_types);
+);CREATE INDEX "ix_BookkeepingComponent_native_types_native_types" ON "BookkeepingComponent_native_types" (native_types);CREATE INDEX "ix_BookkeepingComponent_native_types_BookkeepingComponent_id" ON "BookkeepingComponent_native_types" ("BookkeepingComponent_id");
 CREATE TABLE "Marker_functions" (
 	"Marker_id" TEXT,
 	functions VARCHAR(15) NOT NULL,
 	PRIMARY KEY ("Marker_id", functions),
 	FOREIGN KEY("Marker_id") REFERENCES "Marker" (id)
-);CREATE INDEX "ix_Marker_functions_Marker_id" ON "Marker_functions" ("Marker_id");CREATE INDEX "ix_Marker_functions_functions" ON "Marker_functions" (functions);
+);CREATE INDEX "ix_Marker_functions_functions" ON "Marker_functions" (functions);CREATE INDEX "ix_Marker_functions_Marker_id" ON "Marker_functions" ("Marker_id");
 CREATE TABLE "Marker_native_types" (
 	"Marker_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Marker_id", native_types),
 	FOREIGN KEY("Marker_id") REFERENCES "Marker" (id)
-);CREATE INDEX "ix_Marker_native_types_Marker_id" ON "Marker_native_types" ("Marker_id");CREATE INDEX "ix_Marker_native_types_native_types" ON "Marker_native_types" (native_types);
+);CREATE INDEX "ix_Marker_native_types_native_types" ON "Marker_native_types" (native_types);CREATE INDEX "ix_Marker_native_types_Marker_id" ON "Marker_native_types" ("Marker_id");
 CREATE TABLE "BeamlineSection_functions" (
 	"BeamlineSection_id" TEXT,
 	functions VARCHAR(15) NOT NULL,
@@ -2222,7 +2249,6 @@ CREATE TABLE "MetadataEntry" (
 	"Magnet_id" TEXT,
 	"Solenoid_id" TEXT,
 	"Multipole_id" TEXT,
-	"Dipole_id" TEXT,
 	"Bend_id" TEXT,
 	"Quadrupole_id" TEXT,
 	"Octupole_id" TEXT,
@@ -2235,7 +2261,8 @@ CREATE TABLE "MetadataEntry" (
 	"Cavity_id" TEXT,
 	"CrabCavity_id" TEXT,
 	"RFCavity_id" TEXT,
-	"SuperconductingRFCavity_id" TEXT,
+	"NormalConductingRFCavity_id" TEXT,
+	"SuperConductingRFCavity_id" TEXT,
 	"SupportingFacilityComponent_id" TEXT,
 	"BookkeepingComponent_id" TEXT,
 	"Marker_id" TEXT,
@@ -2250,7 +2277,6 @@ CREATE TABLE "MetadataEntry" (
 	FOREIGN KEY("Magnet_id") REFERENCES "Magnet" (id),
 	FOREIGN KEY("Solenoid_id") REFERENCES "Solenoid" (id),
 	FOREIGN KEY("Multipole_id") REFERENCES "Multipole" (id),
-	FOREIGN KEY("Dipole_id") REFERENCES "Dipole" (id),
 	FOREIGN KEY("Bend_id") REFERENCES "Bend" (id),
 	FOREIGN KEY("Quadrupole_id") REFERENCES "Quadrupole" (id),
 	FOREIGN KEY("Octupole_id") REFERENCES "Octupole" (id),
@@ -2263,7 +2289,8 @@ CREATE TABLE "MetadataEntry" (
 	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id),
 	FOREIGN KEY("CrabCavity_id") REFERENCES "CrabCavity" (id),
 	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id),
-	FOREIGN KEY("SuperconductingRFCavity_id") REFERENCES "SuperconductingRFCavity" (id),
+	FOREIGN KEY("NormalConductingRFCavity_id") REFERENCES "NormalConductingRFCavity" (id),
+	FOREIGN KEY("SuperConductingRFCavity_id") REFERENCES "SuperConductingRFCavity" (id),
 	FOREIGN KEY("SupportingFacilityComponent_id") REFERENCES "SupportingFacilityComponent" (id),
 	FOREIGN KEY("BookkeepingComponent_id") REFERENCES "BookkeepingComponent" (id),
 	FOREIGN KEY("Marker_id") REFERENCES "Marker" (id),
@@ -2330,13 +2357,13 @@ CREATE TABLE "Beamline_functions" (
 	functions VARCHAR(15) NOT NULL,
 	PRIMARY KEY ("Beamline_id", functions),
 	FOREIGN KEY("Beamline_id") REFERENCES "Beamline" (id)
-);CREATE INDEX "ix_Beamline_functions_Beamline_id" ON "Beamline_functions" ("Beamline_id");CREATE INDEX "ix_Beamline_functions_functions" ON "Beamline_functions" (functions);
+);CREATE INDEX "ix_Beamline_functions_functions" ON "Beamline_functions" (functions);CREATE INDEX "ix_Beamline_functions_Beamline_id" ON "Beamline_functions" ("Beamline_id");
 CREATE TABLE "Beamline_native_types" (
 	"Beamline_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("Beamline_id", native_types),
 	FOREIGN KEY("Beamline_id") REFERENCES "Beamline" (id)
-);CREATE INDEX "ix_Beamline_native_types_native_types" ON "Beamline_native_types" (native_types);CREATE INDEX "ix_Beamline_native_types_Beamline_id" ON "Beamline_native_types" ("Beamline_id");
+);CREATE INDEX "ix_Beamline_native_types_Beamline_id" ON "Beamline_native_types" ("Beamline_id");CREATE INDEX "ix_Beamline_native_types_native_types" ON "Beamline_native_types" (native_types);
 CREATE TABLE "SupportingFacilityComponent_functions" (
 	"SupportingFacilityComponent_id" TEXT,
 	functions VARCHAR(11) NOT NULL,
@@ -2348,4 +2375,4 @@ CREATE TABLE "SupportingFacilityComponent_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("SupportingFacilityComponent_id", native_types),
 	FOREIGN KEY("SupportingFacilityComponent_id") REFERENCES "SupportingFacilityComponent" (id)
-);CREATE INDEX "ix_SupportingFacilityComponent_native_types_SupportingFacilityComponent_id" ON "SupportingFacilityComponent_native_types" ("SupportingFacilityComponent_id");CREATE INDEX "ix_SupportingFacilityComponent_native_types_native_types" ON "SupportingFacilityComponent_native_types" (native_types);
+);CREATE INDEX "ix_SupportingFacilityComponent_native_types_native_types" ON "SupportingFacilityComponent_native_types" (native_types);CREATE INDEX "ix_SupportingFacilityComponent_native_types_SupportingFacilityComponent_id" ON "SupportingFacilityComponent_native_types" ("SupportingFacilityComponent_id");

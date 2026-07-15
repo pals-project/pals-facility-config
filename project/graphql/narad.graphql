@@ -172,7 +172,8 @@ enum SignalRoleEnum
     Readback
     Status
     Command
-    Limit
+    MinimumLimit
+    MaximumLimit
   }
 
 enum SourceSystemEnum
@@ -224,7 +225,7 @@ enum VirtualRelationEnum
 type ACKicker
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -267,7 +268,7 @@ type ACKicker
 type Beamline
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -292,7 +293,7 @@ type Beamline
 type BeamlineSection
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -317,7 +318,7 @@ type BeamlineSection
 type BeamPositionMonitor implements ReferenceP, BodyShiftP, TwissP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -358,7 +359,7 @@ type BeamPositionMonitor implements ReferenceP, BodyShiftP, TwissP
 type Bend
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -434,7 +435,7 @@ interface BodyShiftP
 type BookkeepingComponent implements BodyShiftP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -459,7 +460,7 @@ type BookkeepingComponent implements BodyShiftP
 type Cavity implements ReferenceP, ElectricMultipoleP, MagneticMultipoleP, BodyShiftP, TwissP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -501,7 +502,7 @@ type Cavity implements ReferenceP, ElectricMultipoleP, MagneticMultipoleP, BodyS
 type Component implements MetaP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -529,7 +530,7 @@ type ComponentRelation
 type CrabCavity
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -571,7 +572,7 @@ type CrabCavity
 type DiagnosticDevice
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -587,48 +588,6 @@ type DiagnosticDevice
     psi: Float
     length: Float
     sPosition: Float
-  }
-
-type Dipole
-  {
-    id: String!
-    type: String!
-    nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
-    functions: [PhysicalFunctionEnum]!
-    beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
-    components: [MultipoleComponent]
   }
 
 interface ElectricMultipoleP
@@ -655,7 +614,7 @@ interface HasLongitudinalPlacement
 type Kicker implements ElectricMultipoleP, MagneticMultipoleP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -698,7 +657,7 @@ type Kicker implements ElectricMultipoleP, MagneticMultipoleP
 type Magnet implements ReferenceP, BodyShiftP, TwissP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -744,7 +703,7 @@ interface MagneticMultipoleP
 type Marker implements TwissP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -794,7 +753,7 @@ interface MetaP
 type Multipole implements ElectricMultipoleP, MagneticMultipoleP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -849,7 +808,7 @@ type MultipoleComponent
 
 type NARAD
   {
-    type: String!
+    type: Component!
     description: String
     physicalComponents: [PhysicalComponent]
     virtualComponents: [VirtualComponent]
@@ -860,10 +819,52 @@ type NARAD
     componentRelations: [ComponentRelation]
   }
 
+type NormalConductingRFCavity
+  {
+    id: String!
+    type: Component!
+    nativeTypes: [String]
+    description: String
+    label: String
+    alias: String
+    additionalMetadata: [MetadataEntry]
+    functions: [PhysicalFunctionEnum]!
+    beamlineRelation: PhysicalRelationEnum!
+    x: Float
+    y: Float
+    z: Float
+    theta: Float
+    phi: Float
+    psi: Float
+    length: Float
+    sPosition: Float
+    speciesRef: String
+    pcRef: Float
+    eTotRef: Float
+    timeRef: Float
+    components: [MultipoleComponent]
+    xOffset: Float
+    yOffset: Float
+    zOffset: Float
+    xRot: Float
+    yRot: Float
+    zRot: Float
+    alphaA: Float
+    alphaB: Float
+    betaA: Float
+    betaB: Float
+    etaX: Float
+    etaY: Float
+    etapX: Float
+    etapY: Float
+    phiA: Float
+    phiB: Float
+  }
+
 type Octupole
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -905,7 +906,7 @@ type Octupole
 type PhysicalComponent implements FloorP, HasLongitudinalPlacement
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -926,7 +927,7 @@ type PhysicalComponent implements FloorP, HasLongitudinalPlacement
 type Quadrupole
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -968,7 +969,7 @@ type Quadrupole
 type RadiationMonitor implements BodyShiftP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -1008,10 +1009,10 @@ interface Relationship
     object: String!
   }
 
-type RFCavity
+interface RFCavity
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -1053,7 +1054,7 @@ type RFCavity
 type Sextupole
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -1095,7 +1096,7 @@ type Sextupole
 type Signal implements MetaP
   {
     id: String!
-    type: String!
+    type: Component!
     signalRole: SignalRoleEnum!
     sourceSystem: SourceSystemEnum!
     nativeDescription: String
@@ -1122,7 +1123,7 @@ type SignalBinding
 type Solenoid implements SolenoidP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -1168,10 +1169,10 @@ interface SolenoidP
     bsol: Float
   }
 
-type SuperconductingRFCavity
+type SuperConductingRFCavity
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -1213,7 +1214,7 @@ type SuperconductingRFCavity
 type SupportingFacilityComponent implements FloorP, HasLongitudinalPlacement, BodyShiftP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String
@@ -1254,7 +1255,7 @@ interface TwissP
 type VirtualComponent implements FloorP
   {
     id: String!
-    type: String!
+    type: Component!
     nativeTypes: [String]
     description: String
     label: String

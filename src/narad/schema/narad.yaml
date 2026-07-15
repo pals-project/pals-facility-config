@@ -9,7 +9,7 @@ license: https://creativecommons.org/publicdomain/zero/1.0/
 prefixes:
   narad: https://example.org/narad/
   linkml: https://w3id.org/linkml/
-  acc: https://w3id.org/accelerator-core/
+  acc: https://example.org/accelerator-core/
   qudt: http://qudt.org/schema/qudt/
   unit: http://qudt.org/vocab/unit/
   quantitykind: http://qudt.org/vocab/quantitykind/
@@ -50,7 +50,7 @@ slots:
 
   type:
     required: true
-    range: string
+    range: Component
     slot_uri: narad:type
     description: The LinkML class name of this instance.
   
@@ -1028,15 +1028,6 @@ classes:
       - MagneticMultipoleP
     broad_mappings:
       - pals:Multipole
-
-  Dipole:
-    description: >-
-      A magnet primarily used to bend the beam. 2 poles.
-
-      Only one of the electric or magnetic multipole components should be present, not both.
-    is_a: Multipole
-    broad_mappings:
-      - pals:Multipole # DM: not in PALS
   
   Bend:
     description: >-
@@ -1045,6 +1036,8 @@ classes:
       the curvilinear coordinate system is an arc with finite curvature 
       and for the other elements the curvilinear coordinate system is straight.
     is_a: Multipole
+    aliases:
+      - Dipole
     exact_mappings:
       - pals:Bend
   
@@ -1136,6 +1129,7 @@ classes:
   Cavity:
     description: A cavity used for beam acceleration or manipulation.
     is_a: PhysicalComponent
+    abstract: true
     mixins:
       - ReferenceP
       - ElectricMultipoleP
@@ -1147,15 +1141,22 @@ classes:
     description: A cavity used for transverse beam manipulation, such as crabbing or deflecting.
     is_a: Cavity
     exact_mappings:
-      - pals:CrabCavity
+      - pals:CrabCavity # Question about this for PALS folks
 
   RFCavity:
     description: A cavity used for RF acceleration or longitudinal manipulation.
+    abstract: true
     is_a: Cavity
     exact_mappings:
       - pals:RFCavity
   
-  SuperconductingRFCavity:
+  NormalConductingRFCavity:
+    description: A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
+    is_a: RFCavity
+    broad_mappings:
+      - pals:RFCavity # DM: not in PALS
+  
+  SuperConductingRFCavity:
     description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
     is_a: RFCavity
     broad_mappings:
@@ -1456,8 +1457,12 @@ enums:
       Command:
         description: Command or action trigger.
         meaning: sosa:ActuatableProperty
-      Limit:
-        description: Minimum, maximum, or other constraints for an allowed signal value.
+      MinimumLimit:
+        description: Minimum allowed signal value.
+        meaning: xsd:minInclusive
+      MaximumLimit:
+        description: Maximum allowed signal value.
+        meaning: xsd:maxInclusive
 
   CanonicalSignalTypeEnum:
     description: Portable semantic meanings for important signals.

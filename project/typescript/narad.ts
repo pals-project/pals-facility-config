@@ -6,7 +6,6 @@ export type SignalId = string;
 export type MagnetId = string;
 export type SolenoidId = string;
 export type MultipoleId = string;
-export type DipoleId = string;
 export type BendId = string;
 export type QuadrupoleId = string;
 export type OctupoleId = string;
@@ -19,7 +18,8 @@ export type RadiationMonitorId = string;
 export type CavityId = string;
 export type CrabCavityId = string;
 export type RFCavityId = string;
-export type SuperconductingRFCavityId = string;
+export type NormalConductingRFCavityId = string;
+export type SuperConductingRFCavityId = string;
 export type SupportingFacilityComponentId = string;
 export type BookkeepingComponentId = string;
 export type MarkerId = string;
@@ -163,8 +163,10 @@ export enum SignalRoleEnum {
     Status = "Status",
     /** Command or action trigger. */
     Command = "Command",
-    /** Minimum, maximum, or other constraints for an allowed signal value. */
-    Limit = "Limit",
+    /** Minimum allowed signal value. */
+    MinimumLimit = "MinimumLimit",
+    /** Maximum allowed signal value. */
+    MaximumLimit = "MaximumLimit",
 };
 /**
 * Portable semantic meanings for important signals.
@@ -411,7 +413,7 @@ export enum ReferenceGeometryEnum {
  */
 export interface NARAD {
     /** The LinkML class name of this instance. */
-    type: string,
+    type: ComponentId,
     /** Human-readable description for the representation of a particle accelerator and its operations. */
     description?: string,
     /** A list of physical components in the accelerator system. */
@@ -672,7 +674,7 @@ export interface Component extends MetaP {
     /** A unique identifier for the instance. */
     id: string,
     /** The LinkML class name of this instance. */
-    type: string,
+    type: ComponentId,
     /** The native type of the component in the source system, which can be used to identify the component across different source systems. */
     native_types?: string[],
 }
@@ -731,7 +733,7 @@ export interface Signal extends MetaP {
     /** A unique identifier for the instance. */
     id: string,
     /** The LinkML class name of this instance. */
-    type: string,
+    type: ComponentId,
     /** The role of the signal in the control system, such as setpoint, readback, status, command, or limit. */
     signal_role: string,
     /** The source system from which the signal originates, such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service. */
@@ -773,14 +775,6 @@ export interface Solenoid extends Magnet, SolenoidP {
 Only one of the electric or magnetic multipole components should be present, not both.
  */
 export interface Multipole extends Magnet, ElectricMultipoleP, MagneticMultipoleP {
-}
-
-
-/**
- * A magnet primarily used to bend the beam. 2 poles.
-Only one of the electric or magnetic multipole components should be present, not both.
- */
-export interface Dipole extends Multipole {
 }
 
 
@@ -876,9 +870,16 @@ export interface RFCavity extends Cavity {
 
 
 /**
+ * A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
+ */
+export interface NormalConductingRFCavity extends RFCavity {
+}
+
+
+/**
  * A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
  */
-export interface SuperconductingRFCavity extends RFCavity {
+export interface SuperConductingRFCavity extends RFCavity {
 }
 
 

@@ -42,6 +42,7 @@ or functional grouping of components.""" ;
 narad:Bend a owl:Class ;
     rdfs:label "Bend" ;
     rdfs:subClassOf narad:Multipole ;
+    skos:altLabel "Dipole" ;
     skos:definition "Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight." ;
     skos:exactMatch pals:Bend ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -49,185 +50,185 @@ narad:Bend a owl:Class ;
 narad:BendP a owl:Class ;
     rdfs:label "BendP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:e2_rect ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:e2 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:L_sagitta ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:g_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:rho_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:L_rectangle ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:e1 ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:e2 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:edge1_int ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:bend_field_actual ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:edge1_int ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:h1 ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:L_sagitta ],
-        [ a owl:Restriction ;
             owl:allValuesFrom narad:MultipoleGeometryEnum ;
             owl:onProperty narad:multipole_geometry ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:ref_geometry ],
+            owl:onProperty narad:L_sagitta ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:h2 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:multipole_geometry ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:g_ref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:angle_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:angle_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:edge1_int ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:edge2_int ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:e1_rect ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:e2_rect ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:e2 ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:ref_geometry ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:h2 ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:edge2_int ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:multipole_geometry ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:g_ref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:rho_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:e1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:L_chord ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:g_actual ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:angle_ref ],
+            owl:onProperty narad:tilt_ref ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:e1_rect ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:L_rectangle ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:g_actual ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:e2_rect ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:g_actual ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:bend_field_actual ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:bend_field_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:L_rectangle ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:h2 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:ReferenceGeometryEnum ;
-            owl:onProperty narad:ref_geometry ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:bend_field_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:edge2_int ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:e1 ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:L_sagitta ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:tilt_ref ],
+            owl:onProperty narad:bend_field_ref ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:bend_field_actual ],
+            owl:onProperty narad:L_chord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:L_chord ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:bend_field_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:g_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:ReferenceGeometryEnum ;
+            owl:onProperty narad:ref_geometry ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:e1_rect ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:ref_geometry ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:L_rectangle ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:edge2_int ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:e2 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:L_chord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:L_rectangle ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:angle_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:e1 ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:h1 ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:angle_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:e1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:e2_rect ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:bend_field_actual ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:e1_rect ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:rho_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:L_rectangle ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:multipole_geometry ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:L_chord ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:bend_field_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:L_chord ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:tilt_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:h1 ],
+            owl:onProperty narad:g_ref ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:rho_ref ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:tilt_ref ],
+            owl:minCardinality 0 ;
+            owl:onProperty narad:e2_rect ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:multipole_geometry ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:edge2_int ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:e2_rect ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:e1_rect ] ;
+            owl:onProperty narad:edge1_int ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:e2 ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:g_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:edge1_int ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:rho_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:h1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:L_sagitta ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:e1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:tilt_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:h1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:edge1_int ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:h2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:ref_geometry ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:bend_field_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:bend_field_actual ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:edge2_int ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:g_actual ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:bend_field_actual ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:tilt_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:angle_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:h2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:g_actual ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:g_actual ] ;
     skos:definition """Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
 This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).""" ;
     skos:exactMatch pals:BendP ;
@@ -238,14 +239,6 @@ narad:CrabCavity a owl:Class ;
     rdfs:subClassOf narad:Cavity ;
     skos:definition "A cavity used for transverse beam manipulation, such as crabbing or deflecting." ;
     skos:exactMatch pals:CrabCavity ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
-
-narad:Dipole a owl:Class ;
-    rdfs:label "Dipole" ;
-    rdfs:subClassOf narad:Multipole ;
-    skos:broadMatch pals:Multipole ;
-    skos:definition """A magnet primarily used to bend the beam. 2 poles.
-Only one of the electric or magnetic multipole components should be present, not both.""" ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 narad:Marker a owl:Class ;
@@ -259,66 +252,73 @@ narad:Marker a owl:Class ;
 narad:NARAD a owl:Class ;
     rdfs:label "NARAD" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:virtual_components ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:Signal ;
-            owl:onProperty narad:signals ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:description ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:component_relations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:signals ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:virtual_components ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:VirtualComponent ;
+            owl:onProperty narad:virtual_components ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty narad:type ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:ComponentRelation ;
-            owl:onProperty narad:component_relations ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:Beamline ;
-            owl:onProperty narad:beamlines ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:PhysicalComponent ;
-            owl:onProperty narad:physical_components ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:SupportingFacilityComponent ;
-            owl:onProperty narad:supporting_facility_components ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:component_relations ],
+            owl:allValuesFrom narad:Signal ;
+            owl:onProperty narad:signals ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:signal_bindings ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:signals ],
+            owl:onProperty narad:beamlines ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:SupportingFacilityComponent ;
+            owl:onProperty narad:supporting_facility_components ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:PhysicalComponent ;
+            owl:onProperty narad:physical_components ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:SignalBinding ;
+            owl:onProperty narad:signal_bindings ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:Component ;
+            owl:onProperty narad:type ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:physical_components ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom narad:Beamline ;
             owl:onProperty narad:beamlines ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:VirtualComponent ;
-            owl:onProperty narad:virtual_components ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:description ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:supporting_facility_components ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:SignalBinding ;
-            owl:onProperty narad:signal_bindings ] ;
+            owl:allValuesFrom narad:ComponentRelation ;
+            owl:onProperty narad:component_relations ] ;
     skos:definition "Root container for accelerator core components, semantic signals, and local bindings." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+narad:NormalConductingRFCavity a owl:Class ;
+    rdfs:label "NormalConductingRFCavity" ;
+    rdfs:subClassOf narad:RFCavity ;
+    skos:broadMatch pals:RFCavity ;
+    skos:definition "A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 narad:Octupole a owl:Class ;
@@ -362,8 +362,8 @@ A solenoid is an element whose magnetic field is dominated by a field whose dire
     skos:exactMatch pals:Solenoid ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
-narad:SuperconductingRFCavity a owl:Class ;
-    rdfs:label "SuperconductingRFCavity" ;
+narad:SuperConductingRFCavity a owl:Class ;
+    rdfs:label "SuperConductingRFCavity" ;
     rdfs:subClassOf narad:RFCavity ;
     skos:broadMatch pals:RFCavity ;
     skos:definition "A cavity used for RF acceleration or longitudinal manipulation, which is superconducting." ;
@@ -378,92 +378,23 @@ narad:SuperconductingRFCavity a owl:Class ;
 narad:ComponentRelation a owl:Class ;
     rdfs:label "ComponentRelation" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:predicate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:distance_unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:distance_value ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:reference_frame ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:tolerance_unit ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:beamline_context ],
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:distance_value ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:RelationContextEnum ;
             owl:onProperty narad:context ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:Component ;
-            owl:onProperty narad:object ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:predicate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:object ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:distance_unit ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:distance_unit ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:predicate ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:distance_value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:Component ;
-            owl:onProperty narad:subject ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:context ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:reference_frame ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:object ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:context ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:UnitEnum ;
-            owl:onProperty narad:tolerance_unit ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:ComponentRelationPredicateEnum ;
-            owl:onProperty narad:predicate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:direction ],
-        [ a owl:Restriction ;
             owl:allValuesFrom narad:ReferenceFrameEnum ;
             owl:onProperty narad:reference_frame ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:AxisEnum ;
-            owl:onProperty narad:axis ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:tolerance_value ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:axis ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:subject ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:direction ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:DirectionEnum ;
-            owl:onProperty narad:direction ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:tolerance_value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:beamline_context ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:Beamline ;
             owl:onProperty narad:beamline_context ],
@@ -471,20 +402,89 @@ narad:ComponentRelation a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty narad:tolerance_unit ],
         [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:subject ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:context ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:beamline_context ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:Component ;
+            owl:onProperty narad:subject ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:ComponentRelationPredicateEnum ;
+            owl:onProperty narad:predicate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:UnitEnum ;
+            owl:onProperty narad:tolerance_unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:DirectionEnum ;
+            owl:onProperty narad:direction ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:axis ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:tolerance_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:tolerance_unit ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:subject ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:distance_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:tolerance_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:object ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:axis ],
+            owl:onProperty narad:context ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:UnitEnum ;
+            owl:onProperty narad:distance_unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:AxisEnum ;
+            owl:onProperty narad:axis ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:predicate ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:reference_frame ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:distance_unit ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:tolerance_value ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:direction ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:distance_value ],
+            owl:onProperty narad:beamline_context ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:Component ;
+            owl:onProperty narad:object ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:reference_frame ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:axis ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:object ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:direction ],
         narad:Relationship ;
     skos:definition "Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -492,10 +492,10 @@ narad:ComponentRelation a owl:Class ;
 narad:Kicker a owl:Class ;
     rdfs:label "Kicker" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom narad:PlaneEnum ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:plane ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom narad:PlaneEnum ;
             owl:onProperty narad:plane ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
@@ -520,11 +520,14 @@ narad:MetadataEntry a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:value ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:value ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:datatype ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:key ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:key ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:DataTypeEnum ;
             owl:onProperty narad:datatype ],
@@ -533,54 +536,44 @@ narad:MetadataEntry a owl:Class ;
             owl:onProperty narad:key ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty narad:key ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:key ],
+            owl:onProperty narad:value ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:value ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:datatype ] ;
     skos:definition "A single generic key/value metadata entry, used as a GraphQL-compatible replacement for an open-ended (range: Any) field. A list of these represents an arbitrary, extensible bag of program-specific metadata." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
-
-narad:RFCavity a owl:Class ;
-    rdfs:label "RFCavity" ;
-    rdfs:subClassOf narad:Cavity ;
-    skos:definition "A cavity used for RF acceleration or longitudinal manipulation." ;
-    skos:exactMatch pals:RFCavity ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 narad:SignalBinding a owl:Class ;
     rdfs:label "SignalBinding" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:subject ],
+            owl:minCardinality 1 ;
+            owl:onProperty narad:object ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:SignalBindingPredicateEnum ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:object ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty narad:predicate ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:PhysicalComponent ;
             owl:onProperty narad:subject ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:predicate ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:predicate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:object ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:object ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:Signal ;
             owl:onProperty narad:object ],
         [ a owl:Restriction ;
+            owl:allValuesFrom narad:SignalBindingPredicateEnum ;
+            owl:onProperty narad:predicate ],
+        [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty narad:subject ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:subject ],
         narad:Relationship ;
     skos:definition "Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding." ;
@@ -764,56 +757,56 @@ narad:Beamline a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:length ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:length ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:multipass ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty narad:periodic ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty narad:multipass ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:periodic ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty narad:repeat ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:integer ;
             owl:onProperty narad:direction ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:multipass ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:repeat ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:direction ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:direction ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:zero_point ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:periodic ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:zero_point ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:multipass ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:zero_point ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:periodic ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:direction ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:repeat ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty narad:repeat ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:zero_point ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:periodic ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:multipass ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:direction ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:length ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty narad:periodic ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:length ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty narad:multipass ],
         narad:VirtualComponent ;
     skos:definition "A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path." ;
     skos:exactMatch pals:BeamLine ;
@@ -998,38 +991,38 @@ narad:DiagnosticDevice a owl:Class ;
 narad:MetaP a owl:Class ;
     rdfs:label "MetaP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty narad:alias ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:label ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:label ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty narad:description ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:additional_metadata ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:alias ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:label ],
+            owl:onProperty narad:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:MetadataEntry ;
             owl:onProperty narad:additional_metadata ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:description ],
+            owl:onProperty narad:label ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:alias ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:alias ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:alias ] ;
+            owl:onProperty narad:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:additional_metadata ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:label ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:label ] ;
     skos:broadMatch pals:MetaP ;
     skos:definition "Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -1159,6 +1152,13 @@ narad:MetaP a owl:Class ;
     rdfs:subClassOf narad:QuantityKindEnum ;
     skos:definition "Beam transverse position." .
 
+narad:RFCavity a owl:Class ;
+    rdfs:label "RFCavity" ;
+    rdfs:subClassOf narad:Cavity ;
+    skos:definition "A cavity used for RF acceleration or longitudinal manipulation." ;
+    skos:exactMatch pals:RFCavity ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
 <https://example.org/narad/ReferenceFrameEnum#beam_direction> a owl:Class ;
     rdfs:label "beam_direction" ;
     rdfs:subClassOf narad:ReferenceFrameEnum .
@@ -1222,76 +1222,79 @@ narad:MetaP a owl:Class ;
 narad:Relationship a owl:Class ;
     rdfs:label "Relationship" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:predicate ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:object ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:predicate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:object ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:object ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:subject ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:subject ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:subject ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:id ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:subject ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:predicate ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:predicate ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:subject ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:subject ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:object ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:object ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:predicate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:id ] ;
+            owl:onProperty narad:predicate ] ;
     skos:definition "Abstract base for subject-predicate-object associations." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 narad:Signal a owl:Class ;
     rdfs:label "Signal" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:quantity_kind ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:SourceSystemEnum ;
-            owl:onProperty narad:source_system ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty narad:type ],
+            owl:onProperty narad:canonical_signal_type ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom narad:DataTypeEnum ;
             owl:onProperty narad:native_data_type ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:type ],
+            owl:minCardinality 0 ;
+            owl:onProperty narad:access_protocol ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:QuantityKindEnum ;
+            owl:onProperty narad:quantity_kind ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:archive_identifier ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:archive_identifier ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:id ],
+            owl:allValuesFrom narad:CanonicalSignalTypeEnum ;
+            owl:onProperty narad:canonical_signal_type ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:QuantityKindEnum ;
-            owl:onProperty narad:quantity_kind ],
+            owl:allValuesFrom narad:Component ;
+            owl:onProperty narad:type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:canonical_signal_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:id ],
+            owl:onProperty narad:type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:access_protocol ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:UnitEnum ;
             owl:onProperty narad:native_unit ],
@@ -1300,67 +1303,64 @@ narad:Signal a owl:Class ;
             owl:onProperty narad:native_description ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:access_protocol ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
             owl:onProperty narad:id ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty narad:native_unit ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:signal_role ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:source_system ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:source_system ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:canonical_signal_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:quantity_kind ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:archive_identifier ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:native_description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:CanonicalSignalTypeEnum ;
-            owl:onProperty narad:canonical_signal_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:signal_role ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
             owl:onProperty narad:native_data_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:access_protocol ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:DataTypeEnum ;
-            owl:onProperty narad:native_data_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:archive_identifier ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:access_protocol ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:native_description ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:SignalRoleEnum ;
             owl:onProperty narad:signal_role ],
         [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:signal_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:archive_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:native_unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:native_data_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:native_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:native_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:signal_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:SourceSystemEnum ;
+            owl:onProperty narad:source_system ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:source_system ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:id ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:native_unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:source_system ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:quantity_kind ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:access_protocol ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:quantity_kind ],
         narad:MetaP ;
     skos:broadMatch sosa:Actuator,
         sosa:Sensor ;
@@ -1397,10 +1397,15 @@ narad:Signal a owl:Class ;
     rdfs:subClassOf narad:SignalBindingPredicateEnum ;
     skos:definition "Subject has the given signal as its status indicator." .
 
-<https://example.org/narad/SignalRoleEnum#Limit> a owl:Class ;
-    rdfs:label "Limit" ;
+<https://example.org/narad/SignalRoleEnum#MaximumLimit> a owl:Class ;
+    rdfs:label "MaximumLimit" ;
     rdfs:subClassOf narad:SignalRoleEnum ;
-    skos:definition "Minimum, maximum, or other constraints for an allowed signal value." .
+    skos:definition "Maximum allowed signal value." .
+
+<https://example.org/narad/SignalRoleEnum#MinimumLimit> a owl:Class ;
+    rdfs:label "MinimumLimit" ;
+    rdfs:subClassOf narad:SignalRoleEnum ;
+    skos:definition "Minimum allowed signal value." .
 
 <https://example.org/narad/SignalRoleEnum#Status> a owl:Class ;
     rdfs:label "Status" ;
@@ -1410,23 +1415,23 @@ narad:Signal a owl:Class ;
 narad:SolenoidP a owl:Class ;
     rdfs:label "SolenoidP" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:Bsol ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:Ksol ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:Bsol ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:Bsol ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:Ksol ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty narad:Ksol ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:Bsol ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:Ksol ] ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:Bsol ] ;
     skos:definition "Mixin for solenoid-specific parameters." ;
     skos:exactMatch pals:SolenoidP ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -1633,29 +1638,50 @@ Example with three multipole components (N=0,1,2): ```yaml components: - order: 
 narad:FloorP a owl:Class ;
     rdfs:label "FloorP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:theta ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty narad:phi ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:x ],
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:psi ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:phi ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:x ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:z ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:phi ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:y ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty narad:phi ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:psi ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:y ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:theta ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:z ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:x ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:psi ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:theta ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:theta ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:z ],
@@ -1663,28 +1689,7 @@ narad:FloorP a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty narad:x ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:psi ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:theta ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:z ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:psi ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:phi ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:theta ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:y ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty narad:y ] ;
     skos:broadMatch pals:FloorP ;
     skos:definition "Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS)." ;
@@ -1693,13 +1698,13 @@ narad:FloorP a owl:Class ;
 narad:HasLongitudinalPlacement a owl:Class ;
     rdfs:label "HasLongitudinalPlacement" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:length ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:length ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty narad:length ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty narad:length ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
@@ -1774,41 +1779,41 @@ narad:PlaneEnum a owl:Class ;
 narad:ReferenceP a owl:Class ;
     rdfs:label "ReferenceP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:pc_ref ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:pc_ref ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:pc_ref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:time_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:time_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:E_tot_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty narad:species_ref ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:time_ref ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty narad:species_ref ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:time_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:species_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:E_tot_ref ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:E_tot_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:time_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:pc_ref ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:E_tot_ref ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:species_ref ] ;
+            owl:onProperty narad:pc_ref ] ;
     skos:broadMatch pals:ReferenceP ;
     skos:definition "Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS)." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -1819,13 +1824,13 @@ narad:VirtualComponent a owl:Class ;
             owl:allValuesFrom narad:VirtualFunctionEnum ;
             owl:onProperty narad:functions ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom narad:VirtualRelationEnum ;
             owl:onProperty narad:beamline_relation ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:beamline_relation ],
         [ a owl:Restriction ;
-            owl:allValuesFrom narad:VirtualRelationEnum ;
+            owl:minCardinality 1 ;
             owl:onProperty narad:beamline_relation ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
@@ -2266,129 +2271,108 @@ sosa:ObservableProperty a owl:Class ;
     skos:definition "Device state or condition.",
         "Measured or reported value." .
 
-narad:Component a owl:Class ;
-    rdfs:label "Component" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:native_types ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty narad:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:native_types ],
-        narad:MetaP ;
-    skos:broadMatch pals:Element ;
-    skos:definition "A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc." ;
+narad:Multipole a owl:Class ;
+    rdfs:label "Multipole" ;
+    rdfs:subClassOf narad:ElectricMultipoleP,
+        narad:Magnet,
+        narad:MagneticMultipoleP ;
+    skos:broadMatch pals:Multipole ;
+    skos:definition """A general magnet with a higher-order multipole field, such as a sextupole or octupole.
+Only one of the electric or magnetic multipole components should be present, not both.""" ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 narad:TwissP a owl:Class ;
     rdfs:label "TwissP" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:etap_x ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:beta_b ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:beta_a ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:beta_b ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:eta_y ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:alpha_b ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:phi_a ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty narad:alpha_a ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:phi_b ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:eta_x ],
+            owl:onProperty narad:alpha_b ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:phi_b ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:beta_b ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:eta_y ],
+            owl:onProperty narad:etap_y ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:beta_a ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:alpha_a ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:phi_a ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:beta_b ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:eta_y ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:eta_y ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:alpha_a ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:eta_x ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:phi_a ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:etap_x ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:alpha_b ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:eta_x ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:eta_x ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:phi_a ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:etap_x ],
+            owl:onProperty narad:phi_b ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:eta_y ],
+            owl:onProperty narad:etap_y ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:phi_b ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:phi_b ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:eta_y ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:etap_y ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:beta_b ],
+            owl:minCardinality 0 ;
+            owl:onProperty narad:etap_x ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:beta_a ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:alpha_a ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:phi_a ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty narad:phi_a ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:etap_y ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:etap_y ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:eta_x ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:etap_x ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:etap_x ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:alpha_b ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:alpha_b ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:alpha_a ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:beta_a ] ;
+            owl:onProperty narad:etap_y ] ;
     skos:broadMatch pals:TwissP ;
     skos:definition "Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -2432,16 +2416,6 @@ narad:DirectionEnum a owl:Class ;
         <https://example.org/narad/DirectionEnum#positive>,
         <https://example.org/narad/DirectionEnum#upstream> .
 
-narad:Multipole a owl:Class ;
-    rdfs:label "Multipole" ;
-    rdfs:subClassOf narad:ElectricMultipoleP,
-        narad:Magnet,
-        narad:MagneticMultipoleP ;
-    skos:broadMatch pals:Multipole ;
-    skos:definition """A general magnet with a higher-order multipole field, such as a sextupole or octupole.
-Only one of the electric or magnetic multipole components should be present, not both.""" ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
-
 narad:PhysicalRelationEnum a owl:Class ;
     rdfs:label "PhysicalRelationEnum" ;
     owl:unionOf ( <https://example.org/narad/PhysicalRelationEnum#Inline> <https://example.org/narad/PhysicalRelationEnum#AttachedToPipe> <https://example.org/narad/PhysicalRelationEnum#NearBeamline> <https://example.org/narad/PhysicalRelationEnum#SupportingFacility> ) ;
@@ -2471,16 +2445,6 @@ narad:ReferenceGeometryEnum a owl:Class ;
         <https://example.org/narad/ReferenceGeometryEnum#entrance_coords>,
         <https://example.org/narad/ReferenceGeometryEnum#exit_coords> .
 
-narad:SignalRoleEnum a owl:Class ;
-    rdfs:label "SignalRoleEnum" ;
-    owl:unionOf ( sosa:ActuatableProperty sosa:ObservableProperty <https://example.org/narad/SignalRoleEnum#Status> sosa:ActuatableProperty <https://example.org/narad/SignalRoleEnum#Limit> ) ;
-    skos:definition "Roles for control-system signals." ;
-    skos:inScheme <https://w3id.org/accelerator-core> ;
-    linkml:permissible_values sosa:ActuatableProperty,
-        sosa:ObservableProperty,
-        <https://example.org/narad/SignalRoleEnum#Limit>,
-        <https://example.org/narad/SignalRoleEnum#Status> .
-
 narad:VirtualFunctionEnum a owl:Class ;
     rdfs:label "VirtualFunctionEnum" ;
     owl:unionOf ( pals:Beamline pals:Marker pals:Fork <https://example.org/narad/VirtualFunctionEnum#Control> ) ;
@@ -2494,53 +2458,53 @@ narad:VirtualFunctionEnum a owl:Class ;
 narad:BodyShiftP a owl:Class ;
     rdfs:label "BodyShiftP" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:z_offset ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:z_rot ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty narad:x_rot ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty narad:y_offset ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty narad:y_offset ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:y_rot ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:y_offset ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:z_offset ],
+            owl:onProperty narad:x_offset ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:z_offset ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:z_offset ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:x_offset ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:x_rot ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:x_rot ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:x_offset ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:x_rot ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:x_offset ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:z_rot ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:y_rot ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:x_offset ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:x_offset ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:x_rot ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:x_rot ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:y_offset ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:z_rot ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty narad:z_rot ],
@@ -2574,19 +2538,19 @@ narad:Ksol a owl:DatatypeProperty ;
 narad:PhysicalComponent a owl:Class ;
     rdfs:label "PhysicalComponent" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:beamline_relation ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:functions ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom narad:PhysicalRelationEnum ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:beamline_relation ],
         [ a owl:Restriction ;
             owl:allValuesFrom narad:PhysicalFunctionEnum ;
             owl:onProperty narad:functions ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom narad:PhysicalRelationEnum ;
+            owl:onProperty narad:beamline_relation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:functions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty narad:beamline_relation ],
         narad:Component,
         narad:FloorP,
@@ -2594,6 +2558,17 @@ narad:PhysicalComponent a owl:Class ;
     skos:broadMatch pals:Element ;
     skos:definition "A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
+
+narad:SignalRoleEnum a owl:Class ;
+    rdfs:label "SignalRoleEnum" ;
+    owl:unionOf ( sosa:ActuatableProperty sosa:ObservableProperty <https://example.org/narad/SignalRoleEnum#Status> sosa:ActuatableProperty <https://example.org/narad/SignalRoleEnum#MinimumLimit> <https://example.org/narad/SignalRoleEnum#MaximumLimit> ) ;
+    skos:definition "Roles for control-system signals." ;
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    linkml:permissible_values sosa:ActuatableProperty,
+        sosa:ObservableProperty,
+        <https://example.org/narad/SignalRoleEnum#MaximumLimit>,
+        <https://example.org/narad/SignalRoleEnum#MinimumLimit>,
+        <https://example.org/narad/SignalRoleEnum#Status> .
 
 narad:beamline_relation a owl:ObjectProperty ;
     rdfs:label "beamline_relation" ;
@@ -2675,6 +2650,37 @@ narad:Bs a owl:DatatypeProperty ;
     skos:definition "Skew component of the magnetic field." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
+narad:Component a owl:Class ;
+    rdfs:label "Component" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:native_types ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty narad:native_types ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom narad:Component ;
+            owl:onProperty narad:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:id ],
+        narad:MetaP ;
+    skos:broadMatch pals:Element ;
+    skos:definition "A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
 narad:En a owl:DatatypeProperty ;
     rdfs:label "En" ;
     skos:broadMatch pals:EnN ;
@@ -2750,64 +2756,67 @@ narad:subject a owl:DatatypeProperty ;
     rdfs:label "subject" ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
-narad:type a owl:DatatypeProperty ;
+narad:type a owl:ObjectProperty ;
     rdfs:label "type" ;
-    rdfs:range xsd:string ;
+    rdfs:range narad:Component ;
     skos:definition "The LinkML class name of this instance." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 narad:MultipoleComponent a owl:Class ;
     rdfs:label "MultipoleComponent" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:Bn ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:tilt ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:tilt ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:Bn ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty narad:Bs ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:Bn ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty narad:EnL ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:En ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:Ks ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:Es ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:En ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:Ks ],
+            owl:onProperty narad:Kn ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:Bs ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:EsL ],
+            owl:onProperty narad:Bn ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:Es ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:EsL ],
+            owl:onProperty narad:Ks ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty narad:EsL ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:tilt ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:order ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty narad:order ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:EsL ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:tilt ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:En ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:EnL ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty narad:Ks ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:Es ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:Ks ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty narad:EnL ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:integer ;
@@ -2816,37 +2825,34 @@ narad:MultipoleComponent a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty narad:Bs ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty narad:order ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:Es ],
+            owl:minCardinality 0 ;
+            owl:onProperty narad:Bs ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:Kn ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty narad:tilt ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:order ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty narad:EsL ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:Kn ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty narad:Ks ],
+            owl:onProperty narad:En ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty narad:En ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty narad:EnL ],
+            owl:minCardinality 0 ;
+            owl:onProperty narad:Es ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty narad:Bn ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:tilt ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty narad:Bn ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty narad:EsL ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty narad:Kn ] ;
     skos:definition """A single order's electric (or magnetic) multipole component.
 Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.
@@ -2967,22 +2973,39 @@ xsd:string a owl:Class ;
     rdfs:subClassOf narad:DataTypeEnum ;
     skos:definition "string data type" .
 
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty narad:En ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:EnL ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:Es ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:EsL ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty narad:Bs ;
-                owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
-
 [] a owl:Restriction ;
     owl:allValuesFrom xsd:string ;
     owl:onProperty narad:Ksol .
+
+[] a owl:Restriction ;
+    owl:allValuesFrom xsd:string ;
+    owl:onProperty narad:Bsol .
+
+[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:onProperty narad:Bn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty narad:Bs ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty narad:Kn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty narad:Ks ;
+                        owl:someValuesFrom xsd:string ] ) ] ;
+    owl:intersectionOf ( [ a owl:Restriction ;
+                owl:onProperty narad:En ;
+                owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
+
+[] rdfs:subClassOf [ owl:unionOf ( [ owl:intersectionOf ( [ a owl:Restriction ;
+                                    owl:allValuesFrom xsd:string ;
+                                    owl:onProperty narad:Ksol ] [ owl:complementOf [ a owl:Restriction ;
+                                            owl:allValuesFrom xsd:string ;
+                                            owl:onProperty narad:Bsol ] ] ) ] [ owl:intersectionOf ( [ a owl:Restriction ;
+                                    owl:allValuesFrom xsd:string ;
+                                    owl:onProperty narad:Bsol ] [ owl:complementOf [ a owl:Restriction ;
+                                            owl:allValuesFrom xsd:string ;
+                                            owl:onProperty narad:Ksol ] ] ) ] ) ] ;
+    owl:intersectionOf ( [ a owl:Restriction ;
+                owl:onProperty narad:id ;
+                owl:someValuesFrom xsd:string ] narad:SolenoidP ) .
 
 [] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
                         owl:onProperty narad:En ;
@@ -2998,16 +3021,16 @@ xsd:string a owl:Class ;
                 owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
 
 [] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty narad:Bn ;
+                        owl:onProperty narad:En ;
                         owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:Bs ;
+                        owl:onProperty narad:EnL ;
                         owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:Kn ;
+                        owl:onProperty narad:Es ;
                         owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:Ks ;
+                        owl:onProperty narad:EsL ;
                         owl:someValuesFrom xsd:string ] ) ] ;
     owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty narad:EnL ;
+                owl:onProperty narad:Bs ;
                 owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
 
 [] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
@@ -3020,7 +3043,7 @@ xsd:string a owl:Class ;
                         owl:onProperty narad:Ks ;
                         owl:someValuesFrom xsd:string ] ) ] ;
     owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty narad:EsL ;
+                owl:onProperty narad:EnL ;
                 owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
 
 [] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
@@ -3046,7 +3069,7 @@ xsd:string a owl:Class ;
                         owl:onProperty narad:Ks ;
                         owl:someValuesFrom xsd:string ] ) ] ;
     owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty narad:Es ;
+                owl:onProperty narad:EsL ;
                 owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
 
 [] rdfs:subClassOf [ owl:unionOf ( [ a owl:Restriction ;
@@ -3057,23 +3080,6 @@ xsd:string a owl:Class ;
     owl:intersectionOf ( [ a owl:Restriction ;
                 owl:onProperty narad:id ;
                 owl:someValuesFrom xsd:string ] narad:HasLongitudinalPlacement ) .
-
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty narad:Bn ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:Bs ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:Kn ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty narad:Ks ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty narad:En ;
-                owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
-
-[] a owl:Restriction ;
-    owl:allValuesFrom xsd:string ;
-    owl:onProperty narad:Bsol .
 
 [] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
                         owl:onProperty narad:En ;
@@ -3088,17 +3094,17 @@ xsd:string a owl:Class ;
                 owl:onProperty narad:Ks ;
                 owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
 
-[] rdfs:subClassOf [ owl:unionOf ( [ owl:intersectionOf ( [ a owl:Restriction ;
-                                    owl:allValuesFrom xsd:string ;
-                                    owl:onProperty narad:Ksol ] [ owl:complementOf [ a owl:Restriction ;
-                                            owl:allValuesFrom xsd:string ;
-                                            owl:onProperty narad:Bsol ] ] ) ] [ owl:intersectionOf ( [ a owl:Restriction ;
-                                    owl:allValuesFrom xsd:string ;
-                                    owl:onProperty narad:Bsol ] [ owl:complementOf [ a owl:Restriction ;
-                                            owl:allValuesFrom xsd:string ;
-                                            owl:onProperty narad:Ksol ] ] ) ] ) ] ;
+[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:onProperty narad:Bn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty narad:Bs ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty narad:Kn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty narad:Ks ;
+                        owl:someValuesFrom xsd:string ] ) ] ;
     owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty narad:id ;
-                owl:someValuesFrom xsd:string ] narad:SolenoidP ) .
+                owl:onProperty narad:Es ;
+                owl:someValuesFrom xsd:string ] narad:MultipoleComponent ) .
 
 

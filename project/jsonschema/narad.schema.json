@@ -1429,314 +1429,6 @@
             "title": "CanonicalSignalTypeEnum",
             "type": "string"
         },
-        "Cavity": {
-            "additionalProperties": false,
-            "description": "A cavity used for beam acceleration or manipulation.",
-            "if": {
-                "properties": {
-                    "id": {}
-                },
-                "required": [
-                    "id"
-                ]
-            },
-            "properties": {
-                "E_tot_ref": {
-                    "description": "[eV] Reference total energy",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "additional_metadata": {
-                    "description": "Additional metadata or annotations for the instance.",
-                    "items": {
-                        "$ref": "#/$defs/MetadataEntry"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "alias": {
-                    "description": "An alternative name or identifier for the instance.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "alpha_a": {
-                    "description": "Twiss alpha parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "alpha_b": {
-                    "description": "Twiss alpha parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "beamline_relation": {
-                    "$ref": "#/$defs/PhysicalRelationEnum",
-                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
-                },
-                "beta_a": {
-                    "description": "Twiss beta parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "beta_b": {
-                    "description": "Twiss beta parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "components": {
-                    "description": "Electric multipole components, one per order N.",
-                    "items": {
-                        "$ref": "#/$defs/MultipoleComponent"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "description": {
-                    "description": "Human-readable description.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "eta_x": {
-                    "description": "Twiss dispersion parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "eta_y": {
-                    "description": "Twiss dispersion parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "etap_x": {
-                    "description": "Twiss dispersion slope parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "etap_y": {
-                    "description": "Twiss dispersion slope parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "functions": {
-                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
-                    "items": {
-                        "$ref": "#/$defs/PhysicalFunctionEnum"
-                    },
-                    "type": "array"
-                },
-                "id": {
-                    "description": "A unique identifier for the instance.",
-                    "type": "string"
-                },
-                "label": {
-                    "description": "A label string.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "length": {
-                    "description": "Length of the element (arc length for bends).",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "native_types": {
-                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "pc_ref": {
-                    "description": "[momentum*c] Reference momentum times speed of light.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi": {
-                    "description": "Rotation around the X-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi_a": {
-                    "description": "Twiss phase advance parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi_b": {
-                    "description": "Twiss phase advance parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "psi": {
-                    "description": "Rotation around the Z-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "s_position": {
-                    "description": "Longitudinal position of the element along the beamline.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "species_ref": {
-                    "description": "A reference to a species or particle type, such as an ion, electron, or proton.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "theta": {
-                    "description": "Orientation angle around the Y-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "time_ref": {
-                    "description": "[s] Reference time",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "type": {
-                    "description": "The LinkML class name of this instance.",
-                    "type": "string"
-                },
-                "x": {
-                    "description": "Global X coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "x_offset": {
-                    "description": "Shift in the X direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "x_rot": {
-                    "description": "Rotation around the X-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y": {
-                    "description": "Global Y coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y_offset": {
-                    "description": "Shift in the Y direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y_rot": {
-                    "description": "Rotation around the Y-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z": {
-                    "description": "Global Z coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z_offset": {
-                    "description": "Shift in the Z direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z_rot": {
-                    "description": "Rotation around the Z-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                }
-            },
-            "required": [
-                "functions",
-                "beamline_relation",
-                "id",
-                "type"
-            ],
-            "then": {
-                "anyOf": [
-                    {
-                        "properties": {
-                            "length": {}
-                        },
-                        "required": [
-                            "length"
-                        ]
-                    },
-                    {
-                        "properties": {
-                            "s_position": {}
-                        },
-                        "required": [
-                            "s_position"
-                        ]
-                    }
-                ]
-            },
-            "title": "Cavity",
-            "type": "object"
-        },
         "ComponentRelation": {
             "additionalProperties": false,
             "description": "Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds.",
@@ -2298,314 +1990,6 @@
                 ]
             },
             "title": "DiagnosticDevice",
-            "type": "object"
-        },
-        "Dipole": {
-            "additionalProperties": false,
-            "description": "A magnet primarily used to bend the beam. 2 poles.\nOnly one of the electric or magnetic multipole components should be present, not both.",
-            "if": {
-                "properties": {
-                    "id": {}
-                },
-                "required": [
-                    "id"
-                ]
-            },
-            "properties": {
-                "E_tot_ref": {
-                    "description": "[eV] Reference total energy",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "additional_metadata": {
-                    "description": "Additional metadata or annotations for the instance.",
-                    "items": {
-                        "$ref": "#/$defs/MetadataEntry"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "alias": {
-                    "description": "An alternative name or identifier for the instance.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "alpha_a": {
-                    "description": "Twiss alpha parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "alpha_b": {
-                    "description": "Twiss alpha parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "beamline_relation": {
-                    "$ref": "#/$defs/PhysicalRelationEnum",
-                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
-                },
-                "beta_a": {
-                    "description": "Twiss beta parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "beta_b": {
-                    "description": "Twiss beta parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "components": {
-                    "description": "Electric multipole components, one per order N.",
-                    "items": {
-                        "$ref": "#/$defs/MultipoleComponent"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "description": {
-                    "description": "Human-readable description.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "eta_x": {
-                    "description": "Twiss dispersion parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "eta_y": {
-                    "description": "Twiss dispersion parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "etap_x": {
-                    "description": "Twiss dispersion slope parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "etap_y": {
-                    "description": "Twiss dispersion slope parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "functions": {
-                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
-                    "items": {
-                        "$ref": "#/$defs/PhysicalFunctionEnum"
-                    },
-                    "type": "array"
-                },
-                "id": {
-                    "description": "A unique identifier for the instance.",
-                    "type": "string"
-                },
-                "label": {
-                    "description": "A label string.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "length": {
-                    "description": "Length of the element (arc length for bends).",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "native_types": {
-                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "pc_ref": {
-                    "description": "[momentum*c] Reference momentum times speed of light.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi": {
-                    "description": "Rotation around the X-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi_a": {
-                    "description": "Twiss phase advance parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi_b": {
-                    "description": "Twiss phase advance parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "psi": {
-                    "description": "Rotation around the Z-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "s_position": {
-                    "description": "Longitudinal position of the element along the beamline.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "species_ref": {
-                    "description": "A reference to a species or particle type, such as an ion, electron, or proton.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "theta": {
-                    "description": "Orientation angle around the Y-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "time_ref": {
-                    "description": "[s] Reference time",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "type": {
-                    "description": "The LinkML class name of this instance.",
-                    "type": "string"
-                },
-                "x": {
-                    "description": "Global X coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "x_offset": {
-                    "description": "Shift in the X direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "x_rot": {
-                    "description": "Rotation around the X-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y": {
-                    "description": "Global Y coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y_offset": {
-                    "description": "Shift in the Y direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y_rot": {
-                    "description": "Rotation around the Y-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z": {
-                    "description": "Global Z coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z_offset": {
-                    "description": "Shift in the Z direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z_rot": {
-                    "description": "Rotation around the Z-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                }
-            },
-            "required": [
-                "functions",
-                "beamline_relation",
-                "id",
-                "type"
-            ],
-            "then": {
-                "anyOf": [
-                    {
-                        "properties": {
-                            "length": {}
-                        },
-                        "required": [
-                            "length"
-                        ]
-                    },
-                    {
-                        "properties": {
-                            "s_position": {}
-                        },
-                        "required": [
-                            "s_position"
-                        ]
-                    }
-                ]
-            },
-            "title": "Dipole",
             "type": "object"
         },
         "DirectionEnum": {
@@ -3898,6 +3282,314 @@
             "title": "NARAD",
             "type": "object"
         },
+        "NormalConductingRFCavity": {
+            "additionalProperties": false,
+            "description": "A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.",
+            "if": {
+                "properties": {
+                    "id": {}
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "properties": {
+                "E_tot_ref": {
+                    "description": "[eV] Reference total energy",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "additional_metadata": {
+                    "description": "Additional metadata or annotations for the instance.",
+                    "items": {
+                        "$ref": "#/$defs/MetadataEntry"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alias": {
+                    "description": "An alternative name or identifier for the instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "alpha_a": {
+                    "description": "Twiss alpha parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "alpha_b": {
+                    "description": "Twiss alpha parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "beta_a": {
+                    "description": "Twiss beta parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "beta_b": {
+                    "description": "Twiss beta parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "components": {
+                    "description": "Electric multipole components, one per order N.",
+                    "items": {
+                        "$ref": "#/$defs/MultipoleComponent"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Human-readable description.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "eta_x": {
+                    "description": "Twiss dispersion parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "eta_y": {
+                    "description": "Twiss dispersion parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "etap_x": {
+                    "description": "Twiss dispersion slope parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "etap_y": {
+                    "description": "Twiss dispersion slope parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "A label string.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "length": {
+                    "description": "Length of the element (arc length for bends).",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "pc_ref": {
+                    "description": "[momentum*c] Reference momentum times speed of light.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "phi": {
+                    "description": "Rotation around the X-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "phi_a": {
+                    "description": "Twiss phase advance parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "phi_b": {
+                    "description": "Twiss phase advance parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "psi": {
+                    "description": "Rotation around the Z-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "s_position": {
+                    "description": "Longitudinal position of the element along the beamline.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "species_ref": {
+                    "description": "A reference to a species or particle type, such as an ion, electron, or proton.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "theta": {
+                    "description": "Orientation angle around the Y-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "time_ref": {
+                    "description": "[s] Reference time",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "x": {
+                    "description": "Global X coordinate in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "x_offset": {
+                    "description": "Shift in the X direction in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "x_rot": {
+                    "description": "Rotation around the X-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "y": {
+                    "description": "Global Y coordinate in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "y_offset": {
+                    "description": "Shift in the Y direction in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "y_rot": {
+                    "description": "Rotation around the Y-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "z": {
+                    "description": "Global Z coordinate in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "z_offset": {
+                    "description": "Shift in the Z direction in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "z_rot": {
+                    "description": "Rotation around the Z-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "type"
+            ],
+            "then": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "length": {}
+                        },
+                        "required": [
+                            "length"
+                        ]
+                    },
+                    {
+                        "properties": {
+                            "s_position": {}
+                        },
+                        "required": [
+                            "s_position"
+                        ]
+                    }
+                ]
+            },
+            "title": "NormalConductingRFCavity",
+            "type": "object"
+        },
         "Octupole": {
             "additionalProperties": false,
             "description": "A magnet primarily used to focus or defocus the beam. 8 poles.\nOnly one of the electric or magnetic multipole components should be present, not both.",
@@ -4729,314 +4421,6 @@
             "title": "QuantityKindEnum",
             "type": "string"
         },
-        "RFCavity": {
-            "additionalProperties": false,
-            "description": "A cavity used for RF acceleration or longitudinal manipulation.",
-            "if": {
-                "properties": {
-                    "id": {}
-                },
-                "required": [
-                    "id"
-                ]
-            },
-            "properties": {
-                "E_tot_ref": {
-                    "description": "[eV] Reference total energy",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "additional_metadata": {
-                    "description": "Additional metadata or annotations for the instance.",
-                    "items": {
-                        "$ref": "#/$defs/MetadataEntry"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "alias": {
-                    "description": "An alternative name or identifier for the instance.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "alpha_a": {
-                    "description": "Twiss alpha parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "alpha_b": {
-                    "description": "Twiss alpha parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "beamline_relation": {
-                    "$ref": "#/$defs/PhysicalRelationEnum",
-                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
-                },
-                "beta_a": {
-                    "description": "Twiss beta parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "beta_b": {
-                    "description": "Twiss beta parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "components": {
-                    "description": "Electric multipole components, one per order N.",
-                    "items": {
-                        "$ref": "#/$defs/MultipoleComponent"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "description": {
-                    "description": "Human-readable description.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "eta_x": {
-                    "description": "Twiss dispersion parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "eta_y": {
-                    "description": "Twiss dispersion parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "etap_x": {
-                    "description": "Twiss dispersion slope parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "etap_y": {
-                    "description": "Twiss dispersion slope parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "functions": {
-                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
-                    "items": {
-                        "$ref": "#/$defs/PhysicalFunctionEnum"
-                    },
-                    "type": "array"
-                },
-                "id": {
-                    "description": "A unique identifier for the instance.",
-                    "type": "string"
-                },
-                "label": {
-                    "description": "A label string.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "length": {
-                    "description": "Length of the element (arc length for bends).",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "native_types": {
-                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "pc_ref": {
-                    "description": "[momentum*c] Reference momentum times speed of light.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi": {
-                    "description": "Rotation around the X-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi_a": {
-                    "description": "Twiss phase advance parameter in the horizontal plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "phi_b": {
-                    "description": "Twiss phase advance parameter in the vertical plane.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "psi": {
-                    "description": "Rotation around the Z-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "s_position": {
-                    "description": "Longitudinal position of the element along the beamline.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "species_ref": {
-                    "description": "A reference to a species or particle type, such as an ion, electron, or proton.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "theta": {
-                    "description": "Orientation angle around the Y-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "time_ref": {
-                    "description": "[s] Reference time",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "type": {
-                    "description": "The LinkML class name of this instance.",
-                    "type": "string"
-                },
-                "x": {
-                    "description": "Global X coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "x_offset": {
-                    "description": "Shift in the X direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "x_rot": {
-                    "description": "Rotation around the X-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y": {
-                    "description": "Global Y coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y_offset": {
-                    "description": "Shift in the Y direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "y_rot": {
-                    "description": "Rotation around the Y-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z": {
-                    "description": "Global Z coordinate in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z_offset": {
-                    "description": "Shift in the Z direction in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "z_rot": {
-                    "description": "Rotation around the Z-axis in the facility floor plan.",
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                }
-            },
-            "required": [
-                "functions",
-                "beamline_relation",
-                "id",
-                "type"
-            ],
-            "then": {
-                "anyOf": [
-                    {
-                        "properties": {
-                            "length": {}
-                        },
-                        "required": [
-                            "length"
-                        ]
-                    },
-                    {
-                        "properties": {
-                            "s_position": {}
-                        },
-                        "required": [
-                            "s_position"
-                        ]
-                    }
-                ]
-            },
-            "title": "RFCavity",
-            "type": "object"
-        },
         "RadiationMonitor": {
             "additionalProperties": false,
             "description": "A diagnostic device used to monitor radiation dose or dose rate.",
@@ -5729,7 +5113,8 @@
                 "Readback",
                 "Status",
                 "Command",
-                "Limit"
+                "MinimumLimit",
+                "MaximumLimit"
             ],
             "title": "SignalRoleEnum",
             "type": "string"
@@ -6095,7 +5480,7 @@
             "title": "SourceSystemEnum",
             "type": "string"
         },
-        "SuperconductingRFCavity": {
+        "SuperConductingRFCavity": {
             "additionalProperties": false,
             "description": "A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.",
             "if": {
@@ -6400,7 +5785,7 @@
                     }
                 ]
             },
-            "title": "SuperconductingRFCavity",
+            "title": "SuperConductingRFCavity",
             "type": "object"
         },
         "SupportingFacilityComponent": {

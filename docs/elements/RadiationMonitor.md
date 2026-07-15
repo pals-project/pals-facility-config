@@ -6,7 +6,7 @@ A diagnostic device used to monitor radiation dose or dose rate.
 URI: [narad:RadiationMonitor](https://example.org/narad/RadiationMonitor)
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[RadiationMonitor&#124;x_offset:float%20%3F;y_offset:float%20%3F;z_offset:float%20%3F;x_rot:float%20%3F;y_rot:float%20%3F;z_rot:float%20%3F;functions(i):PhysicalFunctionEnum%20%2B;beamline_relation(i):PhysicalRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;length(i):float%20%3F;s_position(i):float%20%3F;id(i):string;type(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F]uses%20-.->[BodyShiftP],[DiagnosticDevice]^-[RadiationMonitor],[MetadataEntry],[DiagnosticDevice],[BodyShiftP])](https://yuml.me/diagram/nofunky;dir:TB/class/[RadiationMonitor&#124;x_offset:float%20%3F;y_offset:float%20%3F;z_offset:float%20%3F;x_rot:float%20%3F;y_rot:float%20%3F;z_rot:float%20%3F;functions(i):PhysicalFunctionEnum%20%2B;beamline_relation(i):PhysicalRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;length(i):float%20%3F;s_position(i):float%20%3F;id(i):string;type(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F]uses%20-.->[BodyShiftP],[DiagnosticDevice]^-[RadiationMonitor],[MetadataEntry],[DiagnosticDevice],[BodyShiftP])
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[RadiationMonitor&#124;x_offset:float%20%3F;y_offset:float%20%3F;z_offset:float%20%3F;x_rot:float%20%3F;y_rot:float%20%3F;z_rot:float%20%3F;functions(i):PhysicalFunctionEnum%20%2B;beamline_relation(i):PhysicalRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;length(i):float%20%3F;s_position(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F]uses%20-.->[BodyShiftP],[DiagnosticDevice]^-[RadiationMonitor],[MetadataEntry],[DiagnosticDevice],[Component],[BodyShiftP])](https://yuml.me/diagram/nofunky;dir:TB/class/[RadiationMonitor&#124;x_offset:float%20%3F;y_offset:float%20%3F;z_offset:float%20%3F;x_rot:float%20%3F;y_rot:float%20%3F;z_rot:float%20%3F;functions(i):PhysicalFunctionEnum%20%2B;beamline_relation(i):PhysicalRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;length(i):float%20%3F;s_position(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F]uses%20-.->[BodyShiftP],[DiagnosticDevice]^-[RadiationMonitor],[MetadataEntry],[DiagnosticDevice],[Component],[BodyShiftP])
 
 ## Parents
 
@@ -26,7 +26,7 @@ URI: [narad:RadiationMonitor](https://example.org/narad/RadiationMonitor)
      * Range: [String](types/String.md)
  * [type](type.md)  <sub>1..1</sub>
      * Description: The LinkML class name of this instance.
-     * Range: [String](types/String.md)
+     * Range: [Component](Component.md)
  * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
      * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
      * Range: [String](types/String.md)
