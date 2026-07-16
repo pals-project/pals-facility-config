@@ -385,6 +385,7 @@ classes:
       beta_a:
         description: Twiss beta parameter in the horizontal plane.
         range: float
+        minimum_value: 0.0
         slot_uri: pals:beta_a
         aliases:
           - beta_x
@@ -392,6 +393,7 @@ classes:
       beta_b:
         description: Twiss beta parameter in the vertical plane.
         range: float
+        minimum_value: 0.0
         slot_uri: pals:beta_b
         aliases:
           - beta_y
@@ -399,24 +401,28 @@ classes:
       eta_x:
         description: Twiss dispersion parameter in the horizontal plane.
         range: float
+        minimum_value: 0.0
         slot_uri: pals:eta_x
         aliases:
           - etax
       eta_y:
         description: Twiss dispersion parameter in the vertical plane.
         range: float
+        minimum_value: 0.0
         slot_uri: pals:eta_y
         aliases:
           - etay
       etap_x:
         description: Twiss dispersion slope parameter in the horizontal plane.
         range: float
+        minimum_value: 0.0
         slot_uri: pals:etap_x
         aliases:
           - etapx
       etap_y:
         description: Twiss dispersion slope parameter in the vertical plane.
         range: float
+        minimum_value: 0.0
         slot_uri: pals:etap_y
         aliases:
           - etapy
