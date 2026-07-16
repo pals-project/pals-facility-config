@@ -415,14 +415,12 @@ classes:
       etap_x:
         description: Twiss dispersion slope parameter in the horizontal plane.
         range: float
-        minimum_value: 0.0
         slot_uri: pals:etap_x
         aliases:
           - etapx
       etap_y:
         description: Twiss dispersion slope parameter in the vertical plane.
         range: float
-        minimum_value: 0.0
         slot_uri: pals:etap_y
         aliases:
           - etapy
