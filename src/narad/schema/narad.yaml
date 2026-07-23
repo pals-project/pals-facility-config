@@ -10,11 +10,8 @@ prefixes:
   narad: https://example.org/narad/
   linkml: https://w3id.org/linkml/
   acc: https://example.org/accelerator-core/
-  qudt: http://qudt.org/schema/qudt/
   unit: http://qudt.org/vocab/unit/
   quantitykind: http://qudt.org/vocab/quantitykind/
-  ssn: http://www.w3.org/ns/ssn/
-  ssn-system: http://www.w3.org/ns/ssn/systems/
   sosa: http://www.w3.org/ns/sosa/
   RO: http://purl.obolibrary.org/obo/RO_
   BFO: http://purl.obolibrary.org/obo/BFO_
@@ -1547,50 +1544,73 @@ enums:
       Engineering units using ASCII-safe enum names. Values map to QUDT unit
       IRIs with the LinkML meaning field when an exact QUDT unit is available.
     permissible_values:
-      mm:
-        description: millimeter
-        meaning: unit:MilliM
-      m:
-        description: meter
-        meaning: unit:M
       A:
         description: ampere
         meaning: unit:A
-      T_m:
-        description: tesla meter
-        meaning: unit:T-M
-      Pa:
-        description: pascal
-        meaning: unit:PA
-      Torr:
-        description: torr
-        meaning: unit:TORR
-      rem_per_h:
-        description: >-
-          rem per hour. Kept as a local accelerator unit value because QUDT
-          publishes rem and rem-per-second but no exact rem-per-hour unit in
-          the checked vocabulary.
-        meaning: unit:REM-PER-H
+      degree:
+        description: degree
+        meaning: unit:DEG
+      eV:
+        description: electron volt
+        meaning: unit:EV
+      eV_per_c:
+        description: momentum in electron volts per speed of light
+      eV_per_c2:
+        description: mass in electron volts per speed of light squared
+      fundamental_charge:
+        description: fundamental charge
+        meaning: unit:????
+      G_per_cm:
+        description: gauss per centimeter
+      Hz:
+        description: hertz
+        meaning: unit:HZ
+      kW:
+        description: kilowatt
+        meaning: unit:KiloW
+      m:
+        description: meter
+        meaning: unit:M
+      mm:
+        description: millimeter
+        meaning: unit:MilliM
       mrem_per_h:
         description: >-
           millirem per hour. Kept as a local accelerator unit value because
           QUDT publishes related radiation units but no exact millirem-per-hour
           unit in the checked vocabulary.
         meaning: unit:MREM-PER-H
-      V:
-        description: volt
-        meaning: unit:V
-      kW:
-        description: kilowatt
-        meaning: unit:KiloW
-      degree:
-        description: degree
-        meaning: unit:DEG
       MV_per_m:
         description: megavolt per meter
         meaning: unit:MegaV-PER-M
-      G_per_cm:
-        description: gauss per centimeter
+      PA:
+        description: pascal
+        meaning: unit:PA
+      randians_pi2:
+        description: radians divided by 2 pi - angles and phases
+      rem_per_h:
+        description: >-
+          rem per hour. Kept as a local accelerator unit value because QUDT
+          publishes rem and rem-per-second but no exact rem-per-hour unit in
+          the checked vocabulary.
+      seconds:
+        description: second
+        meaning: unit:SEC
+      T:
+        description: tesla
+        meaning: unit:T
+      T_M:
+        description: tesla meter
+        meaning: unit:T-M
+      Torr:
+        description: torr
+        meaning: unit:TORR
+      V:
+        description: volt
+        meaning: unit:V
+      V_per_m:
+        description: volt per meter
+        meaning: unit:V-PER-M
       unitless:
         description: dimensionless numeric value
         meaning: unit:NUM
