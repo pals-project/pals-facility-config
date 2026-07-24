@@ -1,18 +1,87 @@
+# Enum: SignalRoleEnum 
 
-# Enum: SignalRoleEnum
 
-Roles for control-system signals.
 
-URI: [narad:SignalRoleEnum](https://example.org/narad/SignalRoleEnum)
 
+_Roles for control-system signals._
+
+
+
+URI: [pals:SignalRoleEnum](https://pals-project.readthedocs.io/SignalRoleEnum)
 
 ## Permissible Values
 
-| Text | Description | Meaning | Other Information |
-| :--- | :---: | :---: | ---: |
-| Setpoint | Requested or configured value. | sosa:ActuatableProperty |  |
-| Readback | Measured or reported value. | sosa:ObservableProperty |  |
-| Status | State or condition indicator. |  |  |
-| Command | Command or action trigger. | sosa:ActuatableProperty |  |
-| MinimumLimit | Minimum allowed signal value. |  |  |
-| MaximumLimit | Maximum allowed signal value. |  |  |
+| Value | Meaning | Description |
+| --- | --- | --- |
+| Setpoint | sosa:ActuatableProperty | Requested or configured value |
+| Readback | sosa:ObservableProperty | Measured or reported value |
+| Status | None | State or condition indicator |
+| Command | sosa:ActuatableProperty | Command or action trigger |
+| MinimumLimit | xsd:minInclusive | Minimum allowed signal value |
+| MaximumLimit | xsd:maxInclusive | Maximum allowed signal value |
+
+
+
+
+## Slots
+
+| Name | Description |
+| ---  | --- |
+| [signal_role](signal_role.md) | The role of the signal in the control system, such as setpoint, readback, sta... |
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: SignalRoleEnum
+description: Roles for control-system signals.
+from_schema: https://w3id.org/accelerator-core
+rank: 1000
+permissible_values:
+  Setpoint:
+    text: Setpoint
+    description: Requested or configured value.
+    meaning: sosa:ActuatableProperty
+  Readback:
+    text: Readback
+    description: Measured or reported value.
+    meaning: sosa:ObservableProperty
+  Status:
+    text: Status
+    description: State or condition indicator.
+  Command:
+    text: Command
+    description: Command or action trigger.
+    meaning: sosa:ActuatableProperty
+  MinimumLimit:
+    text: MinimumLimit
+    description: Minimum allowed signal value.
+    meaning: xsd:minInclusive
+  MaximumLimit:
+    text: MaximumLimit
+    description: Maximum allowed signal value.
+    meaning: xsd:maxInclusive
+
+```
+</details>

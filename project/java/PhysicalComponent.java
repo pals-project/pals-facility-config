@@ -17,13 +17,7 @@ public class PhysicalComponent extends Component {
 
   private List<String> functions;
   private String beamlineRelation;
-  private Float x;
-  private Float y;
-  private Float z;
-  private Float theta;
-  private Float phi;
-  private Float psi;
-  private Float length;
-  private Float sPosition;
+  private FloorParamGroup floorP;
+  private LongitudinalPlacementParamGroup longitudinalPlacementP;
 
 }

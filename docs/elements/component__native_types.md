@@ -3,7 +3,7 @@
 
 The native type of the component in the source system, which can be used to identify the component across different source systems.
 
-URI: [narad:component__native_types](https://example.org/narad/component__native_types)
+URI: [pals:component__native_types](https://pals-project.readthedocs.io/component__native_types)
 
 
 ## Domain and Range
@@ -19,9 +19,10 @@ None &#8594;  <sub>0..\*</sub> [String](types/String.md)
 ## Used by
 
  * [ACKicker](ACKicker.md)
+ * [BeamLine](BeamLine.md)
+ * [BeamLineSection](BeamLineSection.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
- * [Beamline](Beamline.md)
- * [BeamlineSection](BeamlineSection.md)
+ * [BeamProfileMonitor](BeamProfileMonitor.md)
  * [Bend](Bend.md)
  * [BookkeepingComponent](BookkeepingComponent.md)
  * [Cavity](Cavity.md)

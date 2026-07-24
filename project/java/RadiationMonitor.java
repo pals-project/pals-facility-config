@@ -15,11 +15,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class RadiationMonitor extends DiagnosticDevice {
 
-  private Float xOffset;
-  private Float yOffset;
-  private Float zOffset;
-  private Float xRot;
-  private Float yRot;
-  private Float zRot;
+  private BodyShiftParamGroup bodyShiftP;
 
 }

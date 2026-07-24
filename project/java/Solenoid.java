@@ -16,7 +16,6 @@ A solenoid is an element whose magnetic field is dominated by a field whose dire
 @EqualsAndHashCode(callSuper=false)
 public class Solenoid extends Magnet {
 
-  private Float ksol;
-  private Float bsol;
+  private SolenoidParamGroup solenoidP;
 
 }

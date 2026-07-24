@@ -3,7 +3,7 @@
 
 The native unit of the signal in the source system.
 
-URI: [narad:signal__native_unit](https://example.org/narad/signal__native_unit)
+URI: [pals:signal__native_unit](https://pals-project.readthedocs.io/signal__native_unit)
 
 
 ## Domain and Range

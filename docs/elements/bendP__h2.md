@@ -3,7 +3,7 @@
 
 Exit end pole face curvature
 
-URI: [narad:bendP__h2](https://example.org/narad/bendP__h2)
+URI: [pals:bendP__h2](https://pals-project.readthedocs.io/bendP__h2)
 
 
 ## Domain and Range

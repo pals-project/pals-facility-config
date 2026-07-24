@@ -3,7 +3,7 @@
 
 Multipole geometry type. Must be `follows_ref_geometry`.
 
-URI: [narad:bendP__multipole_geometry](https://example.org/narad/bendP__multipole_geometry)
+URI: [pals:bendP__multipole_geometry](https://pals-project.readthedocs.io/bendP__multipole_geometry)
 
 
 ## Domain and Range

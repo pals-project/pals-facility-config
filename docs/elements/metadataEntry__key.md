@@ -3,7 +3,7 @@
 
 The metadata field name.
 
-URI: [narad:metadataEntry__key](https://example.org/narad/metadataEntry__key)
+URI: [pals:metadataEntry__key](https://pals-project.readthedocs.io/metadataEntry__key)
 
 
 ## Domain and Range

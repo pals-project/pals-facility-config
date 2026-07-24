@@ -16,12 +16,12 @@ import lombok.*;
 public class ComponentRelation extends Relationship {
 
   private String context;
-  private Beamline beamlineContext;
+  private BeamLine beamlineContext;
   private String referenceFrame;
   private Float distanceValue;
   private String distanceUnit;
   private String axis;
-  private String direction;
+  private String componentDirection;
   private Float toleranceValue;
   private String toleranceUnit;
 

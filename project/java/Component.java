@@ -16,11 +16,8 @@ import lombok.*;
 public abstract class Component  {
 
   private String id;
-  private Component type;
+  private String kind;
   private List<String> nativeTypes;
-  private String description;
-  private String label;
-  private String alias;
-  private List<MetadataEntry> additionalMetadata;
+  private MetaParamGroup metaP;
 
 }

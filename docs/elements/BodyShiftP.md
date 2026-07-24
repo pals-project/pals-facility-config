@@ -1,51 +1,103 @@
 
-# Class: BodyShiftP
 
-Mixin class for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
-
-URI: [narad:BodyShiftP](https://example.org/narad/BodyShiftP)
+# Slot: BodyShiftP 
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[SupportingFacilityComponent]uses%20-.->[BodyShiftP&#124;x_offset:float%20%3F;y_offset:float%20%3F;z_offset:float%20%3F;x_rot:float%20%3F;y_rot:float%20%3F;z_rot:float%20%3F],[RadiationMonitor]uses%20-.->[BodyShiftP],[Magnet]uses%20-.->[BodyShiftP],[Cavity]uses%20-.->[BodyShiftP],[BookkeepingComponent]uses%20-.->[BodyShiftP],[BeamPositionMonitor]uses%20-.->[BodyShiftP],[SupportingFacilityComponent],[RadiationMonitor],[Magnet],[Cavity],[BookkeepingComponent],[BeamPositionMonitor])](https://yuml.me/diagram/nofunky;dir:TB/class/[SupportingFacilityComponent]uses%20-.->[BodyShiftP&#124;x_offset:float%20%3F;y_offset:float%20%3F;z_offset:float%20%3F;x_rot:float%20%3F;y_rot:float%20%3F;z_rot:float%20%3F],[RadiationMonitor]uses%20-.->[BodyShiftP],[Magnet]uses%20-.->[BodyShiftP],[Cavity]uses%20-.->[BodyShiftP],[BookkeepingComponent]uses%20-.->[BodyShiftP],[BeamPositionMonitor]uses%20-.->[BodyShiftP],[SupportingFacilityComponent],[RadiationMonitor],[Magnet],[Cavity],[BookkeepingComponent],[BeamPositionMonitor])
-
-## Mixin for
-
- * [BeamPositionMonitor](BeamPositionMonitor.md) (mixin)  - A diagnostic device used to measure transverse beam position.
- * [BookkeepingComponent](BookkeepingComponent.md) (mixin)  - A virtual component that represents a bookkeeping or organizational role in the accelerator system,
- * [Cavity](Cavity.md) (mixin)  - A cavity used for beam acceleration or manipulation.
- * [Magnet](Magnet.md) (mixin)  - An accelerator device that produces a magnetic field for beam control.
- * [RadiationMonitor](RadiationMonitor.md) (mixin)  - A diagnostic device used to monitor radiation dose or dose rate.
- * [SupportingFacilityComponent](SupportingFacilityComponent.md) (mixin)  - A physical component that supports accelerator operation
-
-## Referenced by Class
+_A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)._
 
 
-## Attributes
 
 
-### Own
 
- * [➞x_offset](bodyShiftP__x_offset.md)  <sub>0..1</sub>
-     * Description: Shift in the X direction in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞y_offset](bodyShiftP__y_offset.md)  <sub>0..1</sub>
-     * Description: Shift in the Y direction in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞z_offset](bodyShiftP__z_offset.md)  <sub>0..1</sub>
-     * Description: Shift in the Z direction in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞x_rot](bodyShiftP__x_rot.md)  <sub>0..1</sub>
-     * Description: Rotation around the X-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞y_rot](bodyShiftP__y_rot.md)  <sub>0..1</sub>
-     * Description: Rotation around the Y-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞z_rot](bodyShiftP__z_rot.md)  <sub>0..1</sub>
-     * Description: Rotation around the Z-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
+URI: [pals:BodyShiftP](https://pals-project.readthedocs.io/BodyShiftP)
+Alias: BodyShiftP
 
-## Other properties
+<!-- no inheritance hierarchy -->
 
-|  |  |  |
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
 | --- | --- | --- |
-| **Broad Mappings:** | | pals:BodyShiftP |
+| [BeamLineSection](BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizat... |  no  |
+| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
+| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
+| [BookkeepingComponent](BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in t... |  no  |
+| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
+| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
+| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
+| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [HasBodyShiftP](HasBodyShiftP.md) |  |  no  |
+| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
+| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
+| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
+| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [Kicker](Kicker.md) | A magnet primarily used to steer the beam |  no  |
+| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
+| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
+| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
+| [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
+| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
+| [Marker](Marker.md) | A virtual component used as a reference point or marker in the beamline struc... |  no  |
+| [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
+
+
+
+
+
+
+## Properties
+
+* Range: [BodyShiftParamGroup](BodyShiftParamGroup.md)
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:BodyShiftP |
+| native | pals:BodyShiftP |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: BodyShiftP
+description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP
+  (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator
+  Language Standard (PALS).
+from_schema: https://w3id.org/accelerator-core
+rank: 1000
+alias: BodyShiftP
+owner: HasBodyShiftP
+domain_of:
+- HasBodyShiftP
+range: BodyShiftParamGroup
+inlined: true
+
+```
+</details>

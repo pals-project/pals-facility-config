@@ -3,7 +3,7 @@
 
 Chord length of the bend.
 
-URI: [narad:bendP__L_chord](https://example.org/narad/bendP__L_chord)
+URI: [pals:bendP__L_chord](https://pals-project.readthedocs.io/bendP__L_chord)
 
 
 ## Domain and Range

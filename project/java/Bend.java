@@ -15,5 +15,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class Bend extends Multipole {
 
+  private BendParamGroup bendP;
 
 }

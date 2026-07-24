@@ -15,5 +15,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public abstract class RFCavity extends Cavity {
 
+  private RFParamGroup rFP;
 
 }

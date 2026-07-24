@@ -3,7 +3,7 @@
 
 The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 
-URI: [narad:physicalComponent__beamline_relation](https://example.org/narad/physicalComponent__beamline_relation)
+URI: [pals:physicalComponent__beamline_relation](https://pals-project.readthedocs.io/physicalComponent__beamline_relation)
 
 
 ## Domain and Range
@@ -20,6 +20,7 @@ None &#8594;  <sub>1..1</sub> [PhysicalRelationEnum](PhysicalRelationEnum.md)
 
  * [ACKicker](ACKicker.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
+ * [BeamProfileMonitor](BeamProfileMonitor.md)
  * [Bend](Bend.md)
  * [Cavity](Cavity.md)
  * [CrabCavity](CrabCavity.md)
@@ -42,4 +43,4 @@ None &#8594;  <sub>1..1</sub> [PhysicalRelationEnum](PhysicalRelationEnum.md)
 
 |  |  |  |
 | --- | --- | --- |
-| **Mappings:** | | narad:physical_beamline_relation |
+| **Mappings:** | | pals:physical_beamline_relation |

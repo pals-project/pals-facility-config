@@ -3,7 +3,7 @@
 
 The frame of reference / domain in which this relationship is asserted to hold.
 
-URI: [narad:componentRelation__context](https://example.org/narad/componentRelation__context)
+URI: [pals:componentRelation__context](https://pals-project.readthedocs.io/componentRelation__context)
 
 
 ## Domain and Range

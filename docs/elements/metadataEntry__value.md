@@ -3,7 +3,7 @@
 
 The metadata value, serialized as a string.
 
-URI: [narad:metadataEntry__value](https://example.org/narad/metadataEntry__value)
+URI: [pals:metadataEntry__value](https://pals-project.readthedocs.io/metadataEntry__value)
 
 
 ## Domain and Range

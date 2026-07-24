@@ -3,7 +3,7 @@
 
 Rectangular length.
 
-URI: [narad:bendP__L_rectangle](https://example.org/narad/bendP__L_rectangle)
+URI: [pals:bendP__L_rectangle](https://pals-project.readthedocs.io/bendP__L_rectangle)
 
 
 ## Domain and Range

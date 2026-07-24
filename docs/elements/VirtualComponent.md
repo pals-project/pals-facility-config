@@ -1,93 +1,314 @@
 
-# Class: VirtualComponent
 
-A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamlineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
-
-URI: [narad:VirtualComponent](https://example.org/narad/VirtualComponent)
+# Class: VirtualComponent 
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[NARAD]++-%20virtual_components%200..*>[VirtualComponent&#124;functions:VirtualFunctionEnum%20%2B;beamline_relation:VirtualRelationEnum;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[VirtualComponent]uses%20-.->[FloorP],[VirtualComponent]^-[BookkeepingComponent],[VirtualComponent]^-[Beamline],[Component]^-[VirtualComponent],[NARAD],[MetadataEntry],[FloorP],[Component],[BookkeepingComponent],[Beamline])](https://yuml.me/diagram/nofunky;dir:TB/class/[NARAD]++-%20virtual_components%200..*>[VirtualComponent&#124;functions:VirtualFunctionEnum%20%2B;beamline_relation:VirtualRelationEnum;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[VirtualComponent]uses%20-.->[FloorP],[VirtualComponent]^-[BookkeepingComponent],[VirtualComponent]^-[Beamline],[Component]^-[VirtualComponent],[NARAD],[MetadataEntry],[FloorP],[Component],[BookkeepingComponent],[Beamline])
-
-## Parents
-
- *  is_a: [Component](Component.md) - A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
-
-## Uses Mixin
-
- *  mixin: [FloorP](FloorP.md) - Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
-
-## Children
-
- * [Beamline](Beamline.md) - A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
- * [BookkeepingComponent](BookkeepingComponent.md) - A virtual component that represents a bookkeeping or organizational role in the accelerator system,
-
-## Referenced by Class
-
- *  **None** *[➞virtual_components](nARAD__virtual_components.md)*  <sub>0..\*</sub>  **[VirtualComponent](VirtualComponent.md)**
-
-## Attributes
+_A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices._
 
 
-### Own
 
- * [➞functions](virtualComponent__functions.md)  <sub>1..\*</sub>
-     * Description: The function of the virtual component,  which can be used to identify the component across different source systems.
-     * Range: [VirtualFunctionEnum](VirtualFunctionEnum.md)
- * [➞beamline_relation](virtualComponent__beamline_relation.md)  <sub>1..1</sub>
-     * Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
-     * Range: [VirtualRelationEnum](VirtualRelationEnum.md)
 
-### Inherited from Component:
 
- * [id](id.md)  <sub>1..1</sub>
-     * Description: A unique identifier for the instance.
-     * Range: [String](types/String.md)
- * [type](type.md)  <sub>1..1</sub>
-     * Description: The LinkML class name of this instance.
-     * Range: [Component](Component.md)
- * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
-     * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
-     * Range: [String](types/String.md)
+URI: [pals:VirtualComponent](https://pals-project.readthedocs.io/VirtualComponent)
 
-### Mixed in from FloorP:
 
- * [➞x](floorP__x.md)  <sub>0..1</sub>
-     * Description: Global X coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
 
-### Mixed in from FloorP:
 
- * [➞y](floorP__y.md)  <sub>0..1</sub>
-     * Description: Global Y coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
 
-### Mixed in from FloorP:
+```mermaid
+ classDiagram
+    class VirtualComponent
+    click VirtualComponent href "../VirtualComponent/"
+      HasFloorP <|-- VirtualComponent
+        click HasFloorP href "../HasFloorP/"
+      Component <|-- VirtualComponent
+        click Component href "../Component/"
+      
 
- * [➞z](floorP__z.md)  <sub>0..1</sub>
-     * Description: Global Z coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
+      VirtualComponent <|-- BeamLine
+        click BeamLine href "../BeamLine/"
+      VirtualComponent <|-- BookkeepingComponent
+        click BookkeepingComponent href "../BookkeepingComponent/"
+      
 
-### Mixed in from FloorP:
+      VirtualComponent : beamline_relation
+        
+          
+    
+        
+        
+        VirtualComponent --> "1" VirtualRelationEnum : beamline_relation
+        click VirtualRelationEnum href "../VirtualRelationEnum/"
+    
 
- * [➞theta](floorP__theta.md)  <sub>0..1</sub>
-     * Description: Orientation angle around the Y-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
+        
+      VirtualComponent : FloorP
+        
+          
+    
+        
+        
+        VirtualComponent --> "0..1" FloorParamGroup : FloorP
+        click FloorParamGroup href "../FloorParamGroup/"
+    
 
-### Mixed in from FloorP:
+        
+      VirtualComponent : functions
+        
+          
+    
+        
+        
+        VirtualComponent --> "1..*" VirtualFunctionEnum : functions
+        click VirtualFunctionEnum href "../VirtualFunctionEnum/"
+    
 
- * [➞phi](floorP__phi.md)  <sub>0..1</sub>
-     * Description: Rotation around the X-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
+        
+      VirtualComponent : id
+        
+      VirtualComponent : kind
+        
+      VirtualComponent : MetaP
+        
+          
+    
+        
+        
+        VirtualComponent --> "0..1" MetaParamGroup : MetaP
+        click MetaParamGroup href "../MetaParamGroup/"
+    
 
-### Mixed in from FloorP:
+        
+      VirtualComponent : native_types
+        
+      
+```
 
- * [➞psi](floorP__psi.md)  <sub>0..1</sub>
-     * Description: Rotation around the Z-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
 
-## Other properties
 
-|  |  |  |
-| --- | --- | --- |
-| **Broad Mappings:** | | pals:Element |
-|  | | pals:BookkeepingElement |
+
+
+## Inheritance
+* [Component](Component.md) [ [HasMetaP](HasMetaP.md)]
+    * **VirtualComponent** [ [HasFloorP](HasFloorP.md)]
+        * [BeamLine](BeamLine.md)
+        * [BookkeepingComponent](BookkeepingComponent.md) [ [HasBodyShiftP](HasBodyShiftP.md)]
+
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [functions](functions.md) | 1..* <br/> [VirtualFunctionEnum](VirtualFunctionEnum.md) | The function of the virtual component,  which can be used to identify the com... | direct |
+| [beamline_relation](beamline_relation.md) | 1 <br/> [VirtualRelationEnum](VirtualRelationEnum.md) | The relationship of the virtual component to the beamline,  which can be used... | direct |
+| [FloorP](FloorP.md) | 0..1 <br/> [FloorParamGroup](FloorParamGroup.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Pl... | [HasFloorP](HasFloorP.md) |
+| [id](id.md) | 1 <br/> [String](String.md) | A unique identifier for the instance | [Component](Component.md) |
+| [kind](kind.md) | 1 <br/> [String](String.md) | The LinkML class name of this instance | [Component](Component.md) |
+| [native_types](native_types.md) | * <br/> [String](String.md) | The native type of the component in the source system, which can be used to i... | [Component](Component.md) |
+| [MetaP](MetaP.md) | 0..1 <br/> [MetaParamGroup](MetaParamGroup.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Pa... | [HasMetaP](HasMetaP.md) |
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:VirtualComponent |
+| native | pals:VirtualComponent |
+| broad | pals:Element, pals:BookkeepingElement |
+
+
+
+
+
+
+## LinkML Source
+
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+
+### Direct
+
+<details>
+```yaml
+name: VirtualComponent
+description: A virtual or logical component that represents a concept, function, or
+  role in the accelerator  beamline operation but does not have a physical instantiation.  This
+  can be used to capture abstract components, such as Markers, BeamLineSections, and
+  FacilitySpaces that are important for understanding the structure and function of
+  the accelerator system but are not physical devices.
+from_schema: https://w3id.org/accelerator-core
+broad_mappings:
+- pals:Element
+- pals:BookkeepingElement
+is_a: Component
+mixins:
+- HasFloorP
+attributes:
+  functions:
+    name: functions
+    description: The function of the virtual component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:virtual_function
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    - SupportingFacilityComponent
+    range: VirtualFunctionEnum
+    required: true
+    multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the virtual component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:virtual_beamline_relation
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: VirtualRelationEnum
+    required: true
+
+```
+</details>
+
+### Induced
+
+<details>
+```yaml
+name: VirtualComponent
+description: A virtual or logical component that represents a concept, function, or
+  role in the accelerator  beamline operation but does not have a physical instantiation.  This
+  can be used to capture abstract components, such as Markers, BeamLineSections, and
+  FacilitySpaces that are important for understanding the structure and function of
+  the accelerator system but are not physical devices.
+from_schema: https://w3id.org/accelerator-core
+broad_mappings:
+- pals:Element
+- pals:BookkeepingElement
+is_a: Component
+mixins:
+- HasFloorP
+attributes:
+  functions:
+    name: functions
+    description: The function of the virtual component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:virtual_function
+    alias: functions
+    owner: VirtualComponent
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    - SupportingFacilityComponent
+    range: VirtualFunctionEnum
+    required: true
+    multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the virtual component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:virtual_beamline_relation
+    alias: beamline_relation
+    owner: VirtualComponent
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: VirtualRelationEnum
+    required: true
+  FloorP:
+    name: FloorP
+    description: A mixin for floor plan parameters that are aligned with PALS FloorP
+      (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: FloorP
+    owner: VirtualComponent
+    domain_of:
+    - HasFloorP
+    range: FloorParamGroup
+    inlined: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:id
+    identifier: true
+    alias: id
+    owner: VirtualComponent
+    domain_of:
+    - Affiliation
+    - Component
+    - Signal
+    - Relationship
+    range: string
+    required: true
+  kind:
+    name: kind
+    description: The LinkML class name of this instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:kind
+    alias: kind
+    owner: VirtualComponent
+    domain_of:
+    - PALS
+    - Component
+    - Signal
+    range: string
+    required: true
+  native_types:
+    name: native_types
+    description: The native type of the component in the source system, which can
+      be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: native_types
+    owner: VirtualComponent
+    domain_of:
+    - Component
+    range: string
+    multivalued: true
+  MetaP:
+    name: MetaP
+    description: A mixin for metadata parameters that are aligned with PALS MetaP
+      (Metadata Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: MetaP
+    owner: VirtualComponent
+    domain_of:
+    - HasMetaP
+    range: MetaParamGroup
+    inlined: true
+
+```
+</details>

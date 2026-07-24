@@ -16,6 +16,7 @@ Only one of the electric or magnetic multipole components should be present, not
 @EqualsAndHashCode(callSuper=false)
 public class Multipole extends Magnet {
 
-  private List<MultipoleComponent> components;
+  private ElectricMultipoleParamGroup electricMultipoleP;
+  private MagneticMultipoleParamGroup magneticMultipoleP;
 
 }

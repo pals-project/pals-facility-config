@@ -3,7 +3,7 @@
 
 The source system from which the signal originates, such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service.
 
-URI: [narad:signal__source_system](https://example.org/narad/signal__source_system)
+URI: [pals:signal__source_system](https://pals-project.readthedocs.io/signal__source_system)
 
 
 ## Domain and Range

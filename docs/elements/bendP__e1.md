@@ -3,7 +3,7 @@
 
 Entrance end pole face rotation with respect to a sector geometry.
 
-URI: [narad:bendP__e1](https://example.org/narad/bendP__e1)
+URI: [pals:bendP__e1](https://pals-project.readthedocs.io/bendP__e1)
 
 
 ## Domain and Range

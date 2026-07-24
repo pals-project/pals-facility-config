@@ -3,7 +3,7 @@
 
 The native data type of the signal in the source system,  such as String, Integer, Float, or Boolean.
 
-URI: [narad:signal__native_data_type](https://example.org/narad/signal__native_data_type)
+URI: [pals:signal__native_data_type](https://pals-project.readthedocs.io/signal__native_data_type)
 
 
 ## Domain and Range

@@ -3,7 +3,7 @@
 
 
 
-URI: [narad:componentRelation__distance_value](https://example.org/narad/componentRelation__distance_value)
+URI: [pals:componentRelation__distance_value](https://pals-project.readthedocs.io/componentRelation__distance_value)
 
 
 ## Domain and Range

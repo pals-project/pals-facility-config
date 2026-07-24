@@ -3,7 +3,7 @@
 
 Reference bend strength = 1/radius_ref
 
-URI: [narad:bendP__g_ref](https://example.org/narad/bendP__g_ref)
+URI: [pals:bendP__g_ref](https://pals-project.readthedocs.io/bendP__g_ref)
 
 
 ## Domain and Range

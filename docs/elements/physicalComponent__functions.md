@@ -3,7 +3,7 @@
 
 The function of the physical component,  which can be used to identify the component across different source systems.
 
-URI: [narad:physicalComponent__functions](https://example.org/narad/physicalComponent__functions)
+URI: [pals:physicalComponent__functions](https://pals-project.readthedocs.io/physicalComponent__functions)
 
 
 ## Domain and Range
@@ -20,6 +20,7 @@ None &#8594;  <sub>1..\*</sub> [PhysicalFunctionEnum](PhysicalFunctionEnum.md)
 
  * [ACKicker](ACKicker.md)
  * [BeamPositionMonitor](BeamPositionMonitor.md)
+ * [BeamProfileMonitor](BeamProfileMonitor.md)
  * [Bend](Bend.md)
  * [Cavity](Cavity.md)
  * [CrabCavity](CrabCavity.md)
@@ -41,4 +42,4 @@ None &#8594;  <sub>1..\*</sub> [PhysicalFunctionEnum](PhysicalFunctionEnum.md)
 
 |  |  |  |
 | --- | --- | --- |
-| **Mappings:** | | narad:physical_function |
+| **Mappings:** | | pals:physical_function |

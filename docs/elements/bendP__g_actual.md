@@ -3,7 +3,7 @@
 
 Actual bend strength = 1/radius_actual
 
-URI: [narad:bendP__g_actual](https://example.org/narad/bendP__g_actual)
+URI: [pals:bendP__g_actual](https://pals-project.readthedocs.io/bendP__g_actual)
 
 
 ## Domain and Range

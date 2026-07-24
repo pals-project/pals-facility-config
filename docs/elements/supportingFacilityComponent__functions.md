@@ -3,7 +3,7 @@
 
 The function of the supporting facility component,  which can be used to identify the component across different source systems.
 
-URI: [narad:supportingFacilityComponent__functions](https://example.org/narad/supportingFacilityComponent__functions)
+URI: [pals:supportingFacilityComponent__functions](https://pals-project.readthedocs.io/supportingFacilityComponent__functions)
 
 
 ## Domain and Range
@@ -24,4 +24,4 @@ None &#8594;  <sub>1..\*</sub> [FacilityFunctionEnum](FacilityFunctionEnum.md)
 
 |  |  |  |
 | --- | --- | --- |
-| **Mappings:** | | narad:supporting_facility_function |
+| **Mappings:** | | pals:supporting_facility_function |

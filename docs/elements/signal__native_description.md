@@ -3,7 +3,7 @@
 
 A human-readable description of the signal in the source system.
 
-URI: [narad:signal__native_description](https://example.org/narad/signal__native_description)
+URI: [pals:signal__native_description](https://pals-project.readthedocs.io/signal__native_description)
 
 
 ## Domain and Range

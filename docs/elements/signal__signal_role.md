@@ -3,7 +3,7 @@
 
 The role of the signal in the control system, such as setpoint, readback, status, command, or limit.
 
-URI: [narad:signal__signal_role](https://example.org/narad/signal__signal_role)
+URI: [pals:signal__signal_role](https://pals-project.readthedocs.io/signal__signal_role)
 
 
 ## Domain and Range

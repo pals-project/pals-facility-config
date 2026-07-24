@@ -1,16 +1,64 @@
-
-# Enum: ReferenceFrameEnum
-
+# Enum: ReferenceFrameEnum 
 
 
-URI: [narad:ReferenceFrameEnum](https://example.org/narad/ReferenceFrameEnum)
 
+URI: [pals:ReferenceFrameEnum](https://pals-project.readthedocs.io/ReferenceFrameEnum)
 
 ## Permissible Values
 
-| Text | Description | Meaning | Other Information |
-| :--- | :---: | :---: | ---: |
-| beam_direction |  |  |  |
-| facility_coordinates |  |  |  |
-| local_component_frame |  |  |  |
-| tunnel_stationing |  |  |  |
+| Value | Meaning | Description |
+| --- | --- | --- |
+| beam_direction | None |  |
+| facility_coordinates | None |  |
+| local_component_frame | None |  |
+| tunnel_stationing | None |  |
+
+
+
+
+## Slots
+
+| Name | Description |
+| ---  | --- |
+| [reference_frame](reference_frame.md) |  |
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: ReferenceFrameEnum
+from_schema: https://w3id.org/accelerator-core
+rank: 1000
+permissible_values:
+  beam_direction:
+    text: beam_direction
+  facility_coordinates:
+    text: facility_coordinates
+  local_component_frame:
+    text: local_component_frame
+  tunnel_stationing:
+    text: tunnel_stationing
+
+```
+</details>

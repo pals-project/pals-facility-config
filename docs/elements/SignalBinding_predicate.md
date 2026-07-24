@@ -3,7 +3,7 @@
 
 
 
-URI: [narad:SignalBinding_predicate](https://example.org/narad/SignalBinding_predicate)
+URI: [pals:SignalBinding_predicate](https://pals-project.readthedocs.io/SignalBinding_predicate)
 
 
 ## Domain and Range

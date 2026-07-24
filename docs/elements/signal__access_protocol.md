@@ -3,7 +3,7 @@
 
 The protocol used to access the signal in the source system,  such as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.
 
-URI: [narad:signal__access_protocol](https://example.org/narad/signal__access_protocol)
+URI: [pals:signal__access_protocol](https://pals-project.readthedocs.io/signal__access_protocol)
 
 
 ## Domain and Range

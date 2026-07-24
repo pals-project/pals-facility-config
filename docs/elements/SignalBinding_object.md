@@ -3,7 +3,7 @@
 
 
 
-URI: [narad:SignalBinding_object](https://example.org/narad/SignalBinding_object)
+URI: [pals:SignalBinding_object](https://pals-project.readthedocs.io/SignalBinding_object)
 
 
 ## Domain and Range

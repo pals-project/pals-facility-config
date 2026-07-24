@@ -1,48 +1,107 @@
 
-# Class: FloorP
 
-Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
-
-URI: [narad:FloorP](https://example.org/narad/FloorP)
+# Slot: FloorP 
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[VirtualComponent]uses%20-.->[FloorP&#124;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F],[SupportingFacilityComponent]uses%20-.->[FloorP],[PhysicalComponent]uses%20-.->[FloorP],[VirtualComponent],[SupportingFacilityComponent],[PhysicalComponent])](https://yuml.me/diagram/nofunky;dir:TB/class/[VirtualComponent]uses%20-.->[FloorP&#124;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F],[SupportingFacilityComponent]uses%20-.->[FloorP],[PhysicalComponent]uses%20-.->[FloorP],[VirtualComponent],[SupportingFacilityComponent],[PhysicalComponent])
-
-## Mixin for
-
- * [PhysicalComponent](PhysicalComponent.md) (mixin)  - A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system.
- * [SupportingFacilityComponent](SupportingFacilityComponent.md) (mixin)  - A physical component that supports accelerator operation
- * [VirtualComponent](VirtualComponent.md) (mixin)  - A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamlineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
-
-## Referenced by Class
+_A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)._
 
 
-## Attributes
 
 
-### Own
 
- * [➞x](floorP__x.md)  <sub>0..1</sub>
-     * Description: Global X coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞y](floorP__y.md)  <sub>0..1</sub>
-     * Description: Global Y coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞z](floorP__z.md)  <sub>0..1</sub>
-     * Description: Global Z coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞theta](floorP__theta.md)  <sub>0..1</sub>
-     * Description: Orientation angle around the Y-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞phi](floorP__phi.md)  <sub>0..1</sub>
-     * Description: Rotation around the X-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
- * [➞psi](floorP__psi.md)  <sub>0..1</sub>
-     * Description: Rotation around the Z-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
+URI: [pals:FloorP](https://pals-project.readthedocs.io/FloorP)
+Alias: FloorP
 
-## Other properties
+<!-- no inheritance hierarchy -->
 
-|  |  |  |
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
 | --- | --- | --- |
-| **Broad Mappings:** | | pals:FloorP |
+| [BeamLineSection](BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizat... |  no  |
+| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
+| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
+| [BookkeepingComponent](BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in t... |  no  |
+| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
+| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
+| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
+| [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  no  |
+| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
+| [DiagnosticDevice](DiagnosticDevice.md) | An accelerator device used to measure beam or machine state |  no  |
+| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
+| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
+| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [Kicker](Kicker.md) | A magnet primarily used to steer the beam |  no  |
+| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
+| [HasFloorP](HasFloorP.md) |  |  no  |
+| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
+| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
+| [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
+| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
+| [Marker](Marker.md) | A virtual component used as a reference point or marker in the beamline struc... |  no  |
+| [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
+| [VirtualComponent](VirtualComponent.md) | A virtual or logical component that represents a concept, function, or role i... |  no  |
+| [PhysicalComponent](PhysicalComponent.md) | A physical item that participates in or supports accelerator operation |  no  |
+
+
+
+
+
+
+## Properties
+
+* Range: [FloorParamGroup](FloorParamGroup.md)
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:FloorP |
+| native | pals:FloorP |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: FloorP
+description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor
+  Plan Parameters) for interoperability with the Particle Accelerator Language Standard
+  (PALS).
+from_schema: https://w3id.org/accelerator-core
+rank: 1000
+alias: FloorP
+owner: HasFloorP
+domain_of:
+- HasFloorP
+range: FloorParamGroup
+inlined: true
+
+```
+</details>

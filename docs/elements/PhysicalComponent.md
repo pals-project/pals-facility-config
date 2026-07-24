@@ -1,108 +1,357 @@
 
-# Class: PhysicalComponent
 
-A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system.
-
-URI: [narad:PhysicalComponent](https://example.org/narad/PhysicalComponent)
+# Class: PhysicalComponent 
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[SupportingFacilityComponent],[SignalBinding],[SignalBinding]-%20subject%201..1>[PhysicalComponent&#124;functions:PhysicalFunctionEnum%20%2B;beamline_relation:PhysicalRelationEnum;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F;length:float%20%3F;s_position:float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[NARAD]++-%20physical_components%200..*>[PhysicalComponent],[PhysicalComponent]uses%20-.->[FloorP],[PhysicalComponent]uses%20-.->[HasLongitudinalPlacement],[PhysicalComponent]^-[SupportingFacilityComponent],[PhysicalComponent]^-[Magnet],[PhysicalComponent]^-[DiagnosticDevice],[PhysicalComponent]^-[Cavity],[Component]^-[PhysicalComponent],[NARAD],[MetadataEntry],[Magnet],[HasLongitudinalPlacement],[FloorP],[DiagnosticDevice],[Component],[Cavity])](https://yuml.me/diagram/nofunky;dir:TB/class/[SupportingFacilityComponent],[SignalBinding],[SignalBinding]-%20subject%201..1>[PhysicalComponent&#124;functions:PhysicalFunctionEnum%20%2B;beamline_relation:PhysicalRelationEnum;x:float%20%3F;y:float%20%3F;z:float%20%3F;theta:float%20%3F;phi:float%20%3F;psi:float%20%3F;length:float%20%3F;s_position:float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[NARAD]++-%20physical_components%200..*>[PhysicalComponent],[PhysicalComponent]uses%20-.->[FloorP],[PhysicalComponent]uses%20-.->[HasLongitudinalPlacement],[PhysicalComponent]^-[SupportingFacilityComponent],[PhysicalComponent]^-[Magnet],[PhysicalComponent]^-[DiagnosticDevice],[PhysicalComponent]^-[Cavity],[Component]^-[PhysicalComponent],[NARAD],[MetadataEntry],[Magnet],[HasLongitudinalPlacement],[FloorP],[DiagnosticDevice],[Component],[Cavity])
-
-## Parents
-
- *  is_a: [Component](Component.md) - A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
-
-## Uses Mixin
-
- *  mixin: [FloorP](FloorP.md) - Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
- *  mixin: [HasLongitudinalPlacement](HasLongitudinalPlacement.md) - Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis.
-
-## Children
-
- * [Cavity](Cavity.md) - A cavity used for beam acceleration or manipulation.
- * [DiagnosticDevice](DiagnosticDevice.md) - An accelerator device used to measure beam or machine state.
- * [Magnet](Magnet.md) - An accelerator device that produces a magnetic field for beam control.
- * [SupportingFacilityComponent](SupportingFacilityComponent.md) - A physical component that supports accelerator operation
-
-## Referenced by Class
-
- *  **[SignalBinding](SignalBinding.md)** *[SignalBinding➞subject](SignalBinding_subject.md)*  <sub>1..1</sub>  **[PhysicalComponent](PhysicalComponent.md)**
- *  **None** *[➞physical_components](nARAD__physical_components.md)*  <sub>0..\*</sub>  **[PhysicalComponent](PhysicalComponent.md)**
-
-## Attributes
+_A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system._
 
 
-### Own
 
- * [➞functions](physicalComponent__functions.md)  <sub>1..\*</sub>
-     * Description: The function of the physical component,  which can be used to identify the component across different source systems.
-     * Range: [PhysicalFunctionEnum](PhysicalFunctionEnum.md)
- * [➞beamline_relation](physicalComponent__beamline_relation.md)  <sub>1..1</sub>
-     * Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
-     * Range: [PhysicalRelationEnum](PhysicalRelationEnum.md)
 
-### Inherited from Component:
 
- * [id](id.md)  <sub>1..1</sub>
-     * Description: A unique identifier for the instance.
-     * Range: [String](types/String.md)
- * [type](type.md)  <sub>1..1</sub>
-     * Description: The LinkML class name of this instance.
-     * Range: [Component](Component.md)
- * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
-     * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
-     * Range: [String](types/String.md)
+URI: [pals:PhysicalComponent](https://pals-project.readthedocs.io/PhysicalComponent)
 
-### Mixed in from FloorP:
 
- * [➞x](floorP__x.md)  <sub>0..1</sub>
-     * Description: Global X coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
 
-### Mixed in from FloorP:
 
- * [➞y](floorP__y.md)  <sub>0..1</sub>
-     * Description: Global Y coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
 
-### Mixed in from FloorP:
+```mermaid
+ classDiagram
+    class PhysicalComponent
+    click PhysicalComponent href "../PhysicalComponent/"
+      HasFloorP <|-- PhysicalComponent
+        click HasFloorP href "../HasFloorP/"
+      HasLongitudinalPlacementP <|-- PhysicalComponent
+        click HasLongitudinalPlacementP href "../HasLongitudinalPlacementP/"
+      Component <|-- PhysicalComponent
+        click Component href "../Component/"
+      
 
- * [➞z](floorP__z.md)  <sub>0..1</sub>
-     * Description: Global Z coordinate in the facility floor plan.
-     * Range: [Float](types/Float.md)
+      PhysicalComponent <|-- Magnet
+        click Magnet href "../Magnet/"
+      PhysicalComponent <|-- DiagnosticDevice
+        click DiagnosticDevice href "../DiagnosticDevice/"
+      PhysicalComponent <|-- Cavity
+        click Cavity href "../Cavity/"
+      PhysicalComponent <|-- SupportingFacilityComponent
+        click SupportingFacilityComponent href "../SupportingFacilityComponent/"
+      
 
-### Mixed in from FloorP:
+      PhysicalComponent : beamline_relation
+        
+          
+    
+        
+        
+        PhysicalComponent --> "1" PhysicalRelationEnum : beamline_relation
+        click PhysicalRelationEnum href "../PhysicalRelationEnum/"
+    
 
- * [➞theta](floorP__theta.md)  <sub>0..1</sub>
-     * Description: Orientation angle around the Y-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
+        
+      PhysicalComponent : FloorP
+        
+          
+    
+        
+        
+        PhysicalComponent --> "0..1" FloorParamGroup : FloorP
+        click FloorParamGroup href "../FloorParamGroup/"
+    
 
-### Mixed in from FloorP:
+        
+      PhysicalComponent : functions
+        
+          
+    
+        
+        
+        PhysicalComponent --> "1..*" PhysicalFunctionEnum : functions
+        click PhysicalFunctionEnum href "../PhysicalFunctionEnum/"
+    
 
- * [➞phi](floorP__phi.md)  <sub>0..1</sub>
-     * Description: Rotation around the X-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
+        
+      PhysicalComponent : id
+        
+      PhysicalComponent : kind
+        
+      PhysicalComponent : LongitudinalPlacementP
+        
+          
+    
+        
+        
+        PhysicalComponent --> "0..1" LongitudinalPlacementParamGroup : LongitudinalPlacementP
+        click LongitudinalPlacementParamGroup href "../LongitudinalPlacementParamGroup/"
+    
 
-### Mixed in from FloorP:
+        
+      PhysicalComponent : MetaP
+        
+          
+    
+        
+        
+        PhysicalComponent --> "0..1" MetaParamGroup : MetaP
+        click MetaParamGroup href "../MetaParamGroup/"
+    
 
- * [➞psi](floorP__psi.md)  <sub>0..1</sub>
-     * Description: Rotation around the Z-axis in the facility floor plan.
-     * Range: [Float](types/Float.md)
+        
+      PhysicalComponent : native_types
+        
+      
+```
 
-### Mixed in from HasLongitudinalPlacement:
 
- * [➞length](hasLongitudinalPlacement__length.md)  <sub>0..1</sub>
-     * Description: Length of the element (arc length for bends).
-     * Range: [Float](types/Float.md)
 
-### Mixed in from HasLongitudinalPlacement:
 
- * [➞s_position](hasLongitudinalPlacement__s_position.md)  <sub>0..1</sub>
-     * Description: Longitudinal position of the element along the beamline.
-     * Range: [Float](types/Float.md)
 
-## Other properties
+## Inheritance
+* [Component](Component.md) [ [HasMetaP](HasMetaP.md)]
+    * **PhysicalComponent** [ [HasFloorP](HasFloorP.md) [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md)]
+        * [Magnet](Magnet.md) [ [HasReferenceP](HasReferenceP.md) [HasBodyShiftP](HasBodyShiftP.md) [HasTwissP](HasTwissP.md)]
+        * [DiagnosticDevice](DiagnosticDevice.md)
+        * [Cavity](Cavity.md) [ [HasReferenceP](HasReferenceP.md) [HasElectricMultipoleP](HasElectricMultipoleP.md) [HasMagneticMultipoleP](HasMagneticMultipoleP.md) [HasBodyShiftP](HasBodyShiftP.md) [HasTwissP](HasTwissP.md)]
+        * [SupportingFacilityComponent](SupportingFacilityComponent.md) [ [HasFloorP](HasFloorP.md) [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) [HasBodyShiftP](HasBodyShiftP.md)]
 
-|  |  |  |
-| --- | --- | --- |
-| **Broad Mappings:** | | pals:Element |
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [functions](functions.md) | 1..* <br/> [PhysicalFunctionEnum](PhysicalFunctionEnum.md) | The function of the physical component,  which can be used to identify the co... | direct |
+| [beamline_relation](beamline_relation.md) | 1 <br/> [PhysicalRelationEnum](PhysicalRelationEnum.md) | The relationship of the physical component to the beamline,  which can be use... | direct |
+| [FloorP](FloorP.md) | 0..1 <br/> [FloorParamGroup](FloorParamGroup.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Pl... | [HasFloorP](HasFloorP.md) |
+| [LongitudinalPlacementP](LongitudinalPlacementP.md) | 0..1 <br/> [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) | A mixin for an element's extent and position along the longitudinal (beam-dir... | [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) |
+| [id](id.md) | 1 <br/> [String](String.md) | A unique identifier for the instance | [Component](Component.md) |
+| [kind](kind.md) | 1 <br/> [String](String.md) | The LinkML class name of this instance | [Component](Component.md) |
+| [native_types](native_types.md) | * <br/> [String](String.md) | The native type of the component in the source system, which can be used to i... | [Component](Component.md) |
+| [MetaP](MetaP.md) | 0..1 <br/> [MetaParamGroup](MetaParamGroup.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Pa... | [HasMetaP](HasMetaP.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [SignalBinding](SignalBinding.md) | [subject](subject.md) | range | [PhysicalComponent](PhysicalComponent.md) |
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:PhysicalComponent |
+| native | pals:PhysicalComponent |
+| broad | pals:Element |
+
+
+
+
+
+
+## LinkML Source
+
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+
+### Direct
+
+<details>
+```yaml
+name: PhysicalComponent
+description: A physical item that participates in or supports accelerator operation.  This
+  can be used to capture physical components, such as magnets, cavities, diagnostics,
+  vacuum devices, and racks that are important for understanding the structure and
+  function of the accelerator system.
+from_schema: https://w3id.org/accelerator-core
+broad_mappings:
+- pals:Element
+is_a: Component
+mixins:
+- HasFloorP
+- HasLongitudinalPlacementP
+attributes:
+  functions:
+    name: functions
+    description: The function of the physical component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:physical_function
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    - SupportingFacilityComponent
+    range: PhysicalFunctionEnum
+    required: true
+    multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the physical component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:physical_beamline_relation
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: PhysicalRelationEnum
+    required: true
+
+```
+</details>
+
+### Induced
+
+<details>
+```yaml
+name: PhysicalComponent
+description: A physical item that participates in or supports accelerator operation.  This
+  can be used to capture physical components, such as magnets, cavities, diagnostics,
+  vacuum devices, and racks that are important for understanding the structure and
+  function of the accelerator system.
+from_schema: https://w3id.org/accelerator-core
+broad_mappings:
+- pals:Element
+is_a: Component
+mixins:
+- HasFloorP
+- HasLongitudinalPlacementP
+attributes:
+  functions:
+    name: functions
+    description: The function of the physical component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:physical_function
+    alias: functions
+    owner: PhysicalComponent
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    - SupportingFacilityComponent
+    range: PhysicalFunctionEnum
+    required: true
+    multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the physical component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:physical_beamline_relation
+    alias: beamline_relation
+    owner: PhysicalComponent
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: PhysicalRelationEnum
+    required: true
+  FloorP:
+    name: FloorP
+    description: A mixin for floor plan parameters that are aligned with PALS FloorP
+      (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: FloorP
+    owner: PhysicalComponent
+    domain_of:
+    - HasFloorP
+    range: FloorParamGroup
+    inlined: true
+  LongitudinalPlacementP:
+    name: LongitudinalPlacementP
+    description: A mixin for an element's extent and position along the longitudinal
+      (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
+      (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
+      Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: LongitudinalPlacementP
+    owner: PhysicalComponent
+    domain_of:
+    - HasLongitudinalPlacementP
+    range: LongitudinalPlacementParamGroup
+    inlined: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:id
+    identifier: true
+    alias: id
+    owner: PhysicalComponent
+    domain_of:
+    - Affiliation
+    - Component
+    - Signal
+    - Relationship
+    range: string
+    required: true
+  kind:
+    name: kind
+    description: The LinkML class name of this instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:kind
+    alias: kind
+    owner: PhysicalComponent
+    domain_of:
+    - PALS
+    - Component
+    - Signal
+    range: string
+    required: true
+  native_types:
+    name: native_types
+    description: The native type of the component in the source system, which can
+      be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: native_types
+    owner: PhysicalComponent
+    domain_of:
+    - Component
+    range: string
+    multivalued: true
+  MetaP:
+    name: MetaP
+    description: A mixin for metadata parameters that are aligned with PALS MetaP
+      (Metadata Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: MetaP
+    owner: PhysicalComponent
+    domain_of:
+    - HasMetaP
+    range: MetaParamGroup
+    inlined: true
+
+```
+</details>

@@ -3,7 +3,7 @@
 
 Actual bend field.
 
-URI: [narad:bendP__bend_field_actual](https://example.org/narad/bendP__bend_field_actual)
+URI: [pals:bendP__bend_field_actual](https://pals-project.readthedocs.io/bendP__bend_field_actual)
 
 
 ## Domain and Range

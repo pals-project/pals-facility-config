@@ -3,7 +3,7 @@
 
 Reference geometry type. Must be `arc`.
 
-URI: [narad:bendP__ref_geometry](https://example.org/narad/bendP__ref_geometry)
+URI: [pals:bendP__ref_geometry](https://pals-project.readthedocs.io/bendP__ref_geometry)
 
 
 ## Domain and Range

@@ -3,7 +3,7 @@
 
 
 
-URI: [narad:componentRelation__tolerance_unit](https://example.org/narad/componentRelation__tolerance_unit)
+URI: [pals:componentRelation__tolerance_unit](https://pals-project.readthedocs.io/componentRelation__tolerance_unit)
 
 
 ## Domain and Range

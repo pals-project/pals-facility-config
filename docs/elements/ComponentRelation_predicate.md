@@ -3,7 +3,7 @@
 
 
 
-URI: [narad:ComponentRelation_predicate](https://example.org/narad/ComponentRelation_predicate)
+URI: [pals:ComponentRelation_predicate](https://pals-project.readthedocs.io/ComponentRelation_predicate)
 
 
 ## Domain and Range

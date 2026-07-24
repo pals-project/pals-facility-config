@@ -3,7 +3,7 @@
 
 Exit end fringe field integral.
 
-URI: [narad:bendP__edge2_int](https://example.org/narad/bendP__edge2_int)
+URI: [pals:bendP__edge2_int](https://pals-project.readthedocs.io/bendP__edge2_int)
 
 
 ## Domain and Range

@@ -1,42 +1,98 @@
 
-# Class: ReferenceP
 
-Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
-
-URI: [narad:ReferenceP](https://example.org/narad/ReferenceP)
+# Slot: ReferenceP 
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[Magnet]uses%20-.->[ReferenceP&#124;species_ref:string%20%3F;pc_ref:float%20%3F;E_tot_ref:float%20%3F;time_ref:float%20%3F],[Cavity]uses%20-.->[ReferenceP],[BeamPositionMonitor]uses%20-.->[ReferenceP],[Magnet],[Cavity],[BeamPositionMonitor])](https://yuml.me/diagram/nofunky;dir:TB/class/[Magnet]uses%20-.->[ReferenceP&#124;species_ref:string%20%3F;pc_ref:float%20%3F;E_tot_ref:float%20%3F;time_ref:float%20%3F],[Cavity]uses%20-.->[ReferenceP],[BeamPositionMonitor]uses%20-.->[ReferenceP],[Magnet],[Cavity],[BeamPositionMonitor])
-
-## Mixin for
-
- * [BeamPositionMonitor](BeamPositionMonitor.md) (mixin)  - A diagnostic device used to measure transverse beam position.
- * [Cavity](Cavity.md) (mixin)  - A cavity used for beam acceleration or manipulation.
- * [Magnet](Magnet.md) (mixin)  - An accelerator device that produces a magnetic field for beam control.
-
-## Referenced by Class
+_A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)._
 
 
-## Attributes
 
 
-### Own
 
- * [➞species_ref](referenceP__species_ref.md)  <sub>0..1</sub>
-     * Description: A reference to a species or particle type, such as an ion, electron, or proton.
-     * Range: [String](types/String.md)
- * [➞pc_ref](referenceP__pc_ref.md)  <sub>0..1</sub>
-     * Description: [momentum*c] Reference momentum times speed of light.
-     * Range: [Float](types/Float.md)
- * [➞E_tot_ref](referenceP__E_tot_ref.md)  <sub>0..1</sub>
-     * Description: [eV] Reference total energy
-     * Range: [Float](types/Float.md)
- * [➞time_ref](referenceP__time_ref.md)  <sub>0..1</sub>
-     * Description: [s] Reference time
-     * Range: [Float](types/Float.md)
+URI: [pals:ReferenceP](https://pals-project.readthedocs.io/ReferenceP)
+Alias: ReferenceP
 
-## Other properties
+<!-- no inheritance hierarchy -->
 
-|  |  |  |
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
 | --- | --- | --- |
-| **Broad Mappings:** | | pals:ReferenceP |
+| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
+| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
+| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
+| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
+| [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
+| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
+| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
+| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
+| [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
+| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
+| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
+| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
+| [Kicker](Kicker.md) | A magnet primarily used to steer the beam |  no  |
+| [HasReferenceP](HasReferenceP.md) |  |  no  |
+
+
+
+
+
+
+## Properties
+
+* Range: [ReferenceParamGroup](ReferenceParamGroup.md)
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:ReferenceP |
+| native | pals:ReferenceP |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: ReferenceP
+description: A mixin for reference parameters that are aligned with PALS ReferenceP
+  (Reference Parameters) for interoperability with the Particle Accelerator Language
+  Standard (PALS).
+from_schema: https://w3id.org/accelerator-core
+rank: 1000
+alias: ReferenceP
+owner: HasReferenceP
+domain_of:
+- HasReferenceP
+range: ReferenceParamGroup
+inlined: true
+
+```
+</details>

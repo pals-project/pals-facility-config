@@ -3,7 +3,7 @@
 
 Reference bend angle.
 
-URI: [narad:bendP__angle_ref](https://example.org/narad/bendP__angle_ref)
+URI: [pals:bendP__angle_ref](https://pals-project.readthedocs.io/bendP__angle_ref)
 
 
 ## Domain and Range

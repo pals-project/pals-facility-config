@@ -1,29 +1,79 @@
 
-# Slot: predicate
+
+# Slot: predicate 
 
 
 
-URI: [narad:predicate](https://example.org/narad/predicate)
+URI: [rdf:predicate](http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate)
+Alias: predicate
+
+<!-- no inheritance hierarchy -->
 
 
-## Domain and Range
-
-None &#8594;  <sub>1..1</sub> [String](types/String.md)
-
-## Parents
 
 
-## Children
 
- *  [ComponentRelation➞predicate](ComponentRelation_predicate.md)
- *  [SignalBinding➞predicate](SignalBinding_predicate.md)
+## Applicable Classes
 
-## Used by
-
- * [Relationship](Relationship.md)
-
-## Other properties
-
-|  |  |  |
+| Name | Description | Modifies Slot |
 | --- | --- | --- |
-| **Mappings:** | | rdf:predicate |
+| [ComponentRelation](ComponentRelation.md) | Association between two Components (Physical or Virtual), with supporting con... |  yes  |
+| [SignalBinding](SignalBinding.md) | Association between a PhysicalComponent and one of its Signals, e |  yes  |
+| [Relationship](Relationship.md) | Abstract base for subject-predicate-object associations |  no  |
+
+
+
+
+
+
+## Properties
+
+* Range: [String](String.md)
+
+* Required: True
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | rdf:predicate |
+| native | pals:predicate |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: predicate
+from_schema: https://w3id.org/accelerator-core
+rank: 1000
+slot_uri: rdf:predicate
+alias: predicate
+domain_of:
+- Relationship
+relational_role: PREDICATE
+range: string
+required: true
+
+```
+</details>

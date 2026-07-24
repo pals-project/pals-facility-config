@@ -3,7 +3,7 @@
 
 Reference bend field.
 
-URI: [narad:bendP__bend_field_ref](https://example.org/narad/bendP__bend_field_ref)
+URI: [pals:bendP__bend_field_ref](https://pals-project.readthedocs.io/bendP__bend_field_ref)
 
 
 ## Domain and Range

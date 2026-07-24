@@ -1,40 +1,446 @@
 
-# Class: SuperConductingRFCavity
 
-A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
-
-URI: [narad:SuperConductingRFCavity](https://example.org/narad/SuperConductingRFCavity)
+# Class: SuperConductingRFCavity 
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[RFCavity]^-[SuperConductingRFCavity&#124;species_ref(i):string%20%3F;pc_ref(i):float%20%3F;E_tot_ref(i):float%20%3F;time_ref(i):float%20%3F;x_offset(i):float%20%3F;y_offset(i):float%20%3F;z_offset(i):float%20%3F;x_rot(i):float%20%3F;y_rot(i):float%20%3F;z_rot(i):float%20%3F;alpha_a(i):float%20%3F;alpha_b(i):float%20%3F;beta_a(i):float%20%3F;beta_b(i):float%20%3F;eta_x(i):float%20%3F;eta_y(i):float%20%3F;etap_x(i):float%20%3F;etap_y(i):float%20%3F;phi_a(i):float%20%3F;phi_b(i):float%20%3F;functions(i):PhysicalFunctionEnum%20%2B;beamline_relation(i):PhysicalRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;length(i):float%20%3F;s_position(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[RFCavity],[MultipoleComponent],[MetadataEntry],[Component])](https://yuml.me/diagram/nofunky;dir:TB/class/[RFCavity]^-[SuperConductingRFCavity&#124;species_ref(i):string%20%3F;pc_ref(i):float%20%3F;E_tot_ref(i):float%20%3F;time_ref(i):float%20%3F;x_offset(i):float%20%3F;y_offset(i):float%20%3F;z_offset(i):float%20%3F;x_rot(i):float%20%3F;y_rot(i):float%20%3F;z_rot(i):float%20%3F;alpha_a(i):float%20%3F;alpha_b(i):float%20%3F;beta_a(i):float%20%3F;beta_b(i):float%20%3F;eta_x(i):float%20%3F;eta_y(i):float%20%3F;etap_x(i):float%20%3F;etap_y(i):float%20%3F;phi_a(i):float%20%3F;phi_b(i):float%20%3F;functions(i):PhysicalFunctionEnum%20%2B;beamline_relation(i):PhysicalRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;length(i):float%20%3F;s_position(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[RFCavity],[MultipoleComponent],[MetadataEntry],[Component])
-
-## Parents
-
- *  is_a: [RFCavity](RFCavity.md) - A cavity used for RF acceleration or longitudinal manipulation.
-
-## Attributes
+_A cavity used for RF acceleration or longitudinal manipulation, which is superconducting._
 
 
-### Inherited from RFCavity:
 
- * [id](id.md)  <sub>1..1</sub>
-     * Description: A unique identifier for the instance.
-     * Range: [String](types/String.md)
- * [type](type.md)  <sub>1..1</sub>
-     * Description: The LinkML class name of this instance.
-     * Range: [Component](Component.md)
- * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
-     * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
-     * Range: [String](types/String.md)
- * [➞functions](physicalComponent__functions.md)  <sub>1..\*</sub>
-     * Description: The function of the physical component,  which can be used to identify the component across different source systems.
-     * Range: [PhysicalFunctionEnum](PhysicalFunctionEnum.md)
- * [➞beamline_relation](physicalComponent__beamline_relation.md)  <sub>1..1</sub>
-     * Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
-     * Range: [PhysicalRelationEnum](PhysicalRelationEnum.md)
 
-## Other properties
 
-|  |  |  |
-| --- | --- | --- |
-| **Broad Mappings:** | | pals:RFCavity |
+URI: [pals:SuperConductingRFCavity](https://pals-project.readthedocs.io/SuperConductingRFCavity)
+
+
+
+
+
+```mermaid
+ classDiagram
+    class SuperConductingRFCavity
+    click SuperConductingRFCavity href "../SuperConductingRFCavity/"
+      RFCavity <|-- SuperConductingRFCavity
+        click RFCavity href "../RFCavity/"
+      
+      SuperConductingRFCavity : beamline_relation
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "1" PhysicalRelationEnum : beamline_relation
+        click PhysicalRelationEnum href "../PhysicalRelationEnum/"
+    
+
+        
+      SuperConductingRFCavity : BodyShiftP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" BodyShiftParamGroup : BodyShiftP
+        click BodyShiftParamGroup href "../BodyShiftParamGroup/"
+    
+
+        
+      SuperConductingRFCavity : ElectricMultipoleP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" ElectricMultipoleParamGroup : ElectricMultipoleP
+        click ElectricMultipoleParamGroup href "../ElectricMultipoleParamGroup/"
+    
+
+        
+      SuperConductingRFCavity : FloorP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" FloorParamGroup : FloorP
+        click FloorParamGroup href "../FloorParamGroup/"
+    
+
+        
+      SuperConductingRFCavity : functions
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "1..*" PhysicalFunctionEnum : functions
+        click PhysicalFunctionEnum href "../PhysicalFunctionEnum/"
+    
+
+        
+      SuperConductingRFCavity : id
+        
+      SuperConductingRFCavity : kind
+        
+      SuperConductingRFCavity : LongitudinalPlacementP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" LongitudinalPlacementParamGroup : LongitudinalPlacementP
+        click LongitudinalPlacementParamGroup href "../LongitudinalPlacementParamGroup/"
+    
+
+        
+      SuperConductingRFCavity : MagneticMultipoleP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" MagneticMultipoleParamGroup : MagneticMultipoleP
+        click MagneticMultipoleParamGroup href "../MagneticMultipoleParamGroup/"
+    
+
+        
+      SuperConductingRFCavity : MetaP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" MetaParamGroup : MetaP
+        click MetaParamGroup href "../MetaParamGroup/"
+    
+
+        
+      SuperConductingRFCavity : native_types
+        
+      SuperConductingRFCavity : ReferenceP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" ReferenceParamGroup : ReferenceP
+        click ReferenceParamGroup href "../ReferenceParamGroup/"
+    
+
+        
+      SuperConductingRFCavity : RFP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" RFParamGroup : RFP
+        click RFParamGroup href "../RFParamGroup/"
+    
+
+        
+      SuperConductingRFCavity : TwissP
+        
+          
+    
+        
+        
+        SuperConductingRFCavity --> "0..1" TwissParamGroup : TwissP
+        click TwissParamGroup href "../TwissParamGroup/"
+    
+
+        
+      
+```
+
+
+
+
+
+## Inheritance
+* [Component](Component.md) [ [HasMetaP](HasMetaP.md)]
+    * [PhysicalComponent](PhysicalComponent.md) [ [HasFloorP](HasFloorP.md) [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md)]
+        * [Cavity](Cavity.md) [ [HasReferenceP](HasReferenceP.md) [HasElectricMultipoleP](HasElectricMultipoleP.md) [HasMagneticMultipoleP](HasMagneticMultipoleP.md) [HasBodyShiftP](HasBodyShiftP.md) [HasTwissP](HasTwissP.md)]
+            * [RFCavity](RFCavity.md) [ [HasRFP](HasRFP.md)]
+                * **SuperConductingRFCavity**
+
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [RFP](RFP.md) | 0..1 <br/> [RFParamGroup](RFParamGroup.md) | A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for ... | [HasRFP](HasRFP.md) |
+| [ReferenceP](ReferenceP.md) | 0..1 <br/> [ReferenceParamGroup](ReferenceParamGroup.md) | A mixin for reference parameters that are aligned with PALS ReferenceP (Refer... | [HasReferenceP](HasReferenceP.md) |
+| [ElectricMultipoleP](ElectricMultipoleP.md) | 0..1 <br/> [ElectricMultipoleParamGroup](ElectricMultipoleParamGroup.md) | A mixin for electric multipole parameters that are aligned with PALS Electric... | [HasElectricMultipoleP](HasElectricMultipoleP.md) |
+| [MagneticMultipoleP](MagneticMultipoleP.md) | 0..1 <br/> [MagneticMultipoleParamGroup](MagneticMultipoleParamGroup.md) | A mixin for magnetic multipole parameters that are aligned with PALS Magnetic... | [HasMagneticMultipoleP](HasMagneticMultipoleP.md) |
+| [BodyShiftP](BodyShiftP.md) | 0..1 <br/> [BodyShiftParamGroup](BodyShiftParamGroup.md) | A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP... | [HasBodyShiftP](HasBodyShiftP.md) |
+| [TwissP](TwissP.md) | 0..1 <br/> [TwissParamGroup](TwissParamGroup.md) | A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Paramet... | [HasTwissP](HasTwissP.md) |
+| [functions](functions.md) | 1..* <br/> [PhysicalFunctionEnum](PhysicalFunctionEnum.md) | The function of the physical component,  which can be used to identify the co... | [PhysicalComponent](PhysicalComponent.md) |
+| [beamline_relation](beamline_relation.md) | 1 <br/> [PhysicalRelationEnum](PhysicalRelationEnum.md) | The relationship of the physical component to the beamline,  which can be use... | [PhysicalComponent](PhysicalComponent.md) |
+| [FloorP](FloorP.md) | 0..1 <br/> [FloorParamGroup](FloorParamGroup.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Pl... | [HasFloorP](HasFloorP.md) |
+| [LongitudinalPlacementP](LongitudinalPlacementP.md) | 0..1 <br/> [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) | A mixin for an element's extent and position along the longitudinal (beam-dir... | [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) |
+| [id](id.md) | 1 <br/> [String](String.md) | A unique identifier for the instance | [Component](Component.md) |
+| [kind](kind.md) | 1 <br/> [String](String.md) | The LinkML class name of this instance | [Component](Component.md) |
+| [native_types](native_types.md) | * <br/> [String](String.md) | The native type of the component in the source system, which can be used to i... | [Component](Component.md) |
+| [MetaP](MetaP.md) | 0..1 <br/> [MetaParamGroup](MetaParamGroup.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Pa... | [HasMetaP](HasMetaP.md) |
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:SuperConductingRFCavity |
+| native | pals:SuperConductingRFCavity |
+| broad | pals:RFCavity |
+
+
+
+
+
+
+## LinkML Source
+
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+
+### Direct
+
+<details>
+```yaml
+name: SuperConductingRFCavity
+description: A cavity used for RF acceleration or longitudinal manipulation, which
+  is superconducting.
+from_schema: https://w3id.org/accelerator-core
+broad_mappings:
+- pals:RFCavity
+is_a: RFCavity
+
+```
+</details>
+
+### Induced
+
+<details>
+```yaml
+name: SuperConductingRFCavity
+description: A cavity used for RF acceleration or longitudinal manipulation, which
+  is superconducting.
+from_schema: https://w3id.org/accelerator-core
+broad_mappings:
+- pals:RFCavity
+is_a: RFCavity
+attributes:
+  RFP:
+    name: RFP
+    description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters)
+      for interoperability with the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: RFP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasRFP
+    range: RFParamGroup
+    inlined: true
+  ReferenceP:
+    name: ReferenceP
+    description: A mixin for reference parameters that are aligned with PALS ReferenceP
+      (Reference Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: ReferenceP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasReferenceP
+    range: ReferenceParamGroup
+    inlined: true
+  ElectricMultipoleP:
+    name: ElectricMultipoleP
+    description: A mixin for electric multipole parameters that are aligned with PALS
+      ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
+      the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: ElectricMultipoleP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasElectricMultipoleP
+    range: ElectricMultipoleParamGroup
+    inlined: true
+  MagneticMultipoleP:
+    name: MagneticMultipoleP
+    description: A mixin for magnetic multipole parameters that are aligned with PALS
+      MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
+      the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: MagneticMultipoleP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasMagneticMultipoleP
+    range: MagneticMultipoleParamGroup
+    inlined: true
+  BodyShiftP:
+    name: BodyShiftP
+    description: A mixin for floor plan shift parameters that are aligned with PALS
+      BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
+      Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: BodyShiftP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasBodyShiftP
+    range: BodyShiftParamGroup
+    inlined: true
+  TwissP:
+    name: TwissP
+    description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
+      Parameters) for interoperability with the Particle Accelerator Language Standard
+      (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: TwissP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasTwissP
+    range: TwissParamGroup
+    inlined: true
+  functions:
+    name: functions
+    description: The function of the physical component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:physical_function
+    alias: functions
+    owner: SuperConductingRFCavity
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    - SupportingFacilityComponent
+    range: PhysicalFunctionEnum
+    required: true
+    multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the physical component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:physical_beamline_relation
+    alias: beamline_relation
+    owner: SuperConductingRFCavity
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: PhysicalRelationEnum
+    required: true
+  FloorP:
+    name: FloorP
+    description: A mixin for floor plan parameters that are aligned with PALS FloorP
+      (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: FloorP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasFloorP
+    range: FloorParamGroup
+    inlined: true
+  LongitudinalPlacementP:
+    name: LongitudinalPlacementP
+    description: A mixin for an element's extent and position along the longitudinal
+      (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
+      (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
+      Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: LongitudinalPlacementP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasLongitudinalPlacementP
+    range: LongitudinalPlacementParamGroup
+    inlined: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:id
+    identifier: true
+    alias: id
+    owner: SuperConductingRFCavity
+    domain_of:
+    - Affiliation
+    - Component
+    - Signal
+    - Relationship
+    range: string
+    required: true
+  kind:
+    name: kind
+    description: The LinkML class name of this instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:kind
+    alias: kind
+    owner: SuperConductingRFCavity
+    domain_of:
+    - PALS
+    - Component
+    - Signal
+    range: string
+    required: true
+  native_types:
+    name: native_types
+    description: The native type of the component in the source system, which can
+      be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: native_types
+    owner: SuperConductingRFCavity
+    domain_of:
+    - Component
+    range: string
+    multivalued: true
+  MetaP:
+    name: MetaP
+    description: A mixin for metadata parameters that are aligned with PALS MetaP
+      (Metadata Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: MetaP
+    owner: SuperConductingRFCavity
+    domain_of:
+    - HasMetaP
+    range: MetaParamGroup
+    inlined: true
+
+```
+</details>

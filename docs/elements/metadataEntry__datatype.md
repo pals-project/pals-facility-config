@@ -3,7 +3,7 @@
 
 Hint for the value's original type, so consumers can parse it back (e.g. float, integer, boolean) rather than treating everything as an opaque string.
 
-URI: [narad:metadataEntry__datatype](https://example.org/narad/metadataEntry__datatype)
+URI: [pals:metadataEntry__datatype](https://pals-project.readthedocs.io/metadataEntry__datatype)
 
 
 ## Domain and Range

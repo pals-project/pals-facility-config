@@ -3,7 +3,7 @@
 
 Output parameter. Sagitta length.
 
-URI: [narad:bendP__L_sagitta](https://example.org/narad/bendP__L_sagitta)
+URI: [pals:bendP__L_sagitta](https://pals-project.readthedocs.io/bendP__L_sagitta)
 
 
 ## Domain and Range

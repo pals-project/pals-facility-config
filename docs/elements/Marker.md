@@ -1,104 +1,324 @@
 
-# Class: Marker
 
-A virtual component used as a reference point or marker in the beamline structure.
-
-URI: [narad:Marker](https://example.org/narad/Marker)
+# Class: Marker 
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[TwissP],[MetadataEntry],[Marker&#124;alpha_a:float%20%3F;alpha_b:float%20%3F;beta_a:float%20%3F;beta_b:float%20%3F;eta_x:float%20%3F;eta_y:float%20%3F;etap_x:float%20%3F;etap_y:float%20%3F;phi_a:float%20%3F;phi_b:float%20%3F;x_offset(i):float%20%3F;y_offset(i):float%20%3F;z_offset(i):float%20%3F;x_rot(i):float%20%3F;y_rot(i):float%20%3F;z_rot(i):float%20%3F;functions(i):VirtualFunctionEnum%20%2B;beamline_relation(i):VirtualRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F]uses%20-.->[TwissP],[BookkeepingComponent]^-[Marker],[Component],[BookkeepingComponent])](https://yuml.me/diagram/nofunky;dir:TB/class/[TwissP],[MetadataEntry],[Marker&#124;alpha_a:float%20%3F;alpha_b:float%20%3F;beta_a:float%20%3F;beta_b:float%20%3F;eta_x:float%20%3F;eta_y:float%20%3F;etap_x:float%20%3F;etap_y:float%20%3F;phi_a:float%20%3F;phi_b:float%20%3F;x_offset(i):float%20%3F;y_offset(i):float%20%3F;z_offset(i):float%20%3F;x_rot(i):float%20%3F;y_rot(i):float%20%3F;z_rot(i):float%20%3F;functions(i):VirtualFunctionEnum%20%2B;beamline_relation(i):VirtualRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F]uses%20-.->[TwissP],[BookkeepingComponent]^-[Marker],[Component],[BookkeepingComponent])
-
-## Parents
-
- *  is_a: [BookkeepingComponent](BookkeepingComponent.md) - A virtual component that represents a bookkeeping or organizational role in the accelerator system,
-
-## Uses Mixin
-
- *  mixin: [TwissP](TwissP.md) - Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.
-
-## Attributes
+_A virtual component used as a reference point or marker in the beamline structure._
 
 
-### Inherited from BookkeepingComponent:
 
- * [id](id.md)  <sub>1..1</sub>
-     * Description: A unique identifier for the instance.
-     * Range: [String](types/String.md)
- * [type](type.md)  <sub>1..1</sub>
-     * Description: The LinkML class name of this instance.
-     * Range: [Component](Component.md)
- * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
-     * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
-     * Range: [String](types/String.md)
- * [➞functions](virtualComponent__functions.md)  <sub>1..\*</sub>
-     * Description: The function of the virtual component,  which can be used to identify the component across different source systems.
-     * Range: [VirtualFunctionEnum](VirtualFunctionEnum.md)
- * [➞beamline_relation](virtualComponent__beamline_relation.md)  <sub>1..1</sub>
-     * Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
-     * Range: [VirtualRelationEnum](VirtualRelationEnum.md)
 
-### Mixed in from TwissP:
 
- * [➞alpha_a](twissP__alpha_a.md)  <sub>0..1</sub>
-     * Description: Twiss alpha parameter in the horizontal plane.
-     * Range: [Float](types/Float.md)
+URI: [pals:Marker](https://pals-project.readthedocs.io/Marker)
 
-### Mixed in from TwissP:
 
- * [➞alpha_b](twissP__alpha_b.md)  <sub>0..1</sub>
-     * Description: Twiss alpha parameter in the vertical plane.
-     * Range: [Float](types/Float.md)
 
-### Mixed in from TwissP:
 
- * [➞beta_a](twissP__beta_a.md)  <sub>0..1</sub>
-     * Description: Twiss beta parameter in the horizontal plane.
-     * Range: [Float](types/Float.md)
 
-### Mixed in from TwissP:
+```mermaid
+ classDiagram
+    class Marker
+    click Marker href "../Marker/"
+      HasTwissP <|-- Marker
+        click HasTwissP href "../HasTwissP/"
+      BookkeepingComponent <|-- Marker
+        click BookkeepingComponent href "../BookkeepingComponent/"
+      
+      Marker : beamline_relation
+        
+          
+    
+        
+        
+        Marker --> "1" VirtualRelationEnum : beamline_relation
+        click VirtualRelationEnum href "../VirtualRelationEnum/"
+    
 
- * [➞beta_b](twissP__beta_b.md)  <sub>0..1</sub>
-     * Description: Twiss beta parameter in the vertical plane.
-     * Range: [Float](types/Float.md)
+        
+      Marker : BodyShiftP
+        
+          
+    
+        
+        
+        Marker --> "0..1" BodyShiftParamGroup : BodyShiftP
+        click BodyShiftParamGroup href "../BodyShiftParamGroup/"
+    
 
-### Mixed in from TwissP:
+        
+      Marker : FloorP
+        
+          
+    
+        
+        
+        Marker --> "0..1" FloorParamGroup : FloorP
+        click FloorParamGroup href "../FloorParamGroup/"
+    
 
- * [➞eta_x](twissP__eta_x.md)  <sub>0..1</sub>
-     * Description: Twiss dispersion parameter in the horizontal plane.
-     * Range: [Float](types/Float.md)
+        
+      Marker : functions
+        
+          
+    
+        
+        
+        Marker --> "1..*" VirtualFunctionEnum : functions
+        click VirtualFunctionEnum href "../VirtualFunctionEnum/"
+    
 
-### Mixed in from TwissP:
+        
+      Marker : id
+        
+      Marker : kind
+        
+      Marker : MetaP
+        
+          
+    
+        
+        
+        Marker --> "0..1" MetaParamGroup : MetaP
+        click MetaParamGroup href "../MetaParamGroup/"
+    
 
- * [➞eta_y](twissP__eta_y.md)  <sub>0..1</sub>
-     * Description: Twiss dispersion parameter in the vertical plane.
-     * Range: [Float](types/Float.md)
+        
+      Marker : native_types
+        
+      Marker : TwissP
+        
+          
+    
+        
+        
+        Marker --> "0..1" TwissParamGroup : TwissP
+        click TwissParamGroup href "../TwissParamGroup/"
+    
 
-### Mixed in from TwissP:
+        
+      
+```
 
- * [➞etap_x](twissP__etap_x.md)  <sub>0..1</sub>
-     * Description: Twiss dispersion slope parameter in the horizontal plane.
-     * Range: [Float](types/Float.md)
 
-### Mixed in from TwissP:
 
- * [➞etap_y](twissP__etap_y.md)  <sub>0..1</sub>
-     * Description: Twiss dispersion slope parameter in the vertical plane.
-     * Range: [Float](types/Float.md)
 
-### Mixed in from TwissP:
 
- * [➞phi_a](twissP__phi_a.md)  <sub>0..1</sub>
-     * Description: Twiss phase advance parameter in the horizontal plane.
-     * Range: [Float](types/Float.md)
+## Inheritance
+* [Component](Component.md) [ [HasMetaP](HasMetaP.md)]
+    * [VirtualComponent](VirtualComponent.md) [ [HasFloorP](HasFloorP.md)]
+        * [BookkeepingComponent](BookkeepingComponent.md) [ [HasBodyShiftP](HasBodyShiftP.md)]
+            * **Marker** [ [HasTwissP](HasTwissP.md)]
 
-### Mixed in from TwissP:
 
- * [➞phi_b](twissP__phi_b.md)  <sub>0..1</sub>
-     * Description: Twiss phase advance parameter in the vertical plane.
-     * Range: [Float](types/Float.md)
 
-## Other properties
+## Slots
 
-|  |  |  |
-| --- | --- | --- |
-| **Exact Mappings:** | | pals:Marker |
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [TwissP](TwissP.md) | 0..1 <br/> [TwissParamGroup](TwissParamGroup.md) | A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Paramet... | [HasTwissP](HasTwissP.md) |
+| [BodyShiftP](BodyShiftP.md) | 0..1 <br/> [BodyShiftParamGroup](BodyShiftParamGroup.md) | A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP... | [HasBodyShiftP](HasBodyShiftP.md) |
+| [functions](functions.md) | 1..* <br/> [VirtualFunctionEnum](VirtualFunctionEnum.md) | The function of the virtual component,  which can be used to identify the com... | [VirtualComponent](VirtualComponent.md) |
+| [beamline_relation](beamline_relation.md) | 1 <br/> [VirtualRelationEnum](VirtualRelationEnum.md) | The relationship of the virtual component to the beamline,  which can be used... | [VirtualComponent](VirtualComponent.md) |
+| [FloorP](FloorP.md) | 0..1 <br/> [FloorParamGroup](FloorParamGroup.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Pl... | [HasFloorP](HasFloorP.md) |
+| [id](id.md) | 1 <br/> [String](String.md) | A unique identifier for the instance | [Component](Component.md) |
+| [kind](kind.md) | 1 <br/> [String](String.md) | The LinkML class name of this instance | [Component](Component.md) |
+| [native_types](native_types.md) | * <br/> [String](String.md) | The native type of the component in the source system, which can be used to i... | [Component](Component.md) |
+| [MetaP](MetaP.md) | 0..1 <br/> [MetaParamGroup](MetaParamGroup.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Pa... | [HasMetaP](HasMetaP.md) |
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:Marker |
+| native | pals:Marker |
+| exact | pals:Marker |
+
+
+
+
+
+
+## LinkML Source
+
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+
+### Direct
+
+<details>
+```yaml
+name: Marker
+description: A virtual component used as a reference point or marker in the beamline
+  structure.
+from_schema: https://w3id.org/accelerator-core
+exact_mappings:
+- pals:Marker
+is_a: BookkeepingComponent
+mixins:
+- HasTwissP
+
+```
+</details>
+
+### Induced
+
+<details>
+```yaml
+name: Marker
+description: A virtual component used as a reference point or marker in the beamline
+  structure.
+from_schema: https://w3id.org/accelerator-core
+exact_mappings:
+- pals:Marker
+is_a: BookkeepingComponent
+mixins:
+- HasTwissP
+attributes:
+  TwissP:
+    name: TwissP
+    description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
+      Parameters) for interoperability with the Particle Accelerator Language Standard
+      (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: TwissP
+    owner: Marker
+    domain_of:
+    - HasTwissP
+    range: TwissParamGroup
+    inlined: true
+  BodyShiftP:
+    name: BodyShiftP
+    description: A mixin for floor plan shift parameters that are aligned with PALS
+      BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
+      Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: BodyShiftP
+    owner: Marker
+    domain_of:
+    - HasBodyShiftP
+    range: BodyShiftParamGroup
+    inlined: true
+  functions:
+    name: functions
+    description: The function of the virtual component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:virtual_function
+    alias: functions
+    owner: Marker
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    - SupportingFacilityComponent
+    range: VirtualFunctionEnum
+    required: true
+    multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the virtual component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:virtual_beamline_relation
+    alias: beamline_relation
+    owner: Marker
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: VirtualRelationEnum
+    required: true
+  FloorP:
+    name: FloorP
+    description: A mixin for floor plan parameters that are aligned with PALS FloorP
+      (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: FloorP
+    owner: Marker
+    domain_of:
+    - HasFloorP
+    range: FloorParamGroup
+    inlined: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:id
+    identifier: true
+    alias: id
+    owner: Marker
+    domain_of:
+    - Affiliation
+    - Component
+    - Signal
+    - Relationship
+    range: string
+    required: true
+  kind:
+    name: kind
+    description: The LinkML class name of this instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:kind
+    alias: kind
+    owner: Marker
+    domain_of:
+    - PALS
+    - Component
+    - Signal
+    range: string
+    required: true
+  native_types:
+    name: native_types
+    description: The native type of the component in the source system, which can
+      be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: native_types
+    owner: Marker
+    domain_of:
+    - Component
+    range: string
+    multivalued: true
+  MetaP:
+    name: MetaP
+    description: A mixin for metadata parameters that are aligned with PALS MetaP
+      (Metadata Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: MetaP
+    owner: Marker
+    domain_of:
+    - HasMetaP
+    range: MetaParamGroup
+    inlined: true
+
+```
+</details>

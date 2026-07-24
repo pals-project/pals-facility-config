@@ -3,7 +3,7 @@
 
 Entrance end pole face curvature
 
-URI: [narad:bendP__h1](https://example.org/narad/bendP__h1)
+URI: [pals:bendP__h1](https://pals-project.readthedocs.io/bendP__h1)
 
 
 ## Domain and Range

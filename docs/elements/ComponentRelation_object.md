@@ -3,7 +3,7 @@
 
 
 
-URI: [narad:ComponentRelation_object](https://example.org/narad/ComponentRelation_object)
+URI: [pals:ComponentRelation_object](https://pals-project.readthedocs.io/ComponentRelation_object)
 
 
 ## Domain and Range

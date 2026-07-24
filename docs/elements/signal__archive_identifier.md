@@ -3,7 +3,7 @@
 
 The identifier used to reference the signal in an archival system.
 
-URI: [narad:signal__archive_identifier](https://example.org/narad/signal__archive_identifier)
+URI: [pals:signal__archive_identifier](https://pals-project.readthedocs.io/signal__archive_identifier)
 
 
 ## Domain and Range

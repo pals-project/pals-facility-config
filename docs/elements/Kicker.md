@@ -1,71 +1,499 @@
 
-# Class: Kicker
 
-A magnet primarily used to steer the beam.
-Can deflect the beam transversely in both planes, or a single plane, depending on the design and parameters of the kicker. 
-Only one of the electric or magnetic multipole components should be present, not both.
-
-URI: [narad:Kicker](https://example.org/narad/Kicker)
+# Class: Kicker 
 
 
-[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[MultipoleComponent],[MetadataEntry],[MagneticMultipoleP],[Magnet],[Kicker&#124;plane:PlaneEnum%20%3F;species_ref(i):string%20%3F;pc_ref(i):float%20%3F;E_tot_ref(i):float%20%3F;time_ref(i):float%20%3F;x_offset(i):float%20%3F;y_offset(i):float%20%3F;z_offset(i):float%20%3F;x_rot(i):float%20%3F;y_rot(i):float%20%3F;z_rot(i):float%20%3F;alpha_a(i):float%20%3F;alpha_b(i):float%20%3F;beta_a(i):float%20%3F;beta_b(i):float%20%3F;eta_x(i):float%20%3F;eta_y(i):float%20%3F;etap_x(i):float%20%3F;etap_y(i):float%20%3F;phi_a(i):float%20%3F;phi_b(i):float%20%3F;functions(i):PhysicalFunctionEnum%20%2B;beamline_relation(i):PhysicalRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;length(i):float%20%3F;s_position(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F]uses%20-.->[ElectricMultipoleP],[Kicker]uses%20-.->[MagneticMultipoleP],[Kicker]^-[ACKicker],[Magnet]^-[Kicker],[ElectricMultipoleP],[Component],[ACKicker])](https://yuml.me/diagram/nofunky;dir:TB/class/[MultipoleComponent],[MetadataEntry],[MagneticMultipoleP],[Magnet],[Kicker&#124;plane:PlaneEnum%20%3F;species_ref(i):string%20%3F;pc_ref(i):float%20%3F;E_tot_ref(i):float%20%3F;time_ref(i):float%20%3F;x_offset(i):float%20%3F;y_offset(i):float%20%3F;z_offset(i):float%20%3F;x_rot(i):float%20%3F;y_rot(i):float%20%3F;z_rot(i):float%20%3F;alpha_a(i):float%20%3F;alpha_b(i):float%20%3F;beta_a(i):float%20%3F;beta_b(i):float%20%3F;eta_x(i):float%20%3F;eta_y(i):float%20%3F;etap_x(i):float%20%3F;etap_y(i):float%20%3F;phi_a(i):float%20%3F;phi_b(i):float%20%3F;functions(i):PhysicalFunctionEnum%20%2B;beamline_relation(i):PhysicalRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;length(i):float%20%3F;s_position(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F]uses%20-.->[ElectricMultipoleP],[Kicker]uses%20-.->[MagneticMultipoleP],[Kicker]^-[ACKicker],[Magnet]^-[Kicker],[ElectricMultipoleP],[Component],[ACKicker])
+_A magnet primarily used to steer the beam._
 
-## Parents
+_Can deflect the beam transversely in both planes, or a single plane, depending on the design and parameters of the kicker. _
 
- *  is_a: [Magnet](Magnet.md) - An accelerator device that produces a magnetic field for beam control.
-
-## Uses Mixin
-
- *  mixin: [ElectricMultipoleP](ElectricMultipoleP.md) - Mixin for electric multipole parameters,
- *  mixin: [MagneticMultipoleP](MagneticMultipoleP.md) - Mixin for magnetic multipole parameters,
-
-## Children
-
- * [ACKicker](ACKicker.md) - An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.
-
-## Referenced by Class
+_Only one of the electric or magnetic multipole components should be present, not both._
 
 
-## Attributes
 
 
-### Own
 
- * [➞plane](kicker__plane.md)  <sub>0..1</sub>
-     * Description: The transverse plane in which the kicker operates, either horizontal or vertical.
-     * Range: [PlaneEnum](PlaneEnum.md)
+URI: [pals:Kicker](https://pals-project.readthedocs.io/Kicker)
 
-### Inherited from Magnet:
 
- * [id](id.md)  <sub>1..1</sub>
-     * Description: A unique identifier for the instance.
-     * Range: [String](types/String.md)
- * [type](type.md)  <sub>1..1</sub>
-     * Description: The LinkML class name of this instance.
-     * Range: [Component](Component.md)
- * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
-     * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
-     * Range: [String](types/String.md)
- * [➞functions](physicalComponent__functions.md)  <sub>1..\*</sub>
-     * Description: The function of the physical component,  which can be used to identify the component across different source systems.
-     * Range: [PhysicalFunctionEnum](PhysicalFunctionEnum.md)
- * [➞beamline_relation](physicalComponent__beamline_relation.md)  <sub>1..1</sub>
-     * Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
-     * Range: [PhysicalRelationEnum](PhysicalRelationEnum.md)
 
-### Mixed in from ElectricMultipoleP:
 
- * [➞components](electricMultipoleP__components.md)  <sub>0..\*</sub>
-     * Description: Electric multipole components, one per order N.
-     * Range: [MultipoleComponent](MultipoleComponent.md)
 
-## Other properties
+```mermaid
+ classDiagram
+    class Kicker
+    click Kicker href "../Kicker/"
+      HasElectricMultipoleP <|-- Kicker
+        click HasElectricMultipoleP href "../HasElectricMultipoleP/"
+      HasMagneticMultipoleP <|-- Kicker
+        click HasMagneticMultipoleP href "../HasMagneticMultipoleP/"
+      Magnet <|-- Kicker
+        click Magnet href "../Magnet/"
+      
 
-|  |  |  |
-| --- | --- | --- |
-| **Aliases:** | | Corrector |
-|  | | HCorrector |
-|  | | VCorrector |
-|  | | VDiagKicker |
-|  | | HDiagKicker |
-| **Broad Mappings:** | | pals:Kicker |
+      Kicker <|-- ACKicker
+        click ACKicker href "../ACKicker/"
+      
+
+      Kicker : beamline_relation
+        
+          
+    
+        
+        
+        Kicker --> "1" PhysicalRelationEnum : beamline_relation
+        click PhysicalRelationEnum href "../PhysicalRelationEnum/"
+    
+
+        
+      Kicker : BodyShiftP
+        
+          
+    
+        
+        
+        Kicker --> "0..1" BodyShiftParamGroup : BodyShiftP
+        click BodyShiftParamGroup href "../BodyShiftParamGroup/"
+    
+
+        
+      Kicker : ElectricMultipoleP
+        
+          
+    
+        
+        
+        Kicker --> "0..1" ElectricMultipoleParamGroup : ElectricMultipoleP
+        click ElectricMultipoleParamGroup href "../ElectricMultipoleParamGroup/"
+    
+
+        
+      Kicker : FloorP
+        
+          
+    
+        
+        
+        Kicker --> "0..1" FloorParamGroup : FloorP
+        click FloorParamGroup href "../FloorParamGroup/"
+    
+
+        
+      Kicker : functions
+        
+          
+    
+        
+        
+        Kicker --> "1..*" PhysicalFunctionEnum : functions
+        click PhysicalFunctionEnum href "../PhysicalFunctionEnum/"
+    
+
+        
+      Kicker : id
+        
+      Kicker : kind
+        
+      Kicker : LongitudinalPlacementP
+        
+          
+    
+        
+        
+        Kicker --> "0..1" LongitudinalPlacementParamGroup : LongitudinalPlacementP
+        click LongitudinalPlacementParamGroup href "../LongitudinalPlacementParamGroup/"
+    
+
+        
+      Kicker : MagneticMultipoleP
+        
+          
+    
+        
+        
+        Kicker --> "0..1" MagneticMultipoleParamGroup : MagneticMultipoleP
+        click MagneticMultipoleParamGroup href "../MagneticMultipoleParamGroup/"
+    
+
+        
+      Kicker : MetaP
+        
+          
+    
+        
+        
+        Kicker --> "0..1" MetaParamGroup : MetaP
+        click MetaParamGroup href "../MetaParamGroup/"
+    
+
+        
+      Kicker : native_types
+        
+      Kicker : plane
+        
+          
+    
+        
+        
+        Kicker --> "0..1" PlaneEnum : plane
+        click PlaneEnum href "../PlaneEnum/"
+    
+
+        
+      Kicker : ReferenceP
+        
+          
+    
+        
+        
+        Kicker --> "0..1" ReferenceParamGroup : ReferenceP
+        click ReferenceParamGroup href "../ReferenceParamGroup/"
+    
+
+        
+      Kicker : TwissP
+        
+          
+    
+        
+        
+        Kicker --> "0..1" TwissParamGroup : TwissP
+        click TwissParamGroup href "../TwissParamGroup/"
+    
+
+        
+      
+```
+
+
+
+
+
+## Inheritance
+* [Component](Component.md) [ [HasMetaP](HasMetaP.md)]
+    * [PhysicalComponent](PhysicalComponent.md) [ [HasFloorP](HasFloorP.md) [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md)]
+        * [Magnet](Magnet.md) [ [HasReferenceP](HasReferenceP.md) [HasBodyShiftP](HasBodyShiftP.md) [HasTwissP](HasTwissP.md)]
+            * **Kicker** [ [HasElectricMultipoleP](HasElectricMultipoleP.md) [HasMagneticMultipoleP](HasMagneticMultipoleP.md)]
+                * [ACKicker](ACKicker.md)
+
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [plane](plane.md) | 0..1 <br/> [PlaneEnum](PlaneEnum.md) | The transverse plane in which the kicker operates, either horizontal or verti... | direct |
+| [ElectricMultipoleP](ElectricMultipoleP.md) | 0..1 <br/> [ElectricMultipoleParamGroup](ElectricMultipoleParamGroup.md) | A mixin for electric multipole parameters that are aligned with PALS Electric... | [HasElectricMultipoleP](HasElectricMultipoleP.md) |
+| [MagneticMultipoleP](MagneticMultipoleP.md) | 0..1 <br/> [MagneticMultipoleParamGroup](MagneticMultipoleParamGroup.md) | A mixin for magnetic multipole parameters that are aligned with PALS Magnetic... | [HasMagneticMultipoleP](HasMagneticMultipoleP.md) |
+| [ReferenceP](ReferenceP.md) | 0..1 <br/> [ReferenceParamGroup](ReferenceParamGroup.md) | A mixin for reference parameters that are aligned with PALS ReferenceP (Refer... | [HasReferenceP](HasReferenceP.md) |
+| [BodyShiftP](BodyShiftP.md) | 0..1 <br/> [BodyShiftParamGroup](BodyShiftParamGroup.md) | A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP... | [HasBodyShiftP](HasBodyShiftP.md) |
+| [TwissP](TwissP.md) | 0..1 <br/> [TwissParamGroup](TwissParamGroup.md) | A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Paramet... | [HasTwissP](HasTwissP.md) |
+| [functions](functions.md) | 1..* <br/> [PhysicalFunctionEnum](PhysicalFunctionEnum.md) | The function of the physical component,  which can be used to identify the co... | [PhysicalComponent](PhysicalComponent.md) |
+| [beamline_relation](beamline_relation.md) | 1 <br/> [PhysicalRelationEnum](PhysicalRelationEnum.md) | The relationship of the physical component to the beamline,  which can be use... | [PhysicalComponent](PhysicalComponent.md) |
+| [FloorP](FloorP.md) | 0..1 <br/> [FloorParamGroup](FloorParamGroup.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Pl... | [HasFloorP](HasFloorP.md) |
+| [LongitudinalPlacementP](LongitudinalPlacementP.md) | 0..1 <br/> [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) | A mixin for an element's extent and position along the longitudinal (beam-dir... | [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) |
+| [id](id.md) | 1 <br/> [String](String.md) | A unique identifier for the instance | [Component](Component.md) |
+| [kind](kind.md) | 1 <br/> [String](String.md) | The LinkML class name of this instance | [Component](Component.md) |
+| [native_types](native_types.md) | * <br/> [String](String.md) | The native type of the component in the source system, which can be used to i... | [Component](Component.md) |
+| [MetaP](MetaP.md) | 0..1 <br/> [MetaParamGroup](MetaParamGroup.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Pa... | [HasMetaP](HasMetaP.md) |
+
+
+
+
+
+
+
+
+
+## Aliases
+
+
+* Corrector
+* HCorrector
+* VCorrector
+* VDiagKicker
+* HDiagKicker
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:Kicker |
+| native | pals:Kicker |
+| broad | pals:Kicker |
+
+
+
+
+
+
+## LinkML Source
+
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+
+### Direct
+
+<details>
+```yaml
+name: Kicker
+description: "A magnet primarily used to steer the beam.\nCan deflect the beam transversely\
+  \ in both planes, or a single plane, depending on the design and parameters of the\
+  \ kicker. \nOnly one of the electric or magnetic multipole components should be\
+  \ present, not both."
+from_schema: https://w3id.org/accelerator-core
+aliases:
+- Corrector
+- HCorrector
+- VCorrector
+- VDiagKicker
+- HDiagKicker
+broad_mappings:
+- pals:Kicker
+is_a: Magnet
+mixins:
+- HasElectricMultipoleP
+- HasMagneticMultipoleP
+attributes:
+  plane:
+    name: plane
+    description: The transverse plane in which the kicker operates, either horizontal
+      or vertical.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    domain_of:
+    - Kicker
+    range: PlaneEnum
+
+```
+</details>
+
+### Induced
+
+<details>
+```yaml
+name: Kicker
+description: "A magnet primarily used to steer the beam.\nCan deflect the beam transversely\
+  \ in both planes, or a single plane, depending on the design and parameters of the\
+  \ kicker. \nOnly one of the electric or magnetic multipole components should be\
+  \ present, not both."
+from_schema: https://w3id.org/accelerator-core
+aliases:
+- Corrector
+- HCorrector
+- VCorrector
+- VDiagKicker
+- HDiagKicker
+broad_mappings:
+- pals:Kicker
+is_a: Magnet
+mixins:
+- HasElectricMultipoleP
+- HasMagneticMultipoleP
+attributes:
+  plane:
+    name: plane
+    description: The transverse plane in which the kicker operates, either horizontal
+      or vertical.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: plane
+    owner: Kicker
+    domain_of:
+    - Kicker
+    range: PlaneEnum
+  ElectricMultipoleP:
+    name: ElectricMultipoleP
+    description: A mixin for electric multipole parameters that are aligned with PALS
+      ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
+      the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: ElectricMultipoleP
+    owner: Kicker
+    domain_of:
+    - HasElectricMultipoleP
+    range: ElectricMultipoleParamGroup
+    inlined: true
+  MagneticMultipoleP:
+    name: MagneticMultipoleP
+    description: A mixin for magnetic multipole parameters that are aligned with PALS
+      MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
+      the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: MagneticMultipoleP
+    owner: Kicker
+    domain_of:
+    - HasMagneticMultipoleP
+    range: MagneticMultipoleParamGroup
+    inlined: true
+  ReferenceP:
+    name: ReferenceP
+    description: A mixin for reference parameters that are aligned with PALS ReferenceP
+      (Reference Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: ReferenceP
+    owner: Kicker
+    domain_of:
+    - HasReferenceP
+    range: ReferenceParamGroup
+    inlined: true
+  BodyShiftP:
+    name: BodyShiftP
+    description: A mixin for floor plan shift parameters that are aligned with PALS
+      BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
+      Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: BodyShiftP
+    owner: Kicker
+    domain_of:
+    - HasBodyShiftP
+    range: BodyShiftParamGroup
+    inlined: true
+  TwissP:
+    name: TwissP
+    description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
+      Parameters) for interoperability with the Particle Accelerator Language Standard
+      (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: TwissP
+    owner: Kicker
+    domain_of:
+    - HasTwissP
+    range: TwissParamGroup
+    inlined: true
+  functions:
+    name: functions
+    description: The function of the physical component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:physical_function
+    alias: functions
+    owner: Kicker
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    - SupportingFacilityComponent
+    range: PhysicalFunctionEnum
+    required: true
+    multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the physical component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:physical_beamline_relation
+    alias: beamline_relation
+    owner: Kicker
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: PhysicalRelationEnum
+    required: true
+  FloorP:
+    name: FloorP
+    description: A mixin for floor plan parameters that are aligned with PALS FloorP
+      (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: FloorP
+    owner: Kicker
+    domain_of:
+    - HasFloorP
+    range: FloorParamGroup
+    inlined: true
+  LongitudinalPlacementP:
+    name: LongitudinalPlacementP
+    description: A mixin for an element's extent and position along the longitudinal
+      (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
+      (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
+      Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: LongitudinalPlacementP
+    owner: Kicker
+    domain_of:
+    - HasLongitudinalPlacementP
+    range: LongitudinalPlacementParamGroup
+    inlined: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:id
+    identifier: true
+    alias: id
+    owner: Kicker
+    domain_of:
+    - Affiliation
+    - Component
+    - Signal
+    - Relationship
+    range: string
+    required: true
+  kind:
+    name: kind
+    description: The LinkML class name of this instance.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: pals:kind
+    alias: kind
+    owner: Kicker
+    domain_of:
+    - PALS
+    - Component
+    - Signal
+    range: string
+    required: true
+  native_types:
+    name: native_types
+    description: The native type of the component in the source system, which can
+      be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: native_types
+    owner: Kicker
+    domain_of:
+    - Component
+    range: string
+    multivalued: true
+  MetaP:
+    name: MetaP
+    description: A mixin for metadata parameters that are aligned with PALS MetaP
+      (Metadata Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: MetaP
+    owner: Kicker
+    domain_of:
+    - HasMetaP
+    range: MetaParamGroup
+    inlined: true
+
+```
+</details>

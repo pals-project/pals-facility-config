@@ -3,7 +3,7 @@
 
 Normalized solenoid strength.
 
-URI: [narad:solenoidP__Ksol](https://example.org/narad/solenoidP__Ksol)
+URI: [pals:solenoidP__Ksol](https://pals-project.readthedocs.io/solenoidP__Ksol)
 
 
 ## Domain and Range
@@ -18,7 +18,6 @@ None &#8594;  <sub>0..1</sub> [Float](types/Float.md)
 
 ## Used by
 
- * [Solenoid](Solenoid.md)
  * [SolenoidP](SolenoidP.md)
 
 ## Other properties

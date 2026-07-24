@@ -3,7 +3,7 @@
 
 Reference tilt of the bend.
 
-URI: [narad:bendP__tilt_ref](https://example.org/narad/bendP__tilt_ref)
+URI: [pals:bendP__tilt_ref](https://pals-project.readthedocs.io/bendP__tilt_ref)
 
 
 ## Domain and Range

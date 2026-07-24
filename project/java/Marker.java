@@ -15,15 +15,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class Marker extends BookkeepingComponent {
 
-  private Float alphaA;
-  private Float alphaB;
-  private Float betaA;
-  private Float betaB;
-  private Float etaX;
-  private Float etaY;
-  private Float etapX;
-  private Float etapY;
-  private Float phiA;
-  private Float phiB;
+  private TwissParamGroup twissP;
 
 }

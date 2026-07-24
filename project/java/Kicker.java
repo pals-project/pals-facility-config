@@ -18,6 +18,7 @@ Only one of the electric or magnetic multipole components should be present, not
 public class Kicker extends Magnet {
 
   private String plane;
-  private List<MultipoleComponent> components;
+  private ElectricMultipoleParamGroup electricMultipoleP;
+  private MagneticMultipoleParamGroup magneticMultipoleP;
 
 }

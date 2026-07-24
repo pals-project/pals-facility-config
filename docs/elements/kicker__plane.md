@@ -3,7 +3,7 @@
 
 The transverse plane in which the kicker operates, either horizontal or vertical.
 
-URI: [narad:kicker__plane](https://example.org/narad/kicker__plane)
+URI: [pals:kicker__plane](https://pals-project.readthedocs.io/kicker__plane)
 
 
 ## Domain and Range

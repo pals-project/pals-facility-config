@@ -3,7 +3,7 @@
 
 Reference bend radius.
 
-URI: [narad:bendP__rho_ref](https://example.org/narad/bendP__rho_ref)
+URI: [pals:bendP__rho_ref](https://pals-project.readthedocs.io/bendP__rho_ref)
 
 
 ## Domain and Range

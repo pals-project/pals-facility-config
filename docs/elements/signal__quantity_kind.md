@@ -3,7 +3,7 @@
 
 The physical quantity kind of the signal.
 
-URI: [narad:signal__quantity_kind](https://example.org/narad/signal__quantity_kind)
+URI: [pals:signal__quantity_kind](https://pals-project.readthedocs.io/signal__quantity_kind)
 
 
 ## Domain and Range

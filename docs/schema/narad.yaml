@@ -7,30 +7,18 @@ imports:
 - linkml:types
 license: https://creativecommons.org/publicdomain/zero/1.0/
 prefixes:
-  narad:
-    prefix_prefix: narad
-    prefix_reference: https://example.org/narad/
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
   acc:
     prefix_prefix: acc
-    prefix_reference: https://w3id.org/accelerator-core/
-  qudt:
-    prefix_prefix: qudt
-    prefix_reference: http://qudt.org/schema/qudt/
+    prefix_reference: https://example.org/accelerator-core/
   unit:
     prefix_prefix: unit
     prefix_reference: http://qudt.org/vocab/unit/
   quantitykind:
     prefix_prefix: quantitykind
     prefix_reference: http://qudt.org/vocab/quantitykind/
-  ssn:
-    prefix_prefix: ssn
-    prefix_reference: http://www.w3.org/ns/ssn/
-  ssn-system:
-    prefix_prefix: ssn-system
-    prefix_reference: http://www.w3.org/ns/ssn/systems/
   sosa:
     prefix_prefix: sosa
     prefix_reference: http://www.w3.org/ns/sosa/
@@ -52,7 +40,7 @@ prefixes:
   xsd:
     prefix_prefix: xsd
     prefix_reference: http://www.w3.org/2001/XMLSchema#
-default_prefix: narad
+default_prefix: pals
 default_range: string
 types:
   string:
@@ -324,9 +312,39 @@ types:
     uri: xsd:string
     repr: str
 enums:
+  IdentifierTypeEnum:
+    name: IdentifierTypeEnum
+    definition_uri: https://pals-project.readthedocs.io/IdentifierTypeEnum
+    description: Controlled values for identifier types.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      DOI:
+        text: DOI
+        description: Digital Object Identifier.
+        meaning: http://purl.org/spar/datacite/doi
+      PURL:
+        text: PURL
+        description: Persistent Uniform Resource Locator.
+        meaning: http://purl.org/spar/datacite/purl
+      ROR:
+        text: ROR
+        description: Research Organization Registry identifier.
+        meaning: http://purl.org/spar/datacite/ror
+      LOCAL:
+        text: LOCAL
+        description: Local identifier, specific to the facility or source system.
+        meaning: http://purl.org/spar/datacite/local-resource-identifier-scheme
+      URL:
+        text: URL
+        description: Uniform Resource Locator.
+        meaning: http://purl.org/spar/datacite/url
+      ARK:
+        text: ARK
+        description: Archival Resource Key.
+        meaning: http://purl.org/spar/datacite/ark
   SourceSystemEnum:
     name: SourceSystemEnum
-    definition_uri: https://example.org/narad/SourceSystemEnum
+    definition_uri: https://pals-project.readthedocs.io/SourceSystemEnum
     description: Controlled values for facility-local source systems.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -356,7 +374,7 @@ enums:
         description: Other source system.
   PhysicalRelationEnum:
     name: PhysicalRelationEnum
-    definition_uri: https://example.org/narad/PhysicalRelationEnum
+    definition_uri: https://pals-project.readthedocs.io/PhysicalRelationEnum
     description: Controlled values for physical relation to the beamline.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -367,15 +385,15 @@ enums:
       AttachedToPipe:
         text: AttachedToPipe
         description: Mechanically attached to the beam pipe or vacuum envelope.
-      NearBeamline:
-        text: NearBeamline
+      NearBeamLine:
+        text: NearBeamLine
         description: Near and operationally associated with the beamline.
       SupportingFacility:
         text: SupportingFacility
         description: Supports accelerator operation without a specific beam-pipe placement.
   VirtualRelationEnum:
     name: VirtualRelationEnum
-    definition_uri: https://example.org/narad/VirtualRelationEnum
+    definition_uri: https://pals-project.readthedocs.io/VirtualRelationEnum
     description: Controlled values for virtual relation to the beamline.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -384,24 +402,24 @@ enums:
         description: Beam passes through the virtual component. Used for virtual components
           like Markers that represent important locations on the beamline but don't
           have a physical instantiation.
-      AssociatedWithBeamline:
-        text: AssociatedWithBeamline
+      AssociatedWithBeamLine:
+        text: AssociatedWithBeamLine
         description: Not inline with the beamline but still operationally associated
           with it.  Used for virtual components that are important for understanding
-          the beamline structure and function but don't have a direct physical relationship
-          to the beam path,  such as BeamlineSections or Markers that are not inline
+          the BeamLine structure and function but don't have a direct physical relationship
+          to the beam path,  such as BeamLineSections or Markers that are not inline
           with the beam.
-      NotAssociatedWithBeamline:
-        text: NotAssociatedWithBeamline
-        description: Not inline with the beamline and not operationally associated
+      NotAssociatedWithBeamLine:
+        text: NotAssociatedWithBeamLine
+        description: Not inline with the BeamLine and not operationally associated
           with it.  Used for virtual components that are more abstract and don't have
-          a specific relationship  to the beamline, such as a virtual component representing
+          a specific relationship  to the BeamLine, such as a virtual component representing
           a control system function  or role that is important for understanding the
           overall accelerator system but doesn't have a direct relationship to the
-          beamline structure.
+          BeamLine structure.
   PhysicalFunctionEnum:
     name: PhysicalFunctionEnum
-    definition_uri: https://example.org/narad/PhysicalFunctionEnum
+    definition_uri: https://pals-project.readthedocs.io/PhysicalFunctionEnum
     description: Broad device-level functions.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -443,7 +461,7 @@ enums:
         description: Supports timing or synchronization.
   FacilityFunctionEnum:
     name: FacilityFunctionEnum
-    definition_uri: https://example.org/narad/FacilityFunctionEnum
+    definition_uri: https://pals-project.readthedocs.io/FacilityFunctionEnum
     description: Broad structural or support functions.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -472,16 +490,16 @@ enums:
           as radiation or particle detection.
   VirtualFunctionEnum:
     name: VirtualFunctionEnum
-    definition_uri: https://example.org/narad/VirtualFunctionEnum
+    definition_uri: https://pals-project.readthedocs.io/VirtualFunctionEnum
     description: Broad virtual component functions or roles.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
-      BeamlineSection:
-        text: BeamlineSection
-        description: A section of the beamline used for organizational or functional
+      BeamLineSection:
+        text: BeamLineSection
+        description: A section of the BeamLine used for organizational or functional
           grouping of components, such as a linac section, transfer line, or ring
           sector.
-        meaning: pals:Beamline
+        meaning: pals:BeamLine
       Mark:
         text: Mark
         description: A virtual component representing an important location on the
@@ -502,7 +520,7 @@ enums:
           EPICS control system that manages device process variables across the accelerator.
   PlaneEnum:
     name: PlaneEnum
-    definition_uri: https://example.org/narad/PlaneEnum
+    definition_uri: https://pals-project.readthedocs.io/PlaneEnum
     description: Controlled values for transverse plane.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -514,7 +532,7 @@ enums:
         description: Vertical transverse plane.
   SignalRoleEnum:
     name: SignalRoleEnum
-    definition_uri: https://example.org/narad/SignalRoleEnum
+    definition_uri: https://pals-project.readthedocs.io/SignalRoleEnum
     description: Roles for control-system signals.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -533,13 +551,17 @@ enums:
         text: Command
         description: Command or action trigger.
         meaning: sosa:ActuatableProperty
-      Limit:
-        text: Limit
-        description: Minimum, maximum, or other constraints for an allowed signal
-          value.
+      MinimumLimit:
+        text: MinimumLimit
+        description: Minimum allowed signal value.
+        meaning: xsd:minInclusive
+      MaximumLimit:
+        text: MaximumLimit
+        description: Maximum allowed signal value.
+        meaning: xsd:maxInclusive
   CanonicalSignalTypeEnum:
     name: CanonicalSignalTypeEnum
-    definition_uri: https://example.org/narad/CanonicalSignalTypeEnum
+    definition_uri: https://pals-project.readthedocs.io/CanonicalSignalTypeEnum
     description: Portable semantic meanings for important signals.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -602,7 +624,7 @@ enums:
         description: Generic status signal for a device.
   QuantityKindEnum:
     name: QuantityKindEnum
-    definition_uri: https://example.org/narad/QuantityKindEnum
+    definition_uri: https://pals-project.readthedocs.io/QuantityKindEnum
     description: Physical quantity kinds for signals.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -651,66 +673,98 @@ enums:
         meaning: quantitykind:ElectricFieldStrength
   UnitEnum:
     name: UnitEnum
-    definition_uri: https://example.org/narad/UnitEnum
+    definition_uri: https://pals-project.readthedocs.io/UnitEnum
     description: Engineering units using ASCII-safe enum names. Values map to QUDT
       unit IRIs with the LinkML meaning field when an exact QUDT unit is available.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
-      mm:
-        text: mm
-        description: millimeter
-        meaning: unit:MilliM
-      m:
-        text: m
-        description: meter
-        meaning: unit:M
       A:
         text: A
         description: ampere
         meaning: unit:A
-      T_m:
-        text: T_m
-        description: tesla meter
-        meaning: unit:T-M
-      Pa:
-        text: Pa
-        description: pascal
-        meaning: unit:PA
-      Torr:
-        text: Torr
-        description: torr
-        meaning: unit:TORR
-      rem_per_h:
-        text: rem_per_h
-        description: rem per hour. Kept as a local accelerator unit value because
-          QUDT publishes rem and rem-per-second but no exact rem-per-hour unit in
-          the checked vocabulary.
-        meaning: unit:REM-PER-H
+      degree:
+        text: degree
+        description: degree
+        meaning: unit:DEG
+      eV:
+        text: eV
+        description: electron volt
+        meaning: unit:EV
+      eV_per_c:
+        text: eV_per_c
+        description: momentum in electron volts per speed of light
+      eV_per_c2:
+        text: eV_per_c2
+        description: mass in electron volts per speed of light squared
+      fundamental_charge:
+        text: fundamental_charge
+        description: fundamental charge
+        meaning: unit:????
+      G_per_cm:
+        text: G_per_cm
+        description: gauss per centimeter
+      Hz:
+        text: Hz
+        description: hertz
+        meaning: unit:HZ
+      kW:
+        text: kW
+        description: kilowatt
+        meaning: unit:KiloW
+      m:
+        text: m
+        description: meter
+        meaning: unit:M
+      mm:
+        text: mm
+        description: millimeter
+        meaning: unit:MilliM
       mrem_per_h:
         text: mrem_per_h
         description: millirem per hour. Kept as a local accelerator unit value because
           QUDT publishes related radiation units but no exact millirem-per-hour unit
           in the checked vocabulary.
         meaning: unit:MREM-PER-H
-      V:
-        text: V
-        description: volt
-        meaning: unit:V
-      kW:
-        text: kW
-        description: kilowatt
-        meaning: unit:KiloW
-      degree:
-        text: degree
-        description: degree
-        meaning: unit:DEG
       MV_per_m:
         text: MV_per_m
         description: megavolt per meter
         meaning: unit:MegaV-PER-M
-      G_per_cm:
-        text: G_per_cm
-        description: gauss per centimeter
+      PA:
+        text: PA
+        description: pascal
+        meaning: unit:PA
+      randians_pi2:
+        text: randians_pi2
+        description: radians divided by 2 pi - angles and phases
+      rem_per_h:
+        text: rem_per_h
+        description: rem per hour. Kept as a local accelerator unit value because
+          QUDT publishes rem and rem-per-second but no exact rem-per-hour unit in
+          the checked vocabulary.
+      seconds:
+        text: seconds
+        description: second
+        meaning: unit:SEC
+      T:
+        text: T
+        description: tesla
+        meaning: unit:T
+      T_M:
+        text: T_M
+        description: tesla meter
+        meaning: unit:T-M
+      Torr:
+        text: Torr
+        description: torr
+        meaning: unit:TORR
+      V:
+        text: V
+        description: volt
+        meaning: unit:V
+      V_per_m:
+        text: V_per_m
+        description: volt per meter
+        meaning: unit:V-PER-M
       unitless:
         text: unitless
         description: dimensionless numeric value
@@ -720,7 +774,7 @@ enums:
         description: no unit or not applicable
   DataTypeEnum:
     name: DataTypeEnum
-    definition_uri: https://example.org/narad/DataTypeEnum
+    definition_uri: https://pals-project.readthedocs.io/DataTypeEnum
     description: Data types for parameter values.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -742,7 +796,7 @@ enums:
         meaning: xsd:boolean
   ComponentRelationPredicateEnum:
     name: ComponentRelationPredicateEnum
-    definition_uri: https://example.org/narad/ComponentRelationPredicateEnum
+    definition_uri: https://pals-project.readthedocs.io/ComponentRelationPredicateEnum
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
       precedes:
@@ -795,18 +849,18 @@ enums:
       mounted_on:
         text: mounted_on
         description: Subject is mounted on object.
-        meaning: narad:mounted_on
+        meaning: pals:mounted_on
       intersects:
         text: intersects
         description: Subject intersects with object.
-        meaning: narad:intersects
+        meaning: pals:intersects
       nearest_to:
         text: nearest_to
         description: Subject is nearest to object.
-        meaning: narad:nearest_to
+        meaning: pals:nearest_to
   SignalBindingPredicateEnum:
     name: SignalBindingPredicateEnum
-    definition_uri: https://example.org/narad/SignalBindingPredicateEnum
+    definition_uri: https://pals-project.readthedocs.io/SignalBindingPredicateEnum
     description: Controlled predicates for Component-to-Signal bindings.
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
@@ -832,7 +886,7 @@ enums:
         description: Subject has the given signal as a limit/constraint value.
   RelationContextEnum:
     name: RelationContextEnum
-    definition_uri: https://example.org/narad/RelationContextEnum
+    definition_uri: https://pals-project.readthedocs.io/RelationContextEnum
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
       beamline_order:
@@ -849,7 +903,7 @@ enums:
         text: installation_mounting
   ReferenceFrameEnum:
     name: ReferenceFrameEnum
-    definition_uri: https://example.org/narad/ReferenceFrameEnum
+    definition_uri: https://pals-project.readthedocs.io/ReferenceFrameEnum
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
       beam_direction:
@@ -862,7 +916,7 @@ enums:
         text: tunnel_stationing
   AxisEnum:
     name: AxisEnum
-    definition_uri: https://example.org/narad/AxisEnum
+    definition_uri: https://pals-project.readthedocs.io/AxisEnum
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
       x:
@@ -875,7 +929,7 @@ enums:
         text: s
   DirectionEnum:
     name: DirectionEnum
-    definition_uri: https://example.org/narad/DirectionEnum
+    definition_uri: https://pals-project.readthedocs.io/DirectionEnum
     from_schema: https://w3id.org/accelerator-core
     permissible_values:
       upstream:
@@ -888,7 +942,7 @@ enums:
         text: negative
   MultipoleGeometryEnum:
     name: MultipoleGeometryEnum
-    definition_uri: https://example.org/narad/MultipoleGeometryEnum
+    definition_uri: https://pals-project.readthedocs.io/MultipoleGeometryEnum
     description: The geometric configuration of the multipole field.  Sets the geometry
       used to calculate multipoles.
     from_schema: https://w3id.org/accelerator-core
@@ -914,7 +968,7 @@ enums:
         description: Rectangular coordinates commensurate with the exit coordinates.
   ReferenceGeometryEnum:
     name: ReferenceGeometryEnum
-    definition_uri: https://example.org/narad/ReferenceGeometryEnum
+    definition_uri: https://pals-project.readthedocs.io/ReferenceGeometryEnum
     description: The reference geometry used to calculate multipoles.  Sets the geometry
       used to calculate multipoles.
     from_schema: https://w3id.org/accelerator-core
@@ -932,41 +986,100 @@ enums:
       exit_coords:
         text: exit_coords
         description: Rectangular coordinates commensurate with the exit coordinates.
+  CavityTypeEnum:
+    name: CavityTypeEnum
+    definition_uri: https://pals-project.readthedocs.io/CavityTypeEnum
+    description: The type of cavity, which determines the field configuration and
+      mode structure.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      STANDING_WAVE:
+        text: STANDING_WAVE
+        description: Default. A cavity that supports standing wave modes, typically
+          with fixed geometry and resonant frequencies.
+      TRAVELING_WAVE:
+        text: TRAVELING_WAVE
+        description: A cavity that supports traveling wave modes, typically with a
+          waveguide structure and phase velocity matching the beam.
+  ZeroPhaseEnum:
+    name: ZeroPhaseEnum
+    definition_uri: https://pals-project.readthedocs.io/ZeroPhaseEnum
+    description: The zero phase reference for the cavity, which determines the phase
+      of the RF field at the entrance of the cavity.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      ACCELERATING:
+        text: ACCELERATING
+        description: Default. The zero phase is the maximum accelerating phase, where
+          the beam gains energy.
+      BELOW_TRANSITION:
+        text: BELOW_TRANSITION
+        description: Zero phase is at the stable zero crossing for particles below
+          transition.
+      ABOVE_TRANSITION:
+        text: ABOVE_TRANSITION
+        description: Zero phase is at the stable zero crossing for particles above
+          transition..
 slots:
   id:
     name: id
-    definition_uri: https://example.org/narad/id
+    definition_uri: https://pals-project.readthedocs.io/id
     description: A unique identifier for the instance.
     from_schema: https://w3id.org/accelerator-core
     mappings:
-    - narad:id
-    slot_uri: narad:id
+    - pals:id
+    slot_uri: pals:id
     identifier: true
     owner: Relationship
     domain_of:
+    - Affiliation
     - Component
     - Signal
     - Relationship
     range: string
     required: true
-  type:
-    name: type
-    definition_uri: https://example.org/narad/type
+  name:
+    name: name
+    definition_uri: https://pals-project.readthedocs.io/name
+    description: The name of the entity. For example, the name of the person or organization.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:name
+    owner: Affiliation
+    domain_of:
+    - Author
+    - Affiliation
+    range: string
+  alias:
+    name: alias
+    definition_uri: https://pals-project.readthedocs.io/alias
+    description: An alternative name or identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:alias
+    slot_uri: pals:alias
+    owner: Signal
+    domain_of:
+    - MetaParamGroup
+    - Signal
+    range: string
+  kind:
+    name: kind
+    definition_uri: https://pals-project.readthedocs.io/kind
     description: The LinkML class name of this instance.
     from_schema: https://w3id.org/accelerator-core
     mappings:
-    - narad:type
-    slot_uri: narad:type
+    - pals:kind
+    slot_uri: pals:kind
     owner: Signal
     domain_of:
-    - NARAD
+    - PALS
     - Component
     - Signal
-    range: Component
+    range: string
     required: true
   subject:
     name: subject
-    definition_uri: https://example.org/narad/subject
+    definition_uri: https://pals-project.readthedocs.io/subject
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:subject
@@ -983,7 +1096,7 @@ slots:
     required: true
   predicate:
     name: predicate
-    definition_uri: https://example.org/narad/predicate
+    definition_uri: https://pals-project.readthedocs.io/predicate
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:predicate
@@ -999,7 +1112,7 @@ slots:
     required: true
   object:
     name: object
-    definition_uri: https://example.org/narad/object
+    definition_uri: https://pals-project.readthedocs.io/object
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:object
@@ -1014,161 +1127,275 @@ slots:
       meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#object
     range: string
     required: true
-  nARAD__description:
-    name: nARAD__description
-    description: Human-readable description for the representation of a particle accelerator
-      and its operations.
+  affiliation:
+    name: affiliation
+    definition_uri: https://pals-project.readthedocs.io/affiliation
+    description: The affiliation of the author or component, as a ROR.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:description
-    alias: description
-    owner: NARAD
+    slot_uri: pals:affiliation
+    owner: Author
     domain_of:
-    - NARAD
+    - PALS
+    - Author
+    range: Affiliation
+    inlined: true
+    inlined_as_list: false
+  description:
+    name: description
+    definition_uri: https://pals-project.readthedocs.io/description
+    description: A human-readable description of the instance.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:description
+    owner: BeamLine
+    domain_of:
+    - PALS
+    - MetaParamGroup
+    - BeamLine
     range: string
-  nARAD__physical_components:
-    name: nARAD__physical_components
+  identifiers:
+    name: identifiers
+    definition_uri: https://pals-project.readthedocs.io/identifiers
+    description: A unique and ideally persistent identifier for the facility, such
+      as a DOI or ROR.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:identifiers
+    owner: Affiliation
+    domain_of:
+    - Facility
+    - Affiliation
+    range: Identifier
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  length:
+    name: length
+    definition_uri: https://pals-project.readthedocs.io/length
+    description: Length of the element (arc length for bends).
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:length
+    slot_uri: pals:length
+    owner: BeamLine
+    domain_of:
+    - LongitudinalPlacementParamGroup
+    - BeamLine
+    range: float
+  pALS__version:
+    name: pALS__version
+    description: Version of the representation of a particle accelerator and its operations.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:version
+    alias: version
+    owner: PALS
+    domain_of:
+    - PALS
+    range: string
+    pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
+  pALS__authors:
+    name: pALS__authors
+    description: Contains the authorship information for this representation of an
+      accelerator facility and its operations.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:authors
+    alias: authors
+    owner: PALS
+    domain_of:
+    - PALS
+    range: Author
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  pALS__notes:
+    name: pALS__notes
+    description: Additional notes or comments about the representation of a particle
+      accelerator and its operations.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:notes
+    alias: notes
+    owner: PALS
+    domain_of:
+    - PALS
+    range: string
+    multivalued: true
+    inlined_as_list: true
+  pALS__facility:
+    name: pALS__facility
+    description: A facility that contains lattice elements (physical and virtual),
+      beamlines, parameter set commands, signals, etc.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:facility
+    alias: facility
+    owner: PALS
+    domain_of:
+    - PALS
+    range: Facility
+    inlined: true
+    inlined_as_list: true
+  author__email:
+    name: author__email
+    description: The email address of the author.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:email
+    alias: email
+    owner: Author
+    domain_of:
+    - Author
+    range: string
+    pattern: ^[^@]+@[^@]+\.[^@]+$
+  author__orcid:
+    name: author__orcid
+    description: The ORCID identifier of the author.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:orcid
+    alias: orcid
+    owner: Author
+    domain_of:
+    - Author
+    range: string
+    pattern: ^https://orcid\.org/\d{4}-\d{4}-\d{4}-\d{3}[\dX]$
+  facility__components:
+    name: facility__components
     description: A list of physical components in the accelerator system.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:physical_components
-    alias: physical_components
-    owner: NARAD
+    slot_uri: pals:components
+    alias: components
+    owner: Facility
     domain_of:
-    - NARAD
-    range: PhysicalComponent
+    - Facility
+    range: Component
     multivalued: true
     inlined: true
     inlined_as_list: true
-  nARAD__virtual_components:
-    name: nARAD__virtual_components
-    description: A list of virtual components in the accelerator system.
-    from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:virtual_components
-    alias: virtual_components
-    owner: NARAD
-    domain_of:
-    - NARAD
-    range: VirtualComponent
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  nARAD__beamlines:
-    name: nARAD__beamlines
+  facility__beamlines:
+    name: facility__beamlines
     description: A list of beamlines in the accelerator system.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:beamlines
+    slot_uri: pals:beamlines
     alias: beamlines
-    owner: NARAD
+    owner: Facility
     domain_of:
-    - NARAD
-    range: Beamline
+    - Facility
+    range: BeamLine
     multivalued: true
     inlined: true
     inlined_as_list: true
-  nARAD__supporting_facility_components:
-    name: nARAD__supporting_facility_components
-    description: A list of supporting facility components in the accelerator system.
-    from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:supporting_facility_components
-    alias: supporting_facility_components
-    owner: NARAD
-    domain_of:
-    - NARAD
-    range: SupportingFacilityComponent
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  nARAD__signals:
-    name: nARAD__signals
+  facility__signals:
+    name: facility__signals
     description: A list of signals in the accelerator system.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:signals
+    slot_uri: pals:signals
     alias: signals
-    owner: NARAD
+    owner: Facility
     domain_of:
-    - NARAD
+    - Facility
     range: Signal
     multivalued: true
     inlined: true
     inlined_as_list: true
-  nARAD__signal_bindings:
-    name: nARAD__signal_bindings
+  facility__signal_bindings:
+    name: facility__signal_bindings
     description: A list of signal bindings in the accelerator system (Component <->
       Signal relationships).
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:signal_bindings
+    slot_uri: pals:signal_bindings
     alias: signal_bindings
-    owner: NARAD
+    owner: Facility
     domain_of:
-    - NARAD
+    - Facility
     range: SignalBinding
     multivalued: true
     inlined: true
     inlined_as_list: true
-  nARAD__component_relations:
-    name: nARAD__component_relations
+  facility__component_relations:
+    name: facility__component_relations
     description: A list of component relations in the accelerator system (Component
       <-> Component relationships).
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:component_relations
+    slot_uri: pals:component_relations
     alias: component_relations
-    owner: NARAD
+    owner: Facility
     domain_of:
-    - NARAD
+    - Facility
     range: ComponentRelation
     multivalued: true
     inlined: true
     inlined_as_list: true
-  metaP__description:
-    name: metaP__description
-    description: Human-readable description.
+  identifier__identifier_type:
+    name: identifier__identifier_type
+    description: The type of identifier, such as DOI | PURL | ROR | LOCAL | URL |
+      ARK.
     from_schema: https://w3id.org/accelerator-core
-    mappings:
-    - pals:description
-    slot_uri: pals:description
-    alias: description
-    owner: MetaP
+    slot_uri: pals:identifier_type
+    alias: identifier_type
+    owner: Identifier
     domain_of:
-    - MetaP
+    - Identifier
+    range: IdentifierTypeEnum
+  identifier__identifier_value:
+    name: identifier__identifier_value
+    description: The value of the identifier.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:identifier_value
+    alias: identifier_value
+    owner: Identifier
+    domain_of:
+    - Identifier
     range: string
-  metaP__label:
-    name: metaP__label
+  hasMetaP__MetaP:
+    name: hasMetaP__MetaP
+    description: A mixin for metadata parameters that are aligned with PALS MetaP
+      (Metadata Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:MetaP
+    alias: MetaP
+    owner: HasMetaP
+    domain_of:
+    - HasMetaP
+    range: MetaParamGroup
+    inlined: true
+    inlined_as_list: true
+  metaParamGroup__label:
+    name: metaParamGroup__label
     description: A label string.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:label
     slot_uri: pals:label
     alias: label
-    owner: MetaP
+    owner: MetaParamGroup
     domain_of:
-    - MetaP
+    - MetaParamGroup
     range: string
-  metaP__alias:
-    name: metaP__alias
-    description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
-    mappings:
-    - pals:alias
-    slot_uri: pals:alias
-    alias: alias
-    owner: MetaP
-    domain_of:
-    - MetaP
-    range: string
-  metaP__additional_metadata:
-    name: metaP__additional_metadata
+  metaParamGroup__additional_metadata:
+    name: metaParamGroup__additional_metadata
     description: Additional metadata or annotations for the instance.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:additional_metadata
+    slot_uri: pals:additional_metadata
     alias: additional_metadata
-    owner: MetaP
+    owner: MetaParamGroup
     domain_of:
-    - MetaP
-    range: MetadataEntry
+    - MetaParamGroup
+    range: AdditionalMetadata
     multivalued: true
     inlined: true
     inlined_as_list: true
-  floorP__x:
-    name: floorP__x
+  hasFloorP__FloorP:
+    name: hasFloorP__FloorP
+    description: A mixin for floor plan parameters that are aligned with PALS FloorP
+      (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:FloorP
+    alias: FloorP
+    owner: HasFloorP
+    domain_of:
+    - HasFloorP
+    range: FloorParamGroup
+    inlined: true
+    inlined_as_list: true
+  floorParamGroup__x:
+    name: floorParamGroup__x
     description: Global X coordinate in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1179,12 +1406,12 @@ slots:
     - pals:x
     slot_uri: pals:x
     alias: x
-    owner: FloorP
+    owner: FloorParamGroup
     domain_of:
-    - FloorP
+    - FloorParamGroup
     range: float
-  floorP__y:
-    name: floorP__y
+  floorParamGroup__y:
+    name: floorParamGroup__y
     description: Global Y coordinate in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1195,12 +1422,12 @@ slots:
     - pals:y
     slot_uri: pals:y
     alias: y
-    owner: FloorP
+    owner: FloorParamGroup
     domain_of:
-    - FloorP
+    - FloorParamGroup
     range: float
-  floorP__z:
-    name: floorP__z
+  floorParamGroup__z:
+    name: floorParamGroup__z
     description: Global Z coordinate in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1211,12 +1438,12 @@ slots:
     - pals:z
     slot_uri: pals:z
     alias: z
-    owner: FloorP
+    owner: FloorParamGroup
     domain_of:
-    - FloorP
+    - FloorParamGroup
     range: float
-  floorP__theta:
-    name: floorP__theta
+  floorParamGroup__theta:
+    name: floorParamGroup__theta
     description: Orientation angle around the Y-axis in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1227,12 +1454,12 @@ slots:
     - pals:theta
     slot_uri: pals:theta
     alias: theta
-    owner: FloorP
+    owner: FloorParamGroup
     domain_of:
-    - FloorP
+    - FloorParamGroup
     range: float
-  floorP__phi:
-    name: floorP__phi
+  floorParamGroup__phi:
+    name: floorParamGroup__phi
     description: Rotation around the X-axis in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1243,12 +1470,12 @@ slots:
     - pals:phi
     slot_uri: pals:phi
     alias: phi
-    owner: FloorP
+    owner: FloorParamGroup
     domain_of:
-    - FloorP
+    - FloorParamGroup
     range: float
-  floorP__psi:
-    name: floorP__psi
+  floorParamGroup__psi:
+    name: floorParamGroup__psi
     description: Rotation around the Z-axis in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1259,12 +1486,26 @@ slots:
     - pals:psi
     slot_uri: pals:psi
     alias: psi
-    owner: FloorP
+    owner: FloorParamGroup
     domain_of:
-    - FloorP
+    - FloorParamGroup
     range: float
-  bodyShiftP__x_offset:
-    name: bodyShiftP__x_offset
+  hasBodyShiftP__BodyShiftP:
+    name: hasBodyShiftP__BodyShiftP
+    description: A mixin for floor plan shift parameters that are aligned with PALS
+      BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
+      Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:BodyShiftP
+    alias: BodyShiftP
+    owner: HasBodyShiftP
+    domain_of:
+    - HasBodyShiftP
+    range: BodyShiftParamGroup
+    inlined: true
+    inlined_as_list: true
+  bodyShiftParamGroup__x_offset:
+    name: bodyShiftParamGroup__x_offset
     description: Shift in the X direction in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1275,12 +1516,12 @@ slots:
     - pals:x_offset
     slot_uri: pals:x_offset
     alias: x_offset
-    owner: BodyShiftP
+    owner: BodyShiftParamGroup
     domain_of:
-    - BodyShiftP
+    - BodyShiftParamGroup
     range: float
-  bodyShiftP__y_offset:
-    name: bodyShiftP__y_offset
+  bodyShiftParamGroup__y_offset:
+    name: bodyShiftParamGroup__y_offset
     description: Shift in the Y direction in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1291,12 +1532,12 @@ slots:
     - pals:y_offset
     slot_uri: pals:y_offset
     alias: y_offset
-    owner: BodyShiftP
+    owner: BodyShiftParamGroup
     domain_of:
-    - BodyShiftP
+    - BodyShiftParamGroup
     range: float
-  bodyShiftP__z_offset:
-    name: bodyShiftP__z_offset
+  bodyShiftParamGroup__z_offset:
+    name: bodyShiftParamGroup__z_offset
     description: Shift in the Z direction in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1307,12 +1548,12 @@ slots:
     - pals:z_offset
     slot_uri: pals:z_offset
     alias: z_offset
-    owner: BodyShiftP
+    owner: BodyShiftParamGroup
     domain_of:
-    - BodyShiftP
+    - BodyShiftParamGroup
     range: float
-  bodyShiftP__x_rot:
-    name: bodyShiftP__x_rot
+  bodyShiftParamGroup__x_rot:
+    name: bodyShiftParamGroup__x_rot
     description: Rotation around the X-axis in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1323,12 +1564,12 @@ slots:
     - pals:x_rot
     slot_uri: pals:x_rot
     alias: x_rot
-    owner: BodyShiftP
+    owner: BodyShiftParamGroup
     domain_of:
-    - BodyShiftP
+    - BodyShiftParamGroup
     range: float
-  bodyShiftP__y_rot:
-    name: bodyShiftP__y_rot
+  bodyShiftParamGroup__y_rot:
+    name: bodyShiftParamGroup__y_rot
     description: Rotation around the Y-axis in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1339,12 +1580,12 @@ slots:
     - pals:y_rot
     slot_uri: pals:y_rot
     alias: y_rot
-    owner: BodyShiftP
+    owner: BodyShiftParamGroup
     domain_of:
-    - BodyShiftP
+    - BodyShiftParamGroup
     range: float
-  bodyShiftP__z_rot:
-    name: bodyShiftP__z_rot
+  bodyShiftParamGroup__z_rot:
+    name: bodyShiftParamGroup__z_rot
     description: Rotation around the Z-axis in the facility floor plan.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1355,40 +1596,55 @@ slots:
     - pals:z_rot
     slot_uri: pals:z_rot
     alias: z_rot
-    owner: BodyShiftP
+    owner: BodyShiftParamGroup
     domain_of:
-    - BodyShiftP
+    - BodyShiftParamGroup
     range: float
-  hasLongitudinalPlacement__length:
-    name: hasLongitudinalPlacement__length
-    description: Length of the element (arc length for bends).
+  hasLongitudinalPlacementP__LongitudinalPlacementP:
+    name: hasLongitudinalPlacementP__LongitudinalPlacementP
+    description: A mixin for an element's extent and position along the longitudinal
+      (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
+      (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
+      Language Standard (PALS).
     from_schema: https://w3id.org/accelerator-core
-    mappings:
-    - pals:length
-    slot_uri: pals:length
-    alias: length
-    owner: HasLongitudinalPlacement
+    slot_uri: pals:LongitudinalPlacementP
+    alias: LongitudinalPlacementP
+    owner: HasLongitudinalPlacementP
     domain_of:
-    - HasLongitudinalPlacement
-    range: float
-    unit:
-      ucum_code: m
-  hasLongitudinalPlacement__s_position:
-    name: hasLongitudinalPlacement__s_position
+    - HasLongitudinalPlacementP
+    range: LongitudinalPlacementParamGroup
+    inlined: true
+    inlined_as_list: true
+  longitudinalPlacementParamGroup__s_position:
+    name: longitudinalPlacementParamGroup__s_position
     description: Longitudinal position of the element along the beamline.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:s_position
     slot_uri: pals:s_position
     alias: s_position
-    owner: HasLongitudinalPlacement
+    owner: LongitudinalPlacementParamGroup
     domain_of:
-    - HasLongitudinalPlacement
+    - LongitudinalPlacementParamGroup
     range: float
     unit:
       ucum_code: m
-  referenceP__species_ref:
-    name: referenceP__species_ref
+  hasReferenceP__ReferenceP:
+    name: hasReferenceP__ReferenceP
+    description: A mixin for reference parameters that are aligned with PALS ReferenceP
+      (Reference Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:ReferenceP
+    alias: ReferenceP
+    owner: HasReferenceP
+    domain_of:
+    - HasReferenceP
+    range: ReferenceParamGroup
+    inlined: true
+    inlined_as_list: true
+  referenceParamGroup__species_ref:
+    name: referenceParamGroup__species_ref
     description: A reference to a species or particle type, such as an ion, electron,
       or proton.
     from_schema: https://w3id.org/accelerator-core
@@ -1396,12 +1652,12 @@ slots:
     - pals:species_ref
     slot_uri: pals:species_ref
     alias: species_ref
-    owner: ReferenceP
+    owner: ReferenceParamGroup
     domain_of:
-    - ReferenceP
+    - ReferenceParamGroup
     range: string
-  referenceP__pc_ref:
-    name: referenceP__pc_ref
+  referenceParamGroup__pc_ref:
+    name: referenceParamGroup__pc_ref
     description: '[momentum*c] Reference momentum times speed of light.'
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1410,12 +1666,12 @@ slots:
     - pals:pc_ref
     slot_uri: pals:pc_ref
     alias: pc_ref
-    owner: ReferenceP
+    owner: ReferenceParamGroup
     domain_of:
-    - ReferenceP
+    - ReferenceParamGroup
     range: float
-  referenceP__E_tot_ref:
-    name: referenceP__E_tot_ref
+  referenceParamGroup__E_tot_ref:
+    name: referenceParamGroup__E_tot_ref
     description: '[eV] Reference total energy'
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1424,14 +1680,14 @@ slots:
     - pals:E_tot_ref
     slot_uri: pals:E_tot_ref
     alias: E_tot_ref
-    owner: ReferenceP
+    owner: ReferenceParamGroup
     domain_of:
-    - ReferenceP
+    - ReferenceParamGroup
     range: float
     unit:
       ucum_code: eV
-  referenceP__time_ref:
-    name: referenceP__time_ref
+  referenceParamGroup__time_ref:
+    name: referenceParamGroup__time_ref
     description: '[s] Reference time'
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1440,40 +1696,68 @@ slots:
     - pals:time_ref
     slot_uri: pals:time_ref
     alias: time_ref
-    owner: ReferenceP
+    owner: ReferenceParamGroup
     domain_of:
-    - ReferenceP
+    - ReferenceParamGroup
     range: float
     unit:
       ucum_code: s
-  solenoidP__Ksol:
-    name: solenoidP__Ksol
+  hasSolenoidP__SolenoidP:
+    name: hasSolenoidP__SolenoidP
+    description: A mixin for solenoid-specific parameters that are aligned with PALS
+      SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator
+      Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:SolenoidP
+    alias: SolenoidP
+    owner: HasSolenoidP
+    domain_of:
+    - HasSolenoidP
+    range: SolenoidParamGroup
+    inlined: true
+    inlined_as_list: true
+  solenoidParamGroup__Ksol:
+    name: solenoidParamGroup__Ksol
     description: Normalized solenoid strength.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:Ksol
     slot_uri: pals:Ksol
     alias: Ksol
-    owner: SolenoidP
+    owner: SolenoidParamGroup
     domain_of:
-    - SolenoidP
+    - SolenoidParamGroup
     range: float
-  solenoidP__Bsol:
-    name: solenoidP__Bsol
+  solenoidParamGroup__Bsol:
+    name: solenoidParamGroup__Bsol
     description: Solenoid field.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:Bsol
     slot_uri: pals:Bsol
     alias: Bsol
-    owner: SolenoidP
+    owner: SolenoidParamGroup
     domain_of:
-    - SolenoidP
+    - SolenoidParamGroup
     range: float
     unit:
       ucum_code: T
-  twissP__alpha_a:
-    name: twissP__alpha_a
+  hasTwissP__TwissP:
+    name: hasTwissP__TwissP
+    description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
+      Parameters) for interoperability with the Particle Accelerator Language Standard
+      (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:TwissP
+    alias: TwissP
+    owner: HasTwissP
+    domain_of:
+    - HasTwissP
+    range: TwissParamGroup
+    inlined: true
+    inlined_as_list: true
+  twissParamGroup__alpha_a:
+    name: twissParamGroup__alpha_a
     description: Twiss alpha parameter in the horizontal plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1483,12 +1767,12 @@ slots:
     - pals:alpha_a
     slot_uri: pals:alpha_a
     alias: alpha_a
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__alpha_b:
-    name: twissP__alpha_b
+  twissParamGroup__alpha_b:
+    name: twissParamGroup__alpha_b
     description: Twiss alpha parameter in the vertical plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1498,12 +1782,12 @@ slots:
     - pals:alpha_b
     slot_uri: pals:alpha_b
     alias: alpha_b
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__beta_a:
-    name: twissP__beta_a
+  twissParamGroup__beta_a:
+    name: twissParamGroup__beta_a
     description: Twiss beta parameter in the horizontal plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1513,12 +1797,12 @@ slots:
     - pals:beta_a
     slot_uri: pals:beta_a
     alias: beta_a
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__beta_b:
-    name: twissP__beta_b
+  twissParamGroup__beta_b:
+    name: twissParamGroup__beta_b
     description: Twiss beta parameter in the vertical plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1528,12 +1812,12 @@ slots:
     - pals:beta_b
     slot_uri: pals:beta_b
     alias: beta_b
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__eta_x:
-    name: twissP__eta_x
+  twissParamGroup__eta_x:
+    name: twissParamGroup__eta_x
     description: Twiss dispersion parameter in the horizontal plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1542,12 +1826,12 @@ slots:
     - pals:eta_x
     slot_uri: pals:eta_x
     alias: eta_x
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__eta_y:
-    name: twissP__eta_y
+  twissParamGroup__eta_y:
+    name: twissParamGroup__eta_y
     description: Twiss dispersion parameter in the vertical plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1556,12 +1840,12 @@ slots:
     - pals:eta_y
     slot_uri: pals:eta_y
     alias: eta_y
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__etap_x:
-    name: twissP__etap_x
+  twissParamGroup__etap_x:
+    name: twissParamGroup__etap_x
     description: Twiss dispersion slope parameter in the horizontal plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1570,12 +1854,12 @@ slots:
     - pals:etap_x
     slot_uri: pals:etap_x
     alias: etap_x
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__etap_y:
-    name: twissP__etap_y
+  twissParamGroup__etap_y:
+    name: twissParamGroup__etap_y
     description: Twiss dispersion slope parameter in the vertical plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1584,12 +1868,12 @@ slots:
     - pals:etap_y
     slot_uri: pals:etap_y
     alias: etap_y
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__phi_a:
-    name: twissP__phi_a
+  twissParamGroup__phi_a:
+    name: twissParamGroup__phi_a
     description: Twiss phase advance parameter in the horizontal plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1601,12 +1885,12 @@ slots:
     - pals:phi_a
     slot_uri: pals:phi_a
     alias: phi_a
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  twissP__phi_b:
-    name: twissP__phi_b
+  twissParamGroup__phi_b:
+    name: twissParamGroup__phi_b
     description: Twiss phase advance parameter in the vertical plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
@@ -1618,439 +1902,622 @@ slots:
     - pals:phi_b
     slot_uri: pals:phi_b
     alias: phi_b
-    owner: TwissP
+    owner: TwissParamGroup
     domain_of:
-    - TwissP
+    - TwissParamGroup
     range: float
-  electricMultipoleP__components:
-    name: electricMultipoleP__components
+  hasRFP__RFP:
+    name: hasRFP__RFP
+    description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters)
+      for interoperability with the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:RFP
+    alias: RFP
+    owner: HasRFP
+    domain_of:
+    - HasRFP
+    range: RFParamGroup
+    inlined: true
+    inlined_as_list: true
+  rFParamGroup__frequency:
+    name: rFParamGroup__frequency
+    description: RF frequency.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:frequency
+    slot_uri: pals:frequency
+    alias: frequency
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: Hz
+  rFParamGroup__harmon:
+    name: rFParamGroup__harmon
+    description: RF harmonic number.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:harmon
+    slot_uri: pals:harmon
+    alias: harmon
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: integer
+  rFParamGroup__voltage:
+    name: rFParamGroup__voltage
+    description: RF voltage.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:voltage
+    slot_uri: pals:voltage
+    alias: voltage
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: V
+  rFParamGroup__phase:
+    name: rFParamGroup__phase
+    description: RF phase. rad/2pi RF phase in 0 to 2*pi
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:phase
+    slot_uri: pals:phase
+    alias: phase
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+  rFParamGroup__multipass_phase:
+    name: rFParamGroup__multipass_phase
+    description: rad/2pi RF Phase added to multipass elements
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:multipass_phase
+    slot_uri: pals:multipass_phase
+    alias: multipass_phase
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+  rFParamGroup__cavity_type:
+    name: rFParamGroup__cavity_type
+    description: Cavity type
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:cavity_type
+    slot_uri: pals:cavity_type
+    alias: cavity_type
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: CavityTypeEnum
+  rFParamGroup__num_cells:
+    name: rFParamGroup__num_cells
+    description: Number of cells in the cavity
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:num_cells
+    slot_uri: pals:num_cells
+    alias: num_cells
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: integer
+  rFParamGroup__zero_phase:
+    name: rFParamGroup__zero_phase
+    description: Sets what phase = 0 means.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:zero_phase
+    slot_uri: pals:zero_phase
+    alias: zero_phase
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: ZeroPhaseEnum
+  rFParamGroup__L_active:
+    name: rFParamGroup__L_active
+    description: Active acceleration length.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:L_active
+    slot_uri: pals:L_active
+    alias: L_active
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: m
+  rFParamGroup__dE_ref:
+    name: rFParamGroup__dE_ref
+    description: Reference energy gain.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:dE_ref
+    slot_uri: pals:dE_ref
+    alias: dE_ref
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: eV
+  hasElectricMultipoleP__ElectricMultipoleP:
+    name: hasElectricMultipoleP__ElectricMultipoleP
+    description: A mixin for electric multipole parameters that are aligned with PALS
+      ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
+      the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:ElectricMultipoleP
+    alias: ElectricMultipoleP
+    owner: HasElectricMultipoleP
+    domain_of:
+    - HasElectricMultipoleP
+    range: ElectricMultipoleParamGroup
+    inlined: true
+    inlined_as_list: true
+  electricMultipoleParamGroup__elec_components:
+    name: electricMultipoleParamGroup__elec_components
     description: Electric multipole components, one per order N.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:components
-    alias: components
-    owner: ElectricMultipoleP
+    slot_uri: pals:elec_components
+    alias: elec_components
+    owner: ElectricMultipoleParamGroup
     domain_of:
-    - ElectricMultipoleP
-    range: MultipoleComponent
+    - ElectricMultipoleParamGroup
+    range: MultipoleParameterGroup
     multivalued: true
     inlined: true
     inlined_as_list: true
-  magneticMultipoleP__components:
-    name: magneticMultipoleP__components
+  hasMagneticMultipoleP__MagneticMultipoleP:
+    name: hasMagneticMultipoleP__MagneticMultipoleP
+    description: A mixin for magnetic multipole parameters that are aligned with PALS
+      MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
+      the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:MagneticMultipoleP
+    alias: MagneticMultipoleP
+    owner: HasMagneticMultipoleP
+    domain_of:
+    - HasMagneticMultipoleP
+    range: MagneticMultipoleParamGroup
+    inlined: true
+    inlined_as_list: true
+  magneticMultipoleParamGroup__mag_components:
+    name: magneticMultipoleParamGroup__mag_components
     description: Magnetic multipole components, one per order N.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:components
-    alias: components
-    owner: MagneticMultipoleP
+    slot_uri: pals:mag_components
+    alias: mag_components
+    owner: MagneticMultipoleParamGroup
     domain_of:
-    - MagneticMultipoleP
-    range: MultipoleComponent
+    - MagneticMultipoleParamGroup
+    range: MultipoleParameterGroup
     multivalued: true
     inlined: true
     inlined_as_list: true
-  bendP__angle_ref:
-    name: bendP__angle_ref
+  hasBendP__BendP:
+    name: hasBendP__BendP
+    description: A mixin for bend parameters that are aligned with PALS BendP (Bend
+      Parameters) for interoperability with the Particle Accelerator Language Standard
+      (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:BendP
+    alias: BendP
+    owner: HasBendP
+    domain_of:
+    - HasBendP
+    range: BendParamGroup
+    inlined: true
+    inlined_as_list: true
+  bendParamGroup__angle_ref:
+    name: bendParamGroup__angle_ref
     description: Reference bend angle.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:angle_ref
     slot_uri: pals:angle_ref
     alias: angle_ref
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: rad
-  bendP__bend_field_ref:
-    name: bendP__bend_field_ref
+  bendParamGroup__bend_field_ref:
+    name: bendParamGroup__bend_field_ref
     description: Reference bend field.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:bend_field_ref
     slot_uri: pals:bend_field_ref
     alias: bend_field_ref
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: T
-  bendP__bend_field_actual:
-    name: bendP__bend_field_actual
+  bendParamGroup__bend_field_actual:
+    name: bendParamGroup__bend_field_actual
     description: Actual bend field.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:bend_field_actual
     slot_uri: pals:bend_field_actual
     alias: bend_field_actual
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: T
-  bendP__e1:
-    name: bendP__e1
+  bendParamGroup__e1:
+    name: bendParamGroup__e1
     description: Entrance end pole face rotation with respect to a sector geometry.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:e1
     slot_uri: pals:e1
     alias: e1
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: rad
-  bendP__e2:
-    name: bendP__e2
+  bendParamGroup__e2:
+    name: bendParamGroup__e2
     description: Exit end pole face rotation with respect to a sector geometry.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:e2
     slot_uri: pals:e2
     alias: e2
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: rad
-  bendP__e1_rect:
-    name: bendP__e1_rect
+  bendParamGroup__e1_rect:
+    name: bendParamGroup__e1_rect
     description: Entrance end pole face rotation with respect to a rectangular geometry.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:e1_rect
     slot_uri: pals:e1_rect
     alias: e1_rect
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: rad
-  bendP__e2_rect:
-    name: bendP__e2_rect
+  bendParamGroup__e2_rect:
+    name: bendParamGroup__e2_rect
     description: Exit end pole face rotation with respect to a rectangular geometry.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:e2_rect
     slot_uri: pals:e2_rect
     alias: e2_rect
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: rad
-  bendP__edge1_int:
-    name: bendP__edge1_int
+  bendParamGroup__edge1_int:
+    name: bendParamGroup__edge1_int
     description: Entrance end fringe field integral.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:edge1_int
     slot_uri: pals:edge1_int
     alias: edge1_int
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: T.m
-  bendP__edge2_int:
-    name: bendP__edge2_int
+  bendParamGroup__edge2_int:
+    name: bendParamGroup__edge2_int
     description: Exit end fringe field integral.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:edge2_int
     slot_uri: pals:edge2_int
     alias: edge2_int
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: T.m
-  bendP__g_ref:
-    name: bendP__g_ref
+  bendParamGroup__g_ref:
+    name: bendParamGroup__g_ref
     description: Reference bend strength = 1/radius_ref
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:g_ref
     slot_uri: pals:g_ref
     alias: g_ref
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: 1/m
-  bendP__g_actual:
-    name: bendP__g_actual
+  bendParamGroup__g_actual:
+    name: bendParamGroup__g_actual
     description: Actual bend strength = 1/radius_actual
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:g_actual
     slot_uri: pals:g_actual
     alias: g_actual
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: 1/m
-  bendP__h1:
-    name: bendP__h1
+  bendParamGroup__h1:
+    name: bendParamGroup__h1
     description: Entrance end pole face curvature
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:h1
     slot_uri: pals:h1
     alias: h1
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: 1/m
-  bendP__h2:
-    name: bendP__h2
+  bendParamGroup__h2:
+    name: bendParamGroup__h2
     description: Exit end pole face curvature
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:h2
     slot_uri: pals:h2
     alias: h2
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: 1/m
-  bendP__L_chord:
-    name: bendP__L_chord
+  bendParamGroup__L_chord:
+    name: bendParamGroup__L_chord
     description: Chord length of the bend.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:L_chord
     slot_uri: pals:L_chord
     alias: L_chord
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: m
-  bendP__L_sagitta:
-    name: bendP__L_sagitta
+  bendParamGroup__L_sagitta:
+    name: bendParamGroup__L_sagitta
     description: Output parameter. Sagitta length.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:L_sagitta
     slot_uri: pals:L_sagitta
     alias: L_sagitta
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: m
-  bendP__L_rectangle:
-    name: bendP__L_rectangle
+  bendParamGroup__L_rectangle:
+    name: bendParamGroup__L_rectangle
     description: Rectangular length.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:L_rectangle
     slot_uri: pals:L_rectangle
     alias: L_rectangle
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: m
-  bendP__multipole_geometry:
-    name: bendP__multipole_geometry
+  bendParamGroup__multipole_geometry:
+    name: bendParamGroup__multipole_geometry
     description: Multipole geometry type. Must be `follows_ref_geometry`.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:multipole_geometry
     slot_uri: pals:multipole_geometry
     alias: multipole_geometry
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: MultipoleGeometryEnum
-  bendP__ref_geometry:
-    name: bendP__ref_geometry
+  bendParamGroup__ref_geometry:
+    name: bendParamGroup__ref_geometry
     description: Reference geometry type. Must be `arc`.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:ref_geometry
     slot_uri: pals:ref_geometry
     alias: ref_geometry
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: ReferenceGeometryEnum
-  bendP__rho_ref:
-    name: bendP__rho_ref
+  bendParamGroup__rho_ref:
+    name: bendParamGroup__rho_ref
     description: Reference bend radius.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:rho_ref
     slot_uri: pals:rho_ref
     alias: rho_ref
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: m
-  bendP__tilt_ref:
-    name: bendP__tilt_ref
+  bendParamGroup__tilt_ref:
+    name: bendParamGroup__tilt_ref
     description: Reference tilt of the bend.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:tilt_ref
     slot_uri: pals:tilt_ref
     alias: tilt_ref
-    owner: BendP
+    owner: BendParamGroup
     domain_of:
-    - BendP
+    - BendParamGroup
     range: float
     unit:
       ucum_code: rad
-  multipoleComponent__order:
-    name: multipoleComponent__order
+  multipoleParameterGroup__order:
+    name: multipoleParameterGroup__order
     description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:order
+    slot_uri: pals:order
     alias: order
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: integer
     required: true
-  multipoleComponent__tilt:
-    name: multipoleComponent__tilt
+  multipoleParameterGroup__tilt:
+    name: multipoleParameterGroup__tilt
     description: Tilt of the Nth multipole.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:tilt
-    slot_uri: narad:tilt
+    slot_uri: pals:tilt
     alias: tilt
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
     unit:
       ucum_code: rad
-  multipoleComponent__En:
-    name: multipoleComponent__En
+  multipoleParameterGroup__En:
+    name: multipoleParameterGroup__En
     description: Normal component of the field.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:EnN
-    slot_uri: narad:En
+    slot_uri: pals:En
     alias: En
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
-  multipoleComponent__Es:
-    name: multipoleComponent__Es
+  multipoleParameterGroup__Es:
+    name: multipoleParameterGroup__Es
     description: Skew component of the field.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:EsN
-    slot_uri: narad:Es
+    slot_uri: pals:Es
     alias: Es
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
-  multipoleComponent__EnL:
-    name: multipoleComponent__EnL
+  multipoleParameterGroup__EnL:
+    name: multipoleParameterGroup__EnL
     description: Length-integrated normal component.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:EnNL
-    slot_uri: narad:EnL
+    slot_uri: pals:EnL
     alias: EnL
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
-  multipoleComponent__EsL:
-    name: multipoleComponent__EsL
+  multipoleParameterGroup__EsL:
+    name: multipoleParameterGroup__EsL
     description: Length-integrated skew component.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:EsNL
-    slot_uri: narad:EsL
+    slot_uri: pals:EsL
     alias: EsL
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
-  multipoleComponent__Bn:
-    name: multipoleComponent__Bn
+  multipoleParameterGroup__Bn:
+    name: multipoleParameterGroup__Bn
     description: Normal component of the magnetic field.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:BnN
-    slot_uri: narad:Bn
+    slot_uri: pals:Bn
     alias: Bn
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
-  multipoleComponent__Bs:
-    name: multipoleComponent__Bs
+  multipoleParameterGroup__Bs:
+    name: multipoleParameterGroup__Bs
     description: Skew component of the magnetic field.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:BsN
-    slot_uri: narad:Bs
+    slot_uri: pals:Bs
     alias: Bs
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
-  multipoleComponent__Kn:
-    name: multipoleComponent__Kn
+  multipoleParameterGroup__Kn:
+    name: multipoleParameterGroup__Kn
     description: Normalized normal component.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:KnN
-    slot_uri: narad:Kn
+    slot_uri: pals:Kn
     alias: Kn
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
-  multipoleComponent__Ks:
-    name: multipoleComponent__Ks
+  multipoleParameterGroup__Ks:
+    name: multipoleParameterGroup__Ks
     description: Normalized skew component.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:KsN
-    slot_uri: narad:Ks
+    slot_uri: pals:Ks
     alias: Ks
-    owner: MultipoleComponent
+    owner: MultipoleParameterGroup
     domain_of:
-    - MultipoleComponent
+    - MultipoleParameterGroup
     range: float
   component__native_types:
     name: component__native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:native_types
+    slot_uri: pals:native_types
     alias: native_types
     owner: Component
     domain_of:
@@ -2063,8 +2530,8 @@ slots:
       the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
     mappings:
-    - narad:physical_function
-    slot_uri: narad:physical_function
+    - pals:physical_function
+    slot_uri: pals:physical_function
     alias: functions
     owner: PhysicalComponent
     domain_of:
@@ -2078,8 +2545,8 @@ slots:
       can be used to identify the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
     mappings:
-    - narad:physical_beamline_relation
-    slot_uri: narad:physical_beamline_relation
+    - pals:physical_beamline_relation
+    slot_uri: pals:physical_beamline_relation
     alias: beamline_relation
     owner: PhysicalComponent
     domain_of:
@@ -2092,8 +2559,8 @@ slots:
       the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
     mappings:
-    - narad:virtual_function
-    slot_uri: narad:virtual_function
+    - pals:virtual_function
+    slot_uri: pals:virtual_function
     alias: functions
     owner: VirtualComponent
     domain_of:
@@ -2107,70 +2574,43 @@ slots:
       can be used to identify the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
     mappings:
-    - narad:virtual_beamline_relation
-    slot_uri: narad:virtual_beamline_relation
+    - pals:virtual_beamline_relation
+    slot_uri: pals:virtual_beamline_relation
     alias: beamline_relation
     owner: VirtualComponent
     domain_of:
     - VirtualComponent
     range: VirtualRelationEnum
     required: true
-  beamline__multipass:
-    name: beamline__multipass
-    description: 'Indicates whether the beamline is a multipass beamline, where the
-      beam passes through the same physical elements multiple times.
-
-      If not provided, the default assumption is that the beamline is single-pass.'
+  beamLine__multipass:
+    name: beamLine__multipass
+    description: Indicates whether the BeamLine is a multipass BeamLine, where the
+      beam passes through the same physical elements multiple times. If not provided,
+      the default assumption is that the BeamLine is single-pass.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:multipass
     slot_uri: pals:multipass
     alias: multipass
-    owner: Beamline
+    owner: BeamLine
     domain_of:
-    - Beamline
+    - BeamLine
     range: boolean
-  beamline__length:
-    name: beamline__length
-    description: 'The total length of the beamline.
-
-      For pals interoperability, use m as the unit of length.'
-    from_schema: https://w3id.org/accelerator-core
-    mappings:
-    - pals:length
-    slot_uri: pals:length
-    alias: length
-    owner: Beamline
-    domain_of:
-    - Beamline
-    range: float
-  beamline__zero_point:
-    name: beamline__zero_point
-    description: Name of a line item used as a reference point when the BeamLine is
-      used as a subline.
-    from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:zero_point
-    alias: zero_point
-    owner: Beamline
-    domain_of:
-    - Beamline
-    range: string
-  beamline__periodic:
-    name: beamline__periodic
-    description: 'Indicates whether orbit and Twiss parameters periodic.
-
-      If not provided, the default assumption is that the beamline is not periodic.'
+  beamLine__periodic:
+    name: beamLine__periodic
+    description: Indicates whether orbit and Twiss parameters periodic. If not provided,
+      the default assumption is that the BeamLine is not periodic.
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:periodic
     slot_uri: pals:periodic
     alias: periodic
-    owner: Beamline
+    owner: BeamLine
     domain_of:
-    - Beamline
+    - BeamLine
     range: boolean
-  beamline__repeat:
-    name: beamline__repeat
+  beamLine__repeat:
+    name: beamLine__repeat
     description: 'Repetition count. If not provided, the default assumption is that
       the beamline is not repeated and the value is 1.
 
@@ -2180,29 +2620,29 @@ slots:
     - pals:repeat
     slot_uri: pals:repeat
     alias: repeat
-    owner: Beamline
+    owner: BeamLine
     domain_of:
-    - Beamline
+    - BeamLine
     range: integer
-  beamline__direction:
-    name: beamline__direction
-    description: "Beam direction along the beamline: +1 or -1. \nLongitudinal orientation.\
-      \ Default is +1."
+  beamLine__direction:
+    name: beamLine__direction
+    description: 'Beam direction along the BeamLine: +1 or -1. Longitudinal orientation.
+      Default is +1.'
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - pals:direction
     slot_uri: pals:direction
     alias: direction
-    owner: Beamline
+    owner: BeamLine
     domain_of:
-    - Beamline
+    - BeamLine
     range: integer
   signal__signal_role:
     name: signal__signal_role
     description: The role of the signal in the control system, such as setpoint, readback,
       status, command, or limit.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:signal_role
+    slot_uri: pals:signal_role
     alias: signal_role
     owner: Signal
     domain_of:
@@ -2214,7 +2654,7 @@ slots:
     description: The source system from which the signal originates, such as EPICS,
       PALS-Ext, MYA, an element database, a channel database, or a simulation service.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:source_system
+    slot_uri: pals:source_system
     alias: source_system
     owner: Signal
     domain_of:
@@ -2225,7 +2665,7 @@ slots:
     name: signal__native_description
     description: A human-readable description of the signal in the source system.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:native_description
+    slot_uri: pals:native_description
     alias: native_description
     owner: Signal
     domain_of:
@@ -2235,7 +2675,7 @@ slots:
     name: signal__canonical_signal_type
     description: The canonical semantic meaning of the signal.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:canonical_signal_type
+    slot_uri: pals:canonical_signal_type
     alias: canonical_signal_type
     owner: Signal
     domain_of:
@@ -2246,7 +2686,7 @@ slots:
     name: signal__quantity_kind
     description: The physical quantity kind of the signal.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:quantity_kind
+    slot_uri: pals:quantity_kind
     alias: quantity_kind
     owner: Signal
     domain_of:
@@ -2258,7 +2698,7 @@ slots:
     description: The native data type of the signal in the source system,  such as
       String, Integer, Float, or Boolean.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:native_data_type
+    slot_uri: pals:native_data_type
     alias: native_data_type
     owner: Signal
     domain_of:
@@ -2269,7 +2709,7 @@ slots:
     name: signal__native_unit
     description: The native unit of the signal in the source system.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:native_unit
+    slot_uri: pals:native_unit
     alias: native_unit
     owner: Signal
     domain_of:
@@ -2281,7 +2721,7 @@ slots:
     description: The protocol used to access the signal in the source system,  such
       as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:access_protocol
+    slot_uri: pals:access_protocol
     alias: access_protocol
     owner: Signal
     domain_of:
@@ -2291,7 +2731,7 @@ slots:
     name: signal__archive_identifier
     description: The identifier used to reference the signal in an archival system.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:archive_identifier
+    slot_uri: pals:archive_identifier
     alias: archive_identifier
     owner: Signal
     domain_of:
@@ -2302,7 +2742,7 @@ slots:
     description: The transverse plane in which the kicker operates, either horizontal
       or vertical.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:plane
+    slot_uri: pals:plane
     alias: plane
     owner: Kicker
     domain_of:
@@ -2314,8 +2754,8 @@ slots:
       used to identify the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
     mappings:
-    - narad:supporting_facility_function
-    slot_uri: narad:supporting_facility_function
+    - pals:supporting_facility_function
+    slot_uri: pals:supporting_facility_function
     alias: functions
     owner: SupportingFacilityComponent
     domain_of:
@@ -2323,47 +2763,47 @@ slots:
     range: FacilityFunctionEnum
     required: true
     multivalued: true
-  metadataEntry__key:
-    name: metadataEntry__key
+  additionalMetadata__key:
+    name: additionalMetadata__key
     description: The metadata field name.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:key
+    slot_uri: pals:key
     identifier: true
     alias: key
-    owner: MetadataEntry
+    owner: AdditionalMetadata
     domain_of:
-    - MetadataEntry
+    - AdditionalMetadata
     range: string
     required: true
-  metadataEntry__value:
-    name: metadataEntry__value
+  additionalMetadata__value:
+    name: additionalMetadata__value
     description: The metadata value, serialized as a string.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:value
+    slot_uri: pals:value
     alias: value
-    owner: MetadataEntry
+    owner: AdditionalMetadata
     domain_of:
-    - MetadataEntry
+    - AdditionalMetadata
     range: string
     required: true
-  metadataEntry__datatype:
-    name: metadataEntry__datatype
+  additionalMetadata__datatype:
+    name: additionalMetadata__datatype
     description: Hint for the value's original type, so consumers can parse it back
       (e.g. float, integer, boolean) rather than treating everything as an opaque
       string.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:datatype
+    slot_uri: pals:datatype
     alias: datatype
-    owner: MetadataEntry
+    owner: AdditionalMetadata
     domain_of:
-    - MetadataEntry
+    - AdditionalMetadata
     range: DataTypeEnum
   componentRelation__context:
     name: componentRelation__context
     description: The frame of reference / domain in which this relationship is asserted
       to hold.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:context
+    slot_uri: pals:context
     alias: context
     owner: ComponentRelation
     domain_of:
@@ -2371,19 +2811,19 @@ slots:
     range: RelationContextEnum
   componentRelation__beamline_context:
     name: componentRelation__beamline_context
-    description: The specific Beamline this relationship is defined with respect to
+    description: The specific BeamLine this relationship is defined with respect to
       (relevant when context=beamline_order).
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:beamline_context
+    slot_uri: pals:beamline_context
     alias: beamline_context
     owner: ComponentRelation
     domain_of:
     - ComponentRelation
-    range: Beamline
+    range: BeamLine
   componentRelation__reference_frame:
     name: componentRelation__reference_frame
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:reference_frame
+    slot_uri: pals:reference_frame
     alias: reference_frame
     owner: ComponentRelation
     domain_of:
@@ -2392,7 +2832,7 @@ slots:
   componentRelation__distance_value:
     name: componentRelation__distance_value
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:distance_value
+    slot_uri: pals:distance_value
     alias: distance_value
     owner: ComponentRelation
     domain_of:
@@ -2401,7 +2841,7 @@ slots:
   componentRelation__distance_unit:
     name: componentRelation__distance_unit
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:distance_unit
+    slot_uri: pals:distance_unit
     alias: distance_unit
     owner: ComponentRelation
     domain_of:
@@ -2410,17 +2850,17 @@ slots:
   componentRelation__axis:
     name: componentRelation__axis
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:axis
+    slot_uri: pals:axis
     alias: axis
     owner: ComponentRelation
     domain_of:
     - ComponentRelation
     range: AxisEnum
-  componentRelation__direction:
-    name: componentRelation__direction
+  componentRelation__component_direction:
+    name: componentRelation__component_direction
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:direction
-    alias: direction
+    slot_uri: pals:component_direction
+    alias: component_direction
     owner: ComponentRelation
     domain_of:
     - ComponentRelation
@@ -2428,7 +2868,7 @@ slots:
   componentRelation__tolerance_value:
     name: componentRelation__tolerance_value
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:tolerance_value
+    slot_uri: pals:tolerance_value
     alias: tolerance_value
     owner: ComponentRelation
     domain_of:
@@ -2437,15 +2877,33 @@ slots:
   componentRelation__tolerance_unit:
     name: componentRelation__tolerance_unit
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: narad:tolerance_unit
+    slot_uri: pals:tolerance_unit
     alias: tolerance_unit
     owner: ComponentRelation
     domain_of:
     - ComponentRelation
     range: UnitEnum
+  BeamLine_length:
+    name: BeamLine_length
+    definition_uri: https://pals-project.readthedocs.io/length
+    description: The total length of the BeamLine. For pals interoperability, use
+      m as the unit of length.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:length
+    is_a: length
+    domain: BeamLine
+    slot_uri: pals:length
+    alias: length
+    owner: BeamLine
+    domain_of:
+    - BeamLine
+    is_usage_slot: true
+    usage_slot_name: length
+    range: float
   SignalBinding_subject:
     name: SignalBinding_subject
-    definition_uri: https://example.org/narad/subject
+    definition_uri: https://pals-project.readthedocs.io/subject
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:subject
@@ -2467,7 +2925,7 @@ slots:
     required: true
   SignalBinding_predicate:
     name: SignalBinding_predicate
-    definition_uri: https://example.org/narad/predicate
+    definition_uri: https://pals-project.readthedocs.io/predicate
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:predicate
@@ -2488,7 +2946,7 @@ slots:
     required: true
   SignalBinding_object:
     name: SignalBinding_object
-    definition_uri: https://example.org/narad/object
+    definition_uri: https://pals-project.readthedocs.io/object
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:object
@@ -2510,7 +2968,7 @@ slots:
     required: true
   ComponentRelation_subject:
     name: ComponentRelation_subject
-    definition_uri: https://example.org/narad/subject
+    definition_uri: https://pals-project.readthedocs.io/subject
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:subject
@@ -2532,7 +2990,7 @@ slots:
     required: true
   ComponentRelation_predicate:
     name: ComponentRelation_predicate
-    definition_uri: https://example.org/narad/predicate
+    definition_uri: https://pals-project.readthedocs.io/predicate
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:predicate
@@ -2553,7 +3011,7 @@ slots:
     required: true
   ComponentRelation_object:
     name: ComponentRelation_object
-    definition_uri: https://example.org/narad/object
+    definition_uri: https://pals-project.readthedocs.io/object
     from_schema: https://w3id.org/accelerator-core
     mappings:
     - rdf:object
@@ -2574,50 +3032,94 @@ slots:
     range: Component
     required: true
 classes:
-  NARAD:
-    name: NARAD
-    definition_uri: https://example.org/narad/NARAD
+  PALS:
+    name: PALS
+    definition_uri: https://pals-project.readthedocs.io/PALS
     description: Root container for accelerator core components, semantic signals,
       and local bindings.
     from_schema: https://w3id.org/accelerator-core
     slots:
-    - type
-    - nARAD__description
-    - nARAD__physical_components
-    - nARAD__virtual_components
-    - nARAD__beamlines
-    - nARAD__supporting_facility_components
-    - nARAD__signals
-    - nARAD__signal_bindings
-    - nARAD__component_relations
+    - kind
+    - description
+    - affiliation
+    - pALS__version
+    - pALS__authors
+    - pALS__notes
+    - pALS__facility
     attributes:
-      description:
-        name: description
-        description: Human-readable description for the representation of a particle
-          accelerator and its operations.
+      version:
+        name: version
+        description: Version of the representation of a particle accelerator and its
+          operations.
         range: string
-      physical_components:
-        name: physical_components
-        description: A list of physical components in the accelerator system.
-        range: PhysicalComponent
+        pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
+      authors:
+        name: authors
+        description: Contains the authorship information for this representation of
+          an accelerator facility and its operations.
+        range: Author
         multivalued: true
         inlined_as_list: true
-      virtual_components:
-        name: virtual_components
-        description: A list of virtual components in the accelerator system.
-        range: VirtualComponent
+      notes:
+        name: notes
+        description: Additional notes or comments about the representation of a particle
+          accelerator and its operations.
+        range: string
+        multivalued: true
+        inlined_as_list: true
+      facility:
+        name: facility
+        description: A facility that contains lattice elements (physical and virtual),
+          beamlines, parameter set commands, signals, etc.
+        range: Facility
+    class_uri: pals:PALS
+    tree_root: true
+  Author:
+    name: Author
+    definition_uri: https://pals-project.readthedocs.io/Author
+    description: Contains authorship information for a representation of an accelerator
+      facility and its operations.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - name
+    - affiliation
+    - author__email
+    - author__orcid
+    attributes:
+      email:
+        name: email
+        description: The email address of the author.
+        range: string
+        pattern: ^[^@]+@[^@]+\.[^@]+$
+      orcid:
+        name: orcid
+        description: The ORCID identifier of the author.
+        range: string
+        pattern: ^https://orcid\.org/\d{4}-\d{4}-\d{4}-\d{3}[\dX]$
+    class_uri: pals:Author
+  Facility:
+    name: Facility
+    definition_uri: https://pals-project.readthedocs.io/Facility
+    description: A facility that houses one or more accelerators.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - identifiers
+    - facility__components
+    - facility__beamlines
+    - facility__signals
+    - facility__signal_bindings
+    - facility__component_relations
+    attributes:
+      components:
+        name: components
+        description: A list of physical components in the accelerator system.
+        range: Component
         multivalued: true
         inlined_as_list: true
       beamlines:
         name: beamlines
         description: A list of beamlines in the accelerator system.
-        range: Beamline
-        multivalued: true
-        inlined_as_list: true
-      supporting_facility_components:
-        name: supporting_facility_components
-        description: A list of supporting facility components in the accelerator system.
-        range: SupportingFacilityComponent
+        range: BeamLine
         multivalued: true
         inlined_as_list: true
       signals:
@@ -2640,64 +3142,113 @@ classes:
         range: ComponentRelation
         multivalued: true
         inlined_as_list: true
-    class_uri: narad:NARAD
-    tree_root: true
-  MetaP:
-    name: MetaP
-    definition_uri: https://example.org/narad/MetaP
+    class_uri: pals:Facility
+  Affiliation:
+    name: Affiliation
+    definition_uri: https://pals-project.readthedocs.io/Affiliation
+    description: Contains affiliation information for an author or component, such
+      as a ROR.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - id
+    - name
+    - identifiers
+    class_uri: pals:Affiliation
+  Identifier:
+    name: Identifier
+    definition_uri: https://pals-project.readthedocs.io/Identifier
+    description: A unique, and ideally persistent, identifier for a facility, such
+      as a DOI or ROR.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - identifier__identifier_type
+    - identifier__identifier_value
+    attributes:
+      identifier_type:
+        name: identifier_type
+        description: The type of identifier, such as DOI | PURL | ROR | LOCAL | URL
+          | ARK.
+        range: IdentifierTypeEnum
+      identifier_value:
+        name: identifier_value
+        description: The value of the identifier.
+        range: string
+    class_uri: pals:Identifier
+  HasMetaP:
+    name: HasMetaP
+    definition_uri: https://pals-project.readthedocs.io/HasMetaP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasMetaP__MetaP
+    attributes:
+      MetaP:
+        name: MetaP
+        description: A mixin for metadata parameters that are aligned with PALS MetaP
+          (Metadata Parameters) for interoperability with the Particle Accelerator
+          Language Standard (PALS).
+        range: MetaParamGroup
+        inlined: true
+    class_uri: pals:HasMetaP
+  MetaParamGroup:
+    name: MetaParamGroup
+    definition_uri: https://pals-project.readthedocs.io/MetaParamGroup
     description: Mixin class for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:MetaP
-    mixin: true
     slots:
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - description
+    - alias
+    - metaParamGroup__label
+    - metaParamGroup__additional_metadata
     attributes:
-      description:
-        name: description
-        description: Human-readable description.
-        slot_uri: pals:description
-        range: string
       label:
         name: label
         description: A label string.
         slot_uri: pals:label
         range: string
-      alias:
-        name: alias
-        description: An alternative name or identifier for the instance.
-        slot_uri: pals:alias
-        range: string
       additional_metadata:
         name: additional_metadata
         description: Additional metadata or annotations for the instance.
-        range: MetadataEntry
+        range: AdditionalMetadata
         multivalued: true
-        inlined: true
         inlined_as_list: true
-    class_uri: narad:MetaP
-  FloorP:
-    name: FloorP
-    definition_uri: https://example.org/narad/FloorP
+    class_uri: pals:MetaParamGroup
+  HasFloorP:
+    name: HasFloorP
+    definition_uri: https://pals-project.readthedocs.io/HasFloorP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasFloorP__FloorP
+    attributes:
+      FloorP:
+        name: FloorP
+        description: A mixin for floor plan parameters that are aligned with PALS
+          FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator
+          Language Standard (PALS).
+        range: FloorParamGroup
+        inlined: true
+    class_uri: pals:HasFloorP
+  FloorParamGroup:
+    name: FloorParamGroup
+    definition_uri: https://pals-project.readthedocs.io/FloorParamGroup
     description: Mixin class for floor plan parameters that are aligned with PALS
       FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator
       Language Standard (PALS).
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:FloorP
-    mixin: true
     slots:
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
+    - floorParamGroup__x
+    - floorParamGroup__y
+    - floorParamGroup__z
+    - floorParamGroup__theta
+    - floorParamGroup__phi
+    - floorParamGroup__psi
     attributes:
       x:
         name: x
@@ -2753,24 +3304,39 @@ classes:
         - Rotation
         slot_uri: pals:psi
         range: float
-    class_uri: narad:FloorP
-  BodyShiftP:
-    name: BodyShiftP
-    definition_uri: https://example.org/narad/BodyShiftP
+    class_uri: pals:FloorParamGroup
+  HasBodyShiftP:
+    name: HasBodyShiftP
+    definition_uri: https://pals-project.readthedocs.io/HasBodyShiftP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasBodyShiftP__BodyShiftP
+    attributes:
+      BodyShiftP:
+        name: BodyShiftP
+        description: A mixin for floor plan shift parameters that are aligned with
+          PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with
+          the Particle Accelerator Language Standard (PALS).
+        range: BodyShiftParamGroup
+        inlined: true
+    class_uri: pals:HasBodyShiftP
+  BodyShiftParamGroup:
+    name: BodyShiftParamGroup
+    definition_uri: https://pals-project.readthedocs.io/BodyShiftParamGroup
     description: Mixin class for floor plan shift parameters that are aligned with
       PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the
       Particle Accelerator Language Standard (PALS).
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:BodyShiftP
-    mixin: true
     slots:
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
+    - bodyShiftParamGroup__x_offset
+    - bodyShiftParamGroup__y_offset
+    - bodyShiftParamGroup__z_offset
+    - bodyShiftParamGroup__x_rot
+    - bodyShiftParamGroup__y_rot
+    - bodyShiftParamGroup__z_rot
     attributes:
       x_offset:
         name: x_offset
@@ -2826,27 +3392,36 @@ classes:
         - GlobalOffsetPsi
         slot_uri: pals:z_rot
         range: float
-    class_uri: narad:BodyShiftP
-  HasLongitudinalPlacement:
-    name: HasLongitudinalPlacement
-    definition_uri: https://example.org/narad/HasLongitudinalPlacement
+    class_uri: pals:BodyShiftParamGroup
+  HasLongitudinalPlacementP:
+    name: HasLongitudinalPlacementP
+    definition_uri: https://pals-project.readthedocs.io/HasLongitudinalPlacementP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    attributes:
+      LongitudinalPlacementP:
+        name: LongitudinalPlacementP
+        description: A mixin for an element's extent and position along the longitudinal
+          (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
+          (Longitudinal Placement Parameters) for interoperability with the Particle
+          Accelerator Language Standard (PALS).
+        range: LongitudinalPlacementParamGroup
+        inlined: true
+    class_uri: pals:HasLongitudinalPlacementP
+  LongitudinalPlacementParamGroup:
+    name: LongitudinalPlacementParamGroup
+    definition_uri: https://pals-project.readthedocs.io/LongitudinalPlacementParamGroup
     description: "Mixin for an element's extent and position along the longitudinal\
       \ (beam-direction, \"s\") axis. \nCorresponds to PALS's ungrouped element parameters\
       \ `length` and `s_position`.\nOne (or both) `length` or `s_position` must be\
       \ present."
     from_schema: https://w3id.org/accelerator-core
-    mixin: true
     slots:
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
+    - length
+    - longitudinalPlacementParamGroup__s_position
     attributes:
-      length:
-        name: length
-        description: Length of the element (arc length for bends).
-        slot_uri: pals:length
-        range: float
-        unit:
-          ucum_code: m
       s_position:
         name: s_position
         description: Longitudinal position of the element along the beamline.
@@ -2854,7 +3429,7 @@ classes:
         range: float
         unit:
           ucum_code: m
-    class_uri: narad:HasLongitudinalPlacement
+    class_uri: pals:LongitudinalPlacementParamGroup
     rules:
     - preconditions:
         slot_conditions:
@@ -2875,21 +3450,36 @@ classes:
               value_presence:
                 text: PRESENT
       description: An element must have a length and/or a position along the beamline.
-  ReferenceP:
-    name: ReferenceP
-    definition_uri: https://example.org/narad/ReferenceP
+  HasReferenceP:
+    name: HasReferenceP
+    definition_uri: https://pals-project.readthedocs.io/HasReferenceP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasReferenceP__ReferenceP
+    attributes:
+      ReferenceP:
+        name: ReferenceP
+        description: A mixin for reference parameters that are aligned with PALS ReferenceP
+          (Reference Parameters) for interoperability with the Particle Accelerator
+          Language Standard (PALS).
+        range: ReferenceParamGroup
+        inlined: true
+    class_uri: pals:HasReferenceP
+  ReferenceParamGroup:
+    name: ReferenceParamGroup
+    definition_uri: https://pals-project.readthedocs.io/ReferenceParamGroup
     description: Mixin for reference parameters that are aligned with PALS ReferenceP
       (Reference Parameters)  for interoperability with the Particle Accelerator Language
       Standard (PALS).
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:ReferenceP
-    mixin: true
     slots:
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
+    - referenceParamGroup__species_ref
+    - referenceParamGroup__pc_ref
+    - referenceParamGroup__E_tot_ref
+    - referenceParamGroup__time_ref
     attributes:
       species_ref:
         name: species_ref
@@ -2922,18 +3512,33 @@ classes:
         range: float
         unit:
           ucum_code: s
-    class_uri: narad:ReferenceP
-  SolenoidP:
-    name: SolenoidP
-    definition_uri: https://example.org/narad/SolenoidP
+    class_uri: pals:ReferenceParamGroup
+  HasSolenoidP:
+    name: HasSolenoidP
+    definition_uri: https://pals-project.readthedocs.io/HasSolenoidP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasSolenoidP__SolenoidP
+    attributes:
+      SolenoidP:
+        name: SolenoidP
+        description: A mixin for solenoid-specific parameters that are aligned with
+          PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle
+          Accelerator Language Standard (PALS).
+        range: SolenoidParamGroup
+        inlined: true
+    class_uri: pals:HasSolenoidP
+  SolenoidParamGroup:
+    name: SolenoidParamGroup
+    definition_uri: https://pals-project.readthedocs.io/SolenoidParamGroup
     description: Mixin for solenoid-specific parameters.
     from_schema: https://w3id.org/accelerator-core
     exact_mappings:
     - pals:SolenoidP
-    mixin: true
     slots:
-    - solenoidP__Ksol
-    - solenoidP__Bsol
+    - solenoidParamGroup__Ksol
+    - solenoidParamGroup__Bsol
     attributes:
       Ksol:
         name: Ksol
@@ -2947,7 +3552,7 @@ classes:
         range: float
         unit:
           ucum_code: T
-    class_uri: narad:SolenoidP
+    class_uri: pals:SolenoidParamGroup
     rules:
     - preconditions:
         slot_conditions:
@@ -2968,26 +3573,41 @@ classes:
               value_presence:
                 text: PRESENT
       description: A solenoid must have one of, and exactly one of, Ksol or Bsol.
-  TwissP:
-    name: TwissP
-    definition_uri: https://example.org/narad/TwissP
+  HasTwissP:
+    name: HasTwissP
+    definition_uri: https://pals-project.readthedocs.io/HasTwissP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasTwissP__TwissP
+    attributes:
+      TwissP:
+        name: TwissP
+        description: A mixin for Twiss parameters that are aligned with PALS TwissP
+          (Twiss Parameters) for interoperability with the Particle Accelerator Language
+          Standard (PALS).
+        range: TwissParamGroup
+        inlined: true
+    class_uri: pals:HasTwissP
+  TwissParamGroup:
+    name: TwissParamGroup
+    definition_uri: https://pals-project.readthedocs.io/TwissParamGroup
     description: Mixin for Twiss parameters, which can be used to describe the beam
       optics of an accelerator element.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:TwissP
-    mixin: true
     slots:
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
+    - twissParamGroup__alpha_a
+    - twissParamGroup__alpha_b
+    - twissParamGroup__beta_a
+    - twissParamGroup__beta_b
+    - twissParamGroup__eta_x
+    - twissParamGroup__eta_y
+    - twissParamGroup__etap_x
+    - twissParamGroup__etap_y
+    - twissParamGroup__phi_a
+    - twissParamGroup__phi_b
     attributes:
       alpha_a:
         name: alpha_a
@@ -3069,59 +3689,201 @@ classes:
         - psiy
         slot_uri: pals:phi_b
         range: float
-    class_uri: narad:TwissP
-  ElectricMultipoleP:
-    name: ElectricMultipoleP
-    definition_uri: https://example.org/narad/ElectricMultipoleP
+    class_uri: pals:TwissParamGroup
+  HasRFP:
+    name: HasRFP
+    definition_uri: https://pals-project.readthedocs.io/HasRFP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasRFP__RFP
+    attributes:
+      RFP:
+        name: RFP
+        description: A mixin for RF parameters that are aligned with PALS RFP (RF
+          Parameters) for interoperability with the Particle Accelerator Language
+          Standard (PALS).
+        range: RFParamGroup
+        inlined: true
+    class_uri: pals:HasRFP
+  RFParamGroup:
+    name: RFParamGroup
+    definition_uri: https://pals-project.readthedocs.io/RFParamGroup
+    description: Mixin for RF parameters, which can be used to describe the RF properties
+      of an accelerator element. This mixin is aligned with PALS RFP for interoperability
+      with the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:RFP
+    slots:
+    - rFParamGroup__frequency
+    - rFParamGroup__harmon
+    - rFParamGroup__voltage
+    - rFParamGroup__phase
+    - rFParamGroup__multipass_phase
+    - rFParamGroup__cavity_type
+    - rFParamGroup__num_cells
+    - rFParamGroup__zero_phase
+    - rFParamGroup__L_active
+    - rFParamGroup__dE_ref
+    attributes:
+      frequency:
+        name: frequency
+        description: RF frequency.
+        slot_uri: pals:frequency
+        range: float
+        unit:
+          ucum_code: Hz
+      harmon:
+        name: harmon
+        description: RF harmonic number.
+        slot_uri: pals:harmon
+        range: integer
+      voltage:
+        name: voltage
+        description: RF voltage.
+        slot_uri: pals:voltage
+        range: float
+        unit:
+          ucum_code: V
+      phase:
+        name: phase
+        description: RF phase. rad/2pi RF phase in 0 to 2*pi
+        slot_uri: pals:phase
+        range: float
+      multipass_phase:
+        name: multipass_phase
+        description: rad/2pi RF Phase added to multipass elements
+        slot_uri: pals:multipass_phase
+        range: float
+      cavity_type:
+        name: cavity_type
+        description: Cavity type
+        slot_uri: pals:cavity_type
+        range: CavityTypeEnum
+      num_cells:
+        name: num_cells
+        description: Number of cells in the cavity
+        slot_uri: pals:num_cells
+        range: integer
+      zero_phase:
+        name: zero_phase
+        description: Sets what phase = 0 means.
+        slot_uri: pals:zero_phase
+        range: ZeroPhaseEnum
+      L_active:
+        name: L_active
+        description: Active acceleration length.
+        slot_uri: pals:L_active
+        range: float
+        unit:
+          ucum_code: m
+      dE_ref:
+        name: dE_ref
+        description: Reference energy gain.
+        slot_uri: pals:dE_ref
+        range: float
+        unit:
+          ucum_code: eV
+    class_uri: pals:RFParamGroup
+  HasElectricMultipoleP:
+    name: HasElectricMultipoleP
+    definition_uri: https://pals-project.readthedocs.io/HasElectricMultipoleP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasElectricMultipoleP__ElectricMultipoleP
+    attributes:
+      ElectricMultipoleP:
+        name: ElectricMultipoleP
+        description: A mixin for electric multipole parameters that are aligned with
+          PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability
+          with the Particle Accelerator Language Standard (PALS).
+        range: ElectricMultipoleParamGroup
+        inlined: true
+    class_uri: pals:HasElectricMultipoleP
+  ElectricMultipoleParamGroup:
+    name: ElectricMultipoleParamGroup
+    definition_uri: https://pals-project.readthedocs.io/ElectricMultipoleParamGroup
     description: "Mixin for electric multipole parameters, \nwhich can be used to\
       \ describe the electric field components of an accelerator element.\nThis mixin\
       \ is aligned with PALS ElectricMultipoleP for interoperability with the Particle\
       \ Accelerator Language Standard (PALS).\nExample with three multipole components\
-      \ (N=0,1,2): ```yaml components: - order: 7\n  tilt: 0.7\n- order: 3\n  En:\
-      \ 27.3\n- order: 2\n  EnL: 3.47e1\n```"
+      \ (N=0,1,2): ```yaml elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n\
+      \  En: 27.3\n- order: 2\n  EnL: 3.47e1\n```"
     from_schema: https://w3id.org/accelerator-core
     exact_mappings:
     - pals:ElectricMultipoleP
     broad_mappings:
     - pals:ElectricMultipoleP
-    mixin: true
     slots:
-    - electricMultipoleP__components
+    - electricMultipoleParamGroup__elec_components
     attributes:
-      components:
-        name: components
+      elec_components:
+        name: elec_components
         description: Electric multipole components, one per order N.
-        range: MultipoleComponent
+        range: MultipoleParameterGroup
         multivalued: true
         inlined_as_list: true
-    class_uri: narad:ElectricMultipoleP
-  MagneticMultipoleP:
-    name: MagneticMultipoleP
-    definition_uri: https://example.org/narad/MagneticMultipoleP
-    description: "Mixin for magnetic multipole parameters, \nwhich can be used to\
-      \ describe the magnetic field components of an accelerator element.\nThis mixin\
-      \ is aligned with PALS MagneticMultipoleP for interoperability with the Particle\
-      \ Accelerator Language Standard (PALS).\nExample with three multipole components\
-      \ (N=0,1,2): ```yaml components: - order: 7\n  tilt: 0.7\n- order: 3\n  Bn:\
-      \ 27.3\n- order: 2\n  BnL: 3.47e1\n- order: 1\n  Kn: 0.85     # normalized form,\
-      \ e.g. a quadrupole's k1-like strength\n```"
+    class_uri: pals:ElectricMultipoleParamGroup
+  HasMagneticMultipoleP:
+    name: HasMagneticMultipoleP
+    definition_uri: https://pals-project.readthedocs.io/HasMagneticMultipoleP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    attributes:
+      MagneticMultipoleP:
+        name: MagneticMultipoleP
+        description: A mixin for magnetic multipole parameters that are aligned with
+          PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability
+          with the Particle Accelerator Language Standard (PALS).
+        range: MagneticMultipoleParamGroup
+        inlined: true
+    class_uri: pals:HasMagneticMultipoleP
+  MagneticMultipoleParamGroup:
+    name: MagneticMultipoleParamGroup
+    definition_uri: https://pals-project.readthedocs.io/MagneticMultipoleParamGroup
+    description: "Mixin for magnetic multipole parameters,  which can be used to describe\
+      \ the magnetic field components of an accelerator element. This mixin is aligned\
+      \ with PALS MagneticMultipoleP for interoperability with the Particle Accelerator\
+      \ Language Standard (PALS). Example with three multipole components (N=0,1,2):\
+      \ ```yaml mag_components: - order: 7\n  tilt: 0.7\n- order: 3\n  Bn: 27.3\n\
+      - order: 2\n  BnL: 3.47e1\n- order: 1\n  Kn: 0.85     # normalized form, e.g.\
+      \ a quadrupole's k1-like strength\n```"
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:MagneticMultipoleP
-    mixin: true
     slots:
-    - magneticMultipoleP__components
+    - magneticMultipoleParamGroup__mag_components
     attributes:
-      components:
-        name: components
+      mag_components:
+        name: mag_components
         description: Magnetic multipole components, one per order N.
-        range: MultipoleComponent
+        range: MultipoleParameterGroup
         multivalued: true
         inlined_as_list: true
-    class_uri: narad:MagneticMultipoleP
-  BendP:
-    name: BendP
-    definition_uri: https://example.org/narad/BendP
+    class_uri: pals:MagneticMultipoleParamGroup
+  HasBendP:
+    name: HasBendP
+    definition_uri: https://pals-project.readthedocs.io/HasBendP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasBendP__BendP
+    attributes:
+      BendP:
+        name: BendP
+        description: A mixin for bend parameters that are aligned with PALS BendP
+          (Bend Parameters) for interoperability with the Particle Accelerator Language
+          Standard (PALS).
+        range: BendParamGroup
+        inlined: true
+    class_uri: pals:HasBendP
+  BendParamGroup:
+    name: BendParamGroup
+    definition_uri: https://pals-project.readthedocs.io/BendParamGroup
     description: 'Mixin for bend parameters, which can be used to describe the bending
       properties of an accelerator element.
 
@@ -3130,28 +3892,27 @@ classes:
     from_schema: https://w3id.org/accelerator-core
     exact_mappings:
     - pals:BendP
-    mixin: true
     slots:
-    - bendP__angle_ref
-    - bendP__bend_field_ref
-    - bendP__bend_field_actual
-    - bendP__e1
-    - bendP__e2
-    - bendP__e1_rect
-    - bendP__e2_rect
-    - bendP__edge1_int
-    - bendP__edge2_int
-    - bendP__g_ref
-    - bendP__g_actual
-    - bendP__h1
-    - bendP__h2
-    - bendP__L_chord
-    - bendP__L_sagitta
-    - bendP__L_rectangle
-    - bendP__multipole_geometry
-    - bendP__ref_geometry
-    - bendP__rho_ref
-    - bendP__tilt_ref
+    - bendParamGroup__angle_ref
+    - bendParamGroup__bend_field_ref
+    - bendParamGroup__bend_field_actual
+    - bendParamGroup__e1
+    - bendParamGroup__e2
+    - bendParamGroup__e1_rect
+    - bendParamGroup__e2_rect
+    - bendParamGroup__edge1_int
+    - bendParamGroup__edge2_int
+    - bendParamGroup__g_ref
+    - bendParamGroup__g_actual
+    - bendParamGroup__h1
+    - bendParamGroup__h2
+    - bendParamGroup__L_chord
+    - bendParamGroup__L_sagitta
+    - bendParamGroup__L_rectangle
+    - bendParamGroup__multipole_geometry
+    - bendParamGroup__ref_geometry
+    - bendParamGroup__rho_ref
+    - bendParamGroup__tilt_ref
     attributes:
       angle_ref:
         name: angle_ref
@@ -3290,23 +4051,35 @@ classes:
         range: float
         unit:
           ucum_code: rad
-    class_uri: narad:BendP
+    class_uri: pals:BendParamGroup
     rules:
-    - postconditions:
+    - preconditions:
+        slot_conditions:
+          multipole_geometry:
+            name: multipole_geometry
+            value_presence:
+              text: PRESENT
+      postconditions:
         slot_conditions:
           multipole_geometry:
             name: multipole_geometry
             equals_expression: follows_ref_geometry
       description: multipole_geometry must be follows_ref_geometry
-    - postconditions:
+    - preconditions:
+        slot_conditions:
+          ref_geometry:
+            name: ref_geometry
+            value_presence:
+              text: PRESENT
+      postconditions:
         slot_conditions:
           ref_geometry:
             name: ref_geometry
             equals_expression: arc
       description: ref_geometry must be arc
-  MultipoleComponent:
-    name: MultipoleComponent
-    definition_uri: https://example.org/narad/MultipoleComponent
+  MultipoleParameterGroup:
+    name: MultipoleParameterGroup
+    definition_uri: https://pals-project.readthedocs.io/MultipoleParameterGroup
     description: 'A single order''s electric (or magnetic) multipole component.
 
       Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles
@@ -3316,16 +4089,16 @@ classes:
       mixins to represent individual multipole components.'
     from_schema: https://w3id.org/accelerator-core
     slots:
-    - multipoleComponent__order
-    - multipoleComponent__tilt
-    - multipoleComponent__En
-    - multipoleComponent__Es
-    - multipoleComponent__EnL
-    - multipoleComponent__EsL
-    - multipoleComponent__Bn
-    - multipoleComponent__Bs
-    - multipoleComponent__Kn
-    - multipoleComponent__Ks
+    - multipoleParameterGroup__order
+    - multipoleParameterGroup__tilt
+    - multipoleParameterGroup__En
+    - multipoleParameterGroup__Es
+    - multipoleParameterGroup__EnL
+    - multipoleParameterGroup__EsL
+    - multipoleParameterGroup__Bn
+    - multipoleParameterGroup__Bs
+    - multipoleParameterGroup__Kn
+    - multipoleParameterGroup__Ks
     attributes:
       order:
         name: order
@@ -3388,7 +4161,7 @@ classes:
         broad_mappings:
         - pals:KsN
         range: float
-    class_uri: narad:MultipoleComponent
+    class_uri: pals:MultipoleParameterGroup
     rules:
     - preconditions:
         slot_conditions:
@@ -3592,7 +4365,7 @@ classes:
       description: If Ks is present, then En, Es, EnL, EsL should NOT be present
   Component:
     name: Component
-    definition_uri: https://example.org/narad/Component
+    definition_uri: https://pals-project.readthedocs.io/Component
     description: A general class for accelerator components, which can be specialized
       into more specific types like AcceleratorDevice, Magnet, etc.
     from_schema: https://w3id.org/accelerator-core
@@ -3600,15 +4373,12 @@ classes:
     - pals:Element
     abstract: true
     mixins:
-    - MetaP
+    - HasMetaP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     attributes:
       native_types:
         name: native_types
@@ -3616,10 +4386,10 @@ classes:
           can be used to identify the component across different source systems.
         range: string
         multivalued: true
-    class_uri: narad:Component
+    class_uri: pals:Component
   PhysicalComponent:
     name: PhysicalComponent
-    definition_uri: https://example.org/narad/PhysicalComponent
+    definition_uri: https://pals-project.readthedocs.io/PhysicalComponent
     description: A physical item that participates in or supports accelerator operation.  This
       can be used to capture physical components, such as magnets, cavities, diagnostics,
       vacuum devices, and racks that are important for understanding the structure
@@ -3629,32 +4399,23 @@ classes:
     - pals:Element
     is_a: Component
     mixins:
-    - FloorP
-    - HasLongitudinalPlacement
+    - HasFloorP
+    - HasLongitudinalPlacementP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
     attributes:
       functions:
         name: functions
         description: The function of the physical component,  which can be used to
           identify the component across different source systems.
-        slot_uri: narad:physical_function
+        slot_uri: pals:physical_function
         range: PhysicalFunctionEnum
         required: true
         multivalued: true
@@ -3662,17 +4423,17 @@ classes:
         name: beamline_relation
         description: The relationship of the physical component to the beamline,  which
           can be used to identify the component across different source systems.
-        slot_uri: narad:physical_beamline_relation
+        slot_uri: pals:physical_beamline_relation
         range: PhysicalRelationEnum
         required: true
-    class_uri: narad:PhysicalComponent
+    class_uri: pals:PhysicalComponent
   VirtualComponent:
     name: VirtualComponent
-    definition_uri: https://example.org/narad/VirtualComponent
+    definition_uri: https://pals-project.readthedocs.io/VirtualComponent
     description: A virtual or logical component that represents a concept, function,
       or role in the accelerator  beamline operation but does not have a physical
       instantiation.  This can be used to capture abstract components, such as Markers,
-      BeamlineSections, and FacilitySpaces that are important for understanding the
+      BeamLineSections, and FacilitySpaces that are important for understanding the
       structure and function of the accelerator system but are not physical devices.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
@@ -3680,29 +4441,21 @@ classes:
     - pals:BookkeepingElement
     is_a: Component
     mixins:
-    - FloorP
+    - HasFloorP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - virtualComponent__functions
     - virtualComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
+    - hasFloorP__FloorP
     attributes:
       functions:
         name: functions
         description: The function of the virtual component,  which can be used to
           identify the component across different source systems.
-        slot_uri: narad:virtual_function
+        slot_uri: pals:virtual_function
         range: VirtualFunctionEnum
         required: true
         multivalued: true
@@ -3710,67 +4463,50 @@ classes:
         name: beamline_relation
         description: The relationship of the virtual component to the beamline,  which
           can be used to identify the component across different source systems.
-        slot_uri: narad:virtual_beamline_relation
+        slot_uri: pals:virtual_beamline_relation
         range: VirtualRelationEnum
         required: true
-    class_uri: narad:VirtualComponent
-  Beamline:
-    name: Beamline
-    definition_uri: https://example.org/narad/Beamline
-    description: A top-level NARAD-system for an ordered sequence of beamline elements
-      defining a beam path.
+    class_uri: pals:VirtualComponent
+  BeamLine:
+    name: BeamLine
+    definition_uri: https://pals-project.readthedocs.io/BeamLine
+    description: PALS element for an ordered sequence of beamline elements defining
+      a beam path.
     from_schema: https://w3id.org/accelerator-core
     exact_mappings:
     - pals:BeamLine
     is_a: VirtualComponent
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - virtualComponent__functions
     - virtualComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - beamline__multipass
-    - beamline__length
-    - beamline__zero_point
-    - beamline__periodic
-    - beamline__repeat
-    - beamline__direction
+    - hasFloorP__FloorP
+    - BeamLine_length
+    - description
+    - beamLine__multipass
+    - beamLine__periodic
+    - beamLine__repeat
+    - beamLine__direction
+    slot_usage:
+      length:
+        name: length
+        description: The total length of the BeamLine. For pals interoperability,
+          use m as the unit of length.
     attributes:
       multipass:
         name: multipass
-        description: 'Indicates whether the beamline is a multipass beamline, where
-          the beam passes through the same physical elements multiple times.
-
-          If not provided, the default assumption is that the beamline is single-pass.'
+        description: Indicates whether the BeamLine is a multipass BeamLine, where
+          the beam passes through the same physical elements multiple times. If not
+          provided, the default assumption is that the BeamLine is single-pass.
         slot_uri: pals:multipass
         range: boolean
-      length:
-        name: length
-        description: 'The total length of the beamline.
-
-          For pals interoperability, use m as the unit of length.'
-        slot_uri: pals:length
-        range: float
-      zero_point:
-        name: zero_point
-        description: Name of a line item used as a reference point when the BeamLine
-          is used as a subline.
-        range: string
       periodic:
         name: periodic
-        description: 'Indicates whether orbit and Twiss parameters periodic.
-
-          If not provided, the default assumption is that the beamline is not periodic.'
+        description: Indicates whether orbit and Twiss parameters periodic. If not
+          provided, the default assumption is that the BeamLine is not periodic.
         slot_uri: pals:periodic
         range: boolean
       repeat:
@@ -3783,24 +4519,25 @@ classes:
         range: integer
       direction:
         name: direction
-        description: "Beam direction along the beamline: +1 or -1. \nLongitudinal\
-          \ orientation. Default is +1."
+        description: 'Beam direction along the BeamLine: +1 or -1. Longitudinal orientation.
+          Default is +1.'
         slot_uri: pals:direction
         range: integer
-    class_uri: narad:Beamline
+    class_uri: pals:BeamLine
   Signal:
     name: Signal
-    definition_uri: https://example.org/narad/Signal
+    definition_uri: https://pals-project.readthedocs.io/Signal
     description: Semantic meaning of a control-system signal associated with a component.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - sosa:Sensor
     - sosa:Actuator
     mixins:
-    - MetaP
+    - HasMetaP
     slots:
     - id
-    - type
+    - kind
+    - alias
     - signal__signal_role
     - signal__source_system
     - signal__native_description
@@ -3810,10 +4547,7 @@ classes:
     - signal__native_unit
     - signal__access_protocol
     - signal__archive_identifier
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     attributes:
       signal_role:
         name: signal_role
@@ -3862,10 +4596,10 @@ classes:
         name: archive_identifier
         description: The identifier used to reference the signal in an archival system.
         range: string
-    class_uri: narad:Signal
+    class_uri: pals:Signal
   Magnet:
     name: Magnet
-    definition_uri: https://example.org/narad/Magnet
+    definition_uri: https://pals-project.readthedocs.io/Magnet
     description: An accelerator device that produces a magnetic field for beam control.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
@@ -3873,51 +4607,25 @@ classes:
     is_a: PhysicalComponent
     abstract: true
     mixins:
-    - ReferenceP
-    - BodyShiftP
-    - TwissP
+    - HasReferenceP
+    - HasBodyShiftP
+    - HasTwissP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    class_uri: narad:Magnet
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:Magnet
   Solenoid:
     name: Solenoid
-    definition_uri: https://example.org/narad/Solenoid
+    definition_uri: https://pals-project.readthedocs.io/Solenoid
     description: 'A magnet with a primarily longitudinal magnetic field used for focusing.
 
       A solenoid is an element whose magnetic field is dominated by a field whose
@@ -3927,51 +4635,24 @@ classes:
     - pals:Solenoid
     is_a: Magnet
     mixins:
-    - SolenoidP
+    - HasSolenoidP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    - solenoidP__Ksol
-    - solenoidP__Bsol
-    class_uri: narad:Solenoid
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasSolenoidP__SolenoidP
+    class_uri: pals:Solenoid
   Multipole:
     name: Multipole
-    definition_uri: https://example.org/narad/Multipole
+    definition_uri: https://pals-project.readthedocs.io/Multipole
     description: 'A general magnet with a higher-order multipole field, such as a
       sextupole or octupole.
 
@@ -3982,51 +4663,26 @@ classes:
     - pals:Multipole
     is_a: Magnet
     mixins:
-    - ElectricMultipoleP
-    - MagneticMultipoleP
+    - HasElectricMultipoleP
+    - HasMagneticMultipoleP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    - electricMultipoleP__components
-    class_uri: narad:Multipole
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:Multipole
   Bend:
     name: Bend
-    definition_uri: https://example.org/narad/Bend
+    definition_uri: https://pals-project.readthedocs.io/Bend
     description: Dipole magnet used to bend the beam. 2 poles. The major difference
       between this element and other physical elements is that with a Bend  the curvilinear
       coordinate system is an arc with finite curvature  and for the other elements
@@ -4037,49 +4693,27 @@ classes:
     exact_mappings:
     - pals:Bend
     is_a: Multipole
+    mixins:
+    - HasBendP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    - electricMultipoleP__components
-    class_uri: narad:Bend
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBendP__BendP
+    class_uri: pals:Bend
   Quadrupole:
     name: Quadrupole
-    definition_uri: https://example.org/narad/Quadrupole
+    definition_uri: https://pals-project.readthedocs.io/Quadrupole
     description: 'A magnet primarily used to focus or defocus the beam. 4 poles.
 
       Only one of the electric or magnetic multipole components should be present,
@@ -4090,47 +4724,22 @@ classes:
     is_a: Multipole
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    - electricMultipoleP__components
-    class_uri: narad:Quadrupole
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:Quadrupole
   Octupole:
     name: Octupole
-    definition_uri: https://example.org/narad/Octupole
+    definition_uri: https://pals-project.readthedocs.io/Octupole
     description: 'A magnet primarily used to focus or defocus the beam. 8 poles.
 
       Only one of the electric or magnetic multipole components should be present,
@@ -4141,47 +4750,22 @@ classes:
     is_a: Multipole
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    - electricMultipoleP__components
-    class_uri: narad:Octupole
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:Octupole
   Sextupole:
     name: Sextupole
-    definition_uri: https://example.org/narad/Sextupole
+    definition_uri: https://pals-project.readthedocs.io/Sextupole
     description: 'A magnet primarily used to focus or defocus the beam. 6 poles.
 
       Only one of the electric or magnetic multipole components should be present,
@@ -4192,47 +4776,22 @@ classes:
     is_a: Multipole
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    - electricMultipoleP__components
-    class_uri: narad:Sextupole
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:Sextupole
   Kicker:
     name: Kicker
-    definition_uri: https://example.org/narad/Kicker
+    definition_uri: https://pals-project.readthedocs.io/Kicker
     description: "A magnet primarily used to steer the beam.\nCan deflect the beam\
       \ transversely in both planes, or a single plane, depending on the design and\
       \ parameters of the kicker. \nOnly one of the electric or magnetic multipole\
@@ -4248,58 +4807,33 @@ classes:
     - pals:Kicker
     is_a: Magnet
     mixins:
-    - ElectricMultipoleP
-    - MagneticMultipoleP
+    - HasElectricMultipoleP
+    - HasMagneticMultipoleP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
     - kicker__plane
-    - electricMultipoleP__components
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
     attributes:
       plane:
         name: plane
         description: The transverse plane in which the kicker operates, either horizontal
           or vertical.
         range: PlaneEnum
-    class_uri: narad:Kicker
+    class_uri: pals:Kicker
   ACKicker:
     name: ACKicker
-    definition_uri: https://example.org/narad/ACKicker
+    definition_uri: https://pals-project.readthedocs.io/ACKicker
     description: An ACKicker element simulates a time-dependent kicker.  It is like
       a Kicker element except that the field varies in time.  This element requires
       a user supplied time-dependent expression.
@@ -4309,48 +4843,23 @@ classes:
     is_a: Kicker
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
     - kicker__plane
-    - electricMultipoleP__components
-    class_uri: narad:ACKicker
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:ACKicker
   DiagnosticDevice:
     name: DiagnosticDevice
-    definition_uri: https://example.org/narad/DiagnosticDevice
+    definition_uri: https://pals-project.readthedocs.io/DiagnosticDevice
     description: An accelerator device used to measure beam or machine state.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
@@ -4358,165 +4867,116 @@ classes:
     is_a: PhysicalComponent
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    class_uri: narad:DiagnosticDevice
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    class_uri: pals:DiagnosticDevice
+  BeamProfileMonitor:
+    name: BeamProfileMonitor
+    definition_uri: https://pals-project.readthedocs.io/BeamProfileMonitor
+    description: A diagnostic device used to measure transverse beam profile.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Instrument
+    is_a: DiagnosticDevice
+    mixins:
+    - HasReferenceP
+    - HasBodyShiftP
+    - HasTwissP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:BeamProfileMonitor
   BeamPositionMonitor:
     name: BeamPositionMonitor
-    definition_uri: https://example.org/narad/BeamPositionMonitor
+    definition_uri: https://pals-project.readthedocs.io/BeamPositionMonitor
     description: A diagnostic device used to measure transverse beam position.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:Instrument
     is_a: DiagnosticDevice
     mixins:
-    - ReferenceP
-    - BodyShiftP
-    - TwissP
+    - HasReferenceP
+    - HasBodyShiftP
+    - HasTwissP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    class_uri: narad:BeamPositionMonitor
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:BeamPositionMonitor
   RadiationMonitor:
     name: RadiationMonitor
-    definition_uri: https://example.org/narad/RadiationMonitor
+    definition_uri: https://pals-project.readthedocs.io/RadiationMonitor
     description: A diagnostic device used to monitor radiation dose or dose rate.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:Instrument
     is_a: DiagnosticDevice
     mixins:
-    - BodyShiftP
+    - HasBodyShiftP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    class_uri: narad:RadiationMonitor
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasBodyShiftP__BodyShiftP
+    class_uri: pals:RadiationMonitor
   Cavity:
     name: Cavity
-    definition_uri: https://example.org/narad/Cavity
+    definition_uri: https://pals-project.readthedocs.io/Cavity
     description: A cavity used for beam acceleration or manipulation.
     from_schema: https://w3id.org/accelerator-core
     is_a: PhysicalComponent
     abstract: true
     mixins:
-    - ReferenceP
-    - ElectricMultipoleP
-    - MagneticMultipoleP
-    - BodyShiftP
-    - TwissP
+    - HasReferenceP
+    - HasElectricMultipoleP
+    - HasMagneticMultipoleP
+    - HasBodyShiftP
+    - HasTwissP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - electricMultipoleP__components
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    class_uri: narad:Cavity
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:Cavity
   CrabCavity:
     name: CrabCavity
-    definition_uri: https://example.org/narad/CrabCavity
+    definition_uri: https://pals-project.readthedocs.io/CrabCavity
     description: A cavity used for transverse beam manipulation, such as crabbing
       or deflecting.
     from_schema: https://w3id.org/accelerator-core
@@ -4525,96 +4985,49 @@ classes:
     is_a: Cavity
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - electricMultipoleP__components
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    class_uri: narad:CrabCavity
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:CrabCavity
   RFCavity:
     name: RFCavity
-    definition_uri: https://example.org/narad/RFCavity
+    definition_uri: https://pals-project.readthedocs.io/RFCavity
     description: A cavity used for RF acceleration or longitudinal manipulation.
     from_schema: https://w3id.org/accelerator-core
     exact_mappings:
     - pals:RFCavity
     is_a: Cavity
     abstract: true
+    mixins:
+    - HasRFP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - electricMultipoleP__components
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    class_uri: narad:RFCavity
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasRFP__RFP
+    class_uri: pals:RFCavity
   NormalConductingRFCavity:
     name: NormalConductingRFCavity
-    definition_uri: https://example.org/narad/NormalConductingRFCavity
+    definition_uri: https://pals-project.readthedocs.io/NormalConductingRFCavity
     description: A cavity used for RF acceleration or longitudinal manipulation, which
       is normal conducting.
     from_schema: https://w3id.org/accelerator-core
@@ -4623,47 +5036,23 @@ classes:
     is_a: RFCavity
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - electricMultipoleP__components
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    class_uri: narad:NormalConductingRFCavity
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasRFP__RFP
+    class_uri: pals:NormalConductingRFCavity
   SuperConductingRFCavity:
     name: SuperConductingRFCavity
-    definition_uri: https://example.org/narad/SuperConductingRFCavity
+    definition_uri: https://pals-project.readthedocs.io/SuperConductingRFCavity
     description: A cavity used for RF acceleration or longitudinal manipulation, which
       is superconducting.
     from_schema: https://w3id.org/accelerator-core
@@ -4672,135 +5061,83 @@ classes:
     is_a: RFCavity
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__functions
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
-    - referenceP__species_ref
-    - referenceP__pc_ref
-    - referenceP__E_tot_ref
-    - referenceP__time_ref
-    - electricMultipoleP__components
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    class_uri: narad:SuperConductingRFCavity
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasRFP__RFP
+    class_uri: pals:SuperConductingRFCavity
   SupportingFacilityComponent:
     name: SupportingFacilityComponent
-    definition_uri: https://example.org/narad/SupportingFacilityComponent
-    description: "A physical component that supports accelerator operation \nwithout\
-      \ a specific beam-pipe placement, \nsuch as a power supply, control rack, or\
-      \ radiation detector.\nThese can include Girders, Racks, Power Supplies, \n\
-      and other physical infrastructure components that are important for understanding\
-      \ \nthe structure and function of the accelerator system but are not inline\
-      \ with the beamline."
+    definition_uri: https://pals-project.readthedocs.io/SupportingFacilityComponent
+    description: A physical component that supports accelerator operation  without
+      a specific beam-pipe placement,  such as a power supply, control rack, or radiation
+      detector. These can include Girders, Racks, Power Supplies,  and other physical
+      infrastructure components that are important for understanding  the structure
+      and function of the accelerator system but are not inline with the beamline.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:StructuralElement
     is_a: PhysicalComponent
     mixins:
-    - FloorP
-    - HasLongitudinalPlacement
-    - BodyShiftP
+    - HasFloorP
+    - HasLongitudinalPlacementP
+    - HasBodyShiftP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - physicalComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - hasLongitudinalPlacement__length
-    - hasLongitudinalPlacement__s_position
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
     - supportingFacilityComponent__functions
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
+    - hasBodyShiftP__BodyShiftP
     attributes:
       functions:
         name: functions
         description: The function of the supporting facility component,  which can
           be used to identify the component across different source systems.
-        slot_uri: narad:supporting_facility_function
+        slot_uri: pals:supporting_facility_function
         range: FacilityFunctionEnum
         required: true
         multivalued: true
-    class_uri: narad:SupportingFacilityComponent
+    class_uri: pals:SupportingFacilityComponent
   BookkeepingComponent:
     name: BookkeepingComponent
-    definition_uri: https://example.org/narad/BookkeepingComponent
-    description: "A virtual component that represents a bookkeeping or organizational\
-      \ role in the accelerator system, \nsuch as a BeamlineSection, Marker or a Fork.\n\
-      These can include BeamlineSections, Markers, Forks, \nand other virtual components\
-      \ that are important for understanding \nthe structure and function of the accelerator\
-      \ system but are not physical devices."
+    definition_uri: https://pals-project.readthedocs.io/BookkeepingComponent
+    description: A virtual component that represents a bookkeeping or organizational
+      role in the accelerator system,  such as a BeamLineSection, Marker or a Fork.
+      These can include BeamLineSections, Markers, Forks, and other virtual components
+      that are important for understanding  the structure and function of the accelerator
+      system but are not physical devices.
     from_schema: https://w3id.org/accelerator-core
     broad_mappings:
     - pals:BookkeepingElement
     is_a: VirtualComponent
     mixins:
-    - BodyShiftP
+    - HasBodyShiftP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - virtualComponent__functions
     - virtualComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    class_uri: narad:BookkeepingComponent
+    - hasFloorP__FloorP
+    - hasBodyShiftP__BodyShiftP
+    class_uri: pals:BookkeepingComponent
   Marker:
     name: Marker
-    definition_uri: https://example.org/narad/Marker
+    definition_uri: https://pals-project.readthedocs.io/Marker
     description: A virtual component used as a reference point or marker in the beamline
       structure.
     from_schema: https://w3id.org/accelerator-core
@@ -4808,83 +5145,50 @@ classes:
     - pals:Marker
     is_a: BookkeepingComponent
     mixins:
-    - TwissP
+    - HasTwissP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - virtualComponent__functions
     - virtualComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    - twissP__alpha_a
-    - twissP__alpha_b
-    - twissP__beta_a
-    - twissP__beta_b
-    - twissP__eta_x
-    - twissP__eta_y
-    - twissP__etap_x
-    - twissP__etap_y
-    - twissP__phi_a
-    - twissP__phi_b
-    class_uri: narad:Marker
-  BeamlineSection:
-    name: BeamlineSection
-    definition_uri: https://example.org/narad/BeamlineSection
-    description: "A virtual component used to represent a section of the beamline\
-      \ for organizational \nor functional grouping of components."
+    - hasFloorP__FloorP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:Marker
+  BeamLineSection:
+    name: BeamLineSection
+    definition_uri: https://pals-project.readthedocs.io/BeamLineSection
+    description: A virtual component used to represent a section of the BeamLine for
+      organizational or functional grouping of components.
     from_schema: https://w3id.org/accelerator-core
     exact_mappings:
-    - pals:BeamlineSection
+    - pals:BeamLineSection
     is_a: BookkeepingComponent
+    mixins:
+    - HasFloorP
     slots:
     - id
-    - type
+    - kind
     - component__native_types
-    - metaP__description
-    - metaP__label
-    - metaP__alias
-    - metaP__additional_metadata
+    - hasMetaP__MetaP
     - virtualComponent__functions
     - virtualComponent__beamline_relation
-    - floorP__x
-    - floorP__y
-    - floorP__z
-    - floorP__theta
-    - floorP__phi
-    - floorP__psi
-    - bodyShiftP__x_offset
-    - bodyShiftP__y_offset
-    - bodyShiftP__z_offset
-    - bodyShiftP__x_rot
-    - bodyShiftP__y_rot
-    - bodyShiftP__z_rot
-    class_uri: narad:BeamlineSection
-  MetadataEntry:
-    name: MetadataEntry
-    definition_uri: https://example.org/narad/MetadataEntry
+    - hasFloorP__FloorP
+    - hasBodyShiftP__BodyShiftP
+    class_uri: pals:BeamLineSection
+  AdditionalMetadata:
+    name: AdditionalMetadata
+    definition_uri: https://pals-project.readthedocs.io/AdditionalMetadata
     description: 'A single generic key/value metadata entry, used as a GraphQL-compatible
       replacement for an open-ended (range: Any) field. A list of these represents
       an arbitrary, extensible bag of program-specific metadata.'
     from_schema: https://w3id.org/accelerator-core
     slots:
-    - metadataEntry__key
-    - metadataEntry__value
-    - metadataEntry__datatype
+    - additionalMetadata__key
+    - additionalMetadata__value
+    - additionalMetadata__datatype
     attributes:
       key:
         name: key
@@ -4903,10 +5207,10 @@ classes:
           back (e.g. float, integer, boolean) rather than treating everything as an
           opaque string.
         range: DataTypeEnum
-    class_uri: narad:MetadataEntry
+    class_uri: pals:AdditionalMetadata
   Relationship:
     name: Relationship
-    definition_uri: https://example.org/narad/Relationship
+    definition_uri: https://pals-project.readthedocs.io/Relationship
     description: Abstract base for subject-predicate-object associations.
     from_schema: https://w3id.org/accelerator-core
     abstract: true
@@ -4915,11 +5219,11 @@ classes:
     - subject
     - predicate
     - object
-    class_uri: narad:Relationship
+    class_uri: pals:Relationship
     represents_relationship: true
   SignalBinding:
     name: SignalBinding
-    definition_uri: https://example.org/narad/SignalBinding
+    definition_uri: https://pals-project.readthedocs.io/SignalBinding
     description: Association between a PhysicalComponent and one of its Signals, e.g.
       QUAD1.QUAD1_STATUS_binding.
     from_schema: https://w3id.org/accelerator-core
@@ -4939,10 +5243,10 @@ classes:
       object:
         name: object
         range: Signal
-    class_uri: narad:SignalBinding
+    class_uri: pals:SignalBinding
   ComponentRelation:
     name: ComponentRelation
-    definition_uri: https://example.org/narad/ComponentRelation
+    definition_uri: https://pals-project.readthedocs.io/ComponentRelation
     description: Association between two Components (Physical or Virtual), with supporting
       contextual/qualifying information about how and where the relationship holds.
     from_schema: https://w3id.org/accelerator-core
@@ -4955,7 +5259,7 @@ classes:
     - componentRelation__distance_value
     - componentRelation__distance_unit
     - componentRelation__axis
-    - componentRelation__direction
+    - componentRelation__component_direction
     - componentRelation__tolerance_value
     - componentRelation__tolerance_unit
     - ComponentRelation_subject
@@ -4979,9 +5283,9 @@ classes:
         range: RelationContextEnum
       beamline_context:
         name: beamline_context
-        description: The specific Beamline this relationship is defined with respect
+        description: The specific BeamLine this relationship is defined with respect
           to (relevant when context=beamline_order).
-        range: Beamline
+        range: BeamLine
       reference_frame:
         name: reference_frame
         range: ReferenceFrameEnum
@@ -4994,8 +5298,8 @@ classes:
       axis:
         name: axis
         range: AxisEnum
-      direction:
-        name: direction
+      component_direction:
+        name: component_direction
         range: DirectionEnum
       tolerance_value:
         name: tolerance_value
@@ -5003,10 +5307,10 @@ classes:
       tolerance_unit:
         name: tolerance_unit
         range: UnitEnum
-    class_uri: narad:ComponentRelation
+    class_uri: pals:ComponentRelation
 metamodel_version: 1.7.0
 source_file: narad.yaml
-source_file_date: '2026-07-14T16:54:04'
-source_file_size: 57955
-generation_date: '2026-07-15T10:51:23'
+source_file_date: '2026-07-24T13:51:53'
+source_file_size: 68239
+generation_date: '2026-07-24T13:52:45'
 

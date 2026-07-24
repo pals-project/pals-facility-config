@@ -3,7 +3,7 @@
 
 Entrance end pole face rotation with respect to a rectangular geometry.
 
-URI: [narad:bendP__e1_rect](https://example.org/narad/bendP__e1_rect)
+URI: [pals:bendP__e1_rect](https://pals-project.readthedocs.io/bendP__e1_rect)
 
 
 ## Domain and Range

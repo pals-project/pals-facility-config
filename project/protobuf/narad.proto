@@ -5,219 +5,177 @@
 message ACKicker
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
   planeEnum plane = 0
- repeated  multipoleComponent components = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
  }
-// A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
-message Beamline
+// A single generic key/value metadata entry, used as a GraphQL-compatible replacement for an open-ended (range: Any) field. A list of these represents an arbitrary, extensible bag of program-specific metadata.
+message AdditionalMetadata
+ {
+  string key = 0
+  string value = 0
+  dataTypeEnum datatype = 0
+ }
+// Contains affiliation information for an author or component, such as a ROR.
+message Affiliation
  {
   string id = 0
-  component type = 0
+  string name = 0
+ repeated  identifier identifiers = 0
+ }
+// Contains authorship information for a representation of an accelerator facility and its operations.
+message Author
+ {
+  string name = 0
+  affiliation affiliation = 0
+  string email = 0
+  string orcid = 0
+ }
+// PALS element for an ordered sequence of beamline elements defining a beam path.
+message BeamLine
+ {
+  string id = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  boolean multipass = 0
+  floorParamGroup floorP = 0
   float length = 0
-  string zeroPoint = 0
+  string description = 0
+  boolean multipass = 0
   boolean periodic = 0
   integer repeat = 0
   integer direction = 0
  }
-// A virtual component used to represent a section of the beamline for organizational 
-// or functional grouping of components.
-message BeamlineSection
+// A virtual component used to represent a section of the BeamLine for organizational or functional grouping of components.
+message BeamLineSection
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
+  floorParamGroup floorP = 0
+  bodyShiftParamGroup bodyShiftP = 0
  }
 // A diagnostic device used to measure transverse beam position.
 message BeamPositionMonitor
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+ }
+// A diagnostic device used to measure transverse beam profile.
+message BeamProfileMonitor
+ {
+  string id = 0
+  string kind = 0
+ repeated  string nativeTypes = 0
+  metaParamGroup metaP = 0
+ repeated  physicalFunctionEnum functions = 0
+  physicalRelationEnum beamlineRelation = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
  }
 // Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
 message Bend
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
+  bendParamGroup bendP = 0
+ }
+// Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
+// This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+message BendParamGroup
+ {
+  float angleRef = 0
+  float bendFieldRef = 0
+  float bendFieldActual = 0
+  float e1 = 0
+  float e2 = 0
+  float e1Rect = 0
+  float e2Rect = 0
+  float edge1Int = 0
+  float edge2Int = 0
+  float gRef = 0
+  float gActual = 0
+  float h1 = 0
+  float h2 = 0
+  float lChord = 0
+  float lSagitta = 0
+  float lRectangle = 0
+  multipoleGeometryEnum multipoleGeometry = 0
+  referenceGeometryEnum refGeometry = 0
+  float rhoRef = 0
+  float tiltRef = 0
+ }
+// Mixin class for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
+message BodyShiftParamGroup
+ {
   float xOffset = 0
   float yOffset = 0
   float zOffset = 0
   float xRot = 0
   float yRot = 0
   float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
- repeated  multipoleComponent components = 0
  }
-// A virtual component that represents a bookkeeping or organizational role in the accelerator system, 
-// such as a BeamlineSection, Marker or a Fork.
-// These can include BeamlineSections, Markers, Forks, 
-// and other virtual components that are important for understanding 
-// the structure and function of the accelerator system but are not physical devices.
+// A virtual component that represents a bookkeeping or organizational role in the accelerator system,  such as a BeamLineSection, Marker or a Fork. These can include BeamLineSections, Markers, Forks, and other virtual components that are important for understanding  the structure and function of the accelerator system but are not physical devices.
 message BookkeepingComponent
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
+  floorParamGroup floorP = 0
+  bodyShiftParamGroup bodyShiftP = 0
  }
 // Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds.
 message ComponentRelation
  {
   string id = 0
   relationContextEnum context = 0
-  beamline beamlineContext = 0
+  beamLine beamlineContext = 0
   referenceFrameEnum referenceFrame = 0
   float distanceValue = 0
   unitEnum distanceUnit = 0
   axisEnum axis = 0
-  directionEnum direction = 0
+  directionEnum componentDirection = 0
   float toleranceValue = 0
   unitEnum toleranceUnit = 0
   component subject = 0
@@ -228,64 +186,70 @@ message ComponentRelation
 message CrabCavity
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
- repeated  multipoleComponent components = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
  }
 // An accelerator device used to measure beam or machine state.
 message DiagnosticDevice
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+ }
+// Mixin for electric multipole parameters, 
+// which can be used to describe the electric field components of an accelerator element.
+// This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).
+// Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7
+//   tilt: 0.7
+// - order: 3
+//   En: 27.3
+// - order: 2
+//   EnL: 3.47e1
+// ```
+message ElectricMultipoleParamGroup
+ {
+ repeated  multipoleParameterGroup elecComponents = 0
+ }
+// A facility that houses one or more accelerators.
+message Facility
+ {
+ repeated  identifier identifiers = 0
+ repeated  component components = 0
+ repeated  beamLine beamlines = 0
+ repeated  signal signals = 0
+ repeated  signalBinding signalBindings = 0
+ repeated  componentRelation componentRelations = 0
+ }
+// Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
+message FloorParamGroup
+ {
   float x = 0
   float y = 0
   float z = 0
   float theta = 0
   float phi = 0
   float psi = 0
-  float length = 0
-  float sPosition = 0
+ }
+// A unique, and ideally persistent, identifier for a facility, such as a DOI or ROR.
+message Identifier
+ {
+  identifierTypeEnum identifierType = 0
+  string identifierValue = 0
  }
 // A magnet primarily used to steer the beam.
 // Can deflect the beam transversely in both planes, or a single plane, depending on the design and parameters of the kicker. 
@@ -293,134 +257,84 @@ message DiagnosticDevice
 message Kicker
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  planeEnum plane = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
+ }
+// Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis. 
+// Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
+// One (or both) `length` or `s_position` must be present.
+message LongitudinalPlacementParamGroup
+ {
   float length = 0
   float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
-  planeEnum plane = 0
- repeated  multipoleComponent components = 0
+ }
+// Mixin for magnetic multipole parameters,  which can be used to describe the magnetic field components of an accelerator element. This mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml mag_components: - order: 7
+//   tilt: 0.7
+// - order: 3
+//   Bn: 27.3
+// - order: 2
+//   BnL: 3.47e1
+// - order: 1
+//   Kn: 0.85     # normalized form, e.g. a quadrupole's k1-like strength
+// ```
+message MagneticMultipoleParamGroup
+ {
+ repeated  multipoleParameterGroup magComponents = 0
  }
 // A virtual component used as a reference point or marker in the beamline structure.
 message Marker
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
+  floorParamGroup floorP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
  }
-// A single generic key/value metadata entry, used as a GraphQL-compatible replacement for an open-ended (range: Any) field. A list of these represents an arbitrary, extensible bag of program-specific metadata.
-message MetadataEntry
+// Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+message MetaParamGroup
  {
-  string key = 0
-  string value = 0
-  dataTypeEnum datatype = 0
+  string description = 0
+  string alias = 0
+  string label = 0
+ repeated  additionalMetadata additionalMetadata = 0
  }
 // A general magnet with a higher-order multipole field, such as a sextupole or octupole.
 // Only one of the electric or magnetic multipole components should be present, not both.
 message Multipole
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
- repeated  multipoleComponent components = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
  }
 // A single order's electric (or magnetic) multipole component.
 // Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.
 // Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
-message MultipoleComponent
+message MultipoleParameterGroup
  {
   integer order = 0
   float tilt = 0
@@ -433,243 +347,142 @@ message MultipoleComponent
   float kn = 0
   float ks = 0
  }
-// Root container for accelerator core components, semantic signals, and local bindings.
-message NARAD
- {
-  component type = 0
-  string description = 0
- repeated  physicalComponent physicalComponents = 0
- repeated  virtualComponent virtualComponents = 0
- repeated  beamline beamlines = 0
- repeated  supportingFacilityComponent supportingFacilityComponents = 0
- repeated  signal signals = 0
- repeated  signalBinding signalBindings = 0
- repeated  componentRelation componentRelations = 0
- }
 // A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
 message NormalConductingRFCavity
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
- repeated  multipoleComponent components = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  rFParamGroup rFP = 0
  }
 // A magnet primarily used to focus or defocus the beam. 8 poles.
 // Only one of the electric or magnetic multipole components should be present, not both.
 message Octupole
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
- repeated  multipoleComponent components = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
+ }
+// Root container for accelerator core components, semantic signals, and local bindings.
+message PALS
+ {
+  string kind = 0
+  string description = 0
+  affiliation affiliation = 0
+  string version = 0
+ repeated  author authors = 0
+ repeated  string notes = 0
+  facility facility = 0
  }
 // A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system.
 message PhysicalComponent
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
  }
 // A magnet primarily used to focus or defocus the beam. 4 poles.
 // Only one of the electric or magnetic multipole components should be present, not both.
 message Quadrupole
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
- repeated  multipoleComponent components = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
  }
 // A diagnostic device used to monitor radiation dose or dose rate.
 message RadiationMonitor
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+ }
+// Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
+message ReferenceParamGroup
+ {
+  string speciesRef = 0
+  float pcRef = 0
+  float eTotRef = 0
+  float timeRef = 0
+ }
+// Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS).
+message RFParamGroup
+ {
+  float frequency = 0
+  integer harmon = 0
+  float voltage = 0
+  float phase = 0
+  float multipassPhase = 0
+  cavityTypeEnum cavityType = 0
+  integer numCells = 0
+  zeroPhaseEnum zeroPhase = 0
+  float lActive = 0
+  float dERef = 0
  }
 // A magnet primarily used to focus or defocus the beam. 6 poles.
 // Only one of the electric or magnetic multipole components should be present, not both.
 message Sextupole
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
- repeated  multipoleComponent components = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
  }
 // Semantic meaning of a control-system signal associated with a component.
 message Signal
  {
   string id = 0
-  component type = 0
+  string kind = 0
+  string alias = 0
   signalRoleEnum signalRole = 0
   sourceSystemEnum sourceSystem = 0
   string nativeDescription = 0
@@ -679,10 +492,7 @@ message Signal
   unitEnum nativeUnit = 0
   string accessProtocol = 0
   string archiveIdentifier = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  }
 // Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding.
 message SignalBinding
@@ -697,42 +507,21 @@ message SignalBinding
 message Solenoid
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
-  float alphaA = 0
-  float alphaB = 0
-  float betaA = 0
-  float betaB = 0
-  float etaX = 0
-  float etaY = 0
-  float etapX = 0
-  float etapY = 0
-  float phiA = 0
-  float phiB = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  solenoidParamGroup solenoidP = 0
+ }
+// Mixin for solenoid-specific parameters.
+message SolenoidParamGroup
+ {
   float ksol = 0
   float bsol = 0
  }
@@ -740,33 +529,36 @@ message Solenoid
 message SuperConductingRFCavity
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
   physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
-  string speciesRef = 0
-  float pcRef = 0
-  float eTotRef = 0
-  float timeRef = 0
- repeated  multipoleComponent components = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  electricMultipoleParamGroup electricMultipoleP = 0
+  magneticMultipoleParamGroup magneticMultipoleP = 0
+  bodyShiftParamGroup bodyShiftP = 0
+  twissParamGroup twissP = 0
+  rFParamGroup rFP = 0
+ }
+// A physical component that supports accelerator operation  without a specific beam-pipe placement,  such as a power supply, control rack, or radiation detector. These can include Girders, Racks, Power Supplies,  and other physical infrastructure components that are important for understanding  the structure and function of the accelerator system but are not inline with the beamline.
+message SupportingFacilityComponent
+ {
+  string id = 0
+  string kind = 0
+ repeated  string nativeTypes = 0
+  metaParamGroup metaP = 0
+  physicalRelationEnum beamlineRelation = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+ repeated  facilityFunctionEnum functions = 0
+  bodyShiftParamGroup bodyShiftP = 0
+ }
+// Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.
+message TwissParamGroup
+ {
   float alphaA = 0
   float alphaB = 0
   float betaA = 0
@@ -778,54 +570,14 @@ message SuperConductingRFCavity
   float phiA = 0
   float phiB = 0
  }
-// A physical component that supports accelerator operation 
-// without a specific beam-pipe placement, 
-// such as a power supply, control rack, or radiation detector.
-// These can include Girders, Racks, Power Supplies, 
-// and other physical infrastructure components that are important for understanding 
-// the structure and function of the accelerator system but are not inline with the beamline.
-message SupportingFacilityComponent
- {
-  string id = 0
-  component type = 0
- repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
-  physicalRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
-  float length = 0
-  float sPosition = 0
- repeated  facilityFunctionEnum functions = 0
-  float xOffset = 0
-  float yOffset = 0
-  float zOffset = 0
-  float xRot = 0
-  float yRot = 0
-  float zRot = 0
- }
-// A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamlineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
+// A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
 message VirtualComponent
  {
   string id = 0
-  component type = 0
+  string kind = 0
  repeated  string nativeTypes = 0
-  string description = 0
-  string label = 0
-  string alias = 0
- repeated  metadataEntry additionalMetadata = 0
+  metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
   virtualRelationEnum beamlineRelation = 0
-  float x = 0
-  float y = 0
-  float z = 0
-  float theta = 0
-  float phi = 0
-  float psi = 0
+  floorParamGroup floorP = 0
  }

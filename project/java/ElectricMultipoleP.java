@@ -12,7 +12,7 @@ import lombok.*;
   Mixin for electric multipole parameters, 
 which can be used to describe the electric field components of an accelerator element.
 This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).
-Example with three multipole components (N=0,1,2): ```yaml components: - order: 7
+Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7
   tilt: 0.7
 - order: 3
   En: 27.3
@@ -24,6 +24,6 @@ Example with three multipole components (N=0,1,2): ```yaml components: - order: 
 @EqualsAndHashCode(callSuper=false)
 public class ElectricMultipoleP  {
 
-  private List<MultipoleComponent> components;
+  private List<MultipoleParameterGroup> elecComponents;
 
 }

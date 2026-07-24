@@ -3,7 +3,7 @@
 
 The canonical semantic meaning of the signal.
 
-URI: [narad:signal__canonical_signal_type](https://example.org/narad/signal__canonical_signal_type)
+URI: [pals:signal__canonical_signal_type](https://pals-project.readthedocs.io/signal__canonical_signal_type)
 
 
 ## Domain and Range

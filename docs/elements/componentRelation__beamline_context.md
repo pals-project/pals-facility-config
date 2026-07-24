@@ -1,14 +1,14 @@
 
 # Slot: beamline_context
 
-The specific Beamline this relationship is defined with respect to (relevant when context=beamline_order).
+The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order).
 
-URI: [narad:componentRelation__beamline_context](https://example.org/narad/componentRelation__beamline_context)
+URI: [pals:componentRelation__beamline_context](https://pals-project.readthedocs.io/componentRelation__beamline_context)
 
 
 ## Domain and Range
 
-None &#8594;  <sub>0..1</sub> [Beamline](Beamline.md)
+None &#8594;  <sub>0..1</sub> [BeamLine](BeamLine.md)
 
 ## Parents
 

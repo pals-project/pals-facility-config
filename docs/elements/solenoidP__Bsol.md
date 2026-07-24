@@ -3,7 +3,7 @@
 
 Solenoid field.
 
-URI: [narad:solenoidP__Bsol](https://example.org/narad/solenoidP__Bsol)
+URI: [pals:solenoidP__Bsol](https://pals-project.readthedocs.io/solenoidP__Bsol)
 
 
 ## Domain and Range
@@ -18,7 +18,6 @@ None &#8594;  <sub>0..1</sub> [Float](types/Float.md)
 
 ## Used by
 
- * [Solenoid](Solenoid.md)
  * [SolenoidP](SolenoidP.md)
 
 ## Other properties
