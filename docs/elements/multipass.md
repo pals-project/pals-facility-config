@@ -3,13 +3,13 @@
 # Slot: multipass 
 
 
-_Indicates whether this beamline is a multipass recirculating line (true) or a single-pass line (false)._
+_Indicates whether the BeamLine is a multipass BeamLine, where the beam passes through the same physical elements multiple times. If not provided, the default assumption is that the BeamLine is single-pass._
 
 
 
 
 
-URI: [narad:multipass](https://w3id.org/narad_linkml/schema/narad/multipass)
+URI: [pals:multipass](https://pals-project.readthedocs.io/multipass)
 Alias: multipass
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: multipass
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |  no  |
+| [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: multipass
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +55,8 @@ Alias: multipass
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:multipass |
-| native | narad:multipass |
+| self | pals:multipass |
+| native | pals:multipass |
 
 
 
@@ -66,13 +66,16 @@ Alias: multipass
 <details>
 ```yaml
 name: multipass
-description: Indicates whether this beamline is a multipass recirculating line (true)
-  or a single-pass line (false).
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: Indicates whether the BeamLine is a multipass BeamLine, where the beam
+  passes through the same physical elements multiple times. If not provided, the default
+  assumption is that the BeamLine is single-pass.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
+slot_uri: pals:multipass
 alias: multipass
+owner: BeamLine
 domain_of:
-- Beamline
+- BeamLine
 range: boolean
 
 ```

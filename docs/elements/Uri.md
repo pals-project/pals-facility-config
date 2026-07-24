@@ -35,7 +35,7 @@ URI: [xsd:anyURI](http://www.w3.org/2001/XMLSchema#anyURI)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -45,7 +45,7 @@ URI: [xsd:anyURI](http://www.w3.org/2001/XMLSchema#anyURI)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | xsd:anyURI |
-| native | narad:uri |
+| native | pals:uri |
 | close | schema:URL |
 
 

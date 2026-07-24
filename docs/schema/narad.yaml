@@ -1,0 +1,5316 @@
+name: accelerator_core
+description: A lightweight LinkML schema for facility-agnostic accelerator components,
+  their beamline relationships, and associated control-system signals.
+title: Accelerator Core Ontology
+id: https://w3id.org/accelerator-core
+imports:
+- linkml:types
+license: https://creativecommons.org/publicdomain/zero/1.0/
+prefixes:
+  linkml:
+    prefix_prefix: linkml
+    prefix_reference: https://w3id.org/linkml/
+  acc:
+    prefix_prefix: acc
+    prefix_reference: https://example.org/accelerator-core/
+  unit:
+    prefix_prefix: unit
+    prefix_reference: http://qudt.org/vocab/unit/
+  quantitykind:
+    prefix_prefix: quantitykind
+    prefix_reference: http://qudt.org/vocab/quantitykind/
+  sosa:
+    prefix_prefix: sosa
+    prefix_reference: http://www.w3.org/ns/sosa/
+  RO:
+    prefix_prefix: RO
+    prefix_reference: http://purl.obolibrary.org/obo/RO_
+  BFO:
+    prefix_prefix: BFO
+    prefix_reference: http://purl.obolibrary.org/obo/BFO_
+  saref:
+    prefix_prefix: saref
+    prefix_reference: https://saref.etsi.org/core/v4.1.1/
+  pals:
+    prefix_prefix: pals
+    prefix_reference: https://pals-project.readthedocs.io/
+  rdf:
+    prefix_prefix: rdf
+    prefix_reference: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  xsd:
+    prefix_prefix: xsd
+    prefix_reference: http://www.w3.org/2001/XMLSchema#
+default_prefix: pals
+default_range: string
+types:
+  string:
+    name: string
+    definition_uri: https://w3id.org/linkml/String
+    description: A character string
+    notes:
+    - In RDF serializations, a slot with range of string is treated as a literal or
+      type xsd:string.   If you are authoring schemas in LinkML YAML, the type is
+      referenced with the lower case "string".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Text
+    base: str
+    uri: xsd:string
+  integer:
+    name: integer
+    definition_uri: https://w3id.org/linkml/Integer
+    description: An integer
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "integer".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Integer
+    base: int
+    uri: xsd:integer
+  boolean:
+    name: boolean
+    definition_uri: https://w3id.org/linkml/Boolean
+    description: A binary (true or false) value
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "boolean".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Boolean
+    base: Bool
+    uri: xsd:boolean
+    repr: bool
+  float:
+    name: float
+    definition_uri: https://w3id.org/linkml/Float
+    description: A real number that conforms to the xsd:float specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "float".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:float
+  double:
+    name: double
+    definition_uri: https://w3id.org/linkml/Double
+    description: A real number that conforms to the xsd:double specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "double".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    close_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:double
+  decimal:
+    name: decimal
+    definition_uri: https://w3id.org/linkml/Decimal
+    description: A real number with arbitrary precision that conforms to the xsd:decimal
+      specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "decimal".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    broad_mappings:
+    - schema:Number
+    base: Decimal
+    uri: xsd:decimal
+  time:
+    name: time
+    definition_uri: https://w3id.org/linkml/Time
+    description: A time object represents a (local) time of day, independent of any
+      particular day
+    notes:
+    - URI is dateTime because OWL reasoners do not work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "time".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Time
+    base: XSDTime
+    uri: xsd:time
+    repr: str
+  date:
+    name: date
+    definition_uri: https://w3id.org/linkml/Date
+    description: a date (year, month and day) in an idealized calendar
+    notes:
+    - URI is dateTime because OWL reasoners don't work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Date
+    base: XSDDate
+    uri: xsd:date
+    repr: str
+  datetime:
+    name: datetime
+    definition_uri: https://w3id.org/linkml/Datetime
+    description: The combination of a date and time
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "datetime".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:DateTime
+    base: XSDDateTime
+    uri: xsd:dateTime
+    repr: str
+  date_or_datetime:
+    name: date_or_datetime
+    definition_uri: https://w3id.org/linkml/DateOrDatetime
+    description: Either a date or a datetime
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date_or_datetime".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: linkml:DateOrDatetime
+    repr: str
+  uriorcurie:
+    name: uriorcurie
+    definition_uri: https://w3id.org/linkml/Uriorcurie
+    description: a URI or a CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uriorcurie".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: URIorCURIE
+    uri: xsd:anyURI
+    repr: str
+  curie:
+    name: curie
+    definition_uri: https://w3id.org/linkml/Curie
+    conforms_to: https://www.w3.org/TR/curie/
+    description: a compact URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "curie".
+    comments:
+    - in RDF serializations this MUST be expanded to a URI
+    - in non-RDF serializations MAY be serialized as the compact representation
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: Curie
+    uri: xsd:string
+    repr: str
+  uri:
+    name: uri
+    definition_uri: https://w3id.org/linkml/Uri
+    conforms_to: https://www.ietf.org/rfc/rfc3987.txt
+    description: a complete URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uri".
+    comments:
+    - in RDF serializations a slot with range of uri is treated as a literal or type
+      xsd:anyURI unless it is an identifier or a reference to an identifier, in which
+      case it is translated directly to a node
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    close_mappings:
+    - schema:URL
+    base: URI
+    uri: xsd:anyURI
+    repr: str
+  ncname:
+    name: ncname
+    definition_uri: https://w3id.org/linkml/Ncname
+    description: Prefix part of CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "ncname".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: NCName
+    uri: xsd:string
+    repr: str
+  objectidentifier:
+    name: objectidentifier
+    definition_uri: https://w3id.org/linkml/Objectidentifier
+    description: A URI or CURIE that represents an object in the model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "objectidentifier".
+    comments:
+    - Used for inheritance and type checking
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: ElementIdentifier
+    uri: shex:iri
+    repr: str
+  nodeidentifier:
+    name: nodeidentifier
+    definition_uri: https://w3id.org/linkml/Nodeidentifier
+    description: A URI, CURIE or BNODE that represents a node in a model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "nodeidentifier".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: NodeIdentifier
+    uri: shex:nonLiteral
+    repr: str
+  jsonpointer:
+    name: jsonpointer
+    definition_uri: https://w3id.org/linkml/Jsonpointer
+    conforms_to: https://datatracker.ietf.org/doc/html/rfc6901
+    description: A string encoding a JSON Pointer. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to a valid object within the current
+      instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpointer".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+  jsonpath:
+    name: jsonpath
+    definition_uri: https://w3id.org/linkml/Jsonpath
+    conforms_to: https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html
+    description: A string encoding a JSON Path. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to zero or more valid objects within
+      the current instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpath".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+  sparqlpath:
+    name: sparqlpath
+    definition_uri: https://w3id.org/linkml/Sparqlpath
+    conforms_to: https://www.w3.org/TR/sparql11-query/#propertypaths
+    description: A string encoding a SPARQL Property Path. The value of the string
+      MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects
+      within the current instance document when encoded as RDF.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "sparqlpath".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+enums:
+  IdentifierTypeEnum:
+    name: IdentifierTypeEnum
+    definition_uri: https://pals-project.readthedocs.io/IdentifierTypeEnum
+    description: Controlled values for identifier types.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      DOI:
+        text: DOI
+        description: Digital Object Identifier.
+        meaning: http://purl.org/spar/datacite/doi
+      PURL:
+        text: PURL
+        description: Persistent Uniform Resource Locator.
+        meaning: http://purl.org/spar/datacite/purl
+      ROR:
+        text: ROR
+        description: Research Organization Registry identifier.
+        meaning: http://purl.org/spar/datacite/ror
+      LOCAL:
+        text: LOCAL
+        description: Local identifier, specific to the facility or source system.
+        meaning: http://purl.org/spar/datacite/local-resource-identifier-scheme
+      URL:
+        text: URL
+        description: Uniform Resource Locator.
+        meaning: http://purl.org/spar/datacite/url
+      ARK:
+        text: ARK
+        description: Archival Resource Key.
+        meaning: http://purl.org/spar/datacite/ark
+  SourceSystemEnum:
+    name: SourceSystemEnum
+    definition_uri: https://pals-project.readthedocs.io/SourceSystemEnum
+    description: Controlled values for facility-local source systems.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      EPICS:
+        text: EPICS
+        description: EPICS control system.
+      EPICS_ChannelAccess:
+        text: EPICS_ChannelAccess
+        description: EPICS Channel Access source.
+      PALS_Ext:
+        text: PALS_Ext
+        description: PALS-Ext or middle-layer channel/export system.
+      MYA:
+        text: MYA
+        description: MYA archive or historical channel service.
+      ElementDatabase:
+        text: ElementDatabase
+        description: Facility element database.
+      ChannelDatabase:
+        text: ChannelDatabase
+        description: Facility channel database.
+      Simulation:
+        text: Simulation
+        description: Simulation or model-derived signal source.
+      Other:
+        text: Other
+        description: Other source system.
+  PhysicalRelationEnum:
+    name: PhysicalRelationEnum
+    definition_uri: https://pals-project.readthedocs.io/PhysicalRelationEnum
+    description: Controlled values for physical relation to the beamline.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      Inline:
+        text: Inline
+        description: Beam passes through the physical component or beamline aperture.
+          The physical component is physically on the beamline.
+      AttachedToPipe:
+        text: AttachedToPipe
+        description: Mechanically attached to the beam pipe or vacuum envelope.
+      NearBeamLine:
+        text: NearBeamLine
+        description: Near and operationally associated with the beamline.
+      SupportingFacility:
+        text: SupportingFacility
+        description: Supports accelerator operation without a specific beam-pipe placement.
+  VirtualRelationEnum:
+    name: VirtualRelationEnum
+    definition_uri: https://pals-project.readthedocs.io/VirtualRelationEnum
+    description: Controlled values for virtual relation to the beamline.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      Inline:
+        text: Inline
+        description: Beam passes through the virtual component. Used for virtual components
+          like Markers that represent important locations on the beamline but don't
+          have a physical instantiation.
+      AssociatedWithBeamLine:
+        text: AssociatedWithBeamLine
+        description: Not inline with the beamline but still operationally associated
+          with it.  Used for virtual components that are important for understanding
+          the BeamLine structure and function but don't have a direct physical relationship
+          to the beam path,  such as BeamLineSections or Markers that are not inline
+          with the beam.
+      NotAssociatedWithBeamLine:
+        text: NotAssociatedWithBeamLine
+        description: Not inline with the BeamLine and not operationally associated
+          with it.  Used for virtual components that are more abstract and don't have
+          a specific relationship  to the BeamLine, such as a virtual component representing
+          a control system function  or role that is important for understanding the
+          overall accelerator system but doesn't have a direct relationship to the
+          BeamLine structure.
+  PhysicalFunctionEnum:
+    name: PhysicalFunctionEnum
+    definition_uri: https://pals-project.readthedocs.io/PhysicalFunctionEnum
+    description: Broad device-level functions.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      Focusing:
+        text: Focusing
+        description: Focuses or defocuses the beam.
+      Steering:
+        text: Steering
+        description: Steers the beam in a transverse plane.
+      BeamPositionMeasurement:
+        text: BeamPositionMeasurement
+        description: Measures transverse beam position.
+      VacuumGeneration:
+        text: VacuumGeneration
+        description: Generates or maintains vacuum.
+      RadiationMonitoring:
+        text: RadiationMonitoring
+        description: Monitors radiation dose or dose rate.
+      Measurement:
+        text: Measurement
+        description: Measures beam or machine state.
+      BeamAcceleration:
+        text: BeamAcceleration
+        description: Accelerates the beam.
+      BeamLossDetection:
+        text: BeamLossDetection
+        description: Detects beam loss.
+      BeamCurrentMeasurement:
+        text: BeamCurrentMeasurement
+        description: Measures beam current or intensity.
+      BeamProfileMeasurement:
+        text: BeamProfileMeasurement
+        description: Measures beam profile.
+      MachineProtection:
+        text: MachineProtection
+        description: Supports machine protection.
+      TimingSynchronization:
+        text: TimingSynchronization
+        description: Supports timing or synchronization.
+  FacilityFunctionEnum:
+    name: FacilityFunctionEnum
+    definition_uri: https://pals-project.readthedocs.io/FacilityFunctionEnum
+    description: Broad structural or support functions.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      Support:
+        text: Support
+        description: Provides mechanical support for accelerator operations.
+      Alignment:
+        text: Alignment
+        description: Supports alignment of accelerator components.
+      PowerSupply:
+        text: PowerSupply
+        description: Provides electrical power to accelerator components.
+      ControlRack:
+        text: ControlRack
+        description: Houses control electronics for accelerator components.
+      Cooling:
+        text: Cooling
+        description: Provides cooling for accelerator components.
+      Diagnostics:
+        text: Diagnostics
+        description: Provides diagnostic capabilities for accelerator components,
+          such as monitoring or measurement.
+      Detection:
+        text: Detection
+        description: Provides detection capabilities for accelerator components, such
+          as radiation or particle detection.
+  VirtualFunctionEnum:
+    name: VirtualFunctionEnum
+    definition_uri: https://pals-project.readthedocs.io/VirtualFunctionEnum
+    description: Broad virtual component functions or roles.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      BeamLineSection:
+        text: BeamLineSection
+        description: A section of the BeamLine used for organizational or functional
+          grouping of components, such as a linac section, transfer line, or ring
+          sector.
+        meaning: pals:BeamLine
+      Mark:
+        text: Mark
+        description: A virtual component representing an important location on the
+          beamline,  such as a reference point for beam-based alignment, a location
+          of a known aperture restriction,  or a location of a critical diagnostic
+          device.
+        meaning: pals:Marker
+      Fork:
+        text: Fork
+        description: A virtual component representing a branching point in the beamline,  such
+          as a beamline fork or switchyard.
+        meaning: pals:Fork
+      Control:
+        text: Control
+        description: A virtual component representing a control system function or
+          role that is important for understanding the overall accelerator system  but
+          doesn't have a direct relationship to the beamline structure,  such as the
+          EPICS control system that manages device process variables across the accelerator.
+  PlaneEnum:
+    name: PlaneEnum
+    definition_uri: https://pals-project.readthedocs.io/PlaneEnum
+    description: Controlled values for transverse plane.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      Horizontal:
+        text: Horizontal
+        description: Horizontal transverse plane.
+      Vertical:
+        text: Vertical
+        description: Vertical transverse plane.
+  SignalRoleEnum:
+    name: SignalRoleEnum
+    definition_uri: https://pals-project.readthedocs.io/SignalRoleEnum
+    description: Roles for control-system signals.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      Setpoint:
+        text: Setpoint
+        description: Requested or configured value.
+        meaning: sosa:ActuatableProperty
+      Readback:
+        text: Readback
+        description: Measured or reported value.
+        meaning: sosa:ObservableProperty
+      Status:
+        text: Status
+        description: State or condition indicator.
+      Command:
+        text: Command
+        description: Command or action trigger.
+        meaning: sosa:ActuatableProperty
+      MinimumLimit:
+        text: MinimumLimit
+        description: Minimum allowed signal value.
+        meaning: xsd:minInclusive
+      MaximumLimit:
+        text: MaximumLimit
+        description: Maximum allowed signal value.
+        meaning: xsd:maxInclusive
+  CanonicalSignalTypeEnum:
+    name: CanonicalSignalTypeEnum
+    definition_uri: https://pals-project.readthedocs.io/CanonicalSignalTypeEnum
+    description: Portable semantic meanings for important signals.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      HorizontalBeamPosition:
+        text: HorizontalBeamPosition
+        description: Horizontal beam position signal.
+      VerticalBeamPosition:
+        text: VerticalBeamPosition
+        description: Vertical beam position signal.
+      HorizontalBeamPositionOffset:
+        text: HorizontalBeamPositionOffset
+        description: Horizontal beam position offset signal.
+      VerticalBeamPositionOffset:
+        text: VerticalBeamPositionOffset
+        description: Vertical beam position offset signal.
+      BeamIntensity:
+        text: BeamIntensity
+        description: Beam intensity or current signal.
+      DeviceStatus:
+        text: DeviceStatus
+        description: Device status signal.
+      GradientSetpoint:
+        text: GradientSetpoint
+        description: Cavity accelerating gradient setpoint signal.
+      GradientReadback:
+        text: GradientReadback
+        description: Cavity accelerating gradient readback signal.
+      MagnetCurrentSetpoint:
+        text: MagnetCurrentSetpoint
+        description: Magnet current setpoint signal.
+      MagnetCurrentReadback:
+        text: MagnetCurrentReadback
+        description: Magnet current readback signal.
+      MagnetFieldSetpoint:
+        text: MagnetFieldSetpoint
+        description: Magnet field setpoint signal.
+      IntegratedFieldSetpoint:
+        text: IntegratedFieldSetpoint
+        description: Integrated magnetic field setpoint signal.
+      IntegratedFieldReadback:
+        text: IntegratedFieldReadback
+        description: Integrated magnetic field readback signal.
+      VacuumPressure:
+        text: VacuumPressure
+        description: Vacuum pressure signal.
+      IonPumpCurrent:
+        text: IonPumpCurrent
+        description: Ion pump current signal.
+      IonPumpVoltage:
+        text: IonPumpVoltage
+        description: Ion pump voltage signal.
+      GammaDoseRate:
+        text: GammaDoseRate
+        description: Gamma radiation dose-rate signal.
+      NeutronDoseRate:
+        text: NeutronDoseRate
+        description: Neutron radiation dose-rate signal.
+      Status:
+        text: Status
+        description: Generic status signal for a device.
+  QuantityKindEnum:
+    name: QuantityKindEnum
+    definition_uri: https://pals-project.readthedocs.io/QuantityKindEnum
+    description: Physical quantity kinds for signals.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      BeamPosition:
+        text: BeamPosition
+        description: Beam transverse position.
+      State:
+        text: State
+        description: Device state or condition.
+        meaning: sosa:ObservableProperty
+      ElectricCurrent:
+        text: ElectricCurrent
+        description: Electric current.
+        meaning: quantitykind:ElectricCurrent
+      IntegratedMagneticField:
+        text: IntegratedMagneticField
+        description: Integrated magnetic field.
+        meaning: quantitykind:MagneticFluxPerLength
+      MagneticField:
+        text: MagneticField
+        description: Magnetic field.
+        meaning: quantitykind:MagneticFluxDensity
+      Pressure:
+        text: Pressure
+        description: Gas or vacuum pressure.
+        meaning: quantitykind:Pressure
+      DoseRate:
+        text: DoseRate
+        description: Radiation dose rate.
+        meaning: quantitykind:AbsorbedDoseRate
+      Voltage:
+        text: Voltage
+        description: Electric potential difference.
+        meaning: quantitykind:Voltage
+      Power:
+        text: Power
+        description: Power.
+        meaning: quantitykind:Power
+      CavityPhase:
+        text: CavityPhase
+        description: Cavity phase.
+        meaning: quantitykind:PhaseAngle
+      CavityGradient:
+        text: CavityGradient
+        description: Cavity accelerating gradient.
+        meaning: quantitykind:ElectricFieldStrength
+  UnitEnum:
+    name: UnitEnum
+    definition_uri: https://pals-project.readthedocs.io/UnitEnum
+    description: Engineering units using ASCII-safe enum names. Values map to QUDT
+      unit IRIs with the LinkML meaning field when an exact QUDT unit is available.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      A:
+        text: A
+        description: ampere
+        meaning: unit:A
+      degree:
+        text: degree
+        description: degree
+        meaning: unit:DEG
+      eV:
+        text: eV
+        description: electron volt
+        meaning: unit:EV
+      eV_per_c:
+        text: eV_per_c
+        description: momentum in electron volts per speed of light
+      eV_per_c2:
+        text: eV_per_c2
+        description: mass in electron volts per speed of light squared
+      fundamental_charge:
+        text: fundamental_charge
+        description: fundamental charge
+        meaning: unit:????
+      G_per_cm:
+        text: G_per_cm
+        description: gauss per centimeter
+      Hz:
+        text: Hz
+        description: hertz
+        meaning: unit:HZ
+      kW:
+        text: kW
+        description: kilowatt
+        meaning: unit:KiloW
+      m:
+        text: m
+        description: meter
+        meaning: unit:M
+      mm:
+        text: mm
+        description: millimeter
+        meaning: unit:MilliM
+      mrem_per_h:
+        text: mrem_per_h
+        description: millirem per hour. Kept as a local accelerator unit value because
+          QUDT publishes related radiation units but no exact millirem-per-hour unit
+          in the checked vocabulary.
+        meaning: unit:MREM-PER-H
+      MV_per_m:
+        text: MV_per_m
+        description: megavolt per meter
+        meaning: unit:MegaV-PER-M
+      PA:
+        text: PA
+        description: pascal
+        meaning: unit:PA
+      randians_pi2:
+        text: randians_pi2
+        description: radians divided by 2 pi - angles and phases
+      rem_per_h:
+        text: rem_per_h
+        description: rem per hour. Kept as a local accelerator unit value because
+          QUDT publishes rem and rem-per-second but no exact rem-per-hour unit in
+          the checked vocabulary.
+      seconds:
+        text: seconds
+        description: second
+        meaning: unit:SEC
+      T:
+        text: T
+        description: tesla
+        meaning: unit:T
+      T_M:
+        text: T_M
+        description: tesla meter
+        meaning: unit:T-M
+      Torr:
+        text: Torr
+        description: torr
+        meaning: unit:TORR
+      V:
+        text: V
+        description: volt
+        meaning: unit:V
+      V_per_m:
+        text: V_per_m
+        description: volt per meter
+        meaning: unit:V-PER-M
+      unitless:
+        text: unitless
+        description: dimensionless numeric value
+        meaning: unit:NUM
+      none:
+        text: none
+        description: no unit or not applicable
+  DataTypeEnum:
+    name: DataTypeEnum
+    definition_uri: https://pals-project.readthedocs.io/DataTypeEnum
+    description: Data types for parameter values.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      String:
+        text: String
+        description: string data type
+        meaning: xsd:string
+      Integer:
+        text: Integer
+        description: integer data type
+        meaning: xsd:integer
+      Float:
+        text: Float
+        description: floating-point data type
+        meaning: xsd:float
+      Boolean:
+        text: Boolean
+        description: boolean data type
+        meaning: xsd:boolean
+  ComponentRelationPredicateEnum:
+    name: ComponentRelationPredicateEnum
+    definition_uri: https://pals-project.readthedocs.io/ComponentRelationPredicateEnum
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      precedes:
+        text: precedes
+        description: Subject occurs immediately before object in the sequence/beamline
+          order.
+        meaning: BFO:0000063
+      follows:
+        text: follows
+        description: Subject occurs after object in the sequence/beamline order.
+        meaning: BFO:0000062
+      contains:
+        text: contains
+        description: Subject spatially or mereologically contains object.
+        meaning: BFO:0000051
+      contained_in:
+        text: contained_in
+        description: Subject is spatially or mereologically contained in object.
+        meaning: BFO:0000050
+      connected_to:
+        text: connected_to
+        description: Subject and object are physically connected. a is connected to
+          b if and only if a and b are discrete structure,  and there exists some
+          connecting structure c, such that c connects a and b
+        meaning: RO:0002170
+      controls:
+        text: controls
+        description: Subject controls the state or behavior of object.
+        meaning: saref:controls
+      is_controlled_by:
+        text: is_controlled_by
+        description: Subject is controlled by object.
+        meaning: saref:isControlledBy
+      is_part_of:
+        text: is_part_of
+        description: Subject is a part of object.
+        meaning: BFO:0000050
+      has_part:
+        text: has_part
+        description: Subject has part object.
+        meaning: BFO:0000051
+      adjacent_to:
+        text: adjacent_to
+        description: Subject and object are spatially adjacent, without overlapping.
+        meaning: RO:0002220
+      overlaps:
+        text: overlaps
+        description: Subject and object share at least one part in common.
+        meaning: RO:0002131
+      mounted_on:
+        text: mounted_on
+        description: Subject is mounted on object.
+        meaning: pals:mounted_on
+      intersects:
+        text: intersects
+        description: Subject intersects with object.
+        meaning: pals:intersects
+      nearest_to:
+        text: nearest_to
+        description: Subject is nearest to object.
+        meaning: pals:nearest_to
+  SignalBindingPredicateEnum:
+    name: SignalBindingPredicateEnum
+    definition_uri: https://pals-project.readthedocs.io/SignalBindingPredicateEnum
+    description: Controlled predicates for Component-to-Signal bindings.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      has_signal:
+        text: has_signal
+        description: Generic association between a component and one of its signals.
+          The specific role (setpoint, readback, status, etc.) is carried by the Signal's
+          own signal_role field, not the predicate.
+      has_status_signal:
+        text: has_status_signal
+        description: Subject has the given signal as its status indicator.
+      has_setpoint_signal:
+        text: has_setpoint_signal
+        description: Subject has the given signal as its setpoint.
+      has_readback_signal:
+        text: has_readback_signal
+        description: Subject has the given signal as its readback.
+      has_command_signal:
+        text: has_command_signal
+        description: Subject has the given signal as a command trigger.
+      has_limit_signal:
+        text: has_limit_signal
+        description: Subject has the given signal as a limit/constraint value.
+  RelationContextEnum:
+    name: RelationContextEnum
+    definition_uri: https://pals-project.readthedocs.io/RelationContextEnum
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      beamline_order:
+        text: beamline_order
+      Euclidean_3D:
+        text: Euclidean_3D
+      Euclidean_2D:
+        text: Euclidean_2D
+      floorplan:
+        text: floorplan
+      containment:
+        text: containment
+      installation_mounting:
+        text: installation_mounting
+  ReferenceFrameEnum:
+    name: ReferenceFrameEnum
+    definition_uri: https://pals-project.readthedocs.io/ReferenceFrameEnum
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      beam_direction:
+        text: beam_direction
+      facility_coordinates:
+        text: facility_coordinates
+      local_component_frame:
+        text: local_component_frame
+      tunnel_stationing:
+        text: tunnel_stationing
+  AxisEnum:
+    name: AxisEnum
+    definition_uri: https://pals-project.readthedocs.io/AxisEnum
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      x:
+        text: x
+      y:
+        text: y
+      z:
+        text: z
+      s:
+        text: s
+  DirectionEnum:
+    name: DirectionEnum
+    definition_uri: https://pals-project.readthedocs.io/DirectionEnum
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      upstream:
+        text: upstream
+      downstream:
+        text: downstream
+      positive:
+        text: positive
+      negative:
+        text: negative
+  MultipoleGeometryEnum:
+    name: MultipoleGeometryEnum
+    definition_uri: https://pals-project.readthedocs.io/MultipoleGeometryEnum
+    description: The geometric configuration of the multipole field.  Sets the geometry
+      used to calculate multipoles.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      follows_ref_geometry:
+        text: follows_ref_geometry
+        description: Use geometry equivalent to the setting of `ref_geometry`.
+      vertically_pure:
+        text: vertically_pure
+        description: Vertically pure multipoles with arc geometry.
+      horizontally_pure:
+        text: horizontally_pure
+        description: Horizontally pure multipoles with arc geometry.
+      chord:
+        text: chord
+        description: Z-axis is the chord connecting the entrance origin point to the
+          exit origin point.
+      entrance_coords:
+        text: entrance_coords
+        description: Rectangular coordinates commensurate with the entrance coordinates.
+      exit_coords:
+        text: exit_coords
+        description: Rectangular coordinates commensurate with the exit coordinates.
+  ReferenceGeometryEnum:
+    name: ReferenceGeometryEnum
+    definition_uri: https://pals-project.readthedocs.io/ReferenceGeometryEnum
+    description: The reference geometry used to calculate multipoles.  Sets the geometry
+      used to calculate multipoles.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      arc:
+        text: arc
+        description: Default. Reference are the curvelinear arc coordinates.
+      chord:
+        text: chord
+        description: Z-axis is the chord connecting the entrance origin point to the
+          exit origin point.
+      entrance_coords:
+        text: entrance_coords
+        description: Rectangular coordinates commensurate with the entrance coordinates.
+      exit_coords:
+        text: exit_coords
+        description: Rectangular coordinates commensurate with the exit coordinates.
+  CavityTypeEnum:
+    name: CavityTypeEnum
+    definition_uri: https://pals-project.readthedocs.io/CavityTypeEnum
+    description: The type of cavity, which determines the field configuration and
+      mode structure.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      STANDING_WAVE:
+        text: STANDING_WAVE
+        description: Default. A cavity that supports standing wave modes, typically
+          with fixed geometry and resonant frequencies.
+      TRAVELING_WAVE:
+        text: TRAVELING_WAVE
+        description: A cavity that supports traveling wave modes, typically with a
+          waveguide structure and phase velocity matching the beam.
+  ZeroPhaseEnum:
+    name: ZeroPhaseEnum
+    definition_uri: https://pals-project.readthedocs.io/ZeroPhaseEnum
+    description: The zero phase reference for the cavity, which determines the phase
+      of the RF field at the entrance of the cavity.
+    from_schema: https://w3id.org/accelerator-core
+    permissible_values:
+      ACCELERATING:
+        text: ACCELERATING
+        description: Default. The zero phase is the maximum accelerating phase, where
+          the beam gains energy.
+      BELOW_TRANSITION:
+        text: BELOW_TRANSITION
+        description: Zero phase is at the stable zero crossing for particles below
+          transition.
+      ABOVE_TRANSITION:
+        text: ABOVE_TRANSITION
+        description: Zero phase is at the stable zero crossing for particles above
+          transition..
+slots:
+  id:
+    name: id
+    definition_uri: https://pals-project.readthedocs.io/id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:id
+    slot_uri: pals:id
+    identifier: true
+    owner: Relationship
+    domain_of:
+    - Affiliation
+    - Component
+    - Signal
+    - Relationship
+    range: string
+    required: true
+  name:
+    name: name
+    definition_uri: https://pals-project.readthedocs.io/name
+    description: The name of the entity. For example, the name of the person or organization.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:name
+    owner: Affiliation
+    domain_of:
+    - Author
+    - Affiliation
+    range: string
+  alias:
+    name: alias
+    definition_uri: https://pals-project.readthedocs.io/alias
+    description: An alternative name or identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:alias
+    slot_uri: pals:alias
+    owner: Signal
+    domain_of:
+    - MetaParamGroup
+    - Signal
+    range: string
+  kind:
+    name: kind
+    definition_uri: https://pals-project.readthedocs.io/kind
+    description: The LinkML class name of this instance.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:kind
+    slot_uri: pals:kind
+    owner: Signal
+    domain_of:
+    - PALS
+    - Component
+    - Signal
+    range: string
+    required: true
+  subject:
+    name: subject
+    definition_uri: https://pals-project.readthedocs.io/subject
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:subject
+    slot_uri: rdf:subject
+    owner: Relationship
+    domain_of:
+    - Relationship
+    relational_role:
+      text: SUBJECT
+      description: a slot with this role connects a relationship to its subject/source
+        node
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#subject
+    range: string
+    required: true
+  predicate:
+    name: predicate
+    definition_uri: https://pals-project.readthedocs.io/predicate
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:predicate
+    slot_uri: rdf:predicate
+    owner: Relationship
+    domain_of:
+    - Relationship
+    relational_role:
+      text: PREDICATE
+      description: a slot with this role connects a relationship to its predicate/property
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate
+    range: string
+    required: true
+  object:
+    name: object
+    definition_uri: https://pals-project.readthedocs.io/object
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:object
+    slot_uri: rdf:object
+    owner: Relationship
+    domain_of:
+    - Relationship
+    relational_role:
+      text: OBJECT
+      description: a slot with this role connects a relationship to its object/target
+        node
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#object
+    range: string
+    required: true
+  affiliation:
+    name: affiliation
+    definition_uri: https://pals-project.readthedocs.io/affiliation
+    description: The affiliation of the author or component, as a ROR.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:affiliation
+    owner: Author
+    domain_of:
+    - PALS
+    - Author
+    range: Affiliation
+    inlined: true
+    inlined_as_list: false
+  description:
+    name: description
+    definition_uri: https://pals-project.readthedocs.io/description
+    description: A human-readable description of the instance.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:description
+    owner: BeamLine
+    domain_of:
+    - PALS
+    - MetaParamGroup
+    - BeamLine
+    range: string
+  identifiers:
+    name: identifiers
+    definition_uri: https://pals-project.readthedocs.io/identifiers
+    description: A unique and ideally persistent identifier for the facility, such
+      as a DOI or ROR.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:identifiers
+    owner: Affiliation
+    domain_of:
+    - Facility
+    - Affiliation
+    range: Identifier
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  length:
+    name: length
+    definition_uri: https://pals-project.readthedocs.io/length
+    description: Length of the element (arc length for bends).
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:length
+    slot_uri: pals:length
+    owner: BeamLine
+    domain_of:
+    - LongitudinalPlacementParamGroup
+    - BeamLine
+    range: float
+  pALS__version:
+    name: pALS__version
+    description: Version of the representation of a particle accelerator and its operations.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:version
+    alias: version
+    owner: PALS
+    domain_of:
+    - PALS
+    range: string
+    pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
+  pALS__authors:
+    name: pALS__authors
+    description: Contains the authorship information for this representation of an
+      accelerator facility and its operations.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:authors
+    alias: authors
+    owner: PALS
+    domain_of:
+    - PALS
+    range: Author
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  pALS__notes:
+    name: pALS__notes
+    description: Additional notes or comments about the representation of a particle
+      accelerator and its operations.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:notes
+    alias: notes
+    owner: PALS
+    domain_of:
+    - PALS
+    range: string
+    multivalued: true
+    inlined_as_list: true
+  pALS__facility:
+    name: pALS__facility
+    description: A facility that contains lattice elements (physical and virtual),
+      beamlines, parameter set commands, signals, etc.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:facility
+    alias: facility
+    owner: PALS
+    domain_of:
+    - PALS
+    range: Facility
+    inlined: true
+    inlined_as_list: true
+  author__email:
+    name: author__email
+    description: The email address of the author.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:email
+    alias: email
+    owner: Author
+    domain_of:
+    - Author
+    range: string
+    pattern: ^[^@]+@[^@]+\.[^@]+$
+  author__orcid:
+    name: author__orcid
+    description: The ORCID identifier of the author.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:orcid
+    alias: orcid
+    owner: Author
+    domain_of:
+    - Author
+    range: string
+    pattern: ^https://orcid\.org/\d{4}-\d{4}-\d{4}-\d{3}[\dX]$
+  facility__components:
+    name: facility__components
+    description: A list of physical components in the accelerator system.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:components
+    alias: components
+    owner: Facility
+    domain_of:
+    - Facility
+    range: Component
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  facility__beamlines:
+    name: facility__beamlines
+    description: A list of beamlines in the accelerator system.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:beamlines
+    alias: beamlines
+    owner: Facility
+    domain_of:
+    - Facility
+    range: BeamLine
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  facility__signals:
+    name: facility__signals
+    description: A list of signals in the accelerator system.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:signals
+    alias: signals
+    owner: Facility
+    domain_of:
+    - Facility
+    range: Signal
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  facility__signal_bindings:
+    name: facility__signal_bindings
+    description: A list of signal bindings in the accelerator system (Component <->
+      Signal relationships).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:signal_bindings
+    alias: signal_bindings
+    owner: Facility
+    domain_of:
+    - Facility
+    range: SignalBinding
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  facility__component_relations:
+    name: facility__component_relations
+    description: A list of component relations in the accelerator system (Component
+      <-> Component relationships).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:component_relations
+    alias: component_relations
+    owner: Facility
+    domain_of:
+    - Facility
+    range: ComponentRelation
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  identifier__identifier_type:
+    name: identifier__identifier_type
+    description: The type of identifier, such as DOI | PURL | ROR | LOCAL | URL |
+      ARK.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:identifier_type
+    alias: identifier_type
+    owner: Identifier
+    domain_of:
+    - Identifier
+    range: IdentifierTypeEnum
+  identifier__identifier_value:
+    name: identifier__identifier_value
+    description: The value of the identifier.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:identifier_value
+    alias: identifier_value
+    owner: Identifier
+    domain_of:
+    - Identifier
+    range: string
+  hasMetaP__MetaP:
+    name: hasMetaP__MetaP
+    description: A mixin for metadata parameters that are aligned with PALS MetaP
+      (Metadata Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:MetaP
+    alias: MetaP
+    owner: HasMetaP
+    domain_of:
+    - HasMetaP
+    range: MetaParamGroup
+    inlined: true
+    inlined_as_list: true
+  metaParamGroup__label:
+    name: metaParamGroup__label
+    description: A label string.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:label
+    slot_uri: pals:label
+    alias: label
+    owner: MetaParamGroup
+    domain_of:
+    - MetaParamGroup
+    range: string
+  metaParamGroup__additional_metadata:
+    name: metaParamGroup__additional_metadata
+    description: Additional metadata or annotations for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:additional_metadata
+    alias: additional_metadata
+    owner: MetaParamGroup
+    domain_of:
+    - MetaParamGroup
+    range: AdditionalMetadata
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  hasFloorP__FloorP:
+    name: hasFloorP__FloorP
+    description: A mixin for floor plan parameters that are aligned with PALS FloorP
+      (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:FloorP
+    alias: FloorP
+    owner: HasFloorP
+    domain_of:
+    - HasFloorP
+    range: FloorParamGroup
+    inlined: true
+    inlined_as_list: true
+  floorParamGroup__x:
+    name: floorParamGroup__x
+    description: Global X coordinate in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - x_coordinate
+    - ModelX
+    - x coordinate
+    mappings:
+    - pals:x
+    slot_uri: pals:x
+    alias: x
+    owner: FloorParamGroup
+    domain_of:
+    - FloorParamGroup
+    range: float
+  floorParamGroup__y:
+    name: floorParamGroup__y
+    description: Global Y coordinate in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - y_coordinate
+    - ModelY
+    - y coordinate
+    mappings:
+    - pals:y
+    slot_uri: pals:y
+    alias: y
+    owner: FloorParamGroup
+    domain_of:
+    - FloorParamGroup
+    range: float
+  floorParamGroup__z:
+    name: floorParamGroup__z
+    description: Global Z coordinate in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - z_coordinate
+    - ModelZ
+    - z coordinate
+    mappings:
+    - pals:z
+    slot_uri: pals:z
+    alias: z
+    owner: FloorParamGroup
+    domain_of:
+    - FloorParamGroup
+    range: float
+  floorParamGroup__theta:
+    name: floorParamGroup__theta
+    description: Orientation angle around the Y-axis in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - theta_angle
+    - ModelYaw
+    - Model_Yaw
+    mappings:
+    - pals:theta
+    slot_uri: pals:theta
+    alias: theta
+    owner: FloorParamGroup
+    domain_of:
+    - FloorParamGroup
+    range: float
+  floorParamGroup__phi:
+    name: floorParamGroup__phi
+    description: Rotation around the X-axis in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - phi_angle
+    - ModelPitch
+    - Model_Pitch
+    mappings:
+    - pals:phi
+    slot_uri: pals:phi
+    alias: phi
+    owner: FloorParamGroup
+    domain_of:
+    - FloorParamGroup
+    range: float
+  floorParamGroup__psi:
+    name: floorParamGroup__psi
+    description: Rotation around the Z-axis in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - psi_angle
+    - Model_Roll
+    - Rotation
+    mappings:
+    - pals:psi
+    slot_uri: pals:psi
+    alias: psi
+    owner: FloorParamGroup
+    domain_of:
+    - FloorParamGroup
+    range: float
+  hasBodyShiftP__BodyShiftP:
+    name: hasBodyShiftP__BodyShiftP
+    description: A mixin for floor plan shift parameters that are aligned with PALS
+      BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
+      Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:BodyShiftP
+    alias: BodyShiftP
+    owner: HasBodyShiftP
+    domain_of:
+    - HasBodyShiftP
+    range: BodyShiftParamGroup
+    inlined: true
+    inlined_as_list: true
+  bodyShiftParamGroup__x_offset:
+    name: bodyShiftParamGroup__x_offset
+    description: Shift in the X direction in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - delta_x
+    - x_shift
+    - GlobalOffsetX
+    mappings:
+    - pals:x_offset
+    slot_uri: pals:x_offset
+    alias: x_offset
+    owner: BodyShiftParamGroup
+    domain_of:
+    - BodyShiftParamGroup
+    range: float
+  bodyShiftParamGroup__y_offset:
+    name: bodyShiftParamGroup__y_offset
+    description: Shift in the Y direction in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - delta_y
+    - y_shift
+    - GlobalOffsetY
+    mappings:
+    - pals:y_offset
+    slot_uri: pals:y_offset
+    alias: y_offset
+    owner: BodyShiftParamGroup
+    domain_of:
+    - BodyShiftParamGroup
+    range: float
+  bodyShiftParamGroup__z_offset:
+    name: bodyShiftParamGroup__z_offset
+    description: Shift in the Z direction in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - delta_z
+    - z_shift
+    - GlobalOffsetZ
+    mappings:
+    - pals:z_offset
+    slot_uri: pals:z_offset
+    alias: z_offset
+    owner: BodyShiftParamGroup
+    domain_of:
+    - BodyShiftParamGroup
+    range: float
+  bodyShiftParamGroup__x_rot:
+    name: bodyShiftParamGroup__x_rot
+    description: Rotation around the X-axis in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - delta_phi
+    - phi_shift
+    - GlobalOffsetPhi
+    mappings:
+    - pals:x_rot
+    slot_uri: pals:x_rot
+    alias: x_rot
+    owner: BodyShiftParamGroup
+    domain_of:
+    - BodyShiftParamGroup
+    range: float
+  bodyShiftParamGroup__y_rot:
+    name: bodyShiftParamGroup__y_rot
+    description: Rotation around the Y-axis in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - delta_theta
+    - theta_shift
+    - GlobalOffsetTheta
+    mappings:
+    - pals:y_rot
+    slot_uri: pals:y_rot
+    alias: y_rot
+    owner: BodyShiftParamGroup
+    domain_of:
+    - BodyShiftParamGroup
+    range: float
+  bodyShiftParamGroup__z_rot:
+    name: bodyShiftParamGroup__z_rot
+    description: Rotation around the Z-axis in the facility floor plan.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - delta_psi
+    - psi_shift
+    - GlobalOffsetPsi
+    mappings:
+    - pals:z_rot
+    slot_uri: pals:z_rot
+    alias: z_rot
+    owner: BodyShiftParamGroup
+    domain_of:
+    - BodyShiftParamGroup
+    range: float
+  hasLongitudinalPlacementP__LongitudinalPlacementP:
+    name: hasLongitudinalPlacementP__LongitudinalPlacementP
+    description: A mixin for an element's extent and position along the longitudinal
+      (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
+      (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
+      Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:LongitudinalPlacementP
+    alias: LongitudinalPlacementP
+    owner: HasLongitudinalPlacementP
+    domain_of:
+    - HasLongitudinalPlacementP
+    range: LongitudinalPlacementParamGroup
+    inlined: true
+    inlined_as_list: true
+  longitudinalPlacementParamGroup__s_position:
+    name: longitudinalPlacementParamGroup__s_position
+    description: Longitudinal position of the element along the beamline.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:s_position
+    slot_uri: pals:s_position
+    alias: s_position
+    owner: LongitudinalPlacementParamGroup
+    domain_of:
+    - LongitudinalPlacementParamGroup
+    range: float
+    unit:
+      ucum_code: m
+  hasReferenceP__ReferenceP:
+    name: hasReferenceP__ReferenceP
+    description: A mixin for reference parameters that are aligned with PALS ReferenceP
+      (Reference Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:ReferenceP
+    alias: ReferenceP
+    owner: HasReferenceP
+    domain_of:
+    - HasReferenceP
+    range: ReferenceParamGroup
+    inlined: true
+    inlined_as_list: true
+  referenceParamGroup__species_ref:
+    name: referenceParamGroup__species_ref
+    description: A reference to a species or particle type, such as an ion, electron,
+      or proton.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:species_ref
+    slot_uri: pals:species_ref
+    alias: species_ref
+    owner: ReferenceParamGroup
+    domain_of:
+    - ReferenceParamGroup
+    range: string
+  referenceParamGroup__pc_ref:
+    name: referenceParamGroup__pc_ref
+    description: '[momentum*c] Reference momentum times speed of light.'
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - pCentral
+    mappings:
+    - pals:pc_ref
+    slot_uri: pals:pc_ref
+    alias: pc_ref
+    owner: ReferenceParamGroup
+    domain_of:
+    - ReferenceParamGroup
+    range: float
+  referenceParamGroup__E_tot_ref:
+    name: referenceParamGroup__E_tot_ref
+    description: '[eV] Reference total energy'
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - ETotal
+    mappings:
+    - pals:E_tot_ref
+    slot_uri: pals:E_tot_ref
+    alias: E_tot_ref
+    owner: ReferenceParamGroup
+    domain_of:
+    - ReferenceParamGroup
+    range: float
+    unit:
+      ucum_code: eV
+  referenceParamGroup__time_ref:
+    name: referenceParamGroup__time_ref
+    description: '[s] Reference time'
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - tRef
+    mappings:
+    - pals:time_ref
+    slot_uri: pals:time_ref
+    alias: time_ref
+    owner: ReferenceParamGroup
+    domain_of:
+    - ReferenceParamGroup
+    range: float
+    unit:
+      ucum_code: s
+  hasSolenoidP__SolenoidP:
+    name: hasSolenoidP__SolenoidP
+    description: A mixin for solenoid-specific parameters that are aligned with PALS
+      SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator
+      Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:SolenoidP
+    alias: SolenoidP
+    owner: HasSolenoidP
+    domain_of:
+    - HasSolenoidP
+    range: SolenoidParamGroup
+    inlined: true
+    inlined_as_list: true
+  solenoidParamGroup__Ksol:
+    name: solenoidParamGroup__Ksol
+    description: Normalized solenoid strength.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:Ksol
+    slot_uri: pals:Ksol
+    alias: Ksol
+    owner: SolenoidParamGroup
+    domain_of:
+    - SolenoidParamGroup
+    range: float
+  solenoidParamGroup__Bsol:
+    name: solenoidParamGroup__Bsol
+    description: Solenoid field.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:Bsol
+    slot_uri: pals:Bsol
+    alias: Bsol
+    owner: SolenoidParamGroup
+    domain_of:
+    - SolenoidParamGroup
+    range: float
+    unit:
+      ucum_code: T
+  hasTwissP__TwissP:
+    name: hasTwissP__TwissP
+    description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
+      Parameters) for interoperability with the Particle Accelerator Language Standard
+      (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:TwissP
+    alias: TwissP
+    owner: HasTwissP
+    domain_of:
+    - HasTwissP
+    range: TwissParamGroup
+    inlined: true
+    inlined_as_list: true
+  twissParamGroup__alpha_a:
+    name: twissParamGroup__alpha_a
+    description: Twiss alpha parameter in the horizontal plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - alpha_x
+    - alphax
+    mappings:
+    - pals:alpha_a
+    slot_uri: pals:alpha_a
+    alias: alpha_a
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__alpha_b:
+    name: twissParamGroup__alpha_b
+    description: Twiss alpha parameter in the vertical plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - alpha_y
+    - alphay
+    mappings:
+    - pals:alpha_b
+    slot_uri: pals:alpha_b
+    alias: alpha_b
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__beta_a:
+    name: twissParamGroup__beta_a
+    description: Twiss beta parameter in the horizontal plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - beta_x
+    - betax
+    mappings:
+    - pals:beta_a
+    slot_uri: pals:beta_a
+    alias: beta_a
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__beta_b:
+    name: twissParamGroup__beta_b
+    description: Twiss beta parameter in the vertical plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - beta_y
+    - betay
+    mappings:
+    - pals:beta_b
+    slot_uri: pals:beta_b
+    alias: beta_b
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__eta_x:
+    name: twissParamGroup__eta_x
+    description: Twiss dispersion parameter in the horizontal plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - etax
+    mappings:
+    - pals:eta_x
+    slot_uri: pals:eta_x
+    alias: eta_x
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__eta_y:
+    name: twissParamGroup__eta_y
+    description: Twiss dispersion parameter in the vertical plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - etay
+    mappings:
+    - pals:eta_y
+    slot_uri: pals:eta_y
+    alias: eta_y
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__etap_x:
+    name: twissParamGroup__etap_x
+    description: Twiss dispersion slope parameter in the horizontal plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - etapx
+    mappings:
+    - pals:etap_x
+    slot_uri: pals:etap_x
+    alias: etap_x
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__etap_y:
+    name: twissParamGroup__etap_y
+    description: Twiss dispersion slope parameter in the vertical plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - etapy
+    mappings:
+    - pals:etap_y
+    slot_uri: pals:etap_y
+    alias: etap_y
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__phi_a:
+    name: twissParamGroup__phi_a
+    description: Twiss phase advance parameter in the horizontal plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - phi_x
+    - phix
+    - psi_x
+    - psix
+    mappings:
+    - pals:phi_a
+    slot_uri: pals:phi_a
+    alias: phi_a
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  twissParamGroup__phi_b:
+    name: twissParamGroup__phi_b
+    description: Twiss phase advance parameter in the vertical plane.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - phi_y
+    - phiy
+    - psi_y
+    - psiy
+    mappings:
+    - pals:phi_b
+    slot_uri: pals:phi_b
+    alias: phi_b
+    owner: TwissParamGroup
+    domain_of:
+    - TwissParamGroup
+    range: float
+  hasRFP__RFP:
+    name: hasRFP__RFP
+    description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters)
+      for interoperability with the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:RFP
+    alias: RFP
+    owner: HasRFP
+    domain_of:
+    - HasRFP
+    range: RFParamGroup
+    inlined: true
+    inlined_as_list: true
+  rFParamGroup__frequency:
+    name: rFParamGroup__frequency
+    description: RF frequency.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:frequency
+    slot_uri: pals:frequency
+    alias: frequency
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: Hz
+  rFParamGroup__harmon:
+    name: rFParamGroup__harmon
+    description: RF harmonic number.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:harmon
+    slot_uri: pals:harmon
+    alias: harmon
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: integer
+  rFParamGroup__voltage:
+    name: rFParamGroup__voltage
+    description: RF voltage.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:voltage
+    slot_uri: pals:voltage
+    alias: voltage
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: V
+  rFParamGroup__phase:
+    name: rFParamGroup__phase
+    description: RF phase. rad/2pi RF phase in 0 to 2*pi
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:phase
+    slot_uri: pals:phase
+    alias: phase
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+  rFParamGroup__multipass_phase:
+    name: rFParamGroup__multipass_phase
+    description: rad/2pi RF Phase added to multipass elements
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:multipass_phase
+    slot_uri: pals:multipass_phase
+    alias: multipass_phase
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+  rFParamGroup__cavity_type:
+    name: rFParamGroup__cavity_type
+    description: Cavity type
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:cavity_type
+    slot_uri: pals:cavity_type
+    alias: cavity_type
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: CavityTypeEnum
+  rFParamGroup__num_cells:
+    name: rFParamGroup__num_cells
+    description: Number of cells in the cavity
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:num_cells
+    slot_uri: pals:num_cells
+    alias: num_cells
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: integer
+  rFParamGroup__zero_phase:
+    name: rFParamGroup__zero_phase
+    description: Sets what phase = 0 means.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:zero_phase
+    slot_uri: pals:zero_phase
+    alias: zero_phase
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: ZeroPhaseEnum
+  rFParamGroup__L_active:
+    name: rFParamGroup__L_active
+    description: Active acceleration length.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:L_active
+    slot_uri: pals:L_active
+    alias: L_active
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: m
+  rFParamGroup__dE_ref:
+    name: rFParamGroup__dE_ref
+    description: Reference energy gain.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:dE_ref
+    slot_uri: pals:dE_ref
+    alias: dE_ref
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: eV
+  hasElectricMultipoleP__ElectricMultipoleP:
+    name: hasElectricMultipoleP__ElectricMultipoleP
+    description: A mixin for electric multipole parameters that are aligned with PALS
+      ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
+      the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:ElectricMultipoleP
+    alias: ElectricMultipoleP
+    owner: HasElectricMultipoleP
+    domain_of:
+    - HasElectricMultipoleP
+    range: ElectricMultipoleParamGroup
+    inlined: true
+    inlined_as_list: true
+  electricMultipoleParamGroup__elec_components:
+    name: electricMultipoleParamGroup__elec_components
+    description: Electric multipole components, one per order N.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:elec_components
+    alias: elec_components
+    owner: ElectricMultipoleParamGroup
+    domain_of:
+    - ElectricMultipoleParamGroup
+    range: MultipoleParameterGroup
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  hasMagneticMultipoleP__MagneticMultipoleP:
+    name: hasMagneticMultipoleP__MagneticMultipoleP
+    description: A mixin for magnetic multipole parameters that are aligned with PALS
+      MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
+      the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:MagneticMultipoleP
+    alias: MagneticMultipoleP
+    owner: HasMagneticMultipoleP
+    domain_of:
+    - HasMagneticMultipoleP
+    range: MagneticMultipoleParamGroup
+    inlined: true
+    inlined_as_list: true
+  magneticMultipoleParamGroup__mag_components:
+    name: magneticMultipoleParamGroup__mag_components
+    description: Magnetic multipole components, one per order N.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:mag_components
+    alias: mag_components
+    owner: MagneticMultipoleParamGroup
+    domain_of:
+    - MagneticMultipoleParamGroup
+    range: MultipoleParameterGroup
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  hasBendP__BendP:
+    name: hasBendP__BendP
+    description: A mixin for bend parameters that are aligned with PALS BendP (Bend
+      Parameters) for interoperability with the Particle Accelerator Language Standard
+      (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:BendP
+    alias: BendP
+    owner: HasBendP
+    domain_of:
+    - HasBendP
+    range: BendParamGroup
+    inlined: true
+    inlined_as_list: true
+  bendParamGroup__angle_ref:
+    name: bendParamGroup__angle_ref
+    description: Reference bend angle.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:angle_ref
+    slot_uri: pals:angle_ref
+    alias: angle_ref
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: rad
+  bendParamGroup__bend_field_ref:
+    name: bendParamGroup__bend_field_ref
+    description: Reference bend field.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:bend_field_ref
+    slot_uri: pals:bend_field_ref
+    alias: bend_field_ref
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: T
+  bendParamGroup__bend_field_actual:
+    name: bendParamGroup__bend_field_actual
+    description: Actual bend field.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:bend_field_actual
+    slot_uri: pals:bend_field_actual
+    alias: bend_field_actual
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: T
+  bendParamGroup__e1:
+    name: bendParamGroup__e1
+    description: Entrance end pole face rotation with respect to a sector geometry.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:e1
+    slot_uri: pals:e1
+    alias: e1
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: rad
+  bendParamGroup__e2:
+    name: bendParamGroup__e2
+    description: Exit end pole face rotation with respect to a sector geometry.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:e2
+    slot_uri: pals:e2
+    alias: e2
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: rad
+  bendParamGroup__e1_rect:
+    name: bendParamGroup__e1_rect
+    description: Entrance end pole face rotation with respect to a rectangular geometry.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:e1_rect
+    slot_uri: pals:e1_rect
+    alias: e1_rect
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: rad
+  bendParamGroup__e2_rect:
+    name: bendParamGroup__e2_rect
+    description: Exit end pole face rotation with respect to a rectangular geometry.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:e2_rect
+    slot_uri: pals:e2_rect
+    alias: e2_rect
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: rad
+  bendParamGroup__edge1_int:
+    name: bendParamGroup__edge1_int
+    description: Entrance end fringe field integral.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:edge1_int
+    slot_uri: pals:edge1_int
+    alias: edge1_int
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: T.m
+  bendParamGroup__edge2_int:
+    name: bendParamGroup__edge2_int
+    description: Exit end fringe field integral.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:edge2_int
+    slot_uri: pals:edge2_int
+    alias: edge2_int
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: T.m
+  bendParamGroup__g_ref:
+    name: bendParamGroup__g_ref
+    description: Reference bend strength = 1/radius_ref
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:g_ref
+    slot_uri: pals:g_ref
+    alias: g_ref
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: 1/m
+  bendParamGroup__g_actual:
+    name: bendParamGroup__g_actual
+    description: Actual bend strength = 1/radius_actual
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:g_actual
+    slot_uri: pals:g_actual
+    alias: g_actual
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: 1/m
+  bendParamGroup__h1:
+    name: bendParamGroup__h1
+    description: Entrance end pole face curvature
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:h1
+    slot_uri: pals:h1
+    alias: h1
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: 1/m
+  bendParamGroup__h2:
+    name: bendParamGroup__h2
+    description: Exit end pole face curvature
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:h2
+    slot_uri: pals:h2
+    alias: h2
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: 1/m
+  bendParamGroup__L_chord:
+    name: bendParamGroup__L_chord
+    description: Chord length of the bend.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:L_chord
+    slot_uri: pals:L_chord
+    alias: L_chord
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: m
+  bendParamGroup__L_sagitta:
+    name: bendParamGroup__L_sagitta
+    description: Output parameter. Sagitta length.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:L_sagitta
+    slot_uri: pals:L_sagitta
+    alias: L_sagitta
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: m
+  bendParamGroup__L_rectangle:
+    name: bendParamGroup__L_rectangle
+    description: Rectangular length.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:L_rectangle
+    slot_uri: pals:L_rectangle
+    alias: L_rectangle
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: m
+  bendParamGroup__multipole_geometry:
+    name: bendParamGroup__multipole_geometry
+    description: Multipole geometry type. Must be `follows_ref_geometry`.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:multipole_geometry
+    slot_uri: pals:multipole_geometry
+    alias: multipole_geometry
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: MultipoleGeometryEnum
+  bendParamGroup__ref_geometry:
+    name: bendParamGroup__ref_geometry
+    description: Reference geometry type. Must be `arc`.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:ref_geometry
+    slot_uri: pals:ref_geometry
+    alias: ref_geometry
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: ReferenceGeometryEnum
+  bendParamGroup__rho_ref:
+    name: bendParamGroup__rho_ref
+    description: Reference bend radius.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:rho_ref
+    slot_uri: pals:rho_ref
+    alias: rho_ref
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: m
+  bendParamGroup__tilt_ref:
+    name: bendParamGroup__tilt_ref
+    description: Reference tilt of the bend.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:tilt_ref
+    slot_uri: pals:tilt_ref
+    alias: tilt_ref
+    owner: BendParamGroup
+    domain_of:
+    - BendParamGroup
+    range: float
+    unit:
+      ucum_code: rad
+  multipoleParameterGroup__order:
+    name: multipoleParameterGroup__order
+    description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:order
+    alias: order
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: integer
+    required: true
+  multipoleParameterGroup__tilt:
+    name: multipoleParameterGroup__tilt
+    description: Tilt of the Nth multipole.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:tilt
+    slot_uri: pals:tilt
+    alias: tilt
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+    unit:
+      ucum_code: rad
+  multipoleParameterGroup__En:
+    name: multipoleParameterGroup__En
+    description: Normal component of the field.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:EnN
+    slot_uri: pals:En
+    alias: En
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  multipoleParameterGroup__Es:
+    name: multipoleParameterGroup__Es
+    description: Skew component of the field.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:EsN
+    slot_uri: pals:Es
+    alias: Es
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  multipoleParameterGroup__EnL:
+    name: multipoleParameterGroup__EnL
+    description: Length-integrated normal component.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:EnNL
+    slot_uri: pals:EnL
+    alias: EnL
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  multipoleParameterGroup__EsL:
+    name: multipoleParameterGroup__EsL
+    description: Length-integrated skew component.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:EsNL
+    slot_uri: pals:EsL
+    alias: EsL
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  multipoleParameterGroup__Bn:
+    name: multipoleParameterGroup__Bn
+    description: Normal component of the magnetic field.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:BnN
+    slot_uri: pals:Bn
+    alias: Bn
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  multipoleParameterGroup__Bs:
+    name: multipoleParameterGroup__Bs
+    description: Skew component of the magnetic field.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:BsN
+    slot_uri: pals:Bs
+    alias: Bs
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  multipoleParameterGroup__Kn:
+    name: multipoleParameterGroup__Kn
+    description: Normalized normal component.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:KnN
+    slot_uri: pals:Kn
+    alias: Kn
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  multipoleParameterGroup__Ks:
+    name: multipoleParameterGroup__Ks
+    description: Normalized skew component.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:KsN
+    slot_uri: pals:Ks
+    alias: Ks
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  component__native_types:
+    name: component__native_types
+    description: The native type of the component in the source system, which can
+      be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:native_types
+    alias: native_types
+    owner: Component
+    domain_of:
+    - Component
+    range: string
+    multivalued: true
+  physicalComponent__functions:
+    name: physicalComponent__functions
+    description: The function of the physical component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:physical_function
+    slot_uri: pals:physical_function
+    alias: functions
+    owner: PhysicalComponent
+    domain_of:
+    - PhysicalComponent
+    range: PhysicalFunctionEnum
+    required: true
+    multivalued: true
+  physicalComponent__beamline_relation:
+    name: physicalComponent__beamline_relation
+    description: The relationship of the physical component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:physical_beamline_relation
+    slot_uri: pals:physical_beamline_relation
+    alias: beamline_relation
+    owner: PhysicalComponent
+    domain_of:
+    - PhysicalComponent
+    range: PhysicalRelationEnum
+    required: true
+  virtualComponent__functions:
+    name: virtualComponent__functions
+    description: The function of the virtual component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:virtual_function
+    slot_uri: pals:virtual_function
+    alias: functions
+    owner: VirtualComponent
+    domain_of:
+    - VirtualComponent
+    range: VirtualFunctionEnum
+    required: true
+    multivalued: true
+  virtualComponent__beamline_relation:
+    name: virtualComponent__beamline_relation
+    description: The relationship of the virtual component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:virtual_beamline_relation
+    slot_uri: pals:virtual_beamline_relation
+    alias: beamline_relation
+    owner: VirtualComponent
+    domain_of:
+    - VirtualComponent
+    range: VirtualRelationEnum
+    required: true
+  beamLine__multipass:
+    name: beamLine__multipass
+    description: Indicates whether the BeamLine is a multipass BeamLine, where the
+      beam passes through the same physical elements multiple times. If not provided,
+      the default assumption is that the BeamLine is single-pass.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:multipass
+    slot_uri: pals:multipass
+    alias: multipass
+    owner: BeamLine
+    domain_of:
+    - BeamLine
+    range: boolean
+  beamLine__periodic:
+    name: beamLine__periodic
+    description: Indicates whether orbit and Twiss parameters periodic. If not provided,
+      the default assumption is that the BeamLine is not periodic.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:periodic
+    slot_uri: pals:periodic
+    alias: periodic
+    owner: BeamLine
+    domain_of:
+    - BeamLine
+    range: boolean
+  beamLine__repeat:
+    name: beamLine__repeat
+    description: 'Repetition count. If not provided, the default assumption is that
+      the beamline is not repeated and the value is 1.
+
+      If value is greater than 1, the beamline is repeated that many times.'
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:repeat
+    slot_uri: pals:repeat
+    alias: repeat
+    owner: BeamLine
+    domain_of:
+    - BeamLine
+    range: integer
+  beamLine__direction:
+    name: beamLine__direction
+    description: 'Beam direction along the BeamLine: +1 or -1. Longitudinal orientation.
+      Default is +1.'
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:direction
+    slot_uri: pals:direction
+    alias: direction
+    owner: BeamLine
+    domain_of:
+    - BeamLine
+    range: integer
+  signal__signal_role:
+    name: signal__signal_role
+    description: The role of the signal in the control system, such as setpoint, readback,
+      status, command, or limit.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:signal_role
+    alias: signal_role
+    owner: Signal
+    domain_of:
+    - Signal
+    range: SignalRoleEnum
+    required: true
+  signal__source_system:
+    name: signal__source_system
+    description: The source system from which the signal originates, such as EPICS,
+      PALS-Ext, MYA, an element database, a channel database, or a simulation service.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:source_system
+    alias: source_system
+    owner: Signal
+    domain_of:
+    - Signal
+    range: SourceSystemEnum
+    required: true
+  signal__native_description:
+    name: signal__native_description
+    description: A human-readable description of the signal in the source system.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:native_description
+    alias: native_description
+    owner: Signal
+    domain_of:
+    - Signal
+    range: string
+  signal__canonical_signal_type:
+    name: signal__canonical_signal_type
+    description: The canonical semantic meaning of the signal.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:canonical_signal_type
+    alias: canonical_signal_type
+    owner: Signal
+    domain_of:
+    - Signal
+    range: CanonicalSignalTypeEnum
+    required: true
+  signal__quantity_kind:
+    name: signal__quantity_kind
+    description: The physical quantity kind of the signal.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:quantity_kind
+    alias: quantity_kind
+    owner: Signal
+    domain_of:
+    - Signal
+    range: QuantityKindEnum
+    required: true
+  signal__native_data_type:
+    name: signal__native_data_type
+    description: The native data type of the signal in the source system,  such as
+      String, Integer, Float, or Boolean.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:native_data_type
+    alias: native_data_type
+    owner: Signal
+    domain_of:
+    - Signal
+    range: DataTypeEnum
+    required: true
+  signal__native_unit:
+    name: signal__native_unit
+    description: The native unit of the signal in the source system.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:native_unit
+    alias: native_unit
+    owner: Signal
+    domain_of:
+    - Signal
+    range: UnitEnum
+    required: true
+  signal__access_protocol:
+    name: signal__access_protocol
+    description: The protocol used to access the signal in the source system,  such
+      as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:access_protocol
+    alias: access_protocol
+    owner: Signal
+    domain_of:
+    - Signal
+    range: string
+  signal__archive_identifier:
+    name: signal__archive_identifier
+    description: The identifier used to reference the signal in an archival system.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:archive_identifier
+    alias: archive_identifier
+    owner: Signal
+    domain_of:
+    - Signal
+    range: string
+  kicker__plane:
+    name: kicker__plane
+    description: The transverse plane in which the kicker operates, either horizontal
+      or vertical.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:plane
+    alias: plane
+    owner: Kicker
+    domain_of:
+    - Kicker
+    range: PlaneEnum
+  supportingFacilityComponent__functions:
+    name: supportingFacilityComponent__functions
+    description: The function of the supporting facility component,  which can be
+      used to identify the component across different source systems.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:supporting_facility_function
+    slot_uri: pals:supporting_facility_function
+    alias: functions
+    owner: SupportingFacilityComponent
+    domain_of:
+    - SupportingFacilityComponent
+    range: FacilityFunctionEnum
+    required: true
+    multivalued: true
+  additionalMetadata__key:
+    name: additionalMetadata__key
+    description: The metadata field name.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:key
+    identifier: true
+    alias: key
+    owner: AdditionalMetadata
+    domain_of:
+    - AdditionalMetadata
+    range: string
+    required: true
+  additionalMetadata__value:
+    name: additionalMetadata__value
+    description: The metadata value, serialized as a string.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:value
+    alias: value
+    owner: AdditionalMetadata
+    domain_of:
+    - AdditionalMetadata
+    range: string
+    required: true
+  additionalMetadata__datatype:
+    name: additionalMetadata__datatype
+    description: Hint for the value's original type, so consumers can parse it back
+      (e.g. float, integer, boolean) rather than treating everything as an opaque
+      string.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:datatype
+    alias: datatype
+    owner: AdditionalMetadata
+    domain_of:
+    - AdditionalMetadata
+    range: DataTypeEnum
+  componentRelation__context:
+    name: componentRelation__context
+    description: The frame of reference / domain in which this relationship is asserted
+      to hold.
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:context
+    alias: context
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: RelationContextEnum
+  componentRelation__beamline_context:
+    name: componentRelation__beamline_context
+    description: The specific BeamLine this relationship is defined with respect to
+      (relevant when context=beamline_order).
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:beamline_context
+    alias: beamline_context
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: BeamLine
+  componentRelation__reference_frame:
+    name: componentRelation__reference_frame
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:reference_frame
+    alias: reference_frame
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: ReferenceFrameEnum
+  componentRelation__distance_value:
+    name: componentRelation__distance_value
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:distance_value
+    alias: distance_value
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: float
+  componentRelation__distance_unit:
+    name: componentRelation__distance_unit
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:distance_unit
+    alias: distance_unit
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: UnitEnum
+  componentRelation__axis:
+    name: componentRelation__axis
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:axis
+    alias: axis
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: AxisEnum
+  componentRelation__component_direction:
+    name: componentRelation__component_direction
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:component_direction
+    alias: component_direction
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: DirectionEnum
+  componentRelation__tolerance_value:
+    name: componentRelation__tolerance_value
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:tolerance_value
+    alias: tolerance_value
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: float
+  componentRelation__tolerance_unit:
+    name: componentRelation__tolerance_unit
+    from_schema: https://w3id.org/accelerator-core
+    slot_uri: pals:tolerance_unit
+    alias: tolerance_unit
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    range: UnitEnum
+  BeamLine_length:
+    name: BeamLine_length
+    definition_uri: https://pals-project.readthedocs.io/length
+    description: The total length of the BeamLine. For pals interoperability, use
+      m as the unit of length.
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - pals:length
+    is_a: length
+    domain: BeamLine
+    slot_uri: pals:length
+    alias: length
+    owner: BeamLine
+    domain_of:
+    - BeamLine
+    is_usage_slot: true
+    usage_slot_name: length
+    range: float
+  SignalBinding_subject:
+    name: SignalBinding_subject
+    definition_uri: https://pals-project.readthedocs.io/subject
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:subject
+    is_a: subject
+    domain: SignalBinding
+    slot_uri: rdf:subject
+    alias: subject
+    owner: SignalBinding
+    domain_of:
+    - SignalBinding
+    is_usage_slot: true
+    usage_slot_name: subject
+    relational_role:
+      text: SUBJECT
+      description: a slot with this role connects a relationship to its subject/source
+        node
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#subject
+    range: PhysicalComponent
+    required: true
+  SignalBinding_predicate:
+    name: SignalBinding_predicate
+    definition_uri: https://pals-project.readthedocs.io/predicate
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:predicate
+    is_a: predicate
+    domain: SignalBinding
+    slot_uri: rdf:predicate
+    alias: predicate
+    owner: SignalBinding
+    domain_of:
+    - SignalBinding
+    is_usage_slot: true
+    usage_slot_name: predicate
+    relational_role:
+      text: PREDICATE
+      description: a slot with this role connects a relationship to its predicate/property
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate
+    range: SignalBindingPredicateEnum
+    required: true
+  SignalBinding_object:
+    name: SignalBinding_object
+    definition_uri: https://pals-project.readthedocs.io/object
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:object
+    is_a: object
+    domain: SignalBinding
+    slot_uri: rdf:object
+    alias: object
+    owner: SignalBinding
+    domain_of:
+    - SignalBinding
+    is_usage_slot: true
+    usage_slot_name: object
+    relational_role:
+      text: OBJECT
+      description: a slot with this role connects a relationship to its object/target
+        node
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#object
+    range: Signal
+    required: true
+  ComponentRelation_subject:
+    name: ComponentRelation_subject
+    definition_uri: https://pals-project.readthedocs.io/subject
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:subject
+    is_a: subject
+    domain: ComponentRelation
+    slot_uri: rdf:subject
+    alias: subject
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    is_usage_slot: true
+    usage_slot_name: subject
+    relational_role:
+      text: SUBJECT
+      description: a slot with this role connects a relationship to its subject/source
+        node
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#subject
+    range: Component
+    required: true
+  ComponentRelation_predicate:
+    name: ComponentRelation_predicate
+    definition_uri: https://pals-project.readthedocs.io/predicate
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:predicate
+    is_a: predicate
+    domain: ComponentRelation
+    slot_uri: rdf:predicate
+    alias: predicate
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    is_usage_slot: true
+    usage_slot_name: predicate
+    relational_role:
+      text: PREDICATE
+      description: a slot with this role connects a relationship to its predicate/property
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate
+    range: ComponentRelationPredicateEnum
+    required: true
+  ComponentRelation_object:
+    name: ComponentRelation_object
+    definition_uri: https://pals-project.readthedocs.io/object
+    from_schema: https://w3id.org/accelerator-core
+    mappings:
+    - rdf:object
+    is_a: object
+    domain: ComponentRelation
+    slot_uri: rdf:object
+    alias: object
+    owner: ComponentRelation
+    domain_of:
+    - ComponentRelation
+    is_usage_slot: true
+    usage_slot_name: object
+    relational_role:
+      text: OBJECT
+      description: a slot with this role connects a relationship to its object/target
+        node
+      meaning: http://www.w3.org/1999/02/22-rdf-syntax-ns#object
+    range: Component
+    required: true
+classes:
+  PALS:
+    name: PALS
+    definition_uri: https://pals-project.readthedocs.io/PALS
+    description: Root container for accelerator core components, semantic signals,
+      and local bindings.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - kind
+    - description
+    - affiliation
+    - pALS__version
+    - pALS__authors
+    - pALS__notes
+    - pALS__facility
+    attributes:
+      version:
+        name: version
+        description: Version of the representation of a particle accelerator and its
+          operations.
+        range: string
+        pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
+      authors:
+        name: authors
+        description: Contains the authorship information for this representation of
+          an accelerator facility and its operations.
+        range: Author
+        multivalued: true
+        inlined_as_list: true
+      notes:
+        name: notes
+        description: Additional notes or comments about the representation of a particle
+          accelerator and its operations.
+        range: string
+        multivalued: true
+        inlined_as_list: true
+      facility:
+        name: facility
+        description: A facility that contains lattice elements (physical and virtual),
+          beamlines, parameter set commands, signals, etc.
+        range: Facility
+    class_uri: pals:PALS
+    tree_root: true
+  Author:
+    name: Author
+    definition_uri: https://pals-project.readthedocs.io/Author
+    description: Contains authorship information for a representation of an accelerator
+      facility and its operations.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - name
+    - affiliation
+    - author__email
+    - author__orcid
+    attributes:
+      email:
+        name: email
+        description: The email address of the author.
+        range: string
+        pattern: ^[^@]+@[^@]+\.[^@]+$
+      orcid:
+        name: orcid
+        description: The ORCID identifier of the author.
+        range: string
+        pattern: ^https://orcid\.org/\d{4}-\d{4}-\d{4}-\d{3}[\dX]$
+    class_uri: pals:Author
+  Facility:
+    name: Facility
+    definition_uri: https://pals-project.readthedocs.io/Facility
+    description: A facility that houses one or more accelerators.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - identifiers
+    - facility__components
+    - facility__beamlines
+    - facility__signals
+    - facility__signal_bindings
+    - facility__component_relations
+    attributes:
+      components:
+        name: components
+        description: A list of physical components in the accelerator system.
+        range: Component
+        multivalued: true
+        inlined_as_list: true
+      beamlines:
+        name: beamlines
+        description: A list of beamlines in the accelerator system.
+        range: BeamLine
+        multivalued: true
+        inlined_as_list: true
+      signals:
+        name: signals
+        description: A list of signals in the accelerator system.
+        range: Signal
+        multivalued: true
+        inlined_as_list: true
+      signal_bindings:
+        name: signal_bindings
+        description: A list of signal bindings in the accelerator system (Component
+          <-> Signal relationships).
+        range: SignalBinding
+        multivalued: true
+        inlined_as_list: true
+      component_relations:
+        name: component_relations
+        description: A list of component relations in the accelerator system (Component
+          <-> Component relationships).
+        range: ComponentRelation
+        multivalued: true
+        inlined_as_list: true
+    class_uri: pals:Facility
+  Affiliation:
+    name: Affiliation
+    definition_uri: https://pals-project.readthedocs.io/Affiliation
+    description: Contains affiliation information for an author or component, such
+      as a ROR.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - id
+    - name
+    - identifiers
+    class_uri: pals:Affiliation
+  Identifier:
+    name: Identifier
+    definition_uri: https://pals-project.readthedocs.io/Identifier
+    description: A unique, and ideally persistent, identifier for a facility, such
+      as a DOI or ROR.
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - identifier__identifier_type
+    - identifier__identifier_value
+    attributes:
+      identifier_type:
+        name: identifier_type
+        description: The type of identifier, such as DOI | PURL | ROR | LOCAL | URL
+          | ARK.
+        range: IdentifierTypeEnum
+      identifier_value:
+        name: identifier_value
+        description: The value of the identifier.
+        range: string
+    class_uri: pals:Identifier
+  HasMetaP:
+    name: HasMetaP
+    definition_uri: https://pals-project.readthedocs.io/HasMetaP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasMetaP__MetaP
+    attributes:
+      MetaP:
+        name: MetaP
+        description: A mixin for metadata parameters that are aligned with PALS MetaP
+          (Metadata Parameters) for interoperability with the Particle Accelerator
+          Language Standard (PALS).
+        range: MetaParamGroup
+        inlined: true
+    class_uri: pals:HasMetaP
+  MetaParamGroup:
+    name: MetaParamGroup
+    definition_uri: https://pals-project.readthedocs.io/MetaParamGroup
+    description: Mixin class for metadata parameters that are aligned with PALS MetaP
+      (Metadata Parameters) for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:MetaP
+    slots:
+    - description
+    - alias
+    - metaParamGroup__label
+    - metaParamGroup__additional_metadata
+    attributes:
+      label:
+        name: label
+        description: A label string.
+        slot_uri: pals:label
+        range: string
+      additional_metadata:
+        name: additional_metadata
+        description: Additional metadata or annotations for the instance.
+        range: AdditionalMetadata
+        multivalued: true
+        inlined_as_list: true
+    class_uri: pals:MetaParamGroup
+  HasFloorP:
+    name: HasFloorP
+    definition_uri: https://pals-project.readthedocs.io/HasFloorP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasFloorP__FloorP
+    attributes:
+      FloorP:
+        name: FloorP
+        description: A mixin for floor plan parameters that are aligned with PALS
+          FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator
+          Language Standard (PALS).
+        range: FloorParamGroup
+        inlined: true
+    class_uri: pals:HasFloorP
+  FloorParamGroup:
+    name: FloorParamGroup
+    definition_uri: https://pals-project.readthedocs.io/FloorParamGroup
+    description: Mixin class for floor plan parameters that are aligned with PALS
+      FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator
+      Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:FloorP
+    slots:
+    - floorParamGroup__x
+    - floorParamGroup__y
+    - floorParamGroup__z
+    - floorParamGroup__theta
+    - floorParamGroup__phi
+    - floorParamGroup__psi
+    attributes:
+      x:
+        name: x
+        description: Global X coordinate in the facility floor plan.
+        aliases:
+        - x_coordinate
+        - ModelX
+        - x coordinate
+        slot_uri: pals:x
+        range: float
+      y:
+        name: y
+        description: Global Y coordinate in the facility floor plan.
+        aliases:
+        - y_coordinate
+        - ModelY
+        - y coordinate
+        slot_uri: pals:y
+        range: float
+      z:
+        name: z
+        description: Global Z coordinate in the facility floor plan.
+        aliases:
+        - z_coordinate
+        - ModelZ
+        - z coordinate
+        slot_uri: pals:z
+        range: float
+      theta:
+        name: theta
+        description: Orientation angle around the Y-axis in the facility floor plan.
+        aliases:
+        - theta_angle
+        - ModelYaw
+        - Model_Yaw
+        slot_uri: pals:theta
+        range: float
+      phi:
+        name: phi
+        description: Rotation around the X-axis in the facility floor plan.
+        aliases:
+        - phi_angle
+        - ModelPitch
+        - Model_Pitch
+        slot_uri: pals:phi
+        range: float
+      psi:
+        name: psi
+        description: Rotation around the Z-axis in the facility floor plan.
+        aliases:
+        - psi_angle
+        - Model_Roll
+        - Rotation
+        slot_uri: pals:psi
+        range: float
+    class_uri: pals:FloorParamGroup
+  HasBodyShiftP:
+    name: HasBodyShiftP
+    definition_uri: https://pals-project.readthedocs.io/HasBodyShiftP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasBodyShiftP__BodyShiftP
+    attributes:
+      BodyShiftP:
+        name: BodyShiftP
+        description: A mixin for floor plan shift parameters that are aligned with
+          PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with
+          the Particle Accelerator Language Standard (PALS).
+        range: BodyShiftParamGroup
+        inlined: true
+    class_uri: pals:HasBodyShiftP
+  BodyShiftParamGroup:
+    name: BodyShiftParamGroup
+    definition_uri: https://pals-project.readthedocs.io/BodyShiftParamGroup
+    description: Mixin class for floor plan shift parameters that are aligned with
+      PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the
+      Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:BodyShiftP
+    slots:
+    - bodyShiftParamGroup__x_offset
+    - bodyShiftParamGroup__y_offset
+    - bodyShiftParamGroup__z_offset
+    - bodyShiftParamGroup__x_rot
+    - bodyShiftParamGroup__y_rot
+    - bodyShiftParamGroup__z_rot
+    attributes:
+      x_offset:
+        name: x_offset
+        description: Shift in the X direction in the facility floor plan.
+        aliases:
+        - delta_x
+        - x_shift
+        - GlobalOffsetX
+        slot_uri: pals:x_offset
+        range: float
+      y_offset:
+        name: y_offset
+        description: Shift in the Y direction in the facility floor plan.
+        aliases:
+        - delta_y
+        - y_shift
+        - GlobalOffsetY
+        slot_uri: pals:y_offset
+        range: float
+      z_offset:
+        name: z_offset
+        description: Shift in the Z direction in the facility floor plan.
+        aliases:
+        - delta_z
+        - z_shift
+        - GlobalOffsetZ
+        slot_uri: pals:z_offset
+        range: float
+      x_rot:
+        name: x_rot
+        description: Rotation around the X-axis in the facility floor plan.
+        aliases:
+        - delta_phi
+        - phi_shift
+        - GlobalOffsetPhi
+        slot_uri: pals:x_rot
+        range: float
+      y_rot:
+        name: y_rot
+        description: Rotation around the Y-axis in the facility floor plan.
+        aliases:
+        - delta_theta
+        - theta_shift
+        - GlobalOffsetTheta
+        slot_uri: pals:y_rot
+        range: float
+      z_rot:
+        name: z_rot
+        description: Rotation around the Z-axis in the facility floor plan.
+        aliases:
+        - delta_psi
+        - psi_shift
+        - GlobalOffsetPsi
+        slot_uri: pals:z_rot
+        range: float
+    class_uri: pals:BodyShiftParamGroup
+  HasLongitudinalPlacementP:
+    name: HasLongitudinalPlacementP
+    definition_uri: https://pals-project.readthedocs.io/HasLongitudinalPlacementP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    attributes:
+      LongitudinalPlacementP:
+        name: LongitudinalPlacementP
+        description: A mixin for an element's extent and position along the longitudinal
+          (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
+          (Longitudinal Placement Parameters) for interoperability with the Particle
+          Accelerator Language Standard (PALS).
+        range: LongitudinalPlacementParamGroup
+        inlined: true
+    class_uri: pals:HasLongitudinalPlacementP
+  LongitudinalPlacementParamGroup:
+    name: LongitudinalPlacementParamGroup
+    definition_uri: https://pals-project.readthedocs.io/LongitudinalPlacementParamGroup
+    description: "Mixin for an element's extent and position along the longitudinal\
+      \ (beam-direction, \"s\") axis. \nCorresponds to PALS's ungrouped element parameters\
+      \ `length` and `s_position`.\nOne (or both) `length` or `s_position` must be\
+      \ present."
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - length
+    - longitudinalPlacementParamGroup__s_position
+    attributes:
+      s_position:
+        name: s_position
+        description: Longitudinal position of the element along the beamline.
+        slot_uri: pals:s_position
+        range: float
+        unit:
+          ucum_code: m
+    class_uri: pals:LongitudinalPlacementParamGroup
+    rules:
+    - preconditions:
+        slot_conditions:
+          id:
+            name: id
+            value_presence:
+              text: PRESENT
+      postconditions:
+        any_of:
+        - slot_conditions:
+            length:
+              name: length
+              value_presence:
+                text: PRESENT
+        - slot_conditions:
+            s_position:
+              name: s_position
+              value_presence:
+                text: PRESENT
+      description: An element must have a length and/or a position along the beamline.
+  HasReferenceP:
+    name: HasReferenceP
+    definition_uri: https://pals-project.readthedocs.io/HasReferenceP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasReferenceP__ReferenceP
+    attributes:
+      ReferenceP:
+        name: ReferenceP
+        description: A mixin for reference parameters that are aligned with PALS ReferenceP
+          (Reference Parameters) for interoperability with the Particle Accelerator
+          Language Standard (PALS).
+        range: ReferenceParamGroup
+        inlined: true
+    class_uri: pals:HasReferenceP
+  ReferenceParamGroup:
+    name: ReferenceParamGroup
+    definition_uri: https://pals-project.readthedocs.io/ReferenceParamGroup
+    description: Mixin for reference parameters that are aligned with PALS ReferenceP
+      (Reference Parameters)  for interoperability with the Particle Accelerator Language
+      Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:ReferenceP
+    slots:
+    - referenceParamGroup__species_ref
+    - referenceParamGroup__pc_ref
+    - referenceParamGroup__E_tot_ref
+    - referenceParamGroup__time_ref
+    attributes:
+      species_ref:
+        name: species_ref
+        description: A reference to a species or particle type, such as an ion, electron,
+          or proton.
+        slot_uri: pals:species_ref
+        range: string
+      pc_ref:
+        name: pc_ref
+        description: '[momentum*c] Reference momentum times speed of light.'
+        aliases:
+        - pCentral
+        slot_uri: pals:pc_ref
+        range: float
+      E_tot_ref:
+        name: E_tot_ref
+        description: '[eV] Reference total energy'
+        aliases:
+        - ETotal
+        slot_uri: pals:E_tot_ref
+        range: float
+        unit:
+          ucum_code: eV
+      time_ref:
+        name: time_ref
+        description: '[s] Reference time'
+        aliases:
+        - tRef
+        slot_uri: pals:time_ref
+        range: float
+        unit:
+          ucum_code: s
+    class_uri: pals:ReferenceParamGroup
+  HasSolenoidP:
+    name: HasSolenoidP
+    definition_uri: https://pals-project.readthedocs.io/HasSolenoidP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasSolenoidP__SolenoidP
+    attributes:
+      SolenoidP:
+        name: SolenoidP
+        description: A mixin for solenoid-specific parameters that are aligned with
+          PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle
+          Accelerator Language Standard (PALS).
+        range: SolenoidParamGroup
+        inlined: true
+    class_uri: pals:HasSolenoidP
+  SolenoidParamGroup:
+    name: SolenoidParamGroup
+    definition_uri: https://pals-project.readthedocs.io/SolenoidParamGroup
+    description: Mixin for solenoid-specific parameters.
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:SolenoidP
+    slots:
+    - solenoidParamGroup__Ksol
+    - solenoidParamGroup__Bsol
+    attributes:
+      Ksol:
+        name: Ksol
+        description: Normalized solenoid strength.
+        slot_uri: pals:Ksol
+        range: float
+      Bsol:
+        name: Bsol
+        description: Solenoid field.
+        slot_uri: pals:Bsol
+        range: float
+        unit:
+          ucum_code: T
+    class_uri: pals:SolenoidParamGroup
+    rules:
+    - preconditions:
+        slot_conditions:
+          id:
+            name: id
+            value_presence:
+              text: PRESENT
+      postconditions:
+        exactly_one_of:
+        - slot_conditions:
+            Ksol:
+              name: Ksol
+              value_presence:
+                text: PRESENT
+        - slot_conditions:
+            Bsol:
+              name: Bsol
+              value_presence:
+                text: PRESENT
+      description: A solenoid must have one of, and exactly one of, Ksol or Bsol.
+  HasTwissP:
+    name: HasTwissP
+    definition_uri: https://pals-project.readthedocs.io/HasTwissP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasTwissP__TwissP
+    attributes:
+      TwissP:
+        name: TwissP
+        description: A mixin for Twiss parameters that are aligned with PALS TwissP
+          (Twiss Parameters) for interoperability with the Particle Accelerator Language
+          Standard (PALS).
+        range: TwissParamGroup
+        inlined: true
+    class_uri: pals:HasTwissP
+  TwissParamGroup:
+    name: TwissParamGroup
+    definition_uri: https://pals-project.readthedocs.io/TwissParamGroup
+    description: Mixin for Twiss parameters, which can be used to describe the beam
+      optics of an accelerator element.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:TwissP
+    slots:
+    - twissParamGroup__alpha_a
+    - twissParamGroup__alpha_b
+    - twissParamGroup__beta_a
+    - twissParamGroup__beta_b
+    - twissParamGroup__eta_x
+    - twissParamGroup__eta_y
+    - twissParamGroup__etap_x
+    - twissParamGroup__etap_y
+    - twissParamGroup__phi_a
+    - twissParamGroup__phi_b
+    attributes:
+      alpha_a:
+        name: alpha_a
+        description: Twiss alpha parameter in the horizontal plane.
+        aliases:
+        - alpha_x
+        - alphax
+        slot_uri: pals:alpha_a
+        range: float
+      alpha_b:
+        name: alpha_b
+        description: Twiss alpha parameter in the vertical plane.
+        aliases:
+        - alpha_y
+        - alphay
+        slot_uri: pals:alpha_b
+        range: float
+      beta_a:
+        name: beta_a
+        description: Twiss beta parameter in the horizontal plane.
+        aliases:
+        - beta_x
+        - betax
+        slot_uri: pals:beta_a
+        range: float
+      beta_b:
+        name: beta_b
+        description: Twiss beta parameter in the vertical plane.
+        aliases:
+        - beta_y
+        - betay
+        slot_uri: pals:beta_b
+        range: float
+      eta_x:
+        name: eta_x
+        description: Twiss dispersion parameter in the horizontal plane.
+        aliases:
+        - etax
+        slot_uri: pals:eta_x
+        range: float
+      eta_y:
+        name: eta_y
+        description: Twiss dispersion parameter in the vertical plane.
+        aliases:
+        - etay
+        slot_uri: pals:eta_y
+        range: float
+      etap_x:
+        name: etap_x
+        description: Twiss dispersion slope parameter in the horizontal plane.
+        aliases:
+        - etapx
+        slot_uri: pals:etap_x
+        range: float
+      etap_y:
+        name: etap_y
+        description: Twiss dispersion slope parameter in the vertical plane.
+        aliases:
+        - etapy
+        slot_uri: pals:etap_y
+        range: float
+      phi_a:
+        name: phi_a
+        description: Twiss phase advance parameter in the horizontal plane.
+        aliases:
+        - phi_x
+        - phix
+        - psi_x
+        - psix
+        slot_uri: pals:phi_a
+        range: float
+      phi_b:
+        name: phi_b
+        description: Twiss phase advance parameter in the vertical plane.
+        aliases:
+        - phi_y
+        - phiy
+        - psi_y
+        - psiy
+        slot_uri: pals:phi_b
+        range: float
+    class_uri: pals:TwissParamGroup
+  HasRFP:
+    name: HasRFP
+    definition_uri: https://pals-project.readthedocs.io/HasRFP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasRFP__RFP
+    attributes:
+      RFP:
+        name: RFP
+        description: A mixin for RF parameters that are aligned with PALS RFP (RF
+          Parameters) for interoperability with the Particle Accelerator Language
+          Standard (PALS).
+        range: RFParamGroup
+        inlined: true
+    class_uri: pals:HasRFP
+  RFParamGroup:
+    name: RFParamGroup
+    definition_uri: https://pals-project.readthedocs.io/RFParamGroup
+    description: Mixin for RF parameters, which can be used to describe the RF properties
+      of an accelerator element. This mixin is aligned with PALS RFP for interoperability
+      with the Particle Accelerator Language Standard (PALS).
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:RFP
+    slots:
+    - rFParamGroup__frequency
+    - rFParamGroup__harmon
+    - rFParamGroup__voltage
+    - rFParamGroup__phase
+    - rFParamGroup__multipass_phase
+    - rFParamGroup__cavity_type
+    - rFParamGroup__num_cells
+    - rFParamGroup__zero_phase
+    - rFParamGroup__L_active
+    - rFParamGroup__dE_ref
+    attributes:
+      frequency:
+        name: frequency
+        description: RF frequency.
+        slot_uri: pals:frequency
+        range: float
+        unit:
+          ucum_code: Hz
+      harmon:
+        name: harmon
+        description: RF harmonic number.
+        slot_uri: pals:harmon
+        range: integer
+      voltage:
+        name: voltage
+        description: RF voltage.
+        slot_uri: pals:voltage
+        range: float
+        unit:
+          ucum_code: V
+      phase:
+        name: phase
+        description: RF phase. rad/2pi RF phase in 0 to 2*pi
+        slot_uri: pals:phase
+        range: float
+      multipass_phase:
+        name: multipass_phase
+        description: rad/2pi RF Phase added to multipass elements
+        slot_uri: pals:multipass_phase
+        range: float
+      cavity_type:
+        name: cavity_type
+        description: Cavity type
+        slot_uri: pals:cavity_type
+        range: CavityTypeEnum
+      num_cells:
+        name: num_cells
+        description: Number of cells in the cavity
+        slot_uri: pals:num_cells
+        range: integer
+      zero_phase:
+        name: zero_phase
+        description: Sets what phase = 0 means.
+        slot_uri: pals:zero_phase
+        range: ZeroPhaseEnum
+      L_active:
+        name: L_active
+        description: Active acceleration length.
+        slot_uri: pals:L_active
+        range: float
+        unit:
+          ucum_code: m
+      dE_ref:
+        name: dE_ref
+        description: Reference energy gain.
+        slot_uri: pals:dE_ref
+        range: float
+        unit:
+          ucum_code: eV
+    class_uri: pals:RFParamGroup
+  HasElectricMultipoleP:
+    name: HasElectricMultipoleP
+    definition_uri: https://pals-project.readthedocs.io/HasElectricMultipoleP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasElectricMultipoleP__ElectricMultipoleP
+    attributes:
+      ElectricMultipoleP:
+        name: ElectricMultipoleP
+        description: A mixin for electric multipole parameters that are aligned with
+          PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability
+          with the Particle Accelerator Language Standard (PALS).
+        range: ElectricMultipoleParamGroup
+        inlined: true
+    class_uri: pals:HasElectricMultipoleP
+  ElectricMultipoleParamGroup:
+    name: ElectricMultipoleParamGroup
+    definition_uri: https://pals-project.readthedocs.io/ElectricMultipoleParamGroup
+    description: "Mixin for electric multipole parameters, \nwhich can be used to\
+      \ describe the electric field components of an accelerator element.\nThis mixin\
+      \ is aligned with PALS ElectricMultipoleP for interoperability with the Particle\
+      \ Accelerator Language Standard (PALS).\nExample with three multipole components\
+      \ (N=0,1,2): ```yaml elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n\
+      \  En: 27.3\n- order: 2\n  EnL: 3.47e1\n```"
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:ElectricMultipoleP
+    broad_mappings:
+    - pals:ElectricMultipoleP
+    slots:
+    - electricMultipoleParamGroup__elec_components
+    attributes:
+      elec_components:
+        name: elec_components
+        description: Electric multipole components, one per order N.
+        range: MultipoleParameterGroup
+        multivalued: true
+        inlined_as_list: true
+    class_uri: pals:ElectricMultipoleParamGroup
+  HasMagneticMultipoleP:
+    name: HasMagneticMultipoleP
+    definition_uri: https://pals-project.readthedocs.io/HasMagneticMultipoleP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    attributes:
+      MagneticMultipoleP:
+        name: MagneticMultipoleP
+        description: A mixin for magnetic multipole parameters that are aligned with
+          PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability
+          with the Particle Accelerator Language Standard (PALS).
+        range: MagneticMultipoleParamGroup
+        inlined: true
+    class_uri: pals:HasMagneticMultipoleP
+  MagneticMultipoleParamGroup:
+    name: MagneticMultipoleParamGroup
+    definition_uri: https://pals-project.readthedocs.io/MagneticMultipoleParamGroup
+    description: "Mixin for magnetic multipole parameters,  which can be used to describe\
+      \ the magnetic field components of an accelerator element. This mixin is aligned\
+      \ with PALS MagneticMultipoleP for interoperability with the Particle Accelerator\
+      \ Language Standard (PALS). Example with three multipole components (N=0,1,2):\
+      \ ```yaml mag_components: - order: 7\n  tilt: 0.7\n- order: 3\n  Bn: 27.3\n\
+      - order: 2\n  BnL: 3.47e1\n- order: 1\n  Kn: 0.85     # normalized form, e.g.\
+      \ a quadrupole's k1-like strength\n```"
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:MagneticMultipoleP
+    slots:
+    - magneticMultipoleParamGroup__mag_components
+    attributes:
+      mag_components:
+        name: mag_components
+        description: Magnetic multipole components, one per order N.
+        range: MultipoleParameterGroup
+        multivalued: true
+        inlined_as_list: true
+    class_uri: pals:MagneticMultipoleParamGroup
+  HasBendP:
+    name: HasBendP
+    definition_uri: https://pals-project.readthedocs.io/HasBendP
+    from_schema: https://w3id.org/accelerator-core
+    mixin: true
+    slots:
+    - hasBendP__BendP
+    attributes:
+      BendP:
+        name: BendP
+        description: A mixin for bend parameters that are aligned with PALS BendP
+          (Bend Parameters) for interoperability with the Particle Accelerator Language
+          Standard (PALS).
+        range: BendParamGroup
+        inlined: true
+    class_uri: pals:HasBendP
+  BendParamGroup:
+    name: BendParamGroup
+    definition_uri: https://pals-project.readthedocs.io/BendParamGroup
+    description: 'Mixin for bend parameters, which can be used to describe the bending
+      properties of an accelerator element.
+
+      This mixin is aligned with PALS BendP for interoperability with the Particle
+      Accelerator Language Standard (PALS).'
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:BendP
+    slots:
+    - bendParamGroup__angle_ref
+    - bendParamGroup__bend_field_ref
+    - bendParamGroup__bend_field_actual
+    - bendParamGroup__e1
+    - bendParamGroup__e2
+    - bendParamGroup__e1_rect
+    - bendParamGroup__e2_rect
+    - bendParamGroup__edge1_int
+    - bendParamGroup__edge2_int
+    - bendParamGroup__g_ref
+    - bendParamGroup__g_actual
+    - bendParamGroup__h1
+    - bendParamGroup__h2
+    - bendParamGroup__L_chord
+    - bendParamGroup__L_sagitta
+    - bendParamGroup__L_rectangle
+    - bendParamGroup__multipole_geometry
+    - bendParamGroup__ref_geometry
+    - bendParamGroup__rho_ref
+    - bendParamGroup__tilt_ref
+    attributes:
+      angle_ref:
+        name: angle_ref
+        description: Reference bend angle.
+        slot_uri: pals:angle_ref
+        range: float
+        unit:
+          ucum_code: rad
+      bend_field_ref:
+        name: bend_field_ref
+        description: Reference bend field.
+        slot_uri: pals:bend_field_ref
+        range: float
+        unit:
+          ucum_code: T
+      bend_field_actual:
+        name: bend_field_actual
+        description: Actual bend field.
+        slot_uri: pals:bend_field_actual
+        range: float
+        unit:
+          ucum_code: T
+      e1:
+        name: e1
+        description: Entrance end pole face rotation with respect to a sector geometry.
+        slot_uri: pals:e1
+        range: float
+        unit:
+          ucum_code: rad
+      e2:
+        name: e2
+        description: Exit end pole face rotation with respect to a sector geometry.
+        slot_uri: pals:e2
+        range: float
+        unit:
+          ucum_code: rad
+      e1_rect:
+        name: e1_rect
+        description: Entrance end pole face rotation with respect to a rectangular
+          geometry.
+        slot_uri: pals:e1_rect
+        range: float
+        unit:
+          ucum_code: rad
+      e2_rect:
+        name: e2_rect
+        description: Exit end pole face rotation with respect to a rectangular geometry.
+        slot_uri: pals:e2_rect
+        range: float
+        unit:
+          ucum_code: rad
+      edge1_int:
+        name: edge1_int
+        description: Entrance end fringe field integral.
+        slot_uri: pals:edge1_int
+        range: float
+        unit:
+          ucum_code: T.m
+      edge2_int:
+        name: edge2_int
+        description: Exit end fringe field integral.
+        slot_uri: pals:edge2_int
+        range: float
+        unit:
+          ucum_code: T.m
+      g_ref:
+        name: g_ref
+        description: Reference bend strength = 1/radius_ref
+        slot_uri: pals:g_ref
+        range: float
+        unit:
+          ucum_code: 1/m
+      g_actual:
+        name: g_actual
+        description: Actual bend strength = 1/radius_actual
+        slot_uri: pals:g_actual
+        range: float
+        unit:
+          ucum_code: 1/m
+      h1:
+        name: h1
+        description: Entrance end pole face curvature
+        slot_uri: pals:h1
+        range: float
+        unit:
+          ucum_code: 1/m
+      h2:
+        name: h2
+        description: Exit end pole face curvature
+        slot_uri: pals:h2
+        range: float
+        unit:
+          ucum_code: 1/m
+      L_chord:
+        name: L_chord
+        description: Chord length of the bend.
+        slot_uri: pals:L_chord
+        range: float
+        unit:
+          ucum_code: m
+      L_sagitta:
+        name: L_sagitta
+        description: Output parameter. Sagitta length.
+        slot_uri: pals:L_sagitta
+        range: float
+        unit:
+          ucum_code: m
+      L_rectangle:
+        name: L_rectangle
+        description: Rectangular length.
+        slot_uri: pals:L_rectangle
+        range: float
+        unit:
+          ucum_code: m
+      multipole_geometry:
+        name: multipole_geometry
+        description: Multipole geometry type. Must be `follows_ref_geometry`.
+        slot_uri: pals:multipole_geometry
+        range: MultipoleGeometryEnum
+      ref_geometry:
+        name: ref_geometry
+        description: Reference geometry type. Must be `arc`.
+        slot_uri: pals:ref_geometry
+        range: ReferenceGeometryEnum
+      rho_ref:
+        name: rho_ref
+        description: Reference bend radius.
+        slot_uri: pals:rho_ref
+        range: float
+        unit:
+          ucum_code: m
+      tilt_ref:
+        name: tilt_ref
+        description: Reference tilt of the bend.
+        slot_uri: pals:tilt_ref
+        range: float
+        unit:
+          ucum_code: rad
+    class_uri: pals:BendParamGroup
+    rules:
+    - preconditions:
+        slot_conditions:
+          multipole_geometry:
+            name: multipole_geometry
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          multipole_geometry:
+            name: multipole_geometry
+            equals_expression: follows_ref_geometry
+      description: multipole_geometry must be follows_ref_geometry
+    - preconditions:
+        slot_conditions:
+          ref_geometry:
+            name: ref_geometry
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          ref_geometry:
+            name: ref_geometry
+            equals_expression: arc
+      description: ref_geometry must be arc
+  MultipoleParameterGroup:
+    name: MultipoleParameterGroup
+    definition_uri: https://pals-project.readthedocs.io/MultipoleParameterGroup
+    description: 'A single order''s electric (or magnetic) multipole component.
+
+      Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles
+      should be present, not both.
+
+      Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP
+      mixins to represent individual multipole components.'
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - multipoleParameterGroup__order
+    - multipoleParameterGroup__tilt
+    - multipoleParameterGroup__En
+    - multipoleParameterGroup__Es
+    - multipoleParameterGroup__EnL
+    - multipoleParameterGroup__EsL
+    - multipoleParameterGroup__Bn
+    - multipoleParameterGroup__Bs
+    - multipoleParameterGroup__Kn
+    - multipoleParameterGroup__Ks
+    attributes:
+      order:
+        name: order
+        description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
+        range: integer
+        required: true
+      tilt:
+        name: tilt
+        description: Tilt of the Nth multipole.
+        broad_mappings:
+        - pals:tilt
+        range: float
+        unit:
+          ucum_code: rad
+      En:
+        name: En
+        description: Normal component of the field.
+        broad_mappings:
+        - pals:EnN
+        range: float
+      Es:
+        name: Es
+        description: Skew component of the field.
+        broad_mappings:
+        - pals:EsN
+        range: float
+      EnL:
+        name: EnL
+        description: Length-integrated normal component.
+        broad_mappings:
+        - pals:EnNL
+        range: float
+      EsL:
+        name: EsL
+        description: Length-integrated skew component.
+        broad_mappings:
+        - pals:EsNL
+        range: float
+      Bn:
+        name: Bn
+        description: Normal component of the magnetic field.
+        broad_mappings:
+        - pals:BnN
+        range: float
+      Bs:
+        name: Bs
+        description: Skew component of the magnetic field.
+        broad_mappings:
+        - pals:BsN
+        range: float
+      Kn:
+        name: Kn
+        description: Normalized normal component.
+        broad_mappings:
+        - pals:KnN
+        range: float
+      Ks:
+        name: Ks
+        description: Normalized skew component.
+        broad_mappings:
+        - pals:KsN
+        range: float
+    class_uri: pals:MultipoleParameterGroup
+    rules:
+    - preconditions:
+        slot_conditions:
+          Es:
+            name: Es
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          Bn:
+            name: Bn
+            value_presence:
+              text: ABSENT
+          Bs:
+            name: Bs
+            value_presence:
+              text: ABSENT
+          Kn:
+            name: Kn
+            value_presence:
+              text: ABSENT
+          Ks:
+            name: Ks
+            value_presence:
+              text: ABSENT
+      description: If Es is present, then Bn, Bs, Kn, Ks should NOT be present
+    - preconditions:
+        slot_conditions:
+          En:
+            name: En
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          Bn:
+            name: Bn
+            value_presence:
+              text: ABSENT
+          Bs:
+            name: Bs
+            value_presence:
+              text: ABSENT
+          Kn:
+            name: Kn
+            value_presence:
+              text: ABSENT
+          Ks:
+            name: Ks
+            value_presence:
+              text: ABSENT
+      description: If En is present, then Bn, Bs, Kn, Ks should NOT be present
+    - preconditions:
+        slot_conditions:
+          EnL:
+            name: EnL
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          Bn:
+            name: Bn
+            value_presence:
+              text: ABSENT
+          Bs:
+            name: Bs
+            value_presence:
+              text: ABSENT
+          Kn:
+            name: Kn
+            value_presence:
+              text: ABSENT
+          Ks:
+            name: Ks
+            value_presence:
+              text: ABSENT
+      description: If EnL is present, then Bn, Bs, Kn, Ks should NOT be present
+    - preconditions:
+        slot_conditions:
+          EsL:
+            name: EsL
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          Bn:
+            name: Bn
+            value_presence:
+              text: ABSENT
+          Bs:
+            name: Bs
+            value_presence:
+              text: ABSENT
+          Kn:
+            name: Kn
+            value_presence:
+              text: ABSENT
+          Ks:
+            name: Ks
+            value_presence:
+              text: ABSENT
+      description: If EsL is present, then Bn, Bs, Kn, Ks should NOT be present
+    - preconditions:
+        slot_conditions:
+          Bn:
+            name: Bn
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          En:
+            name: En
+            value_presence:
+              text: ABSENT
+          Es:
+            name: Es
+            value_presence:
+              text: ABSENT
+          EnL:
+            name: EnL
+            value_presence:
+              text: ABSENT
+          EsL:
+            name: EsL
+            value_presence:
+              text: ABSENT
+      description: If Bn is present, then En, Es, EnL, EsL should NOT be present
+    - preconditions:
+        slot_conditions:
+          Bs:
+            name: Bs
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          En:
+            name: En
+            value_presence:
+              text: ABSENT
+          Es:
+            name: Es
+            value_presence:
+              text: ABSENT
+          EnL:
+            name: EnL
+            value_presence:
+              text: ABSENT
+          EsL:
+            name: EsL
+            value_presence:
+              text: ABSENT
+      description: If Bs is present, then En, Es, EnL, EsL should NOT be present
+    - preconditions:
+        slot_conditions:
+          Kn:
+            name: Kn
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          En:
+            name: En
+            value_presence:
+              text: ABSENT
+          Es:
+            name: Es
+            value_presence:
+              text: ABSENT
+          EnL:
+            name: EnL
+            value_presence:
+              text: ABSENT
+          EsL:
+            name: EsL
+            value_presence:
+              text: ABSENT
+      description: If Kn is present, then En, Es, EnL, EsL should NOT be present
+    - preconditions:
+        slot_conditions:
+          Ks:
+            name: Ks
+            value_presence:
+              text: PRESENT
+      postconditions:
+        slot_conditions:
+          En:
+            name: En
+            value_presence:
+              text: ABSENT
+          Es:
+            name: Es
+            value_presence:
+              text: ABSENT
+          EnL:
+            name: EnL
+            value_presence:
+              text: ABSENT
+          EsL:
+            name: EsL
+            value_presence:
+              text: ABSENT
+      description: If Ks is present, then En, Es, EnL, EsL should NOT be present
+  Component:
+    name: Component
+    definition_uri: https://pals-project.readthedocs.io/Component
+    description: A general class for accelerator components, which can be specialized
+      into more specific types like AcceleratorDevice, Magnet, etc.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Element
+    abstract: true
+    mixins:
+    - HasMetaP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    attributes:
+      native_types:
+        name: native_types
+        description: The native type of the component in the source system, which
+          can be used to identify the component across different source systems.
+        range: string
+        multivalued: true
+    class_uri: pals:Component
+  PhysicalComponent:
+    name: PhysicalComponent
+    definition_uri: https://pals-project.readthedocs.io/PhysicalComponent
+    description: A physical item that participates in or supports accelerator operation.  This
+      can be used to capture physical components, such as magnets, cavities, diagnostics,
+      vacuum devices, and racks that are important for understanding the structure
+      and function of the accelerator system.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Element
+    is_a: Component
+    mixins:
+    - HasFloorP
+    - HasLongitudinalPlacementP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    attributes:
+      functions:
+        name: functions
+        description: The function of the physical component,  which can be used to
+          identify the component across different source systems.
+        slot_uri: pals:physical_function
+        range: PhysicalFunctionEnum
+        required: true
+        multivalued: true
+      beamline_relation:
+        name: beamline_relation
+        description: The relationship of the physical component to the beamline,  which
+          can be used to identify the component across different source systems.
+        slot_uri: pals:physical_beamline_relation
+        range: PhysicalRelationEnum
+        required: true
+    class_uri: pals:PhysicalComponent
+  VirtualComponent:
+    name: VirtualComponent
+    definition_uri: https://pals-project.readthedocs.io/VirtualComponent
+    description: A virtual or logical component that represents a concept, function,
+      or role in the accelerator  beamline operation but does not have a physical
+      instantiation.  This can be used to capture abstract components, such as Markers,
+      BeamLineSections, and FacilitySpaces that are important for understanding the
+      structure and function of the accelerator system but are not physical devices.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Element
+    - pals:BookkeepingElement
+    is_a: Component
+    mixins:
+    - HasFloorP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - virtualComponent__functions
+    - virtualComponent__beamline_relation
+    - hasFloorP__FloorP
+    attributes:
+      functions:
+        name: functions
+        description: The function of the virtual component,  which can be used to
+          identify the component across different source systems.
+        slot_uri: pals:virtual_function
+        range: VirtualFunctionEnum
+        required: true
+        multivalued: true
+      beamline_relation:
+        name: beamline_relation
+        description: The relationship of the virtual component to the beamline,  which
+          can be used to identify the component across different source systems.
+        slot_uri: pals:virtual_beamline_relation
+        range: VirtualRelationEnum
+        required: true
+    class_uri: pals:VirtualComponent
+  BeamLine:
+    name: BeamLine
+    definition_uri: https://pals-project.readthedocs.io/BeamLine
+    description: PALS element for an ordered sequence of beamline elements defining
+      a beam path.
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:BeamLine
+    is_a: VirtualComponent
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - virtualComponent__functions
+    - virtualComponent__beamline_relation
+    - hasFloorP__FloorP
+    - BeamLine_length
+    - description
+    - beamLine__multipass
+    - beamLine__periodic
+    - beamLine__repeat
+    - beamLine__direction
+    slot_usage:
+      length:
+        name: length
+        description: The total length of the BeamLine. For pals interoperability,
+          use m as the unit of length.
+    attributes:
+      multipass:
+        name: multipass
+        description: Indicates whether the BeamLine is a multipass BeamLine, where
+          the beam passes through the same physical elements multiple times. If not
+          provided, the default assumption is that the BeamLine is single-pass.
+        slot_uri: pals:multipass
+        range: boolean
+      periodic:
+        name: periodic
+        description: Indicates whether orbit and Twiss parameters periodic. If not
+          provided, the default assumption is that the BeamLine is not periodic.
+        slot_uri: pals:periodic
+        range: boolean
+      repeat:
+        name: repeat
+        description: 'Repetition count. If not provided, the default assumption is
+          that the beamline is not repeated and the value is 1.
+
+          If value is greater than 1, the beamline is repeated that many times.'
+        slot_uri: pals:repeat
+        range: integer
+      direction:
+        name: direction
+        description: 'Beam direction along the BeamLine: +1 or -1. Longitudinal orientation.
+          Default is +1.'
+        slot_uri: pals:direction
+        range: integer
+    class_uri: pals:BeamLine
+  Signal:
+    name: Signal
+    definition_uri: https://pals-project.readthedocs.io/Signal
+    description: Semantic meaning of a control-system signal associated with a component.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - sosa:Sensor
+    - sosa:Actuator
+    mixins:
+    - HasMetaP
+    slots:
+    - id
+    - kind
+    - alias
+    - signal__signal_role
+    - signal__source_system
+    - signal__native_description
+    - signal__canonical_signal_type
+    - signal__quantity_kind
+    - signal__native_data_type
+    - signal__native_unit
+    - signal__access_protocol
+    - signal__archive_identifier
+    - hasMetaP__MetaP
+    attributes:
+      signal_role:
+        name: signal_role
+        description: The role of the signal in the control system, such as setpoint,
+          readback, status, command, or limit.
+        range: SignalRoleEnum
+        required: true
+      source_system:
+        name: source_system
+        description: The source system from which the signal originates, such as EPICS,
+          PALS-Ext, MYA, an element database, a channel database, or a simulation
+          service.
+        range: SourceSystemEnum
+        required: true
+      native_description:
+        name: native_description
+        description: A human-readable description of the signal in the source system.
+        range: string
+      canonical_signal_type:
+        name: canonical_signal_type
+        description: The canonical semantic meaning of the signal.
+        range: CanonicalSignalTypeEnum
+        required: true
+      quantity_kind:
+        name: quantity_kind
+        description: The physical quantity kind of the signal.
+        range: QuantityKindEnum
+        required: true
+      native_data_type:
+        name: native_data_type
+        description: The native data type of the signal in the source system,  such
+          as String, Integer, Float, or Boolean.
+        range: DataTypeEnum
+        required: true
+      native_unit:
+        name: native_unit
+        description: The native unit of the signal in the source system.
+        range: UnitEnum
+        required: true
+      access_protocol:
+        name: access_protocol
+        description: The protocol used to access the signal in the source system,  such
+          as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.
+        range: string
+      archive_identifier:
+        name: archive_identifier
+        description: The identifier used to reference the signal in an archival system.
+        range: string
+    class_uri: pals:Signal
+  Magnet:
+    name: Magnet
+    definition_uri: https://pals-project.readthedocs.io/Magnet
+    description: An accelerator device that produces a magnetic field for beam control.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Element
+    is_a: PhysicalComponent
+    abstract: true
+    mixins:
+    - HasReferenceP
+    - HasBodyShiftP
+    - HasTwissP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:Magnet
+  Solenoid:
+    name: Solenoid
+    definition_uri: https://pals-project.readthedocs.io/Solenoid
+    description: 'A magnet with a primarily longitudinal magnetic field used for focusing.
+
+      A solenoid is an element whose magnetic field is dominated by a field whose
+      direction is aligned with the magnetic axis. '
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:Solenoid
+    is_a: Magnet
+    mixins:
+    - HasSolenoidP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasSolenoidP__SolenoidP
+    class_uri: pals:Solenoid
+  Multipole:
+    name: Multipole
+    definition_uri: https://pals-project.readthedocs.io/Multipole
+    description: 'A general magnet with a higher-order multipole field, such as a
+      sextupole or octupole.
+
+      Only one of the electric or magnetic multipole components should be present,
+      not both.'
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Multipole
+    is_a: Magnet
+    mixins:
+    - HasElectricMultipoleP
+    - HasMagneticMultipoleP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:Multipole
+  Bend:
+    name: Bend
+    definition_uri: https://pals-project.readthedocs.io/Bend
+    description: Dipole magnet used to bend the beam. 2 poles. The major difference
+      between this element and other physical elements is that with a Bend  the curvilinear
+      coordinate system is an arc with finite curvature  and for the other elements
+      the curvilinear coordinate system is straight.
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - Dipole
+    exact_mappings:
+    - pals:Bend
+    is_a: Multipole
+    mixins:
+    - HasBendP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBendP__BendP
+    class_uri: pals:Bend
+  Quadrupole:
+    name: Quadrupole
+    definition_uri: https://pals-project.readthedocs.io/Quadrupole
+    description: 'A magnet primarily used to focus or defocus the beam. 4 poles.
+
+      Only one of the electric or magnetic multipole components should be present,
+      not both.'
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:Quadrupole
+    is_a: Multipole
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:Quadrupole
+  Octupole:
+    name: Octupole
+    definition_uri: https://pals-project.readthedocs.io/Octupole
+    description: 'A magnet primarily used to focus or defocus the beam. 8 poles.
+
+      Only one of the electric or magnetic multipole components should be present,
+      not both.'
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:Octupole
+    is_a: Multipole
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:Octupole
+  Sextupole:
+    name: Sextupole
+    definition_uri: https://pals-project.readthedocs.io/Sextupole
+    description: 'A magnet primarily used to focus or defocus the beam. 6 poles.
+
+      Only one of the electric or magnetic multipole components should be present,
+      not both.'
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:Sextupole
+    is_a: Multipole
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:Sextupole
+  Kicker:
+    name: Kicker
+    definition_uri: https://pals-project.readthedocs.io/Kicker
+    description: "A magnet primarily used to steer the beam.\nCan deflect the beam\
+      \ transversely in both planes, or a single plane, depending on the design and\
+      \ parameters of the kicker. \nOnly one of the electric or magnetic multipole\
+      \ components should be present, not both."
+    from_schema: https://w3id.org/accelerator-core
+    aliases:
+    - Corrector
+    - HCorrector
+    - VCorrector
+    - VDiagKicker
+    - HDiagKicker
+    broad_mappings:
+    - pals:Kicker
+    is_a: Magnet
+    mixins:
+    - HasElectricMultipoleP
+    - HasMagneticMultipoleP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - kicker__plane
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    attributes:
+      plane:
+        name: plane
+        description: The transverse plane in which the kicker operates, either horizontal
+          or vertical.
+        range: PlaneEnum
+    class_uri: pals:Kicker
+  ACKicker:
+    name: ACKicker
+    definition_uri: https://pals-project.readthedocs.io/ACKicker
+    description: An ACKicker element simulates a time-dependent kicker.  It is like
+      a Kicker element except that the field varies in time.  This element requires
+      a user supplied time-dependent expression.
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:ACKicker
+    is_a: Kicker
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - kicker__plane
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    class_uri: pals:ACKicker
+  DiagnosticDevice:
+    name: DiagnosticDevice
+    definition_uri: https://pals-project.readthedocs.io/DiagnosticDevice
+    description: An accelerator device used to measure beam or machine state.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Instrument
+    is_a: PhysicalComponent
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    class_uri: pals:DiagnosticDevice
+  BeamProfileMonitor:
+    name: BeamProfileMonitor
+    definition_uri: https://pals-project.readthedocs.io/BeamProfileMonitor
+    description: A diagnostic device used to measure transverse beam profile.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Instrument
+    is_a: DiagnosticDevice
+    mixins:
+    - HasReferenceP
+    - HasBodyShiftP
+    - HasTwissP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:BeamProfileMonitor
+  BeamPositionMonitor:
+    name: BeamPositionMonitor
+    definition_uri: https://pals-project.readthedocs.io/BeamPositionMonitor
+    description: A diagnostic device used to measure transverse beam position.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Instrument
+    is_a: DiagnosticDevice
+    mixins:
+    - HasReferenceP
+    - HasBodyShiftP
+    - HasTwissP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:BeamPositionMonitor
+  RadiationMonitor:
+    name: RadiationMonitor
+    definition_uri: https://pals-project.readthedocs.io/RadiationMonitor
+    description: A diagnostic device used to monitor radiation dose or dose rate.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Instrument
+    is_a: DiagnosticDevice
+    mixins:
+    - HasBodyShiftP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasBodyShiftP__BodyShiftP
+    class_uri: pals:RadiationMonitor
+  Cavity:
+    name: Cavity
+    definition_uri: https://pals-project.readthedocs.io/Cavity
+    description: A cavity used for beam acceleration or manipulation.
+    from_schema: https://w3id.org/accelerator-core
+    is_a: PhysicalComponent
+    abstract: true
+    mixins:
+    - HasReferenceP
+    - HasElectricMultipoleP
+    - HasMagneticMultipoleP
+    - HasBodyShiftP
+    - HasTwissP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:Cavity
+  CrabCavity:
+    name: CrabCavity
+    definition_uri: https://pals-project.readthedocs.io/CrabCavity
+    description: A cavity used for transverse beam manipulation, such as crabbing
+      or deflecting.
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:CrabCavity
+    is_a: Cavity
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:CrabCavity
+  RFCavity:
+    name: RFCavity
+    definition_uri: https://pals-project.readthedocs.io/RFCavity
+    description: A cavity used for RF acceleration or longitudinal manipulation.
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:RFCavity
+    is_a: Cavity
+    abstract: true
+    mixins:
+    - HasRFP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasRFP__RFP
+    class_uri: pals:RFCavity
+  NormalConductingRFCavity:
+    name: NormalConductingRFCavity
+    definition_uri: https://pals-project.readthedocs.io/NormalConductingRFCavity
+    description: A cavity used for RF acceleration or longitudinal manipulation, which
+      is normal conducting.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:RFCavity
+    is_a: RFCavity
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasRFP__RFP
+    class_uri: pals:NormalConductingRFCavity
+  SuperConductingRFCavity:
+    name: SuperConductingRFCavity
+    definition_uri: https://pals-project.readthedocs.io/SuperConductingRFCavity
+    description: A cavity used for RF acceleration or longitudinal manipulation, which
+      is superconducting.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:RFCavity
+    is_a: RFCavity
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasElectricMultipoleP__ElectricMultipoleP
+    - hasMagneticMultipoleP__MagneticMultipoleP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    - hasRFP__RFP
+    class_uri: pals:SuperConductingRFCavity
+  SupportingFacilityComponent:
+    name: SupportingFacilityComponent
+    definition_uri: https://pals-project.readthedocs.io/SupportingFacilityComponent
+    description: A physical component that supports accelerator operation  without
+      a specific beam-pipe placement,  such as a power supply, control rack, or radiation
+      detector. These can include Girders, Racks, Power Supplies,  and other physical
+      infrastructure components that are important for understanding  the structure
+      and function of the accelerator system but are not inline with the beamline.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:StructuralElement
+    is_a: PhysicalComponent
+    mixins:
+    - HasFloorP
+    - HasLongitudinalPlacementP
+    - HasBodyShiftP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - supportingFacilityComponent__functions
+    - hasBodyShiftP__BodyShiftP
+    attributes:
+      functions:
+        name: functions
+        description: The function of the supporting facility component,  which can
+          be used to identify the component across different source systems.
+        slot_uri: pals:supporting_facility_function
+        range: FacilityFunctionEnum
+        required: true
+        multivalued: true
+    class_uri: pals:SupportingFacilityComponent
+  BookkeepingComponent:
+    name: BookkeepingComponent
+    definition_uri: https://pals-project.readthedocs.io/BookkeepingComponent
+    description: A virtual component that represents a bookkeeping or organizational
+      role in the accelerator system,  such as a BeamLineSection, Marker or a Fork.
+      These can include BeamLineSections, Markers, Forks, and other virtual components
+      that are important for understanding  the structure and function of the accelerator
+      system but are not physical devices.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:BookkeepingElement
+    is_a: VirtualComponent
+    mixins:
+    - HasBodyShiftP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - virtualComponent__functions
+    - virtualComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasBodyShiftP__BodyShiftP
+    class_uri: pals:BookkeepingComponent
+  Marker:
+    name: Marker
+    definition_uri: https://pals-project.readthedocs.io/Marker
+    description: A virtual component used as a reference point or marker in the beamline
+      structure.
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:Marker
+    is_a: BookkeepingComponent
+    mixins:
+    - HasTwissP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - virtualComponent__functions
+    - virtualComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasBodyShiftP__BodyShiftP
+    - hasTwissP__TwissP
+    class_uri: pals:Marker
+  BeamLineSection:
+    name: BeamLineSection
+    definition_uri: https://pals-project.readthedocs.io/BeamLineSection
+    description: A virtual component used to represent a section of the BeamLine for
+      organizational or functional grouping of components.
+    from_schema: https://w3id.org/accelerator-core
+    exact_mappings:
+    - pals:BeamLineSection
+    is_a: BookkeepingComponent
+    mixins:
+    - HasFloorP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - virtualComponent__functions
+    - virtualComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasBodyShiftP__BodyShiftP
+    class_uri: pals:BeamLineSection
+  AdditionalMetadata:
+    name: AdditionalMetadata
+    definition_uri: https://pals-project.readthedocs.io/AdditionalMetadata
+    description: 'A single generic key/value metadata entry, used as a GraphQL-compatible
+      replacement for an open-ended (range: Any) field. A list of these represents
+      an arbitrary, extensible bag of program-specific metadata.'
+    from_schema: https://w3id.org/accelerator-core
+    slots:
+    - additionalMetadata__key
+    - additionalMetadata__value
+    - additionalMetadata__datatype
+    attributes:
+      key:
+        name: key
+        description: The metadata field name.
+        identifier: true
+        range: string
+        required: true
+      value:
+        name: value
+        description: The metadata value, serialized as a string.
+        range: string
+        required: true
+      datatype:
+        name: datatype
+        description: Hint for the value's original type, so consumers can parse it
+          back (e.g. float, integer, boolean) rather than treating everything as an
+          opaque string.
+        range: DataTypeEnum
+    class_uri: pals:AdditionalMetadata
+  Relationship:
+    name: Relationship
+    definition_uri: https://pals-project.readthedocs.io/Relationship
+    description: Abstract base for subject-predicate-object associations.
+    from_schema: https://w3id.org/accelerator-core
+    abstract: true
+    slots:
+    - id
+    - subject
+    - predicate
+    - object
+    class_uri: pals:Relationship
+    represents_relationship: true
+  SignalBinding:
+    name: SignalBinding
+    definition_uri: https://pals-project.readthedocs.io/SignalBinding
+    description: Association between a PhysicalComponent and one of its Signals, e.g.
+      QUAD1.QUAD1_STATUS_binding.
+    from_schema: https://w3id.org/accelerator-core
+    is_a: Relationship
+    slots:
+    - id
+    - SignalBinding_subject
+    - SignalBinding_predicate
+    - SignalBinding_object
+    slot_usage:
+      subject:
+        name: subject
+        range: PhysicalComponent
+      predicate:
+        name: predicate
+        range: SignalBindingPredicateEnum
+      object:
+        name: object
+        range: Signal
+    class_uri: pals:SignalBinding
+  ComponentRelation:
+    name: ComponentRelation
+    definition_uri: https://pals-project.readthedocs.io/ComponentRelation
+    description: Association between two Components (Physical or Virtual), with supporting
+      contextual/qualifying information about how and where the relationship holds.
+    from_schema: https://w3id.org/accelerator-core
+    is_a: Relationship
+    slots:
+    - id
+    - componentRelation__context
+    - componentRelation__beamline_context
+    - componentRelation__reference_frame
+    - componentRelation__distance_value
+    - componentRelation__distance_unit
+    - componentRelation__axis
+    - componentRelation__component_direction
+    - componentRelation__tolerance_value
+    - componentRelation__tolerance_unit
+    - ComponentRelation_subject
+    - ComponentRelation_predicate
+    - ComponentRelation_object
+    slot_usage:
+      subject:
+        name: subject
+        range: Component
+      predicate:
+        name: predicate
+        range: ComponentRelationPredicateEnum
+      object:
+        name: object
+        range: Component
+    attributes:
+      context:
+        name: context
+        description: The frame of reference / domain in which this relationship is
+          asserted to hold.
+        range: RelationContextEnum
+      beamline_context:
+        name: beamline_context
+        description: The specific BeamLine this relationship is defined with respect
+          to (relevant when context=beamline_order).
+        range: BeamLine
+      reference_frame:
+        name: reference_frame
+        range: ReferenceFrameEnum
+      distance_value:
+        name: distance_value
+        range: float
+      distance_unit:
+        name: distance_unit
+        range: UnitEnum
+      axis:
+        name: axis
+        range: AxisEnum
+      component_direction:
+        name: component_direction
+        range: DirectionEnum
+      tolerance_value:
+        name: tolerance_value
+        range: float
+      tolerance_unit:
+        name: tolerance_unit
+        range: UnitEnum
+    class_uri: pals:ComponentRelation
+metamodel_version: 1.7.0
+source_file: narad.yaml
+source_file_date: '2026-07-24T13:51:53'
+source_file_size: 68239
+generation_date: '2026-07-24T13:52:45'
+

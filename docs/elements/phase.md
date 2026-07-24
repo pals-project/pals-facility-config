@@ -3,13 +3,13 @@
 # Slot: phase 
 
 
-_RF phase in degrees._
+_RF phase. rad/2pi RF phase in 0 to 2*pi_
 
 
 
 
 
-URI: [narad:phase](https://w3id.org/narad_linkml/schema/narad/phase)
+URI: [pals:phase](https://pals-project.readthedocs.io/phase)
 Alias: phase
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: phase
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
+| [RFParamGroup](RFParamGroup.md) | Mixin for RF parameters, which can be used to describe the RF properties of a... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: phase
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +55,8 @@ Alias: phase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:phase |
-| native | narad:phase |
+| self | pals:phase |
+| native | pals:phase |
 
 
 
@@ -66,12 +66,14 @@ Alias: phase
 <details>
 ```yaml
 name: phase
-description: RF phase in degrees.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: RF phase. rad/2pi RF phase in 0 to 2*pi
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
+slot_uri: pals:phase
 alias: phase
+owner: RFParamGroup
 domain_of:
-- ElementParamSet
+- RFParamGroup
 range: float
 
 ```

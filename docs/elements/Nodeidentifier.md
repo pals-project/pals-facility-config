@@ -31,7 +31,7 @@ URI: [shex:nonLiteral](http://www.w3.org/ns/shex#nonLiteral)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -41,6 +41,6 @@ URI: [shex:nonLiteral](http://www.w3.org/ns/shex#nonLiteral)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | shex:nonLiteral |
-| native | narad:nodeidentifier |
+| native | pals:nodeidentifier |
 
 

@@ -3,13 +3,13 @@
 # Slot: voltage 
 
 
-_RF voltage in volts._
+_RF voltage._
 
 
 
 
 
-URI: [narad:voltage](https://w3id.org/narad_linkml/schema/narad/voltage)
+URI: [pals:voltage](https://pals-project.readthedocs.io/voltage)
 Alias: voltage
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: voltage
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
+| [RFParamGroup](RFParamGroup.md) | Mixin for RF parameters, which can be used to describe the RF properties of a... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: voltage
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +55,8 @@ Alias: voltage
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:voltage |
-| native | narad:voltage |
+| self | pals:voltage |
+| native | pals:voltage |
 
 
 
@@ -66,13 +66,17 @@ Alias: voltage
 <details>
 ```yaml
 name: voltage
-description: RF voltage in volts.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: RF voltage.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
+slot_uri: pals:voltage
 alias: voltage
+owner: RFParamGroup
 domain_of:
-- ElementParamSet
+- RFParamGroup
 range: float
+unit:
+  ucum_code: V
 
 ```
 </details>

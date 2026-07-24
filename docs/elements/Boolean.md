@@ -31,7 +31,7 @@ URI: [xsd:boolean](http://www.w3.org/2001/XMLSchema#boolean)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -41,7 +41,7 @@ URI: [xsd:boolean](http://www.w3.org/2001/XMLSchema#boolean)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | xsd:boolean |
-| native | narad:boolean |
+| native | pals:boolean |
 | exact | schema:Boolean |
 
 

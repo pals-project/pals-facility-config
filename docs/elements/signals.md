@@ -3,13 +3,13 @@
 # Slot: signals 
 
 
-_Signals within a capability, keyed by a semantic signal name._
+_A list of signals in the accelerator system._
 
 
 
 
 
-URI: [narad:signals](https://w3id.org/narad_linkml/schema/narad/signals)
+URI: [pals:signals](https://pals-project.readthedocs.io/signals)
 Alias: signals
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: signals
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ControlCapability](ControlCapability.md) | A reusable device-type control profile that extends a generic shared capabili... |  yes  |
+| [Facility](Facility.md) | A facility that houses one or more accelerators |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: signals
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -57,8 +57,8 @@ Alias: signals
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:signals |
-| native | narad:signals |
+| self | pals:signals |
+| native | pals:signals |
 
 
 
@@ -68,15 +68,17 @@ Alias: signals
 <details>
 ```yaml
 name: signals
-description: Signals within a capability, keyed by a semantic signal name.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: A list of signals in the accelerator system.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: signals
+owner: Facility
 domain_of:
-- ControlCapability
+- Facility
 range: Signal
 multivalued: true
 inlined: true
+inlined_as_list: true
 
 ```
 </details>

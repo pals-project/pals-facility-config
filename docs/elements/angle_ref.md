@@ -3,13 +3,13 @@
 # Slot: angle_ref 
 
 
-_Reference bend angle in radians._
+_Reference bend angle._
 
 
 
 
 
-URI: [narad:angle_ref](https://w3id.org/narad_linkml/schema/narad/angle_ref)
+URI: [pals:angle_ref](https://pals-project.readthedocs.io/angle_ref)
 Alias: angle_ref
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: angle_ref
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
+| [BendParamGroup](BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properti... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: angle_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +55,8 @@ Alias: angle_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:angle_ref |
-| native | narad:angle_ref |
+| self | pals:angle_ref |
+| native | pals:angle_ref |
 
 
 
@@ -66,13 +66,17 @@ Alias: angle_ref
 <details>
 ```yaml
 name: angle_ref
-description: Reference bend angle in radians.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: Reference bend angle.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
+slot_uri: pals:angle_ref
 alias: angle_ref
+owner: BendParamGroup
 domain_of:
-- ElementParamSet
+- BendParamGroup
 range: float
+unit:
+  ucum_code: rad
 
 ```
 </details>

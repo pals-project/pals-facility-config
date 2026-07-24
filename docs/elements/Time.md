@@ -31,7 +31,7 @@ URI: [xsd:time](http://www.w3.org/2001/XMLSchema#time)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -41,7 +41,7 @@ URI: [xsd:time](http://www.w3.org/2001/XMLSchema#time)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | xsd:time |
-| native | narad:time |
+| native | pals:time |
 | exact | schema:Time |
 
 

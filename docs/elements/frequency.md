@@ -3,13 +3,13 @@
 # Slot: frequency 
 
 
-_RF frequency in Hz._
+_RF frequency._
 
 
 
 
 
-URI: [narad:frequency](https://w3id.org/narad_linkml/schema/narad/frequency)
+URI: [pals:frequency](https://pals-project.readthedocs.io/frequency)
 Alias: frequency
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: frequency
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
+| [RFParamGroup](RFParamGroup.md) | Mixin for RF parameters, which can be used to describe the RF properties of a... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: frequency
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +55,8 @@ Alias: frequency
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:frequency |
-| native | narad:frequency |
+| self | pals:frequency |
+| native | pals:frequency |
 
 
 
@@ -66,13 +66,17 @@ Alias: frequency
 <details>
 ```yaml
 name: frequency
-description: RF frequency in Hz.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: RF frequency.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
+slot_uri: pals:frequency
 alias: frequency
+owner: RFParamGroup
 domain_of:
-- ElementParamSet
+- RFParamGroup
 range: float
+unit:
+  ucum_code: Hz
 
 ```
 </details>

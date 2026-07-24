@@ -30,7 +30,7 @@ URI: [xsd:decimal](http://www.w3.org/2001/XMLSchema#decimal)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -40,7 +40,7 @@ URI: [xsd:decimal](http://www.w3.org/2001/XMLSchema#decimal)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | xsd:decimal |
-| native | narad:decimal |
+| native | pals:decimal |
 | broad | schema:Number |
 
 

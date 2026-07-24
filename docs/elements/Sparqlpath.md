@@ -31,7 +31,7 @@ URI: [xsd:string](http://www.w3.org/2001/XMLSchema#string)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -41,6 +41,6 @@ URI: [xsd:string](http://www.w3.org/2001/XMLSchema#string)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | xsd:string |
-| native | narad:sparqlpath |
+| native | pals:sparqlpath |
 
 

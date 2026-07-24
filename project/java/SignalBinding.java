@@ -9,12 +9,11 @@ import lombok.*;
 
 
 /**
-  A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance.
+  Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class SignalBinding extends NamedThing {
+public class SignalBinding extends Relationship {
 
-  private String controlSystemSuffix;
 
 }

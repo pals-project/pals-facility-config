@@ -1,107 +1,21 @@
 
+# Class: AnyValue
 
-# Class: AnyValue 
+A slot that can take any value, used for fields where a controlled vocabulary is not necessary or not yet established. Use when the field can contain a wide range of values that do not fit into a predefined set, or when flexibility is needed for future expansion.
 
-
-_Unconstrained type — accepts any YAML/JSON value (string, number, object, list, etc.)._
-
-
+URI: [narad:AnyValue](https://example.org/narad/AnyValue)
 
 
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[MetaP]++-%20additional_metadata%200..1>[AnyValue&#124;value:string%20%3F],[MetaP])](https://yuml.me/diagram/nofunky;dir:TB/class/[MetaP]++-%20additional_metadata%200..1>[AnyValue&#124;value:string%20%3F],[MetaP])
 
-URI: [linkml:Any](https://w3id.org/linkml/Any)
+## Referenced by Class
 
+ *  **None** *[➞additional_metadata](metaP__additional_metadata.md)*  <sub>0..1</sub>  **[AnyValue](AnyValue.md)**
 
-
-
-
-```mermaid
- classDiagram
-    class AnyValue
-    click AnyValue href "../AnyValue/"
-      
-```
+## Attributes
 
 
+### Own
 
-
-<!-- no inheritance hierarchy -->
-
-
-## Slots
-
-| Name | Cardinality and Range | Description | Inheritance |
-| ---  | --- | --- | --- |
-
-
-
-
-
-## Usages
-
-| used by | used in | type | used |
-| ---  | --- | --- | --- |
-| [FacilityParamSet](FacilityParamSet.md) | [properties](properties.md) | range | [AnyValue](AnyValue.md) |
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | linkml:Any |
-| native | narad:AnyValue |
-
-
-
-
-
-
-## LinkML Source
-
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-
-### Direct
-
-<details>
-```yaml
-name: AnyValue
-description: Unconstrained type — accepts any YAML/JSON value (string, number, object,
-  list, etc.).
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
-class_uri: linkml:Any
-
-```
-</details>
-
-### Induced
-
-<details>
-```yaml
-name: AnyValue
-description: Unconstrained type — accepts any YAML/JSON value (string, number, object,
-  list, etc.).
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
-class_uri: linkml:Any
-
-```
-</details>
+ * [➞value](anyValue__value.md)  <sub>0..1</sub>
+     * Range: [String](types/String.md)

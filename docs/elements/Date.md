@@ -31,7 +31,7 @@ URI: [xsd:date](http://www.w3.org/2001/XMLSchema#date)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -41,7 +41,7 @@ URI: [xsd:date](http://www.w3.org/2001/XMLSchema#date)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | xsd:date |
-| native | narad:date |
+| native | pals:date |
 | exact | schema:Date |
 
 

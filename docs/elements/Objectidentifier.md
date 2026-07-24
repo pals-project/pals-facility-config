@@ -35,7 +35,7 @@ URI: [shex:iri](http://www.w3.org/ns/shex#iri)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -45,6 +45,6 @@ URI: [shex:iri](http://www.w3.org/ns/shex#iri)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | shex:iri |
-| native | narad:objectidentifier |
+| native | pals:objectidentifier |
 
 

@@ -3,13 +3,13 @@
 # Slot: Ksol 
 
 
-_Solenoid integrated field strength._
+_Normalized solenoid strength._
 
 
 
 
 
-URI: [narad:Ksol](https://w3id.org/narad_linkml/schema/narad/Ksol)
+URI: [pals:Ksol](https://pals-project.readthedocs.io/Ksol)
 Alias: Ksol
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: Ksol
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |  no  |
+| [SolenoidParamGroup](SolenoidParamGroup.md) | Mixin for solenoid-specific parameters |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: Ksol
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +55,8 @@ Alias: Ksol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:Ksol |
-| native | narad:Ksol |
+| self | pals:Ksol |
+| native | pals:Ksol |
 
 
 
@@ -66,12 +66,14 @@ Alias: Ksol
 <details>
 ```yaml
 name: Ksol
-description: Solenoid integrated field strength.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: Normalized solenoid strength.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
+slot_uri: pals:Ksol
 alias: Ksol
+owner: SolenoidParamGroup
 domain_of:
-- ElementParamSet
+- SolenoidParamGroup
 range: float
 
 ```

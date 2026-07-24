@@ -1,90 +1,10 @@
-# narad-system-schema
+# Accelerator Core Ontology
 
-LinkML schema for representing NARAD control-system semantics, facility-level signal templates, and facility-specific instance bindings aligned with SSN, SSN-System, and SOSA ontologies. 
-Main modeling layers:
-  - NaradModel — top-level document containing NaradConfig, beamlines, and elements
-    - NaradConfig — top-level NARAD-system container for the capability layer and signal layer
-      - ControlCapabilityLayer — reusable control-profile families, shared capabilities
-      - InstrumentLayer — facility-specific instrument definitions -> their  capabilities
-      - SignalLayer — facility-specific signal suffix templates for system/device types and instance bindings keyed by semantic signal name, linked to the
-        device type
-  - Beamline / BeamlineElement — ordered machine layout of the beamline/line
-  - Element instances — individual beamline elements with applied profiles and instance signal
-    bindings, parameters, and optional facility-specific parameters
+A lightweight LinkML schema for facility-agnostic accelerator components, their beamline relationships, and associated control-system signals.
 
-System hierarchy:
-  - System
-    - ControlSystem
-    - Magnet
-      - Quadrupole, Corrector, Dipole, Solenoid
-    - Instrument
-      - BPM
-    - RFCavity
-    - Marker
-    - Drift
+URI: https://w3id.org/accelerator-core
 
-Control Capability hierarchy:
-  - SystemCapability
-    - MagnetControlCapability
-      - QuadrupoleStrengthControlCapability, CorrectorKickControlCapability, DipoleBendControlCapability
-    - InstrumentControlCapability
-    - BPMControlCapability
-    - CavityGradientControlCapability
-
-Signal modeling:
-  - Signal — abstract control-system quantity
-    - ObservableSignal — readback, constraint, and status quantities
-    - ActuatableSignal — writable/control setpoints
-  - SignalBinding — signal template or suffix definition in the signal layer
-  - InstanceSignalBinding — facility-specific PV binding attached to a beamline element
-
-Serialization conventions:
-  - beamlines are keyed by beamline name
-  - signals are keyed by semantic signal name
-  - instance_signal_bindings are keyed by semantic signal name
-
-Alignments with PALS (Particle Accelerator Language Standard):
-  - Beamline aligns with pals:BeamLine
-  - BeamlineElement aligns with pals:Element
-  - Instrument aligns with pals:Instrument
-  - Dipole aligns with pals:Multipole
-  - Quadrupole aligns with pals:Quadrupole
-  - Solenoid aligns with pals:Solenoid
-  - RFCavity aligns with pals:RFCavity
-
-Additional Notes on Usage: 1. On Signal, SignalBinding, and InstanceSignalBinding: These classes represent different levels of abstraction in the signal modeling.  Signal defines the abstract control-system quantity (e.g. current_readback), SignalBinding captures the control system suffix convention for that signal (e.g. .R for EPICS readback),  and InstanceSignalBinding represents the concrete binding of that signal to a specific beamline element instance, for example, MQWK202.S or RK11:GSET, depending on the facility naming convention.  The semantic signal name (e.g. current_readback) is the key that links these layers together, while the control-system suffix (e.g. .R)  is captured in the SignalBinding. 2. On the distinction between is_instance_of, facility_element_type, and device_type:
-  - BeamlineElement.is_instance_of identifies the element’s semantic class, device_type classifies capability or signal-definition scope, and facility_element_type records facility-local designation.
-  - facility_element_type (FacilityParamSet.facility_element_type) is an optional slot for recording the facility-specific type designation for this element, if it differs from the generic element_kind. 
-  - device_type (ControlCapability.device_type) is the generic element type used for capability profile matching 
-  and signal definition scoping, while facility_element_type captures the facility-specific type designation that may be used in the control system naming convention 
-  or for other facility-specific purposes.
-  For example, a facility might have its own naming convention for magnet types that doesn't align one-to-one with the ElementKindEnum values.
-3. Expected CURIE usage for is_instance_of, is_hosted_by, and is_property_of: 
-  - is_instance_of typically points to the semantic class instantiated by the binding or element, using a CURIE such as narad:CavityGradientCapability if that is your intended convention.
-  - is_hosted_by typically points to the FacilitySystem this binding belongs to, e.g. narad:UITF.
-  - is_property_of typically points to the ControlSystem that implements this binding, e.g. narad:epics.
-4. Open and constrained vocabularies:
-  - ElementKindEnum provides a controlled vocabulary for key classification slots, but the schema is designed to be extensible 
-  with new enum values as needed.
-  - SystemTypeEnum is a high-level classification for systems that can be used for querying and filtering, 
-  but it is not intended to capture all the nuance of device types or capabilities.
-  - DataTypeEnum and SignalRoleEnum provide a controlled vocabulary for signal data types and roles, 
-  but the schema allows for additional values to be added as needed.
-  - IdentifierTypeEnum provides a controlled vocabulary for types of identifiers used in FacilityIdentifier, 
-  but it can be extended to apply to other entities, and with additional identifier types as needed.
-  - The properties slot in FacilityParamSet allows for open-ended key-value pairs to capture any additional 
-  facility-specific parameters that don't fit into the predefined schema structure.
-
-Needed Custom Validations:
-  - Validation to ensure that the element_kind of a BeamlineElement matches the device_type of the DeviceSystem it is an instance of.
-  - Validation to ensure that the value of is_property_of in InstanceSignalBinding matches one of the control systems listed in narad_config.has_sub_system.
-  - Validation that each signal_layer -> facilities -> FacilitySystem -> control_system value has a corresponding entry in narad_config.has_sub_system to ensure that all control systems referenced in the signal layer are defined in the capability layer.
-  - Validation that the signal_bindings defined for a given device_type in the signal layer align with the signals defined in the capability profiles and instrument systems for that device type.
-
-
-URI: https://w3id.org/narad_linkml/schema/narad/system
-
-Name: narad-system-schema
+Name: accelerator_core
 
 
 
@@ -92,30 +12,65 @@ Name: narad-system-schema
 
 | Class | Description |
 | --- | --- |
-| [AnyValue](AnyValue.md) | Unconstrained type — accepts any YAML/JSON value (string, number, object, lis... |
-| [CapabilityLayer](CapabilityLayer.md) | Capability-layer container for control profile families |
-| [ElementParamSet](ElementParamSet.md) | Named physics-parameter block for a beamline element |
-| [FacilityIdentifier](FacilityIdentifier.md) | A globally unique identifier for an entity (e |
-| [FacilityParamSet](FacilityParamSet.md) | Facility-specific element parameters block for beamline elements |
-| [NamedThing](NamedThing.md) | Abstract base class providing identity and human-readable metadata |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ControlCapability](ControlCapability.md) | A reusable device-type control profile that extends a generic shared capabili... |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[InstanceSignalBinding](InstanceSignalBinding.md) | A facility-specific binding between a NARAD Signal and an implementation inte... |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Signal](Signal.md) | Domain term for a control-system signal |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ObservableSignal](ObservableSignal.md) | A NARAD signal that is read, monitored, observed, or exposed by a system |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SignalBinding](SignalBinding.md) | A named control system suffix definition for one semantic signal |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SignalDefinitions](SignalDefinitions.md) | Signal binding set scoped to a device type or device domain |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ControlSystem](ControlSystem.md) | A control system (e |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Instrument](Instrument.md) | A generic beam diagnostic instrument |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SystemCapability](SystemCapability.md) | A capability of a system |
-| [NaradConfig](NaradConfig.md) | A top-level NARAD-system container for the: capability layer + signal layer |
-| [NaradModel](NaradModel.md) | Top-level NARAD document container |
-| [SignalLayer](SignalLayer.md) | Signal-layer container for facility-specific signal bindings |
+| [AdditionalMetadata](AdditionalMetadata.md) | A single generic key/value metadata entry, used as a GraphQL-compatible repla... |
+| [Affiliation](Affiliation.md) | Contains affiliation information for an author or component, such as a ROR |
+| [Author](Author.md) | Contains authorship information for a representation of an accelerator facili... |
+| [BendParamGroup](BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properti... |
+| [BodyShiftParamGroup](BodyShiftParamGroup.md) | Mixin class for floor plan shift parameters that are aligned with PALS BodySh... |
+| [Component](Component.md) | A general class for accelerator components, which can be specialized into mor... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[PhysicalComponent](PhysicalComponent.md) | A physical item that participates in or supports accelerator operation |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DiagnosticDevice](DiagnosticDevice.md) | An accelerator device used to measure beam or machine state |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Kicker](Kicker.md) | A magnet primarily used to steer the beam |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Bend](Bend.md) | Dipole magnet used to bend the beam |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[VirtualComponent](VirtualComponent.md) | A virtual or logical component that represents a concept, function, or role i... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[BookkeepingComponent](BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in t... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[BeamLineSection](BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizat... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Marker](Marker.md) | A virtual component used as a reference point or marker in the beamline struc... |
+| [ElectricMultipoleParamGroup](ElectricMultipoleParamGroup.md) | Mixin for electric multipole parameters,  |
+| [Facility](Facility.md) | A facility that houses one or more accelerators |
+| [FloorParamGroup](FloorParamGroup.md) | Mixin class for floor plan parameters that are aligned with PALS FloorP (Floo... |
+| [HasBendP](HasBendP.md) |  |
+| [HasBodyShiftP](HasBodyShiftP.md) |  |
+| [HasElectricMultipoleP](HasElectricMultipoleP.md) |  |
+| [HasFloorP](HasFloorP.md) |  |
+| [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) |  |
+| [HasMagneticMultipoleP](HasMagneticMultipoleP.md) |  |
+| [HasMetaP](HasMetaP.md) |  |
+| [HasReferenceP](HasReferenceP.md) |  |
+| [HasRFP](HasRFP.md) |  |
+| [HasSolenoidP](HasSolenoidP.md) |  |
+| [HasTwissP](HasTwissP.md) |  |
+| [Identifier](Identifier.md) | A unique, and ideally persistent, identifier for a facility, such as a DOI or... |
+| [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) | Mixin for an element's extent and position along the longitudinal (beam-direc... |
+| [MagneticMultipoleParamGroup](MagneticMultipoleParamGroup.md) | Mixin for magnetic multipole parameters,  which can be used to describe the m... |
+| [MetaParamGroup](MetaParamGroup.md) | Mixin class for metadata parameters that are aligned with PALS MetaP (Metadat... |
+| [MultipoleParameterGroup](MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component |
+| [PALS](PALS.md) | Root container for accelerator core components, semantic signals, and local b... |
+| [ReferenceParamGroup](ReferenceParamGroup.md) | Mixin for reference parameters that are aligned with PALS ReferenceP (Referen... |
+| [Relationship](Relationship.md) | Abstract base for subject-predicate-object associations |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ComponentRelation](ComponentRelation.md) | Association between two Components (Physical or Virtual), with supporting con... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SignalBinding](SignalBinding.md) | Association between a PhysicalComponent and one of its Signals, e |
+| [RFParamGroup](RFParamGroup.md) | Mixin for RF parameters, which can be used to describe the RF properties of a... |
+| [Signal](Signal.md) | Semantic meaning of a control-system signal associated with a component |
+| [SolenoidParamGroup](SolenoidParamGroup.md) | Mixin for solenoid-specific parameters |
+| [TwissParamGroup](TwissParamGroup.md) | Mixin for Twiss parameters, which can be used to describe the beam optics of ... |
 
 
 
@@ -123,88 +78,172 @@ Name: narad-system-schema
 
 | Slot | Description |
 | --- | --- |
-| [angle_ref](angle_ref.md) | Reference bend angle in radians |
-| [beamlines](beamlines.md) | A top-level NARAD-system container for the ordered beamline definitions keyed... |
-| [capability_class](capability_class.md) | Semantic class label for a type-specific capability (e |
-| [class_curie](class_curie.md) | Optional URI or CURIE |
-| [control_capabilities](control_capabilities.md) |  |
-| [control_capability](control_capability.md) | Cross-reference to the specific control capability applied to this element |
-| [control_capability_layer](control_capability_layer.md) | Control Capability definitions for this facility |
-| [control_system](control_system.md) | Identifier of the control system (e |
-| [control_system_suffix](control_system_suffix.md) | Facility-specific control-system (e |
-| [current_max](current_max.md) |  |
-| [current_min](current_min.md) |  |
-| [current_readback](current_readback.md) |  |
-| [current_setpoint](current_setpoint.md) |  |
-| [data_type](data_type.md) | The data type of the signal's value |
-| [deployed_system](deployed_system.md) | Identifier of the deployed system this configuration describes |
-| [description](description.md) | Detailed description of the entity |
-| [device_layer](device_layer.md) | Device definitions for this facility |
-| [device_type](device_type.md) | Represents the generic, semantic class of the device (e |
-| [e1](e1.md) | Entry edge angle in radians |
-| [e2](e2.md) | Exit edge angle in radians |
-| [element_kind](element_kind.md) | The controlled vocabulary for the physical kind of element (e |
-| [elements](elements.md) | Beamline element definitions referenced by name from beamline sequences |
-| [facilities](facilities.md) | Facility-specific signal binding configurations keyed by facility name |
-| [facility_element_type](facility_element_type.md) | capture the facility-specific or local designation (e |
-| [facility_identifier](facility_identifier.md) | Globally unique identifier for the facility, with specified type and value |
-| [facility_param_set](facility_param_set.md) | Facility-specific element parameters (type designation, model name, open prop... |
-| [field_setpoint](field_setpoint.md) |  |
-| [for_property](for_property.md) | SystemCapability → Signal: the capability can expose, monitor, control, or ac... |
-| [frequency](frequency.md) | RF frequency in Hz |
-| [gradient_readback](gradient_readback.md) |  |
-| [gradient_setpoint](gradient_setpoint.md) |  |
-| [has_sub_system](has_sub_system.md) | Relates a System to one of its subsystems (SSN alignment) |
-| [has_system_capability](has_system_capability.md) | Relates a System to a SystemCapability it supports (SSN-System alignment) |
-| [horizontal_beam_position](horizontal_beam_position.md) |  |
-| [identifier_type](identifier_type.md) | The type of identifier used in the identifier slot (e |
-| [identifier_value](identifier_value.md) | The value of the identifier (e |
-| [instance_signal_bindings](instance_signal_bindings.md) | Facility-specific bindings of signals to control-system interfaces (e |
-| [intent](intent.md) | A human-readable statement of the intended use or purpose of this NARAD confi... |
-| [is_hosted_by](is_hosted_by.md) | Links an InstanceSignalBinding to the FacilitySystem it belongs to |
-| [is_instance_of](is_instance_of.md) | NARAD alias for rdf:type |
-| [is_property_of](is_property_of.md) | Inverse of for_property: links the Class Signal to the Class of SignalBinding... |
-| [kick_setpoint](kick_setpoint.md) |  |
-| [Kn1](Kn1.md) | First-order magnetic multipole coefficient (quadrupole strength) |
-| [Ksol](Ksol.md) | Solenoid integrated field strength |
-| [length](length.md) | Physical length of the element in meters |
-| [line](line.md) | Ordered sequence of beamline elements in this beamline |
-| [modeled_as](modeled_as.md) | Accelerator physics code model element type (e |
-| [multipass](multipass.md) | Indicates whether this beamline is a multipass recirculating line (true) or a... |
-| [name](name.md) | Human-readable name or local string key for the entity |
-| [naming_convention](naming_convention.md) | Signal naming convention template (e |
-| [narad_config](narad_config.md) | Top-level NARAD configuration block (capability_layer + signal_layer) |
-| [param_set](param_set.md) | Named physics-parameter blocks for this element (e |
-| [periodic](periodic.md) | For a beamline, indicates whether the orbit and Twiss parameters are periodic... |
-| [phase](phase.md) | RF phase in degrees |
-| [properties](properties.md) | Intentionally open-ended key-value property map for element-specific or facil... |
-| [pv_name](pv_name.md) | Fully-resolved facility-specific process variable name, e |
-| [role](role.md) | The semantic role of the signal within its capability |
-| [schema_version](schema_version.md) | Version of the NARAD schema used in this document |
-| [signal_bindings](signal_bindings.md) | Control-system-specific, e |
-| [signal_definitions](signal_definitions.md) | Structured container for facility-specific signal suffix templates |
-| [signal_layer](signal_layer.md) | Signal suffix templates for this facility |
-| [signals](signals.md) | Signals within a capability, keyed by a semantic signal name |
-| [status](status.md) |  |
-| [strength_setpoint](strength_setpoint.md) |  |
-| [subclass_of](subclass_of.md) | -> NARAD alias for rdfs:subClassOf |
-| [system_type](system_type.md) | High-level system type for classification and querying |
-| [units](units.md) | Conventional unit symbol (e |
-| [units_uri](units_uri.md) | Machine-resolvable QUDT unit reference (e |
-| [vertical_beam_position](vertical_beam_position.md) |  |
-| [voltage](voltage.md) | RF voltage in volts |
-| [zero_point](zero_point.md) | Name of a line item used as a reference point when  the beamline is used as a... |
+| [access_protocol](access_protocol.md) | The protocol used to access the signal in the source system,  such as EPICS C... |
+| [additional_metadata](additional_metadata.md) | Additional metadata or annotations for the instance |
+| [affiliation](affiliation.md) | The affiliation of the author or component, as a ROR |
+| [alias](alias.md) | An alternative name or identifier for the instance |
+| [alpha_a](alpha_a.md) | Twiss alpha parameter in the horizontal plane |
+| [alpha_b](alpha_b.md) | Twiss alpha parameter in the vertical plane |
+| [angle_ref](angle_ref.md) | Reference bend angle |
+| [archive_identifier](archive_identifier.md) | The identifier used to reference the signal in an archival system |
+| [authors](authors.md) | Contains the authorship information for this representation of an accelerator... |
+| [axis](axis.md) |  |
+| [beamline_context](beamline_context.md) | The specific BeamLine this relationship is defined with respect to (relevant ... |
+| [beamline_relation](beamline_relation.md) | The relationship of the physical component to the beamline,  which can be use... |
+| [beamlines](beamlines.md) | A list of beamlines in the accelerator system |
+| [bend_field_actual](bend_field_actual.md) | Actual bend field |
+| [bend_field_ref](bend_field_ref.md) | Reference bend field |
+| [BendP](BendP.md) | A mixin for bend parameters that are aligned with PALS BendP (Bend Parameters... |
+| [beta_a](beta_a.md) | Twiss beta parameter in the horizontal plane |
+| [beta_b](beta_b.md) | Twiss beta parameter in the vertical plane |
+| [Bn](Bn.md) | Normal component of the magnetic field |
+| [BodyShiftP](BodyShiftP.md) | A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP... |
+| [Bs](Bs.md) | Skew component of the magnetic field |
+| [Bsol](Bsol.md) | Solenoid field |
+| [canonical_signal_type](canonical_signal_type.md) | The canonical semantic meaning of the signal |
+| [cavity_type](cavity_type.md) | Cavity type |
+| [component_direction](component_direction.md) |  |
+| [component_relations](component_relations.md) | A list of component relations in the accelerator system (Component <-> Compon... |
+| [components](components.md) | A list of physical components in the accelerator system |
+| [context](context.md) | The frame of reference / domain in which this relationship is asserted to hol... |
+| [datatype](datatype.md) | Hint for the value's original type, so consumers can parse it back (e |
+| [dE_ref](dE_ref.md) | Reference energy gain |
+| [description](description.md) | A human-readable description of the instance |
+| [direction](direction.md) | Beam direction along the BeamLine: +1 or -1 |
+| [distance_unit](distance_unit.md) |  |
+| [distance_value](distance_value.md) |  |
+| [e1](e1.md) | Entrance end pole face rotation with respect to a sector geometry |
+| [e1_rect](e1_rect.md) | Entrance end pole face rotation with respect to a rectangular geometry |
+| [e2](e2.md) | Exit end pole face rotation with respect to a sector geometry |
+| [e2_rect](e2_rect.md) | Exit end pole face rotation with respect to a rectangular geometry |
+| [E_tot_ref](E_tot_ref.md) | [eV] Reference total energy |
+| [edge1_int](edge1_int.md) | Entrance end fringe field integral |
+| [edge2_int](edge2_int.md) | Exit end fringe field integral |
+| [elec_components](elec_components.md) | Electric multipole components, one per order N |
+| [ElectricMultipoleP](ElectricMultipoleP.md) | A mixin for electric multipole parameters that are aligned with PALS Electric... |
+| [email](email.md) | The email address of the author |
+| [En](En.md) | Normal component of the field |
+| [EnL](EnL.md) | Length-integrated normal component |
+| [Es](Es.md) | Skew component of the field |
+| [EsL](EsL.md) | Length-integrated skew component |
+| [eta_x](eta_x.md) | Twiss dispersion parameter in the horizontal plane |
+| [eta_y](eta_y.md) | Twiss dispersion parameter in the vertical plane |
+| [etap_x](etap_x.md) | Twiss dispersion slope parameter in the horizontal plane |
+| [etap_y](etap_y.md) | Twiss dispersion slope parameter in the vertical plane |
+| [facility](facility.md) | A facility that contains lattice elements (physical and virtual), beamlines, ... |
+| [FloorP](FloorP.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Pl... |
+| [frequency](frequency.md) | RF frequency |
+| [functions](functions.md) | The function of the physical component,  which can be used to identify the co... |
+| [g_actual](g_actual.md) | Actual bend strength = 1/radius_actual |
+| [g_ref](g_ref.md) | Reference bend strength = 1/radius_ref |
+| [h1](h1.md) | Entrance end pole face curvature |
+| [h2](h2.md) | Exit end pole face curvature |
+| [harmon](harmon.md) | RF harmonic number |
+| [id](id.md) | A unique identifier for the instance |
+| [identifier_type](identifier_type.md) | The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK |
+| [identifier_value](identifier_value.md) | The value of the identifier |
+| [identifiers](identifiers.md) | A unique and ideally persistent identifier for the facility, such as a DOI or... |
+| [key](key.md) | The metadata field name |
+| [kind](kind.md) | The LinkML class name of this instance |
+| [Kn](Kn.md) | Normalized normal component |
+| [Ks](Ks.md) | Normalized skew component |
+| [Ksol](Ksol.md) | Normalized solenoid strength |
+| [L_active](L_active.md) | Active acceleration length |
+| [L_chord](L_chord.md) | Chord length of the bend |
+| [L_rectangle](L_rectangle.md) | Rectangular length |
+| [L_sagitta](L_sagitta.md) | Output parameter |
+| [label](label.md) | A label string |
+| [length](length.md) | Length of the element (arc length for bends) |
+| [LongitudinalPlacementP](LongitudinalPlacementP.md) | A mixin for an element's extent and position along the longitudinal (beam-dir... |
+| [mag_components](mag_components.md) | Magnetic multipole components, one per order N |
+| [MagneticMultipoleP](MagneticMultipoleP.md) | A mixin for magnetic multipole parameters that are aligned with PALS Magnetic... |
+| [MetaP](MetaP.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Pa... |
+| [multipass](multipass.md) | Indicates whether the BeamLine is a multipass BeamLine, where the beam passes... |
+| [multipass_phase](multipass_phase.md) | rad/2pi RF Phase added to multipass elements |
+| [multipole_geometry](multipole_geometry.md) | Multipole geometry type |
+| [name](name.md) | The name of the entity |
+| [native_data_type](native_data_type.md) | The native data type of the signal in the source system,  such as String, Int... |
+| [native_description](native_description.md) | A human-readable description of the signal in the source system |
+| [native_types](native_types.md) | The native type of the component in the source system, which can be used to i... |
+| [native_unit](native_unit.md) | The native unit of the signal in the source system |
+| [notes](notes.md) | Additional notes or comments about the representation of a particle accelerat... |
+| [num_cells](num_cells.md) | Number of cells in the cavity |
+| [object](object.md) |  |
+| [orcid](orcid.md) | The ORCID identifier of the author |
+| [order](order.md) | Multipole order N (0 = dipole, 1 = quadrupole, etc |
+| [pc_ref](pc_ref.md) | [momentum*c] Reference momentum times speed of light |
+| [periodic](periodic.md) | Indicates whether orbit and Twiss parameters periodic |
+| [phase](phase.md) | RF phase |
+| [phi](phi.md) | Rotation around the X-axis in the facility floor plan |
+| [phi_a](phi_a.md) | Twiss phase advance parameter in the horizontal plane |
+| [phi_b](phi_b.md) | Twiss phase advance parameter in the vertical plane |
+| [plane](plane.md) | The transverse plane in which the kicker operates, either horizontal or verti... |
+| [predicate](predicate.md) |  |
+| [psi](psi.md) | Rotation around the Z-axis in the facility floor plan |
+| [quantity_kind](quantity_kind.md) | The physical quantity kind of the signal |
+| [ref_geometry](ref_geometry.md) | Reference geometry type |
+| [reference_frame](reference_frame.md) |  |
+| [ReferenceP](ReferenceP.md) | A mixin for reference parameters that are aligned with PALS ReferenceP (Refer... |
+| [repeat](repeat.md) | Repetition count |
+| [RFP](RFP.md) | A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for ... |
+| [rho_ref](rho_ref.md) | Reference bend radius |
+| [s_position](s_position.md) | Longitudinal position of the element along the beamline |
+| [signal_bindings](signal_bindings.md) | A list of signal bindings in the accelerator system (Component <-> Signal rel... |
+| [signal_role](signal_role.md) | The role of the signal in the control system, such as setpoint, readback, sta... |
+| [signals](signals.md) | A list of signals in the accelerator system |
+| [SolenoidP](SolenoidP.md) | A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP... |
+| [source_system](source_system.md) | The source system from which the signal originates, such as EPICS, PALS-Ext, ... |
+| [species_ref](species_ref.md) | A reference to a species or particle type, such as an ion, electron, or proto... |
+| [subject](subject.md) |  |
+| [theta](theta.md) | Orientation angle around the Y-axis in the facility floor plan |
+| [tilt](tilt.md) | Tilt of the Nth multipole |
+| [tilt_ref](tilt_ref.md) | Reference tilt of the bend |
+| [time_ref](time_ref.md) | [s] Reference time |
+| [tolerance_unit](tolerance_unit.md) |  |
+| [tolerance_value](tolerance_value.md) |  |
+| [TwissP](TwissP.md) | A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Paramet... |
+| [value](value.md) | The metadata value, serialized as a string |
+| [version](version.md) | Version of the representation of a particle accelerator and its operations |
+| [voltage](voltage.md) | RF voltage |
+| [x](x.md) | Global X coordinate in the facility floor plan |
+| [x_offset](x_offset.md) | Shift in the X direction in the facility floor plan |
+| [x_rot](x_rot.md) | Rotation around the X-axis in the facility floor plan |
+| [y](y.md) | Global Y coordinate in the facility floor plan |
+| [y_offset](y_offset.md) | Shift in the Y direction in the facility floor plan |
+| [y_rot](y_rot.md) | Rotation around the Y-axis in the facility floor plan |
+| [z](z.md) | Global Z coordinate in the facility floor plan |
+| [z_offset](z_offset.md) | Shift in the Z direction in the facility floor plan |
+| [z_rot](z_rot.md) | Rotation around the Z-axis in the facility floor plan |
+| [zero_phase](zero_phase.md) | Sets what phase = 0 means |
 
 
 ## Enumerations
 
 | Enumeration | Description |
 | --- | --- |
-| [DataTypeEnum](DataTypeEnum.md) | Allowed data types for signal values |
-| [ElementKindEnum](ElementKindEnum.md) | Controlled vocabulary for beamline element types, shared between the capabili... |
-| [IdentifierTypeEnum](IdentifierTypeEnum.md) | Allowed identifier types for facilities and other entities |
-| [SignalRoleEnum](SignalRoleEnum.md) | Controlled vocabulary for the semantic role of a signal within a capability |
-| [SystemTypeEnum](SystemTypeEnum.md) | High-level system type for classification and querying |
+| [AxisEnum](AxisEnum.md) |  |
+| [CanonicalSignalTypeEnum](CanonicalSignalTypeEnum.md) | Portable semantic meanings for important signals |
+| [CavityTypeEnum](CavityTypeEnum.md) | The type of cavity, which determines the field configuration and mode structu... |
+| [ComponentRelationPredicateEnum](ComponentRelationPredicateEnum.md) |  |
+| [DataTypeEnum](DataTypeEnum.md) | Data types for parameter values |
+| [DirectionEnum](DirectionEnum.md) |  |
+| [FacilityFunctionEnum](FacilityFunctionEnum.md) | Broad structural or support functions |
+| [IdentifierTypeEnum](IdentifierTypeEnum.md) | Controlled values for identifier types |
+| [MultipoleGeometryEnum](MultipoleGeometryEnum.md) | The geometric configuration of the multipole field |
+| [PhysicalFunctionEnum](PhysicalFunctionEnum.md) | Broad device-level functions |
+| [PhysicalRelationEnum](PhysicalRelationEnum.md) | Controlled values for physical relation to the beamline |
+| [PlaneEnum](PlaneEnum.md) | Controlled values for transverse plane |
+| [QuantityKindEnum](QuantityKindEnum.md) | Physical quantity kinds for signals |
+| [ReferenceFrameEnum](ReferenceFrameEnum.md) |  |
+| [ReferenceGeometryEnum](ReferenceGeometryEnum.md) | The reference geometry used to calculate multipoles |
+| [RelationContextEnum](RelationContextEnum.md) |  |
+| [SignalBindingPredicateEnum](SignalBindingPredicateEnum.md) | Controlled predicates for Component-to-Signal bindings |
+| [SignalRoleEnum](SignalRoleEnum.md) | Roles for control-system signals |
+| [SourceSystemEnum](SourceSystemEnum.md) | Controlled values for facility-local source systems |
+| [UnitEnum](UnitEnum.md) | Engineering units using ASCII-safe enum names |
+| [VirtualFunctionEnum](VirtualFunctionEnum.md) | Broad virtual component functions or roles |
+| [VirtualRelationEnum](VirtualRelationEnum.md) | Controlled values for virtual relation to the beamline |
+| [ZeroPhaseEnum](ZeroPhaseEnum.md) | The zero phase reference for the cavity, which determines the phase of the RF... |
 
 
 ## Types

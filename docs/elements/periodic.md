@@ -3,13 +3,13 @@
 # Slot: periodic 
 
 
-_For a beamline, indicates whether the orbit and Twiss parameters are periodic (true) or non-periodic (false)._
+_Indicates whether orbit and Twiss parameters periodic. If not provided, the default assumption is that the BeamLine is not periodic._
 
 
 
 
 
-URI: [narad:periodic](https://w3id.org/narad_linkml/schema/narad/periodic)
+URI: [pals:periodic](https://pals-project.readthedocs.io/periodic)
 Alias: periodic
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: periodic
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |  no  |
+| [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: periodic
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +55,8 @@ Alias: periodic
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:periodic |
-| native | narad:periodic |
+| self | pals:periodic |
+| native | pals:periodic |
 
 
 
@@ -66,13 +66,15 @@ Alias: periodic
 <details>
 ```yaml
 name: periodic
-description: For a beamline, indicates whether the orbit and Twiss parameters are
-  periodic (true) or non-periodic (false).
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: Indicates whether orbit and Twiss parameters periodic. If not provided,
+  the default assumption is that the BeamLine is not periodic.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
+slot_uri: pals:periodic
 alias: periodic
+owner: BeamLine
 domain_of:
-- Beamline
+- BeamLine
 range: boolean
 
 ```

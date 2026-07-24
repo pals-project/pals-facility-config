@@ -3,20 +3,22 @@
 
 
 
-_Controlled vocabulary for the semantic role of a signal within a capability._
+_Roles for control-system signals._
 
 
 
-URI: [narad:SignalRoleEnum](https://w3id.org/narad_linkml/schema/narad/SignalRoleEnum)
+URI: [pals:SignalRoleEnum](https://pals-project.readthedocs.io/SignalRoleEnum)
 
 ## Permissible Values
 
 | Value | Meaning | Description |
 | --- | --- | --- |
-| control | None | A writable signal that commands a device setpoint |
-| readback | None | A readable signal that reports a measured or monitored quantity |
-| constraint | None | A signal that defines an operational limit or boundary on a control quantity |
-| status | None | A signal reporting the device or system operational state |
+| Setpoint | sosa:ActuatableProperty | Requested or configured value |
+| Readback | sosa:ObservableProperty | Measured or reported value |
+| Status | None | State or condition indicator |
+| Command | sosa:ActuatableProperty | Command or action trigger |
+| MinimumLimit | xsd:minInclusive | Minimum allowed signal value |
+| MaximumLimit | xsd:maxInclusive | Maximum allowed signal value |
 
 
 
@@ -25,7 +27,7 @@ URI: [narad:SignalRoleEnum](https://w3id.org/narad_linkml/schema/narad/SignalRol
 
 | Name | Description |
 | ---  | --- |
-| [role](role.md) | The semantic role of the signal within its capability |
+| [signal_role](signal_role.md) | The role of the signal in the control system, such as setpoint, readback, sta... |
 
 
 
@@ -41,7 +43,7 @@ URI: [narad:SignalRoleEnum](https://w3id.org/narad_linkml/schema/narad/SignalRol
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -53,33 +55,33 @@ URI: [narad:SignalRoleEnum](https://w3id.org/narad_linkml/schema/narad/SignalRol
 <details>
 ```yaml
 name: SignalRoleEnum
-description: Controlled vocabulary for the semantic role of a signal within a capability.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: Roles for control-system signals.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
 permissible_values:
-  control:
-    text: control
-    description: A writable signal that commands a device setpoint.
-    broad_mappings:
-    - sosa:ActuatableProperty
-  readback:
-    text: readback
-    description: A readable signal that reports a measured or monitored quantity.
-      Differs from status in that it typically indicates a continuous measurement
-      (e.g. current readback, beam position) rather than discrete states.
-    broad_mappings:
-    - sosa:ObservableProperty
-  constraint:
-    text: constraint
-    description: A signal that defines an operational limit or boundary on a control
-      quantity.
-  status:
-    text: status
-    description: A signal reporting the device or system operational state. Differs
-      from readback in that it typically indicates discrete states (e.g. fault, standby,
-      ready) rather than a continuous measurement.
-    broad_mappings:
-    - sosa:ObservableProperty
+  Setpoint:
+    text: Setpoint
+    description: Requested or configured value.
+    meaning: sosa:ActuatableProperty
+  Readback:
+    text: Readback
+    description: Measured or reported value.
+    meaning: sosa:ObservableProperty
+  Status:
+    text: Status
+    description: State or condition indicator.
+  Command:
+    text: Command
+    description: Command or action trigger.
+    meaning: sosa:ActuatableProperty
+  MinimumLimit:
+    text: MinimumLimit
+    description: Minimum allowed signal value.
+    meaning: xsd:minInclusive
+  MaximumLimit:
+    text: MaximumLimit
+    description: Maximum allowed signal value.
+    meaning: xsd:maxInclusive
 
 ```
 </details>

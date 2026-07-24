@@ -3,13 +3,13 @@
 # Slot: identifier_value 
 
 
-_The value of the identifier (e.g. the DOI string, ARK string, URL string, or local ID)._
+_The value of the identifier._
 
 
 
 
 
-URI: [narad:identifier_value](https://w3id.org/narad_linkml/schema/narad/identifier_value)
+URI: [pals:identifier_value](https://pals-project.readthedocs.io/identifier_value)
 Alias: identifier_value
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: identifier_value
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilityIdentifier](FacilityIdentifier.md) | A globally unique identifier for an entity (e |  no  |
+| [Identifier](Identifier.md) | A unique, and ideally persistent, identifier for a facility, such as a DOI or... |  no  |
 
 
 
@@ -46,7 +46,7 @@ Alias: identifier_value
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +55,8 @@ Alias: identifier_value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:identifier_value |
-| native | narad:identifier_value |
+| self | pals:identifier_value |
+| native | pals:identifier_value |
 
 
 
@@ -66,13 +66,13 @@ Alias: identifier_value
 <details>
 ```yaml
 name: identifier_value
-description: The value of the identifier (e.g. the DOI string, ARK string, URL string,
-  or local ID).
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: The value of the identifier.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: identifier_value
+owner: Identifier
 domain_of:
-- FacilityIdentifier
+- Identifier
 range: string
 
 ```

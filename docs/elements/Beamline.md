@@ -1,248 +1,71 @@
 
+# Class: Beamline
 
-# Class: Beamline 
+A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
 
-
-_A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path._
-
-
+URI: [narad:Beamline](https://example.org/narad/Beamline)
 
 
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[VirtualComponent],[MetadataEntry],[Component],[ComponentRelation]-%20beamline_context%200..1>[Beamline&#124;multipass:boolean%20%3F;length:float%20%3F;zero_point:string%20%3F;periodic:boolean%20%3F;repeat:integer%20%3F;direction:integer%20%3F;functions(i):VirtualFunctionEnum%20%2B;beamline_relation(i):VirtualRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[NARAD]++-%20beamlines%200..*>[Beamline],[VirtualComponent]^-[Beamline],[NARAD],[ComponentRelation])](https://yuml.me/diagram/nofunky;dir:TB/class/[VirtualComponent],[MetadataEntry],[Component],[ComponentRelation]-%20beamline_context%200..1>[Beamline&#124;multipass:boolean%20%3F;length:float%20%3F;zero_point:string%20%3F;periodic:boolean%20%3F;repeat:integer%20%3F;direction:integer%20%3F;functions(i):VirtualFunctionEnum%20%2B;beamline_relation(i):VirtualRelationEnum;x(i):float%20%3F;y(i):float%20%3F;z(i):float%20%3F;theta(i):float%20%3F;phi(i):float%20%3F;psi(i):float%20%3F;id(i):string;native_types(i):string%20*;description(i):string%20%3F;label(i):string%20%3F;alias(i):string%20%3F],[NARAD]++-%20beamlines%200..*>[Beamline],[VirtualComponent]^-[Beamline],[NARAD],[ComponentRelation])
 
-URI: [narad:Beamline](https://w3id.org/narad_linkml/schema/narad/Beamline)
+## Parents
 
+ *  is_a: [VirtualComponent](VirtualComponent.md) - A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamlineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
 
+## Referenced by Class
 
+ *  **None** *[➞beamline_context](componentRelation__beamline_context.md)*  <sub>0..1</sub>  **[Beamline](Beamline.md)**
+ *  **None** *[➞beamlines](nARAD__beamlines.md)*  <sub>0..\*</sub>  **[Beamline](Beamline.md)**
 
-
-```mermaid
- classDiagram
-    class Beamline
-    click Beamline href "../Beamline/"
-      NamedThing <|-- Beamline
-        click NamedThing href "../NamedThing/"
-      
-      Beamline : description
-        
-      Beamline : length
-        
-      Beamline : line
-        
-          
-    
-        
-        
-        Beamline --> "*" BeamlineElement : line
-        click BeamlineElement href "../BeamlineElement/"
-    
-
-        
-      Beamline : multipass
-        
-      Beamline : name
-        
-      Beamline : periodic
-        
-      Beamline : zero_point
-        
-          
-    
-        
-        
-        Beamline --> "0..1" BeamlineElement : zero_point
-        click BeamlineElement href "../BeamlineElement/"
-    
-
-        
-      
-```
+## Attributes
 
 
+### Own
 
+ * [➞multipass](beamline__multipass.md)  <sub>0..1</sub>
+     * Description: Indicates whether the beamline is a multipass beamline, where the beam passes through the same physical elements multiple times.
+If not provided, the default assumption is that the beamline is single-pass.
+     * Range: [Boolean](types/Boolean.md)
+ * [➞length](beamline__length.md)  <sub>0..1</sub>
+     * Description: The total length of the beamline.
+For pals interoperability, use m as the unit of length.
+     * Range: [Float](types/Float.md)
+ * [➞zero_point](beamline__zero_point.md)  <sub>0..1</sub>
+     * Description: Name of a line item used as a reference point when the BeamLine is used as a subline.
+     * Range: [String](types/String.md)
+ * [➞periodic](beamline__periodic.md)  <sub>0..1</sub>
+     * Description: Indicates whether orbit and Twiss parameters periodic.
+If not provided, the default assumption is that the beamline is not periodic.
+     * Range: [Boolean](types/Boolean.md)
+ * [➞repeat](beamline__repeat.md)  <sub>0..1</sub>
+     * Description: Repetition count. If not provided, the default assumption is that the beamline is not repeated and the value is 1.
+If value is greater than 1, the beamline is repeated that many times.
+     * Range: [Integer](types/Integer.md)
+ * [➞direction](beamline__direction.md)  <sub>0..1</sub>
+     * Description: Beam direction along the beamline: +1 or -1. 
+Longitudinal orientation. Default is +1.
+     * Range: [Integer](types/Integer.md)
 
+### Inherited from VirtualComponent:
 
-## Inheritance
-* [NamedThing](NamedThing.md)
-    * **Beamline**
+ * [id](id.md)  <sub>1..1</sub>
+     * Description: A unique identifier for the instance.
+     * Range: [String](types/String.md)
+ * [type](type.md)  <sub>1..1</sub>
+     * Description: The LinkML class name of this instance.
+     * Range: [Component](Component.md)
+ * [➞native_types](component__native_types.md)  <sub>0..\*</sub>
+     * Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+     * Range: [String](types/String.md)
+ * [➞functions](virtualComponent__functions.md)  <sub>1..\*</sub>
+     * Description: The function of the virtual component,  which can be used to identify the component across different source systems.
+     * Range: [VirtualFunctionEnum](VirtualFunctionEnum.md)
+ * [➞beamline_relation](virtualComponent__beamline_relation.md)  <sub>1..1</sub>
+     * Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
+     * Range: [VirtualRelationEnum](VirtualRelationEnum.md)
 
+## Other properties
 
-
-## Slots
-
-| Name | Cardinality and Range | Description | Inheritance |
-| ---  | --- | --- | --- |
-| [multipass](multipass.md) | 0..1 <br/> [Boolean](Boolean.md) | Indicates whether this beamline is a multipass recirculating line (true) or a... | direct |
-| [length](length.md) | 0..1 <br/> [Float](Float.md) | Physical length of the element in meters | direct |
-| [zero_point](zero_point.md) | 0..1 <br/> [BeamlineElement](BeamlineElement.md) | Name of a line item used as a reference point when  the beamline is used as a... | direct |
-| [periodic](periodic.md) | 0..1 <br/> [Boolean](Boolean.md) | For a beamline, indicates whether the orbit and Twiss parameters are periodic... | direct |
-| [line](line.md) | * <br/> [BeamlineElement](BeamlineElement.md) | Ordered sequence of beamline elements in this beamline | direct |
-| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
-| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
-
-
-
-
-
-## Usages
-
-| used by | used in | type | used |
-| ---  | --- | --- | --- |
-| [NaradModel](NaradModel.md) | [beamlines](beamlines.md) | range | [Beamline](Beamline.md) |
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | narad:Beamline |
-| native | narad:Beamline |
-| exact | pals:BeamLine |
-
-
-
-
-
-
-## LinkML Source
-
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-
-### Direct
-
-<details>
-```yaml
-name: Beamline
-description: A top-level NARAD-system for an ordered sequence of beamline elements
-  defining a beam path.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
-exact_mappings:
-- pals:BeamLine
-is_a: NamedThing
-slots:
-- multipass
-- length
-- zero_point
-- periodic
-- line
-
-```
-</details>
-
-### Induced
-
-<details>
-```yaml
-name: Beamline
-description: A top-level NARAD-system for an ordered sequence of beamline elements
-  defining a beam path.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
-exact_mappings:
-- pals:BeamLine
-is_a: NamedThing
-attributes:
-  multipass:
-    name: multipass
-    description: Indicates whether this beamline is a multipass recirculating line
-      (true) or a single-pass line (false).
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: multipass
-    owner: Beamline
-    domain_of:
-    - Beamline
-    range: boolean
-  length:
-    name: length
-    description: Physical length of the element in meters.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: length
-    owner: Beamline
-    domain_of:
-    - Beamline
-    - BeamlineElement
-    range: float
-  zero_point:
-    name: zero_point
-    description: Name of a line item used as a reference point when  the beamline
-      is used as a subline."
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: zero_point
-    owner: Beamline
-    domain_of:
-    - Beamline
-    range: BeamlineElement
-    multivalued: false
-    inlined: false
-  periodic:
-    name: periodic
-    description: For a beamline, indicates whether the orbit and Twiss parameters
-      are periodic (true) or non-periodic (false).
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: periodic
-    owner: Beamline
-    domain_of:
-    - Beamline
-    range: boolean
-  line:
-    name: line
-    description: Ordered sequence of beamline elements in this beamline. Serializes
-      as a list of element names (BeamlineElement names) referencing the keys in the
-      elements map This is not a direct containment slot; the actual element definitions
-      are in the top-level elements map.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: line
-    owner: Beamline
-    domain_of:
-    - Beamline
-    range: BeamlineElement
-    multivalued: true
-    inlined: false
-  name:
-    name: name
-    description: Human-readable name or local string key for the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    identifier: true
-    alias: name
-    owner: Beamline
-    domain_of:
-    - NamedThing
-    range: string
-    required: true
-  description:
-    name: description
-    description: Detailed description of the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
-    alias: description
-    owner: Beamline
-    domain_of:
-    - NamedThing
-    range: string
-
-```
-</details>
+|  |  |  |
+| --- | --- | --- |
+| **Exact Mappings:** | | pals:BeamLine |

@@ -3,22 +3,22 @@
 
 
 
-_Allowed identifier types for facilities and other entities._
+_Controlled values for identifier types._
 
 
 
-URI: [narad:IdentifierTypeEnum](https://w3id.org/narad_linkml/schema/narad/IdentifierTypeEnum)
+URI: [pals:IdentifierTypeEnum](https://pals-project.readthedocs.io/IdentifierTypeEnum)
 
 ## Permissible Values
 
 | Value | Meaning | Description |
 | --- | --- | --- |
-| doi | None | Digital Object Identifier (DOI) |
-| ark | None | Archival Resource Key (ARK) |
-| handle | None | Handle System identifier |
-| url | None | Uniform Resource Locator (URL) |
-| local | None | Local identifier unique within a specific context or namespace |
-| other | None | Any other type of identifier not covered by the above categories |
+| DOI | http://purl.org/spar/datacite/doi | Digital Object Identifier |
+| PURL | http://purl.org/spar/datacite/purl | Persistent Uniform Resource Locator |
+| ROR | http://purl.org/spar/datacite/ror | Research Organization Registry identifier |
+| LOCAL | http://purl.org/spar/datacite/local-resource-identifier-scheme | Local identifier, specific to the facility or source system |
+| URL | http://purl.org/spar/datacite/url | Uniform Resource Locator |
+| ARK | http://purl.org/spar/datacite/ark | Archival Resource Key |
 
 
 
@@ -27,7 +27,7 @@ URI: [narad:IdentifierTypeEnum](https://w3id.org/narad_linkml/schema/narad/Ident
 
 | Name | Description |
 | ---  | --- |
-| [identifier_type](identifier_type.md) | The type of identifier used in the identifier slot (e |
+| [identifier_type](identifier_type.md) | The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK |
 
 
 
@@ -43,7 +43,7 @@ URI: [narad:IdentifierTypeEnum](https://w3id.org/narad_linkml/schema/narad/Ident
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,28 +55,34 @@ URI: [narad:IdentifierTypeEnum](https://w3id.org/narad_linkml/schema/narad/Ident
 <details>
 ```yaml
 name: IdentifierTypeEnum
-description: Allowed identifier types for facilities and other entities.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: Controlled values for identifier types.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
 permissible_values:
-  doi:
-    text: doi
-    description: Digital Object Identifier (DOI).
-  ark:
-    text: ark
-    description: Archival Resource Key (ARK).
-  handle:
-    text: handle
-    description: Handle System identifier.
-  url:
-    text: url
-    description: Uniform Resource Locator (URL).
-  local:
-    text: local
-    description: Local identifier unique within a specific context or namespace.
-  other:
-    text: other
-    description: Any other type of identifier not covered by the above categories.
+  DOI:
+    text: DOI
+    description: Digital Object Identifier.
+    meaning: http://purl.org/spar/datacite/doi
+  PURL:
+    text: PURL
+    description: Persistent Uniform Resource Locator.
+    meaning: http://purl.org/spar/datacite/purl
+  ROR:
+    text: ROR
+    description: Research Organization Registry identifier.
+    meaning: http://purl.org/spar/datacite/ror
+  LOCAL:
+    text: LOCAL
+    description: Local identifier, specific to the facility or source system.
+    meaning: http://purl.org/spar/datacite/local-resource-identifier-scheme
+  URL:
+    text: URL
+    description: Uniform Resource Locator.
+    meaning: http://purl.org/spar/datacite/url
+  ARK:
+    text: ARK
+    description: Archival Resource Key.
+    meaning: http://purl.org/spar/datacite/ark
 
 ```
 </details>

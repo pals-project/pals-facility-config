@@ -31,7 +31,7 @@ URI: [linkml:DateOrDatetime](https://w3id.org/linkml/DateOrDatetime)
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -41,6 +41,6 @@ URI: [linkml:DateOrDatetime](https://w3id.org/linkml/DateOrDatetime)
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | linkml:DateOrDatetime |
-| native | narad:date_or_datetime |
+| native | pals:date_or_datetime |
 
 

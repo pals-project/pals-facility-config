@@ -1,0 +1,4195 @@
+{
+    "$defs": {
+        "ACKicker": {
+            "additionalProperties": false,
+            "description": "An ACKicker element simulates a time-dependent kicker.  It is like a Kicker element except that the field varies in time.  This element requires a user supplied time-dependent expression.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "plane": {
+                    "$ref": "#/$defs/PlaneEnum",
+                    "description": "The transverse plane in which the kicker operates, either horizontal or vertical."
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "ACKicker",
+            "type": "object"
+        },
+        "AdditionalMetadata": {
+            "additionalProperties": false,
+            "description": "A single generic key/value metadata entry, used as a GraphQL-compatible replacement for an open-ended (range: Any) field. A list of these represents an arbitrary, extensible bag of program-specific metadata.",
+            "properties": {
+                "datatype": {
+                    "$ref": "#/$defs/DataTypeEnum",
+                    "description": "Hint for the value's original type, so consumers can parse it back (e.g. float, integer, boolean) rather than treating everything as an opaque string."
+                },
+                "key": {
+                    "description": "The metadata field name.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The metadata value, serialized as a string.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "key",
+                "value"
+            ],
+            "title": "AdditionalMetadata",
+            "type": "object"
+        },
+        "Affiliation": {
+            "additionalProperties": false,
+            "description": "Contains affiliation information for an author or component, such as a ROR.",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "identifiers": {
+                    "description": "A unique and ideally persistent identifier for the facility, such as a DOI or ROR.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "The name of the entity. For example, the name of the person or organization.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Affiliation",
+            "type": "object"
+        },
+        "Author": {
+            "additionalProperties": false,
+            "description": "Contains authorship information for a representation of an accelerator facility and its operations.",
+            "properties": {
+                "affiliation": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Affiliation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The affiliation of the author or component, as a ROR."
+                },
+                "email": {
+                    "description": "The email address of the author.",
+                    "pattern": "^[^@]+@[^@]+\\.[^@]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "The name of the entity. For example, the name of the person or organization.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "orcid": {
+                    "description": "The ORCID identifier of the author.",
+                    "pattern": "^https://orcid\\.org/\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Author",
+            "type": "object"
+        },
+        "AxisEnum": {
+            "description": "",
+            "enum": [
+                "x",
+                "y",
+                "z",
+                "s"
+            ],
+            "title": "AxisEnum",
+            "type": "string"
+        },
+        "BeamLine": {
+            "additionalProperties": false,
+            "description": "PALS element for an ordered sequence of beamline elements defining a beam path.",
+            "properties": {
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/VirtualRelationEnum",
+                    "description": "The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "description": {
+                    "description": "A human-readable description of the instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "direction": {
+                    "description": "Beam direction along the BeamLine: +1 or -1. Longitudinal orientation. Default is +1.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "functions": {
+                    "description": "The function of the virtual component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/VirtualFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "length": {
+                    "description": "The total length of the BeamLine. For pals interoperability, use m as the unit of length.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "multipass": {
+                    "description": "Indicates whether the BeamLine is a multipass BeamLine, where the beam passes through the same physical elements multiple times. If not provided, the default assumption is that the BeamLine is single-pass.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "periodic": {
+                    "description": "Indicates whether orbit and Twiss parameters periodic. If not provided, the default assumption is that the BeamLine is not periodic.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "repeat": {
+                    "description": "Repetition count. If not provided, the default assumption is that the beamline is not repeated and the value is 1.\nIf value is greater than 1, the beamline is repeated that many times.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "BeamLine",
+            "type": "object"
+        },
+        "BeamLineSection": {
+            "additionalProperties": false,
+            "description": "A virtual component used to represent a section of the BeamLine for organizational or functional grouping of components.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/VirtualRelationEnum",
+                    "description": "The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the virtual component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/VirtualFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "BeamLineSection",
+            "type": "object"
+        },
+        "BeamPositionMonitor": {
+            "additionalProperties": false,
+            "description": "A diagnostic device used to measure transverse beam position.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "BeamPositionMonitor",
+            "type": "object"
+        },
+        "BeamProfileMonitor": {
+            "additionalProperties": false,
+            "description": "A diagnostic device used to measure transverse beam profile.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "BeamProfileMonitor",
+            "type": "object"
+        },
+        "Bend": {
+            "additionalProperties": false,
+            "description": "Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.",
+            "properties": {
+                "BendP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BendParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for bend parameters that are aligned with PALS BendP (Bend Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Bend",
+            "type": "object"
+        },
+        "BendParamGroup": {
+            "additionalProperties": false,
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "multipole_geometry": {}
+                        },
+                        "required": [
+                            "multipole_geometry"
+                        ]
+                    },
+                    "then": {
+                        "properties": {
+                            "multipole_geometry": {}
+                        },
+                        "required": [
+                            "multipole_geometry"
+                        ]
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "ref_geometry": {}
+                        },
+                        "required": [
+                            "ref_geometry"
+                        ]
+                    },
+                    "then": {
+                        "properties": {
+                            "ref_geometry": {}
+                        },
+                        "required": [
+                            "ref_geometry"
+                        ]
+                    }
+                }
+            ],
+            "description": "Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.\nThis mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).",
+            "properties": {
+                "L_chord": {
+                    "description": "Chord length of the bend.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "L_rectangle": {
+                    "description": "Rectangular length.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "L_sagitta": {
+                    "description": "Output parameter. Sagitta length.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "angle_ref": {
+                    "description": "Reference bend angle.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "bend_field_actual": {
+                    "description": "Actual bend field.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "bend_field_ref": {
+                    "description": "Reference bend field.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "e1": {
+                    "description": "Entrance end pole face rotation with respect to a sector geometry.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "e1_rect": {
+                    "description": "Entrance end pole face rotation with respect to a rectangular geometry.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "e2": {
+                    "description": "Exit end pole face rotation with respect to a sector geometry.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "e2_rect": {
+                    "description": "Exit end pole face rotation with respect to a rectangular geometry.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "edge1_int": {
+                    "description": "Entrance end fringe field integral.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "edge2_int": {
+                    "description": "Exit end fringe field integral.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "g_actual": {
+                    "description": "Actual bend strength = 1/radius_actual",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "g_ref": {
+                    "description": "Reference bend strength = 1/radius_ref",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "h1": {
+                    "description": "Entrance end pole face curvature",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "h2": {
+                    "description": "Exit end pole face curvature",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "multipole_geometry": {
+                    "$ref": "#/$defs/MultipoleGeometryEnum",
+                    "description": "Multipole geometry type. Must be `follows_ref_geometry`."
+                },
+                "ref_geometry": {
+                    "$ref": "#/$defs/ReferenceGeometryEnum",
+                    "description": "Reference geometry type. Must be `arc`."
+                },
+                "rho_ref": {
+                    "description": "Reference bend radius.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "tilt_ref": {
+                    "description": "Reference tilt of the bend.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "BendParamGroup",
+            "type": "object"
+        },
+        "BodyShiftParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin class for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).",
+            "properties": {
+                "x_offset": {
+                    "description": "Shift in the X direction in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "x_rot": {
+                    "description": "Rotation around the X-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "y_offset": {
+                    "description": "Shift in the Y direction in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "y_rot": {
+                    "description": "Rotation around the Y-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "z_offset": {
+                    "description": "Shift in the Z direction in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "z_rot": {
+                    "description": "Rotation around the Z-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "BodyShiftParamGroup",
+            "type": "object"
+        },
+        "BookkeepingComponent": {
+            "additionalProperties": false,
+            "description": "A virtual component that represents a bookkeeping or organizational role in the accelerator system,  such as a BeamLineSection, Marker or a Fork. These can include BeamLineSections, Markers, Forks, and other virtual components that are important for understanding  the structure and function of the accelerator system but are not physical devices.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/VirtualRelationEnum",
+                    "description": "The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the virtual component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/VirtualFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "BookkeepingComponent",
+            "type": "object"
+        },
+        "CanonicalSignalTypeEnum": {
+            "description": "Portable semantic meanings for important signals.",
+            "enum": [
+                "HorizontalBeamPosition",
+                "VerticalBeamPosition",
+                "HorizontalBeamPositionOffset",
+                "VerticalBeamPositionOffset",
+                "BeamIntensity",
+                "DeviceStatus",
+                "GradientSetpoint",
+                "GradientReadback",
+                "MagnetCurrentSetpoint",
+                "MagnetCurrentReadback",
+                "MagnetFieldSetpoint",
+                "IntegratedFieldSetpoint",
+                "IntegratedFieldReadback",
+                "VacuumPressure",
+                "IonPumpCurrent",
+                "IonPumpVoltage",
+                "GammaDoseRate",
+                "NeutronDoseRate",
+                "Status"
+            ],
+            "title": "CanonicalSignalTypeEnum",
+            "type": "string"
+        },
+        "CavityTypeEnum": {
+            "description": "The type of cavity, which determines the field configuration and mode structure.",
+            "enum": [
+                "STANDING_WAVE",
+                "TRAVELING_WAVE"
+            ],
+            "title": "CavityTypeEnum",
+            "type": "string"
+        },
+        "ComponentRelation": {
+            "additionalProperties": false,
+            "description": "Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds.",
+            "properties": {
+                "axis": {
+                    "$ref": "#/$defs/AxisEnum"
+                },
+                "beamline_context": {
+                    "description": "The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "component_direction": {
+                    "$ref": "#/$defs/DirectionEnum"
+                },
+                "context": {
+                    "$ref": "#/$defs/RelationContextEnum",
+                    "description": "The frame of reference / domain in which this relationship is asserted to hold."
+                },
+                "distance_unit": {
+                    "$ref": "#/$defs/UnitEnum"
+                },
+                "distance_value": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "predicate": {
+                    "$ref": "#/$defs/ComponentRelationPredicateEnum"
+                },
+                "reference_frame": {
+                    "$ref": "#/$defs/ReferenceFrameEnum"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "tolerance_unit": {
+                    "$ref": "#/$defs/UnitEnum"
+                },
+                "tolerance_value": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "subject",
+                "predicate",
+                "object"
+            ],
+            "title": "ComponentRelation",
+            "type": "object"
+        },
+        "ComponentRelationPredicateEnum": {
+            "description": "",
+            "enum": [
+                "precedes",
+                "follows",
+                "contains",
+                "contained_in",
+                "connected_to",
+                "controls",
+                "is_controlled_by",
+                "is_part_of",
+                "has_part",
+                "adjacent_to",
+                "overlaps",
+                "mounted_on",
+                "intersects",
+                "nearest_to"
+            ],
+            "title": "ComponentRelationPredicateEnum",
+            "type": "string"
+        },
+        "CrabCavity": {
+            "additionalProperties": false,
+            "description": "A cavity used for transverse beam manipulation, such as crabbing or deflecting.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "CrabCavity",
+            "type": "object"
+        },
+        "DataTypeEnum": {
+            "description": "Data types for parameter values.",
+            "enum": [
+                "String",
+                "Integer",
+                "Float",
+                "Boolean"
+            ],
+            "title": "DataTypeEnum",
+            "type": "string"
+        },
+        "DiagnosticDevice": {
+            "additionalProperties": false,
+            "description": "An accelerator device used to measure beam or machine state.",
+            "properties": {
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "DiagnosticDevice",
+            "type": "object"
+        },
+        "DirectionEnum": {
+            "description": "",
+            "enum": [
+                "upstream",
+                "downstream",
+                "positive",
+                "negative"
+            ],
+            "title": "DirectionEnum",
+            "type": "string"
+        },
+        "ElectricMultipoleParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin for electric multipole parameters, \nwhich can be used to describe the electric field components of an accelerator element.\nThis mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).\nExample with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order: 2\n  EnL: 3.47e1\n```",
+            "properties": {
+                "elec_components": {
+                    "description": "Electric multipole components, one per order N.",
+                    "items": {
+                        "$ref": "#/$defs/MultipoleParameterGroup"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ElectricMultipoleParamGroup",
+            "type": "object"
+        },
+        "Facility": {
+            "additionalProperties": false,
+            "description": "A facility that houses one or more accelerators.",
+            "properties": {
+                "beamlines": {
+                    "description": "A list of beamlines in the accelerator system.",
+                    "items": {
+                        "$ref": "#/$defs/BeamLine"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "component_relations": {
+                    "description": "A list of component relations in the accelerator system (Component <-> Component relationships).",
+                    "items": {
+                        "$ref": "#/$defs/ComponentRelation"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "components": {
+                    "description": "A list of physical components in the accelerator system.",
+                    "items": {
+                        "$ref": "#/$defs/Component"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "identifiers": {
+                    "description": "A unique and ideally persistent identifier for the facility, such as a DOI or ROR.",
+                    "items": {
+                        "$ref": "#/$defs/Identifier"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "signal_bindings": {
+                    "description": "A list of signal bindings in the accelerator system (Component <-> Signal relationships).",
+                    "items": {
+                        "$ref": "#/$defs/SignalBinding"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "signals": {
+                    "description": "A list of signals in the accelerator system.",
+                    "items": {
+                        "$ref": "#/$defs/Signal"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Facility",
+            "type": "object"
+        },
+        "FacilityFunctionEnum": {
+            "description": "Broad structural or support functions.",
+            "enum": [
+                "Support",
+                "Alignment",
+                "PowerSupply",
+                "ControlRack",
+                "Cooling",
+                "Diagnostics",
+                "Detection"
+            ],
+            "title": "FacilityFunctionEnum",
+            "type": "string"
+        },
+        "FloorParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).",
+            "properties": {
+                "phi": {
+                    "description": "Rotation around the X-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "psi": {
+                    "description": "Rotation around the Z-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "theta": {
+                    "description": "Orientation angle around the Y-axis in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "x": {
+                    "description": "Global X coordinate in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "y": {
+                    "description": "Global Y coordinate in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "z": {
+                    "description": "Global Z coordinate in the facility floor plan.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "FloorParamGroup",
+            "type": "object"
+        },
+        "Identifier": {
+            "additionalProperties": false,
+            "description": "A unique, and ideally persistent, identifier for a facility, such as a DOI or ROR.",
+            "properties": {
+                "identifier_type": {
+                    "$ref": "#/$defs/IdentifierTypeEnum",
+                    "description": "The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK."
+                },
+                "identifier_value": {
+                    "description": "The value of the identifier.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Identifier",
+            "type": "object"
+        },
+        "IdentifierTypeEnum": {
+            "description": "Controlled values for identifier types.",
+            "enum": [
+                "DOI",
+                "PURL",
+                "ROR",
+                "LOCAL",
+                "URL",
+                "ARK"
+            ],
+            "title": "IdentifierTypeEnum",
+            "type": "string"
+        },
+        "Kicker": {
+            "additionalProperties": false,
+            "description": "A magnet primarily used to steer the beam.\nCan deflect the beam transversely in both planes, or a single plane, depending on the design and parameters of the kicker. \nOnly one of the electric or magnetic multipole components should be present, not both.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "plane": {
+                    "$ref": "#/$defs/PlaneEnum",
+                    "description": "The transverse plane in which the kicker operates, either horizontal or vertical."
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Kicker",
+            "type": "object"
+        },
+        "LongitudinalPlacementParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis. \nCorresponds to PALS's ungrouped element parameters `length` and `s_position`.\nOne (or both) `length` or `s_position` must be present.",
+            "if": {
+                "properties": {
+                    "id": {}
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "properties": {
+                "length": {
+                    "description": "Length of the element (arc length for bends).",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "s_position": {
+                    "description": "Longitudinal position of the element along the beamline.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "then": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "length": {}
+                        },
+                        "required": [
+                            "length"
+                        ]
+                    },
+                    {
+                        "properties": {
+                            "s_position": {}
+                        },
+                        "required": [
+                            "s_position"
+                        ]
+                    }
+                ]
+            },
+            "title": "LongitudinalPlacementParamGroup",
+            "type": "object"
+        },
+        "MagneticMultipoleParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin for magnetic multipole parameters,  which can be used to describe the magnetic field components of an accelerator element. This mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml mag_components: - order: 7\n  tilt: 0.7\n- order: 3\n  Bn: 27.3\n- order: 2\n  BnL: 3.47e1\n- order: 1\n  Kn: 0.85     # normalized form, e.g. a quadrupole's k1-like strength\n```",
+            "properties": {
+                "mag_components": {
+                    "description": "Magnetic multipole components, one per order N.",
+                    "items": {
+                        "$ref": "#/$defs/MultipoleParameterGroup"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "MagneticMultipoleParamGroup",
+            "type": "object"
+        },
+        "Marker": {
+            "additionalProperties": false,
+            "description": "A virtual component used as a reference point or marker in the beamline structure.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/VirtualRelationEnum",
+                    "description": "The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the virtual component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/VirtualFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Marker",
+            "type": "object"
+        },
+        "MetaParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).",
+            "properties": {
+                "additional_metadata": {
+                    "description": "Additional metadata or annotations for the instance.",
+                    "items": {
+                        "$ref": "#/$defs/AdditionalMetadata"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alias": {
+                    "description": "An alternative name or identifier for the instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "A human-readable description of the instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "description": "A label string.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "MetaParamGroup",
+            "type": "object"
+        },
+        "Multipole": {
+            "additionalProperties": false,
+            "description": "A general magnet with a higher-order multipole field, such as a sextupole or octupole.\nOnly one of the electric or magnetic multipole components should be present, not both.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Multipole",
+            "type": "object"
+        },
+        "MultipoleGeometryEnum": {
+            "description": "The geometric configuration of the multipole field.  Sets the geometry used to calculate multipoles.",
+            "enum": [
+                "follows_ref_geometry",
+                "vertically_pure",
+                "horizontally_pure",
+                "chord",
+                "entrance_coords",
+                "exit_coords"
+            ],
+            "title": "MultipoleGeometryEnum",
+            "type": "string"
+        },
+        "MultipoleParameterGroup": {
+            "additionalProperties": false,
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "Es": {}
+                        },
+                        "required": [
+                            "Es"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "required": [
+                                "Bn",
+                                "Bs",
+                                "Kn",
+                                "Ks"
+                            ]
+                        },
+                        "properties": {
+                            "Bn": {},
+                            "Bs": {},
+                            "Kn": {},
+                            "Ks": {}
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "En": {}
+                        },
+                        "required": [
+                            "En"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "required": [
+                                "Bn",
+                                "Bs",
+                                "Kn",
+                                "Ks"
+                            ]
+                        },
+                        "properties": {
+                            "Bn": {},
+                            "Bs": {},
+                            "Kn": {},
+                            "Ks": {}
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "EnL": {}
+                        },
+                        "required": [
+                            "EnL"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "required": [
+                                "Bn",
+                                "Bs",
+                                "Kn",
+                                "Ks"
+                            ]
+                        },
+                        "properties": {
+                            "Bn": {},
+                            "Bs": {},
+                            "Kn": {},
+                            "Ks": {}
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "EsL": {}
+                        },
+                        "required": [
+                            "EsL"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "required": [
+                                "Bn",
+                                "Bs",
+                                "Kn",
+                                "Ks"
+                            ]
+                        },
+                        "properties": {
+                            "Bn": {},
+                            "Bs": {},
+                            "Kn": {},
+                            "Ks": {}
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "Bn": {}
+                        },
+                        "required": [
+                            "Bn"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "required": [
+                                "En",
+                                "Es",
+                                "EnL",
+                                "EsL"
+                            ]
+                        },
+                        "properties": {
+                            "En": {},
+                            "EnL": {},
+                            "Es": {},
+                            "EsL": {}
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "Bs": {}
+                        },
+                        "required": [
+                            "Bs"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "required": [
+                                "En",
+                                "Es",
+                                "EnL",
+                                "EsL"
+                            ]
+                        },
+                        "properties": {
+                            "En": {},
+                            "EnL": {},
+                            "Es": {},
+                            "EsL": {}
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "Kn": {}
+                        },
+                        "required": [
+                            "Kn"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "required": [
+                                "En",
+                                "Es",
+                                "EnL",
+                                "EsL"
+                            ]
+                        },
+                        "properties": {
+                            "En": {},
+                            "EnL": {},
+                            "Es": {},
+                            "EsL": {}
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "Ks": {}
+                        },
+                        "required": [
+                            "Ks"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "required": [
+                                "En",
+                                "Es",
+                                "EnL",
+                                "EsL"
+                            ]
+                        },
+                        "properties": {
+                            "En": {},
+                            "EnL": {},
+                            "Es": {},
+                            "EsL": {}
+                        }
+                    }
+                }
+            ],
+            "description": "A single order's electric (or magnetic) multipole component.\nOnly the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.\nNot a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.",
+            "properties": {
+                "Bn": {
+                    "description": "Normal component of the magnetic field.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "Bs": {
+                    "description": "Skew component of the magnetic field.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "En": {
+                    "description": "Normal component of the field.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "EnL": {
+                    "description": "Length-integrated normal component.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "Es": {
+                    "description": "Skew component of the field.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "EsL": {
+                    "description": "Length-integrated skew component.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "Kn": {
+                    "description": "Normalized normal component.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "Ks": {
+                    "description": "Normalized skew component.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "order": {
+                    "description": "Multipole order N (0 = dipole, 1 = quadrupole, etc.)",
+                    "type": "integer"
+                },
+                "tilt": {
+                    "description": "Tilt of the Nth multipole.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "order"
+            ],
+            "title": "MultipoleParameterGroup",
+            "type": "object"
+        },
+        "NormalConductingRFCavity": {
+            "additionalProperties": false,
+            "description": "A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "RFP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RFParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "NormalConductingRFCavity",
+            "type": "object"
+        },
+        "Octupole": {
+            "additionalProperties": false,
+            "description": "A magnet primarily used to focus or defocus the beam. 8 poles.\nOnly one of the electric or magnetic multipole components should be present, not both.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Octupole",
+            "type": "object"
+        },
+        "PALS": {
+            "additionalProperties": false,
+            "description": "Root container for accelerator core components, semantic signals, and local bindings.",
+            "properties": {
+                "affiliation": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Affiliation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The affiliation of the author or component, as a ROR."
+                },
+                "authors": {
+                    "description": "Contains the authorship information for this representation of an accelerator facility and its operations.",
+                    "items": {
+                        "$ref": "#/$defs/Author"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "A human-readable description of the instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Facility"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A facility that contains lattice elements (physical and virtual), beamlines, parameter set commands, signals, etc."
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "Additional notes or comments about the representation of a particle accelerator and its operations.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "version": {
+                    "description": "Version of the representation of a particle accelerator and its operations.",
+                    "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "kind"
+            ],
+            "title": "PALS",
+            "type": "object"
+        },
+        "PhysicalComponent": {
+            "additionalProperties": false,
+            "description": "A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system.",
+            "properties": {
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "PhysicalComponent",
+            "type": "object"
+        },
+        "PhysicalFunctionEnum": {
+            "description": "Broad device-level functions.",
+            "enum": [
+                "Focusing",
+                "Steering",
+                "BeamPositionMeasurement",
+                "VacuumGeneration",
+                "RadiationMonitoring",
+                "Measurement",
+                "BeamAcceleration",
+                "BeamLossDetection",
+                "BeamCurrentMeasurement",
+                "BeamProfileMeasurement",
+                "MachineProtection",
+                "TimingSynchronization"
+            ],
+            "title": "PhysicalFunctionEnum",
+            "type": "string"
+        },
+        "PhysicalRelationEnum": {
+            "description": "Controlled values for physical relation to the beamline.",
+            "enum": [
+                "Inline",
+                "AttachedToPipe",
+                "NearBeamLine",
+                "SupportingFacility"
+            ],
+            "title": "PhysicalRelationEnum",
+            "type": "string"
+        },
+        "PlaneEnum": {
+            "description": "Controlled values for transverse plane.",
+            "enum": [
+                "Horizontal",
+                "Vertical"
+            ],
+            "title": "PlaneEnum",
+            "type": "string"
+        },
+        "Quadrupole": {
+            "additionalProperties": false,
+            "description": "A magnet primarily used to focus or defocus the beam. 4 poles.\nOnly one of the electric or magnetic multipole components should be present, not both.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Quadrupole",
+            "type": "object"
+        },
+        "QuantityKindEnum": {
+            "description": "Physical quantity kinds for signals.",
+            "enum": [
+                "BeamPosition",
+                "State",
+                "ElectricCurrent",
+                "IntegratedMagneticField",
+                "MagneticField",
+                "Pressure",
+                "DoseRate",
+                "Voltage",
+                "Power",
+                "CavityPhase",
+                "CavityGradient"
+            ],
+            "title": "QuantityKindEnum",
+            "type": "string"
+        },
+        "RFParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS).",
+            "properties": {
+                "L_active": {
+                    "description": "Active acceleration length.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "cavity_type": {
+                    "$ref": "#/$defs/CavityTypeEnum",
+                    "description": "Cavity type"
+                },
+                "dE_ref": {
+                    "description": "Reference energy gain.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "frequency": {
+                    "description": "RF frequency.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "harmon": {
+                    "description": "RF harmonic number.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "multipass_phase": {
+                    "description": "rad/2pi RF Phase added to multipass elements",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "num_cells": {
+                    "description": "Number of cells in the cavity",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "phase": {
+                    "description": "RF phase. rad/2pi RF phase in 0 to 2*pi",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "voltage": {
+                    "description": "RF voltage.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "zero_phase": {
+                    "$ref": "#/$defs/ZeroPhaseEnum",
+                    "description": "Sets what phase = 0 means."
+                }
+            },
+            "title": "RFParamGroup",
+            "type": "object"
+        },
+        "RadiationMonitor": {
+            "additionalProperties": false,
+            "description": "A diagnostic device used to monitor radiation dose or dose rate.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "RadiationMonitor",
+            "type": "object"
+        },
+        "ReferenceFrameEnum": {
+            "description": "",
+            "enum": [
+                "beam_direction",
+                "facility_coordinates",
+                "local_component_frame",
+                "tunnel_stationing"
+            ],
+            "title": "ReferenceFrameEnum",
+            "type": "string"
+        },
+        "ReferenceGeometryEnum": {
+            "description": "The reference geometry used to calculate multipoles.  Sets the geometry used to calculate multipoles.",
+            "enum": [
+                "arc",
+                "chord",
+                "entrance_coords",
+                "exit_coords"
+            ],
+            "title": "ReferenceGeometryEnum",
+            "type": "string"
+        },
+        "ReferenceParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).",
+            "properties": {
+                "E_tot_ref": {
+                    "description": "[eV] Reference total energy",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "pc_ref": {
+                    "description": "[momentum*c] Reference momentum times speed of light.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "species_ref": {
+                    "description": "A reference to a species or particle type, such as an ion, electron, or proton.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "time_ref": {
+                    "description": "[s] Reference time",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ReferenceParamGroup",
+            "type": "object"
+        },
+        "RelationContextEnum": {
+            "description": "",
+            "enum": [
+                "beamline_order",
+                "Euclidean_3D",
+                "Euclidean_2D",
+                "floorplan",
+                "containment",
+                "installation_mounting"
+            ],
+            "title": "RelationContextEnum",
+            "type": "string"
+        },
+        "Sextupole": {
+            "additionalProperties": false,
+            "description": "A magnet primarily used to focus or defocus the beam. 6 poles.\nOnly one of the electric or magnetic multipole components should be present, not both.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Sextupole",
+            "type": "object"
+        },
+        "Signal": {
+            "additionalProperties": false,
+            "description": "Semantic meaning of a control-system signal associated with a component.",
+            "properties": {
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "access_protocol": {
+                    "description": "The protocol used to access the signal in the source system,  such as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "alias": {
+                    "description": "An alternative name or identifier for the instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "archive_identifier": {
+                    "description": "The identifier used to reference the signal in an archival system.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "canonical_signal_type": {
+                    "$ref": "#/$defs/CanonicalSignalTypeEnum",
+                    "description": "The canonical semantic meaning of the signal."
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_data_type": {
+                    "$ref": "#/$defs/DataTypeEnum",
+                    "description": "The native data type of the signal in the source system,  such as String, Integer, Float, or Boolean."
+                },
+                "native_description": {
+                    "description": "A human-readable description of the signal in the source system.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "native_unit": {
+                    "$ref": "#/$defs/UnitEnum",
+                    "description": "The native unit of the signal in the source system."
+                },
+                "quantity_kind": {
+                    "$ref": "#/$defs/QuantityKindEnum",
+                    "description": "The physical quantity kind of the signal."
+                },
+                "signal_role": {
+                    "$ref": "#/$defs/SignalRoleEnum",
+                    "description": "The role of the signal in the control system, such as setpoint, readback, status, command, or limit."
+                },
+                "source_system": {
+                    "$ref": "#/$defs/SourceSystemEnum",
+                    "description": "The source system from which the signal originates, such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service."
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "signal_role",
+                "source_system",
+                "canonical_signal_type",
+                "quantity_kind",
+                "native_data_type",
+                "native_unit"
+            ],
+            "title": "Signal",
+            "type": "object"
+        },
+        "SignalBinding": {
+            "additionalProperties": false,
+            "description": "Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding.",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "predicate": {
+                    "$ref": "#/$defs/SignalBindingPredicateEnum"
+                },
+                "subject": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "subject",
+                "predicate",
+                "object"
+            ],
+            "title": "SignalBinding",
+            "type": "object"
+        },
+        "SignalBindingPredicateEnum": {
+            "description": "Controlled predicates for Component-to-Signal bindings.",
+            "enum": [
+                "has_signal",
+                "has_status_signal",
+                "has_setpoint_signal",
+                "has_readback_signal",
+                "has_command_signal",
+                "has_limit_signal"
+            ],
+            "title": "SignalBindingPredicateEnum",
+            "type": "string"
+        },
+        "SignalRoleEnum": {
+            "description": "Roles for control-system signals.",
+            "enum": [
+                "Setpoint",
+                "Readback",
+                "Status",
+                "Command",
+                "MinimumLimit",
+                "MaximumLimit"
+            ],
+            "title": "SignalRoleEnum",
+            "type": "string"
+        },
+        "Solenoid": {
+            "additionalProperties": false,
+            "description": "A magnet with a primarily longitudinal magnetic field used for focusing.\nA solenoid is an element whose magnetic field is dominated by a field whose direction is aligned with the magnetic axis.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "SolenoidP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SolenoidParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Solenoid",
+            "type": "object"
+        },
+        "SolenoidParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin for solenoid-specific parameters.",
+            "if": {
+                "properties": {
+                    "id": {}
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "properties": {
+                "Bsol": {
+                    "description": "Solenoid field.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "Ksol": {
+                    "description": "Normalized solenoid strength.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "then": {
+                "oneOf": [
+                    {
+                        "properties": {
+                            "Ksol": {}
+                        },
+                        "required": [
+                            "Ksol"
+                        ]
+                    },
+                    {
+                        "properties": {
+                            "Bsol": {}
+                        },
+                        "required": [
+                            "Bsol"
+                        ]
+                    }
+                ]
+            },
+            "title": "SolenoidParamGroup",
+            "type": "object"
+        },
+        "SourceSystemEnum": {
+            "description": "Controlled values for facility-local source systems.",
+            "enum": [
+                "EPICS",
+                "EPICS_ChannelAccess",
+                "PALS_Ext",
+                "MYA",
+                "ElementDatabase",
+                "ChannelDatabase",
+                "Simulation",
+                "Other"
+            ],
+            "title": "SourceSystemEnum",
+            "type": "string"
+        },
+        "SuperConductingRFCavity": {
+            "additionalProperties": false,
+            "description": "A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ElectricMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElectricMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "RFP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RFParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "SuperConductingRFCavity",
+            "type": "object"
+        },
+        "SupportingFacilityComponent": {
+            "additionalProperties": false,
+            "description": "A physical component that supports accelerator operation  without a specific beam-pipe placement,  such as a power supply, control rack, or radiation detector. These can include Girders, Racks, Power Supplies,  and other physical infrastructure components that are important for understanding  the structure and function of the accelerator system but are not inline with the beamline.",
+            "properties": {
+                "BodyShiftP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BodyShiftParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the supporting facility component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/FacilityFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "SupportingFacilityComponent",
+            "type": "object"
+        },
+        "TwissParamGroup": {
+            "additionalProperties": false,
+            "description": "Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.",
+            "properties": {
+                "alpha_a": {
+                    "description": "Twiss alpha parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "alpha_b": {
+                    "description": "Twiss alpha parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "beta_a": {
+                    "description": "Twiss beta parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "beta_b": {
+                    "description": "Twiss beta parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "eta_x": {
+                    "description": "Twiss dispersion parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "eta_y": {
+                    "description": "Twiss dispersion parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "etap_x": {
+                    "description": "Twiss dispersion slope parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "etap_y": {
+                    "description": "Twiss dispersion slope parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "phi_a": {
+                    "description": "Twiss phase advance parameter in the horizontal plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "phi_b": {
+                    "description": "Twiss phase advance parameter in the vertical plane.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "TwissParamGroup",
+            "type": "object"
+        },
+        "UnitEnum": {
+            "description": "Engineering units using ASCII-safe enum names. Values map to QUDT unit IRIs with the LinkML meaning field when an exact QUDT unit is available.",
+            "enum": [
+                "A",
+                "degree",
+                "eV",
+                "eV_per_c",
+                "eV_per_c2",
+                "fundamental_charge",
+                "G_per_cm",
+                "Hz",
+                "kW",
+                "m",
+                "mm",
+                "mrem_per_h",
+                "MV_per_m",
+                "PA",
+                "randians_pi2",
+                "rem_per_h",
+                "seconds",
+                "T",
+                "T_M",
+                "Torr",
+                "V",
+                "V_per_m",
+                "unitless",
+                "none"
+            ],
+            "title": "UnitEnum",
+            "type": "string"
+        },
+        "VirtualComponent": {
+            "additionalProperties": false,
+            "description": "A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.",
+            "properties": {
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/VirtualRelationEnum",
+                    "description": "The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the virtual component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/VirtualFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "VirtualComponent",
+            "type": "object"
+        },
+        "VirtualFunctionEnum": {
+            "description": "Broad virtual component functions or roles.",
+            "enum": [
+                "BeamLineSection",
+                "Mark",
+                "Fork",
+                "Control"
+            ],
+            "title": "VirtualFunctionEnum",
+            "type": "string"
+        },
+        "VirtualRelationEnum": {
+            "description": "Controlled values for virtual relation to the beamline.",
+            "enum": [
+                "Inline",
+                "AssociatedWithBeamLine",
+                "NotAssociatedWithBeamLine"
+            ],
+            "title": "VirtualRelationEnum",
+            "type": "string"
+        },
+        "ZeroPhaseEnum": {
+            "description": "The zero phase reference for the cavity, which determines the phase of the RF field at the entrance of the cavity.",
+            "enum": [
+                "ACCELERATING",
+                "BELOW_TRANSITION",
+                "ABOVE_TRANSITION"
+            ],
+            "title": "ZeroPhaseEnum",
+            "type": "string"
+        }
+    },
+    "$id": "https://w3id.org/accelerator-core",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "Root container for accelerator core components, semantic signals, and local bindings.",
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "affiliation": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/Affiliation"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "The affiliation of the author or component, as a ROR."
+        },
+        "authors": {
+            "description": "Contains the authorship information for this representation of an accelerator facility and its operations.",
+            "items": {
+                "$ref": "#/$defs/Author"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "description": {
+            "description": "A human-readable description of the instance.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "facility": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/Facility"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "A facility that contains lattice elements (physical and virtual), beamlines, parameter set commands, signals, etc."
+        },
+        "kind": {
+            "description": "The LinkML class name of this instance.",
+            "type": "string"
+        },
+        "notes": {
+            "description": "Additional notes or comments about the representation of a particle accelerator and its operations.",
+            "items": {
+                "type": "string"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "version": {
+            "description": "Version of the representation of a particle accelerator and its operations.",
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    },
+    "required": [
+        "kind"
+    ],
+    "title": "accelerator_core",
+    "type": "object",
+    "version": null
+}
