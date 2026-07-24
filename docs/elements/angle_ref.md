@@ -1,0 +1,82 @@
+
+
+# Slot: angle_ref 
+
+
+_Reference bend angle._
+
+
+
+
+
+URI: [pals:angle_ref](https://pals-project.readthedocs.io/angle_ref)
+Alias: angle_ref
+
+<!-- no inheritance hierarchy -->
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [BendParamGroup](BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properti... |  no  |
+
+
+
+
+
+
+## Properties
+
+* Range: [Float](Float.md)
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | pals:angle_ref |
+| native | pals:angle_ref |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: angle_ref
+description: Reference bend angle.
+from_schema: https://w3id.org/accelerator-core
+rank: 1000
+slot_uri: pals:angle_ref
+alias: angle_ref
+owner: BendParamGroup
+domain_of:
+- BendParamGroup
+range: float
+unit:
+  ucum_code: rad
+
+```
+</details>
