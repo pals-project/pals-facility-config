@@ -4,7 +4,6 @@
 @prefix quantitykind: <http://qudt.org/vocab/quantitykind/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
-@prefix unit: <http://qudt.org/vocab/unit/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 inst:ICBK403 pals:FloorP [ a pals:FloorParamGroup ;
@@ -380,7 +379,7 @@ inst:IPMK101.XPOS pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured horizontal beam position." ;
-    pals:native_unit unit:MilliM ;
+    pals:native_unit "mm" ;
     pals:quantity_kind "BeamPosition" ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -391,7 +390,7 @@ inst:IPMK101.YPOS pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured vertical beam position." ;
-    pals:native_unit unit:MilliM ;
+    pals:native_unit "mm" ;
     pals:quantity_kind "BeamPosition" ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -413,7 +412,7 @@ inst:IPMK102.XPOS pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured horizontal beam position." ;
-    pals:native_unit unit:MilliM ;
+    pals:native_unit "mm" ;
     pals:quantity_kind "BeamPosition" ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -424,7 +423,7 @@ inst:IPMK102.YPOS pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured vertical beam position." ;
-    pals:native_unit unit:MilliM ;
+    pals:native_unit "mm" ;
     pals:quantity_kind "BeamPosition" ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -443,8 +442,23 @@ inst:IYGK302 pals:FloorP [ a pals:FloorParamGroup ;
                     pals:key "TransitionMode" ;
                     pals:value "Viewer Limited" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "LimitSwitchCard" ;
-                    pals:value "ITF12C0943ADDR1" ],
+                    pals:key "InsertedMode" ;
+                    pals:value "Viewer Limited" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "HCOSystem" ;
+                    pals:value "UITF Viewers" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Controlled_by" ;
+                    pals:value "iocitf2" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "RetractedChannel" ;
+                    pals:value "12" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "ActuatorChannel" ;
+                    pals:value "6" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "InsertedChannel" ;
+                    pals:value "11" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "ActuatorCard" ;
                     pals:value "ITF12C0922ADDR1" ],
@@ -452,26 +466,11 @@ inst:IYGK302 pals:FloorP [ a pals:FloorParamGroup ;
                     pals:key "SurveyDate" ;
                     pals:value "2021-03-15" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "InsertedChannel" ;
-                    pals:value "11" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "ActuatorChannel" ;
-                    pals:value "6" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "SurveyZ" ;
                     pals:value "4.6462" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "RetractedChannel" ;
-                    pals:value "12" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Controlled_by" ;
-                    pals:value "iocitf2" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HCOSystem" ;
-                    pals:value "UITF Viewers" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "InsertedMode" ;
-                    pals:value "Viewer Limited" ] ;
+                    pals:key "LimitSwitchCard" ;
+                    pals:value "ITF12C0943ADDR1" ] ;
             pals:description "YAG scintillator beam-profile viewer." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144443755972"^^xsd:float ] ;
@@ -488,7 +487,7 @@ inst:MBHK101H.HMAX pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:maxInclusive ;
     pals:source_system "EPICS" .
@@ -499,7 +498,7 @@ inst:MBHK101H.HMIN pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:minInclusive ;
     pals:source_system "EPICS" .
@@ -510,7 +509,7 @@ inst:MBHK101H.KICK pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired integrated corrector kick or equivalent model quantity." ;
-    pals:native_unit unit:T-M ;
+    pals:native_unit "T_M" ;
     pals:quantity_kind quantitykind:MagneticFluxPerLength ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -521,7 +520,7 @@ inst:MBHK101H.S pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired magnet current command." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -543,7 +542,7 @@ inst:MBHK101HM pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured magnet current." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -554,7 +553,7 @@ inst:MBHK101V.HMAX pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:maxInclusive ;
     pals:source_system "EPICS" .
@@ -565,7 +564,7 @@ inst:MBHK101V.HMIN pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:minInclusive ;
     pals:source_system "EPICS" .
@@ -576,7 +575,7 @@ inst:MBHK101V.KICK pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired integrated corrector kick or equivalent model quantity." ;
-    pals:native_unit unit:T-M ;
+    pals:native_unit "T_M" ;
     pals:quantity_kind quantitykind:MagneticFluxPerLength ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -587,7 +586,7 @@ inst:MBHK101V.S pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired magnet current command." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -609,7 +608,7 @@ inst:MBHK101VM pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured magnet current." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -620,7 +619,7 @@ inst:MDSK201.BDL pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired dipole bend field or equivalent model quantity." ;
-    pals:native_unit unit:T-M ;
+    pals:native_unit "T_M" ;
     pals:quantity_kind quantitykind:MagneticFluxPerLength ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -631,7 +630,7 @@ inst:MDSK201.HMAX pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:maxInclusive ;
     pals:source_system "EPICS" .
@@ -642,7 +641,7 @@ inst:MDSK201.HMIN pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:minInclusive ;
     pals:source_system "EPICS" .
@@ -653,7 +652,7 @@ inst:MDSK201.S pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired magnet current command." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -675,7 +674,7 @@ inst:MDSK201M pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured magnet current." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -686,7 +685,7 @@ inst:MFRM604H.HMAX pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:maxInclusive ;
     pals:source_system "EPICS" .
@@ -697,7 +696,7 @@ inst:MFRM604H.HMIN pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:minInclusive ;
     pals:source_system "EPICS" .
@@ -708,7 +707,7 @@ inst:MFRM604H.KICK pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired integrated corrector kick or equivalent model quantity." ;
-    pals:native_unit unit:T-M ;
+    pals:native_unit "T_M" ;
     pals:quantity_kind quantitykind:MagneticFluxPerLength ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -719,7 +718,7 @@ inst:MFRM604H.S pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired magnet current command." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -741,7 +740,7 @@ inst:MFRM604HM pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured magnet current." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -752,7 +751,7 @@ inst:MFRM604V.HMAX pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:maxInclusive ;
     pals:source_system "EPICS" .
@@ -763,7 +762,7 @@ inst:MFRM604V.HMIN pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:minInclusive ;
     pals:source_system "EPICS" .
@@ -774,7 +773,7 @@ inst:MFRM604V.KICK pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired integrated corrector kick or equivalent model quantity." ;
-    pals:native_unit unit:T-M ;
+    pals:native_unit "T_M" ;
     pals:quantity_kind quantitykind:MagneticFluxPerLength ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -785,7 +784,7 @@ inst:MFRM604V.S pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired magnet current command." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -807,7 +806,7 @@ inst:MFRM604VM pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured magnet current." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -829,7 +828,7 @@ inst:MQWK202.HMAX pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:maxInclusive ;
     pals:source_system "EPICS" .
@@ -840,7 +839,7 @@ inst:MQWK202.HMIN pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role xsd:minInclusive ;
     pals:source_system "EPICS" .
@@ -851,7 +850,7 @@ inst:MQWK202.S pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Desired magnet current command." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -873,7 +872,7 @@ inst:MQWK202M pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured magnet current." ;
-    pals:native_unit unit:A ;
+    pals:native_unit "A" ;
     pals:quantity_kind quantitykind:ElectricCurrent ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -884,7 +883,7 @@ inst:RK11.GET pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Requested cavity gradient setpoint." ;
-    pals:native_unit unit:MegaV-PER-M ;
+    pals:native_unit "MV_per_m" ;
     pals:quantity_kind quantitykind:ElectricFieldStrength ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -895,7 +894,7 @@ inst:RK11.GMES pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured cavity gradient readback." ;
-    pals:native_unit unit:MegaV-PER-M ;
+    pals:native_unit "MV_per_m" ;
     pals:quantity_kind quantitykind:ElectricFieldStrength ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -917,7 +916,7 @@ inst:RM11.GET pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Requested cavity gradient setpoint." ;
-    pals:native_unit unit:MegaV-PER-M ;
+    pals:native_unit "MV_per_m" ;
     pals:quantity_kind quantitykind:ElectricFieldStrength ;
     pals:signal_role sosa:ActuatableProperty ;
     pals:source_system "EPICS" .
@@ -928,7 +927,7 @@ inst:RM11.GMES pals:access_protocol "EPICS Channel Access" ;
     pals:kind "Signal" ;
     pals:native_data_type xsd:float ;
     pals:native_description "Measured cavity gradient readback." ;
-    pals:native_unit unit:MegaV-PER-M ;
+    pals:native_unit "MV_per_m" ;
     pals:quantity_kind quantitykind:ElectricFieldStrength ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "EPICS" .
@@ -964,8 +963,20 @@ inst:IFYK203 pals:FloorP [ a pals:FloorParamGroup ;
             pals:length "0.0"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
+                    pals:key "ActuatorChannel" ;
+                    pals:value "11" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Controlled_by" ;
+                    pals:value "iocitf2" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "RetractedChannel" ;
+                    pals:value "6" ],
+                [ a pals:AdditionalMetadata ;
                     pals:key "LimitSwitchCard" ;
                     pals:value "ITF12C0943ADDR2" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "ActuatorCard" ;
+                    pals:value "ITF12C0922ADDR1" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "InsertedMode" ;
                     pals:value "CW" ],
@@ -973,20 +984,8 @@ inst:IFYK203 pals:FloorP [ a pals:FloorParamGroup ;
                     pals:key "TransitionMode" ;
                     pals:value "CW" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Controlled_by" ;
-                    pals:value "iocitf2" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "ActuatorChannel" ;
-                    pals:value "11" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "ActuatorCard" ;
-                    pals:value "ITF12C0922ADDR1" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "InsertedChannel" ;
-                    pals:value "5" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "RetractedChannel" ;
-                    pals:value "6" ] ;
+                    pals:value "5" ] ;
             pals:alias "FC1" ;
             pals:description "Faraday cup beam-current diagnostic." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
@@ -1051,29 +1050,8 @@ inst:ITVK201 pals:FloorP [ a pals:FloorParamGroup ;
             pals:length "0.0"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
-                    pals:key "LimitSwitchCard" ;
-                    pals:value "ITF12C0943ADDR1" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "ActuatorChannel" ;
-                    pals:value "1" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Controlled_by" ;
-                    pals:value "iocitf2" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HCOSystem" ;
-                    pals:value "UITF Viewers" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "InsertedMode" ;
-                    pals:value "Viewer Limited" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "RetractedChannel" ;
-                    pals:value "2" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "InsertedChannel" ;
                     pals:value "1" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "ActuatorCard" ;
-                    pals:value "ITF12C0922ADDR1" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "SurveyDate" ;
                     pals:value "2021-03-15" ],
@@ -1082,7 +1060,28 @@ inst:ITVK201 pals:FloorP [ a pals:FloorParamGroup ;
                     pals:value "1.173" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "TransitionMode" ;
-                    pals:value "Viewer Limited" ] ;
+                    pals:value "Viewer Limited" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "HCOSystem" ;
+                    pals:value "UITF Viewers" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "ActuatorChannel" ;
+                    pals:value "1" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Controlled_by" ;
+                    pals:value "iocitf2" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "RetractedChannel" ;
+                    pals:value "2" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "LimitSwitchCard" ;
+                    pals:value "ITF12C0943ADDR1" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "InsertedMode" ;
+                    pals:value "Viewer Limited" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "ActuatorCard" ;
+                    pals:value "ITF12C0922ADDR1" ] ;
             pals:description "Beam viewer/screen (ITV)." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144307216256"^^xsd:float ] ;
@@ -1115,47 +1114,47 @@ inst:MFHK101 pals:FloorP [ a pals:FloorParamGroup ;
             pals:length "0.0762"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
-                    pals:key "HystRampTime" ;
+                    pals:key "Housed_by" ;
+                    pals:value "ITF02" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "HCOSystem" ;
+                    pals:value "UITF Solenoids" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Tilt" ;
+                    pals:value "0" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "HystDwellTime" ;
                     pals:value "4" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "SurveyZ" ;
                     pals:value ".576" ],
                 [ a pals:AdditionalMetadata ;
+                    pals:key "Hmax" ;
+                    pals:value "3" ],
+                [ a pals:AdditionalMetadata ;
                     pals:key "TrimCardType" ;
                     pals:value "10Amp" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "SurveyDate" ;
-                    pals:value "2021-03-15" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Tilt" ;
-                    pals:value "0" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Housed_by" ;
-                    pals:value "ITF02" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "FieldMap" ;
                     pals:value "Data ( text/plain; charset=us-ascii )" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Powered_by" ;
-                    pals:value "ITF02" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HystDwellTime" ;
-                    pals:value "4" ],
+                    pals:key "Controlled_by" ;
+                    pals:value "iocitfmag" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "Winding" ;
                     pals:value "SingleWound" ],
                 [ a pals:AdditionalMetadata ;
+                    pals:key "HystRampTime" ;
+                    pals:value "4" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Powered_by" ;
+                    pals:value "ITF02" ],
+                [ a pals:AdditionalMetadata ;
                     pals:key "ControlsUnits" ;
                     pals:value "Amps" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Controlled_by" ;
-                    pals:value "iocitfmag" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HCOSystem" ;
-                    pals:value "UITF Solenoids" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Hmax" ;
-                    pals:value "3" ] ;
+                    pals:key "SurveyDate" ;
+                    pals:value "2021-03-15" ] ;
             pals:description "Focusing solenoid in the injector line." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144443755972"^^xsd:float ;
@@ -1216,32 +1215,32 @@ inst:RM11 pals:FloorP [ a pals:FloorParamGroup ;
             pals:length "0.5"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
-                    pals:key "Q0" ;
-                    pals:value "1E+09" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Qexternal" ;
-                    pals:value "1.15E+07" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "Controlled_by" ;
                     pals:value "iocitfrffcc1" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "ROQ" ;
-                    pals:value "1067" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "CavityType" ;
-                    pals:value "C75" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "FCC" ;
-                    pals:value "fcc_773" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "MaxGSET" ;
-                    pals:value "11" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "PhaseRMS" ;
                     pals:value ".04" ],
                 [ a pals:AdditionalMetadata ;
+                    pals:key "MaxGSET" ;
+                    pals:value "11" ],
+                [ a pals:AdditionalMetadata ;
                     pals:key "HCOSystem" ;
-                    pals:value "UITF RF Cavities" ] ;
+                    pals:value "UITF RF Cavities" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "FCC" ;
+                    pals:value "fcc_773" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Qexternal" ;
+                    pals:value "1.15E+07" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "CavityType" ;
+                    pals:value "C75" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Q0" ;
+                    pals:value "1E+09" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "ROQ" ;
+                    pals:value "1067" ] ;
             pals:description "Superconducting (cryomodule) RF accelerating cavity." ] ;
     pals:RFP [ a pals:RFParamGroup ;
             pals:frequency "500000000.0"^^xsd:float ;
@@ -1317,8 +1316,8 @@ inst:IPMK101 pals:BodyShiftP [ a pals:BodyShiftParamGroup ;
             pals:length "0.0"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
-                    pals:key "CanType" ;
-                    pals:value "Stripline" ],
+                    pals:key "Sensitivity" ;
+                    pals:value "9.9" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "Pass" ;
                     pals:value "non-muxed" ],
@@ -1326,11 +1325,11 @@ inst:IPMK101 pals:BodyShiftP [ a pals:BodyShiftParamGroup ;
                     pals:key "Controlled_by" ;
                     pals:value "iocipmk101" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Sensitivity" ;
-                    pals:value "9.9" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "electrode_rotation_deg" ;
-                    pals:value "45.0" ] ;
+                    pals:value "45.0" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "CanType" ;
+                    pals:value "Stripline" ] ;
             pals:description "Digital receiver (stripline) beam position monitor." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144443755972"^^xsd:float ;
@@ -1367,20 +1366,20 @@ inst:IPMK102 pals:BodyShiftP [ a pals:BodyShiftParamGroup ;
             pals:length "0.0"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
-                    pals:key "electrode_rotation_deg" ;
-                    pals:value "45.0" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "Sensitivity" ;
                     pals:value "9.9" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "Pass" ;
                     pals:value "non-muxed" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "CanType" ;
-                    pals:value "Stripline" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "Controlled_by" ;
-                    pals:value "iocipmk102" ] ;
+                    pals:value "iocipmk102" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "electrode_rotation_deg" ;
+                    pals:value "45.0" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "CanType" ;
+                    pals:value "Stripline" ] ;
             pals:description "Digital receiver (stripline) beam position monitor." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144443755972"^^xsd:float ;
@@ -1414,20 +1413,20 @@ inst:MFRM604H pals:FloorP [ a pals:FloorParamGroup ;
             pals:length "1e-06"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
+                    pals:key "KICK" ;
+                    pals:value "0" ],
+                [ a pals:AdditionalMetadata ;
                     pals:key "NoHyst" ;
                     pals:value "1" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Comments" ;
+                    pals:value "Raster" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "TrimCardType" ;
                     pals:value "NA" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "KICK" ;
-                    pals:value "0" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "ControlsUnits" ;
-                    pals:value "milliAmps" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Comments" ;
-                    pals:value "Raster" ] ;
+                    pals:value "milliAmps" ] ;
             pals:description "horizontal steering corrector magnet." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144255654231"^^xsd:float ;
@@ -1465,17 +1464,17 @@ inst:MFRM604V pals:FloorP [ a pals:FloorParamGroup ;
                     pals:key "TrimCardType" ;
                     pals:value "NA" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "KICK" ;
-                    pals:value "0" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "NoHyst" ;
-                    pals:value "1" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "ControlsUnits" ;
                     pals:value "milliAmps" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "Comments" ;
-                    pals:value "Raster" ] ;
+                    pals:value "Raster" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "KICK" ;
+                    pals:value "0" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "NoHyst" ;
+                    pals:value "1" ] ;
             pals:description "vertical steering corrector magnet." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144255654231"^^xsd:float ;
@@ -1510,17 +1509,14 @@ inst:MBHK101H pals:FloorP [ a pals:FloorParamGroup ;
             pals:length "0.0"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
+                    pals:key "HystDwellTime" ;
+                    pals:value "4" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Hmax" ;
+                    pals:value ".999" ],
+                [ a pals:AdditionalMetadata ;
                     pals:key "NoHyst" ;
                     pals:value "1" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "KICK" ;
-                    pals:value "0" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Housed_by" ;
-                    pals:value "ITF02" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HystRampTime" ;
-                    pals:value "4" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "HCOSystem" ;
                     pals:value "UITF Correctors" ],
@@ -1528,23 +1524,26 @@ inst:MBHK101H pals:FloorP [ a pals:FloorParamGroup ;
                     pals:key "TrimCardType" ;
                     pals:value "1Amp" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "FieldMap" ;
-                    pals:value "Data ( text/plain; charset=us-ascii )" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "Controlled_by" ;
                     pals:value "iocitfmag" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "ControlsUnits" ;
-                    pals:value "milliAmps" ],
+                    pals:key "HystRampTime" ;
+                    pals:value "4" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Housed_by" ;
+                    pals:value "ITF02" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "Powered_by" ;
                     pals:value "ITF02" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Hmax" ;
-                    pals:value ".999" ],
+                    pals:key "KICK" ;
+                    pals:value "0" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "HystDwellTime" ;
-                    pals:value "4" ] ;
+                    pals:key "ControlsUnits" ;
+                    pals:value "milliAmps" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "FieldMap" ;
+                    pals:value "Data ( text/plain; charset=us-ascii )" ] ;
             pals:description "horizontal steering corrector magnet." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144443755972"^^xsd:float ;
@@ -1579,41 +1578,41 @@ inst:MBHK101V pals:FloorP [ a pals:FloorParamGroup ;
             pals:length "0.0"^^xsd:float ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
-                    pals:key "ControlsUnits" ;
-                    pals:value "milliAmps" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Powered_by" ;
-                    pals:value "ITF02" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "TrimCardType" ;
-                    pals:value "1Amp" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HystRampTime" ;
-                    pals:value "4" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HystDwellTime" ;
-                    pals:value "4" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Housed_by" ;
-                    pals:value "ITF02" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Controlled_by" ;
-                    pals:value "iocitfmag" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HCOSystem" ;
-                    pals:value "UITF Correctors" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "NoHyst" ;
-                    pals:value "1" ],
-                [ a pals:AdditionalMetadata ;
                     pals:key "Hmax" ;
                     pals:value ".999" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "KICK" ;
                     pals:value "0" ],
                 [ a pals:AdditionalMetadata ;
+                    pals:key "HystRampTime" ;
+                    pals:value "4" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "HCOSystem" ;
+                    pals:value "UITF Correctors" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "ControlsUnits" ;
+                    pals:value "milliAmps" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Controlled_by" ;
+                    pals:value "iocitfmag" ],
+                [ a pals:AdditionalMetadata ;
                     pals:key "FieldMap" ;
-                    pals:value "Data ( text/plain; charset=us-ascii )" ] ;
+                    pals:value "Data ( text/plain; charset=us-ascii )" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "NoHyst" ;
+                    pals:value "1" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "TrimCardType" ;
+                    pals:value "1Amp" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Powered_by" ;
+                    pals:value "ITF02" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Housed_by" ;
+                    pals:value "ITF02" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "HystDwellTime" ;
+                    pals:value "4" ] ;
             pals:description "vertical steering corrector magnet." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144443755972"^^xsd:float ;
@@ -1656,20 +1655,17 @@ inst:MDSK201 pals:BendP [ a pals:BendParamGroup ;
                     pals:order 1 ] ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
-                    pals:key "SurveyDate" ;
-                    pals:value "2021-03-15" ],
+                    pals:key "Controlled_by" ;
+                    pals:value "iocitfmag" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "SurveyZ" ;
-                    pals:value "1.338" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Powered_by" ;
-                    pals:value "ITF02" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HCOSystem" ;
-                    pals:value "UITF Dipoles" ],
+                    pals:key "TrimCardType" ;
+                    pals:value "10Amp" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "HystRampTime" ;
                     pals:value "4" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "HGAP" ;
+                    pals:value ".0641927050701428" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "NoHyst" ;
                     pals:value "1" ],
@@ -1680,23 +1676,26 @@ inst:MDSK201 pals:BendP [ a pals:BendParamGroup ;
                     pals:key "Housed_by" ;
                     pals:value "ITF02" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Hmax" ;
-                    pals:value "3.5" ],
+                    pals:key "HystDwellTime" ;
+                    pals:value "4" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "HCOSystem" ;
+                    pals:value "UITF Dipoles" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "SurveyDate" ;
+                    pals:value "2021-03-15" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Powered_by" ;
+                    pals:value "ITF02" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "ControlsUnits" ;
                     pals:value "Amps" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "TrimCardType" ;
-                    pals:value "10Amp" ],
+                    pals:key "SurveyZ" ;
+                    pals:value "1.338" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "HystDwellTime" ;
-                    pals:value "4" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HGAP" ;
-                    pals:value ".0641927050701428" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Controlled_by" ;
-                    pals:value "iocitfmag" ] ;
+                    pals:key "Hmax" ;
+                    pals:value "3.5" ] ;
             pals:alias "15 Deg Bend" ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144443755972"^^xsd:float ;
@@ -1733,53 +1732,53 @@ inst:MQWK202 pals:FloorP [ a pals:FloorParamGroup ;
                     pals:order 1 ] ] ;
     pals:MetaP [ a pals:MetaParamGroup ;
             pals:additional_metadata [ a pals:AdditionalMetadata ;
-                    pals:key "HystDwellTime" ;
-                    pals:value "4" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "BORE" ;
-                    pals:value "0" ],
+                    pals:key "Controlled_by" ;
+                    pals:value "iocitfmag" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "NoHyst" ;
                     pals:value "1" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Hmax" ;
-                    pals:value "9.9" ],
+                    pals:key "FieldMap" ;
+                    pals:value "Data ( text/plain; charset=us-ascii )" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Usage" ;
-                    pals:value "Matching" ],
+                    pals:key "Resistance" ;
+                    pals:value "1.01" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Housed_by" ;
-                    pals:value "ITF03" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Powered_by" ;
-                    pals:value "ITF03" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "HystRampTime" ;
+                    pals:key "HystDwellTime" ;
                     pals:value "4" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "Limit" ;
                     pals:value "24.25" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "ControlsUnits" ;
-                    pals:value "Amps" ],
+                    pals:key "Usage" ;
+                    pals:value "Matching" ],
                 [ a pals:AdditionalMetadata ;
-                    pals:key "Controlled_by" ;
-                    pals:value "iocitfmag" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "Resistance" ;
-                    pals:value "1.01" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "TrimCardType" ;
-                    pals:value "10Amp" ],
-                [ a pals:AdditionalMetadata ;
-                    pals:key "FieldMap" ;
-                    pals:value "Data ( text/plain; charset=us-ascii )" ],
+                    pals:key "Hmax" ;
+                    pals:value "9.9" ],
                 [ a pals:AdditionalMetadata ;
                     pals:key "Radius" ;
                     pals:value ".0159" ],
                 [ a pals:AdditionalMetadata ;
+                    pals:key "HystRampTime" ;
+                    pals:value "4" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "BORE" ;
+                    pals:value "0" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Housed_by" ;
+                    pals:value "ITF03" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "ControlsUnits" ;
+                    pals:value "Amps" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "Powered_by" ;
+                    pals:value "ITF03" ],
+                [ a pals:AdditionalMetadata ;
                     pals:key "HCOSystem" ;
-                    pals:value "UITF Quads" ] ;
+                    pals:value "UITF Quads" ],
+                [ a pals:AdditionalMetadata ;
+                    pals:key "TrimCardType" ;
+                    pals:value "10Amp" ] ;
             pals:description "Focusing/defocusing quadrupole magnet." ] ;
     pals:ReferenceP [ a pals:ReferenceParamGroup ;
             pals:pc_ref "0.465144443755972"^^xsd:float ;
