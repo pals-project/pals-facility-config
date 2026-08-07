@@ -9,11 +9,12 @@ import lombok.*;
 
 
 /**
-  A virtual component used to represent a section of the BeamLine for organizational or functional grouping of components.
+  A virtual component used to represent a section of the beamline for organizational 
+or functional grouping of components.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class BeamLineSection extends BookkeepingComponent {
+public class BeamlineSection extends BookkeepingComponent {
 
 
 }

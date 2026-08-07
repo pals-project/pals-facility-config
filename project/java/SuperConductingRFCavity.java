@@ -13,7 +13,7 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class SuperConductingRFCavity extends RFCavity {
+public class SuperconductingRFCavity extends RFCavity {
 
 
 }

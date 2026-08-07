@@ -1590,7 +1590,7 @@ enums:
           or role that is important for understanding the overall accelerator system but doesn't have a direct relationship to the BeamLine structure.
 
 
-  PhysicalFunctionEnum:
+  PhysicalFunctionEnum: # converge with CT on this list
     description: Broad device-level functions.
     permissible_values:
       Focusing:
@@ -1948,7 +1948,7 @@ enums:
       local_component_frame:
       tunnel_stationing:
 
-  AxisEnum:
+  AxisEnum: # makes Todd twitch when he sees this - may want multiples, take out for now.
     permissible_values:
       x:
       y:
