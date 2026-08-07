@@ -286,6 +286,20 @@ type Affiliation
     identifiers: [Identifier]
   }
 
+type Aperture implements HasReferenceP, HasTwissP
+  {
+    id: String!
+    kind: String!
+    nativeTypes: [String]
+    metaP: MetaParamGroup
+    functions: [PhysicalFunctionEnum]!
+    beamlineRelation: PhysicalRelationEnum!
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    twissP: TwissParamGroup
+  }
+
 type Author
   {
     name: String
@@ -705,7 +719,7 @@ type Octupole
     magneticMultipoleP: MagneticMultipoleParamGroup
   }
 
-type PALS
+type PALSAccelerator
   {
     kind: String!
     description: String

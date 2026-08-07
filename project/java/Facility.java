@@ -1,12 +1,8 @@
 package None;
 
+/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A facility that houses one or more accelerators.

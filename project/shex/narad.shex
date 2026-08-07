@@ -4,7 +4,6 @@ PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
-PREFIX unit: <http://qudt.org/vocab/unit/>
 PREFIX quantitykind: <http://qudt.org/vocab/quantitykind/>
 PREFIX saref: <https://saref.etsi.org/core/v4.1.1/>
 
@@ -56,10 +55,11 @@ linkml:Sparqlpath xsd:string
 }
 
 <AdditionalMetadata> CLOSED {
-    (  $<AdditionalMetadata_tes> (  <value> @linkml:String ;
+    (  $<AdditionalMetadata_tes> (  <key> @linkml:String ;
+          <value> @linkml:String ;
           <datatype> [ xsd:string xsd:integer xsd:float xsd:boolean ] ?
        ) ;
-       rdf:type [ <AdditionalMetadata> ]
+       rdf:type [ <AdditionalMetadata> ] ?
     )
 }
 
@@ -68,6 +68,20 @@ linkml:Sparqlpath xsd:string
           <identifiers> @<Identifier> *
        ) ;
        rdf:type [ <Affiliation> ]
+    )
+}
+
+<Aperture> CLOSED {
+    (  $<Aperture_tes> (  &<DiagnosticDevice_tes> ;
+          rdf:type [ <DiagnosticDevice> ] ? ;
+          &<HasReferenceP_tes> ;
+          rdf:type [ <HasReferenceP> ] ? ;
+          &<HasTwissP_tes> ;
+          rdf:type [ <HasTwissP> ] ? ;
+          <ReferenceP> @<ReferenceParamGroup> ? ;
+          <TwissP> @<TwissParamGroup> ?
+       ) ;
+       rdf:type [ <Aperture> ]
     )
 }
 
@@ -266,12 +280,19 @@ linkml:Sparqlpath xsd:string
              <https://pals-project.readthedocs.io/ReferenceFrameEnum#local_component_frame>
              <https://pals-project.readthedocs.io/ReferenceFrameEnum#tunnel_stationing> ] ? ;
           <distance_value> @linkml:Float ? ;
-          <distance_unit> [ unit:A unit:DEG unit:EV <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
-             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2> <http://qudt.org/vocab/unit/????>
-             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> unit:HZ unit:KiloW unit:M unit:MilliM unit:MREM-PER-H
-             unit:MegaV-PER-M unit:PA <https://pals-project.readthedocs.io/UnitEnum#randians_pi2>
-             <https://pals-project.readthedocs.io/UnitEnum#rem_per_h> unit:SEC unit:T unit:T-M unit:TORR unit:V unit:V-PER-M
-             unit:NUM <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+          <distance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
+             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
+             <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
+             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
+             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
+             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
+             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
+             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
+             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
           <axis> [ <https://pals-project.readthedocs.io/AxisEnum#x> <https://pals-project.readthedocs.io/AxisEnum#y>
              <https://pals-project.readthedocs.io/AxisEnum#z> <https://pals-project.readthedocs.io/AxisEnum#s> ] ? ;
           <component_direction> [ <https://pals-project.readthedocs.io/DirectionEnum#upstream>
@@ -279,12 +300,19 @@ linkml:Sparqlpath xsd:string
              <https://pals-project.readthedocs.io/DirectionEnum#positive>
              <https://pals-project.readthedocs.io/DirectionEnum#negative> ] ? ;
           <tolerance_value> @linkml:Float ? ;
-          <tolerance_unit> [ unit:A unit:DEG unit:EV <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
-             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2> <http://qudt.org/vocab/unit/????>
-             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> unit:HZ unit:KiloW unit:M unit:MilliM unit:MREM-PER-H
-             unit:MegaV-PER-M unit:PA <https://pals-project.readthedocs.io/UnitEnum#randians_pi2>
-             <https://pals-project.readthedocs.io/UnitEnum#rem_per_h> unit:SEC unit:T unit:T-M unit:TORR unit:V unit:V-PER-M
-             unit:NUM <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+          <tolerance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
+             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
+             <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
+             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
+             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
+             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
+             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
+             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
+             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
           rdf:subject @<Component> ;
           rdf:predicate [ <http://purl.obolibrary.org/obo/BFO_0000063> <http://purl.obolibrary.org/obo/BFO_0000062>
              <http://purl.obolibrary.org/obo/BFO_0000051> <http://purl.obolibrary.org/obo/BFO_0000050>
@@ -313,7 +341,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <DiagnosticDevice> ]
        )
-    } OR @<BeamPositionMonitor> OR @<BeamProfileMonitor> OR @<RadiationMonitor>
+    } OR @<Aperture> OR @<BeamPositionMonitor> OR @<BeamProfileMonitor> OR @<RadiationMonitor>
 )
 
 <ElectricMultipoleParamGroup> CLOSED {
@@ -544,8 +572,8 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<PALS> CLOSED {
-    (  $<PALS_tes> (  <kind> @linkml:String ;
+<PALSAccelerator> CLOSED {
+    (  $<PALSAccelerator_tes> (  <kind> @linkml:String ;
           <description> @linkml:String ? ;
           <affiliation> @<Affiliation> ? ;
           <version> @linkml:String ? ;
@@ -553,7 +581,7 @@ linkml:Sparqlpath xsd:string
           <notes> @linkml:String * ;
           <facility> @<Facility> ?
        ) ;
-       rdf:type [ <PALS> ] ?
+       rdf:type [ <PALSAccelerator> ] ?
     )
 }
 
@@ -714,12 +742,19 @@ linkml:Sparqlpath xsd:string
              quantitykind:AbsorbedDoseRate quantitykind:Voltage quantitykind:Power quantitykind:PhaseAngle
              quantitykind:ElectricFieldStrength ] ;
           <native_data_type> [ xsd:string xsd:integer xsd:float xsd:boolean ] ;
-          <native_unit> [ unit:A unit:DEG unit:EV <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
-             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2> <http://qudt.org/vocab/unit/????>
-             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> unit:HZ unit:KiloW unit:M unit:MilliM unit:MREM-PER-H
-             unit:MegaV-PER-M unit:PA <https://pals-project.readthedocs.io/UnitEnum#randians_pi2>
-             <https://pals-project.readthedocs.io/UnitEnum#rem_per_h> unit:SEC unit:T unit:T-M unit:TORR unit:V unit:V-PER-M
-             unit:NUM <https://pals-project.readthedocs.io/UnitEnum#none> ] ;
+          <native_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
+             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
+             <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
+             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
+             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
+             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
+             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
+             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
+             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ;
           <access_protocol> @linkml:String ? ;
           <archive_identifier> @linkml:String ? ;
           <MetaP> @<MetaParamGroup> ?

@@ -1,12 +1,8 @@
 package None;
 
+/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.
