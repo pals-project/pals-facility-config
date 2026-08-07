@@ -3,13 +3,13 @@
 # Class: SignalBinding 
 
 
-_A named control system suffix definition for one semantic signal. The suffix is used within in a template naming convention to construct the full control system PV name for a given device instance._
+_Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding._
 
 
 
 
 
-URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBinding)
+URI: [pals:SignalBinding](https://pals-project.readthedocs.io/SignalBinding)
 
 
 
@@ -19,14 +19,43 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
  classDiagram
     class SignalBinding
     click SignalBinding href "../SignalBinding/"
-      NamedThing <|-- SignalBinding
-        click NamedThing href "../NamedThing/"
+      Relationship <|-- SignalBinding
+        click Relationship href "../Relationship/"
       
-      SignalBinding : control_system_suffix
+      SignalBinding : id
         
-      SignalBinding : description
+      SignalBinding : object
         
-      SignalBinding : name
+          
+    
+        
+        
+        SignalBinding --> "1" Signal : object
+        click Signal href "../Signal/"
+    
+
+        
+      SignalBinding : predicate
+        
+          
+    
+        
+        
+        SignalBinding --> "1" SignalBindingPredicateEnum : predicate
+        click SignalBindingPredicateEnum href "../SignalBindingPredicateEnum/"
+    
+
+        
+      SignalBinding : subject
+        
+          
+    
+        
+        
+        SignalBinding --> "1" PhysicalComponent : subject
+        click PhysicalComponent href "../PhysicalComponent/"
+    
+
         
       
 ```
@@ -36,18 +65,18 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 
 
 ## Inheritance
-* [NamedThing](NamedThing.md)
+* [Relationship](Relationship.md)
     * **SignalBinding**
-
 
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [control_system_suffix](control_system_suffix.md) | 0..1 <br/> [String](String.md) | Facility-specific control-system (e | direct |
-| [name](name.md) | 1 <br/> [String](String.md) | Human-readable name or local string key for the entity | [NamedThing](NamedThing.md) |
-| [description](description.md) | 0..1 <br/> [String](String.md) | Detailed description of the entity | [NamedThing](NamedThing.md) |
+| [id](id.md) | 1 <br/> [String](String.md) | A unique identifier for the instance | [Relationship](Relationship.md) |
+| [subject](subject.md) | 1 <br/> [PhysicalComponent](PhysicalComponent.md) |  | [Relationship](Relationship.md) |
+| [predicate](predicate.md) | 1 <br/> [SignalBindingPredicateEnum](SignalBindingPredicateEnum.md) |  | [Relationship](Relationship.md) |
+| [object](object.md) | 1 <br/> [Signal](Signal.md) |  | [Relationship](Relationship.md) |
 
 
 
@@ -57,7 +86,12 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [SignalDefinitions](SignalDefinitions.md) | [signal_bindings](signal_bindings.md) | range | [SignalBinding](SignalBinding.md) |
+| [Facility](Facility.md) | [signal_bindings](signal_bindings.md) | range | [SignalBinding](SignalBinding.md) |
+
+
+
+
+
 
 
 
@@ -71,11 +105,10 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 
 
 
-
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -84,8 +117,8 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:SignalBinding |
-| native | narad:SignalBinding |
+| self | pals:SignalBinding |
+| native | pals:SignalBinding |
 
 
 
@@ -101,13 +134,20 @@ URI: [narad:SignalBinding](https://w3id.org/narad_linkml/schema/narad/SignalBind
 <details>
 ```yaml
 name: SignalBinding
-description: A named control system suffix definition for one semantic signal. The
-  suffix is used within in a template naming convention to construct the full control
-  system PV name for a given device instance.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
-is_a: NamedThing
-slots:
-- control_system_suffix
+description: Association between a PhysicalComponent and one of its Signals, e.g.
+  QUAD1.QUAD1_STATUS_binding.
+from_schema: https://w3id.org/accelerator-core
+is_a: Relationship
+slot_usage:
+  subject:
+    name: subject
+    range: PhysicalComponent
+  predicate:
+    name: predicate
+    range: SignalBindingPredicateEnum
+  object:
+    name: object
+    range: Signal
 
 ```
 </details>
@@ -117,47 +157,73 @@ slots:
 <details>
 ```yaml
 name: SignalBinding
-description: A named control system suffix definition for one semantic signal. The
-  suffix is used within in a template naming convention to construct the full control
-  system PV name for a given device instance.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
-is_a: NamedThing
+description: Association between a PhysicalComponent and one of its Signals, e.g.
+  QUAD1.QUAD1_STATUS_binding.
+from_schema: https://w3id.org/accelerator-core
+is_a: Relationship
+slot_usage:
+  subject:
+    name: subject
+    range: PhysicalComponent
+  predicate:
+    name: predicate
+    range: SignalBindingPredicateEnum
+  object:
+    name: object
+    range: Signal
 attributes:
-  control_system_suffix:
-    name: control_system_suffix
-    description: 'Facility-specific control-system (e.g. EPICS) naming suffix used
-      to derive or interpret the signal binding, e.g. .S, M, :GSET.
-
-      '
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
     rank: 1000
-    alias: control_system_suffix
-    owner: SignalBinding
-    domain_of:
-    - SignalBinding
-    range: string
-  name:
-    name: name
-    description: Human-readable name or local string key for the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
-    rank: 1000
+    slot_uri: pals:id
     identifier: true
-    alias: name
+    alias: id
     owner: SignalBinding
     domain_of:
-    - NamedThing
+    - Affiliation
+    - Component
+    - Signal
+    - Relationship
     range: string
     required: true
-  description:
-    name: description
-    description: Detailed description of the entity.
-    from_schema: https://w3id.org/narad_linkml/schema/narad/system
+  subject:
+    name: subject
+    from_schema: https://w3id.org/accelerator-core
     rank: 1000
-    alias: description
+    slot_uri: rdf:subject
+    alias: subject
     owner: SignalBinding
     domain_of:
-    - NamedThing
-    range: string
+    - Relationship
+    relational_role: SUBJECT
+    range: PhysicalComponent
+    required: true
+  predicate:
+    name: predicate
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: rdf:predicate
+    alias: predicate
+    owner: SignalBinding
+    domain_of:
+    - Relationship
+    relational_role: PREDICATE
+    range: SignalBindingPredicateEnum
+    required: true
+  object:
+    name: object
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: rdf:object
+    alias: object
+    owner: SignalBinding
+    domain_of:
+    - Relationship
+    relational_role: OBJECT
+    range: Signal
+    required: true
 
 ```
 </details>

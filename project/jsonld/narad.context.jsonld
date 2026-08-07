@@ -1,0 +1,812 @@
+{
+   "@context": {
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "BFO": {
+         "@id": "http://purl.obolibrary.org/obo/BFO_",
+         "@prefix": true
+      },
+      "RO": {
+         "@id": "http://purl.obolibrary.org/obo/RO_",
+         "@prefix": true
+      },
+      "acc": "https://example.org/accelerator-core/",
+      "inst": "https://example.org/narad-instance/",
+      "linkml": "https://w3id.org/linkml/",
+      "pals": "https://pals-project.readthedocs.io/",
+      "quantitykind": "http://qudt.org/vocab/quantitykind/",
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "saref": "https://saref.etsi.org/core/v4.1.1/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "sosa": "http://www.w3.org/ns/sosa/",
+      "@vocab": "https://pals-project.readthedocs.io/",
+      "datatype": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "datatype"
+      },
+      "key": {
+         "@id": "key"
+      },
+      "value": {
+         "@id": "value"
+      },
+      "affiliation": {
+         "@type": "@id",
+         "@id": "affiliation"
+      },
+      "alias": {
+         "@id": "alias"
+      },
+      "email": {
+         "@id": "email"
+      },
+      "orcid": {
+         "@id": "orcid"
+      },
+      "direction": {
+         "@type": "xsd:integer",
+         "@id": "direction"
+      },
+      "multipass": {
+         "@type": "xsd:boolean",
+         "@id": "multipass"
+      },
+      "periodic": {
+         "@type": "xsd:boolean",
+         "@id": "periodic"
+      },
+      "repeat": {
+         "@type": "xsd:integer",
+         "@id": "repeat"
+      },
+      "angle_ref": {
+         "@type": "xsd:float",
+         "@id": "angle_ref"
+      },
+      "bend_field_actual": {
+         "@type": "xsd:float",
+         "@id": "bend_field_actual"
+      },
+      "bend_field_ref": {
+         "@type": "xsd:float",
+         "@id": "bend_field_ref"
+      },
+      "e1": {
+         "@type": "xsd:float",
+         "@id": "e1"
+      },
+      "e1_rect": {
+         "@type": "xsd:float",
+         "@id": "e1_rect"
+      },
+      "e2": {
+         "@type": "xsd:float",
+         "@id": "e2"
+      },
+      "e2_rect": {
+         "@type": "xsd:float",
+         "@id": "e2_rect"
+      },
+      "edge1_int": {
+         "@type": "xsd:float",
+         "@id": "edge1_int"
+      },
+      "edge2_int": {
+         "@type": "xsd:float",
+         "@id": "edge2_int"
+      },
+      "g_actual": {
+         "@type": "xsd:float",
+         "@id": "g_actual"
+      },
+      "g_ref": {
+         "@type": "xsd:float",
+         "@id": "g_ref"
+      },
+      "h1": {
+         "@type": "xsd:float",
+         "@id": "h1"
+      },
+      "h2": {
+         "@type": "xsd:float",
+         "@id": "h2"
+      },
+      "L_chord": {
+         "@type": "xsd:float",
+         "@id": "L_chord"
+      },
+      "L_rectangle": {
+         "@type": "xsd:float",
+         "@id": "L_rectangle"
+      },
+      "L_sagitta": {
+         "@type": "xsd:float",
+         "@id": "L_sagitta"
+      },
+      "multipole_geometry": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "multipole_geometry"
+      },
+      "ref_geometry": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "ref_geometry"
+      },
+      "rho_ref": {
+         "@type": "xsd:float",
+         "@id": "rho_ref"
+      },
+      "tilt_ref": {
+         "@type": "xsd:float",
+         "@id": "tilt_ref"
+      },
+      "x_offset": {
+         "@type": "xsd:float",
+         "@id": "x_offset"
+      },
+      "x_rot": {
+         "@type": "xsd:float",
+         "@id": "x_rot"
+      },
+      "y_offset": {
+         "@type": "xsd:float",
+         "@id": "y_offset"
+      },
+      "y_rot": {
+         "@type": "xsd:float",
+         "@id": "y_rot"
+      },
+      "z_offset": {
+         "@type": "xsd:float",
+         "@id": "z_offset"
+      },
+      "z_rot": {
+         "@type": "xsd:float",
+         "@id": "z_rot"
+      },
+      "native_types": {
+         "@id": "native_types"
+      },
+      "axis": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "axis"
+      },
+      "beamline_context": {
+         "@type": "@id",
+         "@id": "beamline_context"
+      },
+      "component_direction": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "component_direction"
+      },
+      "context": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "context"
+      },
+      "distance_unit": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "distance_unit"
+      },
+      "distance_value": {
+         "@type": "xsd:float",
+         "@id": "distance_value"
+      },
+      "reference_frame": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "reference_frame"
+      },
+      "tolerance_unit": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "tolerance_unit"
+      },
+      "tolerance_value": {
+         "@type": "xsd:float",
+         "@id": "tolerance_value"
+      },
+      "description": {
+         "@id": "description"
+      },
+      "elec_components": {
+         "@type": "@id",
+         "@id": "elec_components"
+      },
+      "beamlines": {
+         "@type": "@id",
+         "@id": "beamlines"
+      },
+      "component_relations": {
+         "@type": "@id",
+         "@id": "component_relations"
+      },
+      "components": {
+         "@type": "@id",
+         "@id": "components"
+      },
+      "signal_bindings": {
+         "@type": "@id",
+         "@id": "signal_bindings"
+      },
+      "signals": {
+         "@type": "@id",
+         "@id": "signals"
+      },
+      "phi": {
+         "@type": "xsd:float",
+         "@id": "phi"
+      },
+      "psi": {
+         "@type": "xsd:float",
+         "@id": "psi"
+      },
+      "theta": {
+         "@type": "xsd:float",
+         "@id": "theta"
+      },
+      "x": {
+         "@type": "xsd:float",
+         "@id": "x"
+      },
+      "y": {
+         "@type": "xsd:float",
+         "@id": "y"
+      },
+      "z": {
+         "@type": "xsd:float",
+         "@id": "z"
+      },
+      "BendP": {
+         "@type": "@id",
+         "@id": "BendP"
+      },
+      "BodyShiftP": {
+         "@type": "@id",
+         "@id": "BodyShiftP"
+      },
+      "ElectricMultipoleP": {
+         "@type": "@id",
+         "@id": "ElectricMultipoleP"
+      },
+      "FloorP": {
+         "@type": "@id",
+         "@id": "FloorP"
+      },
+      "LongitudinalPlacementP": {
+         "@type": "@id",
+         "@id": "LongitudinalPlacementP"
+      },
+      "MagneticMultipoleP": {
+         "@type": "@id",
+         "@id": "MagneticMultipoleP"
+      },
+      "MetaP": {
+         "@type": "@id",
+         "@id": "MetaP"
+      },
+      "ReferenceP": {
+         "@type": "@id",
+         "@id": "ReferenceP"
+      },
+      "RFP": {
+         "@type": "@id",
+         "@id": "RFP"
+      },
+      "SolenoidP": {
+         "@type": "@id",
+         "@id": "SolenoidP"
+      },
+      "TwissP": {
+         "@type": "@id",
+         "@id": "TwissP"
+      },
+      "id": "@id",
+      "identifier_type": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "identifier_type"
+      },
+      "identifier_value": {
+         "@id": "identifier_value"
+      },
+      "identifiers": {
+         "@type": "@id",
+         "@id": "identifiers"
+      },
+      "plane": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "plane"
+      },
+      "kind": {
+         "@id": "kind"
+      },
+      "length": {
+         "@type": "xsd:float",
+         "@id": "length"
+      },
+      "s_position": {
+         "@type": "xsd:float",
+         "@id": "s_position"
+      },
+      "mag_components": {
+         "@type": "@id",
+         "@id": "mag_components"
+      },
+      "additional_metadata": {
+         "@type": "@id",
+         "@id": "additional_metadata"
+      },
+      "label": {
+         "@id": "label"
+      },
+      "Bn": {
+         "@type": "xsd:float",
+         "@id": "Bn"
+      },
+      "Bs": {
+         "@type": "xsd:float",
+         "@id": "Bs"
+      },
+      "En": {
+         "@type": "xsd:float",
+         "@id": "En"
+      },
+      "EnL": {
+         "@type": "xsd:float",
+         "@id": "EnL"
+      },
+      "Es": {
+         "@type": "xsd:float",
+         "@id": "Es"
+      },
+      "EsL": {
+         "@type": "xsd:float",
+         "@id": "EsL"
+      },
+      "Kn": {
+         "@type": "xsd:float",
+         "@id": "Kn"
+      },
+      "Ks": {
+         "@type": "xsd:float",
+         "@id": "Ks"
+      },
+      "order": {
+         "@type": "xsd:integer",
+         "@id": "order"
+      },
+      "tilt": {
+         "@type": "xsd:float",
+         "@id": "tilt"
+      },
+      "name": {
+         "@id": "name"
+      },
+      "object": {
+         "@id": "rdf:object"
+      },
+      "authors": {
+         "@type": "@id",
+         "@id": "authors"
+      },
+      "facility": {
+         "@type": "@id",
+         "@id": "facility"
+      },
+      "notes": {
+         "@id": "notes"
+      },
+      "version": {
+         "@id": "version"
+      },
+      "beamline_relation": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "virtual_beamline_relation"
+      },
+      "functions": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "virtual_function"
+      },
+      "predicate": {
+         "@id": "rdf:predicate"
+      },
+      "E_tot_ref": {
+         "@type": "xsd:float",
+         "@id": "E_tot_ref"
+      },
+      "pc_ref": {
+         "@type": "xsd:float",
+         "@id": "pc_ref"
+      },
+      "species_ref": {
+         "@id": "species_ref"
+      },
+      "time_ref": {
+         "@type": "xsd:float",
+         "@id": "time_ref"
+      },
+      "cavity_type": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "cavity_type"
+      },
+      "dE_ref": {
+         "@type": "xsd:float",
+         "@id": "dE_ref"
+      },
+      "frequency": {
+         "@type": "xsd:float",
+         "@id": "frequency"
+      },
+      "harmon": {
+         "@type": "xsd:integer",
+         "@id": "harmon"
+      },
+      "L_active": {
+         "@type": "xsd:float",
+         "@id": "L_active"
+      },
+      "multipass_phase": {
+         "@type": "xsd:float",
+         "@id": "multipass_phase"
+      },
+      "num_cells": {
+         "@type": "xsd:integer",
+         "@id": "num_cells"
+      },
+      "phase": {
+         "@type": "xsd:float",
+         "@id": "phase"
+      },
+      "voltage": {
+         "@type": "xsd:float",
+         "@id": "voltage"
+      },
+      "zero_phase": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "zero_phase"
+      },
+      "access_protocol": {
+         "@id": "access_protocol"
+      },
+      "archive_identifier": {
+         "@id": "archive_identifier"
+      },
+      "canonical_signal_type": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "canonical_signal_type"
+      },
+      "native_data_type": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "native_data_type"
+      },
+      "native_description": {
+         "@id": "native_description"
+      },
+      "native_unit": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "native_unit"
+      },
+      "quantity_kind": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "quantity_kind"
+      },
+      "signal_role": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "signal_role"
+      },
+      "source_system": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "source_system"
+      },
+      "Bsol": {
+         "@type": "xsd:float",
+         "@id": "Bsol"
+      },
+      "Ksol": {
+         "@type": "xsd:float",
+         "@id": "Ksol"
+      },
+      "subject": {
+         "@id": "rdf:subject"
+      },
+      "alpha_a": {
+         "@type": "xsd:float",
+         "@id": "alpha_a"
+      },
+      "alpha_b": {
+         "@type": "xsd:float",
+         "@id": "alpha_b"
+      },
+      "beta_a": {
+         "@type": "xsd:float",
+         "@id": "beta_a"
+      },
+      "beta_b": {
+         "@type": "xsd:float",
+         "@id": "beta_b"
+      },
+      "eta_x": {
+         "@type": "xsd:float",
+         "@id": "eta_x"
+      },
+      "eta_y": {
+         "@type": "xsd:float",
+         "@id": "eta_y"
+      },
+      "etap_x": {
+         "@type": "xsd:float",
+         "@id": "etap_x"
+      },
+      "etap_y": {
+         "@type": "xsd:float",
+         "@id": "etap_y"
+      },
+      "phi_a": {
+         "@type": "xsd:float",
+         "@id": "phi_a"
+      },
+      "phi_b": {
+         "@type": "xsd:float",
+         "@id": "phi_b"
+      },
+      "ACKicker": {
+         "@id": "ACKicker"
+      },
+      "AdditionalMetadata": {
+         "@id": "AdditionalMetadata"
+      },
+      "Affiliation": {
+         "@id": "Affiliation"
+      },
+      "Aperture": {
+         "@id": "Aperture"
+      },
+      "Author": {
+         "@id": "Author"
+      },
+      "BeamLine": {
+         "@id": "BeamLine"
+      },
+      "BeamLineSection": {
+         "@id": "BeamLineSection"
+      },
+      "BeamPositionMonitor": {
+         "@id": "BeamPositionMonitor"
+      },
+      "BeamProfileMonitor": {
+         "@id": "BeamProfileMonitor"
+      },
+      "Bend": {
+         "@id": "Bend"
+      },
+      "BendParamGroup": {
+         "@id": "BendParamGroup"
+      },
+      "BodyShiftParamGroup": {
+         "@id": "BodyShiftParamGroup"
+      },
+      "BookkeepingComponent": {
+         "@id": "BookkeepingComponent"
+      },
+      "Cavity": {
+         "@id": "Cavity"
+      },
+      "Component": {
+         "@id": "Component"
+      },
+      "ComponentRelation": {
+         "@id": "ComponentRelation"
+      },
+      "CrabCavity": {
+         "@id": "CrabCavity"
+      },
+      "DiagnosticDevice": {
+         "@id": "DiagnosticDevice"
+      },
+      "ElectricMultipoleParamGroup": {
+         "@id": "ElectricMultipoleParamGroup"
+      },
+      "Facility": {
+         "@id": "Facility"
+      },
+      "FloorParamGroup": {
+         "@id": "FloorParamGroup"
+      },
+      "HasBendP": {
+         "@id": "HasBendP"
+      },
+      "HasBodyShiftP": {
+         "@id": "HasBodyShiftP"
+      },
+      "HasElectricMultipoleP": {
+         "@id": "HasElectricMultipoleP"
+      },
+      "HasFloorP": {
+         "@id": "HasFloorP"
+      },
+      "HasLongitudinalPlacementP": {
+         "@id": "HasLongitudinalPlacementP"
+      },
+      "HasMagneticMultipoleP": {
+         "@id": "HasMagneticMultipoleP"
+      },
+      "HasMetaP": {
+         "@id": "HasMetaP"
+      },
+      "HasReferenceP": {
+         "@id": "HasReferenceP"
+      },
+      "HasRFP": {
+         "@id": "HasRFP"
+      },
+      "HasSolenoidP": {
+         "@id": "HasSolenoidP"
+      },
+      "HasTwissP": {
+         "@id": "HasTwissP"
+      },
+      "Identifier": {
+         "@id": "Identifier"
+      },
+      "Kicker": {
+         "@id": "Kicker"
+      },
+      "LongitudinalPlacementParamGroup": {
+         "@id": "LongitudinalPlacementParamGroup"
+      },
+      "Magnet": {
+         "@id": "Magnet"
+      },
+      "MagneticMultipoleParamGroup": {
+         "@id": "MagneticMultipoleParamGroup"
+      },
+      "Marker": {
+         "@id": "Marker"
+      },
+      "MetaParamGroup": {
+         "@id": "MetaParamGroup"
+      },
+      "Multipole": {
+         "@id": "Multipole"
+      },
+      "MultipoleParameterGroup": {
+         "@id": "MultipoleParameterGroup"
+      },
+      "NormalConductingRFCavity": {
+         "@id": "NormalConductingRFCavity"
+      },
+      "Octupole": {
+         "@id": "Octupole"
+      },
+      "PALSAccelerator": {
+         "@id": "PALSAccelerator"
+      },
+      "PhysicalComponent": {
+         "@id": "PhysicalComponent"
+      },
+      "Quadrupole": {
+         "@id": "Quadrupole"
+      },
+      "RadiationMonitor": {
+         "@id": "RadiationMonitor"
+      },
+      "ReferenceParamGroup": {
+         "@id": "ReferenceParamGroup"
+      },
+      "Relationship": {
+         "@id": "Relationship"
+      },
+      "RFCavity": {
+         "@id": "RFCavity"
+      },
+      "RFParamGroup": {
+         "@id": "RFParamGroup"
+      },
+      "Sextupole": {
+         "@id": "Sextupole"
+      },
+      "Signal": {
+         "@id": "Signal"
+      },
+      "SignalBinding": {
+         "@id": "SignalBinding"
+      },
+      "Solenoid": {
+         "@id": "Solenoid"
+      },
+      "SolenoidParamGroup": {
+         "@id": "SolenoidParamGroup"
+      },
+      "SuperConductingRFCavity": {
+         "@id": "SuperConductingRFCavity"
+      },
+      "SupportingFacilityComponent": {
+         "@id": "SupportingFacilityComponent"
+      },
+      "TwissParamGroup": {
+         "@id": "TwissParamGroup"
+      },
+      "VirtualComponent": {
+         "@id": "VirtualComponent"
+      }
+   }
+}

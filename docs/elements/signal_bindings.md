@@ -3,13 +3,13 @@
 # Slot: signal_bindings 
 
 
-_Control-system-specific, e.g. EPICS, suffix definitions keyed by signal name within a device/domain set._
+_A list of signal bindings in the accelerator system (Component <-> Signal relationships)._
 
 
 
 
 
-URI: [narad:signal_bindings](https://w3id.org/narad_linkml/schema/narad/signal_bindings)
+URI: [pals:signal_bindings](https://pals-project.readthedocs.io/signal_bindings)
 Alias: signal_bindings
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: signal_bindings
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [SignalDefinitions](SignalDefinitions.md) | Signal binding set scoped to a device type or device domain |  yes  |
+| [Facility](Facility.md) | A facility that houses one or more accelerators |  no  |
 
 
 
@@ -31,9 +31,31 @@ Alias: signal_bindings
 
 ## Properties
 
-* Range: [SignalBinding](SignalBinding.md)
+### Type and Range
 
-* Multivalued: True
+| Property | Value |
+| --- | --- |
+| Range | [SignalBinding](SignalBinding.md) |
+| Domain Of | [Facility](Facility.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+| Multivalued | Yes |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [Facility](Facility.md) |
+
+
+
+
+
+
+
+
 
 
 
@@ -44,11 +66,10 @@ Alias: signal_bindings
 
 
 
-
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -57,8 +78,8 @@ Alias: signal_bindings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:signal_bindings |
-| native | narad:signal_bindings |
+| self | pals:signal_bindings |
+| native | pals:signal_bindings |
 
 
 
@@ -68,16 +89,18 @@ Alias: signal_bindings
 <details>
 ```yaml
 name: signal_bindings
-description: Control-system-specific, e.g. EPICS, suffix definitions keyed by signal
-  name within a device/domain set.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: A list of signal bindings in the accelerator system (Component <-> Signal
+  relationships).
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: signal_bindings
+owner: Facility
 domain_of:
-- SignalDefinitions
+- Facility
 range: SignalBinding
 multivalued: true
 inlined: true
+inlined_as_list: true
 
 ```
 </details>

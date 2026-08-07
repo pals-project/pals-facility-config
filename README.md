@@ -12,10 +12,6 @@ pipx install uv
 * https://docs.astral.sh/uv/getting-started/installation/
   * For detailed best practices for working with Python in UV, please see:
 https://berkeleybop.org/best_practice/python_environments.
-
-Then add Copier, a templating system for building repositories with predefined dependencies.
-  * uv tool install --with jinja2-time copier
-  * https://copier.readthedocs.io/en/stable/
    
 Then add Just, a build and deployment tool that helps make
 command-line build operations less cumbersome.
@@ -35,14 +31,17 @@ command-line build operations less cumbersome.
   * [data/](tests/data) - Example data files for testing
 
 ## Using the Schemas
-* just gen-project
+* ```just gen-project```
   * Example of generating the project from the schema. This will generate a Python datamodel and associated files in `project/`: (json/jsonld schemas, OWL, sqlschema, etc).
 
-* just gen-doc
+* ```just gen-doc```
   * Example of generating documentation from the schema.
 
-* uv run linkml-validate --schema src/narad_system/schema/narad_system.yaml  src/narad_system/schema/narad_UITF_instance.yaml
+* ```just gen-python```
+  * Example of generating the Python datamodel from the schema. This will generate Python classes in `src/narad/datamodel/` that correspond to the classes defined in the LinkML schema.
+
+* ```uv run linkml-validate --schema src/narad/schema/narad.yaml  examples/core_acc_narad_instance.yaml```
   * Example of validating an entire data file against the schema. Add --target-class [CLASS_NAME] to validate against a specific class in the schema.
 
 * Examples of invalid data files are in `tests/data/invalid/` and valid data files are in `tests/data/valid/`. You can validate these using the above command.
-  * uv run linkml-validate --schema src/narad_system/schema/narad_system.yaml tests/data/problem/invalid/narad_invalid.yaml --target-class NaradCapability
+  * ```uv run linkml-validate --schema src/narad/schema/narad.yaml tests/data/invalid/narad_invalid.yaml --target-class NaradCapability```

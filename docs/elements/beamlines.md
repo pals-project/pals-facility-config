@@ -3,13 +3,13 @@
 # Slot: beamlines 
 
 
-_A top-level NARAD-system container for the ordered beamline definitions keyed by beamline name. Serializes as a keyed map by beamline name._
+_A list of beamlines in the accelerator system._
 
 
 
 
 
-URI: [narad:beamlines](https://w3id.org/narad_linkml/schema/narad/beamlines)
+URI: [pals:beamlines](https://pals-project.readthedocs.io/beamlines)
 Alias: beamlines
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: beamlines
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NaradModel](NaradModel.md) | Top-level NARAD document container |  no  |
+| [Facility](Facility.md) | A facility that houses one or more accelerators |  no  |
 
 
 
@@ -31,9 +31,31 @@ Alias: beamlines
 
 ## Properties
 
-* Range: [Beamline](Beamline.md)
+### Type and Range
 
-* Multivalued: True
+| Property | Value |
+| --- | --- |
+| Range | [BeamLine](BeamLine.md) |
+| Domain Of | [Facility](Facility.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+| Multivalued | Yes |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [Facility](Facility.md) |
+
+
+
+
+
+
+
+
 
 
 
@@ -44,11 +66,10 @@ Alias: beamlines
 
 
 
-
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -57,8 +78,8 @@ Alias: beamlines
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:beamlines |
-| native | narad:beamlines |
+| self | pals:beamlines |
+| native | pals:beamlines |
 
 
 
@@ -68,16 +89,17 @@ Alias: beamlines
 <details>
 ```yaml
 name: beamlines
-description: A top-level NARAD-system container for the ordered beamline definitions
-  keyed by beamline name. Serializes as a keyed map by beamline name.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: A list of beamlines in the accelerator system.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: beamlines
+owner: Facility
 domain_of:
-- NaradModel
-range: Beamline
+- Facility
+range: BeamLine
 multivalued: true
 inlined: true
+inlined_as_list: true
 
 ```
 </details>

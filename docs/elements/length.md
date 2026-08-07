@@ -3,13 +3,13 @@
 # Slot: length 
 
 
-_Physical length of the element in meters._
+_Length of the element (arc length for bends)._
 
 
 
 
 
-URI: [narad:length](https://w3id.org/narad_linkml/schema/narad/length)
+URI: [pals:length](https://pals-project.readthedocs.io/length)
 Alias: length
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,8 @@ Alias: length
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |  no  |
-| [Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |  no  |
+| [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  yes  |
+| [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) | Mixin for an element's extent and position along the longitudinal (beam-direc... |  no  |
 
 
 
@@ -32,7 +32,24 @@ Alias: length
 
 ## Properties
 
-* Range: [Float](Float.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [Float](Float.md) |
+| Domain Of | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md), [BeamLine](BeamLine.md) |
+| Slot URI | [pals:length](https://pals-project.readthedocs.io/length) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
 
 
 
@@ -43,11 +60,10 @@ Alias: length
 
 
 
-
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -56,8 +72,8 @@ Alias: length
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:length |
-| native | narad:length |
+| self | pals:length |
+| native | pals:length |
 
 
 
@@ -67,13 +83,14 @@ Alias: length
 <details>
 ```yaml
 name: length
-description: Physical length of the element in meters.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: Length of the element (arc length for bends).
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
+slot_uri: pals:length
 alias: length
 domain_of:
-- Beamline
-- BeamlineElement
+- LongitudinalPlacementParamGroup
+- BeamLine
 range: float
 
 ```

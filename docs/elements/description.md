@@ -3,13 +3,13 @@
 # Slot: description 
 
 
-_Detailed description of the entity._
+_A human-readable description of the instance._
 
 
 
 
 
-URI: [narad:description](https://w3id.org/narad_linkml/schema/narad/description)
+URI: [pals:description](https://pals-project.readthedocs.io/description)
 Alias: description
 
 <!-- no inheritance hierarchy -->
@@ -22,22 +22,9 @@ Alias: description
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NamedThing](NamedThing.md) | Abstract base class providing identity and human-readable metadata |  no  |
-| [System](System.md) | A physical, logical, or cyber-physical system involved in sensing, monitoring... |  no  |
-| [SignalBinding](SignalBinding.md) | A named control system suffix definition for one semantic signal |  no  |
-| [ActuatableSignal](ActuatableSignal.md) | A NARAD signal that can be commanded, set, or acted upon |  no  |
-| [Signal](Signal.md) | Domain term for a control-system signal |  no  |
-| [FacilitySystem](FacilitySystem.md) | Facility-specific signal binding configuration |  no  |
-| [ControlCapability](ControlCapability.md) | A reusable device-type control profile that extends a generic shared capabili... |  no  |
-| [SignalDefinitions](SignalDefinitions.md) | Signal binding set scoped to a device type or device domain |  no  |
-| [Beamline](Beamline.md) | A top-level NARAD-system for an ordered sequence of beamline elements definin... |  no  |
-| [SystemCapability](SystemCapability.md) | A capability of a system |  no  |
-| [ControlSystem](ControlSystem.md) | A control system (e |  no  |
-| [Instrument](Instrument.md) | A generic beam diagnostic instrument |  no  |
-| [InstanceSignalBinding](InstanceSignalBinding.md) | A facility-specific binding between a NARAD Signal and an implementation inte... |  no  |
-| [BeamlineElement](BeamlineElement.md) | A single element in a beamline with its kind and optional NARAD capability an... |  no  |
-| [ObservableSignal](ObservableSignal.md) | A NARAD signal that is read, monitored, observed, or exposed by a system |  no  |
-| [DeviceSystem](DeviceSystem.md) | A system representing a beam diagnostic instrument, magnet, or other non-magn... |  no  |
+| [PALSAccelerator](PALSAccelerator.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
+| [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  no  |
+| [MetaParamGroup](MetaParamGroup.md) | Mixin class for metadata parameters that are aligned with PALS MetaP (Metadat... |  no  |
 
 
 
@@ -46,7 +33,23 @@ Alias: description
 
 ## Properties
 
-* Range: [String](String.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [String](String.md) |
+| Domain Of | [PALSAccelerator](PALSAccelerator.md), [MetaParamGroup](MetaParamGroup.md), [BeamLine](BeamLine.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
 
 
 
@@ -57,11 +60,10 @@ Alias: description
 
 
 
-
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -70,8 +72,8 @@ Alias: description
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:description |
-| native | narad:description |
+| self | pals:description |
+| native | pals:description |
 
 
 
@@ -81,12 +83,14 @@ Alias: description
 <details>
 ```yaml
 name: description
-description: Detailed description of the entity.
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: A human-readable description of the instance.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: description
 domain_of:
-- NamedThing
+- PALSAccelerator
+- MetaParamGroup
+- BeamLine
 range: string
 
 ```

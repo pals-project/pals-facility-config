@@ -1,0 +1,13 @@
+{
+   "BFO": "http://purl.obolibrary.org/obo/BFO_",
+   "RO": "http://purl.obolibrary.org/obo/RO_",
+   "acc": "https://example.org/accelerator-core/",
+   "inst": "https://example.org/narad-instance/",
+   "linkml": "https://w3id.org/linkml/",
+   "pals": "https://pals-project.readthedocs.io/",
+   "quantitykind": "http://qudt.org/vocab/quantitykind/",
+   "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+   "saref": "https://saref.etsi.org/core/v4.1.1/",
+   "sosa": "http://www.w3.org/ns/sosa/",
+   "xsd": "http://www.w3.org/2001/XMLSchema#"
+}

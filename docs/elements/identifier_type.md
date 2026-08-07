@@ -3,13 +3,13 @@
 # Slot: identifier_type 
 
 
-_The type of identifier used in the identifier slot (e.g. DOI, ARK, URL, local)._
+_The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK._
 
 
 
 
 
-URI: [narad:identifier_type](https://w3id.org/narad_linkml/schema/narad/identifier_type)
+URI: [pals:identifier_type](https://pals-project.readthedocs.io/identifier_type)
 Alias: identifier_type
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: identifier_type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FacilityIdentifier](FacilityIdentifier.md) | A globally unique identifier for an entity (e |  no  |
+| [Identifier](Identifier.md) | A unique, and ideally persistent, identifier for a facility, such as a DOI or... |  no  |
 
 
 
@@ -31,7 +31,30 @@ Alias: identifier_type
 
 ## Properties
 
-* Range: [IdentifierTypeEnum](IdentifierTypeEnum.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [IdentifierTypeEnum](IdentifierTypeEnum.md) |
+| Domain Of | [Identifier](Identifier.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [Identifier](Identifier.md) |
+
+
+
+
+
+
+
+
 
 
 
@@ -42,11 +65,10 @@ Alias: identifier_type
 
 
 
-
 ### Schema Source
 
 
-* from schema: https://w3id.org/narad_linkml/schema/narad/system
+* from schema: https://w3id.org/accelerator-core
 
 
 
@@ -55,8 +77,8 @@ Alias: identifier_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | narad:identifier_type |
-| native | narad:identifier_type |
+| self | pals:identifier_type |
+| native | pals:identifier_type |
 
 
 
@@ -66,13 +88,13 @@ Alias: identifier_type
 <details>
 ```yaml
 name: identifier_type
-description: The type of identifier used in the identifier slot (e.g. DOI, ARK, URL,
-  local).
-from_schema: https://w3id.org/narad_linkml/schema/narad/system
+description: The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK.
+from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: identifier_type
+owner: Identifier
 domain_of:
-- FacilityIdentifier
+- Identifier
 range: IdentifierTypeEnum
 
 ```

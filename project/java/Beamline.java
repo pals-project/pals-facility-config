@@ -13,12 +13,13 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Beamline extends NamedThing {
+public class Beamline extends VirtualComponent {
 
   private boolean multipass;
   private Float length;
-  private BeamlineElement zeroPoint;
+  private String zeroPoint;
   private boolean periodic;
-  private List<BeamlineElement> line;
+  private Integer repeat;
+  private Integer direction;
 
 }

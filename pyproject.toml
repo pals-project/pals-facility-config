@@ -54,8 +54,8 @@ skip = [
   "pyproject.toml",
   "uv.lock",
   "project/*",
-  "src/narad/datamodel/narad_pydantic.py",
-  "src/narad/datamodel/narad.py",
+  "src/narad/datamodel/narad_core_acc_pydantic.py",
+  "src/narad/datamodel/narad_core_acc.py",
 ]
 
 # Reminder: words have to be lowercased for the ignore-words-list
@@ -71,6 +71,6 @@ extend-exclude = [
   "uv.lock",
   "pyproject.toml",
   "project/*",
-  "src/narad/datamodel/narad_pydantic.py",
-  "src/narad/datamodel/narad.py",
+  "src/narad/datamodel/narad_core_acc_pydantic.py",
+  "src/narad/datamodel/narad_core_acc.py",
 ]
