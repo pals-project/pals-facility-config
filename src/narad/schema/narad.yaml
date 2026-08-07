@@ -16,6 +16,7 @@ prefixes:
   BFO: http://purl.obolibrary.org/obo/BFO_
   saref: https://saref.etsi.org/core/v4.1.1/
   pals: https://pals-project.readthedocs.io/
+  inst: https://example.org/narad-instance/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   xsd: http://www.w3.org/2001/XMLSchema#
 
@@ -57,6 +58,7 @@ slots:
 
   kind:
     required: true
+    designates_type: true
     range: string
     slot_uri: pals:kind
     description: The LinkML class name of this instance.
@@ -98,7 +100,7 @@ slots:
 classes:
 
   #---- Root Class ----------------------------------------------------------
-  PALS:
+  PALSAccelerator:
     description: Root container for accelerator core components, semantic signals, and local bindings.
     tree_root: true
     attributes:
@@ -1329,6 +1331,15 @@ classes:
     broad_mappings:
       - pals:Instrument
 
+  Aperture:
+    description: A diagnostic or limiting aperture element used to constrain or characterize beam passage.
+    is_a: DiagnosticDevice
+    mixins:
+      - HasReferenceP
+      - HasTwissP
+    broad_mappings:
+      - pals:Instrument
+
   RadiationMonitor:
     description: A diagnostic device used to monitor radiation dose or dose rate.
     is_a: DiagnosticDevice
@@ -1439,7 +1450,6 @@ classes:
       represents an arbitrary, extensible bag of program-specific metadata.
     attributes:
       key:
-        identifier: true
         required: true
         range: string
         description: The metadata field name.

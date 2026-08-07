@@ -97,6 +97,16 @@ lint:
 gen-doc: _gen-yaml && _add-artifacts
   uv run gen-doc {{gen_doc_args}} -d {{docdir}} {{source_schema_path}}
 
+# Export the example instance as Turtle RDF
+[group('model development')]
+gen-instance-ttl: _ensure_project_owl
+  uv run linkml-convert \
+    -s {{source_schema_path}} \
+    -C PALSAccelerator \
+    -t ttl \
+    examples/core_acc_narad_instance.yaml \
+    -o {{dest}}/owl/core_acc_narad_instance.ttl
+
 # Build docs and run test server
 [group('model development')]
 testdoc: gen-doc _serve
@@ -252,6 +262,9 @@ _clean_project:
 _ensure_examples_output:  # Ensure a clean examples/output directory exists
   -mkdir -p examples/output
   -rm -rf examples/output/*.*
+
+_ensure_project_owl:
+  -mkdir -p {{dest}}/owl
 
 # ============== Include project-specific recipes ==============
 
