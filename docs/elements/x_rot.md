@@ -31,7 +31,29 @@ Alias: x_rot
 
 ## Properties
 
-* Range: [Float](Float.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [Float](Float.md) |
+| Domain Of | [BodyShiftParamGroup](BodyShiftParamGroup.md) |
+| Slot URI | [pals:x_rot](https://pals-project.readthedocs.io/x_rot) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [BodyShiftParamGroup](BodyShiftParamGroup.md) |
+
+
+
+
+
+
 
 
 
@@ -43,8 +65,9 @@ Alias: x_rot
 * GlobalOffsetPhi
 
 
-## Identifier and Mapping Information
 
+
+## Identifier and Mapping Information
 
 
 

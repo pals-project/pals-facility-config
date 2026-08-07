@@ -136,7 +136,6 @@ URI: [pals:BeamPositionMonitor](https://pals-project.readthedocs.io/BeamPosition
             * **BeamPositionMonitor** [ [HasReferenceP](HasReferenceP.md) [HasBodyShiftP](HasBodyShiftP.md) [HasTwissP](HasTwissP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -162,8 +161,12 @@ URI: [pals:BeamPositionMonitor](https://pals-project.readthedocs.io/BeamPosition
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -345,10 +348,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: BeamPositionMonitor
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

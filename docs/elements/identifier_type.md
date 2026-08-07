@@ -31,13 +31,35 @@ Alias: identifier_type
 
 ## Properties
 
-* Range: [IdentifierTypeEnum](IdentifierTypeEnum.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [IdentifierTypeEnum](IdentifierTypeEnum.md) |
+| Domain Of | [Identifier](Identifier.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [Identifier](Identifier.md) |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

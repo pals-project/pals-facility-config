@@ -22,34 +22,35 @@ Alias: MetaP
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BeamLineSection](BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizat... |  no  |
-| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
-| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
-| [BookkeepingComponent](BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in t... |  no  |
-| [Signal](Signal.md) | Semantic meaning of a control-system signal associated with a component |  no  |
-| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
-| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
-| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
-| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
-| [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  no  |
-| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
-| [HasMetaP](HasMetaP.md) |  |  no  |
-| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
-| [DiagnosticDevice](DiagnosticDevice.md) | An accelerator device used to measure beam or machine state |  no  |
-| [Component](Component.md) | A general class for accelerator components, which can be specialized into mor... |  no  |
-| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
-| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
-| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
 | [Kicker](Kicker.md) | A magnet primarily used to steer the beam |  no  |
-| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
-| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
-| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
-| [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
-| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
-| [Marker](Marker.md) | A virtual component used as a reference point or marker in the beamline struc... |  no  |
-| [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
-| [VirtualComponent](VirtualComponent.md) | A virtual or logical component that represents a concept, function, or role i... |  no  |
 | [PhysicalComponent](PhysicalComponent.md) | A physical item that participates in or supports accelerator operation |  no  |
+| [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
+| [BeamLineSection](BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizat... |  no  |
+| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
+| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
+| [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
+| [Component](Component.md) | A general class for accelerator components, which can be specialized into mor... |  no  |
+| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
+| [HasMetaP](HasMetaP.md) |  |  no  |
+| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [DiagnosticDevice](DiagnosticDevice.md) | An accelerator device used to measure beam or machine state |  no  |
+| [BookkeepingComponent](BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in t... |  no  |
+| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
+| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  no  |
+| [Marker](Marker.md) | A virtual component used as a reference point or marker in the beamline struc... |  no  |
+| [VirtualComponent](VirtualComponent.md) | A virtual or logical component that represents a concept, function, or role i... |  no  |
+| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
+| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
+| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
+| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
+| [Signal](Signal.md) | Semantic meaning of a control-system signal associated with a component |  no  |
+| [Aperture](Aperture.md) | A diagnostic or limiting aperture element used to constrain or characterize b... |  no  |
+| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
+| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
+| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
+| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
 
 
 
@@ -58,13 +59,35 @@ Alias: MetaP
 
 ## Properties
 
-* Range: [MetaParamGroup](MetaParamGroup.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [MetaParamGroup](MetaParamGroup.md) |
+| Domain Of | [HasMetaP](HasMetaP.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [HasMetaP](HasMetaP.md) |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

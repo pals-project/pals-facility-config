@@ -48,6 +48,12 @@ URI: [pals:HasBodyShiftP](https://pals-project.readthedocs.io/HasBodyShiftP)
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -77,8 +83,12 @@ URI: [pals:HasBodyShiftP](https://pals-project.readthedocs.io/HasBodyShiftP)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

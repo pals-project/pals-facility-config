@@ -69,7 +69,6 @@ URI: [pals:SignalBinding](https://pals-project.readthedocs.io/SignalBinding)
     * **SignalBinding**
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -95,8 +94,12 @@ URI: [pals:SignalBinding](https://pals-project.readthedocs.io/SignalBinding)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

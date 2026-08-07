@@ -54,7 +54,6 @@ URI: [pals:MagneticMultipoleParamGroup](https://pals-project.readthedocs.io/Magn
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -89,8 +88,12 @@ URI: [pals:MagneticMultipoleParamGroup](https://pals-project.readthedocs.io/Magn
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

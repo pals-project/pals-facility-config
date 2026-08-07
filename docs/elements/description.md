@@ -22,7 +22,7 @@ Alias: description
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [PALS](PALS.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
+| [PALSAccelerator](PALSAccelerator.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
 | [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  no  |
 | [MetaParamGroup](MetaParamGroup.md) | Mixin class for metadata parameters that are aligned with PALS MetaP (Metadat... |  no  |
 
@@ -33,13 +33,28 @@ Alias: description
 
 ## Properties
 
-* Range: [String](String.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [String](String.md) |
+| Domain Of | [PALSAccelerator](PALSAccelerator.md), [MetaParamGroup](MetaParamGroup.md), [BeamLine](BeamLine.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 
@@ -73,7 +88,7 @@ from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: description
 domain_of:
-- PALS
+- PALSAccelerator
 - MetaParamGroup
 - BeamLine
 range: string

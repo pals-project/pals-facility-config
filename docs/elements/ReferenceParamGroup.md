@@ -35,7 +35,6 @@ URI: [pals:ReferenceParamGroup](https://pals-project.readthedocs.io/ReferencePar
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -65,6 +64,7 @@ URI: [pals:ReferenceParamGroup](https://pals-project.readthedocs.io/ReferencePar
 | [ACKicker](ACKicker.md) | [ReferenceP](ReferenceP.md) | range | [ReferenceParamGroup](ReferenceParamGroup.md) |
 | [BeamProfileMonitor](BeamProfileMonitor.md) | [ReferenceP](ReferenceP.md) | range | [ReferenceParamGroup](ReferenceParamGroup.md) |
 | [BeamPositionMonitor](BeamPositionMonitor.md) | [ReferenceP](ReferenceP.md) | range | [ReferenceParamGroup](ReferenceParamGroup.md) |
+| [Aperture](Aperture.md) | [ReferenceP](ReferenceP.md) | range | [ReferenceParamGroup](ReferenceParamGroup.md) |
 | [Cavity](Cavity.md) | [ReferenceP](ReferenceP.md) | range | [ReferenceParamGroup](ReferenceParamGroup.md) |
 | [CrabCavity](CrabCavity.md) | [ReferenceP](ReferenceP.md) | range | [ReferenceParamGroup](ReferenceParamGroup.md) |
 | [RFCavity](RFCavity.md) | [ReferenceP](ReferenceP.md) | range | [ReferenceParamGroup](ReferenceParamGroup.md) |
@@ -77,8 +77,12 @@ URI: [pals:ReferenceParamGroup](https://pals-project.readthedocs.io/ReferencePar
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

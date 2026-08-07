@@ -32,15 +32,29 @@ Alias: identifiers
 
 ## Properties
 
-* Range: [Identifier](Identifier.md)
+### Type and Range
 
-* Multivalued: True
+| Property | Value |
+| --- | --- |
+| Range | [Identifier](Identifier.md) |
+| Domain Of | [Facility](Facility.md), [Affiliation](Affiliation.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+| Multivalued | Yes |
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

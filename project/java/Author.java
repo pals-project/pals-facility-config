@@ -1,12 +1,8 @@
 package None;
 
+/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   Contains authorship information for a representation of an accelerator facility and its operations.

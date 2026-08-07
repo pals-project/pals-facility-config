@@ -44,7 +44,6 @@ URI: [pals:MetaParamGroup](https://pals-project.readthedocs.io/MetaParamGroup)
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -80,6 +79,7 @@ URI: [pals:MetaParamGroup](https://pals-project.readthedocs.io/MetaParamGroup)
 | [DiagnosticDevice](DiagnosticDevice.md) | [MetaP](MetaP.md) | range | [MetaParamGroup](MetaParamGroup.md) |
 | [BeamProfileMonitor](BeamProfileMonitor.md) | [MetaP](MetaP.md) | range | [MetaParamGroup](MetaParamGroup.md) |
 | [BeamPositionMonitor](BeamPositionMonitor.md) | [MetaP](MetaP.md) | range | [MetaParamGroup](MetaParamGroup.md) |
+| [Aperture](Aperture.md) | [MetaP](MetaP.md) | range | [MetaParamGroup](MetaParamGroup.md) |
 | [RadiationMonitor](RadiationMonitor.md) | [MetaP](MetaP.md) | range | [MetaParamGroup](MetaParamGroup.md) |
 | [Cavity](Cavity.md) | [MetaP](MetaP.md) | range | [MetaParamGroup](MetaParamGroup.md) |
 | [CrabCavity](CrabCavity.md) | [MetaP](MetaP.md) | range | [MetaParamGroup](MetaParamGroup.md) |
@@ -97,8 +97,12 @@ URI: [pals:MetaParamGroup](https://pals-project.readthedocs.io/MetaParamGroup)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -212,7 +216,7 @@ attributes:
     alias: description
     owner: MetaParamGroup
     domain_of:
-    - PALS
+    - PALSAccelerator
     - MetaParamGroup
     - BeamLine
     range: string

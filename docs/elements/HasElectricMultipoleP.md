@@ -40,6 +40,12 @@ URI: [pals:HasElectricMultipoleP](https://pals-project.readthedocs.io/HasElectri
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -65,8 +71,12 @@ URI: [pals:HasElectricMultipoleP](https://pals-project.readthedocs.io/HasElectri
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

@@ -31,7 +31,29 @@ Alias: phi
 
 ## Properties
 
-* Range: [Float](Float.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [Float](Float.md) |
+| Domain Of | [FloorParamGroup](FloorParamGroup.md) |
+| Slot URI | [pals:phi](https://pals-project.readthedocs.io/phi) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [FloorParamGroup](FloorParamGroup.md) |
+
+
+
+
+
+
 
 
 
@@ -43,8 +65,9 @@ Alias: phi
 * Model_Pitch
 
 
-## Identifier and Mapping Information
 
+
+## Identifier and Mapping Information
 
 
 

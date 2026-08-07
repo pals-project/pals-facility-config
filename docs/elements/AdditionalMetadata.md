@@ -42,7 +42,6 @@ URI: [pals:AdditionalMetadata](https://pals-project.readthedocs.io/AdditionalMet
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -67,8 +66,12 @@ URI: [pals:AdditionalMetadata](https://pals-project.readthedocs.io/AdditionalMet
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -113,7 +116,6 @@ attributes:
     description: The metadata field name.
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
-    identifier: true
     domain_of:
     - AdditionalMetadata
     range: string
@@ -156,7 +158,6 @@ attributes:
     description: The metadata field name.
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
-    identifier: true
     alias: key
     owner: AdditionalMetadata
     domain_of:

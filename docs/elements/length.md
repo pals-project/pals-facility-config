@@ -22,8 +22,8 @@ Alias: length
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) | Mixin for an element's extent and position along the longitudinal (beam-direc... |  no  |
 | [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  yes  |
+| [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) | Mixin for an element's extent and position along the longitudinal (beam-direc... |  no  |
 
 
 
@@ -32,13 +32,29 @@ Alias: length
 
 ## Properties
 
-* Range: [Float](Float.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [Float](Float.md) |
+| Domain Of | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md), [BeamLine](BeamLine.md) |
+| Slot URI | [pals:length](https://pals-project.readthedocs.io/length) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

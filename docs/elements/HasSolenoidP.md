@@ -36,6 +36,12 @@ URI: [pals:HasSolenoidP](https://pals-project.readthedocs.io/HasSolenoidP)
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -59,8 +65,12 @@ URI: [pals:HasSolenoidP](https://pals-project.readthedocs.io/HasSolenoidP)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

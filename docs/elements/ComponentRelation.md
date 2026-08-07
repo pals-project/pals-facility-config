@@ -150,7 +150,6 @@ URI: [pals:ComponentRelation](https://pals-project.readthedocs.io/ComponentRelat
     * **ComponentRelation**
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -185,8 +184,12 @@ URI: [pals:ComponentRelation](https://pals-project.readthedocs.io/ComponentRelat
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

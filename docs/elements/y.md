@@ -31,7 +31,29 @@ Alias: y
 
 ## Properties
 
-* Range: [Float](Float.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [Float](Float.md) |
+| Domain Of | [FloorParamGroup](FloorParamGroup.md) |
+| Slot URI | [pals:y](https://pals-project.readthedocs.io/y) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [FloorParamGroup](FloorParamGroup.md) |
+
+
+
+
+
+
 
 
 
@@ -43,8 +65,9 @@ Alias: y
 * y coordinate
 
 
-## Identifier and Mapping Information
 
+
+## Identifier and Mapping Information
 
 
 

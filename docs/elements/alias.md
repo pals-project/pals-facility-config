@@ -32,13 +32,29 @@ Alias: alias
 
 ## Properties
 
-* Range: [String](String.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [String](String.md) |
+| Domain Of | [MetaParamGroup](MetaParamGroup.md), [Signal](Signal.md) |
+| Slot URI | [pals:alias](https://pals-project.readthedocs.io/alias) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

@@ -22,8 +22,8 @@ Alias: name
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Author](Author.md) | Contains authorship information for a representation of an accelerator facili... |  no  |
 | [Affiliation](Affiliation.md) | Contains affiliation information for an author or component, such as a ROR |  no  |
+| [Author](Author.md) | Contains authorship information for a representation of an accelerator facili... |  no  |
 
 
 
@@ -32,13 +32,28 @@ Alias: name
 
 ## Properties
 
-* Range: [String](String.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [String](String.md) |
+| Domain Of | [Author](Author.md), [Affiliation](Affiliation.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

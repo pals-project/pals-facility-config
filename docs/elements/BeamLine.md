@@ -97,7 +97,6 @@ URI: [pals:BeamLine](https://pals-project.readthedocs.io/BeamLine)
         * **BeamLine**
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -133,8 +132,12 @@ URI: [pals:BeamLine](https://pals-project.readthedocs.io/BeamLine)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -321,7 +324,7 @@ attributes:
     alias: description
     owner: BeamLine
     domain_of:
-    - PALS
+    - PALSAccelerator
     - MetaParamGroup
     - BeamLine
     range: string
@@ -388,10 +391,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: BeamLine
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

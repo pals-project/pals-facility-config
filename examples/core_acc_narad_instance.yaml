@@ -1,9 +1,9 @@
 description: PALS-NARAD representation of a validated subset of the Jefferson Lab UITF injector beamline,
   ported from a prior instance format to conform to the accelerator_core LinkML schema.
-kind: PALS
+kind: PALSAccelerator
 version: null # in progress
 affiliation: 
-  id: jefferson-lab
+  id: inst:jefferson-lab
   name: Thomas Jefferson National Accelerator Facility
   identifiers:
     - identifier_type: ROR
@@ -13,7 +13,7 @@ authors:
     email: dianam@jlab.org
     orcid: https://orcid.org/0000-0002-8520-1631
     affiliation: 
-      id: jefferson-lab
+      id: inst:jefferson-lab
       name: Thomas Jefferson National Accelerator Facility
       identifiers:
         - identifier_type: ROR
@@ -26,7 +26,7 @@ facility:
     - identifier_type: URL
       identifier_value: https://www.jlab.org/accelerator/uitf
   components:
-    - id: RF_LASER
+    - id: inst:RF_LASER
       kind: SuperConductingRFCavity
       native_types:
       - RFCavity
@@ -63,7 +63,7 @@ facility:
         frequency: 1497000000.0
         voltage: 0.0
         phase: 0.0
-    - id: IPMK101
+    - id: inst:IPMK101
       kind: BeamPositionMonitor
       native_types:
       - BPM
@@ -111,7 +111,7 @@ facility:
             value: iocipmk101
           - key: electrode_rotation_deg
             value: "45.0"
-    - id: IPMK102
+    - id: inst:IPMK102
       kind: BeamPositionMonitor
       native_types:
       - BPM
@@ -159,7 +159,7 @@ facility:
             value: iocipmk102
           - key: electrode_rotation_deg
             value: "45.0"
-    - id: MBHK101H
+    - id: inst:MBHK101H
       kind: Kicker
       native_types:
       - Corrector
@@ -219,7 +219,7 @@ facility:
             value: "1Amp"
           - key: KICK
             value: "0"
-    - id: MBHK101V
+    - id: inst:MBHK101V
       kind: Kicker
       native_types:
       - Corrector
@@ -279,7 +279,7 @@ facility:
             value: "1Amp"
           - key: KICK
             value: "0"
-    - id: MFRM604V
+    - id: inst:MFRM604V
       kind: Kicker
       native_types:
       - Corrector
@@ -325,7 +325,7 @@ facility:
             value: '0'
           - key: Comments
             value: Raster
-    - id: MFRM604H
+    - id: inst:MFRM604H
       kind: Kicker
       native_types:
       - Corrector
@@ -371,7 +371,7 @@ facility:
             value: '0'
           - key: Comments
             value: Raster
-    - id: MFHK101
+    - id: inst:MFHK101
       kind: Solenoid
       native_types:
       - Solenoid
@@ -435,7 +435,7 @@ facility:
             value: "2021-03-15"
           - key: SurveyZ
             value: ".576"
-    - id: ITVK201
+    - id: inst:ITVK201
       kind: BeamProfileMonitor
       native_types:
       - DiagnosticDevice
@@ -491,7 +491,7 @@ facility:
             value: '2021-03-15'
           - key: SurveyZ
             value: "1.173"
-    - id: IFYK203
+    - id: inst:IFYK203
       kind: BeamProfileMonitor
       native_types:
       - DiagnosticDevice
@@ -542,8 +542,8 @@ facility:
             value: '6'
           - key: Controlled_by
             value: iocitf2
-    - id: ISLK302
-      kind: DiagnosticDevice
+    - id: inst:ISLK302
+      kind: Aperture
       native_types:
       - DiagnosticDevice
       - Aperture
@@ -576,7 +576,7 @@ facility:
       MetaP:
         alias: Aperture 2
         additional_metadata: []
-    - id: IYGK302
+    - id: inst:IYGK302
       kind: BeamProfileMonitor
       native_types:
       - DiagnosticDevice
@@ -621,7 +621,7 @@ facility:
             value: '2021-03-15'
           - key: SurveyZ
             value: '4.6462'
-    - id: ICBK403
+    - id: inst:ICBK403
       kind: BeamProfileMonitor
       native_types:
       - DiagnosticDevice
@@ -656,7 +656,7 @@ facility:
       MetaP:
         alias: Yao Cavity
         additional_metadata: []
-    - id: MDSK201
+    - id: inst:MDSK201
       kind: Bend
       native_types:
       - Dipole
@@ -726,7 +726,7 @@ facility:
             value: '2021-03-15'
           - key: SurveyZ
             value: '1.338'
-    - id: MQWK202
+    - id: inst:MQWK202
       kind: Quadrupole
       native_types:
       - Quadrupole
@@ -797,7 +797,7 @@ facility:
             value: '.0159'
           - key: BORE
             value: '0'
-    - id: RM11
+    - id: inst:RM11
       kind: SuperConductingRFCavity
       native_types:
       - RFCavity
@@ -854,7 +854,7 @@ facility:
             value: iocitfrffcc1
           - key: FCC
             value: fcc_773
-    - id: S_IS_20CM
+    - id: inst:S_IS_20CM
       kind: Marker
       native_types:
       - Marker
@@ -883,8 +883,8 @@ facility:
       MetaP:
         description: Reference marker 20 cm downstream of the gun.
   beamlines:
-    - id: GUN_thru_MV
-      kind: Beamline
+    - id: inst:GUN_thru_MV
+      kind: BeamLine
       functions: 
         - BeamLineSection
       beamline_relation: Inline
@@ -898,7 +898,7 @@ facility:
         psi: 0.0
       description: UITF injector beamline from the gun/laser through the MV (medium-velocity) section.
   signals:
-    - id: RK11.GET
+    - id: inst:RK11.GET
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -909,7 +909,7 @@ facility:
       native_unit: MV_per_m
       access_protocol: EPICS Channel Access
       alias: gradient_setpoint
-    - id: RK11.GMES
+    - id: inst:RK11.GMES
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -920,7 +920,7 @@ facility:
       native_unit: MV_per_m
       access_protocol: EPICS Channel Access
       alias: gradient_readback
-    - id: RK11.STAT
+    - id: inst:RK11.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -932,7 +932,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: IPMK101.XPOS
+    - id: inst:IPMK101.XPOS
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -943,7 +943,7 @@ facility:
       native_unit: mm
       access_protocol: EPICS Channel Access
       alias: horizontal_beam_position
-    - id: IPMK101.YPOS
+    - id: inst:IPMK101.YPOS
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -954,7 +954,7 @@ facility:
       native_unit: mm
       access_protocol: EPICS Channel Access
       alias: vertical_beam_position
-    - id: IPMK101.STAT
+    - id: inst:IPMK101.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -966,7 +966,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: IPMK102.XPOS
+    - id: inst:IPMK102.XPOS
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -977,7 +977,7 @@ facility:
       native_unit: mm
       access_protocol: EPICS Channel Access
       alias: horizontal_beam_position
-    - id: IPMK102.YPOS
+    - id: inst:IPMK102.YPOS
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -988,7 +988,7 @@ facility:
       native_unit: mm
       access_protocol: EPICS Channel Access
       alias: vertical_beam_position
-    - id: IPMK102.STAT
+    - id: inst:IPMK102.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1000,7 +1000,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: MBHK101H.S
+    - id: inst:MBHK101H.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1011,7 +1011,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_setpoint
-    - id: MBHK101HM
+    - id: inst:MBHK101HM
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1022,7 +1022,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_readback
-    - id: MBHK101H.HMIN
+    - id: inst:MBHK101H.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1034,7 +1034,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_min
-    - id: MBHK101H.HMAX
+    - id: inst:MBHK101H.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1046,7 +1046,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_max
-    - id: MBHK101H.STAT
+    - id: inst:MBHK101H.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1058,7 +1058,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: MBHK101H.KICK
+    - id: inst:MBHK101H.KICK
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1069,7 +1069,7 @@ facility:
       native_unit: T_M
       access_protocol: EPICS Channel Access
       alias: kick_setpoint
-    - id: MBHK101V.S
+    - id: inst:MBHK101V.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1080,7 +1080,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_setpoint
-    - id: MBHK101VM
+    - id: inst:MBHK101VM
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1091,7 +1091,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_readback
-    - id: MBHK101V.HMIN
+    - id: inst:MBHK101V.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1103,7 +1103,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_min
-    - id: MBHK101V.HMAX
+    - id: inst:MBHK101V.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1115,7 +1115,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_max
-    - id: MBHK101V.STAT
+    - id: inst:MBHK101V.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1127,7 +1127,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: MBHK101V.KICK
+    - id: inst:MBHK101V.KICK
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1138,7 +1138,7 @@ facility:
       native_unit: T_M
       access_protocol: EPICS Channel Access
       alias: kick_setpoint
-    - id: MFRM604V.S
+    - id: inst:MFRM604V.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1149,7 +1149,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_setpoint
-    - id: MFRM604VM
+    - id: inst:MFRM604VM
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1160,7 +1160,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_readback
-    - id: MFRM604V.HMIN
+    - id: inst:MFRM604V.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1172,7 +1172,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_min
-    - id: MFRM604V.HMAX
+    - id: inst:MFRM604V.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1184,7 +1184,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_max
-    - id: MFRM604V.STAT
+    - id: inst:MFRM604V.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1196,7 +1196,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: MFRM604V.KICK
+    - id: inst:MFRM604V.KICK
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1207,7 +1207,7 @@ facility:
       native_unit: T_M
       access_protocol: EPICS Channel Access
       alias: kick_setpoint
-    - id: MFRM604H.S
+    - id: inst:MFRM604H.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1218,7 +1218,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_setpoint
-    - id: MFRM604HM
+    - id: inst:MFRM604HM
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1229,7 +1229,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_readback
-    - id: MFRM604H.HMIN
+    - id: inst:MFRM604H.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1241,7 +1241,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_min
-    - id: MFRM604H.HMAX
+    - id: inst:MFRM604H.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1253,7 +1253,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_max
-    - id: MFRM604H.STAT
+    - id: inst:MFRM604H.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1265,7 +1265,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: MFRM604H.KICK
+    - id: inst:MFRM604H.KICK
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1276,7 +1276,7 @@ facility:
       native_unit: T_M
       access_protocol: EPICS Channel Access
       alias: kick_setpoint
-    - id: MDSK201.S
+    - id: inst:MDSK201.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1287,7 +1287,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_setpoint
-    - id: MDSK201M
+    - id: inst:MDSK201M
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1298,7 +1298,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_readback
-    - id: MDSK201.HMIN
+    - id: inst:MDSK201.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1310,7 +1310,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_min
-    - id: MDSK201.HMAX
+    - id: inst:MDSK201.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1322,7 +1322,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_max
-    - id: MDSK201.STAT
+    - id: inst:MDSK201.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1334,7 +1334,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: MDSK201.BDL
+    - id: inst:MDSK201.BDL
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1345,7 +1345,7 @@ facility:
       native_unit: T_M
       access_protocol: EPICS Channel Access
       alias: field_setpoint
-    - id: MQWK202.S
+    - id: inst:MQWK202.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1356,7 +1356,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_setpoint
-    - id: MQWK202M
+    - id: inst:MQWK202M
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1367,7 +1367,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_readback
-    - id: MQWK202.HMIN
+    - id: inst:MQWK202.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1379,7 +1379,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_min
-    - id: MQWK202.HMAX
+    - id: inst:MQWK202.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1391,7 +1391,7 @@ facility:
       native_unit: A
       access_protocol: EPICS Channel Access
       alias: current_max
-    - id: MQWK202.STAT
+    - id: inst:MQWK202.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1403,7 +1403,7 @@ facility:
       native_unit: none
       access_protocol: EPICS Channel Access
       alias: status
-    - id: MQWK202.BDL
+    - id: inst:MQWK202.BDL
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1415,7 +1415,7 @@ facility:
       native_unit: G_per_cm
       access_protocol: EPICS Channel Access
       alias: strength_setpoint
-    - id: RM11.GET
+    - id: inst:RM11.GET
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1426,7 +1426,7 @@ facility:
       native_unit: MV_per_m
       access_protocol: EPICS Channel Access
       alias: gradient_setpoint
-    - id: RM11.GMES
+    - id: inst:RM11.GMES
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1437,7 +1437,7 @@ facility:
       native_unit: MV_per_m
       access_protocol: EPICS Channel Access
       alias: gradient_readback
-    - id: RM11.STAT
+    - id: inst:RM11.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1450,268 +1450,268 @@ facility:
       access_protocol: EPICS Channel Access
       alias: status
   signal_bindings:
-    - id: RF_LASER.gradient_setpoint_binding
-      subject: RF_LASER
+    - id: inst:RF_LASER.gradient_setpoint_binding
+      subject: inst:RF_LASER
       predicate: has_setpoint_signal
-      object: RK11.GET
-    - id: RF_LASER.gradient_readback_binding
-      subject: RF_LASER
+      object: inst:RK11.GET
+    - id: inst:RF_LASER.gradient_readback_binding
+      subject: inst:RF_LASER
       predicate: has_readback_signal
-      object: RK11.GMES
-    - id: RF_LASER.status_binding
-      subject: RF_LASER
+      object: inst:RK11.GMES
+    - id: inst:RF_LASER.status_binding
+      subject: inst:RF_LASER
       predicate: has_readback_signal
-      object: RK11.STAT
-    - id: IPMK101.horizontal_beam_position_binding
-      subject: IPMK101
+      object: inst:RK11.STAT
+    - id: inst:IPMK101.horizontal_beam_position_binding
+      subject: inst:IPMK101
       predicate: has_readback_signal
-      object: IPMK101.XPOS
-    - id: IPMK101.vertical_beam_position_binding
-      subject: IPMK101
+      object: inst:IPMK101.XPOS
+    - id: inst:IPMK101.vertical_beam_position_binding
+      subject: inst:IPMK101
       predicate: has_readback_signal
-      object: IPMK101.YPOS
-    - id: IPMK101.status_binding
-      subject: IPMK101
+      object: inst:IPMK101.YPOS
+    - id: inst:IPMK101.status_binding
+      subject: inst:IPMK101
       predicate: has_readback_signal
-      object: IPMK101.STAT
-    - id: IPMK102.horizontal_beam_position_binding
-      subject: IPMK102
+      object: inst:IPMK101.STAT
+    - id: inst:IPMK102.horizontal_beam_position_binding
+      subject: inst:IPMK102
       predicate: has_readback_signal
-      object: IPMK102.XPOS
-    - id: IPMK102.vertical_beam_position_binding
-      subject: IPMK102
+      object: inst:IPMK102.XPOS
+    - id: inst:IPMK102.vertical_beam_position_binding
+      subject: inst:IPMK102
       predicate: has_readback_signal
-      object: IPMK102.YPOS
-    - id: IPMK102.status_binding
-      subject: IPMK102
+      object: inst:IPMK102.YPOS
+    - id: inst:IPMK102.status_binding
+      subject: inst:IPMK102
       predicate: has_readback_signal
-      object: IPMK102.STAT
-    - id: MBHK101H.current_setpoint_binding
-      subject: MBHK101H
+      object: inst:IPMK102.STAT
+    - id: inst:MBHK101H.current_setpoint_binding
+      subject: inst:MBHK101H
       predicate: has_setpoint_signal
-      object: MBHK101H.S
-    - id: MBHK101H.current_readback_binding
-      subject: MBHK101H
+      object: inst:MBHK101H.S
+    - id: inst:MBHK101H.current_readback_binding
+      subject: inst:MBHK101H
       predicate: has_readback_signal
-      object: MBHK101HM
-    - id: MBHK101H.current_min_binding
-      subject: MBHK101H
+      object: inst:MBHK101HM
+    - id: inst:MBHK101H.current_min_binding
+      subject: inst:MBHK101H
       predicate: has_limit_signal
-      object: MBHK101H.HMIN
-    - id: MBHK101H.current_max_binding
-      subject: MBHK101H
+      object: inst:MBHK101H.HMIN
+    - id: inst:MBHK101H.current_max_binding
+      subject: inst:MBHK101H
       predicate: has_limit_signal
-      object: MBHK101H.HMAX
-    - id: MBHK101H.status_binding
-      subject: MBHK101H
+      object: inst:MBHK101H.HMAX
+    - id: inst:MBHK101H.status_binding
+      subject: inst:MBHK101H
       predicate: has_readback_signal
-      object: MBHK101H.STAT
-    - id: MBHK101H.kick_setpoint_binding
-      subject: MBHK101H
+      object: inst:MBHK101H.STAT
+    - id: inst:MBHK101H.kick_setpoint_binding
+      subject: inst:MBHK101H
       predicate: has_setpoint_signal
-      object: MBHK101H.KICK
-    - id: MBHK101V.current_setpoint_binding
-      subject: MBHK101V
+      object: inst:MBHK101H.KICK
+    - id: inst:MBHK101V.current_setpoint_binding
+      subject: inst:MBHK101V
       predicate: has_setpoint_signal
-      object: MBHK101V.S
-    - id: MBHK101V.current_readback_binding
-      subject: MBHK101V
+      object: inst:MBHK101V.S
+    - id: inst:MBHK101V.current_readback_binding
+      subject: inst:MBHK101V
       predicate: has_readback_signal
-      object: MBHK101VM
-    - id: MBHK101V.current_min_binding
-      subject: MBHK101V
+      object: inst:MBHK101VM
+    - id: inst:MBHK101V.current_min_binding
+      subject: inst:MBHK101V
       predicate: has_limit_signal
-      object: MBHK101V.HMIN
-    - id: MBHK101V.current_max_binding
-      subject: MBHK101V
+      object: inst:MBHK101V.HMIN
+    - id: inst:MBHK101V.current_max_binding
+      subject: inst:MBHK101V
       predicate: has_limit_signal
-      object: MBHK101V.HMAX
-    - id: MBHK101V.status_binding
-      subject: MBHK101V
+      object: inst:MBHK101V.HMAX
+    - id: inst:MBHK101V.status_binding
+      subject: inst:MBHK101V
       predicate: has_readback_signal
-      object: MBHK101V.STAT
-    - id: MBHK101V.kick_setpoint_binding
-      subject: MBHK101V
+      object: inst:MBHK101V.STAT
+    - id: inst:MBHK101V.kick_setpoint_binding
+      subject: inst:MBHK101V
       predicate: has_setpoint_signal
-      object: MBHK101V.KICK
-    - id: MFRM604V.current_setpoint_binding
-      subject: MFRM604V
+      object: inst:MBHK101V.KICK
+    - id: inst:MFRM604V.current_setpoint_binding
+      subject: inst:MFRM604V
       predicate: has_setpoint_signal
-      object: MFRM604V.S
-    - id: MFRM604V.current_readback_binding
-      subject: MFRM604V
+      object: inst:MFRM604V.S
+    - id: inst:MFRM604V.current_readback_binding
+      subject: inst:MFRM604V
       predicate: has_readback_signal
-      object: MFRM604VM
-    - id: MFRM604V.current_min_binding
-      subject: MFRM604V
+      object: inst:MFRM604VM
+    - id: inst:MFRM604V.current_min_binding
+      subject: inst:MFRM604V
       predicate: has_limit_signal
-      object: MFRM604V.HMIN
-    - id: MFRM604V.current_max_binding
-      subject: MFRM604V
+      object: inst:MFRM604V.HMIN
+    - id: inst:MFRM604V.current_max_binding
+      subject: inst:MFRM604V
       predicate: has_limit_signal
-      object: MFRM604V.HMAX
-    - id: MFRM604V.status_binding
-      subject: MFRM604V
+      object: inst:MFRM604V.HMAX
+    - id: inst:MFRM604V.status_binding
+      subject: inst:MFRM604V
       predicate: has_readback_signal
-      object: MFRM604V.STAT
-    - id: MFRM604V.kick_setpoint_binding
-      subject: MFRM604V
+      object: inst:MFRM604V.STAT
+    - id: inst:MFRM604V.kick_setpoint_binding
+      subject: inst:MFRM604V
       predicate: has_setpoint_signal
-      object: MFRM604V.KICK
-    - id: MFRM604H.current_setpoint_binding
-      subject: MFRM604H
+      object: inst:MFRM604V.KICK
+    - id: inst:MFRM604H.current_setpoint_binding
+      subject: inst:MFRM604H
       predicate: has_setpoint_signal
-      object: MFRM604H.S
-    - id: MFRM604H.current_readback_binding
-      subject: MFRM604H
+      object: inst:MFRM604H.S
+    - id: inst:MFRM604H.current_readback_binding
+      subject: inst:MFRM604H
       predicate: has_readback_signal
-      object: MFRM604HM
-    - id: MFRM604H.current_min_binding
-      subject: MFRM604H
+      object: inst:MFRM604HM
+    - id: inst:MFRM604H.current_min_binding
+      subject: inst:MFRM604H
       predicate: has_limit_signal
-      object: MFRM604H.HMIN
-    - id: MFRM604H.current_max_binding
-      subject: MFRM604H
+      object: inst:MFRM604H.HMIN
+    - id: inst:MFRM604H.current_max_binding
+      subject: inst:MFRM604H
       predicate: has_limit_signal
-      object: MFRM604H.HMAX
-    - id: MFRM604H.status_binding
-      subject: MFRM604H
+      object: inst:MFRM604H.HMAX
+    - id: inst:MFRM604H.status_binding
+      subject: inst:MFRM604H
       predicate: has_readback_signal
-      object: MFRM604H.STAT
-    - id: MFRM604H.kick_setpoint_binding
-      subject: MFRM604H
+      object: inst:MFRM604H.STAT
+    - id: inst:MFRM604H.kick_setpoint_binding
+      subject: inst:MFRM604H
       predicate: has_setpoint_signal
-      object: MFRM604H.KICK
-    - id: MDSK201.current_setpoint_binding
-      subject: MDSK201
+      object: inst:MFRM604H.KICK
+    - id: inst:MDSK201.current_setpoint_binding
+      subject: inst:MDSK201
       predicate: has_setpoint_signal
-      object: MDSK201.S
-    - id: MDSK201.current_readback_binding
-      subject: MDSK201
+      object: inst:MDSK201.S
+    - id: inst:MDSK201.current_readback_binding
+      subject: inst:MDSK201
       predicate: has_readback_signal
-      object: MDSK201M
-    - id: MDSK201.current_min_binding
-      subject: MDSK201
+      object: inst:MDSK201M
+    - id: inst:MDSK201.current_min_binding
+      subject: inst:MDSK201
       predicate: has_limit_signal
-      object: MDSK201.HMIN
-    - id: MDSK201.current_max_binding
-      subject: MDSK201
+      object: inst:MDSK201.HMIN
+    - id: inst:MDSK201.current_max_binding
+      subject: inst:MDSK201
       predicate: has_limit_signal
-      object: MDSK201.HMAX
-    - id: MDSK201.status_binding
-      subject: MDSK201
+      object: inst:MDSK201.HMAX
+    - id: inst:MDSK201.status_binding
+      subject: inst:MDSK201
       predicate: has_readback_signal
-      object: MDSK201.STAT
-    - id: MDSK201.field_setpoint_binding
-      subject: MDSK201
+      object: inst:MDSK201.STAT
+    - id: inst:MDSK201.field_setpoint_binding
+      subject: inst:MDSK201
       predicate: has_setpoint_signal
-      object: MDSK201.BDL
-    - id: MQWK202.current_setpoint_binding
-      subject: MQWK202
+      object: inst:MDSK201.BDL
+    - id: inst:MQWK202.current_setpoint_binding
+      subject: inst:MQWK202
       predicate: has_setpoint_signal
-      object: MQWK202.S
-    - id: MQWK202.current_readback_binding
-      subject: MQWK202
+      object: inst:MQWK202.S
+    - id: inst:MQWK202.current_readback_binding
+      subject: inst:MQWK202
       predicate: has_readback_signal
-      object: MQWK202M
-    - id: MQWK202.current_min_binding
-      subject: MQWK202
+      object: inst:MQWK202M
+    - id: inst:MQWK202.current_min_binding
+      subject: inst:MQWK202
       predicate: has_limit_signal
-      object: MQWK202.HMIN
-    - id: MQWK202.current_max_binding
-      subject: MQWK202
+      object: inst:MQWK202.HMIN
+    - id: inst:MQWK202.current_max_binding
+      subject: inst:MQWK202
       predicate: has_limit_signal
-      object: MQWK202.HMAX
-    - id: MQWK202.status_binding
-      subject: MQWK202
+      object: inst:MQWK202.HMAX
+    - id: inst:MQWK202.status_binding
+      subject: inst:MQWK202
       predicate: has_readback_signal
-      object: MQWK202.STAT
-    - id: MQWK202.strength_setpoint_binding
-      subject: MQWK202
+      object: inst:MQWK202.STAT
+    - id: inst:MQWK202.strength_setpoint_binding
+      subject: inst:MQWK202
       predicate: has_setpoint_signal
-      object: MQWK202.BDL
-    - id: RM11.gradient_setpoint_binding
-      subject: RM11
+      object: inst:MQWK202.BDL
+    - id: inst:RM11.gradient_setpoint_binding
+      subject: inst:RM11
       predicate: has_setpoint_signal
-      object: RM11.GET
-    - id: RM11.gradient_readback_binding
-      subject: RM11
+      object: inst:RM11.GET
+    - id: inst:RM11.gradient_readback_binding
+      subject: inst:RM11
       predicate: has_readback_signal
-      object: RM11.GMES
-    - id: RM11.status_binding
-      subject: RM11
+      object: inst:RM11.GMES
+    - id: inst:RM11.status_binding
+      subject: inst:RM11
       predicate: has_readback_signal
-      object: RM11.STAT
+      object: inst:RM11.STAT
   component_relations:
-    - id: RF_LASER_precedes_S_IS_20CM
-      subject: RF_LASER
+    - id: inst:RF_LASER_precedes_S_IS_20CM
+      subject: inst:RF_LASER
       predicate: precedes
-      object: S_IS_20CM
+      object: inst:S_IS_20CM
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: S_IS_20CM_precedes_IPMK101
-      subject: S_IS_20CM
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:S_IS_20CM_precedes_IPMK101
+      subject: inst:S_IS_20CM
       predicate: precedes
-      object: IPMK101
+      object: inst:IPMK101
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: IPMK101_precedes_MBHK101H
-      subject: IPMK101
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:IPMK101_precedes_MBHK101H
+      subject: inst:IPMK101
       predicate: precedes
-      object: MBHK101H
+      object: inst:MBHK101H
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: MBHK101H_precedes_MBHK101V
-      subject: MBHK101H
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:MBHK101H_precedes_MBHK101V
+      subject: inst:MBHK101H
       predicate: precedes
-      object: MBHK101V
+      object: inst:MBHK101V
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: MBHK101V_precedes_MFHK101
-      subject: MBHK101V
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:MBHK101V_precedes_MFHK101
+      subject: inst:MBHK101V
       predicate: precedes
-      object: MFHK101
+      object: inst:MFHK101
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: MFHK101_precedes_IPMK102
-      subject: MFHK101
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:MFHK101_precedes_IPMK102
+      subject: inst:MFHK101
       predicate: precedes
-      object: IPMK102
+      object: inst:IPMK102
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: IPMK102_precedes_ITVK201
-      subject: IPMK102
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:IPMK102_precedes_ITVK201
+      subject: inst:IPMK102
       predicate: precedes
-      object: ITVK201
+      object: inst:ITVK201
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: ITVK201_precedes_MDSK201
-      subject: ITVK201
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:ITVK201_precedes_MDSK201
+      subject: inst:ITVK201
       predicate: precedes
-      object: MDSK201
+      object: inst:MDSK201
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: MDSK201_precedes_MQWK202
-      subject: MDSK201
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:MDSK201_precedes_MQWK202
+      subject: inst:MDSK201
       predicate: precedes
-      object: MQWK202
+      object: inst:MQWK202
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: MQWK202_precedes_IFYK203
-      subject: MQWK202
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:MQWK202_precedes_IFYK203
+      subject: inst:MQWK202
       predicate: precedes
-      object: IFYK203
+      object: inst:IFYK203
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: IFYK203_precedes_ISLK302
-      subject: IFYK203
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:IFYK203_precedes_ISLK302
+      subject: inst:IFYK203
       predicate: precedes
-      object: ISLK302
+      object: inst:ISLK302
       context: beamline_order
-      beamline_context: GUN_thru_MV
-    - id: ISLK302_precedes_IYGK302
-      subject: ISLK302
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:ISLK302_precedes_IYGK302
+      subject: inst:ISLK302
       predicate: precedes
-      object: IYGK302
+      object: inst:IYGK302
       context: beamline_order
-      beamline_context: GUN_thru_MV
+      beamline_context: inst:GUN_thru_MV

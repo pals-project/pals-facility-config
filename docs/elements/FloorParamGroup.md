@@ -39,7 +39,6 @@ URI: [pals:FloorParamGroup](https://pals-project.readthedocs.io/FloorParamGroup)
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -75,6 +74,7 @@ URI: [pals:FloorParamGroup](https://pals-project.readthedocs.io/FloorParamGroup)
 | [DiagnosticDevice](DiagnosticDevice.md) | [FloorP](FloorP.md) | range | [FloorParamGroup](FloorParamGroup.md) |
 | [BeamProfileMonitor](BeamProfileMonitor.md) | [FloorP](FloorP.md) | range | [FloorParamGroup](FloorParamGroup.md) |
 | [BeamPositionMonitor](BeamPositionMonitor.md) | [FloorP](FloorP.md) | range | [FloorParamGroup](FloorParamGroup.md) |
+| [Aperture](Aperture.md) | [FloorP](FloorP.md) | range | [FloorParamGroup](FloorParamGroup.md) |
 | [RadiationMonitor](RadiationMonitor.md) | [FloorP](FloorP.md) | range | [FloorParamGroup](FloorParamGroup.md) |
 | [Cavity](Cavity.md) | [FloorP](FloorP.md) | range | [FloorParamGroup](FloorParamGroup.md) |
 | [CrabCavity](CrabCavity.md) | [FloorP](FloorP.md) | range | [FloorParamGroup](FloorParamGroup.md) |
@@ -92,8 +92,12 @@ URI: [pals:FloorParamGroup](https://pals-project.readthedocs.io/FloorParamGroup)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

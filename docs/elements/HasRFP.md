@@ -36,6 +36,12 @@ URI: [pals:HasRFP](https://pals-project.readthedocs.io/HasRFP)
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -59,8 +65,12 @@ URI: [pals:HasRFP](https://pals-project.readthedocs.io/HasRFP)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

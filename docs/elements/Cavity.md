@@ -172,7 +172,6 @@ URI: [pals:Cavity](https://pals-project.readthedocs.io/Cavity)
             * [RFCavity](RFCavity.md) [ [HasRFP](HasRFP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -200,8 +199,12 @@ URI: [pals:Cavity](https://pals-project.readthedocs.io/Cavity)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -410,10 +413,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: Cavity
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

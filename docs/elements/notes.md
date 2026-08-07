@@ -22,7 +22,7 @@ Alias: notes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [PALS](PALS.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
+| [PALSAccelerator](PALSAccelerator.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
 
 
 
@@ -31,15 +31,36 @@ Alias: notes
 
 ## Properties
 
-* Range: [String](String.md)
+### Type and Range
 
-* Multivalued: True
+| Property | Value |
+| --- | --- |
+| Range | [String](String.md) |
+| Domain Of | [PALSAccelerator](PALSAccelerator.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+| Multivalued | Yes |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [PALSAccelerator](PALSAccelerator.md) |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 
@@ -73,9 +94,9 @@ description: Additional notes or comments about the representation of a particle
 from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: notes
-owner: PALS
+owner: PALSAccelerator
 domain_of:
-- PALS
+- PALSAccelerator
 range: string
 multivalued: true
 inlined: true

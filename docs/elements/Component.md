@@ -61,7 +61,6 @@ URI: [pals:Component](https://pals-project.readthedocs.io/Component)
     * [VirtualComponent](VirtualComponent.md) [ [HasFloorP](HasFloorP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -89,8 +88,12 @@ URI: [pals:Component](https://pals-project.readthedocs.io/Component)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -200,10 +203,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: Component
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

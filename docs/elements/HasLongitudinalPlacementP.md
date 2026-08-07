@@ -38,6 +38,12 @@ URI: [pals:HasLongitudinalPlacementP](https://pals-project.readthedocs.io/HasLon
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -62,8 +68,12 @@ URI: [pals:HasLongitudinalPlacementP](https://pals-project.readthedocs.io/HasLon
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

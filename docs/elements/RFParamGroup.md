@@ -65,7 +65,6 @@ URI: [pals:RFParamGroup](https://pals-project.readthedocs.io/RFParamGroup)
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -100,8 +99,12 @@ URI: [pals:RFParamGroup](https://pals-project.readthedocs.io/RFParamGroup)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

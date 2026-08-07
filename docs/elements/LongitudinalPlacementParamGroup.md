@@ -35,7 +35,6 @@ URI: [pals:LongitudinalPlacementParamGroup](https://pals-project.readthedocs.io/
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -65,6 +64,7 @@ URI: [pals:LongitudinalPlacementParamGroup](https://pals-project.readthedocs.io/
 | [DiagnosticDevice](DiagnosticDevice.md) | [LongitudinalPlacementP](LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) |
 | [BeamProfileMonitor](BeamProfileMonitor.md) | [LongitudinalPlacementP](LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) |
 | [BeamPositionMonitor](BeamPositionMonitor.md) | [LongitudinalPlacementP](LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) |
+| [Aperture](Aperture.md) | [LongitudinalPlacementP](LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) |
 | [RadiationMonitor](RadiationMonitor.md) | [LongitudinalPlacementP](LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) |
 | [Cavity](Cavity.md) | [LongitudinalPlacementP](LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) |
 | [CrabCavity](CrabCavity.md) | [LongitudinalPlacementP](LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) |
@@ -91,8 +91,12 @@ URI: [pals:LongitudinalPlacementParamGroup](https://pals-project.readthedocs.io/
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

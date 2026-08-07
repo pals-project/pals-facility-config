@@ -42,6 +42,12 @@ URI: [pals:HasFloorP](https://pals-project.readthedocs.io/HasFloorP)
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -68,8 +74,12 @@ URI: [pals:HasFloorP](https://pals-project.readthedocs.io/HasFloorP)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

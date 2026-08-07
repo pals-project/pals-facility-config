@@ -22,7 +22,7 @@ Alias: version
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [PALS](PALS.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
+| [PALSAccelerator](PALSAccelerator.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
 
 
 
@@ -31,15 +31,42 @@ Alias: version
 
 ## Properties
 
-* Range: [String](String.md)
+### Type and Range
 
-* Regex pattern: `^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$`
+| Property | Value |
+| --- | --- |
+| Range | [String](String.md) |
+| Domain Of | [PALSAccelerator](PALSAccelerator.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [PALSAccelerator](PALSAccelerator.md) |
+
+
+### Value Constraints
+
+| Property | Value |
+| --- | --- |
+| Regex Pattern | `^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$` |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 
@@ -72,9 +99,9 @@ description: Version of the representation of a particle accelerator and its ope
 from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: version
-owner: PALS
+owner: PALSAccelerator
 domain_of:
-- PALS
+- PALSAccelerator
 range: string
 pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
 

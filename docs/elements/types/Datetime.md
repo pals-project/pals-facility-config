@@ -1,17 +1,53 @@
+# Type: Datetime 
 
-# Type: datetime
 
-The combination of a date and time
 
-URI: [linkml:Datetime](https://w3id.org/linkml/Datetime)
 
-|  |  |  |
-| --- | --- | --- |
-| Root (builtin) type | | **XSDDateTime** |
-| Representation | | str |
+_The combination of a date and time_
 
-## Other properties
 
-|  |  |  |
-| --- | --- | --- |
-| **Exact Mappings:** | | schema:DateTime |
+
+URI: [xsd:dateTime](http://www.w3.org/2001/XMLSchema#dateTime)
+
+## Type Properties
+
+| Property | Value |
+| --- | --- |
+| Base | `XSDDateTime` |
+| Type URI | [xsd:dateTime](http://www.w3.org/2001/XMLSchema#dateTime) |
+| Representation | `str` |
+
+
+
+
+
+
+## Notes
+
+* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "datetime".
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | xsd:dateTime |
+| native | pals:datetime |
+| exact | schema:DateTime |
+
+

@@ -44,7 +44,6 @@ URI: [pals:Author](https://pals-project.readthedocs.io/Author)
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -62,7 +61,12 @@ URI: [pals:Author](https://pals-project.readthedocs.io/Author)
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [PALS](PALS.md) | [authors](authors.md) | range | [Author](Author.md) |
+| [PALSAccelerator](PALSAccelerator.md) | [authors](authors.md) | range | [Author](Author.md) |
+
+
+
+
+
 
 
 
@@ -71,7 +75,6 @@ URI: [pals:Author](https://pals-project.readthedocs.io/Author)
 
 
 ## Identifier and Mapping Information
-
 
 
 
@@ -185,7 +188,7 @@ attributes:
     alias: affiliation
     owner: Author
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Author
     range: Affiliation
     inlined: true

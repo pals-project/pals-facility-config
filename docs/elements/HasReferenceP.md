@@ -20,6 +20,8 @@ URI: [pals:HasReferenceP](https://pals-project.readthedocs.io/HasReferenceP)
         click BeamProfileMonitor href "../BeamProfileMonitor/"
       HasReferenceP <|-- BeamPositionMonitor
         click BeamPositionMonitor href "../BeamPositionMonitor/"
+      HasReferenceP <|-- Aperture
+        click Aperture href "../Aperture/"
       HasReferenceP <|-- Cavity
         click Cavity href "../Cavity/"
       
@@ -42,6 +44,12 @@ URI: [pals:HasReferenceP](https://pals-project.readthedocs.io/HasReferenceP)
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -58,6 +66,7 @@ URI: [pals:HasReferenceP](https://pals-project.readthedocs.io/HasReferenceP)
 | [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |
 | [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |
 | [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |
+| [Aperture](Aperture.md) | A diagnostic or limiting aperture element used to constrain or characterize b... |
 | [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |
 
 
@@ -68,8 +77,12 @@ URI: [pals:HasReferenceP](https://pals-project.readthedocs.io/HasReferenceP)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

@@ -40,6 +40,12 @@ URI: [pals:HasMagneticMultipoleP](https://pals-project.readthedocs.io/HasMagneti
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -65,8 +71,12 @@ URI: [pals:HasMagneticMultipoleP](https://pals-project.readthedocs.io/HasMagneti
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

@@ -31,7 +31,29 @@ Alias: z
 
 ## Properties
 
-* Range: [Float](Float.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [Float](Float.md) |
+| Domain Of | [FloorParamGroup](FloorParamGroup.md) |
+| Slot URI | [pals:z](https://pals-project.readthedocs.io/z) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [FloorParamGroup](FloorParamGroup.md) |
+
+
+
+
+
+
 
 
 
@@ -43,8 +65,9 @@ Alias: z
 * z coordinate
 
 
-## Identifier and Mapping Information
 
+
+## Identifier and Mapping Information
 
 
 

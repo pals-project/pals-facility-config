@@ -22,27 +22,28 @@ Alias: LongitudinalPlacementP
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
-| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
-| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
-| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
-| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
-| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
-| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
-| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
-| [DiagnosticDevice](DiagnosticDevice.md) | An accelerator device used to measure beam or machine state |  no  |
-| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
-| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
-| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
 | [Kicker](Kicker.md) | A magnet primarily used to steer the beam |  no  |
-| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
-| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
-| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
-| [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
-| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
-| [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
 | [PhysicalComponent](PhysicalComponent.md) | A physical item that participates in or supports accelerator operation |  no  |
+| [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
+| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
+| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
 | [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) |  |  no  |
+| [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
+| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
+| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [DiagnosticDevice](DiagnosticDevice.md) | An accelerator device used to measure beam or machine state |  no  |
+| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
+| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
+| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
+| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
+| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
+| [Aperture](Aperture.md) | A diagnostic or limiting aperture element used to constrain or characterize b... |  no  |
+| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
+| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
+| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
+| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
 
 
 
@@ -51,13 +52,35 @@ Alias: LongitudinalPlacementP
 
 ## Properties
 
-* Range: [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md) |
+| Domain Of | [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

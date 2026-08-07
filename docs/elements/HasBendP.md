@@ -36,6 +36,12 @@ URI: [pals:HasBendP](https://pals-project.readthedocs.io/HasBendP)
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -59,8 +65,12 @@ URI: [pals:HasBendP](https://pals-project.readthedocs.io/HasBendP)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

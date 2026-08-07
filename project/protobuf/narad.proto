@@ -33,6 +33,20 @@ message Affiliation
   string name = 0
  repeated  identifier identifiers = 0
  }
+// A diagnostic or limiting aperture element used to constrain or characterize beam passage.
+message Aperture
+ {
+  string id = 0
+  string kind = 0
+ repeated  string nativeTypes = 0
+  metaParamGroup metaP = 0
+ repeated  physicalFunctionEnum functions = 0
+  physicalRelationEnum beamlineRelation = 0
+  floorParamGroup floorP = 0
+  longitudinalPlacementParamGroup longitudinalPlacementP = 0
+  referenceParamGroup referenceP = 0
+  twissParamGroup twissP = 0
+ }
 // Contains authorship information for a representation of an accelerator facility and its operations.
 message Author
  {
@@ -384,7 +398,7 @@ message Octupole
   magneticMultipoleParamGroup magneticMultipoleP = 0
  }
 // Root container for accelerator core components, semantic signals, and local bindings.
-message PALS
+message PALSAccelerator
  {
   string kind = 0
   string description = 0

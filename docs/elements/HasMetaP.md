@@ -38,6 +38,12 @@ URI: [pals:HasMetaP](https://pals-project.readthedocs.io/HasMetaP)
 
 <!-- no inheritance hierarchy -->
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
 
 ## Slots
 
@@ -62,8 +68,12 @@ URI: [pals:HasMetaP](https://pals-project.readthedocs.io/HasMetaP)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

@@ -145,7 +145,6 @@ URI: [pals:Solenoid](https://pals-project.readthedocs.io/Solenoid)
             * **Solenoid** [ [HasSolenoidP](HasSolenoidP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -172,8 +171,12 @@ URI: [pals:Solenoid](https://pals-project.readthedocs.io/Solenoid)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -370,10 +373,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: Solenoid
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

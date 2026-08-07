@@ -109,6 +109,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "ACKicker"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -189,6 +192,107 @@
                 "id"
             ],
             "title": "Affiliation",
+            "type": "object"
+        },
+        "Aperture": {
+            "additionalProperties": false,
+            "description": "A diagnostic or limiting aperture element used to constrain or characterize beam passage.",
+            "properties": {
+                "FloorP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FloorParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "LongitudinalPlacementP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/LongitudinalPlacementParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "MetaP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MetaParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "ReferenceP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ReferenceParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "TwissP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TwissParamGroup"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS)."
+                },
+                "beamline_relation": {
+                    "$ref": "#/$defs/PhysicalRelationEnum",
+                    "description": "The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems."
+                },
+                "functions": {
+                    "description": "The function of the physical component,  which can be used to identify the component across different source systems.",
+                    "items": {
+                        "$ref": "#/$defs/PhysicalFunctionEnum"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for the instance.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Aperture"
+                    ],
+                    "type": "string"
+                },
+                "native_types": {
+                    "description": "The native type of the component in the source system, which can be used to identify the component across different source systems.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "functions",
+                "beamline_relation",
+                "id",
+                "kind"
+            ],
+            "title": "Aperture",
             "type": "object"
         },
         "Author": {
@@ -301,6 +405,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "BeamLine"
+                    ],
                     "type": "string"
                 },
                 "length": {
@@ -405,6 +512,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "BeamLineSection"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -514,6 +624,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "BeamPositionMonitor"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -623,6 +736,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "BeamProfileMonitor"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -765,6 +881,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Bend"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -1071,6 +1190,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "BookkeepingComponent"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -1323,6 +1445,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "CrabCavity"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -1410,6 +1535,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "DiagnosticDevice"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -1488,7 +1616,77 @@
                 "components": {
                     "description": "A list of physical components in the accelerator system.",
                     "items": {
-                        "$ref": "#/$defs/Component"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/PhysicalComponent"
+                            },
+                            {
+                                "$ref": "#/$defs/VirtualComponent"
+                            },
+                            {
+                                "$ref": "#/$defs/BeamLine"
+                            },
+                            {
+                                "$ref": "#/$defs/BookkeepingComponent"
+                            },
+                            {
+                                "$ref": "#/$defs/Marker"
+                            },
+                            {
+                                "$ref": "#/$defs/BeamLineSection"
+                            },
+                            {
+                                "$ref": "#/$defs/DiagnosticDevice"
+                            },
+                            {
+                                "$ref": "#/$defs/SupportingFacilityComponent"
+                            },
+                            {
+                                "$ref": "#/$defs/CrabCavity"
+                            },
+                            {
+                                "$ref": "#/$defs/NormalConductingRFCavity"
+                            },
+                            {
+                                "$ref": "#/$defs/SuperConductingRFCavity"
+                            },
+                            {
+                                "$ref": "#/$defs/BeamProfileMonitor"
+                            },
+                            {
+                                "$ref": "#/$defs/BeamPositionMonitor"
+                            },
+                            {
+                                "$ref": "#/$defs/Aperture"
+                            },
+                            {
+                                "$ref": "#/$defs/RadiationMonitor"
+                            },
+                            {
+                                "$ref": "#/$defs/Solenoid"
+                            },
+                            {
+                                "$ref": "#/$defs/Multipole"
+                            },
+                            {
+                                "$ref": "#/$defs/Kicker"
+                            },
+                            {
+                                "$ref": "#/$defs/ACKicker"
+                            },
+                            {
+                                "$ref": "#/$defs/Bend"
+                            },
+                            {
+                                "$ref": "#/$defs/Quadrupole"
+                            },
+                            {
+                                "$ref": "#/$defs/Octupole"
+                            },
+                            {
+                                "$ref": "#/$defs/Sextupole"
+                            }
+                        ]
                     },
                     "type": [
                         "array",
@@ -1734,6 +1932,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Kicker"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -1893,6 +2094,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Marker"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -2063,6 +2267,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Multipole"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -2506,6 +2713,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "NormalConductingRFCavity"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -2637,6 +2847,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Octupole"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -2659,7 +2872,7 @@
             "title": "Octupole",
             "type": "object"
         },
-        "PALS": {
+        "PALSAccelerator": {
             "additionalProperties": false,
             "description": "Root container for accelerator core components, semantic signals, and local bindings.",
             "properties": {
@@ -2704,6 +2917,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "PALSAccelerator"
+                    ],
                     "type": "string"
                 },
                 "notes": {
@@ -2728,7 +2944,7 @@
             "required": [
                 "kind"
             ],
-            "title": "PALS",
+            "title": "PALSAccelerator",
             "type": "object"
         },
         "PhysicalComponent": {
@@ -2785,6 +3001,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "PhysicalComponent"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -2955,6 +3174,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Quadrupole"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -3132,6 +3354,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "RadiationMonitor"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -3334,6 +3559,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Sextupole"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -3402,6 +3630,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Signal"
+                    ],
                     "type": "string"
                 },
                 "native_data_type": {
@@ -3596,6 +3827,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "Solenoid"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -3803,6 +4037,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "SuperConductingRFCavity"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -3890,6 +4127,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "SupportingFacilityComponent"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -4064,6 +4304,9 @@
                 },
                 "kind": {
                     "description": "The LinkML class name of this instance.",
+                    "enum": [
+                        "VirtualComponent"
+                    ],
                     "type": "string"
                 },
                 "native_types": {
@@ -4165,6 +4408,9 @@
         },
         "kind": {
             "description": "The LinkML class name of this instance.",
+            "enum": [
+                "PALSAccelerator"
+            ],
             "type": "string"
         },
         "notes": {

@@ -87,7 +87,6 @@ URI: [pals:BendParamGroup](https://pals-project.readthedocs.io/BendParamGroup)
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -150,8 +149,12 @@ URI: [pals:BendParamGroup](https://pals-project.readthedocs.io/BendParamGroup)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

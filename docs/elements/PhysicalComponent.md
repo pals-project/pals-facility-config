@@ -114,7 +114,6 @@ URI: [pals:PhysicalComponent](https://pals-project.readthedocs.io/PhysicalCompon
         * [SupportingFacilityComponent](SupportingFacilityComponent.md) [ [HasFloorP](HasFloorP.md) [HasLongitudinalPlacementP](HasLongitudinalPlacementP.md) [HasBodyShiftP](HasBodyShiftP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -144,8 +143,12 @@ URI: [pals:PhysicalComponent](https://pals-project.readthedocs.io/PhysicalCompon
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -319,10 +322,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: PhysicalComponent
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

@@ -27,6 +27,8 @@ URI: [pals:DiagnosticDevice](https://pals-project.readthedocs.io/DiagnosticDevic
         click BeamProfileMonitor href "../BeamProfileMonitor/"
       DiagnosticDevice <|-- BeamPositionMonitor
         click BeamPositionMonitor href "../BeamPositionMonitor/"
+      DiagnosticDevice <|-- Aperture
+        click Aperture href "../Aperture/"
       DiagnosticDevice <|-- RadiationMonitor
         click RadiationMonitor href "../RadiationMonitor/"
       
@@ -105,8 +107,8 @@ URI: [pals:DiagnosticDevice](https://pals-project.readthedocs.io/DiagnosticDevic
         * **DiagnosticDevice**
             * [BeamProfileMonitor](BeamProfileMonitor.md) [ [HasReferenceP](HasReferenceP.md) [HasBodyShiftP](HasBodyShiftP.md) [HasTwissP](HasTwissP.md)]
             * [BeamPositionMonitor](BeamPositionMonitor.md) [ [HasReferenceP](HasReferenceP.md) [HasBodyShiftP](HasBodyShiftP.md) [HasTwissP](HasTwissP.md)]
+            * [Aperture](Aperture.md) [ [HasReferenceP](HasReferenceP.md) [HasTwissP](HasTwissP.md)]
             * [RadiationMonitor](RadiationMonitor.md) [ [HasBodyShiftP](HasBodyShiftP.md)]
-
 
 
 ## Slots
@@ -131,8 +133,12 @@ URI: [pals:DiagnosticDevice](https://pals-project.readthedocs.io/DiagnosticDevic
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -267,10 +273,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: DiagnosticDevice
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

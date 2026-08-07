@@ -155,7 +155,6 @@ URI: [pals:Quadrupole](https://pals-project.readthedocs.io/Quadrupole)
                 * **Quadrupole**
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -183,8 +182,12 @@ URI: [pals:Quadrupole](https://pals-project.readthedocs.io/Quadrupole)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -390,10 +393,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: Quadrupole
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

@@ -31,7 +31,29 @@ Alias: z_offset
 
 ## Properties
 
-* Range: [Float](Float.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [Float](Float.md) |
+| Domain Of | [BodyShiftParamGroup](BodyShiftParamGroup.md) |
+| Slot URI | [pals:z_offset](https://pals-project.readthedocs.io/z_offset) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [BodyShiftParamGroup](BodyShiftParamGroup.md) |
+
+
+
+
+
+
 
 
 
@@ -43,8 +65,9 @@ Alias: z_offset
 * GlobalOffsetZ
 
 
-## Identifier and Mapping Information
 
+
+## Identifier and Mapping Information
 
 
 

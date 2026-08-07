@@ -1,17 +1,56 @@
+# Type: Objectidentifier 
 
-# Type: objectidentifier
 
-A URI or CURIE that represents an object in the model.
 
-URI: [linkml:Objectidentifier](https://w3id.org/linkml/Objectidentifier)
 
-|  |  |  |
-| --- | --- | --- |
-| Root (builtin) type | | **ElementIdentifier** |
-| Representation | | str |
+_A URI or CURIE that represents an object in the model._
 
-## Other properties
 
-|  |  |  |
-| --- | --- | --- |
-| **Comments:** | | Used for inheritance and type checking |
+
+URI: [shex:iri](http://www.w3.org/ns/shex#iri)
+
+## Type Properties
+
+| Property | Value |
+| --- | --- |
+| Base | `ElementIdentifier` |
+| Type URI | [shex:iri](http://www.w3.org/ns/shex#iri) |
+| Representation | `str` |
+
+
+
+
+
+
+## Comments
+
+* Used for inheritance and type checking
+
+## Notes
+
+* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "objectidentifier".
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | shex:iri |
+| native | pals:objectidentifier |
+
+

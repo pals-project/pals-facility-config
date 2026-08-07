@@ -149,7 +149,6 @@ URI: [pals:Magnet](https://pals-project.readthedocs.io/Magnet)
             * [Kicker](Kicker.md) [ [HasElectricMultipoleP](HasElectricMultipoleP.md) [HasMagneticMultipoleP](HasMagneticMultipoleP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -175,8 +174,12 @@ URI: [pals:Magnet](https://pals-project.readthedocs.io/Magnet)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -360,10 +363,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: Magnet
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

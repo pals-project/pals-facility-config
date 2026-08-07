@@ -31,7 +31,29 @@ Alias: x
 
 ## Properties
 
-* Range: [Float](Float.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [Float](Float.md) |
+| Domain Of | [FloorParamGroup](FloorParamGroup.md) |
+| Slot URI | [pals:x](https://pals-project.readthedocs.io/x) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [FloorParamGroup](FloorParamGroup.md) |
+
+
+
+
+
+
 
 
 
@@ -43,8 +65,9 @@ Alias: x
 * x coordinate
 
 
-## Identifier and Mapping Information
 
+
+## Identifier and Mapping Information
 
 
 

@@ -31,15 +31,36 @@ Alias: additional_metadata
 
 ## Properties
 
-* Range: [AdditionalMetadata](AdditionalMetadata.md)
+### Type and Range
 
-* Multivalued: True
+| Property | Value |
+| --- | --- |
+| Range | [AdditionalMetadata](AdditionalMetadata.md) |
+| Domain Of | [MetaParamGroup](MetaParamGroup.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+| Multivalued | Yes |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [MetaParamGroup](MetaParamGroup.md) |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

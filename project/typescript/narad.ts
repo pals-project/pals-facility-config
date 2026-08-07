@@ -16,6 +16,7 @@ export type ACKickerId = string;
 export type DiagnosticDeviceId = string;
 export type BeamProfileMonitorId = string;
 export type BeamPositionMonitorId = string;
+export type ApertureId = string;
 export type RadiationMonitorId = string;
 export type CavityId = string;
 export type CrabCavityId = string;
@@ -26,7 +27,6 @@ export type SupportingFacilityComponentId = string;
 export type BookkeepingComponentId = string;
 export type MarkerId = string;
 export type BeamLineSectionId = string;
-export type AdditionalMetadataKey = string;
 export type RelationshipId = string;
 export type SignalBindingId = string;
 export type ComponentRelationId = string;
@@ -471,7 +471,7 @@ export enum ZeroPhaseEnum {
 /**
  * Root container for accelerator core components, semantic signals, and local bindings.
  */
-export interface PALS {
+export interface PALSAccelerator {
     /** The LinkML class name of this instance. */
     kind: string,
     /** A human-readable description of the instance. */
@@ -1058,6 +1058,13 @@ export interface BeamProfileMonitor extends DiagnosticDevice, HasReferenceP, Has
  * A diagnostic device used to measure transverse beam position.
  */
 export interface BeamPositionMonitor extends DiagnosticDevice, HasReferenceP, HasBodyShiftP, HasTwissP {
+}
+
+
+/**
+ * A diagnostic or limiting aperture element used to constrain or characterize beam passage.
+ */
+export interface Aperture extends DiagnosticDevice, HasReferenceP, HasTwissP {
 }
 
 

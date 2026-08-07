@@ -110,7 +110,6 @@ URI: [pals:RadiationMonitor](https://pals-project.readthedocs.io/RadiationMonito
             * **RadiationMonitor** [ [HasBodyShiftP](HasBodyShiftP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -134,8 +133,12 @@ URI: [pals:RadiationMonitor](https://pals-project.readthedocs.io/RadiationMonito
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -287,10 +290,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: RadiationMonitor
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

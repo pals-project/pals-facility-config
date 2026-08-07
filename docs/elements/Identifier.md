@@ -40,7 +40,6 @@ URI: [pals:Identifier](https://pals-project.readthedocs.io/Identifier)
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -65,8 +64,12 @@ URI: [pals:Identifier](https://pals-project.readthedocs.io/Identifier)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

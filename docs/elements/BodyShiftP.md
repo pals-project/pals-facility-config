@@ -22,28 +22,28 @@ Alias: BodyShiftP
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BeamLineSection](BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizat... |  no  |
-| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
-| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
-| [BookkeepingComponent](BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in t... |  no  |
-| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
-| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
-| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
-| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
-| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
 | [HasBodyShiftP](HasBodyShiftP.md) |  |  no  |
-| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
-| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
-| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
-| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
 | [Kicker](Kicker.md) | A magnet primarily used to steer the beam |  no  |
-| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
-| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
-| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
 | [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
-| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
-| [Marker](Marker.md) | A virtual component used as a reference point or marker in the beamline struc... |  no  |
+| [BeamLineSection](BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizat... |  no  |
+| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
+| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
 | [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
+| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
+| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [BookkeepingComponent](BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in t... |  no  |
+| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
+| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [Marker](Marker.md) | A virtual component used as a reference point or marker in the beamline struc... |  no  |
+| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
+| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
+| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
+| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
+| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
+| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
+| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
+| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
+| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
 
 
 
@@ -52,13 +52,35 @@ Alias: BodyShiftP
 
 ## Properties
 
-* Range: [BodyShiftParamGroup](BodyShiftParamGroup.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [BodyShiftParamGroup](BodyShiftParamGroup.md) |
+| Domain Of | [HasBodyShiftP](HasBodyShiftP.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [HasBodyShiftP](HasBodyShiftP.md) |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

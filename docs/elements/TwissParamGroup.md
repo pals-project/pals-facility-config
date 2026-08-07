@@ -47,7 +47,6 @@ URI: [pals:TwissParamGroup](https://pals-project.readthedocs.io/TwissParamGroup)
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -83,6 +82,7 @@ URI: [pals:TwissParamGroup](https://pals-project.readthedocs.io/TwissParamGroup)
 | [ACKicker](ACKicker.md) | [TwissP](TwissP.md) | range | [TwissParamGroup](TwissParamGroup.md) |
 | [BeamProfileMonitor](BeamProfileMonitor.md) | [TwissP](TwissP.md) | range | [TwissParamGroup](TwissParamGroup.md) |
 | [BeamPositionMonitor](BeamPositionMonitor.md) | [TwissP](TwissP.md) | range | [TwissParamGroup](TwissParamGroup.md) |
+| [Aperture](Aperture.md) | [TwissP](TwissP.md) | range | [TwissParamGroup](TwissParamGroup.md) |
 | [Cavity](Cavity.md) | [TwissP](TwissP.md) | range | [TwissParamGroup](TwissParamGroup.md) |
 | [CrabCavity](CrabCavity.md) | [TwissP](TwissP.md) | range | [TwissParamGroup](TwissParamGroup.md) |
 | [RFCavity](RFCavity.md) | [TwissP](TwissP.md) | range | [TwissParamGroup](TwissParamGroup.md) |
@@ -96,8 +96,12 @@ URI: [pals:TwissParamGroup](https://pals-project.readthedocs.io/TwissParamGroup)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

@@ -51,7 +51,6 @@ URI: [pals:MultipoleParameterGroup](https://pals-project.readthedocs.io/Multipol
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -152,8 +151,12 @@ URI: [pals:MultipoleParameterGroup](https://pals-project.readthedocs.io/Multipol
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

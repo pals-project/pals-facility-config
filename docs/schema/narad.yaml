@@ -13,9 +13,6 @@ prefixes:
   acc:
     prefix_prefix: acc
     prefix_reference: https://example.org/accelerator-core/
-  unit:
-    prefix_prefix: unit
-    prefix_reference: http://qudt.org/vocab/unit/
   quantitykind:
     prefix_prefix: quantitykind
     prefix_reference: http://qudt.org/vocab/quantitykind/
@@ -34,6 +31,9 @@ prefixes:
   pals:
     prefix_prefix: pals
     prefix_reference: https://pals-project.readthedocs.io/
+  inst:
+    prefix_prefix: inst
+    prefix_reference: https://example.org/narad-instance/
   rdf:
     prefix_prefix: rdf
     prefix_reference: http://www.w3.org/1999/02/22-rdf-syntax-ns#
@@ -681,15 +681,12 @@ enums:
       A:
         text: A
         description: ampere
-        meaning: unit:A
       degree:
         text: degree
         description: degree
-        meaning: unit:DEG
       eV:
         text: eV
         description: electron volt
-        meaning: unit:EV
       eV_per_c:
         text: eV_per_c
         description: momentum in electron volts per speed of light
@@ -699,40 +696,32 @@ enums:
       fundamental_charge:
         text: fundamental_charge
         description: fundamental charge
-        meaning: unit:????
       G_per_cm:
         text: G_per_cm
         description: gauss per centimeter
       Hz:
         text: Hz
         description: hertz
-        meaning: unit:HZ
       kW:
         text: kW
         description: kilowatt
-        meaning: unit:KiloW
       m:
         text: m
         description: meter
-        meaning: unit:M
       mm:
         text: mm
         description: millimeter
-        meaning: unit:MilliM
       mrem_per_h:
         text: mrem_per_h
         description: millirem per hour. Kept as a local accelerator unit value because
           QUDT publishes related radiation units but no exact millirem-per-hour unit
           in the checked vocabulary.
-        meaning: unit:MREM-PER-H
       MV_per_m:
         text: MV_per_m
         description: megavolt per meter
-        meaning: unit:MegaV-PER-M
       PA:
         text: PA
         description: pascal
-        meaning: unit:PA
       randians_pi2:
         text: randians_pi2
         description: radians divided by 2 pi - angles and phases
@@ -744,31 +733,24 @@ enums:
       seconds:
         text: seconds
         description: second
-        meaning: unit:SEC
       T:
         text: T
         description: tesla
-        meaning: unit:T
       T_M:
         text: T_M
         description: tesla meter
-        meaning: unit:T-M
       Torr:
         text: Torr
         description: torr
-        meaning: unit:TORR
       V:
         text: V
         description: volt
-        meaning: unit:V
       V_per_m:
         text: V_per_m
         description: volt per meter
-        meaning: unit:V-PER-M
       unitless:
         text: unitless
         description: dimensionless numeric value
-        meaning: unit:NUM
       none:
         text: none
         description: no unit or not applicable
@@ -1070,9 +1052,10 @@ slots:
     mappings:
     - pals:kind
     slot_uri: pals:kind
+    designates_type: true
     owner: Signal
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string
@@ -1135,7 +1118,7 @@ slots:
     slot_uri: pals:affiliation
     owner: Author
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Author
     range: Affiliation
     inlined: true
@@ -1148,7 +1131,7 @@ slots:
     slot_uri: pals:description
     owner: BeamLine
     domain_of:
-    - PALS
+    - PALSAccelerator
     - MetaParamGroup
     - BeamLine
     range: string
@@ -1180,54 +1163,54 @@ slots:
     - LongitudinalPlacementParamGroup
     - BeamLine
     range: float
-  pALS__version:
-    name: pALS__version
+  pALSAccelerator__version:
+    name: pALSAccelerator__version
     description: Version of the representation of a particle accelerator and its operations.
     from_schema: https://w3id.org/accelerator-core
     slot_uri: pals:version
     alias: version
-    owner: PALS
+    owner: PALSAccelerator
     domain_of:
-    - PALS
+    - PALSAccelerator
     range: string
     pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
-  pALS__authors:
-    name: pALS__authors
+  pALSAccelerator__authors:
+    name: pALSAccelerator__authors
     description: Contains the authorship information for this representation of an
       accelerator facility and its operations.
     from_schema: https://w3id.org/accelerator-core
     slot_uri: pals:authors
     alias: authors
-    owner: PALS
+    owner: PALSAccelerator
     domain_of:
-    - PALS
+    - PALSAccelerator
     range: Author
     multivalued: true
     inlined: true
     inlined_as_list: true
-  pALS__notes:
-    name: pALS__notes
+  pALSAccelerator__notes:
+    name: pALSAccelerator__notes
     description: Additional notes or comments about the representation of a particle
       accelerator and its operations.
     from_schema: https://w3id.org/accelerator-core
     slot_uri: pals:notes
     alias: notes
-    owner: PALS
+    owner: PALSAccelerator
     domain_of:
-    - PALS
+    - PALSAccelerator
     range: string
     multivalued: true
     inlined_as_list: true
-  pALS__facility:
-    name: pALS__facility
+  pALSAccelerator__facility:
+    name: pALSAccelerator__facility
     description: A facility that contains lattice elements (physical and virtual),
       beamlines, parameter set commands, signals, etc.
     from_schema: https://w3id.org/accelerator-core
     slot_uri: pals:facility
     alias: facility
-    owner: PALS
+    owner: PALSAccelerator
     domain_of:
-    - PALS
+    - PALSAccelerator
     range: Facility
     inlined: true
     inlined_as_list: true
@@ -1627,8 +1610,6 @@ slots:
     domain_of:
     - LongitudinalPlacementParamGroup
     range: float
-    unit:
-      ucum_code: m
   hasReferenceP__ReferenceP:
     name: hasReferenceP__ReferenceP
     description: A mixin for reference parameters that are aligned with PALS ReferenceP
@@ -1684,8 +1665,6 @@ slots:
     domain_of:
     - ReferenceParamGroup
     range: float
-    unit:
-      ucum_code: eV
   referenceParamGroup__time_ref:
     name: referenceParamGroup__time_ref
     description: '[s] Reference time'
@@ -1700,8 +1679,6 @@ slots:
     domain_of:
     - ReferenceParamGroup
     range: float
-    unit:
-      ucum_code: s
   hasSolenoidP__SolenoidP:
     name: hasSolenoidP__SolenoidP
     description: A mixin for solenoid-specific parameters that are aligned with PALS
@@ -1740,8 +1717,6 @@ slots:
     domain_of:
     - SolenoidParamGroup
     range: float
-    unit:
-      ucum_code: T
   hasTwissP__TwissP:
     name: hasTwissP__TwissP
     description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
@@ -1931,8 +1906,6 @@ slots:
     domain_of:
     - RFParamGroup
     range: float
-    unit:
-      ucum_code: Hz
   rFParamGroup__harmon:
     name: rFParamGroup__harmon
     description: RF harmonic number.
@@ -1957,8 +1930,6 @@ slots:
     domain_of:
     - RFParamGroup
     range: float
-    unit:
-      ucum_code: V
   rFParamGroup__phase:
     name: rFParamGroup__phase
     description: RF phase. rad/2pi RF phase in 0 to 2*pi
@@ -2031,8 +2002,6 @@ slots:
     domain_of:
     - RFParamGroup
     range: float
-    unit:
-      ucum_code: m
   rFParamGroup__dE_ref:
     name: rFParamGroup__dE_ref
     description: Reference energy gain.
@@ -2045,8 +2014,6 @@ slots:
     domain_of:
     - RFParamGroup
     range: float
-    unit:
-      ucum_code: eV
   hasElectricMultipoleP__ElectricMultipoleP:
     name: hasElectricMultipoleP__ElectricMultipoleP
     description: A mixin for electric multipole parameters that are aligned with PALS
@@ -2127,8 +2094,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: rad
   bendParamGroup__bend_field_ref:
     name: bendParamGroup__bend_field_ref
     description: Reference bend field.
@@ -2141,8 +2106,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: T
   bendParamGroup__bend_field_actual:
     name: bendParamGroup__bend_field_actual
     description: Actual bend field.
@@ -2155,8 +2118,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: T
   bendParamGroup__e1:
     name: bendParamGroup__e1
     description: Entrance end pole face rotation with respect to a sector geometry.
@@ -2169,8 +2130,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: rad
   bendParamGroup__e2:
     name: bendParamGroup__e2
     description: Exit end pole face rotation with respect to a sector geometry.
@@ -2183,8 +2142,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: rad
   bendParamGroup__e1_rect:
     name: bendParamGroup__e1_rect
     description: Entrance end pole face rotation with respect to a rectangular geometry.
@@ -2197,8 +2154,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: rad
   bendParamGroup__e2_rect:
     name: bendParamGroup__e2_rect
     description: Exit end pole face rotation with respect to a rectangular geometry.
@@ -2211,8 +2166,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: rad
   bendParamGroup__edge1_int:
     name: bendParamGroup__edge1_int
     description: Entrance end fringe field integral.
@@ -2225,8 +2178,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: T.m
   bendParamGroup__edge2_int:
     name: bendParamGroup__edge2_int
     description: Exit end fringe field integral.
@@ -2239,8 +2190,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: T.m
   bendParamGroup__g_ref:
     name: bendParamGroup__g_ref
     description: Reference bend strength = 1/radius_ref
@@ -2253,8 +2202,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: 1/m
   bendParamGroup__g_actual:
     name: bendParamGroup__g_actual
     description: Actual bend strength = 1/radius_actual
@@ -2267,8 +2214,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: 1/m
   bendParamGroup__h1:
     name: bendParamGroup__h1
     description: Entrance end pole face curvature
@@ -2281,8 +2226,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: 1/m
   bendParamGroup__h2:
     name: bendParamGroup__h2
     description: Exit end pole face curvature
@@ -2295,8 +2238,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: 1/m
   bendParamGroup__L_chord:
     name: bendParamGroup__L_chord
     description: Chord length of the bend.
@@ -2309,8 +2250,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: m
   bendParamGroup__L_sagitta:
     name: bendParamGroup__L_sagitta
     description: Output parameter. Sagitta length.
@@ -2323,8 +2262,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: m
   bendParamGroup__L_rectangle:
     name: bendParamGroup__L_rectangle
     description: Rectangular length.
@@ -2337,8 +2274,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: m
   bendParamGroup__multipole_geometry:
     name: bendParamGroup__multipole_geometry
     description: Multipole geometry type. Must be `follows_ref_geometry`.
@@ -2375,8 +2310,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: m
   bendParamGroup__tilt_ref:
     name: bendParamGroup__tilt_ref
     description: Reference tilt of the bend.
@@ -2389,8 +2322,6 @@ slots:
     domain_of:
     - BendParamGroup
     range: float
-    unit:
-      ucum_code: rad
   multipoleParameterGroup__order:
     name: multipoleParameterGroup__order
     description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
@@ -2414,8 +2345,6 @@ slots:
     domain_of:
     - MultipoleParameterGroup
     range: float
-    unit:
-      ucum_code: rad
   multipoleParameterGroup__En:
     name: multipoleParameterGroup__En
     description: Normal component of the field.
@@ -2768,7 +2697,6 @@ slots:
     description: The metadata field name.
     from_schema: https://w3id.org/accelerator-core
     slot_uri: pals:key
-    identifier: true
     alias: key
     owner: AdditionalMetadata
     domain_of:
@@ -3032,9 +2960,9 @@ slots:
     range: Component
     required: true
 classes:
-  PALS:
-    name: PALS
-    definition_uri: https://pals-project.readthedocs.io/PALS
+  PALSAccelerator:
+    name: PALSAccelerator
+    definition_uri: https://pals-project.readthedocs.io/PALSAccelerator
     description: Root container for accelerator core components, semantic signals,
       and local bindings.
     from_schema: https://w3id.org/accelerator-core
@@ -3042,10 +2970,10 @@ classes:
     - kind
     - description
     - affiliation
-    - pALS__version
-    - pALS__authors
-    - pALS__notes
-    - pALS__facility
+    - pALSAccelerator__version
+    - pALSAccelerator__authors
+    - pALSAccelerator__notes
+    - pALSAccelerator__facility
     attributes:
       version:
         name: version
@@ -3072,7 +3000,7 @@ classes:
         description: A facility that contains lattice elements (physical and virtual),
           beamlines, parameter set commands, signals, etc.
         range: Facility
-    class_uri: pals:PALS
+    class_uri: pals:PALSAccelerator
     tree_root: true
   Author:
     name: Author
@@ -3427,8 +3355,6 @@ classes:
         description: Longitudinal position of the element along the beamline.
         slot_uri: pals:s_position
         range: float
-        unit:
-          ucum_code: m
     class_uri: pals:LongitudinalPlacementParamGroup
     rules:
     - preconditions:
@@ -3501,8 +3427,6 @@ classes:
         - ETotal
         slot_uri: pals:E_tot_ref
         range: float
-        unit:
-          ucum_code: eV
       time_ref:
         name: time_ref
         description: '[s] Reference time'
@@ -3510,8 +3434,6 @@ classes:
         - tRef
         slot_uri: pals:time_ref
         range: float
-        unit:
-          ucum_code: s
     class_uri: pals:ReferenceParamGroup
   HasSolenoidP:
     name: HasSolenoidP
@@ -3550,8 +3472,6 @@ classes:
         description: Solenoid field.
         slot_uri: pals:Bsol
         range: float
-        unit:
-          ucum_code: T
     class_uri: pals:SolenoidParamGroup
     rules:
     - preconditions:
@@ -3732,8 +3652,6 @@ classes:
         description: RF frequency.
         slot_uri: pals:frequency
         range: float
-        unit:
-          ucum_code: Hz
       harmon:
         name: harmon
         description: RF harmonic number.
@@ -3744,8 +3662,6 @@ classes:
         description: RF voltage.
         slot_uri: pals:voltage
         range: float
-        unit:
-          ucum_code: V
       phase:
         name: phase
         description: RF phase. rad/2pi RF phase in 0 to 2*pi
@@ -3776,15 +3692,11 @@ classes:
         description: Active acceleration length.
         slot_uri: pals:L_active
         range: float
-        unit:
-          ucum_code: m
       dE_ref:
         name: dE_ref
         description: Reference energy gain.
         slot_uri: pals:dE_ref
         range: float
-        unit:
-          ucum_code: eV
     class_uri: pals:RFParamGroup
   HasElectricMultipoleP:
     name: HasElectricMultipoleP
@@ -3919,114 +3831,82 @@ classes:
         description: Reference bend angle.
         slot_uri: pals:angle_ref
         range: float
-        unit:
-          ucum_code: rad
       bend_field_ref:
         name: bend_field_ref
         description: Reference bend field.
         slot_uri: pals:bend_field_ref
         range: float
-        unit:
-          ucum_code: T
       bend_field_actual:
         name: bend_field_actual
         description: Actual bend field.
         slot_uri: pals:bend_field_actual
         range: float
-        unit:
-          ucum_code: T
       e1:
         name: e1
         description: Entrance end pole face rotation with respect to a sector geometry.
         slot_uri: pals:e1
         range: float
-        unit:
-          ucum_code: rad
       e2:
         name: e2
         description: Exit end pole face rotation with respect to a sector geometry.
         slot_uri: pals:e2
         range: float
-        unit:
-          ucum_code: rad
       e1_rect:
         name: e1_rect
         description: Entrance end pole face rotation with respect to a rectangular
           geometry.
         slot_uri: pals:e1_rect
         range: float
-        unit:
-          ucum_code: rad
       e2_rect:
         name: e2_rect
         description: Exit end pole face rotation with respect to a rectangular geometry.
         slot_uri: pals:e2_rect
         range: float
-        unit:
-          ucum_code: rad
       edge1_int:
         name: edge1_int
         description: Entrance end fringe field integral.
         slot_uri: pals:edge1_int
         range: float
-        unit:
-          ucum_code: T.m
       edge2_int:
         name: edge2_int
         description: Exit end fringe field integral.
         slot_uri: pals:edge2_int
         range: float
-        unit:
-          ucum_code: T.m
       g_ref:
         name: g_ref
         description: Reference bend strength = 1/radius_ref
         slot_uri: pals:g_ref
         range: float
-        unit:
-          ucum_code: 1/m
       g_actual:
         name: g_actual
         description: Actual bend strength = 1/radius_actual
         slot_uri: pals:g_actual
         range: float
-        unit:
-          ucum_code: 1/m
       h1:
         name: h1
         description: Entrance end pole face curvature
         slot_uri: pals:h1
         range: float
-        unit:
-          ucum_code: 1/m
       h2:
         name: h2
         description: Exit end pole face curvature
         slot_uri: pals:h2
         range: float
-        unit:
-          ucum_code: 1/m
       L_chord:
         name: L_chord
         description: Chord length of the bend.
         slot_uri: pals:L_chord
         range: float
-        unit:
-          ucum_code: m
       L_sagitta:
         name: L_sagitta
         description: Output parameter. Sagitta length.
         slot_uri: pals:L_sagitta
         range: float
-        unit:
-          ucum_code: m
       L_rectangle:
         name: L_rectangle
         description: Rectangular length.
         slot_uri: pals:L_rectangle
         range: float
-        unit:
-          ucum_code: m
       multipole_geometry:
         name: multipole_geometry
         description: Multipole geometry type. Must be `follows_ref_geometry`.
@@ -4042,15 +3922,11 @@ classes:
         description: Reference bend radius.
         slot_uri: pals:rho_ref
         range: float
-        unit:
-          ucum_code: m
       tilt_ref:
         name: tilt_ref
         description: Reference tilt of the bend.
         slot_uri: pals:tilt_ref
         range: float
-        unit:
-          ucum_code: rad
     class_uri: pals:BendParamGroup
     rules:
     - preconditions:
@@ -4111,8 +3987,6 @@ classes:
         broad_mappings:
         - pals:tilt
         range: float
-        unit:
-          ucum_code: rad
       En:
         name: En
         description: Normal component of the field.
@@ -4925,6 +4799,30 @@ classes:
     - hasBodyShiftP__BodyShiftP
     - hasTwissP__TwissP
     class_uri: pals:BeamPositionMonitor
+  Aperture:
+    name: Aperture
+    definition_uri: https://pals-project.readthedocs.io/Aperture
+    description: A diagnostic or limiting aperture element used to constrain or characterize
+      beam passage.
+    from_schema: https://w3id.org/accelerator-core
+    broad_mappings:
+    - pals:Instrument
+    is_a: DiagnosticDevice
+    mixins:
+    - HasReferenceP
+    - HasTwissP
+    slots:
+    - id
+    - kind
+    - component__native_types
+    - hasMetaP__MetaP
+    - physicalComponent__functions
+    - physicalComponent__beamline_relation
+    - hasFloorP__FloorP
+    - hasLongitudinalPlacementP__LongitudinalPlacementP
+    - hasReferenceP__ReferenceP
+    - hasTwissP__TwissP
+    class_uri: pals:Aperture
   RadiationMonitor:
     name: RadiationMonitor
     definition_uri: https://pals-project.readthedocs.io/RadiationMonitor
@@ -5193,7 +5091,6 @@ classes:
       key:
         name: key
         description: The metadata field name.
-        identifier: true
         range: string
         required: true
       value:
@@ -5310,7 +5207,7 @@ classes:
     class_uri: pals:ComponentRelation
 metamodel_version: 1.7.0
 source_file: narad.yaml
-source_file_date: '2026-07-24T13:51:53'
-source_file_size: 68239
-generation_date: '2026-07-24T13:52:45'
+source_file_date: '2026-08-07T11:43:02'
+source_file_size: 68694
+generation_date: '2026-08-07T11:44:08'
 

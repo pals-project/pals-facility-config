@@ -39,7 +39,6 @@ URI: [pals:BodyShiftParamGroup](https://pals-project.readthedocs.io/BodyShiftPar
 
 <!-- no inheritance hierarchy -->
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -88,8 +87,12 @@ URI: [pals:BodyShiftParamGroup](https://pals-project.readthedocs.io/BodyShiftPar
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

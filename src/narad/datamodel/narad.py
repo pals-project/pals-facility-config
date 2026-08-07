@@ -1,5 +1,5 @@
 # Auto generated from narad.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-07-24T13:53:14
+# Generation date: 2026-08-07T11:45:28
 # Schema: accelerator_core
 #
 # id: https://w3id.org/accelerator-core
@@ -66,13 +66,13 @@ version = None
 BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
 RO = CurieNamespace('RO', 'http://purl.obolibrary.org/obo/RO_')
 ACC = CurieNamespace('acc', 'https://example.org/accelerator-core/')
+INST = CurieNamespace('inst', 'https://example.org/narad-instance/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 PALS = CurieNamespace('pals', 'https://pals-project.readthedocs.io/')
 QUANTITYKIND = CurieNamespace('quantitykind', 'http://qudt.org/vocab/quantitykind/')
 RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 SAREF = CurieNamespace('saref', 'https://saref.etsi.org/core/v4.1.1/')
 SOSA = CurieNamespace('sosa', 'http://www.w3.org/ns/sosa/')
-UNIT = CurieNamespace('unit', 'http://qudt.org/vocab/unit/')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
 DEFAULT_ = PALS
 
@@ -152,6 +152,10 @@ class BeamPositionMonitorId(DiagnosticDeviceId):
     pass
 
 
+class ApertureId(DiagnosticDeviceId):
+    pass
+
+
 class RadiationMonitorId(DiagnosticDeviceId):
     pass
 
@@ -192,10 +196,6 @@ class BeamLineSectionId(BookkeepingComponentId):
     pass
 
 
-class AdditionalMetadataKey(extended_str):
-    pass
-
-
 class RelationshipId(extended_str):
     pass
 
@@ -209,16 +209,16 @@ class ComponentRelationId(RelationshipId):
 
 
 @dataclass(repr=False)
-class PALS(YAMLRoot):
+class PALSAccelerator(YAMLRoot):
     """
     Root container for accelerator core components, semantic signals, and local bindings.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["PALS"]
-    class_class_curie: ClassVar[str] = "pals:PALS"
-    class_name: ClassVar[str] = "PALS"
-    class_model_uri: ClassVar[URIRef] = PALS.PALS
+    class_class_uri: ClassVar[URIRef] = PALS["PALSAccelerator"]
+    class_class_curie: ClassVar[str] = "pals:PALSAccelerator"
+    class_name: ClassVar[str] = "PALSAccelerator"
+    class_model_uri: ClassVar[URIRef] = PALS.PALSAccelerator
 
     kind: str = None
     description: Optional[str] = None
@@ -231,8 +231,7 @@ class PALS(YAMLRoot):
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.kind):
             self.MissingRequiredField("kind")
-        if not isinstance(self.kind, str):
-            self.kind = str(self.kind)
+        self.kind = str(self.class_name)
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
@@ -418,7 +417,7 @@ class MetaParamGroup(YAMLRoot):
     description: Optional[str] = None
     alias: Optional[str] = None
     label: Optional[str] = None
-    additional_metadata: Optional[Union[dict[Union[str, AdditionalMetadataKey], Union[dict, "AdditionalMetadata"]], list[Union[dict, "AdditionalMetadata"]]]] = empty_dict()
+    additional_metadata: Optional[Union[Union[dict, "AdditionalMetadata"], list[Union[dict, "AdditionalMetadata"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.description is not None and not isinstance(self.description, str):
@@ -430,7 +429,7 @@ class MetaParamGroup(YAMLRoot):
         if self.label is not None and not isinstance(self.label, str):
             self.label = str(self.label)
 
-        self._normalize_inlined_as_list(slot_name="additional_metadata", slot_type=AdditionalMetadata, key_name="key", keyed=True)
+        self._normalize_inlined_as_list(slot_name="additional_metadata", slot_type=AdditionalMetadata, key_name="key", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -889,9 +888,7 @@ class ElectricMultipoleParamGroup(YAMLRoot):
     elec_components: Optional[Union[Union[dict, "MultipoleParameterGroup"], list[Union[dict, "MultipoleParameterGroup"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if not isinstance(self.elec_components, list):
-            self.elec_components = [self.elec_components] if self.elec_components is not None else []
-        self.elec_components = [v if isinstance(v, MultipoleParameterGroup) else MultipoleParameterGroup(**as_dict(v)) for v in self.elec_components]
+        self._normalize_inlined_as_list(slot_name="elec_components", slot_type=MultipoleParameterGroup, key_name="order", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -940,9 +937,7 @@ class MagneticMultipoleParamGroup(YAMLRoot):
     mag_components: Optional[Union[Union[dict, "MultipoleParameterGroup"], list[Union[dict, "MultipoleParameterGroup"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if not isinstance(self.mag_components, list):
-            self.mag_components = [self.mag_components] if self.mag_components is not None else []
-        self.mag_components = [v if isinstance(v, MultipoleParameterGroup) else MultipoleParameterGroup(**as_dict(v)) for v in self.mag_components]
+        self._normalize_inlined_as_list(slot_name="mag_components", slot_type=MultipoleParameterGroup, key_name="order", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -1151,8 +1146,7 @@ class Component(YAMLRoot):
 
         if self._is_empty(self.kind):
             self.MissingRequiredField("kind")
-        if not isinstance(self.kind, str):
-            self.kind = str(self.kind)
+        self.kind = str(self.class_name)
 
         if not isinstance(self.native_types, list):
             self.native_types = [self.native_types] if self.native_types is not None else []
@@ -1162,6 +1156,23 @@ class Component(YAMLRoot):
             self.MetaP = MetaParamGroup(**as_dict(self.MetaP))
 
         super().__post_init__(**kwargs)
+
+
+    def __new__(cls, *args, **kwargs):
+
+        type_designator = "kind"
+        if not type_designator in kwargs:
+            return super().__new__(cls,*args,**kwargs)
+        else:
+            type_designator_value = kwargs[type_designator]
+            target_cls = cls._class_for("class_name", type_designator_value)
+
+
+            if target_cls is None:
+                raise ValueError(f"Wrong type designator value: class {cls.__name__} "
+                                 f"has no subclass with ['class_name']='{kwargs[type_designator]}'")
+            return super().__new__(target_cls,*args,**kwargs)
+
 
 
 @dataclass(repr=False)
@@ -1209,6 +1220,9 @@ class PhysicalComponent(Component):
             self.LongitudinalPlacementP = LongitudinalPlacementParamGroup(**as_dict(self.LongitudinalPlacementP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1253,6 +1267,9 @@ class VirtualComponent(Component):
             self.FloorP = FloorParamGroup(**as_dict(self.FloorP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1303,6 +1320,9 @@ class BeamLine(VirtualComponent):
             self.direction = int(self.direction)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1339,8 +1359,7 @@ class Signal(YAMLRoot):
 
         if self._is_empty(self.kind):
             self.MissingRequiredField("kind")
-        if not isinstance(self.kind, str):
-            self.kind = str(self.kind)
+        self.kind = str(self.class_name)
 
         if self._is_empty(self.signal_role):
             self.MissingRequiredField("signal_role")
@@ -1421,6 +1440,9 @@ class Magnet(PhysicalComponent):
             self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1453,6 +1475,9 @@ class Solenoid(Magnet):
             self.SolenoidP = SolenoidParamGroup(**as_dict(self.SolenoidP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1488,6 +1513,9 @@ class Multipole(Magnet):
             self.MagneticMultipoleP = MagneticMultipoleParamGroup(**as_dict(self.MagneticMultipoleP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1520,6 +1548,9 @@ class Bend(Multipole):
             self.BendP = BendParamGroup(**as_dict(self.BendP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1547,6 +1578,9 @@ class Quadrupole(Multipole):
             self.id = QuadrupoleId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1574,6 +1608,9 @@ class Octupole(Multipole):
             self.id = OctupoleId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1601,6 +1638,9 @@ class Sextupole(Multipole):
             self.id = SextupoleId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1642,6 +1682,9 @@ class Kicker(Magnet):
             self.MagneticMultipoleP = MagneticMultipoleParamGroup(**as_dict(self.MagneticMultipoleP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1669,6 +1712,9 @@ class ACKicker(Kicker):
             self.id = ACKickerId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1695,6 +1741,9 @@ class DiagnosticDevice(PhysicalComponent):
             self.id = DiagnosticDeviceId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1733,6 +1782,9 @@ class BeamProfileMonitor(DiagnosticDevice):
             self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1771,6 +1823,46 @@ class BeamPositionMonitor(DiagnosticDevice):
             self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
+
+
+@dataclass(repr=False)
+class Aperture(DiagnosticDevice):
+    """
+    A diagnostic or limiting aperture element used to constrain or characterize beam passage.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["Aperture"]
+    class_class_curie: ClassVar[str] = "pals:Aperture"
+    class_name: ClassVar[str] = "Aperture"
+    class_model_uri: ClassVar[URIRef] = PALS.Aperture
+
+    id: Union[str, ApertureId] = None
+    kind: str = None
+    functions: Union[Union[str, "PhysicalFunctionEnum"], list[Union[str, "PhysicalFunctionEnum"]]] = None
+    beamline_relation: Union[str, "PhysicalRelationEnum"] = None
+    ReferenceP: Optional[Union[dict, ReferenceParamGroup]] = None
+    TwissP: Optional[Union[dict, TwissParamGroup]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ApertureId):
+            self.id = ApertureId(self.id)
+
+        if self.ReferenceP is not None and not isinstance(self.ReferenceP, ReferenceParamGroup):
+            self.ReferenceP = ReferenceParamGroup(**as_dict(self.ReferenceP))
+
+        if self.TwissP is not None and not isinstance(self.TwissP, TwissParamGroup):
+            self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1801,6 +1893,9 @@ class RadiationMonitor(DiagnosticDevice):
             self.BodyShiftP = BodyShiftParamGroup(**as_dict(self.BodyShiftP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1842,6 +1937,9 @@ class Cavity(PhysicalComponent):
             self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1868,6 +1966,9 @@ class CrabCavity(Cavity):
             self.id = CrabCavityId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1893,6 +1994,9 @@ class RFCavity(Cavity):
             self.RFP = RFParamGroup(**as_dict(self.RFP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1919,6 +2023,9 @@ class NormalConductingRFCavity(RFCavity):
             self.id = NormalConductingRFCavityId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1945,6 +2052,9 @@ class SuperConductingRFCavity(RFCavity):
             self.id = SuperConductingRFCavityId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1992,6 +2102,9 @@ class SupportingFacilityComponent(PhysicalComponent):
             self.BodyShiftP = BodyShiftParamGroup(**as_dict(self.BodyShiftP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2025,6 +2138,9 @@ class BookkeepingComponent(VirtualComponent):
             self.BodyShiftP = BodyShiftParamGroup(**as_dict(self.BodyShiftP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2055,6 +2171,9 @@ class Marker(BookkeepingComponent):
             self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2086,6 +2205,9 @@ class BeamLineSection(BookkeepingComponent):
             self.FloorP = FloorParamGroup(**as_dict(self.FloorP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2101,15 +2223,15 @@ class AdditionalMetadata(YAMLRoot):
     class_name: ClassVar[str] = "AdditionalMetadata"
     class_model_uri: ClassVar[URIRef] = PALS.AdditionalMetadata
 
-    key: Union[str, AdditionalMetadataKey] = None
+    key: str = None
     value: str = None
     datatype: Optional[Union[str, "DataTypeEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.key):
             self.MissingRequiredField("key")
-        if not isinstance(self.key, AdditionalMetadataKey):
-            self.key = AdditionalMetadataKey(self.key)
+        if not isinstance(self.key, str):
+            self.key = str(self.key)
 
         if self._is_empty(self.value):
             self.MissingRequiredField("value")
@@ -2670,16 +2792,13 @@ class UnitEnum(EnumDefinitionImpl):
     """
     A = PermissibleValue(
         text="A",
-        description="ampere",
-        meaning=UNIT["A"])
+        description="ampere")
     degree = PermissibleValue(
         text="degree",
-        description="degree",
-        meaning=UNIT["DEG"])
+        description="degree")
     eV = PermissibleValue(
         text="eV",
-        description="electron volt",
-        meaning=UNIT["EV"])
+        description="electron volt")
     eV_per_c = PermissibleValue(
         text="eV_per_c",
         description="momentum in electron volts per speed of light")
@@ -2688,39 +2807,31 @@ class UnitEnum(EnumDefinitionImpl):
         description="mass in electron volts per speed of light squared")
     fundamental_charge = PermissibleValue(
         text="fundamental_charge",
-        description="fundamental charge",
-        meaning=UNIT["????"])
+        description="fundamental charge")
     G_per_cm = PermissibleValue(
         text="G_per_cm",
         description="gauss per centimeter")
     Hz = PermissibleValue(
         text="Hz",
-        description="hertz",
-        meaning=UNIT["HZ"])
+        description="hertz")
     kW = PermissibleValue(
         text="kW",
-        description="kilowatt",
-        meaning=UNIT["KiloW"])
+        description="kilowatt")
     m = PermissibleValue(
         text="m",
-        description="meter",
-        meaning=UNIT["M"])
+        description="meter")
     mm = PermissibleValue(
         text="mm",
-        description="millimeter",
-        meaning=UNIT["MilliM"])
+        description="millimeter")
     mrem_per_h = PermissibleValue(
         text="mrem_per_h",
-        description="""millirem per hour. Kept as a local accelerator unit value because QUDT publishes related radiation units but no exact millirem-per-hour unit in the checked vocabulary.""",
-        meaning=UNIT["MREM-PER-H"])
+        description="""millirem per hour. Kept as a local accelerator unit value because QUDT publishes related radiation units but no exact millirem-per-hour unit in the checked vocabulary.""")
     MV_per_m = PermissibleValue(
         text="MV_per_m",
-        description="megavolt per meter",
-        meaning=UNIT["MegaV-PER-M"])
+        description="megavolt per meter")
     PA = PermissibleValue(
         text="PA",
-        description="pascal",
-        meaning=UNIT["PA"])
+        description="pascal")
     randians_pi2 = PermissibleValue(
         text="randians_pi2",
         description="radians divided by 2 pi - angles and phases")
@@ -2729,32 +2840,25 @@ class UnitEnum(EnumDefinitionImpl):
         description="""rem per hour. Kept as a local accelerator unit value because QUDT publishes rem and rem-per-second but no exact rem-per-hour unit in the checked vocabulary.""")
     seconds = PermissibleValue(
         text="seconds",
-        description="second",
-        meaning=UNIT["SEC"])
+        description="second")
     T = PermissibleValue(
         text="T",
-        description="tesla",
-        meaning=UNIT["T"])
+        description="tesla")
     T_M = PermissibleValue(
         text="T_M",
-        description="tesla meter",
-        meaning=UNIT["T-M"])
+        description="tesla meter")
     Torr = PermissibleValue(
         text="Torr",
-        description="torr",
-        meaning=UNIT["TORR"])
+        description="torr")
     V = PermissibleValue(
         text="V",
-        description="volt",
-        meaning=UNIT["V"])
+        description="volt")
     V_per_m = PermissibleValue(
         text="V_per_m",
-        description="volt per meter",
-        meaning=UNIT["V-PER-M"])
+        description="volt per meter")
     unitless = PermissibleValue(
         text="unitless",
-        description="dimensionless numeric value",
-        meaning=UNIT["NUM"])
+        description="dimensionless numeric value")
     none = PermissibleValue(
         text="none",
         description="no unit or not applicable")
@@ -3049,18 +3153,18 @@ slots.identifiers = Slot(uri=PALS.identifiers, name="identifiers", curie=PALS.cu
 slots.length = Slot(uri=PALS.length, name="length", curie=PALS.curie('length'),
                    model_uri=PALS.length, domain=None, range=Optional[float])
 
-slots.pALS__version = Slot(uri=PALS.version, name="pALS__version", curie=PALS.curie('version'),
-                   model_uri=PALS.pALS__version, domain=None, range=Optional[str],
+slots.pALSAccelerator__version = Slot(uri=PALS.version, name="pALSAccelerator__version", curie=PALS.curie('version'),
+                   model_uri=PALS.pALSAccelerator__version, domain=None, range=Optional[str],
                    pattern=re.compile(r'^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'))
 
-slots.pALS__authors = Slot(uri=PALS.authors, name="pALS__authors", curie=PALS.curie('authors'),
-                   model_uri=PALS.pALS__authors, domain=None, range=Optional[Union[Union[dict, Author], list[Union[dict, Author]]]])
+slots.pALSAccelerator__authors = Slot(uri=PALS.authors, name="pALSAccelerator__authors", curie=PALS.curie('authors'),
+                   model_uri=PALS.pALSAccelerator__authors, domain=None, range=Optional[Union[Union[dict, Author], list[Union[dict, Author]]]])
 
-slots.pALS__notes = Slot(uri=PALS.notes, name="pALS__notes", curie=PALS.curie('notes'),
-                   model_uri=PALS.pALS__notes, domain=None, range=Optional[Union[str, list[str]]])
+slots.pALSAccelerator__notes = Slot(uri=PALS.notes, name="pALSAccelerator__notes", curie=PALS.curie('notes'),
+                   model_uri=PALS.pALSAccelerator__notes, domain=None, range=Optional[Union[str, list[str]]])
 
-slots.pALS__facility = Slot(uri=PALS.facility, name="pALS__facility", curie=PALS.curie('facility'),
-                   model_uri=PALS.pALS__facility, domain=None, range=Optional[Union[dict, Facility]])
+slots.pALSAccelerator__facility = Slot(uri=PALS.facility, name="pALSAccelerator__facility", curie=PALS.curie('facility'),
+                   model_uri=PALS.pALSAccelerator__facility, domain=None, range=Optional[Union[dict, Facility]])
 
 slots.author__email = Slot(uri=PALS.email, name="author__email", curie=PALS.curie('email'),
                    model_uri=PALS.author__email, domain=None, range=Optional[str],
@@ -3098,7 +3202,7 @@ slots.metaParamGroup__label = Slot(uri=PALS.label, name="metaParamGroup__label",
                    model_uri=PALS.metaParamGroup__label, domain=None, range=Optional[str])
 
 slots.metaParamGroup__additional_metadata = Slot(uri=PALS.additional_metadata, name="metaParamGroup__additional_metadata", curie=PALS.curie('additional_metadata'),
-                   model_uri=PALS.metaParamGroup__additional_metadata, domain=None, range=Optional[Union[dict[Union[str, AdditionalMetadataKey], Union[dict, AdditionalMetadata]], list[Union[dict, AdditionalMetadata]]]])
+                   model_uri=PALS.metaParamGroup__additional_metadata, domain=None, range=Optional[Union[Union[dict, AdditionalMetadata], list[Union[dict, AdditionalMetadata]]]])
 
 slots.hasFloorP__FloorP = Slot(uri=PALS.FloorP, name="hasFloorP__FloorP", curie=PALS.curie('FloorP'),
                    model_uri=PALS.hasFloorP__FloorP, domain=None, range=Optional[Union[dict, FloorParamGroup]])
@@ -3404,7 +3508,7 @@ slots.supportingFacilityComponent__functions = Slot(uri=PALS.supporting_facility
                    model_uri=PALS.supportingFacilityComponent__functions, domain=None, range=Union[Union[str, "FacilityFunctionEnum"], list[Union[str, "FacilityFunctionEnum"]]])
 
 slots.additionalMetadata__key = Slot(uri=PALS.key, name="additionalMetadata__key", curie=PALS.curie('key'),
-                   model_uri=PALS.additionalMetadata__key, domain=None, range=URIRef)
+                   model_uri=PALS.additionalMetadata__key, domain=None, range=str)
 
 slots.additionalMetadata__value = Slot(uri=PALS.value, name="additionalMetadata__value", curie=PALS.curie('value'),
                    model_uri=PALS.additionalMetadata__value, domain=None, range=str)

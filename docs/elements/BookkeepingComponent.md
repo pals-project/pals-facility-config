@@ -107,7 +107,6 @@ URI: [pals:BookkeepingComponent](https://pals-project.readthedocs.io/Bookkeeping
             * [BeamLineSection](BeamLineSection.md) [ [HasFloorP](HasFloorP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -130,8 +129,12 @@ URI: [pals:BookkeepingComponent](https://pals-project.readthedocs.io/Bookkeeping
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -275,10 +278,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: BookkeepingComponent
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

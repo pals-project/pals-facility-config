@@ -47,6 +47,12 @@ URI: [pals:Relationship](https://pals-project.readthedocs.io/Relationship)
     * [ComponentRelation](ComponentRelation.md)
 
 
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Represents Relationship | Yes |
+
 
 ## Slots
 
@@ -66,8 +72,12 @@ URI: [pals:Relationship](https://pals-project.readthedocs.io/Relationship)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 

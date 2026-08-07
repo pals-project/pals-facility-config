@@ -31,15 +31,36 @@ Alias: signal_bindings
 
 ## Properties
 
-* Range: [SignalBinding](SignalBinding.md)
+### Type and Range
 
-* Multivalued: True
+| Property | Value |
+| --- | --- |
+| Range | [SignalBinding](SignalBinding.md) |
+| Domain Of | [Facility](Facility.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+| Multivalued | Yes |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [Facility](Facility.md) |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 

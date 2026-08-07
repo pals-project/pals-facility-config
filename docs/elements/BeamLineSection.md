@@ -99,7 +99,6 @@ URI: [pals:BeamLineSection](https://pals-project.readthedocs.io/BeamLineSection)
             * **BeamLineSection** [ [HasFloorP](HasFloorP.md)]
 
 
-
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
@@ -122,8 +121,12 @@ URI: [pals:BeamLineSection](https://pals-project.readthedocs.io/BeamLineSection)
 
 
 
-## Identifier and Mapping Information
 
+
+
+
+
+## Identifier and Mapping Information
 
 
 
@@ -261,10 +264,11 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: pals:kind
+    designates_type: true
     alias: kind
     owner: BeamLineSection
     domain_of:
-    - PALS
+    - PALSAccelerator
     - Component
     - Signal
     range: string

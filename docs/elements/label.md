@@ -31,13 +31,36 @@ Alias: label
 
 ## Properties
 
-* Range: [String](String.md)
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [String](String.md) |
+| Domain Of | [MetaParamGroup](MetaParamGroup.md) |
+| Slot URI | [pals:label](https://pals-project.readthedocs.io/label) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+### Slot Characteristics
+
+| Property | Value |
+| --- | --- |
+| Owner | [MetaParamGroup](MetaParamGroup.md) |
+
+
+
+
+
+
+
+
 
 
 
 
 ## Identifier and Mapping Information
-
 
 
 
