@@ -34,8 +34,8 @@ command-line build operations less cumbersome.
 * ```just gen-project```
   * Example of generating the project from the schema. This will generate a Python datamodel and associated files in `project/`: (json/jsonld schemas, OWL, sqlschema, etc).
 
-* ```just gen-doc```
-  * Example of generating documentation from the schema.
+* ```just gen-doc --truncate-descriptions False --example-directory doc_examples/ --subfolder-type-separation```
+  * Example of generating documentation from the schema. Use these arguments to control the output of the documentation generation. The `--example-directory` argument specifies the directory where example files are located, and the `--subfolder-type-separation` argument indicates that the documentation should be organized into subfolders based on type separation. `--subfolder-type-separation` is important for generating the documentation in a way that is compatible with mkdocs (used to build the documentation site) on macOS.
 
 * ```just gen-python```
   * Example of generating the Python datamodel from the schema. This will generate Python classes in `src/narad/datamodel/` that correspond to the classes defined in the LinkML schema.
