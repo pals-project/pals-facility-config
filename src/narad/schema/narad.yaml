@@ -1514,7 +1514,7 @@ classes:
         range: float
       distance_unit:
         range: UnitEnum
-      axis:
+      axis: # remove this
         range: AxisEnum
       component_direction:
         range: DirectionEnum
