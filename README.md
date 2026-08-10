@@ -22,11 +22,15 @@ command-line build operations less cumbersome.
 ## Repository Structure
 * [docs/](docs/) - mkdocs-managed documentation
 * [examples/](examples/) - Examples of using the schema
+  * [archived/](examples/archived) -- archived examples
+  * core_acc_narad_instance.yaml -- example of a core accelerator instance
 * [project/](project/) - project files (these files are auto-generated, do not edit)
 * [src/](src/) - source files (edit these)
-  * [narad_system](src/narad_system)
-    * [schema/](src/narad_system/schema) -- LinkML schema (edit this)
-    * [datamodel/](src/narad_system/datamodel) -- generated Python datamodel
+  * [archived/](src/archived) -- archived files
+  * [narad](src/narad)
+    * [schema/](src/narad/schema) -- LinkML schema (edit this)
+    * [datamodel/](src/narad/datamodel) -- generated Python datamodel
+    * narad.yaml -- LinkML schema for NARAD data services
 * [tests/](tests/) - Python tests
   * [data/](tests/data) - Example data files for testing
 
