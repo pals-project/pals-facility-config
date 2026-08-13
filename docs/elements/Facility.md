@@ -1,102 +1,37 @@
 
+# Class: Facility
 
-# Slot: facility 
+A facility that houses one or more accelerators.
 
-
-_A facility that contains lattice elements (physical and virtual), beamlines, parameter set commands, signals, etc._
-
-
+URI: [pals:Facility](https://pals-project.readthedocs.io/Facility)
 
 
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[SignalBinding],[Signal],[Identifier],[ComponentRelation]<component_relations%200..*-++[Facility],[SignalBinding]<signal_bindings%200..*-++[Facility],[Signal]<signals%200..*-++[Facility],[BeamLine]<beamlines%200..*-++[Facility],[Component]<components%200..*-++[Facility],[Identifier]<identifiers%200..*-++[Facility],[PALSAccelerator]++-%20facility%200..1>[Facility],[PALSAccelerator],[ComponentRelation],[Component],[BeamLine])](https://yuml.me/diagram/nofunky;dir:TB/class/[SignalBinding],[Signal],[Identifier],[ComponentRelation]<component_relations%200..*-++[Facility],[SignalBinding]<signal_bindings%200..*-++[Facility],[Signal]<signals%200..*-++[Facility],[BeamLine]<beamlines%200..*-++[Facility],[Component]<components%200..*-++[Facility],[Identifier]<identifiers%200..*-++[Facility],[PALSAccelerator]++-%20facility%200..1>[Facility],[PALSAccelerator],[ComponentRelation],[Component],[BeamLine])
 
-URI: [pals:facility](https://pals-project.readthedocs.io/facility)
-Alias: facility
+## Referenced by Class
 
-<!-- no inheritance hierarchy -->
+ *  **None** *[➞facility](pALSAccelerator__facility.md)*  <sub>0..1</sub>  **[Facility](Facility.md)**
 
-
-
-
-
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [PALSAccelerator](PALSAccelerator.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
+## Attributes
 
 
+### Own
 
-
-
-
-## Properties
-
-### Type and Range
-
-| Property | Value |
-| --- | --- |
-| Range | [Facility](Facility.md) |
-| Domain Of | [PALSAccelerator](PALSAccelerator.md) |
-
-### Cardinality and Requirements
-
-| Property | Value |
-| --- | --- |
-### Slot Characteristics
-
-| Property | Value |
-| --- | --- |
-| Owner | [PALSAccelerator](PALSAccelerator.md) |
-
-
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | pals:facility |
-| native | pals:facility |
-
-
-
-
-## LinkML Source
-
-<details>
-```yaml
-name: facility
-description: A facility that contains lattice elements (physical and virtual), beamlines,
-  parameter set commands, signals, etc.
-from_schema: https://w3id.org/accelerator-core
-rank: 1000
-alias: facility
-owner: PALSAccelerator
-domain_of:
-- PALSAccelerator
-range: Facility
-
-```
-</details>
+ * [identifiers](identifiers.md)  <sub>0..\*</sub>
+     * Description: A unique and ideally persistent identifier for the facility, such as a DOI or ROR.
+     * Range: [Identifier](Identifier.md)
+ * [➞components](facility__components.md)  <sub>0..\*</sub>
+     * Description: A list of physical components in the accelerator system.
+     * Range: [Component](Component.md)
+ * [➞beamlines](facility__beamlines.md)  <sub>0..\*</sub>
+     * Description: A list of beamlines in the accelerator system.
+     * Range: [BeamLine](BeamLine.md)
+ * [➞signals](facility__signals.md)  <sub>0..\*</sub>
+     * Description: A list of signals in the accelerator system.
+     * Range: [Signal](Signal.md)
+ * [➞signal_bindings](facility__signal_bindings.md)  <sub>0..\*</sub>
+     * Description: A list of signal bindings in the accelerator system (Component <-> Signal relationships).
+     * Range: [SignalBinding](SignalBinding.md)
+ * [➞component_relations](facility__component_relations.md)  <sub>0..\*</sub>
+     * Description: A list of component relations in the accelerator system (Component <-> Component relationships).
+     * Range: [ComponentRelation](ComponentRelation.md)

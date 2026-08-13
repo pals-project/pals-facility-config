@@ -1,52 +1,11 @@
-# Type: DateOrDatetime 
 
+# Type: date_or_datetime
 
-
-
-_Either a date or a datetime_
-
-
+Either a date or a datetime
 
 URI: [linkml:DateOrDatetime](https://w3id.org/linkml/DateOrDatetime)
 
-## Type Properties
-
-| Property | Value |
-| --- | --- |
-| Base | `str` |
-| Type URI | [linkml:DateOrDatetime](https://w3id.org/linkml/DateOrDatetime) |
-| Representation | `str` |
-
-
-
-
-
-
-## Notes
-
-* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "date_or_datetime".
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | linkml:DateOrDatetime |
-| native | pals:date_or_datetime |
-
-
+|  |  |  |
+| --- | --- | --- |
+| Root (builtin) type | | **str** |
+| Representation | | str |

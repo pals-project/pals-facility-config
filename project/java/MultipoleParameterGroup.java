@@ -1,13 +1,15 @@
 package None;
 
-/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
 
+
+
+
+
+
 /**
-  A single order's electric (or magnetic) multipole component.
-Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.
-Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
+  A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)

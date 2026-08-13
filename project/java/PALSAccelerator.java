@@ -1,8 +1,12 @@
 package None;
 
-/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
+
+
+
+
+
 
 /**
   Root container for accelerator core components, semantic signals, and local bindings.

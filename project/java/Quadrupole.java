@@ -1,8 +1,12 @@
 package None;
 
-/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
+
+
+
+
+
 
 /**
   A magnet primarily used to focus or defocus the beam. 4 poles.

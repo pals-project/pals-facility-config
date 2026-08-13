@@ -1,52 +1,16 @@
-# Type: Decimal 
 
+# Type: decimal
 
+A real number with arbitrary precision that conforms to the xsd:decimal specification
 
+URI: [linkml:Decimal](https://w3id.org/linkml/Decimal)
 
-_A real number with arbitrary precision that conforms to the xsd:decimal specification_
+|  |  |  |
+| --- | --- | --- |
+| Root (builtin) type | | **Decimal** |
 
+## Other properties
 
-
-URI: [xsd:decimal](http://www.w3.org/2001/XMLSchema#decimal)
-
-## Type Properties
-
-| Property | Value |
-| --- | --- |
-| Base | `Decimal` |
-| Type URI | [xsd:decimal](http://www.w3.org/2001/XMLSchema#decimal) |
-
-
-
-
-
-
-## Notes
-
-* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "decimal".
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | xsd:decimal |
-| native | pals:decimal |
-| broad | schema:Number |
-
-
+|  |  |  |
+| --- | --- | --- |
+| **Broad Mappings:** | | schema:Number |

@@ -49,3 +49,11 @@ command-line build operations less cumbersome.
 
 * Examples of invalid data files are in `tests/data/invalid/` and valid data files are in `tests/data/valid/`. You can validate these using the above command.
   * ```uv run linkml-validate --schema src/narad/schema/narad.yaml tests/data/invalid/narad_invalid.yaml --target-class NaradCapability```
+
+* Generating an OWL/RDF graph of the schema:
+  * ```uv run gen-owl  src/narad/schema/narad.yaml > "project/owl/narad.owl.ttl"```
+  * This will generate an OWL/RDF graph of the schema in the `project/owl/` directory.  
+
+  * Generate an OWL/RDF graph of the schema and instance data:
+    * ```uv run linkml-convert -s src/narad/schema/narad.yaml -t rdf examples/core_acc_narad_instance.yaml -o project/owl/core_acc_narad_instance.ttl```
+      * this will generate an OWL/RDF graph of the instance data in Turtle format. You can also use other formats such as RDF/XML or JSON-LD by changing the output file extension.

@@ -1,97 +1,56 @@
 
+# Slot: alias
 
-# Slot: alias 
-
-
-_An alternative name or identifier for the instance._
-
-
-
-
+An alternative name or identifier for the instance.
 
 URI: [pals:alias](https://pals-project.readthedocs.io/alias)
-Alias: alias
-
-<!-- no inheritance hierarchy -->
 
 
+## Domain and Range
+
+None &#8594;  <sub>0..\*</sub> [String](types/String.md)
+
+## Parents
 
 
+## Children
 
-## Applicable Classes
 
-| Name | Description | Modifies Slot |
+## Used by
+
+ * [ACKicker](ACKicker.md)
+ * [Aperture](Aperture.md)
+ * [BeamLine](BeamLine.md)
+ * [BeamLineSection](BeamLineSection.md)
+ * [BeamPositionMonitor](BeamPositionMonitor.md)
+ * [BeamProfileMonitor](BeamProfileMonitor.md)
+ * [Bend](Bend.md)
+ * [BookkeepingComponent](BookkeepingComponent.md)
+ * [Cavity](Cavity.md)
+ * [Component](Component.md)
+ * [CrabCavity](CrabCavity.md)
+ * [DiagnosticDevice](DiagnosticDevice.md)
+ * [Kicker](Kicker.md)
+ * [Magnet](Magnet.md)
+ * [Marker](Marker.md)
+ * [MetaParamGroup](MetaParamGroup.md)
+ * [Multipole](Multipole.md)
+ * [Node](Node.md)
+ * [NormalConductingRFCavity](NormalConductingRFCavity.md)
+ * [Octupole](Octupole.md)
+ * [PhysicalComponent](PhysicalComponent.md)
+ * [Quadrupole](Quadrupole.md)
+ * [RFCavity](RFCavity.md)
+ * [RadiationMonitor](RadiationMonitor.md)
+ * [Sextupole](Sextupole.md)
+ * [Signal](Signal.md)
+ * [Solenoid](Solenoid.md)
+ * [SuperConductingRFCavity](SuperConductingRFCavity.md)
+ * [SupportingFacilityComponent](SupportingFacilityComponent.md)
+ * [VirtualComponent](VirtualComponent.md)
+
+## Other properties
+
+|  |  |  |
 | --- | --- | --- |
-| [Signal](Signal.md) | Semantic meaning of a control-system signal associated with a component |  no  |
-| [MetaParamGroup](MetaParamGroup.md) | Mixin class for metadata parameters that are aligned with PALS MetaP (Metadat... |  no  |
-
-
-
-
-
-
-## Properties
-
-### Type and Range
-
-| Property | Value |
-| --- | --- |
-| Range | [String](String.md) |
-| Domain Of | [MetaParamGroup](MetaParamGroup.md), [Signal](Signal.md) |
-| Slot URI | [pals:alias](https://pals-project.readthedocs.io/alias) |
-
-### Cardinality and Requirements
-
-| Property | Value |
-| --- | --- |
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | pals:alias |
-| native | pals:alias |
-
-
-
-
-## LinkML Source
-
-<details>
-```yaml
-name: alias
-description: An alternative name or identifier for the instance.
-from_schema: https://w3id.org/accelerator-core
-rank: 1000
-slot_uri: pals:alias
-alias: alias
-domain_of:
-- MetaParamGroup
-- Signal
-range: string
-
-```
-</details>
+| **Mappings:** | | pals:alias |

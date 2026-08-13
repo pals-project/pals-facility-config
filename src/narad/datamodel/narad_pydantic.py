@@ -29,7 +29,7 @@ from pydantic import (
 )
 
 
-metamodel_version = "1.7.0"
+metamodel_version = "None"
 version = "None"
 
 
@@ -45,7 +45,19 @@ class ConfiguredBaseModel(BaseModel):
         strict = False,
     )
 
-
+    @model_serializer(mode='wrap', when_used='unless-none')
+    def treat_empty_lists_as_none(
+            self, handler: SerializerFunctionWrapHandler,
+            info: SerializationInfo) -> dict[str, Any]:
+        if info.exclude_none:
+            _instance = self.model_copy()
+            for field, field_info in type(_instance).model_fields.items():
+                if getattr(_instance, field) == [] and not(
+                        field_info.is_required()):
+                    setattr(_instance, field, None)
+        else:
+            _instance = self
+        return handler(_instance, info)
 
 
 
@@ -82,9 +94,11 @@ linkml_meta = LinkMLMeta({'default_prefix': 'pals',
                   'acc': {'prefix_prefix': 'acc',
                           'prefix_reference': 'https://example.org/accelerator-core/'},
                   'inst': {'prefix_prefix': 'inst',
-                           'prefix_reference': 'https://example.org/narad-instance/'},
+                           'prefix_reference': 'https://example.org/pals-instance/'},
                   'linkml': {'prefix_prefix': 'linkml',
                              'prefix_reference': 'https://w3id.org/linkml/'},
+                  'om': {'prefix_prefix': 'om',
+                         'prefix_reference': 'http://www.ontology-of-units-of-measure.org/resource/om-2/'},
                   'pals': {'prefix_prefix': 'pals',
                            'prefix_reference': 'https://pals-project.readthedocs.io/'},
                   'quantitykind': {'prefix_prefix': 'quantitykind',
@@ -618,92 +632,21 @@ class DataTypeEnum(str, Enum):
     """
 
 
-class ComponentRelationPredicateEnum(str, Enum):
-    precedes = "precedes"
+class CoordinateSystemEnum(str, Enum):
     """
-    Subject occurs immediately before object in the sequence/beamline order.
+    Coordinate systems for spatial relationships.
     """
-    follows = "follows"
+    Cartesian = "Cartesian"
     """
-    Subject occurs after object in the sequence/beamline order.
+    Cartesian coordinate system (x, y, z).
     """
-    contains = "contains"
+    Cylindrical = "Cylindrical"
     """
-    Subject spatially or mereologically contains object.
+    Cylindrical coordinate system (r, theta, z).
     """
-    contained_in = "contained_in"
+    Spherical = "Spherical"
     """
-    Subject is spatially or mereologically contained in object.
-    """
-    connected_to = "connected_to"
-    """
-    Subject and object are physically connected. a is connected to b if and only if a and b are discrete structure,  and there exists some connecting structure c, such that c connects a and b
-    """
-    controls = "controls"
-    """
-    Subject controls the state or behavior of object.
-    """
-    is_controlled_by = "is_controlled_by"
-    """
-    Subject is controlled by object.
-    """
-    is_part_of = "is_part_of"
-    """
-    Subject is a part of object.
-    """
-    has_part = "has_part"
-    """
-    Subject has part object.
-    """
-    adjacent_to = "adjacent_to"
-    """
-    Subject and object are spatially adjacent, without overlapping.
-    """
-    overlaps = "overlaps"
-    """
-    Subject and object share at least one part in common.
-    """
-    mounted_on = "mounted_on"
-    """
-    Subject is mounted on object.
-    """
-    intersects = "intersects"
-    """
-    Subject intersects with object.
-    """
-    nearest_to = "nearest_to"
-    """
-    Subject is nearest to object.
-    """
-
-
-class SignalBindingPredicateEnum(str, Enum):
-    """
-    Controlled predicates for Component-to-Signal bindings.
-    """
-    has_signal = "has_signal"
-    """
-    Generic association between a component and one of its signals. The specific role (setpoint, readback, status, etc.) is carried by the Signal's own signal_role field, not the predicate.
-    """
-    has_status_signal = "has_status_signal"
-    """
-    Subject has the given signal as its status indicator.
-    """
-    has_setpoint_signal = "has_setpoint_signal"
-    """
-    Subject has the given signal as its setpoint.
-    """
-    has_readback_signal = "has_readback_signal"
-    """
-    Subject has the given signal as its readback.
-    """
-    has_command_signal = "has_command_signal"
-    """
-    Subject has the given signal as a command trigger.
-    """
-    has_limit_signal = "has_limit_signal"
-    """
-    Subject has the given signal as a limit/constraint value.
+    Spherical coordinate system (r, theta, phi).
     """
 
 
@@ -721,13 +664,6 @@ class ReferenceFrameEnum(str, Enum):
     facility_coordinates = "facility_coordinates"
     local_component_frame = "local_component_frame"
     tunnel_stationing = "tunnel_stationing"
-
-
-class AxisEnum(str, Enum):
-    x = "x"
-    y = "y"
-    z = "z"
-    s = "s"
 
 
 class DirectionEnum(str, Enum):
@@ -822,6 +758,20 @@ class ZeroPhaseEnum(str, Enum):
 
 
 
+class Node(ConfiguredBaseModel):
+    """
+    Abstract base class for all node entities in the accelerator core ontology. This differentiates nodes from edges (relationships) in the ontology. This class is not intended to be instantiated directly, but serves as a common ancestor for all other classes. Allows for the use of kind: as a discriminator for the type of node in the ontology.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True, 'from_schema': 'https://w3id.org/accelerator-core'})
+
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    kind: Literal["Node"] = Field(default="Node", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Node', 'PALSAccelerator'],
+         'slot_uri': 'pals:kind'} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
+
+
 class PALSAccelerator(ConfiguredBaseModel):
     """
     Root container for accelerator core components, semantic signals, and local bindings.
@@ -829,13 +779,13 @@ class PALSAccelerator(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core', 'tree_root': True})
 
     kind: Literal["PALSAccelerator"] = Field(default="PALSAccelerator", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
     description: Optional[str] = Field(default=None, description="""A human-readable description of the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator', 'MetaParamGroup', 'BeamLine']} })
     affiliation: Optional[Affiliation] = Field(default=None, description="""The affiliation of the author or component, as a ROR.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator', 'Author']} })
     version: Optional[str] = Field(default=None, description="""Version of the representation of a particle accelerator and its operations.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator']} })
-    authors: Optional[list[Author]] = Field(default=None, description="""Contains the authorship information for this representation of an accelerator facility and its operations.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator']} })
-    notes: Optional[list[str]] = Field(default=None, description="""Additional notes or comments about the representation of a particle accelerator and its operations.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator']} })
+    authors: Optional[list[Author]] = Field(default=[], description="""Contains the authorship information for this representation of an accelerator facility and its operations.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator']} })
+    notes: Optional[list[str]] = Field(default=[], description="""Additional notes or comments about the representation of a particle accelerator and its operations.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator']} })
     facility: Optional[Facility] = Field(default=None, description="""A facility that contains lattice elements (physical and virtual), beamlines, parameter set commands, signals, etc.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator']} })
 
     @field_validator('version')
@@ -896,12 +846,12 @@ class Facility(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core'})
 
-    identifiers: Optional[list[Identifier]] = Field(default=None, description="""A unique and ideally persistent identifier for the facility, such as a DOI or ROR.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility', 'Affiliation']} })
-    components: Optional[list[Union[Component,PhysicalComponent,VirtualComponent,BeamLine,BookkeepingComponent,Marker,BeamLineSection,Magnet,DiagnosticDevice,Cavity,SupportingFacilityComponent,CrabCavity,RFCavity,NormalConductingRFCavity,SuperConductingRFCavity,BeamProfileMonitor,BeamPositionMonitor,Aperture,RadiationMonitor,Solenoid,Multipole,Kicker,ACKicker,Bend,Quadrupole,Octupole,Sextupole]]] = Field(default=None, description="""A list of physical components in the accelerator system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
-    beamlines: Optional[list[BeamLine]] = Field(default=None, description="""A list of beamlines in the accelerator system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
-    signals: Optional[list[Signal]] = Field(default=None, description="""A list of signals in the accelerator system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
-    signal_bindings: Optional[list[SignalBinding]] = Field(default=None, description="""A list of signal bindings in the accelerator system (Component <-> Signal relationships).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
-    component_relations: Optional[list[ComponentRelation]] = Field(default=None, description="""A list of component relations in the accelerator system (Component <-> Component relationships).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
+    identifiers: Optional[list[Identifier]] = Field(default=[], description="""A unique and ideally persistent identifier for the facility, such as a DOI or ROR.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility', 'Affiliation']} })
+    components: Optional[list[Union[Component,PhysicalComponent,VirtualComponent,BeamLine,BookkeepingComponent,Marker,BeamLineSection,Magnet,DiagnosticDevice,Cavity,SupportingFacilityComponent,CrabCavity,RFCavity,NormalConductingRFCavity,SuperConductingRFCavity,BeamProfileMonitor,BeamPositionMonitor,Aperture,RadiationMonitor,Solenoid,Multipole,Kicker,ACKicker,Bend,Quadrupole,Octupole,Sextupole]]] = Field(default=[], description="""A list of physical components in the accelerator system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
+    beamlines: Optional[list[BeamLine]] = Field(default=[], description="""A list of beamlines in the accelerator system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
+    signals: Optional[list[Signal]] = Field(default=[], description="""A list of signals in the accelerator system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
+    signal_bindings: Optional[list[Union[SignalBinding,HasSignal,HasSetpointSignal,HasReadbackSignal,HasCommandSignal,HasLimitSignal]]] = Field(default=[], description="""A list of signal bindings in the accelerator system (Component <-> Signal relationships).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
+    component_relations: Optional[list[Union[ComponentRelation,Precedes,Contains,Controls,IsPartOf,AdjacentTo,Overlaps,HasConnectingBranch,MountedOn,Intersects,NearestTo]]] = Field(default=[], description="""A list of component relations in the accelerator system (Component <-> Component relationships).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility']} })
 
 
 class Affiliation(ConfiguredBaseModel):
@@ -910,10 +860,10 @@ class Affiliation(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core'})
 
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     name: Optional[str] = Field(default=None, description="""The name of the entity. For example, the name of the person or organization.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Author', 'Affiliation']} })
-    identifiers: Optional[list[Identifier]] = Field(default=None, description="""A unique and ideally persistent identifier for the facility, such as a DOI or ROR.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility', 'Affiliation']} })
+    identifiers: Optional[list[Identifier]] = Field(default=[], description="""A unique and ideally persistent identifier for the facility, such as a DOI or ROR.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Facility', 'Affiliation']} })
 
 
 class Identifier(ConfiguredBaseModel):
@@ -926,13 +876,23 @@ class Identifier(ConfiguredBaseModel):
     identifier_value: Optional[str] = Field(default=None, description="""The value of the identifier.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Identifier']} })
 
 
+class ParamGroup(ConfiguredBaseModel):
+    """
+    Abstract base for inlined PALS parameter-group objects, giving each an identifier so it resolves to a stable node/IRI rather than a blank node when exported to RDF.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True, 'from_schema': 'https://w3id.org/accelerator-core'})
+
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+
+
 class HasMetaP(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core', 'mixin': True})
 
     MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
 
 
-class MetaParamGroup(ConfiguredBaseModel):
+class MetaParamGroup(ParamGroup):
     """
     Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
     """
@@ -940,9 +900,11 @@ class MetaParamGroup(ConfiguredBaseModel):
          'from_schema': 'https://w3id.org/accelerator-core'})
 
     description: Optional[str] = Field(default=None, description="""A human-readable description of the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PALSAccelerator', 'MetaParamGroup', 'BeamLine']} })
-    alias: Optional[str] = Field(default=None, description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaParamGroup', 'Signal'], 'slot_uri': 'pals:alias'} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
     label: Optional[str] = Field(default=None, description="""A label string.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaParamGroup'], 'slot_uri': 'pals:label'} })
-    additional_metadata: Optional[list[AdditionalMetadata]] = Field(default=None, description="""Additional metadata or annotations for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaParamGroup']} })
+    additional_metadata: Optional[list[AdditionalMetadata]] = Field(default=[], description="""Additional metadata or annotations for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaParamGroup']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasFloorP(ConfiguredBaseModel):
@@ -951,7 +913,7 @@ class HasFloorP(ConfiguredBaseModel):
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
 
 
-class FloorParamGroup(ConfiguredBaseModel):
+class FloorParamGroup(ParamGroup):
     """
     Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
     """
@@ -976,6 +938,8 @@ class FloorParamGroup(ConfiguredBaseModel):
     psi: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['psi_angle', 'Model_Roll', 'Rotation'],
          'domain_of': ['FloorParamGroup'],
          'slot_uri': 'pals:psi'} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasBodyShiftP(ConfiguredBaseModel):
@@ -984,7 +948,7 @@ class HasBodyShiftP(ConfiguredBaseModel):
     BodyShiftP: Optional[BodyShiftParamGroup] = Field(default=None, description="""A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasBodyShiftP']} })
 
 
-class BodyShiftParamGroup(ConfiguredBaseModel):
+class BodyShiftParamGroup(ParamGroup):
     """
     Mixin class for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
     """
@@ -1009,6 +973,8 @@ class BodyShiftParamGroup(ConfiguredBaseModel):
     z_rot: Optional[float] = Field(default=None, description="""Rotation around the Z-axis in the facility floor plan.""", json_schema_extra = { "linkml_meta": {'aliases': ['delta_psi', 'psi_shift', 'GlobalOffsetPsi'],
          'domain_of': ['BodyShiftParamGroup'],
          'slot_uri': 'pals:z_rot'} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasLongitudinalPlacementP(ConfiguredBaseModel):
@@ -1017,11 +983,9 @@ class HasLongitudinalPlacementP(ConfiguredBaseModel):
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
 
 
-class LongitudinalPlacementParamGroup(ConfiguredBaseModel):
+class LongitudinalPlacementParamGroup(ParamGroup):
     """
-    Mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis. 
-    Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
-    One (or both) `length` or `s_position` must be present.
+    Mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`. One (or both) `length` or `s_position` must be present.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core',
          'rules': [{'description': 'An element must have a length and/or a position '
@@ -1037,6 +1001,8 @@ class LongitudinalPlacementParamGroup(ConfiguredBaseModel):
          'slot_uri': 'pals:length'} })
     s_position: Optional[float] = Field(default=None, description="""Longitudinal position of the element along the beamline.""", json_schema_extra = { "linkml_meta": {'domain_of': ['LongitudinalPlacementParamGroup'],
          'slot_uri': 'pals:s_position'} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasReferenceP(ConfiguredBaseModel):
@@ -1045,7 +1011,7 @@ class HasReferenceP(ConfiguredBaseModel):
     ReferenceP: Optional[ReferenceParamGroup] = Field(default=None, description="""A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasReferenceP']} })
 
 
-class ReferenceParamGroup(ConfiguredBaseModel):
+class ReferenceParamGroup(ParamGroup):
     """
     Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
     """
@@ -1062,6 +1028,8 @@ class ReferenceParamGroup(ConfiguredBaseModel):
     time_ref: Optional[float] = Field(default=None, description="""[s] Reference time""", json_schema_extra = { "linkml_meta": {'aliases': ['tRef'],
          'domain_of': ['ReferenceParamGroup'],
          'slot_uri': 'pals:time_ref'} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasSolenoidP(ConfiguredBaseModel):
@@ -1070,7 +1038,7 @@ class HasSolenoidP(ConfiguredBaseModel):
     SolenoidP: Optional[SolenoidParamGroup] = Field(default=None, description="""A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasSolenoidP']} })
 
 
-class SolenoidParamGroup(ConfiguredBaseModel):
+class SolenoidParamGroup(ParamGroup):
     """
     Mixin for solenoid-specific parameters.
     """
@@ -1087,6 +1055,8 @@ class SolenoidParamGroup(ConfiguredBaseModel):
 
     Ksol: Optional[float] = Field(default=None, description="""Normalized solenoid strength.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SolenoidParamGroup'], 'slot_uri': 'pals:Ksol'} })
     Bsol: Optional[float] = Field(default=None, description="""Solenoid field.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SolenoidParamGroup'], 'slot_uri': 'pals:Bsol'} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasTwissP(ConfiguredBaseModel):
@@ -1095,7 +1065,7 @@ class HasTwissP(ConfiguredBaseModel):
     TwissP: Optional[TwissParamGroup] = Field(default=None, description="""A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasTwissP']} })
 
 
-class TwissParamGroup(ConfiguredBaseModel):
+class TwissParamGroup(ParamGroup):
     """
     Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.
     """
@@ -1132,6 +1102,8 @@ class TwissParamGroup(ConfiguredBaseModel):
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissParamGroup'],
          'slot_uri': 'pals:phi_b'} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasRFP(ConfiguredBaseModel):
@@ -1140,7 +1112,7 @@ class HasRFP(ConfiguredBaseModel):
     RFP: Optional[RFParamGroup] = Field(default=None, description="""A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasRFP']} })
 
 
-class RFParamGroup(ConfiguredBaseModel):
+class RFParamGroup(ParamGroup):
     """
     Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS).
     """
@@ -1157,6 +1129,8 @@ class RFParamGroup(ConfiguredBaseModel):
     zero_phase: Optional[ZeroPhaseEnum] = Field(default=None, description="""Sets what phase = 0 means.""", json_schema_extra = { "linkml_meta": {'domain_of': ['RFParamGroup'], 'slot_uri': 'pals:zero_phase'} })
     L_active: Optional[float] = Field(default=None, description="""Active acceleration length.""", json_schema_extra = { "linkml_meta": {'domain_of': ['RFParamGroup'], 'slot_uri': 'pals:L_active'} })
     dE_ref: Optional[float] = Field(default=None, description="""Reference energy gain.""", json_schema_extra = { "linkml_meta": {'domain_of': ['RFParamGroup'], 'slot_uri': 'pals:dE_ref'} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasElectricMultipoleP(ConfiguredBaseModel):
@@ -1165,12 +1139,9 @@ class HasElectricMultipoleP(ConfiguredBaseModel):
     ElectricMultipoleP: Optional[ElectricMultipoleParamGroup] = Field(default=None, description="""A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasElectricMultipoleP']} })
 
 
-class ElectricMultipoleParamGroup(ConfiguredBaseModel):
+class ElectricMultipoleParamGroup(ParamGroup):
     """
-    Mixin for electric multipole parameters, 
-    which can be used to describe the electric field components of an accelerator element.
-    This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).
-    Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7
+    Mixin for electric multipole parameters,  which can be used to describe the electric field components of an accelerator element. This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7
       tilt: 0.7
     - order: 3
       En: 27.3
@@ -1182,7 +1153,9 @@ class ElectricMultipoleParamGroup(ConfiguredBaseModel):
          'exact_mappings': ['pals:ElectricMultipoleP'],
          'from_schema': 'https://w3id.org/accelerator-core'})
 
-    elec_components: Optional[list[MultipoleParameterGroup]] = Field(default=None, description="""Electric multipole components, one per order N.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElectricMultipoleParamGroup']} })
+    elec_components: Optional[list[MultipoleParameterGroup]] = Field(default=[], description="""Electric multipole components, one per order N.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ElectricMultipoleParamGroup']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasMagneticMultipoleP(ConfiguredBaseModel):
@@ -1191,7 +1164,7 @@ class HasMagneticMultipoleP(ConfiguredBaseModel):
     MagneticMultipoleP: Optional[MagneticMultipoleParamGroup] = Field(default=None, description="""A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMagneticMultipoleP']} })
 
 
-class MagneticMultipoleParamGroup(ConfiguredBaseModel):
+class MagneticMultipoleParamGroup(ParamGroup):
     """
     Mixin for magnetic multipole parameters,  which can be used to describe the magnetic field components of an accelerator element. This mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml mag_components: - order: 7
       tilt: 0.7
@@ -1206,7 +1179,9 @@ class MagneticMultipoleParamGroup(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['pals:MagneticMultipoleP'],
          'from_schema': 'https://w3id.org/accelerator-core'})
 
-    mag_components: Optional[list[MultipoleParameterGroup]] = Field(default=None, description="""Magnetic multipole components, one per order N.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MagneticMultipoleParamGroup']} })
+    mag_components: Optional[list[MultipoleParameterGroup]] = Field(default=[], description="""Magnetic multipole components, one per order N.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MagneticMultipoleParamGroup']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class HasBendP(ConfiguredBaseModel):
@@ -1215,10 +1190,9 @@ class HasBendP(ConfiguredBaseModel):
     BendP: Optional[BendParamGroup] = Field(default=None, description="""A mixin for bend parameters that are aligned with PALS BendP (Bend Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasBendP']} })
 
 
-class BendParamGroup(ConfiguredBaseModel):
+class BendParamGroup(ParamGroup):
     """
-    Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
-    This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+    Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['pals:BendP'],
          'from_schema': 'https://w3id.org/accelerator-core',
@@ -1253,13 +1227,13 @@ class BendParamGroup(ConfiguredBaseModel):
     ref_geometry: Optional[ReferenceGeometryEnum] = Field(default=None, description="""Reference geometry type. Must be `arc`.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendParamGroup'], 'slot_uri': 'pals:ref_geometry'} })
     rho_ref: Optional[float] = Field(default=None, description="""Reference bend radius.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendParamGroup'], 'slot_uri': 'pals:rho_ref'} })
     tilt_ref: Optional[float] = Field(default=None, description="""Reference tilt of the bend.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BendParamGroup'], 'slot_uri': 'pals:tilt_ref'} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
 
 
 class MultipoleParameterGroup(ConfiguredBaseModel):
     """
-    A single order's electric (or magnetic) multipole component.
-    Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.
-    Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
+    A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core',
          'rules': [{'description': 'If Es is present, then Bn, Bs, Kn, Ks should NOT '
@@ -1371,7 +1345,7 @@ class MultipoleParameterGroup(ConfiguredBaseModel):
     Ks: Optional[float] = Field(default=None, description="""Normalized skew component.""", json_schema_extra = { "linkml_meta": {'broad_mappings': ['pals:KsN'], 'domain_of': ['MultipoleParameterGroup']} })
 
 
-class Component(HasMetaP):
+class Component(HasMetaP, Node):
     """
     A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
     """
@@ -1380,13 +1354,14 @@ class Component(HasMetaP):
          'from_schema': 'https://w3id.org/accelerator-core',
          'mixins': ['HasMetaP']})
 
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Component"] = Field(default="Component", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class PhysicalComponent(Component, HasLongitudinalPlacementP, HasFloorP):
@@ -1405,13 +1380,14 @@ class PhysicalComponent(Component, HasLongitudinalPlacementP, HasFloorP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["PhysicalComponent"] = Field(default="PhysicalComponent", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class VirtualComponent(Component, HasFloorP):
@@ -1429,13 +1405,14 @@ class VirtualComponent(Component, HasFloorP):
     beamline_relation: VirtualRelationEnum = Field(default=..., description="""The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
          'slot_uri': 'pals:virtual_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["VirtualComponent"] = Field(default="VirtualComponent", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class BeamLine(VirtualComponent):
@@ -1464,16 +1441,17 @@ If value is greater than 1, the beamline is repeated that many times.""", json_s
     beamline_relation: VirtualRelationEnum = Field(default=..., description="""The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
          'slot_uri': 'pals:virtual_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["BeamLine"] = Field(default="BeamLine", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
-class Signal(HasMetaP):
+class Signal(HasMetaP, Node):
     """
     Semantic meaning of a control-system signal associated with a component.
     """
@@ -1481,12 +1459,6 @@ class Signal(HasMetaP):
          'from_schema': 'https://w3id.org/accelerator-core',
          'mixins': ['HasMetaP']})
 
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
-         'slot_uri': 'pals:id'} })
-    kind: Literal["Signal"] = Field(default="Signal", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
-         'slot_uri': 'pals:kind'} })
-    alias: Optional[str] = Field(default=None, description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MetaParamGroup', 'Signal'], 'slot_uri': 'pals:alias'} })
     signal_role: SignalRoleEnum = Field(default=..., description="""The role of the signal in the control system, such as setpoint, readback, status, command, or limit.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
     source_system: SourceSystemEnum = Field(default=..., description="""The source system from which the signal originates, such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
     native_description: Optional[str] = Field(default=None, description="""A human-readable description of the signal in the source system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
@@ -1497,6 +1469,12 @@ class Signal(HasMetaP):
     access_protocol: Optional[str] = Field(default=None, description="""The protocol used to access the signal in the source system,  such as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
     archive_identifier: Optional[str] = Field(default=None, description="""The identifier used to reference the signal in an archival system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Signal']} })
     MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    kind: Literal["Signal"] = Field(default="Signal", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Node', 'PALSAccelerator'],
+         'slot_uri': 'pals:kind'} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Magnet(PhysicalComponent, HasTwissP, HasReferenceP, HasBodyShiftP):
@@ -1519,13 +1497,14 @@ class Magnet(PhysicalComponent, HasTwissP, HasReferenceP, HasBodyShiftP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Magnet"] = Field(default="Magnet", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Solenoid(Magnet, HasSolenoidP):
@@ -1549,13 +1528,14 @@ class Solenoid(Magnet, HasSolenoidP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Solenoid"] = Field(default="Solenoid", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Multipole(Magnet, HasMagneticMultipoleP, HasElectricMultipoleP):
@@ -1580,13 +1560,14 @@ class Multipole(Magnet, HasMagneticMultipoleP, HasElectricMultipoleP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Multipole"] = Field(default="Multipole", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Bend(Multipole, HasBendP):
@@ -1612,13 +1593,14 @@ class Bend(Multipole, HasBendP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Bend"] = Field(default="Bend", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Quadrupole(Multipole):
@@ -1642,13 +1624,14 @@ class Quadrupole(Multipole):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Quadrupole"] = Field(default="Quadrupole", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Octupole(Multipole):
@@ -1672,13 +1655,14 @@ class Octupole(Multipole):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Octupole"] = Field(default="Octupole", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Sextupole(Multipole):
@@ -1702,13 +1686,14 @@ class Sextupole(Multipole):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Sextupole"] = Field(default="Sextupole", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Kicker(Magnet, HasMagneticMultipoleP, HasElectricMultipoleP):
@@ -1740,13 +1725,14 @@ class Kicker(Magnet, HasMagneticMultipoleP, HasElectricMultipoleP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Kicker"] = Field(default="Kicker", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class ACKicker(Kicker):
@@ -1770,13 +1756,14 @@ class ACKicker(Kicker):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["ACKicker"] = Field(default="ACKicker", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class DiagnosticDevice(PhysicalComponent):
@@ -1794,13 +1781,14 @@ class DiagnosticDevice(PhysicalComponent):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["DiagnosticDevice"] = Field(default="DiagnosticDevice", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class BeamProfileMonitor(DiagnosticDevice, HasTwissP, HasReferenceP, HasBodyShiftP):
@@ -1822,13 +1810,14 @@ class BeamProfileMonitor(DiagnosticDevice, HasTwissP, HasReferenceP, HasBodyShif
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["BeamProfileMonitor"] = Field(default="BeamProfileMonitor", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class BeamPositionMonitor(DiagnosticDevice, HasTwissP, HasReferenceP, HasBodyShiftP):
@@ -1850,13 +1839,14 @@ class BeamPositionMonitor(DiagnosticDevice, HasTwissP, HasReferenceP, HasBodyShi
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["BeamPositionMonitor"] = Field(default="BeamPositionMonitor", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Aperture(DiagnosticDevice, HasTwissP, HasReferenceP):
@@ -1877,13 +1867,14 @@ class Aperture(DiagnosticDevice, HasTwissP, HasReferenceP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Aperture"] = Field(default="Aperture", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class RadiationMonitor(DiagnosticDevice, HasBodyShiftP):
@@ -1903,13 +1894,14 @@ class RadiationMonitor(DiagnosticDevice, HasBodyShiftP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["RadiationMonitor"] = Field(default="RadiationMonitor", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Cavity(PhysicalComponent, HasMagneticMultipoleP, HasElectricMultipoleP, HasTwissP, HasReferenceP, HasBodyShiftP):
@@ -1937,13 +1929,14 @@ class Cavity(PhysicalComponent, HasMagneticMultipoleP, HasElectricMultipoleP, Ha
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Cavity"] = Field(default="Cavity", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class CrabCavity(Cavity):
@@ -1966,13 +1959,14 @@ class CrabCavity(Cavity):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["CrabCavity"] = Field(default="CrabCavity", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class RFCavity(Cavity, HasRFP):
@@ -1998,13 +1992,14 @@ class RFCavity(Cavity, HasRFP):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["RFCavity"] = Field(default="RFCavity", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class NormalConductingRFCavity(RFCavity):
@@ -2028,13 +2023,14 @@ class NormalConductingRFCavity(RFCavity):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["NormalConductingRFCavity"] = Field(default="NormalConductingRFCavity", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class SuperConductingRFCavity(RFCavity):
@@ -2058,13 +2054,14 @@ class SuperConductingRFCavity(RFCavity):
          'slot_uri': 'pals:physical_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
     LongitudinalPlacementP: Optional[LongitudinalPlacementParamGroup] = Field(default=None, description="""A mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasLongitudinalPlacementP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["SuperConductingRFCavity"] = Field(default="SuperConductingRFCavity", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class SupportingFacilityComponent(PhysicalComponent, HasLongitudinalPlacementP, HasBodyShiftP, HasFloorP):
@@ -2084,13 +2081,14 @@ class SupportingFacilityComponent(PhysicalComponent, HasLongitudinalPlacementP, 
     BodyShiftP: Optional[BodyShiftParamGroup] = Field(default=None, description="""A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasBodyShiftP']} })
     beamline_relation: PhysicalRelationEnum = Field(default=..., description="""The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
          'slot_uri': 'pals:physical_beamline_relation'} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["SupportingFacilityComponent"] = Field(default="SupportingFacilityComponent", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class BookkeepingComponent(VirtualComponent, HasBodyShiftP):
@@ -2109,13 +2107,14 @@ class BookkeepingComponent(VirtualComponent, HasBodyShiftP):
     beamline_relation: VirtualRelationEnum = Field(default=..., description="""The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
          'slot_uri': 'pals:virtual_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["BookkeepingComponent"] = Field(default="BookkeepingComponent", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class Marker(BookkeepingComponent, HasTwissP):
@@ -2135,13 +2134,14 @@ class Marker(BookkeepingComponent, HasTwissP):
     beamline_relation: VirtualRelationEnum = Field(default=..., description="""The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
          'slot_uri': 'pals:virtual_beamline_relation'} })
     FloorP: Optional[FloorParamGroup] = Field(default=None, description="""A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasFloorP']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["Marker"] = Field(default="Marker", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class BeamLineSection(BookkeepingComponent, HasFloorP):
@@ -2160,13 +2160,14 @@ class BeamLineSection(BookkeepingComponent, HasFloorP):
          'slot_uri': 'pals:virtual_function'} })
     beamline_relation: VirtualRelationEnum = Field(default=..., description="""The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['PhysicalComponent', 'VirtualComponent'],
          'slot_uri': 'pals:virtual_beamline_relation'} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    native_types: Optional[list[str]] = Field(default=[], description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
+    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
     kind: Literal["BeamLineSection"] = Field(default="BeamLineSection", description="""The LinkML class name of this instance.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
-         'domain_of': ['PALSAccelerator', 'Component', 'Signal'],
+         'domain_of': ['Node', 'PALSAccelerator'],
          'slot_uri': 'pals:kind'} })
-    native_types: Optional[list[str]] = Field(default=None, description="""The native type of the component in the source system, which can be used to identify the component across different source systems.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Component']} })
-    MetaP: Optional[MetaParamGroup] = Field(default=None, description="""A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasMetaP']} })
+    alias: Optional[list[str]] = Field(default=[], description="""An alternative name or identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'MetaParamGroup'], 'slot_uri': 'pals:alias'} })
 
 
 class AdditionalMetadata(ConfiguredBaseModel):
@@ -2180,89 +2181,502 @@ class AdditionalMetadata(ConfiguredBaseModel):
     datatype: Optional[DataTypeEnum] = Field(default=None, description="""Hint for the value's original type, so consumers can parse it back (e.g. float, integer, boolean) rather than treating everything as an opaque string.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdditionalMetadata']} })
 
 
-class Relationship(ConfiguredBaseModel):
+class Edge(ConfiguredBaseModel):
     """
     Abstract base for subject-predicate-object associations.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
-         'from_schema': 'https://w3id.org/accelerator-core',
-         'represents_relationship': True})
+         'class_uri': 'rdf:Statement',
+         'from_schema': 'https://w3id.org/accelerator-core'})
 
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
-    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'SUBJECT',
-         'slot_uri': 'rdf:subject'} })
-    predicate: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'PREDICATE',
-         'slot_uri': 'rdf:predicate'} })
-    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'OBJECT',
-         'slot_uri': 'rdf:object'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/Edge","http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement","pals:Edge","rdf:Statement"] = Field(default="rdf:Statement", json_schema_extra = { "linkml_meta": {'designates_type': True, 'domain_of': ['Edge'], 'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
 
 
-class SignalBinding(Relationship):
+class SignalBinding(Edge):
     """
-    Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding.
+    Association between a PhysicalComponent and one of its Signals, e.g. QUAD1 component to QUAD1.STATUS signal.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core',
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
+         'from_schema': 'https://w3id.org/accelerator-core',
          'slot_usage': {'object': {'name': 'object', 'range': 'Signal'},
-                        'predicate': {'name': 'predicate',
-                                      'range': 'SignalBindingPredicateEnum'},
                         'subject': {'name': 'subject', 'range': 'PhysicalComponent'}}})
 
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
-    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'SUBJECT',
-         'slot_uri': 'rdf:subject'} })
-    predicate: SignalBindingPredicateEnum = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'PREDICATE',
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/SignalBinding","pals:SignalBinding"] = Field(default="pals:SignalBinding", json_schema_extra = { "linkml_meta": {'designates_type': True, 'domain_of': ['Edge'], 'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class HasSignal(SignalBinding):
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:has_signal',
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:has_signal',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/HasSignal","https://pals-project.readthedocs.io/has_signal","pals:HasSignal","pals:has_signal"] = Field(default="pals:has_signal", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:has_signal',
          'slot_uri': 'rdf:predicate'} })
-    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'OBJECT',
-         'slot_uri': 'rdf:object'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
 
 
-class ComponentRelation(Relationship):
+class HasSetpointSignal(SignalBinding):
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:has_setpoint_signal',
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:has_setpoint_signal',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/HasSetpointSignal","https://pals-project.readthedocs.io/has_setpoint_signal","pals:HasSetpointSignal","pals:has_setpoint_signal"] = Field(default="pals:has_setpoint_signal", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:has_setpoint_signal',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class HasReadbackSignal(SignalBinding):
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:has_readback_signal',
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:has_readback_signal',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/HasReadbackSignal","https://pals-project.readthedocs.io/has_readback_signal","pals:HasReadbackSignal","pals:has_readback_signal"] = Field(default="pals:has_readback_signal", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:has_readback_signal',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class HasCommandSignal(SignalBinding):
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:has_command_signal',
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:has_command_signal',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/HasCommandSignal","https://pals-project.readthedocs.io/has_command_signal","pals:HasCommandSignal","pals:has_command_signal"] = Field(default="pals:has_command_signal", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:has_command_signal',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class HasLimitSignal(SignalBinding):
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:has_limit_signal',
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:has_limit_signal',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/HasLimitSignal","https://pals-project.readthedocs.io/has_limit_signal","pals:HasLimitSignal","pals:has_limit_signal"] = Field(default="pals:has_limit_signal", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:has_limit_signal',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class ComponentRelation(Edge):
     """
     Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core',
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
+         'from_schema': 'https://w3id.org/accelerator-core',
          'slot_usage': {'object': {'name': 'object', 'range': 'Component'},
-                        'predicate': {'name': 'predicate',
-                                      'range': 'ComponentRelationPredicateEnum'},
                         'subject': {'name': 'subject', 'range': 'Component'}}})
 
-    context: Optional[RelationContextEnum] = Field(default=None, description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
-    beamline_context: Optional[str] = Field(default=None, description="""The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order).""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
-    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
-    distance_value: Optional[float] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
-    distance_unit: Optional[UnitEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
-    axis: Optional[AxisEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
     component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
-    tolerance_value: Optional[float] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
-    tolerance_unit: Optional[UnitEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
-    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Affiliation', 'Component', 'Signal', 'Relationship'],
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
-    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'SUBJECT',
-         'slot_uri': 'rdf:subject'} })
-    predicate: ComponentRelationPredicateEnum = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'PREDICATE',
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/ComponentRelation","pals:ComponentRelation"] = Field(default="pals:ComponentRelation", json_schema_extra = { "linkml_meta": {'designates_type': True, 'domain_of': ['Edge'], 'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class Precedes(ComponentRelation):
+    """
+    A relationship indicating that the subject component precedes the object component in a specified context,  such as along a beamline.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:precedes',
+         'exact_mappings': ['BFO:0000063'],
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'context': {'description': 'The frame of reference / domain in '
+                                                   'which this relationship is '
+                                                   'asserted to hold. For '
+                                                   'pals:precedes, this is the '
+                                                   'Beamline context = '
+                                                   'beamline_context.',
+                                    'equals_expression': 'beamline_context',
+                                    'name': 'context',
+                                    'required': True},
+                        'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:precedes',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    beamline_context: str = Field(default=..., description="""The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order). Only an edge-property slot for edges that are defined with respect to a specific BeamLine.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Precedes', 'HasConnectingBranch']} })
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold. For pals:precedes, this is the Beamline context = beamline_context.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'equals_expression': 'beamline_context'} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/Precedes","https://pals-project.readthedocs.io/precedes","pals:Precedes","pals:precedes"] = Field(default="pals:precedes", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:precedes',
          'slot_uri': 'rdf:predicate'} })
-    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Relationship'],
-         'relational_role': 'OBJECT',
-         'slot_uri': 'rdf:object'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class Contains(ComponentRelation):
+    """
+    A relationship indicating that the subject component contains the object component in a specified context,  such as within a BeamLineSection or other organizational grouping.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:contains',
+         'exact_mappings': ['BFO:0000051'],
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:contains',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/Contains","https://pals-project.readthedocs.io/contains","pals:Contains","pals:contains"] = Field(default="pals:contains", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:contains',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class Controls(ComponentRelation):
+    """
+    A relationship indicating that the subject component controls the object component in a specified context,  such as a power supply controlling a magnet.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:controls',
+         'exact_mappings': ['saref:controls'],
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:controls',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/Controls","https://pals-project.readthedocs.io/controls","pals:Controls","pals:controls"] = Field(default="pals:controls", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:controls',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class IsPartOf(ComponentRelation):
+    """
+    A relationship indicating that the subject component is part of the object component in a specified context,  such as a magnet being part of a BeamLineSection.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:is_part_of',
+         'exact_mappings': ['BFO:0000050'],
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:is_part_of',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/IsPartOf","https://pals-project.readthedocs.io/is_part_of","pals:IsPartOf","pals:is_part_of"] = Field(default="pals:is_part_of", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:is_part_of',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class AdjacentTo(ComponentRelation):
+    """
+    A relationship indicating that the subject component is adjacent to the object component and not overlapping
+     in a specified context, such as radiation detector and a magnet.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:adjacent_to',
+         'exact_mappings': ['RO:0002220'],
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:adjacent_to',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    distance_value: Optional[float] = Field(default=None, description="""Distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'NearestTo'], 'slot_uri': 'om:Distance'} })
+    distance_unit: Optional[UnitEnum] = Field(default=None, description="""Unit of the distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'NearestTo']} })
+    tolerance_value: Optional[float] = Field(default=None, description="""Tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'NearestTo']} })
+    tolerance_unit: Optional[UnitEnum] = Field(default=None, description="""Unit of the tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'NearestTo']} })
+    coordinates: Optional[CoordinateSet] = Field(default=None, description="""A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'Overlaps', 'MountedOn', 'NearestTo'],
+         'recommended': True} })
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/AdjacentTo","https://pals-project.readthedocs.io/adjacent_to","pals:AdjacentTo","pals:adjacent_to"] = Field(default="pals:adjacent_to", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:adjacent_to',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class Overlaps(ComponentRelation):
+    """
+    A relationship indicating that the subject component overlaps the object component in a specified context,  such as a magnet and a diagnostic device.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:overlaps',
+         'exact_mappings': ['RO:0002131'],
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:overlaps',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    coordinates: Optional[CoordinateSet] = Field(default=None, description="""A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'Overlaps', 'MountedOn', 'NearestTo'],
+         'recommended': True} })
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/Overlaps","https://pals-project.readthedocs.io/overlaps","pals:Overlaps","pals:overlaps"] = Field(default="pals:overlaps", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:overlaps',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class HasConnectingBranch(ComponentRelation):
+    """
+    A relationship indicating that the subject component has a connecting branch to the object component in a specified context,  such as a beamline section having a fork as a connecting branch.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'pals:has_connecting_branch',
+         'exact_mappings': ['RO:0002253'],
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'context': {'description': 'The frame of reference / domain in '
+                                                   'which this relationship is '
+                                                   'asserted to hold. For '
+                                                   'pals:has_connecting_branch, this '
+                                                   'is the Beamline context = '
+                                                   'beamline_context.',
+                                    'equals_expression': 'beamline_context',
+                                    'name': 'context',
+                                    'required': True},
+                        'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:has_connecting_branch',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    beamline_context: str = Field(default=..., description="""The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order). Only an edge-property slot for edges that are defined with respect to a specific BeamLine.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Precedes', 'HasConnectingBranch']} })
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold. For pals:has_connecting_branch, this is the Beamline context = beamline_context.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'equals_expression': 'beamline_context'} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/HasConnectingBranch","https://pals-project.readthedocs.io/has_connecting_branch","pals:HasConnectingBranch","pals:has_connecting_branch"] = Field(default="pals:has_connecting_branch", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:has_connecting_branch',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class MountedOn(ComponentRelation):
+    """
+    A relationship indicating that the subject component is mounted on the object component in a specified context,  such as a diagnostic device mounted on a magnet.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['RO:0002371'],
+         'class_uri': 'pals:mounted_on',
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:mounted_on',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    coordinates: Optional[CoordinateSet] = Field(default=None, description="""A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'Overlaps', 'MountedOn', 'NearestTo'],
+         'recommended': True} })
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/MountedOn","https://pals-project.readthedocs.io/mounted_on","pals:MountedOn","pals:mounted_on"] = Field(default="pals:mounted_on", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:mounted_on',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class Intersects(ComponentRelation):
+    """
+    A relationship indicating that the subject component intersects the object component in a specified context,  such as a beamline and a diagnostic device.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['RO:0015011'],
+         'class_uri': 'pals:intersects',
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:intersects',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/Intersects","https://pals-project.readthedocs.io/intersects","pals:Intersects","pals:intersects"] = Field(default="pals:intersects", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:intersects',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class NearestTo(ComponentRelation):
+    """
+    A relationship indicating that the subject component is nearest to the object component in a specified context,  such as a diagnostic device nearest to a magnet.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['RO:0002325'],
+         'class_uri': 'pals:nearest_to',
+         'from_schema': 'https://w3id.org/accelerator-core',
+         'slot_usage': {'predicate': {'description': 'The predicate of the '
+                                                     'relationship, which can be used '
+                                                     'to identify the relationship '
+                                                     'across different source systems.',
+                                      'equals_expression': 'pals:nearest_to',
+                                      'name': 'predicate',
+                                      'required': True}}})
+
+    distance_value: Optional[float] = Field(default=None, description="""Distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'NearestTo'], 'slot_uri': 'om:Distance'} })
+    distance_unit: Optional[UnitEnum] = Field(default=None, description="""Unit of the distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'NearestTo']} })
+    tolerance_value: Optional[float] = Field(default=None, description="""Tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'NearestTo']} })
+    tolerance_unit: Optional[UnitEnum] = Field(default=None, description="""Unit of the tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'NearestTo']} })
+    coordinates: Optional[CoordinateSet] = Field(default=None, description="""A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AdjacentTo', 'Overlaps', 'MountedOn', 'NearestTo'],
+         'recommended': True} })
+    context: RelationContextEnum = Field(default=..., description="""The frame of reference / domain in which this relationship is asserted to hold.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    component_direction: Optional[DirectionEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation']} })
+    reference_frame: Optional[ReferenceFrameEnum] = Field(default=None, json_schema_extra = { "linkml_meta": {'domain_of': ['ComponentRelation'], 'recommended': True} })
+    id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
+         'slot_uri': 'pals:id'} })
+    subject: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:subject'} })
+    predicate: Literal["https://pals-project.readthedocs.io/NearestTo","https://pals-project.readthedocs.io/nearest_to","pals:NearestTo","pals:nearest_to"] = Field(default="pals:nearest_to", description="""The predicate of the relationship, which can be used to identify the relationship across different source systems.""", json_schema_extra = { "linkml_meta": {'designates_type': True,
+         'domain_of': ['Edge'],
+         'equals_expression': 'pals:nearest_to',
+         'slot_uri': 'rdf:predicate'} })
+    object: str = Field(default=..., json_schema_extra = { "linkml_meta": {'domain_of': ['Edge'], 'slot_uri': 'rdf:object'} })
+
+
+class CoordinateSet(ConfiguredBaseModel):
+    """
+    A set of coordinates that define the spatial relationship between two components. This can include Cartesian coordinates, cylindrical coordinates, or other coordinate systems as needed. Useful for defining the spatial relationship where the relationship is not strictly linear or where the components are not aligned along a single axis.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/accelerator-core'})
+
+    coordinate_system: Optional[CoordinateSystemEnum] = Field(default=None, description="""The coordinate system used for the coordinates (e.g., Cartesian, Cylindrical).""", json_schema_extra = { "linkml_meta": {'domain_of': ['CoordinateSet']} })
+    x_coord: Optional[float] = Field(default=None, description="""The x-coordinate in the specified coordinate system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CoordinateSet']} })
+    y_coord: Optional[float] = Field(default=None, description="""The y-coordinate in the specified coordinate system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CoordinateSet']} })
+    z_coord: Optional[float] = Field(default=None, description="""The z-coordinate in the specified coordinate system.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CoordinateSet']} })
+    r_coord: Optional[float] = Field(default=None, description="""The radial distance in cylindrical coordinates.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CoordinateSet']} })
+    theta_coord: Optional[float] = Field(default=None, description="""The angular coordinate in cylindrical coordinates (in radians).""", json_schema_extra = { "linkml_meta": {'domain_of': ['CoordinateSet']} })
+    phi_coord: Optional[float] = Field(default=None, description="""The azimuthal angle in spherical coordinates (in radians).""", json_schema_extra = { "linkml_meta": {'domain_of': ['CoordinateSet']} })
 
 
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
+Node.model_rebuild()
 PALSAccelerator.model_rebuild()
 Author.model_rebuild()
 Facility.model_rebuild()
 Affiliation.model_rebuild()
 Identifier.model_rebuild()
+ParamGroup.model_rebuild()
 HasMetaP.model_rebuild()
 MetaParamGroup.model_rebuild()
 HasFloorP.model_rebuild()
@@ -2315,6 +2729,22 @@ BookkeepingComponent.model_rebuild()
 Marker.model_rebuild()
 BeamLineSection.model_rebuild()
 AdditionalMetadata.model_rebuild()
-Relationship.model_rebuild()
+Edge.model_rebuild()
 SignalBinding.model_rebuild()
+HasSignal.model_rebuild()
+HasSetpointSignal.model_rebuild()
+HasReadbackSignal.model_rebuild()
+HasCommandSignal.model_rebuild()
+HasLimitSignal.model_rebuild()
 ComponentRelation.model_rebuild()
+Precedes.model_rebuild()
+Contains.model_rebuild()
+Controls.model_rebuild()
+IsPartOf.model_rebuild()
+AdjacentTo.model_rebuild()
+Overlaps.model_rebuild()
+HasConnectingBranch.model_rebuild()
+MountedOn.model_rebuild()
+Intersects.model_rebuild()
+NearestTo.model_rebuild()
+CoordinateSet.model_rebuild()

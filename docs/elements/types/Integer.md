@@ -1,52 +1,16 @@
-# Type: Integer 
 
+# Type: integer
 
+An integer
 
+URI: [linkml:Integer](https://w3id.org/linkml/Integer)
 
-_An integer_
+|  |  |  |
+| --- | --- | --- |
+| Root (builtin) type | | **int** |
 
+## Other properties
 
-
-URI: [xsd:integer](http://www.w3.org/2001/XMLSchema#integer)
-
-## Type Properties
-
-| Property | Value |
-| --- | --- |
-| Base | `int` |
-| Type URI | [xsd:integer](http://www.w3.org/2001/XMLSchema#integer) |
-
-
-
-
-
-
-## Notes
-
-* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "integer".
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | xsd:integer |
-| native | pals:integer |
-| exact | schema:Integer |
-
-
+|  |  |  |
+| --- | --- | --- |
+| **Exact Mappings:** | | schema:Integer |

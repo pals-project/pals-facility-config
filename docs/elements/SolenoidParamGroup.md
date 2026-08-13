@@ -1,210 +1,41 @@
 
+# Class: SolenoidParamGroup
 
-# Class: SolenoidParamGroup 
-
-
-_Mixin for solenoid-specific parameters._
-
-
-
-
+Mixin for solenoid-specific parameters.
 
 URI: [pals:SolenoidParamGroup](https://pals-project.readthedocs.io/SolenoidParamGroup)
 
 
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[HasSolenoidP]++-%20SolenoidP%200..1>[SolenoidParamGroup&#124;Ksol:float%20%3F;Bsol:float%20%3F;id(i):string],[ParamGroup]^-[SolenoidParamGroup],[ParamGroup],[HasSolenoidP])](https://yuml.me/diagram/nofunky;dir:TB/class/[HasSolenoidP]++-%20SolenoidP%200..1>[SolenoidParamGroup&#124;Ksol:float%20%3F;Bsol:float%20%3F;id(i):string],[ParamGroup]^-[SolenoidParamGroup],[ParamGroup],[HasSolenoidP])
+
+## Parents
+
+ *  is_a: [ParamGroup](ParamGroup.md) - Abstract base for inlined PALS parameter-group objects, giving each an identifier so it resolves to a stable node/IRI rather than a blank node when exported to RDF.
+
+## Referenced by Class
+
+ *  **None** *[➞SolenoidP](hasSolenoidP__SolenoidP.md)*  <sub>0..1</sub>  **[SolenoidParamGroup](SolenoidParamGroup.md)**
+
+## Attributes
 
 
+### Own
 
-```mermaid
- classDiagram
-    class SolenoidParamGroup
-    click SolenoidParamGroup href "../SolenoidParamGroup/"
-      SolenoidParamGroup : Bsol
-        
-      SolenoidParamGroup : Ksol
-        
-      
-```
+ * [➞Ksol](solenoidParamGroup__Ksol.md)  <sub>0..1</sub>
+     * Description: Normalized solenoid strength.
+     * Range: [Float](types/Float.md)
+ * [➞Bsol](solenoidParamGroup__Bsol.md)  <sub>0..1</sub>
+     * Description: Solenoid field.
+     * Range: [Float](types/Float.md)
 
+### Inherited from ParamGroup:
 
+ * [id](id.md)  <sub>1..1</sub>
+     * Description: A unique identifier for the instance.
+     * Range: [String](types/String.md)
 
+## Other properties
 
-<!-- no inheritance hierarchy -->
-
-## Slots
-
-| Name | Cardinality and Range | Description | Inheritance |
-| ---  | --- | --- | --- |
-| [Ksol](Ksol.md) | 0..1 <br/> [Float](Float.md) | Normalized solenoid strength | direct |
-| [Bsol](Bsol.md) | 0..1 <br/> [Float](Float.md) | Solenoid field | direct |
-
-
-
-
-
-## Usages
-
-| used by | used in | type | used |
-| ---  | --- | --- | --- |
-| [HasSolenoidP](HasSolenoidP.md) | [SolenoidP](SolenoidP.md) | range | [SolenoidParamGroup](SolenoidParamGroup.md) |
-| [Solenoid](Solenoid.md) | [SolenoidP](SolenoidP.md) | range | [SolenoidParamGroup](SolenoidParamGroup.md) |
-
-
-
-
-## Rules
-
-
-### 
-
-| Rule Applied | Preconditions | Postconditions | Elseconditions |
-|--------------|---------------|----------------|----------------|
-| slot_conditions |```{'id': {'value_presence': 'PRESENT'}}``` | | |
-
-
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | pals:SolenoidParamGroup |
-| native | pals:SolenoidParamGroup |
-| exact | pals:SolenoidP |
-
-
-
-
-
-
-## LinkML Source
-
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-
-### Direct
-
-<details>
-```yaml
-name: SolenoidParamGroup
-description: Mixin for solenoid-specific parameters.
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
-- pals:SolenoidP
-attributes:
-  Ksol:
-    name: Ksol
-    description: Normalized solenoid strength.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:Ksol
-    domain_of:
-    - SolenoidParamGroup
-    range: float
-  Bsol:
-    name: Bsol
-    description: Solenoid field.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:Bsol
-    domain_of:
-    - SolenoidParamGroup
-    range: float
-    unit:
-      ucum_code: T
-rules:
-- preconditions:
-    slot_conditions:
-      id:
-        name: id
-        value_presence: PRESENT
-  postconditions:
-    exactly_one_of:
-    - slot_conditions:
-        Ksol:
-          name: Ksol
-          value_presence: PRESENT
-    - slot_conditions:
-        Bsol:
-          name: Bsol
-          value_presence: PRESENT
-  description: A solenoid must have one of, and exactly one of, Ksol or Bsol.
-
-```
-</details>
-
-### Induced
-
-<details>
-```yaml
-name: SolenoidParamGroup
-description: Mixin for solenoid-specific parameters.
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
-- pals:SolenoidP
-attributes:
-  Ksol:
-    name: Ksol
-    description: Normalized solenoid strength.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:Ksol
-    alias: Ksol
-    owner: SolenoidParamGroup
-    domain_of:
-    - SolenoidParamGroup
-    range: float
-  Bsol:
-    name: Bsol
-    description: Solenoid field.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:Bsol
-    alias: Bsol
-    owner: SolenoidParamGroup
-    domain_of:
-    - SolenoidParamGroup
-    range: float
-    unit:
-      ucum_code: T
-rules:
-- preconditions:
-    slot_conditions:
-      id:
-        name: id
-        value_presence: PRESENT
-  postconditions:
-    exactly_one_of:
-    - slot_conditions:
-        Ksol:
-          name: Ksol
-          value_presence: PRESENT
-    - slot_conditions:
-        Bsol:
-          name: Bsol
-          value_presence: PRESENT
-  description: A solenoid must have one of, and exactly one of, Ksol or Bsol.
-
-```
-</details>
+|  |  |  |
+| --- | --- | --- |
+| **Exact Mappings:** | | pals:SolenoidP |

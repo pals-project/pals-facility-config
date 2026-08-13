@@ -1,52 +1,16 @@
-# Type: String 
 
+# Type: string
 
+A character string
 
+URI: [linkml:String](https://w3id.org/linkml/String)
 
-_A character string_
+|  |  |  |
+| --- | --- | --- |
+| Root (builtin) type | | **str** |
 
+## Other properties
 
-
-URI: [xsd:string](http://www.w3.org/2001/XMLSchema#string)
-
-## Type Properties
-
-| Property | Value |
-| --- | --- |
-| Base | `str` |
-| Type URI | [xsd:string](http://www.w3.org/2001/XMLSchema#string) |
-
-
-
-
-
-
-## Notes
-
-* In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "string".
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | xsd:string |
-| native | pals:string |
-| exact | schema:Text |
-
-
+|  |  |  |
+| --- | --- | --- |
+| **Exact Mappings:** | | schema:Text |
