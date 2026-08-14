@@ -1,1658 +1,4908 @@
-narad_config:
-  schema_version: '0.1'
-  intent: NARAD extension for capability-layer semantics and facility-specific signal
-    bindings
-  deployed_system: BTA
-  has_sub_system:
-    - ado
-  control_capability_layer:
-    MagnetCapability:
-      description: Shared current-control semantics for powered magnets.
-      device_type: Magnet
-      signals:
-        current_setpoint:
-          role: control
-          data_type: float
-          units: A
-          units_uri: si-unit:A
-          description: Desired magnet current command.
-        current_readback:
-          role: readback
-          data_type: float
-          units: A
-          description: Measured magnet current.
-        current_range:
-          role: constraint
-          data_type: float
-          units: A
-          units_uri: si-unit:A
-          description: Minimum and Maximum allowed current setting.
-        magnet_status:
-          role: status
-          data_type: string
-          description: Power-supply or device state summary.
-    QuadrupoleCapability:
-      description: Control and observe the normalized quadrupole strength.
-      device_type: Quadrupole
-      subclass_of: MagnetCapability
-      signals:
-        strength_setpoint:
-          role: control
-          data_type: float
-          units: G/cm
-          units_uri: si-unit:Gs
-          description: Desired integrated quadrupole strength or equivalent model quantity.
-    DipoleCapability:
-      description: Control and observe the dipole bend field.
-      device_type: Dipole
-      subclass_of: MagnetCapability
-      signals:
-        field_setpoint:
-          role: control
-          data_type: float
-          units: T*m
-          units_uri: si-unit:T-M
-          description: Desired dipole bend field or equivalent model quantity.
-    CorrectorKickCapability:
-      description: Control and observe the corrector kick.
-      device_type: Corrector
-      subclass_of: MagnetCapability
-      signals:
-        kick_setpoint:
-          role: control
-          data_type: float
-          units: T*m
-          units_uri: si-unit:T-M
-          description: Desired integrated corrector kick or equivalent model quantity.
-    InstrumentCapability:
-      description: Shared readback semantics generic instruments.
-      device_type: Instrument
-      signals:
-        status:
-          role: readback
-          data_type: string
-          units: mm
-          units_uri: si-unit:MilliM
-          description: generic instrument status readback.
-    BPMCapability:
-      description: Shared readback semantics for beam position monitor instruments.
-      device_type: BPM
-      subclass_of: InstrumentCapability
-      signals:
-        horizontal_beam_position:
-          role: readback
-          data_type: float
-          units: mm
-          units_uri: si-unit:MilliM
-          description: Measured horizontal beam position.
-        vertical_beam_position:
-          role: readback
-          data_type: float
-          units: mm
-          units_uri: si-unit:MilliM
-          description: Measured vertical beam position.
-    MultiwireCapability:
-      description: Shared readback semantics for multi-wire beam profile monitor instruments.
-      device_type: Multiwire
-      subclass_of: InstrumentCapability
-      signals:
-        horizontal_profile:
-          role: readback
-          data_type: float
-          units: V
-          units_uri: si-unit:volt
-          description: Measured horizontal beam intensity profile.
-        vertical_profile:
-          role: readback
-          data_type: float
-          units: V
-          units_uri: si-unit:volt
-          description: Measured vertical beam intensity profile.
-        insertion_status:
-          role: status
-          data_type: string
-          description: Insertion status of the Multi-wire monitor.
-  device_layer:
-    Magnet:
-      device_type: Magnet
-      has_sub_system:
-        - name: Quadrupole
-        - name: Dipole
-        - name: Corrector
-      has_system_capability: MagnetCapability
-    Quadrupole:
-      device_type: Quadrupole
-      subclass_of: Magnet
-      has_system_capability: QuadrupoleCapability
-    Dipole:
-      device_type: Dipole
-      subclass_of: Magnet
-      has_system_capability: DipoleCapability
-    Corrector:
-      device_type: Corrector
-      subclass_of: Magnet
-      has_system_capability: CorrectorKickCapability
-    Instrument:
-      device_type: Instrument
-      has_sub_system:
-        - name: BPM
-        - name: Multiwire
-      has_system_capability: InstrumentCapability
-  signal_layer:
-    facilities:
-      BTA:
-        facility_identifier:
-          - identifier_type: url
-            identifier_value: https://jacow.org/PAC2009/papers/TH6PFP014.pdf
-        control_system:
-          name: ado
-          naming_convention: <device><signal_code>
-        signal_definitions:
-          magnet_signals:
-            device_type: Magnet
-            signal_bindings:
-              current_setpoint:
-                description: ADO current setpoint name
-                control_system_suffix: :setpointS
-              current_readback:
-                description: ADO current readback name
-                control_system_suffix: :currentM
-              current_range:
-                description: ADO minimum current range
-                control_system_suffix: :rangeC
-              magnet_status:
-                description: ADO status name
-                control_system_suffix: :stateS
-          multiwire_signals:
-            device_type: Multiwire
-            signal_bindings:
-              horizontal_profile:
-                description: ADO horizontal multi-wire data name
-                control_system_suffix: :horInDataM
-              vertical_profile:
-                description: ADO vertical multi-wire data name
-                control_system_suffix: :verInDataM
-              insertion_status:
-                description: ADO insertion status name
-                control_system_suffix: :harpIsM
-beamlines:
-  BTA_LINE:
-    line:
-    - BTASTART
-    - DHF6A
-    - DRF6A
-    - DHF6B
-    - DRF6B
-    - PUEH001
-    - DR001
-    - MW006
-    - DR006
-    - DV007
-    - DR007
-    - QV1
-    - DRQ1
-    - DH1A
-    - DH1B
-    - DRD1
-    - QH2A
-    - DRQ2A
-    - QH2B
-    - DRQ2B
-    - XF019
-    - DR019
-    - QV3
-    - DRQ3
-    - FOIL024
-    - DR024A
-    - DV030
-    - DR024B
-    - QH4
-    - DRQ4
-    - DH2
-    - DRD2
-    - QV5
-    - DRQ5
-    - PUEV046
-    - DR046
-    - DH3
-    - DRD3
-    - QH6
-    - DRQ6
-    - XF059
-    - DR059
-    - MW060
-    - DR060
-    - QV7
-    - DRQ7Y
-    - MK077
-    - DRQ7Z
-    - QH8
-    - DRQ8
-    - DH4A
-    - DH4B
-    - DRD4
-    - QV9
-    - DRQ9A
-    - DV120
-    - DRQ9B
-    - QH10
-    - DRQ10
-    - MW125
-    - DR125
-    - DH127
-    - DR127
-    - PUEV129
-    - DR129
-    - QV11
-    - DRQ11
-    - MK139
-    - DR139
-    - DR141
-    - PUEH143
-    - DR143
-    - QH12
-    - DRQ12
-    - MK156
-    - DR156
-    - DH158
-    - DR158
-    - PUEV160
-    - DR160
-    - QV13
-    - DRQ13
-    - MW166
-    - DR166
-    - DR168
-    - PUEH170
-    - DR170
-    - QH14
-    - DRQ14
-    - DH5A
-    - DH5B
-    - DRD5
-    - DV181
-    - DR181
-    - XF183
-    - DR183
-    - QV15
-    - M1
-    - L20SPTM1
-    - L20SPTM2
-    - MM_A01BF
-    - D2S
-    - MM_A02BF
-    - DPUE
-    - PUE_A02
-    - DHCA02
-    - DVCA02
-    - D2TX
-    - MM_A03CD
-    - DSQ
-    - QHFV
-    - QPOL
-    - DSQ
-    - MM_A04CD
-    - DPUE
-    - PUE_A04
-    - D2LX
-    - MM_A05AF
-    - D2H_A05
-    - KCKRA05
-    - D2H_A05
-    - MM_A06AF
-    - D2L
-    - MM_A07CD
-    - DSS
-    - SXV
-    - DSS
-    - MM_A08CD
-    - DPUE
-    - PUE_A08
-    - DHCA08
-    - DVCA08
-    - D2TX
-    - MM_A09BF
-    - D2S
-    - MM_A10BF
-    - D10
-    - D10
-    - MM_A11BD
-    - D2S
-    - MM_A12BD
-    - DPUE
-    - PUE_A12
-    - DHCA12
-    - DVCA12
-    - D2TX
-    - MM_A13CF
-    - DSS
-    - SXH
-    - DSS
-    - MM_A14CF
-    - DPUE
-    - PUE_A14
-    - D2LX
-    - MM_A15AD
-    - D2H
-    - MWA15
-elements:
-- name: BTASTART
-  is_instance_of: Marker
-- name: DHF6A
-  is_instance_of: Dipole
-  length: 1.25
-  param_set:
-    g_ref: -0.057192
-    e2: -0.07149
-- name: DRF6A
-  is_instance_of: Drift
-  length: 0.03949999999999998
-- name: DHF6B
-  is_instance_of: Dipole
-  length: 1.3269
-  param_set:
-    g_ref: -0.044728314115607806
-    e1: -0.03324
-    e2: -0.07149
-- name: DRF6B
-  is_instance_of: Drift
-  length: 0.4064
-- name: PUEH001
-  is_instance_of: BPM
-  length: 0.0
-- name: DR001
-  is_instance_of: Drift
-  length: 1.2518000000000002
-- name: MW006
-  is_instance_of: Multiwire
-  length: 0.0
-  instance_signal_bindings:
-    horizontal_profile:
-      pv_name: btaMW006Cntl:horInDataM
-      is_instance_of: MultiwireCapability.signals.horizontal_profile
-      for_property: horizontal_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    vertical_profile:
-      pv_name: btaMW006Cntl:verInDataM
-      is_instance_of: MultiwireCapability.signals.vertical_profile
-      for_property: vertical_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    insertion_status:
-      pv_name: btaMW006Cntl:harpIsM
-      is_instance_of: MultiwireCapability.signals.insertion_status
-      for_property: insertion_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    facility_param_set:
-      properties:
-        nbr_wires_x: 32
-        nbr_wires_y: 32
-        spacing_x: 0.0015
-        spacing_y: 0.0015
-- name: DR006
-  is_instance_of: Drift
-  length: 0.43259999999999993
-- name: DV007
-  is_instance_of: Corrector
-  length: 0.2286
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-tv7-ps:setpointS
-      is_instance_of: CorrectorKickCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-tv7-ps:currentM
-      is_instance_of: CorrectorKickCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-tv7-ps:rangeC
-      is_instance_of: CorrectorKickCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-tv7-ps:stateS
-      is_instance_of: CorrectorKickCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Ks0: 0.0
-- name: DR007
-  is_instance_of: Drift
-  length: 0.16060000000000002
-- name: QV1
-  is_instance_of: Quadrupole
-  length: 0.5588
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qd1-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qd1-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qd1-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qd1-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: -0.5437892687566989
-- name: DRQ1
-  is_instance_of: Drift
-  length: 0.4031500000000003
-- name: DH1A
-  is_instance_of: Dipole
-  length: 0.2666536729738865
-  param_set:
-    g_ref: 0.06818582244610812
-    e1: 0.009091
-    e2: 0.009091
-    edge_int1: 0.02065
-    edge_int2: 0.02065
-- name: DH1B
-  is_instance_of: Dipole
-  length: 0.2666536729738865
-  param_set:
-    g_ref: 0.06818582244610812
-    e1: 0.009091
-    e2: 0.009091
-    edge_int1: 0.02065
-    edge_int2: 0.02065
-- name: DRD1
-  is_instance_of: Drift
-  length: 0.353954
-- name: QH2A
-  is_instance_of: Quadrupole
-  length: 0.5588
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qf2-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qf2-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qf2-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qf2-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: 1.0492993067514023
-- name: DRQ2A
-  is_instance_of: Drift
-  length: 0.14119599999999966
-- name: QH2B
-  is_instance_of: Quadrupole
-  length: 0.5588
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qf2-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qf2-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qf2-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qf2-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: 1.0492993067514023
-- name: DRQ2B
-  is_instance_of: Drift
-  length: 0.4599000000000001
-- name: XF019
-  is_instance_of: Marker
-  length: 0.0
-- name: DR019
-  is_instance_of: Drift
-  length: 0.3256999999999993
-- name: QV3
-  is_instance_of: Quadrupole
-  length: 0.5588
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qd3-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qd3-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qd3-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qd3-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: -1.4212102570001446
-- name: DRQ3
-  is_instance_of: Drift
-  length: 0.3706000000000004
-- name: FOIL024
-  is_instance_of: Marker
-  length: 0.0
-- name: DR024A
-  is_instance_of: Drift
-  length: 0.012100000000000347
-- name: DV030
-  is_instance_of: Corrector
-  length: 0.2438
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-tv30-ps:setpointS
-      is_instance_of: CorrectorKickCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-tv30-ps:currentM
-      is_instance_of: CorrectorKickCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-tv30-ps:rangeC
-      is_instance_of: CorrectorKickCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-tv30-ps:stateS
-      is_instance_of: CorrectorKickCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Ks0: 0.0
-- name: DR024B
-  is_instance_of: Drift
-  length: 0.6880999999999995
-- name: QH4
-  is_instance_of: Quadrupole
-  length: 0.5588
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qf4-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qf4-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qf4-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qf4-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: 1.3799174639073808
-- name: DRQ4
-  is_instance_of: Drift
-  length: 0.48617500000000113
-- name: DH2
-  is_instance_of: Dipole
-  length: 2.42385
-  param_set:
-    g_ref: 0.1137446624172288
-    e1: 0.05058
-    e2: 0.05058
-    edge_int1: 0.02891
-    edge_int2: 0.02891
-    Kn1: 0.00019564081935763354
-- name: DRD2
-  is_instance_of: Drift
-  length: 0.4714249999999991
-- name: QV5
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qd5-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qd5-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qd5-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qd5-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: -0.013354833631008985
-- name: DRQ5
-  is_instance_of: Drift
-  length: 0.11834999999999998
-- name: PUEV046
-  is_instance_of: BPM
-  length: 0.0
-- name: DR046
-  is_instance_of: Drift
-  length: 0.8646750000000023
-- name: DH3
-  is_instance_of: Dipole
-  length: 2.42385
-  param_set:
-    g_ref: 0.1137446624172288
-    e1: 0.05058
-    e2: 0.05058
-    edge_int1: 0.02891
-    edge_int2: 0.02891
-    Kn1: 0.00019564081935763354
-- name: DRD3
-  is_instance_of: Drift
-  length: 0.4897249999999973
-- name: QH6
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qf6-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qf6-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qf6-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qf6-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: 0.9743513509122018
-- name: DRQ6
-  is_instance_of: Drift
-  length: 0.4714500000000008
-- name: XF059
-  is_instance_of: Marker
-  length: 0.0
-- name: DR059
-  is_instance_of: Drift
-  length: 0.4698999999999991
-- name: MW060
-  is_instance_of: Multiwire
-  length: 0.0
-  instance_signal_bindings:
-    horizontal_profile:
-      pv_name: btaMW060Cntl:horInDataM
-      is_instance_of: MultiwireCapability.signals.horizontal_profile
-      for_property: horizontal_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    vertical_profile:
-      pv_name: btaMW060Cntl:verInDataM
-      is_instance_of: MultiwireCapability.signals.vertical_profile
-      for_property: vertical_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    insertion_status:
-      pv_name: btaMW060Cntl:harpIsM
-      is_instance_of: MultiwireCapability.signals.insertion_status
-      for_property: insertion_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    facility_param_set:
-      properties:
-        nbr_wires_x: 32
-        nbr_wires_y: 32
-        spacing_x: 0.0025
-        spacing_y: 0.0025
-- name: DR060
-  is_instance_of: Drift
-  length: 0.4601500000000023
-- name: QV7
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qd7-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qd7-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qd7-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qd7-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: -0.8675096450596528
-- name: DRQ7Y
-  is_instance_of: Drift
-  length: 4.25075
-- name: MK077
-  is_instance_of: Marker
-  length: 0.0
-- name: DRQ7Z
-  is_instance_of: Drift
-  length: 4.25075
-- name: QH8
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qf8-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qf8-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qf8-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qf8-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: 0.31882795472842496
-- name: DRQ8
-  is_instance_of: Drift
-  length: 0.7341
-- name: DH4A
-  is_instance_of: Dipole
-  length: 0.26665081030218785
-  param_set:
-    g_ref: 0.03202690436350769
-    e1: 0.00427
-    e2: 0.00427
-    edge_int1: 0.02065
-    edge_int2: 0.02065
-- name: DH4B
-  is_instance_of: Dipole
-  length: 0.26665081030218785
-  param_set:
-    g_ref: 0.03202690436350769
-    e1: 0.00427
-    e2: 0.00427
-    edge_int1: 0.02065
-    edge_int2: 0.02065
-- name: DRD4
-  is_instance_of: Drift
-  length: 1.8078999999999987
-- name: QV9
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qd9-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qd9-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qd9-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qd9-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: -0.7925788082089091
-- name: DRQ9A
-  is_instance_of: Drift
-  length: 0.670250000000003
-- name: DV120
-  is_instance_of: Corrector
-  length: 0.2438
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-tv120-ps:setpointS
-      is_instance_of: CorrectorKickCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-tv120-ps:currentM
-      is_instance_of: CorrectorKickCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-tv120-ps:rangeC
-      is_instance_of: CorrectorKickCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-tv120-ps:stateS
-      is_instance_of: CorrectorKickCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Ks0: 0.0
-- name: DRQ9B
-  is_instance_of: Drift
-  length: 1.567049999999995
-- name: QH10
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qf10-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qf10-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qf10-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qf10-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: 0.6942945538633392
-- name: DRQ10
-  is_instance_of: Drift
-  length: 5.030150000000003
-- name: MW125
-  is_instance_of: Multiwire
-  length: 0.0
-  instance_signal_bindings:
-    horizontal_profile:
-      pv_name: btaMW125Cntl:horInDataM
-      is_instance_of: MultiwireCapability.signals.horizontal_profile
-      for_property: horizontal_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    vertical_profile:
-      pv_name: btaMW125Cntl:verInDataM
-      is_instance_of: MultiwireCapability.signals.vertical_profile
-      for_property: vertical_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    insertion_status:
-      pv_name: btaMW125Cntl:harpIsM
-      is_instance_of: MultiwireCapability.signals.insertion_status
-      for_property: insertion_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    facility_param_set:
-      properties:
-        nbr_wires_x: 32
-        nbr_wires_y: 32
-        spacing_x: 0.0025
-        spacing_y: 0.0025
-- name: DR125
-  is_instance_of: Drift
-  length: 0.43049999999999866
-- name: DH127
-  is_instance_of: Corrector
-  length: 0.2438
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-th127-ps:setpointS
-      is_instance_of: CorrectorKickCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-th127-ps:currentM
-      is_instance_of: CorrectorKickCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-th127-ps:rangeC
-      is_instance_of: CorrectorKickCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-th127-ps:stateS
-      is_instance_of: CorrectorKickCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn0: 0.0
-- name: DR127
-  is_instance_of: Drift
-  length: 0.29639999999999805
-- name: PUEV129
-  is_instance_of: BPM
-  length: 0.0
-- name: DR129
-  is_instance_of: Drift
-  length: 0.11834999999999998
-- name: QV11
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qd11-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qd11-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qd11-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qd11-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: -0.3671828230083464
-- name: DRQ11
-  is_instance_of: Drift
-  length: 3.01295
-- name: MK139
-  is_instance_of: Marker
-  length: 0.0
-- name: DR139
-  is_instance_of: Drift
-  length: 0.552500000000002
-- name: DR141
-  is_instance_of: Drift
-  length: 0.41820000000000185
-- name: PUEH143
-  is_instance_of: BPM
-  length: 0.0
-- name: DR143
-  is_instance_of: Drift
-  length: 0.11834999999999998
-- name: QH12
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qf12-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qf12-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qf12-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qf12-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: 0.4868974442913689
-- name: DRQ12
-  is_instance_of: Drift
-  length: 3.7802499999999988
-- name: MK156
-  is_instance_of: Marker
-  length: 0.0
-- name: DR156
-  is_instance_of: Drift
-  length: 0.430600000000002
-- name: DH158
-  is_instance_of: Corrector
-  length: 0.2438
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-th158-ps:setpointS
-      is_instance_of: CorrectorKickCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-th158-ps:currentM
-      is_instance_of: CorrectorKickCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-th158-ps:rangeC
-      is_instance_of: CorrectorKickCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-th158-ps:stateS
-      is_instance_of: CorrectorKickCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn0: 0.0
-- name: DR158
-  is_instance_of: Drift
-  length: 0.29639999999999805
-- name: PUEV160
-  is_instance_of: BPM
-  length: 0.0
-- name: DR160
-  is_instance_of: Drift
-  length: 0.11834999999999998
-- name: QV13
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qd13-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qd13-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qd13-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qd13-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: -0.9895450067507202
-- name: DRQ13
-  is_instance_of: Drift
-  length: 0.5969500000000032
-- name: MW166
-  is_instance_of: Multiwire
-  length: 0.0
-  instance_signal_bindings:
-    horizontal_profile:
-      pv_name: btaMW166Cntl:horInDataM
-      is_instance_of: MultiwireCapability.signals.horizontal_profile
-      for_property: horizontal_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    vertical_profile:
-      pv_name: btaMW166Cntl:verInDataM
-      is_instance_of: MultiwireCapability.signals.vertical_profile
-      for_property: vertical_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    insertion_status:
-      pv_name: btaMW166Cntl:harpIsM
-      is_instance_of: MultiwireCapability.signals.insertion_status
-      for_property: insertion_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    facility_param_set:
-      properties:
-        nbr_wires_x: 32
-        nbr_wires_y: 32
-        spacing_x: 0.0025
-        spacing_y: 0.0025
-- name: DR166
-  is_instance_of: Drift
-  length: 0.5523999999999987
-- name: DR168
-  is_instance_of: Drift
-  length: 0.41829999999999806
-- name: PUEH170
-  is_instance_of: BPM
-  length: 0.0
-- name: DR170
-  is_instance_of: Drift
-  length: 0.11834999999999998
-- name: QH14
-  is_instance_of: Quadrupole
-  length: 0.4985
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qf14-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qf14-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qf14-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qf14-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: 0.748989790597664
-- name: DRQ14
-  is_instance_of: Drift
-  length: 0.5067499999999983
-- name: DH5A
-  is_instance_of: Dipole
-  length: 0.6229286126725115
-  param_set:
-    g_ref: -0.1130065284655793
-    e1: -0.0351975
-    e2: -0.0351975
-    edge_int1: 0.02065
-    edge_int2: 0.02065
-- name: DH5B
-  is_instance_of: Dipole
-  length: 0.6229286126725115
-  param_set:
-    g_ref: -0.1130065284655793
-    e1: -0.0351975
-    e2: -0.0351975
-    edge_int1: 0.02065
-    edge_int2: 0.02065
-- name: DRD5
-  is_instance_of: Drift
-  length: 0.4516000000000008
-- name: DV181
-  is_instance_of: Corrector
-  length: 0.2438
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-tv181-ps:setpointS
-      is_instance_of: CorrectorKickCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-tv181-ps:currentM
-      is_instance_of: CorrectorKickCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-tv181-ps:rangeC
-      is_instance_of: CorrectorKickCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-tv181-ps:stateS
-      is_instance_of: CorrectorKickCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Ks0: 0.0
-- name: DR181
-  is_instance_of: Drift
-  length: 0.3797999999999996
-- name: XF183
-  is_instance_of: Marker
-  length: 0.0
-- name: DR183
-  is_instance_of: Drift
-  length: 0.5255000000000035
-- name: QV15
-  is_instance_of: Quadrupole
-  length: 0.5588
-  instance_signal_bindings:
-    current_setpoint:
-      pv_name: bta-qd15-ps:setpointS
-      is_instance_of: QuadrupoleCapability.signals.current_setpoint
-      for_property: current_setpoint
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_readback:
-      pv_name: bta-qd15-ps:currentM
-      is_instance_of: QuadrupoleCapability.signals.current_readback
-      for_property: current_readback
-      is_hosted_by: BTA
-      is_property_of: ado
-    current_range:
-      pv_name: bta-qd15-ps:rangeC
-      is_instance_of: QuadrupoleCapability.signals.current_range
-      for_property: current_range
-      is_hosted_by: BTA
-      is_property_of: ado
-    status:
-      pv_name: bta-qd15-ps:stateS
-      is_instance_of: QuadrupoleCapability.signals.magnet_status
-      for_property: magnet_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    Kn1: -0.7193376543986799
-- name: M1
-  is_instance_of: Drift
-  length: 2.2606
-- name: L20SPTM1
-  is_instance_of: Dipole
-  length: 1.2309543850148328
-  param_set:
-    g_ref: 0.04457110731957698
-    e1: 0.0274325
-    e2: 0.0274325
-- name: L20SPTM2
-  is_instance_of: Dipole
-  length: 1.2309543850148328
-  param_set:
-    g_ref: 0.04457110731957698
-    e1: 0.0274325
-    e2: 0.0274325
-- name: MM_A01BF
-  is_instance_of: Dipole
-  length: 2.0066461824881423
-  param_set:
-    g_ref: -0.011712229642227363
-    e1: -0.01175115045
-    e2: -0.01175115045
-    Kn1: 0.04850457979108316
-    Kn2: 0.010112690671265677
-- name: D2S
-  is_instance_of: Drift
-  length: 0.609514656
-- name: MM_A02BF
-  is_instance_of: Dipole
-  length: 2.0066461824881423
-  param_set:
-    g_ref: -0.011712229642227363
-    e1: -0.01175115045
-    e2: -0.01175115045
-    Kn1: 0.04850457979108316
-    Kn2: 0.010112690671265677
-- name: DPUE
-  is_instance_of: Drift
-  length: 0.287
-- name: PUE_A02
-  is_instance_of: BPM
-  length: 0.0
-- name: DHCA02
-  is_instance_of: Corrector
-  length: 0.0
-  param_set:
-    Kn0: 0.0
-- name: DVCA02
-  is_instance_of: Corrector
-  length: 0.0
-  param_set:
-    Ks0: 0.0
-- name: D2TX
-  is_instance_of: Drift
-  length: 0.322485192
-- name: MM_A03CD
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: -0.04863291582125735
-    Kn2: 0.008756616595046793
-- name: DSQ
-  is_instance_of: Drift
-  length: 0.37104735600000005
-- name: QHFV
-  is_instance_of: Quadrupole
-  length: 0.39088
-- name: QPOL
-  is_instance_of: Quadrupole
-  length: 0.39088
-- name: MM_A04CD
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: -0.04863291582125735
-    Kn2: 0.008756616595046793
-- name: PUE_A04
-  is_instance_of: BPM
-  length: 0.0
-- name: D2LX
-  is_instance_of: Drift
-  length: 0.32245471200000003
-- name: MM_A05AF
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: 0.04870190658303816
-    Kn2: 0.008723426564620421
-- name: D2H_A05
-  is_instance_of: Drift
-  length: 0.26192735600000006
-- name: KCKRA05
-  is_instance_of: Dipole
-  length: 1.0000003750000985
-  param_set:
-    g_ref: 0.0029999988750001264
-    e1: 0.0015
-    e2: 0.0015
-- name: MM_A06AF
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: 0.04870190658303816
-    Kn2: 0.008723426564620421
-- name: D2L
-  is_instance_of: Drift
-  length: 0.609454712
-- name: MM_A07CD
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: -0.04863291582125735
-    Kn2: 0.008756616595046793
-- name: DSS
-  is_instance_of: Drift
-  length: 0.43442735600000004
-- name: SXV
-  is_instance_of: Sextupole
-  length: 0.655
-- name: MM_A08CD
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: -0.04863291582125735
-    Kn2: 0.008756616595046793
-- name: PUE_A08
-  is_instance_of: BPM
-  length: 0.0
-- name: DHCA08
-  is_instance_of: Corrector
-  length: 0.0
-  param_set:
-    Kn0: 0.0
-- name: DVCA08
-  is_instance_of: Corrector
-  length: 0.0
-  param_set:
-    Ks0: 0.0
-- name: MM_A09BF
-  is_instance_of: Dipole
-  length: 2.0066461824881423
-  param_set:
-    g_ref: -0.011712229642227363
-    e1: -0.01175115045
-    e2: -0.01175115045
-    Kn1: 0.04850457979108316
-    Kn2: 0.010112690671265677
-- name: MM_A10BF
-  is_instance_of: Dipole
-  length: 2.0066461824881423
-  param_set:
-    g_ref: -0.011712229642227363
-    e1: -0.01175115045
-    e2: -0.01175115045
-    Kn1: 0.04850457979108316
-    Kn2: 0.010112690671265677
-- name: D10
-  is_instance_of: Drift
-  length: 1.523839218
-- name: MM_A11BD
-  is_instance_of: Dipole
-  length: 2.0066461824881423
-  param_set:
-    g_ref: -0.011712229642227363
-    e1: -0.01175115045
-    e2: -0.01175115045
-    Kn1: -0.0484198946267085
-    Kn2: 0.010003388034307203
-- name: MM_A12BD
-  is_instance_of: Dipole
-  length: 2.0066461824881423
-  param_set:
-    g_ref: -0.011712229642227363
-    e1: -0.01175115045
-    e2: -0.01175115045
-    Kn1: -0.0484198946267085
-    Kn2: 0.010003388034307203
-- name: PUE_A12
-  is_instance_of: BPM
-  length: 0.0
-- name: DHCA12
-  is_instance_of: Corrector
-  length: 0.0
-  param_set:
-    Kn0: 0.0
-- name: DVCA12
-  is_instance_of: Corrector
-  length: 0.0
-  param_set:
-    Ks0: 0.0
-- name: MM_A13CF
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: 0.048742537207372996
-    Kn2: 0.00884527783214509
-- name: SXH
-  is_instance_of: Sextupole
-  length: 0.655
-- name: MM_A14CF
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: 0.048742537207372996
-    Kn2: 0.00884527783214509
-- name: PUE_A14
-  is_instance_of: BPM
-  length: 0.0
-- name: MM_A15AD
-  is_instance_of: Dipole
-  length: 2.387677802013313
-  param_set:
-    g_ref: -0.011712229630153455
-    e1: -0.01398251535
-    e2: -0.01398251535
-    Kn1: -0.0486098096672228
-    Kn2: 0.008609656995266375
-- name: D2H
-  is_instance_of: Drift
-  length: 0.7619273560000001
-- name: MWA15
-  is_instance_of: Multiwire
-  length: 0.0
-  instance_signal_bindings:
-    horizontal_profile:
-      pv_name: adrA15MWCntl:horInDataM
-      is_instance_of: MultiwireCapability.signals.horizontal_profile
-      for_property: horizontal_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    vertical_profile:
-      pv_name: adrA15MWCntl:verInDataM
-      is_instance_of: MultiwireCapability.signals.vertical_profile
-      for_property: vertical_profile
-      is_hosted_by: BTA
-      is_property_of: ado
-    insertion_status:
-      pv_name: adrA15MWCntl:harpIsM
-      is_instance_of: MultiwireCapability.signals.insertion_status
-      for_property: insertion_status
-      is_hosted_by: BTA
-      is_property_of: ado
-  param_set:
-    facility_param_set:
-      properties:
-        nbr_wires_x: 64
-        nbr_wires_y: 32
-        spacing_x: 0.002
-        spacing_y: 0.002
+description: Skeleton NARAD representation of the BTA beamline generated from bta.pals.yaml.
+kind: PALSAccelerator
+version: 0.1.0
+notes:
+- Generated from a PALS lattice export and enriched with ADO signals defined by local naming rules.
+- Model-only drifts, controllers, constants, and lattice records are omitted because the current accelerator-core
+  schema has no direct representation for them.
+facility:
+  identifiers:
+  - identifier_type: LOCAL
+    identifier_value: BTA
+  components:
+  - id: inst:BEGINNING_B1
+    kind: BeginningEle
+    native_types:
+    - BeginningEle
+    - Beginning_Ele
+    functions:
+    - Mark
+    beamline_relation: Inline
+    ReferenceP:
+      pc_ref: 2160058016.715229
+      species_ref: proton
+    TwissP:
+      beta_a: 12.5509384
+      beta_b: 4.072941886974975
+      alpha_a: 1.8249910306663342
+      alpha_b: -0.6499756770851368
+      eta_x: 2.7207960780961375
+      etap_x: -0.4222600658627664
+  - id: inst:BTASTART
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:DHF6A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.25
+    BendP:
+      g_ref: -0.057192
+      e2: -0.07149
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.057192
+  - id: inst:DHF6T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:DRF6A
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.03949999999999998
+  - id: inst:DHF6B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.3269
+    BendP:
+      g_ref: -0.044728314115607806
+      e1: -0.03324
+      e2: -0.07149
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.04472831411560781
+  - id: inst:DRF6B
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4064
+  - id: inst:PUEH001
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+  - id: inst:DR001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.2518000000000002
+  - id: inst:MW006
+    kind: BeamProfileMonitor
+    native_types:
+    - Marker
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      description: Multiwire beam-profile monitor.
+      additional_metadata:
+      - key: nbr_wires_x
+        value: '32'
+        datatype: Integer
+      - key: nbr_wires_y
+        value: '32'
+        datatype: Integer
+      - key: spacing_x
+        value: '0.0015'
+        datatype: Float
+      - key: spacing_y
+        value: '0.0015'
+        datatype: Float
+  - id: inst:DR006
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.43259999999999993
+  - id: inst:DV007
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.2286
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Ks: 0.00019785396946390708
+    plane: Vertical
+  - id: inst:DR007
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.16060000000000002
+  - id: inst:QV1
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5588
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: -0.543789268756699
+  - id: inst:DRQ1
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4031500000000003
+  - id: inst:DH1A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.2666536729738865
+    BendP:
+      g_ref: 0.06818582244610812
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.0681858224461081
+  - id: inst:DH1T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:DH1B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.2666536729738865
+    BendP:
+      g_ref: 0.06818582244610812
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.0681858224461081
+  - id: inst:DRD1
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.353954
+  - id: inst:QH2A
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5588
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: 1.0492993067514023
+  - id: inst:DRQ2A
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.14119599999999966
+  - id: inst:QH2B
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5588
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: 1.0492993067514023
+  - id: inst:DRQ2B
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4599000000000001
+  - id: inst:XF019
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:DR019
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.3256999999999993
+  - id: inst:QV3
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5588
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: -1.4212102570001448
+  - id: inst:DRQ3
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.3706000000000004
+  - id: inst:FOIL024
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:DR024A
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.012100000000000347
+  - id: inst:DV030
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.2438
+    plane: Vertical
+  - id: inst:DR024B
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.6880999999999995
+  - id: inst:QH4
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5588
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: 1.3799174639073808
+  - id: inst:DRQ4
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.48617500000000113
+  - id: inst:DH2
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.42385
+    BendP:
+      g_ref: 0.1137446624172288
+      edge1_int: 0.02891
+      edge2_int: 0.02891
+      e1: 0.05058
+      e2: 0.05058
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.11374466241722879
+      - order: 1
+        Kn: 0.00019564081935763354
+  - id: inst:DRD2
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4714249999999991
+  - id: inst:QV5
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: -0.013354833631008985
+  - id: inst:DH23T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:DRQ5
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.11834999999999998
+  - id: inst:PUEV046
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+  - id: inst:DR046
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.8646750000000023
+  - id: inst:DH3
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.42385
+    BendP:
+      g_ref: 0.1137446624172288
+      edge1_int: 0.02891
+      edge2_int: 0.02891
+      e1: 0.05058
+      e2: 0.05058
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.11374466241722879
+      - order: 1
+        Kn: 0.00019564081935763354
+  - id: inst:DRD3
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4897249999999973
+  - id: inst:QH6
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: 0.9743513509122018
+  - id: inst:DRQ6
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4714500000000008
+  - id: inst:XF059
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:DR059
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4698999999999991
+  - id: inst:MW060
+    kind: BeamProfileMonitor
+    native_types:
+    - Marker
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      description: Multiwire beam-profile monitor.
+      additional_metadata:
+      - key: nbr_wires_x
+        value: '32'
+        datatype: Integer
+      - key: nbr_wires_y
+        value: '32'
+        datatype: Integer
+      - key: spacing_x
+        value: '0.0025'
+        datatype: Float
+      - key: spacing_y
+        value: '0.0025'
+        datatype: Float
+  - id: inst:DR060
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4601500000000023
+  - id: inst:QV7
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: -0.8675096450596528
+  - id: inst:DRQ7Y
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 4.25075
+  - id: inst:MK077
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:DRQ7Z
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 4.25075
+  - id: inst:QH8
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: 0.31882795472842496
+  - id: inst:DRQ8
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.7341
+  - id: inst:DH4A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.26665081030218785
+    BendP:
+      g_ref: 0.03202690436350769
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.032026904363507684
+  - id: inst:DH4T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:DH4B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.26665081030218785
+    BendP:
+      g_ref: 0.03202690436350769
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.032026904363507684
+  - id: inst:DRD4
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.8078999999999987
+  - id: inst:QV9
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: -0.7925788082089091
+  - id: inst:DRQ9A
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.670250000000003
+  - id: inst:DV120
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.2438
+    plane: Vertical
+  - id: inst:DRQ9B
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.567049999999995
+  - id: inst:QH10
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: 0.6942945538633392
+  - id: inst:DRQ10
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 5.030150000000003
+  - id: inst:MW125
+    kind: BeamProfileMonitor
+    native_types:
+    - Marker
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      description: Multiwire beam-profile monitor.
+      additional_metadata:
+      - key: nbr_wires_x
+        value: '32'
+        datatype: Integer
+      - key: nbr_wires_y
+        value: '32'
+        datatype: Integer
+      - key: spacing_x
+        value: '0.0025'
+        datatype: Float
+      - key: spacing_y
+        value: '0.0025'
+        datatype: Float
+  - id: inst:DR125
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.43049999999999866
+  - id: inst:DH127
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.2438
+    plane: Horizontal
+  - id: inst:DR127
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.29639999999999805
+  - id: inst:PUEV129
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+  - id: inst:DR129
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.11834999999999998
+  - id: inst:QV11
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: -0.3671828230083464
+  - id: inst:DRQ11
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 3.01295
+  - id: inst:MK139
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:DR139
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.552500000000002
+  - id: inst:DR141
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.41820000000000185
+  - id: inst:PUEH143
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+  - id: inst:DR143
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.11834999999999998
+  - id: inst:QH12
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: 0.4868974442913689
+  - id: inst:DRQ12
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 3.7802499999999988
+  - id: inst:MK156
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:DR156
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.430600000000002
+  - id: inst:DH158
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.2438
+    plane: Horizontal
+  - id: inst:DR158
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.29639999999999805
+  - id: inst:PUEV160
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+  - id: inst:DR160
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.11834999999999998
+  - id: inst:QV13
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: -0.9895450067507202
+  - id: inst:DRQ13
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5969500000000032
+  - id: inst:MW166
+    kind: BeamProfileMonitor
+    native_types:
+    - Marker
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      description: Multiwire beam-profile monitor.
+      additional_metadata:
+      - key: nbr_wires_x
+        value: '32'
+        datatype: Integer
+      - key: nbr_wires_y
+        value: '32'
+        datatype: Integer
+      - key: spacing_x
+        value: '0.0025'
+        datatype: Float
+      - key: spacing_y
+        value: '0.0025'
+        datatype: Float
+  - id: inst:DR166
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5523999999999987
+  - id: inst:DR168
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.41829999999999806
+  - id: inst:PUEH170
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+  - id: inst:DR170
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.11834999999999998
+  - id: inst:QH14
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4985
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: 0.748989790597664
+  - id: inst:DRQ14
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5067499999999983
+  - id: inst:DH5A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.6229286126725115
+    BendP:
+      g_ref: -0.1130065284655793
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.1130065284655793
+  - id: inst:DH5T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:DH5B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.6229286126725115
+    BendP:
+      g_ref: -0.1130065284655793
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.1130065284655793
+  - id: inst:DRD5
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.4516000000000008
+  - id: inst:DV181
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.2438
+    plane: Vertical
+  - id: inst:DR181
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.3797999999999996
+  - id: inst:XF183
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:DR183
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5255000000000035
+  - id: inst:QV15
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5588
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Kn: -0.71933765439868
+  - id: inst:M1
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.2606
+  - id: inst:L20SPTM1
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.2309543850148328
+    BendP:
+      g_ref: 0.04457110731957698
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.04457110731957699
+  - id: inst:DHL20T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:L20SPTM2
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.2309543850148328
+    BendP:
+      g_ref: 0.04457110731957698
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.04457110731957699
+  - id: inst:MM_A01BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.0066461824881423
+    BendP:
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: 0.04850457979108316
+      - order: 2
+        Kn: 0.010112690671265677
+  - id: inst:D2S_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.609514656
+  - id: inst:MM_A02BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.0066461824881423
+    BendP:
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: 0.04850457979108316
+      - order: 2
+        Kn: 0.010112690671265677
+  - id: inst:DPUE_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.287
+  - id: inst:PUE_A02
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      label: “AGSBPM”
+  - id: inst:DHCA02
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:DVCA02
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Vertical
+  - id: inst:D2TX_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.322485192
+  - id: inst:MM_A03CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: -0.04863291582125736
+      - order: 2
+        Kn: 0.008756616595046793
+  - id: inst:DSQ_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.37104735600000005
+  - id: inst:QHFV
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.39088
+  - id: inst:QPOL
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.39088
+  - id: inst:DSQ_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.37104735600000005
+  - id: inst:MM_A04CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: -0.04863291582125736
+      - order: 2
+        Kn: 0.008756616595046793
+  - id: inst:DPUE_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.287
+  - id: inst:PUE_A04
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      label: “AGSBPM”
+  - id: inst:D2LX_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.32245471200000003
+  - id: inst:MM_A05AF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: 0.04870190658303816
+      - order: 2
+        Kn: 0.008723426564620421
+  - id: inst:D2H_A05_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.26192735600000006
+  - id: inst:KCKRA05
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0000003750000985
+    BendP:
+      g_ref: 0.0029999988750001264
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: 0.0029999988750001264
+  - id: inst:D2H_A05_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.26192735600000006
+  - id: inst:MM_A06AF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: 0.04870190658303816
+      - order: 2
+        Kn: 0.008723426564620421
+  - id: inst:D2L
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.609454712
+  - id: inst:MM_A07CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: -0.04863291582125736
+      - order: 2
+        Kn: 0.008756616595046793
+  - id: inst:DSS_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.43442735600000004
+  - id: inst:SXV
+    kind: Sextupole
+    native_types:
+    - Sextupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.655
+  - id: inst:DSS_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.43442735600000004
+  - id: inst:MM_A08CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: -0.04863291582125736
+      - order: 2
+        Kn: 0.008756616595046793
+  - id: inst:DPUE_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.287
+  - id: inst:PUE_A08
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      label: “AGSBPM”
+  - id: inst:DHCA08
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:DVCA08
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Vertical
+  - id: inst:D2TX_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.322485192
+  - id: inst:MM_A09BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.0066461824881423
+    BendP:
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: 0.04850457979108316
+      - order: 2
+        Kn: 0.010112690671265677
+  - id: inst:D2S_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.609514656
+  - id: inst:MM_A10BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.0066461824881423
+    BendP:
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: 0.04850457979108316
+      - order: 2
+        Kn: 0.010112690671265677
+  - id: inst:D10_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.523839218
+  - id: inst:D10_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.523839218
+  - id: inst:MM_A11BD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.0066461824881423
+    BendP:
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: -0.0484198946267085
+      - order: 2
+        Kn: 0.010003388034307203
+  - id: inst:D2S_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.609514656
+  - id: inst:MM_A12BD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.0066461824881423
+    BendP:
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: -0.0484198946267085
+      - order: 2
+        Kn: 0.010003388034307203
+  - id: inst:DPUE_004
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.287
+  - id: inst:PUE_A12
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      label: “AGSBPM”
+  - id: inst:DHCA12
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Horizontal
+  - id: inst:DVCA12
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    plane: Vertical
+  - id: inst:D2TX_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.322485192
+  - id: inst:MM_A13CF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: 0.048742537207373
+      - order: 2
+        Kn: 0.008845277832145091
+  - id: inst:DSS_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.43442735600000004
+  - id: inst:SXH
+    kind: Sextupole
+    native_types:
+    - Sextupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.655
+  - id: inst:DSS_004
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.43442735600000004
+  - id: inst:MM_A14CF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: 0.048742537207373
+      - order: 2
+        Kn: 0.008845277832145091
+  - id: inst:DPUE_005
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.287
+  - id: inst:PUE_A14
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      label: “AGSBPM”
+  - id: inst:D2LX_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.32245471200000003
+  - id: inst:MM_A15AD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 2.387677802013313
+    BendP:
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: -0.0486098096672228
+      - order: 2
+        Kn: 0.008609656995266375
+  - id: inst:D2H
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.7619273560000001
+  - id: inst:MWA15
+    kind: BeamProfileMonitor
+    native_types:
+    - Marker
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.0
+    MetaP:
+      description: Multiwire beam-profile monitor.
+      additional_metadata:
+      - key: nbr_wires_x
+        value: '64'
+        datatype: Integer
+      - key: nbr_wires_y
+        value: '32'
+        datatype: Integer
+      - key: spacing_x
+        value: '0.002'
+        datatype: Float
+      - key: spacing_y
+        value: '0.002'
+        datatype: Float
+  - id: inst:END_B0
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  beamlines:
+  - id: inst:BTA_LINE
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
+    multipass: false
+    periodic: false
+    description: BTA beamline imported from bta.pals.yaml.
+  signals:
+  - id: inst:btaMW006Cntl:horInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured horizontal multiwire beam-intensity profile.
+    canonical_signal_type: HorizontalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: horizontal_profile
+  - id: inst:btaMW006Cntl:verInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured vertical multiwire beam-intensity profile.
+    canonical_signal_type: VerticalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: vertical_profile
+  - id: inst:btaMW006Cntl:harpIsM
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Insertion status of the multiwire monitor.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: insertion_status
+  - id: inst:bta-tv7-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-tv7-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-tv7-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-tv7-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qd1-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qd1-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qd1-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qd1-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-th1-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-th1-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-th1-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-th1-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qf2-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qf2-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qf2-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qf2-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qd3-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qd3-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qd3-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qd3-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-tv30-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-tv30-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-tv30-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-tv30-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qf4-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qf4-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qf4-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qf4-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qd5-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qd5-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qd5-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qd5-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-th23-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-th23-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-th23-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-th23-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qf6-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qf6-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qf6-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qf6-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:btaMW060Cntl:horInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured horizontal multiwire beam-intensity profile.
+    canonical_signal_type: HorizontalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: horizontal_profile
+  - id: inst:btaMW060Cntl:verInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured vertical multiwire beam-intensity profile.
+    canonical_signal_type: VerticalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: vertical_profile
+  - id: inst:btaMW060Cntl:harpIsM
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Insertion status of the multiwire monitor.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: insertion_status
+  - id: inst:bta-qd7-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qd7-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qd7-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qd7-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qf8-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qf8-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qf8-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qf8-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-th4-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-th4-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-th4-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-th4-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qd9-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qd9-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qd9-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qd9-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-tv120-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-tv120-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-tv120-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-tv120-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qf10-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qf10-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qf10-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qf10-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:btaMW125Cntl:horInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured horizontal multiwire beam-intensity profile.
+    canonical_signal_type: HorizontalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: horizontal_profile
+  - id: inst:btaMW125Cntl:verInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured vertical multiwire beam-intensity profile.
+    canonical_signal_type: VerticalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: vertical_profile
+  - id: inst:btaMW125Cntl:harpIsM
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Insertion status of the multiwire monitor.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: insertion_status
+  - id: inst:bta-th127-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-th127-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-th127-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-th127-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qd11-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qd11-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qd11-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qd11-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qf12-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qf12-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qf12-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qf12-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-th158-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-th158-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-th158-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-th158-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qd13-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qd13-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qd13-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qd13-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:btaMW166Cntl:horInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured horizontal multiwire beam-intensity profile.
+    canonical_signal_type: HorizontalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: horizontal_profile
+  - id: inst:btaMW166Cntl:verInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured vertical multiwire beam-intensity profile.
+    canonical_signal_type: VerticalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: vertical_profile
+  - id: inst:btaMW166Cntl:harpIsM
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Insertion status of the multiwire monitor.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: insertion_status
+  - id: inst:bta-qf14-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qf14-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qf14-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qf14-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-th5-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-th5-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-th5-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-th5-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-tv181-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-tv181-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-tv181-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-tv181-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:bta-qd15-ps:setpointS
+    kind: Signal
+    signal_role: Setpoint
+    source_system: Other
+    native_description: Desired magnet current command.
+    canonical_signal_type: MagnetCurrentSetpoint
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_setpoint
+  - id: inst:bta-qd15-ps:currentM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured magnet current.
+    canonical_signal_type: MagnetCurrentReadback
+    quantity_kind: ElectricCurrent
+    native_data_type: Float
+    native_unit: A
+    access_protocol: ADO
+    alias: current_readback
+  - id: inst:bta-qd15-ps:rangeC
+    kind: Signal
+    signal_role: RangeLimit
+    source_system: Other
+    native_description: Allowed magnet-current range returned as [maximum, minimum].
+    canonical_signal_type: MagnetCurrentRange
+    quantity_kind: ElectricCurrent
+    native_data_type: FloatArray
+    native_unit: A
+    access_protocol: ADO
+    alias: current_range
+    MetaP:
+      additional_metadata:
+      - key: array_order
+        value: maximum,minimum
+        datatype: String
+      - key: array_length
+        value: '2'
+        datatype: Integer
+  - id: inst:bta-qd15-ps:stateS
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Power-supply or device state summary.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: magnet_status
+  - id: inst:adrA15MWCntl:horInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured horizontal multiwire beam-intensity profile.
+    canonical_signal_type: HorizontalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: horizontal_profile
+  - id: inst:adrA15MWCntl:verInDataM
+    kind: Signal
+    signal_role: Readback
+    source_system: Other
+    native_description: Measured vertical multiwire beam-intensity profile.
+    canonical_signal_type: VerticalBeamPosition
+    quantity_kind: BeamPosition
+    native_data_type: FloatArray
+    native_unit: V
+    access_protocol: ADO
+    alias: vertical_profile
+  - id: inst:adrA15MWCntl:harpIsM
+    kind: Signal
+    signal_role: Status
+    source_system: Other
+    native_description: Insertion status of the multiwire monitor.
+    canonical_signal_type: Status
+    quantity_kind: State
+    native_data_type: String
+    native_unit: none
+    access_protocol: ADO
+    alias: insertion_status
+  signal_bindings:
+  - id: inst:MW006.horizontal_profile_binding
+    subject: inst:MW006
+    predicate: has_readback_signal
+    object: inst:btaMW006Cntl:horInDataM
+  - id: inst:MW006.vertical_profile_binding
+    subject: inst:MW006
+    predicate: has_readback_signal
+    object: inst:btaMW006Cntl:verInDataM
+  - id: inst:MW006.insertion_status_binding
+    subject: inst:MW006
+    predicate: has_status_signal
+    object: inst:btaMW006Cntl:harpIsM
+  - id: inst:DV007.current_setpoint_binding
+    subject: inst:DV007
+    predicate: has_setpoint_signal
+    object: inst:bta-tv7-ps:setpointS
+  - id: inst:DV007.current_readback_binding
+    subject: inst:DV007
+    predicate: has_readback_signal
+    object: inst:bta-tv7-ps:currentM
+  - id: inst:DV007.current_range_binding
+    subject: inst:DV007
+    predicate: has_limit_signal
+    object: inst:bta-tv7-ps:rangeC
+  - id: inst:DV007.magnet_status_binding
+    subject: inst:DV007
+    predicate: has_status_signal
+    object: inst:bta-tv7-ps:stateS
+  - id: inst:QV1.current_setpoint_binding
+    subject: inst:QV1
+    predicate: has_setpoint_signal
+    object: inst:bta-qd1-ps:setpointS
+  - id: inst:QV1.current_readback_binding
+    subject: inst:QV1
+    predicate: has_readback_signal
+    object: inst:bta-qd1-ps:currentM
+  - id: inst:QV1.current_range_binding
+    subject: inst:QV1
+    predicate: has_limit_signal
+    object: inst:bta-qd1-ps:rangeC
+  - id: inst:QV1.magnet_status_binding
+    subject: inst:QV1
+    predicate: has_status_signal
+    object: inst:bta-qd1-ps:stateS
+  - id: inst:DH1T.current_setpoint_binding
+    subject: inst:DH1T
+    predicate: has_setpoint_signal
+    object: inst:bta-th1-ps:setpointS
+  - id: inst:DH1T.current_readback_binding
+    subject: inst:DH1T
+    predicate: has_readback_signal
+    object: inst:bta-th1-ps:currentM
+  - id: inst:DH1T.current_range_binding
+    subject: inst:DH1T
+    predicate: has_limit_signal
+    object: inst:bta-th1-ps:rangeC
+  - id: inst:DH1T.magnet_status_binding
+    subject: inst:DH1T
+    predicate: has_status_signal
+    object: inst:bta-th1-ps:stateS
+  - id: inst:QH2A.current_setpoint_binding
+    subject: inst:QH2A
+    predicate: has_setpoint_signal
+    object: inst:bta-qf2-ps:setpointS
+  - id: inst:QH2A.current_readback_binding
+    subject: inst:QH2A
+    predicate: has_readback_signal
+    object: inst:bta-qf2-ps:currentM
+  - id: inst:QH2A.current_range_binding
+    subject: inst:QH2A
+    predicate: has_limit_signal
+    object: inst:bta-qf2-ps:rangeC
+  - id: inst:QH2A.magnet_status_binding
+    subject: inst:QH2A
+    predicate: has_status_signal
+    object: inst:bta-qf2-ps:stateS
+  - id: inst:QH2B.current_setpoint_binding
+    subject: inst:QH2B
+    predicate: has_setpoint_signal
+    object: inst:bta-qf2-ps:setpointS
+  - id: inst:QH2B.current_readback_binding
+    subject: inst:QH2B
+    predicate: has_readback_signal
+    object: inst:bta-qf2-ps:currentM
+  - id: inst:QH2B.current_range_binding
+    subject: inst:QH2B
+    predicate: has_limit_signal
+    object: inst:bta-qf2-ps:rangeC
+  - id: inst:QH2B.magnet_status_binding
+    subject: inst:QH2B
+    predicate: has_status_signal
+    object: inst:bta-qf2-ps:stateS
+  - id: inst:QV3.current_setpoint_binding
+    subject: inst:QV3
+    predicate: has_setpoint_signal
+    object: inst:bta-qd3-ps:setpointS
+  - id: inst:QV3.current_readback_binding
+    subject: inst:QV3
+    predicate: has_readback_signal
+    object: inst:bta-qd3-ps:currentM
+  - id: inst:QV3.current_range_binding
+    subject: inst:QV3
+    predicate: has_limit_signal
+    object: inst:bta-qd3-ps:rangeC
+  - id: inst:QV3.magnet_status_binding
+    subject: inst:QV3
+    predicate: has_status_signal
+    object: inst:bta-qd3-ps:stateS
+  - id: inst:DV030.current_setpoint_binding
+    subject: inst:DV030
+    predicate: has_setpoint_signal
+    object: inst:bta-tv30-ps:setpointS
+  - id: inst:DV030.current_readback_binding
+    subject: inst:DV030
+    predicate: has_readback_signal
+    object: inst:bta-tv30-ps:currentM
+  - id: inst:DV030.current_range_binding
+    subject: inst:DV030
+    predicate: has_limit_signal
+    object: inst:bta-tv30-ps:rangeC
+  - id: inst:DV030.magnet_status_binding
+    subject: inst:DV030
+    predicate: has_status_signal
+    object: inst:bta-tv30-ps:stateS
+  - id: inst:QH4.current_setpoint_binding
+    subject: inst:QH4
+    predicate: has_setpoint_signal
+    object: inst:bta-qf4-ps:setpointS
+  - id: inst:QH4.current_readback_binding
+    subject: inst:QH4
+    predicate: has_readback_signal
+    object: inst:bta-qf4-ps:currentM
+  - id: inst:QH4.current_range_binding
+    subject: inst:QH4
+    predicate: has_limit_signal
+    object: inst:bta-qf4-ps:rangeC
+  - id: inst:QH4.magnet_status_binding
+    subject: inst:QH4
+    predicate: has_status_signal
+    object: inst:bta-qf4-ps:stateS
+  - id: inst:QV5.current_setpoint_binding
+    subject: inst:QV5
+    predicate: has_setpoint_signal
+    object: inst:bta-qd5-ps:setpointS
+  - id: inst:QV5.current_readback_binding
+    subject: inst:QV5
+    predicate: has_readback_signal
+    object: inst:bta-qd5-ps:currentM
+  - id: inst:QV5.current_range_binding
+    subject: inst:QV5
+    predicate: has_limit_signal
+    object: inst:bta-qd5-ps:rangeC
+  - id: inst:QV5.magnet_status_binding
+    subject: inst:QV5
+    predicate: has_status_signal
+    object: inst:bta-qd5-ps:stateS
+  - id: inst:DH23T.current_setpoint_binding
+    subject: inst:DH23T
+    predicate: has_setpoint_signal
+    object: inst:bta-th23-ps:setpointS
+  - id: inst:DH23T.current_readback_binding
+    subject: inst:DH23T
+    predicate: has_readback_signal
+    object: inst:bta-th23-ps:currentM
+  - id: inst:DH23T.current_range_binding
+    subject: inst:DH23T
+    predicate: has_limit_signal
+    object: inst:bta-th23-ps:rangeC
+  - id: inst:DH23T.magnet_status_binding
+    subject: inst:DH23T
+    predicate: has_status_signal
+    object: inst:bta-th23-ps:stateS
+  - id: inst:QH6.current_setpoint_binding
+    subject: inst:QH6
+    predicate: has_setpoint_signal
+    object: inst:bta-qf6-ps:setpointS
+  - id: inst:QH6.current_readback_binding
+    subject: inst:QH6
+    predicate: has_readback_signal
+    object: inst:bta-qf6-ps:currentM
+  - id: inst:QH6.current_range_binding
+    subject: inst:QH6
+    predicate: has_limit_signal
+    object: inst:bta-qf6-ps:rangeC
+  - id: inst:QH6.magnet_status_binding
+    subject: inst:QH6
+    predicate: has_status_signal
+    object: inst:bta-qf6-ps:stateS
+  - id: inst:MW060.horizontal_profile_binding
+    subject: inst:MW060
+    predicate: has_readback_signal
+    object: inst:btaMW060Cntl:horInDataM
+  - id: inst:MW060.vertical_profile_binding
+    subject: inst:MW060
+    predicate: has_readback_signal
+    object: inst:btaMW060Cntl:verInDataM
+  - id: inst:MW060.insertion_status_binding
+    subject: inst:MW060
+    predicate: has_status_signal
+    object: inst:btaMW060Cntl:harpIsM
+  - id: inst:QV7.current_setpoint_binding
+    subject: inst:QV7
+    predicate: has_setpoint_signal
+    object: inst:bta-qd7-ps:setpointS
+  - id: inst:QV7.current_readback_binding
+    subject: inst:QV7
+    predicate: has_readback_signal
+    object: inst:bta-qd7-ps:currentM
+  - id: inst:QV7.current_range_binding
+    subject: inst:QV7
+    predicate: has_limit_signal
+    object: inst:bta-qd7-ps:rangeC
+  - id: inst:QV7.magnet_status_binding
+    subject: inst:QV7
+    predicate: has_status_signal
+    object: inst:bta-qd7-ps:stateS
+  - id: inst:QH8.current_setpoint_binding
+    subject: inst:QH8
+    predicate: has_setpoint_signal
+    object: inst:bta-qf8-ps:setpointS
+  - id: inst:QH8.current_readback_binding
+    subject: inst:QH8
+    predicate: has_readback_signal
+    object: inst:bta-qf8-ps:currentM
+  - id: inst:QH8.current_range_binding
+    subject: inst:QH8
+    predicate: has_limit_signal
+    object: inst:bta-qf8-ps:rangeC
+  - id: inst:QH8.magnet_status_binding
+    subject: inst:QH8
+    predicate: has_status_signal
+    object: inst:bta-qf8-ps:stateS
+  - id: inst:DH4T.current_setpoint_binding
+    subject: inst:DH4T
+    predicate: has_setpoint_signal
+    object: inst:bta-th4-ps:setpointS
+  - id: inst:DH4T.current_readback_binding
+    subject: inst:DH4T
+    predicate: has_readback_signal
+    object: inst:bta-th4-ps:currentM
+  - id: inst:DH4T.current_range_binding
+    subject: inst:DH4T
+    predicate: has_limit_signal
+    object: inst:bta-th4-ps:rangeC
+  - id: inst:DH4T.magnet_status_binding
+    subject: inst:DH4T
+    predicate: has_status_signal
+    object: inst:bta-th4-ps:stateS
+  - id: inst:QV9.current_setpoint_binding
+    subject: inst:QV9
+    predicate: has_setpoint_signal
+    object: inst:bta-qd9-ps:setpointS
+  - id: inst:QV9.current_readback_binding
+    subject: inst:QV9
+    predicate: has_readback_signal
+    object: inst:bta-qd9-ps:currentM
+  - id: inst:QV9.current_range_binding
+    subject: inst:QV9
+    predicate: has_limit_signal
+    object: inst:bta-qd9-ps:rangeC
+  - id: inst:QV9.magnet_status_binding
+    subject: inst:QV9
+    predicate: has_status_signal
+    object: inst:bta-qd9-ps:stateS
+  - id: inst:DV120.current_setpoint_binding
+    subject: inst:DV120
+    predicate: has_setpoint_signal
+    object: inst:bta-tv120-ps:setpointS
+  - id: inst:DV120.current_readback_binding
+    subject: inst:DV120
+    predicate: has_readback_signal
+    object: inst:bta-tv120-ps:currentM
+  - id: inst:DV120.current_range_binding
+    subject: inst:DV120
+    predicate: has_limit_signal
+    object: inst:bta-tv120-ps:rangeC
+  - id: inst:DV120.magnet_status_binding
+    subject: inst:DV120
+    predicate: has_status_signal
+    object: inst:bta-tv120-ps:stateS
+  - id: inst:QH10.current_setpoint_binding
+    subject: inst:QH10
+    predicate: has_setpoint_signal
+    object: inst:bta-qf10-ps:setpointS
+  - id: inst:QH10.current_readback_binding
+    subject: inst:QH10
+    predicate: has_readback_signal
+    object: inst:bta-qf10-ps:currentM
+  - id: inst:QH10.current_range_binding
+    subject: inst:QH10
+    predicate: has_limit_signal
+    object: inst:bta-qf10-ps:rangeC
+  - id: inst:QH10.magnet_status_binding
+    subject: inst:QH10
+    predicate: has_status_signal
+    object: inst:bta-qf10-ps:stateS
+  - id: inst:MW125.horizontal_profile_binding
+    subject: inst:MW125
+    predicate: has_readback_signal
+    object: inst:btaMW125Cntl:horInDataM
+  - id: inst:MW125.vertical_profile_binding
+    subject: inst:MW125
+    predicate: has_readback_signal
+    object: inst:btaMW125Cntl:verInDataM
+  - id: inst:MW125.insertion_status_binding
+    subject: inst:MW125
+    predicate: has_status_signal
+    object: inst:btaMW125Cntl:harpIsM
+  - id: inst:DH127.current_setpoint_binding
+    subject: inst:DH127
+    predicate: has_setpoint_signal
+    object: inst:bta-th127-ps:setpointS
+  - id: inst:DH127.current_readback_binding
+    subject: inst:DH127
+    predicate: has_readback_signal
+    object: inst:bta-th127-ps:currentM
+  - id: inst:DH127.current_range_binding
+    subject: inst:DH127
+    predicate: has_limit_signal
+    object: inst:bta-th127-ps:rangeC
+  - id: inst:DH127.magnet_status_binding
+    subject: inst:DH127
+    predicate: has_status_signal
+    object: inst:bta-th127-ps:stateS
+  - id: inst:QV11.current_setpoint_binding
+    subject: inst:QV11
+    predicate: has_setpoint_signal
+    object: inst:bta-qd11-ps:setpointS
+  - id: inst:QV11.current_readback_binding
+    subject: inst:QV11
+    predicate: has_readback_signal
+    object: inst:bta-qd11-ps:currentM
+  - id: inst:QV11.current_range_binding
+    subject: inst:QV11
+    predicate: has_limit_signal
+    object: inst:bta-qd11-ps:rangeC
+  - id: inst:QV11.magnet_status_binding
+    subject: inst:QV11
+    predicate: has_status_signal
+    object: inst:bta-qd11-ps:stateS
+  - id: inst:QH12.current_setpoint_binding
+    subject: inst:QH12
+    predicate: has_setpoint_signal
+    object: inst:bta-qf12-ps:setpointS
+  - id: inst:QH12.current_readback_binding
+    subject: inst:QH12
+    predicate: has_readback_signal
+    object: inst:bta-qf12-ps:currentM
+  - id: inst:QH12.current_range_binding
+    subject: inst:QH12
+    predicate: has_limit_signal
+    object: inst:bta-qf12-ps:rangeC
+  - id: inst:QH12.magnet_status_binding
+    subject: inst:QH12
+    predicate: has_status_signal
+    object: inst:bta-qf12-ps:stateS
+  - id: inst:DH158.current_setpoint_binding
+    subject: inst:DH158
+    predicate: has_setpoint_signal
+    object: inst:bta-th158-ps:setpointS
+  - id: inst:DH158.current_readback_binding
+    subject: inst:DH158
+    predicate: has_readback_signal
+    object: inst:bta-th158-ps:currentM
+  - id: inst:DH158.current_range_binding
+    subject: inst:DH158
+    predicate: has_limit_signal
+    object: inst:bta-th158-ps:rangeC
+  - id: inst:DH158.magnet_status_binding
+    subject: inst:DH158
+    predicate: has_status_signal
+    object: inst:bta-th158-ps:stateS
+  - id: inst:QV13.current_setpoint_binding
+    subject: inst:QV13
+    predicate: has_setpoint_signal
+    object: inst:bta-qd13-ps:setpointS
+  - id: inst:QV13.current_readback_binding
+    subject: inst:QV13
+    predicate: has_readback_signal
+    object: inst:bta-qd13-ps:currentM
+  - id: inst:QV13.current_range_binding
+    subject: inst:QV13
+    predicate: has_limit_signal
+    object: inst:bta-qd13-ps:rangeC
+  - id: inst:QV13.magnet_status_binding
+    subject: inst:QV13
+    predicate: has_status_signal
+    object: inst:bta-qd13-ps:stateS
+  - id: inst:MW166.horizontal_profile_binding
+    subject: inst:MW166
+    predicate: has_readback_signal
+    object: inst:btaMW166Cntl:horInDataM
+  - id: inst:MW166.vertical_profile_binding
+    subject: inst:MW166
+    predicate: has_readback_signal
+    object: inst:btaMW166Cntl:verInDataM
+  - id: inst:MW166.insertion_status_binding
+    subject: inst:MW166
+    predicate: has_status_signal
+    object: inst:btaMW166Cntl:harpIsM
+  - id: inst:QH14.current_setpoint_binding
+    subject: inst:QH14
+    predicate: has_setpoint_signal
+    object: inst:bta-qf14-ps:setpointS
+  - id: inst:QH14.current_readback_binding
+    subject: inst:QH14
+    predicate: has_readback_signal
+    object: inst:bta-qf14-ps:currentM
+  - id: inst:QH14.current_range_binding
+    subject: inst:QH14
+    predicate: has_limit_signal
+    object: inst:bta-qf14-ps:rangeC
+  - id: inst:QH14.magnet_status_binding
+    subject: inst:QH14
+    predicate: has_status_signal
+    object: inst:bta-qf14-ps:stateS
+  - id: inst:DH5T.current_setpoint_binding
+    subject: inst:DH5T
+    predicate: has_setpoint_signal
+    object: inst:bta-th5-ps:setpointS
+  - id: inst:DH5T.current_readback_binding
+    subject: inst:DH5T
+    predicate: has_readback_signal
+    object: inst:bta-th5-ps:currentM
+  - id: inst:DH5T.current_range_binding
+    subject: inst:DH5T
+    predicate: has_limit_signal
+    object: inst:bta-th5-ps:rangeC
+  - id: inst:DH5T.magnet_status_binding
+    subject: inst:DH5T
+    predicate: has_status_signal
+    object: inst:bta-th5-ps:stateS
+  - id: inst:DV181.current_setpoint_binding
+    subject: inst:DV181
+    predicate: has_setpoint_signal
+    object: inst:bta-tv181-ps:setpointS
+  - id: inst:DV181.current_readback_binding
+    subject: inst:DV181
+    predicate: has_readback_signal
+    object: inst:bta-tv181-ps:currentM
+  - id: inst:DV181.current_range_binding
+    subject: inst:DV181
+    predicate: has_limit_signal
+    object: inst:bta-tv181-ps:rangeC
+  - id: inst:DV181.magnet_status_binding
+    subject: inst:DV181
+    predicate: has_status_signal
+    object: inst:bta-tv181-ps:stateS
+  - id: inst:QV15.current_setpoint_binding
+    subject: inst:QV15
+    predicate: has_setpoint_signal
+    object: inst:bta-qd15-ps:setpointS
+  - id: inst:QV15.current_readback_binding
+    subject: inst:QV15
+    predicate: has_readback_signal
+    object: inst:bta-qd15-ps:currentM
+  - id: inst:QV15.current_range_binding
+    subject: inst:QV15
+    predicate: has_limit_signal
+    object: inst:bta-qd15-ps:rangeC
+  - id: inst:QV15.magnet_status_binding
+    subject: inst:QV15
+    predicate: has_status_signal
+    object: inst:bta-qd15-ps:stateS
+  - id: inst:MWA15.horizontal_profile_binding
+    subject: inst:MWA15
+    predicate: has_readback_signal
+    object: inst:adrA15MWCntl:horInDataM
+  - id: inst:MWA15.vertical_profile_binding
+    subject: inst:MWA15
+    predicate: has_readback_signal
+    object: inst:adrA15MWCntl:verInDataM
+  - id: inst:MWA15.insertion_status_binding
+    subject: inst:MWA15
+    predicate: has_status_signal
+    object: inst:adrA15MWCntl:harpIsM
+  component_relations:
+  - id: inst:BEGINNING_B1_PRECEDES_BTASTART
+    subject: inst:BEGINNING_B1
+    predicate: precedes
+    object: inst:BTASTART
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTASTART_PRECEDES_DHF6A
+    subject: inst:BTASTART
+    predicate: precedes
+    object: inst:DHF6A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DHF6A_PRECEDES_DHF6T
+    subject: inst:DHF6A
+    predicate: precedes
+    object: inst:DHF6T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DHF6T_PRECEDES_DRF6A
+    subject: inst:DHF6T
+    predicate: precedes
+    object: inst:DRF6A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRF6A_PRECEDES_DHF6B
+    subject: inst:DRF6A
+    predicate: precedes
+    object: inst:DHF6B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DHF6B_PRECEDES_DRF6B
+    subject: inst:DHF6B
+    predicate: precedes
+    object: inst:DRF6B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRF6B_PRECEDES_PUEH001
+    subject: inst:DRF6B
+    predicate: precedes
+    object: inst:PUEH001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUEH001_PRECEDES_DR001
+    subject: inst:PUEH001
+    predicate: precedes
+    object: inst:DR001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR001_PRECEDES_MW006
+    subject: inst:DR001
+    predicate: precedes
+    object: inst:MW006
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MW006_PRECEDES_DR006
+    subject: inst:MW006
+    predicate: precedes
+    object: inst:DR006
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR006_PRECEDES_DV007
+    subject: inst:DR006
+    predicate: precedes
+    object: inst:DV007
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DV007_PRECEDES_DR007
+    subject: inst:DV007
+    predicate: precedes
+    object: inst:DR007
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR007_PRECEDES_QV1
+    subject: inst:DR007
+    predicate: precedes
+    object: inst:QV1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QV1_PRECEDES_DRQ1
+    subject: inst:QV1
+    predicate: precedes
+    object: inst:DRQ1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ1_PRECEDES_DH1A
+    subject: inst:DRQ1
+    predicate: precedes
+    object: inst:DH1A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH1A_PRECEDES_DH1T
+    subject: inst:DH1A
+    predicate: precedes
+    object: inst:DH1T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH1T_PRECEDES_DH1B
+    subject: inst:DH1T
+    predicate: precedes
+    object: inst:DH1B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH1B_PRECEDES_DRD1
+    subject: inst:DH1B
+    predicate: precedes
+    object: inst:DRD1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRD1_PRECEDES_QH2A
+    subject: inst:DRD1
+    predicate: precedes
+    object: inst:QH2A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QH2A_PRECEDES_DRQ2A
+    subject: inst:QH2A
+    predicate: precedes
+    object: inst:DRQ2A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ2A_PRECEDES_QH2B
+    subject: inst:DRQ2A
+    predicate: precedes
+    object: inst:QH2B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QH2B_PRECEDES_DRQ2B
+    subject: inst:QH2B
+    predicate: precedes
+    object: inst:DRQ2B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ2B_PRECEDES_XF019
+    subject: inst:DRQ2B
+    predicate: precedes
+    object: inst:XF019
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:XF019_PRECEDES_DR019
+    subject: inst:XF019
+    predicate: precedes
+    object: inst:DR019
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR019_PRECEDES_QV3
+    subject: inst:DR019
+    predicate: precedes
+    object: inst:QV3
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QV3_PRECEDES_DRQ3
+    subject: inst:QV3
+    predicate: precedes
+    object: inst:DRQ3
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ3_PRECEDES_FOIL024
+    subject: inst:DRQ3
+    predicate: precedes
+    object: inst:FOIL024
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:FOIL024_PRECEDES_DR024A
+    subject: inst:FOIL024
+    predicate: precedes
+    object: inst:DR024A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR024A_PRECEDES_DV030
+    subject: inst:DR024A
+    predicate: precedes
+    object: inst:DV030
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DV030_PRECEDES_DR024B
+    subject: inst:DV030
+    predicate: precedes
+    object: inst:DR024B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR024B_PRECEDES_QH4
+    subject: inst:DR024B
+    predicate: precedes
+    object: inst:QH4
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QH4_PRECEDES_DRQ4
+    subject: inst:QH4
+    predicate: precedes
+    object: inst:DRQ4
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ4_PRECEDES_DH2
+    subject: inst:DRQ4
+    predicate: precedes
+    object: inst:DH2
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH2_PRECEDES_DRD2
+    subject: inst:DH2
+    predicate: precedes
+    object: inst:DRD2
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRD2_PRECEDES_QV5
+    subject: inst:DRD2
+    predicate: precedes
+    object: inst:QV5
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QV5_PRECEDES_DH23T
+    subject: inst:QV5
+    predicate: precedes
+    object: inst:DH23T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH23T_PRECEDES_DRQ5
+    subject: inst:DH23T
+    predicate: precedes
+    object: inst:DRQ5
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ5_PRECEDES_PUEV046
+    subject: inst:DRQ5
+    predicate: precedes
+    object: inst:PUEV046
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUEV046_PRECEDES_DR046
+    subject: inst:PUEV046
+    predicate: precedes
+    object: inst:DR046
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR046_PRECEDES_DH3
+    subject: inst:DR046
+    predicate: precedes
+    object: inst:DH3
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH3_PRECEDES_DRD3
+    subject: inst:DH3
+    predicate: precedes
+    object: inst:DRD3
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRD3_PRECEDES_QH6
+    subject: inst:DRD3
+    predicate: precedes
+    object: inst:QH6
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QH6_PRECEDES_DRQ6
+    subject: inst:QH6
+    predicate: precedes
+    object: inst:DRQ6
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ6_PRECEDES_XF059
+    subject: inst:DRQ6
+    predicate: precedes
+    object: inst:XF059
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:XF059_PRECEDES_DR059
+    subject: inst:XF059
+    predicate: precedes
+    object: inst:DR059
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR059_PRECEDES_MW060
+    subject: inst:DR059
+    predicate: precedes
+    object: inst:MW060
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MW060_PRECEDES_DR060
+    subject: inst:MW060
+    predicate: precedes
+    object: inst:DR060
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR060_PRECEDES_QV7
+    subject: inst:DR060
+    predicate: precedes
+    object: inst:QV7
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QV7_PRECEDES_DRQ7Y
+    subject: inst:QV7
+    predicate: precedes
+    object: inst:DRQ7Y
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ7Y_PRECEDES_MK077
+    subject: inst:DRQ7Y
+    predicate: precedes
+    object: inst:MK077
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MK077_PRECEDES_DRQ7Z
+    subject: inst:MK077
+    predicate: precedes
+    object: inst:DRQ7Z
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ7Z_PRECEDES_QH8
+    subject: inst:DRQ7Z
+    predicate: precedes
+    object: inst:QH8
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QH8_PRECEDES_DRQ8
+    subject: inst:QH8
+    predicate: precedes
+    object: inst:DRQ8
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ8_PRECEDES_DH4A
+    subject: inst:DRQ8
+    predicate: precedes
+    object: inst:DH4A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH4A_PRECEDES_DH4T
+    subject: inst:DH4A
+    predicate: precedes
+    object: inst:DH4T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH4T_PRECEDES_DH4B
+    subject: inst:DH4T
+    predicate: precedes
+    object: inst:DH4B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH4B_PRECEDES_DRD4
+    subject: inst:DH4B
+    predicate: precedes
+    object: inst:DRD4
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRD4_PRECEDES_QV9
+    subject: inst:DRD4
+    predicate: precedes
+    object: inst:QV9
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QV9_PRECEDES_DRQ9A
+    subject: inst:QV9
+    predicate: precedes
+    object: inst:DRQ9A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ9A_PRECEDES_DV120
+    subject: inst:DRQ9A
+    predicate: precedes
+    object: inst:DV120
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DV120_PRECEDES_DRQ9B
+    subject: inst:DV120
+    predicate: precedes
+    object: inst:DRQ9B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ9B_PRECEDES_QH10
+    subject: inst:DRQ9B
+    predicate: precedes
+    object: inst:QH10
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QH10_PRECEDES_DRQ10
+    subject: inst:QH10
+    predicate: precedes
+    object: inst:DRQ10
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ10_PRECEDES_MW125
+    subject: inst:DRQ10
+    predicate: precedes
+    object: inst:MW125
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MW125_PRECEDES_DR125
+    subject: inst:MW125
+    predicate: precedes
+    object: inst:DR125
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR125_PRECEDES_DH127
+    subject: inst:DR125
+    predicate: precedes
+    object: inst:DH127
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH127_PRECEDES_DR127
+    subject: inst:DH127
+    predicate: precedes
+    object: inst:DR127
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR127_PRECEDES_PUEV129
+    subject: inst:DR127
+    predicate: precedes
+    object: inst:PUEV129
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUEV129_PRECEDES_DR129
+    subject: inst:PUEV129
+    predicate: precedes
+    object: inst:DR129
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR129_PRECEDES_QV11
+    subject: inst:DR129
+    predicate: precedes
+    object: inst:QV11
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QV11_PRECEDES_DRQ11
+    subject: inst:QV11
+    predicate: precedes
+    object: inst:DRQ11
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ11_PRECEDES_MK139
+    subject: inst:DRQ11
+    predicate: precedes
+    object: inst:MK139
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MK139_PRECEDES_DR139
+    subject: inst:MK139
+    predicate: precedes
+    object: inst:DR139
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR139_PRECEDES_DR141
+    subject: inst:DR139
+    predicate: precedes
+    object: inst:DR141
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR141_PRECEDES_PUEH143
+    subject: inst:DR141
+    predicate: precedes
+    object: inst:PUEH143
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUEH143_PRECEDES_DR143
+    subject: inst:PUEH143
+    predicate: precedes
+    object: inst:DR143
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR143_PRECEDES_QH12
+    subject: inst:DR143
+    predicate: precedes
+    object: inst:QH12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QH12_PRECEDES_DRQ12
+    subject: inst:QH12
+    predicate: precedes
+    object: inst:DRQ12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ12_PRECEDES_MK156
+    subject: inst:DRQ12
+    predicate: precedes
+    object: inst:MK156
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MK156_PRECEDES_DR156
+    subject: inst:MK156
+    predicate: precedes
+    object: inst:DR156
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR156_PRECEDES_DH158
+    subject: inst:DR156
+    predicate: precedes
+    object: inst:DH158
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH158_PRECEDES_DR158
+    subject: inst:DH158
+    predicate: precedes
+    object: inst:DR158
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR158_PRECEDES_PUEV160
+    subject: inst:DR158
+    predicate: precedes
+    object: inst:PUEV160
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUEV160_PRECEDES_DR160
+    subject: inst:PUEV160
+    predicate: precedes
+    object: inst:DR160
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR160_PRECEDES_QV13
+    subject: inst:DR160
+    predicate: precedes
+    object: inst:QV13
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QV13_PRECEDES_DRQ13
+    subject: inst:QV13
+    predicate: precedes
+    object: inst:DRQ13
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ13_PRECEDES_MW166
+    subject: inst:DRQ13
+    predicate: precedes
+    object: inst:MW166
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MW166_PRECEDES_DR166
+    subject: inst:MW166
+    predicate: precedes
+    object: inst:DR166
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR166_PRECEDES_DR168
+    subject: inst:DR166
+    predicate: precedes
+    object: inst:DR168
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR168_PRECEDES_PUEH170
+    subject: inst:DR168
+    predicate: precedes
+    object: inst:PUEH170
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUEH170_PRECEDES_DR170
+    subject: inst:PUEH170
+    predicate: precedes
+    object: inst:DR170
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR170_PRECEDES_QH14
+    subject: inst:DR170
+    predicate: precedes
+    object: inst:QH14
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QH14_PRECEDES_DRQ14
+    subject: inst:QH14
+    predicate: precedes
+    object: inst:DRQ14
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRQ14_PRECEDES_DH5A
+    subject: inst:DRQ14
+    predicate: precedes
+    object: inst:DH5A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH5A_PRECEDES_DH5T
+    subject: inst:DH5A
+    predicate: precedes
+    object: inst:DH5T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH5T_PRECEDES_DH5B
+    subject: inst:DH5T
+    predicate: precedes
+    object: inst:DH5B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DH5B_PRECEDES_DRD5
+    subject: inst:DH5B
+    predicate: precedes
+    object: inst:DRD5
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DRD5_PRECEDES_DV181
+    subject: inst:DRD5
+    predicate: precedes
+    object: inst:DV181
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DV181_PRECEDES_DR181
+    subject: inst:DV181
+    predicate: precedes
+    object: inst:DR181
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR181_PRECEDES_XF183
+    subject: inst:DR181
+    predicate: precedes
+    object: inst:XF183
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:XF183_PRECEDES_DR183
+    subject: inst:XF183
+    predicate: precedes
+    object: inst:DR183
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DR183_PRECEDES_QV15
+    subject: inst:DR183
+    predicate: precedes
+    object: inst:QV15
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QV15_PRECEDES_M1
+    subject: inst:QV15
+    predicate: precedes
+    object: inst:M1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:M1_PRECEDES_L20SPTM1
+    subject: inst:M1
+    predicate: precedes
+    object: inst:L20SPTM1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:L20SPTM1_PRECEDES_DHL20T
+    subject: inst:L20SPTM1
+    predicate: precedes
+    object: inst:DHL20T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DHL20T_PRECEDES_L20SPTM2
+    subject: inst:DHL20T
+    predicate: precedes
+    object: inst:L20SPTM2
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:L20SPTM2_PRECEDES_MM_A01BF
+    subject: inst:L20SPTM2
+    predicate: precedes
+    object: inst:MM_A01BF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A01BF_PRECEDES_D2S_001
+    subject: inst:MM_A01BF
+    predicate: precedes
+    object: inst:D2S_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2S_001_PRECEDES_MM_A02BF
+    subject: inst:D2S_001
+    predicate: precedes
+    object: inst:MM_A02BF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A02BF_PRECEDES_DPUE_001
+    subject: inst:MM_A02BF
+    predicate: precedes
+    object: inst:DPUE_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DPUE_001_PRECEDES_PUE_A02
+    subject: inst:DPUE_001
+    predicate: precedes
+    object: inst:PUE_A02
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUE_A02_PRECEDES_DHCA02
+    subject: inst:PUE_A02
+    predicate: precedes
+    object: inst:DHCA02
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DHCA02_PRECEDES_DVCA02
+    subject: inst:DHCA02
+    predicate: precedes
+    object: inst:DVCA02
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DVCA02_PRECEDES_D2TX_001
+    subject: inst:DVCA02
+    predicate: precedes
+    object: inst:D2TX_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2TX_001_PRECEDES_MM_A03CD
+    subject: inst:D2TX_001
+    predicate: precedes
+    object: inst:MM_A03CD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A03CD_PRECEDES_DSQ_001
+    subject: inst:MM_A03CD
+    predicate: precedes
+    object: inst:DSQ_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DSQ_001_PRECEDES_QHFV
+    subject: inst:DSQ_001
+    predicate: precedes
+    object: inst:QHFV
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QHFV_PRECEDES_QPOL
+    subject: inst:QHFV
+    predicate: precedes
+    object: inst:QPOL
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:QPOL_PRECEDES_DSQ_002
+    subject: inst:QPOL
+    predicate: precedes
+    object: inst:DSQ_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DSQ_002_PRECEDES_MM_A04CD
+    subject: inst:DSQ_002
+    predicate: precedes
+    object: inst:MM_A04CD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A04CD_PRECEDES_DPUE_002
+    subject: inst:MM_A04CD
+    predicate: precedes
+    object: inst:DPUE_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DPUE_002_PRECEDES_PUE_A04
+    subject: inst:DPUE_002
+    predicate: precedes
+    object: inst:PUE_A04
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUE_A04_PRECEDES_D2LX_001
+    subject: inst:PUE_A04
+    predicate: precedes
+    object: inst:D2LX_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2LX_001_PRECEDES_MM_A05AF
+    subject: inst:D2LX_001
+    predicate: precedes
+    object: inst:MM_A05AF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A05AF_PRECEDES_D2H_A05_001
+    subject: inst:MM_A05AF
+    predicate: precedes
+    object: inst:D2H_A05_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2H_A05_001_PRECEDES_KCKRA05
+    subject: inst:D2H_A05_001
+    predicate: precedes
+    object: inst:KCKRA05
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:KCKRA05_PRECEDES_D2H_A05_002
+    subject: inst:KCKRA05
+    predicate: precedes
+    object: inst:D2H_A05_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2H_A05_002_PRECEDES_MM_A06AF
+    subject: inst:D2H_A05_002
+    predicate: precedes
+    object: inst:MM_A06AF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A06AF_PRECEDES_D2L
+    subject: inst:MM_A06AF
+    predicate: precedes
+    object: inst:D2L
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2L_PRECEDES_MM_A07CD
+    subject: inst:D2L
+    predicate: precedes
+    object: inst:MM_A07CD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A07CD_PRECEDES_DSS_001
+    subject: inst:MM_A07CD
+    predicate: precedes
+    object: inst:DSS_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DSS_001_PRECEDES_SXV
+    subject: inst:DSS_001
+    predicate: precedes
+    object: inst:SXV
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:SXV_PRECEDES_DSS_002
+    subject: inst:SXV
+    predicate: precedes
+    object: inst:DSS_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DSS_002_PRECEDES_MM_A08CD
+    subject: inst:DSS_002
+    predicate: precedes
+    object: inst:MM_A08CD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A08CD_PRECEDES_DPUE_003
+    subject: inst:MM_A08CD
+    predicate: precedes
+    object: inst:DPUE_003
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DPUE_003_PRECEDES_PUE_A08
+    subject: inst:DPUE_003
+    predicate: precedes
+    object: inst:PUE_A08
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUE_A08_PRECEDES_DHCA08
+    subject: inst:PUE_A08
+    predicate: precedes
+    object: inst:DHCA08
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DHCA08_PRECEDES_DVCA08
+    subject: inst:DHCA08
+    predicate: precedes
+    object: inst:DVCA08
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DVCA08_PRECEDES_D2TX_002
+    subject: inst:DVCA08
+    predicate: precedes
+    object: inst:D2TX_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2TX_002_PRECEDES_MM_A09BF
+    subject: inst:D2TX_002
+    predicate: precedes
+    object: inst:MM_A09BF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A09BF_PRECEDES_D2S_002
+    subject: inst:MM_A09BF
+    predicate: precedes
+    object: inst:D2S_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2S_002_PRECEDES_MM_A10BF
+    subject: inst:D2S_002
+    predicate: precedes
+    object: inst:MM_A10BF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A10BF_PRECEDES_D10_001
+    subject: inst:MM_A10BF
+    predicate: precedes
+    object: inst:D10_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D10_001_PRECEDES_D10_002
+    subject: inst:D10_001
+    predicate: precedes
+    object: inst:D10_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D10_002_PRECEDES_MM_A11BD
+    subject: inst:D10_002
+    predicate: precedes
+    object: inst:MM_A11BD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A11BD_PRECEDES_D2S_003
+    subject: inst:MM_A11BD
+    predicate: precedes
+    object: inst:D2S_003
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2S_003_PRECEDES_MM_A12BD
+    subject: inst:D2S_003
+    predicate: precedes
+    object: inst:MM_A12BD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A12BD_PRECEDES_DPUE_004
+    subject: inst:MM_A12BD
+    predicate: precedes
+    object: inst:DPUE_004
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DPUE_004_PRECEDES_PUE_A12
+    subject: inst:DPUE_004
+    predicate: precedes
+    object: inst:PUE_A12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUE_A12_PRECEDES_DHCA12
+    subject: inst:PUE_A12
+    predicate: precedes
+    object: inst:DHCA12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DHCA12_PRECEDES_DVCA12
+    subject: inst:DHCA12
+    predicate: precedes
+    object: inst:DVCA12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DVCA12_PRECEDES_D2TX_003
+    subject: inst:DVCA12
+    predicate: precedes
+    object: inst:D2TX_003
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2TX_003_PRECEDES_MM_A13CF
+    subject: inst:D2TX_003
+    predicate: precedes
+    object: inst:MM_A13CF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A13CF_PRECEDES_DSS_003
+    subject: inst:MM_A13CF
+    predicate: precedes
+    object: inst:DSS_003
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DSS_003_PRECEDES_SXH
+    subject: inst:DSS_003
+    predicate: precedes
+    object: inst:SXH
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:SXH_PRECEDES_DSS_004
+    subject: inst:SXH
+    predicate: precedes
+    object: inst:DSS_004
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DSS_004_PRECEDES_MM_A14CF
+    subject: inst:DSS_004
+    predicate: precedes
+    object: inst:MM_A14CF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A14CF_PRECEDES_DPUE_005
+    subject: inst:MM_A14CF
+    predicate: precedes
+    object: inst:DPUE_005
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:DPUE_005_PRECEDES_PUE_A14
+    subject: inst:DPUE_005
+    predicate: precedes
+    object: inst:PUE_A14
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:PUE_A14_PRECEDES_D2LX_002
+    subject: inst:PUE_A14
+    predicate: precedes
+    object: inst:D2LX_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2LX_002_PRECEDES_MM_A15AD
+    subject: inst:D2LX_002
+    predicate: precedes
+    object: inst:MM_A15AD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MM_A15AD_PRECEDES_D2H
+    subject: inst:MM_A15AD
+    predicate: precedes
+    object: inst:D2H
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:D2H_PRECEDES_MWA15
+    subject: inst:D2H
+    predicate: precedes
+    object: inst:MWA15
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:MWA15_PRECEDES_END_B0
+    subject: inst:MWA15
+    predicate: precedes
+    object: inst:END_B0
+    context: beamline_order
+    beamline_context: inst:BTA_LINE

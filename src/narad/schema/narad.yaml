@@ -1432,6 +1432,31 @@ classes:
     exact_mappings:
       - pals:Marker
 
+  BeginningEle:
+    description: >-
+      Initial element at the start of a beamline branch. It holds the initial
+      reference and Twiss parameters for the branch. A BeginningEle may be
+      omitted when the branch is reached through a Fork that propagates its
+      reference parameters; otherwise it is expected to be the first element
+      in the branch.
+    is_a: BookkeepingComponent
+    mixins:
+      - HasReferenceP
+      - HasTwissP
+    exact_mappings:
+      - pals:BeginningEle
+
+  Drift:
+    description: >-
+      A field-free space between beamline components. A Drift is a virtual
+      beamline component whose longitudinal extent preserves the separation
+      between adjacent physical or virtual components.
+    is_a: VirtualComponent
+    mixins:
+      - HasLongitudinalPlacementP
+    exact_mappings:
+      - pals:Drift
+
   BeamLineSection:
     description: >-
       A virtual component used to represent a section of the BeamLine for organizational
@@ -1661,6 +1686,10 @@ enums:
           such as a reference point for beam-based alignment, a location of a known aperture restriction, 
           or a location of a critical diagnostic device.
         meaning: pals:Marker
+      DriftSpace:
+        description: >-
+          A field-free longitudinal interval separating beamline components.
+        meaning: pals:Drift
       Fork:
         description: >-
           A virtual component representing a branching point in the beamline, 
@@ -1701,6 +1730,9 @@ enums:
       MaximumLimit:
         description: Maximum allowed signal value.
         meaning: xsd:maxInclusive
+      RangeLimit:
+        description: A signal containing both upper and lower allowed limits.
+        meaning: acc:RangeLimit
 
   CanonicalSignalTypeEnum:
     description: Portable semantic meanings for important signals.
@@ -1727,6 +1759,8 @@ enums:
         description: Magnet current readback signal.
       MagnetFieldSetpoint:
         description: Magnet field setpoint signal.
+      MagnetCurrentRange:
+        description: Magnet current range signal.
       IntegratedFieldSetpoint:
         description: Integrated magnetic field setpoint signal.
       IntegratedFieldReadback:
@@ -1872,6 +1906,10 @@ enums:
       Boolean:
         description: boolean data type
         meaning: xsd:boolean
+      FloatArray:
+        description: An array of floating-point values.
+        meaning: acc:FloatArray
+
 
   ComponentRelationPredicateEnum:
     permissible_values:
