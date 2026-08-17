@@ -1,16 +1,19 @@
 package None;
 
-/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
 
+
+
+
+
+
 /**
-  Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
-This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+  Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class BendParamGroup  {
+public class BendParamGroup extends ParamGroup {
 
   private Float angleRef;
   private Float bendFieldRef;

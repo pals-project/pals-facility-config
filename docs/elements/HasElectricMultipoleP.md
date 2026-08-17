@@ -1,155 +1,27 @@
 
-
-# Class: HasElectricMultipoleP 
+# Class: HasElectricMultipoleP
 
 
 
 URI: [pals:HasElectricMultipoleP](https://pals-project.readthedocs.io/HasElectricMultipoleP)
 
 
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[ElectricMultipoleParamGroup]<ElectricMultipoleP%200..1-++[HasElectricMultipoleP],[Multipole]uses%20-.->[HasElectricMultipoleP],[Kicker]uses%20-.->[HasElectricMultipoleP],[Cavity]uses%20-.->[HasElectricMultipoleP],[Multipole],[Kicker],[ElectricMultipoleParamGroup],[Cavity])](https://yuml.me/diagram/nofunky;dir:TB/class/[ElectricMultipoleParamGroup]<ElectricMultipoleP%200..1-++[HasElectricMultipoleP],[Multipole]uses%20-.->[HasElectricMultipoleP],[Kicker]uses%20-.->[HasElectricMultipoleP],[Cavity]uses%20-.->[HasElectricMultipoleP],[Multipole],[Kicker],[ElectricMultipoleParamGroup],[Cavity])
+
+## Mixin for
+
+ * [Cavity](Cavity.md) (mixin)  - A cavity used for beam acceleration or manipulation.
+ * [Kicker](Kicker.md) (mixin)  - A magnet primarily used to steer the beam.
+ * [Multipole](Multipole.md) (mixin)  - A general magnet with a higher-order multipole field, such as a sextupole or octupole.
+
+## Referenced by Class
 
 
-
-```mermaid
- classDiagram
-    class HasElectricMultipoleP
-    click HasElectricMultipoleP href "../HasElectricMultipoleP/"
-      HasElectricMultipoleP <|-- Multipole
-        click Multipole href "../Multipole/"
-      HasElectricMultipoleP <|-- Kicker
-        click Kicker href "../Kicker/"
-      HasElectricMultipoleP <|-- Cavity
-        click Cavity href "../Cavity/"
-      
-      HasElectricMultipoleP : ElectricMultipoleP
-        
-          
-    
-        
-        
-        HasElectricMultipoleP --> "0..1" ElectricMultipoleParamGroup : ElectricMultipoleP
-        click ElectricMultipoleParamGroup href "../ElectricMultipoleParamGroup/"
-    
-
-        
-      
-```
+## Attributes
 
 
+### Own
 
-
-<!-- no inheritance hierarchy -->
-
-## Class Properties
-
-| Property | Value |
-| --- | --- |
-| Mixin | Yes |
-
-
-## Slots
-
-| Name | Cardinality and Range | Description | Inheritance |
-| ---  | --- | --- | --- |
-| [ElectricMultipoleP](ElectricMultipoleP.md) | 0..1 <br/> [ElectricMultipoleParamGroup](ElectricMultipoleParamGroup.md) | A mixin for electric multipole parameters that are aligned with PALS Electric... | direct |
-
-
-
-## Mixin Usage
-
-| mixed into | description |
-| --- | --- |
-| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |
-| [Kicker](Kicker.md) | A magnet primarily used to steer the beam |
-| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | pals:HasElectricMultipoleP |
-| native | pals:HasElectricMultipoleP |
-
-
-
-
-
-
-## LinkML Source
-
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-
-### Direct
-
-<details>
-```yaml
-name: HasElectricMultipoleP
-from_schema: https://w3id.org/accelerator-core
-mixin: true
-attributes:
-  ElectricMultipoleP:
-    name: ElectricMultipoleP
-    description: A mixin for electric multipole parameters that are aligned with PALS
-      ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
-      the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    domain_of:
-    - HasElectricMultipoleP
-    range: ElectricMultipoleParamGroup
-    inlined: true
-
-```
-</details>
-
-### Induced
-
-<details>
-```yaml
-name: HasElectricMultipoleP
-from_schema: https://w3id.org/accelerator-core
-mixin: true
-attributes:
-  ElectricMultipoleP:
-    name: ElectricMultipoleP
-    description: A mixin for electric multipole parameters that are aligned with PALS
-      ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
-      the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    alias: ElectricMultipoleP
-    owner: HasElectricMultipoleP
-    domain_of:
-    - HasElectricMultipoleP
-    range: ElectricMultipoleParamGroup
-    inlined: true
-
-```
-</details>
+ * [➞ElectricMultipoleP](hasElectricMultipoleP__ElectricMultipoleP.md)  <sub>0..1</sub>
+     * Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+     * Range: [ElectricMultipoleParamGroup](ElectricMultipoleParamGroup.md)

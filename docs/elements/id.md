@@ -1,139 +1,86 @@
 
+# Slot: id
 
-# Slot: id 
-
-
-_A unique identifier for the instance._
-
-
-
-
+A unique identifier for the instance.
 
 URI: [pals:id](https://pals-project.readthedocs.io/id)
-Alias: id
-
-<!-- no inheritance hierarchy -->
 
 
+## Domain and Range
+
+None &#8594;  <sub>1..1</sub> [String](types/String.md)
+
+## Parents
 
 
+## Children
 
-## Applicable Classes
 
-| Name | Description | Modifies Slot |
+## Used by
+
+ * [ACKicker](ACKicker.md)
+ * [AdjacentTo](AdjacentTo.md)
+ * [Affiliation](Affiliation.md)
+ * [Aperture](Aperture.md)
+ * [BeamLine](BeamLine.md)
+ * [BeamLineSection](BeamLineSection.md)
+ * [BeamPositionMonitor](BeamPositionMonitor.md)
+ * [BeamProfileMonitor](BeamProfileMonitor.md)
+ * [Bend](Bend.md)
+ * [BendParamGroup](BendParamGroup.md)
+ * [BodyShiftParamGroup](BodyShiftParamGroup.md)
+ * [BookkeepingComponent](BookkeepingComponent.md)
+ * [Cavity](Cavity.md)
+ * [Component](Component.md)
+ * [ComponentRelation](ComponentRelation.md)
+ * [Contains](Contains.md)
+ * [Controls](Controls.md)
+ * [CrabCavity](CrabCavity.md)
+ * [DiagnosticDevice](DiagnosticDevice.md)
+ * [Edge](Edge.md)
+ * [ElectricMultipoleParamGroup](ElectricMultipoleParamGroup.md)
+ * [FloorParamGroup](FloorParamGroup.md)
+ * [HasCommandSignal](HasCommandSignal.md)
+ * [HasConnectingBranch](HasConnectingBranch.md)
+ * [HasLimitSignal](HasLimitSignal.md)
+ * [HasReadbackSignal](HasReadbackSignal.md)
+ * [HasSetpointSignal](HasSetpointSignal.md)
+ * [HasSignal](HasSignal.md)
+ * [Intersects](Intersects.md)
+ * [IsPartOf](IsPartOf.md)
+ * [Kicker](Kicker.md)
+ * [LongitudinalPlacementParamGroup](LongitudinalPlacementParamGroup.md)
+ * [Magnet](Magnet.md)
+ * [MagneticMultipoleParamGroup](MagneticMultipoleParamGroup.md)
+ * [Marker](Marker.md)
+ * [MetaParamGroup](MetaParamGroup.md)
+ * [MountedOn](MountedOn.md)
+ * [Multipole](Multipole.md)
+ * [NearestTo](NearestTo.md)
+ * [Node](Node.md)
+ * [NormalConductingRFCavity](NormalConductingRFCavity.md)
+ * [Octupole](Octupole.md)
+ * [Overlaps](Overlaps.md)
+ * [ParamGroup](ParamGroup.md)
+ * [PhysicalComponent](PhysicalComponent.md)
+ * [Precedes](Precedes.md)
+ * [Quadrupole](Quadrupole.md)
+ * [RFCavity](RFCavity.md)
+ * [RFParamGroup](RFParamGroup.md)
+ * [RadiationMonitor](RadiationMonitor.md)
+ * [ReferenceParamGroup](ReferenceParamGroup.md)
+ * [Sextupole](Sextupole.md)
+ * [Signal](Signal.md)
+ * [SignalBinding](SignalBinding.md)
+ * [Solenoid](Solenoid.md)
+ * [SolenoidParamGroup](SolenoidParamGroup.md)
+ * [SuperConductingRFCavity](SuperConductingRFCavity.md)
+ * [SupportingFacilityComponent](SupportingFacilityComponent.md)
+ * [TwissParamGroup](TwissParamGroup.md)
+ * [VirtualComponent](VirtualComponent.md)
+
+## Other properties
+
+|  |  |  |
 | --- | --- | --- |
-| [Kicker](Kicker.md) | A magnet primarily used to steer the beam |  no  |
-| [PhysicalComponent](PhysicalComponent.md) | A physical item that participates in or supports accelerator operation |  no  |
-| [ACKicker](ACKicker.md) | An ACKicker element simulates a time-dependent kicker |  no  |
-| [Relationship](Relationship.md) | Abstract base for subject-predicate-object associations |  no  |
-| [Solenoid](Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing |  no  |
-| [BeamLineSection](BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizat... |  no  |
-| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |  no  |
-| [NormalConductingRFCavity](NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is norm... |  no  |
-| [Component](Component.md) | A general class for accelerator components, which can be specialized into mor... |  no  |
-| [CrabCavity](CrabCavity.md) | A cavity used for transverse beam manipulation, such as crabbing or deflectin... |  no  |
-| [Quadrupole](Quadrupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
-| [DiagnosticDevice](DiagnosticDevice.md) | An accelerator device used to measure beam or machine state |  no  |
-| [Affiliation](Affiliation.md) | Contains affiliation information for an author or component, such as a ROR |  no  |
-| [SignalBinding](SignalBinding.md) | Association between a PhysicalComponent and one of its Signals, e |  no  |
-| [BookkeepingComponent](BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in t... |  no  |
-| [SupportingFacilityComponent](SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific ... |  no  |
-| [Sextupole](Sextupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
-| [ComponentRelation](ComponentRelation.md) | Association between two Components (Physical or Virtual), with supporting con... |  no  |
-| [BeamLine](BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam pat... |  no  |
-| [Marker](Marker.md) | A virtual component used as a reference point or marker in the beamline struc... |  no  |
-| [VirtualComponent](VirtualComponent.md) | A virtual or logical component that represents a concept, function, or role i... |  no  |
-| [Octupole](Octupole.md) | A magnet primarily used to focus or defocus the beam |  no  |
-| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |  no  |
-| [SuperConductingRFCavity](SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is supe... |  no  |
-| [Bend](Bend.md) | Dipole magnet used to bend the beam |  no  |
-| [Multipole](Multipole.md) | A general magnet with a higher-order multipole field, such as a sextupole or ... |  no  |
-| [Signal](Signal.md) | Semantic meaning of a control-system signal associated with a component |  no  |
-| [Aperture](Aperture.md) | A diagnostic or limiting aperture element used to constrain or characterize b... |  no  |
-| [RadiationMonitor](RadiationMonitor.md) | A diagnostic device used to monitor radiation dose or dose rate |  no  |
-| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |  no  |
-| [RFCavity](RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation |  no  |
-| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |  no  |
-
-
-
-
-
-
-## Properties
-
-### Type and Range
-
-| Property | Value |
-| --- | --- |
-| Range | [String](String.md) |
-| Domain Of | [Affiliation](Affiliation.md), [Component](Component.md), [Signal](Signal.md), [Relationship](Relationship.md) |
-| Slot URI | [pals:id](https://pals-project.readthedocs.io/id) |
-
-### Cardinality and Requirements
-
-| Property | Value |
-| --- | --- |
-| Required | Yes |
-### Slot Characteristics
-
-| Property | Value |
-| --- | --- |
-| Identifier | Yes |
-
-
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | pals:id |
-| native | pals:id |
-
-
-
-
-## LinkML Source
-
-<details>
-```yaml
-name: id
-description: A unique identifier for the instance.
-from_schema: https://w3id.org/accelerator-core
-rank: 1000
-slot_uri: pals:id
-identifier: true
-alias: id
-domain_of:
-- Affiliation
-- Component
-- Signal
-- Relationship
-range: string
-required: true
-
-```
-</details>
+| **Mappings:** | | pals:id |

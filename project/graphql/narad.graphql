@@ -1,12 +1,4 @@
 # metamodel_version: 1.7.0
-enum AxisEnum
-  {
-    x
-    y
-    z
-    s
-  }
-
 enum CanonicalSignalTypeEnum
   {
     HorizontalBeamPosition
@@ -36,22 +28,11 @@ enum CavityTypeEnum
     TRAVELING_WAVE
   }
 
-enum ComponentRelationPredicateEnum
+enum CoordinateSystemEnum
   {
-    precedes
-    follows
-    contains
-    contained_in
-    connected_to
-    controls
-    is_controlled_by
-    is_part_of
-    has_part
-    adjacent_to
-    overlaps
-    mounted_on
-    intersects
-    nearest_to
+    Cartesian
+    Cylindrical
+    Spherical
   }
 
 enum DataTypeEnum
@@ -172,16 +153,6 @@ enum RelationContextEnum
     installation_mounting
   }
 
-enum SignalBindingPredicateEnum
-  {
-    has_signal
-    has_status_signal
-    has_setpoint_signal
-    has_readback_signal
-    has_command_signal
-    has_limit_signal
-  }
-
 enum SignalRoleEnum
   {
     Setpoint
@@ -258,6 +229,7 @@ type ACKicker
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -279,6 +251,22 @@ type AdditionalMetadata
     datatype: DataTypeEnum
   }
 
+type AdjacentTo
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    distanceValue: Float
+    distanceUnit: UnitEnum
+    toleranceValue: Float
+    toleranceUnit: UnitEnum
+    coordinates: CoordinateSet
+    predicate: String!
+  }
+
 type Affiliation
   {
     id: String!
@@ -290,6 +278,7 @@ type Aperture implements HasReferenceP, HasTwissP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -312,6 +301,7 @@ type BeamLine
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
@@ -329,6 +319,7 @@ type BeamLineSection implements HasFloorP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
@@ -341,6 +332,7 @@ type BeamPositionMonitor implements HasReferenceP, HasBodyShiftP, HasTwissP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -356,6 +348,7 @@ type BeamProfileMonitor implements HasReferenceP, HasBodyShiftP, HasTwissP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -371,6 +364,7 @@ type Bend implements HasBendP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -387,6 +381,7 @@ type Bend implements HasBendP
 
 type BendParamGroup
   {
+    id: String!
     angleRef: Float
     bendFieldRef: Float
     bendFieldActual: Float
@@ -411,6 +406,7 @@ type BendParamGroup
 
 type BodyShiftParamGroup
   {
+    id: String!
     xOffset: Float
     yOffset: Float
     zOffset: Float
@@ -423,6 +419,7 @@ type BookkeepingComponent implements HasBodyShiftP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
@@ -435,6 +432,7 @@ type Cavity implements HasReferenceP, HasElectricMultipoleP, HasMagneticMultipol
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -452,31 +450,60 @@ type Component implements HasMetaP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
   }
 
-type ComponentRelation
+interface ComponentRelation
   {
     id: String!
-    context: RelationContextEnum
-    beamlineContext: BeamLine
-    referenceFrame: ReferenceFrameEnum
-    distanceValue: Float
-    distanceUnit: UnitEnum
-    axis: AxisEnum
+    predicate: String!
+    context: RelationContextEnum!
     componentDirection: DirectionEnum
-    toleranceValue: Float
-    toleranceUnit: UnitEnum
+    referenceFrame: ReferenceFrameEnum
     subject: Component!
-    predicate: ComponentRelationPredicateEnum!
     object: Component!
+  }
+
+type Contains
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    predicate: String!
+  }
+
+type Controls
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    predicate: String!
+  }
+
+type CoordinateSet
+  {
+    coordinateSystem: CoordinateSystemEnum
+    xCoord: Float
+    yCoord: Float
+    zCoord: Float
+    rCoord: Float
+    thetaCoord: Float
+    phiCoord: Float
   }
 
 type CrabCavity
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -494,6 +521,7 @@ type DiagnosticDevice
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -502,8 +530,17 @@ type DiagnosticDevice
     longitudinalPlacementP: LongitudinalPlacementParamGroup
   }
 
+interface Edge
+  {
+    id: String!
+    subject: String!
+    predicate: String!
+    object: String!
+  }
+
 type ElectricMultipoleParamGroup
   {
+    id: String!
     elecComponents: [MultipoleParameterGroup]
   }
 
@@ -519,6 +556,7 @@ type Facility
 
 type FloorParamGroup
   {
+    id: String!
     x: Float
     y: Float
     z: Float
@@ -537,6 +575,26 @@ interface HasBodyShiftP
     bodyShiftP: BodyShiftParamGroup
   }
 
+type HasCommandSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
+  }
+
+type HasConnectingBranch
+  {
+    id: String!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    beamlineContext: BeamLine!
+    predicate: String!
+    context: RelationContextEnum!
+  }
+
 interface HasElectricMultipoleP
   {
     electricMultipoleP: ElectricMultipoleParamGroup
@@ -545,6 +603,14 @@ interface HasElectricMultipoleP
 interface HasFloorP
   {
     floorP: FloorParamGroup
+  }
+
+type HasLimitSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
   }
 
 interface HasLongitudinalPlacementP
@@ -562,6 +628,14 @@ interface HasMetaP
     metaP: MetaParamGroup
   }
 
+type HasReadbackSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
+  }
+
 interface HasReferenceP
   {
     referenceP: ReferenceParamGroup
@@ -570,6 +644,22 @@ interface HasReferenceP
 interface HasRFP
   {
     rFP: RFParamGroup
+  }
+
+type HasSetpointSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
+  }
+
+type HasSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
   }
 
 interface HasSolenoidP
@@ -588,10 +678,33 @@ type Identifier
     identifierValue: String
   }
 
+type Intersects
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    predicate: String!
+  }
+
+type IsPartOf
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    predicate: String!
+  }
+
 type Kicker implements HasElectricMultipoleP, HasMagneticMultipoleP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -608,6 +721,7 @@ type Kicker implements HasElectricMultipoleP, HasMagneticMultipoleP
 
 type LongitudinalPlacementParamGroup
   {
+    id: String!
     length: Float
     sPosition: Float
   }
@@ -616,6 +730,7 @@ type Magnet implements HasReferenceP, HasBodyShiftP, HasTwissP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -629,6 +744,7 @@ type Magnet implements HasReferenceP, HasBodyShiftP, HasTwissP
 
 type MagneticMultipoleParamGroup
   {
+    id: String!
     magComponents: [MultipoleParameterGroup]
   }
 
@@ -636,6 +752,7 @@ type Marker implements HasTwissP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
@@ -647,16 +764,30 @@ type Marker implements HasTwissP
 
 type MetaParamGroup
   {
+    id: String!
     description: String
-    alias: String
+    alias: [String]
     label: String
     additionalMetadata: [AdditionalMetadata]
+  }
+
+type MountedOn
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    coordinates: CoordinateSet
+    predicate: String!
   }
 
 type Multipole implements HasElectricMultipoleP, HasMagneticMultipoleP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -684,10 +815,34 @@ type MultipoleParameterGroup
     ks: Float
   }
 
+type NearestTo
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    distanceValue: Float
+    distanceUnit: UnitEnum
+    toleranceValue: Float
+    toleranceUnit: UnitEnum
+    coordinates: CoordinateSet
+    predicate: String!
+  }
+
+interface Node
+  {
+    id: String!
+    kind: String!
+    alias: [String]
+  }
+
 type NormalConductingRFCavity
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -706,6 +861,7 @@ type Octupole
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -719,6 +875,18 @@ type Octupole
     magneticMultipoleP: MagneticMultipoleParamGroup
   }
 
+type Overlaps
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    coordinates: CoordinateSet
+    predicate: String!
+  }
+
 type PALSAccelerator
   {
     kind: String!
@@ -730,10 +898,16 @@ type PALSAccelerator
     facility: Facility
   }
 
+interface ParamGroup
+  {
+    id: String!
+  }
+
 type PhysicalComponent implements HasFloorP, HasLongitudinalPlacementP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -742,10 +916,23 @@ type PhysicalComponent implements HasFloorP, HasLongitudinalPlacementP
     longitudinalPlacementP: LongitudinalPlacementParamGroup
   }
 
+type Precedes
+  {
+    id: String!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    beamlineContext: BeamLine!
+    predicate: String!
+    context: RelationContextEnum!
+  }
+
 type Quadrupole
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -763,6 +950,7 @@ type RadiationMonitor implements HasBodyShiftP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -774,24 +962,18 @@ type RadiationMonitor implements HasBodyShiftP
 
 type ReferenceParamGroup
   {
+    id: String!
     speciesRef: String
     pcRef: Float
     eTotRef: Float
     timeRef: Float
   }
 
-interface Relationship
-  {
-    id: String!
-    subject: String!
-    predicate: String!
-    object: String!
-  }
-
 type RFCavity implements HasRFP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -808,6 +990,7 @@ type RFCavity implements HasRFP
 
 type RFParamGroup
   {
+    id: String!
     frequency: Float
     harmon: Int
     voltage: Float
@@ -824,6 +1007,7 @@ type Sextupole
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -841,7 +1025,7 @@ type Signal implements HasMetaP
   {
     id: String!
     kind: String!
-    alias: String
+    alias: [String]
     signalRole: SignalRoleEnum!
     sourceSystem: SourceSystemEnum!
     nativeDescription: String
@@ -854,11 +1038,11 @@ type Signal implements HasMetaP
     metaP: MetaParamGroup
   }
 
-type SignalBinding
+interface SignalBinding
   {
     id: String!
+    predicate: String!
     subject: PhysicalComponent!
-    predicate: SignalBindingPredicateEnum!
     object: Signal!
   }
 
@@ -866,6 +1050,7 @@ type Solenoid implements HasSolenoidP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -880,6 +1065,7 @@ type Solenoid implements HasSolenoidP
 
 type SolenoidParamGroup
   {
+    id: String!
     ksol: Float
     bsol: Float
   }
@@ -888,6 +1074,7 @@ type SuperConductingRFCavity
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
@@ -906,6 +1093,7 @@ type SupportingFacilityComponent implements HasFloorP, HasLongitudinalPlacementP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     beamlineRelation: PhysicalRelationEnum!
@@ -917,6 +1105,7 @@ type SupportingFacilityComponent implements HasFloorP, HasLongitudinalPlacementP
 
 type TwissParamGroup
   {
+    id: String!
     alphaA: Float
     alphaB: Float
     betaA: Float
@@ -933,6 +1122,7 @@ type VirtualComponent implements HasFloorP
   {
     id: String!
     kind: String!
+    alias: [String]
     nativeTypes: [String]
     metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!

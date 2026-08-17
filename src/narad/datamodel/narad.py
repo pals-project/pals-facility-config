@@ -1,5 +1,5 @@
 # Auto generated from narad.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-08-07T11:45:28
+# Generation date: 2026-08-13T10:49:13
 # Schema: accelerator_core
 #
 # id: https://w3id.org/accelerator-core
@@ -56,8 +56,8 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Boolean, Float, Integer, String
-from linkml_runtime.utils.metamodelcore import Bool
+from linkml_runtime.linkml_model.types import Boolean, Float, Integer, String, Uriorcurie
+from linkml_runtime.utils.metamodelcore import Bool, URIorCURIE
 
 metamodel_version = "1.7.0"
 version = None
@@ -66,8 +66,9 @@ version = None
 BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
 RO = CurieNamespace('RO', 'http://purl.obolibrary.org/obo/RO_')
 ACC = CurieNamespace('acc', 'https://example.org/accelerator-core/')
-INST = CurieNamespace('inst', 'https://example.org/narad-instance/')
+INST = CurieNamespace('inst', 'https://example.org/pals-instance/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
+OM = CurieNamespace('om', 'http://www.ontology-of-units-of-measure.org/resource/om-2/')
 PALS = CurieNamespace('pals', 'https://pals-project.readthedocs.io/')
 QUANTITYKIND = CurieNamespace('quantitykind', 'http://qudt.org/vocab/quantitykind/')
 RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
@@ -80,11 +81,63 @@ DEFAULT_ = PALS
 # Types
 
 # Class references
+class NodeId(extended_str):
+    pass
+
+
 class AffiliationId(extended_str):
     pass
 
 
-class ComponentId(extended_str):
+class ParamGroupId(extended_str):
+    pass
+
+
+class MetaParamGroupId(ParamGroupId):
+    pass
+
+
+class FloorParamGroupId(ParamGroupId):
+    pass
+
+
+class BodyShiftParamGroupId(ParamGroupId):
+    pass
+
+
+class LongitudinalPlacementParamGroupId(ParamGroupId):
+    pass
+
+
+class ReferenceParamGroupId(ParamGroupId):
+    pass
+
+
+class SolenoidParamGroupId(ParamGroupId):
+    pass
+
+
+class TwissParamGroupId(ParamGroupId):
+    pass
+
+
+class RFParamGroupId(ParamGroupId):
+    pass
+
+
+class ElectricMultipoleParamGroupId(ParamGroupId):
+    pass
+
+
+class MagneticMultipoleParamGroupId(ParamGroupId):
+    pass
+
+
+class BendParamGroupId(ParamGroupId):
+    pass
+
+
+class ComponentId(NodeId):
     pass
 
 
@@ -100,7 +153,7 @@ class BeamLineId(VirtualComponentId):
     pass
 
 
-class SignalId(extended_str):
+class SignalId(NodeId):
     pass
 
 
@@ -196,16 +249,129 @@ class BeamLineSectionId(BookkeepingComponentId):
     pass
 
 
-class RelationshipId(extended_str):
+class EdgeId(extended_str):
     pass
 
 
-class SignalBindingId(RelationshipId):
+class SignalBindingId(EdgeId):
     pass
 
 
-class ComponentRelationId(RelationshipId):
+class HasSignalId(SignalBindingId):
     pass
+
+
+class HasSetpointSignalId(SignalBindingId):
+    pass
+
+
+class HasReadbackSignalId(SignalBindingId):
+    pass
+
+
+class HasCommandSignalId(SignalBindingId):
+    pass
+
+
+class HasLimitSignalId(SignalBindingId):
+    pass
+
+
+class ComponentRelationId(EdgeId):
+    pass
+
+
+class PrecedesId(ComponentRelationId):
+    pass
+
+
+class ContainsId(ComponentRelationId):
+    pass
+
+
+class ControlsId(ComponentRelationId):
+    pass
+
+
+class IsPartOfId(ComponentRelationId):
+    pass
+
+
+class AdjacentToId(ComponentRelationId):
+    pass
+
+
+class OverlapsId(ComponentRelationId):
+    pass
+
+
+class HasConnectingBranchId(ComponentRelationId):
+    pass
+
+
+class MountedOnId(ComponentRelationId):
+    pass
+
+
+class IntersectsId(ComponentRelationId):
+    pass
+
+
+class NearestToId(ComponentRelationId):
+    pass
+
+
+@dataclass(repr=False)
+class Node(YAMLRoot):
+    """
+    Abstract base class for all node entities in the accelerator core ontology. This differentiates nodes from edges
+    (relationships) in the ontology. This class is not intended to be instantiated directly, but serves as a common
+    ancestor for all other classes. Allows for the use of kind: as a discriminator for the type of node in the
+    ontology.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["Node"]
+    class_class_curie: ClassVar[str] = "pals:Node"
+    class_name: ClassVar[str] = "Node"
+    class_model_uri: ClassVar[URIRef] = PALS.Node
+
+    id: Union[str, NodeId] = None
+    kind: str = None
+    alias: Optional[Union[str, list[str]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, NodeId):
+            self.id = NodeId(self.id)
+
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
+
+        if not isinstance(self.alias, list):
+            self.alias = [self.alias] if self.alias is not None else []
+        self.alias = [v if isinstance(v, str) else str(v) for v in self.alias]
+
+        super().__post_init__(**kwargs)
+
+
+    def __new__(cls, *args, **kwargs):
+
+        type_designator = "kind"
+        if not type_designator in kwargs:
+            return super().__new__(cls,*args,**kwargs)
+        else:
+            type_designator_value = kwargs[type_designator]
+            target_cls = cls._class_for("class_name", type_designator_value)
+
+
+            if target_cls is None:
+                raise ValueError(f"Wrong type designator value: class {cls.__name__} "
+                                 f"has no subclass with ['class_name']='{kwargs[type_designator]}'")
+            return super().__new__(target_cls,*args,**kwargs)
+
 
 
 @dataclass(repr=False)
@@ -384,6 +550,30 @@ class Identifier(YAMLRoot):
 
 
 @dataclass(repr=False)
+class ParamGroup(YAMLRoot):
+    """
+    Abstract base for inlined PALS parameter-group objects, giving each an identifier so it resolves to a stable
+    node/IRI rather than a blank node when exported to RDF.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["ParamGroup"]
+    class_class_curie: ClassVar[str] = "pals:ParamGroup"
+    class_name: ClassVar[str] = "ParamGroup"
+    class_model_uri: ClassVar[URIRef] = PALS.ParamGroup
+
+    id: Union[str, ParamGroupId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ParamGroupId):
+            self.id = ParamGroupId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class HasMetaP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -402,7 +592,7 @@ class HasMetaP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class MetaParamGroup(YAMLRoot):
+class MetaParamGroup(ParamGroup):
     """
     Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability
     with the Particle Accelerator Language Standard (PALS).
@@ -414,22 +604,31 @@ class MetaParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "MetaParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.MetaParamGroup
 
+    id: Union[str, MetaParamGroupId] = None
     description: Optional[str] = None
-    alias: Optional[str] = None
+    alias: Optional[Union[str, list[str]]] = empty_list()
     label: Optional[str] = None
     additional_metadata: Optional[Union[Union[dict, "AdditionalMetadata"], list[Union[dict, "AdditionalMetadata"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MetaParamGroupId):
+            self.id = MetaParamGroupId(self.id)
+
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
-        if self.alias is not None and not isinstance(self.alias, str):
-            self.alias = str(self.alias)
+        if not isinstance(self.alias, list):
+            self.alias = [self.alias] if self.alias is not None else []
+        self.alias = [v if isinstance(v, str) else str(v) for v in self.alias]
 
         if self.label is not None and not isinstance(self.label, str):
             self.label = str(self.label)
 
-        self._normalize_inlined_as_list(slot_name="additional_metadata", slot_type=AdditionalMetadata, key_name="key", keyed=False)
+        if not isinstance(self.additional_metadata, list):
+            self.additional_metadata = [self.additional_metadata] if self.additional_metadata is not None else []
+        self.additional_metadata = [v if isinstance(v, AdditionalMetadata) else AdditionalMetadata(**as_dict(v)) for v in self.additional_metadata]
 
         super().__post_init__(**kwargs)
 
@@ -453,7 +652,7 @@ class HasFloorP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class FloorParamGroup(YAMLRoot):
+class FloorParamGroup(ParamGroup):
     """
     Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for
     interoperability with the Particle Accelerator Language Standard (PALS).
@@ -465,6 +664,7 @@ class FloorParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "FloorParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.FloorParamGroup
 
+    id: Union[str, FloorParamGroupId] = None
     x: Optional[float] = None
     y: Optional[float] = None
     z: Optional[float] = None
@@ -473,6 +673,11 @@ class FloorParamGroup(YAMLRoot):
     psi: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, FloorParamGroupId):
+            self.id = FloorParamGroupId(self.id)
+
         if self.x is not None and not isinstance(self.x, float):
             self.x = float(self.x)
 
@@ -513,7 +718,7 @@ class HasBodyShiftP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class BodyShiftParamGroup(YAMLRoot):
+class BodyShiftParamGroup(ParamGroup):
     """
     Mixin class for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters)
     for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -525,6 +730,7 @@ class BodyShiftParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "BodyShiftParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.BodyShiftParamGroup
 
+    id: Union[str, BodyShiftParamGroupId] = None
     x_offset: Optional[float] = None
     y_offset: Optional[float] = None
     z_offset: Optional[float] = None
@@ -533,6 +739,11 @@ class BodyShiftParamGroup(YAMLRoot):
     z_rot: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, BodyShiftParamGroupId):
+            self.id = BodyShiftParamGroupId(self.id)
+
         if self.x_offset is not None and not isinstance(self.x_offset, float):
             self.x_offset = float(self.x_offset)
 
@@ -573,11 +784,11 @@ class HasLongitudinalPlacementP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class LongitudinalPlacementParamGroup(YAMLRoot):
+class LongitudinalPlacementParamGroup(ParamGroup):
     """
-    Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis.
-    Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
-    One (or both) `length` or `s_position` must be present.
+    Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis. Corresponds to
+    PALS's ungrouped element parameters `length` and `s_position`. One (or both) `length` or `s_position` must be
+    present.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -586,10 +797,16 @@ class LongitudinalPlacementParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "LongitudinalPlacementParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.LongitudinalPlacementParamGroup
 
+    id: Union[str, LongitudinalPlacementParamGroupId] = None
     length: Optional[float] = None
     s_position: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, LongitudinalPlacementParamGroupId):
+            self.id = LongitudinalPlacementParamGroupId(self.id)
+
         if self.length is not None and not isinstance(self.length, float):
             self.length = float(self.length)
 
@@ -618,7 +835,7 @@ class HasReferenceP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class ReferenceParamGroup(YAMLRoot):
+class ReferenceParamGroup(ParamGroup):
     """
     Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability
     with the Particle Accelerator Language Standard (PALS).
@@ -630,12 +847,18 @@ class ReferenceParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "ReferenceParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.ReferenceParamGroup
 
+    id: Union[str, ReferenceParamGroupId] = None
     species_ref: Optional[str] = None
     pc_ref: Optional[float] = None
     E_tot_ref: Optional[float] = None
     time_ref: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ReferenceParamGroupId):
+            self.id = ReferenceParamGroupId(self.id)
+
         if self.species_ref is not None and not isinstance(self.species_ref, str):
             self.species_ref = str(self.species_ref)
 
@@ -670,7 +893,7 @@ class HasSolenoidP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class SolenoidParamGroup(YAMLRoot):
+class SolenoidParamGroup(ParamGroup):
     """
     Mixin for solenoid-specific parameters.
     """
@@ -681,10 +904,16 @@ class SolenoidParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "SolenoidParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.SolenoidParamGroup
 
+    id: Union[str, SolenoidParamGroupId] = None
     Ksol: Optional[float] = None
     Bsol: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SolenoidParamGroupId):
+            self.id = SolenoidParamGroupId(self.id)
+
         if self.Ksol is not None and not isinstance(self.Ksol, float):
             self.Ksol = float(self.Ksol)
 
@@ -713,7 +942,7 @@ class HasTwissP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class TwissParamGroup(YAMLRoot):
+class TwissParamGroup(ParamGroup):
     """
     Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.
     """
@@ -724,6 +953,7 @@ class TwissParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "TwissParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.TwissParamGroup
 
+    id: Union[str, TwissParamGroupId] = None
     alpha_a: Optional[float] = None
     alpha_b: Optional[float] = None
     beta_a: Optional[float] = None
@@ -736,6 +966,11 @@ class TwissParamGroup(YAMLRoot):
     phi_b: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TwissParamGroupId):
+            self.id = TwissParamGroupId(self.id)
+
         if self.alpha_a is not None and not isinstance(self.alpha_a, float):
             self.alpha_a = float(self.alpha_a)
 
@@ -788,7 +1023,7 @@ class HasRFP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class RFParamGroup(YAMLRoot):
+class RFParamGroup(ParamGroup):
     """
     Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is
     aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -800,6 +1035,7 @@ class RFParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "RFParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.RFParamGroup
 
+    id: Union[str, RFParamGroupId] = None
     frequency: Optional[float] = None
     harmon: Optional[int] = None
     voltage: Optional[float] = None
@@ -812,6 +1048,11 @@ class RFParamGroup(YAMLRoot):
     dE_ref: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, RFParamGroupId):
+            self.id = RFParamGroupId(self.id)
+
         if self.frequency is not None and not isinstance(self.frequency, float):
             self.frequency = float(self.frequency)
 
@@ -864,13 +1105,12 @@ class HasElectricMultipoleP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class ElectricMultipoleParamGroup(YAMLRoot):
+class ElectricMultipoleParamGroup(ParamGroup):
     """
-    Mixin for electric multipole parameters,
-    which can be used to describe the electric field components of an accelerator element.
-    This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language
-    Standard (PALS).
-    Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7
+    Mixin for electric multipole parameters, which can be used to describe the electric field components of an
+    accelerator element. This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle
+    Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml elec_components:
+    - order: 7
     tilt: 0.7
     - order: 3
     En: 27.3
@@ -885,10 +1125,18 @@ class ElectricMultipoleParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "ElectricMultipoleParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.ElectricMultipoleParamGroup
 
+    id: Union[str, ElectricMultipoleParamGroupId] = None
     elec_components: Optional[Union[Union[dict, "MultipoleParameterGroup"], list[Union[dict, "MultipoleParameterGroup"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        self._normalize_inlined_as_list(slot_name="elec_components", slot_type=MultipoleParameterGroup, key_name="order", keyed=False)
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ElectricMultipoleParamGroupId):
+            self.id = ElectricMultipoleParamGroupId(self.id)
+
+        if not isinstance(self.elec_components, list):
+            self.elec_components = [self.elec_components] if self.elec_components is not None else []
+        self.elec_components = [v if isinstance(v, MultipoleParameterGroup) else MultipoleParameterGroup(**as_dict(v)) for v in self.elec_components]
 
         super().__post_init__(**kwargs)
 
@@ -912,7 +1160,7 @@ class HasMagneticMultipoleP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class MagneticMultipoleParamGroup(YAMLRoot):
+class MagneticMultipoleParamGroup(ParamGroup):
     """
     Mixin for magnetic multipole parameters, which can be used to describe the magnetic field components of an
     accelerator element. This mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle
@@ -934,10 +1182,18 @@ class MagneticMultipoleParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "MagneticMultipoleParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.MagneticMultipoleParamGroup
 
+    id: Union[str, MagneticMultipoleParamGroupId] = None
     mag_components: Optional[Union[Union[dict, "MultipoleParameterGroup"], list[Union[dict, "MultipoleParameterGroup"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        self._normalize_inlined_as_list(slot_name="mag_components", slot_type=MultipoleParameterGroup, key_name="order", keyed=False)
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MagneticMultipoleParamGroupId):
+            self.id = MagneticMultipoleParamGroupId(self.id)
+
+        if not isinstance(self.mag_components, list):
+            self.mag_components = [self.mag_components] if self.mag_components is not None else []
+        self.mag_components = [v if isinstance(v, MultipoleParameterGroup) else MultipoleParameterGroup(**as_dict(v)) for v in self.mag_components]
 
         super().__post_init__(**kwargs)
 
@@ -961,10 +1217,10 @@ class HasBendP(YAMLRoot):
 
 
 @dataclass(repr=False)
-class BendParamGroup(YAMLRoot):
+class BendParamGroup(ParamGroup):
     """
-    Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
-    This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+    Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This
+    mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -973,6 +1229,7 @@ class BendParamGroup(YAMLRoot):
     class_name: ClassVar[str] = "BendParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.BendParamGroup
 
+    id: Union[str, BendParamGroupId] = None
     angle_ref: Optional[float] = None
     bend_field_ref: Optional[float] = None
     bend_field_actual: Optional[float] = None
@@ -995,6 +1252,11 @@ class BendParamGroup(YAMLRoot):
     tilt_ref: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, BendParamGroupId):
+            self.id = BendParamGroupId(self.id)
+
         if self.angle_ref is not None and not isinstance(self.angle_ref, float):
             self.angle_ref = float(self.angle_ref)
 
@@ -1061,10 +1323,9 @@ class BendParamGroup(YAMLRoot):
 @dataclass(repr=False)
 class MultipoleParameterGroup(YAMLRoot):
     """
-    A single order's electric (or magnetic) multipole component.
-    Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.
-    Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual
-    multipole components.
+    A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles OR the
+    fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the
+    ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -1121,7 +1382,7 @@ class MultipoleParameterGroup(YAMLRoot):
 
 
 @dataclass(repr=False)
-class Component(YAMLRoot):
+class Component(Node):
     """
     A general class for accelerator components, which can be specialized into more specific types like
     AcceleratorDevice, Magnet, etc.
@@ -1139,15 +1400,6 @@ class Component(YAMLRoot):
     MetaP: Optional[Union[dict, MetaParamGroup]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, ComponentId):
-            self.id = ComponentId(self.id)
-
-        if self._is_empty(self.kind):
-            self.MissingRequiredField("kind")
-        self.kind = str(self.class_name)
-
         if not isinstance(self.native_types, list):
             self.native_types = [self.native_types] if self.native_types is not None else []
         self.native_types = [v if isinstance(v, str) else str(v) for v in self.native_types]
@@ -1156,23 +1408,9 @@ class Component(YAMLRoot):
             self.MetaP = MetaParamGroup(**as_dict(self.MetaP))
 
         super().__post_init__(**kwargs)
-
-
-    def __new__(cls, *args, **kwargs):
-
-        type_designator = "kind"
-        if not type_designator in kwargs:
-            return super().__new__(cls,*args,**kwargs)
-        else:
-            type_designator_value = kwargs[type_designator]
-            target_cls = cls._class_for("class_name", type_designator_value)
-
-
-            if target_cls is None:
-                raise ValueError(f"Wrong type designator value: class {cls.__name__} "
-                                 f"has no subclass with ['class_name']='{kwargs[type_designator]}'")
-            return super().__new__(target_cls,*args,**kwargs)
-
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -1326,7 +1564,7 @@ class BeamLine(VirtualComponent):
 
 
 @dataclass(repr=False)
-class Signal(YAMLRoot):
+class Signal(Node):
     """
     Semantic meaning of a control-system signal associated with a component.
     """
@@ -1345,7 +1583,6 @@ class Signal(YAMLRoot):
     quantity_kind: Union[str, "QuantityKindEnum"] = None
     native_data_type: Union[str, "DataTypeEnum"] = None
     native_unit: Union[str, "UnitEnum"] = None
-    alias: Optional[str] = None
     native_description: Optional[str] = None
     access_protocol: Optional[str] = None
     archive_identifier: Optional[str] = None
@@ -1356,10 +1593,6 @@ class Signal(YAMLRoot):
             self.MissingRequiredField("id")
         if not isinstance(self.id, SignalId):
             self.id = SignalId(self.id)
-
-        if self._is_empty(self.kind):
-            self.MissingRequiredField("kind")
-        self.kind = str(self.class_name)
 
         if self._is_empty(self.signal_role):
             self.MissingRequiredField("signal_role")
@@ -1391,9 +1624,6 @@ class Signal(YAMLRoot):
         if not isinstance(self.native_unit, UnitEnum):
             self.native_unit = UnitEnum(self.native_unit)
 
-        if self.alias is not None and not isinstance(self.alias, str):
-            self.alias = str(self.alias)
-
         if self.native_description is not None and not isinstance(self.native_description, str):
             self.native_description = str(self.native_description)
 
@@ -1407,6 +1637,9 @@ class Signal(YAMLRoot):
             self.MetaP = MetaParamGroup(**as_dict(self.MetaP))
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2245,27 +2478,27 @@ class AdditionalMetadata(YAMLRoot):
 
 
 @dataclass(repr=False)
-class Relationship(YAMLRoot):
+class Edge(YAMLRoot):
     """
     Abstract base for subject-predicate-object associations.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Relationship"]
-    class_class_curie: ClassVar[str] = "pals:Relationship"
-    class_name: ClassVar[str] = "Relationship"
-    class_model_uri: ClassVar[URIRef] = PALS.Relationship
+    class_class_uri: ClassVar[URIRef] = RDF["Statement"]
+    class_class_curie: ClassVar[str] = "rdf:Statement"
+    class_name: ClassVar[str] = "Edge"
+    class_model_uri: ClassVar[URIRef] = PALS.Edge
 
-    id: Union[str, RelationshipId] = None
+    id: Union[str, EdgeId] = None
     subject: str = None
-    predicate: str = None
+    predicate: Union[str, URIorCURIE] = None
     object: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, RelationshipId):
-            self.id = RelationshipId(self.id)
+        if not isinstance(self.id, EdgeId):
+            self.id = EdgeId(self.id)
 
         if self._is_empty(self.subject):
             self.MissingRequiredField("subject")
@@ -2274,8 +2507,7 @@ class Relationship(YAMLRoot):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        if not isinstance(self.predicate, str):
-            self.predicate = str(self.predicate)
+        self.predicate = str(self.class_class_curie)
 
         if self._is_empty(self.object):
             self.MissingRequiredField("object")
@@ -2285,10 +2517,35 @@ class Relationship(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
+    def __new__(cls, *args, **kwargs):
+
+        type_designator = "predicate"
+        if not type_designator in kwargs:
+            return super().__new__(cls,*args,**kwargs)
+        else:
+            type_designator_value = kwargs[type_designator]
+            target_cls = cls._class_for("class_class_curie", type_designator_value)
+
+
+            if target_cls is None:
+                target_cls = cls._class_for("class_class_uri", type_designator_value)
+
+
+            if target_cls is None:
+                target_cls = cls._class_for("class_model_uri", type_designator_value)
+
+
+            if target_cls is None:
+                raise ValueError(f"Wrong type designator value: class {cls.__name__} "
+                                 f"has no subclass with ['class_class_curie', 'class_class_uri', 'class_model_uri']='{kwargs[type_designator]}'")
+            return super().__new__(target_cls,*args,**kwargs)
+
+
+
 @dataclass(repr=False)
-class SignalBinding(Relationship):
+class SignalBinding(Edge):
     """
-    Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding.
+    Association between a PhysicalComponent and one of its Signals, e.g. QUAD1 component to QUAD1.STATUS signal.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -2298,25 +2555,15 @@ class SignalBinding(Relationship):
     class_model_uri: ClassVar[URIRef] = PALS.SignalBinding
 
     id: Union[str, SignalBindingId] = None
+    predicate: Union[str, URIorCURIE] = None
     subject: Union[str, PhysicalComponentId] = None
-    predicate: Union[str, "SignalBindingPredicateEnum"] = None
     object: Union[str, SignalId] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, SignalBindingId):
-            self.id = SignalBindingId(self.id)
-
         if self._is_empty(self.subject):
             self.MissingRequiredField("subject")
         if not isinstance(self.subject, PhysicalComponentId):
             self.subject = PhysicalComponentId(self.subject)
-
-        if self._is_empty(self.predicate):
-            self.MissingRequiredField("predicate")
-        if not isinstance(self.predicate, SignalBindingPredicateEnum):
-            self.predicate = SignalBindingPredicateEnum(self.predicate)
 
         if self._is_empty(self.object):
             self.MissingRequiredField("object")
@@ -2324,10 +2571,163 @@ class SignalBinding(Relationship):
             self.object = SignalId(self.object)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
 
 
 @dataclass(repr=False)
-class ComponentRelation(Relationship):
+class HasSignal(SignalBinding):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["has_signal"]
+    class_class_curie: ClassVar[str] = "pals:has_signal"
+    class_name: ClassVar[str] = "HasSignal"
+    class_model_uri: ClassVar[URIRef] = PALS.HasSignal
+
+    id: Union[str, HasSignalId] = None
+    subject: Union[str, PhysicalComponentId] = None
+    object: Union[str, SignalId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, HasSignalId):
+            self.id = HasSignalId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class HasSetpointSignal(SignalBinding):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["has_setpoint_signal"]
+    class_class_curie: ClassVar[str] = "pals:has_setpoint_signal"
+    class_name: ClassVar[str] = "HasSetpointSignal"
+    class_model_uri: ClassVar[URIRef] = PALS.HasSetpointSignal
+
+    id: Union[str, HasSetpointSignalId] = None
+    subject: Union[str, PhysicalComponentId] = None
+    object: Union[str, SignalId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, HasSetpointSignalId):
+            self.id = HasSetpointSignalId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class HasReadbackSignal(SignalBinding):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["has_readback_signal"]
+    class_class_curie: ClassVar[str] = "pals:has_readback_signal"
+    class_name: ClassVar[str] = "HasReadbackSignal"
+    class_model_uri: ClassVar[URIRef] = PALS.HasReadbackSignal
+
+    id: Union[str, HasReadbackSignalId] = None
+    subject: Union[str, PhysicalComponentId] = None
+    object: Union[str, SignalId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, HasReadbackSignalId):
+            self.id = HasReadbackSignalId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class HasCommandSignal(SignalBinding):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["has_command_signal"]
+    class_class_curie: ClassVar[str] = "pals:has_command_signal"
+    class_name: ClassVar[str] = "HasCommandSignal"
+    class_model_uri: ClassVar[URIRef] = PALS.HasCommandSignal
+
+    id: Union[str, HasCommandSignalId] = None
+    subject: Union[str, PhysicalComponentId] = None
+    object: Union[str, SignalId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, HasCommandSignalId):
+            self.id = HasCommandSignalId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class HasLimitSignal(SignalBinding):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["has_limit_signal"]
+    class_class_curie: ClassVar[str] = "pals:has_limit_signal"
+    class_name: ClassVar[str] = "HasLimitSignal"
+    class_model_uri: ClassVar[URIRef] = PALS.HasLimitSignal
+
+    id: Union[str, HasLimitSignalId] = None
+    subject: Union[str, PhysicalComponentId] = None
+    object: Union[str, SignalId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, HasLimitSignalId):
+            self.id = HasLimitSignalId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class ComponentRelation(Edge):
     """
     Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about
     how and where the relationship holds.
@@ -2340,48 +2740,225 @@ class ComponentRelation(Relationship):
     class_model_uri: ClassVar[URIRef] = PALS.ComponentRelation
 
     id: Union[str, ComponentRelationId] = None
+    predicate: Union[str, URIorCURIE] = None
+    context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
-    predicate: Union[str, "ComponentRelationPredicateEnum"] = None
     object: Union[str, ComponentId] = None
-    context: Optional[Union[str, "RelationContextEnum"]] = None
-    beamline_context: Optional[Union[str, BeamLineId]] = None
-    reference_frame: Optional[Union[str, "ReferenceFrameEnum"]] = None
-    distance_value: Optional[float] = None
-    distance_unit: Optional[Union[str, "UnitEnum"]] = None
-    axis: Optional[Union[str, "AxisEnum"]] = None
     component_direction: Optional[Union[str, "DirectionEnum"]] = None
-    tolerance_value: Optional[float] = None
-    tolerance_unit: Optional[Union[str, "UnitEnum"]] = None
+    reference_frame: Optional[Union[str, "ReferenceFrameEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, ComponentRelationId):
-            self.id = ComponentRelationId(self.id)
+        if self._is_empty(self.context):
+            self.MissingRequiredField("context")
+        if not isinstance(self.context, RelationContextEnum):
+            self.context = RelationContextEnum(self.context)
 
         if self._is_empty(self.subject):
             self.MissingRequiredField("subject")
         if not isinstance(self.subject, ComponentId):
             self.subject = ComponentId(self.subject)
 
-        if self._is_empty(self.predicate):
-            self.MissingRequiredField("predicate")
-        if not isinstance(self.predicate, ComponentRelationPredicateEnum):
-            self.predicate = ComponentRelationPredicateEnum(self.predicate)
-
         if self._is_empty(self.object):
             self.MissingRequiredField("object")
         if not isinstance(self.object, ComponentId):
             self.object = ComponentId(self.object)
 
-        if self.context is not None and not isinstance(self.context, RelationContextEnum):
-            self.context = RelationContextEnum(self.context)
-
-        if self.beamline_context is not None and not isinstance(self.beamline_context, BeamLineId):
-            self.beamline_context = BeamLineId(self.beamline_context)
+        if self.component_direction is not None and not isinstance(self.component_direction, DirectionEnum):
+            self.component_direction = DirectionEnum(self.component_direction)
 
         if self.reference_frame is not None and not isinstance(self.reference_frame, ReferenceFrameEnum):
             self.reference_frame = ReferenceFrameEnum(self.reference_frame)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class Precedes(ComponentRelation):
+    """
+    A relationship indicating that the subject component precedes the object component in a specified context, such as
+    along a beamline.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["precedes"]
+    class_class_curie: ClassVar[str] = "pals:precedes"
+    class_name: ClassVar[str] = "Precedes"
+    class_model_uri: ClassVar[URIRef] = PALS.Precedes
+
+    id: Union[str, PrecedesId] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    beamline_context: Union[str, BeamLineId] = None
+    predicate: Union[str, URIorCURIE] = None
+    context: Union[str, "RelationContextEnum"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PrecedesId):
+            self.id = PrecedesId(self.id)
+
+        if self._is_empty(self.beamline_context):
+            self.MissingRequiredField("beamline_context")
+        if not isinstance(self.beamline_context, BeamLineId):
+            self.beamline_context = BeamLineId(self.beamline_context)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        if self._is_empty(self.context):
+            self.MissingRequiredField("context")
+        if not isinstance(self.context, RelationContextEnum):
+            self.context = RelationContextEnum(self.context)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class Contains(ComponentRelation):
+    """
+    A relationship indicating that the subject component contains the object component in a specified context, such as
+    within a BeamLineSection or other organizational grouping.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["contains"]
+    class_class_curie: ClassVar[str] = "pals:contains"
+    class_name: ClassVar[str] = "Contains"
+    class_model_uri: ClassVar[URIRef] = PALS.Contains
+
+    id: Union[str, ContainsId] = None
+    context: Union[str, "RelationContextEnum"] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ContainsId):
+            self.id = ContainsId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class Controls(ComponentRelation):
+    """
+    A relationship indicating that the subject component controls the object component in a specified context, such as
+    a power supply controlling a magnet.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["controls"]
+    class_class_curie: ClassVar[str] = "pals:controls"
+    class_name: ClassVar[str] = "Controls"
+    class_model_uri: ClassVar[URIRef] = PALS.Controls
+
+    id: Union[str, ControlsId] = None
+    context: Union[str, "RelationContextEnum"] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ControlsId):
+            self.id = ControlsId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class IsPartOf(ComponentRelation):
+    """
+    A relationship indicating that the subject component is part of the object component in a specified context, such
+    as a magnet being part of a BeamLineSection.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["is_part_of"]
+    class_class_curie: ClassVar[str] = "pals:is_part_of"
+    class_name: ClassVar[str] = "IsPartOf"
+    class_model_uri: ClassVar[URIRef] = PALS.IsPartOf
+
+    id: Union[str, IsPartOfId] = None
+    context: Union[str, "RelationContextEnum"] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, IsPartOfId):
+            self.id = IsPartOfId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class AdjacentTo(ComponentRelation):
+    """
+    A relationship indicating that the subject component is adjacent to the object component and not overlapping
+    in a specified context, such as radiation detector and a magnet.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["adjacent_to"]
+    class_class_curie: ClassVar[str] = "pals:adjacent_to"
+    class_name: ClassVar[str] = "AdjacentTo"
+    class_model_uri: ClassVar[URIRef] = PALS.AdjacentTo
+
+    id: Union[str, AdjacentToId] = None
+    context: Union[str, "RelationContextEnum"] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    predicate: Union[str, URIorCURIE] = None
+    distance_value: Optional[float] = None
+    distance_unit: Optional[Union[str, "UnitEnum"]] = None
+    tolerance_value: Optional[float] = None
+    tolerance_unit: Optional[Union[str, "UnitEnum"]] = None
+    coordinates: Optional[Union[dict, "CoordinateSet"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, AdjacentToId):
+            self.id = AdjacentToId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
 
         if self.distance_value is not None and not isinstance(self.distance_value, float):
             self.distance_value = float(self.distance_value)
@@ -2389,17 +2966,279 @@ class ComponentRelation(Relationship):
         if self.distance_unit is not None and not isinstance(self.distance_unit, UnitEnum):
             self.distance_unit = UnitEnum(self.distance_unit)
 
-        if self.axis is not None and not isinstance(self.axis, AxisEnum):
-            self.axis = AxisEnum(self.axis)
+        if self.tolerance_value is not None and not isinstance(self.tolerance_value, float):
+            self.tolerance_value = float(self.tolerance_value)
 
-        if self.component_direction is not None and not isinstance(self.component_direction, DirectionEnum):
-            self.component_direction = DirectionEnum(self.component_direction)
+        if self.tolerance_unit is not None and not isinstance(self.tolerance_unit, UnitEnum):
+            self.tolerance_unit = UnitEnum(self.tolerance_unit)
+
+        if self.coordinates is not None and not isinstance(self.coordinates, CoordinateSet):
+            self.coordinates = CoordinateSet(**as_dict(self.coordinates))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class Overlaps(ComponentRelation):
+    """
+    A relationship indicating that the subject component overlaps the object component in a specified context, such as
+    a magnet and a diagnostic device.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["overlaps"]
+    class_class_curie: ClassVar[str] = "pals:overlaps"
+    class_name: ClassVar[str] = "Overlaps"
+    class_model_uri: ClassVar[URIRef] = PALS.Overlaps
+
+    id: Union[str, OverlapsId] = None
+    context: Union[str, "RelationContextEnum"] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    predicate: Union[str, URIorCURIE] = None
+    coordinates: Optional[Union[dict, "CoordinateSet"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, OverlapsId):
+            self.id = OverlapsId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        if self.coordinates is not None and not isinstance(self.coordinates, CoordinateSet):
+            self.coordinates = CoordinateSet(**as_dict(self.coordinates))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class HasConnectingBranch(ComponentRelation):
+    """
+    A relationship indicating that the subject component has a connecting branch to the object component in a
+    specified context, such as a beamline section having a fork as a connecting branch.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["has_connecting_branch"]
+    class_class_curie: ClassVar[str] = "pals:has_connecting_branch"
+    class_name: ClassVar[str] = "HasConnectingBranch"
+    class_model_uri: ClassVar[URIRef] = PALS.HasConnectingBranch
+
+    id: Union[str, HasConnectingBranchId] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    beamline_context: Union[str, BeamLineId] = None
+    predicate: Union[str, URIorCURIE] = None
+    context: Union[str, "RelationContextEnum"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, HasConnectingBranchId):
+            self.id = HasConnectingBranchId(self.id)
+
+        if self._is_empty(self.beamline_context):
+            self.MissingRequiredField("beamline_context")
+        if not isinstance(self.beamline_context, BeamLineId):
+            self.beamline_context = BeamLineId(self.beamline_context)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        if self._is_empty(self.context):
+            self.MissingRequiredField("context")
+        if not isinstance(self.context, RelationContextEnum):
+            self.context = RelationContextEnum(self.context)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class MountedOn(ComponentRelation):
+    """
+    A relationship indicating that the subject component is mounted on the object component in a specified context,
+    such as a diagnostic device mounted on a magnet.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["mounted_on"]
+    class_class_curie: ClassVar[str] = "pals:mounted_on"
+    class_name: ClassVar[str] = "MountedOn"
+    class_model_uri: ClassVar[URIRef] = PALS.MountedOn
+
+    id: Union[str, MountedOnId] = None
+    context: Union[str, "RelationContextEnum"] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    predicate: Union[str, URIorCURIE] = None
+    coordinates: Optional[Union[dict, "CoordinateSet"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MountedOnId):
+            self.id = MountedOnId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        if self.coordinates is not None and not isinstance(self.coordinates, CoordinateSet):
+            self.coordinates = CoordinateSet(**as_dict(self.coordinates))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class Intersects(ComponentRelation):
+    """
+    A relationship indicating that the subject component intersects the object component in a specified context, such
+    as a beamline and a diagnostic device.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["intersects"]
+    class_class_curie: ClassVar[str] = "pals:intersects"
+    class_name: ClassVar[str] = "Intersects"
+    class_model_uri: ClassVar[URIRef] = PALS.Intersects
+
+    id: Union[str, IntersectsId] = None
+    context: Union[str, "RelationContextEnum"] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    predicate: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, IntersectsId):
+            self.id = IntersectsId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class NearestTo(ComponentRelation):
+    """
+    A relationship indicating that the subject component is nearest to the object component in a specified context,
+    such as a diagnostic device nearest to a magnet.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["nearest_to"]
+    class_class_curie: ClassVar[str] = "pals:nearest_to"
+    class_name: ClassVar[str] = "NearestTo"
+    class_model_uri: ClassVar[URIRef] = PALS.NearestTo
+
+    id: Union[str, NearestToId] = None
+    context: Union[str, "RelationContextEnum"] = None
+    subject: Union[str, ComponentId] = None
+    object: Union[str, ComponentId] = None
+    predicate: Union[str, URIorCURIE] = None
+    distance_value: Optional[float] = None
+    distance_unit: Optional[Union[str, "UnitEnum"]] = None
+    tolerance_value: Optional[float] = None
+    tolerance_unit: Optional[Union[str, "UnitEnum"]] = None
+    coordinates: Optional[Union[dict, "CoordinateSet"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, NearestToId):
+            self.id = NearestToId(self.id)
+
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+        if self.distance_value is not None and not isinstance(self.distance_value, float):
+            self.distance_value = float(self.distance_value)
+
+        if self.distance_unit is not None and not isinstance(self.distance_unit, UnitEnum):
+            self.distance_unit = UnitEnum(self.distance_unit)
 
         if self.tolerance_value is not None and not isinstance(self.tolerance_value, float):
             self.tolerance_value = float(self.tolerance_value)
 
         if self.tolerance_unit is not None and not isinstance(self.tolerance_unit, UnitEnum):
             self.tolerance_unit = UnitEnum(self.tolerance_unit)
+
+        if self.coordinates is not None and not isinstance(self.coordinates, CoordinateSet):
+            self.coordinates = CoordinateSet(**as_dict(self.coordinates))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.predicate):
+            self.MissingRequiredField("predicate")
+        self.predicate = str(self.class_class_curie)
+
+
+@dataclass(repr=False)
+class CoordinateSet(YAMLRoot):
+    """
+    A set of coordinates that define the spatial relationship between two components. This can include Cartesian
+    coordinates, cylindrical coordinates, or other coordinate systems as needed. Useful for defining the spatial
+    relationship where the relationship is not strictly linear or where the components are not aligned along a single
+    axis.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["CoordinateSet"]
+    class_class_curie: ClassVar[str] = "pals:CoordinateSet"
+    class_name: ClassVar[str] = "CoordinateSet"
+    class_model_uri: ClassVar[URIRef] = PALS.CoordinateSet
+
+    coordinate_system: Optional[Union[str, "CoordinateSystemEnum"]] = None
+    x_coord: Optional[float] = None
+    y_coord: Optional[float] = None
+    z_coord: Optional[float] = None
+    r_coord: Optional[float] = None
+    theta_coord: Optional[float] = None
+    phi_coord: Optional[float] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.coordinate_system is not None and not isinstance(self.coordinate_system, CoordinateSystemEnum):
+            self.coordinate_system = CoordinateSystemEnum(self.coordinate_system)
+
+        if self.x_coord is not None and not isinstance(self.x_coord, float):
+            self.x_coord = float(self.x_coord)
+
+        if self.y_coord is not None and not isinstance(self.y_coord, float):
+            self.y_coord = float(self.y_coord)
+
+        if self.z_coord is not None and not isinstance(self.z_coord, float):
+            self.z_coord = float(self.z_coord)
+
+        if self.r_coord is not None and not isinstance(self.r_coord, float):
+            self.r_coord = float(self.r_coord)
+
+        if self.theta_coord is not None and not isinstance(self.theta_coord, float):
+            self.theta_coord = float(self.theta_coord)
+
+        if self.phi_coord is not None and not isinstance(self.phi_coord, float):
+            self.phi_coord = float(self.phi_coord)
 
         super().__post_init__(**kwargs)
 
@@ -2894,95 +3733,23 @@ class DataTypeEnum(EnumDefinitionImpl):
         description="Data types for parameter values.",
     )
 
-class ComponentRelationPredicateEnum(EnumDefinitionImpl):
-
-    precedes = PermissibleValue(
-        text="precedes",
-        description="Subject occurs immediately before object in the sequence/beamline order.",
-        meaning=BFO["0000063"])
-    follows = PermissibleValue(
-        text="follows",
-        description="Subject occurs after object in the sequence/beamline order.",
-        meaning=BFO["0000062"])
-    contains = PermissibleValue(
-        text="contains",
-        description="Subject spatially or mereologically contains object.",
-        meaning=BFO["0000051"])
-    contained_in = PermissibleValue(
-        text="contained_in",
-        description="Subject is spatially or mereologically contained in object.",
-        meaning=BFO["0000050"])
-    connected_to = PermissibleValue(
-        text="connected_to",
-        description="""Subject and object are physically connected. a is connected to b if and only if a and b are discrete structure,  and there exists some connecting structure c, such that c connects a and b""",
-        meaning=RO["0002170"])
-    controls = PermissibleValue(
-        text="controls",
-        description="Subject controls the state or behavior of object.",
-        meaning=SAREF["controls"])
-    is_controlled_by = PermissibleValue(
-        text="is_controlled_by",
-        description="Subject is controlled by object.",
-        meaning=SAREF["isControlledBy"])
-    is_part_of = PermissibleValue(
-        text="is_part_of",
-        description="Subject is a part of object.",
-        meaning=BFO["0000050"])
-    has_part = PermissibleValue(
-        text="has_part",
-        description="Subject has part object.",
-        meaning=BFO["0000051"])
-    adjacent_to = PermissibleValue(
-        text="adjacent_to",
-        description="Subject and object are spatially adjacent, without overlapping.",
-        meaning=RO["0002220"])
-    overlaps = PermissibleValue(
-        text="overlaps",
-        description="Subject and object share at least one part in common.",
-        meaning=RO["0002131"])
-    mounted_on = PermissibleValue(
-        text="mounted_on",
-        description="Subject is mounted on object.",
-        meaning=PALS["mounted_on"])
-    intersects = PermissibleValue(
-        text="intersects",
-        description="Subject intersects with object.",
-        meaning=PALS["intersects"])
-    nearest_to = PermissibleValue(
-        text="nearest_to",
-        description="Subject is nearest to object.",
-        meaning=PALS["nearest_to"])
+class CoordinateSystemEnum(EnumDefinitionImpl):
+    """
+    Coordinate systems for spatial relationships.
+    """
+    Cartesian = PermissibleValue(
+        text="Cartesian",
+        description="Cartesian coordinate system (x, y, z).")
+    Cylindrical = PermissibleValue(
+        text="Cylindrical",
+        description="Cylindrical coordinate system (r, theta, z).")
+    Spherical = PermissibleValue(
+        text="Spherical",
+        description="Spherical coordinate system (r, theta, phi).")
 
     _defn = EnumDefinition(
-        name="ComponentRelationPredicateEnum",
-    )
-
-class SignalBindingPredicateEnum(EnumDefinitionImpl):
-    """
-    Controlled predicates for Component-to-Signal bindings.
-    """
-    has_signal = PermissibleValue(
-        text="has_signal",
-        description="""Generic association between a component and one of its signals. The specific role (setpoint, readback, status, etc.) is carried by the Signal's own signal_role field, not the predicate.""")
-    has_status_signal = PermissibleValue(
-        text="has_status_signal",
-        description="Subject has the given signal as its status indicator.")
-    has_setpoint_signal = PermissibleValue(
-        text="has_setpoint_signal",
-        description="Subject has the given signal as its setpoint.")
-    has_readback_signal = PermissibleValue(
-        text="has_readback_signal",
-        description="Subject has the given signal as its readback.")
-    has_command_signal = PermissibleValue(
-        text="has_command_signal",
-        description="Subject has the given signal as a command trigger.")
-    has_limit_signal = PermissibleValue(
-        text="has_limit_signal",
-        description="Subject has the given signal as a limit/constraint value.")
-
-    _defn = EnumDefinition(
-        name="SignalBindingPredicateEnum",
-        description="Controlled predicates for Component-to-Signal bindings.",
+        name="CoordinateSystemEnum",
+        description="Coordinate systems for spatial relationships.",
     )
 
 class RelationContextEnum(EnumDefinitionImpl):
@@ -3007,17 +3774,6 @@ class ReferenceFrameEnum(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="ReferenceFrameEnum",
-    )
-
-class AxisEnum(EnumDefinitionImpl):
-
-    x = PermissibleValue(text="x")
-    y = PermissibleValue(text="y")
-    z = PermissibleValue(text="z")
-    s = PermissibleValue(text="s")
-
-    _defn = EnumDefinition(
-        name="AxisEnum",
     )
 
 class DirectionEnum(EnumDefinitionImpl):
@@ -3127,7 +3883,7 @@ slots.name = Slot(uri=PALS.name, name="name", curie=PALS.curie('name'),
                    model_uri=PALS.name, domain=None, range=Optional[str])
 
 slots.alias = Slot(uri=PALS.alias, name="alias", curie=PALS.curie('alias'),
-                   model_uri=PALS.alias, domain=None, range=Optional[str])
+                   model_uri=PALS.alias, domain=None, range=Optional[Union[str, list[str]]])
 
 slots.kind = Slot(uri=PALS.kind, name="kind", curie=PALS.curie('kind'),
                    model_uri=PALS.kind, domain=None, range=str)
@@ -3136,7 +3892,7 @@ slots.subject = Slot(uri=RDF.subject, name="subject", curie=RDF.curie('subject')
                    model_uri=PALS.subject, domain=None, range=str)
 
 slots.predicate = Slot(uri=RDF.predicate, name="predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.predicate, domain=None, range=str)
+                   model_uri=PALS.predicate, domain=None, range=Union[str, URIorCURIE])
 
 slots.object = Slot(uri=RDF.object, name="object", curie=RDF.curie('object'),
                    model_uri=PALS.object, domain=None, range=str)
@@ -3152,6 +3908,27 @@ slots.identifiers = Slot(uri=PALS.identifiers, name="identifiers", curie=PALS.cu
 
 slots.length = Slot(uri=PALS.length, name="length", curie=PALS.curie('length'),
                    model_uri=PALS.length, domain=None, range=Optional[float])
+
+slots.context = Slot(uri=PALS.context, name="context", curie=PALS.curie('context'),
+                   model_uri=PALS.context, domain=None, range=Union[str, "RelationContextEnum"])
+
+slots.beamline_context = Slot(uri=PALS.beamline_context, name="beamline_context", curie=PALS.curie('beamline_context'),
+                   model_uri=PALS.beamline_context, domain=None, range=Union[str, BeamLineId])
+
+slots.distance_value = Slot(uri=OM.Distance, name="distance_value", curie=OM.curie('Distance'),
+                   model_uri=PALS.distance_value, domain=None, range=Optional[float])
+
+slots.distance_unit = Slot(uri=PALS.distance_unit, name="distance_unit", curie=PALS.curie('distance_unit'),
+                   model_uri=PALS.distance_unit, domain=None, range=Optional[Union[str, "UnitEnum"]])
+
+slots.tolerance_value = Slot(uri=PALS.tolerance_value, name="tolerance_value", curie=PALS.curie('tolerance_value'),
+                   model_uri=PALS.tolerance_value, domain=None, range=Optional[float])
+
+slots.tolerance_unit = Slot(uri=PALS.tolerance_unit, name="tolerance_unit", curie=PALS.curie('tolerance_unit'),
+                   model_uri=PALS.tolerance_unit, domain=None, range=Optional[Union[str, "UnitEnum"]])
+
+slots.coordinates = Slot(uri=PALS.coordinates, name="coordinates", curie=PALS.curie('coordinates'),
+                   model_uri=PALS.coordinates, domain=None, range=Optional[Union[dict, CoordinateSet]])
 
 slots.pALSAccelerator__version = Slot(uri=PALS.version, name="pALSAccelerator__version", curie=PALS.curie('version'),
                    model_uri=PALS.pALSAccelerator__version, domain=None, range=Optional[str],
@@ -3516,32 +4293,32 @@ slots.additionalMetadata__value = Slot(uri=PALS.value, name="additionalMetadata_
 slots.additionalMetadata__datatype = Slot(uri=PALS.datatype, name="additionalMetadata__datatype", curie=PALS.curie('datatype'),
                    model_uri=PALS.additionalMetadata__datatype, domain=None, range=Optional[Union[str, "DataTypeEnum"]])
 
-slots.componentRelation__context = Slot(uri=PALS.context, name="componentRelation__context", curie=PALS.curie('context'),
-                   model_uri=PALS.componentRelation__context, domain=None, range=Optional[Union[str, "RelationContextEnum"]])
-
-slots.componentRelation__beamline_context = Slot(uri=PALS.beamline_context, name="componentRelation__beamline_context", curie=PALS.curie('beamline_context'),
-                   model_uri=PALS.componentRelation__beamline_context, domain=None, range=Optional[Union[str, BeamLineId]])
+slots.componentRelation__component_direction = Slot(uri=PALS.component_direction, name="componentRelation__component_direction", curie=PALS.curie('component_direction'),
+                   model_uri=PALS.componentRelation__component_direction, domain=None, range=Optional[Union[str, "DirectionEnum"]])
 
 slots.componentRelation__reference_frame = Slot(uri=PALS.reference_frame, name="componentRelation__reference_frame", curie=PALS.curie('reference_frame'),
                    model_uri=PALS.componentRelation__reference_frame, domain=None, range=Optional[Union[str, "ReferenceFrameEnum"]])
 
-slots.componentRelation__distance_value = Slot(uri=PALS.distance_value, name="componentRelation__distance_value", curie=PALS.curie('distance_value'),
-                   model_uri=PALS.componentRelation__distance_value, domain=None, range=Optional[float])
+slots.coordinateSet__coordinate_system = Slot(uri=PALS.coordinate_system, name="coordinateSet__coordinate_system", curie=PALS.curie('coordinate_system'),
+                   model_uri=PALS.coordinateSet__coordinate_system, domain=None, range=Optional[Union[str, "CoordinateSystemEnum"]])
 
-slots.componentRelation__distance_unit = Slot(uri=PALS.distance_unit, name="componentRelation__distance_unit", curie=PALS.curie('distance_unit'),
-                   model_uri=PALS.componentRelation__distance_unit, domain=None, range=Optional[Union[str, "UnitEnum"]])
+slots.coordinateSet__x_coord = Slot(uri=PALS.x_coord, name="coordinateSet__x_coord", curie=PALS.curie('x_coord'),
+                   model_uri=PALS.coordinateSet__x_coord, domain=None, range=Optional[float])
 
-slots.componentRelation__axis = Slot(uri=PALS.axis, name="componentRelation__axis", curie=PALS.curie('axis'),
-                   model_uri=PALS.componentRelation__axis, domain=None, range=Optional[Union[str, "AxisEnum"]])
+slots.coordinateSet__y_coord = Slot(uri=PALS.y_coord, name="coordinateSet__y_coord", curie=PALS.curie('y_coord'),
+                   model_uri=PALS.coordinateSet__y_coord, domain=None, range=Optional[float])
 
-slots.componentRelation__component_direction = Slot(uri=PALS.component_direction, name="componentRelation__component_direction", curie=PALS.curie('component_direction'),
-                   model_uri=PALS.componentRelation__component_direction, domain=None, range=Optional[Union[str, "DirectionEnum"]])
+slots.coordinateSet__z_coord = Slot(uri=PALS.z_coord, name="coordinateSet__z_coord", curie=PALS.curie('z_coord'),
+                   model_uri=PALS.coordinateSet__z_coord, domain=None, range=Optional[float])
 
-slots.componentRelation__tolerance_value = Slot(uri=PALS.tolerance_value, name="componentRelation__tolerance_value", curie=PALS.curie('tolerance_value'),
-                   model_uri=PALS.componentRelation__tolerance_value, domain=None, range=Optional[float])
+slots.coordinateSet__r_coord = Slot(uri=PALS.r_coord, name="coordinateSet__r_coord", curie=PALS.curie('r_coord'),
+                   model_uri=PALS.coordinateSet__r_coord, domain=None, range=Optional[float])
 
-slots.componentRelation__tolerance_unit = Slot(uri=PALS.tolerance_unit, name="componentRelation__tolerance_unit", curie=PALS.curie('tolerance_unit'),
-                   model_uri=PALS.componentRelation__tolerance_unit, domain=None, range=Optional[Union[str, "UnitEnum"]])
+slots.coordinateSet__theta_coord = Slot(uri=PALS.theta_coord, name="coordinateSet__theta_coord", curie=PALS.curie('theta_coord'),
+                   model_uri=PALS.coordinateSet__theta_coord, domain=None, range=Optional[float])
+
+slots.coordinateSet__phi_coord = Slot(uri=PALS.phi_coord, name="coordinateSet__phi_coord", curie=PALS.curie('phi_coord'),
+                   model_uri=PALS.coordinateSet__phi_coord, domain=None, range=Optional[float])
 
 slots.BeamLine_length = Slot(uri=PALS.length, name="BeamLine_length", curie=PALS.curie('length'),
                    model_uri=PALS.BeamLine_length, domain=BeamLine, range=Optional[float])
@@ -3549,17 +4326,62 @@ slots.BeamLine_length = Slot(uri=PALS.length, name="BeamLine_length", curie=PALS
 slots.SignalBinding_subject = Slot(uri=RDF.subject, name="SignalBinding_subject", curie=RDF.curie('subject'),
                    model_uri=PALS.SignalBinding_subject, domain=SignalBinding, range=Union[str, PhysicalComponentId])
 
-slots.SignalBinding_predicate = Slot(uri=RDF.predicate, name="SignalBinding_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.SignalBinding_predicate, domain=SignalBinding, range=Union[str, "SignalBindingPredicateEnum"])
-
 slots.SignalBinding_object = Slot(uri=RDF.object, name="SignalBinding_object", curie=RDF.curie('object'),
                    model_uri=PALS.SignalBinding_object, domain=SignalBinding, range=Union[str, SignalId])
+
+slots.HasSignal_predicate = Slot(uri=RDF.predicate, name="HasSignal_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.HasSignal_predicate, domain=HasSignal, range=Union[str, URIorCURIE])
+
+slots.HasSetpointSignal_predicate = Slot(uri=RDF.predicate, name="HasSetpointSignal_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.HasSetpointSignal_predicate, domain=HasSetpointSignal, range=Union[str, URIorCURIE])
+
+slots.HasReadbackSignal_predicate = Slot(uri=RDF.predicate, name="HasReadbackSignal_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.HasReadbackSignal_predicate, domain=HasReadbackSignal, range=Union[str, URIorCURIE])
+
+slots.HasCommandSignal_predicate = Slot(uri=RDF.predicate, name="HasCommandSignal_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.HasCommandSignal_predicate, domain=HasCommandSignal, range=Union[str, URIorCURIE])
+
+slots.HasLimitSignal_predicate = Slot(uri=RDF.predicate, name="HasLimitSignal_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.HasLimitSignal_predicate, domain=HasLimitSignal, range=Union[str, URIorCURIE])
 
 slots.ComponentRelation_subject = Slot(uri=RDF.subject, name="ComponentRelation_subject", curie=RDF.curie('subject'),
                    model_uri=PALS.ComponentRelation_subject, domain=ComponentRelation, range=Union[str, ComponentId])
 
-slots.ComponentRelation_predicate = Slot(uri=RDF.predicate, name="ComponentRelation_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.ComponentRelation_predicate, domain=ComponentRelation, range=Union[str, "ComponentRelationPredicateEnum"])
-
 slots.ComponentRelation_object = Slot(uri=RDF.object, name="ComponentRelation_object", curie=RDF.curie('object'),
                    model_uri=PALS.ComponentRelation_object, domain=ComponentRelation, range=Union[str, ComponentId])
+
+slots.Precedes_predicate = Slot(uri=RDF.predicate, name="Precedes_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.Precedes_predicate, domain=Precedes, range=Union[str, URIorCURIE])
+
+slots.Precedes_context = Slot(uri=PALS.context, name="Precedes_context", curie=PALS.curie('context'),
+                   model_uri=PALS.Precedes_context, domain=Precedes, range=Union[str, "RelationContextEnum"])
+
+slots.Contains_predicate = Slot(uri=RDF.predicate, name="Contains_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.Contains_predicate, domain=Contains, range=Union[str, URIorCURIE])
+
+slots.Controls_predicate = Slot(uri=RDF.predicate, name="Controls_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.Controls_predicate, domain=Controls, range=Union[str, URIorCURIE])
+
+slots.IsPartOf_predicate = Slot(uri=RDF.predicate, name="IsPartOf_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.IsPartOf_predicate, domain=IsPartOf, range=Union[str, URIorCURIE])
+
+slots.AdjacentTo_predicate = Slot(uri=RDF.predicate, name="AdjacentTo_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.AdjacentTo_predicate, domain=AdjacentTo, range=Union[str, URIorCURIE])
+
+slots.Overlaps_predicate = Slot(uri=RDF.predicate, name="Overlaps_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.Overlaps_predicate, domain=Overlaps, range=Union[str, URIorCURIE])
+
+slots.HasConnectingBranch_predicate = Slot(uri=RDF.predicate, name="HasConnectingBranch_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.HasConnectingBranch_predicate, domain=HasConnectingBranch, range=Union[str, URIorCURIE])
+
+slots.HasConnectingBranch_context = Slot(uri=PALS.context, name="HasConnectingBranch_context", curie=PALS.curie('context'),
+                   model_uri=PALS.HasConnectingBranch_context, domain=HasConnectingBranch, range=Union[str, "RelationContextEnum"])
+
+slots.MountedOn_predicate = Slot(uri=RDF.predicate, name="MountedOn_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.MountedOn_predicate, domain=MountedOn, range=Union[str, URIorCURIE])
+
+slots.Intersects_predicate = Slot(uri=RDF.predicate, name="Intersects_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.Intersects_predicate, domain=Intersects, range=Union[str, URIorCURIE])
+
+slots.NearestTo_predicate = Slot(uri=RDF.predicate, name="NearestTo_predicate", curie=RDF.curie('predicate'),
+                   model_uri=PALS.NearestTo_predicate, domain=NearestTo, range=Union[str, URIorCURIE])

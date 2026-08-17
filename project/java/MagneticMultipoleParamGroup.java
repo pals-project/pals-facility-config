@@ -1,8 +1,12 @@
 package None;
 
-/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
+
+
+
+
+
 
 /**
   Mixin for magnetic multipole parameters,  which can be used to describe the magnetic field components of an accelerator element. This mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml mag_components: - order: 7
@@ -17,7 +21,7 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class MagneticMultipoleParamGroup  {
+public class MagneticMultipoleParamGroup extends ParamGroup {
 
   private List<MultipoleParameterGroup> magComponents;
 

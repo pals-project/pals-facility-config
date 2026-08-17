@@ -33,6 +33,10 @@
       "prefix_reference": "http://purl.obolibrary.org/obo/BFO_"
     },
     {
+      "prefix_prefix": "om",
+      "prefix_reference": "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+    },
+    {
       "prefix_prefix": "saref",
       "prefix_reference": "https://saref.etsi.org/core/v4.1.1/"
     },
@@ -42,7 +46,7 @@
     },
     {
       "prefix_prefix": "inst",
-      "prefix_reference": "https://example.org/narad-instance/"
+      "prefix_reference": "https://example.org/pals-instance/"
     },
     {
       "prefix_prefix": "rdf",
@@ -939,111 +943,22 @@
       ]
     },
     {
-      "name": "ComponentRelationPredicateEnum",
-      "definition_uri": "https://pals-project.readthedocs.io/ComponentRelationPredicateEnum",
+      "name": "CoordinateSystemEnum",
+      "definition_uri": "https://pals-project.readthedocs.io/CoordinateSystemEnum",
+      "description": "Coordinate systems for spatial relationships.",
       "from_schema": "https://w3id.org/accelerator-core",
       "permissible_values": [
         {
-          "text": "precedes",
-          "description": "Subject occurs immediately before object in the sequence/beamline order.",
-          "meaning": "BFO:0000063"
+          "text": "Cartesian",
+          "description": "Cartesian coordinate system (x, y, z)."
         },
         {
-          "text": "follows",
-          "description": "Subject occurs after object in the sequence/beamline order.",
-          "meaning": "BFO:0000062"
+          "text": "Cylindrical",
+          "description": "Cylindrical coordinate system (r, theta, z)."
         },
         {
-          "text": "contains",
-          "description": "Subject spatially or mereologically contains object.",
-          "meaning": "BFO:0000051"
-        },
-        {
-          "text": "contained_in",
-          "description": "Subject is spatially or mereologically contained in object.",
-          "meaning": "BFO:0000050"
-        },
-        {
-          "text": "connected_to",
-          "description": "Subject and object are physically connected. a is connected to b if and only if a and b are discrete structure,  and there exists some connecting structure c, such that c connects a and b",
-          "meaning": "RO:0002170"
-        },
-        {
-          "text": "controls",
-          "description": "Subject controls the state or behavior of object.",
-          "meaning": "saref:controls"
-        },
-        {
-          "text": "is_controlled_by",
-          "description": "Subject is controlled by object.",
-          "meaning": "saref:isControlledBy"
-        },
-        {
-          "text": "is_part_of",
-          "description": "Subject is a part of object.",
-          "meaning": "BFO:0000050"
-        },
-        {
-          "text": "has_part",
-          "description": "Subject has part object.",
-          "meaning": "BFO:0000051"
-        },
-        {
-          "text": "adjacent_to",
-          "description": "Subject and object are spatially adjacent, without overlapping.",
-          "meaning": "RO:0002220"
-        },
-        {
-          "text": "overlaps",
-          "description": "Subject and object share at least one part in common.",
-          "meaning": "RO:0002131"
-        },
-        {
-          "text": "mounted_on",
-          "description": "Subject is mounted on object.",
-          "meaning": "pals:mounted_on"
-        },
-        {
-          "text": "intersects",
-          "description": "Subject intersects with object.",
-          "meaning": "pals:intersects"
-        },
-        {
-          "text": "nearest_to",
-          "description": "Subject is nearest to object.",
-          "meaning": "pals:nearest_to"
-        }
-      ]
-    },
-    {
-      "name": "SignalBindingPredicateEnum",
-      "definition_uri": "https://pals-project.readthedocs.io/SignalBindingPredicateEnum",
-      "description": "Controlled predicates for Component-to-Signal bindings.",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "permissible_values": [
-        {
-          "text": "has_signal",
-          "description": "Generic association between a component and one of its signals. The specific role (setpoint, readback, status, etc.) is carried by the Signal's own signal_role field, not the predicate."
-        },
-        {
-          "text": "has_status_signal",
-          "description": "Subject has the given signal as its status indicator."
-        },
-        {
-          "text": "has_setpoint_signal",
-          "description": "Subject has the given signal as its setpoint."
-        },
-        {
-          "text": "has_readback_signal",
-          "description": "Subject has the given signal as its readback."
-        },
-        {
-          "text": "has_command_signal",
-          "description": "Subject has the given signal as a command trigger."
-        },
-        {
-          "text": "has_limit_signal",
-          "description": "Subject has the given signal as a limit/constraint value."
+          "text": "Spherical",
+          "description": "Spherical coordinate system (r, theta, phi)."
         }
       ]
     },
@@ -1088,25 +1003,6 @@
         },
         {
           "text": "tunnel_stationing"
-        }
-      ]
-    },
-    {
-      "name": "AxisEnum",
-      "definition_uri": "https://pals-project.readthedocs.io/AxisEnum",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "permissible_values": [
-        {
-          "text": "x"
-        },
-        {
-          "text": "y"
-        },
-        {
-          "text": "z"
-        },
-        {
-          "text": "s"
         }
       ]
     },
@@ -1233,12 +1129,12 @@
       ],
       "slot_uri": "https://pals-project.readthedocs.io/id",
       "identifier": true,
-      "owner": "Relationship",
+      "owner": "Edge",
       "domain_of": [
+        "Node",
         "Affiliation",
-        "Component",
-        "Signal",
-        "Relationship"
+        "ParamGroup",
+        "Edge"
       ],
       "range": "string",
       "required": true,
@@ -1267,12 +1163,13 @@
         "https://pals-project.readthedocs.io/alias"
       ],
       "slot_uri": "https://pals-project.readthedocs.io/alias",
-      "owner": "Signal",
+      "owner": "MetaParamGroup",
       "domain_of": [
-        "MetaParamGroup",
-        "Signal"
+        "Node",
+        "MetaParamGroup"
       ],
       "range": "string",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1285,11 +1182,10 @@
       ],
       "slot_uri": "https://pals-project.readthedocs.io/kind",
       "designates_type": true,
-      "owner": "Signal",
+      "owner": "PALSAccelerator",
       "domain_of": [
-        "PALSAccelerator",
-        "Component",
-        "Signal"
+        "Node",
+        "PALSAccelerator"
       ],
       "range": "string",
       "required": true,
@@ -1303,16 +1199,10 @@
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
       ],
       "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
-      "owner": "Relationship",
+      "owner": "Edge",
       "domain_of": [
-        "Relationship"
+        "Edge"
       ],
-      "relational_role": {
-        "text": "SUBJECT",
-        "description": "a slot with this role connects a relationship to its subject/source node",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
-        "@type": "PermissibleValue"
-      },
       "range": "string",
       "required": true,
       "@type": "SlotDefinition"
@@ -1325,17 +1215,12 @@
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
       ],
       "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
-      "owner": "Relationship",
+      "designates_type": true,
+      "owner": "Edge",
       "domain_of": [
-        "Relationship"
+        "Edge"
       ],
-      "relational_role": {
-        "text": "PREDICATE",
-        "description": "a slot with this role connects a relationship to its predicate/property",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
-        "@type": "PermissibleValue"
-      },
-      "range": "string",
+      "range": "uriorcurie",
       "required": true,
       "@type": "SlotDefinition"
     },
@@ -1347,16 +1232,10 @@
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#object"
       ],
       "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
-      "owner": "Relationship",
+      "owner": "Edge",
       "domain_of": [
-        "Relationship"
+        "Edge"
       ],
-      "relational_role": {
-        "text": "OBJECT",
-        "description": "a slot with this role connects a relationship to its object/target node",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
-        "@type": "PermissibleValue"
-      },
       "range": "string",
       "required": true,
       "@type": "SlotDefinition"
@@ -1423,6 +1302,113 @@
         "BeamLine"
       ],
       "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "context",
+      "definition_uri": "https://pals-project.readthedocs.io/context",
+      "description": "The frame of reference / domain in which this relationship is asserted to hold.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/context",
+      "owner": "ComponentRelation",
+      "domain_of": [
+        "ComponentRelation"
+      ],
+      "range": "RelationContextEnum",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "beamline_context",
+      "definition_uri": "https://pals-project.readthedocs.io/beamline_context",
+      "description": "The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order). Only an edge-property slot for edges that are defined with respect to a specific BeamLine.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/beamline_context",
+      "owner": "HasConnectingBranch",
+      "domain_of": [
+        "Precedes",
+        "HasConnectingBranch"
+      ],
+      "range": "BeamLine",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "distance_value",
+      "definition_uri": "https://pals-project.readthedocs.io/distance_value",
+      "description": "Distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/Distance"
+      ],
+      "slot_uri": "http://www.ontology-of-units-of-measure.org/resource/om-2/Distance",
+      "owner": "NearestTo",
+      "domain_of": [
+        "AdjacentTo",
+        "NearestTo"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "distance_unit",
+      "definition_uri": "https://pals-project.readthedocs.io/distance_unit",
+      "description": "Unit of the distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/distance_unit",
+      "owner": "NearestTo",
+      "domain_of": [
+        "AdjacentTo",
+        "NearestTo"
+      ],
+      "range": "UnitEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "tolerance_value",
+      "definition_uri": "https://pals-project.readthedocs.io/tolerance_value",
+      "description": "Tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/tolerance_value",
+      "owner": "NearestTo",
+      "domain_of": [
+        "AdjacentTo",
+        "NearestTo"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "tolerance_unit",
+      "definition_uri": "https://pals-project.readthedocs.io/tolerance_unit",
+      "description": "Unit of the tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/tolerance_unit",
+      "owner": "NearestTo",
+      "domain_of": [
+        "AdjacentTo",
+        "NearestTo"
+      ],
+      "range": "UnitEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinates",
+      "definition_uri": "https://pals-project.readthedocs.io/coordinates",
+      "description": "A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/coordinates",
+      "owner": "NearestTo",
+      "domain_of": [
+        "AdjacentTo",
+        "Overlaps",
+        "MountedOn",
+        "NearestTo"
+      ],
+      "range": "CoordinateSet",
+      "recommended": true,
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1631,7 +1617,6 @@
       ],
       "range": "MetaParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1678,7 +1663,6 @@
       ],
       "range": "FloorParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1819,7 +1803,6 @@
       ],
       "range": "BodyShiftParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1960,7 +1943,6 @@
       ],
       "range": "LongitudinalPlacementParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1991,7 +1973,6 @@
       ],
       "range": "ReferenceParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2079,7 +2060,6 @@
       ],
       "range": "SolenoidParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2126,7 +2106,6 @@
       ],
       "range": "TwissParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2341,7 +2320,6 @@
       ],
       "range": "RFParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2516,7 +2494,6 @@
       ],
       "range": "ElectricMultipoleParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2547,7 +2524,6 @@
       ],
       "range": "MagneticMultipoleParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2578,7 +2554,6 @@
       ],
       "range": "BendParamGroup",
       "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3403,80 +3378,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "componentRelation__context",
-      "description": "The frame of reference / domain in which this relationship is asserted to hold.",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "slot_uri": "https://pals-project.readthedocs.io/context",
-      "alias": "context",
-      "owner": "ComponentRelation",
-      "domain_of": [
-        "ComponentRelation"
-      ],
-      "range": "RelationContextEnum",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "componentRelation__beamline_context",
-      "description": "The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order).",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "slot_uri": "https://pals-project.readthedocs.io/beamline_context",
-      "alias": "beamline_context",
-      "owner": "ComponentRelation",
-      "domain_of": [
-        "ComponentRelation"
-      ],
-      "range": "BeamLine",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "componentRelation__reference_frame",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "slot_uri": "https://pals-project.readthedocs.io/reference_frame",
-      "alias": "reference_frame",
-      "owner": "ComponentRelation",
-      "domain_of": [
-        "ComponentRelation"
-      ],
-      "range": "ReferenceFrameEnum",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "componentRelation__distance_value",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "slot_uri": "https://pals-project.readthedocs.io/distance_value",
-      "alias": "distance_value",
-      "owner": "ComponentRelation",
-      "domain_of": [
-        "ComponentRelation"
-      ],
-      "range": "float",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "componentRelation__distance_unit",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "slot_uri": "https://pals-project.readthedocs.io/distance_unit",
-      "alias": "distance_unit",
-      "owner": "ComponentRelation",
-      "domain_of": [
-        "ComponentRelation"
-      ],
-      "range": "UnitEnum",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "componentRelation__axis",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "slot_uri": "https://pals-project.readthedocs.io/axis",
-      "alias": "axis",
-      "owner": "ComponentRelation",
-      "domain_of": [
-        "ComponentRelation"
-      ],
-      "range": "AxisEnum",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "componentRelation__component_direction",
       "from_schema": "https://w3id.org/accelerator-core",
       "slot_uri": "https://pals-project.readthedocs.io/component_direction",
@@ -3489,27 +3390,107 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "componentRelation__tolerance_value",
+      "name": "componentRelation__reference_frame",
       "from_schema": "https://w3id.org/accelerator-core",
-      "slot_uri": "https://pals-project.readthedocs.io/tolerance_value",
-      "alias": "tolerance_value",
+      "slot_uri": "https://pals-project.readthedocs.io/reference_frame",
+      "alias": "reference_frame",
       "owner": "ComponentRelation",
       "domain_of": [
         "ComponentRelation"
+      ],
+      "range": "ReferenceFrameEnum",
+      "recommended": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinateSet__coordinate_system",
+      "description": "The coordinate system used for the coordinates (e.g., Cartesian, Cylindrical).",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/coordinate_system",
+      "alias": "coordinate_system",
+      "owner": "CoordinateSet",
+      "domain_of": [
+        "CoordinateSet"
+      ],
+      "range": "CoordinateSystemEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinateSet__x_coord",
+      "description": "The x-coordinate in the specified coordinate system.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/x_coord",
+      "alias": "x_coord",
+      "owner": "CoordinateSet",
+      "domain_of": [
+        "CoordinateSet"
       ],
       "range": "float",
       "@type": "SlotDefinition"
     },
     {
-      "name": "componentRelation__tolerance_unit",
+      "name": "coordinateSet__y_coord",
+      "description": "The y-coordinate in the specified coordinate system.",
       "from_schema": "https://w3id.org/accelerator-core",
-      "slot_uri": "https://pals-project.readthedocs.io/tolerance_unit",
-      "alias": "tolerance_unit",
-      "owner": "ComponentRelation",
+      "slot_uri": "https://pals-project.readthedocs.io/y_coord",
+      "alias": "y_coord",
+      "owner": "CoordinateSet",
       "domain_of": [
-        "ComponentRelation"
+        "CoordinateSet"
       ],
-      "range": "UnitEnum",
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinateSet__z_coord",
+      "description": "The z-coordinate in the specified coordinate system.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/z_coord",
+      "alias": "z_coord",
+      "owner": "CoordinateSet",
+      "domain_of": [
+        "CoordinateSet"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinateSet__r_coord",
+      "description": "The radial distance in cylindrical coordinates.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/r_coord",
+      "alias": "r_coord",
+      "owner": "CoordinateSet",
+      "domain_of": [
+        "CoordinateSet"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinateSet__theta_coord",
+      "description": "The angular coordinate in cylindrical coordinates (in radians).",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/theta_coord",
+      "alias": "theta_coord",
+      "owner": "CoordinateSet",
+      "domain_of": [
+        "CoordinateSet"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinateSet__phi_coord",
+      "description": "The azimuthal angle in spherical coordinates (in radians).",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slot_uri": "https://pals-project.readthedocs.io/phi_coord",
+      "alias": "phi_coord",
+      "owner": "CoordinateSet",
+      "domain_of": [
+        "CoordinateSet"
+      ],
+      "range": "float",
       "@type": "SlotDefinition"
     },
     {
@@ -3550,40 +3531,7 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "subject",
-      "relational_role": {
-        "text": "SUBJECT",
-        "description": "a slot with this role connects a relationship to its subject/source node",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
-        "@type": "PermissibleValue"
-      },
       "range": "PhysicalComponent",
-      "required": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "SignalBinding_predicate",
-      "definition_uri": "https://pals-project.readthedocs.io/predicate",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "mappings": [
-        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
-      ],
-      "is_a": "predicate",
-      "domain": "SignalBinding",
-      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
-      "alias": "predicate",
-      "owner": "SignalBinding",
-      "domain_of": [
-        "SignalBinding"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "predicate",
-      "relational_role": {
-        "text": "PREDICATE",
-        "description": "a slot with this role connects a relationship to its predicate/property",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
-        "@type": "PermissibleValue"
-      },
-      "range": "SignalBindingPredicateEnum",
       "required": true,
       "@type": "SlotDefinition"
     },
@@ -3604,14 +3552,128 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "object",
-      "relational_role": {
-        "text": "OBJECT",
-        "description": "a slot with this role connects a relationship to its object/target node",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
-        "@type": "PermissibleValue"
-      },
       "range": "Signal",
       "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "HasSignal_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "HasSignal",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "HasSignal",
+      "domain_of": [
+        "HasSignal"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:has_signal",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "HasSetpointSignal_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "HasSetpointSignal",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "HasSetpointSignal",
+      "domain_of": [
+        "HasSetpointSignal"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:has_setpoint_signal",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "HasReadbackSignal_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "HasReadbackSignal",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "HasReadbackSignal",
+      "domain_of": [
+        "HasReadbackSignal"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:has_readback_signal",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "HasCommandSignal_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "HasCommandSignal",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "HasCommandSignal",
+      "domain_of": [
+        "HasCommandSignal"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:has_command_signal",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "HasLimitSignal_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "HasLimitSignal",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "HasLimitSignal",
+      "domain_of": [
+        "HasLimitSignal"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:has_limit_signal",
       "@type": "SlotDefinition"
     },
     {
@@ -3631,40 +3693,7 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "subject",
-      "relational_role": {
-        "text": "SUBJECT",
-        "description": "a slot with this role connects a relationship to its subject/source node",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
-        "@type": "PermissibleValue"
-      },
       "range": "Component",
-      "required": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "ComponentRelation_predicate",
-      "definition_uri": "https://pals-project.readthedocs.io/predicate",
-      "from_schema": "https://w3id.org/accelerator-core",
-      "mappings": [
-        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
-      ],
-      "is_a": "predicate",
-      "domain": "ComponentRelation",
-      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
-      "alias": "predicate",
-      "owner": "ComponentRelation",
-      "domain_of": [
-        "ComponentRelation"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "predicate",
-      "relational_role": {
-        "text": "PREDICATE",
-        "description": "a slot with this role connects a relationship to its predicate/property",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
-        "@type": "PermissibleValue"
-      },
-      "range": "ComponentRelationPredicateEnum",
       "required": true,
       "@type": "SlotDefinition"
     },
@@ -3685,18 +3714,307 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "object",
-      "relational_role": {
-        "text": "OBJECT",
-        "description": "a slot with this role connects a relationship to its object/target node",
-        "meaning": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
-        "@type": "PermissibleValue"
-      },
       "range": "Component",
       "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Precedes_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "Precedes",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "Precedes",
+      "domain_of": [
+        "Precedes"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:precedes",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Precedes_context",
+      "definition_uri": "https://pals-project.readthedocs.io/context",
+      "description": "The frame of reference / domain in which this relationship is asserted to hold. For pals:precedes, this is the Beamline context = beamline_context.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "is_a": "context",
+      "domain": "Precedes",
+      "slot_uri": "https://pals-project.readthedocs.io/context",
+      "alias": "context",
+      "owner": "Precedes",
+      "domain_of": [
+        "Precedes"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "context",
+      "range": "RelationContextEnum",
+      "required": true,
+      "equals_expression": "beamline_context",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Contains_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "Contains",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "Contains",
+      "domain_of": [
+        "Contains"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:contains",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Controls_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "Controls",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "Controls",
+      "domain_of": [
+        "Controls"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:controls",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "IsPartOf_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "IsPartOf",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "IsPartOf",
+      "domain_of": [
+        "IsPartOf"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:is_part_of",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "AdjacentTo_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "AdjacentTo",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "AdjacentTo",
+      "domain_of": [
+        "AdjacentTo"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:adjacent_to",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Overlaps_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "Overlaps",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "Overlaps",
+      "domain_of": [
+        "Overlaps"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:overlaps",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "HasConnectingBranch_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "HasConnectingBranch",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "HasConnectingBranch",
+      "domain_of": [
+        "HasConnectingBranch"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:has_connecting_branch",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "HasConnectingBranch_context",
+      "definition_uri": "https://pals-project.readthedocs.io/context",
+      "description": "The frame of reference / domain in which this relationship is asserted to hold. For pals:has_connecting_branch, this is the Beamline context = beamline_context.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "is_a": "context",
+      "domain": "HasConnectingBranch",
+      "slot_uri": "https://pals-project.readthedocs.io/context",
+      "alias": "context",
+      "owner": "HasConnectingBranch",
+      "domain_of": [
+        "HasConnectingBranch"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "context",
+      "range": "RelationContextEnum",
+      "required": true,
+      "equals_expression": "beamline_context",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "MountedOn_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "MountedOn",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "MountedOn",
+      "domain_of": [
+        "MountedOn"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:mounted_on",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Intersects_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "Intersects",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "Intersects",
+      "domain_of": [
+        "Intersects"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:intersects",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "NearestTo_predicate",
+      "definition_uri": "https://pals-project.readthedocs.io/predicate",
+      "description": "The predicate of the relationship, which can be used to identify the relationship across different source systems.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "is_a": "predicate",
+      "domain": "NearestTo",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "designates_type": true,
+      "alias": "predicate",
+      "owner": "NearestTo",
+      "domain_of": [
+        "NearestTo"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "predicate",
+      "range": "uriorcurie",
+      "required": true,
+      "equals_expression": "pals:nearest_to",
       "@type": "SlotDefinition"
     }
   ],
   "classes": [
+    {
+      "name": "Node",
+      "definition_uri": "https://pals-project.readthedocs.io/Node",
+      "description": "Abstract base class for all node entities in the accelerator core ontology. This differentiates nodes from edges (relationships) in the ontology. This class is not intended to be instantiated directly, but serves as a common ancestor for all other classes. Allows for the use of kind: as a discriminator for the type of node in the ontology.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "abstract": true,
+      "slots": [
+        "id",
+        "kind",
+        "alias"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/Node",
+      "@type": "ClassDefinition"
+    },
     {
       "name": "PALSAccelerator",
       "definition_uri": "https://pals-project.readthedocs.io/PALSAccelerator",
@@ -3879,6 +4197,19 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "ParamGroup",
+      "definition_uri": "https://pals-project.readthedocs.io/ParamGroup",
+      "description": "Abstract base for inlined PALS parameter-group objects, giving each an identifier so it resolves to a stable node/IRI rather than a blank node when exported to RDF.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "abstract": true,
+      "slots": [
+        "id"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/ParamGroup",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "HasMetaP",
       "definition_uri": "https://pals-project.readthedocs.io/HasMetaP",
       "from_schema": "https://w3id.org/accelerator-core",
@@ -3907,7 +4238,9 @@
       "broad_mappings": [
         "pals:MetaP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "description",
         "alias",
         "metaParamGroup__label",
@@ -3963,7 +4296,9 @@
       "broad_mappings": [
         "pals:FloorP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "floorParamGroup__x",
         "floorParamGroup__y",
         "floorParamGroup__z",
@@ -4078,7 +4413,9 @@
       "broad_mappings": [
         "pals:BodyShiftP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "bodyShiftParamGroup__x_offset",
         "bodyShiftParamGroup__y_offset",
         "bodyShiftParamGroup__z_offset",
@@ -4188,9 +4525,11 @@
     {
       "name": "LongitudinalPlacementParamGroup",
       "definition_uri": "https://pals-project.readthedocs.io/LongitudinalPlacementParamGroup",
-      "description": "Mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis. \nCorresponds to PALS's ungrouped element parameters `length` and `s_position`.\nOne (or both) `length` or `s_position` must be present.",
+      "description": "Mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`. One (or both) `length` or `s_position` must be present.",
       "from_schema": "https://w3id.org/accelerator-core",
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "length",
         "longitudinalPlacementParamGroup__s_position"
       ],
@@ -4286,7 +4625,9 @@
       "broad_mappings": [
         "pals:ReferenceP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "referenceParamGroup__species_ref",
         "referenceParamGroup__pc_ref",
         "referenceParamGroup__E_tot_ref",
@@ -4364,7 +4705,9 @@
       "exact_mappings": [
         "pals:SolenoidP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "solenoidParamGroup__Ksol",
         "solenoidParamGroup__Bsol"
       ],
@@ -4467,7 +4810,9 @@
       "broad_mappings": [
         "pals:TwissP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "twissParamGroup__alpha_a",
         "twissParamGroup__alpha_b",
         "twissParamGroup__beta_a",
@@ -4624,7 +4969,9 @@
       "broad_mappings": [
         "pals:RFP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "rFParamGroup__frequency",
         "rFParamGroup__harmon",
         "rFParamGroup__voltage",
@@ -4736,7 +5083,7 @@
     {
       "name": "ElectricMultipoleParamGroup",
       "definition_uri": "https://pals-project.readthedocs.io/ElectricMultipoleParamGroup",
-      "description": "Mixin for electric multipole parameters, \nwhich can be used to describe the electric field components of an accelerator element.\nThis mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).\nExample with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order: 2\n  EnL: 3.47e1\n```",
+      "description": "Mixin for electric multipole parameters,  which can be used to describe the electric field components of an accelerator element. This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order: 2\n  EnL: 3.47e1\n```",
       "from_schema": "https://w3id.org/accelerator-core",
       "exact_mappings": [
         "pals:ElectricMultipoleP"
@@ -4744,7 +5091,9 @@
       "broad_mappings": [
         "pals:ElectricMultipoleP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "electricMultipoleParamGroup__elec_components"
       ],
       "slot_usage": {},
@@ -4790,7 +5139,9 @@
       "broad_mappings": [
         "pals:MagneticMultipoleP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "magneticMultipoleParamGroup__mag_components"
       ],
       "slot_usage": {},
@@ -4831,12 +5182,14 @@
     {
       "name": "BendParamGroup",
       "definition_uri": "https://pals-project.readthedocs.io/BendParamGroup",
-      "description": "Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.\nThis mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).",
+      "description": "Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).",
       "from_schema": "https://w3id.org/accelerator-core",
       "exact_mappings": [
         "pals:BendP"
       ],
+      "is_a": "ParamGroup",
       "slots": [
+        "id",
         "bendParamGroup__angle_ref",
         "bendParamGroup__bend_field_ref",
         "bendParamGroup__bend_field_actual",
@@ -5063,7 +5416,7 @@
     {
       "name": "MultipoleParameterGroup",
       "definition_uri": "https://pals-project.readthedocs.io/MultipoleParameterGroup",
-      "description": "A single order's electric (or magnetic) multipole component.\nOnly the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.\nNot a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.",
+      "description": "A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.",
       "from_schema": "https://w3id.org/accelerator-core",
       "slots": [
         "multipoleParameterGroup__order",
@@ -5613,6 +5966,7 @@
       "broad_mappings": [
         "pals:Element"
       ],
+      "is_a": "Node",
       "abstract": true,
       "mixins": [
         "HasMetaP"
@@ -5620,6 +5974,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP"
       ],
@@ -5652,6 +6007,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -5698,6 +6054,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "virtualComponent__functions",
@@ -5739,6 +6096,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "virtualComponent__functions",
@@ -5794,6 +6152,7 @@
         "sosa:Sensor",
         "sosa:Actuator"
       ],
+      "is_a": "Node",
       "mixins": [
         "HasMetaP"
       ],
@@ -5896,6 +6255,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -5925,6 +6285,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -5956,6 +6317,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -5990,6 +6352,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6019,6 +6382,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6047,6 +6411,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6075,6 +6440,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6114,6 +6480,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6151,6 +6518,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6180,6 +6548,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6208,6 +6577,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6239,6 +6609,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6269,6 +6640,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6297,6 +6669,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6326,6 +6699,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6354,6 +6728,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6386,6 +6761,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6415,6 +6791,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6444,6 +6821,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__functions",
@@ -6478,6 +6856,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "physicalComponent__beamline_relation",
@@ -6516,6 +6895,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "virtualComponent__functions",
@@ -6542,6 +6922,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "virtualComponent__functions",
@@ -6569,6 +6950,7 @@
       "slots": [
         "id",
         "kind",
+        "alias",
         "component__native_types",
         "hasMetaP__MetaP",
         "virtualComponent__functions",
@@ -6617,10 +6999,13 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "Relationship",
-      "definition_uri": "https://pals-project.readthedocs.io/Relationship",
+      "name": "Edge",
+      "definition_uri": "https://pals-project.readthedocs.io/Edge",
       "description": "Abstract base for subject-predicate-object associations.",
       "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "rdf:Statement"
+      ],
       "abstract": true,
       "slots": [
         "id",
@@ -6629,20 +7014,20 @@
         "object"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/Relationship",
-      "represents_relationship": true,
+      "class_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
       "@type": "ClassDefinition"
     },
     {
       "name": "SignalBinding",
       "definition_uri": "https://pals-project.readthedocs.io/SignalBinding",
-      "description": "Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding.",
+      "description": "Association between a PhysicalComponent and one of its Signals, e.g. QUAD1 component to QUAD1.STATUS signal.",
       "from_schema": "https://w3id.org/accelerator-core",
-      "is_a": "Relationship",
+      "is_a": "Edge",
+      "abstract": true,
       "slots": [
         "id",
+        "predicate",
         "SignalBinding_subject",
-        "SignalBinding_predicate",
         "SignalBinding_object"
       ],
       "slot_usage": {},
@@ -6650,85 +7035,460 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "HasSignal",
+      "definition_uri": "https://pals-project.readthedocs.io/HasSignal",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:has_signal"
+      ],
+      "is_a": "SignalBinding",
+      "slots": [
+        "id",
+        "SignalBinding_subject",
+        "SignalBinding_object",
+        "HasSignal_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/has_signal",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "HasSetpointSignal",
+      "definition_uri": "https://pals-project.readthedocs.io/HasSetpointSignal",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:has_setpoint_signal"
+      ],
+      "is_a": "SignalBinding",
+      "slots": [
+        "id",
+        "SignalBinding_subject",
+        "SignalBinding_object",
+        "HasSetpointSignal_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/has_setpoint_signal",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "HasReadbackSignal",
+      "definition_uri": "https://pals-project.readthedocs.io/HasReadbackSignal",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:has_readback_signal"
+      ],
+      "is_a": "SignalBinding",
+      "slots": [
+        "id",
+        "SignalBinding_subject",
+        "SignalBinding_object",
+        "HasReadbackSignal_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/has_readback_signal",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "HasCommandSignal",
+      "definition_uri": "https://pals-project.readthedocs.io/HasCommandSignal",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:has_command_signal"
+      ],
+      "is_a": "SignalBinding",
+      "slots": [
+        "id",
+        "SignalBinding_subject",
+        "SignalBinding_object",
+        "HasCommandSignal_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/has_command_signal",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "HasLimitSignal",
+      "definition_uri": "https://pals-project.readthedocs.io/HasLimitSignal",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:has_limit_signal"
+      ],
+      "is_a": "SignalBinding",
+      "slots": [
+        "id",
+        "SignalBinding_subject",
+        "SignalBinding_object",
+        "HasLimitSignal_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/has_limit_signal",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "ComponentRelation",
       "definition_uri": "https://pals-project.readthedocs.io/ComponentRelation",
       "description": "Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds.",
       "from_schema": "https://w3id.org/accelerator-core",
-      "is_a": "Relationship",
+      "is_a": "Edge",
+      "abstract": true,
       "slots": [
         "id",
-        "componentRelation__context",
-        "componentRelation__beamline_context",
-        "componentRelation__reference_frame",
-        "componentRelation__distance_value",
-        "componentRelation__distance_unit",
-        "componentRelation__axis",
+        "predicate",
+        "context",
         "componentRelation__component_direction",
-        "componentRelation__tolerance_value",
-        "componentRelation__tolerance_unit",
+        "componentRelation__reference_frame",
         "ComponentRelation_subject",
-        "ComponentRelation_predicate",
         "ComponentRelation_object"
       ],
       "slot_usage": {},
       "attributes": [
-        {
-          "name": "context",
-          "description": "The frame of reference / domain in which this relationship is asserted to hold.",
-          "range": "RelationContextEnum",
-          "@type": "SlotDefinition"
-        },
-        {
-          "name": "beamline_context",
-          "description": "The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order).",
-          "range": "BeamLine",
-          "@type": "SlotDefinition"
-        },
-        {
-          "name": "reference_frame",
-          "range": "ReferenceFrameEnum",
-          "@type": "SlotDefinition"
-        },
-        {
-          "name": "distance_value",
-          "range": "float",
-          "@type": "SlotDefinition"
-        },
-        {
-          "name": "distance_unit",
-          "range": "UnitEnum",
-          "@type": "SlotDefinition"
-        },
-        {
-          "name": "axis",
-          "range": "AxisEnum",
-          "@type": "SlotDefinition"
-        },
         {
           "name": "component_direction",
           "range": "DirectionEnum",
           "@type": "SlotDefinition"
         },
         {
-          "name": "tolerance_value",
-          "range": "float",
-          "@type": "SlotDefinition"
-        },
-        {
-          "name": "tolerance_unit",
-          "range": "UnitEnum",
+          "name": "reference_frame",
+          "range": "ReferenceFrameEnum",
+          "recommended": true,
           "@type": "SlotDefinition"
         }
       ],
       "class_uri": "https://pals-project.readthedocs.io/ComponentRelation",
       "@type": "ClassDefinition"
+    },
+    {
+      "name": "Precedes",
+      "definition_uri": "https://pals-project.readthedocs.io/Precedes",
+      "description": "A relationship indicating that the subject component precedes the object component in a specified context,  such as along a beamline.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:precedes"
+      ],
+      "exact_mappings": [
+        "BFO:0000063"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "beamline_context",
+        "Precedes_predicate",
+        "Precedes_context"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/precedes",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Contains",
+      "definition_uri": "https://pals-project.readthedocs.io/Contains",
+      "description": "A relationship indicating that the subject component contains the object component in a specified context,  such as within a BeamLineSection or other organizational grouping.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:contains"
+      ],
+      "exact_mappings": [
+        "BFO:0000051"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "context",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "Contains_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/contains",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Controls",
+      "definition_uri": "https://pals-project.readthedocs.io/Controls",
+      "description": "A relationship indicating that the subject component controls the object component in a specified context,  such as a power supply controlling a magnet.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:controls"
+      ],
+      "exact_mappings": [
+        "saref:controls"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "context",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "Controls_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/controls",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "IsPartOf",
+      "definition_uri": "https://pals-project.readthedocs.io/IsPartOf",
+      "description": "A relationship indicating that the subject component is part of the object component in a specified context,  such as a magnet being part of a BeamLineSection.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:is_part_of"
+      ],
+      "exact_mappings": [
+        "BFO:0000050"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "context",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "IsPartOf_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/is_part_of",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "AdjacentTo",
+      "definition_uri": "https://pals-project.readthedocs.io/AdjacentTo",
+      "description": "A relationship indicating that the subject component is adjacent to the object component and not overlapping\n in a specified context, such as radiation detector and a magnet.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:adjacent_to"
+      ],
+      "exact_mappings": [
+        "RO:0002220"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "context",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "distance_value",
+        "distance_unit",
+        "tolerance_value",
+        "tolerance_unit",
+        "coordinates",
+        "AdjacentTo_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/adjacent_to",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Overlaps",
+      "definition_uri": "https://pals-project.readthedocs.io/Overlaps",
+      "description": "A relationship indicating that the subject component overlaps the object component in a specified context,  such as a magnet and a diagnostic device.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:overlaps"
+      ],
+      "exact_mappings": [
+        "RO:0002131"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "context",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "coordinates",
+        "Overlaps_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/overlaps",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "HasConnectingBranch",
+      "definition_uri": "https://pals-project.readthedocs.io/HasConnectingBranch",
+      "description": "A relationship indicating that the subject component has a connecting branch to the object component in a specified context,  such as a beamline section having a fork as a connecting branch.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:has_connecting_branch"
+      ],
+      "exact_mappings": [
+        "RO:0002253"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "beamline_context",
+        "HasConnectingBranch_predicate",
+        "HasConnectingBranch_context"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/has_connecting_branch",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MountedOn",
+      "definition_uri": "https://pals-project.readthedocs.io/MountedOn",
+      "description": "A relationship indicating that the subject component is mounted on the object component in a specified context,  such as a diagnostic device mounted on a magnet.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:mounted_on"
+      ],
+      "broad_mappings": [
+        "RO:0002371"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "context",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "coordinates",
+        "MountedOn_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/mounted_on",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Intersects",
+      "definition_uri": "https://pals-project.readthedocs.io/Intersects",
+      "description": "A relationship indicating that the subject component intersects the object component in a specified context,  such as a beamline and a diagnostic device.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:intersects"
+      ],
+      "broad_mappings": [
+        "RO:0015011"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "context",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "Intersects_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/intersects",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "NearestTo",
+      "definition_uri": "https://pals-project.readthedocs.io/NearestTo",
+      "description": "A relationship indicating that the subject component is nearest to the object component in a specified context,  such as a diagnostic device nearest to a magnet.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "mappings": [
+        "pals:nearest_to"
+      ],
+      "broad_mappings": [
+        "RO:0002325"
+      ],
+      "is_a": "ComponentRelation",
+      "slots": [
+        "id",
+        "context",
+        "componentRelation__component_direction",
+        "componentRelation__reference_frame",
+        "ComponentRelation_subject",
+        "ComponentRelation_object",
+        "distance_value",
+        "distance_unit",
+        "tolerance_value",
+        "tolerance_unit",
+        "coordinates",
+        "NearestTo_predicate"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/nearest_to",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CoordinateSet",
+      "definition_uri": "https://pals-project.readthedocs.io/CoordinateSet",
+      "description": "A set of coordinates that define the spatial relationship between two components. This can include Cartesian coordinates, cylindrical coordinates, or other coordinate systems as needed. Useful for defining the spatial relationship where the relationship is not strictly linear or where the components are not aligned along a single axis.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "slots": [
+        "coordinateSet__coordinate_system",
+        "coordinateSet__x_coord",
+        "coordinateSet__y_coord",
+        "coordinateSet__z_coord",
+        "coordinateSet__r_coord",
+        "coordinateSet__theta_coord",
+        "coordinateSet__phi_coord"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "coordinate_system",
+          "description": "The coordinate system used for the coordinates (e.g., Cartesian, Cylindrical).",
+          "range": "CoordinateSystemEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "x_coord",
+          "description": "The x-coordinate in the specified coordinate system.",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "y_coord",
+          "description": "The y-coordinate in the specified coordinate system.",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "z_coord",
+          "description": "The z-coordinate in the specified coordinate system.",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "r_coord",
+          "description": "The radial distance in cylindrical coordinates.",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "theta_coord",
+          "description": "The angular coordinate in cylindrical coordinates (in radians).",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "phi_coord",
+          "description": "The azimuthal angle in spherical coordinates (in radians).",
+          "range": "float",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://pals-project.readthedocs.io/CoordinateSet",
+      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "narad.yaml",
-  "source_file_date": "2026-08-07T11:43:02",
-  "source_file_size": 68694,
-  "generation_date": "2026-08-07T11:45:27",
+  "source_file_date": "2026-08-13T10:44:20",
+  "source_file_size": 78636,
+  "generation_date": "2026-08-13T10:49:10",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/narad.context.jsonld",

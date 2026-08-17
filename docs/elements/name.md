@@ -1,95 +1,22 @@
 
+# Slot: name
 
-# Slot: name 
-
-
-_The name of the entity. For example, the name of the person or organization._
-
-
-
-
+The name of the entity. For example, the name of the person or organization.
 
 URI: [pals:name](https://pals-project.readthedocs.io/name)
-Alias: name
-
-<!-- no inheritance hierarchy -->
 
 
+## Domain and Range
+
+None &#8594;  <sub>0..1</sub> [String](types/String.md)
+
+## Parents
 
 
-
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [Affiliation](Affiliation.md) | Contains affiliation information for an author or component, such as a ROR |  no  |
-| [Author](Author.md) | Contains authorship information for a representation of an accelerator facili... |  no  |
+## Children
 
 
+## Used by
 
-
-
-
-## Properties
-
-### Type and Range
-
-| Property | Value |
-| --- | --- |
-| Range | [String](String.md) |
-| Domain Of | [Author](Author.md), [Affiliation](Affiliation.md) |
-
-### Cardinality and Requirements
-
-| Property | Value |
-| --- | --- |
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | pals:name |
-| native | pals:name |
-
-
-
-
-## LinkML Source
-
-<details>
-```yaml
-name: name
-description: The name of the entity. For example, the name of the person or organization.
-from_schema: https://w3id.org/accelerator-core
-rank: 1000
-alias: name
-domain_of:
-- Author
-- Affiliation
-range: string
-
-```
-</details>
+ * [Affiliation](Affiliation.md)
+ * [Author](Author.md)

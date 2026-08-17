@@ -6,6 +6,7 @@ message ACKicker
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -26,6 +27,23 @@ message AdditionalMetadata
   string value = 0
   dataTypeEnum datatype = 0
  }
+// A relationship indicating that the subject component is adjacent to the object component and not overlapping
+//  in a specified context, such as radiation detector and a magnet.
+message AdjacentTo
+ {
+  string id = 0
+  relationContextEnum context = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  float distanceValue = 0
+  unitEnum distanceUnit = 0
+  float toleranceValue = 0
+  unitEnum toleranceUnit = 0
+  coordinateSet coordinates = 0
+  uriorcurie predicate = 0
+ }
 // Contains affiliation information for an author or component, such as a ROR.
 message Affiliation
  {
@@ -38,6 +56,7 @@ message Aperture
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -60,6 +79,7 @@ message BeamLine
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
@@ -77,6 +97,7 @@ message BeamLineSection
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
@@ -89,6 +110,7 @@ message BeamPositionMonitor
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -104,6 +126,7 @@ message BeamProfileMonitor
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -119,6 +142,7 @@ message Bend
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -132,10 +156,10 @@ message Bend
   magneticMultipoleParamGroup magneticMultipoleP = 0
   bendParamGroup bendP = 0
  }
-// Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
-// This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+// Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
 message BendParamGroup
  {
+  string id = 0
   float angleRef = 0
   float bendFieldRef = 0
   float bendFieldActual = 0
@@ -160,6 +184,7 @@ message BendParamGroup
 // Mixin class for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
 message BodyShiftParamGroup
  {
+  string id = 0
   float xOffset = 0
   float yOffset = 0
   float zOffset = 0
@@ -172,6 +197,7 @@ message BookkeepingComponent
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
@@ -179,28 +205,45 @@ message BookkeepingComponent
   floorParamGroup floorP = 0
   bodyShiftParamGroup bodyShiftP = 0
  }
-// Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds.
-message ComponentRelation
+// A relationship indicating that the subject component contains the object component in a specified context,  such as within a BeamLineSection or other organizational grouping.
+message Contains
  {
   string id = 0
   relationContextEnum context = 0
-  beamLine beamlineContext = 0
-  referenceFrameEnum referenceFrame = 0
-  float distanceValue = 0
-  unitEnum distanceUnit = 0
-  axisEnum axis = 0
   directionEnum componentDirection = 0
-  float toleranceValue = 0
-  unitEnum toleranceUnit = 0
+  referenceFrameEnum referenceFrame = 0
   component subject = 0
-  componentRelationPredicateEnum predicate = 0
   component object = 0
+  uriorcurie predicate = 0
+ }
+// A relationship indicating that the subject component controls the object component in a specified context,  such as a power supply controlling a magnet.
+message Controls
+ {
+  string id = 0
+  relationContextEnum context = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  uriorcurie predicate = 0
+ }
+// A set of coordinates that define the spatial relationship between two components. This can include Cartesian coordinates, cylindrical coordinates, or other coordinate systems as needed. Useful for defining the spatial relationship where the relationship is not strictly linear or where the components are not aligned along a single axis.
+message CoordinateSet
+ {
+  coordinateSystemEnum coordinateSystem = 0
+  float xCoord = 0
+  float yCoord = 0
+  float zCoord = 0
+  float rCoord = 0
+  float thetaCoord = 0
+  float phiCoord = 0
  }
 // A cavity used for transverse beam manipulation, such as crabbing or deflecting.
 message CrabCavity
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -218,6 +261,7 @@ message DiagnosticDevice
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -225,10 +269,7 @@ message DiagnosticDevice
   floorParamGroup floorP = 0
   longitudinalPlacementParamGroup longitudinalPlacementP = 0
  }
-// Mixin for electric multipole parameters, 
-// which can be used to describe the electric field components of an accelerator element.
-// This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).
-// Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7
+// Mixin for electric multipole parameters,  which can be used to describe the electric field components of an accelerator element. This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7
 //   tilt: 0.7
 // - order: 3
 //   En: 27.3
@@ -237,6 +278,7 @@ message DiagnosticDevice
 // ```
 message ElectricMultipoleParamGroup
  {
+  string id = 0
  repeated  multipoleParameterGroup elecComponents = 0
  }
 // A facility that houses one or more accelerators.
@@ -252,6 +294,7 @@ message Facility
 // Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
 message FloorParamGroup
  {
+  string id = 0
   float x = 0
   float y = 0
   float z = 0
@@ -259,11 +302,80 @@ message FloorParamGroup
   float phi = 0
   float psi = 0
  }
+message HasCommandSignal
+ {
+  string id = 0
+  physicalComponent subject = 0
+  signal object = 0
+  uriorcurie predicate = 0
+ }
+// A relationship indicating that the subject component has a connecting branch to the object component in a specified context,  such as a beamline section having a fork as a connecting branch.
+message HasConnectingBranch
+ {
+  string id = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  beamLine beamlineContext = 0
+  uriorcurie predicate = 0
+  relationContextEnum context = 0
+ }
+message HasLimitSignal
+ {
+  string id = 0
+  physicalComponent subject = 0
+  signal object = 0
+  uriorcurie predicate = 0
+ }
+message HasReadbackSignal
+ {
+  string id = 0
+  physicalComponent subject = 0
+  signal object = 0
+  uriorcurie predicate = 0
+ }
+message HasSetpointSignal
+ {
+  string id = 0
+  physicalComponent subject = 0
+  signal object = 0
+  uriorcurie predicate = 0
+ }
+message HasSignal
+ {
+  string id = 0
+  physicalComponent subject = 0
+  signal object = 0
+  uriorcurie predicate = 0
+ }
 // A unique, and ideally persistent, identifier for a facility, such as a DOI or ROR.
 message Identifier
  {
   identifierTypeEnum identifierType = 0
   string identifierValue = 0
+ }
+// A relationship indicating that the subject component intersects the object component in a specified context,  such as a beamline and a diagnostic device.
+message Intersects
+ {
+  string id = 0
+  relationContextEnum context = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  uriorcurie predicate = 0
+ }
+// A relationship indicating that the subject component is part of the object component in a specified context,  such as a magnet being part of a BeamLineSection.
+message IsPartOf
+ {
+  string id = 0
+  relationContextEnum context = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  uriorcurie predicate = 0
  }
 // A magnet primarily used to steer the beam.
 // Can deflect the beam transversely in both planes, or a single plane, depending on the design and parameters of the kicker. 
@@ -272,6 +384,7 @@ message Kicker
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -285,11 +398,10 @@ message Kicker
   electricMultipoleParamGroup electricMultipoleP = 0
   magneticMultipoleParamGroup magneticMultipoleP = 0
  }
-// Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis. 
-// Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
-// One (or both) `length` or `s_position` must be present.
+// Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`. One (or both) `length` or `s_position` must be present.
 message LongitudinalPlacementParamGroup
  {
+  string id = 0
   float length = 0
   float sPosition = 0
  }
@@ -304,6 +416,7 @@ message LongitudinalPlacementParamGroup
 // ```
 message MagneticMultipoleParamGroup
  {
+  string id = 0
  repeated  multipoleParameterGroup magComponents = 0
  }
 // A virtual component used as a reference point or marker in the beamline structure.
@@ -311,6 +424,7 @@ message Marker
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0
@@ -322,10 +436,23 @@ message Marker
 // Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 message MetaParamGroup
  {
+  string id = 0
   string description = 0
-  string alias = 0
+ repeated  string alias = 0
   string label = 0
  repeated  additionalMetadata additionalMetadata = 0
+ }
+// A relationship indicating that the subject component is mounted on the object component in a specified context,  such as a diagnostic device mounted on a magnet.
+message MountedOn
+ {
+  string id = 0
+  relationContextEnum context = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  coordinateSet coordinates = 0
+  uriorcurie predicate = 0
  }
 // A general magnet with a higher-order multipole field, such as a sextupole or octupole.
 // Only one of the electric or magnetic multipole components should be present, not both.
@@ -333,6 +460,7 @@ message Multipole
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -345,9 +473,7 @@ message Multipole
   electricMultipoleParamGroup electricMultipoleP = 0
   magneticMultipoleParamGroup magneticMultipoleP = 0
  }
-// A single order's electric (or magnetic) multipole component.
-// Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.
-// Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
+// A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
 message MultipoleParameterGroup
  {
   integer order = 0
@@ -361,11 +487,28 @@ message MultipoleParameterGroup
   float kn = 0
   float ks = 0
  }
+// A relationship indicating that the subject component is nearest to the object component in a specified context,  such as a diagnostic device nearest to a magnet.
+message NearestTo
+ {
+  string id = 0
+  relationContextEnum context = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  float distanceValue = 0
+  unitEnum distanceUnit = 0
+  float toleranceValue = 0
+  unitEnum toleranceUnit = 0
+  coordinateSet coordinates = 0
+  uriorcurie predicate = 0
+ }
 // A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
 message NormalConductingRFCavity
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -385,6 +528,7 @@ message Octupole
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -396,6 +540,18 @@ message Octupole
   twissParamGroup twissP = 0
   electricMultipoleParamGroup electricMultipoleP = 0
   magneticMultipoleParamGroup magneticMultipoleP = 0
+ }
+// A relationship indicating that the subject component overlaps the object component in a specified context,  such as a magnet and a diagnostic device.
+message Overlaps
+ {
+  string id = 0
+  relationContextEnum context = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  coordinateSet coordinates = 0
+  uriorcurie predicate = 0
  }
 // Root container for accelerator core components, semantic signals, and local bindings.
 message PALSAccelerator
@@ -413,6 +569,7 @@ message PhysicalComponent
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -420,12 +577,25 @@ message PhysicalComponent
   floorParamGroup floorP = 0
   longitudinalPlacementParamGroup longitudinalPlacementP = 0
  }
+// A relationship indicating that the subject component precedes the object component in a specified context,  such as along a beamline.
+message Precedes
+ {
+  string id = 0
+  directionEnum componentDirection = 0
+  referenceFrameEnum referenceFrame = 0
+  component subject = 0
+  component object = 0
+  beamLine beamlineContext = 0
+  uriorcurie predicate = 0
+  relationContextEnum context = 0
+ }
 // A magnet primarily used to focus or defocus the beam. 4 poles.
 // Only one of the electric or magnetic multipole components should be present, not both.
 message Quadrupole
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -443,6 +613,7 @@ message RadiationMonitor
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -454,6 +625,7 @@ message RadiationMonitor
 // Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
 message ReferenceParamGroup
  {
+  string id = 0
   string speciesRef = 0
   float pcRef = 0
   float eTotRef = 0
@@ -462,6 +634,7 @@ message ReferenceParamGroup
 // Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS).
 message RFParamGroup
  {
+  string id = 0
   float frequency = 0
   integer harmon = 0
   float voltage = 0
@@ -479,6 +652,7 @@ message Sextupole
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -496,7 +670,7 @@ message Signal
  {
   string id = 0
   string kind = 0
-  string alias = 0
+ repeated  string alias = 0
   signalRoleEnum signalRole = 0
   sourceSystemEnum sourceSystem = 0
   string nativeDescription = 0
@@ -508,20 +682,13 @@ message Signal
   string archiveIdentifier = 0
   metaParamGroup metaP = 0
  }
-// Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding.
-message SignalBinding
- {
-  string id = 0
-  physicalComponent subject = 0
-  signalBindingPredicateEnum predicate = 0
-  signal object = 0
- }
 // A magnet with a primarily longitudinal magnetic field used for focusing.
 // A solenoid is an element whose magnetic field is dominated by a field whose direction is aligned with the magnetic axis. 
 message Solenoid
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -536,6 +703,7 @@ message Solenoid
 // Mixin for solenoid-specific parameters.
 message SolenoidParamGroup
  {
+  string id = 0
   float ksol = 0
   float bsol = 0
  }
@@ -544,6 +712,7 @@ message SuperConductingRFCavity
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  physicalFunctionEnum functions = 0
@@ -562,6 +731,7 @@ message SupportingFacilityComponent
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
   physicalRelationEnum beamlineRelation = 0
@@ -573,6 +743,7 @@ message SupportingFacilityComponent
 // Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.
 message TwissParamGroup
  {
+  string id = 0
   float alphaA = 0
   float alphaB = 0
   float betaA = 0
@@ -589,6 +760,7 @@ message VirtualComponent
  {
   string id = 0
   string kind = 0
+ repeated  string alias = 0
  repeated  string nativeTypes = 0
   metaParamGroup metaP = 0
  repeated  virtualFunctionEnum functions = 0

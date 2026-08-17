@@ -1,103 +1,44 @@
 
-
-# Slot: predicate 
-
-
-
-URI: [rdf:predicate](http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate)
-Alias: predicate
-
-<!-- no inheritance hierarchy -->
+# Slot: predicate
 
 
 
+URI: [pals:predicate](https://pals-project.readthedocs.io/predicate)
 
 
-## Applicable Classes
+## Domain and Range
 
-| Name | Description | Modifies Slot |
+None &#8594;  <sub>1..1</sub> [Uriorcurie](types/Uriorcurie.md)
+
+## Parents
+
+
+## Children
+
+ *  [AdjacentTo➞predicate](AdjacentTo_predicate.md)
+ *  [Contains➞predicate](Contains_predicate.md)
+ *  [Controls➞predicate](Controls_predicate.md)
+ *  [HasCommandSignal➞predicate](HasCommandSignal_predicate.md)
+ *  [HasConnectingBranch➞predicate](HasConnectingBranch_predicate.md)
+ *  [HasLimitSignal➞predicate](HasLimitSignal_predicate.md)
+ *  [HasReadbackSignal➞predicate](HasReadbackSignal_predicate.md)
+ *  [HasSetpointSignal➞predicate](HasSetpointSignal_predicate.md)
+ *  [HasSignal➞predicate](HasSignal_predicate.md)
+ *  [Intersects➞predicate](Intersects_predicate.md)
+ *  [IsPartOf➞predicate](IsPartOf_predicate.md)
+ *  [MountedOn➞predicate](MountedOn_predicate.md)
+ *  [NearestTo➞predicate](NearestTo_predicate.md)
+ *  [Overlaps➞predicate](Overlaps_predicate.md)
+ *  [Precedes➞predicate](Precedes_predicate.md)
+
+## Used by
+
+ * [ComponentRelation](ComponentRelation.md)
+ * [Edge](Edge.md)
+ * [SignalBinding](SignalBinding.md)
+
+## Other properties
+
+|  |  |  |
 | --- | --- | --- |
-| [ComponentRelation](ComponentRelation.md) | Association between two Components (Physical or Virtual), with supporting con... |  yes  |
-| [Relationship](Relationship.md) | Abstract base for subject-predicate-object associations |  no  |
-| [SignalBinding](SignalBinding.md) | Association between a PhysicalComponent and one of its Signals, e |  yes  |
-
-
-
-
-
-
-## Properties
-
-### Type and Range
-
-| Property | Value |
-| --- | --- |
-| Range | [String](String.md) |
-| Domain Of | [Relationship](Relationship.md) |
-| Slot URI | [rdf:predicate](http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate) |
-
-### Cardinality and Requirements
-
-| Property | Value |
-| --- | --- |
-| Required | Yes |
-<details>
-<summary>Relationship Properties</summary>
-
-| Property | Value |
-| --- | --- |
-| Relational Role | PREDICATE |
-
-</details>
-
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | rdf:predicate |
-| native | pals:predicate |
-
-
-
-
-## LinkML Source
-
-<details>
-```yaml
-name: predicate
-from_schema: https://w3id.org/accelerator-core
-rank: 1000
-slot_uri: rdf:predicate
-alias: predicate
-domain_of:
-- Relationship
-relational_role: PREDICATE
-range: string
-required: true
-
-```
-</details>
+| **Mappings:** | | rdf:predicate |

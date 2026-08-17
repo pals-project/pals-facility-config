@@ -1,96 +1,28 @@
 
+# Class: Affiliation
 
-# Slot: affiliation 
+Contains affiliation information for an author or component, such as a ROR.
 
-
-_The affiliation of the author or component, as a ROR._
-
-
+URI: [pals:Affiliation](https://pals-project.readthedocs.io/Affiliation)
 
 
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[Identifier],[Identifier]<identifiers%200..*-++[Affiliation&#124;id:string;name:string%20%3F],[PALSAccelerator]++-%20affiliation%200..1>[Affiliation],[Author]++-%20affiliation%200..1>[Affiliation],[PALSAccelerator],[Author])](https://yuml.me/diagram/nofunky;dir:TB/class/[Identifier],[Identifier]<identifiers%200..*-++[Affiliation&#124;id:string;name:string%20%3F],[PALSAccelerator]++-%20affiliation%200..1>[Affiliation],[Author]++-%20affiliation%200..1>[Affiliation],[PALSAccelerator],[Author])
 
-URI: [pals:affiliation](https://pals-project.readthedocs.io/affiliation)
-Alias: affiliation
+## Referenced by Class
 
-<!-- no inheritance hierarchy -->
+ *  **None** *[affiliation](affiliation.md)*  <sub>0..1</sub>  **[Affiliation](Affiliation.md)**
 
-
-
-
-
-## Applicable Classes
-
-| Name | Description | Modifies Slot |
-| --- | --- | --- |
-| [PALSAccelerator](PALSAccelerator.md) | Root container for accelerator core components, semantic signals, and local b... |  no  |
-| [Author](Author.md) | Contains authorship information for a representation of an accelerator facili... |  no  |
+## Attributes
 
 
+### Own
 
-
-
-
-## Properties
-
-### Type and Range
-
-| Property | Value |
-| --- | --- |
-| Range | [Affiliation](Affiliation.md) |
-| Domain Of | [PALSAccelerator](PALSAccelerator.md), [Author](Author.md) |
-
-### Cardinality and Requirements
-
-| Property | Value |
-| --- | --- |
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | pals:affiliation |
-| native | pals:affiliation |
-
-
-
-
-## LinkML Source
-
-<details>
-```yaml
-name: affiliation
-description: The affiliation of the author or component, as a ROR.
-from_schema: https://w3id.org/accelerator-core
-rank: 1000
-alias: affiliation
-domain_of:
-- PALSAccelerator
-- Author
-range: Affiliation
-inlined: true
-
-```
-</details>
+ * [id](id.md)  <sub>1..1</sub>
+     * Description: A unique identifier for the instance.
+     * Range: [String](types/String.md)
+ * [name](name.md)  <sub>0..1</sub>
+     * Description: The name of the entity. For example, the name of the person or organization.
+     * Range: [String](types/String.md)
+ * [identifiers](identifiers.md)  <sub>0..\*</sub>
+     * Description: A unique and ideally persistent identifier for the facility, such as a DOI or ROR.
+     * Range: [Identifier](Identifier.md)
