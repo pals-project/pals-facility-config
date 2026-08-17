@@ -1,52 +1,16 @@
-# Type: Double 
 
+# Type: double
 
+A real number that conforms to the xsd:double specification
 
+URI: [linkml:Double](https://w3id.org/linkml/Double)
 
-_A real number that conforms to the xsd:double specification_
+|  |  |  |
+| --- | --- | --- |
+| Root (builtin) type | | **float** |
 
+## Other properties
 
-
-URI: [xsd:double](http://www.w3.org/2001/XMLSchema#double)
-
-## Type Properties
-
-| Property | Value |
-| --- | --- |
-| Base | `float` |
-| Type URI | [xsd:double](http://www.w3.org/2001/XMLSchema#double) |
-
-
-
-
-
-
-## Notes
-
-* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "double".
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | xsd:double |
-| native | pals:double |
-| close | schema:Float |
-
-
+|  |  |  |
+| --- | --- | --- |
+| **Close Mappings:** | | schema:Float |

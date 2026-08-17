@@ -1,15 +1,19 @@
 package None;
 
-/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
+
+
+
+
+
 
 /**
   Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class TwissParamGroup  {
+public class TwissParamGroup extends ParamGroup {
 
   private Float alphaA;
   private Float alphaB;

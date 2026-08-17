@@ -1,161 +1,29 @@
 
-
-# Class: HasReferenceP 
+# Class: HasReferenceP
 
 
 
 URI: [pals:HasReferenceP](https://pals-project.readthedocs.io/HasReferenceP)
 
 
+[![img](https://yuml.me/diagram/nofunky;dir:TB/class/[ReferenceParamGroup],[ReferenceParamGroup]<ReferenceP%200..1-++[HasReferenceP],[Magnet]uses%20-.->[HasReferenceP],[Cavity]uses%20-.->[HasReferenceP],[BeamProfileMonitor]uses%20-.->[HasReferenceP],[BeamPositionMonitor]uses%20-.->[HasReferenceP],[Aperture]uses%20-.->[HasReferenceP],[Magnet],[Cavity],[BeamProfileMonitor],[BeamPositionMonitor],[Aperture])](https://yuml.me/diagram/nofunky;dir:TB/class/[ReferenceParamGroup],[ReferenceParamGroup]<ReferenceP%200..1-++[HasReferenceP],[Magnet]uses%20-.->[HasReferenceP],[Cavity]uses%20-.->[HasReferenceP],[BeamProfileMonitor]uses%20-.->[HasReferenceP],[BeamPositionMonitor]uses%20-.->[HasReferenceP],[Aperture]uses%20-.->[HasReferenceP],[Magnet],[Cavity],[BeamProfileMonitor],[BeamPositionMonitor],[Aperture])
+
+## Mixin for
+
+ * [Aperture](Aperture.md) (mixin)  - A diagnostic or limiting aperture element used to constrain or characterize beam passage.
+ * [BeamPositionMonitor](BeamPositionMonitor.md) (mixin)  - A diagnostic device used to measure transverse beam position.
+ * [BeamProfileMonitor](BeamProfileMonitor.md) (mixin)  - A diagnostic device used to measure transverse beam profile.
+ * [Cavity](Cavity.md) (mixin)  - A cavity used for beam acceleration or manipulation.
+ * [Magnet](Magnet.md) (mixin)  - An accelerator device that produces a magnetic field for beam control.
+
+## Referenced by Class
 
 
-
-```mermaid
- classDiagram
-    class HasReferenceP
-    click HasReferenceP href "../HasReferenceP/"
-      HasReferenceP <|-- Magnet
-        click Magnet href "../Magnet/"
-      HasReferenceP <|-- BeamProfileMonitor
-        click BeamProfileMonitor href "../BeamProfileMonitor/"
-      HasReferenceP <|-- BeamPositionMonitor
-        click BeamPositionMonitor href "../BeamPositionMonitor/"
-      HasReferenceP <|-- Aperture
-        click Aperture href "../Aperture/"
-      HasReferenceP <|-- Cavity
-        click Cavity href "../Cavity/"
-      
-      HasReferenceP : ReferenceP
-        
-          
-    
-        
-        
-        HasReferenceP --> "0..1" ReferenceParamGroup : ReferenceP
-        click ReferenceParamGroup href "../ReferenceParamGroup/"
-    
-
-        
-      
-```
+## Attributes
 
 
+### Own
 
-
-<!-- no inheritance hierarchy -->
-
-## Class Properties
-
-| Property | Value |
-| --- | --- |
-| Mixin | Yes |
-
-
-## Slots
-
-| Name | Cardinality and Range | Description | Inheritance |
-| ---  | --- | --- | --- |
-| [ReferenceP](ReferenceP.md) | 0..1 <br/> [ReferenceParamGroup](ReferenceParamGroup.md) | A mixin for reference parameters that are aligned with PALS ReferenceP (Refer... | direct |
-
-
-
-## Mixin Usage
-
-| mixed into | description |
-| --- | --- |
-| [Magnet](Magnet.md) | An accelerator device that produces a magnetic field for beam control |
-| [BeamProfileMonitor](BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile |
-| [BeamPositionMonitor](BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position |
-| [Aperture](Aperture.md) | A diagnostic or limiting aperture element used to constrain or characterize b... |
-| [Cavity](Cavity.md) | A cavity used for beam acceleration or manipulation |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | pals:HasReferenceP |
-| native | pals:HasReferenceP |
-
-
-
-
-
-
-## LinkML Source
-
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-
-### Direct
-
-<details>
-```yaml
-name: HasReferenceP
-from_schema: https://w3id.org/accelerator-core
-mixin: true
-attributes:
-  ReferenceP:
-    name: ReferenceP
-    description: A mixin for reference parameters that are aligned with PALS ReferenceP
-      (Reference Parameters) for interoperability with the Particle Accelerator Language
-      Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    domain_of:
-    - HasReferenceP
-    range: ReferenceParamGroup
-    inlined: true
-
-```
-</details>
-
-### Induced
-
-<details>
-```yaml
-name: HasReferenceP
-from_schema: https://w3id.org/accelerator-core
-mixin: true
-attributes:
-  ReferenceP:
-    name: ReferenceP
-    description: A mixin for reference parameters that are aligned with PALS ReferenceP
-      (Reference Parameters) for interoperability with the Particle Accelerator Language
-      Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    alias: ReferenceP
-    owner: HasReferenceP
-    domain_of:
-    - HasReferenceP
-    range: ReferenceParamGroup
-    inlined: true
-
-```
-</details>
+ * [➞ReferenceP](hasReferenceP__ReferenceP.md)  <sub>0..1</sub>
+     * Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+     * Range: [ReferenceParamGroup](ReferenceParamGroup.md)

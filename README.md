@@ -22,11 +22,15 @@ command-line build operations less cumbersome.
 ## Repository Structure
 * [docs/](docs/) - mkdocs-managed documentation
 * [examples/](examples/) - Examples of using the schema
+  * [archived/](examples/archived) -- archived examples
+  * core_acc_narad_instance.yaml -- example of a core accelerator instance
 * [project/](project/) - project files (these files are auto-generated, do not edit)
 * [src/](src/) - source files (edit these)
-  * [narad_system](src/narad_system)
-    * [schema/](src/narad_system/schema) -- LinkML schema (edit this)
-    * [datamodel/](src/narad_system/datamodel) -- generated Python datamodel
+  * [archived/](src/archived) -- archived files
+  * [narad](src/narad)
+    * [schema/](src/narad/schema) -- LinkML schema (edit this)
+    * [datamodel/](src/narad/datamodel) -- generated Python datamodel
+    * narad.yaml -- LinkML schema for NARAD data services
 * [tests/](tests/) - Python tests
   * [data/](tests/data) - Example data files for testing
 
@@ -34,8 +38,8 @@ command-line build operations less cumbersome.
 * ```just gen-project```
   * Example of generating the project from the schema. This will generate a Python datamodel and associated files in `project/`: (json/jsonld schemas, OWL, sqlschema, etc).
 
-* ```just gen-doc```
-  * Example of generating documentation from the schema.
+* ```just gen-doc --truncate-descriptions False --example-directory doc_examples/ --subfolder-type-separation```
+  * Example of generating documentation from the schema. Use these arguments to control the output of the documentation generation. The `--example-directory` argument specifies the directory where example files are located, and the `--subfolder-type-separation` argument indicates that the documentation should be organized into subfolders based on type separation. `--subfolder-type-separation` is important for generating the documentation in a way that is compatible with mkdocs (used to build the documentation site) on macOS.
 
 * ```just gen-python```
   * Example of generating the Python datamodel from the schema. This will generate Python classes in `src/narad/datamodel/` that correspond to the classes defined in the LinkML schema.
@@ -45,3 +49,11 @@ command-line build operations less cumbersome.
 
 * Examples of invalid data files are in `tests/data/invalid/` and valid data files are in `tests/data/valid/`. You can validate these using the above command.
   * ```uv run linkml-validate --schema src/narad/schema/narad.yaml tests/data/invalid/narad_invalid.yaml --target-class NaradCapability```
+
+* Generating an OWL/RDF graph of the schema:
+  * ```uv run gen-owl  src/narad/schema/narad.yaml > "project/owl/narad.owl.ttl"```
+  * This will generate an OWL/RDF graph of the schema in the `project/owl/` directory.  
+
+  * Generate an OWL/RDF graph of the schema and instance data:
+    * ```uv run linkml-convert -s src/narad/schema/narad.yaml -t rdf examples/core_acc_narad_instance.yaml -o project/owl/core_acc_narad_instance.ttl```
+      * this will generate an OWL/RDF graph of the instance data in Turtle format. You can also use other formats such as RDF/XML or JSON-LD by changing the output file extension.

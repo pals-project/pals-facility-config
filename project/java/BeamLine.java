@@ -9,15 +9,15 @@ import lombok.*;
 
 
 /**
-  A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
+  PALS element for an ordered sequence of beamline elements defining a beam path.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Beamline extends VirtualComponent {
+public class BeamLine extends VirtualComponent {
 
-  private boolean multipass;
   private Float length;
-  private String zeroPoint;
+  private String description;
+  private boolean multipass;
   private boolean periodic;
   private Integer repeat;
   private Integer direction;

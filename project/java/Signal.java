@@ -1,19 +1,20 @@
 package None;
 
-/* metamodel_version: 1.7.0 */
 import java.util.List;
 import lombok.*;
+
+
+
+
+
 
 /**
   Semantic meaning of a control-system signal associated with a component.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Signal  {
+public class Signal extends Node {
 
-  private String id;
-  private String kind;
-  private String alias;
   private String signalRole;
   private String sourceSystem;
   private String nativeDescription;

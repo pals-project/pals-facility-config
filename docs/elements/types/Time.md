@@ -1,54 +1,17 @@
-# Type: Time 
 
+# Type: time
 
+A time object represents a (local) time of day, independent of any particular day
 
+URI: [linkml:Time](https://w3id.org/linkml/Time)
 
-_A time object represents a (local) time of day, independent of any particular day_
+|  |  |  |
+| --- | --- | --- |
+| Root (builtin) type | | **XSDTime** |
+| Representation | | str |
 
+## Other properties
 
-
-URI: [xsd:time](http://www.w3.org/2001/XMLSchema#time)
-
-## Type Properties
-
-| Property | Value |
-| --- | --- |
-| Base | `XSDTime` |
-| Type URI | [xsd:time](http://www.w3.org/2001/XMLSchema#time) |
-| Representation | `str` |
-
-
-
-
-
-
-## Notes
-
-* URI is dateTime because OWL reasoners do not work with straight date or time
-* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "time".
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://w3id.org/accelerator-core
-
-
-
-
-## Mappings
-
-| Mapping Type | Mapped Value |
-| ---  | ---  |
-| self | xsd:time |
-| native | pals:time |
-| exact | schema:Time |
-
-
+|  |  |  |
+| --- | --- | --- |
+| **Exact Mappings:** | | schema:Time |
