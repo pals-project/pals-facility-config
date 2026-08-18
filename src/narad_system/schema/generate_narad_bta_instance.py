@@ -25,6 +25,7 @@ MAGNET_FUNCTIONS = {
 DIRECT_PARAMETER_GROUPS = ("ReferenceP", "TwissP", "BodyShiftP")
 
 
+# BtA multiwire monitor device properties used to populate additional_metadata fields.
 MW_DEVICE_INFO = {
     "MW006": {
         "nbr_wires_x": 32,
@@ -58,6 +59,8 @@ MW_DEVICE_INFO = {
     },
 }
 
+# ADO signal generation rules for BtA components. 
+# Each entry maps a PALS element name pattern to an ADO device and attribute.
 ADO_RULES = {
         'BTA': {#System
             'Quadrupole': {#Kind
@@ -91,6 +94,8 @@ ADO_RULES = {
         }
     }
 
+# ADO signal specifications for BtA components. 
+# Each entry defines the properties of a signal type.
 ADO_SIGNAL_SPECS = {
     "current_setpoint": {
         "signal_role": "Setpoint",
@@ -99,7 +104,7 @@ ADO_SIGNAL_SPECS = {
         "quantity_kind": "ElectricCurrent",
         "native_data_type": "Float",
         "native_unit": "A",
-        "predicate": "has_setpoint_signal",
+        "predicate": "pals:has_setpoint_signal",
     },
     "current_readback": {
         "signal_role": "Readback",
@@ -108,7 +113,7 @@ ADO_SIGNAL_SPECS = {
         "quantity_kind": "ElectricCurrent",
         "native_data_type": "Float",
         "native_unit": "A",
-        "predicate": "has_readback_signal",
+        "predicate": "pals:has_readback_signal",
     },
     "current_range": {
         "signal_role": "RangeLimit",
@@ -117,7 +122,7 @@ ADO_SIGNAL_SPECS = {
         "quantity_kind": "ElectricCurrent",
         "native_data_type": "FloatArray",
         "native_unit": "A",
-        "predicate": "has_limit_signal",
+        "predicate": "pals:has_limit_signal",
         "MetaP": {
             "additional_metadata": [
                 {"key": "array_order", "value": "maximum,minimum", "datatype": "String"},
@@ -132,7 +137,7 @@ ADO_SIGNAL_SPECS = {
         "quantity_kind": "State",
         "native_data_type": "String",
         "native_unit": "none",
-        "predicate": "has_status_signal",
+        "predicate": "pals:has_signal",
     },
     "horizontal_profile": {
         "signal_role": "Readback",
@@ -141,7 +146,7 @@ ADO_SIGNAL_SPECS = {
         "quantity_kind": "BeamPosition",
         "native_data_type": "FloatArray",
         "native_unit": "V",
-        "predicate": "has_readback_signal",
+        "predicate": "pals:has_readback_signal",
     },
     "vertical_profile": {
         "signal_role": "Readback",
@@ -150,7 +155,7 @@ ADO_SIGNAL_SPECS = {
         "quantity_kind": "BeamPosition",
         "native_data_type": "FloatArray",
         "native_unit": "V",
-        "predicate": "has_readback_signal",
+        "predicate": "pals:has_readback_signal",
     },
     "insertion_status": {
         "signal_role": "Status",
@@ -159,7 +164,7 @@ ADO_SIGNAL_SPECS = {
         "quantity_kind": "State",
         "native_data_type": "String",
         "native_unit": "none",
-        "predicate": "has_status_signal",
+        "predicate": "pals:has_signal",
     },
 }
 
@@ -173,6 +178,20 @@ def metadata_datatype(value: Any) -> str:
     if isinstance(value, float):
         return "Float"
     return "String"
+
+
+def normalize_parameter_groups(entity: dict[str, Any], *, replace_ids: bool = False) -> None:
+    """Add stable IDs and normalize aliases for inlined PALS parameter groups."""
+    for group_name, group in entity.items():
+        if not group_name.endswith("P") or not isinstance(group, dict):
+            continue
+        group_id = f"{entity['id']}/{group_name}"
+        if replace_ids:
+            group["id"] = group_id
+        else:
+            group.setdefault("id", group_id)
+        if isinstance(group.get("alias"), str):
+            group["alias"] = [group["alias"]]
 
 
 def add_mw_metadata(component: dict[str, Any], name: str) -> None:
@@ -238,10 +257,11 @@ def generate_ado_signals(
                 "native_data_type": spec["native_data_type"],
                 "native_unit": spec["native_unit"],
                 "access_protocol": "ADO",
-                "alias": semantic_name,
+                "alias": [semantic_name],
             }
             if "MetaP" in spec:
                 signal["MetaP"] = deepcopy(spec["MetaP"])
+            normalize_parameter_groups(signal)
 
             existing = signals_by_id.setdefault(signal_id, signal)
             if existing != signal:
@@ -281,6 +301,7 @@ def magnetic_multipoles(group: dict[str, Any]) -> dict[str, Any] | None:
 
 
 def native_types(source: dict[str, Any]) -> list[str]:
+    """Return a list of native type identifiers for a PALS element."""
     values = [str(source["kind"])]
     bmad_key = source.get("Bmad", {}).get("Bmad_key")
     if bmad_key and bmad_key not in values:
@@ -358,10 +379,12 @@ def component_from_pals(name: str, source: dict[str, Any]) -> dict[str, Any] | N
         elif bmad_key == "VKicker":
             component["plane"] = "Vertical"
 
+    normalize_parameter_groups(component)
     return component
 
 
 def load_facility_records(path: Path) -> tuple[dict[str, dict[str, Any]], list[str], bool]:
+    """Load PALS facility records and extract the beamline definition."""
     with path.open(encoding="utf-8") as stream:
         document = yaml.safe_load(stream)
 
@@ -387,6 +410,7 @@ def load_facility_records(path: Path) -> tuple[dict[str, dict[str, Any]], list[s
 
 
 def build_document(source_path: Path) -> dict[str, Any]:
+    """Build a NARAD instance document from a PALS export and local ADO rules."""
     records, line, periodic = load_facility_records(source_path)
     components_by_name = {
         name: component
@@ -405,6 +429,7 @@ def build_document(source_path: Path) -> dict[str, Any]:
         if occurrence_totals[name] > 1:
             occurrence_numbers[name] += 1
             component["id"] = instance_id(f"{name}_{occurrence_numbers[name]:03d}")
+            normalize_parameter_groups(component, replace_ids=True)
         components.append(component)
         ordered_ids.append(component["id"])
 
@@ -421,7 +446,7 @@ def build_document(source_path: Path) -> dict[str, Any]:
             {
                 "id": f"inst:{subject[5:]}_PRECEDES_{obj[5:]}",
                 "subject": subject,
-                "predicate": "precedes",
+                "predicate": "pals:precedes",
                 "object": obj,
                 "context": "beamline_order",
                 "beamline_context": beamline_id,
