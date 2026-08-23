@@ -12,6 +12,7 @@ enum CanonicalSignalTypeEnum
     MagnetCurrentSetpoint
     MagnetCurrentReadback
     MagnetFieldSetpoint
+    MagnetCurrentRange
     IntegratedFieldSetpoint
     IntegratedFieldReadback
     VacuumPressure
@@ -41,6 +42,7 @@ enum DataTypeEnum
     Integer
     Float
     Boolean
+    FloatArray
   }
 
 enum DirectionEnum
@@ -161,6 +163,7 @@ enum SignalRoleEnum
     Command
     MinimumLimit
     MaximumLimit
+    RangeLimit
   }
 
 enum SourceSystemEnum
@@ -207,6 +210,7 @@ enum VirtualFunctionEnum
   {
     BeamLineSection
     Mark
+    DriftSpace
     Fork
     Control
   }
@@ -357,6 +361,21 @@ type BeamProfileMonitor implements HasReferenceP, HasBodyShiftP, HasTwissP
     longitudinalPlacementP: LongitudinalPlacementParamGroup
     referenceP: ReferenceParamGroup
     bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+  }
+
+type BeginningEle implements HasReferenceP, HasTwissP
+  {
+    id: String!
+    kind: String!
+    alias: [String]
+    nativeTypes: [String]
+    metaP: MetaParamGroup
+    functions: [VirtualFunctionEnum]!
+    beamlineRelation: VirtualRelationEnum!
+    floorP: FloorParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    referenceP: ReferenceParamGroup
     twissP: TwissParamGroup
   }
 
@@ -526,6 +545,19 @@ type DiagnosticDevice
     metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+  }
+
+type Drift implements HasLongitudinalPlacementP
+  {
+    id: String!
+    kind: String!
+    alias: [String]
+    nativeTypes: [String]
+    metaP: MetaParamGroup
+    functions: [VirtualFunctionEnum]!
+    beamlineRelation: VirtualRelationEnum!
     floorP: FloorParamGroup
     longitudinalPlacementP: LongitudinalPlacementParamGroup
   }

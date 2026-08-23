@@ -1,9 +1,9 @@
 -- # Abstract Class: Node Description: Abstract base class for all node entities in the accelerator core ontology. This differentiates nodes from edges (relationships) in the ontology. This class is not intended to be instantiated directly, but serves as a common ancestor for all other classes. Allows for the use of kind: as a discriminator for the type of node in the ontology.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 -- # Class: PALSAccelerator Description: Root container for accelerator core components, semantic signals, and local bindings.
 --     * Slot: id
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: description Description: A human-readable description of the instance.
 --     * Slot: version Description: Version of the representation of a particle accelerator and its operations.
 --     * Slot: affiliation_id Description: The affiliation of the author or component, as a ROR.
@@ -159,20 +159,20 @@
 --     * Slot: MagneticMultipoleParamGroup_id Description: Autocreated FK slot
 -- # Abstract Class: Component Description: A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: Facility_id Description: Autocreated FK slot
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 -- # Class: PhysicalComponent Description: A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: LongitudinalPlacementP_id Description: A mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 -- # Class: VirtualComponent Description: A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 -- # Class: BeamLine Description: PALS element for an ordered sequence of beamline elements defining a beam path.
@@ -184,7 +184,7 @@
 --     * Slot: direction Description: Beam direction along the BeamLine: +1 or -1. Longitudinal orientation. Default is +1.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: Facility_id Description: Autocreated FK slot
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -199,13 +199,13 @@
 --     * Slot: access_protocol Description: The protocol used to access the signal in the source system,  such as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.
 --     * Slot: archive_identifier Description: The identifier used to reference the signal in an archival system.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: Facility_id Description: Autocreated FK slot
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 -- # Abstract Class: Magnet Description: An accelerator device that produces a magnetic field for beam control.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: TwissP_id Description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -215,7 +215,7 @@
 -- # Class: Solenoid Description: A magnet with a primarily longitudinal magnetic field used for focusing.A solenoid is an element whose magnetic field is dominated by a field whose direction is aligned with the magnetic axis.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: SolenoidP_id Description: A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -226,7 +226,7 @@
 -- # Class: Multipole Description: A general magnet with a higher-order multipole field, such as a sextupole or octupole.Only one of the electric or magnetic multipole components should be present, not both.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -238,7 +238,7 @@
 -- # Class: Bend Description: Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: BendP_id Description: A mixin for bend parameters that are aligned with PALS BendP (Bend Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -251,7 +251,7 @@
 -- # Class: Quadrupole Description: A magnet primarily used to focus or defocus the beam. 4 poles.Only one of the electric or magnetic multipole components should be present, not both.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -263,7 +263,7 @@
 -- # Class: Octupole Description: A magnet primarily used to focus or defocus the beam. 8 poles.Only one of the electric or magnetic multipole components should be present, not both.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -275,7 +275,7 @@
 -- # Class: Sextupole Description: A magnet primarily used to focus or defocus the beam. 6 poles.Only one of the electric or magnetic multipole components should be present, not both.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -288,7 +288,7 @@
 --     * Slot: plane Description: The transverse plane in which the kicker operates, either horizontal or vertical.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -301,7 +301,7 @@
 --     * Slot: plane Description: The transverse plane in which the kicker operates, either horizontal or vertical.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -313,14 +313,14 @@
 -- # Class: DiagnosticDevice Description: An accelerator device used to measure beam or machine state.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: LongitudinalPlacementP_id Description: A mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 -- # Class: BeamProfileMonitor Description: A diagnostic device used to measure transverse beam profile.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: TwissP_id Description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -330,7 +330,7 @@
 -- # Class: BeamPositionMonitor Description: A diagnostic device used to measure transverse beam position.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: TwissP_id Description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -340,7 +340,7 @@
 -- # Class: Aperture Description: A diagnostic or limiting aperture element used to constrain or characterize beam passage.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: TwissP_id Description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -349,7 +349,7 @@
 -- # Class: RadiationMonitor Description: A diagnostic device used to monitor radiation dose or dose rate.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: LongitudinalPlacementP_id Description: A mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -357,7 +357,7 @@
 -- # Abstract Class: Cavity Description: A cavity used for beam acceleration or manipulation.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -369,7 +369,7 @@
 -- # Class: CrabCavity Description: A cavity used for transverse beam manipulation, such as crabbing or deflecting.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MagneticMultipoleP_id Description: A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -381,7 +381,7 @@
 -- # Abstract Class: RFCavity Description: A cavity used for RF acceleration or longitudinal manipulation.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: RFP_id Description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -394,7 +394,7 @@
 -- # Class: NormalConductingRFCavity Description: A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: RFP_id Description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -407,7 +407,7 @@
 -- # Class: SuperConductingRFCavity Description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: RFP_id Description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: ElectricMultipoleP_id Description: A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -420,7 +420,7 @@
 -- # Class: SupportingFacilityComponent Description: A physical component that supports accelerator operation  without a specific beam-pipe placement,  such as a power supply, control rack, or radiation detector. These can include Girders, Racks, Power Supplies,  and other physical infrastructure components that are important for understanding  the structure and function of the accelerator system but are not inline with the beamline.
 --     * Slot: beamline_relation Description: The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: LongitudinalPlacementP_id Description: A mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -428,22 +428,38 @@
 -- # Class: BookkeepingComponent Description: A virtual component that represents a bookkeeping or organizational role in the accelerator system,  such as a BeamLineSection, Marker or a Fork. These can include BeamLineSections, Markers, Forks, and other virtual components that are important for understanding  the structure and function of the accelerator system but are not physical devices.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 -- # Class: Marker Description: A virtual component used as a reference point or marker in the beamline structure.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: TwissP_id Description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+--     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+--     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+-- # Class: BeginningEle Description: Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference parameters; otherwise it is expected to be the first element in the branch.
+--     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
+--     * Slot: id Description: A unique identifier for the instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
+--     * Slot: ReferenceP_id Description: A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+--     * Slot: TwissP_id Description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+--     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+--     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+--     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
+-- # Class: Drift Description: A field-free space between beamline components. A Drift is a virtual beamline component whose longitudinal extent preserves the separation between adjacent physical or virtual components.
+--     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
+--     * Slot: id Description: A unique identifier for the instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
+--     * Slot: LongitudinalPlacementP_id Description: A mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 -- # Class: BeamLineSection Description: A virtual component used to represent a section of the BeamLine for organizational or functional grouping of components.
 --     * Slot: beamline_relation Description: The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems.
 --     * Slot: id Description: A unique identifier for the instance.
---     * Slot: kind Description: The LinkML class name of this instance.
+--     * Slot: kind Description: The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.
 --     * Slot: FloorP_id Description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: BodyShiftP_id Description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
 --     * Slot: MetaP_id Description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
@@ -850,6 +866,24 @@
 -- # Class: Marker_alias
 --     * Slot: Marker_id Description: Autocreated FK slot
 --     * Slot: alias Description: An alternative name or identifier for the instance.
+-- # Class: BeginningEle_functions
+--     * Slot: BeginningEle_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the virtual component,  which can be used to identify the component across different source systems.
+-- # Class: BeginningEle_native_types
+--     * Slot: BeginningEle_id Description: Autocreated FK slot
+--     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: BeginningEle_alias
+--     * Slot: BeginningEle_id Description: Autocreated FK slot
+--     * Slot: alias Description: An alternative name or identifier for the instance.
+-- # Class: Drift_functions
+--     * Slot: Drift_id Description: Autocreated FK slot
+--     * Slot: functions Description: The function of the virtual component,  which can be used to identify the component across different source systems.
+-- # Class: Drift_native_types
+--     * Slot: Drift_id Description: Autocreated FK slot
+--     * Slot: native_types Description: The native type of the component in the source system, which can be used to identify the component across different source systems.
+-- # Class: Drift_alias
+--     * Slot: Drift_id Description: Autocreated FK slot
+--     * Slot: alias Description: An alternative name or identifier for the instance.
 -- # Class: BeamLineSection_functions
 --     * Slot: BeamLineSection_id Description: Autocreated FK slot
 --     * Slot: functions Description: The function of the virtual component,  which can be used to identify the component across different source systems.
@@ -1158,7 +1192,7 @@ CREATE TABLE "Signal" (
 	native_description TEXT,
 	canonical_signal_type VARCHAR(28) NOT NULL,
 	quantity_kind VARCHAR(23) NOT NULL,
-	native_data_type VARCHAR(7) NOT NULL,
+	native_data_type VARCHAR(10) NOT NULL,
 	native_unit VARCHAR(18) NOT NULL,
 	access_protocol TEXT,
 	archive_identifier TEXT,
@@ -1600,6 +1634,34 @@ CREATE TABLE "Marker" (
 	FOREIGN KEY("FloorP_id") REFERENCES "FloorParamGroup" (id),
 	FOREIGN KEY("MetaP_id") REFERENCES "MetaParamGroup" (id)
 );CREATE INDEX "ix_Marker_id" ON "Marker" (id);
+CREATE TABLE "BeginningEle" (
+	beamline_relation VARCHAR(25) NOT NULL,
+	id TEXT NOT NULL,
+	kind TEXT NOT NULL,
+	"ReferenceP_id" TEXT,
+	"TwissP_id" TEXT,
+	"BodyShiftP_id" TEXT,
+	"FloorP_id" TEXT,
+	"MetaP_id" TEXT,
+	PRIMARY KEY (id),
+	FOREIGN KEY("ReferenceP_id") REFERENCES "ReferenceParamGroup" (id),
+	FOREIGN KEY("TwissP_id") REFERENCES "TwissParamGroup" (id),
+	FOREIGN KEY("BodyShiftP_id") REFERENCES "BodyShiftParamGroup" (id),
+	FOREIGN KEY("FloorP_id") REFERENCES "FloorParamGroup" (id),
+	FOREIGN KEY("MetaP_id") REFERENCES "MetaParamGroup" (id)
+);CREATE INDEX "ix_BeginningEle_id" ON "BeginningEle" (id);
+CREATE TABLE "Drift" (
+	beamline_relation VARCHAR(25) NOT NULL,
+	id TEXT NOT NULL,
+	kind TEXT NOT NULL,
+	"LongitudinalPlacementP_id" TEXT,
+	"FloorP_id" TEXT,
+	"MetaP_id" TEXT,
+	PRIMARY KEY (id),
+	FOREIGN KEY("LongitudinalPlacementP_id") REFERENCES "LongitudinalPlacementParamGroup" (id),
+	FOREIGN KEY("FloorP_id") REFERENCES "FloorParamGroup" (id),
+	FOREIGN KEY("MetaP_id") REFERENCES "MetaParamGroup" (id)
+);CREATE INDEX "ix_Drift_id" ON "Drift" (id);
 CREATE TABLE "BeamLineSection" (
 	beamline_relation VARCHAR(25) NOT NULL,
 	id TEXT NOT NULL,
@@ -1616,7 +1678,7 @@ CREATE TABLE "AdditionalMetadata" (
 	id INTEGER NOT NULL,
 	"key" TEXT NOT NULL,
 	value TEXT NOT NULL,
-	datatype VARCHAR(7),
+	datatype VARCHAR(10),
 	"MetaParamGroup_id" TEXT,
 	PRIMARY KEY (id),
 	FOREIGN KEY("MetaParamGroup_id") REFERENCES "MetaParamGroup" (id)
@@ -1873,7 +1935,7 @@ CREATE TABLE "PALSAccelerator_notes" (
 	notes TEXT,
 	PRIMARY KEY ("PALSAccelerator_id", notes),
 	FOREIGN KEY("PALSAccelerator_id") REFERENCES "PALSAccelerator" (id)
-);CREATE INDEX "ix_PALSAccelerator_notes_PALSAccelerator_id" ON "PALSAccelerator_notes" ("PALSAccelerator_id");CREATE INDEX "ix_PALSAccelerator_notes_notes" ON "PALSAccelerator_notes" (notes);
+);CREATE INDEX "ix_PALSAccelerator_notes_notes" ON "PALSAccelerator_notes" (notes);CREATE INDEX "ix_PALSAccelerator_notes_PALSAccelerator_id" ON "PALSAccelerator_notes" ("PALSAccelerator_id");
 CREATE TABLE "Component_native_types" (
 	"Component_id" TEXT,
 	native_types TEXT,
@@ -1921,25 +1983,25 @@ CREATE TABLE "VirtualComponent_alias" (
 	alias TEXT,
 	PRIMARY KEY ("VirtualComponent_id", alias),
 	FOREIGN KEY("VirtualComponent_id") REFERENCES "VirtualComponent" (id)
-);CREATE INDEX "ix_VirtualComponent_alias_VirtualComponent_id" ON "VirtualComponent_alias" ("VirtualComponent_id");CREATE INDEX "ix_VirtualComponent_alias_alias" ON "VirtualComponent_alias" (alias);
+);CREATE INDEX "ix_VirtualComponent_alias_alias" ON "VirtualComponent_alias" (alias);CREATE INDEX "ix_VirtualComponent_alias_VirtualComponent_id" ON "VirtualComponent_alias" ("VirtualComponent_id");
 CREATE TABLE "BeamLine_functions" (
 	"BeamLine_id" TEXT,
 	functions VARCHAR(15) NOT NULL,
 	PRIMARY KEY ("BeamLine_id", functions),
 	FOREIGN KEY("BeamLine_id") REFERENCES "BeamLine" (id)
-);CREATE INDEX "ix_BeamLine_functions_functions" ON "BeamLine_functions" (functions);CREATE INDEX "ix_BeamLine_functions_BeamLine_id" ON "BeamLine_functions" ("BeamLine_id");
+);CREATE INDEX "ix_BeamLine_functions_BeamLine_id" ON "BeamLine_functions" ("BeamLine_id");CREATE INDEX "ix_BeamLine_functions_functions" ON "BeamLine_functions" (functions);
 CREATE TABLE "BeamLine_native_types" (
 	"BeamLine_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("BeamLine_id", native_types),
 	FOREIGN KEY("BeamLine_id") REFERENCES "BeamLine" (id)
-);CREATE INDEX "ix_BeamLine_native_types_native_types" ON "BeamLine_native_types" (native_types);CREATE INDEX "ix_BeamLine_native_types_BeamLine_id" ON "BeamLine_native_types" ("BeamLine_id");
+);CREATE INDEX "ix_BeamLine_native_types_BeamLine_id" ON "BeamLine_native_types" ("BeamLine_id");CREATE INDEX "ix_BeamLine_native_types_native_types" ON "BeamLine_native_types" (native_types);
 CREATE TABLE "BeamLine_alias" (
 	"BeamLine_id" TEXT,
 	alias TEXT,
 	PRIMARY KEY ("BeamLine_id", alias),
 	FOREIGN KEY("BeamLine_id") REFERENCES "BeamLine" (id)
-);CREATE INDEX "ix_BeamLine_alias_alias" ON "BeamLine_alias" (alias);CREATE INDEX "ix_BeamLine_alias_BeamLine_id" ON "BeamLine_alias" ("BeamLine_id");
+);CREATE INDEX "ix_BeamLine_alias_BeamLine_id" ON "BeamLine_alias" ("BeamLine_id");CREATE INDEX "ix_BeamLine_alias_alias" ON "BeamLine_alias" (alias);
 CREATE TABLE "Signal_alias" (
 	"Signal_id" TEXT,
 	alias TEXT,
@@ -1951,7 +2013,7 @@ CREATE TABLE "Magnet_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("Magnet_id", functions),
 	FOREIGN KEY("Magnet_id") REFERENCES "Magnet" (id)
-);CREATE INDEX "ix_Magnet_functions_functions" ON "Magnet_functions" (functions);CREATE INDEX "ix_Magnet_functions_Magnet_id" ON "Magnet_functions" ("Magnet_id");
+);CREATE INDEX "ix_Magnet_functions_Magnet_id" ON "Magnet_functions" ("Magnet_id");CREATE INDEX "ix_Magnet_functions_functions" ON "Magnet_functions" (functions);
 CREATE TABLE "Magnet_native_types" (
 	"Magnet_id" TEXT,
 	native_types TEXT,
@@ -1969,7 +2031,7 @@ CREATE TABLE "Solenoid_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("Solenoid_id", functions),
 	FOREIGN KEY("Solenoid_id") REFERENCES "Solenoid" (id)
-);CREATE INDEX "ix_Solenoid_functions_Solenoid_id" ON "Solenoid_functions" ("Solenoid_id");CREATE INDEX "ix_Solenoid_functions_functions" ON "Solenoid_functions" (functions);
+);CREATE INDEX "ix_Solenoid_functions_functions" ON "Solenoid_functions" (functions);CREATE INDEX "ix_Solenoid_functions_Solenoid_id" ON "Solenoid_functions" ("Solenoid_id");
 CREATE TABLE "Solenoid_native_types" (
 	"Solenoid_id" TEXT,
 	native_types TEXT,
@@ -1981,7 +2043,7 @@ CREATE TABLE "Solenoid_alias" (
 	alias TEXT,
 	PRIMARY KEY ("Solenoid_id", alias),
 	FOREIGN KEY("Solenoid_id") REFERENCES "Solenoid" (id)
-);CREATE INDEX "ix_Solenoid_alias_alias" ON "Solenoid_alias" (alias);CREATE INDEX "ix_Solenoid_alias_Solenoid_id" ON "Solenoid_alias" ("Solenoid_id");
+);CREATE INDEX "ix_Solenoid_alias_Solenoid_id" ON "Solenoid_alias" ("Solenoid_id");CREATE INDEX "ix_Solenoid_alias_alias" ON "Solenoid_alias" (alias);
 CREATE TABLE "Multipole_functions" (
 	"Multipole_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -1993,7 +2055,7 @@ CREATE TABLE "Multipole_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Multipole_id", native_types),
 	FOREIGN KEY("Multipole_id") REFERENCES "Multipole" (id)
-);CREATE INDEX "ix_Multipole_native_types_native_types" ON "Multipole_native_types" (native_types);CREATE INDEX "ix_Multipole_native_types_Multipole_id" ON "Multipole_native_types" ("Multipole_id");
+);CREATE INDEX "ix_Multipole_native_types_Multipole_id" ON "Multipole_native_types" ("Multipole_id");CREATE INDEX "ix_Multipole_native_types_native_types" ON "Multipole_native_types" (native_types);
 CREATE TABLE "Multipole_alias" (
 	"Multipole_id" TEXT,
 	alias TEXT,
@@ -2011,7 +2073,7 @@ CREATE TABLE "Bend_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Bend_id", native_types),
 	FOREIGN KEY("Bend_id") REFERENCES "Bend" (id)
-);CREATE INDEX "ix_Bend_native_types_native_types" ON "Bend_native_types" (native_types);CREATE INDEX "ix_Bend_native_types_Bend_id" ON "Bend_native_types" ("Bend_id");
+);CREATE INDEX "ix_Bend_native_types_Bend_id" ON "Bend_native_types" ("Bend_id");CREATE INDEX "ix_Bend_native_types_native_types" ON "Bend_native_types" (native_types);
 CREATE TABLE "Bend_alias" (
 	"Bend_id" TEXT,
 	alias TEXT,
@@ -2029,7 +2091,7 @@ CREATE TABLE "Quadrupole_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Quadrupole_id", native_types),
 	FOREIGN KEY("Quadrupole_id") REFERENCES "Quadrupole" (id)
-);CREATE INDEX "ix_Quadrupole_native_types_Quadrupole_id" ON "Quadrupole_native_types" ("Quadrupole_id");CREATE INDEX "ix_Quadrupole_native_types_native_types" ON "Quadrupole_native_types" (native_types);
+);CREATE INDEX "ix_Quadrupole_native_types_native_types" ON "Quadrupole_native_types" (native_types);CREATE INDEX "ix_Quadrupole_native_types_Quadrupole_id" ON "Quadrupole_native_types" ("Quadrupole_id");
 CREATE TABLE "Quadrupole_alias" (
 	"Quadrupole_id" TEXT,
 	alias TEXT,
@@ -2071,7 +2133,7 @@ CREATE TABLE "Sextupole_alias" (
 	alias TEXT,
 	PRIMARY KEY ("Sextupole_id", alias),
 	FOREIGN KEY("Sextupole_id") REFERENCES "Sextupole" (id)
-);CREATE INDEX "ix_Sextupole_alias_Sextupole_id" ON "Sextupole_alias" ("Sextupole_id");CREATE INDEX "ix_Sextupole_alias_alias" ON "Sextupole_alias" (alias);
+);CREATE INDEX "ix_Sextupole_alias_alias" ON "Sextupole_alias" (alias);CREATE INDEX "ix_Sextupole_alias_Sextupole_id" ON "Sextupole_alias" ("Sextupole_id");
 CREATE TABLE "Kicker_functions" (
 	"Kicker_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -2083,7 +2145,7 @@ CREATE TABLE "Kicker_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Kicker_id", native_types),
 	FOREIGN KEY("Kicker_id") REFERENCES "Kicker" (id)
-);CREATE INDEX "ix_Kicker_native_types_Kicker_id" ON "Kicker_native_types" ("Kicker_id");CREATE INDEX "ix_Kicker_native_types_native_types" ON "Kicker_native_types" (native_types);
+);CREATE INDEX "ix_Kicker_native_types_native_types" ON "Kicker_native_types" (native_types);CREATE INDEX "ix_Kicker_native_types_Kicker_id" ON "Kicker_native_types" ("Kicker_id");
 CREATE TABLE "Kicker_alias" (
 	"Kicker_id" TEXT,
 	alias TEXT,
@@ -2101,13 +2163,13 @@ CREATE TABLE "ACKicker_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("ACKicker_id", native_types),
 	FOREIGN KEY("ACKicker_id") REFERENCES "ACKicker" (id)
-);CREATE INDEX "ix_ACKicker_native_types_ACKicker_id" ON "ACKicker_native_types" ("ACKicker_id");CREATE INDEX "ix_ACKicker_native_types_native_types" ON "ACKicker_native_types" (native_types);
+);CREATE INDEX "ix_ACKicker_native_types_native_types" ON "ACKicker_native_types" (native_types);CREATE INDEX "ix_ACKicker_native_types_ACKicker_id" ON "ACKicker_native_types" ("ACKicker_id");
 CREATE TABLE "ACKicker_alias" (
 	"ACKicker_id" TEXT,
 	alias TEXT,
 	PRIMARY KEY ("ACKicker_id", alias),
 	FOREIGN KEY("ACKicker_id") REFERENCES "ACKicker" (id)
-);CREATE INDEX "ix_ACKicker_alias_ACKicker_id" ON "ACKicker_alias" ("ACKicker_id");CREATE INDEX "ix_ACKicker_alias_alias" ON "ACKicker_alias" (alias);
+);CREATE INDEX "ix_ACKicker_alias_alias" ON "ACKicker_alias" (alias);CREATE INDEX "ix_ACKicker_alias_ACKicker_id" ON "ACKicker_alias" ("ACKicker_id");
 CREATE TABLE "DiagnosticDevice_functions" (
 	"DiagnosticDevice_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -2131,7 +2193,7 @@ CREATE TABLE "BeamProfileMonitor_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("BeamProfileMonitor_id", functions),
 	FOREIGN KEY("BeamProfileMonitor_id") REFERENCES "BeamProfileMonitor" (id)
-);CREATE INDEX "ix_BeamProfileMonitor_functions_BeamProfileMonitor_id" ON "BeamProfileMonitor_functions" ("BeamProfileMonitor_id");CREATE INDEX "ix_BeamProfileMonitor_functions_functions" ON "BeamProfileMonitor_functions" (functions);
+);CREATE INDEX "ix_BeamProfileMonitor_functions_functions" ON "BeamProfileMonitor_functions" (functions);CREATE INDEX "ix_BeamProfileMonitor_functions_BeamProfileMonitor_id" ON "BeamProfileMonitor_functions" ("BeamProfileMonitor_id");
 CREATE TABLE "BeamProfileMonitor_native_types" (
 	"BeamProfileMonitor_id" TEXT,
 	native_types TEXT,
@@ -2149,7 +2211,7 @@ CREATE TABLE "BeamPositionMonitor_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("BeamPositionMonitor_id", functions),
 	FOREIGN KEY("BeamPositionMonitor_id") REFERENCES "BeamPositionMonitor" (id)
-);CREATE INDEX "ix_BeamPositionMonitor_functions_functions" ON "BeamPositionMonitor_functions" (functions);CREATE INDEX "ix_BeamPositionMonitor_functions_BeamPositionMonitor_id" ON "BeamPositionMonitor_functions" ("BeamPositionMonitor_id");
+);CREATE INDEX "ix_BeamPositionMonitor_functions_BeamPositionMonitor_id" ON "BeamPositionMonitor_functions" ("BeamPositionMonitor_id");CREATE INDEX "ix_BeamPositionMonitor_functions_functions" ON "BeamPositionMonitor_functions" (functions);
 CREATE TABLE "BeamPositionMonitor_native_types" (
 	"BeamPositionMonitor_id" TEXT,
 	native_types TEXT,
@@ -2173,7 +2235,7 @@ CREATE TABLE "Aperture_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Aperture_id", native_types),
 	FOREIGN KEY("Aperture_id") REFERENCES "Aperture" (id)
-);CREATE INDEX "ix_Aperture_native_types_native_types" ON "Aperture_native_types" (native_types);CREATE INDEX "ix_Aperture_native_types_Aperture_id" ON "Aperture_native_types" ("Aperture_id");
+);CREATE INDEX "ix_Aperture_native_types_Aperture_id" ON "Aperture_native_types" ("Aperture_id");CREATE INDEX "ix_Aperture_native_types_native_types" ON "Aperture_native_types" (native_types);
 CREATE TABLE "Aperture_alias" (
 	"Aperture_id" TEXT,
 	alias TEXT,
@@ -2185,7 +2247,7 @@ CREATE TABLE "RadiationMonitor_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("RadiationMonitor_id", functions),
 	FOREIGN KEY("RadiationMonitor_id") REFERENCES "RadiationMonitor" (id)
-);CREATE INDEX "ix_RadiationMonitor_functions_RadiationMonitor_id" ON "RadiationMonitor_functions" ("RadiationMonitor_id");CREATE INDEX "ix_RadiationMonitor_functions_functions" ON "RadiationMonitor_functions" (functions);
+);CREATE INDEX "ix_RadiationMonitor_functions_functions" ON "RadiationMonitor_functions" (functions);CREATE INDEX "ix_RadiationMonitor_functions_RadiationMonitor_id" ON "RadiationMonitor_functions" ("RadiationMonitor_id");
 CREATE TABLE "RadiationMonitor_native_types" (
 	"RadiationMonitor_id" TEXT,
 	native_types TEXT,
@@ -2203,7 +2265,7 @@ CREATE TABLE "Cavity_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("Cavity_id", functions),
 	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id)
-);CREATE INDEX "ix_Cavity_functions_functions" ON "Cavity_functions" (functions);CREATE INDEX "ix_Cavity_functions_Cavity_id" ON "Cavity_functions" ("Cavity_id");
+);CREATE INDEX "ix_Cavity_functions_Cavity_id" ON "Cavity_functions" ("Cavity_id");CREATE INDEX "ix_Cavity_functions_functions" ON "Cavity_functions" (functions);
 CREATE TABLE "Cavity_native_types" (
 	"Cavity_id" TEXT,
 	native_types TEXT,
@@ -2215,7 +2277,7 @@ CREATE TABLE "Cavity_alias" (
 	alias TEXT,
 	PRIMARY KEY ("Cavity_id", alias),
 	FOREIGN KEY("Cavity_id") REFERENCES "Cavity" (id)
-);CREATE INDEX "ix_Cavity_alias_Cavity_id" ON "Cavity_alias" ("Cavity_id");CREATE INDEX "ix_Cavity_alias_alias" ON "Cavity_alias" (alias);
+);CREATE INDEX "ix_Cavity_alias_alias" ON "Cavity_alias" (alias);CREATE INDEX "ix_Cavity_alias_Cavity_id" ON "Cavity_alias" ("Cavity_id");
 CREATE TABLE "CrabCavity_functions" (
 	"CrabCavity_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -2239,13 +2301,13 @@ CREATE TABLE "RFCavity_functions" (
 	functions VARCHAR(23) NOT NULL,
 	PRIMARY KEY ("RFCavity_id", functions),
 	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id)
-);CREATE INDEX "ix_RFCavity_functions_RFCavity_id" ON "RFCavity_functions" ("RFCavity_id");CREATE INDEX "ix_RFCavity_functions_functions" ON "RFCavity_functions" (functions);
+);CREATE INDEX "ix_RFCavity_functions_functions" ON "RFCavity_functions" (functions);CREATE INDEX "ix_RFCavity_functions_RFCavity_id" ON "RFCavity_functions" ("RFCavity_id");
 CREATE TABLE "RFCavity_native_types" (
 	"RFCavity_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("RFCavity_id", native_types),
 	FOREIGN KEY("RFCavity_id") REFERENCES "RFCavity" (id)
-);CREATE INDEX "ix_RFCavity_native_types_native_types" ON "RFCavity_native_types" (native_types);CREATE INDEX "ix_RFCavity_native_types_RFCavity_id" ON "RFCavity_native_types" ("RFCavity_id");
+);CREATE INDEX "ix_RFCavity_native_types_RFCavity_id" ON "RFCavity_native_types" ("RFCavity_id");CREATE INDEX "ix_RFCavity_native_types_native_types" ON "RFCavity_native_types" (native_types);
 CREATE TABLE "RFCavity_alias" (
 	"RFCavity_id" TEXT,
 	alias TEXT,
@@ -2269,7 +2331,7 @@ CREATE TABLE "NormalConductingRFCavity_alias" (
 	alias TEXT,
 	PRIMARY KEY ("NormalConductingRFCavity_id", alias),
 	FOREIGN KEY("NormalConductingRFCavity_id") REFERENCES "NormalConductingRFCavity" (id)
-);CREATE INDEX "ix_NormalConductingRFCavity_alias_NormalConductingRFCavity_id" ON "NormalConductingRFCavity_alias" ("NormalConductingRFCavity_id");CREATE INDEX "ix_NormalConductingRFCavity_alias_alias" ON "NormalConductingRFCavity_alias" (alias);
+);CREATE INDEX "ix_NormalConductingRFCavity_alias_alias" ON "NormalConductingRFCavity_alias" (alias);CREATE INDEX "ix_NormalConductingRFCavity_alias_NormalConductingRFCavity_id" ON "NormalConductingRFCavity_alias" ("NormalConductingRFCavity_id");
 CREATE TABLE "SuperConductingRFCavity_functions" (
 	"SuperConductingRFCavity_id" TEXT,
 	functions VARCHAR(23) NOT NULL,
@@ -2299,7 +2361,7 @@ CREATE TABLE "SupportingFacilityComponent_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("SupportingFacilityComponent_id", native_types),
 	FOREIGN KEY("SupportingFacilityComponent_id") REFERENCES "SupportingFacilityComponent" (id)
-);CREATE INDEX "ix_SupportingFacilityComponent_native_types_SupportingFacilityComponent_id" ON "SupportingFacilityComponent_native_types" ("SupportingFacilityComponent_id");CREATE INDEX "ix_SupportingFacilityComponent_native_types_native_types" ON "SupportingFacilityComponent_native_types" (native_types);
+);CREATE INDEX "ix_SupportingFacilityComponent_native_types_native_types" ON "SupportingFacilityComponent_native_types" (native_types);CREATE INDEX "ix_SupportingFacilityComponent_native_types_SupportingFacilityComponent_id" ON "SupportingFacilityComponent_native_types" ("SupportingFacilityComponent_id");
 CREATE TABLE "SupportingFacilityComponent_alias" (
 	"SupportingFacilityComponent_id" TEXT,
 	alias TEXT,
@@ -2311,7 +2373,7 @@ CREATE TABLE "BookkeepingComponent_functions" (
 	functions VARCHAR(15) NOT NULL,
 	PRIMARY KEY ("BookkeepingComponent_id", functions),
 	FOREIGN KEY("BookkeepingComponent_id") REFERENCES "BookkeepingComponent" (id)
-);CREATE INDEX "ix_BookkeepingComponent_functions_functions" ON "BookkeepingComponent_functions" (functions);CREATE INDEX "ix_BookkeepingComponent_functions_BookkeepingComponent_id" ON "BookkeepingComponent_functions" ("BookkeepingComponent_id");
+);CREATE INDEX "ix_BookkeepingComponent_functions_BookkeepingComponent_id" ON "BookkeepingComponent_functions" ("BookkeepingComponent_id");CREATE INDEX "ix_BookkeepingComponent_functions_functions" ON "BookkeepingComponent_functions" (functions);
 CREATE TABLE "BookkeepingComponent_native_types" (
 	"BookkeepingComponent_id" TEXT,
 	native_types TEXT,
@@ -2335,25 +2397,61 @@ CREATE TABLE "Marker_native_types" (
 	native_types TEXT,
 	PRIMARY KEY ("Marker_id", native_types),
 	FOREIGN KEY("Marker_id") REFERENCES "Marker" (id)
-);CREATE INDEX "ix_Marker_native_types_native_types" ON "Marker_native_types" (native_types);CREATE INDEX "ix_Marker_native_types_Marker_id" ON "Marker_native_types" ("Marker_id");
+);CREATE INDEX "ix_Marker_native_types_Marker_id" ON "Marker_native_types" ("Marker_id");CREATE INDEX "ix_Marker_native_types_native_types" ON "Marker_native_types" (native_types);
 CREATE TABLE "Marker_alias" (
 	"Marker_id" TEXT,
 	alias TEXT,
 	PRIMARY KEY ("Marker_id", alias),
 	FOREIGN KEY("Marker_id") REFERENCES "Marker" (id)
 );CREATE INDEX "ix_Marker_alias_alias" ON "Marker_alias" (alias);CREATE INDEX "ix_Marker_alias_Marker_id" ON "Marker_alias" ("Marker_id");
+CREATE TABLE "BeginningEle_functions" (
+	"BeginningEle_id" TEXT,
+	functions VARCHAR(15) NOT NULL,
+	PRIMARY KEY ("BeginningEle_id", functions),
+	FOREIGN KEY("BeginningEle_id") REFERENCES "BeginningEle" (id)
+);CREATE INDEX "ix_BeginningEle_functions_functions" ON "BeginningEle_functions" (functions);CREATE INDEX "ix_BeginningEle_functions_BeginningEle_id" ON "BeginningEle_functions" ("BeginningEle_id");
+CREATE TABLE "BeginningEle_native_types" (
+	"BeginningEle_id" TEXT,
+	native_types TEXT,
+	PRIMARY KEY ("BeginningEle_id", native_types),
+	FOREIGN KEY("BeginningEle_id") REFERENCES "BeginningEle" (id)
+);CREATE INDEX "ix_BeginningEle_native_types_BeginningEle_id" ON "BeginningEle_native_types" ("BeginningEle_id");CREATE INDEX "ix_BeginningEle_native_types_native_types" ON "BeginningEle_native_types" (native_types);
+CREATE TABLE "BeginningEle_alias" (
+	"BeginningEle_id" TEXT,
+	alias TEXT,
+	PRIMARY KEY ("BeginningEle_id", alias),
+	FOREIGN KEY("BeginningEle_id") REFERENCES "BeginningEle" (id)
+);CREATE INDEX "ix_BeginningEle_alias_alias" ON "BeginningEle_alias" (alias);CREATE INDEX "ix_BeginningEle_alias_BeginningEle_id" ON "BeginningEle_alias" ("BeginningEle_id");
+CREATE TABLE "Drift_functions" (
+	"Drift_id" TEXT,
+	functions VARCHAR(15) NOT NULL,
+	PRIMARY KEY ("Drift_id", functions),
+	FOREIGN KEY("Drift_id") REFERENCES "Drift" (id)
+);CREATE INDEX "ix_Drift_functions_functions" ON "Drift_functions" (functions);CREATE INDEX "ix_Drift_functions_Drift_id" ON "Drift_functions" ("Drift_id");
+CREATE TABLE "Drift_native_types" (
+	"Drift_id" TEXT,
+	native_types TEXT,
+	PRIMARY KEY ("Drift_id", native_types),
+	FOREIGN KEY("Drift_id") REFERENCES "Drift" (id)
+);CREATE INDEX "ix_Drift_native_types_Drift_id" ON "Drift_native_types" ("Drift_id");CREATE INDEX "ix_Drift_native_types_native_types" ON "Drift_native_types" (native_types);
+CREATE TABLE "Drift_alias" (
+	"Drift_id" TEXT,
+	alias TEXT,
+	PRIMARY KEY ("Drift_id", alias),
+	FOREIGN KEY("Drift_id") REFERENCES "Drift" (id)
+);CREATE INDEX "ix_Drift_alias_Drift_id" ON "Drift_alias" ("Drift_id");CREATE INDEX "ix_Drift_alias_alias" ON "Drift_alias" (alias);
 CREATE TABLE "BeamLineSection_functions" (
 	"BeamLineSection_id" TEXT,
 	functions VARCHAR(15) NOT NULL,
 	PRIMARY KEY ("BeamLineSection_id", functions),
 	FOREIGN KEY("BeamLineSection_id") REFERENCES "BeamLineSection" (id)
-);CREATE INDEX "ix_BeamLineSection_functions_functions" ON "BeamLineSection_functions" (functions);CREATE INDEX "ix_BeamLineSection_functions_BeamLineSection_id" ON "BeamLineSection_functions" ("BeamLineSection_id");
+);CREATE INDEX "ix_BeamLineSection_functions_BeamLineSection_id" ON "BeamLineSection_functions" ("BeamLineSection_id");CREATE INDEX "ix_BeamLineSection_functions_functions" ON "BeamLineSection_functions" (functions);
 CREATE TABLE "BeamLineSection_native_types" (
 	"BeamLineSection_id" TEXT,
 	native_types TEXT,
 	PRIMARY KEY ("BeamLineSection_id", native_types),
 	FOREIGN KEY("BeamLineSection_id") REFERENCES "BeamLineSection" (id)
-);CREATE INDEX "ix_BeamLineSection_native_types_native_types" ON "BeamLineSection_native_types" (native_types);CREATE INDEX "ix_BeamLineSection_native_types_BeamLineSection_id" ON "BeamLineSection_native_types" ("BeamLineSection_id");
+);CREATE INDEX "ix_BeamLineSection_native_types_BeamLineSection_id" ON "BeamLineSection_native_types" ("BeamLineSection_id");CREATE INDEX "ix_BeamLineSection_native_types_native_types" ON "BeamLineSection_native_types" (native_types);
 CREATE TABLE "BeamLineSection_alias" (
 	"BeamLineSection_id" TEXT,
 	alias TEXT,

@@ -1,5 +1,5 @@
 # Auto generated from narad.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-08-13T10:49:13
+# Generation date: 2026-08-23T16:47:49
 # Schema: accelerator_core
 #
 # id: https://w3id.org/accelerator-core
@@ -56,8 +56,8 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Boolean, Float, Integer, String, Uriorcurie
-from linkml_runtime.utils.metamodelcore import Bool, URIorCURIE
+from linkml_runtime.linkml_model.types import Boolean, Float, Integer, String
+from linkml_runtime.utils.metamodelcore import Bool
 
 metamodel_version = "1.7.0"
 version = None
@@ -65,12 +65,14 @@ version = None
 # Namespaces
 BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
 RO = CurieNamespace('RO', 'http://purl.obolibrary.org/obo/RO_')
+_BASE = CurieNamespace('_base', 'https://pals-project.readthedocs.io/')
 ACC = CurieNamespace('acc', 'https://example.org/accelerator-core/')
 INST = CurieNamespace('inst', 'https://example.org/pals-instance/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 OM = CurieNamespace('om', 'http://www.ontology-of-units-of-measure.org/resource/om-2/')
 PALS = CurieNamespace('pals', 'https://pals-project.readthedocs.io/')
 QUANTITYKIND = CurieNamespace('quantitykind', 'http://qudt.org/vocab/quantitykind/')
+QUDT = CurieNamespace('qudt', 'http://qudt.org/vocab/unit/')
 RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 SAREF = CurieNamespace('saref', 'https://saref.etsi.org/core/v4.1.1/')
 SOSA = CurieNamespace('sosa', 'http://www.w3.org/ns/sosa/')
@@ -245,6 +247,14 @@ class MarkerId(BookkeepingComponentId):
     pass
 
 
+class BeginningEleId(BookkeepingComponentId):
+    pass
+
+
+class DriftId(VirtualComponentId):
+    pass
+
+
 class BeamLineSectionId(BookkeepingComponentId):
     pass
 
@@ -331,8 +341,8 @@ class Node(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Node"]
-    class_class_curie: ClassVar[str] = "pals:Node"
+    class_class_uri: ClassVar[URIRef] = _BASE["Node"]
+    class_class_curie: ClassVar[str] = "_base:Node"
     class_name: ClassVar[str] = "Node"
     class_model_uri: ClassVar[URIRef] = PALS.Node
 
@@ -381,8 +391,8 @@ class PALSAccelerator(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["PALSAccelerator"]
-    class_class_curie: ClassVar[str] = "pals:PALSAccelerator"
+    class_class_uri: ClassVar[URIRef] = _BASE["PALSAccelerator"]
+    class_class_curie: ClassVar[str] = "_base:PALSAccelerator"
     class_name: ClassVar[str] = "PALSAccelerator"
     class_model_uri: ClassVar[URIRef] = PALS.PALSAccelerator
 
@@ -429,8 +439,8 @@ class Author(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Author"]
-    class_class_curie: ClassVar[str] = "pals:Author"
+    class_class_uri: ClassVar[URIRef] = _BASE["Author"]
+    class_class_curie: ClassVar[str] = "_base:Author"
     class_name: ClassVar[str] = "Author"
     class_model_uri: ClassVar[URIRef] = PALS.Author
 
@@ -462,8 +472,8 @@ class Facility(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Facility"]
-    class_class_curie: ClassVar[str] = "pals:Facility"
+    class_class_uri: ClassVar[URIRef] = _BASE["Facility"]
+    class_class_curie: ClassVar[str] = "_base:Facility"
     class_name: ClassVar[str] = "Facility"
     class_model_uri: ClassVar[URIRef] = PALS.Facility
 
@@ -499,8 +509,8 @@ class Affiliation(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Affiliation"]
-    class_class_curie: ClassVar[str] = "pals:Affiliation"
+    class_class_uri: ClassVar[URIRef] = _BASE["Affiliation"]
+    class_class_curie: ClassVar[str] = "_base:Affiliation"
     class_name: ClassVar[str] = "Affiliation"
     class_model_uri: ClassVar[URIRef] = PALS.Affiliation
 
@@ -531,8 +541,8 @@ class Identifier(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Identifier"]
-    class_class_curie: ClassVar[str] = "pals:Identifier"
+    class_class_uri: ClassVar[URIRef] = _BASE["Identifier"]
+    class_class_curie: ClassVar[str] = "_base:Identifier"
     class_name: ClassVar[str] = "Identifier"
     class_model_uri: ClassVar[URIRef] = PALS.Identifier
 
@@ -557,8 +567,8 @@ class ParamGroup(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["ParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:ParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["ParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:ParamGroup"
     class_name: ClassVar[str] = "ParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.ParamGroup
 
@@ -577,8 +587,8 @@ class ParamGroup(YAMLRoot):
 class HasMetaP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasMetaP"]
-    class_class_curie: ClassVar[str] = "pals:HasMetaP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasMetaP"]
+    class_class_curie: ClassVar[str] = "_base:HasMetaP"
     class_name: ClassVar[str] = "HasMetaP"
     class_model_uri: ClassVar[URIRef] = PALS.HasMetaP
 
@@ -599,8 +609,8 @@ class MetaParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["MetaParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:MetaParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["MetaParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:MetaParamGroup"
     class_name: ClassVar[str] = "MetaParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.MetaParamGroup
 
@@ -637,8 +647,8 @@ class MetaParamGroup(ParamGroup):
 class HasFloorP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasFloorP"]
-    class_class_curie: ClassVar[str] = "pals:HasFloorP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasFloorP"]
+    class_class_curie: ClassVar[str] = "_base:HasFloorP"
     class_name: ClassVar[str] = "HasFloorP"
     class_model_uri: ClassVar[URIRef] = PALS.HasFloorP
 
@@ -659,8 +669,8 @@ class FloorParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["FloorParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:FloorParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["FloorParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:FloorParamGroup"
     class_name: ClassVar[str] = "FloorParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.FloorParamGroup
 
@@ -703,8 +713,8 @@ class FloorParamGroup(ParamGroup):
 class HasBodyShiftP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasBodyShiftP"]
-    class_class_curie: ClassVar[str] = "pals:HasBodyShiftP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasBodyShiftP"]
+    class_class_curie: ClassVar[str] = "_base:HasBodyShiftP"
     class_name: ClassVar[str] = "HasBodyShiftP"
     class_model_uri: ClassVar[URIRef] = PALS.HasBodyShiftP
 
@@ -725,8 +735,8 @@ class BodyShiftParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["BodyShiftParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:BodyShiftParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["BodyShiftParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:BodyShiftParamGroup"
     class_name: ClassVar[str] = "BodyShiftParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.BodyShiftParamGroup
 
@@ -769,8 +779,8 @@ class BodyShiftParamGroup(ParamGroup):
 class HasLongitudinalPlacementP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasLongitudinalPlacementP"]
-    class_class_curie: ClassVar[str] = "pals:HasLongitudinalPlacementP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasLongitudinalPlacementP"]
+    class_class_curie: ClassVar[str] = "_base:HasLongitudinalPlacementP"
     class_name: ClassVar[str] = "HasLongitudinalPlacementP"
     class_model_uri: ClassVar[URIRef] = PALS.HasLongitudinalPlacementP
 
@@ -792,8 +802,8 @@ class LongitudinalPlacementParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["LongitudinalPlacementParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:LongitudinalPlacementParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["LongitudinalPlacementParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:LongitudinalPlacementParamGroup"
     class_name: ClassVar[str] = "LongitudinalPlacementParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.LongitudinalPlacementParamGroup
 
@@ -820,8 +830,8 @@ class LongitudinalPlacementParamGroup(ParamGroup):
 class HasReferenceP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasReferenceP"]
-    class_class_curie: ClassVar[str] = "pals:HasReferenceP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasReferenceP"]
+    class_class_curie: ClassVar[str] = "_base:HasReferenceP"
     class_name: ClassVar[str] = "HasReferenceP"
     class_model_uri: ClassVar[URIRef] = PALS.HasReferenceP
 
@@ -842,8 +852,8 @@ class ReferenceParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["ReferenceParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:ReferenceParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["ReferenceParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:ReferenceParamGroup"
     class_name: ClassVar[str] = "ReferenceParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.ReferenceParamGroup
 
@@ -878,8 +888,8 @@ class ReferenceParamGroup(ParamGroup):
 class HasSolenoidP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasSolenoidP"]
-    class_class_curie: ClassVar[str] = "pals:HasSolenoidP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasSolenoidP"]
+    class_class_curie: ClassVar[str] = "_base:HasSolenoidP"
     class_name: ClassVar[str] = "HasSolenoidP"
     class_model_uri: ClassVar[URIRef] = PALS.HasSolenoidP
 
@@ -899,8 +909,8 @@ class SolenoidParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["SolenoidParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:SolenoidParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["SolenoidParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:SolenoidParamGroup"
     class_name: ClassVar[str] = "SolenoidParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.SolenoidParamGroup
 
@@ -927,8 +937,8 @@ class SolenoidParamGroup(ParamGroup):
 class HasTwissP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasTwissP"]
-    class_class_curie: ClassVar[str] = "pals:HasTwissP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasTwissP"]
+    class_class_curie: ClassVar[str] = "_base:HasTwissP"
     class_name: ClassVar[str] = "HasTwissP"
     class_model_uri: ClassVar[URIRef] = PALS.HasTwissP
 
@@ -948,8 +958,8 @@ class TwissParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["TwissParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:TwissParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["TwissParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:TwissParamGroup"
     class_name: ClassVar[str] = "TwissParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.TwissParamGroup
 
@@ -1008,8 +1018,8 @@ class TwissParamGroup(ParamGroup):
 class HasRFP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasRFP"]
-    class_class_curie: ClassVar[str] = "pals:HasRFP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasRFP"]
+    class_class_curie: ClassVar[str] = "_base:HasRFP"
     class_name: ClassVar[str] = "HasRFP"
     class_model_uri: ClassVar[URIRef] = PALS.HasRFP
 
@@ -1030,8 +1040,8 @@ class RFParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["RFParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:RFParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["RFParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:RFParamGroup"
     class_name: ClassVar[str] = "RFParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.RFParamGroup
 
@@ -1090,8 +1100,8 @@ class RFParamGroup(ParamGroup):
 class HasElectricMultipoleP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasElectricMultipoleP"]
-    class_class_curie: ClassVar[str] = "pals:HasElectricMultipoleP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasElectricMultipoleP"]
+    class_class_curie: ClassVar[str] = "_base:HasElectricMultipoleP"
     class_name: ClassVar[str] = "HasElectricMultipoleP"
     class_model_uri: ClassVar[URIRef] = PALS.HasElectricMultipoleP
 
@@ -1120,8 +1130,8 @@ class ElectricMultipoleParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["ElectricMultipoleParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:ElectricMultipoleParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["ElectricMultipoleParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:ElectricMultipoleParamGroup"
     class_name: ClassVar[str] = "ElectricMultipoleParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.ElectricMultipoleParamGroup
 
@@ -1145,8 +1155,8 @@ class ElectricMultipoleParamGroup(ParamGroup):
 class HasMagneticMultipoleP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasMagneticMultipoleP"]
-    class_class_curie: ClassVar[str] = "pals:HasMagneticMultipoleP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasMagneticMultipoleP"]
+    class_class_curie: ClassVar[str] = "_base:HasMagneticMultipoleP"
     class_name: ClassVar[str] = "HasMagneticMultipoleP"
     class_model_uri: ClassVar[URIRef] = PALS.HasMagneticMultipoleP
 
@@ -1177,8 +1187,8 @@ class MagneticMultipoleParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["MagneticMultipoleParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:MagneticMultipoleParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["MagneticMultipoleParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:MagneticMultipoleParamGroup"
     class_name: ClassVar[str] = "MagneticMultipoleParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.MagneticMultipoleParamGroup
 
@@ -1202,8 +1212,8 @@ class MagneticMultipoleParamGroup(ParamGroup):
 class HasBendP(YAMLRoot):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["HasBendP"]
-    class_class_curie: ClassVar[str] = "pals:HasBendP"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasBendP"]
+    class_class_curie: ClassVar[str] = "_base:HasBendP"
     class_name: ClassVar[str] = "HasBendP"
     class_model_uri: ClassVar[URIRef] = PALS.HasBendP
 
@@ -1224,8 +1234,8 @@ class BendParamGroup(ParamGroup):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["BendParamGroup"]
-    class_class_curie: ClassVar[str] = "pals:BendParamGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["BendParamGroup"]
+    class_class_curie: ClassVar[str] = "_base:BendParamGroup"
     class_name: ClassVar[str] = "BendParamGroup"
     class_model_uri: ClassVar[URIRef] = PALS.BendParamGroup
 
@@ -1329,8 +1339,8 @@ class MultipoleParameterGroup(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["MultipoleParameterGroup"]
-    class_class_curie: ClassVar[str] = "pals:MultipoleParameterGroup"
+    class_class_uri: ClassVar[URIRef] = _BASE["MultipoleParameterGroup"]
+    class_class_curie: ClassVar[str] = "_base:MultipoleParameterGroup"
     class_name: ClassVar[str] = "MultipoleParameterGroup"
     class_model_uri: ClassVar[URIRef] = PALS.MultipoleParameterGroup
 
@@ -1389,8 +1399,8 @@ class Component(Node):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Component"]
-    class_class_curie: ClassVar[str] = "pals:Component"
+    class_class_uri: ClassVar[URIRef] = _BASE["Component"]
+    class_class_curie: ClassVar[str] = "_base:Component"
     class_name: ClassVar[str] = "Component"
     class_model_uri: ClassVar[URIRef] = PALS.Component
 
@@ -1422,8 +1432,8 @@ class PhysicalComponent(Component):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["PhysicalComponent"]
-    class_class_curie: ClassVar[str] = "pals:PhysicalComponent"
+    class_class_uri: ClassVar[URIRef] = _BASE["PhysicalComponent"]
+    class_class_curie: ClassVar[str] = "_base:PhysicalComponent"
     class_name: ClassVar[str] = "PhysicalComponent"
     class_model_uri: ClassVar[URIRef] = PALS.PhysicalComponent
 
@@ -1473,8 +1483,8 @@ class VirtualComponent(Component):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["VirtualComponent"]
-    class_class_curie: ClassVar[str] = "pals:VirtualComponent"
+    class_class_uri: ClassVar[URIRef] = _BASE["VirtualComponent"]
+    class_class_curie: ClassVar[str] = "_base:VirtualComponent"
     class_name: ClassVar[str] = "VirtualComponent"
     class_model_uri: ClassVar[URIRef] = PALS.VirtualComponent
 
@@ -1517,8 +1527,8 @@ class BeamLine(VirtualComponent):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["BeamLine"]
-    class_class_curie: ClassVar[str] = "pals:BeamLine"
+    class_class_uri: ClassVar[URIRef] = _BASE["BeamLine"]
+    class_class_curie: ClassVar[str] = "_base:BeamLine"
     class_name: ClassVar[str] = "BeamLine"
     class_model_uri: ClassVar[URIRef] = PALS.BeamLine
 
@@ -1570,8 +1580,8 @@ class Signal(Node):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Signal"]
-    class_class_curie: ClassVar[str] = "pals:Signal"
+    class_class_uri: ClassVar[URIRef] = _BASE["Signal"]
+    class_class_curie: ClassVar[str] = "_base:Signal"
     class_name: ClassVar[str] = "Signal"
     class_model_uri: ClassVar[URIRef] = PALS.Signal
 
@@ -1649,8 +1659,8 @@ class Magnet(PhysicalComponent):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Magnet"]
-    class_class_curie: ClassVar[str] = "pals:Magnet"
+    class_class_uri: ClassVar[URIRef] = _BASE["Magnet"]
+    class_class_curie: ClassVar[str] = "_base:Magnet"
     class_name: ClassVar[str] = "Magnet"
     class_model_uri: ClassVar[URIRef] = PALS.Magnet
 
@@ -1687,8 +1697,8 @@ class Solenoid(Magnet):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Solenoid"]
-    class_class_curie: ClassVar[str] = "pals:Solenoid"
+    class_class_uri: ClassVar[URIRef] = _BASE["Solenoid"]
+    class_class_curie: ClassVar[str] = "_base:Solenoid"
     class_name: ClassVar[str] = "Solenoid"
     class_model_uri: ClassVar[URIRef] = PALS.Solenoid
 
@@ -1721,8 +1731,8 @@ class Multipole(Magnet):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Multipole"]
-    class_class_curie: ClassVar[str] = "pals:Multipole"
+    class_class_uri: ClassVar[URIRef] = _BASE["Multipole"]
+    class_class_curie: ClassVar[str] = "_base:Multipole"
     class_name: ClassVar[str] = "Multipole"
     class_model_uri: ClassVar[URIRef] = PALS.Multipole
 
@@ -1760,8 +1770,8 @@ class Bend(Multipole):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Bend"]
-    class_class_curie: ClassVar[str] = "pals:Bend"
+    class_class_uri: ClassVar[URIRef] = _BASE["Bend"]
+    class_class_curie: ClassVar[str] = "_base:Bend"
     class_name: ClassVar[str] = "Bend"
     class_model_uri: ClassVar[URIRef] = PALS.Bend
 
@@ -1794,8 +1804,8 @@ class Quadrupole(Multipole):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Quadrupole"]
-    class_class_curie: ClassVar[str] = "pals:Quadrupole"
+    class_class_uri: ClassVar[URIRef] = _BASE["Quadrupole"]
+    class_class_curie: ClassVar[str] = "_base:Quadrupole"
     class_name: ClassVar[str] = "Quadrupole"
     class_model_uri: ClassVar[URIRef] = PALS.Quadrupole
 
@@ -1824,8 +1834,8 @@ class Octupole(Multipole):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Octupole"]
-    class_class_curie: ClassVar[str] = "pals:Octupole"
+    class_class_uri: ClassVar[URIRef] = _BASE["Octupole"]
+    class_class_curie: ClassVar[str] = "_base:Octupole"
     class_name: ClassVar[str] = "Octupole"
     class_model_uri: ClassVar[URIRef] = PALS.Octupole
 
@@ -1854,8 +1864,8 @@ class Sextupole(Multipole):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Sextupole"]
-    class_class_curie: ClassVar[str] = "pals:Sextupole"
+    class_class_uri: ClassVar[URIRef] = _BASE["Sextupole"]
+    class_class_curie: ClassVar[str] = "_base:Sextupole"
     class_name: ClassVar[str] = "Sextupole"
     class_model_uri: ClassVar[URIRef] = PALS.Sextupole
 
@@ -1886,8 +1896,8 @@ class Kicker(Magnet):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Kicker"]
-    class_class_curie: ClassVar[str] = "pals:Kicker"
+    class_class_uri: ClassVar[URIRef] = _BASE["Kicker"]
+    class_class_curie: ClassVar[str] = "_base:Kicker"
     class_name: ClassVar[str] = "Kicker"
     class_model_uri: ClassVar[URIRef] = PALS.Kicker
 
@@ -1928,8 +1938,8 @@ class ACKicker(Kicker):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["ACKicker"]
-    class_class_curie: ClassVar[str] = "pals:ACKicker"
+    class_class_uri: ClassVar[URIRef] = _BASE["ACKicker"]
+    class_class_curie: ClassVar[str] = "_base:ACKicker"
     class_name: ClassVar[str] = "ACKicker"
     class_model_uri: ClassVar[URIRef] = PALS.ACKicker
 
@@ -1957,8 +1967,8 @@ class DiagnosticDevice(PhysicalComponent):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["DiagnosticDevice"]
-    class_class_curie: ClassVar[str] = "pals:DiagnosticDevice"
+    class_class_uri: ClassVar[URIRef] = _BASE["DiagnosticDevice"]
+    class_class_curie: ClassVar[str] = "_base:DiagnosticDevice"
     class_name: ClassVar[str] = "DiagnosticDevice"
     class_model_uri: ClassVar[URIRef] = PALS.DiagnosticDevice
 
@@ -1986,8 +1996,8 @@ class BeamProfileMonitor(DiagnosticDevice):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["BeamProfileMonitor"]
-    class_class_curie: ClassVar[str] = "pals:BeamProfileMonitor"
+    class_class_uri: ClassVar[URIRef] = _BASE["BeamProfileMonitor"]
+    class_class_curie: ClassVar[str] = "_base:BeamProfileMonitor"
     class_name: ClassVar[str] = "BeamProfileMonitor"
     class_model_uri: ClassVar[URIRef] = PALS.BeamProfileMonitor
 
@@ -2027,8 +2037,8 @@ class BeamPositionMonitor(DiagnosticDevice):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["BeamPositionMonitor"]
-    class_class_curie: ClassVar[str] = "pals:BeamPositionMonitor"
+    class_class_uri: ClassVar[URIRef] = _BASE["BeamPositionMonitor"]
+    class_class_curie: ClassVar[str] = "_base:BeamPositionMonitor"
     class_name: ClassVar[str] = "BeamPositionMonitor"
     class_model_uri: ClassVar[URIRef] = PALS.BeamPositionMonitor
 
@@ -2068,8 +2078,8 @@ class Aperture(DiagnosticDevice):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Aperture"]
-    class_class_curie: ClassVar[str] = "pals:Aperture"
+    class_class_uri: ClassVar[URIRef] = _BASE["Aperture"]
+    class_class_curie: ClassVar[str] = "_base:Aperture"
     class_name: ClassVar[str] = "Aperture"
     class_model_uri: ClassVar[URIRef] = PALS.Aperture
 
@@ -2105,8 +2115,8 @@ class RadiationMonitor(DiagnosticDevice):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["RadiationMonitor"]
-    class_class_curie: ClassVar[str] = "pals:RadiationMonitor"
+    class_class_uri: ClassVar[URIRef] = _BASE["RadiationMonitor"]
+    class_class_curie: ClassVar[str] = "_base:RadiationMonitor"
     class_name: ClassVar[str] = "RadiationMonitor"
     class_model_uri: ClassVar[URIRef] = PALS.RadiationMonitor
 
@@ -2138,8 +2148,8 @@ class Cavity(PhysicalComponent):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Cavity"]
-    class_class_curie: ClassVar[str] = "pals:Cavity"
+    class_class_uri: ClassVar[URIRef] = _BASE["Cavity"]
+    class_class_curie: ClassVar[str] = "_base:Cavity"
     class_name: ClassVar[str] = "Cavity"
     class_model_uri: ClassVar[URIRef] = PALS.Cavity
 
@@ -2182,8 +2192,8 @@ class CrabCavity(Cavity):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["CrabCavity"]
-    class_class_curie: ClassVar[str] = "pals:CrabCavity"
+    class_class_uri: ClassVar[URIRef] = _BASE["CrabCavity"]
+    class_class_curie: ClassVar[str] = "_base:CrabCavity"
     class_name: ClassVar[str] = "CrabCavity"
     class_model_uri: ClassVar[URIRef] = PALS.CrabCavity
 
@@ -2211,8 +2221,8 @@ class RFCavity(Cavity):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["RFCavity"]
-    class_class_curie: ClassVar[str] = "pals:RFCavity"
+    class_class_uri: ClassVar[URIRef] = _BASE["RFCavity"]
+    class_class_curie: ClassVar[str] = "_base:RFCavity"
     class_name: ClassVar[str] = "RFCavity"
     class_model_uri: ClassVar[URIRef] = PALS.RFCavity
 
@@ -2239,8 +2249,8 @@ class NormalConductingRFCavity(RFCavity):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["NormalConductingRFCavity"]
-    class_class_curie: ClassVar[str] = "pals:NormalConductingRFCavity"
+    class_class_uri: ClassVar[URIRef] = _BASE["NormalConductingRFCavity"]
+    class_class_curie: ClassVar[str] = "_base:NormalConductingRFCavity"
     class_name: ClassVar[str] = "NormalConductingRFCavity"
     class_model_uri: ClassVar[URIRef] = PALS.NormalConductingRFCavity
 
@@ -2268,8 +2278,8 @@ class SuperConductingRFCavity(RFCavity):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["SuperConductingRFCavity"]
-    class_class_curie: ClassVar[str] = "pals:SuperConductingRFCavity"
+    class_class_uri: ClassVar[URIRef] = _BASE["SuperConductingRFCavity"]
+    class_class_curie: ClassVar[str] = "_base:SuperConductingRFCavity"
     class_name: ClassVar[str] = "SuperConductingRFCavity"
     class_model_uri: ClassVar[URIRef] = PALS.SuperConductingRFCavity
 
@@ -2300,8 +2310,8 @@ class SupportingFacilityComponent(PhysicalComponent):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["SupportingFacilityComponent"]
-    class_class_curie: ClassVar[str] = "pals:SupportingFacilityComponent"
+    class_class_uri: ClassVar[URIRef] = _BASE["SupportingFacilityComponent"]
+    class_class_curie: ClassVar[str] = "_base:SupportingFacilityComponent"
     class_name: ClassVar[str] = "SupportingFacilityComponent"
     class_model_uri: ClassVar[URIRef] = PALS.SupportingFacilityComponent
 
@@ -2350,8 +2360,8 @@ class BookkeepingComponent(VirtualComponent):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["BookkeepingComponent"]
-    class_class_curie: ClassVar[str] = "pals:BookkeepingComponent"
+    class_class_uri: ClassVar[URIRef] = _BASE["BookkeepingComponent"]
+    class_class_curie: ClassVar[str] = "_base:BookkeepingComponent"
     class_name: ClassVar[str] = "BookkeepingComponent"
     class_model_uri: ClassVar[URIRef] = PALS.BookkeepingComponent
 
@@ -2383,8 +2393,8 @@ class Marker(BookkeepingComponent):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["Marker"]
-    class_class_curie: ClassVar[str] = "pals:Marker"
+    class_class_uri: ClassVar[URIRef] = _BASE["Marker"]
+    class_class_curie: ClassVar[str] = "_base:Marker"
     class_name: ClassVar[str] = "Marker"
     class_model_uri: ClassVar[URIRef] = PALS.Marker
 
@@ -2410,6 +2420,79 @@ class Marker(BookkeepingComponent):
 
 
 @dataclass(repr=False)
+class BeginningEle(BookkeepingComponent):
+    """
+    Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the
+    branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference
+    parameters; otherwise it is expected to be the first element in the branch.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = _BASE["BeginningEle"]
+    class_class_curie: ClassVar[str] = "_base:BeginningEle"
+    class_name: ClassVar[str] = "BeginningEle"
+    class_model_uri: ClassVar[URIRef] = PALS.BeginningEle
+
+    id: Union[str, BeginningEleId] = None
+    kind: str = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
+    beamline_relation: Union[str, "VirtualRelationEnum"] = None
+    ReferenceP: Optional[Union[dict, ReferenceParamGroup]] = None
+    TwissP: Optional[Union[dict, TwissParamGroup]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, BeginningEleId):
+            self.id = BeginningEleId(self.id)
+
+        if self.ReferenceP is not None and not isinstance(self.ReferenceP, ReferenceParamGroup):
+            self.ReferenceP = ReferenceParamGroup(**as_dict(self.ReferenceP))
+
+        if self.TwissP is not None and not isinstance(self.TwissP, TwissParamGroup):
+            self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
+
+
+@dataclass(repr=False)
+class Drift(VirtualComponent):
+    """
+    A field-free space between beamline components. A Drift is a virtual beamline component whose longitudinal extent
+    preserves the separation between adjacent physical or virtual components.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = _BASE["Drift"]
+    class_class_curie: ClassVar[str] = "_base:Drift"
+    class_name: ClassVar[str] = "Drift"
+    class_model_uri: ClassVar[URIRef] = PALS.Drift
+
+    id: Union[str, DriftId] = None
+    kind: str = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
+    beamline_relation: Union[str, "VirtualRelationEnum"] = None
+    LongitudinalPlacementP: Optional[Union[dict, LongitudinalPlacementParamGroup]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DriftId):
+            self.id = DriftId(self.id)
+
+        if self.LongitudinalPlacementP is not None and not isinstance(self.LongitudinalPlacementP, LongitudinalPlacementParamGroup):
+            self.LongitudinalPlacementP = LongitudinalPlacementParamGroup(**as_dict(self.LongitudinalPlacementP))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
+
+
+@dataclass(repr=False)
 class BeamLineSection(BookkeepingComponent):
     """
     A virtual component used to represent a section of the BeamLine for organizational or functional grouping of
@@ -2417,8 +2500,8 @@ class BeamLineSection(BookkeepingComponent):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["BeamLineSection"]
-    class_class_curie: ClassVar[str] = "pals:BeamLineSection"
+    class_class_uri: ClassVar[URIRef] = _BASE["BeamLineSection"]
+    class_class_curie: ClassVar[str] = "_base:BeamLineSection"
     class_name: ClassVar[str] = "BeamLineSection"
     class_model_uri: ClassVar[URIRef] = PALS.BeamLineSection
 
@@ -2451,8 +2534,8 @@ class AdditionalMetadata(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["AdditionalMetadata"]
-    class_class_curie: ClassVar[str] = "pals:AdditionalMetadata"
+    class_class_uri: ClassVar[URIRef] = _BASE["AdditionalMetadata"]
+    class_class_curie: ClassVar[str] = "_base:AdditionalMetadata"
     class_name: ClassVar[str] = "AdditionalMetadata"
     class_model_uri: ClassVar[URIRef] = PALS.AdditionalMetadata
 
@@ -2491,7 +2574,7 @@ class Edge(YAMLRoot):
 
     id: Union[str, EdgeId] = None
     subject: str = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     object: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -2507,7 +2590,7 @@ class Edge(YAMLRoot):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         if self._is_empty(self.object):
             self.MissingRequiredField("object")
@@ -2524,20 +2607,12 @@ class Edge(YAMLRoot):
             return super().__new__(cls,*args,**kwargs)
         else:
             type_designator_value = kwargs[type_designator]
-            target_cls = cls._class_for("class_class_curie", type_designator_value)
-
-
-            if target_cls is None:
-                target_cls = cls._class_for("class_class_uri", type_designator_value)
-
-
-            if target_cls is None:
-                target_cls = cls._class_for("class_model_uri", type_designator_value)
+            target_cls = cls._class_for("class_name", type_designator_value)
 
 
             if target_cls is None:
                 raise ValueError(f"Wrong type designator value: class {cls.__name__} "
-                                 f"has no subclass with ['class_class_curie', 'class_class_uri', 'class_model_uri']='{kwargs[type_designator]}'")
+                                 f"has no subclass with ['class_name']='{kwargs[type_designator]}'")
             return super().__new__(target_cls,*args,**kwargs)
 
 
@@ -2549,13 +2624,13 @@ class SignalBinding(Edge):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["SignalBinding"]
-    class_class_curie: ClassVar[str] = "pals:SignalBinding"
+    class_class_uri: ClassVar[URIRef] = _BASE["SignalBinding"]
+    class_class_curie: ClassVar[str] = "_base:SignalBinding"
     class_name: ClassVar[str] = "SignalBinding"
     class_model_uri: ClassVar[URIRef] = PALS.SignalBinding
 
     id: Union[str, SignalBindingId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     subject: Union[str, PhysicalComponentId] = None
     object: Union[str, SignalId] = None
 
@@ -2573,22 +2648,22 @@ class SignalBinding(Edge):
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
 class HasSignal(SignalBinding):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["has_signal"]
-    class_class_curie: ClassVar[str] = "pals:has_signal"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasSignalRelation"]
+    class_class_curie: ClassVar[str] = "_base:HasSignalRelation"
     class_name: ClassVar[str] = "HasSignal"
     class_model_uri: ClassVar[URIRef] = PALS.HasSignal
 
     id: Union[str, HasSignalId] = None
     subject: Union[str, PhysicalComponentId] = None
     object: Union[str, SignalId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2598,27 +2673,27 @@ class HasSignal(SignalBinding):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
 class HasSetpointSignal(SignalBinding):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["has_setpoint_signal"]
-    class_class_curie: ClassVar[str] = "pals:has_setpoint_signal"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasSetpointSignalRelation"]
+    class_class_curie: ClassVar[str] = "_base:HasSetpointSignalRelation"
     class_name: ClassVar[str] = "HasSetpointSignal"
     class_model_uri: ClassVar[URIRef] = PALS.HasSetpointSignal
 
     id: Union[str, HasSetpointSignalId] = None
     subject: Union[str, PhysicalComponentId] = None
     object: Union[str, SignalId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2628,27 +2703,27 @@ class HasSetpointSignal(SignalBinding):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
 class HasReadbackSignal(SignalBinding):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["has_readback_signal"]
-    class_class_curie: ClassVar[str] = "pals:has_readback_signal"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasReadbackSignalRelation"]
+    class_class_curie: ClassVar[str] = "_base:HasReadbackSignalRelation"
     class_name: ClassVar[str] = "HasReadbackSignal"
     class_model_uri: ClassVar[URIRef] = PALS.HasReadbackSignal
 
     id: Union[str, HasReadbackSignalId] = None
     subject: Union[str, PhysicalComponentId] = None
     object: Union[str, SignalId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2658,27 +2733,27 @@ class HasReadbackSignal(SignalBinding):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
 class HasCommandSignal(SignalBinding):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["has_command_signal"]
-    class_class_curie: ClassVar[str] = "pals:has_command_signal"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasCommandSignalRelation"]
+    class_class_curie: ClassVar[str] = "_base:HasCommandSignalRelation"
     class_name: ClassVar[str] = "HasCommandSignal"
     class_model_uri: ClassVar[URIRef] = PALS.HasCommandSignal
 
     id: Union[str, HasCommandSignalId] = None
     subject: Union[str, PhysicalComponentId] = None
     object: Union[str, SignalId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2688,27 +2763,27 @@ class HasCommandSignal(SignalBinding):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
 class HasLimitSignal(SignalBinding):
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["has_limit_signal"]
-    class_class_curie: ClassVar[str] = "pals:has_limit_signal"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasLimitSignalRelation"]
+    class_class_curie: ClassVar[str] = "_base:HasLimitSignalRelation"
     class_name: ClassVar[str] = "HasLimitSignal"
     class_model_uri: ClassVar[URIRef] = PALS.HasLimitSignal
 
     id: Union[str, HasLimitSignalId] = None
     subject: Union[str, PhysicalComponentId] = None
     object: Union[str, SignalId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2718,12 +2793,12 @@ class HasLimitSignal(SignalBinding):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2734,13 +2809,13 @@ class ComponentRelation(Edge):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["ComponentRelation"]
-    class_class_curie: ClassVar[str] = "pals:ComponentRelation"
+    class_class_uri: ClassVar[URIRef] = _BASE["ComponentRelation"]
+    class_class_curie: ClassVar[str] = "_base:ComponentRelation"
     class_name: ClassVar[str] = "ComponentRelation"
     class_model_uri: ClassVar[URIRef] = PALS.ComponentRelation
 
     id: Union[str, ComponentRelationId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
@@ -2772,7 +2847,7 @@ class ComponentRelation(Edge):
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2783,8 +2858,8 @@ class Precedes(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["precedes"]
-    class_class_curie: ClassVar[str] = "pals:precedes"
+    class_class_uri: ClassVar[URIRef] = _BASE["PrecedesRelation"]
+    class_class_curie: ClassVar[str] = "_base:PrecedesRelation"
     class_name: ClassVar[str] = "Precedes"
     class_model_uri: ClassVar[URIRef] = PALS.Precedes
 
@@ -2792,7 +2867,7 @@ class Precedes(ComponentRelation):
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
     beamline_context: Union[str, BeamLineId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     context: Union[str, "RelationContextEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -2808,7 +2883,7 @@ class Precedes(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         if self._is_empty(self.context):
             self.MissingRequiredField("context")
@@ -2818,7 +2893,7 @@ class Precedes(ComponentRelation):
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2829,8 +2904,8 @@ class Contains(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["contains"]
-    class_class_curie: ClassVar[str] = "pals:contains"
+    class_class_uri: ClassVar[URIRef] = _BASE["ContainsRelation"]
+    class_class_curie: ClassVar[str] = "_base:ContainsRelation"
     class_name: ClassVar[str] = "Contains"
     class_model_uri: ClassVar[URIRef] = PALS.Contains
 
@@ -2838,7 +2913,7 @@ class Contains(ComponentRelation):
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2848,12 +2923,12 @@ class Contains(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2864,8 +2939,8 @@ class Controls(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["controls"]
-    class_class_curie: ClassVar[str] = "pals:controls"
+    class_class_uri: ClassVar[URIRef] = _BASE["ControlsRelation"]
+    class_class_curie: ClassVar[str] = "_base:ControlsRelation"
     class_name: ClassVar[str] = "Controls"
     class_model_uri: ClassVar[URIRef] = PALS.Controls
 
@@ -2873,7 +2948,7 @@ class Controls(ComponentRelation):
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2883,12 +2958,12 @@ class Controls(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2899,8 +2974,8 @@ class IsPartOf(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["is_part_of"]
-    class_class_curie: ClassVar[str] = "pals:is_part_of"
+    class_class_uri: ClassVar[URIRef] = _BASE["IsPartOfRelation"]
+    class_class_curie: ClassVar[str] = "_base:IsPartOfRelation"
     class_name: ClassVar[str] = "IsPartOf"
     class_model_uri: ClassVar[URIRef] = PALS.IsPartOf
 
@@ -2908,7 +2983,7 @@ class IsPartOf(ComponentRelation):
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2918,12 +2993,12 @@ class IsPartOf(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2934,8 +3009,8 @@ class AdjacentTo(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["adjacent_to"]
-    class_class_curie: ClassVar[str] = "pals:adjacent_to"
+    class_class_uri: ClassVar[URIRef] = _BASE["AdjacentToRelation"]
+    class_class_curie: ClassVar[str] = "_base:AdjacentToRelation"
     class_name: ClassVar[str] = "AdjacentTo"
     class_model_uri: ClassVar[URIRef] = PALS.AdjacentTo
 
@@ -2943,7 +3018,7 @@ class AdjacentTo(ComponentRelation):
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     distance_value: Optional[float] = None
     distance_unit: Optional[Union[str, "UnitEnum"]] = None
     tolerance_value: Optional[float] = None
@@ -2958,7 +3033,7 @@ class AdjacentTo(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         if self.distance_value is not None and not isinstance(self.distance_value, float):
             self.distance_value = float(self.distance_value)
@@ -2978,7 +3053,7 @@ class AdjacentTo(ComponentRelation):
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -2989,8 +3064,8 @@ class Overlaps(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["overlaps"]
-    class_class_curie: ClassVar[str] = "pals:overlaps"
+    class_class_uri: ClassVar[URIRef] = _BASE["OverlapsRelation"]
+    class_class_curie: ClassVar[str] = "_base:OverlapsRelation"
     class_name: ClassVar[str] = "Overlaps"
     class_model_uri: ClassVar[URIRef] = PALS.Overlaps
 
@@ -2998,7 +3073,7 @@ class Overlaps(ComponentRelation):
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     coordinates: Optional[Union[dict, "CoordinateSet"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -3009,7 +3084,7 @@ class Overlaps(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         if self.coordinates is not None and not isinstance(self.coordinates, CoordinateSet):
             self.coordinates = CoordinateSet(**as_dict(self.coordinates))
@@ -3017,7 +3092,7 @@ class Overlaps(ComponentRelation):
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -3028,8 +3103,8 @@ class HasConnectingBranch(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["has_connecting_branch"]
-    class_class_curie: ClassVar[str] = "pals:has_connecting_branch"
+    class_class_uri: ClassVar[URIRef] = _BASE["HasConnectingBranchRelation"]
+    class_class_curie: ClassVar[str] = "_base:HasConnectingBranchRelation"
     class_name: ClassVar[str] = "HasConnectingBranch"
     class_model_uri: ClassVar[URIRef] = PALS.HasConnectingBranch
 
@@ -3037,7 +3112,7 @@ class HasConnectingBranch(ComponentRelation):
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
     beamline_context: Union[str, BeamLineId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     context: Union[str, "RelationContextEnum"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -3053,7 +3128,7 @@ class HasConnectingBranch(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         if self._is_empty(self.context):
             self.MissingRequiredField("context")
@@ -3063,7 +3138,7 @@ class HasConnectingBranch(ComponentRelation):
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -3074,8 +3149,8 @@ class MountedOn(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["mounted_on"]
-    class_class_curie: ClassVar[str] = "pals:mounted_on"
+    class_class_uri: ClassVar[URIRef] = _BASE["MountedOnRelation"]
+    class_class_curie: ClassVar[str] = "_base:MountedOnRelation"
     class_name: ClassVar[str] = "MountedOn"
     class_model_uri: ClassVar[URIRef] = PALS.MountedOn
 
@@ -3083,7 +3158,7 @@ class MountedOn(ComponentRelation):
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     coordinates: Optional[Union[dict, "CoordinateSet"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -3094,7 +3169,7 @@ class MountedOn(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         if self.coordinates is not None and not isinstance(self.coordinates, CoordinateSet):
             self.coordinates = CoordinateSet(**as_dict(self.coordinates))
@@ -3102,7 +3177,7 @@ class MountedOn(ComponentRelation):
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -3113,8 +3188,8 @@ class Intersects(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["intersects"]
-    class_class_curie: ClassVar[str] = "pals:intersects"
+    class_class_uri: ClassVar[URIRef] = _BASE["IntersectsRelation"]
+    class_class_curie: ClassVar[str] = "_base:IntersectsRelation"
     class_name: ClassVar[str] = "Intersects"
     class_model_uri: ClassVar[URIRef] = PALS.Intersects
 
@@ -3122,7 +3197,7 @@ class Intersects(ComponentRelation):
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -3132,12 +3207,12 @@ class Intersects(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -3148,8 +3223,8 @@ class NearestTo(ComponentRelation):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["nearest_to"]
-    class_class_curie: ClassVar[str] = "pals:nearest_to"
+    class_class_uri: ClassVar[URIRef] = _BASE["NearestToRelation"]
+    class_class_curie: ClassVar[str] = "_base:NearestToRelation"
     class_name: ClassVar[str] = "NearestTo"
     class_model_uri: ClassVar[URIRef] = PALS.NearestTo
 
@@ -3157,7 +3232,7 @@ class NearestTo(ComponentRelation):
     context: Union[str, "RelationContextEnum"] = None
     subject: Union[str, ComponentId] = None
     object: Union[str, ComponentId] = None
-    predicate: Union[str, URIorCURIE] = None
+    predicate: str = None
     distance_value: Optional[float] = None
     distance_unit: Optional[Union[str, "UnitEnum"]] = None
     tolerance_value: Optional[float] = None
@@ -3172,7 +3247,7 @@ class NearestTo(ComponentRelation):
 
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
         if self.distance_value is not None and not isinstance(self.distance_value, float):
             self.distance_value = float(self.distance_value)
@@ -3192,7 +3267,7 @@ class NearestTo(ComponentRelation):
         super().__post_init__(**kwargs)
         if self._is_empty(self.predicate):
             self.MissingRequiredField("predicate")
-        self.predicate = str(self.class_class_curie)
+        self.predicate = str(self.class_name)
 
 
 @dataclass(repr=False)
@@ -3205,8 +3280,8 @@ class CoordinateSet(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PALS["CoordinateSet"]
-    class_class_curie: ClassVar[str] = "pals:CoordinateSet"
+    class_class_uri: ClassVar[URIRef] = _BASE["CoordinateSet"]
+    class_class_curie: ClassVar[str] = "_base:CoordinateSet"
     class_name: ClassVar[str] = "CoordinateSet"
     class_model_uri: ClassVar[URIRef] = PALS.CoordinateSet
 
@@ -3437,15 +3512,19 @@ class VirtualFunctionEnum(EnumDefinitionImpl):
     BeamLineSection = PermissibleValue(
         text="BeamLineSection",
         description="""A section of the BeamLine used for organizational or functional grouping of components, such as a linac section, transfer line, or ring sector.""",
-        meaning=PALS["BeamLine"])
+        meaning=_BASE["BeamLine"])
     Mark = PermissibleValue(
         text="Mark",
         description="""A virtual component representing an important location on the beamline,  such as a reference point for beam-based alignment, a location of a known aperture restriction,  or a location of a critical diagnostic device.""",
-        meaning=PALS["Marker"])
+        meaning=_BASE["Marker"])
+    DriftSpace = PermissibleValue(
+        text="DriftSpace",
+        description="A field-free longitudinal interval separating beamline components.",
+        meaning=_BASE["Drift"])
     Fork = PermissibleValue(
         text="Fork",
         description="""A virtual component representing a branching point in the beamline,  such as a beamline fork or switchyard.""",
-        meaning=PALS["Fork"])
+        meaning=_BASE["Fork"])
     Control = PermissibleValue(
         text="Control",
         description="""A virtual component representing a control system function or role that is important for understanding the overall accelerator system  but doesn't have a direct relationship to the beamline structure,  such as the EPICS control system that manages device process variables across the accelerator.""")
@@ -3498,6 +3577,10 @@ class SignalRoleEnum(EnumDefinitionImpl):
         text="MaximumLimit",
         description="Maximum allowed signal value.",
         meaning=XSD["maxInclusive"])
+    RangeLimit = PermissibleValue(
+        text="RangeLimit",
+        description="A signal containing both upper and lower allowed limits.",
+        meaning=ACC["RangeLimit"])
 
     _defn = EnumDefinition(
         name="SignalRoleEnum",
@@ -3541,6 +3624,9 @@ class CanonicalSignalTypeEnum(EnumDefinitionImpl):
     MagnetFieldSetpoint = PermissibleValue(
         text="MagnetFieldSetpoint",
         description="Magnet field setpoint signal.")
+    MagnetCurrentRange = PermissibleValue(
+        text="MagnetCurrentRange",
+        description="Magnet current range signal.")
     IntegratedFieldSetpoint = PermissibleValue(
         text="IntegratedFieldSetpoint",
         description="Integrated magnetic field setpoint signal.")
@@ -3631,13 +3717,16 @@ class UnitEnum(EnumDefinitionImpl):
     """
     A = PermissibleValue(
         text="A",
-        description="ampere")
+        description="ampere",
+        meaning=QUDT["A"])
     degree = PermissibleValue(
         text="degree",
-        description="degree")
+        description="degree",
+        meaning=QUDT["DEG"])
     eV = PermissibleValue(
         text="eV",
-        description="electron volt")
+        description="electron volt",
+        meaning=QUDT["EV"])
     eV_per_c = PermissibleValue(
         text="eV_per_c",
         description="momentum in electron volts per speed of light")
@@ -3652,25 +3741,32 @@ class UnitEnum(EnumDefinitionImpl):
         description="gauss per centimeter")
     Hz = PermissibleValue(
         text="Hz",
-        description="hertz")
+        description="hertz",
+        meaning=QUDT["HZ"])
     kW = PermissibleValue(
         text="kW",
-        description="kilowatt")
+        description="kilowatt",
+        meaning=QUDT["KiloW"])
     m = PermissibleValue(
         text="m",
-        description="meter")
+        description="meter",
+        meaning=QUDT["M"])
     mm = PermissibleValue(
         text="mm",
-        description="millimeter")
+        description="millimeter",
+        meaning=QUDT["MilliM"])
     mrem_per_h = PermissibleValue(
         text="mrem_per_h",
-        description="""millirem per hour. Kept as a local accelerator unit value because QUDT publishes related radiation units but no exact millirem-per-hour unit in the checked vocabulary.""")
+        description="""millirem per hour. Kept as a local accelerator unit value because QUDT publishes related radiation units but no exact millirem-per-hour unit in the checked vocabulary.""",
+        meaning=QUDT["MREM-PER-H"])
     MV_per_m = PermissibleValue(
         text="MV_per_m",
-        description="megavolt per meter")
+        description="megavolt per meter",
+        meaning=QUDT["MegaV-PER-M"])
     PA = PermissibleValue(
         text="PA",
-        description="pascal")
+        description="pascal",
+        meaning=QUDT["PA"])
     randians_pi2 = PermissibleValue(
         text="randians_pi2",
         description="radians divided by 2 pi - angles and phases")
@@ -3679,25 +3775,32 @@ class UnitEnum(EnumDefinitionImpl):
         description="""rem per hour. Kept as a local accelerator unit value because QUDT publishes rem and rem-per-second but no exact rem-per-hour unit in the checked vocabulary.""")
     seconds = PermissibleValue(
         text="seconds",
-        description="second")
+        description="second",
+        meaning=QUDT["SEC"])
     T = PermissibleValue(
         text="T",
-        description="tesla")
+        description="tesla",
+        meaning=QUDT["T"])
     T_M = PermissibleValue(
         text="T_M",
-        description="tesla meter")
+        description="tesla meter",
+        meaning=QUDT["T-M"])
     Torr = PermissibleValue(
         text="Torr",
-        description="torr")
+        description="torr",
+        meaning=QUDT["TORR"])
     V = PermissibleValue(
         text="V",
-        description="volt")
+        description="volt",
+        meaning=QUDT["V"])
     V_per_m = PermissibleValue(
         text="V_per_m",
-        description="volt per meter")
+        description="volt per meter",
+        meaning=QUDT["V-PER-M"])
     unitless = PermissibleValue(
         text="unitless",
-        description="dimensionless numeric value")
+        description="dimensionless numeric value",
+        meaning=QUDT["NUM"])
     none = PermissibleValue(
         text="none",
         description="no unit or not applicable")
@@ -3727,6 +3830,10 @@ class DataTypeEnum(EnumDefinitionImpl):
         text="Boolean",
         description="boolean data type",
         meaning=XSD["boolean"])
+    FloatArray = PermissibleValue(
+        text="FloatArray",
+        description="An array of floating-point values.",
+        meaning=ACC["FloatArray"])
 
     _defn = EnumDefinition(
         name="DataTypeEnum",
@@ -3885,14 +3992,14 @@ slots.name = Slot(uri=PALS.name, name="name", curie=PALS.curie('name'),
 slots.alias = Slot(uri=PALS.alias, name="alias", curie=PALS.curie('alias'),
                    model_uri=PALS.alias, domain=None, range=Optional[Union[str, list[str]]])
 
-slots.kind = Slot(uri=PALS.kind, name="kind", curie=PALS.curie('kind'),
+slots.kind = Slot(uri=RDF.type, name="kind", curie=RDF.curie('type'),
                    model_uri=PALS.kind, domain=None, range=str)
 
 slots.subject = Slot(uri=RDF.subject, name="subject", curie=RDF.curie('subject'),
                    model_uri=PALS.subject, domain=None, range=str)
 
 slots.predicate = Slot(uri=RDF.predicate, name="predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.predicate, domain=None, range=Union[str, URIorCURIE])
+                   model_uri=PALS.predicate, domain=None, range=str)
 
 slots.object = Slot(uri=RDF.object, name="object", curie=RDF.curie('object'),
                    model_uri=PALS.object, domain=None, range=str)
@@ -4330,19 +4437,19 @@ slots.SignalBinding_object = Slot(uri=RDF.object, name="SignalBinding_object", c
                    model_uri=PALS.SignalBinding_object, domain=SignalBinding, range=Union[str, SignalId])
 
 slots.HasSignal_predicate = Slot(uri=RDF.predicate, name="HasSignal_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.HasSignal_predicate, domain=HasSignal, range=Union[str, URIorCURIE])
+                   model_uri=PALS.HasSignal_predicate, domain=HasSignal, range=str)
 
 slots.HasSetpointSignal_predicate = Slot(uri=RDF.predicate, name="HasSetpointSignal_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.HasSetpointSignal_predicate, domain=HasSetpointSignal, range=Union[str, URIorCURIE])
+                   model_uri=PALS.HasSetpointSignal_predicate, domain=HasSetpointSignal, range=str)
 
 slots.HasReadbackSignal_predicate = Slot(uri=RDF.predicate, name="HasReadbackSignal_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.HasReadbackSignal_predicate, domain=HasReadbackSignal, range=Union[str, URIorCURIE])
+                   model_uri=PALS.HasReadbackSignal_predicate, domain=HasReadbackSignal, range=str)
 
 slots.HasCommandSignal_predicate = Slot(uri=RDF.predicate, name="HasCommandSignal_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.HasCommandSignal_predicate, domain=HasCommandSignal, range=Union[str, URIorCURIE])
+                   model_uri=PALS.HasCommandSignal_predicate, domain=HasCommandSignal, range=str)
 
 slots.HasLimitSignal_predicate = Slot(uri=RDF.predicate, name="HasLimitSignal_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.HasLimitSignal_predicate, domain=HasLimitSignal, range=Union[str, URIorCURIE])
+                   model_uri=PALS.HasLimitSignal_predicate, domain=HasLimitSignal, range=str)
 
 slots.ComponentRelation_subject = Slot(uri=RDF.subject, name="ComponentRelation_subject", curie=RDF.curie('subject'),
                    model_uri=PALS.ComponentRelation_subject, domain=ComponentRelation, range=Union[str, ComponentId])
@@ -4351,37 +4458,37 @@ slots.ComponentRelation_object = Slot(uri=RDF.object, name="ComponentRelation_ob
                    model_uri=PALS.ComponentRelation_object, domain=ComponentRelation, range=Union[str, ComponentId])
 
 slots.Precedes_predicate = Slot(uri=RDF.predicate, name="Precedes_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.Precedes_predicate, domain=Precedes, range=Union[str, URIorCURIE])
+                   model_uri=PALS.Precedes_predicate, domain=Precedes, range=str)
 
 slots.Precedes_context = Slot(uri=PALS.context, name="Precedes_context", curie=PALS.curie('context'),
                    model_uri=PALS.Precedes_context, domain=Precedes, range=Union[str, "RelationContextEnum"])
 
 slots.Contains_predicate = Slot(uri=RDF.predicate, name="Contains_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.Contains_predicate, domain=Contains, range=Union[str, URIorCURIE])
+                   model_uri=PALS.Contains_predicate, domain=Contains, range=str)
 
 slots.Controls_predicate = Slot(uri=RDF.predicate, name="Controls_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.Controls_predicate, domain=Controls, range=Union[str, URIorCURIE])
+                   model_uri=PALS.Controls_predicate, domain=Controls, range=str)
 
 slots.IsPartOf_predicate = Slot(uri=RDF.predicate, name="IsPartOf_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.IsPartOf_predicate, domain=IsPartOf, range=Union[str, URIorCURIE])
+                   model_uri=PALS.IsPartOf_predicate, domain=IsPartOf, range=str)
 
 slots.AdjacentTo_predicate = Slot(uri=RDF.predicate, name="AdjacentTo_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.AdjacentTo_predicate, domain=AdjacentTo, range=Union[str, URIorCURIE])
+                   model_uri=PALS.AdjacentTo_predicate, domain=AdjacentTo, range=str)
 
 slots.Overlaps_predicate = Slot(uri=RDF.predicate, name="Overlaps_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.Overlaps_predicate, domain=Overlaps, range=Union[str, URIorCURIE])
+                   model_uri=PALS.Overlaps_predicate, domain=Overlaps, range=str)
 
 slots.HasConnectingBranch_predicate = Slot(uri=RDF.predicate, name="HasConnectingBranch_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.HasConnectingBranch_predicate, domain=HasConnectingBranch, range=Union[str, URIorCURIE])
+                   model_uri=PALS.HasConnectingBranch_predicate, domain=HasConnectingBranch, range=str)
 
 slots.HasConnectingBranch_context = Slot(uri=PALS.context, name="HasConnectingBranch_context", curie=PALS.curie('context'),
                    model_uri=PALS.HasConnectingBranch_context, domain=HasConnectingBranch, range=Union[str, "RelationContextEnum"])
 
 slots.MountedOn_predicate = Slot(uri=RDF.predicate, name="MountedOn_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.MountedOn_predicate, domain=MountedOn, range=Union[str, URIorCURIE])
+                   model_uri=PALS.MountedOn_predicate, domain=MountedOn, range=str)
 
 slots.Intersects_predicate = Slot(uri=RDF.predicate, name="Intersects_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.Intersects_predicate, domain=Intersects, range=Union[str, URIorCURIE])
+                   model_uri=PALS.Intersects_predicate, domain=Intersects, range=str)
 
 slots.NearestTo_predicate = Slot(uri=RDF.predicate, name="NearestTo_predicate", curie=RDF.curie('predicate'),
-                   model_uri=PALS.NearestTo_predicate, domain=NearestTo, range=Union[str, URIorCURIE])
+                   model_uri=PALS.NearestTo_predicate, domain=NearestTo, range=str)

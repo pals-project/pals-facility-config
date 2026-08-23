@@ -4,6 +4,8 @@ PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX acc: <https://example.org/accelerator-core/>
+PREFIX qudt: <http://qudt.org/vocab/unit/>
 PREFIX quantitykind: <http://qudt.org/vocab/quantitykind/>
 PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/>
 
@@ -57,7 +59,7 @@ linkml:Sparqlpath xsd:string
 <AdditionalMetadata> CLOSED {
     (  $<AdditionalMetadata_tes> (  <key> @linkml:String ;
           <value> @linkml:String ;
-          <datatype> [ xsd:string xsd:integer xsd:float xsd:boolean ] ?
+          <datatype> [ xsd:string xsd:integer xsd:float xsd:boolean acc:FloatArray ] ?
        ) ;
        rdf:type [ <AdditionalMetadata> ] ?
     )
@@ -67,37 +69,25 @@ linkml:Sparqlpath xsd:string
     (  $<AdjacentTo_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
           om:Distance @linkml:Float ? ;
-          <distance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
-             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+          <distance_unit> [ qudt:A qudt:DEG qudt:EV <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
              <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
              <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
-             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
-             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
-             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
-             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
-             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
-             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
-             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> qudt:HZ qudt:KiloW qudt:M qudt:MilliM qudt:MREM-PER-H
+             qudt:MegaV-PER-M qudt:PA <https://pals-project.readthedocs.io/UnitEnum#randians_pi2>
+             <https://pals-project.readthedocs.io/UnitEnum#rem_per_h> qudt:SEC qudt:T qudt:T-M qudt:TORR qudt:V qudt:V-PER-M
+             qudt:NUM <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
           <tolerance_value> @linkml:Float ? ;
-          <tolerance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
-             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+          <tolerance_unit> [ qudt:A qudt:DEG qudt:EV <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
              <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
              <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
-             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
-             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
-             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
-             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
-             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
-             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
-             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> qudt:HZ qudt:KiloW qudt:M qudt:MilliM qudt:MREM-PER-H
+             qudt:MegaV-PER-M qudt:PA <https://pals-project.readthedocs.io/UnitEnum#randians_pi2>
+             <https://pals-project.readthedocs.io/UnitEnum#rem_per_h> qudt:SEC qudt:T qudt:T-M qudt:TORR qudt:V qudt:V-PER-M
+             qudt:NUM <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
           <coordinates> @<CoordinateSet> ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <adjacent_to> ]
+       rdf:type [ <AdjacentToRelation> ]
     )
 }
 
@@ -191,6 +181,20 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<BeginningEle> CLOSED {
+    (  $<BeginningEle_tes> (  &<BookkeepingComponent_tes> ;
+          rdf:type [ <BookkeepingComponent> ] ? ;
+          &<HasReferenceP_tes> ;
+          rdf:type [ <HasReferenceP> ] ? ;
+          &<HasTwissP_tes> ;
+          rdf:type [ <HasTwissP> ] ? ;
+          <ReferenceP> @<ReferenceParamGroup> ? ;
+          <TwissP> @<TwissParamGroup> ?
+       ) ;
+       rdf:type [ <BeginningEle> ]
+    )
+}
+
 <Bend> CLOSED {
     (  $<Bend_tes> (  &<Multipole_tes> ;
           rdf:type [ <Multipole> ] ? ;
@@ -262,7 +266,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <BookkeepingComponent> ]
        )
-    } OR @<BeamLineSection> OR @<Marker>
+    } OR @<BeamLineSection> OR @<BeginningEle> OR @<Marker>
 )
 
 <Cavity>  (
@@ -340,18 +344,18 @@ linkml:Sparqlpath xsd:string
 <Contains> CLOSED {
     (  $<Contains_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <contains> ]
+       rdf:type [ <ContainsRelation> ]
     )
 }
 
 <Controls> CLOSED {
     (  $<Controls_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <controls> ]
+       rdf:type [ <ControlsRelation> ]
     )
 }
 
@@ -388,13 +392,24 @@ linkml:Sparqlpath xsd:string
     } OR @<Aperture> OR @<BeamPositionMonitor> OR @<BeamProfileMonitor> OR @<RadiationMonitor>
 )
 
+<Drift> CLOSED {
+    (  $<Drift_tes> (  &<VirtualComponent_tes> ;
+          rdf:type [ <VirtualComponent> ] ? ;
+          &<HasLongitudinalPlacementP_tes> ;
+          rdf:type [ <HasLongitudinalPlacementP> ] ? ;
+          <LongitudinalPlacementP> @<LongitudinalPlacementParamGroup> ?
+       ) ;
+       rdf:type [ <Drift> ]
+    )
+}
+
 <Edge>  (
     @<ComponentRelation> OR @<SignalBinding>
 )
 
 <Edge_struct> {
     (  $<Edge_tes> (  rdf:subject @linkml:String ;
-          rdf:predicate @linkml:Uriorcurie ;
+          rdf:predicate @linkml:String ;
           rdf:object @linkml:String
        ) ;
        rdf:type [ rdf:Statement ]
@@ -451,9 +466,9 @@ linkml:Sparqlpath xsd:string
 <HasCommandSignal> CLOSED {
     (  $<HasCommandSignal_tes> (  &<SignalBinding_tes> ;
           rdf:type [ <SignalBinding> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <has_command_signal> ]
+       rdf:type [ <HasCommandSignalRelation> ]
     )
 }
 
@@ -461,7 +476,7 @@ linkml:Sparqlpath xsd:string
     (  $<HasConnectingBranch_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
           <beamline_context> @<BeamLine> ;
-          rdf:predicate @linkml:Uriorcurie ;
+          rdf:predicate @linkml:String ;
           <context> [ <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order>
              <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D>
              <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D>
@@ -469,7 +484,7 @@ linkml:Sparqlpath xsd:string
              <https://pals-project.readthedocs.io/RelationContextEnum#containment>
              <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> ]
        ) ;
-       rdf:type [ <has_connecting_branch> ]
+       rdf:type [ <HasConnectingBranchRelation> ]
     )
 }
 
@@ -488,9 +503,9 @@ linkml:Sparqlpath xsd:string
 <HasLimitSignal> CLOSED {
     (  $<HasLimitSignal_tes> (  &<SignalBinding_tes> ;
           rdf:type [ <SignalBinding> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <has_limit_signal> ]
+       rdf:type [ <HasLimitSignalRelation> ]
     )
 }
 
@@ -515,9 +530,9 @@ linkml:Sparqlpath xsd:string
 <HasReadbackSignal> CLOSED {
     (  $<HasReadbackSignal_tes> (  &<SignalBinding_tes> ;
           rdf:type [ <SignalBinding> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <has_readback_signal> ]
+       rdf:type [ <HasReadbackSignalRelation> ]
     )
 }
 
@@ -536,18 +551,18 @@ linkml:Sparqlpath xsd:string
 <HasSetpointSignal> CLOSED {
     (  $<HasSetpointSignal_tes> (  &<SignalBinding_tes> ;
           rdf:type [ <SignalBinding> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <has_setpoint_signal> ]
+       rdf:type [ <HasSetpointSignalRelation> ]
     )
 }
 
 <HasSignal> CLOSED {
     (  $<HasSignal_tes> (  &<SignalBinding_tes> ;
           rdf:type [ <SignalBinding> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <has_signal> ]
+       rdf:type [ <HasSignalRelation> ]
     )
 }
 
@@ -576,18 +591,18 @@ linkml:Sparqlpath xsd:string
 <Intersects> CLOSED {
     (  $<Intersects_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <intersects> ]
+       rdf:type [ <IntersectsRelation> ]
     )
 }
 
 <IsPartOf> CLOSED {
     (  $<IsPartOf_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <is_part_of> ]
+       rdf:type [ <IsPartOfRelation> ]
     )
 }
 
@@ -676,9 +691,9 @@ linkml:Sparqlpath xsd:string
     (  $<MountedOn_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
           <coordinates> @<CoordinateSet> ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <mounted_on> ]
+       rdf:type [ <MountedOnRelation> ]
     )
 }
 
@@ -718,37 +733,25 @@ linkml:Sparqlpath xsd:string
     (  $<NearestTo_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
           om:Distance @linkml:Float ? ;
-          <distance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
-             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+          <distance_unit> [ qudt:A qudt:DEG qudt:EV <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
              <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
              <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
-             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
-             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
-             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
-             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
-             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
-             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
-             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> qudt:HZ qudt:KiloW qudt:M qudt:MilliM qudt:MREM-PER-H
+             qudt:MegaV-PER-M qudt:PA <https://pals-project.readthedocs.io/UnitEnum#randians_pi2>
+             <https://pals-project.readthedocs.io/UnitEnum#rem_per_h> qudt:SEC qudt:T qudt:T-M qudt:TORR qudt:V qudt:V-PER-M
+             qudt:NUM <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
           <tolerance_value> @linkml:Float ? ;
-          <tolerance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
-             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+          <tolerance_unit> [ qudt:A qudt:DEG qudt:EV <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
              <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
              <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
-             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
-             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
-             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
-             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
-             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
-             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
-             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> qudt:HZ qudt:KiloW qudt:M qudt:MilliM qudt:MREM-PER-H
+             qudt:MegaV-PER-M qudt:PA <https://pals-project.readthedocs.io/UnitEnum#randians_pi2>
+             <https://pals-project.readthedocs.io/UnitEnum#rem_per_h> qudt:SEC qudt:T qudt:T-M qudt:TORR qudt:V qudt:V-PER-M
+             qudt:NUM <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
           <coordinates> @<CoordinateSet> ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <nearest_to> ]
+       rdf:type [ <NearestToRelation> ]
     )
 }
 
@@ -757,7 +760,7 @@ linkml:Sparqlpath xsd:string
 )
 
 <Node_struct> {
-    (  $<Node_tes> (  <kind> @linkml:String ;
+    (  $<Node_tes> (  rdf:type @linkml:String ;
           <alias> @linkml:String *
        ) ;
        rdf:type [ <Node> ]
@@ -784,14 +787,14 @@ linkml:Sparqlpath xsd:string
     (  $<Overlaps_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
           <coordinates> @<CoordinateSet> ? ;
-          rdf:predicate @linkml:Uriorcurie
+          rdf:predicate @linkml:String
        ) ;
-       rdf:type [ <overlaps> ]
+       rdf:type [ <OverlapsRelation> ]
     )
 }
 
 <PALSAccelerator> CLOSED {
-    (  $<PALSAccelerator_tes> (  <kind> @linkml:String ;
+    (  $<PALSAccelerator_tes> (  rdf:type @linkml:String ;
           <description> @linkml:String ? ;
           <affiliation> @<Affiliation> ? ;
           <version> @linkml:String ? ;
@@ -851,7 +854,7 @@ linkml:Sparqlpath xsd:string
     (  $<Precedes_tes> (  &<ComponentRelation_tes> ;
           rdf:type [ <ComponentRelation> ] ? ;
           <beamline_context> @<BeamLine> ;
-          rdf:predicate @linkml:Uriorcurie ;
+          rdf:predicate @linkml:String ;
           <context> [ <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order>
              <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D>
              <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D>
@@ -859,7 +862,7 @@ linkml:Sparqlpath xsd:string
              <https://pals-project.readthedocs.io/RelationContextEnum#containment>
              <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> ]
        ) ;
-       rdf:type [ <precedes> ]
+       rdf:type [ <PrecedesRelation> ]
     )
 }
 
@@ -945,7 +948,7 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <HasMetaP> ] ? ;
           <signal_role> [ sosa:ActuatableProperty sosa:ObservableProperty
              <https://pals-project.readthedocs.io/SignalRoleEnum#Status> sosa:ActuatableProperty xsd:minInclusive xsd:maxInclusive
-             ] ;
+             acc:RangeLimit ] ;
           <source_system> [ <https://pals-project.readthedocs.io/SourceSystemEnum#EPICS>
              <https://pals-project.readthedocs.io/SourceSystemEnum#EPICS_ChannelAccess>
              <https://pals-project.readthedocs.io/SourceSystemEnum#PALS_Ext>
@@ -966,6 +969,7 @@ linkml:Sparqlpath xsd:string
              <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#MagnetCurrentSetpoint>
              <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#MagnetCurrentReadback>
              <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#MagnetFieldSetpoint>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#MagnetCurrentRange>
              <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#IntegratedFieldSetpoint>
              <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#IntegratedFieldReadback>
              <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#VacuumPressure>
@@ -978,20 +982,14 @@ linkml:Sparqlpath xsd:string
              quantitykind:ElectricCurrent quantitykind:MagneticFluxPerLength quantitykind:MagneticFluxDensity quantitykind:Pressure
              quantitykind:AbsorbedDoseRate quantitykind:Voltage quantitykind:Power quantitykind:PhaseAngle
              quantitykind:ElectricFieldStrength ] ;
-          <native_data_type> [ xsd:string xsd:integer xsd:float xsd:boolean ] ;
-          <native_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
-             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+          <native_data_type> [ xsd:string xsd:integer xsd:float xsd:boolean acc:FloatArray ] ;
+          <native_unit> [ qudt:A qudt:DEG qudt:EV <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
              <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
              <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
-             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
-             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
-             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
-             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
-             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
-             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
-             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
-             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ;
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> qudt:HZ qudt:KiloW qudt:M qudt:MilliM qudt:MREM-PER-H
+             qudt:MegaV-PER-M qudt:PA <https://pals-project.readthedocs.io/UnitEnum#randians_pi2>
+             <https://pals-project.readthedocs.io/UnitEnum#rem_per_h> qudt:SEC qudt:T qudt:T-M qudt:TORR qudt:V qudt:V-PER-M
+             qudt:NUM <https://pals-project.readthedocs.io/UnitEnum#none> ] ;
           <access_protocol> @linkml:String ? ;
           <archive_identifier> @linkml:String ? ;
           <MetaP> @<MetaParamGroup> ?
@@ -1089,8 +1087,8 @@ linkml:Sparqlpath xsd:string
              rdf:type [ <Component> ] ? ;
              &<HasFloorP_tes> ;
              rdf:type [ <HasFloorP> ] ? ;
-             <virtual_function> [ <BeamLine> <Marker> <Fork> <https://pals-project.readthedocs.io/VirtualFunctionEnum#Control> ] +
-             ;
+             <virtual_function> [ <BeamLine> <Marker> <Drift> <Fork>
+                <https://pals-project.readthedocs.io/VirtualFunctionEnum#Control> ] + ;
              <virtual_beamline_relation> [ <https://pals-project.readthedocs.io/VirtualRelationEnum#Inline>
                 <https://pals-project.readthedocs.io/VirtualRelationEnum#AssociatedWithBeamLine>
                 <https://pals-project.readthedocs.io/VirtualRelationEnum#NotAssociatedWithBeamLine> ] ;
@@ -1098,5 +1096,5 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <VirtualComponent> ]
        )
-    } OR @<BeamLine> OR @<BookkeepingComponent>
+    } OR @<BeamLine> OR @<BookkeepingComponent> OR @<Drift>
 )

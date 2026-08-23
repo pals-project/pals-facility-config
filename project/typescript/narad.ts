@@ -39,6 +39,8 @@ export type SuperConductingRFCavityId = string;
 export type SupportingFacilityComponentId = string;
 export type BookkeepingComponentId = string;
 export type MarkerId = string;
+export type BeginningEleId = string;
+export type DriftId = string;
 export type BeamLineSectionId = string;
 export type EdgeId = string;
 export type SignalBindingId = string;
@@ -183,6 +185,8 @@ export enum VirtualFunctionEnum {
     BeamLineSection = "BeamLineSection",
     /** A virtual component representing an important location on the beamline,  such as a reference point for beam-based alignment, a location of a known aperture restriction,  or a location of a critical diagnostic device. */
     Mark = "Mark",
+    /** A field-free longitudinal interval separating beamline components. */
+    DriftSpace = "DriftSpace",
     /** A virtual component representing a branching point in the beamline,  such as a beamline fork or switchyard. */
     Fork = "Fork",
     /** A virtual component representing a control system function or role that is important for understanding the overall accelerator system  but doesn't have a direct relationship to the beamline structure,  such as the EPICS control system that manages device process variables across the accelerator. */
@@ -215,6 +219,8 @@ export enum SignalRoleEnum {
     MinimumLimit = "MinimumLimit",
     /** Maximum allowed signal value. */
     MaximumLimit = "MaximumLimit",
+    /** A signal containing both upper and lower allowed limits. */
+    RangeLimit = "RangeLimit",
 };
 /**
 * Portable semantic meanings for important signals.
@@ -243,6 +249,8 @@ export enum CanonicalSignalTypeEnum {
     MagnetCurrentReadback = "MagnetCurrentReadback",
     /** Magnet field setpoint signal. */
     MagnetFieldSetpoint = "MagnetFieldSetpoint",
+    /** Magnet current range signal. */
+    MagnetCurrentRange = "MagnetCurrentRange",
     /** Integrated magnetic field setpoint signal. */
     IntegratedFieldSetpoint = "IntegratedFieldSetpoint",
     /** Integrated magnetic field readback signal. */
@@ -355,6 +363,8 @@ export enum DataTypeEnum {
     Float = "Float",
     /** boolean data type */
     Boolean = "Boolean",
+    /** An array of floating-point values. */
+    FloatArray = "FloatArray",
 };
 /**
 * Coordinate systems for spatial relationships.
@@ -456,7 +466,7 @@ export enum ZeroPhaseEnum {
 export interface Node {
     /** A unique identifier for the instance. */
     id: string,
-    /** The LinkML class name of this instance. */
+    /** The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`. */
     kind: string,
     /** An alternative name or identifier for the instance. */
     alias?: string[],
@@ -467,7 +477,7 @@ export interface Node {
  * Root container for accelerator core components, semantic signals, and local bindings.
  */
 export interface PALSAccelerator {
-    /** The LinkML class name of this instance. */
+    /** The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`. */
     kind: string,
     /** A human-readable description of the instance. */
     description?: string,
@@ -1116,6 +1126,20 @@ export interface BookkeepingComponent extends VirtualComponent, HasBodyShiftP {
  * A virtual component used as a reference point or marker in the beamline structure.
  */
 export interface Marker extends BookkeepingComponent, HasTwissP {
+}
+
+
+/**
+ * Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference parameters; otherwise it is expected to be the first element in the branch.
+ */
+export interface BeginningEle extends BookkeepingComponent, HasReferenceP, HasTwissP {
+}
+
+
+/**
+ * A field-free space between beamline components. A Drift is a virtual beamline component whose longitudinal extent preserves the separation between adjacent physical or virtual components.
+ */
+export interface Drift extends VirtualComponent, HasLongitudinalPlacementP {
 }
 
 

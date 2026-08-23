@@ -13,8 +13,20 @@
       "prefix_reference": "https://w3id.org/linkml/"
     },
     {
+      "prefix_prefix": "_base",
+      "prefix_reference": "https://pals-project.readthedocs.io/"
+    },
+    {
+      "prefix_prefix": "pals",
+      "prefix_reference": "https://pals-project.readthedocs.io/"
+    },
+    {
       "prefix_prefix": "acc",
       "prefix_reference": "https://example.org/accelerator-core/"
+    },
+    {
+      "prefix_prefix": "qudt",
+      "prefix_reference": "http://qudt.org/vocab/unit/"
     },
     {
       "prefix_prefix": "quantitykind",
@@ -39,10 +51,6 @@
     {
       "prefix_prefix": "saref",
       "prefix_reference": "https://saref.etsi.org/core/v4.1.1/"
-    },
-    {
-      "prefix_prefix": "pals",
-      "prefix_reference": "https://pals-project.readthedocs.io/"
     },
     {
       "prefix_prefix": "inst",
@@ -601,6 +609,11 @@
           "meaning": "pals:Marker"
         },
         {
+          "text": "DriftSpace",
+          "description": "A field-free longitudinal interval separating beamline components.",
+          "meaning": "pals:Drift"
+        },
+        {
           "text": "Fork",
           "description": "A virtual component representing a branching point in the beamline,  such as a beamline fork or switchyard.",
           "meaning": "pals:Fork"
@@ -661,6 +674,11 @@
           "text": "MaximumLimit",
           "description": "Maximum allowed signal value.",
           "meaning": "xsd:maxInclusive"
+        },
+        {
+          "text": "RangeLimit",
+          "description": "A signal containing both upper and lower allowed limits.",
+          "meaning": "acc:RangeLimit"
         }
       ]
     },
@@ -713,6 +731,10 @@
         {
           "text": "MagnetFieldSetpoint",
           "description": "Magnet field setpoint signal."
+        },
+        {
+          "text": "MagnetCurrentRange",
+          "description": "Magnet current range signal."
         },
         {
           "text": "IntegratedFieldSetpoint",
@@ -818,15 +840,18 @@
       "permissible_values": [
         {
           "text": "A",
-          "description": "ampere"
+          "description": "ampere",
+          "meaning": "qudt:A"
         },
         {
           "text": "degree",
-          "description": "degree"
+          "description": "degree",
+          "meaning": "qudt:DEG"
         },
         {
           "text": "eV",
-          "description": "electron volt"
+          "description": "electron volt",
+          "meaning": "qudt:EV"
         },
         {
           "text": "eV_per_c",
@@ -846,31 +871,38 @@
         },
         {
           "text": "Hz",
-          "description": "hertz"
+          "description": "hertz",
+          "meaning": "qudt:HZ"
         },
         {
           "text": "kW",
-          "description": "kilowatt"
+          "description": "kilowatt",
+          "meaning": "qudt:KiloW"
         },
         {
           "text": "m",
-          "description": "meter"
+          "description": "meter",
+          "meaning": "qudt:M"
         },
         {
           "text": "mm",
-          "description": "millimeter"
+          "description": "millimeter",
+          "meaning": "qudt:MilliM"
         },
         {
           "text": "mrem_per_h",
-          "description": "millirem per hour. Kept as a local accelerator unit value because QUDT publishes related radiation units but no exact millirem-per-hour unit in the checked vocabulary."
+          "description": "millirem per hour. Kept as a local accelerator unit value because QUDT publishes related radiation units but no exact millirem-per-hour unit in the checked vocabulary.",
+          "meaning": "qudt:MREM-PER-H"
         },
         {
           "text": "MV_per_m",
-          "description": "megavolt per meter"
+          "description": "megavolt per meter",
+          "meaning": "qudt:MegaV-PER-M"
         },
         {
           "text": "PA",
-          "description": "pascal"
+          "description": "pascal",
+          "meaning": "qudt:PA"
         },
         {
           "text": "randians_pi2",
@@ -882,31 +914,38 @@
         },
         {
           "text": "seconds",
-          "description": "second"
+          "description": "second",
+          "meaning": "qudt:SEC"
         },
         {
           "text": "T",
-          "description": "tesla"
+          "description": "tesla",
+          "meaning": "qudt:T"
         },
         {
           "text": "T_M",
-          "description": "tesla meter"
+          "description": "tesla meter",
+          "meaning": "qudt:T-M"
         },
         {
           "text": "Torr",
-          "description": "torr"
+          "description": "torr",
+          "meaning": "qudt:TORR"
         },
         {
           "text": "V",
-          "description": "volt"
+          "description": "volt",
+          "meaning": "qudt:V"
         },
         {
           "text": "V_per_m",
-          "description": "volt per meter"
+          "description": "volt per meter",
+          "meaning": "qudt:V-PER-M"
         },
         {
           "text": "unitless",
-          "description": "dimensionless numeric value"
+          "description": "dimensionless numeric value",
+          "meaning": "qudt:NUM"
         },
         {
           "text": "none",
@@ -939,6 +978,11 @@
           "text": "Boolean",
           "description": "boolean data type",
           "meaning": "xsd:boolean"
+        },
+        {
+          "text": "FloatArray",
+          "description": "An array of floating-point values.",
+          "meaning": "acc:FloatArray"
         }
       ]
     },
@@ -1175,12 +1219,12 @@
     {
       "name": "kind",
       "definition_uri": "https://pals-project.readthedocs.io/kind",
-      "description": "The LinkML class name of this instance.",
+      "description": "The LinkML class name of this instance in uri/curie form, e.g. `pals:Quadrupole` or `pals:BeamProfileMonitor`.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "https://pals-project.readthedocs.io/kind"
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
       ],
-      "slot_uri": "https://pals-project.readthedocs.io/kind",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
       "designates_type": true,
       "owner": "PALSAccelerator",
       "domain_of": [
@@ -1220,7 +1264,7 @@
       "domain_of": [
         "Edge"
       ],
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
       "@type": "SlotDefinition"
     },
@@ -1959,6 +2003,10 @@
         "LongitudinalPlacementParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2027,6 +2075,10 @@
         "ReferenceParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "eV",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2046,6 +2098,10 @@
         "ReferenceParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "s",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2092,6 +2148,10 @@
         "SolenoidParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "T",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2336,6 +2396,10 @@
         "RFParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "Hz",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2368,6 +2432,10 @@
         "RFParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "V",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2464,6 +2532,10 @@
         "RFParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2480,6 +2552,10 @@
         "RFParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "eV",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2570,6 +2646,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2586,6 +2666,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "T",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2602,6 +2686,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "T",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2618,6 +2706,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2634,6 +2726,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2650,6 +2746,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2666,6 +2766,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2682,6 +2786,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "T.m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2698,6 +2806,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "T.m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2714,6 +2826,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "1/m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2730,6 +2846,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "1/m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2746,6 +2866,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "1/m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2762,6 +2886,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "1/m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2778,6 +2906,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2794,6 +2926,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2810,6 +2946,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2858,6 +2998,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "m",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2874,6 +3018,10 @@
         "BendParamGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -2904,6 +3052,10 @@
         "MultipoleParameterGroup"
       ],
       "range": "float",
+      "unit": {
+        "ucum_code": "rad",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -3575,9 +3727,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:has_signal",
+      "equals_expression": "SignalBinding",
       "@type": "SlotDefinition"
     },
     {
@@ -3599,9 +3751,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:has_setpoint_signal",
+      "equals_expression": "HasSetpointSignal",
       "@type": "SlotDefinition"
     },
     {
@@ -3623,9 +3775,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:has_readback_signal",
+      "equals_expression": "HasReadbackSignal",
       "@type": "SlotDefinition"
     },
     {
@@ -3647,9 +3799,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:has_command_signal",
+      "equals_expression": "HasCommandSignal",
       "@type": "SlotDefinition"
     },
     {
@@ -3671,9 +3823,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:has_limit_signal",
+      "equals_expression": "HasLimitSignal",
       "@type": "SlotDefinition"
     },
     {
@@ -3737,9 +3889,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:precedes",
+      "equals_expression": "Precedes",
       "@type": "SlotDefinition"
     },
     {
@@ -3781,9 +3933,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:contains",
+      "equals_expression": "Contains",
       "@type": "SlotDefinition"
     },
     {
@@ -3805,9 +3957,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:controls",
+      "equals_expression": "Controls",
       "@type": "SlotDefinition"
     },
     {
@@ -3829,9 +3981,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:is_part_of",
+      "equals_expression": "IsPartOf",
       "@type": "SlotDefinition"
     },
     {
@@ -3853,9 +4005,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:adjacent_to",
+      "equals_expression": "AdjacentTo",
       "@type": "SlotDefinition"
     },
     {
@@ -3877,9 +4029,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:overlaps",
+      "equals_expression": "Overlaps",
       "@type": "SlotDefinition"
     },
     {
@@ -3901,9 +4053,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:has_connecting_branch",
+      "equals_expression": "HasConnectingBranch",
       "@type": "SlotDefinition"
     },
     {
@@ -3945,9 +4097,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:mounted_on",
+      "equals_expression": "MountedOn",
       "@type": "SlotDefinition"
     },
     {
@@ -3969,9 +4121,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:intersects",
+      "equals_expression": "Intersects",
       "@type": "SlotDefinition"
     },
     {
@@ -3993,9 +4145,9 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "predicate",
-      "range": "uriorcurie",
+      "range": "string",
       "required": true,
-      "equals_expression": "pals:nearest_to",
+      "equals_expression": "NearestTo",
       "@type": "SlotDefinition"
     }
   ],
@@ -4540,6 +4692,10 @@
           "description": "Longitudinal position of the element along the beamline.",
           "slot_uri": "pals:s_position",
           "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         }
       ],
@@ -4660,6 +4816,10 @@
           ],
           "slot_uri": "pals:E_tot_ref",
           "range": "float",
+          "unit": {
+            "ucum_code": "eV",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -4670,6 +4830,10 @@
           ],
           "slot_uri": "pals:time_ref",
           "range": "float",
+          "unit": {
+            "ucum_code": "s",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         }
       ],
@@ -4725,6 +4889,10 @@
           "description": "Solenoid field.",
           "slot_uri": "pals:Bsol",
           "range": "float",
+          "unit": {
+            "ucum_code": "T",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         }
       ],
@@ -4990,6 +5158,10 @@
           "description": "RF frequency.",
           "slot_uri": "pals:frequency",
           "range": "float",
+          "unit": {
+            "ucum_code": "Hz",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5004,6 +5176,10 @@
           "description": "RF voltage.",
           "slot_uri": "pals:voltage",
           "range": "float",
+          "unit": {
+            "ucum_code": "V",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5046,6 +5222,10 @@
           "description": "Active acceleration length.",
           "slot_uri": "pals:L_active",
           "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5053,6 +5233,10 @@
           "description": "Reference energy gain.",
           "slot_uri": "pals:dE_ref",
           "range": "float",
+          "unit": {
+            "ucum_code": "eV",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         }
       ],
@@ -5218,6 +5402,10 @@
           "description": "Reference bend angle.",
           "slot_uri": "pals:angle_ref",
           "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5225,6 +5413,10 @@
           "description": "Reference bend field.",
           "slot_uri": "pals:bend_field_ref",
           "range": "float",
+          "unit": {
+            "ucum_code": "T",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5232,6 +5424,10 @@
           "description": "Actual bend field.",
           "slot_uri": "pals:bend_field_actual",
           "range": "float",
+          "unit": {
+            "ucum_code": "T",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5239,6 +5435,10 @@
           "description": "Entrance end pole face rotation with respect to a sector geometry.",
           "slot_uri": "pals:e1",
           "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5246,6 +5446,10 @@
           "description": "Exit end pole face rotation with respect to a sector geometry.",
           "slot_uri": "pals:e2",
           "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5253,6 +5457,10 @@
           "description": "Entrance end pole face rotation with respect to a rectangular geometry.",
           "slot_uri": "pals:e1_rect",
           "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5260,6 +5468,10 @@
           "description": "Exit end pole face rotation with respect to a rectangular geometry.",
           "slot_uri": "pals:e2_rect",
           "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5267,6 +5479,10 @@
           "description": "Entrance end fringe field integral.",
           "slot_uri": "pals:edge1_int",
           "range": "float",
+          "unit": {
+            "ucum_code": "T.m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5274,6 +5490,10 @@
           "description": "Exit end fringe field integral.",
           "slot_uri": "pals:edge2_int",
           "range": "float",
+          "unit": {
+            "ucum_code": "T.m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5281,6 +5501,10 @@
           "description": "Reference bend strength = 1/radius_ref",
           "slot_uri": "pals:g_ref",
           "range": "float",
+          "unit": {
+            "ucum_code": "1/m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5288,6 +5512,10 @@
           "description": "Actual bend strength = 1/radius_actual",
           "slot_uri": "pals:g_actual",
           "range": "float",
+          "unit": {
+            "ucum_code": "1/m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5295,6 +5523,10 @@
           "description": "Entrance end pole face curvature",
           "slot_uri": "pals:h1",
           "range": "float",
+          "unit": {
+            "ucum_code": "1/m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5302,6 +5534,10 @@
           "description": "Exit end pole face curvature",
           "slot_uri": "pals:h2",
           "range": "float",
+          "unit": {
+            "ucum_code": "1/m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5309,6 +5545,10 @@
           "description": "Chord length of the bend.",
           "slot_uri": "pals:L_chord",
           "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5316,6 +5556,10 @@
           "description": "Output parameter. Sagitta length.",
           "slot_uri": "pals:L_sagitta",
           "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5323,6 +5567,10 @@
           "description": "Rectangular length.",
           "slot_uri": "pals:L_rectangle",
           "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5344,6 +5592,10 @@
           "description": "Reference bend radius.",
           "slot_uri": "pals:rho_ref",
           "range": "float",
+          "unit": {
+            "ucum_code": "m",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -5351,6 +5603,10 @@
           "description": "Reference tilt of the bend.",
           "slot_uri": "pals:tilt_ref",
           "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         }
       ],
@@ -5446,6 +5702,10 @@
             "pals:tilt"
           ],
           "range": "float",
+          "unit": {
+            "ucum_code": "rad",
+            "@type": "UnitOfMeasure"
+          },
           "@type": "SlotDefinition"
         },
         {
@@ -6936,6 +7196,63 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "BeginningEle",
+      "definition_uri": "https://pals-project.readthedocs.io/BeginningEle",
+      "description": "Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference parameters; otherwise it is expected to be the first element in the branch.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "exact_mappings": [
+        "pals:BeginningEle"
+      ],
+      "is_a": "BookkeepingComponent",
+      "mixins": [
+        "HasReferenceP",
+        "HasTwissP"
+      ],
+      "slots": [
+        "id",
+        "kind",
+        "alias",
+        "component__native_types",
+        "hasMetaP__MetaP",
+        "virtualComponent__functions",
+        "virtualComponent__beamline_relation",
+        "hasFloorP__FloorP",
+        "hasBodyShiftP__BodyShiftP",
+        "hasReferenceP__ReferenceP",
+        "hasTwissP__TwissP"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/BeginningEle",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Drift",
+      "definition_uri": "https://pals-project.readthedocs.io/Drift",
+      "description": "A field-free space between beamline components. A Drift is a virtual beamline component whose longitudinal extent preserves the separation between adjacent physical or virtual components.",
+      "from_schema": "https://w3id.org/accelerator-core",
+      "exact_mappings": [
+        "pals:Drift"
+      ],
+      "is_a": "VirtualComponent",
+      "mixins": [
+        "HasLongitudinalPlacementP"
+      ],
+      "slots": [
+        "id",
+        "kind",
+        "alias",
+        "component__native_types",
+        "hasMetaP__MetaP",
+        "virtualComponent__functions",
+        "virtualComponent__beamline_relation",
+        "hasFloorP__FloorP",
+        "hasLongitudinalPlacementP__LongitudinalPlacementP"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://pals-project.readthedocs.io/Drift",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "BeamLineSection",
       "definition_uri": "https://pals-project.readthedocs.io/BeamLineSection",
       "description": "A virtual component used to represent a section of the BeamLine for organizational or functional grouping of components.",
@@ -7037,9 +7354,16 @@
     {
       "name": "HasSignal",
       "definition_uri": "https://pals-project.readthedocs.io/HasSignal",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:has_signal",
+          "@type": "Annotation"
+        }
+      ],
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:has_signal"
+        "pals:HasSignalRelation"
       ],
       "is_a": "SignalBinding",
       "slots": [
@@ -7049,15 +7373,22 @@
         "HasSignal_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/has_signal",
+      "class_uri": "https://pals-project.readthedocs.io/HasSignalRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "HasSetpointSignal",
       "definition_uri": "https://pals-project.readthedocs.io/HasSetpointSignal",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:has_setpoint_signal",
+          "@type": "Annotation"
+        }
+      ],
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:has_setpoint_signal"
+        "pals:HasSetpointSignalRelation"
       ],
       "is_a": "SignalBinding",
       "slots": [
@@ -7067,15 +7398,22 @@
         "HasSetpointSignal_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/has_setpoint_signal",
+      "class_uri": "https://pals-project.readthedocs.io/HasSetpointSignalRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "HasReadbackSignal",
       "definition_uri": "https://pals-project.readthedocs.io/HasReadbackSignal",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:has_readback_signal",
+          "@type": "Annotation"
+        }
+      ],
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:has_readback_signal"
+        "pals:HasReadbackSignalRelation"
       ],
       "is_a": "SignalBinding",
       "slots": [
@@ -7085,15 +7423,22 @@
         "HasReadbackSignal_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/has_readback_signal",
+      "class_uri": "https://pals-project.readthedocs.io/HasReadbackSignalRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "HasCommandSignal",
       "definition_uri": "https://pals-project.readthedocs.io/HasCommandSignal",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:has_command_signal",
+          "@type": "Annotation"
+        }
+      ],
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:has_command_signal"
+        "pals:HasCommandSignalRelation"
       ],
       "is_a": "SignalBinding",
       "slots": [
@@ -7103,15 +7448,22 @@
         "HasCommandSignal_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/has_command_signal",
+      "class_uri": "https://pals-project.readthedocs.io/HasCommandSignalRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "HasLimitSignal",
       "definition_uri": "https://pals-project.readthedocs.io/HasLimitSignal",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:has_limit_signal",
+          "@type": "Annotation"
+        }
+      ],
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:has_limit_signal"
+        "pals:HasLimitSignalRelation"
       ],
       "is_a": "SignalBinding",
       "slots": [
@@ -7121,7 +7473,7 @@
         "HasLimitSignal_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/has_limit_signal",
+      "class_uri": "https://pals-project.readthedocs.io/HasLimitSignalRelation",
       "@type": "ClassDefinition"
     },
     {
@@ -7160,10 +7512,17 @@
     {
       "name": "Precedes",
       "definition_uri": "https://pals-project.readthedocs.io/Precedes",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:precedes",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component precedes the object component in a specified context,  such as along a beamline.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:precedes"
+        "pals:PrecedesRelation"
       ],
       "exact_mappings": [
         "BFO:0000063"
@@ -7180,16 +7539,23 @@
         "Precedes_context"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/precedes",
+      "class_uri": "https://pals-project.readthedocs.io/PrecedesRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "Contains",
       "definition_uri": "https://pals-project.readthedocs.io/Contains",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:contains",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component contains the object component in a specified context,  such as within a BeamLineSection or other organizational grouping.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:contains"
+        "pals:ContainsRelation"
       ],
       "exact_mappings": [
         "BFO:0000051"
@@ -7205,16 +7571,23 @@
         "Contains_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/contains",
+      "class_uri": "https://pals-project.readthedocs.io/ContainsRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "Controls",
       "definition_uri": "https://pals-project.readthedocs.io/Controls",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:controls",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component controls the object component in a specified context,  such as a power supply controlling a magnet.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:controls"
+        "pals:ControlsRelation"
       ],
       "exact_mappings": [
         "saref:controls"
@@ -7230,16 +7603,23 @@
         "Controls_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/controls",
+      "class_uri": "https://pals-project.readthedocs.io/ControlsRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "IsPartOf",
       "definition_uri": "https://pals-project.readthedocs.io/IsPartOf",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:is_part_of",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component is part of the object component in a specified context,  such as a magnet being part of a BeamLineSection.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:is_part_of"
+        "pals:IsPartOfRelation"
       ],
       "exact_mappings": [
         "BFO:0000050"
@@ -7255,16 +7635,23 @@
         "IsPartOf_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/is_part_of",
+      "class_uri": "https://pals-project.readthedocs.io/IsPartOfRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "AdjacentTo",
       "definition_uri": "https://pals-project.readthedocs.io/AdjacentTo",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:adjacent_to",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component is adjacent to the object component and not overlapping\n in a specified context, such as radiation detector and a magnet.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:adjacent_to"
+        "pals:AdjacentToRelation"
       ],
       "exact_mappings": [
         "RO:0002220"
@@ -7285,16 +7672,23 @@
         "AdjacentTo_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/adjacent_to",
+      "class_uri": "https://pals-project.readthedocs.io/AdjacentToRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "Overlaps",
       "definition_uri": "https://pals-project.readthedocs.io/Overlaps",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:overlaps",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component overlaps the object component in a specified context,  such as a magnet and a diagnostic device.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:overlaps"
+        "pals:OverlapsRelation"
       ],
       "exact_mappings": [
         "RO:0002131"
@@ -7311,16 +7705,23 @@
         "Overlaps_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/overlaps",
+      "class_uri": "https://pals-project.readthedocs.io/OverlapsRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "HasConnectingBranch",
       "definition_uri": "https://pals-project.readthedocs.io/HasConnectingBranch",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:has_connecting_branch",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component has a connecting branch to the object component in a specified context,  such as a beamline section having a fork as a connecting branch.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:has_connecting_branch"
+        "pals:HasConnectingBranchRelation"
       ],
       "exact_mappings": [
         "RO:0002253"
@@ -7337,16 +7738,23 @@
         "HasConnectingBranch_context"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/has_connecting_branch",
+      "class_uri": "https://pals-project.readthedocs.io/HasConnectingBranchRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "MountedOn",
       "definition_uri": "https://pals-project.readthedocs.io/MountedOn",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:mounted_on",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component is mounted on the object component in a specified context,  such as a diagnostic device mounted on a magnet.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:mounted_on"
+        "pals:MountedOnRelation"
       ],
       "broad_mappings": [
         "RO:0002371"
@@ -7363,16 +7771,23 @@
         "MountedOn_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/mounted_on",
+      "class_uri": "https://pals-project.readthedocs.io/MountedOnRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "Intersects",
       "definition_uri": "https://pals-project.readthedocs.io/Intersects",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:intersects",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component intersects the object component in a specified context,  such as a beamline and a diagnostic device.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:intersects"
+        "pals:IntersectsRelation"
       ],
       "broad_mappings": [
         "RO:0015011"
@@ -7388,16 +7803,23 @@
         "Intersects_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/intersects",
+      "class_uri": "https://pals-project.readthedocs.io/IntersectsRelation",
       "@type": "ClassDefinition"
     },
     {
       "name": "NearestTo",
       "definition_uri": "https://pals-project.readthedocs.io/NearestTo",
+      "annotations": [
+        {
+          "tag": "rdf_predicate",
+          "value": "pals:nearest_to",
+          "@type": "Annotation"
+        }
+      ],
       "description": "A relationship indicating that the subject component is nearest to the object component in a specified context,  such as a diagnostic device nearest to a magnet.",
       "from_schema": "https://w3id.org/accelerator-core",
       "mappings": [
-        "pals:nearest_to"
+        "pals:NearestToRelation"
       ],
       "broad_mappings": [
         "RO:0002325"
@@ -7418,7 +7840,7 @@
         "NearestTo_predicate"
       ],
       "slot_usage": {},
-      "class_uri": "https://pals-project.readthedocs.io/nearest_to",
+      "class_uri": "https://pals-project.readthedocs.io/NearestToRelation",
       "@type": "ClassDefinition"
     },
     {
@@ -7486,9 +7908,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "narad.yaml",
-  "source_file_date": "2026-08-13T10:44:20",
-  "source_file_size": 78636,
-  "generation_date": "2026-08-13T10:49:10",
+  "source_file_date": "2026-08-23T16:01:12",
+  "source_file_size": 80978,
+  "generation_date": "2026-08-23T16:47:46",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/narad.context.jsonld",

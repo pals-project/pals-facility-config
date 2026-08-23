@@ -1594,266 +1594,272 @@ facility:
   signal_bindings:
     - id: inst:RF_LASER_GET
       subject: inst:RF_LASER
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:RK11.GET
     - id: inst:RF_LASER_GMES
       subject: inst:RF_LASER
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:RK11.GMES
     - id: inst:RF_LASER_STAT
       subject: inst:RF_LASER
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:RK11.STAT
     - id: inst:IPMK101_XPOS
       subject: inst:IPMK101
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:IPMK101.XPOS
     - id: inst:IPMK101_YPOS
       subject: inst:IPMK101
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:IPMK101.YPOS
     - id: inst:IPMK101_STAT
       subject: inst:IPMK101
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:IPMK101.STAT
     - id: inst:IPMK102_XPOS
       subject: inst:IPMK102
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:IPMK102.XPOS
     - id: inst:IPMK102_YPOS
       subject: inst:IPMK102
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:IPMK102.YPOS
     - id: inst:IPMK102_STAT
       subject: inst:IPMK102
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:IPMK102.STAT
     - id: inst:MBHK101H_S
       subject: inst:MBHK101H
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MBHK101H.S
     - id: inst:MBHK101H_RB
       subject: inst:MBHK101H
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MBHK101HM
     - id: inst:MBHK101H_LMIN
       subject: inst:MBHK101H
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MBHK101H.HMIN
     - id: inst:MBHK101H_LMAX
       subject: inst:MBHK101H
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MBHK101H.HMAX
     - id: inst:MBHK101H_STAT
       subject: inst:MBHK101H
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MBHK101H.STAT
     - id: inst:MBHK101H_KICK
       subject: inst:MBHK101H
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MBHK101H.KICK
     - id: inst:MBHK101V_S
       subject: inst:MBHK101V
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MBHK101V.S
     - id: inst:MBHK101V_RB
       subject: inst:MBHK101V
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MBHK101VM
     - id: inst:MBHK101V_LMIN
       subject: inst:MBHK101V
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MBHK101V.HMIN
     - id: inst:MBHK101V_LMAX
       subject: inst:MBHK101V
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MBHK101V.HMAX
     - id: inst:MBHK101V_STAT
       subject: inst:MBHK101V
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MBHK101V.STAT
     - id: inst:MBHK101V_KICK
       subject: inst:MBHK101V
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MBHK101V.KICK
     - id: inst:MFRM604V_S
       subject: inst:MFRM604V
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MFRM604V.S
     - id: inst:MFRM604V_RB
       subject: inst:MFRM604V
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MFRM604VM
     - id: inst:MFRM604V_LMIN
       subject: inst:MFRM604V
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MFRM604V.HMIN
     - id: inst:MFRM604V_LMAX
       subject: inst:MFRM604V
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MFRM604V.HMAX
     - id: inst:MFRM604V_STAT
       subject: inst:MFRM604V
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MFRM604V.STAT
     - id: inst:MFRM604V_KICK
       subject: inst:MFRM604V
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MFRM604V.KICK
     - id: inst:MFRM604H_S
       subject: inst:MFRM604H
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MFRM604H.S
     - id: inst:MFRM604H_RB
       subject: inst:MFRM604H
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MFRM604HM
     - id: inst:MFRM604H_LMIN
       subject: inst:MFRM604H
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MFRM604H.HMIN
     - id: inst:MFRM604H_LMAX
       subject: inst:MFRM604H
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MFRM604H.HMAX
     - id: inst:MFRM604H_STAT
       subject: inst:MFRM604H
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MFRM604H.STAT
     - id: inst:MFRM604H_KICK
       subject: inst:MFRM604H
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MFRM604H.KICK
     - id: inst:MDSK201_S
       subject: inst:MDSK201
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MDSK201.S
     - id: inst:MDSK201_RB
       subject: inst:MDSK201
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MDSK201M
     - id: inst:MDSK201_LMIN
       subject: inst:MDSK201
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MDSK201.HMIN
     - id: inst:MDSK201_LMAX
       subject: inst:MDSK201
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MDSK201.HMAX
     - id: inst:MDSK201_STAT
       subject: inst:MDSK201
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MDSK201.STAT
     - id: inst:MDSK201_BDL
       subject: inst:MDSK201
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MDSK201.BDL
     - id: inst:MQWK202_S
       subject: inst:MQWK202
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MQWK202.S
     - id: inst:MQWK202_RB
       subject: inst:MQWK202
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MQWK202M
     - id: inst:MQWK202_LMIN
       subject: inst:MQWK202
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MQWK202.HMIN
     - id: inst:MQWK202_LMAX
       subject: inst:MQWK202
-      predicate: pals:has_limit_signal
+      predicate: HasLimitSignal
       object: inst:MQWK202.HMAX
     - id: inst:MQWK202_STAT
       subject: inst:MQWK202
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:MQWK202.STAT
     - id: inst:MQWK202_BDL
       subject: inst:MQWK202
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:MQWK202.BDL
     - id: inst:RM11_GET
       subject: inst:RM11
-      predicate: pals:has_setpoint_signal
+      predicate: HasSetpointSignal
       object: inst:RM11.GET
     - id: inst:RM11_GMES
       subject: inst:RM11
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:RM11.GMES
     - id: inst:RM11_STAT
       subject: inst:RM11
-      predicate: pals:has_readback_signal
+      predicate: HasReadbackSignal
       object: inst:RM11.STAT
   component_relations:
     - id: inst:RF_LASER_to_S_IS_20CM
       subject: inst:RF_LASER
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:S_IS_20CM
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:S_IS_20CM_to_IPMK101
       subject: inst:S_IS_20CM
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:IPMK101
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:IPMK101_to_MBHK101H
       subject: inst:IPMK101
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:MBHK101H
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:MBHK101H_to_MBHK101V
       subject: inst:MBHK101H
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:MBHK101V
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:MBHK101V_to_MFHK101
       subject: inst:MBHK101V
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:MFHK101
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:MFHK101_to_IPMK102
       subject: inst:MFHK101
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:IPMK102
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:IPMK102_to_ITVK201
       subject: inst:IPMK102
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:ITVK201
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:ITVK201_to_MDSK201
       subject: inst:ITVK201
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:MDSK201
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:MDSK201_to_MQWK202
       subject: inst:MDSK201
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:MQWK202
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:MQWK202_to_IFYK203
       subject: inst:MQWK202
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:IFYK203
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:IFYK203_to_ISLK302
       subject: inst:IFYK203
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:ISLK302
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
     - id: inst:ISLK302_to_IYGK302
       subject: inst:ISLK302
-      predicate: pals:precedes
+      predicate: Precedes
       object: inst:IYGK302
+      context: beamline_order
+      beamline_context: inst:GUN_thru_MV
+    - id: inst:IYGK302_to_RM11
+      subject: inst:IYGK302
+      predicate: Precedes
+      object: inst:RM11
       context: beamline_order
       beamline_context: inst:GUN_thru_MV
