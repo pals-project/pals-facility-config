@@ -9,7 +9,6 @@
 
 import os
 import json
-from pathlib import Path
 
 import gradio as gr
 from openai import OpenAI
@@ -25,12 +24,6 @@ from kg_agent import (
     run_graph_agent_loop,
     test_neo4j_connection,
 )
-
-from dotenv import load_dotenv
-
-ENV_PATH = Path(__file__).resolve().parent / ".env"
-# Load .env from the project directory so launches from other cwd values still work.
-load_dotenv(dotenv_path=ENV_PATH, override=False)
 
 
 def get_env_value(*names: str, default: str = "") -> str:

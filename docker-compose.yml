@@ -1,0 +1,61 @@
+services:
+  neo4j-kg:
+    image: neo4j:5-community
+    container_name: neo4j_kg
+    ports:
+      - "7474:7474" # HTTP / Neo4j Browser
+      - "7687:7687" # Bolt protocol
+    environment:
+      - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
+      - NEO4J_PLUGINS=["apoc", "n10s"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*,n10s.*
+      - NEO4J_dbms_unmanaged__extension__classes=n10s.endpoint=/rdf
+    volumes:
+      - ./project/owl/narad.owl.ttl:/data/narad.owl.ttl
+      - ./project/owl/core_acc_narad_instance.ttl:/data/narad_instance.ttl
+      - neo4j_data:/data
+      - neo4j_plugins:/plugins
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u ${NEO4J_USER} -p ${NEO4J_PASSWORD} 'RETURN 1;' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  neo4j-init:
+    image: neo4j:5-community
+    container_name: neo4j_kg_init
+    depends_on:
+      neo4j-kg:
+        condition: service_healthy
+    environment:
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+    volumes:
+      - ./src/llm/graph_init.cypher:/graph_init.cypher:ro
+    entrypoint: ["bash", "-c", "echo 'Neo4j is healthy – running graph_init.cypher …' && cat /graph_init.cypher | cypher-shell -a bolt://neo4j-kg:7687 -u \"$$NEO4J_USER\" -p \"$$NEO4J_PASSWORD\" --non-interactive && echo 'Graph initialisation complete.'"]
+    restart: "no"
+
+  gradio-chat:
+    build: ./src/llm
+    container_name: gradio_chat
+    ports:
+      - "7860:7860"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - LLM_MODEL_NAME=${LLM_MODEL_NAME}
+      - NEO4J_URI=bolt://neo4j-kg:7687
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+      - USE_GRAPH_CONTEXT=${USE_GRAPH_CONTEXT:-true}
+      - SHOW_REASONING=${SHOW_REASONING:-false}
+      - NEO4J_TRACE_MAX_CHARS=${NEO4J_TRACE_MAX_CHARS:-4000}
+      - NEO4J_SCHEMA_CACHE_TTL_SECONDS=${NEO4J_SCHEMA_CACHE_TTL_SECONDS:-300}
+    depends_on:
+      neo4j-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+volumes:
+  neo4j_data:
+  neo4j_plugins:

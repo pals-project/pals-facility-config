@@ -34,3 +34,11 @@ htmlcov/
 # Ignore macOS Finder metadata
 .DS_Store
 **/.DS_Store
+
+# IDE / editor config
+.idea/
+.vscode/
+*.swp
+
+# Environment files with secrets
+.env
