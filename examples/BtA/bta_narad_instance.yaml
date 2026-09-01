@@ -1,14 +1,11 @@
-description: Skeleton NARAD representation of the BTA beamline generated from bta.pals.yaml.
+description: NARAD representation of the BtA beamline enriched with ADO controls.
 kind: PALSAccelerator
 version: 0.1.0
 notes:
-- Generated from a PALS lattice export and enriched with ADO signals defined by local naming rules.
-- Model-only drifts, controllers, constants, and lattice records are omitted because the current accelerator-core
-  schema has no direct representation for them.
+- 'Translated from Bmad lattice file: bta.run_oct30.bmad'
+- Generated from PALS source data without control-system enrichment.
+- Enriched with BtA device properties and ADO signal naming rules.
 facility:
-  identifiers:
-  - identifier_type: LOCAL
-    identifier_value: BTA
   components:
   - id: inst:BEGINNING_B1
     kind: BeginningEle
@@ -135,12 +132,13 @@ facility:
     kind: BeamProfileMonitor
     native_types:
     - Marker
+    - Multiwire
     functions:
     - BeamProfileMeasurement
     beamline_relation: Inline
     LongitudinalPlacementP:
-      length: 0.0
       id: inst:MW006/LongitudinalPlacementP
+      length: 0.0
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -613,12 +611,13 @@ facility:
     kind: BeamProfileMonitor
     native_types:
     - Marker
+    - Multiwire
     functions:
     - BeamProfileMeasurement
     beamline_relation: Inline
     LongitudinalPlacementP:
-      length: 0.0
       id: inst:MW060/LongitudinalPlacementP
+      length: 0.0
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -852,12 +851,13 @@ facility:
     kind: BeamProfileMonitor
     native_types:
     - Marker
+    - Multiwire
     functions:
     - BeamProfileMeasurement
     beamline_relation: Inline
     LongitudinalPlacementP:
-      length: 0.0
       id: inst:MW125/LongitudinalPlacementP
+      length: 0.0
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -1114,12 +1114,13 @@ facility:
     kind: BeamProfileMonitor
     native_types:
     - Marker
+    - Multiwire
     functions:
     - BeamProfileMeasurement
     beamline_relation: Inline
     LongitudinalPlacementP:
-      length: 0.0
       id: inst:MW166/LongitudinalPlacementP
+      length: 0.0
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -2180,12 +2181,13 @@ facility:
     kind: BeamProfileMonitor
     native_types:
     - Marker
+    - Multiwire
     functions:
     - BeamProfileMeasurement
     beamline_relation: Inline
     LongitudinalPlacementP:
-      length: 0.0
       id: inst:MWA15/LongitudinalPlacementP
+      length: 0.0
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -2217,7 +2219,7 @@ facility:
     beamline_relation: Inline
     multipass: false
     periodic: false
-    description: BTA beamline imported from bta.pals.yaml.
+    description: Beamline imported from PALS record bta_line.
   signals:
   - id: inst:btaMW006Cntl:horInDataM
     kind: Signal
@@ -4302,987 +4304,990 @@ facility:
     predicate: pals:has_signal
     object: inst:adrA15MWCntl:harpIsM
   component_relations:
-  - id: inst:BEGINNING_B1_PRECEDES_BTASTART
+  - id: inst:BTA_LINE_BEGINNING_B1_PRECEDES_BTASTART
     subject: inst:BEGINNING_B1
     predicate: pals:precedes
     object: inst:BTASTART
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:BTASTART_PRECEDES_DHF6A
+  - id: inst:BTA_LINE_BTASTART_PRECEDES_DHF6A
     subject: inst:BTASTART
     predicate: pals:precedes
     object: inst:DHF6A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DHF6A_PRECEDES_DHF6T
+  - id: inst:BTA_LINE_DHF6A_PRECEDES_DHF6T
     subject: inst:DHF6A
     predicate: pals:precedes
     object: inst:DHF6T
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DHF6T_PRECEDES_DRF6A
+  - id: inst:BTA_LINE_DHF6T_PRECEDES_DRF6A
     subject: inst:DHF6T
     predicate: pals:precedes
     object: inst:DRF6A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRF6A_PRECEDES_DHF6B
+  - id: inst:BTA_LINE_DRF6A_PRECEDES_DHF6B
     subject: inst:DRF6A
     predicate: pals:precedes
     object: inst:DHF6B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DHF6B_PRECEDES_DRF6B
+  - id: inst:BTA_LINE_DHF6B_PRECEDES_DRF6B
     subject: inst:DHF6B
     predicate: pals:precedes
     object: inst:DRF6B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRF6B_PRECEDES_PUEH001
+  - id: inst:BTA_LINE_DRF6B_PRECEDES_PUEH001
     subject: inst:DRF6B
     predicate: pals:precedes
     object: inst:PUEH001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUEH001_PRECEDES_DR001
+  - id: inst:BTA_LINE_PUEH001_PRECEDES_DR001
     subject: inst:PUEH001
     predicate: pals:precedes
     object: inst:DR001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR001_PRECEDES_MW006
+  - id: inst:BTA_LINE_DR001_PRECEDES_MW006
     subject: inst:DR001
     predicate: pals:precedes
     object: inst:MW006
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MW006_PRECEDES_DR006
+  - id: inst:BTA_LINE_MW006_PRECEDES_DR006
     subject: inst:MW006
     predicate: pals:precedes
     object: inst:DR006
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR006_PRECEDES_DV007
+  - id: inst:BTA_LINE_DR006_PRECEDES_DV007
     subject: inst:DR006
     predicate: pals:precedes
     object: inst:DV007
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DV007_PRECEDES_DR007
+  - id: inst:BTA_LINE_DV007_PRECEDES_DR007
     subject: inst:DV007
     predicate: pals:precedes
     object: inst:DR007
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR007_PRECEDES_QV1
+  - id: inst:BTA_LINE_DR007_PRECEDES_QV1
     subject: inst:DR007
     predicate: pals:precedes
     object: inst:QV1
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QV1_PRECEDES_DRQ1
+  - id: inst:BTA_LINE_QV1_PRECEDES_DRQ1
     subject: inst:QV1
     predicate: pals:precedes
     object: inst:DRQ1
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ1_PRECEDES_DH1A
+  - id: inst:BTA_LINE_DRQ1_PRECEDES_DH1A
     subject: inst:DRQ1
     predicate: pals:precedes
     object: inst:DH1A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH1A_PRECEDES_DH1T
+  - id: inst:BTA_LINE_DH1A_PRECEDES_DH1T
     subject: inst:DH1A
     predicate: pals:precedes
     object: inst:DH1T
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH1T_PRECEDES_DH1B
+  - id: inst:BTA_LINE_DH1T_PRECEDES_DH1B
     subject: inst:DH1T
     predicate: pals:precedes
     object: inst:DH1B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH1B_PRECEDES_DRD1
+  - id: inst:BTA_LINE_DH1B_PRECEDES_DRD1
     subject: inst:DH1B
     predicate: pals:precedes
     object: inst:DRD1
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRD1_PRECEDES_QH2A
+  - id: inst:BTA_LINE_DRD1_PRECEDES_QH2A
     subject: inst:DRD1
     predicate: pals:precedes
     object: inst:QH2A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QH2A_PRECEDES_DRQ2A
+  - id: inst:BTA_LINE_QH2A_PRECEDES_DRQ2A
     subject: inst:QH2A
     predicate: pals:precedes
     object: inst:DRQ2A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ2A_PRECEDES_QH2B
+  - id: inst:BTA_LINE_DRQ2A_PRECEDES_QH2B
     subject: inst:DRQ2A
     predicate: pals:precedes
     object: inst:QH2B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QH2B_PRECEDES_DRQ2B
+  - id: inst:BTA_LINE_QH2B_PRECEDES_DRQ2B
     subject: inst:QH2B
     predicate: pals:precedes
     object: inst:DRQ2B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ2B_PRECEDES_XF019
+  - id: inst:BTA_LINE_DRQ2B_PRECEDES_XF019
     subject: inst:DRQ2B
     predicate: pals:precedes
     object: inst:XF019
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:XF019_PRECEDES_DR019
+  - id: inst:BTA_LINE_XF019_PRECEDES_DR019
     subject: inst:XF019
     predicate: pals:precedes
     object: inst:DR019
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR019_PRECEDES_QV3
+  - id: inst:BTA_LINE_DR019_PRECEDES_QV3
     subject: inst:DR019
     predicate: pals:precedes
     object: inst:QV3
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QV3_PRECEDES_DRQ3
+  - id: inst:BTA_LINE_QV3_PRECEDES_DRQ3
     subject: inst:QV3
     predicate: pals:precedes
     object: inst:DRQ3
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ3_PRECEDES_FOIL024
+  - id: inst:BTA_LINE_DRQ3_PRECEDES_FOIL024
     subject: inst:DRQ3
     predicate: pals:precedes
     object: inst:FOIL024
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:FOIL024_PRECEDES_DR024A
+  - id: inst:BTA_LINE_FOIL024_PRECEDES_DR024A
     subject: inst:FOIL024
     predicate: pals:precedes
     object: inst:DR024A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR024A_PRECEDES_DV030
+  - id: inst:BTA_LINE_DR024A_PRECEDES_DV030
     subject: inst:DR024A
     predicate: pals:precedes
     object: inst:DV030
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DV030_PRECEDES_DR024B
+  - id: inst:BTA_LINE_DV030_PRECEDES_DR024B
     subject: inst:DV030
     predicate: pals:precedes
     object: inst:DR024B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR024B_PRECEDES_QH4
+  - id: inst:BTA_LINE_DR024B_PRECEDES_QH4
     subject: inst:DR024B
     predicate: pals:precedes
     object: inst:QH4
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QH4_PRECEDES_DRQ4
+  - id: inst:BTA_LINE_QH4_PRECEDES_DRQ4
     subject: inst:QH4
     predicate: pals:precedes
     object: inst:DRQ4
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ4_PRECEDES_DH2
+  - id: inst:BTA_LINE_DRQ4_PRECEDES_DH2
     subject: inst:DRQ4
     predicate: pals:precedes
     object: inst:DH2
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH2_PRECEDES_DRD2
+  - id: inst:BTA_LINE_DH2_PRECEDES_DRD2
     subject: inst:DH2
     predicate: pals:precedes
     object: inst:DRD2
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRD2_PRECEDES_QV5
+  - id: inst:BTA_LINE_DRD2_PRECEDES_QV5
     subject: inst:DRD2
     predicate: pals:precedes
     object: inst:QV5
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QV5_PRECEDES_DH23T
+  - id: inst:BTA_LINE_QV5_PRECEDES_DH23T
     subject: inst:QV5
     predicate: pals:precedes
     object: inst:DH23T
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH23T_PRECEDES_DRQ5
+  - id: inst:BTA_LINE_DH23T_PRECEDES_DRQ5
     subject: inst:DH23T
     predicate: pals:precedes
     object: inst:DRQ5
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ5_PRECEDES_PUEV046
+  - id: inst:BTA_LINE_DRQ5_PRECEDES_PUEV046
     subject: inst:DRQ5
     predicate: pals:precedes
     object: inst:PUEV046
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUEV046_PRECEDES_DR046
+  - id: inst:BTA_LINE_PUEV046_PRECEDES_DR046
     subject: inst:PUEV046
     predicate: pals:precedes
     object: inst:DR046
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR046_PRECEDES_DH3
+  - id: inst:BTA_LINE_DR046_PRECEDES_DH3
     subject: inst:DR046
     predicate: pals:precedes
     object: inst:DH3
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH3_PRECEDES_DRD3
+  - id: inst:BTA_LINE_DH3_PRECEDES_DRD3
     subject: inst:DH3
     predicate: pals:precedes
     object: inst:DRD3
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRD3_PRECEDES_QH6
+  - id: inst:BTA_LINE_DRD3_PRECEDES_QH6
     subject: inst:DRD3
     predicate: pals:precedes
     object: inst:QH6
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QH6_PRECEDES_DRQ6
+  - id: inst:BTA_LINE_QH6_PRECEDES_DRQ6
     subject: inst:QH6
     predicate: pals:precedes
     object: inst:DRQ6
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ6_PRECEDES_XF059
+  - id: inst:BTA_LINE_DRQ6_PRECEDES_XF059
     subject: inst:DRQ6
     predicate: pals:precedes
     object: inst:XF059
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:XF059_PRECEDES_DR059
+  - id: inst:BTA_LINE_XF059_PRECEDES_DR059
     subject: inst:XF059
     predicate: pals:precedes
     object: inst:DR059
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR059_PRECEDES_MW060
+  - id: inst:BTA_LINE_DR059_PRECEDES_MW060
     subject: inst:DR059
     predicate: pals:precedes
     object: inst:MW060
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MW060_PRECEDES_DR060
+  - id: inst:BTA_LINE_MW060_PRECEDES_DR060
     subject: inst:MW060
     predicate: pals:precedes
     object: inst:DR060
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR060_PRECEDES_QV7
+  - id: inst:BTA_LINE_DR060_PRECEDES_QV7
     subject: inst:DR060
     predicate: pals:precedes
     object: inst:QV7
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QV7_PRECEDES_DRQ7Y
+  - id: inst:BTA_LINE_QV7_PRECEDES_DRQ7Y
     subject: inst:QV7
     predicate: pals:precedes
     object: inst:DRQ7Y
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ7Y_PRECEDES_MK077
+  - id: inst:BTA_LINE_DRQ7Y_PRECEDES_MK077
     subject: inst:DRQ7Y
     predicate: pals:precedes
     object: inst:MK077
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MK077_PRECEDES_DRQ7Z
+  - id: inst:BTA_LINE_MK077_PRECEDES_DRQ7Z
     subject: inst:MK077
     predicate: pals:precedes
     object: inst:DRQ7Z
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ7Z_PRECEDES_QH8
+  - id: inst:BTA_LINE_DRQ7Z_PRECEDES_QH8
     subject: inst:DRQ7Z
     predicate: pals:precedes
     object: inst:QH8
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QH8_PRECEDES_DRQ8
+  - id: inst:BTA_LINE_QH8_PRECEDES_DRQ8
     subject: inst:QH8
     predicate: pals:precedes
     object: inst:DRQ8
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ8_PRECEDES_DH4A
+  - id: inst:BTA_LINE_DRQ8_PRECEDES_DH4A
     subject: inst:DRQ8
     predicate: pals:precedes
     object: inst:DH4A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH4A_PRECEDES_DH4T
+  - id: inst:BTA_LINE_DH4A_PRECEDES_DH4T
     subject: inst:DH4A
     predicate: pals:precedes
     object: inst:DH4T
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH4T_PRECEDES_DH4B
+  - id: inst:BTA_LINE_DH4T_PRECEDES_DH4B
     subject: inst:DH4T
     predicate: pals:precedes
     object: inst:DH4B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH4B_PRECEDES_DRD4
+  - id: inst:BTA_LINE_DH4B_PRECEDES_DRD4
     subject: inst:DH4B
     predicate: pals:precedes
     object: inst:DRD4
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRD4_PRECEDES_QV9
+  - id: inst:BTA_LINE_DRD4_PRECEDES_QV9
     subject: inst:DRD4
     predicate: pals:precedes
     object: inst:QV9
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QV9_PRECEDES_DRQ9A
+  - id: inst:BTA_LINE_QV9_PRECEDES_DRQ9A
     subject: inst:QV9
     predicate: pals:precedes
     object: inst:DRQ9A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ9A_PRECEDES_DV120
+  - id: inst:BTA_LINE_DRQ9A_PRECEDES_DV120
     subject: inst:DRQ9A
     predicate: pals:precedes
     object: inst:DV120
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DV120_PRECEDES_DRQ9B
+  - id: inst:BTA_LINE_DV120_PRECEDES_DRQ9B
     subject: inst:DV120
     predicate: pals:precedes
     object: inst:DRQ9B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ9B_PRECEDES_QH10
+  - id: inst:BTA_LINE_DRQ9B_PRECEDES_QH10
     subject: inst:DRQ9B
     predicate: pals:precedes
     object: inst:QH10
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QH10_PRECEDES_DRQ10
+  - id: inst:BTA_LINE_QH10_PRECEDES_DRQ10
     subject: inst:QH10
     predicate: pals:precedes
     object: inst:DRQ10
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ10_PRECEDES_MW125
+  - id: inst:BTA_LINE_DRQ10_PRECEDES_MW125
     subject: inst:DRQ10
     predicate: pals:precedes
     object: inst:MW125
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MW125_PRECEDES_DR125
+  - id: inst:BTA_LINE_MW125_PRECEDES_DR125
     subject: inst:MW125
     predicate: pals:precedes
     object: inst:DR125
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR125_PRECEDES_DH127
+  - id: inst:BTA_LINE_DR125_PRECEDES_DH127
     subject: inst:DR125
     predicate: pals:precedes
     object: inst:DH127
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH127_PRECEDES_DR127
+  - id: inst:BTA_LINE_DH127_PRECEDES_DR127
     subject: inst:DH127
     predicate: pals:precedes
     object: inst:DR127
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR127_PRECEDES_PUEV129
+  - id: inst:BTA_LINE_DR127_PRECEDES_PUEV129
     subject: inst:DR127
     predicate: pals:precedes
     object: inst:PUEV129
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUEV129_PRECEDES_DR129
+  - id: inst:BTA_LINE_PUEV129_PRECEDES_DR129
     subject: inst:PUEV129
     predicate: pals:precedes
     object: inst:DR129
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR129_PRECEDES_QV11
+  - id: inst:BTA_LINE_DR129_PRECEDES_QV11
     subject: inst:DR129
     predicate: pals:precedes
     object: inst:QV11
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QV11_PRECEDES_DRQ11
+  - id: inst:BTA_LINE_QV11_PRECEDES_DRQ11
     subject: inst:QV11
     predicate: pals:precedes
     object: inst:DRQ11
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ11_PRECEDES_MK139
+  - id: inst:BTA_LINE_DRQ11_PRECEDES_MK139
     subject: inst:DRQ11
     predicate: pals:precedes
     object: inst:MK139
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MK139_PRECEDES_DR139
+  - id: inst:BTA_LINE_MK139_PRECEDES_DR139
     subject: inst:MK139
     predicate: pals:precedes
     object: inst:DR139
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR139_PRECEDES_DR141
+  - id: inst:BTA_LINE_DR139_PRECEDES_DR141
     subject: inst:DR139
     predicate: pals:precedes
     object: inst:DR141
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR141_PRECEDES_PUEH143
+  - id: inst:BTA_LINE_DR141_PRECEDES_PUEH143
     subject: inst:DR141
     predicate: pals:precedes
     object: inst:PUEH143
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUEH143_PRECEDES_DR143
+  - id: inst:BTA_LINE_PUEH143_PRECEDES_DR143
     subject: inst:PUEH143
     predicate: pals:precedes
     object: inst:DR143
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR143_PRECEDES_QH12
+  - id: inst:BTA_LINE_DR143_PRECEDES_QH12
     subject: inst:DR143
     predicate: pals:precedes
     object: inst:QH12
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QH12_PRECEDES_DRQ12
+  - id: inst:BTA_LINE_QH12_PRECEDES_DRQ12
     subject: inst:QH12
     predicate: pals:precedes
     object: inst:DRQ12
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ12_PRECEDES_MK156
+  - id: inst:BTA_LINE_DRQ12_PRECEDES_MK156
     subject: inst:DRQ12
     predicate: pals:precedes
     object: inst:MK156
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MK156_PRECEDES_DR156
+  - id: inst:BTA_LINE_MK156_PRECEDES_DR156
     subject: inst:MK156
     predicate: pals:precedes
     object: inst:DR156
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR156_PRECEDES_DH158
+  - id: inst:BTA_LINE_DR156_PRECEDES_DH158
     subject: inst:DR156
     predicate: pals:precedes
     object: inst:DH158
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH158_PRECEDES_DR158
+  - id: inst:BTA_LINE_DH158_PRECEDES_DR158
     subject: inst:DH158
     predicate: pals:precedes
     object: inst:DR158
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR158_PRECEDES_PUEV160
+  - id: inst:BTA_LINE_DR158_PRECEDES_PUEV160
     subject: inst:DR158
     predicate: pals:precedes
     object: inst:PUEV160
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUEV160_PRECEDES_DR160
+  - id: inst:BTA_LINE_PUEV160_PRECEDES_DR160
     subject: inst:PUEV160
     predicate: pals:precedes
     object: inst:DR160
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR160_PRECEDES_QV13
+  - id: inst:BTA_LINE_DR160_PRECEDES_QV13
     subject: inst:DR160
     predicate: pals:precedes
     object: inst:QV13
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QV13_PRECEDES_DRQ13
+  - id: inst:BTA_LINE_QV13_PRECEDES_DRQ13
     subject: inst:QV13
     predicate: pals:precedes
     object: inst:DRQ13
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ13_PRECEDES_MW166
+  - id: inst:BTA_LINE_DRQ13_PRECEDES_MW166
     subject: inst:DRQ13
     predicate: pals:precedes
     object: inst:MW166
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MW166_PRECEDES_DR166
+  - id: inst:BTA_LINE_MW166_PRECEDES_DR166
     subject: inst:MW166
     predicate: pals:precedes
     object: inst:DR166
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR166_PRECEDES_DR168
+  - id: inst:BTA_LINE_DR166_PRECEDES_DR168
     subject: inst:DR166
     predicate: pals:precedes
     object: inst:DR168
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR168_PRECEDES_PUEH170
+  - id: inst:BTA_LINE_DR168_PRECEDES_PUEH170
     subject: inst:DR168
     predicate: pals:precedes
     object: inst:PUEH170
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUEH170_PRECEDES_DR170
+  - id: inst:BTA_LINE_PUEH170_PRECEDES_DR170
     subject: inst:PUEH170
     predicate: pals:precedes
     object: inst:DR170
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR170_PRECEDES_QH14
+  - id: inst:BTA_LINE_DR170_PRECEDES_QH14
     subject: inst:DR170
     predicate: pals:precedes
     object: inst:QH14
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QH14_PRECEDES_DRQ14
+  - id: inst:BTA_LINE_QH14_PRECEDES_DRQ14
     subject: inst:QH14
     predicate: pals:precedes
     object: inst:DRQ14
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRQ14_PRECEDES_DH5A
+  - id: inst:BTA_LINE_DRQ14_PRECEDES_DH5A
     subject: inst:DRQ14
     predicate: pals:precedes
     object: inst:DH5A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH5A_PRECEDES_DH5T
+  - id: inst:BTA_LINE_DH5A_PRECEDES_DH5T
     subject: inst:DH5A
     predicate: pals:precedes
     object: inst:DH5T
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH5T_PRECEDES_DH5B
+  - id: inst:BTA_LINE_DH5T_PRECEDES_DH5B
     subject: inst:DH5T
     predicate: pals:precedes
     object: inst:DH5B
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DH5B_PRECEDES_DRD5
+  - id: inst:BTA_LINE_DH5B_PRECEDES_DRD5
     subject: inst:DH5B
     predicate: pals:precedes
     object: inst:DRD5
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DRD5_PRECEDES_DV181
+  - id: inst:BTA_LINE_DRD5_PRECEDES_DV181
     subject: inst:DRD5
     predicate: pals:precedes
     object: inst:DV181
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DV181_PRECEDES_DR181
+  - id: inst:BTA_LINE_DV181_PRECEDES_DR181
     subject: inst:DV181
     predicate: pals:precedes
     object: inst:DR181
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR181_PRECEDES_XF183
+  - id: inst:BTA_LINE_DR181_PRECEDES_XF183
     subject: inst:DR181
     predicate: pals:precedes
     object: inst:XF183
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:XF183_PRECEDES_DR183
+  - id: inst:BTA_LINE_XF183_PRECEDES_DR183
     subject: inst:XF183
     predicate: pals:precedes
     object: inst:DR183
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DR183_PRECEDES_QV15
+  - id: inst:BTA_LINE_DR183_PRECEDES_QV15
     subject: inst:DR183
     predicate: pals:precedes
     object: inst:QV15
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QV15_PRECEDES_M1
+  - id: inst:BTA_LINE_QV15_PRECEDES_M1
     subject: inst:QV15
     predicate: pals:precedes
     object: inst:M1
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:M1_PRECEDES_L20SPTM1
+  - id: inst:BTA_LINE_M1_PRECEDES_L20SPTM1
     subject: inst:M1
     predicate: pals:precedes
     object: inst:L20SPTM1
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:L20SPTM1_PRECEDES_DHL20T
+  - id: inst:BTA_LINE_L20SPTM1_PRECEDES_DHL20T
     subject: inst:L20SPTM1
     predicate: pals:precedes
     object: inst:DHL20T
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DHL20T_PRECEDES_L20SPTM2
+  - id: inst:BTA_LINE_DHL20T_PRECEDES_L20SPTM2
     subject: inst:DHL20T
     predicate: pals:precedes
     object: inst:L20SPTM2
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:L20SPTM2_PRECEDES_MM_A01BF
+  - id: inst:BTA_LINE_L20SPTM2_PRECEDES_MM_A01BF
     subject: inst:L20SPTM2
     predicate: pals:precedes
     object: inst:MM_A01BF
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A01BF_PRECEDES_D2S_001
+  - id: inst:BTA_LINE_MM_A01BF_PRECEDES_D2S_001
     subject: inst:MM_A01BF
     predicate: pals:precedes
     object: inst:D2S_001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2S_001_PRECEDES_MM_A02BF
+  - id: inst:BTA_LINE_D2S_001_PRECEDES_MM_A02BF
     subject: inst:D2S_001
     predicate: pals:precedes
     object: inst:MM_A02BF
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A02BF_PRECEDES_DPUE_001
+  - id: inst:BTA_LINE_MM_A02BF_PRECEDES_DPUE_001
     subject: inst:MM_A02BF
     predicate: pals:precedes
     object: inst:DPUE_001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_001_PRECEDES_PUE_A02
+  - id: inst:BTA_LINE_DPUE_001_PRECEDES_PUE_A02
     subject: inst:DPUE_001
     predicate: pals:precedes
     object: inst:PUE_A02
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A02_PRECEDES_DHCA02
+  - id: inst:BTA_LINE_PUE_A02_PRECEDES_DHCA02
     subject: inst:PUE_A02
     predicate: pals:precedes
     object: inst:DHCA02
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DHCA02_PRECEDES_DVCA02
+  - id: inst:BTA_LINE_DHCA02_PRECEDES_DVCA02
     subject: inst:DHCA02
     predicate: pals:precedes
     object: inst:DVCA02
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DVCA02_PRECEDES_D2TX_001
+  - id: inst:BTA_LINE_DVCA02_PRECEDES_D2TX_001
     subject: inst:DVCA02
     predicate: pals:precedes
     object: inst:D2TX_001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2TX_001_PRECEDES_MM_A03CD
+  - id: inst:BTA_LINE_D2TX_001_PRECEDES_MM_A03CD
     subject: inst:D2TX_001
     predicate: pals:precedes
     object: inst:MM_A03CD
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A03CD_PRECEDES_DSQ_001
+  - id: inst:BTA_LINE_MM_A03CD_PRECEDES_DSQ_001
     subject: inst:MM_A03CD
     predicate: pals:precedes
     object: inst:DSQ_001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DSQ_001_PRECEDES_QHFV
+  - id: inst:BTA_LINE_DSQ_001_PRECEDES_QHFV
     subject: inst:DSQ_001
     predicate: pals:precedes
     object: inst:QHFV
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QHFV_PRECEDES_QPOL
+  - id: inst:BTA_LINE_QHFV_PRECEDES_QPOL
     subject: inst:QHFV
     predicate: pals:precedes
     object: inst:QPOL
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:QPOL_PRECEDES_DSQ_002
+  - id: inst:BTA_LINE_QPOL_PRECEDES_DSQ_002
     subject: inst:QPOL
     predicate: pals:precedes
     object: inst:DSQ_002
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DSQ_002_PRECEDES_MM_A04CD
+  - id: inst:BTA_LINE_DSQ_002_PRECEDES_MM_A04CD
     subject: inst:DSQ_002
     predicate: pals:precedes
     object: inst:MM_A04CD
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A04CD_PRECEDES_DPUE_002
+  - id: inst:BTA_LINE_MM_A04CD_PRECEDES_DPUE_002
     subject: inst:MM_A04CD
     predicate: pals:precedes
     object: inst:DPUE_002
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_002_PRECEDES_PUE_A04
+  - id: inst:BTA_LINE_DPUE_002_PRECEDES_PUE_A04
     subject: inst:DPUE_002
     predicate: pals:precedes
     object: inst:PUE_A04
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A04_PRECEDES_D2LX_001
+  - id: inst:BTA_LINE_PUE_A04_PRECEDES_D2LX_001
     subject: inst:PUE_A04
     predicate: pals:precedes
     object: inst:D2LX_001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2LX_001_PRECEDES_MM_A05AF
+  - id: inst:BTA_LINE_D2LX_001_PRECEDES_MM_A05AF
     subject: inst:D2LX_001
     predicate: pals:precedes
     object: inst:MM_A05AF
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A05AF_PRECEDES_D2H_A05_001
+  - id: inst:BTA_LINE_MM_A05AF_PRECEDES_D2H_A05_001
     subject: inst:MM_A05AF
     predicate: pals:precedes
     object: inst:D2H_A05_001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2H_A05_001_PRECEDES_KCKRA05
+  - id: inst:BTA_LINE_D2H_A05_001_PRECEDES_KCKRA05
     subject: inst:D2H_A05_001
     predicate: pals:precedes
     object: inst:KCKRA05
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:KCKRA05_PRECEDES_D2H_A05_002
+  - id: inst:BTA_LINE_KCKRA05_PRECEDES_D2H_A05_002
     subject: inst:KCKRA05
     predicate: pals:precedes
     object: inst:D2H_A05_002
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2H_A05_002_PRECEDES_MM_A06AF
+  - id: inst:BTA_LINE_D2H_A05_002_PRECEDES_MM_A06AF
     subject: inst:D2H_A05_002
     predicate: pals:precedes
     object: inst:MM_A06AF
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A06AF_PRECEDES_D2L
+  - id: inst:BTA_LINE_MM_A06AF_PRECEDES_D2L
     subject: inst:MM_A06AF
     predicate: pals:precedes
     object: inst:D2L
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2L_PRECEDES_MM_A07CD
+  - id: inst:BTA_LINE_D2L_PRECEDES_MM_A07CD
     subject: inst:D2L
     predicate: pals:precedes
     object: inst:MM_A07CD
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A07CD_PRECEDES_DSS_001
+  - id: inst:BTA_LINE_MM_A07CD_PRECEDES_DSS_001
     subject: inst:MM_A07CD
     predicate: pals:precedes
     object: inst:DSS_001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DSS_001_PRECEDES_SXV
+  - id: inst:BTA_LINE_DSS_001_PRECEDES_SXV
     subject: inst:DSS_001
     predicate: pals:precedes
     object: inst:SXV
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:SXV_PRECEDES_DSS_002
+  - id: inst:BTA_LINE_SXV_PRECEDES_DSS_002
     subject: inst:SXV
     predicate: pals:precedes
     object: inst:DSS_002
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DSS_002_PRECEDES_MM_A08CD
+  - id: inst:BTA_LINE_DSS_002_PRECEDES_MM_A08CD
     subject: inst:DSS_002
     predicate: pals:precedes
     object: inst:MM_A08CD
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A08CD_PRECEDES_DPUE_003
+  - id: inst:BTA_LINE_MM_A08CD_PRECEDES_DPUE_003
     subject: inst:MM_A08CD
     predicate: pals:precedes
     object: inst:DPUE_003
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_003_PRECEDES_PUE_A08
+  - id: inst:BTA_LINE_DPUE_003_PRECEDES_PUE_A08
     subject: inst:DPUE_003
     predicate: pals:precedes
     object: inst:PUE_A08
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A08_PRECEDES_DHCA08
+  - id: inst:BTA_LINE_PUE_A08_PRECEDES_DHCA08
     subject: inst:PUE_A08
     predicate: pals:precedes
     object: inst:DHCA08
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DHCA08_PRECEDES_DVCA08
+  - id: inst:BTA_LINE_DHCA08_PRECEDES_DVCA08
     subject: inst:DHCA08
     predicate: pals:precedes
     object: inst:DVCA08
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DVCA08_PRECEDES_D2TX_002
+  - id: inst:BTA_LINE_DVCA08_PRECEDES_D2TX_002
     subject: inst:DVCA08
     predicate: pals:precedes
     object: inst:D2TX_002
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2TX_002_PRECEDES_MM_A09BF
+  - id: inst:BTA_LINE_D2TX_002_PRECEDES_MM_A09BF
     subject: inst:D2TX_002
     predicate: pals:precedes
     object: inst:MM_A09BF
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A09BF_PRECEDES_D2S_002
+  - id: inst:BTA_LINE_MM_A09BF_PRECEDES_D2S_002
     subject: inst:MM_A09BF
     predicate: pals:precedes
     object: inst:D2S_002
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2S_002_PRECEDES_MM_A10BF
+  - id: inst:BTA_LINE_D2S_002_PRECEDES_MM_A10BF
     subject: inst:D2S_002
     predicate: pals:precedes
     object: inst:MM_A10BF
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A10BF_PRECEDES_D10_001
+  - id: inst:BTA_LINE_MM_A10BF_PRECEDES_D10_001
     subject: inst:MM_A10BF
     predicate: pals:precedes
     object: inst:D10_001
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D10_001_PRECEDES_D10_002
+  - id: inst:BTA_LINE_D10_001_PRECEDES_D10_002
     subject: inst:D10_001
     predicate: pals:precedes
     object: inst:D10_002
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D10_002_PRECEDES_MM_A11BD
+  - id: inst:BTA_LINE_D10_002_PRECEDES_MM_A11BD
     subject: inst:D10_002
     predicate: pals:precedes
     object: inst:MM_A11BD
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A11BD_PRECEDES_D2S_003
+  - id: inst:BTA_LINE_MM_A11BD_PRECEDES_D2S_003
     subject: inst:MM_A11BD
     predicate: pals:precedes
     object: inst:D2S_003
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2S_003_PRECEDES_MM_A12BD
+  - id: inst:BTA_LINE_D2S_003_PRECEDES_MM_A12BD
     subject: inst:D2S_003
     predicate: pals:precedes
     object: inst:MM_A12BD
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A12BD_PRECEDES_DPUE_004
+  - id: inst:BTA_LINE_MM_A12BD_PRECEDES_DPUE_004
     subject: inst:MM_A12BD
     predicate: pals:precedes
     object: inst:DPUE_004
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_004_PRECEDES_PUE_A12
+  - id: inst:BTA_LINE_DPUE_004_PRECEDES_PUE_A12
     subject: inst:DPUE_004
     predicate: pals:precedes
     object: inst:PUE_A12
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A12_PRECEDES_DHCA12
+  - id: inst:BTA_LINE_PUE_A12_PRECEDES_DHCA12
     subject: inst:PUE_A12
     predicate: pals:precedes
     object: inst:DHCA12
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DHCA12_PRECEDES_DVCA12
+  - id: inst:BTA_LINE_DHCA12_PRECEDES_DVCA12
     subject: inst:DHCA12
     predicate: pals:precedes
     object: inst:DVCA12
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DVCA12_PRECEDES_D2TX_003
+  - id: inst:BTA_LINE_DVCA12_PRECEDES_D2TX_003
     subject: inst:DVCA12
     predicate: pals:precedes
     object: inst:D2TX_003
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2TX_003_PRECEDES_MM_A13CF
+  - id: inst:BTA_LINE_D2TX_003_PRECEDES_MM_A13CF
     subject: inst:D2TX_003
     predicate: pals:precedes
     object: inst:MM_A13CF
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A13CF_PRECEDES_DSS_003
+  - id: inst:BTA_LINE_MM_A13CF_PRECEDES_DSS_003
     subject: inst:MM_A13CF
     predicate: pals:precedes
     object: inst:DSS_003
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DSS_003_PRECEDES_SXH
+  - id: inst:BTA_LINE_DSS_003_PRECEDES_SXH
     subject: inst:DSS_003
     predicate: pals:precedes
     object: inst:SXH
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:SXH_PRECEDES_DSS_004
+  - id: inst:BTA_LINE_SXH_PRECEDES_DSS_004
     subject: inst:SXH
     predicate: pals:precedes
     object: inst:DSS_004
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DSS_004_PRECEDES_MM_A14CF
+  - id: inst:BTA_LINE_DSS_004_PRECEDES_MM_A14CF
     subject: inst:DSS_004
     predicate: pals:precedes
     object: inst:MM_A14CF
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A14CF_PRECEDES_DPUE_005
+  - id: inst:BTA_LINE_MM_A14CF_PRECEDES_DPUE_005
     subject: inst:MM_A14CF
     predicate: pals:precedes
     object: inst:DPUE_005
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_005_PRECEDES_PUE_A14
+  - id: inst:BTA_LINE_DPUE_005_PRECEDES_PUE_A14
     subject: inst:DPUE_005
     predicate: pals:precedes
     object: inst:PUE_A14
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A14_PRECEDES_D2LX_002
+  - id: inst:BTA_LINE_PUE_A14_PRECEDES_D2LX_002
     subject: inst:PUE_A14
     predicate: pals:precedes
     object: inst:D2LX_002
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2LX_002_PRECEDES_MM_A15AD
+  - id: inst:BTA_LINE_D2LX_002_PRECEDES_MM_A15AD
     subject: inst:D2LX_002
     predicate: pals:precedes
     object: inst:MM_A15AD
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MM_A15AD_PRECEDES_D2H
+  - id: inst:BTA_LINE_MM_A15AD_PRECEDES_D2H
     subject: inst:MM_A15AD
     predicate: pals:precedes
     object: inst:D2H
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:D2H_PRECEDES_MWA15
+  - id: inst:BTA_LINE_D2H_PRECEDES_MWA15
     subject: inst:D2H
     predicate: pals:precedes
     object: inst:MWA15
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:MWA15_PRECEDES_END_B0
+  - id: inst:BTA_LINE_MWA15_PRECEDES_END_B0
     subject: inst:MWA15
     predicate: pals:precedes
     object: inst:END_B0
     context: beamline_order
     beamline_context: inst:BTA_LINE
+  identifiers:
+  - identifier_type: LOCAL
+    identifier_value: BTA

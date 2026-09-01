@@ -20,6 +20,7 @@ prefixes:
   inst: https://example.org/pals-instance/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   xsd: http://www.w3.org/2001/XMLSchema#
+  ssn_system: https://www.w3.org/ns/ssn/systems/
 
 default_prefix: pals
 default_range: string
@@ -887,10 +888,10 @@ classes:
         description: Reference geometry type. Must be `arc`.
         range: ReferenceGeometryEnum
         slot_uri: pals:ref_geometry
-      rho_ref:
+      radius_ref:
         description: Reference bend radius.
         range: float
-        slot_uri: pals:rho_ref
+        slot_uri: pals:radius_ref
         #unit:
         #  ucum_code: m
       tilt_ref:
@@ -2053,7 +2054,7 @@ enums:
         meaning: xsd:maxInclusive
       RangeLimit:
         description: A signal containing both upper and lower allowed limits.
-        meaning: acc:RangeLimit
+        meaning: ssn_system:OperatingRange
 
   CanonicalSignalTypeEnum:
     description: Portable semantic meanings for important signals.
@@ -2229,7 +2230,7 @@ enums:
         meaning: xsd:boolean
       FloatArray:
         description: An array of floating-point values.
-        meaning: acc:FloatArray
+        # meaning: xsd:float[]
 
 
   CoordinateSystemEnum:

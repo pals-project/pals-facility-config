@@ -1,0 +1,375 @@
+description: Control-system-neutral NARAD skeleton generated from fodo.pals.yaml.
+kind: PALSAccelerator
+version: 0.1.0
+notes:
+- Generated from PALS source data without control-system enrichment.
+facility:
+  components:
+  - id: inst:DRIFT1_FODO_CELL_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.25
+      id: inst:DRIFT1_FODO_CELL_001/LongitudinalPlacementP
+  - id: inst:QUAD1
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:QUAD1/LongitudinalPlacementP
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Bn: 1.0
+      id: inst:QUAD1/MagneticMultipoleP
+  - id: inst:DRIFT2
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5
+      id: inst:DRIFT2/LongitudinalPlacementP
+  - id: inst:QUAD2
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:QUAD2/LongitudinalPlacementP
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Bn: -1.0
+      id: inst:QUAD2/MagneticMultipoleP
+  - id: inst:DRIFT1_FODO_CELL_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.25
+      id: inst:DRIFT1_FODO_CELL_002/LongitudinalPlacementP
+  - id: inst:DRIFT1_FODO_CHANNEL_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.25
+      id: inst:DRIFT1_FODO_CHANNEL_001/LongitudinalPlacementP
+  - id: inst:QUAD1_FODO_CHANNEL_001
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:QUAD1_FODO_CHANNEL_001/LongitudinalPlacementP
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Bn: 1.0
+      id: inst:QUAD1_FODO_CHANNEL_001/MagneticMultipoleP
+  - id: inst:DRIFT2_FODO_CHANNEL_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5
+      id: inst:DRIFT2_FODO_CHANNEL_001/LongitudinalPlacementP
+  - id: inst:QUAD2_FODO_CHANNEL_001
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:QUAD2_FODO_CHANNEL_001/LongitudinalPlacementP
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Bn: -1.0
+      id: inst:QUAD2_FODO_CHANNEL_001/MagneticMultipoleP
+  - id: inst:DRIFT1_FODO_CHANNEL_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.25
+      id: inst:DRIFT1_FODO_CHANNEL_002/LongitudinalPlacementP
+  - id: inst:DRIFT1_FODO_CHANNEL_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.25
+      id: inst:DRIFT1_FODO_CHANNEL_003/LongitudinalPlacementP
+  - id: inst:QUAD1_FODO_CHANNEL_002
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:QUAD1_FODO_CHANNEL_002/LongitudinalPlacementP
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Bn: 1.0
+      id: inst:QUAD1_FODO_CHANNEL_002/MagneticMultipoleP
+  - id: inst:DRIFT2_FODO_CHANNEL_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5
+      id: inst:DRIFT2_FODO_CHANNEL_002/LongitudinalPlacementP
+  - id: inst:QUAD2_FODO_CHANNEL_002
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:QUAD2_FODO_CHANNEL_002/LongitudinalPlacementP
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Bn: -1.0
+      id: inst:QUAD2_FODO_CHANNEL_002/MagneticMultipoleP
+  - id: inst:DRIFT1_FODO_CHANNEL_004
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.25
+      id: inst:DRIFT1_FODO_CHANNEL_004/LongitudinalPlacementP
+  - id: inst:DRIFT1_FODO_CHANNEL_005
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.25
+      id: inst:DRIFT1_FODO_CHANNEL_005/LongitudinalPlacementP
+  - id: inst:QUAD1_FODO_CHANNEL_003
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:QUAD1_FODO_CHANNEL_003/LongitudinalPlacementP
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Bn: 1.0
+      id: inst:QUAD1_FODO_CHANNEL_003/MagneticMultipoleP
+  - id: inst:DRIFT2_FODO_CHANNEL_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5
+      id: inst:DRIFT2_FODO_CHANNEL_003/LongitudinalPlacementP
+  - id: inst:QUAD2_FODO_CHANNEL_003
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:QUAD2_FODO_CHANNEL_003/LongitudinalPlacementP
+    MagneticMultipoleP:
+      mag_components:
+      - order: 1
+        Bn: -1.0
+      id: inst:QUAD2_FODO_CHANNEL_003/MagneticMultipoleP
+  - id: inst:DRIFT1_FODO_CHANNEL_006
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.25
+      id: inst:DRIFT1_FODO_CHANNEL_006/LongitudinalPlacementP
+  beamlines:
+  - id: inst:FODO_CELL
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
+    multipass: false
+    periodic: false
+    description: Beamline imported from PALS record fodo_cell.
+  - id: inst:FODO_CHANNEL
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
+    multipass: false
+    periodic: false
+    description: Beamline imported from PALS record fodo_channel.
+  signals: []
+  signal_bindings: []
+  component_relations:
+  - id: inst:FODO_CELL_DRIFT1_FODO_CELL_001_PRECEDES_QUAD1
+    subject: inst:DRIFT1_FODO_CELL_001
+    predicate: pals:precedes
+    object: inst:QUAD1
+    context: beamline_order
+    beamline_context: inst:FODO_CELL
+  - id: inst:FODO_CELL_QUAD1_PRECEDES_DRIFT2
+    subject: inst:QUAD1
+    predicate: pals:precedes
+    object: inst:DRIFT2
+    context: beamline_order
+    beamline_context: inst:FODO_CELL
+  - id: inst:FODO_CELL_DRIFT2_PRECEDES_QUAD2
+    subject: inst:DRIFT2
+    predicate: pals:precedes
+    object: inst:QUAD2
+    context: beamline_order
+    beamline_context: inst:FODO_CELL
+  - id: inst:FODO_CELL_QUAD2_PRECEDES_DRIFT1_FODO_CELL_002
+    subject: inst:QUAD2
+    predicate: pals:precedes
+    object: inst:DRIFT1_FODO_CELL_002
+    context: beamline_order
+    beamline_context: inst:FODO_CELL
+  - id: inst:FODO_CHANNEL_DRIFT1_FODO_CHANNEL_001_PRECEDES_QUAD1_FODO_CHANNEL_001
+    subject: inst:DRIFT1_FODO_CHANNEL_001
+    predicate: pals:precedes
+    object: inst:QUAD1_FODO_CHANNEL_001
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_QUAD1_FODO_CHANNEL_001_PRECEDES_DRIFT2_FODO_CHANNEL_001
+    subject: inst:QUAD1_FODO_CHANNEL_001
+    predicate: pals:precedes
+    object: inst:DRIFT2_FODO_CHANNEL_001
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_DRIFT2_FODO_CHANNEL_001_PRECEDES_QUAD2_FODO_CHANNEL_001
+    subject: inst:DRIFT2_FODO_CHANNEL_001
+    predicate: pals:precedes
+    object: inst:QUAD2_FODO_CHANNEL_001
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_QUAD2_FODO_CHANNEL_001_PRECEDES_DRIFT1_FODO_CHANNEL_002
+    subject: inst:QUAD2_FODO_CHANNEL_001
+    predicate: pals:precedes
+    object: inst:DRIFT1_FODO_CHANNEL_002
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_DRIFT1_FODO_CHANNEL_002_PRECEDES_DRIFT1_FODO_CHANNEL_003
+    subject: inst:DRIFT1_FODO_CHANNEL_002
+    predicate: pals:precedes
+    object: inst:DRIFT1_FODO_CHANNEL_003
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_DRIFT1_FODO_CHANNEL_003_PRECEDES_QUAD1_FODO_CHANNEL_002
+    subject: inst:DRIFT1_FODO_CHANNEL_003
+    predicate: pals:precedes
+    object: inst:QUAD1_FODO_CHANNEL_002
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_QUAD1_FODO_CHANNEL_002_PRECEDES_DRIFT2_FODO_CHANNEL_002
+    subject: inst:QUAD1_FODO_CHANNEL_002
+    predicate: pals:precedes
+    object: inst:DRIFT2_FODO_CHANNEL_002
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_DRIFT2_FODO_CHANNEL_002_PRECEDES_QUAD2_FODO_CHANNEL_002
+    subject: inst:DRIFT2_FODO_CHANNEL_002
+    predicate: pals:precedes
+    object: inst:QUAD2_FODO_CHANNEL_002
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_QUAD2_FODO_CHANNEL_002_PRECEDES_DRIFT1_FODO_CHANNEL_004
+    subject: inst:QUAD2_FODO_CHANNEL_002
+    predicate: pals:precedes
+    object: inst:DRIFT1_FODO_CHANNEL_004
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_DRIFT1_FODO_CHANNEL_004_PRECEDES_DRIFT1_FODO_CHANNEL_005
+    subject: inst:DRIFT1_FODO_CHANNEL_004
+    predicate: pals:precedes
+    object: inst:DRIFT1_FODO_CHANNEL_005
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_DRIFT1_FODO_CHANNEL_005_PRECEDES_QUAD1_FODO_CHANNEL_003
+    subject: inst:DRIFT1_FODO_CHANNEL_005
+    predicate: pals:precedes
+    object: inst:QUAD1_FODO_CHANNEL_003
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_QUAD1_FODO_CHANNEL_003_PRECEDES_DRIFT2_FODO_CHANNEL_003
+    subject: inst:QUAD1_FODO_CHANNEL_003
+    predicate: pals:precedes
+    object: inst:DRIFT2_FODO_CHANNEL_003
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_DRIFT2_FODO_CHANNEL_003_PRECEDES_QUAD2_FODO_CHANNEL_003
+    subject: inst:DRIFT2_FODO_CHANNEL_003
+    predicate: pals:precedes
+    object: inst:QUAD2_FODO_CHANNEL_003
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
+  - id: inst:FODO_CHANNEL_QUAD2_FODO_CHANNEL_003_PRECEDES_DRIFT1_FODO_CHANNEL_006
+    subject: inst:QUAD2_FODO_CHANNEL_003
+    predicate: pals:precedes
+    object: inst:DRIFT1_FODO_CHANNEL_006
+    context: beamline_order
+    beamline_context: inst:FODO_CHANNEL
