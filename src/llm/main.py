@@ -230,6 +230,7 @@ with gr.Blocks(title="Gradio Chat") as demo:
                     choices=[],
                     value=None,
                     label="Model",
+                    allow_custom_value=True,  # accept API calls (e.g. automation scripts) that skip "Refresh Models"
                 )
                 temperature = gr.Slider(
                     minimum=0.0,
@@ -315,4 +316,4 @@ with gr.Blocks(title="Gradio Chat") as demo:
         outputs=[manual_query_output],
     )
 
-demo.launch(server_name="0.0.0.0")
+demo.launch(server_name="0.0.0.0", show_error=True)
