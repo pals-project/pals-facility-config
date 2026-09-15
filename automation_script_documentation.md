@@ -1,4 +1,4 @@
-# Branch: 19-automation-script — Automated NARAD Q&A Pipeline
+# Automation Script — Automated NARAD Q&A Pipeline
 
 This document describes the work done on this branch: an automation script that
 turns the previously manual, multi-step workflow
@@ -277,3 +277,14 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
 - **Only `--transformation RDF` is implemented.** Any other value raises
   `NotImplementedError` — this is a placeholder for future non-RDF
   transformation strategies, per the original design brief for this branch.
+
+## 7. Example Run
+
+```bash
+uv run python3 src/run_pipeline.py \
+  --schema src/narad/schema/narad.yaml \
+  --instance examples/core_acc_narad_instance.yaml \
+  --queries examples/benchmark_queries/UITF_v1.yaml \
+  --answers examples/benchmark_queries/UITF_v1_answers.yaml \
+  --delete-intermediate-files
+```
