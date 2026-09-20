@@ -1139,11 +1139,11 @@ inst:DH1T.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
 
 <https://example.org/pals-instance/DH2/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.11374466241722879"^^xsd:float ;
-            pals:order 0 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.00019564081935763354"^^xsd:float ;
-            pals:order 1 ] .
+            pals:order 1 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.11374466241722879"^^xsd:float ;
+            pals:order 0 ] .
 
 inst:DH23T.current_range_binding rdf:object <https://example.org/pals-instance/bta-th23-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1176,11 +1176,11 @@ inst:DH23T.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/DH3/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.00019564081935763354"^^xsd:float ;
-            pals:order 1 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.11374466241722879"^^xsd:float ;
-            pals:order 0 ] .
+            pals:order 0 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.00019564081935763354"^^xsd:float ;
+            pals:order 1 ] .
 
 <https://example.org/pals-instance/DH4A/BendP> a pals:BendParamGroup ;
     pals:edge1_int "0.02065"^^xsd:float ;
@@ -1620,14 +1620,14 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A01BF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229642227363"^^xsd:float ;
-            pals:order 0 ],
+            pals:Kn "0.010112690671265677"^^xsd:float ;
+            pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04850457979108316"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.010112690671265677"^^xsd:float ;
-            pals:order 2 ] .
+            pals:Kn "-0.011712229642227363"^^xsd:float ;
+            pals:order 0 ] .
 
 <https://example.org/pals-instance/MM_A02BF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
@@ -1640,11 +1640,11 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
             pals:Kn "0.010112690671265677"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229642227363"^^xsd:float ;
-            pals:order 0 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04850457979108316"^^xsd:float ;
-            pals:order 1 ] .
+            pals:order 1 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "-0.011712229642227363"^^xsd:float ;
+            pals:order 0 ] .
 
 <https://example.org/pals-instance/MM_A03CD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
@@ -1657,11 +1657,11 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
             pals:Kn "-0.011712229630153455"^^xsd:float ;
             pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.008756616595046793"^^xsd:float ;
-            pals:order 2 ],
+            pals:Kn "-0.04863291582125735"^^xsd:float ;
+            pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.04863291582125736"^^xsd:float ;
-            pals:order 1 ] .
+            pals:Kn "0.008756616595046793"^^xsd:float ;
+            pals:order 2 ] .
 
 <https://example.org/pals-instance/MM_A04CD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
@@ -1671,13 +1671,13 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A04CD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
-            pals:order 0 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008756616595046793"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.04863291582125736"^^xsd:float ;
+            pals:Kn "-0.011712229630153455"^^xsd:float ;
+            pals:order 0 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "-0.04863291582125735"^^xsd:float ;
             pals:order 1 ] .
 
 <https://example.org/pals-instance/MM_A05AF/BendP> a pals:BendParamGroup ;
@@ -1688,11 +1688,11 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A05AF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
-            pals:order 0 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04870190658303816"^^xsd:float ;
             pals:order 1 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "-0.011712229630153455"^^xsd:float ;
+            pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008723426564620421"^^xsd:float ;
             pals:order 2 ] .
@@ -1705,14 +1705,14 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A06AF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
+            pals:Kn "-0.011712229630153455"^^xsd:float ;
+            pals:order 0 ],
+        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04870190658303816"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008723426564620421"^^xsd:float ;
-            pals:order 2 ],
-        [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
-            pals:order 0 ] .
+            pals:order 2 ] .
 
 <https://example.org/pals-instance/MM_A07CD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
@@ -1722,14 +1722,14 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A07CD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.04863291582125736"^^xsd:float ;
-            pals:order 1 ],
+            pals:KnL "-0.0279650307"^^xsd:float ;
+            pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008756616595046793"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
-            pals:order 0 ] .
+            pals:KnL "0.0"^^xsd:float ;
+            pals:order 1 ] .
 
 <https://example.org/pals-instance/MM_A08CD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
@@ -1739,14 +1739,14 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A08CD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.04863291582125736"^^xsd:float ;
-            pals:order 1 ],
+            pals:Kn "0.008756616595046793"^^xsd:float ;
+            pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
+            pals:KnL "-0.0279650307"^^xsd:float ;
             pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.008756616595046793"^^xsd:float ;
-            pals:order 2 ] .
+            pals:KnL "0.0"^^xsd:float ;
+            pals:order 1 ] .
 
 <https://example.org/pals-instance/MM_A09BF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
@@ -1756,14 +1756,14 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A09BF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.04850457979108316"^^xsd:float ;
-            pals:order 1 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.010112690671265677"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229642227363"^^xsd:float ;
-            pals:order 0 ] .
+            pals:order 0 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.04850457979108316"^^xsd:float ;
+            pals:order 1 ] .
 
 <https://example.org/pals-instance/MM_A10BF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
@@ -1790,14 +1790,14 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A11BD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.0484198946267085"^^xsd:float ;
-            pals:order 1 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.010003388034307203"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229642227363"^^xsd:float ;
-            pals:order 0 ] .
+            pals:order 0 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "-0.0484198946267085"^^xsd:float ;
+            pals:order 1 ] .
 
 <https://example.org/pals-instance/MM_A12BD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
@@ -1807,14 +1807,14 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A12BD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.010003388034307203"^^xsd:float ;
+            pals:order 2 ],
+        [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229642227363"^^xsd:float ;
             pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.0484198946267085"^^xsd:float ;
-            pals:order 1 ],
-        [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.010003388034307203"^^xsd:float ;
-            pals:order 2 ] .
+            pals:order 1 ] .
 
 <https://example.org/pals-instance/MM_A13CF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
@@ -1827,7 +1827,7 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
             pals:Kn "0.008845277832145091"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.048742537207373"^^xsd:float ;
+            pals:Kn "0.048742537207372996"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229630153455"^^xsd:float ;
@@ -1844,10 +1844,10 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
             pals:Kn "0.008845277832145091"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.048742537207373"^^xsd:float ;
+            pals:KnL "0.0"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
+            pals:KnL "-0.0279650307"^^xsd:float ;
             pals:order 0 ] .
 
 <https://example.org/pals-instance/MM_A15AD/BendP> a pals:BendParamGroup ;
@@ -1858,14 +1858,14 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
 
 <https://example.org/pals-instance/MM_A15AD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.008609656995266375"^^xsd:float ;
-            pals:order 2 ],
+            pals:KnL "0.0"^^xsd:float ;
+            pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
+            pals:KnL "-0.0279650307"^^xsd:float ;
             pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.0486098096672228"^^xsd:float ;
-            pals:order 1 ] .
+            pals:Kn "0.008609656995266375"^^xsd:float ;
+            pals:order 2 ] .
 
 inst:MW006.horizontal_profile_binding rdf:object <https://example.org/pals-instance/btaMW006Cntl:horInDataM> ;
     rdf:predicate "pals:has_readback_signal"^^xsd:anyURI ;
@@ -1885,19 +1885,19 @@ inst:MW006.vertical_profile_binding rdf:object <https://example.org/pals-instanc
 <https://example.org/pals-instance/MW006/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
-            pals:key "nbr_wires_x" ;
+            pals:key "nbr_wires_y" ;
             pals:value "32" ],
-        [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:float ;
-            pals:key "spacing_y" ;
-            pals:value "0.0015" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_x" ;
             pals:value "0.0015" ],
         [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:float ;
+            pals:key "spacing_y" ;
+            pals:value "0.0015" ],
+        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
-            pals:key "nbr_wires_y" ;
+            pals:key "nbr_wires_x" ;
             pals:value "32" ] ;
     pals:description "Multiwire beam-profile monitor." .
 
@@ -1918,21 +1918,21 @@ inst:MW060.vertical_profile_binding rdf:object <https://example.org/pals-instanc
 
 <https://example.org/pals-instance/MW060/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "nbr_wires_x" ;
-            pals:value "32" ],
-        [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "nbr_wires_y" ;
-            pals:value "32" ],
+            pals:datatype xsd:float ;
+            pals:key "spacing_x" ;
+            pals:value "0.0025" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_y" ;
             pals:value "0.0025" ],
         [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:float ;
-            pals:key "spacing_x" ;
-            pals:value "0.0025" ] ;
+            pals:datatype xsd:integer ;
+            pals:key "nbr_wires_y" ;
+            pals:value "32" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "nbr_wires_x" ;
+            pals:value "32" ] ;
     pals:description "Multiwire beam-profile monitor." .
 
 inst:MW125.horizontal_profile_binding rdf:object <https://example.org/pals-instance/btaMW125Cntl:horInDataM> ;
@@ -1956,16 +1956,16 @@ inst:MW125.vertical_profile_binding rdf:object <https://example.org/pals-instanc
             pals:key "nbr_wires_y" ;
             pals:value "32" ],
         [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:float ;
-            pals:key "spacing_y" ;
-            pals:value "0.0025" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "nbr_wires_x" ;
             pals:value "32" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_x" ;
+            pals:value "0.0025" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:float ;
+            pals:key "spacing_y" ;
             pals:value "0.0025" ] ;
     pals:description "Multiwire beam-profile monitor." .
 
@@ -1987,20 +1987,20 @@ inst:MW166.vertical_profile_binding rdf:object <https://example.org/pals-instanc
 <https://example.org/pals-instance/MW166/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
-            pals:key "nbr_wires_y" ;
+            pals:key "nbr_wires_x" ;
             pals:value "32" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_y" ;
             pals:value "0.0025" ],
         [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "nbr_wires_x" ;
-            pals:value "32" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_x" ;
-            pals:value "0.0025" ] ;
+            pals:value "0.0025" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "nbr_wires_y" ;
+            pals:value "32" ] ;
     pals:description "Multiwire beam-profile monitor." .
 
 inst:MWA15.horizontal_profile_binding rdf:object <https://example.org/pals-instance/adrA15MWCntl:horInDataM> ;
@@ -2020,10 +2020,6 @@ inst:MWA15.vertical_profile_binding rdf:object <https://example.org/pals-instanc
 
 <https://example.org/pals-instance/MWA15/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "nbr_wires_x" ;
-            pals:value "64" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_y" ;
             pals:value "0.002" ],
@@ -2031,6 +2027,10 @@ inst:MWA15.vertical_profile_binding rdf:object <https://example.org/pals-instanc
             pals:datatype xsd:integer ;
             pals:key "nbr_wires_y" ;
             pals:value "32" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "nbr_wires_x" ;
+            pals:value "64" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_x" ;
@@ -2493,33 +2493,33 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-qd11-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-qd13-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-qd15-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-qd3-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2533,13 +2533,13 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-qd5-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-qd7-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2563,25 +2563,15 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-qf10-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-qf12-ps:rangeC/MetaP> a pals:MetaParamGroup ;
-    pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
-
-<https://example.org/pals-instance/bta-qf14-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
@@ -2590,6 +2580,16 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
             pals:value "2" ] .
+
+<https://example.org/pals-instance/bta-qf14-ps:rangeC/MetaP> a pals:MetaParamGroup ;
+    pals:additional_metadata [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-qf2-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2603,13 +2603,13 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-qf4-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-qf6-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2633,23 +2633,23 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-th1-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-th127-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-th158-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2673,13 +2673,13 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-th4-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-th5-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2693,13 +2693,13 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-tv120-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-tv181-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2713,13 +2713,13 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-tv30-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-tv7-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -4937,7 +4937,7 @@ inst:XF183 pals:kind "Marker" ;
 inst:MW006 pals:LongitudinalPlacementP <https://example.org/pals-instance/MW006/LongitudinalPlacementP> ;
     pals:MetaP <https://example.org/pals-instance/MW006/MetaP> ;
     pals:kind "BeamProfileMonitor" ;
-    pals:native_types "Marker",
+    pals:native_types "Instrument",
         "Multiwire" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "BeamProfileMeasurement" .
@@ -4945,7 +4945,7 @@ inst:MW006 pals:LongitudinalPlacementP <https://example.org/pals-instance/MW006/
 inst:MW060 pals:LongitudinalPlacementP <https://example.org/pals-instance/MW060/LongitudinalPlacementP> ;
     pals:MetaP <https://example.org/pals-instance/MW060/MetaP> ;
     pals:kind "BeamProfileMonitor" ;
-    pals:native_types "Marker",
+    pals:native_types "Instrument",
         "Multiwire" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "BeamProfileMeasurement" .
@@ -4953,7 +4953,7 @@ inst:MW060 pals:LongitudinalPlacementP <https://example.org/pals-instance/MW060/
 inst:MW125 pals:LongitudinalPlacementP <https://example.org/pals-instance/MW125/LongitudinalPlacementP> ;
     pals:MetaP <https://example.org/pals-instance/MW125/MetaP> ;
     pals:kind "BeamProfileMonitor" ;
-    pals:native_types "Marker",
+    pals:native_types "Instrument",
         "Multiwire" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "BeamProfileMeasurement" .
@@ -4961,7 +4961,7 @@ inst:MW125 pals:LongitudinalPlacementP <https://example.org/pals-instance/MW125/
 inst:MW166 pals:LongitudinalPlacementP <https://example.org/pals-instance/MW166/LongitudinalPlacementP> ;
     pals:MetaP <https://example.org/pals-instance/MW166/MetaP> ;
     pals:kind "BeamProfileMonitor" ;
-    pals:native_types "Marker",
+    pals:native_types "Instrument",
         "Multiwire" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "BeamProfileMeasurement" .
@@ -4969,7 +4969,7 @@ inst:MW166 pals:LongitudinalPlacementP <https://example.org/pals-instance/MW166/
 inst:MWA15 pals:LongitudinalPlacementP <https://example.org/pals-instance/MWA15/LongitudinalPlacementP> ;
     pals:MetaP <https://example.org/pals-instance/MWA15/MetaP> ;
     pals:kind "BeamProfileMonitor" ;
-    pals:native_types "Marker",
+    pals:native_types "Instrument",
         "Multiwire" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "BeamProfileMeasurement" .
@@ -5167,7 +5167,7 @@ inst:QV9 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV9/Long
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "Focusing" .
 
-inst:BTA_LINE pals:description "Beamline imported from PALS record bta_line." ;
+inst:BTA_LINE pals:description "Beamline imported from PALSParserPy branch bta_line." ;
     pals:kind "BeamLine" ;
     pals:multipass false ;
     pals:periodic false ;
@@ -5745,7 +5745,7 @@ inst:BTA_LINE pals:description "Beamline imported from PALS record bta_line." ;
                 <https://example.org/pals-instance/btaMW166Cntl:verInDataM> ] ;
     pals:kind "PALSAccelerator" ;
     pals:notes "Enriched with BtA device properties and ADO signal naming rules.",
-        "Generated from PALS source data without control-system enrichment.",
+        "Generated from a PALSParserPy-expanded lattice without control system enrichment.",
         "Translated from Bmad lattice file: bta.run_oct30.bmad" ;
     pals:version "0.1.0" .
 

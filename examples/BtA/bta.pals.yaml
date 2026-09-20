@@ -1425,7 +1425,7 @@ PALS:
         length:  1.25180000000000025E+000
 
     - mw006: 
-        kind: Marker
+        kind: Instrument
 
     - dr006: 
         kind: Drift
@@ -1630,7 +1630,7 @@ PALS:
         length:  4.69899999999999096E-001
 
     - mw060: 
-        kind: Marker
+        kind: Instrument
 
     - dr060: 
         kind: Drift
@@ -1727,7 +1727,7 @@ PALS:
         length:  5.03015000000000256E+000
 
     - mw125: 
-        kind: Marker
+        kind: Instrument
 
     - dr125: 
         kind: Drift
@@ -1829,7 +1829,7 @@ PALS:
         length:  5.96950000000003200E-001
 
     - mw166: 
-        kind: Marker
+        kind: Instrument
 
     - dr166: 
         kind: Drift
@@ -2255,7 +2255,7 @@ PALS:
         length:  7.61927356000000056E-001
 
     - mwa15: 
-        kind: Marker
+        kind: Instrument
 
     - end_b0: 
         kind: Marker

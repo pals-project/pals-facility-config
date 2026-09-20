@@ -664,7 +664,12 @@ classes:
         slot_uri: pals:voltage
         #unit:
         #  ucum_code: V
-      # gradient - is this time dependent?
+      gradient:
+        description: RF accelerating gradient.
+        range: float
+        slot_uri: pals:gradient
+        #unit:
+        #  ucum_code: V/m
       phase:
         description: RF phase. rad/2pi RF phase in 0 to 2*pi
         range: float
@@ -790,10 +795,10 @@ classes:
         slot_uri: pals:angle_ref
         #unit:
         #  ucum_code: rad
-      bend_field_ref:
+      Bn0_ref:
         description: Reference bend field.
         range: float
-        slot_uri: pals:bend_field_ref
+        slot_uri: pals:Bn0_ref
         #unit:
         #  ucum_code: T
       bend_field_actual:
@@ -862,6 +867,12 @@ classes:
         slot_uri: pals:h2
         #unit:
         #  ucum_code: 1/m
+      Kn0_from_g_ref:
+        description: >-
+          Whether the normal dipole component defaults to values computed from
+          the reference curvature and reference bend field.
+        range: boolean
+        slot_uri: pals:Kn0_from_g_ref
       L_chord:
         description: Chord length of the bend.
         range: float
@@ -900,25 +911,6 @@ classes:
         slot_uri: pals:tilt_ref
         #unit:
         #  ucum_code: rad
-    rules:
-      - description: "multipole_geometry must be follows_ref_geometry"
-        preconditions:
-          slot_conditions:
-            multipole_geometry:
-              value_presence: PRESENT
-        postconditions:
-          slot_conditions:
-            multipole_geometry:
-              equals_expression: follows_ref_geometry
-      - description: "ref_geometry must be arc"
-        preconditions:
-          slot_conditions:
-            ref_geometry:
-              value_presence: PRESENT
-        postconditions:
-          slot_conditions:
-            ref_geometry:
-              equals_expression: arc
     exact_mappings:
       - pals:BendP
 
@@ -970,6 +962,16 @@ classes:
         range: float
         broad_mappings:
           - pals:BsN
+      BnL:
+        description: Length-integrated normal component of the magnetic field.
+        range: float
+        broad_mappings:
+          - pals:BnNL
+      BsL:
+        description: Length-integrated skew component of the magnetic field.
+        range: float
+        broad_mappings:
+          - pals:BsNL
       Kn:
         description: Normalized normal component.
         range: float
@@ -980,127 +982,143 @@ classes:
         range: float
         broad_mappings:
           - pals:KsN
+      KnL:
+        description: Length-integrated normalized normal component.
+        range: float
+        broad_mappings:
+          - pals:KnNL
+      KsL:
+        description: Length-integrated normalized skew component.
+        range: float
+        broad_mappings:
+          - pals:KsNL
     rules:
-      - description: "If Es is present, then Bn, Bs, Kn, Ks should NOT be present"
+      - description: Non-integrated electric normal and skew strengths must not be mixed with another representation for the same order.
         preconditions:
-          slot_conditions:
-            Es:
-              value_presence: PRESENT 
+          any_of:
+            - slot_conditions:
+                En:
+                  value_presence: PRESENT
+            - slot_conditions:
+                Es:
+                  value_presence: PRESENT
         postconditions:
           slot_conditions:
-            Bn:
-              value_presence: ABSENT
-            Bs:
-              value_presence: ABSENT
-            Kn:
-              value_presence: ABSENT
-            Ks:
-              value_presence: ABSENT
-      - description: "If En is present, then Bn, Bs, Kn, Ks should NOT be present"
+            EnL: {value_presence: ABSENT}
+            EsL: {value_presence: ABSENT}
+            Bn: {value_presence: ABSENT}
+            Bs: {value_presence: ABSENT}
+            BnL: {value_presence: ABSENT}
+            BsL: {value_presence: ABSENT}
+            Kn: {value_presence: ABSENT}
+            Ks: {value_presence: ABSENT}
+            KnL: {value_presence: ABSENT}
+            KsL: {value_presence: ABSENT}
+      - description: Integrated electric normal and skew strengths must not be mixed with another representation for the same order.
         preconditions:
-          slot_conditions:
-            En:
-              value_presence: PRESENT 
+          any_of:
+            - slot_conditions:
+                EnL:
+                  value_presence: PRESENT
+            - slot_conditions:
+                EsL:
+                  value_presence: PRESENT
         postconditions:
           slot_conditions:
-            Bn:
-              value_presence: ABSENT
-            Bs:
-              value_presence: ABSENT
-            Kn:
-              value_presence: ABSENT
-            Ks:
-              value_presence: ABSENT
-      - description: "If EnL is present, then Bn, Bs, Kn, Ks should NOT be present"
+            En: {value_presence: ABSENT}
+            Es: {value_presence: ABSENT}
+            Bn: {value_presence: ABSENT}
+            Bs: {value_presence: ABSENT}
+            BnL: {value_presence: ABSENT}
+            BsL: {value_presence: ABSENT}
+            Kn: {value_presence: ABSENT}
+            Ks: {value_presence: ABSENT}
+            KnL: {value_presence: ABSENT}
+            KsL: {value_presence: ABSENT}
+      - description: Non-integrated magnetic-field normal and skew strengths must not be mixed with another representation for the same order.
         preconditions:
-          slot_conditions:
-            EnL:
-              value_presence: PRESENT 
+          any_of:
+            - slot_conditions:
+                Bn:
+                  value_presence: PRESENT
+            - slot_conditions:
+                Bs:
+                  value_presence: PRESENT
         postconditions:
           slot_conditions:
-            Bn:
-              value_presence: ABSENT
-            Bs:
-              value_presence: ABSENT
-            Kn:
-              value_presence: ABSENT
-            Ks:
-              value_presence: ABSENT
-      - description: "If EsL is present, then Bn, Bs, Kn, Ks should NOT be present"
+            En: {value_presence: ABSENT}
+            Es: {value_presence: ABSENT}
+            EnL: {value_presence: ABSENT}
+            EsL: {value_presence: ABSENT}
+            BnL: {value_presence: ABSENT}
+            BsL: {value_presence: ABSENT}
+            Kn: {value_presence: ABSENT}
+            Ks: {value_presence: ABSENT}
+            KnL: {value_presence: ABSENT}
+            KsL: {value_presence: ABSENT}
+      - description: Integrated magnetic-field normal and skew strengths must not be mixed with another representation for the same order.
         preconditions:
-          slot_conditions:
-            EsL:
-              value_presence: PRESENT 
+          any_of:
+            - slot_conditions:
+                BnL:
+                  value_presence: PRESENT
+            - slot_conditions:
+                BsL:
+                  value_presence: PRESENT
         postconditions:
           slot_conditions:
-            Bn:
-              value_presence: ABSENT
-            Bs:
-              value_presence: ABSENT
-            Kn:
-              value_presence: ABSENT
-            Ks:
-              value_presence: ABSENT  
-      - description: "If Bn is present, then En, Es, EnL, EsL should NOT be present"
+            En: {value_presence: ABSENT}
+            Es: {value_presence: ABSENT}
+            EnL: {value_presence: ABSENT}
+            EsL: {value_presence: ABSENT}
+            Bn: {value_presence: ABSENT}
+            Bs: {value_presence: ABSENT}
+            Kn: {value_presence: ABSENT}
+            Ks: {value_presence: ABSENT}
+            KnL: {value_presence: ABSENT}
+            KsL: {value_presence: ABSENT}
+      - description: Non-integrated normalized normal and skew strengths must not be mixed with another representation for the same order.
         preconditions:
-          slot_conditions:
-            Bn:
-              value_presence: PRESENT 
+          any_of:
+            - slot_conditions:
+                Kn:
+                  value_presence: PRESENT
+            - slot_conditions:
+                Ks:
+                  value_presence: PRESENT
         postconditions:
           slot_conditions:
-            En:
-              value_presence: ABSENT
-            Es:
-              value_presence: ABSENT
-            EnL:
-              value_presence: ABSENT
-            EsL:
-              value_presence: ABSENT
-      - description: "If Bs is present, then En, Es, EnL, EsL should NOT be present"
+            En: {value_presence: ABSENT}
+            Es: {value_presence: ABSENT}
+            EnL: {value_presence: ABSENT}
+            EsL: {value_presence: ABSENT}
+            Bn: {value_presence: ABSENT}
+            Bs: {value_presence: ABSENT}
+            BnL: {value_presence: ABSENT}
+            BsL: {value_presence: ABSENT}
+            KnL: {value_presence: ABSENT}
+            KsL: {value_presence: ABSENT}
+      - description: Integrated normalized normal and skew strengths must not be mixed with another representation for the same order.
         preconditions:
-          slot_conditions:
-            Bs:
-              value_presence: PRESENT 
+          any_of:
+            - slot_conditions:
+                KnL:
+                  value_presence: PRESENT
+            - slot_conditions:
+                KsL:
+                  value_presence: PRESENT
         postconditions:
           slot_conditions:
-            En:
-              value_presence: ABSENT
-            Es:
-              value_presence: ABSENT
-            EnL:
-              value_presence: ABSENT
-            EsL:
-              value_presence: ABSENT
-      - description: "If Kn is present, then En, Es, EnL, EsL should NOT be present"
-        preconditions:
-          slot_conditions:
-            Kn:
-              value_presence: PRESENT 
-        postconditions:
-          slot_conditions:
-            En:
-              value_presence: ABSENT
-            Es:
-              value_presence: ABSENT
-            EnL:
-              value_presence: ABSENT
-            EsL:
-              value_presence: ABSENT
-      - description: "If Ks is present, then En, Es, EnL, EsL should NOT be present"
-        preconditions:
-          slot_conditions:
-            Ks:
-              value_presence: PRESENT 
-        postconditions:
-          slot_conditions:
-            En:
-              value_presence: ABSENT
-            Es:
-              value_presence: ABSENT
-            EnL:
-              value_presence: ABSENT
-            EsL:
-              value_presence: ABSENT
+            En: {value_presence: ABSENT}
+            Es: {value_presence: ABSENT}
+            EnL: {value_presence: ABSENT}
+            EsL: {value_presence: ABSENT}
+            Bn: {value_presence: ABSENT}
+            Bs: {value_presence: ABSENT}
+            BnL: {value_presence: ABSENT}
+            BsL: {value_presence: ABSENT}
+            Kn: {value_presence: ABSENT}
+            Ks: {value_presence: ABSENT}
 
   # ---- High-level component classes ------------------------------------------------
   Component:
@@ -1119,6 +1137,7 @@ classes:
   
   PhysicalComponent:
     is_a: Component
+    abstract: true
     mixins:
       - HasFloorP
       - HasLongitudinalPlacementP
@@ -1147,6 +1166,7 @@ classes:
 
   VirtualComponent:
     is_a: Component
+    abstract: true
     mixins:
       - HasFloorP
     description: >-
@@ -1178,6 +1198,8 @@ classes:
   BeamLine:
     is_a: VirtualComponent
     description: "PALS element for an ordered sequence of beamline elements defining a beam path."
+    annotations:
+      default_function: BeamLineSection
     attributes:
       multipass:
         description: >-
@@ -1291,6 +1313,8 @@ classes:
     is_a: Magnet
     mixins:
       - HasSolenoidP
+    annotations:
+      default_function: Focusing
     exact_mappings:
       - pals:Solenoid
 
@@ -1303,6 +1327,8 @@ classes:
     mixins:
       - HasElectricMultipoleP
       - HasMagneticMultipoleP
+    annotations:
+      default_function: Focusing
     broad_mappings:
       - pals:Multipole
   
@@ -1317,6 +1343,8 @@ classes:
       - Dipole
     mixins:
       - HasBendP
+    annotations:
+      default_function: Steering
     exact_mappings:
       - pals:Bend
   
@@ -1326,6 +1354,8 @@ classes:
 
       Only one of the electric or magnetic multipole components should be present, not both.
     is_a: Multipole
+    annotations:
+      default_function: Focusing
     exact_mappings:
       - pals:Quadrupole
 
@@ -1335,6 +1365,8 @@ classes:
 
       Only one of the electric or magnetic multipole components should be present, not both.
     is_a: Multipole
+    annotations:
+      default_function: Focusing
     exact_mappings:
       - pals:Octupole
 
@@ -1344,6 +1376,8 @@ classes:
 
       Only one of the electric or magnetic multipole components should be present, not both.
     is_a: Multipole
+    annotations:
+      default_function: Focusing
     exact_mappings:
       - pals:Sextupole
 
@@ -1362,6 +1396,8 @@ classes:
       plane:
         description: The transverse plane in which the kicker operates, either horizontal or vertical.
         range: PlaneEnum
+    annotations:
+      default_function: Steering
     broad_mappings:
       - pals:Kicker
     aliases:
@@ -1384,6 +1420,8 @@ classes:
   DiagnosticDevice:
     description: An accelerator device used to measure beam or machine state.
     is_a: PhysicalComponent
+    annotations:
+      default_function: Measurement
     broad_mappings:
       - pals:Instrument
 
@@ -1394,6 +1432,8 @@ classes:
       - HasReferenceP
       - HasBodyShiftP
       - HasTwissP
+    annotations:
+      default_function: BeamProfileMeasurement
     broad_mappings:
       - pals:Instrument
 
@@ -1404,6 +1444,8 @@ classes:
       - HasReferenceP
       - HasBodyShiftP
       - HasTwissP
+    annotations:
+      default_function: BeamPositionMeasurement
     broad_mappings:
       - pals:Instrument
 
@@ -1421,6 +1463,8 @@ classes:
     is_a: DiagnosticDevice
     mixins:
       - HasBodyShiftP
+    annotations:
+      default_function: RadiationMonitoring
     broad_mappings:
       - pals:Instrument
   
@@ -1438,15 +1482,18 @@ classes:
   CrabCavity:
     description: A cavity used for transverse beam manipulation, such as crabbing or deflecting.
     is_a: Cavity
+    annotations:
+      default_function: Steering
     exact_mappings:
       - pals:CrabCavity # Question about this for PALS folks
 
   RFCavity:
     description: A cavity used for RF acceleration or longitudinal manipulation.
-    abstract: true
     is_a: Cavity
     mixins:
       - HasRFP
+    annotations:
+      default_function: BeamAcceleration
     exact_mappings:
       - pals:RFCavity
   
@@ -1454,13 +1501,13 @@ classes:
     description: A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
     is_a: RFCavity
     broad_mappings:
-      - pals:RFCavity # DM: not in PALS
+      - pals:RFCavity
   
   SuperConductingRFCavity:
     description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
     is_a: RFCavity
     broad_mappings:
-      - pals:RFCavity # DM: not in PALS
+      - pals:RFCavity
   
   SupportingFacilityComponent:
     is_a: PhysicalComponent
@@ -1484,6 +1531,8 @@ classes:
         multivalued: true
         slot_uri: pals:supporting_facility_function
         range: FacilityFunctionEnum
+    annotations:
+      default_function: Support
     broad_mappings:
       - pals:StructuralElement
   
@@ -1497,6 +1546,8 @@ classes:
       the structure and function of the accelerator system but are not physical devices.
     mixins:
       - HasBodyShiftP
+    annotations:
+      default_function: Mark
     broad_mappings:
       - pals:BookkeepingElement
 
@@ -1505,6 +1556,8 @@ classes:
     is_a: BookkeepingComponent
     mixins:
       - HasTwissP
+    annotations:
+      default_function: Mark
     exact_mappings:
       - pals:Marker
 
@@ -1519,6 +1572,8 @@ classes:
     mixins:
       - HasReferenceP
       - HasTwissP
+    annotations:
+      default_function: Mark
     exact_mappings:
       - pals:BeginningEle
 
@@ -1530,6 +1585,8 @@ classes:
     is_a: VirtualComponent
     mixins:
       - HasLongitudinalPlacementP
+    annotations:
+      default_function: DriftSpace
     exact_mappings:
       - pals:Drift
 
@@ -1540,6 +1597,8 @@ classes:
     is_a: BookkeepingComponent
     mixins:
       - HasFloorP
+    annotations:
+      default_function: BeamLineSection
     exact_mappings:
       - pals:BeamLineSection
 

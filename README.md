@@ -4,19 +4,86 @@ This repository contains the code for the NARAD Data Services, which provide acc
 The services are built using LinkML and are designed to facilitate the integration and use of accelerator operations data across various applications.
 
 ## Prerequisites
-First, install UV, a Python version, build, and dependency management
-system. UV provides a streamlined workflow for managing Python projects, including dependency installation, virtual environments, and project scaffolding.
-```
+Install [uv](https://docs.astral.sh/uv/), which manages the Python version,
+virtual environment, and Python dependencies for this project:
+
+```console
 pipx install uv
 ```
-* https://docs.astral.sh/uv/getting-started/installation/
-  * For detailed best practices for working with Python in UV, please see:
-https://berkeleybop.org/best_practice/python_environments.
-   
-Then add Just, a build and deployment tool that helps make
-command-line build operations less cumbersome.
-  * uv tool install rust-just
-  * https://github.com/casey/just
+
+See the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/)
+for alternatives to `pipx`. For detailed best practices for Python environments
+with uv, see the [Berkeley BOP guide](https://berkeleybop.org/best_practice/python_environments).
+
+Install [Just](https://github.com/casey/just), which provides the repository's
+build and generation commands:
+
+```console
+uv tool install rust-just
+```
+
+The project also requires Git, CMake, and a C++ compiler to build its PALS
+parser dependency.
+
+## Environment Setup
+
+Run the following commands from the NARAD-DataServices repository root. The
+first command creates `.venv` and installs the dependencies declared in
+`pyproject.toml` and locked in `uv.lock`:
+
+```console
+uv sync
+```
+
+The main project uses
+[PALSParserPy](https://github.com/pals-project/PALSParserPy), a thin Python
+wrapper around the shared library built by
+[PALSParserCpp](https://github.com/pals-project/PALSParserCpp). Clone the two
+parser repositories side by side, build the C++ library, and then install the
+Python wrapper into the NARAD uv environment. This follows the upstream
+[PALSParserPy installation guide](https://pals-project.github.io/PALSParserPy/guide/installation.html):
+
+```console
+cd ..
+git clone https://github.com/pals-project/PALSParserCpp.git
+git clone https://github.com/pals-project/PALSParserPy.git
+
+cd PALSParserCpp && cmake -S . -B build && cmake --build build && cd ..
+
+cd PALSParserPy
+uv pip install --python ../NARAD-DataServices/.venv/bin/python -e .
+cd ../NARAD-DataServices
+```
+
+The expected checkout layout is:
+
+```text
+parent-directory/
+├── NARAD-DataServices/
+├── PALSParserCpp/
+└── PALSParserPy/
+```
+
+If PALSParserCpp is stored elsewhere, set `PALS_PARSER_CPP_DIR` to its checkout
+or `PALS_PARSER_CPP_LIB` to the compiled shared library before using
+PALSParserPy. Because PALSParserPy is installed separately rather than declared
+in `pyproject.toml`, reinstall it after a future exact `uv sync` removes it.
+
+Verify the complete environment with:
+
+```console
+uv run python -c "import palsparserpy; print(palsparserpy.__file__)"
+uv run pytest
+```
+
+For example, generate a PALSParserPy-based NARAD skeleton and then the enriched
+BtA instance with:
+
+```console
+uv run python src/narad_system/schema/palsparserpy_to_narad.py \
+  -input examples/BtA/bta.pals.yaml
+uv run python examples/BtA/generate_narad_bta_instance.py
+```
 
 
 ## Repository Structure

@@ -1,0 +1,3123 @@
+kind: PALSAccelerator
+description: Control-system-neutral NARAD skeleton generated from bta.pals.yaml using PALSParserPy.
+version: 0.1.0
+notes:
+- 'Translated from Bmad lattice file: bta.run_oct30.bmad'
+- Generated from a PALSParserPy-expanded lattice without control system enrichment.
+facility:
+  components:
+  - ReferenceP:
+      id: inst:BEGINNING_B1/ReferenceP
+      species_ref: proton
+      pc_ref: 2160058016.715229
+    TwissP:
+      id: inst:BEGINNING_B1/TwissP
+      alpha_a: 1.8249910306663342
+      alpha_b: -0.6499756770851368
+      beta_a: 12.5509384
+      beta_b: 4.072941886974975
+      eta_x: 2.7207960780961375
+      etap_x: -0.4222600658627664
+    id: inst:BEGINNING_B1
+    kind: BeginningEle
+    native_types:
+    - BeginningEle
+    - Beginning_Ele
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:BTASTART
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DHF6A/BendP
+      e2: -0.07149
+      g_ref: -0.057192
+    MagneticMultipoleP:
+      id: inst:DHF6A/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.057192
+    LongitudinalPlacementP:
+      id: inst:DHF6A/LongitudinalPlacementP
+      length: 1.25
+    id: inst:DHF6A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DHF6T/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DHF6T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - LongitudinalPlacementP:
+      id: inst:DRF6A/LongitudinalPlacementP
+      length: 0.03949999999999998
+    id: inst:DRF6A
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DHF6B/BendP
+      e1: -0.03324
+      e2: -0.07149
+      g_ref: -0.044728314115607806
+    MagneticMultipoleP:
+      id: inst:DHF6B/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.04472831411560781
+    LongitudinalPlacementP:
+      id: inst:DHF6B/LongitudinalPlacementP
+      length: 1.3269
+    id: inst:DHF6B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRF6B/LongitudinalPlacementP
+      length: 0.4064
+    id: inst:DRF6B
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUEH001/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUEH001
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR001/LongitudinalPlacementP
+      length: 1.2518000000000002
+    id: inst:DR001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:MW006/LongitudinalPlacementP
+      length: 0.0
+    id: inst:MW006
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR006/LongitudinalPlacementP
+      length: 0.43259999999999993
+    id: inst:DR006
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:DV007/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Ks: 0.00019785396946390708
+    LongitudinalPlacementP:
+      id: inst:DV007/LongitudinalPlacementP
+      length: 0.2286
+    id: inst:DV007
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Vertical
+  - LongitudinalPlacementP:
+      id: inst:DR007/LongitudinalPlacementP
+      length: 0.16060000000000002
+    id: inst:DR007
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QV1/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.543789268756699
+    LongitudinalPlacementP:
+      id: inst:QV1/LongitudinalPlacementP
+      length: 0.5588
+    id: inst:QV1
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ1/LongitudinalPlacementP
+      length: 0.4031500000000003
+    id: inst:DRQ1
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DH1A/BendP
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+      g_ref: 0.06818582244610812
+    MagneticMultipoleP:
+      id: inst:DH1A/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.0681858224461081
+    LongitudinalPlacementP:
+      id: inst:DH1A/LongitudinalPlacementP
+      length: 0.2666536729738865
+    id: inst:DH1A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DH1T/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DH1T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - BendP:
+      id: inst:DH1B/BendP
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+      g_ref: 0.06818582244610812
+    MagneticMultipoleP:
+      id: inst:DH1B/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.0681858224461081
+    LongitudinalPlacementP:
+      id: inst:DH1B/LongitudinalPlacementP
+      length: 0.2666536729738865
+    id: inst:DH1B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRD1/LongitudinalPlacementP
+      length: 0.353954
+    id: inst:DRD1
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QH2A/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 1.0492993067514023
+    LongitudinalPlacementP:
+      id: inst:QH2A/LongitudinalPlacementP
+      length: 0.5588
+    id: inst:QH2A
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ2A/LongitudinalPlacementP
+      length: 0.14119599999999966
+    id: inst:DRQ2A
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QH2B/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 1.0492993067514023
+    LongitudinalPlacementP:
+      id: inst:QH2B/LongitudinalPlacementP
+      length: 0.5588
+    id: inst:QH2B
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ2B/LongitudinalPlacementP
+      length: 0.4599000000000001
+    id: inst:DRQ2B
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - id: inst:XF019
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR019/LongitudinalPlacementP
+      length: 0.3256999999999993
+    id: inst:DR019
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QV3/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -1.4212102570001448
+    LongitudinalPlacementP:
+      id: inst:QV3/LongitudinalPlacementP
+      length: 0.5588
+    id: inst:QV3
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ3/LongitudinalPlacementP
+      length: 0.3706000000000004
+    id: inst:DRQ3
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - id: inst:FOIL024
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR024A/LongitudinalPlacementP
+      length: 0.012100000000000347
+    id: inst:DR024A
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DV030/LongitudinalPlacementP
+      length: 0.2438
+    id: inst:DV030
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Vertical
+  - LongitudinalPlacementP:
+      id: inst:DR024B/LongitudinalPlacementP
+      length: 0.6880999999999995
+    id: inst:DR024B
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QH4/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 1.3799174639073808
+    LongitudinalPlacementP:
+      id: inst:QH4/LongitudinalPlacementP
+      length: 0.5588
+    id: inst:QH4
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ4/LongitudinalPlacementP
+      length: 0.48617500000000113
+    id: inst:DRQ4
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DH2/BendP
+      e1: 0.05058
+      e2: 0.05058
+      edge1_int: 0.02891
+      edge2_int: 0.02891
+      g_ref: 0.1137446624172288
+    MagneticMultipoleP:
+      id: inst:DH2/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.11374466241722879
+      - order: 1
+        Kn: 0.00019564081935763354
+    LongitudinalPlacementP:
+      id: inst:DH2/LongitudinalPlacementP
+      length: 2.42385
+    id: inst:DH2
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRD2/LongitudinalPlacementP
+      length: 0.4714249999999991
+    id: inst:DRD2
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QV5/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.013354833631008985
+    LongitudinalPlacementP:
+      id: inst:QV5/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QV5
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DH23T/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DH23T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - LongitudinalPlacementP:
+      id: inst:DRQ5/LongitudinalPlacementP
+      length: 0.11834999999999998
+    id: inst:DRQ5
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUEV046/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUEV046
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR046/LongitudinalPlacementP
+      length: 0.8646750000000023
+    id: inst:DR046
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DH3/BendP
+      e1: 0.05058
+      e2: 0.05058
+      edge1_int: 0.02891
+      edge2_int: 0.02891
+      g_ref: 0.1137446624172288
+    MagneticMultipoleP:
+      id: inst:DH3/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.11374466241722879
+      - order: 1
+        Kn: 0.00019564081935763354
+    LongitudinalPlacementP:
+      id: inst:DH3/LongitudinalPlacementP
+      length: 2.42385
+    id: inst:DH3
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRD3/LongitudinalPlacementP
+      length: 0.4897249999999973
+    id: inst:DRD3
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QH6/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.9743513509122018
+    LongitudinalPlacementP:
+      id: inst:QH6/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QH6
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ6/LongitudinalPlacementP
+      length: 0.4714500000000008
+    id: inst:DRQ6
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - id: inst:XF059
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR059/LongitudinalPlacementP
+      length: 0.4698999999999991
+    id: inst:DR059
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:MW060/LongitudinalPlacementP
+      length: 0.0
+    id: inst:MW060
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR060/LongitudinalPlacementP
+      length: 0.4601500000000023
+    id: inst:DR060
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QV7/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.8675096450596528
+    LongitudinalPlacementP:
+      id: inst:QV7/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QV7
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ7Y/LongitudinalPlacementP
+      length: 4.25075
+    id: inst:DRQ7Y
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - id: inst:MK077
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ7Z/LongitudinalPlacementP
+      length: 4.25075
+    id: inst:DRQ7Z
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QH8/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.31882795472842496
+    LongitudinalPlacementP:
+      id: inst:QH8/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QH8
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ8/LongitudinalPlacementP
+      length: 0.7341
+    id: inst:DRQ8
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DH4A/BendP
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+      g_ref: 0.03202690436350769
+    MagneticMultipoleP:
+      id: inst:DH4A/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.032026904363507684
+    LongitudinalPlacementP:
+      id: inst:DH4A/LongitudinalPlacementP
+      length: 0.26665081030218785
+    id: inst:DH4A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DH4T/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DH4T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - BendP:
+      id: inst:DH4B/BendP
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+      g_ref: 0.03202690436350769
+    MagneticMultipoleP:
+      id: inst:DH4B/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.032026904363507684
+    LongitudinalPlacementP:
+      id: inst:DH4B/LongitudinalPlacementP
+      length: 0.26665081030218785
+    id: inst:DH4B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRD4/LongitudinalPlacementP
+      length: 1.8078999999999987
+    id: inst:DRD4
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QV9/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.7925788082089091
+    LongitudinalPlacementP:
+      id: inst:QV9/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QV9
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ9A/LongitudinalPlacementP
+      length: 0.670250000000003
+    id: inst:DRQ9A
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DV120/LongitudinalPlacementP
+      length: 0.2438
+    id: inst:DV120
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Vertical
+  - LongitudinalPlacementP:
+      id: inst:DRQ9B/LongitudinalPlacementP
+      length: 1.567049999999995
+    id: inst:DRQ9B
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QH10/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.6942945538633392
+    LongitudinalPlacementP:
+      id: inst:QH10/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QH10
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ10/LongitudinalPlacementP
+      length: 5.030150000000003
+    id: inst:DRQ10
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:MW125/LongitudinalPlacementP
+      length: 0.0
+    id: inst:MW125
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR125/LongitudinalPlacementP
+      length: 0.43049999999999866
+    id: inst:DR125
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DH127/LongitudinalPlacementP
+      length: 0.2438
+    id: inst:DH127
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - LongitudinalPlacementP:
+      id: inst:DR127/LongitudinalPlacementP
+      length: 0.29639999999999805
+    id: inst:DR127
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUEV129/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUEV129
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR129/LongitudinalPlacementP
+      length: 0.11834999999999998
+    id: inst:DR129
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QV11/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.3671828230083464
+    LongitudinalPlacementP:
+      id: inst:QV11/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QV11
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ11/LongitudinalPlacementP
+      length: 3.01295
+    id: inst:DRQ11
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - id: inst:MK139
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR139/LongitudinalPlacementP
+      length: 0.552500000000002
+    id: inst:DR139
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR141/LongitudinalPlacementP
+      length: 0.41820000000000185
+    id: inst:DR141
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUEH143/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUEH143
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR143/LongitudinalPlacementP
+      length: 0.11834999999999998
+    id: inst:DR143
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QH12/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.4868974442913689
+    LongitudinalPlacementP:
+      id: inst:QH12/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QH12
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ12/LongitudinalPlacementP
+      length: 3.7802499999999988
+    id: inst:DRQ12
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - id: inst:MK156
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR156/LongitudinalPlacementP
+      length: 0.430600000000002
+    id: inst:DR156
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DH158/LongitudinalPlacementP
+      length: 0.2438
+    id: inst:DH158
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - LongitudinalPlacementP:
+      id: inst:DR158/LongitudinalPlacementP
+      length: 0.29639999999999805
+    id: inst:DR158
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUEV160/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUEV160
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR160/LongitudinalPlacementP
+      length: 0.11834999999999998
+    id: inst:DR160
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QV13/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.9895450067507202
+    LongitudinalPlacementP:
+      id: inst:QV13/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QV13
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ13/LongitudinalPlacementP
+      length: 0.5969500000000032
+    id: inst:DRQ13
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:MW166/LongitudinalPlacementP
+      length: 0.0
+    id: inst:MW166
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR166/LongitudinalPlacementP
+      length: 0.5523999999999987
+    id: inst:DR166
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR168/LongitudinalPlacementP
+      length: 0.41829999999999806
+    id: inst:DR168
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUEH170/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUEH170
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR170/LongitudinalPlacementP
+      length: 0.11834999999999998
+    id: inst:DR170
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QH14/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.748989790597664
+    LongitudinalPlacementP:
+      id: inst:QH14/LongitudinalPlacementP
+      length: 0.4985
+    id: inst:QH14
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRQ14/LongitudinalPlacementP
+      length: 0.5067499999999983
+    id: inst:DRQ14
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DH5A/BendP
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+      g_ref: -0.1130065284655793
+    MagneticMultipoleP:
+      id: inst:DH5A/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.1130065284655793
+    LongitudinalPlacementP:
+      id: inst:DH5A/LongitudinalPlacementP
+      length: 0.6229286126725115
+    id: inst:DH5A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DH5T/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DH5T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - BendP:
+      id: inst:DH5B/BendP
+      edge1_int: 0.02065
+      edge2_int: 0.02065
+      g_ref: -0.1130065284655793
+    MagneticMultipoleP:
+      id: inst:DH5B/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.1130065284655793
+    LongitudinalPlacementP:
+      id: inst:DH5B/LongitudinalPlacementP
+      length: 0.6229286126725115
+    id: inst:DH5B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRD5/LongitudinalPlacementP
+      length: 0.4516000000000008
+    id: inst:DRD5
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DV181/LongitudinalPlacementP
+      length: 0.2438
+    id: inst:DV181
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Vertical
+  - LongitudinalPlacementP:
+      id: inst:DR181/LongitudinalPlacementP
+      length: 0.3797999999999996
+    id: inst:DR181
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - id: inst:XF183
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DR183/LongitudinalPlacementP
+      length: 0.5255000000000035
+    id: inst:DR183
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QV15/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.71933765439868
+    LongitudinalPlacementP:
+      id: inst:QV15/LongitudinalPlacementP
+      length: 0.5588
+    id: inst:QV15
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:M1/LongitudinalPlacementP
+      length: 2.2606
+    id: inst:M1
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:L20SPTM1/BendP
+      g_ref: 0.04457110731957698
+    MagneticMultipoleP:
+      id: inst:L20SPTM1/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.04457110731957699
+    LongitudinalPlacementP:
+      id: inst:L20SPTM1/LongitudinalPlacementP
+      length: 1.2309543850148328
+    id: inst:L20SPTM1
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DHL20T/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DHL20T
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - BendP:
+      id: inst:L20SPTM2/BendP
+      g_ref: 0.04457110731957698
+    MagneticMultipoleP:
+      id: inst:L20SPTM2/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.04457110731957699
+    LongitudinalPlacementP:
+      id: inst:L20SPTM2/LongitudinalPlacementP
+      length: 1.2309543850148328
+    id: inst:L20SPTM2
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A01BF/BendP
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      id: inst:MM_A01BF/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: 0.04850457979108316
+      - order: 2
+        Kn: 0.010112690671265677
+    LongitudinalPlacementP:
+      id: inst:MM_A01BF/LongitudinalPlacementP
+      length: 2.0066461824881423
+    id: inst:MM_A01BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2S_001/LongitudinalPlacementP
+      length: 0.609514656
+    id: inst:D2S_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A02BF/BendP
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      id: inst:MM_A02BF/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: 0.04850457979108316
+      - order: 2
+        Kn: 0.010112690671265677
+    LongitudinalPlacementP:
+      id: inst:MM_A02BF/LongitudinalPlacementP
+      length: 2.0066461824881423
+    id: inst:MM_A02BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DPUE_001/LongitudinalPlacementP
+      length: 0.287
+    id: inst:DPUE_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUE_A02/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUE_A02
+    kind: DiagnosticDevice
+    MetaP:
+      id: inst:PUE_A02/MetaP
+      label: “AGSBPM”
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DHCA02/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DHCA02
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - LongitudinalPlacementP:
+      id: inst:DVCA02/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DVCA02
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Vertical
+  - LongitudinalPlacementP:
+      id: inst:D2TX_001/LongitudinalPlacementP
+      length: 0.322485192
+    id: inst:D2TX_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A03CD/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A03CD/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: -0.04863291582125735
+      - order: 2
+        Kn: 0.008756616595046793
+    LongitudinalPlacementP:
+      id: inst:MM_A03CD/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A03CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DSQ_001/LongitudinalPlacementP
+      length: 0.37104735600000005
+    id: inst:DSQ_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:QHFV/LongitudinalPlacementP
+      length: 0.39088
+    id: inst:QHFV
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:QPOL/LongitudinalPlacementP
+      length: 0.39088
+    id: inst:QPOL
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DSQ_002/LongitudinalPlacementP
+      length: 0.37104735600000005
+    id: inst:DSQ_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A04CD/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A04CD/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: -0.04863291582125735
+      - order: 2
+        Kn: 0.008756616595046793
+    LongitudinalPlacementP:
+      id: inst:MM_A04CD/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A04CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DPUE_002/LongitudinalPlacementP
+      length: 0.287
+    id: inst:DPUE_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUE_A04/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUE_A04
+    kind: DiagnosticDevice
+    MetaP:
+      id: inst:PUE_A04/MetaP
+      label: “AGSBPM”
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2LX_001/LongitudinalPlacementP
+      length: 0.32245471200000003
+    id: inst:D2LX_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A05AF/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A05AF/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: 0.04870190658303816
+      - order: 2
+        Kn: 0.008723426564620421
+    LongitudinalPlacementP:
+      id: inst:MM_A05AF/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A05AF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2H_A05_001/LongitudinalPlacementP
+      length: 0.26192735600000006
+    id: inst:D2H_A05_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:KCKRA05/BendP
+      g_ref: 0.0029999988750001264
+    MagneticMultipoleP:
+      id: inst:KCKRA05/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.0029999988750001264
+    LongitudinalPlacementP:
+      id: inst:KCKRA05/LongitudinalPlacementP
+      length: 1.0000003750000985
+    id: inst:KCKRA05
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2H_A05_002/LongitudinalPlacementP
+      length: 0.26192735600000006
+    id: inst:D2H_A05_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A06AF/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A06AF/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: 0.04870190658303816
+      - order: 2
+        Kn: 0.008723426564620421
+    LongitudinalPlacementP:
+      id: inst:MM_A06AF/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A06AF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2L/LongitudinalPlacementP
+      length: 0.609454712
+    id: inst:D2L
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A07CD/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A07CD/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        KnL: -0.0279650307
+      - order: 1
+        KnL: 0.0
+      - order: 2
+        Kn: 0.008756616595046793
+    LongitudinalPlacementP:
+      id: inst:MM_A07CD/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A07CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DSS_001/LongitudinalPlacementP
+      length: 0.43442735600000004
+    id: inst:DSS_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:SXV/LongitudinalPlacementP
+      length: 0.655
+    id: inst:SXV
+    kind: Sextupole
+    native_types:
+    - Sextupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DSS_002/LongitudinalPlacementP
+      length: 0.43442735600000004
+    id: inst:DSS_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A08CD/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A08CD/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        KnL: -0.0279650307
+      - order: 1
+        KnL: 0.0
+      - order: 2
+        Kn: 0.008756616595046793
+    LongitudinalPlacementP:
+      id: inst:MM_A08CD/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A08CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DPUE_003/LongitudinalPlacementP
+      length: 0.287
+    id: inst:DPUE_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUE_A08/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUE_A08
+    kind: DiagnosticDevice
+    MetaP:
+      id: inst:PUE_A08/MetaP
+      label: “AGSBPM”
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DHCA08/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DHCA08
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - LongitudinalPlacementP:
+      id: inst:DVCA08/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DVCA08
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Vertical
+  - LongitudinalPlacementP:
+      id: inst:D2TX_002/LongitudinalPlacementP
+      length: 0.322485192
+    id: inst:D2TX_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A09BF/BendP
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      id: inst:MM_A09BF/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: 0.04850457979108316
+      - order: 2
+        Kn: 0.010112690671265677
+    LongitudinalPlacementP:
+      id: inst:MM_A09BF/LongitudinalPlacementP
+      length: 2.0066461824881423
+    id: inst:MM_A09BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2S_002/LongitudinalPlacementP
+      length: 0.609514656
+    id: inst:D2S_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A10BF/BendP
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      id: inst:MM_A10BF/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: 0.04850457979108316
+      - order: 2
+        Kn: 0.010112690671265677
+    LongitudinalPlacementP:
+      id: inst:MM_A10BF/LongitudinalPlacementP
+      length: 2.0066461824881423
+    id: inst:MM_A10BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D10_001/LongitudinalPlacementP
+      length: 1.523839218
+    id: inst:D10_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D10_002/LongitudinalPlacementP
+      length: 1.523839218
+    id: inst:D10_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A11BD/BendP
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      id: inst:MM_A11BD/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: -0.0484198946267085
+      - order: 2
+        Kn: 0.010003388034307203
+    LongitudinalPlacementP:
+      id: inst:MM_A11BD/LongitudinalPlacementP
+      length: 2.0066461824881423
+    id: inst:MM_A11BD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2S_003/LongitudinalPlacementP
+      length: 0.609514656
+    id: inst:D2S_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A12BD/BendP
+      g_ref: -0.011712229642227363
+    MagneticMultipoleP:
+      id: inst:MM_A12BD/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229642227363
+      - order: 1
+        Kn: -0.0484198946267085
+      - order: 2
+        Kn: 0.010003388034307203
+    LongitudinalPlacementP:
+      id: inst:MM_A12BD/LongitudinalPlacementP
+      length: 2.0066461824881423
+    id: inst:MM_A12BD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DPUE_004/LongitudinalPlacementP
+      length: 0.287
+    id: inst:DPUE_004
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUE_A12/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUE_A12
+    kind: DiagnosticDevice
+    MetaP:
+      id: inst:PUE_A12/MetaP
+      label: “AGSBPM”
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DHCA12/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DHCA12
+    kind: Kicker
+    native_types:
+    - Kicker
+    - HKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Horizontal
+  - LongitudinalPlacementP:
+      id: inst:DVCA12/LongitudinalPlacementP
+      length: 0.0
+    id: inst:DVCA12
+    kind: Kicker
+    native_types:
+    - Kicker
+    - VKicker
+    functions:
+    - Steering
+    beamline_relation: Inline
+    plane: Vertical
+  - LongitudinalPlacementP:
+      id: inst:D2TX_003/LongitudinalPlacementP
+      length: 0.322485192
+    id: inst:D2TX_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A13CF/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A13CF/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: -0.011712229630153455
+      - order: 1
+        Kn: 0.048742537207372996
+      - order: 2
+        Kn: 0.008845277832145091
+    LongitudinalPlacementP:
+      id: inst:MM_A13CF/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A13CF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DSS_003/LongitudinalPlacementP
+      length: 0.43442735600000004
+    id: inst:DSS_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:SXH/LongitudinalPlacementP
+      length: 0.655
+    id: inst:SXH
+    kind: Sextupole
+    native_types:
+    - Sextupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DSS_004/LongitudinalPlacementP
+      length: 0.43442735600000004
+    id: inst:DSS_004
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A14CF/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A14CF/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        KnL: -0.0279650307
+      - order: 1
+        KnL: 0.0
+      - order: 2
+        Kn: 0.008845277832145091
+    LongitudinalPlacementP:
+      id: inst:MM_A14CF/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A14CF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DPUE_005/LongitudinalPlacementP
+      length: 0.287
+    id: inst:DPUE_005
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUE_A14/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUE_A14
+    kind: DiagnosticDevice
+    MetaP:
+      id: inst:PUE_A14/MetaP
+      label: “AGSBPM”
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2LX_002/LongitudinalPlacementP
+      length: 0.32245471200000003
+    id: inst:D2LX_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:MM_A15AD/BendP
+      g_ref: -0.011712229630153455
+    MagneticMultipoleP:
+      id: inst:MM_A15AD/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        KnL: -0.0279650307
+      - order: 1
+        KnL: 0.0
+      - order: 2
+        Kn: 0.008609656995266375
+    LongitudinalPlacementP:
+      id: inst:MM_A15AD/LongitudinalPlacementP
+      length: 2.387677802013313
+    id: inst:MM_A15AD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:D2H/LongitudinalPlacementP
+      length: 0.7619273560000001
+    id: inst:D2H
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:MWA15/LongitudinalPlacementP
+      length: 0.0
+    id: inst:MWA15
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - id: inst:END_B0
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  beamlines:
+  - id: inst:BTA_LINE
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
+    description: Beamline imported from PALSParserPy branch bta_line.
+    multipass: false
+    periodic: false
+  signals: []
+  signal_bindings: []
+  component_relations:
+  - id: inst:BTA_LINE_BEGINNING_B1_PRECEDES_BTASTART
+    subject: inst:BEGINNING_B1
+    predicate: pals:precedes
+    object: inst:BTASTART
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_BTASTART_PRECEDES_DHF6A
+    subject: inst:BTASTART
+    predicate: pals:precedes
+    object: inst:DHF6A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DHF6A_PRECEDES_DHF6T
+    subject: inst:DHF6A
+    predicate: pals:precedes
+    object: inst:DHF6T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DHF6T_PRECEDES_DRF6A
+    subject: inst:DHF6T
+    predicate: pals:precedes
+    object: inst:DRF6A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRF6A_PRECEDES_DHF6B
+    subject: inst:DRF6A
+    predicate: pals:precedes
+    object: inst:DHF6B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DHF6B_PRECEDES_DRF6B
+    subject: inst:DHF6B
+    predicate: pals:precedes
+    object: inst:DRF6B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRF6B_PRECEDES_PUEH001
+    subject: inst:DRF6B
+    predicate: pals:precedes
+    object: inst:PUEH001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUEH001_PRECEDES_DR001
+    subject: inst:PUEH001
+    predicate: pals:precedes
+    object: inst:DR001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR001_PRECEDES_MW006
+    subject: inst:DR001
+    predicate: pals:precedes
+    object: inst:MW006
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MW006_PRECEDES_DR006
+    subject: inst:MW006
+    predicate: pals:precedes
+    object: inst:DR006
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR006_PRECEDES_DV007
+    subject: inst:DR006
+    predicate: pals:precedes
+    object: inst:DV007
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DV007_PRECEDES_DR007
+    subject: inst:DV007
+    predicate: pals:precedes
+    object: inst:DR007
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR007_PRECEDES_QV1
+    subject: inst:DR007
+    predicate: pals:precedes
+    object: inst:QV1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QV1_PRECEDES_DRQ1
+    subject: inst:QV1
+    predicate: pals:precedes
+    object: inst:DRQ1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ1_PRECEDES_DH1A
+    subject: inst:DRQ1
+    predicate: pals:precedes
+    object: inst:DH1A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH1A_PRECEDES_DH1T
+    subject: inst:DH1A
+    predicate: pals:precedes
+    object: inst:DH1T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH1T_PRECEDES_DH1B
+    subject: inst:DH1T
+    predicate: pals:precedes
+    object: inst:DH1B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH1B_PRECEDES_DRD1
+    subject: inst:DH1B
+    predicate: pals:precedes
+    object: inst:DRD1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRD1_PRECEDES_QH2A
+    subject: inst:DRD1
+    predicate: pals:precedes
+    object: inst:QH2A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QH2A_PRECEDES_DRQ2A
+    subject: inst:QH2A
+    predicate: pals:precedes
+    object: inst:DRQ2A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ2A_PRECEDES_QH2B
+    subject: inst:DRQ2A
+    predicate: pals:precedes
+    object: inst:QH2B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QH2B_PRECEDES_DRQ2B
+    subject: inst:QH2B
+    predicate: pals:precedes
+    object: inst:DRQ2B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ2B_PRECEDES_XF019
+    subject: inst:DRQ2B
+    predicate: pals:precedes
+    object: inst:XF019
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_XF019_PRECEDES_DR019
+    subject: inst:XF019
+    predicate: pals:precedes
+    object: inst:DR019
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR019_PRECEDES_QV3
+    subject: inst:DR019
+    predicate: pals:precedes
+    object: inst:QV3
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QV3_PRECEDES_DRQ3
+    subject: inst:QV3
+    predicate: pals:precedes
+    object: inst:DRQ3
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ3_PRECEDES_FOIL024
+    subject: inst:DRQ3
+    predicate: pals:precedes
+    object: inst:FOIL024
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_FOIL024_PRECEDES_DR024A
+    subject: inst:FOIL024
+    predicate: pals:precedes
+    object: inst:DR024A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR024A_PRECEDES_DV030
+    subject: inst:DR024A
+    predicate: pals:precedes
+    object: inst:DV030
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DV030_PRECEDES_DR024B
+    subject: inst:DV030
+    predicate: pals:precedes
+    object: inst:DR024B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR024B_PRECEDES_QH4
+    subject: inst:DR024B
+    predicate: pals:precedes
+    object: inst:QH4
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QH4_PRECEDES_DRQ4
+    subject: inst:QH4
+    predicate: pals:precedes
+    object: inst:DRQ4
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ4_PRECEDES_DH2
+    subject: inst:DRQ4
+    predicate: pals:precedes
+    object: inst:DH2
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH2_PRECEDES_DRD2
+    subject: inst:DH2
+    predicate: pals:precedes
+    object: inst:DRD2
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRD2_PRECEDES_QV5
+    subject: inst:DRD2
+    predicate: pals:precedes
+    object: inst:QV5
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QV5_PRECEDES_DH23T
+    subject: inst:QV5
+    predicate: pals:precedes
+    object: inst:DH23T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH23T_PRECEDES_DRQ5
+    subject: inst:DH23T
+    predicate: pals:precedes
+    object: inst:DRQ5
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ5_PRECEDES_PUEV046
+    subject: inst:DRQ5
+    predicate: pals:precedes
+    object: inst:PUEV046
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUEV046_PRECEDES_DR046
+    subject: inst:PUEV046
+    predicate: pals:precedes
+    object: inst:DR046
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR046_PRECEDES_DH3
+    subject: inst:DR046
+    predicate: pals:precedes
+    object: inst:DH3
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH3_PRECEDES_DRD3
+    subject: inst:DH3
+    predicate: pals:precedes
+    object: inst:DRD3
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRD3_PRECEDES_QH6
+    subject: inst:DRD3
+    predicate: pals:precedes
+    object: inst:QH6
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QH6_PRECEDES_DRQ6
+    subject: inst:QH6
+    predicate: pals:precedes
+    object: inst:DRQ6
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ6_PRECEDES_XF059
+    subject: inst:DRQ6
+    predicate: pals:precedes
+    object: inst:XF059
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_XF059_PRECEDES_DR059
+    subject: inst:XF059
+    predicate: pals:precedes
+    object: inst:DR059
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR059_PRECEDES_MW060
+    subject: inst:DR059
+    predicate: pals:precedes
+    object: inst:MW060
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MW060_PRECEDES_DR060
+    subject: inst:MW060
+    predicate: pals:precedes
+    object: inst:DR060
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR060_PRECEDES_QV7
+    subject: inst:DR060
+    predicate: pals:precedes
+    object: inst:QV7
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QV7_PRECEDES_DRQ7Y
+    subject: inst:QV7
+    predicate: pals:precedes
+    object: inst:DRQ7Y
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ7Y_PRECEDES_MK077
+    subject: inst:DRQ7Y
+    predicate: pals:precedes
+    object: inst:MK077
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MK077_PRECEDES_DRQ7Z
+    subject: inst:MK077
+    predicate: pals:precedes
+    object: inst:DRQ7Z
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ7Z_PRECEDES_QH8
+    subject: inst:DRQ7Z
+    predicate: pals:precedes
+    object: inst:QH8
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QH8_PRECEDES_DRQ8
+    subject: inst:QH8
+    predicate: pals:precedes
+    object: inst:DRQ8
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ8_PRECEDES_DH4A
+    subject: inst:DRQ8
+    predicate: pals:precedes
+    object: inst:DH4A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH4A_PRECEDES_DH4T
+    subject: inst:DH4A
+    predicate: pals:precedes
+    object: inst:DH4T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH4T_PRECEDES_DH4B
+    subject: inst:DH4T
+    predicate: pals:precedes
+    object: inst:DH4B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH4B_PRECEDES_DRD4
+    subject: inst:DH4B
+    predicate: pals:precedes
+    object: inst:DRD4
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRD4_PRECEDES_QV9
+    subject: inst:DRD4
+    predicate: pals:precedes
+    object: inst:QV9
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QV9_PRECEDES_DRQ9A
+    subject: inst:QV9
+    predicate: pals:precedes
+    object: inst:DRQ9A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ9A_PRECEDES_DV120
+    subject: inst:DRQ9A
+    predicate: pals:precedes
+    object: inst:DV120
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DV120_PRECEDES_DRQ9B
+    subject: inst:DV120
+    predicate: pals:precedes
+    object: inst:DRQ9B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ9B_PRECEDES_QH10
+    subject: inst:DRQ9B
+    predicate: pals:precedes
+    object: inst:QH10
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QH10_PRECEDES_DRQ10
+    subject: inst:QH10
+    predicate: pals:precedes
+    object: inst:DRQ10
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ10_PRECEDES_MW125
+    subject: inst:DRQ10
+    predicate: pals:precedes
+    object: inst:MW125
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MW125_PRECEDES_DR125
+    subject: inst:MW125
+    predicate: pals:precedes
+    object: inst:DR125
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR125_PRECEDES_DH127
+    subject: inst:DR125
+    predicate: pals:precedes
+    object: inst:DH127
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH127_PRECEDES_DR127
+    subject: inst:DH127
+    predicate: pals:precedes
+    object: inst:DR127
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR127_PRECEDES_PUEV129
+    subject: inst:DR127
+    predicate: pals:precedes
+    object: inst:PUEV129
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUEV129_PRECEDES_DR129
+    subject: inst:PUEV129
+    predicate: pals:precedes
+    object: inst:DR129
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR129_PRECEDES_QV11
+    subject: inst:DR129
+    predicate: pals:precedes
+    object: inst:QV11
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QV11_PRECEDES_DRQ11
+    subject: inst:QV11
+    predicate: pals:precedes
+    object: inst:DRQ11
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ11_PRECEDES_MK139
+    subject: inst:DRQ11
+    predicate: pals:precedes
+    object: inst:MK139
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MK139_PRECEDES_DR139
+    subject: inst:MK139
+    predicate: pals:precedes
+    object: inst:DR139
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR139_PRECEDES_DR141
+    subject: inst:DR139
+    predicate: pals:precedes
+    object: inst:DR141
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR141_PRECEDES_PUEH143
+    subject: inst:DR141
+    predicate: pals:precedes
+    object: inst:PUEH143
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUEH143_PRECEDES_DR143
+    subject: inst:PUEH143
+    predicate: pals:precedes
+    object: inst:DR143
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR143_PRECEDES_QH12
+    subject: inst:DR143
+    predicate: pals:precedes
+    object: inst:QH12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QH12_PRECEDES_DRQ12
+    subject: inst:QH12
+    predicate: pals:precedes
+    object: inst:DRQ12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ12_PRECEDES_MK156
+    subject: inst:DRQ12
+    predicate: pals:precedes
+    object: inst:MK156
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MK156_PRECEDES_DR156
+    subject: inst:MK156
+    predicate: pals:precedes
+    object: inst:DR156
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR156_PRECEDES_DH158
+    subject: inst:DR156
+    predicate: pals:precedes
+    object: inst:DH158
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH158_PRECEDES_DR158
+    subject: inst:DH158
+    predicate: pals:precedes
+    object: inst:DR158
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR158_PRECEDES_PUEV160
+    subject: inst:DR158
+    predicate: pals:precedes
+    object: inst:PUEV160
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUEV160_PRECEDES_DR160
+    subject: inst:PUEV160
+    predicate: pals:precedes
+    object: inst:DR160
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR160_PRECEDES_QV13
+    subject: inst:DR160
+    predicate: pals:precedes
+    object: inst:QV13
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QV13_PRECEDES_DRQ13
+    subject: inst:QV13
+    predicate: pals:precedes
+    object: inst:DRQ13
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ13_PRECEDES_MW166
+    subject: inst:DRQ13
+    predicate: pals:precedes
+    object: inst:MW166
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MW166_PRECEDES_DR166
+    subject: inst:MW166
+    predicate: pals:precedes
+    object: inst:DR166
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR166_PRECEDES_DR168
+    subject: inst:DR166
+    predicate: pals:precedes
+    object: inst:DR168
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR168_PRECEDES_PUEH170
+    subject: inst:DR168
+    predicate: pals:precedes
+    object: inst:PUEH170
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUEH170_PRECEDES_DR170
+    subject: inst:PUEH170
+    predicate: pals:precedes
+    object: inst:DR170
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR170_PRECEDES_QH14
+    subject: inst:DR170
+    predicate: pals:precedes
+    object: inst:QH14
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QH14_PRECEDES_DRQ14
+    subject: inst:QH14
+    predicate: pals:precedes
+    object: inst:DRQ14
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRQ14_PRECEDES_DH5A
+    subject: inst:DRQ14
+    predicate: pals:precedes
+    object: inst:DH5A
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH5A_PRECEDES_DH5T
+    subject: inst:DH5A
+    predicate: pals:precedes
+    object: inst:DH5T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH5T_PRECEDES_DH5B
+    subject: inst:DH5T
+    predicate: pals:precedes
+    object: inst:DH5B
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DH5B_PRECEDES_DRD5
+    subject: inst:DH5B
+    predicate: pals:precedes
+    object: inst:DRD5
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DRD5_PRECEDES_DV181
+    subject: inst:DRD5
+    predicate: pals:precedes
+    object: inst:DV181
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DV181_PRECEDES_DR181
+    subject: inst:DV181
+    predicate: pals:precedes
+    object: inst:DR181
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR181_PRECEDES_XF183
+    subject: inst:DR181
+    predicate: pals:precedes
+    object: inst:XF183
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_XF183_PRECEDES_DR183
+    subject: inst:XF183
+    predicate: pals:precedes
+    object: inst:DR183
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DR183_PRECEDES_QV15
+    subject: inst:DR183
+    predicate: pals:precedes
+    object: inst:QV15
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QV15_PRECEDES_M1
+    subject: inst:QV15
+    predicate: pals:precedes
+    object: inst:M1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_M1_PRECEDES_L20SPTM1
+    subject: inst:M1
+    predicate: pals:precedes
+    object: inst:L20SPTM1
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_L20SPTM1_PRECEDES_DHL20T
+    subject: inst:L20SPTM1
+    predicate: pals:precedes
+    object: inst:DHL20T
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DHL20T_PRECEDES_L20SPTM2
+    subject: inst:DHL20T
+    predicate: pals:precedes
+    object: inst:L20SPTM2
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_L20SPTM2_PRECEDES_MM_A01BF
+    subject: inst:L20SPTM2
+    predicate: pals:precedes
+    object: inst:MM_A01BF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A01BF_PRECEDES_D2S_001
+    subject: inst:MM_A01BF
+    predicate: pals:precedes
+    object: inst:D2S_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2S_001_PRECEDES_MM_A02BF
+    subject: inst:D2S_001
+    predicate: pals:precedes
+    object: inst:MM_A02BF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A02BF_PRECEDES_DPUE_001
+    subject: inst:MM_A02BF
+    predicate: pals:precedes
+    object: inst:DPUE_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DPUE_001_PRECEDES_PUE_A02
+    subject: inst:DPUE_001
+    predicate: pals:precedes
+    object: inst:PUE_A02
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUE_A02_PRECEDES_DHCA02
+    subject: inst:PUE_A02
+    predicate: pals:precedes
+    object: inst:DHCA02
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DHCA02_PRECEDES_DVCA02
+    subject: inst:DHCA02
+    predicate: pals:precedes
+    object: inst:DVCA02
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DVCA02_PRECEDES_D2TX_001
+    subject: inst:DVCA02
+    predicate: pals:precedes
+    object: inst:D2TX_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2TX_001_PRECEDES_MM_A03CD
+    subject: inst:D2TX_001
+    predicate: pals:precedes
+    object: inst:MM_A03CD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A03CD_PRECEDES_DSQ_001
+    subject: inst:MM_A03CD
+    predicate: pals:precedes
+    object: inst:DSQ_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DSQ_001_PRECEDES_QHFV
+    subject: inst:DSQ_001
+    predicate: pals:precedes
+    object: inst:QHFV
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QHFV_PRECEDES_QPOL
+    subject: inst:QHFV
+    predicate: pals:precedes
+    object: inst:QPOL
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_QPOL_PRECEDES_DSQ_002
+    subject: inst:QPOL
+    predicate: pals:precedes
+    object: inst:DSQ_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DSQ_002_PRECEDES_MM_A04CD
+    subject: inst:DSQ_002
+    predicate: pals:precedes
+    object: inst:MM_A04CD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A04CD_PRECEDES_DPUE_002
+    subject: inst:MM_A04CD
+    predicate: pals:precedes
+    object: inst:DPUE_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DPUE_002_PRECEDES_PUE_A04
+    subject: inst:DPUE_002
+    predicate: pals:precedes
+    object: inst:PUE_A04
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUE_A04_PRECEDES_D2LX_001
+    subject: inst:PUE_A04
+    predicate: pals:precedes
+    object: inst:D2LX_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2LX_001_PRECEDES_MM_A05AF
+    subject: inst:D2LX_001
+    predicate: pals:precedes
+    object: inst:MM_A05AF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A05AF_PRECEDES_D2H_A05_001
+    subject: inst:MM_A05AF
+    predicate: pals:precedes
+    object: inst:D2H_A05_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2H_A05_001_PRECEDES_KCKRA05
+    subject: inst:D2H_A05_001
+    predicate: pals:precedes
+    object: inst:KCKRA05
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_KCKRA05_PRECEDES_D2H_A05_002
+    subject: inst:KCKRA05
+    predicate: pals:precedes
+    object: inst:D2H_A05_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2H_A05_002_PRECEDES_MM_A06AF
+    subject: inst:D2H_A05_002
+    predicate: pals:precedes
+    object: inst:MM_A06AF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A06AF_PRECEDES_D2L
+    subject: inst:MM_A06AF
+    predicate: pals:precedes
+    object: inst:D2L
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2L_PRECEDES_MM_A07CD
+    subject: inst:D2L
+    predicate: pals:precedes
+    object: inst:MM_A07CD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A07CD_PRECEDES_DSS_001
+    subject: inst:MM_A07CD
+    predicate: pals:precedes
+    object: inst:DSS_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DSS_001_PRECEDES_SXV
+    subject: inst:DSS_001
+    predicate: pals:precedes
+    object: inst:SXV
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_SXV_PRECEDES_DSS_002
+    subject: inst:SXV
+    predicate: pals:precedes
+    object: inst:DSS_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DSS_002_PRECEDES_MM_A08CD
+    subject: inst:DSS_002
+    predicate: pals:precedes
+    object: inst:MM_A08CD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A08CD_PRECEDES_DPUE_003
+    subject: inst:MM_A08CD
+    predicate: pals:precedes
+    object: inst:DPUE_003
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DPUE_003_PRECEDES_PUE_A08
+    subject: inst:DPUE_003
+    predicate: pals:precedes
+    object: inst:PUE_A08
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUE_A08_PRECEDES_DHCA08
+    subject: inst:PUE_A08
+    predicate: pals:precedes
+    object: inst:DHCA08
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DHCA08_PRECEDES_DVCA08
+    subject: inst:DHCA08
+    predicate: pals:precedes
+    object: inst:DVCA08
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DVCA08_PRECEDES_D2TX_002
+    subject: inst:DVCA08
+    predicate: pals:precedes
+    object: inst:D2TX_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2TX_002_PRECEDES_MM_A09BF
+    subject: inst:D2TX_002
+    predicate: pals:precedes
+    object: inst:MM_A09BF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A09BF_PRECEDES_D2S_002
+    subject: inst:MM_A09BF
+    predicate: pals:precedes
+    object: inst:D2S_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2S_002_PRECEDES_MM_A10BF
+    subject: inst:D2S_002
+    predicate: pals:precedes
+    object: inst:MM_A10BF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A10BF_PRECEDES_D10_001
+    subject: inst:MM_A10BF
+    predicate: pals:precedes
+    object: inst:D10_001
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D10_001_PRECEDES_D10_002
+    subject: inst:D10_001
+    predicate: pals:precedes
+    object: inst:D10_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D10_002_PRECEDES_MM_A11BD
+    subject: inst:D10_002
+    predicate: pals:precedes
+    object: inst:MM_A11BD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A11BD_PRECEDES_D2S_003
+    subject: inst:MM_A11BD
+    predicate: pals:precedes
+    object: inst:D2S_003
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2S_003_PRECEDES_MM_A12BD
+    subject: inst:D2S_003
+    predicate: pals:precedes
+    object: inst:MM_A12BD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A12BD_PRECEDES_DPUE_004
+    subject: inst:MM_A12BD
+    predicate: pals:precedes
+    object: inst:DPUE_004
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DPUE_004_PRECEDES_PUE_A12
+    subject: inst:DPUE_004
+    predicate: pals:precedes
+    object: inst:PUE_A12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUE_A12_PRECEDES_DHCA12
+    subject: inst:PUE_A12
+    predicate: pals:precedes
+    object: inst:DHCA12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DHCA12_PRECEDES_DVCA12
+    subject: inst:DHCA12
+    predicate: pals:precedes
+    object: inst:DVCA12
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DVCA12_PRECEDES_D2TX_003
+    subject: inst:DVCA12
+    predicate: pals:precedes
+    object: inst:D2TX_003
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2TX_003_PRECEDES_MM_A13CF
+    subject: inst:D2TX_003
+    predicate: pals:precedes
+    object: inst:MM_A13CF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A13CF_PRECEDES_DSS_003
+    subject: inst:MM_A13CF
+    predicate: pals:precedes
+    object: inst:DSS_003
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DSS_003_PRECEDES_SXH
+    subject: inst:DSS_003
+    predicate: pals:precedes
+    object: inst:SXH
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_SXH_PRECEDES_DSS_004
+    subject: inst:SXH
+    predicate: pals:precedes
+    object: inst:DSS_004
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DSS_004_PRECEDES_MM_A14CF
+    subject: inst:DSS_004
+    predicate: pals:precedes
+    object: inst:MM_A14CF
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A14CF_PRECEDES_DPUE_005
+    subject: inst:MM_A14CF
+    predicate: pals:precedes
+    object: inst:DPUE_005
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_DPUE_005_PRECEDES_PUE_A14
+    subject: inst:DPUE_005
+    predicate: pals:precedes
+    object: inst:PUE_A14
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_PUE_A14_PRECEDES_D2LX_002
+    subject: inst:PUE_A14
+    predicate: pals:precedes
+    object: inst:D2LX_002
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2LX_002_PRECEDES_MM_A15AD
+    subject: inst:D2LX_002
+    predicate: pals:precedes
+    object: inst:MM_A15AD
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MM_A15AD_PRECEDES_D2H
+    subject: inst:MM_A15AD
+    predicate: pals:precedes
+    object: inst:D2H
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_D2H_PRECEDES_MWA15
+    subject: inst:D2H
+    predicate: pals:precedes
+    object: inst:MWA15
+    context: beamline_order
+    beamline_context: inst:BTA_LINE
+  - id: inst:BTA_LINE_MWA15_PRECEDES_END_B0
+    subject: inst:MWA15
+    predicate: pals:precedes
+    object: inst:END_B0
+    context: beamline_order
+    beamline_context: inst:BTA_LINE

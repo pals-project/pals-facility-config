@@ -1,0 +1,229 @@
+kind: PALSAccelerator
+description: Control-system-neutral NARAD skeleton generated from convert.pals.yaml using PALSParserPy.
+version: 0.1.0
+notes:
+- Generated from a PALSParserPy-expanded lattice without control system enrichment.
+facility:
+  components:
+  - ReferenceP:
+      id: inst:BEG/ReferenceP
+      species_ref: electron
+      pc_ref: 3000000.0
+    id: inst:BEG
+    kind: BeginningEle
+    native_types:
+    - BeginningEle
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - id: inst:MARKER1
+    kind: Marker
+    native_types:
+    - Marker
+    functions:
+    - Mark
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:DRIFT1/LongitudinalPlacementP
+      length: 100.0
+    id: inst:DRIFT1
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+  - BendP:
+      id: inst:S1/BendP
+      Bn0_ref: 1.2
+      e1: 9.1
+      e2: -10.2
+      e1_rect: 1.1
+      e2_rect: 1.2
+      edge1_int: 1.3
+      edge2_int: 1.4
+      g_ref: 1.5
+      h1: 1.6
+      h2: 1.7
+      L_chord: 1.8
+      L_sagitta: 1.9
+      radius_ref: 4.2
+      tilt_ref: 2.0
+    BodyShiftP:
+      id: inst:S1/BodyShiftP
+      x_offset: 9.1
+      y_offset: 9.2
+      z_offset: 9.3
+      x_rot: -1.0
+      y_rot: -2.0
+      z_rot: -3.0
+    LongitudinalPlacementP:
+      id: inst:S1/LongitudinalPlacementP
+      length: 10.0
+    id: inst:S1
+    kind: Bend
+    native_types:
+    - Bend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QUAD1/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        tilt: 1.0
+        Kn: 32.0
+        Ks: 10.0
+    LongitudinalPlacementP:
+      id: inst:QUAD1/LongitudinalPlacementP
+      length: 0.01
+    id: inst:QUAD1
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - SolenoidP:
+      id: inst:SOL1/SolenoidP
+      Ksol: 10.0
+    LongitudinalPlacementP:
+      id: inst:SOL1/LongitudinalPlacementP
+      length: 0.0
+    id: inst:SOL1
+    kind: Solenoid
+    native_types:
+    - Solenoid
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:MULTIPOLE1/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        tilt: 1.0
+        Bn: 3.0
+        Bs: 9.0
+      - order: 2
+        tilt: 2.0
+        Kn: 1.0
+        Ks: 10.0
+      - order: 4
+        tilt: 10.3
+        BnL: 2.0
+        BsL: 3.0
+      - order: 9
+        tilt: 2.0
+        KnL: 11.0
+        KsL: 12.0
+    LongitudinalPlacementP:
+      id: inst:MULTIPOLE1/LongitudinalPlacementP
+      length: 37.6
+    id: inst:MULTIPOLE1
+    kind: Multipole
+    native_types:
+    - Multipole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - RFP:
+      id: inst:RFCAV1/RFP
+      frequency: 100000.0
+      voltage: 100.0
+      gradient: 0.2
+      phase: 3.1
+      multipass_phase: 2.0
+      cavity_type: STANDING_WAVE
+      num_cells: 1
+      zero_phase: ACCELERATING
+    LongitudinalPlacementP:
+      id: inst:RFCAV1/LongitudinalPlacementP
+      length: 1.3
+    id: inst:RFCAV1
+    kind: RFCavity
+    native_types:
+    - RFCavity
+    functions:
+    - BeamAcceleration
+    beamline_relation: Inline
+  - RFP:
+      id: inst:RFCAV2/RFP
+      harmon: 2000
+      voltage: 100.0
+      gradient: 0.2
+      phase: 3.1
+      multipass_phase: 2.0
+      cavity_type: STANDING_WAVE
+      num_cells: 1
+      zero_phase: BELOW_TRANSITION
+    LongitudinalPlacementP:
+      id: inst:RFCAV2/LongitudinalPlacementP
+      length: 1.3
+    id: inst:RFCAV2
+    kind: RFCavity
+    native_types:
+    - RFCavity
+    functions:
+    - BeamAcceleration
+    beamline_relation: Inline
+  - RFP:
+      id: inst:RFCAV3/RFP
+      voltage: 100.0
+      gradient: 0.2
+      phase: 3.1
+      multipass_phase: 2.0
+      cavity_type: TRAVELING_WAVE
+      num_cells: 1
+      zero_phase: ABOVE_TRANSITION
+    LongitudinalPlacementP:
+      id: inst:RFCAV3/LongitudinalPlacementP
+      length: 1.3
+    id: inst:RFCAV3
+    kind: RFCavity
+    native_types:
+    - RFCavity
+    functions:
+    - BeamAcceleration
+    beamline_relation: Inline
+  beamlines:
+  - id: inst:RING
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
+    description: Beamline imported from PALSParserPy branch ring.
+    multipass: false
+    periodic: false
+  signals: []
+  signal_bindings: []
+  component_relations:
+  - id: inst:RING_BEG_PRECEDES_MARKER1
+    subject: inst:BEG
+    predicate: pals:precedes
+    object: inst:MARKER1
+    context: beamline_order
+    beamline_context: inst:RING
+  - id: inst:RING_S1_PRECEDES_QUAD1
+    subject: inst:S1
+    predicate: pals:precedes
+    object: inst:QUAD1
+    context: beamline_order
+    beamline_context: inst:RING
+  - id: inst:RING_SOL1_PRECEDES_MULTIPOLE1
+    subject: inst:SOL1
+    predicate: pals:precedes
+    object: inst:MULTIPOLE1
+    context: beamline_order
+    beamline_context: inst:RING
+  - id: inst:RING_RFCAV1_PRECEDES_RFCAV2
+    subject: inst:RFCAV1
+    predicate: pals:precedes
+    object: inst:RFCAV2
+    context: beamline_order
+    beamline_context: inst:RING
+  - id: inst:RING_RFCAV2_PRECEDES_RFCAV3
+    subject: inst:RFCAV2
+    predicate: pals:precedes
+    object: inst:RFCAV3
+    context: beamline_order
+    beamline_context: inst:RING

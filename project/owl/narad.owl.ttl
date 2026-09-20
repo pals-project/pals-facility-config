@@ -22,49 +22,40 @@
 pals:AdditionalMetadata a owl:Class ;
     rdfs:label "AdditionalMetadata" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:key ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:datatype ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:key ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:datatype ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:key ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:key ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty pals:value ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pals:key ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:DataTypeEnum ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:datatype ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:value ] ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:DataTypeEnum ;
+            owl:onProperty pals:datatype ] ;
     skos:definition "A single generic key/value metadata entry, used as a GraphQL-compatible replacement for an open-ended (range: Any) field. A list of these represents an arbitrary, extensible bag of program-specific metadata." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:Author a owl:Class ;
     rdfs:label "Author" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:affiliation ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:orcid ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:email ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
@@ -73,86 +64,291 @@ pals:Author a owl:Class ;
             owl:onProperty pals:email ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:affiliation ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:Affiliation ;
-            owl:onProperty pals:affiliation ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty pals:email ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:orcid ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
                                 owl:onDatatype xsd:string ;
                                 owl:withRestrictions ( [ xsd:pattern "^https://orcid\\.org/\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$" ] ) ] ) ] ;
+            owl:onProperty pals:orcid ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:orcid ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:Affiliation ;
+            owl:onProperty pals:affiliation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:affiliation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:affiliation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:email ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:orcid ] ;
     skos:definition "Contains authorship information for a representation of an accelerator facility and its operations." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+pals:BendParamGroup a owl:Class ;
+    rdfs:label "BendParamGroup" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:h1 ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:Kn0_from_g_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:L_chord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:ref_geometry ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:bend_field_actual ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:e1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:g_actual ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:g_actual ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:e2 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:tilt_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:multipole_geometry ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:L_sagitta ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:L_sagitta ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:bend_field_actual ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:g_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Bn0_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty pals:Kn0_from_g_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:e1 ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:L_rectangle ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:L_rectangle ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:e1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:L_chord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:e2_rect ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:tilt_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:ref_geometry ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:edge2_int ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:L_chord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:e1_rect ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:radius_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:edge2_int ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:e2 ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:h2 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:e2_rect ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:e2 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:tilt_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:e2_rect ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:L_rectangle ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:h2 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:angle_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:edge1_int ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:Bn0_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:L_sagitta ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:edge1_int ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:e1_rect ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:g_actual ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:Bn0_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:angle_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Kn0_from_g_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:ReferenceGeometryEnum ;
+            owl:onProperty pals:ref_geometry ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:e1_rect ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:h1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:g_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:MultipoleGeometryEnum ;
+            owl:onProperty pals:multipole_geometry ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:h2 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:h1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:g_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:radius_ref ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:bend_field_actual ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:edge2_int ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:radius_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:edge1_int ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:multipole_geometry ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:angle_ref ],
+        pals:ParamGroup ;
+    skos:definition "Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS)." ;
+    skos:exactMatch pals:BendP ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:BodyShiftParamGroup a owl:Class ;
     rdfs:label "BodyShiftParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:x_rot ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:x_rot ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
             owl:onProperty pals:y_rot ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:x_offset ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty pals:z_rot ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:y_offset ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:x_rot ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:x_offset ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:y_rot ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty pals:x_offset ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:y_rot ],
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:x_offset ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:y_offset ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:y_offset ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty pals:z_offset ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:y_offset ],
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:x_rot ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:z_offset ],
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:z_rot ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty pals:z_rot ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:x_rot ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:y_offset ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:z_rot ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:y_rot ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:y_offset ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:z_offset ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:z_offset ],
         pals:ParamGroup ;
     skos:broadMatch pals:BodyShiftP ;
@@ -183,6 +379,12 @@ pals:Facility a owl:Class ;
     rdfs:label "Facility" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty pals:identifiers ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:beamlines ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:BeamLine ;
             owl:onProperty pals:beamlines ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
@@ -191,83 +393,32 @@ pals:Facility a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty pals:signal_bindings ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:Identifier ;
-            owl:onProperty pals:identifiers ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:components ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:component_relations ],
-        [ a owl:Restriction ;
             owl:allValuesFrom pals:Component ;
             owl:onProperty pals:components ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom pals:Signal ;
+            owl:onProperty pals:signals ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:Identifier ;
             owl:onProperty pals:identifiers ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:BeamLine ;
-            owl:onProperty pals:beamlines ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:SignalBinding ;
-            owl:onProperty pals:signal_bindings ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:ComponentRelation ;
             owl:onProperty pals:component_relations ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:Signal ;
-            owl:onProperty pals:signals ] ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:components ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:SignalBinding ;
+            owl:onProperty pals:signal_bindings ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:component_relations ] ;
     skos:definition "A facility that houses one or more accelerators." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:FloorParamGroup a owl:Class ;
     rdfs:label "FloorParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:phi ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:x ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:psi ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:theta ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:phi ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:theta ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:psi ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:phi ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:psi ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:z ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:z ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:y ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:y ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:x ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:z ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:y ],
         [ a owl:Restriction ;
@@ -275,7 +426,52 @@ pals:FloorParamGroup a owl:Class ;
             owl:onProperty pals:theta ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:phi ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:psi ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:theta ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:y ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:x ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:theta ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:phi ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:z ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:phi ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:x ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:z ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:psi ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:psi ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:x ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:y ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:z ],
         pals:ParamGroup ;
     skos:broadMatch pals:FloorP ;
     skos:definition "Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS)." ;
@@ -284,39 +480,39 @@ pals:FloorParamGroup a owl:Class ;
 pals:HasBendP a owl:Class ;
     rdfs:label "HasBendP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom pals:BendParamGroup ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:BendP ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:BendP ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom pals:BendParamGroup ;
             owl:onProperty pals:BendP ] ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:HasRFP a owl:Class ;
     rdfs:label "HasRFP" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:RFP ],
+        [ a owl:Restriction ;
             owl:allValuesFrom pals:RFParamGroup ;
             owl:onProperty pals:RFP ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:RFP ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty pals:RFP ] ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:HasSolenoidP a owl:Class ;
     rdfs:label "HasSolenoidP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom pals:SolenoidParamGroup ;
-            owl:onProperty pals:SolenoidP ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:SolenoidP ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty pals:SolenoidP ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:SolenoidParamGroup ;
             owl:onProperty pals:SolenoidP ] ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
@@ -344,34 +540,34 @@ pals:MagneticMultipoleParamGroup a owl:Class ;
 pals:MetaParamGroup a owl:Class ;
     rdfs:label "MetaParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:description ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:description ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:alias ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:description ],
+            owl:minCardinality 0 ;
+            owl:onProperty pals:additional_metadata ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:AdditionalMetadata ;
             owl:onProperty pals:additional_metadata ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:additional_metadata ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:label ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:description ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:label ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:alias ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty pals:label ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:label ],
         pals:ParamGroup ;
     skos:broadMatch pals:MetaP ;
@@ -381,95 +577,104 @@ pals:MetaParamGroup a owl:Class ;
 pals:RFParamGroup a owl:Class ;
     rdfs:label "RFParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:multipass_phase ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:ZeroPhaseEnum ;
-            owl:onProperty pals:zero_phase ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:dE_ref ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:phase ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:phase ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty pals:cavity_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:num_cells ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:frequency ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty pals:num_cells ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:harmon ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty pals:dE_ref ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:L_active ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:dE_ref ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:multipass_phase ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:voltage ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty pals:cavity_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:L_active ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:frequency ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:multipass_phase ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:zero_phase ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:voltage ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
             owl:onProperty pals:harmon ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:phase ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:CavityTypeEnum ;
             owl:onProperty pals:cavity_type ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:frequency ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:harmon ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:multipass_phase ],
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:harmon ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:zero_phase ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:phase ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty pals:voltage ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:voltage ],
+            owl:onProperty pals:phase ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:L_active ],
+            owl:onProperty pals:frequency ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:gradient ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty pals:num_cells ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:num_cells ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:cavity_type ],
+            owl:minCardinality 0 ;
+            owl:onProperty pals:gradient ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:multipass_phase ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:L_active ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:gradient ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:ZeroPhaseEnum ;
+            owl:onProperty pals:zero_phase ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:frequency ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:L_active ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:multipass_phase ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:L_active ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:zero_phase ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:dE_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:phase ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:zero_phase ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:voltage ],
         pals:ParamGroup ;
     skos:broadMatch pals:RFP ;
     skos:definition "Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS)." ;
@@ -478,41 +683,41 @@ pals:RFParamGroup a owl:Class ;
 pals:ReferenceParamGroup a owl:Class ;
     rdfs:label "ReferenceParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:time_ref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:pc_ref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:E_tot_ref ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:species_ref ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty pals:time_ref ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:E_tot_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:time_ref ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:pc_ref ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:E_tot_ref ],
+            owl:onProperty pals:pc_ref ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:float ;
             owl:onProperty pals:pc_ref ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:species_ref ],
+            owl:onProperty pals:time_ref ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:E_tot_ref ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:species_ref ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:E_tot_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:time_ref ],
+            owl:onProperty pals:species_ref ],
         pals:ParamGroup ;
     skos:broadMatch pals:ReferenceP ;
     skos:definition "Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS)." ;
@@ -521,95 +726,95 @@ pals:ReferenceParamGroup a owl:Class ;
 pals:TwissParamGroup a owl:Class ;
     rdfs:label "TwissParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:alpha_a ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:alpha_a ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:eta_y ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:beta_a ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:etap_x ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:eta_x ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:beta_a ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:alpha_b ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:etap_x ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:alpha_a ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:eta_x ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:etap_y ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:beta_b ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:phi_b ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:beta_b ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:beta_a ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:alpha_b ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:etap_y ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:phi_b ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:phi_a ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:beta_b ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:etap_y ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:alpha_b ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:eta_y ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:etap_x ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:eta_x ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:phi_a ],
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:beta_b ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:eta_y ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty pals:beta_a ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:phi_b ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:alpha_a ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:etap_y ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:eta_x ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:phi_b ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:eta_y ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:alpha_b ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:beta_a ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:alpha_a ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:etap_x ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:etap_y ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:eta_x ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:beta_b ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:eta_x ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:phi_b ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:eta_y ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:beta_b ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:phi_a ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:phi_a ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:beta_a ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:alpha_b ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:alpha_b ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:phi_a ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:alpha_a ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:etap_x ],
         pals:ParamGroup ;
     skos:broadMatch pals:TwissP ;
     skos:definition "Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element." ;
@@ -703,58 +908,58 @@ xsd:minInclusive a owl:Class ;
 pals:AdjacentTo a owl:Class ;
     rdfs:label "AdjacentTo" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:tolerance_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:distance_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:distance_unit ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:coordinates ],
+            owl:onProperty pals:tolerance_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:UnitEnum ;
+            owl:onProperty pals:tolerance_unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:distance_unit ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:coordinates ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:tolerance_unit ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:distance_value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:CoordinateSet ;
             owl:onProperty pals:coordinates ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:tolerance_unit ],
+            owl:minCardinality 0 ;
+            owl:onProperty pals:coordinates ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:distance_value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:distance_value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:tolerance_value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:distance_unit ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:tolerance_value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:tolerance_value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:UnitEnum ;
-            owl:onProperty pals:distance_unit ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:UnitEnum ;
             owl:onProperty pals:tolerance_unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:distance_value ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:tolerance_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:UnitEnum ;
             owl:onProperty pals:distance_unit ],
         pals:ComponentRelation ;
     skos:definition """A relationship indicating that the subject component is adjacent to the object component and not overlapping
@@ -780,7 +985,8 @@ pals:BeamPositionMonitor a owl:Class ;
         pals:HasTwissP ;
     skos:broadMatch pals:Instrument ;
     skos:definition "A diagnostic device used to measure transverse beam position." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "BeamPositionMeasurement" .
 
 pals:BeamProfileMonitor a owl:Class ;
     rdfs:label "BeamProfileMonitor" ;
@@ -790,7 +996,8 @@ pals:BeamProfileMonitor a owl:Class ;
         pals:HasTwissP ;
     skos:broadMatch pals:Instrument ;
     skos:definition "A diagnostic device used to measure transverse beam profile." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "BeamProfileMeasurement" .
 
 <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#BeamIntensity> a owl:Class ;
     rdfs:label "BeamIntensity" ;
@@ -905,13 +1112,13 @@ pals:BeamProfileMonitor a owl:Class ;
 pals:Contains a owl:Class ;
     rdfs:label "Contains" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
         pals:ComponentRelation ;
     skos:definition "A relationship indicating that the subject component contains the object component in a specified context,  such as within a BeamLineSection or other organizational grouping." ;
@@ -922,13 +1129,13 @@ pals:Contains a owl:Class ;
 pals:Controls a owl:Class ;
     rdfs:label "Controls" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         pals:ComponentRelation ;
     skos:definition "A relationship indicating that the subject component controls the object component in a specified context,  such as a power supply controlling a magnet." ;
@@ -1015,13 +1222,13 @@ pals:Fork a owl:Class ;
 pals:HasCommandSignal a owl:Class ;
     rdfs:label "HasCommandSignal" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         pals:SignalBinding ;
     skos:exactMatch pals:has_command_signal ;
@@ -1030,32 +1237,32 @@ pals:HasCommandSignal a owl:Class ;
 pals:HasConnectingBranch a owl:Class ;
     rdfs:label "HasConnectingBranch" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:beamline_context ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:beamline_context ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:predicate ],
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:context ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty pals:context ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:BeamLine ;
             owl:onProperty pals:beamline_context ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:context ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:context ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:beamline_context ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:context ],
         pals:ComponentRelation ;
     skos:definition "A relationship indicating that the subject component has a connecting branch to the object component in a specified context,  such as a beamline section having a fork as a connecting branch." ;
     skos:exactMatch RO:0002253,
@@ -1068,10 +1275,10 @@ pals:HasLimitSignal a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         pals:SignalBinding ;
     skos:exactMatch pals:has_limit_signal ;
@@ -1080,26 +1287,26 @@ pals:HasLimitSignal a owl:Class ;
 pals:HasMetaP a owl:Class ;
     rdfs:label "HasMetaP" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:MetaP ],
+        [ a owl:Restriction ;
             owl:allValuesFrom pals:MetaParamGroup ;
             owl:onProperty pals:MetaP ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:MetaP ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty pals:MetaP ] ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:HasReadbackSignal a owl:Class ;
     rdfs:label "HasReadbackSignal" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
         pals:SignalBinding ;
     skos:exactMatch pals:has_readback_signal ;
@@ -1108,13 +1315,13 @@ pals:HasReadbackSignal a owl:Class ;
 pals:HasSetpointSignal a owl:Class ;
     rdfs:label "HasSetpointSignal" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         pals:SignalBinding ;
     skos:exactMatch pals:has_setpoint_signal ;
@@ -1126,10 +1333,10 @@ pals:HasSignal a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
         pals:SignalBinding ;
     skos:exactMatch pals:has_signal ;
@@ -1138,10 +1345,10 @@ pals:HasSignal a owl:Class ;
 pals:Intersects a owl:Class ;
     rdfs:label "Intersects" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
@@ -1158,10 +1365,10 @@ pals:IsPartOf a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
         pals:ComponentRelation ;
     skos:definition "A relationship indicating that the subject component is part of the object component in a specified context,  such as a magnet being part of a BeamLineSection." ;
@@ -1172,23 +1379,23 @@ pals:IsPartOf a owl:Class ;
 pals:LongitudinalPlacementParamGroup a owl:Class ;
     rdfs:label "LongitudinalPlacementParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:s_position ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty pals:length ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:length ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:s_position ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:length ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty pals:s_position ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:s_position ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:length ],
         pals:ParamGroup ;
     skos:definition "Mixin for an element's extent and position along the longitudinal (beam-direction, \"s\") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`. One (or both) `length` or `s_position` must be present." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -1199,20 +1406,20 @@ pals:MountedOn a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
+            owl:allValuesFrom pals:CoordinateSet ;
+            owl:onProperty pals:coordinates ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:coordinates ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:CoordinateSet ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:coordinates ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:coordinates ],
         pals:ComponentRelation ;
     skos:broadMatch RO:0002371 ;
     skos:definition "A relationship indicating that the subject component is mounted on the object component in a specified context,  such as a diagnostic device mounted on a magnet." ;
@@ -1252,47 +1459,35 @@ pals:MountedOn a owl:Class ;
 pals:NearestTo a owl:Class ;
     rdfs:label "NearestTo" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:tolerance_value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:tolerance_value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:UnitEnum ;
-            owl:onProperty pals:distance_unit ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:distance_unit ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
             owl:allValuesFrom pals:CoordinateSet ;
             owl:onProperty pals:coordinates ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:tolerance_unit ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty pals:tolerance_value ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:distance_value ],
+            owl:onProperty pals:coordinates ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:distance_value ],
+            owl:minCardinality 1 ;
+            owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:UnitEnum ;
             owl:onProperty pals:tolerance_unit ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:tolerance_unit ],
+            owl:onProperty pals:tolerance_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:distance_unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:distance_value ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:coordinates ],
@@ -1300,10 +1495,22 @@ pals:NearestTo a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:distance_unit ],
         [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:tolerance_value ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:coordinates ],
+            owl:onProperty pals:tolerance_unit ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:distance_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:UnitEnum ;
+            owl:onProperty pals:distance_unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:tolerance_unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:distance_value ],
         pals:ComponentRelation ;
     skos:broadMatch RO:0002325 ;
@@ -1321,11 +1528,8 @@ pals:NormalConductingRFCavity a owl:Class ;
 pals:Overlaps a owl:Class ;
     rdfs:label "Overlaps" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom pals:CoordinateSet ;
-            owl:onProperty pals:coordinates ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:coordinates ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:coordinates ],
@@ -1333,10 +1537,13 @@ pals:Overlaps a owl:Class ;
             owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:predicate ],
+            owl:allValuesFrom pals:CoordinateSet ;
+            owl:onProperty pals:coordinates ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:coordinates ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:predicate ],
         pals:ComponentRelation ;
     skos:definition "A relationship indicating that the subject component overlaps the object component in a specified context,  such as a magnet and a diagnostic device." ;
@@ -1347,20 +1554,17 @@ pals:Overlaps a owl:Class ;
 pals:PALSAccelerator a owl:Class ;
     rdfs:label "PALSAccelerator" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:kind ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:notes ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:kind ],
+            owl:minCardinality 0 ;
+            owl:onProperty pals:version ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:facility ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:description ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:kind ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
@@ -1369,43 +1573,46 @@ pals:PALSAccelerator a owl:Class ;
             owl:onProperty pals:version ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:affiliation ],
+            owl:onProperty pals:version ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:affiliation ],
+            owl:onProperty pals:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:description ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:authors ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:description ],
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:facility ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:notes ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:version ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:kind ],
+            owl:onProperty pals:affiliation ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:version ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:facility ],
+            owl:onProperty pals:affiliation ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:Facility ;
             owl:onProperty pals:facility ],
         [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:kind ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:authors ],
+        [ a owl:Restriction ;
             owl:allValuesFrom pals:Affiliation ;
             owl:onProperty pals:affiliation ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:description ],
+        [ a owl:Restriction ;
             owl:allValuesFrom pals:Author ;
-            owl:onProperty pals:authors ] ;
+            owl:onProperty pals:authors ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:kind ] ;
     skos:definition "Root container for accelerator core components, semantic signals, and local bindings." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
@@ -1502,32 +1709,32 @@ pals:PALSAccelerator a owl:Class ;
 pals:Precedes a owl:Class ;
     rdfs:label "Precedes" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:beamline_context ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:context ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:context ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:context ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:context ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:beamline_context ],
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:BeamLine ;
             owl:onProperty pals:beamline_context ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:context ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty pals:predicate ],
+            owl:onProperty pals:beamline_context ],
         pals:ComponentRelation ;
     skos:definition "A relationship indicating that the subject component precedes the object component in a specified context,  such as along a beamline." ;
     skos:exactMatch BFO:0000063,
@@ -1545,7 +1752,8 @@ pals:RadiationMonitor a owl:Class ;
         pals:HasBodyShiftP ;
     skos:broadMatch pals:Instrument ;
     skos:definition "A diagnostic device used to monitor radiation dose or dose rate." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "RadiationMonitoring" .
 
 <https://pals-project.readthedocs.io/ReferenceFrameEnum#beam_direction> a owl:Class ;
     rdfs:label "beam_direction" ;
@@ -1615,6 +1823,15 @@ pals:RadiationMonitor a owl:Class ;
 pals:SolenoidParamGroup a owl:Class ;
     rdfs:label "SolenoidParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:Ksol ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Ksol ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Bsol ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty pals:Ksol ],
         [ a owl:Restriction ;
@@ -1623,15 +1840,6 @@ pals:SolenoidParamGroup a owl:Class ;
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty pals:Bsol ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:Bsol ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:Ksol ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:Ksol ],
         pals:ParamGroup ;
     skos:definition "Mixin for solenoid-specific parameters." ;
     skos:exactMatch pals:SolenoidP ;
@@ -1698,7 +1906,8 @@ pals:SupportingFacilityComponent a owl:Class ;
         pals:PhysicalComponent ;
     skos:broadMatch pals:StructuralElement ;
     skos:definition "A physical component that supports accelerator operation  without a specific beam-pipe placement,  such as a power supply, control rack, or radiation detector. These can include Girders, Racks, Power Supplies,  and other physical infrastructure components that are important for understanding  the structure and function of the accelerator system but are not inline with the beamline." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Support" .
 
 <https://pals-project.readthedocs.io/UnitEnum#A> a owl:Class ;
     rdfs:label "A" ;
@@ -1932,14 +2141,11 @@ pals:ACKicker a owl:Class ;
 pals:Affiliation a owl:Class ;
     rdfs:label "Affiliation" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:id ],
+            owl:onProperty pals:name ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:Identifier ;
             owl:onProperty pals:identifiers ],
@@ -1947,7 +2153,10 @@ pals:Affiliation a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty pals:identifiers ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
@@ -1964,7 +2173,8 @@ pals:BeamLineSection a owl:Class ;
         pals:HasFloorP ;
     skos:definition "A virtual component used to represent a section of the BeamLine for organizational or functional grouping of components." ;
     skos:exactMatch pals:BeamLineSection ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "BeamLineSection" .
 
 pals:BeginningEle a owl:Class ;
     rdfs:label "BeginningEle" ;
@@ -1973,7 +2183,8 @@ pals:BeginningEle a owl:Class ;
         pals:HasTwissP ;
     skos:definition "Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference parameters; otherwise it is expected to be the first element in the branch." ;
     skos:exactMatch pals:BeginningEle ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Mark" .
 
 pals:Bend a owl:Class ;
     rdfs:label "Bend" ;
@@ -1982,193 +2193,12 @@ pals:Bend a owl:Class ;
     skos:altLabel "Dipole" ;
     skos:definition "Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight." ;
     skos:exactMatch pals:Bend ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Steering" .
 
-pals:BendParamGroup a owl:Class ;
-    rdfs:label "BendParamGroup" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:L_rectangle ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:h1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:g_actual ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:L_chord ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:L_sagitta ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:e1 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:edge2_int ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:ReferenceGeometryEnum ;
-            owl:onProperty pals:ref_geometry ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:e2_rect ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:e1_rect ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:edge1_int ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:ref_geometry ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:h2 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:e2 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:h1 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:L_rectangle ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:g_actual ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:bend_field_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:g_actual ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:angle_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:bend_field_actual ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:g_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:tilt_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:e2 ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:h2 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:L_chord ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:tilt_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:h2 ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:h1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:e1_rect ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:bend_field_actual ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:L_sagitta ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:multipole_geometry ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:edge2_int ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:edge2_int ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:radius_ref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:e1 ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:e2 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:L_chord ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:bend_field_ref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:g_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:tilt_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:L_rectangle ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:radius_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:g_ref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:angle_ref ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:edge1_int ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:MultipoleGeometryEnum ;
-            owl:onProperty pals:multipole_geometry ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:bend_field_actual ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:e1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:e2_rect ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:bend_field_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:edge1_int ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:radius_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:L_sagitta ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:ref_geometry ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:angle_ref ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:e2_rect ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:multipole_geometry ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:e1_rect ],
-        pals:ParamGroup ;
-    skos:definition "Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS)." ;
-    skos:exactMatch pals:BendP ;
+pals:Bn0_ref a owl:DatatypeProperty ;
+    rdfs:label "Bn0_ref" ;
+    skos:definition "Reference bend field." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:CavityTypeEnum a owl:Class ;
@@ -2184,7 +2214,8 @@ pals:CrabCavity a owl:Class ;
     rdfs:subClassOf pals:Cavity ;
     skos:definition "A cavity used for transverse beam manipulation, such as crabbing or deflecting." ;
     skos:exactMatch pals:CrabCavity ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Steering" .
 
 pals:E_tot_ref a owl:DatatypeProperty ;
     rdfs:label "E_tot_ref" ;
@@ -2195,36 +2226,36 @@ pals:E_tot_ref a owl:DatatypeProperty ;
 pals:HasElectricMultipoleP a owl:Class ;
     rdfs:label "HasElectricMultipoleP" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:ElectricMultipoleP ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:ElectricMultipoleP ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:ElectricMultipoleParamGroup ;
-            owl:onProperty pals:ElectricMultipoleP ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty pals:ElectricMultipoleP ] ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:HasLongitudinalPlacementP a owl:Class ;
     rdfs:label "HasLongitudinalPlacementP" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:LongitudinalPlacementP ],
+        [ a owl:Restriction ;
             owl:allValuesFrom pals:LongitudinalPlacementParamGroup ;
             owl:onProperty pals:LongitudinalPlacementP ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:LongitudinalPlacementP ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty pals:LongitudinalPlacementP ] ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:HasMagneticMultipoleP a owl:Class ;
     rdfs:label "HasMagneticMultipoleP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom pals:MagneticMultipoleParamGroup ;
             owl:onProperty pals:MagneticMultipoleP ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:MagneticMultipoleParamGroup ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:MagneticMultipoleP ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
@@ -2234,24 +2265,29 @@ pals:HasMagneticMultipoleP a owl:Class ;
 pals:Identifier a owl:Class ;
     rdfs:label "Identifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:identifier_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:identifier_value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:identifier_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:identifier_value ],
         [ a owl:Restriction ;
+            owl:allValuesFrom pals:IdentifierTypeEnum ;
+            owl:onProperty pals:identifier_type ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:identifier_value ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:IdentifierTypeEnum ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:identifier_type ] ;
     skos:definition "A unique, and ideally persistent, identifier for a facility, such as a DOI or ROR." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+pals:Kn0_from_g_ref a owl:DatatypeProperty ;
+    rdfs:label "Kn0_from_g_ref" ;
+    skos:definition "Whether the normal dipole component defaults to values computed from the reference curvature and reference bend field." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:L_active a owl:DatatypeProperty ;
@@ -2285,7 +2321,8 @@ pals:Octupole a owl:Class ;
     skos:definition """A magnet primarily used to focus or defocus the beam. 8 poles.
 Only one of the electric or magnetic multipole components should be present, not both.""" ;
     skos:exactMatch pals:Octupole ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Focusing" .
 
 pals:PlaneEnum a owl:Class ;
     rdfs:label "PlaneEnum" ;
@@ -2301,7 +2338,8 @@ pals:Quadrupole a owl:Class ;
     skos:definition """A magnet primarily used to focus or defocus the beam. 4 poles.
 Only one of the electric or magnetic multipole components should be present, not both.""" ;
     skos:exactMatch pals:Quadrupole ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Focusing" .
 
 pals:Sextupole a owl:Class ;
     rdfs:label "Sextupole" ;
@@ -2309,7 +2347,8 @@ pals:Sextupole a owl:Class ;
     skos:definition """A magnet primarily used to focus or defocus the beam. 6 poles.
 Only one of the electric or magnetic multipole components should be present, not both.""" ;
     skos:exactMatch pals:Sextupole ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Focusing" .
 
 pals:Solenoid a owl:Class ;
     rdfs:label "Solenoid" ;
@@ -2318,7 +2357,8 @@ pals:Solenoid a owl:Class ;
     skos:definition """A magnet with a primarily longitudinal magnetic field used for focusing.
 A solenoid is an element whose magnetic field is dominated by a field whose direction is aligned with the magnetic axis. """ ;
     skos:exactMatch pals:Solenoid ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Focusing" .
 
 pals:access_protocol a owl:DatatypeProperty ;
     rdfs:label "access_protocol" ;
@@ -2352,11 +2392,6 @@ pals:archive_identifier a owl:DatatypeProperty ;
 pals:bend_field_actual a owl:DatatypeProperty ;
     rdfs:label "bend_field_actual" ;
     skos:definition "Actual bend field." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
-
-pals:bend_field_ref a owl:DatatypeProperty ;
-    rdfs:label "bend_field_ref" ;
-    skos:definition "Reference bend field." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:beta_a a owl:DatatypeProperty ;
@@ -2486,6 +2521,11 @@ pals:g_ref a owl:DatatypeProperty ;
     skos:definition "Reference bend strength = 1/radius_ref" ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
+pals:gradient a owl:DatatypeProperty ;
+    rdfs:label "gradient" ;
+    skos:definition "RF accelerating gradient." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
 pals:h1 a owl:DatatypeProperty ;
     rdfs:label "h1" ;
     skos:definition "Entrance end pole face curvature" ;
@@ -2529,6 +2569,11 @@ pals:multipass a owl:DatatypeProperty ;
 pals:multipass_phase a owl:DatatypeProperty ;
     rdfs:label "multipass_phase" ;
     skos:definition "rad/2pi RF Phase added to multipass elements" ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+pals:multipole_geometry a owl:ObjectProperty ;
+    rdfs:label "multipole_geometry" ;
+    skos:definition "Multipole geometry type. Must be `follows_ref_geometry`." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:native_data_type a owl:ObjectProperty ;
@@ -2634,6 +2679,11 @@ pals:r_coord a owl:DatatypeProperty ;
 pals:radius_ref a owl:DatatypeProperty ;
     rdfs:label "radius_ref" ;
     skos:definition "Reference bend radius." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+pals:ref_geometry a owl:ObjectProperty ;
+    rdfs:label "ref_geometry" ;
+    skos:definition "Reference geometry type. Must be `arc`." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:reference_frame a owl:ObjectProperty ;
@@ -2792,11 +2842,6 @@ pals:zero_phase a owl:ObjectProperty ;
     skos:definition "Sets what phase = 0 means." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
-xsd:boolean a owl:Class ;
-    rdfs:label "Boolean" ;
-    rdfs:subClassOf pals:DataTypeEnum ;
-    skos:definition "boolean data type" .
-
 sosa:ObservableProperty a owl:Class ;
     rdfs:label "Readback",
         "State" ;
@@ -2838,41 +2883,41 @@ pals:CoordinateSystemEnum a owl:Class ;
 pals:Edge a owl:Class ;
     rdfs:label "Edge" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:id ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty pals:subject ],
+            owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:predicate ],
+            owl:onProperty pals:subject ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:anyURI ;
             owl:onProperty pals:predicate ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:predicate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:object ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:subject ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:object ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty pals:id ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:object ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:subject ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:predicate ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:subject ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:object ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:object ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:id ] ;
+            owl:onProperty pals:subject ] ;
     skos:definition "Abstract base for subject-predicate-object associations." ;
     skos:exactMatch rdf:Statement ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -2885,13 +2930,13 @@ pals:FloorP a owl:ObjectProperty ;
 pals:HasFloorP a owl:Class ;
     rdfs:label "HasFloorP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom pals:FloorParamGroup ;
             owl:onProperty pals:FloorP ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:FloorP ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:FloorParamGroup ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:FloorP ] ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
@@ -2918,7 +2963,8 @@ pals:Kicker a owl:Class ;
     skos:definition """A magnet primarily used to steer the beam.
 Can deflect the beam transversely in both planes, or a single plane, depending on the design and parameters of the kicker. 
 Only one of the electric or magnetic multipole components should be present, not both.""" ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Steering" .
 
 pals:MagneticMultipoleP a owl:ObjectProperty ;
     rdfs:label "MagneticMultipoleP" ;
@@ -2933,10 +2979,16 @@ pals:MetaP a owl:ObjectProperty ;
 pals:Node a owl:Class ;
     rdfs:label "Node" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:alias ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:id ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty pals:kind ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:kind ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
@@ -2945,17 +2997,11 @@ pals:Node a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:kind ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:kind ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:id ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:alias ] ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:id ] ;
     skos:definition "Abstract base class for all node entities in the accelerator core ontology. This differentiates nodes from edges (relationships) in the ontology. This class is not intended to be instantiated directly, but serves as a common ancestor for all other classes. Allows for the use of kind: as a discriminator for the type of node in the ontology." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
@@ -2972,53 +3018,17 @@ pals:ReferenceP a owl:ObjectProperty ;
 pals:Signal a owl:Class ;
     rdfs:label "Signal" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom pals:SourceSystemEnum ;
-            owl:onProperty pals:source_system ],
+            owl:minCardinality 1 ;
+            owl:onProperty pals:canonical_signal_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:access_protocol ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:archive_identifier ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty pals:quantity_kind ],
+            owl:onProperty pals:signal_role ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:SignalRoleEnum ;
             owl:onProperty pals:signal_role ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:native_unit ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:DataTypeEnum ;
-            owl:onProperty pals:native_data_type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:QuantityKindEnum ;
-            owl:onProperty pals:quantity_kind ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:CanonicalSignalTypeEnum ;
-            owl:onProperty pals:canonical_signal_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:canonical_signal_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:native_data_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:access_protocol ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:archive_identifier ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:native_unit ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:source_system ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:native_data_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:UnitEnum ;
             owl:onProperty pals:native_unit ],
@@ -3026,32 +3036,68 @@ pals:Signal a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty pals:native_description ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:quantity_kind ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:SourceSystemEnum ;
+            owl:onProperty pals:source_system ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:native_unit ],
+        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pals:source_system ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:DataTypeEnum ;
+            owl:onProperty pals:native_data_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:archive_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:native_data_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:native_description ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:native_description ],
+            owl:onProperty pals:source_system ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty pals:signal_role ],
+            owl:onProperty pals:quantity_kind ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:CanonicalSignalTypeEnum ;
+            owl:onProperty pals:canonical_signal_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:access_protocol ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:native_unit ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:canonical_signal_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:signal_role ],
+            owl:onProperty pals:native_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:access_protocol ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:quantity_kind ],
+            owl:onProperty pals:signal_role ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty pals:archive_identifier ],
         [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:native_data_type ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:access_protocol ],
+            owl:onProperty pals:archive_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:QuantityKindEnum ;
+            owl:onProperty pals:quantity_kind ],
         pals:HasMetaP,
         pals:Node ;
     skos:broadMatch sosa:Actuator,
@@ -3110,78 +3156,84 @@ pals:tilt a owl:DatatypeProperty ;
     skos:definition "Tilt of the Nth multipole." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
+xsd:boolean a owl:Class ;
+    rdfs:label "Boolean" ;
+    rdfs:subClassOf pals:DataTypeEnum ;
+    skos:definition "boolean data type" .
+
 pals:BookkeepingComponent a owl:Class ;
     rdfs:label "BookkeepingComponent" ;
     rdfs:subClassOf pals:HasBodyShiftP,
         pals:VirtualComponent ;
     skos:broadMatch pals:BookkeepingElement ;
     skos:definition "A virtual component that represents a bookkeeping or organizational role in the accelerator system,  such as a BeamLineSection, Marker or a Fork. These can include BeamLineSections, Markers, Forks, and other virtual components that are important for understanding  the structure and function of the accelerator system but are not physical devices." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Mark" .
 
 pals:CoordinateSet a owl:Class ;
     rdfs:label "CoordinateSet" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pals:coordinate_system ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
             owl:onProperty pals:x_coord ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty pals:phi_coord ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:coordinate_system ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:x_coord ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:r_coord ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:z_coord ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:y_coord ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:z_coord ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:phi_coord ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:theta_coord ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty pals:x_coord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:phi_coord ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:y_coord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:theta_coord ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:theta_coord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:y_coord ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:r_coord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:r_coord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:z_coord ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:coordinate_system ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:CoordinateSystemEnum ;
-            owl:onProperty pals:coordinate_system ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:x_coord ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:z_coord ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:y_coord ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:theta_coord ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:r_coord ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:r_coord ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:y_coord ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:r_coord ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:phi_coord ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:theta_coord ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:phi_coord ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:y_coord ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:z_coord ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:z_coord ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:theta_coord ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty pals:coordinate_system ] ;
     skos:definition "A set of coordinates that define the spatial relationship between two components. This can include Cartesian coordinates, cylindrical coordinates, or other coordinate systems as needed. Useful for defining the spatial relationship where the relationship is not strictly linear or where the components are not aligned along a single axis." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -3204,7 +3256,8 @@ pals:Drift a owl:Class ;
     skos:definition "A field-free longitudinal interval separating beamline components.",
         "A field-free space between beamline components. A Drift is a virtual beamline component whose longitudinal extent preserves the separation between adjacent physical or virtual components." ;
     skos:exactMatch pals:Drift ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "DriftSpace" .
 
 pals:ElectricMultipoleP a owl:ObjectProperty ;
     rdfs:label "ElectricMultipoleP" ;
@@ -3230,7 +3283,8 @@ pals:Marker a owl:Class ;
     skos:definition "A virtual component representing an important location on the beamline,  such as a reference point for beam-based alignment, a location of a known aperture restriction,  or a location of a critical diagnostic device.",
         "A virtual component used as a reference point or marker in the beamline structure." ;
     skos:exactMatch pals:Marker ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Mark" .
 
 pals:PhysicalRelationEnum a owl:Class ;
     rdfs:label "PhysicalRelationEnum" ;
@@ -3264,35 +3318,25 @@ pals:ReferenceGeometryEnum a owl:Class ;
 pals:VirtualComponent a owl:Class ;
     rdfs:label "VirtualComponent" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom pals:VirtualRelationEnum ;
-            owl:onProperty pals:beamline_relation ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:beamline_relation ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pals:functions ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:VirtualFunctionEnum ;
             owl:onProperty pals:functions ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:beamline_relation ],
+        [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty pals:beamline_relation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:VirtualRelationEnum ;
             owl:onProperty pals:beamline_relation ],
         pals:Component,
         pals:HasFloorP ;
     skos:broadMatch pals:BookkeepingElement,
         pals:Element ;
     skos:definition "A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
-
-pals:multipole_geometry a owl:ObjectProperty ;
-    rdfs:label "multipole_geometry" ;
-    skos:definition "Multipole geometry type. Must be `follows_ref_geometry`." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
-
-pals:ref_geometry a owl:ObjectProperty ;
-    rdfs:label "ref_geometry" ;
-    skos:definition "Reference geometry type. Must be `arc`." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:Bsol a owl:DatatypeProperty ;
@@ -3305,15 +3349,16 @@ pals:DiagnosticDevice a owl:Class ;
     rdfs:subClassOf pals:PhysicalComponent ;
     skos:broadMatch pals:Instrument ;
     skos:definition "An accelerator device used to measure beam or machine state." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Measurement" .
 
 pals:HasReferenceP a owl:Class ;
     rdfs:label "HasReferenceP" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom pals:ReferenceParamGroup ;
             owl:onProperty pals:ReferenceP ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:ReferenceParamGroup ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:ReferenceP ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
@@ -3399,10 +3444,10 @@ xsd:integer a owl:Class ;
 pals:Component a owl:Class ;
     rdfs:label "Component" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:native_types ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty pals:native_types ],
         pals:HasMetaP,
         pals:Node ;
@@ -3437,13 +3482,13 @@ pals:HasBodyShiftP a owl:Class ;
 pals:HasTwissP a owl:Class ;
     rdfs:label "HasTwissP" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom pals:TwissParamGroup ;
+            owl:onProperty pals:TwissP ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:TwissP ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty pals:TwissP ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:TwissParamGroup ;
             owl:onProperty pals:TwissP ] ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
@@ -3467,7 +3512,8 @@ pals:Multipole a owl:Class ;
     skos:broadMatch pals:Multipole ;
     skos:definition """A general magnet with a higher-order multipole field, such as a sextupole or octupole.
 Only one of the electric or magnetic multipole components should be present, not both.""" ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "Focusing" .
 
 pals:MultipoleGeometryEnum a owl:Class ;
     rdfs:label "MultipoleGeometryEnum" ;
@@ -3511,7 +3557,8 @@ pals:RFCavity a owl:Class ;
         pals:HasRFP ;
     skos:definition "A cavity used for RF acceleration or longitudinal manipulation." ;
     skos:exactMatch pals:RFCavity ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "BeamAcceleration" .
 
 pals:SignalRoleEnum a owl:Class ;
     rdfs:label "SignalRoleEnum" ;
@@ -3531,16 +3578,272 @@ pals:length a owl:DatatypeProperty ;
     skos:definition "Length of the element (arc length for bends)." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
+pals:FacilityFunctionEnum a owl:Class ;
+    rdfs:label "FacilityFunctionEnum" ;
+    owl:unionOf ( <https://pals-project.readthedocs.io/FacilityFunctionEnum#Support> <https://pals-project.readthedocs.io/FacilityFunctionEnum#Alignment> <https://pals-project.readthedocs.io/FacilityFunctionEnum#PowerSupply> <https://pals-project.readthedocs.io/FacilityFunctionEnum#ControlRack> <https://pals-project.readthedocs.io/FacilityFunctionEnum#Cooling> <https://pals-project.readthedocs.io/FacilityFunctionEnum#Diagnostics> <https://pals-project.readthedocs.io/FacilityFunctionEnum#Detection> ) ;
+    skos:definition "Broad structural or support functions." ;
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    linkml:permissible_values <https://pals-project.readthedocs.io/FacilityFunctionEnum#Alignment>,
+        <https://pals-project.readthedocs.io/FacilityFunctionEnum#ControlRack>,
+        <https://pals-project.readthedocs.io/FacilityFunctionEnum#Cooling>,
+        <https://pals-project.readthedocs.io/FacilityFunctionEnum#Detection>,
+        <https://pals-project.readthedocs.io/FacilityFunctionEnum#Diagnostics>,
+        <https://pals-project.readthedocs.io/FacilityFunctionEnum#PowerSupply>,
+        <https://pals-project.readthedocs.io/FacilityFunctionEnum#Support> .
+
+pals:MultipoleParameterGroup a owl:Class ;
+    rdfs:label "MultipoleParameterGroup" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:BnL ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:KsL ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:EsL ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:order ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:order ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:EsL ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Bs ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:Ks ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:EnL ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Es ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:tilt ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:KnL ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:EnL ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:KnL ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:Bs ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:EnL ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Kn ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:En ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:EsL ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:tilt ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:KsL ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:Es ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:Bs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:Kn ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:KnL ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Ks ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:BsL ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:Bn ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty pals:order ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:KsL ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:En ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:Bn ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:tilt ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:BsL ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:BnL ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:BsL ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:Ks ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:Kn ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:Es ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:BnL ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:En ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:Bn ] ;
+    skos:definition "A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+pals:RelationContextEnum a owl:Class ;
+    rdfs:label "RelationContextEnum" ;
+    owl:unionOf ( <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order> <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D> <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D> <https://pals-project.readthedocs.io/RelationContextEnum#floorplan> <https://pals-project.readthedocs.io/RelationContextEnum#containment> <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> ) ;
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    linkml:permissible_values <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D>,
+        <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D>,
+        <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order>,
+        <https://pals-project.readthedocs.io/RelationContextEnum#containment>,
+        <https://pals-project.readthedocs.io/RelationContextEnum#floorplan>,
+        <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> .
+
+pals:SignalBinding a owl:Class ;
+    rdfs:label "SignalBinding" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:object ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:subject ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:Signal ;
+            owl:onProperty pals:object ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:subject ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:object ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom pals:PhysicalComponent ;
+            owl:onProperty pals:subject ],
+        pals:Edge ;
+    skos:definition "Association between a PhysicalComponent and one of its Signals, e.g. QUAD1 component to QUAD1.STATUS signal." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+pals:BeamLine a owl:Class ;
+    rdfs:label "BeamLine",
+        "BeamLineSection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:length ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:direction ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:direction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:multipass ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:repeat ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:periodic ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:multipass ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty pals:direction ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:length ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty pals:length ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty pals:multipass ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty pals:repeat ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty pals:repeat ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:periodic ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty pals:periodic ],
+        pals:VirtualComponent,
+        pals:VirtualFunctionEnum ;
+    skos:definition "A section of the BeamLine used for organizational or functional grouping of components, such as a linac section, transfer line, or ring sector.",
+        "PALS element for an ordered sequence of beamline elements defining a beam path." ;
+    skos:exactMatch pals:BeamLine ;
+    skos:inScheme <https://w3id.org/accelerator-core> ;
+    pals:default_function "BeamLineSection" .
+
 pals:Bn a owl:DatatypeProperty ;
     rdfs:label "Bn" ;
     skos:broadMatch pals:BnN ;
     skos:definition "Normal component of the magnetic field." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
+pals:BnL a owl:DatatypeProperty ;
+    rdfs:label "BnL" ;
+    skos:broadMatch pals:BnNL ;
+    skos:definition "Length-integrated normal component of the magnetic field." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
 pals:Bs a owl:DatatypeProperty ;
     rdfs:label "Bs" ;
     skos:broadMatch pals:BsN ;
     skos:definition "Skew component of the magnetic field." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+pals:BsL a owl:DatatypeProperty ;
+    rdfs:label "BsL" ;
+    skos:broadMatch pals:BsNL ;
+    skos:definition "Length-integrated skew component of the magnetic field." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:En a owl:DatatypeProperty ;
@@ -3567,23 +3870,16 @@ pals:EsL a owl:DatatypeProperty ;
     skos:definition "Length-integrated skew component." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
-pals:FacilityFunctionEnum a owl:Class ;
-    rdfs:label "FacilityFunctionEnum" ;
-    owl:unionOf ( <https://pals-project.readthedocs.io/FacilityFunctionEnum#Support> <https://pals-project.readthedocs.io/FacilityFunctionEnum#Alignment> <https://pals-project.readthedocs.io/FacilityFunctionEnum#PowerSupply> <https://pals-project.readthedocs.io/FacilityFunctionEnum#ControlRack> <https://pals-project.readthedocs.io/FacilityFunctionEnum#Cooling> <https://pals-project.readthedocs.io/FacilityFunctionEnum#Diagnostics> <https://pals-project.readthedocs.io/FacilityFunctionEnum#Detection> ) ;
-    skos:definition "Broad structural or support functions." ;
-    skos:inScheme <https://w3id.org/accelerator-core> ;
-    linkml:permissible_values <https://pals-project.readthedocs.io/FacilityFunctionEnum#Alignment>,
-        <https://pals-project.readthedocs.io/FacilityFunctionEnum#ControlRack>,
-        <https://pals-project.readthedocs.io/FacilityFunctionEnum#Cooling>,
-        <https://pals-project.readthedocs.io/FacilityFunctionEnum#Detection>,
-        <https://pals-project.readthedocs.io/FacilityFunctionEnum#Diagnostics>,
-        <https://pals-project.readthedocs.io/FacilityFunctionEnum#PowerSupply>,
-        <https://pals-project.readthedocs.io/FacilityFunctionEnum#Support> .
-
 pals:Kn a owl:DatatypeProperty ;
     rdfs:label "Kn" ;
     skos:broadMatch pals:KnN ;
     skos:definition "Normalized normal component." ;
+    skos:inScheme <https://w3id.org/accelerator-core> .
+
+pals:KnL a owl:DatatypeProperty ;
+    rdfs:label "KnL" ;
+    skos:broadMatch pals:KnNL ;
+    skos:definition "Length-integrated normalized normal component." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:Ks a owl:DatatypeProperty ;
@@ -3592,103 +3888,10 @@ pals:Ks a owl:DatatypeProperty ;
     skos:definition "Normalized skew component." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
-pals:RelationContextEnum a owl:Class ;
-    rdfs:label "RelationContextEnum" ;
-    owl:unionOf ( <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order> <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D> <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D> <https://pals-project.readthedocs.io/RelationContextEnum#floorplan> <https://pals-project.readthedocs.io/RelationContextEnum#containment> <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> ) ;
-    skos:inScheme <https://w3id.org/accelerator-core> ;
-    linkml:permissible_values <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D>,
-        <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D>,
-        <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order>,
-        <https://pals-project.readthedocs.io/RelationContextEnum#containment>,
-        <https://pals-project.readthedocs.io/RelationContextEnum#floorplan>,
-        <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> .
-
-pals:SignalBinding a owl:Class ;
-    rdfs:label "SignalBinding" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:subject ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:object ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:object ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:subject ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:PhysicalComponent ;
-            owl:onProperty pals:subject ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:Signal ;
-            owl:onProperty pals:object ],
-        pals:Edge ;
-    skos:definition "Association between a PhysicalComponent and one of its Signals, e.g. QUAD1 component to QUAD1.STATUS signal." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
-
-pals:BeamLine a owl:Class ;
-    rdfs:label "BeamLine",
-        "BeamLineSection" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:length ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:periodic ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty pals:multipass ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty pals:direction ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:direction ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:length ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:multipass ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:periodic ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty pals:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty pals:repeat ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:repeat ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:repeat ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:direction ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:length ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty pals:periodic ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:multipass ],
-        pals:VirtualComponent,
-        pals:VirtualFunctionEnum ;
-    skos:definition "A section of the BeamLine used for organizational or functional grouping of components, such as a linac section, transfer line, or ring sector.",
-        "PALS element for an ordered sequence of beamline elements defining a beam path." ;
-    skos:exactMatch pals:BeamLine ;
+pals:KsL a owl:DatatypeProperty ;
+    rdfs:label "KsL" ;
+    skos:broadMatch pals:KsNL ;
+    skos:definition "Length-integrated normalized skew component." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
 pals:SourceSystemEnum a owl:Class ;
@@ -3725,111 +3928,16 @@ pals:subject a owl:DatatypeProperty ;
     rdfs:label "subject" ;
     skos:inScheme <https://w3id.org/accelerator-core> .
 
-pals:MultipoleParameterGroup a owl:Class ;
-    rdfs:label "MultipoleParameterGroup" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:Es ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:Kn ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:Bs ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:EnL ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:Bs ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:tilt ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:Bn ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:Bn ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:En ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:En ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:EnL ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:Bn ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:EsL ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:EnL ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:order ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:Ks ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:tilt ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty pals:order ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:EsL ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:Bs ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:Ks ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:En ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:Kn ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:Kn ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:Es ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:EsL ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:tilt ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:Es ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:order ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:float ;
-            owl:onProperty pals:Ks ] ;
-    skos:definition "A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components." ;
-    skos:inScheme <https://w3id.org/accelerator-core> .
-
 pals:ParamGroup a owl:Class ;
     rdfs:label "ParamGroup" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:id ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pals:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
+            owl:onProperty pals:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty pals:id ] ;
     skos:definition "Abstract base for inlined PALS parameter-group objects, giving each an identifier so it resolves to a stable node/IRI rather than a blank node when exported to RDF." ;
     skos:inScheme <https://w3id.org/accelerator-core> .
@@ -3860,46 +3968,46 @@ pals:coordinates a owl:ObjectProperty ;
 pals:ComponentRelation a owl:Class ;
     rdfs:label "ComponentRelation" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:object ],
+            owl:allValuesFrom pals:Component ;
+            owl:onProperty pals:subject ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty pals:subject ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:reference_frame ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:subject ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty pals:component_direction ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom pals:Component ;
             owl:onProperty pals:object ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:DirectionEnum ;
             owl:onProperty pals:component_direction ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:minCardinality 1 ;
+            owl:onProperty pals:context ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:component_direction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pals:object ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty pals:reference_frame ],
         [ a owl:Restriction ;
-            owl:allValuesFrom pals:Component ;
+            owl:minCardinality 1 ;
             owl:onProperty pals:object ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:ReferenceFrameEnum ;
             owl:onProperty pals:reference_frame ],
         [ a owl:Restriction ;
             owl:allValuesFrom pals:RelationContextEnum ;
-            owl:onProperty pals:context ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty pals:subject ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty pals:component_direction ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pals:subject ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom pals:Component ;
-            owl:onProperty pals:subject ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
             owl:onProperty pals:context ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
@@ -4010,57 +4118,9 @@ xsd:string a owl:Class ;
     skos:definition "string data type" .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf pals:IsPartOf ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:IsPartOf .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:BeamLine ;
+    rdfs:subClassOf pals:Node ;
     owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:BeamLine .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:BeamProfileMonitor ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:BeamProfileMonitor .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:HasLimitSignal ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:HasLimitSignal .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Magnet ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Magnet .
-
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty pals:Bn ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Bs ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Kn ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Ks ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:En ;
-                owl:someValuesFrom xsd:string ] pals:MultipoleParameterGroup ) .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:NormalConductingRFCavity ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:NormalConductingRFCavity .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:NearestTo ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:NearestTo .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:BookkeepingComponent ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:BookkeepingComponent .
+    owl:someValuesFrom pals:Node .
 
 [] a owl:Restriction ;
     rdfs:subClassOf pals:Aperture ;
@@ -4071,6 +4131,229 @@ xsd:string a owl:Class ;
     rdfs:subClassOf pals:DiagnosticDevice ;
     owl:onProperty pals:kind ;
     owl:someValuesFrom pals:DiagnosticDevice .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Component ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Component .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:PALSAccelerator ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:PALSAccelerator .
+
+[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:onProperty pals:Bn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Bs ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Kn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Ks ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KsL ;
+                        owl:someValuesFrom xsd:string ] ) ] ;
+    owl:intersectionOf ( [ owl:unionOf ( [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:En ] [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:Es ] ) ] pals:MultipoleParameterGroup ) .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:VirtualComponent ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:VirtualComponent .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:ACKicker ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:ACKicker .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Overlaps ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:Overlaps .
+
+[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:onProperty pals:Bn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Bs ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:En ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Es ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KsL ;
+                        owl:someValuesFrom xsd:string ] ) ] ;
+    owl:intersectionOf ( [ owl:unionOf ( [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:Kn ] [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:Ks ] ) ] pals:MultipoleParameterGroup ) .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:MountedOn ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:MountedOn .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Kicker ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Kicker .
+
+[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:onProperty pals:Bn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Bs ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:En ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Es ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Kn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Ks ;
+                        owl:someValuesFrom xsd:string ] ) ] ;
+    owl:intersectionOf ( [ owl:unionOf ( [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:KnL ] [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:KsL ] ) ] pals:MultipoleParameterGroup ) .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:SupportingFacilityComponent ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:SupportingFacilityComponent .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Edge ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:Edge .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Precedes ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:Precedes .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Solenoid ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Solenoid .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:PhysicalComponent ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:PhysicalComponent .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:BeamProfileMonitor ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:BeamProfileMonitor .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:AdjacentTo ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:AdjacentTo .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:RadiationMonitor ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:RadiationMonitor .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Sextupole ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Sextupole .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:RFCavity ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:RFCavity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:BeamPositionMonitor ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:BeamPositionMonitor .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:HasSignal ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:HasSignal .
+
+[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:onProperty pals:BnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:En ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Es ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Kn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Ks ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KsL ;
+                        owl:someValuesFrom xsd:string ] ) ] ;
+    owl:intersectionOf ( [ owl:unionOf ( [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:Bn ] [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:Bs ] ) ] pals:MultipoleParameterGroup ) .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:BookkeepingComponent ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:BookkeepingComponent .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:NormalConductingRFCavity ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:NormalConductingRFCavity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:HasReadbackSignal ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:HasReadbackSignal .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Multipole ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Multipole .
 
 [] rdfs:subClassOf [ owl:unionOf ( [ owl:intersectionOf ( [ a owl:Restriction ;
                                     owl:allValuesFrom xsd:string ;
@@ -4086,32 +4369,41 @@ xsd:string a owl:Class ;
                 owl:someValuesFrom xsd:string ] pals:SolenoidParamGroup ) .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf pals:VirtualComponent ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:VirtualComponent .
+    rdfs:subClassOf pals:HasCommandSignal ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:HasCommandSignal .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf pals:PALSAccelerator ;
+    rdfs:subClassOf pals:Signal ;
     owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:PALSAccelerator .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:RadiationMonitor ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:RadiationMonitor .
+    owl:someValuesFrom pals:Signal .
 
 [] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
                         owl:onProperty pals:Bn ;
                         owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
                         owl:onProperty pals:Bs ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:BsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:En ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Es ;
                         owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
                         owl:onProperty pals:Kn ;
                         owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
                         owl:onProperty pals:Ks ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KsL ;
                         owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:EnL ;
-                owl:someValuesFrom xsd:string ] pals:MultipoleParameterGroup ) .
+    owl:intersectionOf ( [ owl:unionOf ( [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:EnL ] [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:EsL ] ) ] pals:MultipoleParameterGroup ) .
 
 [] a owl:Restriction ;
     rdfs:subClassOf pals:Cavity ;
@@ -4119,153 +4411,9 @@ xsd:string a owl:Class ;
     owl:someValuesFrom pals:Cavity .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf pals:Edge ;
+    rdfs:subClassOf pals:ComponentRelation ;
     owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:Edge .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Contains ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:Contains .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Controls ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:Controls .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Solenoid ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Solenoid .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Quadrupole ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Quadrupole .
-
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty pals:En ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:EnL ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Es ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:EsL ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:Bs ;
-                owl:someValuesFrom xsd:string ] pals:MultipoleParameterGroup ) .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:SuperConductingRFCavity ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:SuperConductingRFCavity .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:BeamPositionMonitor ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:BeamPositionMonitor .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:SignalBinding ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:SignalBinding .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Precedes ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:Precedes .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Signal ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Signal .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:RFCavity ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:RFCavity .
-
-[] a owl:Restriction ;
-    owl:allValuesFrom xsd:string ;
-    owl:onProperty pals:Bsol .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:HasReadbackSignal ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:HasReadbackSignal .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:HasCommandSignal ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:HasCommandSignal .
-
-[] a owl:Restriction ;
-    owl:allValuesFrom xsd:string ;
-    owl:onProperty pals:Ksol .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:HasSetpointSignal ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:HasSetpointSignal .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Marker ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Marker .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:AdjacentTo ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:AdjacentTo .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Overlaps ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:Overlaps .
-
-[] rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty pals:ref_geometry ;
-            owl:someValuesFrom xsd:string ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:ref_geometry ;
-                owl:someValuesFrom xsd:string ] pals:BendParamGroup ) .
-
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty pals:En ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:EnL ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Es ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:EsL ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:Kn ;
-                owl:someValuesFrom xsd:string ] pals:MultipoleParameterGroup ) .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:MountedOn ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:MountedOn .
-
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty pals:Bn ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Bs ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Kn ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Ks ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:Es ;
-                owl:someValuesFrom xsd:string ] pals:MultipoleParameterGroup ) .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:BeginningEle ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:BeginningEle .
+    owl:someValuesFrom pals:ComponentRelation .
 
 [] a owl:Restriction ;
     rdfs:subClassOf pals:Bend ;
@@ -4273,14 +4421,124 @@ xsd:string a owl:Class ;
     owl:someValuesFrom pals:Bend .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf pals:Sextupole ;
+    rdfs:subClassOf pals:BeamLineSection ;
     owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Sextupole .
+    owl:someValuesFrom pals:BeamLineSection .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf pals:ACKicker ;
+    rdfs:subClassOf pals:CrabCavity ;
     owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:ACKicker .
+    owl:someValuesFrom pals:CrabCavity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Controls ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:Controls .
+
+[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:onProperty pals:Bn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Bs ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:En ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Es ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:EsL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Kn ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KnL ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:Ks ;
+                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
+                        owl:onProperty pals:KsL ;
+                        owl:someValuesFrom xsd:string ] ) ] ;
+    owl:intersectionOf ( [ owl:unionOf ( [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:BnL ] [ a owl:Restriction ;
+                            owl:allValuesFrom xsd:string ;
+                            owl:onProperty pals:BsL ] ) ] pals:MultipoleParameterGroup ) .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Magnet ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Magnet .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:BeamLine ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:BeamLine .
+
+[] a owl:Restriction ;
+    owl:allValuesFrom xsd:string ;
+    owl:onProperty pals:Ksol .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Quadrupole ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Quadrupole .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Drift ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Drift .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:IsPartOf ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:IsPartOf .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:NearestTo ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:NearestTo .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Intersects ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:Intersects .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Contains ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:Contains .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:SuperConductingRFCavity ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:SuperConductingRFCavity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:BeginningEle ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:BeginningEle .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:HasLimitSignal ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:HasLimitSignal .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:HasSetpointSignal ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:HasSetpointSignal .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:HasConnectingBranch ;
+    owl:onProperty pals:predicate ;
+    owl:someValuesFrom pals:HasConnectingBranch .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf pals:Marker ;
+    owl:onProperty pals:kind ;
+    owl:someValuesFrom pals:Marker .
+
+[] a owl:Restriction ;
+    owl:allValuesFrom xsd:string ;
+    owl:onProperty pals:Bsol .
 
 [] rdfs:subClassOf [ owl:unionOf ( [ a owl:Restriction ;
                         owl:allValuesFrom xsd:string ;
@@ -4292,119 +4550,13 @@ xsd:string a owl:Class ;
                 owl:someValuesFrom xsd:string ] pals:LongitudinalPlacementParamGroup ) .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf pals:SupportingFacilityComponent ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:SupportingFacilityComponent .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:PhysicalComponent ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:PhysicalComponent .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Component ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Component .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:HasSignal ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:HasSignal .
-
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty pals:En ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:EnL ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Es ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:EsL ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:Bn ;
-                owl:someValuesFrom xsd:string ] pals:MultipoleParameterGroup ) .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Multipole ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Multipole .
-
-[] a owl:Restriction ;
     rdfs:subClassOf pals:Octupole ;
     owl:onProperty pals:kind ;
     owl:someValuesFrom pals:Octupole .
 
 [] a owl:Restriction ;
-    rdfs:subClassOf pals:HasConnectingBranch ;
+    rdfs:subClassOf pals:SignalBinding ;
     owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:HasConnectingBranch .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Drift ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Drift .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Kicker ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Kicker .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:ComponentRelation ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:ComponentRelation .
-
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty pals:En ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:EnL ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Es ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:EsL ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:Ks ;
-                owl:someValuesFrom xsd:string ] pals:MultipoleParameterGroup ) .
-
-[] rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty pals:multipole_geometry ;
-            owl:someValuesFrom xsd:string ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:multipole_geometry ;
-                owl:someValuesFrom xsd:string ] pals:BendParamGroup ) .
-
-[] rdfs:subClassOf [ owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:onProperty pals:Bn ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Bs ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Kn ;
-                        owl:someValuesFrom xsd:string ] [ a owl:Restriction ;
-                        owl:onProperty pals:Ks ;
-                        owl:someValuesFrom xsd:string ] ) ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pals:EsL ;
-                owl:someValuesFrom xsd:string ] pals:MultipoleParameterGroup ) .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Intersects ;
-    owl:onProperty pals:predicate ;
-    owl:someValuesFrom pals:Intersects .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:Node ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:Node .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:BeamLineSection ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:BeamLineSection .
-
-[] a owl:Restriction ;
-    rdfs:subClassOf pals:CrabCavity ;
-    owl:onProperty pals:kind ;
-    owl:someValuesFrom pals:CrabCavity .
+    owl:someValuesFrom pals:SignalBinding .
 
 

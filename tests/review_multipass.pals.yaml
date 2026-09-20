@@ -1,0 +1,34 @@
+PALS:
+  facility:
+    - begin:
+        kind: BeginningEle
+        ReferenceP:
+          species_ref: electron
+          E_tot_ref: 1.0e9
+    - drift_before:
+        kind: Drift
+        length: 1.0
+    - solenoid:
+        kind: Solenoid
+        length: 0.5
+        SolenoidP:
+          Bsol: 0.5
+    - unresolved_placeholder:
+        kind: Placeholder
+    - drift_after:
+        kind: Drift
+        length: 1.0
+    - recirculator:
+        kind: BeamLine
+        multipass: true
+        line:
+          - begin
+          - drift_before
+          - solenoid
+          - unresolved_placeholder
+          - drift_after
+    - machine:
+        kind: Lattice
+        branches:
+          - recirculator
+    - use: machine

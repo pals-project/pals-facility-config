@@ -15,12 +15,17 @@ requires-python = ">=3.9,<4.0"
 dynamic = ["version"]
 
 dependencies = [
-  "linkml-runtime >=1.9.4",
+  "jsonasobj2>=1.0.4",
+  "linkml-runtime>=1.9.4",
+  "pydantic>=2.0",
+  "PyYAML>=6.0",
+  "rdflib>=6.0",
 ]
 
 [dependency-groups]
 dev = [
     "linkml>=1.9.3",
+    "pytest>=8.0",
     "mkdocs-material>=8.2.8",
     "mkdocs-mermaid2-plugin>=1.1.1",
     "mkdocs-pymdownx-material-extras>=2.5.6",

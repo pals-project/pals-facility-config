@@ -1,0 +1,75 @@
+description: Control-system-neutral NARAD skeleton generated from review_multipass.pals.yaml using PALSParserPy.
+kind: PALSAccelerator
+version: 0.1.0
+notes:
+- Generated from a PALSParserPy-expanded lattice without control-system enrichment.
+facility:
+  components:
+  - id: inst:BEGIN
+    kind: BeginningEle
+    native_types:
+    - BeginningEle
+    functions:
+    - Mark
+    beamline_relation: Inline
+    ReferenceP:
+      species_ref: electron
+      E_tot_ref: 1000000000.0
+      id: inst:BEGIN/ReferenceP
+  - id: inst:DRIFT_BEFORE
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:DRIFT_BEFORE/LongitudinalPlacementP
+  - id: inst:SOLENOID
+    kind: Solenoid
+    native_types:
+    - Solenoid
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 0.5
+      id: inst:SOLENOID/LongitudinalPlacementP
+    SolenoidP:
+      Bsol: 0.5
+      id: inst:SOLENOID/SolenoidP
+  - id: inst:DRIFT_AFTER
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      length: 1.0
+      id: inst:DRIFT_AFTER/LongitudinalPlacementP
+  beamlines:
+  - id: inst:RECIRCULATOR
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
+    multipass: true
+    periodic: false
+    description: Beamline imported from PALSParserPy branch recirculator.
+  signals: []
+  signal_bindings: []
+  component_relations:
+  - id: inst:RECIRCULATOR_BEGIN_PRECEDES_DRIFT_BEFORE
+    subject: inst:BEGIN
+    predicate: pals:precedes
+    object: inst:DRIFT_BEFORE
+    context: beamline_order
+    beamline_context: inst:RECIRCULATOR
+  - id: inst:RECIRCULATOR_DRIFT_BEFORE_PRECEDES_SOLENOID
+    subject: inst:DRIFT_BEFORE
+    predicate: pals:precedes
+    object: inst:SOLENOID
+    context: beamline_order
+    beamline_context: inst:RECIRCULATOR

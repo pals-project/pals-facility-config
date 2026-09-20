@@ -1,0 +1,161 @@
+kind: PALSAccelerator
+description: Control-system-neutral NARAD skeleton generated from ex.pals.yaml using PALSParserPy.
+version: 0.1.0
+notes:
+- Generated from a PALSParserPy-expanded lattice without control system enrichment.
+facility:
+  components:
+  - LongitudinalPlacementP:
+      id: inst:THINGZ/LongitudinalPlacementP
+      length: 0.0
+    id: inst:THINGZ
+    kind: Sextupole
+    native_types:
+    - Sextupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:Q1A/LongitudinalPlacementP
+      length: 1.079360186305116e-08
+    id: inst:Q1A
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DH1A_001/BendP
+      e1: 7.68536863609965e-18
+      edge2_int: 0.02065
+      g_ref: 0.06818582244610812
+    LongitudinalPlacementP:
+      id: inst:DH1A_001/LongitudinalPlacementP
+      length: 0.2666536729738865
+    id: inst:DH1A_001
+    kind: Bend
+    native_types:
+    - Bend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUEH001_001/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUEH001_001
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QUAD1_001/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Bn: 1.0
+    LongitudinalPlacementP:
+      id: inst:QUAD1_001/LongitudinalPlacementP
+      length: 1.0
+    id: inst:QUAD1_001
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  - BendP:
+      id: inst:DH1A_002/BendP
+      e1: 7.68536863609965e-18
+      edge2_int: 0.02065
+      g_ref: 0.06818582244610812
+    LongitudinalPlacementP:
+      id: inst:DH1A_002/LongitudinalPlacementP
+      length: 0.2666536729738865
+    id: inst:DH1A_002
+    kind: Bend
+    native_types:
+    - Bend
+    functions:
+    - Steering
+    beamline_relation: Inline
+  - LongitudinalPlacementP:
+      id: inst:PUEH001_002/LongitudinalPlacementP
+      length: 0.0
+    id: inst:PUEH001_002
+    kind: DiagnosticDevice
+    native_types:
+    - Instrument
+    functions:
+    - Measurement
+    beamline_relation: Inline
+  - MagneticMultipoleP:
+      id: inst:QUAD1_002/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Bn: 1.0
+    LongitudinalPlacementP:
+      id: inst:QUAD1_002/LongitudinalPlacementP
+      length: 1.0
+    id: inst:QUAD1_002
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+  beamlines:
+  - id: inst:INJ_LINE
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
+    description: Beamline imported from PALSParserPy branch inj_line.
+    multipass: true
+    periodic: false
+  signals: []
+  signal_bindings: []
+  component_relations:
+  - id: inst:INJ_LINE_THINGZ_PRECEDES_Q1A
+    subject: inst:THINGZ
+    predicate: pals:precedes
+    object: inst:Q1A
+    context: beamline_order
+    beamline_context: inst:INJ_LINE
+  - id: inst:INJ_LINE_Q1A_PRECEDES_DH1A_001
+    subject: inst:Q1A
+    predicate: pals:precedes
+    object: inst:DH1A_001
+    context: beamline_order
+    beamline_context: inst:INJ_LINE
+  - id: inst:INJ_LINE_DH1A_001_PRECEDES_PUEH001_001
+    subject: inst:DH1A_001
+    predicate: pals:precedes
+    object: inst:PUEH001_001
+    context: beamline_order
+    beamline_context: inst:INJ_LINE
+  - id: inst:INJ_LINE_PUEH001_001_PRECEDES_QUAD1_001
+    subject: inst:PUEH001_001
+    predicate: pals:precedes
+    object: inst:QUAD1_001
+    context: beamline_order
+    beamline_context: inst:INJ_LINE
+  - id: inst:INJ_LINE_QUAD1_001_PRECEDES_DH1A_002
+    subject: inst:QUAD1_001
+    predicate: pals:precedes
+    object: inst:DH1A_002
+    context: beamline_order
+    beamline_context: inst:INJ_LINE
+  - id: inst:INJ_LINE_DH1A_002_PRECEDES_PUEH001_002
+    subject: inst:DH1A_002
+    predicate: pals:precedes
+    object: inst:PUEH001_002
+    context: beamline_order
+    beamline_context: inst:INJ_LINE
+  - id: inst:INJ_LINE_PUEH001_002_PRECEDES_QUAD1_002
+    subject: inst:PUEH001_002
+    predicate: pals:precedes
+    object: inst:QUAD1_002
+    context: beamline_order
+    beamline_context: inst:INJ_LINE

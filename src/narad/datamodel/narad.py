@@ -1,5 +1,5 @@
 # Auto generated from narad.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-08-13T10:49:13
+# Generation date: 2026-09-20T18:54:15
 # Schema: accelerator_core
 #
 # id: https://w3id.org/accelerator-core
@@ -74,6 +74,7 @@ QUANTITYKIND = CurieNamespace('quantitykind', 'http://qudt.org/vocab/quantitykin
 RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 SAREF = CurieNamespace('saref', 'https://saref.etsi.org/core/v4.1.1/')
 SOSA = CurieNamespace('sosa', 'http://www.w3.org/ns/sosa/')
+SSN_SYSTEM = CurieNamespace('ssn_system', 'https://www.w3.org/ns/ssn/systems/')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
 DEFAULT_ = PALS
 
@@ -242,6 +243,14 @@ class BookkeepingComponentId(VirtualComponentId):
 
 
 class MarkerId(BookkeepingComponentId):
+    pass
+
+
+class BeginningEleId(BookkeepingComponentId):
+    pass
+
+
+class DriftId(VirtualComponentId):
     pass
 
 
@@ -626,9 +635,7 @@ class MetaParamGroup(ParamGroup):
         if self.label is not None and not isinstance(self.label, str):
             self.label = str(self.label)
 
-        if not isinstance(self.additional_metadata, list):
-            self.additional_metadata = [self.additional_metadata] if self.additional_metadata is not None else []
-        self.additional_metadata = [v if isinstance(v, AdditionalMetadata) else AdditionalMetadata(**as_dict(v)) for v in self.additional_metadata]
+        self._normalize_inlined_as_list(slot_name="additional_metadata", slot_type=AdditionalMetadata, key_name="key", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -1039,6 +1046,7 @@ class RFParamGroup(ParamGroup):
     frequency: Optional[float] = None
     harmon: Optional[int] = None
     voltage: Optional[float] = None
+    gradient: Optional[float] = None
     phase: Optional[float] = None
     multipass_phase: Optional[float] = None
     cavity_type: Optional[Union[str, "CavityTypeEnum"]] = None
@@ -1061,6 +1069,9 @@ class RFParamGroup(ParamGroup):
 
         if self.voltage is not None and not isinstance(self.voltage, float):
             self.voltage = float(self.voltage)
+
+        if self.gradient is not None and not isinstance(self.gradient, float):
+            self.gradient = float(self.gradient)
 
         if self.phase is not None and not isinstance(self.phase, float):
             self.phase = float(self.phase)
@@ -1134,9 +1145,7 @@ class ElectricMultipoleParamGroup(ParamGroup):
         if not isinstance(self.id, ElectricMultipoleParamGroupId):
             self.id = ElectricMultipoleParamGroupId(self.id)
 
-        if not isinstance(self.elec_components, list):
-            self.elec_components = [self.elec_components] if self.elec_components is not None else []
-        self.elec_components = [v if isinstance(v, MultipoleParameterGroup) else MultipoleParameterGroup(**as_dict(v)) for v in self.elec_components]
+        self._normalize_inlined_as_list(slot_name="elec_components", slot_type=MultipoleParameterGroup, key_name="order", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -1191,9 +1200,7 @@ class MagneticMultipoleParamGroup(ParamGroup):
         if not isinstance(self.id, MagneticMultipoleParamGroupId):
             self.id = MagneticMultipoleParamGroupId(self.id)
 
-        if not isinstance(self.mag_components, list):
-            self.mag_components = [self.mag_components] if self.mag_components is not None else []
-        self.mag_components = [v if isinstance(v, MultipoleParameterGroup) else MultipoleParameterGroup(**as_dict(v)) for v in self.mag_components]
+        self._normalize_inlined_as_list(slot_name="mag_components", slot_type=MultipoleParameterGroup, key_name="order", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -1231,7 +1238,7 @@ class BendParamGroup(ParamGroup):
 
     id: Union[str, BendParamGroupId] = None
     angle_ref: Optional[float] = None
-    bend_field_ref: Optional[float] = None
+    Bn0_ref: Optional[float] = None
     bend_field_actual: Optional[float] = None
     e1: Optional[float] = None
     e2: Optional[float] = None
@@ -1243,12 +1250,13 @@ class BendParamGroup(ParamGroup):
     g_actual: Optional[float] = None
     h1: Optional[float] = None
     h2: Optional[float] = None
+    Kn0_from_g_ref: Optional[Union[bool, Bool]] = None
     L_chord: Optional[float] = None
     L_sagitta: Optional[float] = None
     L_rectangle: Optional[float] = None
     multipole_geometry: Optional[Union[str, "MultipoleGeometryEnum"]] = None
     ref_geometry: Optional[Union[str, "ReferenceGeometryEnum"]] = None
-    rho_ref: Optional[float] = None
+    radius_ref: Optional[float] = None
     tilt_ref: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1260,8 +1268,8 @@ class BendParamGroup(ParamGroup):
         if self.angle_ref is not None and not isinstance(self.angle_ref, float):
             self.angle_ref = float(self.angle_ref)
 
-        if self.bend_field_ref is not None and not isinstance(self.bend_field_ref, float):
-            self.bend_field_ref = float(self.bend_field_ref)
+        if self.Bn0_ref is not None and not isinstance(self.Bn0_ref, float):
+            self.Bn0_ref = float(self.Bn0_ref)
 
         if self.bend_field_actual is not None and not isinstance(self.bend_field_actual, float):
             self.bend_field_actual = float(self.bend_field_actual)
@@ -1296,6 +1304,9 @@ class BendParamGroup(ParamGroup):
         if self.h2 is not None and not isinstance(self.h2, float):
             self.h2 = float(self.h2)
 
+        if self.Kn0_from_g_ref is not None and not isinstance(self.Kn0_from_g_ref, Bool):
+            self.Kn0_from_g_ref = Bool(self.Kn0_from_g_ref)
+
         if self.L_chord is not None and not isinstance(self.L_chord, float):
             self.L_chord = float(self.L_chord)
 
@@ -1311,8 +1322,8 @@ class BendParamGroup(ParamGroup):
         if self.ref_geometry is not None and not isinstance(self.ref_geometry, ReferenceGeometryEnum):
             self.ref_geometry = ReferenceGeometryEnum(self.ref_geometry)
 
-        if self.rho_ref is not None and not isinstance(self.rho_ref, float):
-            self.rho_ref = float(self.rho_ref)
+        if self.radius_ref is not None and not isinstance(self.radius_ref, float):
+            self.radius_ref = float(self.radius_ref)
 
         if self.tilt_ref is not None and not isinstance(self.tilt_ref, float):
             self.tilt_ref = float(self.tilt_ref)
@@ -1342,8 +1353,12 @@ class MultipoleParameterGroup(YAMLRoot):
     EsL: Optional[float] = None
     Bn: Optional[float] = None
     Bs: Optional[float] = None
+    BnL: Optional[float] = None
+    BsL: Optional[float] = None
     Kn: Optional[float] = None
     Ks: Optional[float] = None
+    KnL: Optional[float] = None
+    KsL: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.order):
@@ -1372,11 +1387,23 @@ class MultipoleParameterGroup(YAMLRoot):
         if self.Bs is not None and not isinstance(self.Bs, float):
             self.Bs = float(self.Bs)
 
+        if self.BnL is not None and not isinstance(self.BnL, float):
+            self.BnL = float(self.BnL)
+
+        if self.BsL is not None and not isinstance(self.BsL, float):
+            self.BsL = float(self.BsL)
+
         if self.Kn is not None and not isinstance(self.Kn, float):
             self.Kn = float(self.Kn)
 
         if self.Ks is not None and not isinstance(self.Ks, float):
             self.Ks = float(self.Ks)
+
+        if self.KnL is not None and not isinstance(self.KnL, float):
+            self.KnL = float(self.KnL)
+
+        if self.KsL is not None and not isinstance(self.KsL, float):
+            self.KsL = float(self.KsL)
 
         super().__post_init__(**kwargs)
 
@@ -1435,11 +1462,6 @@ class PhysicalComponent(Component):
     LongitudinalPlacementP: Optional[Union[dict, LongitudinalPlacementParamGroup]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PhysicalComponentId):
-            self.id = PhysicalComponentId(self.id)
-
         if self._is_empty(self.functions):
             self.MissingRequiredField("functions")
         if not isinstance(self.functions, list):
@@ -1485,11 +1507,6 @@ class VirtualComponent(Component):
     FloorP: Optional[Union[dict, FloorParamGroup]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, VirtualComponentId):
-            self.id = VirtualComponentId(self.id)
-
         if self._is_empty(self.functions):
             self.MissingRequiredField("functions")
         if not isinstance(self.functions, list):
@@ -2223,6 +2240,11 @@ class RFCavity(Cavity):
     RFP: Optional[Union[dict, RFParamGroup]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, RFCavityId):
+            self.id = RFCavityId(self.id)
+
         if self.RFP is not None and not isinstance(self.RFP, RFParamGroup):
             self.RFP = RFParamGroup(**as_dict(self.RFP))
 
@@ -2402,6 +2424,79 @@ class Marker(BookkeepingComponent):
 
         if self.TwissP is not None and not isinstance(self.TwissP, TwissParamGroup):
             self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
+
+
+@dataclass(repr=False)
+class BeginningEle(BookkeepingComponent):
+    """
+    Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the
+    branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference
+    parameters; otherwise it is expected to be the first element in the branch.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["BeginningEle"]
+    class_class_curie: ClassVar[str] = "pals:BeginningEle"
+    class_name: ClassVar[str] = "BeginningEle"
+    class_model_uri: ClassVar[URIRef] = PALS.BeginningEle
+
+    id: Union[str, BeginningEleId] = None
+    kind: str = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
+    beamline_relation: Union[str, "VirtualRelationEnum"] = None
+    ReferenceP: Optional[Union[dict, ReferenceParamGroup]] = None
+    TwissP: Optional[Union[dict, TwissParamGroup]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, BeginningEleId):
+            self.id = BeginningEleId(self.id)
+
+        if self.ReferenceP is not None and not isinstance(self.ReferenceP, ReferenceParamGroup):
+            self.ReferenceP = ReferenceParamGroup(**as_dict(self.ReferenceP))
+
+        if self.TwissP is not None and not isinstance(self.TwissP, TwissParamGroup):
+            self.TwissP = TwissParamGroup(**as_dict(self.TwissP))
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.kind):
+            self.MissingRequiredField("kind")
+        self.kind = str(self.class_name)
+
+
+@dataclass(repr=False)
+class Drift(VirtualComponent):
+    """
+    A field-free space between beamline components. A Drift is a virtual beamline component whose longitudinal extent
+    preserves the separation between adjacent physical or virtual components.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PALS["Drift"]
+    class_class_curie: ClassVar[str] = "pals:Drift"
+    class_name: ClassVar[str] = "Drift"
+    class_model_uri: ClassVar[URIRef] = PALS.Drift
+
+    id: Union[str, DriftId] = None
+    kind: str = None
+    functions: Union[Union[str, "VirtualFunctionEnum"], list[Union[str, "VirtualFunctionEnum"]]] = None
+    beamline_relation: Union[str, "VirtualRelationEnum"] = None
+    LongitudinalPlacementP: Optional[Union[dict, LongitudinalPlacementParamGroup]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DriftId):
+            self.id = DriftId(self.id)
+
+        if self.LongitudinalPlacementP is not None and not isinstance(self.LongitudinalPlacementP, LongitudinalPlacementParamGroup):
+            self.LongitudinalPlacementP = LongitudinalPlacementParamGroup(**as_dict(self.LongitudinalPlacementP))
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.kind):
@@ -3442,6 +3537,10 @@ class VirtualFunctionEnum(EnumDefinitionImpl):
         text="Mark",
         description="""A virtual component representing an important location on the beamline,  such as a reference point for beam-based alignment, a location of a known aperture restriction,  or a location of a critical diagnostic device.""",
         meaning=PALS["Marker"])
+    DriftSpace = PermissibleValue(
+        text="DriftSpace",
+        description="A field-free longitudinal interval separating beamline components.",
+        meaning=PALS["Drift"])
     Fork = PermissibleValue(
         text="Fork",
         description="""A virtual component representing a branching point in the beamline,  such as a beamline fork or switchyard.""",
@@ -3498,6 +3597,10 @@ class SignalRoleEnum(EnumDefinitionImpl):
         text="MaximumLimit",
         description="Maximum allowed signal value.",
         meaning=XSD["maxInclusive"])
+    RangeLimit = PermissibleValue(
+        text="RangeLimit",
+        description="A signal containing both upper and lower allowed limits.",
+        meaning=SSN_SYSTEM["OperatingRange"])
 
     _defn = EnumDefinition(
         name="SignalRoleEnum",
@@ -3541,6 +3644,9 @@ class CanonicalSignalTypeEnum(EnumDefinitionImpl):
     MagnetFieldSetpoint = PermissibleValue(
         text="MagnetFieldSetpoint",
         description="Magnet field setpoint signal.")
+    MagnetCurrentRange = PermissibleValue(
+        text="MagnetCurrentRange",
+        description="Magnet current range signal.")
     IntegratedFieldSetpoint = PermissibleValue(
         text="IntegratedFieldSetpoint",
         description="Integrated magnetic field setpoint signal.")
@@ -3727,6 +3833,9 @@ class DataTypeEnum(EnumDefinitionImpl):
         text="Boolean",
         description="boolean data type",
         meaning=XSD["boolean"])
+    FloatArray = PermissibleValue(
+        text="FloatArray",
+        description="An array of floating-point values.")
 
     _defn = EnumDefinition(
         name="DataTypeEnum",
@@ -4098,6 +4207,9 @@ slots.rFParamGroup__harmon = Slot(uri=PALS.harmon, name="rFParamGroup__harmon", 
 slots.rFParamGroup__voltage = Slot(uri=PALS.voltage, name="rFParamGroup__voltage", curie=PALS.curie('voltage'),
                    model_uri=PALS.rFParamGroup__voltage, domain=None, range=Optional[float])
 
+slots.rFParamGroup__gradient = Slot(uri=PALS.gradient, name="rFParamGroup__gradient", curie=PALS.curie('gradient'),
+                   model_uri=PALS.rFParamGroup__gradient, domain=None, range=Optional[float])
+
 slots.rFParamGroup__phase = Slot(uri=PALS.phase, name="rFParamGroup__phase", curie=PALS.curie('phase'),
                    model_uri=PALS.rFParamGroup__phase, domain=None, range=Optional[float])
 
@@ -4137,8 +4249,8 @@ slots.hasBendP__BendP = Slot(uri=PALS.BendP, name="hasBendP__BendP", curie=PALS.
 slots.bendParamGroup__angle_ref = Slot(uri=PALS.angle_ref, name="bendParamGroup__angle_ref", curie=PALS.curie('angle_ref'),
                    model_uri=PALS.bendParamGroup__angle_ref, domain=None, range=Optional[float])
 
-slots.bendParamGroup__bend_field_ref = Slot(uri=PALS.bend_field_ref, name="bendParamGroup__bend_field_ref", curie=PALS.curie('bend_field_ref'),
-                   model_uri=PALS.bendParamGroup__bend_field_ref, domain=None, range=Optional[float])
+slots.bendParamGroup__Bn0_ref = Slot(uri=PALS.Bn0_ref, name="bendParamGroup__Bn0_ref", curie=PALS.curie('Bn0_ref'),
+                   model_uri=PALS.bendParamGroup__Bn0_ref, domain=None, range=Optional[float])
 
 slots.bendParamGroup__bend_field_actual = Slot(uri=PALS.bend_field_actual, name="bendParamGroup__bend_field_actual", curie=PALS.curie('bend_field_actual'),
                    model_uri=PALS.bendParamGroup__bend_field_actual, domain=None, range=Optional[float])
@@ -4173,6 +4285,9 @@ slots.bendParamGroup__h1 = Slot(uri=PALS.h1, name="bendParamGroup__h1", curie=PA
 slots.bendParamGroup__h2 = Slot(uri=PALS.h2, name="bendParamGroup__h2", curie=PALS.curie('h2'),
                    model_uri=PALS.bendParamGroup__h2, domain=None, range=Optional[float])
 
+slots.bendParamGroup__Kn0_from_g_ref = Slot(uri=PALS.Kn0_from_g_ref, name="bendParamGroup__Kn0_from_g_ref", curie=PALS.curie('Kn0_from_g_ref'),
+                   model_uri=PALS.bendParamGroup__Kn0_from_g_ref, domain=None, range=Optional[Union[bool, Bool]])
+
 slots.bendParamGroup__L_chord = Slot(uri=PALS.L_chord, name="bendParamGroup__L_chord", curie=PALS.curie('L_chord'),
                    model_uri=PALS.bendParamGroup__L_chord, domain=None, range=Optional[float])
 
@@ -4188,8 +4303,8 @@ slots.bendParamGroup__multipole_geometry = Slot(uri=PALS.multipole_geometry, nam
 slots.bendParamGroup__ref_geometry = Slot(uri=PALS.ref_geometry, name="bendParamGroup__ref_geometry", curie=PALS.curie('ref_geometry'),
                    model_uri=PALS.bendParamGroup__ref_geometry, domain=None, range=Optional[Union[str, "ReferenceGeometryEnum"]])
 
-slots.bendParamGroup__rho_ref = Slot(uri=PALS.rho_ref, name="bendParamGroup__rho_ref", curie=PALS.curie('rho_ref'),
-                   model_uri=PALS.bendParamGroup__rho_ref, domain=None, range=Optional[float])
+slots.bendParamGroup__radius_ref = Slot(uri=PALS.radius_ref, name="bendParamGroup__radius_ref", curie=PALS.curie('radius_ref'),
+                   model_uri=PALS.bendParamGroup__radius_ref, domain=None, range=Optional[float])
 
 slots.bendParamGroup__tilt_ref = Slot(uri=PALS.tilt_ref, name="bendParamGroup__tilt_ref", curie=PALS.curie('tilt_ref'),
                    model_uri=PALS.bendParamGroup__tilt_ref, domain=None, range=Optional[float])
@@ -4218,11 +4333,23 @@ slots.multipoleParameterGroup__Bn = Slot(uri=PALS.Bn, name="multipoleParameterGr
 slots.multipoleParameterGroup__Bs = Slot(uri=PALS.Bs, name="multipoleParameterGroup__Bs", curie=PALS.curie('Bs'),
                    model_uri=PALS.multipoleParameterGroup__Bs, domain=None, range=Optional[float])
 
+slots.multipoleParameterGroup__BnL = Slot(uri=PALS.BnL, name="multipoleParameterGroup__BnL", curie=PALS.curie('BnL'),
+                   model_uri=PALS.multipoleParameterGroup__BnL, domain=None, range=Optional[float])
+
+slots.multipoleParameterGroup__BsL = Slot(uri=PALS.BsL, name="multipoleParameterGroup__BsL", curie=PALS.curie('BsL'),
+                   model_uri=PALS.multipoleParameterGroup__BsL, domain=None, range=Optional[float])
+
 slots.multipoleParameterGroup__Kn = Slot(uri=PALS.Kn, name="multipoleParameterGroup__Kn", curie=PALS.curie('Kn'),
                    model_uri=PALS.multipoleParameterGroup__Kn, domain=None, range=Optional[float])
 
 slots.multipoleParameterGroup__Ks = Slot(uri=PALS.Ks, name="multipoleParameterGroup__Ks", curie=PALS.curie('Ks'),
                    model_uri=PALS.multipoleParameterGroup__Ks, domain=None, range=Optional[float])
+
+slots.multipoleParameterGroup__KnL = Slot(uri=PALS.KnL, name="multipoleParameterGroup__KnL", curie=PALS.curie('KnL'),
+                   model_uri=PALS.multipoleParameterGroup__KnL, domain=None, range=Optional[float])
+
+slots.multipoleParameterGroup__KsL = Slot(uri=PALS.KsL, name="multipoleParameterGroup__KsL", curie=PALS.curie('KsL'),
+                   model_uri=PALS.multipoleParameterGroup__KsL, domain=None, range=Optional[float])
 
 slots.component__native_types = Slot(uri=PALS.native_types, name="component__native_types", curie=PALS.curie('native_types'),
                    model_uri=PALS.component__native_types, domain=None, range=Optional[Union[str, list[str]]])

@@ -3,6 +3,15 @@
 
 Usage: python pals_to_narad.py -input INPUT_PALS_YAML -output OUTPUT_SKELETON_YAML
 Run ``python pals_to_narad.py -help`` for option details.
+
+Unsupported expanded element kinds are listed in a warning and omitted without
+creating a precedence relation across the resulting gap; users must decide how
+those kinds should map to NARAD. Multipass is derived from the source beamline,
+but NARAD does not yet define multipass identity and relationships.
+
+This translator uses ``src/narad/datamodel/narad_pydantic.py`` for NARAD class
+discovery and validation. Run ``just gen-python`` after changing ``narad.yaml``
+so the generated models remain synchronized with the schema.
 """
 
 from __future__ import annotations
@@ -15,7 +24,10 @@ from pathlib import Path
 import re
 from typing import Any
 
+from pydantic import BaseModel, ValidationError
 import yaml
+
+from narad.datamodel import narad_pydantic as narad_model
 
 
 class PalsYamlLoader(yaml.SafeLoader):
@@ -28,13 +40,89 @@ PalsYamlLoader.add_implicit_resolver(
     list("-+0123456789"),
 )
 
-MAGNET_FUNCTIONS = {
-    "Bend": ["Steering"],
-    "Quadrupole": ["Focusing"],
-    "Sextupole": ["Focusing"],
-    "Kicker": ["Steering"],
-}
-DIRECT_PARAMETER_GROUPS = ("ReferenceP", "TwissP", "BodyShiftP")
+def parameter_groups(model: type[BaseModel]) -> tuple[str, ...]:
+    """Derive the parameter groups accepted by a NARAD component class."""
+    return tuple(name for name in model.model_fields if name.endswith("P"))
+
+
+def component_functions(model: type[BaseModel]) -> list[str] | None:
+    """Read the nearest default_function annotation in the model hierarchy."""
+    for ancestor in model.__mro__:
+        metadata = ancestor.__dict__.get("linkml_meta")
+        if metadata is None:
+            continue
+        annotation = dict(metadata).get("annotations", {}).get("default_function")
+        if annotation is not None:
+            value = annotation.get("value") if isinstance(annotation, dict) else annotation
+            return [str(value)]
+    return None
+
+
+def concrete_component_models() -> list[type[BaseModel]]:
+    """Return concrete generated Pydantic models for NARAD components."""
+    models: list[type[BaseModel]] = []
+    for candidate in vars(narad_model).values():
+        if not isinstance(candidate, type) or not issubclass(
+            candidate, narad_model.Component
+        ):
+            continue
+        if dict(candidate.linkml_meta).get("abstract", False):
+            continue
+        if candidate not in models:
+            models.append(candidate)
+    return models
+
+
+def general_mapping_candidate(
+    candidates: list[type[BaseModel]],
+) -> type[BaseModel] | None:
+    """Return the unique candidate that is a superclass of all candidates."""
+    general = [
+        candidate
+        for candidate in candidates
+        if all(issubclass(other, candidate) for other in candidates)
+    ]
+    return general[0] if len(general) == 1 else None
+
+
+def component_model(source_kind: str) -> type[BaseModel] | None:
+    """Resolve a PALS kind using NARAD names and schema mapping metadata."""
+    models = concrete_component_models()
+    same_name = getattr(narad_model, source_kind, None)
+    if same_name in models:
+        return same_name
+
+    mapping = f"pals:{source_kind}"
+    for mapping_type in ("exact_mappings", "broad_mappings"):
+        candidates = [
+            model
+            for model in models
+            if mapping in dict(model.linkml_meta).get(mapping_type, [])
+        ]
+        if len(candidates) == 1:
+            return candidates[0]
+        if candidates:
+            return general_mapping_candidate(candidates)
+    return None
+
+
+def translation_rule(source_kind: str) -> dict[str, Any] | None:
+    """Derive structural mapping from NARAD and add translation semantics."""
+    model = component_model(source_kind)
+    if model is None:
+        return None
+    functions = component_functions(model)
+    if functions is None:
+        return None
+    groups = parameter_groups(model)
+    return {
+        "target_kind": model.__name__,
+        "model": model,
+        "functions": functions,
+        "parameter_groups": groups,
+        "has_length": "LongitudinalPlacementP" in groups,
+        "plane_from_bmad": issubclass(model, narad_model.Kicker),
+    }
 
 
 def instance_id(name: str) -> str:
@@ -57,17 +145,33 @@ def normalize_parameter_groups(entity: dict[str, Any], *, replace_ids: bool = Fa
 
 
 def magnetic_multipoles(group: dict[str, Any]) -> dict[str, Any] | None:
-    """Convert legacy Kn0/Ks1-style fields to the new mag_components list."""
+    """Convert flattened PALS multipole fields to mag_components by order."""
     components: dict[int, dict[str, Any]] = {}
     for key, value in group.items():
-        match = re.fullmatch(r"(Kn|Ks|Bn|Bs)(\d+)", key)
+        match = re.fullmatch(r"(tilt|Kn|Ks|Bn|Bs)(\d+)(L?)", key)
         if not match:
             continue
-        field, order_text = match.groups()
+        field, order_text, integrated = match.groups()
+        if field == "tilt" and integrated:
+            continue
         order = int(order_text)
-        components.setdefault(order, {"order": order})[field] = value
+        output_field = f"{field}L" if integrated else field
+        components.setdefault(order, {"order": order})[output_field] = value
     if not components:
         return None
+    for order, component in components.items():
+        representations = {
+            field[0] + ("L" if field.endswith("L") else "")
+            for field in component
+            if field not in {"order", "tilt"}
+        }
+        if len(representations) > 1:
+            fields = ", ".join(
+                field for field in component if field not in {"order", "tilt"}
+            )
+            raise ValueError(
+                f"multipole order {order} mixes incompatible strength types: {fields}"
+            )
     return {"mag_components": [components[n] for n in sorted(components)]}
 
 
@@ -83,70 +187,88 @@ def native_types(source: dict[str, Any]) -> list[str]:
 def component_from_pals(name: str, source: dict[str, Any]) -> dict[str, Any] | None:
     """Map a supported PALS element to the current NARAD component schema."""
     source_kind = source.get("kind")
-    target_kind = source_kind
-
-    if source_kind in MAGNET_FUNCTIONS:
-        functions = list(MAGNET_FUNCTIONS[source_kind])
-    elif source_kind == "Instrument":
-        target_kind = "DiagnosticDevice"
-        functions = ["Measurement"]
-    elif source_kind == "BeginningEle":
-        functions = ["Mark"]
-    elif source_kind == "Drift":
-        functions = ["DriftSpace"]
-    elif source_kind == "Marker":
-        functions = ["Mark"]
-    else:
-        # Constants, controllers, and lattice/beamline container records are
-        # not Component instances in the current NARAD schema.
+    rule = translation_rule(str(source_kind))
+    if rule is None:
         return None
 
     component: dict[str, Any] = {
         "id": instance_id(name),
-        "kind": target_kind,
+        "kind": rule["target_kind"],
         "native_types": native_types(source),
-        "functions": functions,
+        "functions": list(rule["functions"]),
         "beamline_relation": "Inline",
     }
 
-    if target_kind not in {"Marker", "BeginningEle"}:
+    if rule["has_length"]:
         component["LongitudinalPlacementP"] = {
             "length": float(source.get("length", 0.0))
         }
 
-    parameter_groups = (
-        DIRECT_PARAMETER_GROUPS
-        if target_kind != "Marker"
-        else ("TwissP", "BodyShiftP")
-    )
-    for group_name in parameter_groups:
-        if source.get(group_name):
-            component[group_name] = deepcopy(source[group_name])
+    for group_name in rule["parameter_groups"]:
+        source_group = source.get(group_name)
+        if not source_group:
+            continue
+        if group_name == "MagneticMultipoleP":
+            source_group = magnetic_multipoles(source_group)
+        if source_group:
+            component[group_name] = deepcopy(source_group)
 
-    if source.get("MetaP"):
-        component["MetaP"] = deepcopy(source["MetaP"])
-    if source.get("BendP"):
-        component["BendP"] = deepcopy(source["BendP"])
-
-    multipoles = magnetic_multipoles(source.get("MagneticMultipoleP", {}))
-    if multipoles:
-        component["MagneticMultipoleP"] = multipoles
-
-    bmad_key = source.get("Bmad", {}).get("Bmad_key", "")
-    if target_kind == "Kicker":
+    if rule.get("plane_from_bmad"):
+        bmad_key = source.get("Bmad", {}).get("Bmad_key", "")
         if bmad_key == "HKicker":
             component["plane"] = "Horizontal"
         elif bmad_key == "VKicker":
             component["plane"] = "Vertical"
 
     normalize_parameter_groups(component)
-    return component
+    validated = rule["model"].model_validate(component)
+    return validated.model_dump(mode="json", exclude_none=True)
+
+
+def mapped_elements(
+    expanded_line: list[tuple[str, dict[str, Any]]],
+) -> list[tuple[str, dict[str, Any] | None]]:
+    """Map an expanded line while retaining gaps for unsupported elements."""
+    mapped: list[tuple[str, dict[str, Any] | None]] = []
+    unsupported: Counter[tuple[str, str]] = Counter()
+    for name, source in expanded_line:
+        try:
+            component = component_from_pals(name, source)
+        except (ValueError, ValidationError) as exc:
+            warnings.warn(
+                f"Invalid PALS element {name!r} was omitted: {exc}",
+                UserWarning,
+                stacklevel=2,
+            )
+            component = None
+        mapped.append((name, component))
+        if component is None:
+            unsupported[(name, str(source.get("kind", "<missing kind>")))] += 1
+
+    if unsupported:
+        details = ", ".join(
+            f"{name} ({kind})" + (f" x{count}" if count > 1 else "")
+            for (name, kind), count in sorted(unsupported.items())
+        )
+        warnings.warn(
+            "Unsupported or invalid PALS elements were omitted from the NARAD skeleton: "
+            f"{details}. No precedence relation was created across an omitted "
+            "element. Decide how these PALS kinds should map to NARAD before "
+            "using the skeleton as a complete lattice.",
+            UserWarning,
+            stacklevel=2,
+        )
+    return mapped
 
 
 def load_pals(
     path: Path,
-) -> tuple[dict[str, Any], dict[str, dict[str, Any]], list[tuple[str, dict[str, Any]]]]:
-    """Load named facility records and source beamlines."""
+) -> tuple[
+    dict[str, Any],
+    dict[str, dict[str, Any]],
+    list[tuple[str, dict[str, Any], dict[str, Any]]],
+]:
+    """Load records and select the beamline branches of the active lattice."""
     with path.open(encoding="utf-8") as stream:
         document = yaml.load(stream, Loader=PalsYamlLoader)
 
@@ -165,10 +287,47 @@ def load_pals(
         for name, value in record.items()
         if isinstance(value, dict)
     }
-    beamlines = [(name, value) for name, value in named.items() if value.get("kind") == "BeamLine"]
-    if not beamlines:
-        raise ValueError("expected at least one BeamLine record")
-    return pals, named, beamlines
+
+    selected_names = [
+        str(record["use"])
+        for record in records
+        if isinstance(record, dict) and record.get("use") is not None
+    ]
+    if len(selected_names) > 1:
+        raise ValueError(
+            "expected at most one PALS use statement; "
+            f"found {len(selected_names)}"
+        )
+    if selected_names:
+        lattice_name = selected_names[0]
+    else:
+        lattice_names = [
+            name for name, value in named.items() if value.get("kind") == "Lattice"
+        ]
+        if len(lattice_names) != 1:
+            raise ValueError(
+                "expected one selected PALS lattice or exactly one Lattice record; "
+                f"found {len(lattice_names)} lattice records"
+            )
+        lattice_name = lattice_names[0]
+
+    lattice = resolve_record(lattice_name, {}, named)
+    if lattice.get("kind") != "Lattice":
+        raise ValueError(f"PALS use target {lattice_name!r} is not a Lattice")
+    branch_items = lattice.get("branches", [])
+    if not isinstance(branch_items, list) or not branch_items:
+        raise ValueError(f"Lattice {lattice_name!r} has no branches")
+
+    branches: list[tuple[str, dict[str, Any], dict[str, Any]]] = []
+    for item in branch_items:
+        branch_name, branch_override = parse_line_item(item)
+        branch = resolve_record(branch_name, branch_override, named)
+        if branch.get("kind") != "BeamLine":
+            raise ValueError(
+                f"Lattice branch {branch_name!r} is not a BeamLine"
+            )
+        branches.append((branch_name, branch_override, branch))
+    return pals, named, branches
 
 
 def deep_merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
@@ -256,12 +415,55 @@ def expand_beamline(
     return expanded
 
 
+def beamline_is_multipass(
+    name: str,
+    override: dict[str, Any],
+    records: dict[str, dict[str, Any]],
+    expansion_stack: tuple[str, ...] = (),
+) -> bool:
+    """Return whether a beamline or any nested beamline is multipass."""
+    if name in expansion_stack:
+        cycle = " -> ".join((*expansion_stack, name))
+        raise ValueError(f"cyclic BeamLine reference: {cycle}")
+
+    beamline = resolve_record(name, override, records)
+    if bool(beamline.get("multipass", False)):
+        return True
+
+    for item in beamline.get("line", []):
+        item_name, item_override = parse_line_item(item)
+        resolved = resolve_record(item_name, item_override, records)
+        if int(resolved.get("repeat", 1)) == 0:
+            continue
+        if resolved.get("kind") == "BeamLine" and beamline_is_multipass(
+            item_name,
+            item_override,
+            records,
+            (*expansion_stack, name),
+        ):
+            return True
+    return False
+
+
+def warn_multipass(beamline_name: str) -> None:
+    """Report the current NARAD modeling limitation for a multipass beamline."""
+    warnings.warn(
+        f"Beamline {beamline_name!r} is multipass, but multipass identity and "
+        "relationships are not yet defined in NARAD schema. The generated components "
+        "and precedence relations may not represent shared physical elements "
+        "across passes correctly.",
+        UserWarning,
+        stacklevel=2,
+    )
+
+
 def build_document(source_path: Path) -> dict[str, Any]:
     """Build a signal-free NARAD skeleton from a PALS export."""
     pals, records, source_beamlines = load_pals(source_path)
     named_components = {
         name: component
         for name, source in records.items()
+        if source.get("kind") not in {"BeamLine", "Lattice"}
         if (component := component_from_pals(name, source)) is not None
     }
 
@@ -271,17 +473,21 @@ def build_document(source_path: Path) -> dict[str, Any]:
     relations: list[dict[str, Any]] = []
     beamlines: list[dict[str, Any]] = []
 
-    for beamline_name, beamline in source_beamlines:
-        expanded_line = expand_beamline(beamline_name, {}, records)
-        supported_line = [
-            (name, component)
-            for name, source in expanded_line
-            if (component := component_from_pals(name, source)) is not None
-        ]
-        occurrence_totals = Counter(name for name, _ in supported_line)
+    for beamline_name, beamline_override, beamline in source_beamlines:
+        multipass = beamline_is_multipass(beamline_name, beamline_override, records)
+        if multipass:
+            warn_multipass(beamline_name)
+        expanded_line = expand_beamline(beamline_name, beamline_override, records)
+        mapped_line = mapped_elements(expanded_line)
+        occurrence_totals = Counter(
+            name for name, component in mapped_line if component is not None
+        )
         occurrence_numbers: Counter[str] = Counter()
-        ordered_ids: list[str] = []
-        for name, source_component in supported_line:
+        ordered_ids: list[str | None] = []
+        for name, source_component in mapped_line:
+            if source_component is None:
+                ordered_ids.append(None)
+                continue
             component = deepcopy(source_component)
             if occurrence_totals[name] > 1:
                 occurrence_numbers[name] += 1
@@ -307,14 +513,15 @@ def build_document(source_path: Path) -> dict[str, Any]:
                 "beamline_context": beamline_id,
             }
             for subject, obj in zip(ordered_ids, ordered_ids[1:])
+            if subject is not None and obj is not None
         )
         beamlines.append(
             {
                 "id": beamline_id,
                 "kind": "BeamLine",
-                "functions": ["BeamLineSection"],
+                "functions": component_functions(narad_model.BeamLine),
                 "beamline_relation": "Inline",
-                "multipass": False,
+                "multipass": multipass,
                 "periodic": bool(beamline.get("periodic", False)),
                 "description": f"Beamline imported from PALS record {beamline_name}.",
             }
@@ -328,7 +535,7 @@ def build_document(source_path: Path) -> dict[str, Any]:
     notes = list(source_notes) if isinstance(source_notes, list) else [str(source_notes)]
     notes.append("Generated from PALS source data without control-system enrichment.")
 
-    return {
+    document = {
         "description": f"Control-system-neutral NARAD skeleton generated from {source_path.name}.",
         "kind": "PALSAccelerator",
         "version": "0.1.0",
@@ -341,6 +548,8 @@ def build_document(source_path: Path) -> dict[str, Any]:
             "component_relations": relations,
         },
     }
+    validated = narad_model.PALSAccelerator.model_validate(document)
+    return validated.model_dump(mode="json", exclude_none=True)
 
 
 def parse_args() -> argparse.Namespace:
