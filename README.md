@@ -85,6 +85,27 @@ uv run python src/narad_system/schema/palsparserpy_to_narad.py \
 uv run python examples/BtA/generate_narad_bta_instance.py
 ```
 
+## Known PALS-to-NARAD Gaps
+
+The PALSParserPy translator currently produces a flattened, control-neutral
+NARAD skeleton. PALSParserPy resolves expressions and expands the selected
+lattice before NARAD mapping, but not every source concept has a corresponding
+NARAD representation yet.
+
+| PALS feature | Current behavior | Remaining gap |
+| --- | --- | --- |
+| Multiple branches | PALSParserPy expands all branches, including branches created by forks. | The translator currently requires exactly one branch per lattice. NARAD occurrence identity and relations across multiple beamlines still need to be defined. |
+| Forks | PALSParserPy resolves fork destinations and creates the resulting branches. | NARAD has a `Fork` function value and `HasConnectingBranch` relation, but no concrete `Fork` component or `ForkP` parameter group. Fork elements and their connectivity are therefore not translated. |
+| Multipass beamlines | The translator preserves the beamline-level `multipass` flag and emits a warning. | NARAD does not yet distinguish a shared physical component from its separate pass occurrences or relate those occurrences across passes. |
+| Constants and variables | PALSParserPy evaluates them, and translated component parameters contain the resulting numeric values. | Named constants, variables, original expressions, and evaluation provenance are not retained in NARAD. |
+| Controllers | PALSParserPy evaluates controller expressions before translation, so the controlled parameter values are present in the generated components. | Controller entities, knob variables, expressions, control types, and parameter-level dependencies are not represented. The existing NARAD `Controls` relation only describes component-to-component control. |
+| Includes, inheritance, repeats, and expressions | These are resolved during PALS expansion, and their expanded component values and order are translated. | The generated skeleton does not preserve the original authoring constructs or their provenance. |
+| Other unsupported element kinds | Unsupported expanded elements are reported and omitted. No precedence relation is created across the resulting gap. | Each kind needs an explicit NARAD class/mapping decision before the skeleton can represent the complete lattice. |
+
+Until these gaps are addressed, generated skeletons should be treated as
+resolved lattice snapshots rather than lossless round-trip representations of
+the original PALS source.
+
 
 ## Repository Structure
 * [docs/](docs/) - mkdocs-managed documentation
@@ -105,8 +126,18 @@ uv run python examples/BtA/generate_narad_bta_instance.py
 * ```just gen-project```
   * Example of generating the project from the schema. This will generate a Python datamodel and associated files in `project/`: (json/jsonld schemas, OWL, sqlschema, etc).
 
-* ```just gen-doc --truncate-descriptions False --example-directory doc_examples/ --subfolder-type-separation```
-  * Example of generating documentation from the schema. Use these arguments to control the output of the documentation generation. The `--example-directory` argument specifies the directory where example files are located, and the `--subfolder-type-separation` argument indicates that the documentation should be organized into subfolders based on type separation. `--subfolder-type-separation` is important for generating the documentation in a way that is compatible with mkdocs (used to build the documentation site) on macOS.
+* `just gen-doc`
+  * Generates documentation from the schema into `docs/elements/`. The recipe
+    takes no arguments; the following generator flags are set in the `gen-doc`
+    recipe in `justfile`:
+    * `--truncate-descriptions False`
+    * `--diagram-type er_diagram`
+    * `--example-directory doc_examples/`, where example files are located
+    * `--subfolder-type-separation`, which generates documentation in
+      subfolders for compatibility with mkdocs
+    * `--template-directory docs/templates-linkml`
+  * To pass extra flags, set `LINKML_GENERATORS_DOC_ARGS` in
+    `config.public.mk`.
 
 * ```just gen-python```
   * Example of generating the Python datamodel from the schema. This will generate Python classes in `src/narad/datamodel/` that correspond to the classes defined in the LinkML schema.
