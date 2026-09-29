@@ -1130,7 +1130,7 @@ classes:
         description: >-
           The function of the physical component, 
           which can be used to identify the component across different source systems.
-        required: true
+        required: false  # SupportingFacilityComponent uses facility_functions instead
         multivalued: true
         slot_uri: pals:physical_function
         range: PhysicalFunctionEnum
@@ -1475,7 +1475,7 @@ classes:
       - HasLongitudinalPlacementP
       - HasBodyShiftP
     attributes:
-      functions:
+      facility_functions:
         description: >-
           The function of the supporting facility component, 
           which can be used to identify the component across different source systems.
@@ -2185,6 +2185,8 @@ enums:
         description: mass in electron volts per speed of light squared
       fundamental_charge:
         description: fundamental charge
+      Gauss:
+        description: gauss (magnetic flux density)
       G_per_cm:
         description: gauss per centimeter
       Hz:
