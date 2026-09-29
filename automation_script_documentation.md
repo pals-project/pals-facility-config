@@ -60,7 +60,7 @@ uv run python3 src/run_pipeline.py \
 | `--schema`    | LinkML schema YAML (source of truth for the data model)                  | `src/narad/schema/narad.yaml` |
 | `--instance`  | LinkML instance YAML (the actual accelerator data to load into the graph) | `examples/core_acc_narad_instance.yaml` |
 | `--queries`   | YAML file with the benchmark questions to ask                            | `examples/benchmark_queries/UITF_v1.yaml` |
-| `--answers`   | Where to write the LLM's answers                                         | `examples/benchmark_queries/UITF_v1_answers.yaml` |
+| `--answers`   | Where to write the LLM's answers                                         | `examples/benchmark_queries/UITF_v1_LLM_answers.yaml` |
 
 ### Optional inputs
 
