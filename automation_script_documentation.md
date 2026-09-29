@@ -48,7 +48,9 @@ uv run python3 src/run_pipeline.py \
   [--startup-timeout 180] \
   [--delete-intermediate-files] \
   [--no-fresh] \
-  [--no-accumulate-history]
+  [--no-accumulate-history] \
+  [--question-key Q] \
+  [--llm-answer-key LLM_Ans]
 ```
 
 ### Required inputs
@@ -72,6 +74,8 @@ uv run python3 src/run_pipeline.py \
 | `--delete-intermediate-files` | off | Delete the generated `.ttl`/`.owl.ttl` files once the graph has been built and queried. |
 | `--no-fresh` | off (i.e. fresh by default) | Skip `docker compose down -v` before `up -d`. **Not safe** if the RDF content changed since the last run — see §6. |
 | `--no-accumulate-history` | off (i.e. accumulate by default) | Ask every question independently, with no prior chat history, instead of one continuous conversation. |
+| `--question-key` | `Q` | Key in each queries entry holding the question text. |
+| `--llm-answer-key` | `LLM_Ans` | Key to write the LLM's answer under in each answers entry; the script asserts this key does not already exist in the queries entry. |
 
 ### Queries file format (`--queries`)
 
@@ -85,15 +89,23 @@ A YAML list of `{Q, Ans}` dicts, e.g. [`examples/benchmark_queries/UITF_v1.yaml`
 ```
 
 Only the `Q` field is ever sent to the LLM. `Ans` is the human-authored expected
-answer for reference/grading — the script reads it but does not use it.
+answer for reference/grading; if present, it is carried through into the
+generated answers file (see below) so an evaluator can compare it against the
+LLM's answer without checking multiple files.
 
 ### Answers file format (`--answers`)
 
-A YAML list of strings, one per question, in the same order as the input file:
+A YAML list of `{Q, Ans, LLM_Ans}` dicts, one per question, in the same order as
+the input file. `Ans` is only included if it was present in the corresponding
+queries entry:
 
 ```yaml
-- 'At the first BPM in the graph, the beam position fields are not populated: ...'
-- 'MFHK101 is a Solenoid instance, but the graph does not show any ...'
+- Q: Give me the horizontal and vertical beam positions and status at the first BPM
+  Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
+  LLM_Ans: 'At the first BPM in the graph, the beam position fields are not populated: ...'
+- Q: What's the status of MFHK101?
+  Ans: MFHK101.STAT
+  LLM_Ans: 'MFHK101 is a Solenoid instance, but the graph does not show any ...'
 ```
 
 If `--answers` has no file extension, `.yaml` is appended automatically. If it
@@ -165,7 +177,9 @@ that container can take a while (image build on first run, then app startup).
 
 ### Stage 5 — Ask every question (`run_benchmark` / `query_gradio`)
 
-1. `load_queries()` reads the `Q` field from every entry in `--queries`.
+1. Reads every entry from `--queries` (a list of dicts) directly, with no schema
+   validation beyond requiring the `--question-key` field (`Q` by default) on
+   each entry.
 2. `load_gradio_settings()` builds the full parameter set the `/respond` API
    endpoint expects (model name, base URL, API key, temperature, system
    prompt, graph-context toggle, Neo4j URI/user/password/database, reasoning
@@ -180,7 +194,12 @@ that container can take a while (image build on first run, then app startup).
    responses can return `content` as a list of `{"type": "text", "text": ...}`
    blocks instead of a plain string; this flattens either shape into plain
    text before it's written out.
-5. All answers are collected into a list and written to `--answers` as YAML.
+5. For each question, the result dict is a deep copy of the original queries
+   entry (so `Ans` and any other extra fields are preserved as-is) with the
+   `--llm-answer-key` field (`LLM_Ans` by default) added for the LLM's answer.
+   The script asserts that key isn't already present in the entry, to avoid
+   silently overwriting existing data. All results are collected into a list
+   and written to `--answers` as YAML.
 
 ### Stage 6 — Cleanup
 
@@ -285,6 +304,6 @@ uv run python3 src/run_pipeline.py \
   --schema src/narad/schema/narad.yaml \
   --instance examples/core_acc_narad_instance.yaml \
   --queries examples/benchmark_queries/UITF_v1.yaml \
-  --answers examples/benchmark_queries/UITF_v1_answers.yaml \
+  --answers examples/benchmark_queries/UITF_v1_LLM_answers.yaml \
   --delete-intermediate-files
 ```

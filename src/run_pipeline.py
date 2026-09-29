@@ -19,7 +19,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-
+import copy
 import yaml
 from dotenv import load_dotenv
 from gradio_client import Client
@@ -195,13 +195,6 @@ def extract_message_text(content: Any) -> str:
     return str(content)
 
 
-def load_queries(queries_path: Path) -> list[str]:
-    """Read the `Q` field from each entry of a queries YAML file."""
-    with queries_path.open() as handle:
-        entries = yaml.safe_load(handle)
-    return [entry["Q"].strip() for entry in entries]
-
-
 def normalize_answers_path(answers_path: Path) -> Path:
     """Ensure the answers path has a .yml/.yaml suffix, defaulting to .yaml if none given."""
     suffix = answers_path.suffix.lower()
@@ -219,22 +212,29 @@ def run_benchmark(
     *,
     accumulate_history: bool,
     startup_timeout_seconds: float,
+    question_key: str,
+    llm_answer_key: str,
 ) -> None:
     """Run every query in queries_path through gradio-chat and write answers to answers_path."""
     client = wait_for_gradio_ready(gradio_url, timeout_seconds=startup_timeout_seconds)
     settings = load_gradio_settings()
 
-    questions = load_queries(queries_path)
+    with open(queries_path, 'r') as handle:
+        entries = yaml.safe_load(handle)
     history: list[dict[str, str]] = []
-    answers: list[str] = []
-    for question in questions:
+    results: list[dict[str, str]] = []
+    for entry in entries:
+        question = entry[question_key].strip()
         if not accumulate_history:
             history = []
         answer, history = query_gradio(client, question, history, settings)
-        answers.append(answer)
+        assert llm_answer_key not in entry, f"Entry already contains '{llm_answer_key}' !!!"
+        result = copy.deepcopy(entry)
+        result[llm_answer_key] = answer
+        results.append(result)
 
     with answers_path.open("w") as handle:
-        yaml.safe_dump(answers, handle, allow_unicode=True, sort_keys=False)
+        yaml.safe_dump(results, handle, allow_unicode=True, sort_keys=False)
 
 
 def delete_intermediate_files(paths: IntermediatePaths) -> None:
@@ -261,6 +261,11 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         "--no-accumulate-history", dest="accumulate_history", action="store_false",
         help="Query each benchmark question independently, without prior chat history",
     )
+    parser.add_argument("--question-key", default="Q", help="Key in each queries entry holding the question text")
+    parser.add_argument(
+        "--llm-answer-key", default="LLM_Ans",
+        help="Key to write the LLM's answer under in each answers entry (must not already exist in the queries entry)",
+    )
     parser.set_defaults(fresh=True, accumulate_history=True)
     return parser.parse_args(argv)
 
@@ -285,6 +290,8 @@ def main(argv: list[str]) -> int:
         answers_path,
         accumulate_history=args.accumulate_history,
         startup_timeout_seconds=args.startup_timeout,
+        question_key=args.question_key,
+        llm_answer_key=args.llm_answer_key,
     )
 
     if args.delete_intermediate_files:
