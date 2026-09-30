@@ -23,6 +23,7 @@ from kg_agent import (
     run_neo4j_query,
     run_graph_agent_loop,
     test_neo4j_connection,
+    build_linkml_schema_context
 )
 
 
@@ -133,10 +134,16 @@ def respond(
         except Exception as exc:
             schema_snapshot = f"Schema snapshot unavailable: {exc}"
 
+        try:
+            linkml_schema_context = build_linkml_schema_context()
+        except Exception as exc:
+            linkml_schema_context = f"LinkML schema reference unavailable: {exc}"
+
         langchain_history.append(
             SystemMessage(
                 content=build_agent_system_prompt(
                     schema_snapshot=schema_snapshot,
+                    linkml_schema_context=linkml_schema_context,
                 )
             )
         )

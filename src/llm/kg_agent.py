@@ -1,8 +1,11 @@
 import json
 import re
 import time
+import os
+import yaml
 from html import escape
 from typing import LiteralString, cast
+from pathlib import Path
 
 import gradio as gr
 from langchain_core.messages import HumanMessage, ToolMessage
@@ -17,6 +20,19 @@ WRITE_CYPHER_PATTERN = re.compile(
 )
 
 _SCHEMA_CACHE: dict[str, tuple[float, str]] = {}
+
+_SCHEMA_CONTEXT_CACHE: tuple[str, int, str] | None = None
+
+_SCHEMA_DETAIL_KEYS = (
+    "description",
+    "range",
+    "required",
+    "multivalued",
+    "slot_uri",
+    "aliases",
+    "inlined",
+    "inlined_as_list",
+)
 
 
 class CypherToolInput(BaseModel):
@@ -146,20 +162,171 @@ def build_schema_snapshot(
     _SCHEMA_CACHE[cache_key] = (now, snapshot)
     return snapshot
 
+def _schema_details(definition: dict) -> dict:
+    """Return the schema fields useful to an agent, omitting generator-only details."""
+    return {
+        key: definition[key]
+        for key in _SCHEMA_DETAIL_KEYS
+        if key in definition
+    }
 
-def build_agent_system_prompt(schema_snapshot: str | None = None) -> str:
-    base_prompt = (
-        "You are a knowledge-graph assistant with access to a Neo4j tool named execute_cypher. "
-        "Use iterative tool calls when needed and do not produce a final answer until you have "
-        "enough graph evidence. If a query fails or returns no rows, revise and try again. "
-        "Use read-only Cypher only, and keep each query focused with LIMIT when appropriate. "
-        "Prefer label/type/property names from the provided schema snapshot."
+def _merge_properties(target: dict, source: dict) -> None:
+    """Merge property definitions while preserving inherited details."""
+    for name, details in source.items():
+        merged = dict(target.get(name, {}))
+        merged.update(details)
+        target[name] = merged
+
+def build_linkml_schema_context(schema_path: str | None = None) -> str:
+    """Load a compact, inheritance-aware LinkML schema description for the agent."""
+    global _SCHEMA_CONTEXT_CACHE
+
+    path = Path(
+        schema_path
+        or os.getenv("LINKML_SCHEMA_FILE", "src/narad/schema/narad.yaml")
     )
+    mtime_ns = path.stat().st_mtime_ns
+    cache_key = str(path.resolve())
 
-    parts = [base_prompt]
-    if schema_snapshot and schema_snapshot.strip():
-        parts.append("\nSchema snapshot:\n" + schema_snapshot.strip())
-    return "\n".join(parts)
+    if (
+        _SCHEMA_CONTEXT_CACHE is not None
+        and _SCHEMA_CONTEXT_CACHE[0] == cache_key
+        and _SCHEMA_CONTEXT_CACHE[1] == mtime_ns
+    ):
+        return _SCHEMA_CONTEXT_CACHE[2]
+
+    schema = yaml.safe_load(path.read_text(encoding="utf-8"))
+    raw_classes = schema.get("classes", {})
+    raw_slots = schema.get("slots", {})
+    raw_enums = schema.get("enums", {})
+
+    def effective_properties(class_name: str, visiting: frozenset[str] = frozenset()) -> dict:
+        """Collect inherited slots, mixins, attributes, and class-specific slot usage."""
+        if class_name in visiting or class_name not in raw_classes:
+            return {}
+
+        class_def = raw_classes[class_name]
+        next_visiting = visiting | {class_name}
+        properties: dict = {}
+
+        parent_names = []
+        if class_def.get("is_a"):
+            parent_names.append(class_def["is_a"])
+        parent_names.extend(class_def.get("mixins", []))
+
+        for parent_name in parent_names:
+            _merge_properties(
+                properties,
+                effective_properties(parent_name, next_visiting),
+            )
+
+        # Slots inherit their common definition from the schema-level slots map.
+        for slot_name in class_def.get("slots", []):
+            _merge_properties(
+                properties,
+                {slot_name: _schema_details(raw_slots.get(slot_name, {}))},
+            )
+
+        # Attributes are class-defined properties.
+        for attribute_name, attribute_def in class_def.get("attributes", {}).items():
+            _merge_properties(
+                properties,
+                {attribute_name: _schema_details(attribute_def)},
+            )
+
+        # slot_usage provides class-specific overrides, e.g. subject range=Component.
+        for slot_name, usage_def in class_def.get("slot_usage", {}).items():
+            _merge_properties(
+                properties,
+                {slot_name: _schema_details(usage_def)},
+            )
+
+        return properties
+
+    class_context = {}
+    for class_name, class_def in raw_classes.items():
+        annotations = class_def.get("annotations", {})
+        predicate_annotation = annotations.get("rdf_predicate")
+        if isinstance(predicate_annotation, dict):
+            predicate_annotation = predicate_annotation.get("value")
+
+        class_context[class_name] = {
+            "description": class_def.get("description"),
+            "is_a": class_def.get("is_a"),
+            "mixins": class_def.get("mixins", []),
+            "aliases": class_def.get("aliases", []),
+            "abstract": class_def.get("abstract", False),
+            "class_uri": class_def.get("class_uri"),
+            "rdf_predicate": predicate_annotation,
+            "properties": effective_properties(class_name),
+        }
+
+    enum_context = {}
+    for enum_name, enum_def in raw_enums.items():
+        enum_context[enum_name] = {
+            "description": enum_def.get("description"),
+            "values": {
+                value_name: value_def.get("description")
+                if isinstance(value_def, dict)
+                else None
+                for value_name, value_def in enum_def.get("permissible_values", {}).items()
+            },
+        }
+
+    context = {
+        "schema": {
+            "name": schema.get("name"),
+            "title": schema.get("title"),
+            "description": schema.get("description"),
+        },
+        "classes": class_context,
+        "enums": enum_context,
+        "interpretation_notes": [
+            "This is LinkML semantic documentation; use the live Neo4j snapshot for exact labels and property names.",
+            "Relationship classes have subject/object properties and may also have class-specific qualifiers.",
+            "Classes with rdf_predicate define direct RDF relationships; in this graph, those can be traversed as Neo4j relationships.",
+            "A direct relationship and its reified relation node are distinct representations; qualifiers may be on the reified node, not on the direct relationship.",
+        ],
+    }
+
+    rendered = json.dumps(context, ensure_ascii=False, separators=(",", ":"))
+    _SCHEMA_CONTEXT_CACHE = (cache_key, mtime_ns, rendered)
+    return rendered
+
+
+def build_agent_system_prompt(
+        schema_snapshot: str | None = None,
+        linkml_schema_context: str | None = None,
+    ) -> str:
+        base_prompt = (
+            "You are a knowledge-graph assistant with access to a Neo4j tool named execute_cypher. "
+            "Use iterative tool calls when needed and do not produce a final answer until you have "
+            "enough graph evidence. If a query fails or returns no rows, revise and try again. "
+            "Use read-only Cypher only, and keep each query focused with LIMIT when appropriate. "
+            "Use the LinkML schema for meanings, descriptions, ranges, and relationship semantics. "
+            "Use the live Neo4j schema snapshot for the actual labels, relationship types, and property names."
+        )
+
+        parts = [base_prompt]
+
+        if linkml_schema_context and linkml_schema_context.strip():
+            parts.append("\nLinkML schema reference:\n" + linkml_schema_context.strip())
+
+        if schema_snapshot and schema_snapshot.strip():
+            parts.append("\nLive Neo4j schema snapshot:\n" + schema_snapshot.strip())
+
+        parts.append(
+            "\nQuery guidance:\n"
+            "- For beamline order, traverse the direct `precedes` relationship when that type appears "
+            "in the live Neo4j snapshot.\n"
+            "- Use the reified relation node when a question needs relationship qualifiers such as "
+            "`context` or `beamline_context`; do not assume those qualifiers are properties of the "
+            "direct relationship.\n"
+            "- Use schema ranges and descriptions to choose properties, then verify the chosen "
+            "labels/property names against the live snapshot."
+        )
+
+        return "\n".join(parts)
 
 
 def build_cypher_tool(neo4j_uri: str, neo4j_user: str, neo4j_password: str, neo4j_database: str) -> StructuredTool:
