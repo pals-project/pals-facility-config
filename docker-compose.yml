@@ -60,6 +60,9 @@ services:
       - SHOW_REASONING=${SHOW_REASONING:-false}
       - NEO4J_TRACE_MAX_CHARS=${NEO4J_TRACE_MAX_CHARS:-4000}
       - NEO4J_SCHEMA_CACHE_TTL_SECONDS=${NEO4J_SCHEMA_CACHE_TTL_SECONDS:-300}
+      - LINKML_SCHEMA_FILE=/app/narad.yaml
+    volumes:
+      - ${LINKML_SCHEMA_HOST_PATH:-./src/narad/schema/narad.yaml}:/app/narad.yaml:ro
     depends_on:
       neo4j-init:
         condition: service_completed_successfully
