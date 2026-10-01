@@ -244,11 +244,19 @@ def build_linkml_schema_context(schema_path: str | None = None) -> str:
         return properties
 
     class_context = {}
+    class_aliases: dict[str, list[str]] = {}
     for class_name, class_def in raw_classes.items():
         annotations = class_def.get("annotations", {})
         predicate_annotation = annotations.get("rdf_predicate")
         if isinstance(predicate_annotation, dict):
             predicate_annotation = predicate_annotation.get("value")
+
+        aliases = class_def.get("aliases") or []
+        if isinstance(aliases, str):
+            aliases = [aliases]
+
+        for alias in aliases:
+            class_aliases.setdefault(alias.casefold(), []).append(class_name)
 
         class_context[class_name] = {
             "description": class_def.get("description"),
@@ -278,6 +286,7 @@ def build_linkml_schema_context(schema_path: str | None = None) -> str:
             "name": schema.get("name"),
             "title": schema.get("title"),
             "description": schema.get("description"),
+            "class_aliases": class_aliases,
         },
         "classes": class_context,
         "enums": enum_context,
@@ -324,6 +333,12 @@ def build_agent_system_prompt(
             "direct relationship.\n"
             "- Use schema ranges and descriptions to choose properties, then verify the chosen "
             "labels/property names against the live snapshot."
+            "\nAlias interpretation:\n"
+            "- LinkML class aliases are synonyms for class names, not identifiers for individual graph nodes.\n"
+            "- Resolve a class alias using the LinkML class_aliases map. For example, 'Dipole' means the "
+            "Bend class; when the live Neo4j snapshot confirms the Bend label, use that label to find Bend instances.\n"
+            "- A class alias alone can match many instances. For a specific component, also resolve an instance "
+            "identifier, name, or data-instance alias. If multiple instances match, ask which one the user means."
         )
 
         return "\n".join(parts)
