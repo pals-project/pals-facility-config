@@ -1907,22 +1907,28 @@ enums:
     permissible_values:
       DOI:
         description: Digital Object Identifier.
-        meaning: http://purl.org/spar/datacite/doi
+        exact_mappings:
+          - http://purl.org/spar/datacite/doi
       PURL:
         description: Persistent Uniform Resource Locator.
-        meaning: http://purl.org/spar/datacite/purl
+        exact_mappings:
+          - http://purl.org/spar/datacite/purl
       ROR:
         description: Research Organization Registry identifier.
-        meaning: http://purl.org/spar/datacite/ror
+        exact_mappings:
+          - http://purl.org/spar/datacite/ror
       LOCAL:
         description: Local identifier, specific to the facility or source system.
-        meaning: http://purl.org/spar/datacite/local-resource-identifier-scheme
+        exact_mappings:
+          - http://purl.org/spar/datacite/local-resource-identifier-scheme
       URL:
         description: Uniform Resource Locator.
-        meaning: http://purl.org/spar/datacite/url
+        exact_mappings:
+          - http://purl.org/spar/datacite/url
       ARK:
         description: Archival Resource Key.
-        meaning: http://purl.org/spar/datacite/ark
+        exact_mappings:
+          - http://purl.org/spar/datacite/ark
 
   SourceSystemEnum:
     description: Controlled values for facility-local source systems.
@@ -2030,22 +2036,26 @@ enums:
       BeamLineSection:
         description: >-
           A section of the BeamLine used for organizational or functional grouping of components, such as a linac section, transfer line, or ring sector.
-        meaning: pals:BeamLine
+        exact_mappings:
+          - pals:BeamLine
       Mark:
         description: >-
           A virtual component representing an important location on the beamline, 
           such as a reference point for beam-based alignment, a location of a known aperture restriction, 
           or a location of a critical diagnostic device.
-        meaning: pals:Marker
+        exact_mappings:
+          - pals:Marker
       DriftSpace:
         description: >-
           A field-free longitudinal interval separating beamline components.
-        meaning: pals:Drift
+        exact_mappings:
+          - pals:Drift
       Fork:
         description: >-
           A virtual component representing a branching point in the beamline, 
           such as a beamline fork or switchyard.
-        meaning: pals:Fork
+        exact_mappings:
+          - pals:Fork
       Control:
         description: >-
           A virtual component representing a control system function or role
@@ -2066,24 +2076,30 @@ enums:
     permissible_values:
       Setpoint:
         description: Requested or configured value.
-        meaning: sosa:ActuatableProperty
+        exact_mappings:
+          - sosa:ActuatableProperty
       Readback:
         description: Measured or reported value.
-        meaning: sosa:ObservableProperty
+        exact_mappings:
+          - sosa:ObservableProperty
       Status:
         description: State or condition indicator.
       Command:
         description: Command or action trigger.
-        meaning: sosa:ActuatableProperty
+        exact_mappings:
+          - sosa:ActuatableProperty
       MinimumLimit:
         description: Minimum allowed signal value.
-        meaning: xsd:minInclusive
+        exact_mappings:
+          - xsd:minInclusive
       MaximumLimit:
         description: Maximum allowed signal value.
-        meaning: xsd:maxInclusive
+        exact_mappings:
+          - xsd:maxInclusive
       RangeLimit:
         description: A signal containing both upper and lower allowed limits.
-        meaning: acc:RangeLimit
+        exact_mappings:
+          - acc:RangeLimit
 
   CanonicalSignalTypeEnum:
     description: Portable semantic meanings for important signals.
@@ -2136,34 +2152,44 @@ enums:
         description: Beam transverse position.
       State:
         description: Device state or condition.
-        meaning: sosa:ObservableProperty
+        exact_mappings:
+          - sosa:ObservableProperty
       ElectricCurrent:
         description: Electric current.
-        meaning: quantitykind:ElectricCurrent
+        exact_mappings:
+          - quantitykind:ElectricCurrent
       IntegratedMagneticField:
         description: Integrated magnetic field.
-        meaning: quantitykind:MagneticFluxPerLength
+        exact_mappings:
+          - quantitykind:MagneticFluxPerLength
       MagneticField:
         description: Magnetic field.
-        meaning: quantitykind:MagneticFluxDensity
+        exact_mappings:
+          - quantitykind:MagneticFluxDensity
       Pressure:
         description: Gas or vacuum pressure.
-        meaning: quantitykind:Pressure
+        exact_mappings:
+          - quantitykind:Pressure
       DoseRate:
         description: Radiation dose rate.
-        meaning: quantitykind:AbsorbedDoseRate
+        exact_mappings:
+          - quantitykind:AbsorbedDoseRate
       Voltage:
         description: Electric potential difference.
-        meaning: quantitykind:Voltage
+        exact_mappings:
+          - quantitykind:Voltage
       Power:
         description: Power.
-        meaning: quantitykind:Power
+        exact_mappings:
+          - quantitykind:Power
       CavityPhase:
         description: Cavity phase.
-        meaning: quantitykind:PhaseAngle
+        exact_mappings:
+          - quantitykind:PhaseAngle
       CavityGradient:
         description: Cavity accelerating gradient.
-        meaning: quantitykind:ElectricFieldStrength
+        exact_mappings:
+          - quantitykind:ElectricFieldStrength
 
   UnitEnum:
     description: >-
@@ -2172,13 +2198,16 @@ enums:
     permissible_values:
       A:
         description: ampere
-        meaning: qudt:A
+        exact_mappings:
+          - qudt:A
       degree:
         description: degree
-        meaning: qudt:DEG
+        exact_mappings:
+          - qudt:DEG
       eV:
         description: electron volt
-        meaning: qudt:EV
+        exact_mappings:
+          - qudt:EV
       eV_per_c:
         description: momentum in electron volts per speed of light
       eV_per_c2:
@@ -2191,28 +2220,35 @@ enums:
         description: gauss per centimeter
       Hz:
         description: hertz
-        meaning: qudt:HZ
+        exact_mappings:
+          - qudt:HZ
       kW:
         description: kilowatt
-        meaning: qudt:KiloW
+        related_mappings:
+          - qudt:KiloW
       m:
         description: meter
-        meaning: qudt:M
+        exact_mappings:
+          - qudt:M
       mm:
         description: millimeter
-        meaning: qudt:MilliM
+        exact_mappings:
+          - qudt:MilliM
       mrem_per_h:
         description: >-
           millirem per hour. Kept as a local accelerator unit value because
           QUDT publishes related radiation units but no exact millirem-per-hour
           unit in the checked vocabulary.
-        meaning: qudt:MREM-PER-H
+        exact_mappings:
+          - qudt:MREM-PER-H
       MV_per_m:
         description: megavolt per meter
-        meaning: qudt:MegaV-PER-M
+        exact_mappings:
+          - qudt:MegaV-PER-M
       PA:
         description: pascal
-        meaning: qudt:PA
+        exact_mappings:
+          - qudt:PA
       randians_pi2:
         description: radians divided by 2 pi - angles and phases
       rem_per_h:
@@ -2222,25 +2258,32 @@ enums:
           the checked vocabulary.
       seconds:
         description: second
-        meaning: qudt:SEC
+        exact_mappings:
+          - qudt:SEC
       T:
         description: tesla
-        meaning: qudt:T
+        exact_mappings:
+          - qudt:T
       T_M:
         description: tesla meter
-        meaning: qudt:T-M
+        exact_mappings:
+          - qudt:T-M
       Torr:
         description: torr
-        meaning: qudt:TORR
+        exact_mappings:
+          - qudt:TORR
       V:
         description: volt
-        meaning: qudt:V
+        exact_mappings:
+          - qudt:V
       V_per_m:
         description: volt per meter
-        meaning: qudt:V-PER-M
+        exact_mappings:
+          - qudt:V-PER-M
       unitless:
         description: dimensionless numeric value
-        meaning: qudt:NUM
+        exact_mappings:
+          - qudt:NUM
       none:
         description: no unit or not applicable
 
@@ -2249,19 +2292,24 @@ enums:
     permissible_values:
       String:
         description: string data type
-        meaning: xsd:string
+        exact_mappings:
+          - xsd:string
       Integer:
         description: integer data type
-        meaning: xsd:integer
+        exact_mappings:
+          - xsd:integer
       Float:
         description: floating-point data type
-        meaning: xsd:float
+        exact_mappings:
+          - xsd:float
       Boolean:
         description: boolean data type
-        meaning: xsd:boolean
+        exact_mappings:
+          - xsd:boolean
       FloatArray:
         description: An array of floating-point values.
-        meaning: acc:FloatArray
+        exact_mappings:
+          - acc:FloatArray
 
 
   CoordinateSystemEnum:
