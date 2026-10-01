@@ -1,10 +1,10 @@
 - Q: Give me the horizontal and vertical beam positions and status at the first BPM
   Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
-- Q: What's the status of MFHK101?
+- Q: What's the status signal of MFHK101?
   Ans: MFHK101.STAT
-- Q: What's the status of the second solenoid?
+- Q: What's the status signal of the second solenoid?
   Ans: MFBK202.STAT
-- Q: Give me the strengths of all quadrupoles
+- Q: Give me the strength signals of all quadrupoles
   Ans: MQWK202.BDL, MQWK203.BDL, MQJM501.BDL–504.BDL, MQJM603.BDL, MQJM604.BDL
 - Q: Give me the name of the first viewer downstream of MBHK102V
   Ans: ITVK201
