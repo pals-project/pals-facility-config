@@ -24,9 +24,10 @@ import yaml
 from dotenv import load_dotenv
 from gradio_client import Client
 from linkml_runtime.utils.schemaview import SchemaView
+from rdflib import Graph, URIRef, RDF, Literal, Namespace
+from postprocess_for_rdf import load_predicate_uris
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-
 
 @dataclass
 class IntermediatePaths:
@@ -102,13 +103,13 @@ def generate_rdf(schema_path: Path, instance_path: Path, gen_owl_args: str) -> I
     run_command(
         [
             "uv", "run", "python3", "src/postprocess_for_rdf.py",
+            "--schema", str(schema_path),
             "--instance_file", str(paths.instance_raw_ttl),
             "--output_file", str(paths.instance_rdf_ttl),
         ],
         cwd=REPO_ROOT,
     )
     return paths
-
 
 def docker_compose_up(paths: IntermediatePaths, *, fresh: bool, compose_file: Path) -> None:
     """Point docker-compose at the generated RDF files and (re)start the stack."""
@@ -282,6 +283,8 @@ def main(argv: list[str]) -> int:
     instance_path = Path(args.instance).resolve()
     answers_path = normalize_answers_path(Path(args.answers).resolve())
 
+
+    load_predicate_uris(str(schema_path)) # fail fast if there are missing rdf_predicate annotations
     paths = generate_rdf(schema_path, instance_path, args.gen_owl_args)
     docker_compose_up(paths, fresh=args.fresh, compose_file=Path(args.compose_file))
     run_benchmark(
