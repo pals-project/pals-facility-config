@@ -1,27 +1,9 @@
 from rdflib import Graph, URIRef, RDF, Literal, Namespace
 import argparse
+from linkml_runtime.utils.schemaview import SchemaView
 
 PALS = Namespace("https://pals-project.readthedocs.io/")
 
-# class_uri overrides for predicate-designating (relation) classes —
-# everything else defaults to PALS[<bare class name>]
-PREDICATE_URI = {
-    "HasSignal": PALS.has_signal,
-    "HasSetpointSignal": PALS.has_setpoint_signal,
-    "HasReadbackSignal": PALS.has_readback_signal,
-    "HasCommandSignal": PALS.has_command_signal,
-    "HasLimitSignal": PALS.has_limit_signal,
-    "Precedes": PALS.precedes,
-    "Contains": PALS.contains,
-    "Controls": PALS.controls,
-    "IsPartOf": PALS.is_part_of,
-    "AdjacentTo": PALS.adjacent_to,
-    "Overlaps": PALS.overlaps,
-    "HasConnectingBranch": PALS.has_connecting_branch,
-    "MountedOn": PALS.mounted_on,
-    "Intersects": PALS.intersects,
-    "NearestTo": PALS.nearest_to,
-}
 
 # RELATION_MAP is NOT USED in this script, but is provided for reference. It maps bare class names to their corresponding PALS relation classes and predicates.
 RELATION_MAP = {
@@ -87,6 +69,29 @@ RELATION_MAP = {
     },
 }
 
+def load_predicate_uris(schema_path: str) -> dict[str, URIRef]:
+    """Map each concrete Edge subclass name to the expanded URI in its rdf_predicate annotation."""
+    schema_view = SchemaView(schema_path)
+    mapping: dict[str, URIRef] = {}
+    missing: list[str] = []
+
+    for class_name in schema_view.class_descendants("Edge", reflexive=False):
+        class_def = schema_view.get_class(class_name)
+        if class_def.abstract:
+            continue
+        annotation = class_def.annotations.get("rdf_predicate")
+        if annotation is None:
+            missing.append(class_name)
+            continue
+        mapping[class_name] = URIRef(schema_view.expand_curie(str(annotation.value)))
+
+    if missing:
+        raise ValueError(
+            "Concrete Edge classes missing an 'rdf_predicate' annotation: "
+            + ", ".join(sorted(missing))
+        )
+    return mapping
+
 def main():
     """
     Postprocesses the RDF graph to replace bare class names with PALS URIs for predicate-designating classes.
@@ -106,6 +111,10 @@ def main():
     """
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument(
+                "--schema", default="src/narad/schema/narad.yaml",
+                help="Path to the LinkML schema file",
+            )
+    ap.add_argument(
             "--instance_file", default="project/owl/core_acc_narad_instance.ttl",
             help="Path to the instance file (RDF graph) to postprocess",
         )
@@ -115,49 +124,37 @@ def main():
     )
     args = ap.parse_args()
 
+    predicate_uri = load_predicate_uris(args.schema)
+    class_for_predicate = {uri: PALS[name] for name, uri in predicate_uri.items()}
+
     g = Graph()
     g.parse(args.instance_file, format="turtle")
 
-    RDF_PREDICATE = URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate")
 
     for s, p, o in list(g.triples((None, RDF.type, None))):
         if isinstance(o, Literal):
             g.remove((s, p, o))
             g.add((s, p, PALS[str(o)]))   # bare class name -> pals:ClassName
 
-    for s, p, o in list(g.triples((None, RDF_PREDICATE, None))):
+    unknown = sorted({
+        str(o) for _, _, o in g.triples((None, RDF.predicate, None))
+        if isinstance(o, Literal) and str(o) not in predicate_uri
+    })
+    if unknown:
+        raise ValueError(f"Instance uses predicates with no rdf_predicate mapping in the schema: {', '.join(unknown)}")
+
+    for s, p, o in list(g.triples((None, RDF.predicate, None))):
         if isinstance(o, Literal):
             g.remove((s, p, o))
-            g.add((s, p, PREDICATE_URI[str(o)]))
+            g.add((s, p, predicate_uri[str(o)]))
 
-    # Materialize each reified relationship as a direct RDF triple.
+
     for relation, _, predicate in list(g.triples((None, RDF.predicate, None))):
         subject = g.value(relation, RDF.subject)
         obj = g.value(relation, RDF.object)
-
-        if (
-            subject is not None
-            and obj is not None
-            and isinstance(predicate, URIRef)
-        ):
-            g.add((subject, predicate, obj))
-
-    CLASS_FOR_PREDICATE = {uri: PALS[name] for name, uri in PREDICATE_URI.items()}
-
-    # Reverse lookup: predicate URI -> relation class
-    for relation, _, predicate in list(g.triples((None, RDF.predicate, None))):
-        subject = g.value(relation, RDF.subject)
-        obj = g.value(relation, RDF.object)
-
-        # Directly assert the reified relation's type, e.g. inst:IFYK203_to_ISLK302 a pals:Precedes
-        if predicate in CLASS_FOR_PREDICATE:
-            g.add((relation, RDF.type, CLASS_FOR_PREDICATE[predicate]))
-
-        if (
-            subject is not None
-            and obj is not None
-            and isinstance(predicate, URIRef)
-        ):
+        if predicate in class_for_predicate:
+            g.add((relation, RDF.type, class_for_predicate[predicate]))
+        if subject is not None and obj is not None and isinstance(predicate, URIRef):
             g.add((subject, predicate, obj))
 
     g.serialize(destination=args.output_file, format="turtle")
