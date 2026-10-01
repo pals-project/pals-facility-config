@@ -38,4 +38,4 @@ SET n:Instance;
 
 // 3. Create full-text search index for LLM entity resolution
 CREATE FULLTEXT INDEX instance_name_idx IF NOT EXISTS
-FOR (n:Instance) ON EACH [n.name, n.uri];
+FOR (n:Instance) ON EACH [n.name, n.uri, n.alias];
