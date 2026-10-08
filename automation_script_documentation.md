@@ -148,9 +148,11 @@ Result: three files sitting next to the schema/instance sources, e.g.
 
 ### Stage 3 — Start the Docker stack (`docker_compose_up`)
 
-1. Sets two environment variables for the `docker compose` subprocess only:
+1. Sets three environment variables for the `docker compose` subprocess only:
    `NEO4J_SCHEMA_TTL_PATH` and `NEO4J_INSTANCE_TTL_PATH`, pointing at the files
-   generated in Stage 2.
+   generated in Stage 2, and `LINKML_SCHEMA_HOST_PATH`, pointing at the
+   `--schema` YAML so `gradio-chat` describes the same schema to the LLM that
+   the graph was built from.
 2. If `--no-fresh` was **not** passed (the default): runs
    `docker compose down -v` to remove any previous containers **and volumes**
    (`neo4j_data`, `neo4j_plugins`), guaranteeing a clean graph.
@@ -266,7 +268,7 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
 - **Hardcoded, not `.env`-overridable:** `NEO4J_URI` (must stay
   `bolt://neo4j-kg:7687` inside Docker).
 - **Internal, set only by `run_pipeline.py` itself:**
-  `NEO4J_SCHEMA_TTL_PATH`, `NEO4J_INSTANCE_TTL_PATH`.
+  `NEO4J_SCHEMA_TTL_PATH`, `NEO4J_INSTANCE_TTL_PATH`, `LINKML_SCHEMA_HOST_PATH`.
 
 ## 6. Known caveats / things to be aware of
 

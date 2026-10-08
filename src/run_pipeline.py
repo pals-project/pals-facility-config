@@ -111,11 +111,13 @@ def generate_rdf(schema_path: Path, instance_path: Path, gen_owl_args: str) -> I
     )
     return paths
 
-def docker_compose_up(paths: IntermediatePaths, *, fresh: bool, compose_file: Path) -> None:
-    """Point docker-compose at the generated RDF files and (re)start the stack."""
+def docker_compose_up(paths: IntermediatePaths, schema_path: Path, *, fresh: bool, compose_file: Path) -> None:
+    """Point docker-compose at the generated RDF files and the source schema, then (re)start the stack."""
     env = os.environ.copy()
     env["NEO4J_SCHEMA_TTL_PATH"] = str(paths.schema_ttl)
     env["NEO4J_INSTANCE_TTL_PATH"] = str(paths.instance_rdf_ttl)
+    # gradio-chat reads the LinkML schema directly to give the LLM class/slot/enum descriptions.
+    env["LINKML_SCHEMA_HOST_PATH"] = str(schema_path)
 
     if fresh:
         run_command(["docker", "compose", "-f", str(compose_file), "down", "-v"], cwd=REPO_ROOT, env=env)
@@ -286,7 +288,7 @@ def main(argv: list[str]) -> int:
 
     load_predicate_uris(str(schema_path)) # fail fast if there are missing rdf_predicate annotations
     paths = generate_rdf(schema_path, instance_path, args.gen_owl_args)
-    docker_compose_up(paths, fresh=args.fresh, compose_file=Path(args.compose_file))
+    docker_compose_up(paths, schema_path, fresh=args.fresh, compose_file=Path(args.compose_file))
     run_benchmark(
         args.gradio_url,
         Path(args.queries).resolve(),
