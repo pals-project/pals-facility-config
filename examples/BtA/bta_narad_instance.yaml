@@ -10,19 +10,7 @@ facility:
   - identifier_type: LOCAL
     identifier_value: BTA
   components:
-  - ReferenceP:
-      id: inst:BEGINNING_B1/ReferenceP
-      species_ref: proton
-      pc_ref: 2160058016.715229
-    TwissP:
-      id: inst:BEGINNING_B1/TwissP
-      alpha_a: 1.8249910306663342
-      alpha_b: -0.6499756770851368
-      beta_a: 12.5509384
-      beta_b: 4.072941886974975
-      eta_x: 2.7207960780961375
-      etap_x: -0.4222600658627664
-    id: inst:BEGINNING_B1
+  - id: inst:BEGINNING_B1
     kind: BeginningEle
     native_types:
     - BeginningEle
@@ -30,6 +18,22 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
+    ReferenceP:
+      id: inst:BEGINNING_B1/ReferenceP
+      species_ref: proton
+      pc_ref: 2160058016.715229
+    TwissP:
+      id: inst:BEGINNING_B1/TwissP
+      alpha_a: 1.825
+      alpha_b: -0.64998
+      beta_a: 12.551
+      beta_b: 4.0729
+      eta_x: 2.7208
+      eta_y: 0.0
+      etap_x: -0.42226
+      etap_y: 0.0
+      phi_a: 13.281
+      phi_b: 13.334
   - id: inst:BTASTART
     kind: Marker
     native_types:
@@ -37,7 +41,27 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - BendP:
+    TwissP:
+      id: inst:BTASTART/TwissP
+      alpha_a: 1.825
+      alpha_b: -0.64998
+      beta_a: 12.551
+      beta_b: 4.0729
+      eta_x: 2.7208
+      eta_y: 0.0
+      etap_x: -0.42226
+      etap_y: 0.0
+      phi_a: 13.281
+      phi_b: 13.334
+  - id: inst:DHF6A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DHF6A/BendP
       e2: -0.07149
       g_ref: -0.057192
@@ -46,21 +70,23 @@ facility:
       mag_components:
       - order: 0
         Kn: -0.057192
+    TwissP:
+      id: inst:DHF6A/TwissP
+      alpha_a: 1.393
+      alpha_b: -1.061
+      beta_a: 8.4782
+      beta_b: 6.2436
+      eta_x: 2.1418
+      eta_y: 0.0
+      etap_x: -0.49495
+      etap_y: 0.0
+      phi_a: 13.403
+      phi_b: 13.585
     LongitudinalPlacementP:
       id: inst:DHF6A/LongitudinalPlacementP
       length: 1.25
-    id: inst:DHF6A
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DHF6T/LongitudinalPlacementP
-      length: 0.0
-    id: inst:DHF6T
+      s_position: 1.25
+  - id: inst:DHF6T
     kind: Kicker
     native_types:
     - Kicker
@@ -69,17 +95,42 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - LongitudinalPlacementP:
-      id: inst:DRF6A/LongitudinalPlacementP
-      length: 0.03949999999999998
-    id: inst:DRF6A
+    TwissP:
+      id: inst:DHF6T/TwissP
+      alpha_a: 1.393
+      alpha_b: -1.061
+      beta_a: 8.4782
+      beta_b: 6.2436
+      eta_x: 2.1418
+      eta_y: 0.0
+      etap_x: -0.49495
+      etap_y: 0.0
+      phi_a: 13.403
+      phi_b: 13.585
+    LongitudinalPlacementP:
+      id: inst:DHF6T/LongitudinalPlacementP
+      length: 0.0
+      s_position: 1.25
+  - id: inst:DRF6A
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:DRF6A/LongitudinalPlacementP
+      length: 0.03949999999999998
+      s_position: 1.289
+  - id: inst:DHF6B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DHF6B/BendP
       e1: -0.03324
       e2: -0.07149
@@ -89,31 +140,34 @@ facility:
       mag_components:
       - order: 0
         Kn: -0.04472831411560781
+    TwissP:
+      id: inst:DHF6B/TwissP
+      alpha_a: 0.90861
+      alpha_b: -1.4813
+      beta_a: 5.3232
+      beta_b: 9.748
+      eta_x: 1.427
+      eta_y: 0.0
+      etap_x: -0.55131
+      etap_y: 0.0
+      phi_a: 13.608
+      phi_b: 13.761
     LongitudinalPlacementP:
       id: inst:DHF6B/LongitudinalPlacementP
       length: 1.3269
-    id: inst:DHF6B
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRF6B/LongitudinalPlacementP
-      length: 0.4064
-    id: inst:DRF6B
+      s_position: 2.616
+  - id: inst:DRF6B
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUEH001/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUEH001
+    LongitudinalPlacementP:
+      id: inst:DRF6B/LongitudinalPlacementP
+      length: 0.4064
+      s_position: 3.023
+  - id: inst:PUEH001
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -121,21 +175,33 @@ facility:
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR001/LongitudinalPlacementP
-      length: 1.2518000000000002
-    id: inst:DR001
+    LongitudinalPlacementP:
+      id: inst:PUEH001/LongitudinalPlacementP
+      length: 0.0
+      s_position: 3.023
+  - id: inst:DR001
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    LongitudinalPlacementP:
+      id: inst:DR001/LongitudinalPlacementP
+      length: 1.2518000000000002
+      s_position: 4.275
+  - id: inst:MW006
+    kind: BeamProfileMonitor
+    native_types:
+    - Instrument
+    - Multiwire
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
       id: inst:MW006/LongitudinalPlacementP
       length: 0.0
-    id: inst:MW006
-    kind: BeamProfileMonitor
+      s_position: 4.275
     MetaP:
       id: inst:MW006/MetaP
       description: Multiwire beam-profile monitor.
@@ -152,31 +218,18 @@ facility:
       - key: spacing_y
         value: '0.0015'
         datatype: Float
-    native_types:
-    - Instrument
-    - Multiwire
-    functions:
-    - BeamProfileMeasurement
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR006/LongitudinalPlacementP
-      length: 0.43259999999999993
-    id: inst:DR006
+  - id: inst:DR006
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:DV007/MagneticMultipoleP
-      mag_components:
-      - order: 0
-        Ks: 0.00019785396946390708
     LongitudinalPlacementP:
-      id: inst:DV007/LongitudinalPlacementP
-      length: 0.2286
-    id: inst:DV007
+      id: inst:DR006/LongitudinalPlacementP
+      length: 0.43259999999999993
+      s_position: 4.707
+  - id: inst:DV007
     kind: Kicker
     native_types:
     - Kicker
@@ -185,42 +238,86 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Vertical
-  - LongitudinalPlacementP:
-      id: inst:DR007/LongitudinalPlacementP
-      length: 0.16060000000000002
-    id: inst:DR007
+    MagneticMultipoleP:
+      id: inst:DV007/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Ks: 0.00019785396946390708
+    TwissP:
+      id: inst:DV007/TwissP
+      alpha_a: 0.11318
+      alpha_b: -2.2413
+      beta_a: 2.9533
+      beta_b: 18.382
+      eta_x: 0.14828
+      eta_y: -5.1697e-06
+      etap_x: -0.55131
+      etap_y: 0.0
+      phi_a: 14.232
+      phi_b: 13.935
+    LongitudinalPlacementP:
+      id: inst:DV007/LongitudinalPlacementP
+      length: 0.2286
+      s_position: 4.936
+  - id: inst:DR007
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QV1/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: -0.543789268756699
     LongitudinalPlacementP:
-      id: inst:QV1/LongitudinalPlacementP
-      length: 0.5588
-    id: inst:QV1
+      id: inst:DR007/LongitudinalPlacementP
+      length: 0.16060000000000002
+      s_position: 5.096
+  - id: inst:QV1
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ1/LongitudinalPlacementP
-      length: 0.4031500000000003
-    id: inst:DRQ1
+    MagneticMultipoleP:
+      id: inst:QV1/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.543789268756699
+    TwissP:
+      id: inst:QV1/TwissP
+      alpha_a: -1.1283
+      alpha_b: 3.4506
+      beta_a: 3.4921
+      beta_b: 18.425
+      eta_x: -0.25198
+      eta_y: -3.4229e-05
+      etap_x: -0.58011
+      etap_y: 7.2993e-06
+      phi_a: 14.468
+      phi_b: 13.972
+    LongitudinalPlacementP:
+      id: inst:QV1/LongitudinalPlacementP
+      length: 0.5588
+      s_position: 5.655
+  - id: inst:DRQ1
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:DRQ1/LongitudinalPlacementP
+      length: 0.4031500000000003
+      s_position: 6.058
+  - id: inst:DH1A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH1A/BendP
       edge1_int: 0.02065
       edge2_int: 0.02065
@@ -230,21 +327,23 @@ facility:
       mag_components:
       - order: 0
         Kn: 0.0681858224461081
+    TwissP:
+      id: inst:DH1A/TwissP
+      alpha_a: -1.5642
+      alpha_b: 2.9935
+      beta_a: 5.2955
+      beta_b: 14.113
+      eta_x: -0.63811
+      eta_y: -5.4476e-05
+      etap_x: -0.56193
+      etap_y: 6.9986e-06
+      phi_a: 14.624
+      phi_b: 14.014
     LongitudinalPlacementP:
       id: inst:DH1A/LongitudinalPlacementP
       length: 0.2666536729738865
-    id: inst:DH1A
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DH1T/LongitudinalPlacementP
-      length: 0.0
-    id: inst:DH1T
+      s_position: 6.325
+  - id: inst:DH1T
     kind: Kicker
     native_types:
     - Kicker
@@ -253,7 +352,31 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - BendP:
+    TwissP:
+      id: inst:DH1T/TwissP
+      alpha_a: -1.5642
+      alpha_b: 2.9935
+      beta_a: 5.2955
+      beta_b: 14.113
+      eta_x: -0.63811
+      eta_y: -5.4476e-05
+      etap_x: -0.56193
+      etap_y: 6.9986e-06
+      phi_a: 14.624
+      phi_b: 14.014
+    LongitudinalPlacementP:
+      id: inst:DH1T/LongitudinalPlacementP
+      length: 0.0
+      s_position: 6.325
+  - id: inst:DH1B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH1B/BendP
       edge1_int: 0.02065
       edge2_int: 0.02065
@@ -263,77 +386,111 @@ facility:
       mag_components:
       - order: 0
         Kn: 0.0681858224461081
+    TwissP:
+      id: inst:DH1B/TwissP
+      alpha_a: -1.7378
+      alpha_b: 2.816
+      beta_a: 6.1759
+      beta_b: 12.564
+      eta_x: -0.78552
+      eta_y: -6.2521e-05
+      etap_x: -0.54374
+      etap_y: 6.7264e-06
+      phi_a: 14.671
+      phi_b: 14.034
     LongitudinalPlacementP:
       id: inst:DH1B/LongitudinalPlacementP
       length: 0.2666536729738865
-    id: inst:DH1B
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRD1/LongitudinalPlacementP
-      length: 0.353954
-    id: inst:DRD1
+      s_position: 6.592
+  - id: inst:DRD1
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    LongitudinalPlacementP:
+      id: inst:DRD1/LongitudinalPlacementP
+      length: 0.353954
+      s_position: 6.946
+  - id: inst:QH2A
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:QH2A/MagneticMultipoleP
       mag_components:
       - order: 1
         Kn: 1.0492993067514023
+    TwissP:
+      id: inst:QH2A/TwissP
+      alpha_a: 2.3897
+      alpha_b: -3.761
+      beta_a: 7.2225
+      beta_b: 11.264
+      eta_x: -1.1096
+      eta_y: -0.00011991
+      etap_x: 0.08556
+      etap_y: -4.6926e-05
+      phi_a: 14.795
+      phi_b: 14.119
     LongitudinalPlacementP:
       id: inst:QH2A/LongitudinalPlacementP
       length: 0.5588
-    id: inst:QH2A
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ2A/LongitudinalPlacementP
-      length: 0.14119599999999966
-    id: inst:DRQ2A
+      s_position: 7.504
+  - id: inst:DRQ2A
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    LongitudinalPlacementP:
+      id: inst:DRQ2A/LongitudinalPlacementP
+      length: 0.14119599999999966
+      s_position: 7.646
+  - id: inst:QH2B
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:QH2B/MagneticMultipoleP
       mag_components:
       - order: 1
         Kn: 1.0492993067514023
+    TwissP:
+      id: inst:QH2B/TwissP
+      alpha_a: 3.5828
+      alpha_b: -16.694
+      beta_a: 2.8917
+      beta_b: 22.775
+      eta_x: -0.87734
+      eta_y: -0.0002746
+      etap_x: 0.68088
+      etap_y: -0.00016269
+      phi_a: 14.937
+      phi_b: 14.166
     LongitudinalPlacementP:
       id: inst:QH2B/LongitudinalPlacementP
       length: 0.5588
-    id: inst:QH2B
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ2B/LongitudinalPlacementP
-      length: 0.4599000000000001
-    id: inst:DRQ2B
+      s_position: 8.204
+  - id: inst:DRQ2B
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRQ2B/LongitudinalPlacementP
+      length: 0.4599000000000001
+      s_position: 8.664
   - id: inst:XF019
     kind: Marker
     native_types:
@@ -341,41 +498,68 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR019/LongitudinalPlacementP
-      length: 0.3256999999999993
-    id: inst:DR019
+    TwissP:
+      id: inst:XF019/TwissP
+      alpha_a: 1.3823
+      alpha_b: -22.342
+      beta_a: 0.60832
+      beta_b: 40.727
+      eta_x: -0.5642
+      eta_y: -0.00043956
+      etap_x: 0.68088
+      etap_y: -0.00016269
+      phi_a: 15.291
+      phi_b: 14.181
+  - id: inst:DR019
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QV3/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: -1.4212102570001448
     LongitudinalPlacementP:
-      id: inst:QV3/LongitudinalPlacementP
-      length: 0.5588
-    id: inst:QV3
+      id: inst:DR019/LongitudinalPlacementP
+      length: 0.3256999999999993
+      s_position: 8.99
+  - id: inst:QV3
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ3/LongitudinalPlacementP
-      length: 0.3706000000000004
-    id: inst:DRQ3
+    MagneticMultipoleP:
+      id: inst:QV3/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -1.4212102570001448
+    TwissP:
+      id: inst:QV3/TwissP
+      alpha_a: -4.1215
+      alpha_b: 21.547
+      beta_a: 2.3152
+      beta_b: 59.744
+      eta_x: -0.012021
+      eta_y: -0.00053981
+      etap_x: 0.54512
+      etap_y: 0.00030165
+      phi_a: 17.428
+      phi_b: 14.196
+    LongitudinalPlacementP:
+      id: inst:QV3/LongitudinalPlacementP
+      length: 0.5588
+      s_position: 9.549
+  - id: inst:DRQ3
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRQ3/LongitudinalPlacementP
+      length: 0.3706000000000004
+      s_position: 9.919
   - id: inst:FOIL024
     kind: Marker
     native_types:
@@ -383,20 +567,30 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR024A/LongitudinalPlacementP
-      length: 0.012100000000000347
-    id: inst:DR024A
+    TwissP:
+      id: inst:FOIL024/TwissP
+      alpha_a: -7.0006
+      alpha_b: 18.661
+      beta_a: 6.437
+      beta_b: 44.844
+      eta_x: 0.19
+      eta_y: -0.00038459
+      etap_x: 0.54512
+      etap_y: 0.00030165
+      phi_a: 17.524
+      phi_b: 14.204
+  - id: inst:DR024A
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DV030/LongitudinalPlacementP
-      length: 0.2438
-    id: inst:DV030
+    LongitudinalPlacementP:
+      id: inst:DR024A/LongitudinalPlacementP
+      length: 0.012100000000000347
+      s_position: 9.932
+  - id: inst:DV030
     kind: Kicker
     native_types:
     - Kicker
@@ -405,42 +599,81 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Vertical
-  - LongitudinalPlacementP:
-      id: inst:DR024B/LongitudinalPlacementP
-      length: 0.6880999999999995
-    id: inst:DR024B
+    TwissP:
+      id: inst:DV030/TwissP
+      alpha_a: -8.9887
+      alpha_b: 16.668
+      beta_a: 10.529
+      beta_b: 35.803
+      eta_x: 0.3295
+      eta_y: -0.00027741
+      etap_x: 0.54512
+      etap_y: 0.00030165
+      phi_a: 17.555
+      phi_b: 14.21
+    LongitudinalPlacementP:
+      id: inst:DV030/LongitudinalPlacementP
+      length: 0.2438
+      s_position: 10.175
+  - id: inst:DR024B
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QH4/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: 1.3799174639073808
     LongitudinalPlacementP:
-      id: inst:QH4/LongitudinalPlacementP
-      length: 0.5588
-    id: inst:QH4
+      id: inst:DR024B/LongitudinalPlacementP
+      length: 0.6880999999999995
+      s_position: 10.863
+  - id: inst:QH4
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ4/LongitudinalPlacementP
-      length: 0.48617500000000113
-    id: inst:DRQ4
+    MagneticMultipoleP:
+      id: inst:QH4/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 1.3799174639073808
+    TwissP:
+      id: inst:QH4/TwissP
+      alpha_a: 8.2396
+      alpha_b: 0.065159
+      beta_a: 30.574
+      beta_b: 10.975
+      eta_x: 0.84137
+      eta_y: 0.00021451
+      etap_x: -0.073291
+      etap_y: 0.00039133
+      phi_a: 17.615
+      phi_b: 14.283
+    LongitudinalPlacementP:
+      id: inst:QH4/LongitudinalPlacementP
+      length: 0.5588
+      s_position: 11.422
+  - id: inst:DRQ4
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:DRQ4/LongitudinalPlacementP
+      length: 0.48617500000000113
+      s_position: 11.908
+  - id: inst:DH2
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH2/BendP
       e1: 0.05058
       e2: 0.05058
@@ -454,46 +687,62 @@ facility:
         Kn: 0.11374466241722879
       - order: 1
         Kn: 0.00019564081935763354
+    TwissP:
+      id: inst:DH2/TwissP
+      alpha_a: 1.6486
+      alpha_b: -0.097079
+      beta_a: 1.5263
+      beta_b: 11.121
+      eta_x: 0.94256
+      eta_y: 0.0012026
+      etap_x: 0.18625
+      etap_y: 0.00039324
+      phi_a: 18.048
+      phi_b: 14.549
     LongitudinalPlacementP:
       id: inst:DH2/LongitudinalPlacementP
       length: 2.42385
-    id: inst:DH2
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRD2/LongitudinalPlacementP
-      length: 0.4714249999999991
-    id: inst:DRD2
+      s_position: 14.332
+  - id: inst:DRD2
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QV5/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: -0.013354833631008985
     LongitudinalPlacementP:
-      id: inst:QV5/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QV5
+      id: inst:DRD2/LongitudinalPlacementP
+      length: 0.4714249999999991
+      s_position: 14.804
+  - id: inst:QV5
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DH23T/LongitudinalPlacementP
-      length: 0.0
-    id: inst:DH23T
+    MagneticMultipoleP:
+      id: inst:QV5/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.013354833631008985
+    TwissP:
+      id: inst:QV5/TwissP
+      alpha_a: -0.71687
+      alpha_b: -0.10948
+      beta_a: 0.62111
+      beta_b: 11.357
+      eta_x: 1.125
+      eta_y: 0.0015339
+      etap_x: 0.19343
+      etap_y: 0.00038359
+      phi_a: 19.692
+      phi_b: 14.635
+    LongitudinalPlacementP:
+      id: inst:QV5/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 15.302
+  - id: inst:DH23T
     kind: Kicker
     native_types:
     - Kicker
@@ -502,20 +751,34 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - LongitudinalPlacementP:
-      id: inst:DRQ5/LongitudinalPlacementP
-      length: 0.11834999999999998
-    id: inst:DRQ5
+    TwissP:
+      id: inst:DH23T/TwissP
+      alpha_a: -0.71687
+      alpha_b: -0.10948
+      beta_a: 0.62111
+      beta_b: 11.357
+      eta_x: 1.125
+      eta_y: 0.0015339
+      etap_x: 0.19343
+      etap_y: 0.00038359
+      phi_a: 19.692
+      phi_b: 14.635
+    LongitudinalPlacementP:
+      id: inst:DH23T/LongitudinalPlacementP
+      length: 0.0
+      s_position: 15.302
+  - id: inst:DRQ5
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUEV046/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUEV046
+    LongitudinalPlacementP:
+      id: inst:DRQ5/LongitudinalPlacementP
+      length: 0.11834999999999998
+      s_position: 15.421
+  - id: inst:PUEV046
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -523,17 +786,30 @@ facility:
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR046/LongitudinalPlacementP
-      length: 0.8646750000000023
-    id: inst:DR046
+    LongitudinalPlacementP:
+      id: inst:PUEV046/LongitudinalPlacementP
+      length: 0.0
+      s_position: 15.421
+  - id: inst:DR046
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:DR046/LongitudinalPlacementP
+      length: 0.8646750000000023
+      s_position: 16.285
+  - id: inst:DH3
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH3/BendP
       e1: 0.05058
       e2: 0.05058
@@ -547,52 +823,72 @@ facility:
         Kn: 0.11374466241722879
       - order: 1
         Kn: 0.00019564081935763354
+    TwissP:
+      id: inst:DH3/TwissP
+      alpha_a: -8.4132
+      alpha_b: -0.29228
+      beta_a: 32.66
+      beta_b: 12.858
+      eta_x: 2.0776
+      eta_y: 0.002638
+      etap_x: 0.4361
+      etap_y: 0.0003796
+      phi_a: 20.532
+      phi_b: 14.92
     LongitudinalPlacementP:
       id: inst:DH3/LongitudinalPlacementP
       length: 2.42385
-    id: inst:DH3
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRD3/LongitudinalPlacementP
-      length: 0.4897249999999973
-    id: inst:DRD3
+      s_position: 18.709
+  - id: inst:DRD3
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QH6/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: 0.9743513509122018
     LongitudinalPlacementP:
-      id: inst:QH6/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QH6
+      id: inst:DRD3/LongitudinalPlacementP
+      length: 0.4897249999999973
+      s_position: 19.199
+  - id: inst:QH6
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ6/LongitudinalPlacementP
-      length: 0.4714500000000008
-    id: inst:DRQ6
+    MagneticMultipoleP:
+      id: inst:QH6/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.9743513509122018
+    TwissP:
+      id: inst:QH6/TwissP
+      alpha_a: 10.847
+      alpha_b: -8.0356
+      beta_a: 40.69
+      beta_b: 17.03
+      eta_x: 2.2281
+      eta_y: 0.0032487
+      etap_x: -0.68415
+      etap_y: 0.0018264
+      phi_a: 20.557
+      phi_b: 14.992
+    LongitudinalPlacementP:
+      id: inst:QH6/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 19.697
+  - id: inst:DRQ6
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRQ6/LongitudinalPlacementP
+      length: 0.4714500000000008
+      s_position: 20.169
   - id: inst:XF059
     kind: Marker
     native_types:
@@ -600,21 +896,41 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR059/LongitudinalPlacementP
-      length: 0.4698999999999991
-    id: inst:DR059
+    TwissP:
+      id: inst:XF059/TwissP
+      alpha_a: 9.4722
+      alpha_b: -9.8509
+      beta_a: 31.11
+      beta_b: 25.463
+      eta_x: 1.9056
+      eta_y: 0.0039457
+      etap_x: -0.68415
+      etap_y: 0.0018264
+      phi_a: 20.57
+      phi_b: 15.015
+  - id: inst:DR059
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    LongitudinalPlacementP:
+      id: inst:DR059/LongitudinalPlacementP
+      length: 0.4698999999999991
+      s_position: 20.639
+  - id: inst:MW060
+    kind: BeamProfileMonitor
+    native_types:
+    - Instrument
+    - Multiwire
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
       id: inst:MW060/LongitudinalPlacementP
       length: 0.0
-    id: inst:MW060
-    kind: BeamProfileMonitor
+      s_position: 20.639
     MetaP:
       id: inst:MW060/MetaP
       description: Multiwire beam-profile monitor.
@@ -631,47 +947,56 @@ facility:
       - key: spacing_y
         value: '0.0025'
         datatype: Float
-    native_types:
-    - Instrument
-    - Multiwire
-    functions:
-    - BeamProfileMeasurement
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR060/LongitudinalPlacementP
-      length: 0.4601500000000023
-    id: inst:DR060
+  - id: inst:DR060
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QV7/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: -0.8675096450596528
     LongitudinalPlacementP:
-      id: inst:QV7/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QV7
+      id: inst:DR060/LongitudinalPlacementP
+      length: 0.4601500000000023
+      s_position: 21.099
+  - id: inst:QV7
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ7Y/LongitudinalPlacementP
-      length: 4.25075
-    id: inst:DRQ7Y
+    MagneticMultipoleP:
+      id: inst:QV7/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.8675096450596528
+    TwissP:
+      id: inst:QV7/TwissP
+      alpha_a: 0.25414
+      alpha_b: 7.8709
+      beta_a: 12.748
+      beta_b: 50.107
+      eta_x: 1.0551
+      eta_y: 0.0055967
+      etap_x: -0.19039
+      etap_y: -0.00056786
+      phi_a: 20.648
+      phi_b: 15.052
+    LongitudinalPlacementP:
+      id: inst:QV7/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 21.597
+  - id: inst:DRQ7Y
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRQ7Y/LongitudinalPlacementP
+      length: 4.25075
+      s_position: 25.848
   - id: inst:MK077
     kind: Marker
     native_types:
@@ -679,42 +1004,77 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ7Z/LongitudinalPlacementP
-      length: 4.25075
-    id: inst:DRQ7Z
+    TwissP:
+      id: inst:MK077/TwissP
+      alpha_a: -0.10083
+      alpha_b: 2.5305
+      beta_a: 12.097
+      beta_b: 5.8929
+      eta_x: 0.24585
+      eta_y: 0.0039479
+      etap_x: -0.19039
+      etap_y: -0.00056786
+      phi_a: 20.997
+      phi_b: 15.302
+  - id: inst:DRQ7Z
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QH8/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: 0.31882795472842496
     LongitudinalPlacementP:
-      id: inst:QH8/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QH8
+      id: inst:DRQ7Z/LongitudinalPlacementP
+      length: 4.25075
+      s_position: 30.099
+  - id: inst:QH8
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ8/LongitudinalPlacementP
-      length: 0.7341
-    id: inst:DRQ8
+    MagneticMultipoleP:
+      id: inst:QH8/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.31882795472842496
+    TwissP:
+      id: inst:QH8/TwissP
+      alpha_a: 1.7542
+      alpha_b: -5.1126
+      beta_a: 13.798
+      beta_b: 10.929
+      eta_x: -0.63493
+      eta_y: 0.0022084
+      etap_x: -0.094521
+      etap_y: -0.00021239
+      phi_a: 21.359
+      phi_b: 17.782
+    LongitudinalPlacementP:
+      id: inst:QH8/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 30.597
+  - id: inst:DRQ8
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:DRQ8/LongitudinalPlacementP
+      length: 0.7341
+      s_position: 31.331
+  - id: inst:DH4A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH4A/BendP
       edge1_int: 0.02065
       edge2_int: 0.02065
@@ -724,21 +1084,23 @@ facility:
       mag_components:
       - order: 0
         Kn: 0.032026904363507684
+    TwissP:
+      id: inst:DH4A/TwissP
+      alpha_a: 1.4585
+      alpha_b: -7.5933
+      beta_a: 10.583
+      beta_b: 23.648
+      eta_x: -0.72838
+      eta_y: 0.002234
+      etap_x: -0.085981
+      etap_y: -0.00021274
+      phi_a: 21.442
+      phi_b: 17.845
     LongitudinalPlacementP:
       id: inst:DH4A/LongitudinalPlacementP
       length: 0.26665081030218785
-    id: inst:DH4A
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DH4T/LongitudinalPlacementP
-      length: 0.0
-    id: inst:DH4T
+      s_position: 31.598
+  - id: inst:DH4T
     kind: Kicker
     native_types:
     - Kicker
@@ -747,7 +1109,31 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - BendP:
+    TwissP:
+      id: inst:DH4T/TwissP
+      alpha_a: 1.4585
+      alpha_b: -7.5933
+      beta_a: 10.583
+      beta_b: 23.648
+      eta_x: -0.72838
+      eta_y: 0.002234
+      etap_x: -0.085981
+      etap_y: -0.00021274
+      phi_a: 21.442
+      phi_b: 17.845
+    LongitudinalPlacementP:
+      id: inst:DH4T/LongitudinalPlacementP
+      length: 0.0
+      s_position: 31.598
+  - id: inst:DH4B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH4B/BendP
       edge1_int: 0.02065
       edge2_int: 0.02065
@@ -757,56 +1143,73 @@ facility:
       mag_components:
       - order: 0
         Kn: 0.032026904363507684
+    TwissP:
+      id: inst:DH4B/TwissP
+      alpha_a: 1.3797
+      alpha_b: -8.2495
+      beta_a: 9.826
+      beta_b: 27.872
+      eta_x: -0.75017
+      eta_y: 0.0022414
+      etap_x: -0.077441
+      etap_y: -0.00021313
+      phi_a: 21.468
+      phi_b: 17.855
     LongitudinalPlacementP:
       id: inst:DH4B/LongitudinalPlacementP
       length: 0.26665081030218785
-    id: inst:DH4B
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRD4/LongitudinalPlacementP
-      length: 1.8078999999999987
-    id: inst:DRD4
+      s_position: 31.865
+  - id: inst:DRD4
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QV9/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: -0.7925788082089091
     LongitudinalPlacementP:
-      id: inst:QV9/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QV9
+      id: inst:DRD4/LongitudinalPlacementP
+      length: 1.8078999999999987
+      s_position: 33.673
+  - id: inst:QV9
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ9A/LongitudinalPlacementP
-      length: 0.670250000000003
-    id: inst:DRQ9A
+    MagneticMultipoleP:
+      id: inst:QV9/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.7925788082089091
+    TwissP:
+      id: inst:QV9/TwissP
+      alpha_a: -1.5724
+      alpha_b: 13.601
+      beta_a: 6.1434
+      beta_b: 65.333
+      eta_x: -1.0192
+      eta_y: 0.0019618
+      etap_x: -0.44856
+      etap_y: -0.0010737
+      phi_a: 21.796
+      phi_b: 17.905
+    LongitudinalPlacementP:
+      id: inst:QV9/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 34.171
+  - id: inst:DRQ9A
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DV120/LongitudinalPlacementP
-      length: 0.2438
-    id: inst:DV120
+    LongitudinalPlacementP:
+      id: inst:DRQ9A/LongitudinalPlacementP
+      length: 0.670250000000003
+      s_position: 34.841
+  - id: inst:DV120
     kind: Kicker
     native_types:
     - Kicker
@@ -815,46 +1218,84 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Vertical
-  - LongitudinalPlacementP:
-      id: inst:DRQ9B/LongitudinalPlacementP
-      length: 1.567049999999995
-    id: inst:DRQ9B
+    TwissP:
+      id: inst:DV120/TwissP
+      alpha_a: -2.089
+      alpha_b: 10.999
+      beta_a: 9.4901
+      beta_b: 42.847
+      eta_x: -1.4292
+      eta_y: 0.00077699
+      etap_x: -0.44856
+      etap_y: -0.0010737
+      phi_a: 21.916
+      phi_b: 17.922
+    LongitudinalPlacementP:
+      id: inst:DV120/LongitudinalPlacementP
+      length: 0.2438
+      s_position: 35.085
+  - id: inst:DRQ9B
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QH10/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: 0.6942945538633392
     LongitudinalPlacementP:
-      id: inst:QH10/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QH10
+      id: inst:DRQ9B/LongitudinalPlacementP
+      length: 1.567049999999995
+      s_position: 36.652
+  - id: inst:QH10
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ10/LongitudinalPlacementP
-      length: 5.030150000000003
-    id: inst:DRQ10
+    MagneticMultipoleP:
+      id: inst:QH10/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.6942945538633392
+    TwissP:
+      id: inst:QH10/TwissP
+      alpha_a: 3.1044
+      alpha_b: 1.3871
+      beta_a: 17.357
+      beta_b: 11.628
+      eta_x: -2.168
+      eta_y: -0.0019795
+      etap_x: 0.30647
+      etap_y: -0.0016281
+      phi_a: 22.066
+      phi_b: 18.022
+    LongitudinalPlacementP:
+      id: inst:QH10/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 37.151
+  - id: inst:DRQ10
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    LongitudinalPlacementP:
+      id: inst:DRQ10/LongitudinalPlacementP
+      length: 5.030150000000003
+      s_position: 42.181
+  - id: inst:MW125
+    kind: BeamProfileMonitor
+    native_types:
+    - Instrument
+    - Multiwire
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
       id: inst:MW125/LongitudinalPlacementP
       length: 0.0
-    id: inst:MW125
-    kind: BeamProfileMonitor
+      s_position: 42.181
     MetaP:
       id: inst:MW125/MetaP
       description: Multiwire beam-profile monitor.
@@ -871,26 +1312,18 @@ facility:
       - key: spacing_y
         value: '0.0025'
         datatype: Float
-    native_types:
-    - Instrument
-    - Multiwire
-    functions:
-    - BeamProfileMeasurement
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR125/LongitudinalPlacementP
-      length: 0.43049999999999866
-    id: inst:DR125
+  - id: inst:DR125
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DH127/LongitudinalPlacementP
-      length: 0.2438
-    id: inst:DH127
+    LongitudinalPlacementP:
+      id: inst:DR125/LongitudinalPlacementP
+      length: 0.43049999999999866
+      s_position: 42.611
+  - id: inst:DH127
     kind: Kicker
     native_types:
     - Kicker
@@ -899,20 +1332,34 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - LongitudinalPlacementP:
-      id: inst:DR127/LongitudinalPlacementP
-      length: 0.29639999999999805
-    id: inst:DR127
+    TwissP:
+      id: inst:DH127/TwissP
+      alpha_a: -0.39168
+      alpha_b: -0.047367
+      beta_a: 1.882
+      beta_b: 3.9856
+      eta_x: -0.41976
+      eta_y: -0.011442
+      etap_x: 0.30647
+      etap_y: -0.0016281
+      phi_a: 23.699
+      phi_b: 19.015
+    LongitudinalPlacementP:
+      id: inst:DH127/LongitudinalPlacementP
+      length: 0.2438
+      s_position: 42.855
+  - id: inst:DR127
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUEV129/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUEV129
+    LongitudinalPlacementP:
+      id: inst:DR127/LongitudinalPlacementP
+      length: 0.29639999999999805
+      s_position: 43.152
+  - id: inst:PUEV129
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -920,41 +1367,60 @@ facility:
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR129/LongitudinalPlacementP
-      length: 0.11834999999999998
-    id: inst:DR129
+    LongitudinalPlacementP:
+      id: inst:PUEV129/LongitudinalPlacementP
+      length: 0.0
+      s_position: 43.152
+  - id: inst:DR129
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QV11/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: -0.3671828230083464
     LongitudinalPlacementP:
-      id: inst:QV11/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QV11
+      id: inst:DR129/LongitudinalPlacementP
+      length: 0.11834999999999998
+      s_position: 43.27
+  - id: inst:QV11
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ11/LongitudinalPlacementP
-      length: 3.01295
-    id: inst:DRQ11
+    MagneticMultipoleP:
+      id: inst:QV11/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.3671828230083464
+    TwissP:
+      id: inst:QV11/TwissP
+      alpha_a: -1.5413
+      alpha_b: 0.45748
+      beta_a: 3.3706
+      beta_b: 3.9109
+      eta_x: -0.15099
+      eta_y: -0.012411
+      etap_x: 0.26618
+      etap_y: 0.00063469
+      phi_a: 24.081
+      phi_b: 19.242
+    LongitudinalPlacementP:
+      id: inst:QV11/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 43.768
+  - id: inst:DRQ11
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRQ11/LongitudinalPlacementP
+      length: 3.01295
+      s_position: 46.781
   - id: inst:MK139
     kind: Marker
     native_types:
@@ -962,30 +1428,41 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    TwissP:
+      id: inst:MK139/TwissP
+      alpha_a: -4.5586
+      alpha_b: -0.47415
+      beta_a: 21.749
+      beta_b: 3.9611
+      eta_x: 0.65099
+      eta_y: -0.010773
+      etap_x: 0.26618
+      etap_y: 0.00063469
+      phi_a: 24.441
+      phi_b: 20.113
+  - id: inst:DR139
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
       id: inst:DR139/LongitudinalPlacementP
       length: 0.552500000000002
-    id: inst:DR139
+      s_position: 47.334
+  - id: inst:DR141
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    LongitudinalPlacementP:
       id: inst:DR141/LongitudinalPlacementP
       length: 0.41820000000000185
-    id: inst:DR141
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUEH143/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUEH143
+      s_position: 47.752
+  - id: inst:PUEH143
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -993,41 +1470,60 @@ facility:
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR143/LongitudinalPlacementP
-      length: 0.11834999999999998
-    id: inst:DR143
+    LongitudinalPlacementP:
+      id: inst:PUEH143/LongitudinalPlacementP
+      length: 0.0
+      s_position: 47.752
+  - id: inst:DR143
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QH12/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: 0.4868974442913689
     LongitudinalPlacementP:
-      id: inst:QH12/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QH12
+      id: inst:DR143/LongitudinalPlacementP
+      length: 0.11834999999999998
+      s_position: 47.87
+  - id: inst:QH12
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ12/LongitudinalPlacementP
-      length: 3.7802499999999988
-    id: inst:DRQ12
+    MagneticMultipoleP:
+      id: inst:QH12/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.4868974442913689
+    TwissP:
+      id: inst:QH12/TwissP
+      alpha_a: 2.5528
+      alpha_b: -2.5907
+      beta_a: 34.475
+      beta_b: 6.9911
+      eta_x: 1.0146
+      eta_y: -0.010532
+      etap_x: 0.026447
+      etap_y: -0.0018537
+      phi_a: 24.496
+      phi_b: 20.435
+    LongitudinalPlacementP:
+      id: inst:QH12/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 48.369
+  - id: inst:DRQ12
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRQ12/LongitudinalPlacementP
+      length: 3.7802499999999988
+      s_position: 52.149
   - id: inst:MK156
     kind: Marker
     native_types:
@@ -1035,20 +1531,30 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR156/LongitudinalPlacementP
-      length: 0.430600000000002
-    id: inst:DR156
+    TwissP:
+      id: inst:MK156/TwissP
+      alpha_a: 1.7286
+      alpha_b: -6.7606
+      beta_a: 18.291
+      beta_b: 42.341
+      eta_x: 1.1145
+      eta_y: -0.017963
+      etap_x: 0.026447
+      etap_y: -0.0018537
+      phi_a: 24.647
+      phi_b: 20.657
+  - id: inst:DR156
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DH158/LongitudinalPlacementP
-      length: 0.2438
-    id: inst:DH158
+    LongitudinalPlacementP:
+      id: inst:DR156/LongitudinalPlacementP
+      length: 0.430600000000002
+      s_position: 52.58
+  - id: inst:DH158
     kind: Kicker
     native_types:
     - Kicker
@@ -1057,20 +1563,34 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - LongitudinalPlacementP:
-      id: inst:DR158/LongitudinalPlacementP
-      length: 0.29639999999999805
-    id: inst:DR158
+    TwissP:
+      id: inst:DH158/TwissP
+      alpha_a: 1.5815
+      alpha_b: -7.5045
+      beta_a: 16.058
+      beta_b: 51.961
+      eta_x: 1.1324
+      eta_y: -0.019288
+      etap_x: 0.026447
+      etap_y: -0.0018537
+      phi_a: 24.687
+      phi_b: 20.671
+    LongitudinalPlacementP:
+      id: inst:DH158/LongitudinalPlacementP
+      length: 0.2438
+      s_position: 52.824
+  - id: inst:DR158
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUEV160/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUEV160
+    LongitudinalPlacementP:
+      id: inst:DR158/LongitudinalPlacementP
+      length: 0.29639999999999805
+      s_position: 53.12
+  - id: inst:PUEV160
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -1078,46 +1598,72 @@ facility:
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR160/LongitudinalPlacementP
-      length: 0.11834999999999998
-    id: inst:DR160
+    LongitudinalPlacementP:
+      id: inst:PUEV160/LongitudinalPlacementP
+      length: 0.0
+      s_position: 53.12
+  - id: inst:DR160
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QV13/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: -0.9895450067507202
     LongitudinalPlacementP:
-      id: inst:QV13/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QV13
+      id: inst:DR160/LongitudinalPlacementP
+      length: 0.11834999999999998
+      s_position: 53.238
+  - id: inst:QV13
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ13/LongitudinalPlacementP
-      length: 0.5969500000000032
-    id: inst:DRQ13
+    MagneticMultipoleP:
+      id: inst:QV13/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.9895450067507202
+    TwissP:
+      id: inst:QV13/TwissP
+      alpha_a: -6.3894
+      alpha_b: 19.481
+      beta_a: 17.044
+      beta_b: 52.112
+      eta_x: 1.3005
+      eta_y: -0.018542
+      etap_x: 0.61716
+      etap_y: 0.0078852
+      phi_a: 24.746
+      phi_b: 20.687
+    LongitudinalPlacementP:
+      id: inst:QV13/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 53.737
+  - id: inst:DRQ13
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    LongitudinalPlacementP:
+      id: inst:DRQ13/LongitudinalPlacementP
+      length: 0.5969500000000032
+      s_position: 54.334
+  - id: inst:MW166
+    kind: BeamProfileMonitor
+    native_types:
+    - Instrument
+    - Multiwire
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
       id: inst:MW166/LongitudinalPlacementP
       length: 0.0
-    id: inst:MW166
-    kind: BeamProfileMonitor
+      s_position: 54.334
     MetaP:
       id: inst:MW166/MetaP
       description: Multiwire beam-profile monitor.
@@ -1134,36 +1680,29 @@ facility:
       - key: spacing_y
         value: '0.0025'
         datatype: Float
+  - id: inst:DR166
+    kind: Drift
     native_types:
-    - Instrument
-    - Multiwire
+    - Drift
     functions:
-    - BeamProfileMeasurement
+    - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    LongitudinalPlacementP:
       id: inst:DR166/LongitudinalPlacementP
       length: 0.5523999999999987
-    id: inst:DR166
+      s_position: 54.886
+  - id: inst:DR168
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    LongitudinalPlacementP:
       id: inst:DR168/LongitudinalPlacementP
       length: 0.41829999999999806
-    id: inst:DR168
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUEH170/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUEH170
+      s_position: 55.304
+  - id: inst:PUEH170
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -1171,42 +1710,69 @@ facility:
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR170/LongitudinalPlacementP
-      length: 0.11834999999999998
-    id: inst:DR170
+    LongitudinalPlacementP:
+      id: inst:PUEH170/LongitudinalPlacementP
+      length: 0.0
+      s_position: 55.304
+  - id: inst:DR170
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QH14/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: 0.748989790597664
     LongitudinalPlacementP:
-      id: inst:QH14/LongitudinalPlacementP
-      length: 0.4985
-    id: inst:QH14
+      id: inst:DR170/LongitudinalPlacementP
+      length: 0.11834999999999998
+      s_position: 55.423
+  - id: inst:QH14
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRQ14/LongitudinalPlacementP
-      length: 0.5067499999999983
-    id: inst:DRQ14
+    MagneticMultipoleP:
+      id: inst:QH14/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.748989790597664
+    TwissP:
+      id: inst:QH14/TwissP
+      alpha_a: 7.0562
+      alpha_b: 2.875
+      beta_a: 47.41
+      beta_b: 2.459
+      eta_x: 2.4248
+      eta_y: -0.0012113
+      etap_x: -0.28662
+      etap_y: 0.0067649
+      phi_a: 24.817
+      phi_b: 20.897
+    LongitudinalPlacementP:
+      id: inst:QH14/LongitudinalPlacementP
+      length: 0.4985
+      s_position: 55.921
+  - id: inst:DRQ14
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:DRQ14/LongitudinalPlacementP
+      length: 0.5067499999999983
+      s_position: 56.428
+  - id: inst:DH5A
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH5A/BendP
       edge1_int: 0.02065
       edge2_int: 0.02065
@@ -1216,21 +1782,23 @@ facility:
       mag_components:
       - order: 0
         Kn: -0.1130065284655793
+    TwissP:
+      id: inst:DH5A/TwissP
+      alpha_a: 5.8466
+      alpha_b: -1.3815
+      beta_a: 32.841
+      beta_b: 0.77248
+      eta_x: 2.0792
+      eta_y: 0.0065872
+      etap_x: -0.35704
+      etap_y: 0.0067319
+      phi_a: 24.846
+      phi_b: 23.079
     LongitudinalPlacementP:
       id: inst:DH5A/LongitudinalPlacementP
       length: 0.6229286126725115
-    id: inst:DH5A
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DH5T/LongitudinalPlacementP
-      length: 0.0
-    id: inst:DH5T
+      s_position: 57.051
+  - id: inst:DH5T
     kind: Kicker
     native_types:
     - Kicker
@@ -1239,7 +1807,31 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - BendP:
+    TwissP:
+      id: inst:DH5T/TwissP
+      alpha_a: 5.8466
+      alpha_b: -1.3815
+      beta_a: 32.841
+      beta_b: 0.77248
+      eta_x: 2.0792
+      eta_y: 0.0065872
+      etap_x: -0.35704
+      etap_y: 0.0067319
+      phi_a: 24.846
+      phi_b: 23.079
+    LongitudinalPlacementP:
+      id: inst:DH5T/LongitudinalPlacementP
+      length: 0.0
+      s_position: 57.051
+  - id: inst:DH5B
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH5B/BendP
       edge1_int: 0.02065
       edge2_int: 0.02065
@@ -1249,31 +1841,34 @@ facility:
       mag_components:
       - order: 0
         Kn: -0.1130065284655793
+    TwissP:
+      id: inst:DH5B/TwissP
+      alpha_a: 5.1798
+      alpha_b: -3.7048
+      beta_a: 25.978
+      beta_b: 3.9477
+      eta_x: 1.8351
+      eta_y: 0.010863
+      etap_x: -0.42747
+      etap_y: 0.0066682
+      phi_a: 24.867
+      phi_b: 23.444
     LongitudinalPlacementP:
       id: inst:DH5B/LongitudinalPlacementP
       length: 0.6229286126725115
-    id: inst:DH5B
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRD5/LongitudinalPlacementP
-      length: 0.4516000000000008
-    id: inst:DRD5
+      s_position: 57.674
+  - id: inst:DRD5
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DV181/LongitudinalPlacementP
-      length: 0.2438
-    id: inst:DV181
+    LongitudinalPlacementP:
+      id: inst:DRD5/LongitudinalPlacementP
+      length: 0.4516000000000008
+      s_position: 58.125
+  - id: inst:DV181
     kind: Kicker
     native_types:
     - Kicker
@@ -1282,16 +1877,33 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Vertical
-  - LongitudinalPlacementP:
-      id: inst:DR181/LongitudinalPlacementP
-      length: 0.3797999999999996
-    id: inst:DR181
+    TwissP:
+      id: inst:DV181/TwissP
+      alpha_a: 4.4348
+      alpha_b: -6.2988
+      beta_a: 19.292
+      beta_b: 10.904
+      eta_x: 1.5378
+      eta_y: 0.015589
+      etap_x: -0.42747
+      etap_y: 0.0066682
+      phi_a: 24.898
+      phi_b: 23.55
+    LongitudinalPlacementP:
+      id: inst:DV181/LongitudinalPlacementP
+      length: 0.2438
+      s_position: 58.369
+  - id: inst:DR181
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DR181/LongitudinalPlacementP
+      length: 0.3797999999999996
+      s_position: 58.749
   - id: inst:XF183
     kind: Marker
     native_types:
@@ -1299,53 +1911,69 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DR183/LongitudinalPlacementP
-      length: 0.5255000000000035
-    id: inst:DR183
+    TwissP:
+      id: inst:XF183/TwissP
+      alpha_a: 4.0279
+      alpha_b: -7.7155
+      beta_a: 16.078
+      beta_b: 16.227
+      eta_x: 1.3755
+      eta_y: 0.01817
+      etap_x: -0.42747
+      etap_y: 0.0066682
+      phi_a: 24.92
+      phi_b: 23.579
+  - id: inst:DR183
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
-      id: inst:QV15/MagneticMultipoleP
-      mag_components:
-      - order: 1
-        Kn: -0.71933765439868
     LongitudinalPlacementP:
-      id: inst:QV15/LongitudinalPlacementP
-      length: 0.5588
-    id: inst:QV15
+      id: inst:DR183/LongitudinalPlacementP
+      length: 0.5255000000000035
+      s_position: 59.275
+  - id: inst:QV15
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:M1/LongitudinalPlacementP
-      length: 2.2606
-    id: inst:M1
+    MagneticMultipoleP:
+      id: inst:QV15/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: -0.71933765439868
+    TwissP:
+      id: inst:QV15/TwissP
+      alpha_a: -1.1951
+      alpha_b: 1.3057
+      beta_a: 10.959
+      beta_b: 30.428
+      eta_x: 1.0346
+      eta_y: 0.022974
+      etap_x: 0.0037283
+      etap_y: -0.0024931
+      phi_a: 25.008
+      phi_b: 23.624
+    LongitudinalPlacementP:
+      id: inst:QV15/LongitudinalPlacementP
+      length: 0.5588
+      s_position: 59.833
+  - id: inst:M1
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
-      id: inst:L20SPTM1/BendP
-      g_ref: 0.04457110731957698
-    MagneticMultipoleP:
-      id: inst:L20SPTM1/MagneticMultipoleP
-      mag_components:
-      - order: 0
-        Kn: 0.04457110731957699
     LongitudinalPlacementP:
-      id: inst:L20SPTM1/LongitudinalPlacementP
-      length: 1.2309543850148328
-    id: inst:L20SPTM1
+      id: inst:M1/LongitudinalPlacementP
+      length: 2.2606
+      s_position: 62.094
+  - id: inst:L20SPTM1
     kind: Bend
     native_types:
     - Bend
@@ -1353,10 +1981,31 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DHL20T/LongitudinalPlacementP
-      length: 0.0
-    id: inst:DHL20T
+    BendP:
+      id: inst:L20SPTM1/BendP
+      g_ref: 0.04457110731957698
+    MagneticMultipoleP:
+      id: inst:L20SPTM1/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.04457110731957699
+    TwissP:
+      id: inst:L20SPTM1/TwissP
+      alpha_a: -1.9685
+      alpha_b: 1.0498
+      beta_a: 22.003
+      beta_b: 22.323
+      eta_x: 1.0814
+      eta_y: 0.014316
+      etap_x: 0.058607
+      etap_y: -0.0025327
+      phi_a: 25.234
+      phi_b: 23.758
+    LongitudinalPlacementP:
+      id: inst:L20SPTM1/LongitudinalPlacementP
+      length: 1.2309543850148328
+      s_position: 63.325
+  - id: inst:DHL20T
     kind: Kicker
     native_types:
     - Kicker
@@ -1365,18 +2014,23 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - BendP:
-      id: inst:L20SPTM2/BendP
-      g_ref: 0.04457110731957698
-    MagneticMultipoleP:
-      id: inst:L20SPTM2/MagneticMultipoleP
-      mag_components:
-      - order: 0
-        Kn: 0.04457110731957699
+    TwissP:
+      id: inst:DHL20T/TwissP
+      alpha_a: -1.9685
+      alpha_b: 1.0498
+      beta_a: 22.003
+      beta_b: 22.323
+      eta_x: 1.0814
+      eta_y: 0.014316
+      etap_x: 0.058607
+      etap_y: -0.0025327
+      phi_a: 25.234
+      phi_b: 23.758
     LongitudinalPlacementP:
-      id: inst:L20SPTM2/LongitudinalPlacementP
-      length: 1.2309543850148328
-    id: inst:L20SPTM2
+      id: inst:DHL20T/LongitudinalPlacementP
+      length: 0.0
+      s_position: 63.325
+  - id: inst:L20SPTM2
     kind: Bend
     native_types:
     - Bend
@@ -1384,7 +2038,39 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - BendP:
+    BendP:
+      id: inst:L20SPTM2/BendP
+      g_ref: 0.04457110731957698
+    MagneticMultipoleP:
+      id: inst:L20SPTM2/MagneticMultipoleP
+      mag_components:
+      - order: 0
+        Kn: 0.04457110731957699
+    TwissP:
+      id: inst:L20SPTM2/TwissP
+      alpha_a: -2.2411
+      alpha_b: 0.9822
+      beta_a: 27.182
+      beta_b: 19.818
+      eta_x: 1.1872
+      eta_y: 0.011201
+      etap_x: 0.11349
+      etap_y: -0.002565
+      phi_a: 25.285
+      phi_b: 23.817
+    LongitudinalPlacementP:
+      id: inst:L20SPTM2/LongitudinalPlacementP
+      length: 1.2309543850148328
+      s_position: 64.556
+  - id: inst:MM_A01BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:MM_A01BF/BendP
       g_ref: -0.011712229642227363
     MagneticMultipoleP:
@@ -1396,10 +2082,34 @@ facility:
         Kn: 0.04850457979108316
       - order: 2
         Kn: 0.010112690671265677
+    TwissP:
+      id: inst:MM_A01BF/TwissP
+      alpha_a: 0.50449
+      alpha_b: -1.0185
+      beta_a: 30.913
+      beta_b: 19.886
+      eta_x: 1.2703
+      eta_y: 0.0070616
+      etap_x: -0.032005
+      etap_y: -0.0017058
+      phi_a: 25.352
+      phi_b: 23.922
     LongitudinalPlacementP:
       id: inst:MM_A01BF/LongitudinalPlacementP
       length: 2.0066461824881423
-    id: inst:MM_A01BF
+      s_position: 66.563
+  - id: inst:D2S_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D2S_001/LongitudinalPlacementP
+      length: 0.609514656
+      s_position: 67.172
+  - id: inst:MM_A02BF
     kind: Bend
     native_types:
     - Bend
@@ -1407,17 +2117,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2S_001/LongitudinalPlacementP
-      length: 0.609514656
-    id: inst:D2S_001
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A02BF/BendP
       g_ref: -0.011712229642227363
     MagneticMultipoleP:
@@ -1429,45 +2129,49 @@ facility:
         Kn: 0.04850457979108316
       - order: 2
         Kn: 0.010112690671265677
+    TwissP:
+      id: inst:MM_A02BF/TwissP
+      alpha_a: 2.8142
+      alpha_b: -4.0947
+      beta_a: 23.237
+      beta_b: 30.927
+      eta_x: 1.0453
+      eta_y: 0.0032854
+      etap_x: -0.16951
+      etap_y: -0.0012764
+      phi_a: 25.445
+      phi_b: 24.032
     LongitudinalPlacementP:
       id: inst:MM_A02BF/LongitudinalPlacementP
       length: 2.0066461824881423
-    id: inst:MM_A02BF
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DPUE_001/LongitudinalPlacementP
-      length: 0.287
-    id: inst:DPUE_001
+      s_position: 69.179
+  - id: inst:DPUE_001
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUE_A02/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUE_A02
+    LongitudinalPlacementP:
+      id: inst:DPUE_001/LongitudinalPlacementP
+      length: 0.287
+      s_position: 69.466
+  - id: inst:PUE_A02
     kind: BeamPositionMonitor
-    MetaP:
-      id: inst:PUE_A02/MetaP
-      label: “AGSBPM”
     native_types:
     - Instrument
     - Monitor
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DHCA02/LongitudinalPlacementP
+    LongitudinalPlacementP:
+      id: inst:PUE_A02/LongitudinalPlacementP
       length: 0.0
-    id: inst:DHCA02
+      s_position: 69.466
+    MetaP:
+      id: inst:PUE_A02/MetaP
+      label: “AGSBPM”
+  - id: inst:DHCA02
     kind: Kicker
     native_types:
     - Kicker
@@ -1476,10 +2180,23 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - LongitudinalPlacementP:
-      id: inst:DVCA02/LongitudinalPlacementP
+    TwissP:
+      id: inst:DHCA02/TwissP
+      alpha_a: 2.7041
+      alpha_b: -4.2596
+      beta_a: 21.653
+      beta_b: 33.325
+      eta_x: 0.99667
+      eta_y: 0.0029522
+      etap_x: -0.16951
+      etap_y: -0.0012764
+      phi_a: 25.458
+      phi_b: 24.041
+    LongitudinalPlacementP:
+      id: inst:DHCA02/LongitudinalPlacementP
       length: 0.0
-    id: inst:DVCA02
+      s_position: 69.466
+  - id: inst:DVCA02
     kind: Kicker
     native_types:
     - Kicker
@@ -1488,17 +2205,42 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Vertical
-  - LongitudinalPlacementP:
-      id: inst:D2TX_001/LongitudinalPlacementP
-      length: 0.322485192
-    id: inst:D2TX_001
+    TwissP:
+      id: inst:DVCA02/TwissP
+      alpha_a: 2.7041
+      alpha_b: -4.2596
+      beta_a: 21.653
+      beta_b: 33.325
+      eta_x: 0.99667
+      eta_y: 0.0029522
+      etap_x: -0.16951
+      etap_y: -0.0012764
+      phi_a: 25.458
+      phi_b: 24.041
+    LongitudinalPlacementP:
+      id: inst:DVCA02/LongitudinalPlacementP
+      length: 0.0
+      s_position: 69.466
+  - id: inst:D2TX_001
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:D2TX_001/LongitudinalPlacementP
+      length: 0.322485192
+      s_position: 69.788
+  - id: inst:MM_A03CD
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:MM_A03CD/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -1510,10 +2252,91 @@ facility:
         Kn: -0.04863291582125735
       - order: 2
         Kn: 0.008756616595046793
+    TwissP:
+      id: inst:MM_A03CD/TwissP
+      alpha_a: 0.28342
+      alpha_b: 0.14409
+      beta_a: 13.681
+      beta_b: 47.473
+      eta_x: 0.61784
+      eta_y: -0.00053984
+      etap_x: -0.10831
+      etap_y: -0.0014117
+      phi_a: 25.625
+      phi_b: 24.106
     LongitudinalPlacementP:
       id: inst:MM_A03CD/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A03CD
+      s_position: 72.176
+  - id: inst:DSQ_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DSQ_001/LongitudinalPlacementP
+      length: 0.37104735600000005
+      s_position: 72.547
+  - id: inst:QHFV
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    TwissP:
+      id: inst:QHFV/TwissP
+      alpha_a: 0.22326
+      alpha_b: 0.12771
+      beta_a: 13.295
+      beta_b: 47.266
+      eta_x: 0.53531
+      eta_y: -0.0016021
+      etap_x: -0.10831
+      etap_y: -0.0014117
+      phi_a: 25.682
+      phi_b: 24.122
+    LongitudinalPlacementP:
+      id: inst:QHFV/LongitudinalPlacementP
+      length: 0.39088
+      s_position: 72.938
+  - id: inst:QPOL
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    TwissP:
+      id: inst:QPOL/TwissP
+      alpha_a: 0.19239
+      alpha_b: 0.1193
+      beta_a: 13.133
+      beta_b: 47.169
+      eta_x: 0.49298
+      eta_y: -0.0021471
+      etap_x: -0.10831
+      etap_y: -0.0014117
+      phi_a: 25.711
+      phi_b: 24.13
+    LongitudinalPlacementP:
+      id: inst:QPOL/LongitudinalPlacementP
+      length: 0.39088
+      s_position: 73.329
+  - id: inst:DSQ_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DSQ_002/LongitudinalPlacementP
+      length: 0.37104735600000005
+      s_position: 73.7
+  - id: inst:MM_A04CD
     kind: Bend
     native_types:
     - Bend
@@ -1521,47 +2344,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DSQ_001/LongitudinalPlacementP
-      length: 0.37104735600000005
-    id: inst:DSQ_001
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:QHFV/LongitudinalPlacementP
-      length: 0.39088
-    id: inst:QHFV
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:QPOL/LongitudinalPlacementP
-      length: 0.39088
-    id: inst:QPOL
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DSQ_002/LongitudinalPlacementP
-      length: 0.37104735600000005
-    id: inst:DSQ_002
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A04CD/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -1573,10 +2356,60 @@ facility:
         Kn: -0.04863291582125735
       - order: 2
         Kn: 0.008756616595046793
+    TwissP:
+      id: inst:MM_A04CD/TwissP
+      alpha_a: -1.768
+      alpha_b: 4.5335
+      beta_a: 16.513
+      beta_b: 34.835
+      eta_x: 0.21218
+      eta_y: -0.0056093
+      etap_x: -0.0979
+      etap_y: -0.00092647
+      phi_a: 25.911
+      phi_b: 24.194
     LongitudinalPlacementP:
       id: inst:MM_A04CD/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A04CD
+      s_position: 76.087
+  - id: inst:DPUE_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DPUE_002/LongitudinalPlacementP
+      length: 0.287
+      s_position: 76.374
+  - id: inst:PUE_A04
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:PUE_A04/LongitudinalPlacementP
+      length: 0.0
+      s_position: 76.374
+    MetaP:
+      id: inst:PUE_A04/MetaP
+      label: “AGSBPM”
+  - id: inst:D2LX_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D2LX_001/LongitudinalPlacementP
+      length: 0.32245471200000003
+      s_position: 76.697
+  - id: inst:MM_A05AF
     kind: Bend
     native_types:
     - Bend
@@ -1584,41 +2417,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DPUE_002/LongitudinalPlacementP
-      length: 0.287
-    id: inst:DPUE_002
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUE_A04/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUE_A04
-    kind: BeamPositionMonitor
-    MetaP:
-      id: inst:PUE_A04/MetaP
-      label: “AGSBPM”
-    native_types:
-    - Instrument
-    - Monitor
-    functions:
-    - BeamPositionMeasurement
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2LX_001/LongitudinalPlacementP
-      length: 0.32245471200000003
-    id: inst:D2LX_001
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A05AF/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -1630,10 +2429,34 @@ facility:
         Kn: 0.04870190658303816
       - order: 2
         Kn: 0.008723426564620421
+    TwissP:
+      id: inst:MM_A05AF/TwissP
+      alpha_a: 0.35885
+      alpha_b: 0.81986
+      beta_a: 22.877
+      beta_b: 18.643
+      eta_x: -0.12385
+      eta_y: -0.0095409
+      etap_x: -0.12824
+      etap_y: -0.0018225
+      phi_a: 26.056
+      phi_b: 24.32
     LongitudinalPlacementP:
       id: inst:MM_A05AF/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A05AF
+      s_position: 79.085
+  - id: inst:D2H_A05_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D2H_A05_001/LongitudinalPlacementP
+      length: 0.26192735600000006
+      s_position: 79.346
+  - id: inst:KCKRA05
     kind: Bend
     native_types:
     - Bend
@@ -1641,17 +2464,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2H_A05_001/LongitudinalPlacementP
-      length: 0.26192735600000006
-    id: inst:D2H_A05_001
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:KCKRA05/BendP
       g_ref: 0.0029999988750001264
     MagneticMultipoleP:
@@ -1659,10 +2472,34 @@ facility:
       mag_components:
       - order: 0
         Kn: 0.0029999988750001264
+    TwissP:
+      id: inst:KCKRA05/TwissP
+      alpha_a: 0.29659
+      alpha_b: 0.70682
+      beta_a: 22.05
+      beta_b: 16.716
+      eta_x: -0.28418
+      eta_y: -0.011847
+      etap_x: -0.12524
+      etap_y: -0.0018224
+      phi_a: 26.112
+      phi_b: 24.391
     LongitudinalPlacementP:
       id: inst:KCKRA05/LongitudinalPlacementP
       length: 1.0000003750000985
-    id: inst:KCKRA05
+      s_position: 80.346
+  - id: inst:D2H_A05_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D2H_A05_002/LongitudinalPlacementP
+      length: 0.26192735600000006
+      s_position: 80.608
+  - id: inst:MM_A06AF
     kind: Bend
     native_types:
     - Bend
@@ -1670,17 +2507,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2H_A05_002/LongitudinalPlacementP
-      length: 0.26192735600000006
-    id: inst:D2H_A05_002
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A06AF/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -1692,10 +2519,34 @@ facility:
         Kn: 0.04870190658303816
       - order: 2
         Kn: 0.008723426564620421
+    TwissP:
+      id: inst:MM_A06AF/TwissP
+      alpha_a: 2.1438
+      alpha_b: -1.4238
+      beta_a: 15.499
+      beta_b: 17.974
+      eta_x: -0.59195
+      eta_y: -0.018532
+      etap_x: -0.099759
+      etap_y: -0.0035652
+      phi_a: 26.248
+      phi_b: 24.554
     LongitudinalPlacementP:
       id: inst:MM_A06AF/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A06AF
+      s_position: 82.996
+  - id: inst:D2L
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D2L/LongitudinalPlacementP
+      length: 0.609454712
+      s_position: 83.605
+  - id: inst:MM_A07CD
     kind: Bend
     native_types:
     - Bend
@@ -1703,17 +2554,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2L/LongitudinalPlacementP
-      length: 0.609454712
-    id: inst:D2L
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A07CD/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -1725,10 +2566,68 @@ facility:
         KnL: 0.0
       - order: 2
         Kn: 0.008756616595046793
+    TwissP:
+      id: inst:MM_A07CD/TwissP
+      alpha_a: 0.25502
+      alpha_b: 0.81332
+      beta_a: 8.2512
+      beta_b: 21.652
+      eta_x: -1.0288
+      eta_y: -0.025902
+      etap_x: -0.22255
+      etap_y: -0.00078072
+      phi_a: 26.534
+      phi_b: 24.696
     LongitudinalPlacementP:
       id: inst:MM_A07CD/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A07CD
+      s_position: 85.993
+  - id: inst:DSS_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DSS_001/LongitudinalPlacementP
+      length: 0.43442735600000004
+      s_position: 86.428
+  - id: inst:SXV
+    kind: Sextupole
+    native_types:
+    - Sextupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    TwissP:
+      id: inst:SXV/TwissP
+      alpha_a: 0.1144
+      alpha_b: 0.72972
+      beta_a: 7.8488
+      beta_b: 19.971
+      eta_x: -1.2713
+      eta_y: -0.026778
+      etap_x: -0.22255
+      etap_y: -0.00078072
+      phi_a: 26.67
+      phi_b: 24.749
+    LongitudinalPlacementP:
+      id: inst:SXV/LongitudinalPlacementP
+      length: 0.655
+      s_position: 87.083
+  - id: inst:DSS_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DSS_002/LongitudinalPlacementP
+      length: 0.43442735600000004
+      s_position: 87.517
+  - id: inst:MM_A08CD
     kind: Bend
     native_types:
     - Bend
@@ -1736,37 +2635,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DSS_001/LongitudinalPlacementP
-      length: 0.43442735600000004
-    id: inst:DSS_001
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:SXV/LongitudinalPlacementP
-      length: 0.655
-    id: inst:SXV
-    kind: Sextupole
-    native_types:
-    - Sextupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DSS_002/LongitudinalPlacementP
-      length: 0.43442735600000004
-    id: inst:DSS_002
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A08CD/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -1778,45 +2647,49 @@ facility:
         KnL: 0.0
       - order: 2
         Kn: 0.008756616595046793
+    TwissP:
+      id: inst:MM_A08CD/TwissP
+      alpha_a: -1.3538
+      alpha_b: 2.0507
+      beta_a: 10.609
+      beta_b: 12.107
+      eta_x: -2.1524
+      eta_y: -0.025352
+      etap_x: -0.4497
+      etap_y: 0.0023679
+      phi_a: 27.005
+      phi_b: 24.92
     LongitudinalPlacementP:
       id: inst:MM_A08CD/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A08CD
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DPUE_003/LongitudinalPlacementP
-      length: 0.287
-    id: inst:DPUE_003
+      s_position: 89.905
+  - id: inst:DPUE_003
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUE_A08/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUE_A08
+    LongitudinalPlacementP:
+      id: inst:DPUE_003/LongitudinalPlacementP
+      length: 0.287
+      s_position: 90.192
+  - id: inst:PUE_A08
     kind: BeamPositionMonitor
-    MetaP:
-      id: inst:PUE_A08/MetaP
-      label: “AGSBPM”
     native_types:
     - Instrument
     - Monitor
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DHCA08/LongitudinalPlacementP
+    LongitudinalPlacementP:
+      id: inst:PUE_A08/LongitudinalPlacementP
       length: 0.0
-    id: inst:DHCA08
+      s_position: 90.192
+    MetaP:
+      id: inst:PUE_A08/MetaP
+      label: “AGSBPM”
+  - id: inst:DHCA08
     kind: Kicker
     native_types:
     - Kicker
@@ -1825,10 +2698,23 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - LongitudinalPlacementP:
-      id: inst:DVCA08/LongitudinalPlacementP
+    TwissP:
+      id: inst:DHCA08/TwissP
+      alpha_a: -1.4304
+      alpha_b: 1.9274
+      beta_a: 11.408
+      beta_b: 10.966
+      eta_x: -2.2814
+      eta_y: -0.024704
+      etap_x: -0.4497
+      etap_y: 0.0023679
+      phi_a: 27.031
+      phi_b: 24.945
+    LongitudinalPlacementP:
+      id: inst:DHCA08/LongitudinalPlacementP
       length: 0.0
-    id: inst:DVCA08
+      s_position: 90.192
+  - id: inst:DVCA08
     kind: Kicker
     native_types:
     - Kicker
@@ -1837,17 +2723,42 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Vertical
-  - LongitudinalPlacementP:
-      id: inst:D2TX_002/LongitudinalPlacementP
-      length: 0.322485192
-    id: inst:D2TX_002
+    TwissP:
+      id: inst:DVCA08/TwissP
+      alpha_a: -1.4304
+      alpha_b: 1.9274
+      beta_a: 11.408
+      beta_b: 10.966
+      eta_x: -2.2814
+      eta_y: -0.024704
+      etap_x: -0.4497
+      etap_y: 0.0023679
+      phi_a: 27.031
+      phi_b: 24.945
+    LongitudinalPlacementP:
+      id: inst:DVCA08/LongitudinalPlacementP
+      length: 0.0
+      s_position: 90.192
+  - id: inst:D2TX_002
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:D2TX_002/LongitudinalPlacementP
+      length: 0.322485192
+      s_position: 90.514
+  - id: inst:MM_A09BF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:MM_A09BF/BendP
       g_ref: -0.011712229642227363
     MagneticMultipoleP:
@@ -1859,10 +2770,34 @@ facility:
         Kn: 0.04850457979108316
       - order: 2
         Kn: 0.010112690671265677
+    TwissP:
+      id: inst:MM_A09BF/TwissP
+      alpha_a: -0.378
+      alpha_b: 0.47669
+      beta_a: 16.428
+      beta_b: 5.4949
+      eta_x: -3.0898
+      eta_y: -0.021583
+      etap_x: -0.20066
+      etap_y: 0.00022473
+      phi_a: 27.195
+      phi_b: 25.263
     LongitudinalPlacementP:
       id: inst:MM_A09BF/LongitudinalPlacementP
       length: 2.0066461824881423
-    id: inst:MM_A09BF
+      s_position: 92.521
+  - id: inst:D2S_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D2S_002/LongitudinalPlacementP
+      length: 0.609514656
+      s_position: 93.13
+  - id: inst:MM_A10BF
     kind: Bend
     native_types:
     - Bend
@@ -1870,17 +2805,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2S_002/LongitudinalPlacementP
-      length: 0.609514656
-    id: inst:D2S_002
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A10BF/BendP
       g_ref: -0.011712229642227363
     MagneticMultipoleP:
@@ -1892,10 +2817,45 @@ facility:
         Kn: 0.04850457979108316
       - order: 2
         Kn: 0.010112690671265677
+    TwissP:
+      id: inst:MM_A10BF/TwissP
+      alpha_a: 1.0516
+      alpha_b: -0.57704
+      beta_a: 15.559
+      beta_b: 5.4428
+      eta_x: -3.3163
+      eta_y: -0.023215
+      etap_x: 0.098455
+      etap_y: -0.0018845
+      phi_a: 27.351
+      phi_b: 25.788
     LongitudinalPlacementP:
       id: inst:MM_A10BF/LongitudinalPlacementP
       length: 2.0066461824881423
-    id: inst:MM_A10BF
+      s_position: 95.137
+  - id: inst:D10_001
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D10_001/LongitudinalPlacementP
+      length: 1.523839218
+      s_position: 96.661
+  - id: inst:D10_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D10_002/LongitudinalPlacementP
+      length: 1.523839218
+      s_position: 98.185
+  - id: inst:MM_A11BD
     kind: Bend
     native_types:
     - Bend
@@ -1903,27 +2863,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D10_001/LongitudinalPlacementP
-      length: 1.523839218
-    id: inst:D10_001
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D10_002/LongitudinalPlacementP
-      length: 1.523839218
-    id: inst:D10_002
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A11BD/BendP
       g_ref: -0.011712229642227363
     MagneticMultipoleP:
@@ -1935,10 +2875,34 @@ facility:
         Kn: -0.0484198946267085
       - order: 2
         Kn: 0.010003388034307203
+    TwissP:
+      id: inst:MM_A11BD/TwissP
+      alpha_a: -0.55113
+      alpha_b: -0.31127
+      beta_a: 10.24
+      beta_b: 14.747
+      eta_x: -3.135
+      eta_y: -0.029989
+      etap_x: -0.21877
+      etap_y: 0.0010472
+      phi_a: 27.795
+      phi_b: 26.34
     LongitudinalPlacementP:
       id: inst:MM_A11BD/LongitudinalPlacementP
       length: 2.0066461824881423
-    id: inst:MM_A11BD
+      s_position: 100.191
+  - id: inst:D2S_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D2S_003/LongitudinalPlacementP
+      length: 0.609514656
+      s_position: 100.801
+  - id: inst:MM_A12BD
     kind: Bend
     native_types:
     - Bend
@@ -1946,17 +2910,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2S_003/LongitudinalPlacementP
-      length: 0.609514656
-    id: inst:D2S_003
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A12BD/BendP
       g_ref: -0.011712229642227363
     MagneticMultipoleP:
@@ -1968,45 +2922,49 @@ facility:
         Kn: -0.0484198946267085
       - order: 2
         Kn: 0.010003388034307203
+    TwissP:
+      id: inst:MM_A12BD/TwissP
+      alpha_a: -2.3891
+      alpha_b: 0.93483
+      beta_a: 16.649
+      beta_b: 13.912
+      eta_x: -4.0695
+      eta_y: -0.024612
+      etap_x: -0.59273
+      etap_y: 0.0037235
+      phi_a: 28.007
+      phi_b: 26.515
     LongitudinalPlacementP:
       id: inst:MM_A12BD/LongitudinalPlacementP
       length: 2.0066461824881423
-    id: inst:MM_A12BD
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DPUE_004/LongitudinalPlacementP
-      length: 0.287
-    id: inst:DPUE_004
+      s_position: 102.807
+  - id: inst:DPUE_004
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUE_A12/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUE_A12
+    LongitudinalPlacementP:
+      id: inst:DPUE_004/LongitudinalPlacementP
+      length: 0.287
+      s_position: 103.094
+  - id: inst:PUE_A12
     kind: BeamPositionMonitor
-    MetaP:
-      id: inst:PUE_A12/MetaP
-      label: “AGSBPM”
     native_types:
     - Instrument
     - Monitor
     functions:
     - BeamPositionMeasurement
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DHCA12/LongitudinalPlacementP
+    LongitudinalPlacementP:
+      id: inst:PUE_A12/LongitudinalPlacementP
       length: 0.0
-    id: inst:DHCA12
+      s_position: 103.094
+    MetaP:
+      id: inst:PUE_A12/MetaP
+      label: “AGSBPM”
+  - id: inst:DHCA12
     kind: Kicker
     native_types:
     - Kicker
@@ -2015,10 +2973,23 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Horizontal
-  - LongitudinalPlacementP:
-      id: inst:DVCA12/LongitudinalPlacementP
+    TwissP:
+      id: inst:DHCA12/TwissP
+      alpha_a: -2.5047
+      alpha_b: 0.89617
+      beta_a: 18.054
+      beta_b: 13.387
+      eta_x: -4.2397
+      eta_y: -0.023558
+      etap_x: -0.59273
+      etap_y: 0.0037235
+      phi_a: 28.023
+      phi_b: 26.536
+    LongitudinalPlacementP:
+      id: inst:DHCA12/LongitudinalPlacementP
       length: 0.0
-    id: inst:DVCA12
+      s_position: 103.094
+  - id: inst:DVCA12
     kind: Kicker
     native_types:
     - Kicker
@@ -2027,17 +2998,42 @@ facility:
     - Steering
     beamline_relation: Inline
     plane: Vertical
-  - LongitudinalPlacementP:
-      id: inst:D2TX_003/LongitudinalPlacementP
-      length: 0.322485192
-    id: inst:D2TX_003
+    TwissP:
+      id: inst:DVCA12/TwissP
+      alpha_a: -2.5047
+      alpha_b: 0.89617
+      beta_a: 18.054
+      beta_b: 13.387
+      eta_x: -4.2397
+      eta_y: -0.023558
+      etap_x: -0.59273
+      etap_y: 0.0037235
+      phi_a: 28.023
+      phi_b: 26.536
+    LongitudinalPlacementP:
+      id: inst:DVCA12/LongitudinalPlacementP
+      length: 0.0
+      s_position: 103.094
+  - id: inst:D2TX_003
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:D2TX_003/LongitudinalPlacementP
+      length: 0.322485192
+      s_position: 103.417
+  - id: inst:MM_A13CF
+    kind: Bend
+    native_types:
+    - Bend
+    - SBend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:MM_A13CF/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -2049,10 +3045,68 @@ facility:
         Kn: 0.048742537207372996
       - order: 2
         Kn: 0.008845277832145091
+    TwissP:
+      id: inst:MM_A13CF/TwissP
+      alpha_a: -0.20208
+      alpha_b: -0.79226
+      beta_a: 27.189
+      beta_b: 12.69
+      eta_x: -5.2124
+      eta_y: -0.016386
+      etap_x: -0.046782
+      etap_y: 0.0015124
+      phi_a: 28.139
+      phi_b: 26.758
     LongitudinalPlacementP:
       id: inst:MM_A13CF/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A13CF
+      s_position: 105.805
+  - id: inst:DSS_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DSS_003/LongitudinalPlacementP
+      length: 0.43442735600000004
+      s_position: 106.239
+  - id: inst:SXH
+    kind: Sextupole
+    native_types:
+    - Sextupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    TwissP:
+      id: inst:SXH/TwissP
+      alpha_a: -0.24379
+      alpha_b: -0.932
+      beta_a: 27.675
+      beta_b: 14.569
+      eta_x: -5.2633
+      eta_y: -0.014807
+      etap_x: -0.046782
+      etap_y: 0.0015124
+      phi_a: 28.179
+      phi_b: 26.838
+    LongitudinalPlacementP:
+      id: inst:SXH/LongitudinalPlacementP
+      length: 0.655
+      s_position: 106.894
+  - id: inst:DSS_004
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DSS_004/LongitudinalPlacementP
+      length: 0.43442735600000004
+      s_position: 107.329
+  - id: inst:MM_A14CF
     kind: Bend
     native_types:
     - Bend
@@ -2060,37 +3114,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DSS_003/LongitudinalPlacementP
-      length: 0.43442735600000004
-    id: inst:DSS_003
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:SXH/LongitudinalPlacementP
-      length: 0.655
-    id: inst:SXH
-    kind: Sextupole
-    native_types:
-    - Sextupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DSS_004/LongitudinalPlacementP
-      length: 0.43442735600000004
-    id: inst:DSS_004
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A14CF/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -2102,10 +3126,60 @@ facility:
         KnL: 0.0
       - order: 2
         Kn: 0.008845277832145091
+    TwissP:
+      id: inst:MM_A14CF/TwissP
+      alpha_a: 2.4739
+      alpha_b: -4.0899
+      beta_a: 22.059
+      beta_b: 26.52
+      eta_x: -4.7056
+      eta_y: -0.012659
+      etap_x: 0.51979
+      etap_y: -5.4848e-05
+      phi_a: 28.286
+      phi_b: 26.991
     LongitudinalPlacementP:
       id: inst:MM_A14CF/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A14CF
+      s_position: 109.716
+  - id: inst:DPUE_005
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DPUE_005/LongitudinalPlacementP
+      length: 0.287
+      s_position: 110.003
+  - id: inst:PUE_A14
+    kind: BeamPositionMonitor
+    native_types:
+    - Instrument
+    - Monitor
+    functions:
+    - BeamPositionMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:PUE_A14/LongitudinalPlacementP
+      length: 0.0
+      s_position: 110.003
+    MetaP:
+      id: inst:PUE_A14/MetaP
+      label: “AGSBPM”
+  - id: inst:D2LX_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:D2LX_002/LongitudinalPlacementP
+      length: 0.32245471200000003
+      s_position: 110.326
+  - id: inst:MM_A15AD
     kind: Bend
     native_types:
     - Bend
@@ -2113,41 +3187,7 @@ facility:
     functions:
     - Steering
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DPUE_005/LongitudinalPlacementP
-      length: 0.287
-    id: inst:DPUE_005
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUE_A14/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUE_A14
-    kind: BeamPositionMonitor
-    MetaP:
-      id: inst:PUE_A14/MetaP
-      label: “AGSBPM”
-    native_types:
-    - Instrument
-    - Monitor
-    functions:
-    - BeamPositionMeasurement
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2LX_002/LongitudinalPlacementP
-      length: 0.32245471200000003
-    id: inst:D2LX_002
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:MM_A15AD/BendP
       g_ref: -0.011712229630153455
     MagneticMultipoleP:
@@ -2159,32 +3199,45 @@ facility:
         KnL: 0.0
       - order: 2
         Kn: 0.008609656995266375
+    TwissP:
+      id: inst:MM_A15AD/TwissP
+      alpha_a: 0.080366
+      alpha_b: -0.48962
+      beta_a: 14.003
+      beta_b: 44.903
+      eta_x: -3.7462
+      eta_y: -0.01135
+      etap_x: 0.030909
+      etap_y: 0.0013406
+      phi_a: 28.469
+      phi_b: 27.073
     LongitudinalPlacementP:
       id: inst:MM_A15AD/LongitudinalPlacementP
       length: 2.387677802013313
-    id: inst:MM_A15AD
-    kind: Bend
-    native_types:
-    - Bend
-    - SBend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:D2H/LongitudinalPlacementP
-      length: 0.7619273560000001
-    id: inst:D2H
+      s_position: 112.713
+  - id: inst:D2H
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - LongitudinalPlacementP:
+    LongitudinalPlacementP:
+      id: inst:D2H/LongitudinalPlacementP
+      length: 0.7619273560000001
+      s_position: 113.475
+  - id: inst:MWA15
+    kind: BeamProfileMonitor
+    native_types:
+    - Instrument
+    - Multiwire
+    functions:
+    - BeamProfileMeasurement
+    beamline_relation: Inline
+    LongitudinalPlacementP:
       id: inst:MWA15/LongitudinalPlacementP
       length: 0.0
-    id: inst:MWA15
-    kind: BeamProfileMonitor
+      s_position: 113.475
     MetaP:
       id: inst:MWA15/MetaP
       description: Multiwire beam-profile monitor.
@@ -2201,12 +3254,6 @@ facility:
       - key: spacing_y
         value: '0.002'
         datatype: Float
-    native_types:
-    - Instrument
-    - Multiwire
-    functions:
-    - BeamProfileMeasurement
-    beamline_relation: Inline
   - id: inst:END_B0
     kind: Marker
     native_types:
@@ -2214,6 +3261,18 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
+    TwissP:
+      id: inst:END_B0/TwissP
+      alpha_a: 0.025604
+      alpha_b: -0.51066
+      beta_a: 13.922
+      beta_b: 45.665
+      eta_x: -3.7227
+      eta_y: -0.010352
+      etap_x: 0.030909
+      etap_y: 0.0013406
+      phi_a: 28.524
+      phi_b: 27.09
   beamlines:
   - id: inst:BTA_LINE
     kind: BeamLine

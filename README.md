@@ -82,6 +82,8 @@ BtA instance with:
 ```console
 uv run python src/narad_system/schema/palsparserpy_to_narad.py \
   -input examples/BtA/bta.pals.yaml
+uv run python examples/BtA/update_bta_twiss.py \
+  --input examples/BtA/bta_narad_skeleton_palsparserpy.yaml
 uv run python examples/BtA/generate_narad_bta_instance.py
 ```
 

@@ -5,17 +5,17 @@ notes:
 - Generated from a PALSParserPy-expanded lattice without control system enrichment.
 facility:
   components:
-  - ReferenceP:
-      id: inst:BEG/ReferenceP
-      species_ref: electron
-      pc_ref: 3000000.0
-    id: inst:BEG
+  - id: inst:BEG
     kind: BeginningEle
     native_types:
     - BeginningEle
     functions:
     - Mark
     beamline_relation: Inline
+    ReferenceP:
+      id: inst:BEG/ReferenceP
+      species_ref: electron
+      pc_ref: 3000000.0
   - id: inst:MARKER1
     kind: Marker
     native_types:
@@ -23,17 +23,24 @@ facility:
     functions:
     - Mark
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT1/LongitudinalPlacementP
-      length: 100.0
-    id: inst:DRIFT1
+  - id: inst:DRIFT1
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:DRIFT1/LongitudinalPlacementP
+      length: 100.0
+  - id: inst:S1
+    kind: Bend
+    native_types:
+    - Bend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:S1/BendP
       Bn0_ref: 1.2
       e1: 9.1
@@ -60,14 +67,14 @@ facility:
     LongitudinalPlacementP:
       id: inst:S1/LongitudinalPlacementP
       length: 10.0
-    id: inst:S1
-    kind: Bend
+  - id: inst:QUAD1
+    kind: Quadrupole
     native_types:
-    - Bend
+    - Quadrupole
     functions:
-    - Steering
+    - Focusing
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    MagneticMultipoleP:
       id: inst:QUAD1/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -77,27 +84,27 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD1/LongitudinalPlacementP
       length: 0.01
-    id: inst:QUAD1
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - SolenoidP:
-      id: inst:SOL1/SolenoidP
-      Ksol: 10.0
-    LongitudinalPlacementP:
-      id: inst:SOL1/LongitudinalPlacementP
-      length: 0.0
-    id: inst:SOL1
+  - id: inst:SOL1
     kind: Solenoid
     native_types:
     - Solenoid
     functions:
     - Focusing
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    SolenoidP:
+      id: inst:SOL1/SolenoidP
+      Ksol: 10.0
+    LongitudinalPlacementP:
+      id: inst:SOL1/LongitudinalPlacementP
+      length: 0.0
+  - id: inst:MULTIPOLE1
+    kind: Multipole
+    native_types:
+    - Multipole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:MULTIPOLE1/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -119,14 +126,14 @@ facility:
     LongitudinalPlacementP:
       id: inst:MULTIPOLE1/LongitudinalPlacementP
       length: 37.6
-    id: inst:MULTIPOLE1
-    kind: Multipole
+  - id: inst:RFCAV1
+    kind: RFCavity
     native_types:
-    - Multipole
+    - RFCavity
     functions:
-    - Focusing
+    - BeamAcceleration
     beamline_relation: Inline
-  - RFP:
+    RFP:
       id: inst:RFCAV1/RFP
       frequency: 100000.0
       voltage: 100.0
@@ -139,14 +146,14 @@ facility:
     LongitudinalPlacementP:
       id: inst:RFCAV1/LongitudinalPlacementP
       length: 1.3
-    id: inst:RFCAV1
+  - id: inst:RFCAV2
     kind: RFCavity
     native_types:
     - RFCavity
     functions:
     - BeamAcceleration
     beamline_relation: Inline
-  - RFP:
+    RFP:
       id: inst:RFCAV2/RFP
       harmon: 2000
       voltage: 100.0
@@ -159,14 +166,14 @@ facility:
     LongitudinalPlacementP:
       id: inst:RFCAV2/LongitudinalPlacementP
       length: 1.3
-    id: inst:RFCAV2
+  - id: inst:RFCAV3
     kind: RFCavity
     native_types:
     - RFCavity
     functions:
     - BeamAcceleration
     beamline_relation: Inline
-  - RFP:
+    RFP:
       id: inst:RFCAV3/RFP
       voltage: 100.0
       gradient: 0.2
@@ -178,13 +185,6 @@ facility:
     LongitudinalPlacementP:
       id: inst:RFCAV3/LongitudinalPlacementP
       length: 1.3
-    id: inst:RFCAV3
-    kind: RFCavity
-    native_types:
-    - RFCavity
-    functions:
-    - BeamAcceleration
-    beamline_relation: Inline
   beamlines:
   - id: inst:RING
     kind: BeamLine

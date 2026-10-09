@@ -1,8 +1,8 @@
-description: Control-system-neutral NARAD skeleton generated from review_multipass.pals.yaml using PALSParserPy.
 kind: PALSAccelerator
+description: Control-system-neutral NARAD skeleton generated from review_multipass.pals.yaml using PALSParserPy.
 version: 0.1.0
 notes:
-- Generated from a PALSParserPy-expanded lattice without control-system enrichment.
+- Generated from a PALSParserPy-expanded lattice without control system enrichment.
 facility:
   components:
   - id: inst:BEGIN
@@ -13,9 +13,9 @@ facility:
     - Mark
     beamline_relation: Inline
     ReferenceP:
+      id: inst:BEGIN/ReferenceP
       species_ref: electron
       E_tot_ref: 1000000000.0
-      id: inst:BEGIN/ReferenceP
   - id: inst:DRIFT_BEFORE
     kind: Drift
     native_types:
@@ -24,8 +24,8 @@ facility:
     - DriftSpace
     beamline_relation: Inline
     LongitudinalPlacementP:
-      length: 1.0
       id: inst:DRIFT_BEFORE/LongitudinalPlacementP
+      length: 1.0
   - id: inst:SOLENOID
     kind: Solenoid
     native_types:
@@ -33,12 +33,12 @@ facility:
     functions:
     - Focusing
     beamline_relation: Inline
-    LongitudinalPlacementP:
-      length: 0.5
-      id: inst:SOLENOID/LongitudinalPlacementP
     SolenoidP:
-      Bsol: 0.5
       id: inst:SOLENOID/SolenoidP
+      Bsol: 0.5
+    LongitudinalPlacementP:
+      id: inst:SOLENOID/LongitudinalPlacementP
+      length: 0.5
   - id: inst:DRIFT_AFTER
     kind: Drift
     native_types:
@@ -47,17 +47,17 @@ facility:
     - DriftSpace
     beamline_relation: Inline
     LongitudinalPlacementP:
-      length: 1.0
       id: inst:DRIFT_AFTER/LongitudinalPlacementP
+      length: 1.0
   beamlines:
   - id: inst:RECIRCULATOR
     kind: BeamLine
     functions:
     - BeamLineSection
     beamline_relation: Inline
+    description: Beamline imported from PALSParserPy branch recirculator.
     multipass: true
     periodic: false
-    description: Beamline imported from PALSParserPy branch recirculator.
   signals: []
   signal_bindings: []
   component_relations:

@@ -5,27 +5,34 @@ notes:
 - Generated from a PALSParserPy-expanded lattice without control system enrichment.
 facility:
   components:
-  - LongitudinalPlacementP:
-      id: inst:THINGZ/LongitudinalPlacementP
-      length: 0.0
-    id: inst:THINGZ
+  - id: inst:THINGZ
     kind: Sextupole
     native_types:
     - Sextupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:Q1A/LongitudinalPlacementP
-      length: 1.079360186305116e-08
-    id: inst:Q1A
+    LongitudinalPlacementP:
+      id: inst:THINGZ/LongitudinalPlacementP
+      length: 0.0
+  - id: inst:Q1A
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - BendP:
+    LongitudinalPlacementP:
+      id: inst:Q1A/LongitudinalPlacementP
+      length: 1.079360186305116e-08
+  - id: inst:DH1A_001
+    kind: Bend
+    native_types:
+    - Bend
+    functions:
+    - Steering
+    beamline_relation: Inline
+    BendP:
       id: inst:DH1A_001/BendP
       e1: 7.68536863609965e-18
       edge2_int: 0.02065
@@ -33,24 +40,24 @@ facility:
     LongitudinalPlacementP:
       id: inst:DH1A_001/LongitudinalPlacementP
       length: 0.2666536729738865
-    id: inst:DH1A_001
-    kind: Bend
-    native_types:
-    - Bend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUEH001_001/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUEH001_001
+  - id: inst:PUEH001_001
     kind: DiagnosticDevice
     native_types:
     - Instrument
     functions:
     - Measurement
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    LongitudinalPlacementP:
+      id: inst:PUEH001_001/LongitudinalPlacementP
+      length: 0.0
+  - id: inst:QUAD1_001
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:QUAD1_001/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -58,14 +65,14 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD1_001/LongitudinalPlacementP
       length: 1.0
-    id: inst:QUAD1_001
-    kind: Quadrupole
+  - id: inst:DH1A_002
+    kind: Bend
     native_types:
-    - Quadrupole
+    - Bend
     functions:
-    - Focusing
+    - Steering
     beamline_relation: Inline
-  - BendP:
+    BendP:
       id: inst:DH1A_002/BendP
       e1: 7.68536863609965e-18
       edge2_int: 0.02065
@@ -73,24 +80,24 @@ facility:
     LongitudinalPlacementP:
       id: inst:DH1A_002/LongitudinalPlacementP
       length: 0.2666536729738865
-    id: inst:DH1A_002
-    kind: Bend
-    native_types:
-    - Bend
-    functions:
-    - Steering
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:PUEH001_002/LongitudinalPlacementP
-      length: 0.0
-    id: inst:PUEH001_002
+  - id: inst:PUEH001_002
     kind: DiagnosticDevice
     native_types:
     - Instrument
     functions:
     - Measurement
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    LongitudinalPlacementP:
+      id: inst:PUEH001_002/LongitudinalPlacementP
+      length: 0.0
+  - id: inst:QUAD1_002
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:QUAD1_002/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -98,13 +105,6 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD1_002/LongitudinalPlacementP
       length: 1.0
-    id: inst:QUAD1_002
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
   beamlines:
   - id: inst:INJ_LINE
     kind: BeamLine

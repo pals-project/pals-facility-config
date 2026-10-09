@@ -5,17 +5,24 @@ notes:
 - Generated from PALS source data without control-system enrichment.
 facility:
   components:
-  - LongitudinalPlacementP:
-      id: inst:DRIFT1_001/LongitudinalPlacementP
-      length: 0.25
-    id: inst:DRIFT1_001
+  - id: inst:DRIFT1_001
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    LongitudinalPlacementP:
+      id: inst:DRIFT1_001/LongitudinalPlacementP
+      length: 0.25
+  - id: inst:QUAD1_001
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:QUAD1_001/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -23,24 +30,24 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD1_001/LongitudinalPlacementP
       length: 1.0
-    id: inst:QUAD1_001
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT2_001/LongitudinalPlacementP
-      length: 0.5
-    id: inst:DRIFT2_001
+  - id: inst:DRIFT2_001
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    LongitudinalPlacementP:
+      id: inst:DRIFT2_001/LongitudinalPlacementP
+      length: 0.5
+  - id: inst:QUAD2_001
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:QUAD2_001/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -48,34 +55,34 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD2_001/LongitudinalPlacementP
       length: 1.0
-    id: inst:QUAD2_001
+  - id: inst:DRIFT1_002
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRIFT1_002/LongitudinalPlacementP
+      length: 0.25
+  - id: inst:DRIFT1_003
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRIFT1_003/LongitudinalPlacementP
+      length: 0.25
+  - id: inst:QUAD1_002
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT1_002/LongitudinalPlacementP
-      length: 0.25
-    id: inst:DRIFT1_002
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT1_003/LongitudinalPlacementP
-      length: 0.25
-    id: inst:DRIFT1_003
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - MagneticMultipoleP:
+    MagneticMultipoleP:
       id: inst:QUAD1_002/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -83,24 +90,24 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD1_002/LongitudinalPlacementP
       length: 1.0
-    id: inst:QUAD1_002
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT2_002/LongitudinalPlacementP
-      length: 0.5
-    id: inst:DRIFT2_002
+  - id: inst:DRIFT2_002
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    LongitudinalPlacementP:
+      id: inst:DRIFT2_002/LongitudinalPlacementP
+      length: 0.5
+  - id: inst:QUAD2_002
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:QUAD2_002/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -108,34 +115,34 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD2_002/LongitudinalPlacementP
       length: 1.0
-    id: inst:QUAD2_002
+  - id: inst:DRIFT1_004
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRIFT1_004/LongitudinalPlacementP
+      length: 0.25
+  - id: inst:DRIFT1_005
+    kind: Drift
+    native_types:
+    - Drift
+    functions:
+    - DriftSpace
+    beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRIFT1_005/LongitudinalPlacementP
+      length: 0.25
+  - id: inst:QUAD1_003
     kind: Quadrupole
     native_types:
     - Quadrupole
     functions:
     - Focusing
     beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT1_004/LongitudinalPlacementP
-      length: 0.25
-    id: inst:DRIFT1_004
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT1_005/LongitudinalPlacementP
-      length: 0.25
-    id: inst:DRIFT1_005
-    kind: Drift
-    native_types:
-    - Drift
-    functions:
-    - DriftSpace
-    beamline_relation: Inline
-  - MagneticMultipoleP:
+    MagneticMultipoleP:
       id: inst:QUAD1_003/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -143,24 +150,24 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD1_003/LongitudinalPlacementP
       length: 1.0
-    id: inst:QUAD1_003
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT2_003/LongitudinalPlacementP
-      length: 0.5
-    id: inst:DRIFT2_003
+  - id: inst:DRIFT2_003
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
-  - MagneticMultipoleP:
+    LongitudinalPlacementP:
+      id: inst:DRIFT2_003/LongitudinalPlacementP
+      length: 0.5
+  - id: inst:QUAD2_003
+    kind: Quadrupole
+    native_types:
+    - Quadrupole
+    functions:
+    - Focusing
+    beamline_relation: Inline
+    MagneticMultipoleP:
       id: inst:QUAD2_003/MagneticMultipoleP
       mag_components:
       - order: 1
@@ -168,23 +175,16 @@ facility:
     LongitudinalPlacementP:
       id: inst:QUAD2_003/LongitudinalPlacementP
       length: 1.0
-    id: inst:QUAD2_003
-    kind: Quadrupole
-    native_types:
-    - Quadrupole
-    functions:
-    - Focusing
-    beamline_relation: Inline
-  - LongitudinalPlacementP:
-      id: inst:DRIFT1_006/LongitudinalPlacementP
-      length: 0.25
-    id: inst:DRIFT1_006
+  - id: inst:DRIFT1_006
     kind: Drift
     native_types:
     - Drift
     functions:
     - DriftSpace
     beamline_relation: Inline
+    LongitudinalPlacementP:
+      id: inst:DRIFT1_006/LongitudinalPlacementP
+      length: 0.25
   beamlines:
   - id: inst:FODO_CHANNEL
     kind: BeamLine

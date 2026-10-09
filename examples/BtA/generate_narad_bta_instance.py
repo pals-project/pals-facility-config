@@ -16,6 +16,7 @@ from typing import Any
 import yaml
 
 from narad.datamodel import narad_pydantic as narad_model
+from narad_system.schema.yaml_order import order_document_components
 
 
 DEFAULT_INPUT = Path(__file__).with_name("bta_narad_skeleton_palsparserpy.yaml")
@@ -287,7 +288,9 @@ def enrich_document(skeleton: dict[str, Any]) -> dict[str, Any]:
     document["description"] = BTA_DOCUMENT_ENRICHMENT["description"]
     document.setdefault("notes", []).extend(BTA_DOCUMENT_ENRICHMENT["notes"])
     validated = narad_model.PALSAccelerator.model_validate(document)
-    return validated.model_dump(mode="json", exclude_none=True)
+    return order_document_components(
+        validated.model_dump(mode="json", exclude_none=True)
+    )
 
 
 def parse_args() -> argparse.Namespace:

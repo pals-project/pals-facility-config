@@ -28,6 +28,7 @@ from pydantic import BaseModel, ValidationError
 import yaml
 
 from narad.datamodel import narad_pydantic as narad_model
+from narad_system.schema.yaml_order import order_document_components
 
 
 class PalsYamlLoader(yaml.SafeLoader):
@@ -549,7 +550,9 @@ def build_document(source_path: Path) -> dict[str, Any]:
         },
     }
     validated = narad_model.PALSAccelerator.model_validate(document)
-    return validated.model_dump(mode="json", exclude_none=True)
+    return order_document_components(
+        validated.model_dump(mode="json", exclude_none=True)
+    )
 
 
 def parse_args() -> argparse.Namespace:
