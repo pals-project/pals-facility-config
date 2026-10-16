@@ -58,6 +58,7 @@ DEFAULT_TRACE_MAX_CHARS = int(os.getenv("NEO4J_TRACE_MAX_CHARS", "4000"))
 DEFAULT_SCHEMA_CACHE_TTL_SECONDS = int(os.getenv("NEO4J_SCHEMA_CACHE_TTL_SECONDS", "300"))
 DEFAULT_USE_GRAPH_CONTEXT = get_env_bool("USE_GRAPH_CONTEXT", True)
 DEFAULT_SHOW_REASONING = get_env_bool("SHOW_REASONING", False)
+DEFAULT_RETURN_NEO4J_WARNINGS = get_env_bool("NEO4J_RETURN_WARNINGS", True)
 DEFAULT_MANUAL_QUERY = os.getenv("NEO4J_MANUAL_QUERY", "MATCH (n) RETURN n LIMIT 25")
 
 
@@ -158,7 +159,10 @@ def respond(
 
     model = build_model(model_name, base_url, api_key, temperature)
     if use_graph_context:
-        cypher_tool = build_cypher_tool(neo4j_uri, neo4j_user, neo4j_password, neo4j_database)
+        cypher_tool = build_cypher_tool(
+            neo4j_uri, neo4j_user, neo4j_password, neo4j_database,
+            return_warnings=DEFAULT_RETURN_NEO4J_WARNINGS,
+        )
         response_content, query_trace = run_graph_agent_loop(
             model,
             langchain_history,

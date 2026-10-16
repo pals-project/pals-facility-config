@@ -53,7 +53,8 @@ def validate_read_only_cypher(query: str) -> str:
     return normalized_query
 
 
-def run_neo4j_query(uri: str, user: str, password: str, database: str, query: str):
+def run_neo4j_query_with_warnings(uri: str, user: str, password: str, database: str, query: str):
+    """Run a read-only query and return (records, Neo4j warning descriptions)."""
     safe_query = validate_read_only_cypher(query)
     typed_query = cast(LiteralString, safe_query)
     if not uri.strip() or not user.strip() or not password.strip() or not database.strip():
@@ -61,7 +62,16 @@ def run_neo4j_query(uri: str, user: str, password: str, database: str, query: st
 
     with GraphDatabase.driver(uri.strip(), auth=(user.strip(), password.strip())) as driver:
         with driver.session(database=database.strip()) as session:
-            records = session.run(Query(typed_query)).data()
+            result = session.run(Query(typed_query))
+            records = result.data()
+            summary = result.consume()
+    # e.g. "warn: label does not exist. The label `pals` does not exist. ..."
+    warnings = [status.status_description for status in summary.gql_status_objects if status.is_notification]
+    return records, warnings
+
+
+def run_neo4j_query(uri: str, user: str, password: str, database: str, query: str):
+    records, _warnings = run_neo4j_query_with_warnings(uri, user, password, database, query)
     return records
 
 
@@ -344,17 +354,28 @@ def build_agent_system_prompt(
         return "\n".join(parts)
 
 
-def build_cypher_tool(neo4j_uri: str, neo4j_user: str, neo4j_password: str, neo4j_database: str) -> StructuredTool:
+def build_cypher_tool(
+        neo4j_uri: str,
+        neo4j_user: str,
+        neo4j_password: str,
+        neo4j_database: str,
+        return_warnings: bool = True,
+    ) -> StructuredTool:
     def execute_cypher(cypher_query: str) -> str:
         try:
-            records = run_neo4j_query(
+            records, warnings = run_neo4j_query_with_warnings(
                 neo4j_uri,
                 neo4j_user,
                 neo4j_password,
                 neo4j_database,
                 cypher_query,
             )
-            return build_graph_context(records)
+            context = build_graph_context(records)
+            # Without these, a misspelled or nonexistent label/type/property just looks like an empty result.
+            if return_warnings and warnings:
+                context += "\n\nNeo4j warnings (revise the query if they explain missing or empty results):\n"
+                context += "\n".join(f"- {warning}" for warning in warnings)
+            return context
         except Exception as exc:
             return f"Cypher execution error: {exc}"
 

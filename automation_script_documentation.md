@@ -283,7 +283,13 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
   `USE_GRAPH_CONTEXT`, `SHOW_REASONING`, `NEO4J_TRACE_MAX_CHARS`,
   `NEO4J_SCHEMA_CACHE_TTL_SECONDS`, `OPENAI_TEMPERATURE`,
   `OPENAI_SYSTEM_PROMPT`, `NEO4J_DATABASE`, `NEO4J_AGENT_MAX_ITERATIONS`,
-  `NEO4J_MANUAL_QUERY`.
+  `NEO4J_MANUAL_QUERY`, `NEO4J_RETURN_WARNINGS`.
+- **`NEO4J_RETURN_WARNINGS`** (default `true`; only an explicit `false`
+  turns it off): appends Neo4j's query warnings, such as "label does not
+  exist", to each query result the LLM agent sees, so it can revise a query
+  that references a nonexistent label, relationship type, or property instead
+  of trusting an empty result. Set it to `false` to compare benchmark runs
+  with and without it.
 - **Do not set in `.env`:** `NEO4J_URI`. It must stay `bolt://neo4j-kg:7687`
   inside Docker, and `docker-compose.yml` hardcodes that for the container.
   But `run_pipeline.py` reads `NEO4J_URI` from `.env` (defaulting to
