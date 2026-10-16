@@ -163,7 +163,9 @@ Result: three files sitting next to the schema/instance sources, e.g.
 2. If `--no-fresh` was **not** passed (the default): runs
    `docker compose down -v` to remove any previous containers **and volumes**
    (`neo4j_data`, `neo4j_plugins`), guaranteeing a clean graph.
-3. Runs `docker compose up -d`. `docker-compose.yml`'s `neo4j-kg` service now
+3. Runs `docker compose up -d --build`. `--build` rebuilds the `gradio-chat`
+   image, whose code (`main.py`, `kg_agent.py`) is copied in at build time, so
+   source changes are always picked up. `docker-compose.yml`'s `neo4j-kg` service now
    mounts:
    ```yaml
    - ${NEO4J_SCHEMA_TTL_PATH:-./project/owl/narad.owl.ttl}:/data/narad.owl.ttl

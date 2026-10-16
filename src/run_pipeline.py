@@ -121,7 +121,8 @@ def docker_compose_up(paths: IntermediatePaths, schema_path: Path, *, fresh: boo
 
     if fresh:
         run_command(["docker", "compose", "-f", str(compose_file), "down", "-v"], cwd=REPO_ROOT, env=env)
-    run_command(["docker", "compose", "-f", str(compose_file), "up", "-d"], cwd=REPO_ROOT, env=env)
+    # --build: gradio-chat's code is copied into its image, so rebuild to pick up source changes.
+    run_command(["docker", "compose", "-f", str(compose_file), "up", "-d", "--build"], cwd=REPO_ROOT, env=env)
 
 
 def wait_for_gradio_ready(url: str, *, timeout_seconds: float, poll_interval_seconds: float = 3.0) -> Any:
