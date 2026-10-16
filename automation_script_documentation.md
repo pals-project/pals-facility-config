@@ -82,9 +82,9 @@ uv run python3 src/run_pipeline.py \
 A YAML list of `{Q, Ans}` dicts, e.g. [`examples/benchmark_queries/UITF_v1.yaml`](examples/benchmark_queries/UITF_v1.yaml):
 
 ```yaml
-- Q: Give me the horizontal and vertical beam positions and status at the first BPM
+- Q: Give me the signals for the horizontal and vertical beam positions and status at the first BPM
   Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
-- Q: What's the status of MFHK101?
+- Q: What's the status signal of MFHK101?
   Ans: MFHK101.STAT
 ```
 
@@ -100,12 +100,12 @@ the input file. `Ans` is only included if it was present in the corresponding
 queries entry:
 
 ```yaml
-- Q: Give me the horizontal and vertical beam positions and status at the first BPM
+- Q: Give me the signals for the horizontal and vertical beam positions and status at the first BPM
   Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
-  LLM_Ans: 'At the first BPM in the graph, the beam position fields are not populated: ...'
-- Q: What's the status of MFHK101?
+  LLM_Ans: 'The first BPM is **IPMK101** ... `IPMK101.XPOS` ... `IPMK101.YPOS` ... `IPMK101.STAT` ...'
+- Q: What's the status signal of MFHK101?
   Ans: MFHK101.STAT
-  LLM_Ans: 'MFHK101 is a Solenoid instance, but the graph does not show any ...'
+  LLM_Ans: 'The status signal for **MFHK101** is `MFHK101.STAT` ...'
 ```
 
 If `--answers` has no file extension, `.yaml` is appended automatically. If it
@@ -126,7 +126,12 @@ process environment (API keys, Neo4j credentials, model name, etc. — see §5).
 This reproduces the `gen-owl` / `gen-instance-ttl` / `gen-post` `justfile`
 recipes, but calls the underlying tools directly instead of going through
 `just`, and writes the outputs **next to the source files** instead of a
-hardcoded `project/owl/` directory:
+hardcoded `project/owl/` directory.
+
+Before generating anything, `main()` calls `load_predicate_uris(schema_path)`
+(from [`src/postprocess_for_rdf.py`](src/postprocess_for_rdf.py)), which
+fails fast if any concrete `Edge` subclass in the schema lacks an
+`rdf_predicate` annotation, since step 4 below needs it.
 
 1. `resolve_target_class(schema_path)` — uses LinkML's `SchemaView` to find the
    schema's `tree_root: true` class automatically (e.g. `PALSAccelerator`),
@@ -136,10 +141,12 @@ hardcoded `project/owl/` directory:
    version of the schema (the "TBox").
 3. `uv run linkml-convert -s <schema>.yaml -C <tree_root_class> -t ttl <instance>.yaml -o <instance>.ttl`
    — converts the instance YAML data to raw RDF/Turtle (the "ABox").
-4. `uv run python3 src/postprocess_for_rdf.py --instance_file <instance>.ttl --output_file <instance>_rdf.ttl`
+4. `uv run python3 src/postprocess_for_rdf.py --schema <schema>.yaml --instance_file <instance>.ttl --output_file <instance>_rdf.ttl`
    — rewrites bare relation-class instances (e.g. `HasSignal`, `Contains`) into
    proper RDF predicate URIs, using the existing [`src/postprocess_for_rdf.py`](src/postprocess_for_rdf.py)
-   script. This step is required — the raw `linkml-convert` output alone does not
+   script. The predicate URIs come from each relation class's `rdf_predicate`
+   annotation in `--schema` (e.g. `Precedes` → `pals:precedes`), not a
+   hardcoded map. This step is required — the raw `linkml-convert` output alone does not
    have correctly-typed relationship edges for the graph import to use.
 
 Result: three files sitting next to the schema/instance sources, e.g.
@@ -228,9 +235,15 @@ end-to-end:
     `OPENAI_TEMPERATURE`, `OPENAI_SYSTEM_PROMPT`, `NEO4J_DATABASE`,
     `NEO4J_AGENT_MAX_ITERATIONS`, and `NEO4J_MANUAL_QUERY` from `.env` (previously
     silently ignored by Compose even though `.env.example` implied otherwise).
-    `NEO4J_URI` is intentionally **not** made overridable — it must stay
-    `bolt://neo4j-kg:7687` (the Docker-network service name) or the
-    containerized app cannot reach Neo4j at all.
+    `NEO4J_URI` is intentionally **not** forwarded — the container's value is
+    hardcoded to `bolt://neo4j-kg:7687` (the Docker-network service name), or
+    the containerized app cannot reach Neo4j at all. See §5 for why it should
+    not be set in `.env` either.
+  - `gradio-chat` mounts the `--schema` YAML read-only at `/app/narad.yaml`
+    (`${LINKML_SCHEMA_HOST_PATH:-./src/narad/schema/narad.yaml}`, set
+    automatically by `run_pipeline.py`) and points `LINKML_SCHEMA_FILE` at it,
+    so `kg_agent.py` can give the LLM the schema's class, slot, and enum
+    descriptions for the same schema the graph was built from.
 
 - **[`src/llm/main.py`](src/llm/main.py)**
   - `model_name` Dropdown now has `allow_custom_value=True`, so API-driven
@@ -265,8 +278,12 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
   `NEO4J_SCHEMA_CACHE_TTL_SECONDS`, `OPENAI_TEMPERATURE`,
   `OPENAI_SYSTEM_PROMPT`, `NEO4J_DATABASE`, `NEO4J_AGENT_MAX_ITERATIONS`,
   `NEO4J_MANUAL_QUERY`.
-- **Hardcoded, not `.env`-overridable:** `NEO4J_URI` (must stay
-  `bolt://neo4j-kg:7687` inside Docker).
+- **Do not set in `.env`:** `NEO4J_URI`. It must stay `bolt://neo4j-kg:7687`
+  inside Docker, and `docker-compose.yml` hardcodes that for the container.
+  But `run_pipeline.py` reads `NEO4J_URI` from `.env` (defaulting to
+  `bolt://neo4j-kg:7687`) and sends it with every question, which overrides
+  the container's value — so e.g. `NEO4J_URI=bolt://localhost:7687` in `.env`
+  would make every pipeline query fail to reach Neo4j.
 - **Internal, set only by `run_pipeline.py` itself:**
   `NEO4J_SCHEMA_TTL_PATH`, `NEO4J_INSTANCE_TTL_PATH`, `LINKML_SCHEMA_HOST_PATH`.
 
