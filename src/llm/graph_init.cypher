@@ -36,6 +36,20 @@ MATCH (n:Resource)
 WHERE NOT n:Class AND NOT n:Property AND NOT n:Ontology
 SET n:Instance;
 
-// 3. Create full-text search index for LLM entity resolution
+// 3. Give every reified relation node (e.g. inst:RF_LASER_to_VIPK101) its own direct
+//    relationship (e.g. -[:precedes]->) whose `relation_uri` is that node's uri; qualifiers like
+//    `beamline_context` stay on the node. n10s merges identical triples into one
+//    relationship, so drop those and create one per relation node instead.
+MATCH (r)-[:predicate]->(p), (r)-[:subject]->(s), (r)-[:object]->(o)
+MATCH (s)-[e]->(o)
+WHERE type(e) = last(split(last(split(p.uri, '#')), '/')) AND e.relation_uri IS NULL
+WITH DISTINCT e
+DELETE e;
+
+MATCH (r)-[:predicate]->(p), (r)-[:subject]->(s), (r)-[:object]->(o)
+WITH r, s, o, last(split(last(split(p.uri, '#')), '/')) AS rel_type
+MERGE (s)-[:$(rel_type) {relation_uri: r.uri}]->(o);
+
+// 4. Create full-text search index for LLM entity resolution
 CREATE FULLTEXT INDEX instance_name_idx IF NOT EXISTS
 FOR (n:Instance) ON EACH [n.name, n.uri, n.alias];
