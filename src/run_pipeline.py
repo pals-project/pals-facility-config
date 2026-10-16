@@ -262,15 +262,15 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--delete-intermediate-files", action="store_true")
     parser.add_argument("--no-fresh", dest="fresh", action="store_false", help="Skip `docker compose down -v` before starting")
     parser.add_argument(
-        "--no-accumulate-history", dest="accumulate_history", action="store_false",
-        help="Query each benchmark question independently, without prior chat history",
+        "--accumulate-history", action="store_true",
+        help="Ask the benchmark questions as one continuous conversation instead of independently",
     )
     parser.add_argument("--question-key", default="Q", help="Key in each queries entry holding the question text")
     parser.add_argument(
         "--llm-answer-key", default="LLM_Ans",
         help="Key to write the LLM's answer under in each answers entry (must not already exist in the queries entry)",
     )
-    parser.set_defaults(fresh=True, accumulate_history=True)
+    parser.set_defaults(fresh=True)
     return parser.parse_args(argv)
 
 

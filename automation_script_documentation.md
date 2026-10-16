@@ -48,7 +48,7 @@ uv run python3 src/run_pipeline.py \
   [--startup-timeout 180] \
   [--delete-intermediate-files] \
   [--no-fresh] \
-  [--no-accumulate-history] \
+  [--accumulate-history] \
   [--question-key Q] \
   [--llm-answer-key LLM_Ans]
 ```
@@ -73,7 +73,7 @@ uv run python3 src/run_pipeline.py \
 | `--startup-timeout` | `180` seconds | How long to wait for `gradio-chat` to become reachable before giving up. |
 | `--delete-intermediate-files` | off | Delete the generated `.ttl`/`.owl.ttl` files once the graph has been built and queried. |
 | `--no-fresh` | off (i.e. fresh by default) | Skip `docker compose down -v` before `up -d`. **Not safe** if the RDF content changed since the last run — see §6. |
-| `--no-accumulate-history` | off (i.e. accumulate by default) | Ask every question independently, with no prior chat history, instead of one continuous conversation. |
+| `--accumulate-history` | off (i.e. each question is asked independently by default) | Ask the questions as one continuous conversation, passing the prior chat history with each question. |
 | `--question-key` | `Q` | Key in each queries entry holding the question text. |
 | `--llm-answer-key` | `LLM_Ans` | Key to write the LLM's answer under in each answers entry; the script asserts this key does not already exist in the queries entry. |
 
@@ -198,9 +198,9 @@ that container can take a while (image build on first run, then app startup).
    uses.
 3. For each question, `query_gradio()` calls the `gradio-chat` app's
    `/respond` API endpoint via `gradio_client`, exactly as if a human had
-   typed the question into the chat UI and clicked Send. It passes the running
-   `history` list so far (unless `--no-accumulate-history` is set, in which
-   case history is reset to empty before every question).
+   typed the question into the chat UI and clicked Send. By default history is
+   reset to empty before every question; with `--accumulate-history` it
+   passes the running `history` list so far instead.
 4. `extract_message_text()` normalizes the assistant's reply: newer Gradio/LLM
    responses can return `content` as a list of `{"type": "text", "text": ...}`
    blocks instead of a plain string; this flattens either shape into plain
@@ -311,9 +311,9 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
   physical floor-survey coordinates (`FloorP.x`/`.y`) with an unrelated beam
   position signal (`IPMK101.XPOS`/`.YPOS`) that has no value populated in the
   graph; (2) non-deterministic agentic tool-use search paths, which can be
-  further influenced by how much prior chat history is accumulated
-  (`--no-accumulate-history` can be used to isolate each question and reduce
-  this effect for benchmarking).
+  further influenced by prior chat history when `--accumulate-history` is
+  used (the default asks each question in isolation, which reduces this
+  effect for benchmarking).
 - **Only `--transformation RDF` is implemented.** Any other value raises
   `NotImplementedError` — this is a placeholder for future non-RDF
   transformation strategies, per the original design brief for this branch.
