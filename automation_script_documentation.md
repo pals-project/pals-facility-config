@@ -71,7 +71,7 @@ uv run python3 src/run_pipeline.py \
 | `--compose-file` | `docker-compose.yml` at repo root | Which compose file to drive. |
 | `--gradio-url` | `http://localhost:7860` | Where the driver (running on the **host**) reaches the published `gradio-chat` port. |
 | `--startup-timeout` | `180` seconds | How long to wait for `gradio-chat` to become reachable before giving up. |
-| `--delete-intermediate-files` | off | Delete the generated `.ttl`/`.owl.ttl` files once the graph has been built and queried. |
+| `--delete-intermediate-files` | off | Delete the generated `.ttl`/`.owl.ttl` files as soon as the graph has been built (before the questions are asked). |
 | `--no-fresh` | off (i.e. fresh by default) | Skip `docker compose down -v` before `up -d`. **Not safe** if the RDF content changed since the last run — see §6. |
 | `--accumulate-history` | off (i.e. each question is asked independently by default) | Ask the questions as one continuous conversation, passing the prior chat history with each question. |
 | `--question-key` | `Q` | Key in each queries entry holding the question text. |
@@ -186,6 +186,11 @@ Polls `gradio_client.Client(url)` every 3 seconds (up to `--startup-timeout`)
 until the `gradio-chat` container's web server responds, since building/starting
 that container can take a while (image build on first run, then app startup).
 
+If `--delete-intermediate-files` was passed, the three generated `.ttl` files
+from Stage 2 are deleted at this point. `gradio-chat` only starts after
+`neo4j-init` has finished importing them, so the graph no longer needs them,
+and they are removed even if a later stage fails.
+
 ### Stage 5 — Ask every question (`run_benchmark` / `query_gradio`)
 
 1. Reads every entry from `--queries` (a list of dicts) directly, with no schema
@@ -212,12 +217,11 @@ that container can take a while (image build on first run, then app startup).
    silently overwriting existing data. All results are collected into a list
    and written to `--answers` as YAML.
 
-### Stage 6 — Cleanup
+### Stage 6 — After the run
 
-If `--delete-intermediate-files` was passed, the three generated `.ttl` files
-from Stage 2 are deleted. The Docker containers/volumes are **left running**
-intentionally, so you can continue using the interactive Gradio UI afterwards
-without rebuilding the graph.
+The Docker containers/volumes are **left running** intentionally, so you can
+continue using the interactive Gradio UI afterwards without rebuilding the
+graph.
 
 ## 4. Supporting changes made on this branch
 

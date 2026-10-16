@@ -210,17 +210,15 @@ def normalize_answers_path(answers_path: Path) -> Path:
 
 
 def run_benchmark(
-    gradio_url: str,
+    client: Any,
     queries_path: Path,
     answers_path: Path,
     *,
     accumulate_history: bool,
-    startup_timeout_seconds: float,
     question_key: str,
     llm_answer_key: str,
 ) -> None:
     """Run every query in queries_path through gradio-chat and write answers to answers_path."""
-    client = wait_for_gradio_ready(gradio_url, timeout_seconds=startup_timeout_seconds)
     settings = load_gradio_settings()
 
     with open(queries_path, 'r') as handle:
@@ -290,18 +288,19 @@ def main(argv: list[str]) -> int:
     load_predicate_uris(str(schema_path)) # fail fast if there are missing rdf_predicate annotations
     paths = generate_rdf(schema_path, instance_path, args.gen_owl_args)
     docker_compose_up(paths, schema_path, fresh=args.fresh, compose_file=Path(args.compose_file))
+    # gradio-chat only starts after neo4j-init has imported the RDF, so the files are no longer needed.
+    client = wait_for_gradio_ready(args.gradio_url, timeout_seconds=args.startup_timeout)
+    if args.delete_intermediate_files:
+        delete_intermediate_files(paths)
+
     run_benchmark(
-        args.gradio_url,
+        client,
         Path(args.queries).resolve(),
         answers_path,
         accumulate_history=args.accumulate_history,
-        startup_timeout_seconds=args.startup_timeout,
         question_key=args.question_key,
         llm_answer_key=args.llm_answer_key,
     )
-
-    if args.delete_intermediate_files:
-        delete_intermediate_files(paths)
 
     return 0
 
