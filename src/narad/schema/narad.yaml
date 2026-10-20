@@ -1772,12 +1772,22 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: Precedes
       context:
         description: >-
           The frame of reference / domain in which this relationship is asserted to hold.
           For Precedes, this is always beamline_order; the specific BeamLine is given in beamline_context.
         required: true
-        equals_string: beamline_order
+    rules:
+      - description: "This is a Precedes relation, context must be beamline_order"
+        preconditions:
+          slot_conditions:
+            predicate:
+              equals_string: Precedes
+        postconditions:
+          slot_conditions:
+            context:
+              equals_string: beamline_order
     annotations:
       rdf_predicate: acc:precedes
   
@@ -1794,6 +1804,7 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: Contains
     annotations:
       rdf_predicate: acc:contains
       
@@ -1809,6 +1820,7 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: Controls
     annotations:
       rdf_predicate: acc:controls
   
@@ -1825,6 +1837,7 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: IsPartOf
     annotations:
       rdf_predicate: acc:is_part_of
     
@@ -1847,6 +1860,7 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: AdjacentTo
     annotations:
       rdf_predicate: acc:adjacent_to
 
@@ -1864,6 +1878,7 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: Overlaps
     annotations:
       rdf_predicate: acc:overlaps
   
@@ -1881,12 +1896,22 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: HasConnectingBranch
       context:
         description: >-
           The frame of reference / domain in which this relationship is asserted to hold.
           For HasConnectingBranch, this is always beamline_order; the specific BeamLine is given in beamline_context.
         required: true
-        equals_string: beamline_order
+    rules:
+      - description: "This is a HasConnectingBranch relation, context must be beamline_order"
+        preconditions:
+          slot_conditions:
+            predicate:
+              equals_string: HasConnectingBranch
+        postconditions:
+          slot_conditions:
+            context:
+              equals_string: beamline_order
     annotations:
       rdf_predicate: acc:has_connecting_branch
 
@@ -1904,6 +1929,7 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: MountedOn
     annotations:
       rdf_predicate: acc:mounted_on
      
@@ -1919,6 +1945,7 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: Intersects
     annotations:
       rdf_predicate: acc:intersects
 
@@ -1940,6 +1967,7 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
+        equals_string: NearestTo
     annotations:
       rdf_predicate: acc:nearest_to
 
