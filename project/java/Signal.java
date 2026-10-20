@@ -13,10 +13,8 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Signal  {
+public class Signal extends Node {
 
-  private String id;
-  private Component type;
   private String signalRole;
   private String sourceSystem;
   private String nativeDescription;
@@ -26,9 +24,6 @@ public class Signal  {
   private String nativeUnit;
   private String accessProtocol;
   private String archiveIdentifier;
-  private String description;
-  private String label;
-  private String alias;
-  private List<MetadataEntry> additionalMetadata;
+  private MetaParamGroup metaP;
 
 }

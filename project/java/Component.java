@@ -13,14 +13,9 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public abstract class Component  {
+public abstract class Component extends Node {
 
-  private String id;
-  private Component type;
   private List<String> nativeTypes;
-  private String description;
-  private String label;
-  private String alias;
-  private List<MetadataEntry> additionalMetadata;
+  private MetaParamGroup metaP;
 
 }

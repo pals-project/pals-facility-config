@@ -1,7 +1,21 @@
+export type NodeId = string;
+export type AffiliationId = string;
+export type ParamGroupId = string;
+export type MetaParamGroupId = string;
+export type FloorParamGroupId = string;
+export type BodyShiftParamGroupId = string;
+export type LongitudinalPlacementParamGroupId = string;
+export type ReferenceParamGroupId = string;
+export type SolenoidParamGroupId = string;
+export type TwissParamGroupId = string;
+export type RFParamGroupId = string;
+export type ElectricMultipoleParamGroupId = string;
+export type MagneticMultipoleParamGroupId = string;
+export type BendParamGroupId = string;
 export type ComponentId = string;
 export type PhysicalComponentId = string;
 export type VirtualComponentId = string;
-export type BeamlineId = string;
+export type BeamLineId = string;
 export type SignalId = string;
 export type MagnetId = string;
 export type SolenoidId = string;
@@ -13,7 +27,9 @@ export type SextupoleId = string;
 export type KickerId = string;
 export type ACKickerId = string;
 export type DiagnosticDeviceId = string;
+export type BeamProfileMonitorId = string;
 export type BeamPositionMonitorId = string;
+export type ApertureId = string;
 export type RadiationMonitorId = string;
 export type CavityId = string;
 export type CrabCavityId = string;
@@ -23,11 +39,43 @@ export type SuperConductingRFCavityId = string;
 export type SupportingFacilityComponentId = string;
 export type BookkeepingComponentId = string;
 export type MarkerId = string;
-export type BeamlineSectionId = string;
-export type MetadataEntryKey = string;
-export type RelationshipId = string;
+export type BeamLineSectionId = string;
+export type EdgeId = string;
 export type SignalBindingId = string;
+export type HasSignalId = string;
+export type HasSetpointSignalId = string;
+export type HasReadbackSignalId = string;
+export type HasCommandSignalId = string;
+export type HasLimitSignalId = string;
 export type ComponentRelationId = string;
+export type PrecedesId = string;
+export type ContainsId = string;
+export type ControlsId = string;
+export type IsPartOfId = string;
+export type AdjacentToId = string;
+export type OverlapsId = string;
+export type HasConnectingBranchId = string;
+export type MountedOnId = string;
+export type IntersectsId = string;
+export type NearestToId = string;
+/**
+* Controlled values for identifier types.
+*/
+export enum IdentifierTypeEnum {
+    
+    /** Digital Object Identifier. */
+    DOI = "DOI",
+    /** Persistent Uniform Resource Locator. */
+    PURL = "PURL",
+    /** Research Organization Registry identifier. */
+    ROR = "ROR",
+    /** Local identifier, specific to the facility or source system. */
+    LOCAL = "LOCAL",
+    /** Uniform Resource Locator. */
+    URL = "URL",
+    /** Archival Resource Key. */
+    ARK = "ARK",
+};
 /**
 * Controlled values for facility-local source systems.
 */
@@ -60,7 +108,7 @@ export enum PhysicalRelationEnum {
     /** Mechanically attached to the beam pipe or vacuum envelope. */
     AttachedToPipe = "AttachedToPipe",
     /** Near and operationally associated with the beamline. */
-    NearBeamline = "NearBeamline",
+    NearBeamLine = "NearBeamLine",
     /** Supports accelerator operation without a specific beam-pipe placement. */
     SupportingFacility = "SupportingFacility",
 };
@@ -71,10 +119,10 @@ export enum VirtualRelationEnum {
     
     /** Beam passes through the virtual component. Used for virtual components like Markers that represent important locations on the beamline but don't have a physical instantiation. */
     Inline = "Inline",
-    /** Not inline with the beamline but still operationally associated with it.  Used for virtual components that are important for understanding the beamline structure and function but don't have a direct physical relationship to the beam path,  such as BeamlineSections or Markers that are not inline with the beam. */
-    AssociatedWithBeamline = "AssociatedWithBeamline",
-    /** Not inline with the beamline and not operationally associated with it.  Used for virtual components that are more abstract and don't have a specific relationship  to the beamline, such as a virtual component representing a control system function  or role that is important for understanding the overall accelerator system but doesn't have a direct relationship to the beamline structure. */
-    NotAssociatedWithBeamline = "NotAssociatedWithBeamline",
+    /** Not inline with the beamline but still operationally associated with it.  Used for virtual components that are important for understanding the BeamLine structure and function but don't have a direct physical relationship to the beam path,  such as BeamLineSections or Markers that are not inline with the beam. */
+    AssociatedWithBeamLine = "AssociatedWithBeamLine",
+    /** Not inline with the BeamLine and not operationally associated with it.  Used for virtual components that are more abstract and don't have a specific relationship  to the BeamLine, such as a virtual component representing a control system function  or role that is important for understanding the overall accelerator system but doesn't have a direct relationship to the BeamLine structure. */
+    NotAssociatedWithBeamLine = "NotAssociatedWithBeamLine",
 };
 /**
 * Broad device-level functions.
@@ -131,8 +179,8 @@ export enum FacilityFunctionEnum {
 */
 export enum VirtualFunctionEnum {
     
-    /** A section of the beamline used for organizational or functional grouping of components, such as a linac section, transfer line, or ring sector. */
-    BeamlineSection = "BeamlineSection",
+    /** A section of the BeamLine used for organizational or functional grouping of components, such as a linac section, transfer line, or ring sector. */
+    BeamLineSection = "BeamLineSection",
     /** A virtual component representing an important location on the beamline,  such as a reference point for beam-based alignment, a location of a known aperture restriction,  or a location of a critical diagnostic device. */
     Mark = "Mark",
     /** A virtual component representing a branching point in the beamline,  such as a beamline fork or switchyard. */
@@ -245,32 +293,50 @@ export enum QuantityKindEnum {
 */
 export enum UnitEnum {
     
-    /** millimeter */
-    mm = "mm",
-    /** meter */
-    m = "m",
     /** ampere */
     A = "A",
-    /** tesla meter */
-    T_m = "T_m",
-    /** pascal */
-    Pa = "Pa",
-    /** torr */
-    Torr = "Torr",
-    /** rem per hour. Kept as a local accelerator unit value because QUDT publishes rem and rem-per-second but no exact rem-per-hour unit in the checked vocabulary. */
-    rem_per_h = "rem_per_h",
-    /** millirem per hour. Kept as a local accelerator unit value because QUDT publishes related radiation units but no exact millirem-per-hour unit in the checked vocabulary. */
-    mrem_per_h = "mrem_per_h",
-    /** volt */
-    V = "V",
-    /** kilowatt */
-    kW = "kW",
     /** degree */
     degree = "degree",
-    /** megavolt per meter */
-    MV_per_m = "MV_per_m",
+    /** electron volt */
+    eV = "eV",
+    /** momentum in electron volts per speed of light */
+    eV_per_c = "eV_per_c",
+    /** mass in electron volts per speed of light squared */
+    eV_per_c2 = "eV_per_c2",
+    /** fundamental charge */
+    fundamental_charge = "fundamental_charge",
     /** gauss per centimeter */
     G_per_cm = "G_per_cm",
+    /** hertz */
+    Hz = "Hz",
+    /** kilowatt */
+    kW = "kW",
+    /** meter */
+    m = "m",
+    /** millimeter */
+    mm = "mm",
+    /** millirem per hour. Kept as a local accelerator unit value because QUDT publishes related radiation units but no exact millirem-per-hour unit in the checked vocabulary. */
+    mrem_per_h = "mrem_per_h",
+    /** megavolt per meter */
+    MV_per_m = "MV_per_m",
+    /** pascal */
+    PA = "PA",
+    /** radians divided by 2 pi - angles and phases */
+    randians_pi2 = "randians_pi2",
+    /** rem per hour. Kept as a local accelerator unit value because QUDT publishes rem and rem-per-second but no exact rem-per-hour unit in the checked vocabulary. */
+    rem_per_h = "rem_per_h",
+    /** second */
+    seconds = "seconds",
+    /** tesla */
+    T = "T",
+    /** tesla meter */
+    T_M = "T_M",
+    /** torr */
+    Torr = "Torr",
+    /** volt */
+    V = "V",
+    /** volt per meter */
+    V_per_m = "V_per_m",
     /** dimensionless numeric value */
     unitless = "unitless",
     /** no unit or not applicable */
@@ -290,55 +356,17 @@ export enum DataTypeEnum {
     /** boolean data type */
     Boolean = "Boolean",
 };
-
-export enum ComponentRelationPredicateEnum {
-    
-    /** Subject occurs immediately before object in the sequence/beamline order. */
-    precedes = "precedes",
-    /** Subject occurs after object in the sequence/beamline order. */
-    follows = "follows",
-    /** Subject spatially or mereologically contains object. */
-    contains = "contains",
-    /** Subject is spatially or mereologically contained in object. */
-    contained_in = "contained_in",
-    /** Subject and object are physically connected. a is connected to b if and only if a and b are discrete structure,  and there exists some connecting structure c, such that c connects a and b */
-    connected_to = "connected_to",
-    /** Subject controls the state or behavior of object. */
-    controls = "controls",
-    /** Subject is controlled by object. */
-    is_controlled_by = "is_controlled_by",
-    /** Subject is a part of object. */
-    is_part_of = "is_part_of",
-    /** Subject has part object. */
-    has_part = "has_part",
-    /** Subject and object are spatially adjacent, without overlapping. */
-    adjacent_to = "adjacent_to",
-    /** Subject and object share at least one part in common. */
-    overlaps = "overlaps",
-    /** Subject is mounted on object. */
-    mounted_on = "mounted_on",
-    /** Subject intersects with object. */
-    intersects = "intersects",
-    /** Subject is nearest to object. */
-    nearest_to = "nearest_to",
-};
 /**
-* Controlled predicates for Component-to-Signal bindings.
+* Coordinate systems for spatial relationships.
 */
-export enum SignalBindingPredicateEnum {
+export enum CoordinateSystemEnum {
     
-    /** Generic association between a component and one of its signals. The specific role (setpoint, readback, status, etc.) is carried by the Signal's own signal_role field, not the predicate. */
-    has_signal = "has_signal",
-    /** Subject has the given signal as its status indicator. */
-    has_status_signal = "has_status_signal",
-    /** Subject has the given signal as its setpoint. */
-    has_setpoint_signal = "has_setpoint_signal",
-    /** Subject has the given signal as its readback. */
-    has_readback_signal = "has_readback_signal",
-    /** Subject has the given signal as a command trigger. */
-    has_command_signal = "has_command_signal",
-    /** Subject has the given signal as a limit/constraint value. */
-    has_limit_signal = "has_limit_signal",
+    /** Cartesian coordinate system (x, y, z). */
+    Cartesian = "Cartesian",
+    /** Cylindrical coordinate system (r, theta, z). */
+    Cylindrical = "Cylindrical",
+    /** Spherical coordinate system (r, theta, phi). */
+    Spherical = "Spherical",
 };
 
 export enum RelationContextEnum {
@@ -357,14 +385,6 @@ export enum ReferenceFrameEnum {
     facility_coordinates = "facility_coordinates",
     local_component_frame = "local_component_frame",
     tunnel_stationing = "tunnel_stationing",
-};
-
-export enum AxisEnum {
-    
-    x = "x",
-    y = "y",
-    z = "z",
-    s = "s",
 };
 
 export enum DirectionEnum {
@@ -406,24 +426,89 @@ export enum ReferenceGeometryEnum {
     /** Rectangular coordinates commensurate with the exit coordinates. */
     exit_coords = "exit_coords",
 };
+/**
+* The type of cavity, which determines the field configuration and mode structure.
+*/
+export enum CavityTypeEnum {
+    
+    /** Default. A cavity that supports standing wave modes, typically with fixed geometry and resonant frequencies. */
+    STANDING_WAVE = "STANDING_WAVE",
+    /** A cavity that supports traveling wave modes, typically with a waveguide structure and phase velocity matching the beam. */
+    TRAVELING_WAVE = "TRAVELING_WAVE",
+};
+/**
+* The zero phase reference for the cavity, which determines the phase of the RF field at the entrance of the cavity.
+*/
+export enum ZeroPhaseEnum {
+    
+    /** Default. The zero phase is the maximum accelerating phase, where the beam gains energy. */
+    ACCELERATING = "ACCELERATING",
+    /** Zero phase is at the stable zero crossing for particles below transition. */
+    BELOW_TRANSITION = "BELOW_TRANSITION",
+    /** Zero phase is at the stable zero crossing for particles above transition.. */
+    ABOVE_TRANSITION = "ABOVE_TRANSITION",
+};
+
+
+/**
+ * Abstract base class for all node entities in the accelerator core ontology. This differentiates nodes from edges (relationships) in the ontology. This class is not intended to be instantiated directly, but serves as a common ancestor for all other classes. Allows for the use of kind: as a discriminator for the type of node in the ontology.
+ */
+export interface Node {
+    /** A unique identifier for the instance. */
+    id: string,
+    /** The LinkML class name of this instance. */
+    kind: string,
+    /** An alternative name or identifier for the instance. */
+    alias?: string[],
+}
 
 
 /**
  * Root container for accelerator core components, semantic signals, and local bindings.
  */
-export interface NARAD {
+export interface PALSAccelerator {
     /** The LinkML class name of this instance. */
-    type: ComponentId,
-    /** Human-readable description for the representation of a particle accelerator and its operations. */
+    kind: string,
+    /** A human-readable description of the instance. */
     description?: string,
+    /** The affiliation of the author or component, as a ROR. */
+    affiliation?: Affiliation,
+    /** Version of the representation of a particle accelerator and its operations. */
+    version?: string,
+    /** Contains the authorship information for this representation of an accelerator facility and its operations. */
+    authors?: Author[],
+    /** Additional notes or comments about the representation of a particle accelerator and its operations. */
+    notes?: string[],
+    /** A facility that contains lattice elements (physical and virtual), beamlines, parameter set commands, signals, etc. */
+    facility?: Facility,
+}
+
+
+/**
+ * Contains authorship information for a representation of an accelerator facility and its operations.
+ */
+export interface Author {
+    /** The name of the entity. For example, the name of the person or organization. */
+    name?: string,
+    /** The affiliation of the author or component, as a ROR. */
+    affiliation?: Affiliation,
+    /** The email address of the author. */
+    email?: string,
+    /** The ORCID identifier of the author. */
+    orcid?: string,
+}
+
+
+/**
+ * A facility that houses one or more accelerators.
+ */
+export interface Facility {
+    /** A unique and ideally persistent identifier for the facility, such as a DOI or ROR. */
+    identifiers?: Identifier[],
     /** A list of physical components in the accelerator system. */
-    physical_components?: PhysicalComponent[],
-    /** A list of virtual components in the accelerator system. */
-    virtual_components?: VirtualComponent[],
+    components?: Component[],
     /** A list of beamlines in the accelerator system. */
-    beamlines?: Beamline[],
-    /** A list of supporting facility components in the accelerator system. */
-    supporting_facility_components?: SupportingFacilityComponent[],
+    beamlines?: BeamLine[],
     /** A list of signals in the accelerator system. */
     signals?: Signal[],
     /** A list of signal bindings in the accelerator system (Component <-> Signal relationships). */
@@ -434,24 +519,71 @@ export interface NARAD {
 
 
 /**
+ * Contains affiliation information for an author or component, such as a ROR.
+ */
+export interface Affiliation {
+    /** A unique identifier for the instance. */
+    id: string,
+    /** The name of the entity. For example, the name of the person or organization. */
+    name?: string,
+    /** A unique and ideally persistent identifier for the facility, such as a DOI or ROR. */
+    identifiers?: Identifier[],
+}
+
+
+/**
+ * A unique, and ideally persistent, identifier for a facility, such as a DOI or ROR.
+ */
+export interface Identifier {
+    /** The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK. */
+    identifier_type?: string,
+    /** The value of the identifier. */
+    identifier_value?: string,
+}
+
+
+/**
+ * Abstract base for inlined PALS parameter-group objects, giving each an identifier so it resolves to a stable node/IRI rather than a blank node when exported to RDF.
+ */
+export interface ParamGroup {
+    /** A unique identifier for the instance. */
+    id: string,
+}
+
+
+
+export interface HasMetaP {
+    /** A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    MetaP?: MetaParamGroup,
+}
+
+
+/**
  * Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS).
  */
-export interface MetaP {
-    /** Human-readable description. */
+export interface MetaParamGroup extends ParamGroup {
+    /** A human-readable description of the instance. */
     description?: string,
+    /** An alternative name or identifier for the instance. */
+    alias?: string[],
     /** A label string. */
     label?: string,
-    /** An alternative name or identifier for the instance. */
-    alias?: string,
     /** Additional metadata or annotations for the instance. */
-    additional_metadata?: MetadataEntry[],
+    additional_metadata?: AdditionalMetadata[],
+}
+
+
+
+export interface HasFloorP {
+    /** A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    FloorP?: FloorParamGroup,
 }
 
 
 /**
  * Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
  */
-export interface FloorP {
+export interface FloorParamGroup extends ParamGroup {
     /** Global X coordinate in the facility floor plan. */
     x?: number,
     /** Global Y coordinate in the facility floor plan. */
@@ -467,10 +599,17 @@ export interface FloorP {
 }
 
 
+
+export interface HasBodyShiftP {
+    /** A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    BodyShiftP?: BodyShiftParamGroup,
+}
+
+
 /**
  * Mixin class for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
  */
-export interface BodyShiftP {
+export interface BodyShiftParamGroup extends ParamGroup {
     /** Shift in the X direction in the facility floor plan. */
     x_offset?: number,
     /** Shift in the Y direction in the facility floor plan. */
@@ -486,12 +625,17 @@ export interface BodyShiftP {
 }
 
 
+
+export interface HasLongitudinalPlacementP {
+    /** A mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    LongitudinalPlacementP?: LongitudinalPlacementParamGroup,
+}
+
+
 /**
- * Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis. 
-Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
-One (or both) `length` or `s_position` must be present.
+ * Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`. One (or both) `length` or `s_position` must be present.
  */
-export interface HasLongitudinalPlacement {
+export interface LongitudinalPlacementParamGroup extends ParamGroup {
     /** Length of the element (arc length for bends). */
     length?: number,
     /** Longitudinal position of the element along the beamline. */
@@ -499,10 +643,17 @@ export interface HasLongitudinalPlacement {
 }
 
 
+
+export interface HasReferenceP {
+    /** A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    ReferenceP?: ReferenceParamGroup,
+}
+
+
 /**
  * Mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters)  for interoperability with the Particle Accelerator Language Standard (PALS).
  */
-export interface ReferenceP {
+export interface ReferenceParamGroup extends ParamGroup {
     /** A reference to a species or particle type, such as an ion, electron, or proton. */
     species_ref?: string,
     /** [momentum*c] Reference momentum times speed of light. */
@@ -514,10 +665,17 @@ export interface ReferenceP {
 }
 
 
+
+export interface HasSolenoidP {
+    /** A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    SolenoidP?: SolenoidParamGroup,
+}
+
+
 /**
  * Mixin for solenoid-specific parameters.
  */
-export interface SolenoidP {
+export interface SolenoidParamGroup extends ParamGroup {
     /** Normalized solenoid strength. */
     Ksol?: number,
     /** Solenoid field. */
@@ -525,10 +683,17 @@ export interface SolenoidP {
 }
 
 
+
+export interface HasTwissP {
+    /** A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    TwissP?: TwissParamGroup,
+}
+
+
 /**
  * Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element.
  */
-export interface TwissP {
+export interface TwissParamGroup extends ParamGroup {
     /** Twiss alpha parameter in the horizontal plane. */
     alpha_a?: number,
     /** Twiss alpha parameter in the vertical plane. */
@@ -552,11 +717,49 @@ export interface TwissP {
 }
 
 
+
+export interface HasRFP {
+    /** A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    RFP?: RFParamGroup,
+}
+
+
 /**
- * Mixin for electric multipole parameters, 
-which can be used to describe the electric field components of an accelerator element.
-This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).
-Example with three multipole components (N=0,1,2): ```yaml components: - order: 7
+ * Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS).
+ */
+export interface RFParamGroup extends ParamGroup {
+    /** RF frequency. */
+    frequency?: number,
+    /** RF harmonic number. */
+    harmon?: number,
+    /** RF voltage. */
+    voltage?: number,
+    /** RF phase. rad/2pi RF phase in 0 to 2*pi */
+    phase?: number,
+    /** rad/2pi RF Phase added to multipass elements */
+    multipass_phase?: number,
+    /** Cavity type */
+    cavity_type?: string,
+    /** Number of cells in the cavity */
+    num_cells?: number,
+    /** Sets what phase = 0 means. */
+    zero_phase?: string,
+    /** Active acceleration length. */
+    L_active?: number,
+    /** Reference energy gain. */
+    dE_ref?: number,
+}
+
+
+
+export interface HasElectricMultipoleP {
+    /** A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    ElectricMultipoleP?: ElectricMultipoleParamGroup,
+}
+
+
+/**
+ * Mixin for electric multipole parameters,  which can be used to describe the electric field components of an accelerator element. This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7
   tilt: 0.7
 - order: 3
   En: 27.3
@@ -564,17 +767,21 @@ Example with three multipole components (N=0,1,2): ```yaml components: - order: 
   EnL: 3.47e1
 ```
  */
-export interface ElectricMultipoleP {
+export interface ElectricMultipoleParamGroup extends ParamGroup {
     /** Electric multipole components, one per order N. */
-    components?: MultipoleComponent[],
+    elec_components?: MultipoleParameterGroup[],
+}
+
+
+
+export interface HasMagneticMultipoleP {
+    /** A mixin for magnetic multipole parameters that are aligned with PALS MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    MagneticMultipoleP?: MagneticMultipoleParamGroup,
 }
 
 
 /**
- * Mixin for magnetic multipole parameters, 
-which can be used to describe the magnetic field components of an accelerator element.
-This mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).
-Example with three multipole components (N=0,1,2): ```yaml components: - order: 7
+ * Mixin for magnetic multipole parameters,  which can be used to describe the magnetic field components of an accelerator element. This mixin is aligned with PALS MagneticMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml mag_components: - order: 7
   tilt: 0.7
 - order: 3
   Bn: 27.3
@@ -584,17 +791,23 @@ Example with three multipole components (N=0,1,2): ```yaml components: - order: 
   Kn: 0.85     # normalized form, e.g. a quadrupole's k1-like strength
 ```
  */
-export interface MagneticMultipoleP {
+export interface MagneticMultipoleParamGroup extends ParamGroup {
     /** Magnetic multipole components, one per order N. */
-    components?: MultipoleComponent[],
+    mag_components?: MultipoleParameterGroup[],
+}
+
+
+
+export interface HasBendP {
+    /** A mixin for bend parameters that are aligned with PALS BendP (Bend Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). */
+    BendP?: BendParamGroup,
 }
 
 
 /**
- * Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.
-This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
+ * Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS).
  */
-export interface BendP {
+export interface BendParamGroup extends ParamGroup {
     /** Reference bend angle. */
     angle_ref?: number,
     /** Reference bend field. */
@@ -639,11 +852,9 @@ export interface BendP {
 
 
 /**
- * A single order's electric (or magnetic) multipole component.
-Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.
-Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
+ * A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components.
  */
-export interface MultipoleComponent {
+export interface MultipoleParameterGroup {
     /** Multipole order N (0 = dipole, 1 = quadrupole, etc.) */
     order: number,
     /** Tilt of the Nth multipole. */
@@ -670,11 +881,7 @@ export interface MultipoleComponent {
 /**
  * A general class for accelerator components, which can be specialized into more specific types like AcceleratorDevice, Magnet, etc.
  */
-export interface Component extends MetaP {
-    /** A unique identifier for the instance. */
-    id: string,
-    /** The LinkML class name of this instance. */
-    type: ComponentId,
+export interface Component extends Node, HasMetaP {
     /** The native type of the component in the source system, which can be used to identify the component across different source systems. */
     native_types?: string[],
 }
@@ -683,7 +890,7 @@ export interface Component extends MetaP {
 /**
  * A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system.
  */
-export interface PhysicalComponent extends Component, FloorP, HasLongitudinalPlacement {
+export interface PhysicalComponent extends Component, HasFloorP, HasLongitudinalPlacementP {
     /** The function of the physical component,  which can be used to identify the component across different source systems. */
     functions: string,
     /** The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems. */
@@ -692,9 +899,9 @@ export interface PhysicalComponent extends Component, FloorP, HasLongitudinalPla
 
 
 /**
- * A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamlineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
+ * A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices.
  */
-export interface VirtualComponent extends Component, FloorP {
+export interface VirtualComponent extends Component, HasFloorP {
     /** The function of the virtual component,  which can be used to identify the component across different source systems. */
     functions: string,
     /** The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems. */
@@ -703,25 +910,21 @@ export interface VirtualComponent extends Component, FloorP {
 
 
 /**
- * A top-level NARAD-system for an ordered sequence of beamline elements defining a beam path.
+ * PALS element for an ordered sequence of beamline elements defining a beam path.
  */
-export interface Beamline extends VirtualComponent {
-    /** Indicates whether the beamline is a multipass beamline, where the beam passes through the same physical elements multiple times.
-If not provided, the default assumption is that the beamline is single-pass. */
-    multipass?: boolean,
-    /** The total length of the beamline.
-For pals interoperability, use m as the unit of length. */
+export interface BeamLine extends VirtualComponent {
+    /** The total length of the BeamLine. For pals interoperability, use m as the unit of length. */
     length?: number,
-    /** Name of a line item used as a reference point when the BeamLine is used as a subline. */
-    zero_point?: string,
-    /** Indicates whether orbit and Twiss parameters periodic.
-If not provided, the default assumption is that the beamline is not periodic. */
+    /** A human-readable description of the instance. */
+    description?: string,
+    /** Indicates whether the BeamLine is a multipass BeamLine, where the beam passes through the same physical elements multiple times. If not provided, the default assumption is that the BeamLine is single-pass. */
+    multipass?: boolean,
+    /** Indicates whether orbit and Twiss parameters periodic. If not provided, the default assumption is that the BeamLine is not periodic. */
     periodic?: boolean,
     /** Repetition count. If not provided, the default assumption is that the beamline is not repeated and the value is 1.
 If value is greater than 1, the beamline is repeated that many times. */
     repeat?: number,
-    /** Beam direction along the beamline: +1 or -1. 
-Longitudinal orientation. Default is +1. */
+    /** Beam direction along the BeamLine: +1 or -1. Longitudinal orientation. Default is +1. */
     direction?: number,
 }
 
@@ -729,11 +932,7 @@ Longitudinal orientation. Default is +1. */
 /**
  * Semantic meaning of a control-system signal associated with a component.
  */
-export interface Signal extends MetaP {
-    /** A unique identifier for the instance. */
-    id: string,
-    /** The LinkML class name of this instance. */
-    type: ComponentId,
+export interface Signal extends Node, HasMetaP {
     /** The role of the signal in the control system, such as setpoint, readback, status, command, or limit. */
     signal_role: string,
     /** The source system from which the signal originates, such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service. */
@@ -758,7 +957,7 @@ export interface Signal extends MetaP {
 /**
  * An accelerator device that produces a magnetic field for beam control.
  */
-export interface Magnet extends PhysicalComponent, ReferenceP, BodyShiftP, TwissP {
+export interface Magnet extends PhysicalComponent, HasReferenceP, HasBodyShiftP, HasTwissP {
 }
 
 
@@ -766,7 +965,7 @@ export interface Magnet extends PhysicalComponent, ReferenceP, BodyShiftP, Twiss
  * A magnet with a primarily longitudinal magnetic field used for focusing.
 A solenoid is an element whose magnetic field is dominated by a field whose direction is aligned with the magnetic axis. 
  */
-export interface Solenoid extends Magnet, SolenoidP {
+export interface Solenoid extends Magnet, HasSolenoidP {
 }
 
 
@@ -774,14 +973,14 @@ export interface Solenoid extends Magnet, SolenoidP {
  * A general magnet with a higher-order multipole field, such as a sextupole or octupole.
 Only one of the electric or magnetic multipole components should be present, not both.
  */
-export interface Multipole extends Magnet, ElectricMultipoleP, MagneticMultipoleP {
+export interface Multipole extends Magnet, HasElectricMultipoleP, HasMagneticMultipoleP {
 }
 
 
 /**
  * Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight.
  */
-export interface Bend extends Multipole {
+export interface Bend extends Multipole, HasBendP {
 }
 
 
@@ -814,7 +1013,7 @@ export interface Sextupole extends Multipole {
 Can deflect the beam transversely in both planes, or a single plane, depending on the design and parameters of the kicker. 
 Only one of the electric or magnetic multipole components should be present, not both.
  */
-export interface Kicker extends Magnet, ElectricMultipoleP, MagneticMultipoleP {
+export interface Kicker extends Magnet, HasElectricMultipoleP, HasMagneticMultipoleP {
     /** The transverse plane in which the kicker operates, either horizontal or vertical. */
     plane?: string,
 }
@@ -835,23 +1034,37 @@ export interface DiagnosticDevice extends PhysicalComponent {
 
 
 /**
+ * A diagnostic device used to measure transverse beam profile.
+ */
+export interface BeamProfileMonitor extends DiagnosticDevice, HasReferenceP, HasBodyShiftP, HasTwissP {
+}
+
+
+/**
  * A diagnostic device used to measure transverse beam position.
  */
-export interface BeamPositionMonitor extends DiagnosticDevice, ReferenceP, BodyShiftP, TwissP {
+export interface BeamPositionMonitor extends DiagnosticDevice, HasReferenceP, HasBodyShiftP, HasTwissP {
+}
+
+
+/**
+ * A diagnostic or limiting aperture element used to constrain or characterize beam passage.
+ */
+export interface Aperture extends DiagnosticDevice, HasReferenceP, HasTwissP {
 }
 
 
 /**
  * A diagnostic device used to monitor radiation dose or dose rate.
  */
-export interface RadiationMonitor extends DiagnosticDevice, BodyShiftP {
+export interface RadiationMonitor extends DiagnosticDevice, HasBodyShiftP {
 }
 
 
 /**
  * A cavity used for beam acceleration or manipulation.
  */
-export interface Cavity extends PhysicalComponent, ReferenceP, ElectricMultipoleP, MagneticMultipoleP, BodyShiftP, TwissP {
+export interface Cavity extends PhysicalComponent, HasReferenceP, HasElectricMultipoleP, HasMagneticMultipoleP, HasBodyShiftP, HasTwissP {
 }
 
 
@@ -865,7 +1078,7 @@ export interface CrabCavity extends Cavity {
 /**
  * A cavity used for RF acceleration or longitudinal manipulation.
  */
-export interface RFCavity extends Cavity {
+export interface RFCavity extends Cavity, HasRFP {
 }
 
 
@@ -884,49 +1097,39 @@ export interface SuperConductingRFCavity extends RFCavity {
 
 
 /**
- * A physical component that supports accelerator operation 
-without a specific beam-pipe placement, 
-such as a power supply, control rack, or radiation detector.
-These can include Girders, Racks, Power Supplies, 
-and other physical infrastructure components that are important for understanding 
-the structure and function of the accelerator system but are not inline with the beamline.
+ * A physical component that supports accelerator operation  without a specific beam-pipe placement,  such as a power supply, control rack, or radiation detector. These can include Girders, Racks, Power Supplies,  and other physical infrastructure components that are important for understanding  the structure and function of the accelerator system but are not inline with the beamline.
  */
-export interface SupportingFacilityComponent extends PhysicalComponent, FloorP, HasLongitudinalPlacement, BodyShiftP {
+export interface SupportingFacilityComponent extends PhysicalComponent, HasFloorP, HasLongitudinalPlacementP, HasBodyShiftP {
     /** The function of the supporting facility component,  which can be used to identify the component across different source systems. */
     functions: string,
 }
 
 
 /**
- * A virtual component that represents a bookkeeping or organizational role in the accelerator system, 
-such as a BeamlineSection, Marker or a Fork.
-These can include BeamlineSections, Markers, Forks, 
-and other virtual components that are important for understanding 
-the structure and function of the accelerator system but are not physical devices.
+ * A virtual component that represents a bookkeeping or organizational role in the accelerator system,  such as a BeamLineSection, Marker or a Fork. These can include BeamLineSections, Markers, Forks, and other virtual components that are important for understanding  the structure and function of the accelerator system but are not physical devices.
  */
-export interface BookkeepingComponent extends VirtualComponent, BodyShiftP {
+export interface BookkeepingComponent extends VirtualComponent, HasBodyShiftP {
 }
 
 
 /**
  * A virtual component used as a reference point or marker in the beamline structure.
  */
-export interface Marker extends BookkeepingComponent, TwissP {
+export interface Marker extends BookkeepingComponent, HasTwissP {
 }
 
 
 /**
- * A virtual component used to represent a section of the beamline for organizational 
-or functional grouping of components.
+ * A virtual component used to represent a section of the BeamLine for organizational or functional grouping of components.
  */
-export interface BeamlineSection extends BookkeepingComponent {
+export interface BeamLineSection extends BookkeepingComponent, HasFloorP {
 }
 
 
 /**
  * A single generic key/value metadata entry, used as a GraphQL-compatible replacement for an open-ended (range: Any) field. A list of these represents an arbitrary, extensible bag of program-specific metadata.
  */
-export interface MetadataEntry {
+export interface AdditionalMetadata {
     /** The metadata field name. */
     key: string,
     /** The metadata value, serialized as a string. */
@@ -939,7 +1142,7 @@ export interface MetadataEntry {
 /**
  * Abstract base for subject-predicate-object associations.
  */
-export interface Relationship {
+export interface Edge {
     /** A unique identifier for the instance. */
     id: string,
     subject: string,
@@ -949,27 +1152,165 @@ export interface Relationship {
 
 
 /**
- * Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding.
+ * Association between a PhysicalComponent and one of its Signals, e.g. QUAD1 component to QUAD1.STATUS signal.
  */
-export interface SignalBinding extends Relationship {
+export interface SignalBinding extends Edge {
+}
+
+
+
+export interface HasSignal extends SignalBinding {
+}
+
+
+
+export interface HasSetpointSignal extends SignalBinding {
+}
+
+
+
+export interface HasReadbackSignal extends SignalBinding {
+}
+
+
+
+export interface HasCommandSignal extends SignalBinding {
+}
+
+
+
+export interface HasLimitSignal extends SignalBinding {
 }
 
 
 /**
  * Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds.
  */
-export interface ComponentRelation extends Relationship {
+export interface ComponentRelation extends Edge {
     /** The frame of reference / domain in which this relationship is asserted to hold. */
-    context?: string,
-    /** The specific Beamline this relationship is defined with respect to (relevant when context=beamline_order). */
-    beamline_context?: BeamlineId,
+    context: string,
+    component_direction?: string,
     reference_frame?: string,
+}
+
+
+/**
+ * A relationship indicating that the subject component precedes the object component in a specified context,  such as along a beamline.
+ */
+export interface Precedes extends ComponentRelation {
+    /** The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order). Only an edge-property slot for edges that are defined with respect to a specific BeamLine. */
+    beamline_context: BeamLineId,
+}
+
+
+/**
+ * A relationship indicating that the subject component contains the object component in a specified context,  such as within a BeamLineSection or other organizational grouping.
+ */
+export interface Contains extends ComponentRelation {
+}
+
+
+/**
+ * A relationship indicating that the subject component controls the object component in a specified context,  such as a power supply controlling a magnet.
+ */
+export interface Controls extends ComponentRelation {
+}
+
+
+/**
+ * A relationship indicating that the subject component is part of the object component in a specified context,  such as a magnet being part of a BeamLineSection.
+ */
+export interface IsPartOf extends ComponentRelation {
+}
+
+
+/**
+ * A relationship indicating that the subject component is adjacent to the object component and not overlapping
+ in a specified context, such as radiation detector and a magnet.
+ */
+export interface AdjacentTo extends ComponentRelation {
+    /** Distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship. */
     distance_value?: number,
+    /** Unit of the distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship. */
     distance_unit?: string,
-    axis?: string,
-    direction?: string,
+    /** Tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship. */
     tolerance_value?: number,
+    /** Unit of the tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship. */
     tolerance_unit?: string,
+    /** A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship. */
+    coordinates?: CoordinateSet,
+}
+
+
+/**
+ * A relationship indicating that the subject component overlaps the object component in a specified context,  such as a magnet and a diagnostic device.
+ */
+export interface Overlaps extends ComponentRelation {
+    /** A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship. */
+    coordinates?: CoordinateSet,
+}
+
+
+/**
+ * A relationship indicating that the subject component has a connecting branch to the object component in a specified context,  such as a beamline section having a fork as a connecting branch.
+ */
+export interface HasConnectingBranch extends ComponentRelation {
+    /** The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order). Only an edge-property slot for edges that are defined with respect to a specific BeamLine. */
+    beamline_context: BeamLineId,
+}
+
+
+/**
+ * A relationship indicating that the subject component is mounted on the object component in a specified context,  such as a diagnostic device mounted on a magnet.
+ */
+export interface MountedOn extends ComponentRelation {
+    /** A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship. */
+    coordinates?: CoordinateSet,
+}
+
+
+/**
+ * A relationship indicating that the subject component intersects the object component in a specified context,  such as a beamline and a diagnostic device.
+ */
+export interface Intersects extends ComponentRelation {
+}
+
+
+/**
+ * A relationship indicating that the subject component is nearest to the object component in a specified context,  such as a diagnostic device nearest to a magnet.
+ */
+export interface NearestTo extends ComponentRelation {
+    /** Distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship. */
+    distance_value?: number,
+    /** Unit of the distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship. */
+    distance_unit?: string,
+    /** Tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship. */
+    tolerance_value?: number,
+    /** Unit of the tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship. */
+    tolerance_unit?: string,
+    /** A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship. */
+    coordinates?: CoordinateSet,
+}
+
+
+/**
+ * A set of coordinates that define the spatial relationship between two components. This can include Cartesian coordinates, cylindrical coordinates, or other coordinate systems as needed. Useful for defining the spatial relationship where the relationship is not strictly linear or where the components are not aligned along a single axis.
+ */
+export interface CoordinateSet {
+    /** The coordinate system used for the coordinates (e.g., Cartesian, Cylindrical). */
+    coordinate_system?: string,
+    /** The x-coordinate in the specified coordinate system. */
+    x_coord?: number,
+    /** The y-coordinate in the specified coordinate system. */
+    y_coord?: number,
+    /** The z-coordinate in the specified coordinate system. */
+    z_coord?: number,
+    /** The radial distance in cylindrical coordinates. */
+    r_coord?: number,
+    /** The angular coordinate in cylindrical coordinates (in radians). */
+    theta_coord?: number,
+    /** The azimuthal angle in spherical coordinates (in radians). */
+    phi_coord?: number,
 }
 
 

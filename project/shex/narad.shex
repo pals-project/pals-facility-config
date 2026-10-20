@@ -1,13 +1,11 @@
 # metamodel_version: 1.7.0
-BASE <https://example.org/narad/>
+BASE <https://pals-project.readthedocs.io/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
-PREFIX unit: <http://qudt.org/vocab/unit/>
 PREFIX quantitykind: <http://qudt.org/vocab/quantitykind/>
-PREFIX saref: <https://saref.etsi.org/core/v4.1.1/>
-PREFIX pals: <https://pals-project.readthedocs.io/>
+PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/>
 
 
 linkml:String xsd:string
@@ -56,113 +54,201 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<Beamline> CLOSED {
-    (  $<Beamline_tes> (  &<VirtualComponent_tes> ;
-          rdf:type [ <VirtualComponent> ] ? ;
-          pals:multipass @linkml:Boolean ? ;
-          pals:length @linkml:Float ? ;
-          <zero_point> @linkml:String ? ;
-          pals:periodic @linkml:Boolean ? ;
-          pals:repeat @linkml:Integer ? ;
-          pals:direction @linkml:Integer ?
+<AdditionalMetadata> CLOSED {
+    (  $<AdditionalMetadata_tes> (  <key> @linkml:String ;
+          <value> @linkml:String ;
+          <datatype> [ xsd:string xsd:integer xsd:float xsd:boolean ] ?
        ) ;
-       rdf:type [ <Beamline> ]
+       rdf:type [ <AdditionalMetadata> ] ?
     )
 }
 
-<BeamlineSection> CLOSED {
-    (  $<BeamlineSection_tes> (  &<BookkeepingComponent_tes> ;
-          rdf:type [ <BookkeepingComponent> ] ?
+<AdjacentTo> CLOSED {
+    (  $<AdjacentTo_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          om:Distance @linkml:Float ? ;
+          <distance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
+             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
+             <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
+             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
+             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
+             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
+             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
+             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
+             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+          <tolerance_value> @linkml:Float ? ;
+          <tolerance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
+             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
+             <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
+             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
+             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
+             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
+             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
+             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
+             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+          <coordinates> @<CoordinateSet> ? ;
+          rdf:predicate @linkml:Uriorcurie
        ) ;
-       rdf:type [ <BeamlineSection> ]
+       rdf:type [ <adjacent_to> ]
+    )
+}
+
+<Affiliation> CLOSED {
+    (  $<Affiliation_tes> (  <name> @linkml:String ? ;
+          <identifiers> @<Identifier> *
+       ) ;
+       rdf:type [ <Affiliation> ]
+    )
+}
+
+<Aperture> CLOSED {
+    (  $<Aperture_tes> (  &<DiagnosticDevice_tes> ;
+          rdf:type [ <DiagnosticDevice> ] ? ;
+          &<HasReferenceP_tes> ;
+          rdf:type [ <HasReferenceP> ] ? ;
+          &<HasTwissP_tes> ;
+          rdf:type [ <HasTwissP> ] ? ;
+          <ReferenceP> @<ReferenceParamGroup> ? ;
+          <TwissP> @<TwissParamGroup> ?
+       ) ;
+       rdf:type [ <Aperture> ]
+    )
+}
+
+<Author> CLOSED {
+    (  $<Author_tes> (  <name> @linkml:String ? ;
+          <affiliation> @<Affiliation> ? ;
+          <email> @linkml:String ? ;
+          <orcid> @linkml:String ?
+       ) ;
+       rdf:type [ <Author> ] ?
+    )
+}
+
+<BeamLine> CLOSED {
+    (  $<BeamLine_tes> (  &<VirtualComponent_tes> ;
+          rdf:type [ <VirtualComponent> ] ? ;
+          <length> @linkml:Float ? ;
+          <description> @linkml:String ? ;
+          <multipass> @linkml:Boolean ? ;
+          <periodic> @linkml:Boolean ? ;
+          <repeat> @linkml:Integer ? ;
+          <direction> @linkml:Integer ?
+       ) ;
+       rdf:type [ <BeamLine> ]
+    )
+}
+
+<BeamLineSection> CLOSED {
+    (  $<BeamLineSection_tes> (  &<BookkeepingComponent_tes> ;
+          rdf:type [ <BookkeepingComponent> ] ? ;
+          &<HasFloorP_tes> ;
+          rdf:type [ <HasFloorP> ] ?
+       ) ;
+       rdf:type [ <BeamLineSection> ]
     )
 }
 
 <BeamPositionMonitor> CLOSED {
     (  $<BeamPositionMonitor_tes> (  &<DiagnosticDevice_tes> ;
           rdf:type [ <DiagnosticDevice> ] ? ;
-          &<ReferenceP_tes> ;
-          rdf:type [ <ReferenceP> ] ? ;
-          &<BodyShiftP_tes> ;
-          rdf:type [ <BodyShiftP> ] ? ;
-          &<TwissP_tes> ;
-          rdf:type [ <TwissP> ] ? ;
-          pals:species_ref @linkml:String ? ;
-          pals:pc_ref @linkml:Float ? ;
-          pals:E_tot_ref @linkml:Float ? ;
-          pals:time_ref @linkml:Float ? ;
-          pals:x_offset @linkml:Float ? ;
-          pals:y_offset @linkml:Float ? ;
-          pals:z_offset @linkml:Float ? ;
-          pals:x_rot @linkml:Float ? ;
-          pals:y_rot @linkml:Float ? ;
-          pals:z_rot @linkml:Float ? ;
-          pals:alpha_a @linkml:Float ? ;
-          pals:alpha_b @linkml:Float ? ;
-          pals:beta_a @linkml:Float ? ;
-          pals:beta_b @linkml:Float ? ;
-          pals:eta_x @linkml:Float ? ;
-          pals:eta_y @linkml:Float ? ;
-          pals:etap_x @linkml:Float ? ;
-          pals:etap_y @linkml:Float ? ;
-          pals:phi_a @linkml:Float ? ;
-          pals:phi_b @linkml:Float ?
+          &<HasReferenceP_tes> ;
+          rdf:type [ <HasReferenceP> ] ? ;
+          &<HasBodyShiftP_tes> ;
+          rdf:type [ <HasBodyShiftP> ] ? ;
+          &<HasTwissP_tes> ;
+          rdf:type [ <HasTwissP> ] ? ;
+          <ReferenceP> @<ReferenceParamGroup> ? ;
+          <BodyShiftP> @<BodyShiftParamGroup> ? ;
+          <TwissP> @<TwissParamGroup> ?
        ) ;
        rdf:type [ <BeamPositionMonitor> ]
     )
 }
 
+<BeamProfileMonitor> CLOSED {
+    (  $<BeamProfileMonitor_tes> (  &<DiagnosticDevice_tes> ;
+          rdf:type [ <DiagnosticDevice> ] ? ;
+          &<HasReferenceP_tes> ;
+          rdf:type [ <HasReferenceP> ] ? ;
+          &<HasBodyShiftP_tes> ;
+          rdf:type [ <HasBodyShiftP> ] ? ;
+          &<HasTwissP_tes> ;
+          rdf:type [ <HasTwissP> ] ? ;
+          <ReferenceP> @<ReferenceParamGroup> ? ;
+          <BodyShiftP> @<BodyShiftParamGroup> ? ;
+          <TwissP> @<TwissParamGroup> ?
+       ) ;
+       rdf:type [ <BeamProfileMonitor> ]
+    )
+}
+
 <Bend> CLOSED {
     (  $<Bend_tes> (  &<Multipole_tes> ;
-          rdf:type [ <Multipole> ] ?
+          rdf:type [ <Multipole> ] ? ;
+          &<HasBendP_tes> ;
+          rdf:type [ <HasBendP> ] ? ;
+          <BendP> @<BendParamGroup> ?
        ) ;
        rdf:type [ <Bend> ]
     )
 }
 
-<BendP> {
-    (  $<BendP_tes> (  pals:angle_ref @linkml:Float ? ;
-          pals:bend_field_ref @linkml:Float ? ;
-          pals:bend_field_actual @linkml:Float ? ;
-          pals:e1 @linkml:Float ? ;
-          pals:e2 @linkml:Float ? ;
-          pals:e1_rect @linkml:Float ? ;
-          pals:e2_rect @linkml:Float ? ;
-          pals:edge1_int @linkml:Float ? ;
-          pals:edge2_int @linkml:Float ? ;
-          pals:g_ref @linkml:Float ? ;
-          pals:g_actual @linkml:Float ? ;
-          pals:h1 @linkml:Float ? ;
-          pals:h2 @linkml:Float ? ;
-          pals:L_chord @linkml:Float ? ;
-          pals:L_sagitta @linkml:Float ? ;
-          pals:L_rectangle @linkml:Float ? ;
-          pals:multipole_geometry [ <https://example.org/narad/MultipoleGeometryEnum#follows_ref_geometry>
-             <https://example.org/narad/MultipoleGeometryEnum#vertically_pure>
-             <https://example.org/narad/MultipoleGeometryEnum#horizontally_pure>
-             <https://example.org/narad/MultipoleGeometryEnum#chord>
-             <https://example.org/narad/MultipoleGeometryEnum#entrance_coords>
-             <https://example.org/narad/MultipoleGeometryEnum#exit_coords> ] ? ;
-          pals:ref_geometry [ <https://example.org/narad/ReferenceGeometryEnum#arc>
-             <https://example.org/narad/ReferenceGeometryEnum#chord>
-             <https://example.org/narad/ReferenceGeometryEnum#entrance_coords>
-             <https://example.org/narad/ReferenceGeometryEnum#exit_coords> ] ? ;
-          pals:rho_ref @linkml:Float ? ;
-          pals:tilt_ref @linkml:Float ?
+<BendParamGroup> CLOSED {
+    (  $<BendParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <angle_ref> @linkml:Float ? ;
+          <bend_field_ref> @linkml:Float ? ;
+          <bend_field_actual> @linkml:Float ? ;
+          <e1> @linkml:Float ? ;
+          <e2> @linkml:Float ? ;
+          <e1_rect> @linkml:Float ? ;
+          <e2_rect> @linkml:Float ? ;
+          <edge1_int> @linkml:Float ? ;
+          <edge2_int> @linkml:Float ? ;
+          <g_ref> @linkml:Float ? ;
+          <g_actual> @linkml:Float ? ;
+          <h1> @linkml:Float ? ;
+          <h2> @linkml:Float ? ;
+          <L_chord> @linkml:Float ? ;
+          <L_sagitta> @linkml:Float ? ;
+          <L_rectangle> @linkml:Float ? ;
+          <multipole_geometry> [ <https://pals-project.readthedocs.io/MultipoleGeometryEnum#follows_ref_geometry>
+             <https://pals-project.readthedocs.io/MultipoleGeometryEnum#vertically_pure>
+             <https://pals-project.readthedocs.io/MultipoleGeometryEnum#horizontally_pure>
+             <https://pals-project.readthedocs.io/MultipoleGeometryEnum#chord>
+             <https://pals-project.readthedocs.io/MultipoleGeometryEnum#entrance_coords>
+             <https://pals-project.readthedocs.io/MultipoleGeometryEnum#exit_coords> ] ? ;
+          <ref_geometry> [ <https://pals-project.readthedocs.io/ReferenceGeometryEnum#arc>
+             <https://pals-project.readthedocs.io/ReferenceGeometryEnum#chord>
+             <https://pals-project.readthedocs.io/ReferenceGeometryEnum#entrance_coords>
+             <https://pals-project.readthedocs.io/ReferenceGeometryEnum#exit_coords> ] ? ;
+          <rho_ref> @linkml:Float ? ;
+          <tilt_ref> @linkml:Float ?
        ) ;
-       rdf:type [ <BendP> ] ?
+       rdf:type [ <BendParamGroup> ]
     )
 }
 
-<BodyShiftP> {
-    (  $<BodyShiftP_tes> (  pals:x_offset @linkml:Float ? ;
-          pals:y_offset @linkml:Float ? ;
-          pals:z_offset @linkml:Float ? ;
-          pals:x_rot @linkml:Float ? ;
-          pals:y_rot @linkml:Float ? ;
-          pals:z_rot @linkml:Float ?
+<BodyShiftParamGroup> CLOSED {
+    (  $<BodyShiftParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <x_offset> @linkml:Float ? ;
+          <y_offset> @linkml:Float ? ;
+          <z_offset> @linkml:Float ? ;
+          <x_rot> @linkml:Float ? ;
+          <y_rot> @linkml:Float ? ;
+          <z_rot> @linkml:Float ?
        ) ;
-       rdf:type [ <BodyShiftP> ] ?
+       rdf:type [ <BodyShiftParamGroup> ]
     )
 }
 
@@ -170,18 +256,13 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<BookkeepingComponent_tes> (  &<VirtualComponent_tes> ;
              rdf:type [ <VirtualComponent> ] ? ;
-             &<BodyShiftP_tes> ;
-             rdf:type [ <BodyShiftP> ] ? ;
-             pals:x_offset @linkml:Float ? ;
-             pals:y_offset @linkml:Float ? ;
-             pals:z_offset @linkml:Float ? ;
-             pals:x_rot @linkml:Float ? ;
-             pals:y_rot @linkml:Float ? ;
-             pals:z_rot @linkml:Float ?
+             &<HasBodyShiftP_tes> ;
+             rdf:type [ <HasBodyShiftP> ] ? ;
+             <BodyShiftP> @<BodyShiftParamGroup> ?
           ) ;
           rdf:type [ <BookkeepingComponent> ]
        )
-    } OR @<BeamlineSection> OR @<Marker>
+    } OR @<BeamLineSection> OR @<Marker>
 )
 
 <Cavity>  (
@@ -191,37 +272,21 @@ linkml:Sparqlpath xsd:string
 <Cavity_struct> {
     (  $<Cavity_tes> (  &<PhysicalComponent_tes> ;
           rdf:type [ <PhysicalComponent> ] ? ;
-          &<ReferenceP_tes> ;
-          rdf:type [ <ReferenceP> ] ? ;
-          &<ElectricMultipoleP_tes> ;
-          rdf:type [ <ElectricMultipoleP> ] ? ;
-          &<MagneticMultipoleP_tes> ;
-          rdf:type [ <MagneticMultipoleP> ] ? ;
-          &<BodyShiftP_tes> ;
-          rdf:type [ <BodyShiftP> ] ? ;
-          &<TwissP_tes> ;
-          rdf:type [ <TwissP> ] ? ;
-          pals:species_ref @linkml:String ? ;
-          pals:pc_ref @linkml:Float ? ;
-          pals:E_tot_ref @linkml:Float ? ;
-          pals:time_ref @linkml:Float ? ;
-          <components> @<MultipoleComponent> * ;
-          pals:x_offset @linkml:Float ? ;
-          pals:y_offset @linkml:Float ? ;
-          pals:z_offset @linkml:Float ? ;
-          pals:x_rot @linkml:Float ? ;
-          pals:y_rot @linkml:Float ? ;
-          pals:z_rot @linkml:Float ? ;
-          pals:alpha_a @linkml:Float ? ;
-          pals:alpha_b @linkml:Float ? ;
-          pals:beta_a @linkml:Float ? ;
-          pals:beta_b @linkml:Float ? ;
-          pals:eta_x @linkml:Float ? ;
-          pals:eta_y @linkml:Float ? ;
-          pals:etap_x @linkml:Float ? ;
-          pals:etap_y @linkml:Float ? ;
-          pals:phi_a @linkml:Float ? ;
-          pals:phi_b @linkml:Float ?
+          &<HasReferenceP_tes> ;
+          rdf:type [ <HasReferenceP> ] ? ;
+          &<HasElectricMultipoleP_tes> ;
+          rdf:type [ <HasElectricMultipoleP> ] ? ;
+          &<HasMagneticMultipoleP_tes> ;
+          rdf:type [ <HasMagneticMultipoleP> ] ? ;
+          &<HasBodyShiftP_tes> ;
+          rdf:type [ <HasBodyShiftP> ] ? ;
+          &<HasTwissP_tes> ;
+          rdf:type [ <HasTwissP> ] ? ;
+          <ReferenceP> @<ReferenceParamGroup> ? ;
+          <ElectricMultipoleP> @<ElectricMultipoleParamGroup> ? ;
+          <MagneticMultipoleP> @<MagneticMultipoleParamGroup> ? ;
+          <BodyShiftP> @<BodyShiftParamGroup> ? ;
+          <TwissP> @<TwissParamGroup> ?
        ) ;
        rdf:type [ <Cavity> ]
     )
@@ -232,54 +297,76 @@ linkml:Sparqlpath xsd:string
 )
 
 <Component_struct> {
-    (  $<Component_tes> (  &<MetaP_tes> ;
-          rdf:type [ <MetaP> ] ? ;
-          <type> @<Component> ;
+    (  $<Component_tes> (  &<Node_tes> ;
+          rdf:type [ <Node> ] ? ;
+          &<HasMetaP_tes> ;
+          rdf:type [ <HasMetaP> ] ? ;
           <native_types> @linkml:String * ;
-          pals:description @linkml:String ? ;
-          pals:label @linkml:String ? ;
-          pals:alias @linkml:String ? ;
-          <additional_metadata> @<MetadataEntry> *
+          <MetaP> @<MetaParamGroup> ?
        ) ;
        rdf:type [ <Component> ]
     )
 }
 
-<ComponentRelation> CLOSED {
-    (  $<ComponentRelation_tes> (  &<Relationship_tes> ;
-          rdf:type [ <Relationship> ] ? ;
-          <context> [ <https://example.org/narad/RelationContextEnum#beamline_order>
-             <https://example.org/narad/RelationContextEnum#Euclidean_3D>
-             <https://example.org/narad/RelationContextEnum#Euclidean_2D> <https://example.org/narad/RelationContextEnum#floorplan>
-             <https://example.org/narad/RelationContextEnum#containment>
-             <https://example.org/narad/RelationContextEnum#installation_mounting> ] ? ;
-          <beamline_context> @<Beamline> ? ;
-          <reference_frame> [ <https://example.org/narad/ReferenceFrameEnum#beam_direction>
-             <https://example.org/narad/ReferenceFrameEnum#facility_coordinates>
-             <https://example.org/narad/ReferenceFrameEnum#local_component_frame>
-             <https://example.org/narad/ReferenceFrameEnum#tunnel_stationing> ] ? ;
-          <distance_value> @linkml:Float ? ;
-          <distance_unit> [ unit:MilliM unit:M unit:A unit:T-M unit:PA unit:TORR unit:REM-PER-H unit:MREM-PER-H unit:V unit:KiloW
-             unit:DEG unit:MegaV-PER-M <https://example.org/narad/UnitEnum#G_per_cm> unit:NUM
-             <https://example.org/narad/UnitEnum#none> ] ? ;
-          <axis> [ <https://example.org/narad/AxisEnum#x> <https://example.org/narad/AxisEnum#y>
-             <https://example.org/narad/AxisEnum#z> <https://example.org/narad/AxisEnum#s> ] ? ;
-          <direction> [ <https://example.org/narad/DirectionEnum#upstream> <https://example.org/narad/DirectionEnum#downstream>
-             <https://example.org/narad/DirectionEnum#positive> <https://example.org/narad/DirectionEnum#negative> ] ? ;
-          <tolerance_value> @linkml:Float ? ;
-          <tolerance_unit> [ unit:MilliM unit:M unit:A unit:T-M unit:PA unit:TORR unit:REM-PER-H unit:MREM-PER-H unit:V unit:KiloW
-             unit:DEG unit:MegaV-PER-M <https://example.org/narad/UnitEnum#G_per_cm> unit:NUM
-             <https://example.org/narad/UnitEnum#none> ] ? ;
+<ComponentRelation>  (
+    @<AdjacentTo> OR @<Contains> OR @<Controls> OR @<HasConnectingBranch> OR @<Intersects> OR @<IsPartOf> OR @<MountedOn> OR
+    @<NearestTo> OR @<Overlaps> OR @<Precedes>
+)
+
+<ComponentRelation_struct> {
+    (  $<ComponentRelation_tes> (  &<Edge_tes> ;
+          rdf:type [ rdf:Statement ] ? ;
+          <context> [ <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order>
+             <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D>
+             <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D>
+             <https://pals-project.readthedocs.io/RelationContextEnum#floorplan>
+             <https://pals-project.readthedocs.io/RelationContextEnum#containment>
+             <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> ] ;
+          <component_direction> [ <https://pals-project.readthedocs.io/DirectionEnum#upstream>
+             <https://pals-project.readthedocs.io/DirectionEnum#downstream>
+             <https://pals-project.readthedocs.io/DirectionEnum#positive>
+             <https://pals-project.readthedocs.io/DirectionEnum#negative> ] ? ;
+          <reference_frame> [ <https://pals-project.readthedocs.io/ReferenceFrameEnum#beam_direction>
+             <https://pals-project.readthedocs.io/ReferenceFrameEnum#facility_coordinates>
+             <https://pals-project.readthedocs.io/ReferenceFrameEnum#local_component_frame>
+             <https://pals-project.readthedocs.io/ReferenceFrameEnum#tunnel_stationing> ] ? ;
           rdf:subject @<Component> ;
-          rdf:predicate [ <http://purl.obolibrary.org/obo/BFO_0000063> <http://purl.obolibrary.org/obo/BFO_0000062>
-             <http://purl.obolibrary.org/obo/BFO_0000051> <http://purl.obolibrary.org/obo/BFO_0000050>
-             <http://purl.obolibrary.org/obo/RO_0002170> saref:controls saref:isControlledBy
-             <http://purl.obolibrary.org/obo/BFO_0000050> <http://purl.obolibrary.org/obo/BFO_0000051>
-             <http://purl.obolibrary.org/obo/RO_0002220> <http://purl.obolibrary.org/obo/RO_0002131> <mounted_on> <intersects>
-             <nearest_to> ] ;
           rdf:object @<Component>
        ) ;
        rdf:type [ <ComponentRelation> ]
+    )
+}
+
+<Contains> CLOSED {
+    (  $<Contains_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <contains> ]
+    )
+}
+
+<Controls> CLOSED {
+    (  $<Controls_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <controls> ]
+    )
+}
+
+<CoordinateSet> CLOSED {
+    (  $<CoordinateSet_tes> (  <coordinate_system> [ <https://pals-project.readthedocs.io/CoordinateSystemEnum#Cartesian>
+             <https://pals-project.readthedocs.io/CoordinateSystemEnum#Cylindrical>
+             <https://pals-project.readthedocs.io/CoordinateSystemEnum#Spherical> ] ? ;
+          <x_coord> @linkml:Float ? ;
+          <y_coord> @linkml:Float ? ;
+          <z_coord> @linkml:Float ? ;
+          <r_coord> @linkml:Float ? ;
+          <theta_coord> @linkml:Float ? ;
+          <phi_coord> @linkml:Float ?
+       ) ;
+       rdf:type [ <CoordinateSet> ] ?
     )
 }
 
@@ -298,32 +385,209 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <DiagnosticDevice> ]
        )
-    } OR @<BeamPositionMonitor> OR @<RadiationMonitor>
+    } OR @<Aperture> OR @<BeamPositionMonitor> OR @<BeamProfileMonitor> OR @<RadiationMonitor>
 )
 
-<ElectricMultipoleP> {
-    (  $<ElectricMultipoleP_tes> <components> @<MultipoleComponent> * ;
-       rdf:type [ <ElectricMultipoleP> ] ?
+<Edge>  (
+    @<ComponentRelation> OR @<SignalBinding>
+)
+
+<Edge_struct> {
+    (  $<Edge_tes> (  rdf:subject @linkml:String ;
+          rdf:predicate @linkml:Uriorcurie ;
+          rdf:object @linkml:String
+       ) ;
+       rdf:type [ rdf:Statement ]
     )
 }
 
-<FloorP> {
-    (  $<FloorP_tes> (  pals:x @linkml:Float ? ;
-          pals:y @linkml:Float ? ;
-          pals:z @linkml:Float ? ;
-          pals:theta @linkml:Float ? ;
-          pals:phi @linkml:Float ? ;
-          pals:psi @linkml:Float ?
+<ElectricMultipoleParamGroup> CLOSED {
+    (  $<ElectricMultipoleParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <elec_components> @<MultipoleParameterGroup> *
        ) ;
-       rdf:type [ <FloorP> ] ?
+       rdf:type [ <ElectricMultipoleParamGroup> ]
     )
 }
 
-<HasLongitudinalPlacement> {
-    (  $<HasLongitudinalPlacement_tes> (  pals:length @linkml:Float ? ;
-          pals:s_position @linkml:Float ?
+<Facility> CLOSED {
+    (  $<Facility_tes> (  <identifiers> @<Identifier> * ;
+          <components> @<Component> * ;
+          <beamlines> @<BeamLine> * ;
+          <signals> @<Signal> * ;
+          <signal_bindings> @<SignalBinding> * ;
+          <component_relations> @<ComponentRelation> *
        ) ;
-       rdf:type [ <HasLongitudinalPlacement> ] ?
+       rdf:type [ <Facility> ] ?
+    )
+}
+
+<FloorParamGroup> CLOSED {
+    (  $<FloorParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <x> @linkml:Float ? ;
+          <y> @linkml:Float ? ;
+          <z> @linkml:Float ? ;
+          <theta> @linkml:Float ? ;
+          <phi> @linkml:Float ? ;
+          <psi> @linkml:Float ?
+       ) ;
+       rdf:type [ <FloorParamGroup> ]
+    )
+}
+
+<HasBendP> {
+    (  $<HasBendP_tes> <BendP> @<BendParamGroup> ? ;
+       rdf:type [ <HasBendP> ] ?
+    )
+}
+
+<HasBodyShiftP> {
+    (  $<HasBodyShiftP_tes> <BodyShiftP> @<BodyShiftParamGroup> ? ;
+       rdf:type [ <HasBodyShiftP> ] ?
+    )
+}
+
+<HasCommandSignal> CLOSED {
+    (  $<HasCommandSignal_tes> (  &<SignalBinding_tes> ;
+          rdf:type [ <SignalBinding> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <has_command_signal> ]
+    )
+}
+
+<HasConnectingBranch> CLOSED {
+    (  $<HasConnectingBranch_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          <beamline_context> @<BeamLine> ;
+          rdf:predicate @linkml:Uriorcurie ;
+          <context> [ <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order>
+             <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D>
+             <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D>
+             <https://pals-project.readthedocs.io/RelationContextEnum#floorplan>
+             <https://pals-project.readthedocs.io/RelationContextEnum#containment>
+             <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> ]
+       ) ;
+       rdf:type [ <has_connecting_branch> ]
+    )
+}
+
+<HasElectricMultipoleP> {
+    (  $<HasElectricMultipoleP_tes> <ElectricMultipoleP> @<ElectricMultipoleParamGroup> ? ;
+       rdf:type [ <HasElectricMultipoleP> ] ?
+    )
+}
+
+<HasFloorP> {
+    (  $<HasFloorP_tes> <FloorP> @<FloorParamGroup> ? ;
+       rdf:type [ <HasFloorP> ] ?
+    )
+}
+
+<HasLimitSignal> CLOSED {
+    (  $<HasLimitSignal_tes> (  &<SignalBinding_tes> ;
+          rdf:type [ <SignalBinding> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <has_limit_signal> ]
+    )
+}
+
+<HasLongitudinalPlacementP> {
+    (  $<HasLongitudinalPlacementP_tes> <LongitudinalPlacementP> @<LongitudinalPlacementParamGroup> ? ;
+       rdf:type [ <HasLongitudinalPlacementP> ] ?
+    )
+}
+
+<HasMagneticMultipoleP> {
+    (  $<HasMagneticMultipoleP_tes> <MagneticMultipoleP> @<MagneticMultipoleParamGroup> ? ;
+       rdf:type [ <HasMagneticMultipoleP> ] ?
+    )
+}
+
+<HasMetaP> {
+    (  $<HasMetaP_tes> <MetaP> @<MetaParamGroup> ? ;
+       rdf:type [ <HasMetaP> ] ?
+    )
+}
+
+<HasReadbackSignal> CLOSED {
+    (  $<HasReadbackSignal_tes> (  &<SignalBinding_tes> ;
+          rdf:type [ <SignalBinding> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <has_readback_signal> ]
+    )
+}
+
+<HasReferenceP> {
+    (  $<HasReferenceP_tes> <ReferenceP> @<ReferenceParamGroup> ? ;
+       rdf:type [ <HasReferenceP> ] ?
+    )
+}
+
+<HasRFP> {
+    (  $<HasRFP_tes> <RFP> @<RFParamGroup> ? ;
+       rdf:type [ <HasRFP> ] ?
+    )
+}
+
+<HasSetpointSignal> CLOSED {
+    (  $<HasSetpointSignal_tes> (  &<SignalBinding_tes> ;
+          rdf:type [ <SignalBinding> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <has_setpoint_signal> ]
+    )
+}
+
+<HasSignal> CLOSED {
+    (  $<HasSignal_tes> (  &<SignalBinding_tes> ;
+          rdf:type [ <SignalBinding> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <has_signal> ]
+    )
+}
+
+<HasSolenoidP> {
+    (  $<HasSolenoidP_tes> <SolenoidP> @<SolenoidParamGroup> ? ;
+       rdf:type [ <HasSolenoidP> ] ?
+    )
+}
+
+<HasTwissP> {
+    (  $<HasTwissP_tes> <TwissP> @<TwissParamGroup> ? ;
+       rdf:type [ <HasTwissP> ] ?
+    )
+}
+
+<Identifier> CLOSED {
+    (  $<Identifier_tes> (  <identifier_type> [ <http://purl.org/spar/datacite/doi> <http://purl.org/spar/datacite/purl>
+             <http://purl.org/spar/datacite/ror> <http://purl.org/spar/datacite/local-resource-identifier-scheme>
+             <http://purl.org/spar/datacite/url> <http://purl.org/spar/datacite/ark> ] ? ;
+          <identifier_value> @linkml:String ?
+       ) ;
+       rdf:type [ <Identifier> ] ?
+    )
+}
+
+<Intersects> CLOSED {
+    (  $<Intersects_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <intersects> ]
+    )
+}
+
+<IsPartOf> CLOSED {
+    (  $<IsPartOf_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <is_part_of> ]
     )
 }
 
@@ -331,17 +595,29 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<Kicker_tes> (  &<Magnet_tes> ;
              rdf:type [ <Magnet> ] ? ;
-             &<ElectricMultipoleP_tes> ;
-             rdf:type [ <ElectricMultipoleP> ] ? ;
-             &<MagneticMultipoleP_tes> ;
-             rdf:type [ <MagneticMultipoleP> ] ? ;
-             <plane> [ <https://example.org/narad/PlaneEnum#Horizontal> <https://example.org/narad/PlaneEnum#Vertical> ] ? ;
-             <components> @<MultipoleComponent> *
+             &<HasElectricMultipoleP_tes> ;
+             rdf:type [ <HasElectricMultipoleP> ] ? ;
+             &<HasMagneticMultipoleP_tes> ;
+             rdf:type [ <HasMagneticMultipoleP> ] ? ;
+             <plane> [ <https://pals-project.readthedocs.io/PlaneEnum#Horizontal>
+                <https://pals-project.readthedocs.io/PlaneEnum#Vertical> ] ? ;
+             <ElectricMultipoleP> @<ElectricMultipoleParamGroup> ? ;
+             <MagneticMultipoleP> @<MagneticMultipoleParamGroup> ?
           ) ;
           rdf:type [ <Kicker> ]
        )
     } OR @<ACKicker>
 )
+
+<LongitudinalPlacementParamGroup> CLOSED {
+    (  $<LongitudinalPlacementParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <length> @linkml:Float ? ;
+          <s_position> @linkml:Float ?
+       ) ;
+       rdf:type [ <LongitudinalPlacementParamGroup> ]
+    )
+}
 
 <Magnet>  (
     @<Kicker> OR @<Multipole> OR @<Solenoid>
@@ -350,78 +626,59 @@ linkml:Sparqlpath xsd:string
 <Magnet_struct> {
     (  $<Magnet_tes> (  &<PhysicalComponent_tes> ;
           rdf:type [ <PhysicalComponent> ] ? ;
-          &<ReferenceP_tes> ;
-          rdf:type [ <ReferenceP> ] ? ;
-          &<BodyShiftP_tes> ;
-          rdf:type [ <BodyShiftP> ] ? ;
-          &<TwissP_tes> ;
-          rdf:type [ <TwissP> ] ? ;
-          pals:species_ref @linkml:String ? ;
-          pals:pc_ref @linkml:Float ? ;
-          pals:E_tot_ref @linkml:Float ? ;
-          pals:time_ref @linkml:Float ? ;
-          pals:x_offset @linkml:Float ? ;
-          pals:y_offset @linkml:Float ? ;
-          pals:z_offset @linkml:Float ? ;
-          pals:x_rot @linkml:Float ? ;
-          pals:y_rot @linkml:Float ? ;
-          pals:z_rot @linkml:Float ? ;
-          pals:alpha_a @linkml:Float ? ;
-          pals:alpha_b @linkml:Float ? ;
-          pals:beta_a @linkml:Float ? ;
-          pals:beta_b @linkml:Float ? ;
-          pals:eta_x @linkml:Float ? ;
-          pals:eta_y @linkml:Float ? ;
-          pals:etap_x @linkml:Float ? ;
-          pals:etap_y @linkml:Float ? ;
-          pals:phi_a @linkml:Float ? ;
-          pals:phi_b @linkml:Float ?
+          &<HasReferenceP_tes> ;
+          rdf:type [ <HasReferenceP> ] ? ;
+          &<HasBodyShiftP_tes> ;
+          rdf:type [ <HasBodyShiftP> ] ? ;
+          &<HasTwissP_tes> ;
+          rdf:type [ <HasTwissP> ] ? ;
+          <ReferenceP> @<ReferenceParamGroup> ? ;
+          <BodyShiftP> @<BodyShiftParamGroup> ? ;
+          <TwissP> @<TwissParamGroup> ?
        ) ;
        rdf:type [ <Magnet> ]
     )
 }
 
-<MagneticMultipoleP> {
-    (  $<MagneticMultipoleP_tes> <components> @<MultipoleComponent> * ;
-       rdf:type [ <MagneticMultipoleP> ] ?
+<MagneticMultipoleParamGroup> CLOSED {
+    (  $<MagneticMultipoleParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <mag_components> @<MultipoleParameterGroup> *
+       ) ;
+       rdf:type [ <MagneticMultipoleParamGroup> ]
     )
 }
 
 <Marker> CLOSED {
     (  $<Marker_tes> (  &<BookkeepingComponent_tes> ;
           rdf:type [ <BookkeepingComponent> ] ? ;
-          &<TwissP_tes> ;
-          rdf:type [ <TwissP> ] ? ;
-          pals:alpha_a @linkml:Float ? ;
-          pals:alpha_b @linkml:Float ? ;
-          pals:beta_a @linkml:Float ? ;
-          pals:beta_b @linkml:Float ? ;
-          pals:eta_x @linkml:Float ? ;
-          pals:eta_y @linkml:Float ? ;
-          pals:etap_x @linkml:Float ? ;
-          pals:etap_y @linkml:Float ? ;
-          pals:phi_a @linkml:Float ? ;
-          pals:phi_b @linkml:Float ?
+          &<HasTwissP_tes> ;
+          rdf:type [ <HasTwissP> ] ? ;
+          <TwissP> @<TwissParamGroup> ?
        ) ;
        rdf:type [ <Marker> ]
     )
 }
 
-<MetadataEntry> CLOSED {
-    (  $<MetadataEntry_tes> (  <value> @linkml:String ;
-          <datatype> [ xsd:string xsd:integer xsd:float xsd:boolean ] ?
+<MetaParamGroup> CLOSED {
+    (  $<MetaParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <description> @linkml:String ? ;
+          <alias> @linkml:String * ;
+          <label> @linkml:String ? ;
+          <additional_metadata> @<AdditionalMetadata> *
        ) ;
-       rdf:type [ <MetadataEntry> ]
+       rdf:type [ <MetaParamGroup> ]
     )
 }
 
-<MetaP> {
-    (  $<MetaP_tes> (  pals:description @linkml:String ? ;
-          pals:label @linkml:String ? ;
-          pals:alias @linkml:String ? ;
-          <additional_metadata> @<MetadataEntry> *
+<MountedOn> CLOSED {
+    (  $<MountedOn_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          <coordinates> @<CoordinateSet> ? ;
+          rdf:predicate @linkml:Uriorcurie
        ) ;
-       rdf:type [ <MetaP> ] ?
+       rdf:type [ <mounted_on> ]
     )
 }
 
@@ -429,19 +686,20 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<Multipole_tes> (  &<Magnet_tes> ;
              rdf:type [ <Magnet> ] ? ;
-             &<ElectricMultipoleP_tes> ;
-             rdf:type [ <ElectricMultipoleP> ] ? ;
-             &<MagneticMultipoleP_tes> ;
-             rdf:type [ <MagneticMultipoleP> ] ? ;
-             <components> @<MultipoleComponent> *
+             &<HasElectricMultipoleP_tes> ;
+             rdf:type [ <HasElectricMultipoleP> ] ? ;
+             &<HasMagneticMultipoleP_tes> ;
+             rdf:type [ <HasMagneticMultipoleP> ] ? ;
+             <ElectricMultipoleP> @<ElectricMultipoleParamGroup> ? ;
+             <MagneticMultipoleP> @<MagneticMultipoleParamGroup> ?
           ) ;
           rdf:type [ <Multipole> ]
        )
     } OR @<Bend> OR @<Octupole> OR @<Quadrupole> OR @<Sextupole>
 )
 
-<MultipoleComponent> CLOSED {
-    (  $<MultipoleComponent_tes> (  <order> @linkml:Integer ;
+<MultipoleParameterGroup> CLOSED {
+    (  $<MultipoleParameterGroup_tes> (  <order> @linkml:Integer ;
           <tilt> @linkml:Float ? ;
           <En> @linkml:Float ? ;
           <Es> @linkml:Float ? ;
@@ -452,22 +710,57 @@ linkml:Sparqlpath xsd:string
           <Kn> @linkml:Float ? ;
           <Ks> @linkml:Float ?
        ) ;
-       rdf:type [ <MultipoleComponent> ] ?
+       rdf:type [ <MultipoleParameterGroup> ] ?
     )
 }
 
-<NARAD> CLOSED {
-    (  $<NARAD_tes> (  <type> @<Component> ;
-          <description> @linkml:String ? ;
-          <physical_components> @<PhysicalComponent> * ;
-          <virtual_components> @<VirtualComponent> * ;
-          <beamlines> @<Beamline> * ;
-          <supporting_facility_components> @<SupportingFacilityComponent> * ;
-          <signals> @<Signal> * ;
-          <signal_bindings> @<SignalBinding> * ;
-          <component_relations> @<ComponentRelation> *
+<NearestTo> CLOSED {
+    (  $<NearestTo_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          om:Distance @linkml:Float ? ;
+          <distance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
+             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
+             <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
+             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
+             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
+             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
+             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
+             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
+             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+          <tolerance_value> @linkml:Float ? ;
+          <tolerance_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
+             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
+             <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
+             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
+             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
+             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
+             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
+             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
+             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ? ;
+          <coordinates> @<CoordinateSet> ? ;
+          rdf:predicate @linkml:Uriorcurie
        ) ;
-       rdf:type [ <NARAD> ] ?
+       rdf:type [ <nearest_to> ]
+    )
+}
+
+<Node>  (
+    @<Component> OR @<Signal>
+)
+
+<Node_struct> {
+    (  $<Node_tes> (  <kind> @linkml:String ;
+          <alias> @linkml:String *
+       ) ;
+       rdf:type [ <Node> ]
     )
 }
 
@@ -487,43 +780,88 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Overlaps> CLOSED {
+    (  $<Overlaps_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          <coordinates> @<CoordinateSet> ? ;
+          rdf:predicate @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <overlaps> ]
+    )
+}
+
+<PALSAccelerator> CLOSED {
+    (  $<PALSAccelerator_tes> (  <kind> @linkml:String ;
+          <description> @linkml:String ? ;
+          <affiliation> @<Affiliation> ? ;
+          <version> @linkml:String ? ;
+          <authors> @<Author> * ;
+          <notes> @linkml:String * ;
+          <facility> @<Facility> ?
+       ) ;
+       rdf:type [ <PALSAccelerator> ] ?
+    )
+}
+
+<ParamGroup>  (
+    @<BendParamGroup> OR @<BodyShiftParamGroup> OR @<ElectricMultipoleParamGroup> OR @<FloorParamGroup> OR
+    @<LongitudinalPlacementParamGroup> OR @<MagneticMultipoleParamGroup> OR @<MetaParamGroup> OR @<RFParamGroup> OR
+    @<ReferenceParamGroup> OR @<SolenoidParamGroup> OR @<TwissParamGroup>
+)
+
+<ParamGroup_struct> {
+    (  $<ParamGroup_tes> rdf:type . * ;
+       rdf:type [ <ParamGroup> ]
+    )
+}
+
 <PhysicalComponent>  (
     CLOSED {
        (  $<PhysicalComponent_tes> (  &<Component_tes> ;
              rdf:type [ <Component> ] ? ;
-             &<FloorP_tes> ;
-             rdf:type [ <FloorP> ] ? ;
-             &<HasLongitudinalPlacement_tes> ;
-             rdf:type [ <HasLongitudinalPlacement> ] ? ;
-             <physical_function> [ <https://example.org/narad/PhysicalFunctionEnum#Focusing>
-                <https://example.org/narad/PhysicalFunctionEnum#Steering>
-                <https://example.org/narad/PhysicalFunctionEnum#BeamPositionMeasurement>
-                <https://example.org/narad/PhysicalFunctionEnum#VacuumGeneration>
-                <https://example.org/narad/PhysicalFunctionEnum#RadiationMonitoring>
-                <https://example.org/narad/PhysicalFunctionEnum#Measurement>
-                <https://example.org/narad/PhysicalFunctionEnum#BeamAcceleration>
-                <https://example.org/narad/PhysicalFunctionEnum#BeamLossDetection>
-                <https://example.org/narad/PhysicalFunctionEnum#BeamCurrentMeasurement>
-                <https://example.org/narad/PhysicalFunctionEnum#BeamProfileMeasurement>
-                <https://example.org/narad/PhysicalFunctionEnum#MachineProtection>
-                <https://example.org/narad/PhysicalFunctionEnum#TimingSynchronization> ] + ;
-             <physical_beamline_relation> [ <https://example.org/narad/PhysicalRelationEnum#Inline>
-                <https://example.org/narad/PhysicalRelationEnum#AttachedToPipe>
-                <https://example.org/narad/PhysicalRelationEnum#NearBeamline>
-                <https://example.org/narad/PhysicalRelationEnum#SupportingFacility> ] ;
-             pals:x @linkml:Float ? ;
-             pals:y @linkml:Float ? ;
-             pals:z @linkml:Float ? ;
-             pals:theta @linkml:Float ? ;
-             pals:phi @linkml:Float ? ;
-             pals:psi @linkml:Float ? ;
-             pals:length @linkml:Float ? ;
-             pals:s_position @linkml:Float ?
+             &<HasFloorP_tes> ;
+             rdf:type [ <HasFloorP> ] ? ;
+             &<HasLongitudinalPlacementP_tes> ;
+             rdf:type [ <HasLongitudinalPlacementP> ] ? ;
+             <physical_function> [ <https://pals-project.readthedocs.io/PhysicalFunctionEnum#Focusing>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#Steering>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#BeamPositionMeasurement>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#VacuumGeneration>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#RadiationMonitoring>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#Measurement>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#BeamAcceleration>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#BeamLossDetection>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#BeamCurrentMeasurement>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#BeamProfileMeasurement>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#MachineProtection>
+                <https://pals-project.readthedocs.io/PhysicalFunctionEnum#TimingSynchronization> ] + ;
+             <physical_beamline_relation> [ <https://pals-project.readthedocs.io/PhysicalRelationEnum#Inline>
+                <https://pals-project.readthedocs.io/PhysicalRelationEnum#AttachedToPipe>
+                <https://pals-project.readthedocs.io/PhysicalRelationEnum#NearBeamLine>
+                <https://pals-project.readthedocs.io/PhysicalRelationEnum#SupportingFacility> ] ;
+             <FloorP> @<FloorParamGroup> ? ;
+             <LongitudinalPlacementP> @<LongitudinalPlacementParamGroup> ?
           ) ;
           rdf:type [ <PhysicalComponent> ]
        )
     } OR @<Cavity> OR @<DiagnosticDevice> OR @<Magnet> OR @<SupportingFacilityComponent>
 )
+
+<Precedes> CLOSED {
+    (  $<Precedes_tes> (  &<ComponentRelation_tes> ;
+          rdf:type [ <ComponentRelation> ] ? ;
+          <beamline_context> @<BeamLine> ;
+          rdf:predicate @linkml:Uriorcurie ;
+          <context> [ <https://pals-project.readthedocs.io/RelationContextEnum#beamline_order>
+             <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_3D>
+             <https://pals-project.readthedocs.io/RelationContextEnum#Euclidean_2D>
+             <https://pals-project.readthedocs.io/RelationContextEnum#floorplan>
+             <https://pals-project.readthedocs.io/RelationContextEnum#containment>
+             <https://pals-project.readthedocs.io/RelationContextEnum#installation_mounting> ]
+       ) ;
+       rdf:type [ <precedes> ]
+    )
+}
 
 <Quadrupole> CLOSED {
     (  $<Quadrupole_tes> (  &<Multipole_tes> ;
@@ -536,39 +874,23 @@ linkml:Sparqlpath xsd:string
 <RadiationMonitor> CLOSED {
     (  $<RadiationMonitor_tes> (  &<DiagnosticDevice_tes> ;
           rdf:type [ <DiagnosticDevice> ] ? ;
-          &<BodyShiftP_tes> ;
-          rdf:type [ <BodyShiftP> ] ? ;
-          pals:x_offset @linkml:Float ? ;
-          pals:y_offset @linkml:Float ? ;
-          pals:z_offset @linkml:Float ? ;
-          pals:x_rot @linkml:Float ? ;
-          pals:y_rot @linkml:Float ? ;
-          pals:z_rot @linkml:Float ?
+          &<HasBodyShiftP_tes> ;
+          rdf:type [ <HasBodyShiftP> ] ? ;
+          <BodyShiftP> @<BodyShiftParamGroup> ?
        ) ;
        rdf:type [ <RadiationMonitor> ]
     )
 }
 
-<ReferenceP> {
-    (  $<ReferenceP_tes> (  pals:species_ref @linkml:String ? ;
-          pals:pc_ref @linkml:Float ? ;
-          pals:E_tot_ref @linkml:Float ? ;
-          pals:time_ref @linkml:Float ?
+<ReferenceParamGroup> CLOSED {
+    (  $<ReferenceParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <species_ref> @linkml:String ? ;
+          <pc_ref> @linkml:Float ? ;
+          <E_tot_ref> @linkml:Float ? ;
+          <time_ref> @linkml:Float ?
        ) ;
-       rdf:type [ <ReferenceP> ] ?
-    )
-}
-
-<Relationship>  (
-    @<ComponentRelation> OR @<SignalBinding>
-)
-
-<Relationship_struct> {
-    (  $<Relationship_tes> (  rdf:subject @linkml:String ;
-          rdf:predicate @linkml:String ;
-          rdf:object @linkml:String
-       ) ;
-       rdf:type [ <Relationship> ]
+       rdf:type [ <ReferenceParamGroup> ]
     )
 }
 
@@ -578,9 +900,33 @@ linkml:Sparqlpath xsd:string
 
 <RFCavity_struct> {
     (  $<RFCavity_tes> (  &<Cavity_tes> ;
-          rdf:type [ <Cavity> ] ?
+          rdf:type [ <Cavity> ] ? ;
+          &<HasRFP_tes> ;
+          rdf:type [ <HasRFP> ] ? ;
+          <RFP> @<RFParamGroup> ?
        ) ;
        rdf:type [ <RFCavity> ]
+    )
+}
+
+<RFParamGroup> CLOSED {
+    (  $<RFParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <frequency> @linkml:Float ? ;
+          <harmon> @linkml:Integer ? ;
+          <voltage> @linkml:Float ? ;
+          <phase> @linkml:Float ? ;
+          <multipass_phase> @linkml:Float ? ;
+          <cavity_type> [ <https://pals-project.readthedocs.io/CavityTypeEnum#STANDING_WAVE>
+             <https://pals-project.readthedocs.io/CavityTypeEnum#TRAVELING_WAVE> ] ? ;
+          <num_cells> @linkml:Integer ? ;
+          <zero_phase> [ <https://pals-project.readthedocs.io/ZeroPhaseEnum#ACCELERATING>
+             <https://pals-project.readthedocs.io/ZeroPhaseEnum#BELOW_TRANSITION>
+             <https://pals-project.readthedocs.io/ZeroPhaseEnum#ABOVE_TRANSITION> ] ? ;
+          <L_active> @linkml:Float ? ;
+          <dE_ref> @linkml:Float ?
+       ) ;
+       rdf:type [ <RFParamGroup> ]
     )
 }
 
@@ -593,66 +939,75 @@ linkml:Sparqlpath xsd:string
 }
 
 <Signal> CLOSED {
-    (  $<Signal_tes> (  &<MetaP_tes> ;
-          rdf:type [ <MetaP> ] ? ;
-          <type> @<Component> ;
-          <signal_role> [ sosa:ActuatableProperty sosa:ObservableProperty <https://example.org/narad/SignalRoleEnum#Status>
-             sosa:ActuatableProperty <https://example.org/narad/SignalRoleEnum#MinimumLimit>
-             <https://example.org/narad/SignalRoleEnum#MaximumLimit> ] ;
-          <source_system> [ <https://example.org/narad/SourceSystemEnum#EPICS>
-             <https://example.org/narad/SourceSystemEnum#EPICS_ChannelAccess> <https://example.org/narad/SourceSystemEnum#PALS_Ext>
-             <https://example.org/narad/SourceSystemEnum#MYA> <https://example.org/narad/SourceSystemEnum#ElementDatabase>
-             <https://example.org/narad/SourceSystemEnum#ChannelDatabase> <https://example.org/narad/SourceSystemEnum#Simulation>
-             <https://example.org/narad/SourceSystemEnum#Other> ] ;
+    (  $<Signal_tes> (  &<Node_tes> ;
+          rdf:type [ <Node> ] ? ;
+          &<HasMetaP_tes> ;
+          rdf:type [ <HasMetaP> ] ? ;
+          <signal_role> [ sosa:ActuatableProperty sosa:ObservableProperty
+             <https://pals-project.readthedocs.io/SignalRoleEnum#Status> sosa:ActuatableProperty xsd:minInclusive xsd:maxInclusive
+             ] ;
+          <source_system> [ <https://pals-project.readthedocs.io/SourceSystemEnum#EPICS>
+             <https://pals-project.readthedocs.io/SourceSystemEnum#EPICS_ChannelAccess>
+             <https://pals-project.readthedocs.io/SourceSystemEnum#PALS_Ext>
+             <https://pals-project.readthedocs.io/SourceSystemEnum#MYA>
+             <https://pals-project.readthedocs.io/SourceSystemEnum#ElementDatabase>
+             <https://pals-project.readthedocs.io/SourceSystemEnum#ChannelDatabase>
+             <https://pals-project.readthedocs.io/SourceSystemEnum#Simulation>
+             <https://pals-project.readthedocs.io/SourceSystemEnum#Other> ] ;
           <native_description> @linkml:String ? ;
-          <canonical_signal_type> [ <https://example.org/narad/CanonicalSignalTypeEnum#HorizontalBeamPosition>
-             <https://example.org/narad/CanonicalSignalTypeEnum#VerticalBeamPosition>
-             <https://example.org/narad/CanonicalSignalTypeEnum#HorizontalBeamPositionOffset>
-             <https://example.org/narad/CanonicalSignalTypeEnum#VerticalBeamPositionOffset>
-             <https://example.org/narad/CanonicalSignalTypeEnum#BeamIntensity>
-             <https://example.org/narad/CanonicalSignalTypeEnum#DeviceStatus>
-             <https://example.org/narad/CanonicalSignalTypeEnum#GradientSetpoint>
-             <https://example.org/narad/CanonicalSignalTypeEnum#GradientReadback>
-             <https://example.org/narad/CanonicalSignalTypeEnum#MagnetCurrentSetpoint>
-             <https://example.org/narad/CanonicalSignalTypeEnum#MagnetCurrentReadback>
-             <https://example.org/narad/CanonicalSignalTypeEnum#MagnetFieldSetpoint>
-             <https://example.org/narad/CanonicalSignalTypeEnum#IntegratedFieldSetpoint>
-             <https://example.org/narad/CanonicalSignalTypeEnum#IntegratedFieldReadback>
-             <https://example.org/narad/CanonicalSignalTypeEnum#VacuumPressure>
-             <https://example.org/narad/CanonicalSignalTypeEnum#IonPumpCurrent>
-             <https://example.org/narad/CanonicalSignalTypeEnum#IonPumpVoltage>
-             <https://example.org/narad/CanonicalSignalTypeEnum#GammaDoseRate>
-             <https://example.org/narad/CanonicalSignalTypeEnum#NeutronDoseRate>
-             <https://example.org/narad/CanonicalSignalTypeEnum#Status> ] ;
-          <quantity_kind> [ <https://example.org/narad/QuantityKindEnum#BeamPosition> sosa:ObservableProperty
+          <canonical_signal_type> [ <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#HorizontalBeamPosition>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#VerticalBeamPosition>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#HorizontalBeamPositionOffset>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#VerticalBeamPositionOffset>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#BeamIntensity>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#DeviceStatus>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#GradientSetpoint>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#GradientReadback>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#MagnetCurrentSetpoint>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#MagnetCurrentReadback>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#MagnetFieldSetpoint>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#IntegratedFieldSetpoint>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#IntegratedFieldReadback>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#VacuumPressure>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#IonPumpCurrent>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#IonPumpVoltage>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#GammaDoseRate>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#NeutronDoseRate>
+             <https://pals-project.readthedocs.io/CanonicalSignalTypeEnum#Status> ] ;
+          <quantity_kind> [ <https://pals-project.readthedocs.io/QuantityKindEnum#BeamPosition> sosa:ObservableProperty
              quantitykind:ElectricCurrent quantitykind:MagneticFluxPerLength quantitykind:MagneticFluxDensity quantitykind:Pressure
              quantitykind:AbsorbedDoseRate quantitykind:Voltage quantitykind:Power quantitykind:PhaseAngle
              quantitykind:ElectricFieldStrength ] ;
           <native_data_type> [ xsd:string xsd:integer xsd:float xsd:boolean ] ;
-          <native_unit> [ unit:MilliM unit:M unit:A unit:T-M unit:PA unit:TORR unit:REM-PER-H unit:MREM-PER-H unit:V unit:KiloW
-             unit:DEG unit:MegaV-PER-M <https://example.org/narad/UnitEnum#G_per_cm> unit:NUM
-             <https://example.org/narad/UnitEnum#none> ] ;
+          <native_unit> [ <https://pals-project.readthedocs.io/UnitEnum#A> <https://pals-project.readthedocs.io/UnitEnum#degree>
+             <https://pals-project.readthedocs.io/UnitEnum#eV> <https://pals-project.readthedocs.io/UnitEnum#eV_per_c>
+             <https://pals-project.readthedocs.io/UnitEnum#eV_per_c2>
+             <https://pals-project.readthedocs.io/UnitEnum#fundamental_charge>
+             <https://pals-project.readthedocs.io/UnitEnum#G_per_cm> <https://pals-project.readthedocs.io/UnitEnum#Hz>
+             <https://pals-project.readthedocs.io/UnitEnum#kW> <https://pals-project.readthedocs.io/UnitEnum#m>
+             <https://pals-project.readthedocs.io/UnitEnum#mm> <https://pals-project.readthedocs.io/UnitEnum#mrem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#MV_per_m> <https://pals-project.readthedocs.io/UnitEnum#PA>
+             <https://pals-project.readthedocs.io/UnitEnum#randians_pi2> <https://pals-project.readthedocs.io/UnitEnum#rem_per_h>
+             <https://pals-project.readthedocs.io/UnitEnum#seconds> <https://pals-project.readthedocs.io/UnitEnum#T>
+             <https://pals-project.readthedocs.io/UnitEnum#T_M> <https://pals-project.readthedocs.io/UnitEnum#Torr>
+             <https://pals-project.readthedocs.io/UnitEnum#V> <https://pals-project.readthedocs.io/UnitEnum#V_per_m>
+             <https://pals-project.readthedocs.io/UnitEnum#unitless> <https://pals-project.readthedocs.io/UnitEnum#none> ] ;
           <access_protocol> @linkml:String ? ;
           <archive_identifier> @linkml:String ? ;
-          pals:description @linkml:String ? ;
-          pals:label @linkml:String ? ;
-          pals:alias @linkml:String ? ;
-          <additional_metadata> @<MetadataEntry> *
+          <MetaP> @<MetaParamGroup> ?
        ) ;
        rdf:type [ <Signal> ]
     )
 }
 
-<SignalBinding> CLOSED {
-    (  $<SignalBinding_tes> (  &<Relationship_tes> ;
-          rdf:type [ <Relationship> ] ? ;
+<SignalBinding>  (
+    @<HasCommandSignal> OR @<HasLimitSignal> OR @<HasReadbackSignal> OR @<HasSetpointSignal> OR @<HasSignal>
+)
+
+<SignalBinding_struct> {
+    (  $<SignalBinding_tes> (  &<Edge_tes> ;
+          rdf:type [ rdf:Statement ] ? ;
           rdf:subject @<PhysicalComponent> ;
-          rdf:predicate [ <https://example.org/narad/SignalBindingPredicateEnum#has_signal>
-             <https://example.org/narad/SignalBindingPredicateEnum#has_status_signal>
-             <https://example.org/narad/SignalBindingPredicateEnum#has_setpoint_signal>
-             <https://example.org/narad/SignalBindingPredicateEnum#has_readback_signal>
-             <https://example.org/narad/SignalBindingPredicateEnum#has_command_signal>
-             <https://example.org/narad/SignalBindingPredicateEnum#has_limit_signal> ] ;
           rdf:object @<Signal>
        ) ;
        rdf:type [ <SignalBinding> ]
@@ -662,20 +1017,21 @@ linkml:Sparqlpath xsd:string
 <Solenoid> CLOSED {
     (  $<Solenoid_tes> (  &<Magnet_tes> ;
           rdf:type [ <Magnet> ] ? ;
-          &<SolenoidP_tes> ;
-          rdf:type [ <SolenoidP> ] ? ;
-          pals:Ksol @linkml:Float ? ;
-          pals:Bsol @linkml:Float ?
+          &<HasSolenoidP_tes> ;
+          rdf:type [ <HasSolenoidP> ] ? ;
+          <SolenoidP> @<SolenoidParamGroup> ?
        ) ;
        rdf:type [ <Solenoid> ]
     )
 }
 
-<SolenoidP> {
-    (  $<SolenoidP_tes> (  pals:Ksol @linkml:Float ? ;
-          pals:Bsol @linkml:Float ?
+<SolenoidParamGroup> CLOSED {
+    (  $<SolenoidParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <Ksol> @linkml:Float ? ;
+          <Bsol> @linkml:Float ?
        ) ;
-       rdf:type [ <SolenoidP> ] ?
+       rdf:type [ <SolenoidParamGroup> ]
     )
 }
 
@@ -690,42 +1046,40 @@ linkml:Sparqlpath xsd:string
 <SupportingFacilityComponent> CLOSED {
     (  $<SupportingFacilityComponent_tes> (  &<PhysicalComponent_tes> ;
           rdf:type [ <PhysicalComponent> ] ? ;
-          &<FloorP_tes> ;
-          rdf:type [ <FloorP> ] ? ;
-          &<HasLongitudinalPlacement_tes> ;
-          rdf:type [ <HasLongitudinalPlacement> ] ? ;
-          &<BodyShiftP_tes> ;
-          rdf:type [ <BodyShiftP> ] ? ;
-          <supporting_facility_function> [ <https://example.org/narad/FacilityFunctionEnum#Support>
-             <https://example.org/narad/FacilityFunctionEnum#Alignment>
-             <https://example.org/narad/FacilityFunctionEnum#PowerSupply>
-             <https://example.org/narad/FacilityFunctionEnum#ControlRack> <https://example.org/narad/FacilityFunctionEnum#Cooling>
-             <https://example.org/narad/FacilityFunctionEnum#Diagnostics>
-             <https://example.org/narad/FacilityFunctionEnum#Detection> ] + ;
-          pals:x_offset @linkml:Float ? ;
-          pals:y_offset @linkml:Float ? ;
-          pals:z_offset @linkml:Float ? ;
-          pals:x_rot @linkml:Float ? ;
-          pals:y_rot @linkml:Float ? ;
-          pals:z_rot @linkml:Float ?
+          &<HasFloorP_tes> ;
+          rdf:type [ <HasFloorP> ] ? ;
+          &<HasLongitudinalPlacementP_tes> ;
+          rdf:type [ <HasLongitudinalPlacementP> ] ? ;
+          &<HasBodyShiftP_tes> ;
+          rdf:type [ <HasBodyShiftP> ] ? ;
+          <supporting_facility_function> [ <https://pals-project.readthedocs.io/FacilityFunctionEnum#Support>
+             <https://pals-project.readthedocs.io/FacilityFunctionEnum#Alignment>
+             <https://pals-project.readthedocs.io/FacilityFunctionEnum#PowerSupply>
+             <https://pals-project.readthedocs.io/FacilityFunctionEnum#ControlRack>
+             <https://pals-project.readthedocs.io/FacilityFunctionEnum#Cooling>
+             <https://pals-project.readthedocs.io/FacilityFunctionEnum#Diagnostics>
+             <https://pals-project.readthedocs.io/FacilityFunctionEnum#Detection> ] + ;
+          <BodyShiftP> @<BodyShiftParamGroup> ?
        ) ;
        rdf:type [ <SupportingFacilityComponent> ]
     )
 }
 
-<TwissP> {
-    (  $<TwissP_tes> (  pals:alpha_a @linkml:Float ? ;
-          pals:alpha_b @linkml:Float ? ;
-          pals:beta_a @linkml:Float ? ;
-          pals:beta_b @linkml:Float ? ;
-          pals:eta_x @linkml:Float ? ;
-          pals:eta_y @linkml:Float ? ;
-          pals:etap_x @linkml:Float ? ;
-          pals:etap_y @linkml:Float ? ;
-          pals:phi_a @linkml:Float ? ;
-          pals:phi_b @linkml:Float ?
+<TwissParamGroup> CLOSED {
+    (  $<TwissParamGroup_tes> (  &<ParamGroup_tes> ;
+          rdf:type [ <ParamGroup> ] ? ;
+          <alpha_a> @linkml:Float ? ;
+          <alpha_b> @linkml:Float ? ;
+          <beta_a> @linkml:Float ? ;
+          <beta_b> @linkml:Float ? ;
+          <eta_x> @linkml:Float ? ;
+          <eta_y> @linkml:Float ? ;
+          <etap_x> @linkml:Float ? ;
+          <etap_y> @linkml:Float ? ;
+          <phi_a> @linkml:Float ? ;
+          <phi_b> @linkml:Float ?
        ) ;
-       rdf:type [ <TwissP> ] ?
+       rdf:type [ <TwissParamGroup> ]
     )
 }
 
@@ -733,20 +1087,16 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<VirtualComponent_tes> (  &<Component_tes> ;
              rdf:type [ <Component> ] ? ;
-             &<FloorP_tes> ;
-             rdf:type [ <FloorP> ] ? ;
-             <virtual_function> [ pals:Beamline pals:Marker pals:Fork <https://example.org/narad/VirtualFunctionEnum#Control> ] + ;
-             <virtual_beamline_relation> [ <https://example.org/narad/VirtualRelationEnum#Inline>
-                <https://example.org/narad/VirtualRelationEnum#AssociatedWithBeamline>
-                <https://example.org/narad/VirtualRelationEnum#NotAssociatedWithBeamline> ] ;
-             pals:x @linkml:Float ? ;
-             pals:y @linkml:Float ? ;
-             pals:z @linkml:Float ? ;
-             pals:theta @linkml:Float ? ;
-             pals:phi @linkml:Float ? ;
-             pals:psi @linkml:Float ?
+             &<HasFloorP_tes> ;
+             rdf:type [ <HasFloorP> ] ? ;
+             <virtual_function> [ <BeamLine> <Marker> <Fork> <https://pals-project.readthedocs.io/VirtualFunctionEnum#Control> ] +
+             ;
+             <virtual_beamline_relation> [ <https://pals-project.readthedocs.io/VirtualRelationEnum#Inline>
+                <https://pals-project.readthedocs.io/VirtualRelationEnum#AssociatedWithBeamLine>
+                <https://pals-project.readthedocs.io/VirtualRelationEnum#NotAssociatedWithBeamLine> ] ;
+             <FloorP> @<FloorParamGroup> ?
           ) ;
           rdf:type [ <VirtualComponent> ]
        )
-    } OR @<Beamline> OR @<BookkeepingComponent>
+    } OR @<BeamLine> OR @<BookkeepingComponent>
 )

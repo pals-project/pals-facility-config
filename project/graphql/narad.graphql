@@ -1,12 +1,4 @@
 # metamodel_version: 1.7.0
-enum AxisEnum
-  {
-    x
-    y
-    z
-    s
-  }
-
 enum CanonicalSignalTypeEnum
   {
     HorizontalBeamPosition
@@ -30,22 +22,17 @@ enum CanonicalSignalTypeEnum
     Status
   }
 
-enum ComponentRelationPredicateEnum
+enum CavityTypeEnum
   {
-    precedes
-    follows
-    contains
-    contained_in
-    connected_to
-    controls
-    is_controlled_by
-    is_part_of
-    has_part
-    adjacent_to
-    overlaps
-    mounted_on
-    intersects
-    nearest_to
+    STANDING_WAVE
+    TRAVELING_WAVE
+  }
+
+enum CoordinateSystemEnum
+  {
+    Cartesian
+    Cylindrical
+    Spherical
   }
 
 enum DataTypeEnum
@@ -73,6 +60,16 @@ enum FacilityFunctionEnum
     Cooling
     Diagnostics
     Detection
+  }
+
+enum IdentifierTypeEnum
+  {
+    DOI
+    PURL
+    ROR
+    LOCAL
+    URL
+    ARK
   }
 
 enum MultipoleGeometryEnum
@@ -105,7 +102,7 @@ enum PhysicalRelationEnum
   {
     Inline
     AttachedToPipe
-    NearBeamline
+    NearBeamLine
     SupportingFacility
   }
 
@@ -156,16 +153,6 @@ enum RelationContextEnum
     installation_mounting
   }
 
-enum SignalBindingPredicateEnum
-  {
-    has_signal
-    has_status_signal
-    has_setpoint_signal
-    has_readback_signal
-    has_command_signal
-    has_limit_signal
-  }
-
 enum SignalRoleEnum
   {
     Setpoint
@@ -190,26 +177,35 @@ enum SourceSystemEnum
 
 enum UnitEnum
   {
-    mm
-    m
     A
-    T_m
-    Pa
-    Torr
-    rem_per_h
-    mrem_per_h
-    V
-    kW
     degree
-    MV_per_m
+    eV
+    eV_per_c
+    eV_per_c2
+    fundamental_charge
     G_per_cm
+    Hz
+    kW
+    m
+    mm
+    mrem_per_h
+    MV_per_m
+    PA
+    randians_pi2
+    rem_per_h
+    seconds
+    T
+    T_M
+    Torr
+    V
+    V_per_m
     unitless
     none
   }
 
 enum VirtualFunctionEnum
   {
-    BeamlineSection
+    BeamLineSection
     Mark
     Fork
     Control
@@ -218,188 +214,174 @@ enum VirtualFunctionEnum
 enum VirtualRelationEnum
   {
     Inline
-    AssociatedWithBeamline
-    NotAssociatedWithBeamline
+    AssociatedWithBeamLine
+    NotAssociatedWithBeamLine
+  }
+
+enum ZeroPhaseEnum
+  {
+    ACCELERATING
+    BELOW_TRANSITION
+    ABOVE_TRANSITION
   }
 
 type ACKicker
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
     plane: PlaneEnum
-    components: [MultipoleComponent]
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
   }
 
-type Beamline
+type AdditionalMetadata
+  {
+    key: String!
+    value: String!
+    datatype: DataTypeEnum
+  }
+
+type AdjacentTo
   {
     id: String!
-    type: Component!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    distanceValue: Float
+    distanceUnit: UnitEnum
+    toleranceValue: Float
+    toleranceUnit: UnitEnum
+    coordinates: CoordinateSet
+    predicate: String!
+  }
+
+type Affiliation
+  {
+    id: String!
+    name: String
+    identifiers: [Identifier]
+  }
+
+type Aperture implements HasReferenceP, HasTwissP
+  {
+    id: String!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
+    functions: [PhysicalFunctionEnum]!
+    beamlineRelation: PhysicalRelationEnum!
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    twissP: TwissParamGroup
+  }
+
+type Author
+  {
+    name: String
+    affiliation: Affiliation
+    email: String
+    orcid: String
+  }
+
+type BeamLine
+  {
+    id: String!
+    kind: String!
+    alias: [String]
+    nativeTypes: [String]
+    metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
     beamlineRelation: VirtualRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    multipass: Boolean
+    floorP: FloorParamGroup
     length: Float
-    zeroPoint: String
+    description: String
+    multipass: Boolean
     periodic: Boolean
     repeat: Int
     direction: Int
   }
 
-type BeamlineSection
+type BeamLineSection implements HasFloorP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
     beamlineRelation: VirtualRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
+    floorP: FloorParamGroup
+    bodyShiftP: BodyShiftParamGroup
   }
 
-type BeamPositionMonitor implements ReferenceP, BodyShiftP, TwissP
+type BeamPositionMonitor implements HasReferenceP, HasBodyShiftP, HasTwissP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
   }
 
-type Bend
+type BeamProfileMonitor implements HasReferenceP, HasBodyShiftP, HasTwissP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
-    components: [MultipoleComponent]
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
   }
 
-interface BendP
+type Bend implements HasBendP
   {
+    id: String!
+    kind: String!
+    alias: [String]
+    nativeTypes: [String]
+    metaP: MetaParamGroup
+    functions: [PhysicalFunctionEnum]!
+    beamlineRelation: PhysicalRelationEnum!
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
+    bendP: BendParamGroup
+  }
+
+type BendParamGroup
+  {
+    id: String!
     angleRef: Float
     bendFieldRef: Float
     bendFieldActual: Float
@@ -422,8 +404,9 @@ interface BendP
     tiltRef: Float
   }
 
-interface BodyShiftP
+type BodyShiftParamGroup
   {
+    id: String!
     xOffset: Float
     yOffset: Float
     zOffset: Float
@@ -432,367 +415,393 @@ interface BodyShiftP
     zRot: Float
   }
 
-type BookkeepingComponent implements BodyShiftP
+type BookkeepingComponent implements HasBodyShiftP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
     beamlineRelation: VirtualRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
+    floorP: FloorParamGroup
+    bodyShiftP: BodyShiftParamGroup
   }
 
-type Cavity implements ReferenceP, ElectricMultipoleP, MagneticMultipoleP, BodyShiftP, TwissP
+type Cavity implements HasReferenceP, HasElectricMultipoleP, HasMagneticMultipoleP, HasBodyShiftP, HasTwissP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    components: [MultipoleComponent]
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
   }
 
-type Component implements MetaP
+type Component implements HasMetaP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
   }
 
-type ComponentRelation
+interface ComponentRelation
   {
     id: String!
-    context: RelationContextEnum
-    beamlineContext: Beamline
+    predicate: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
     referenceFrame: ReferenceFrameEnum
-    distanceValue: Float
-    distanceUnit: UnitEnum
-    axis: AxisEnum
-    direction: DirectionEnum
-    toleranceValue: Float
-    toleranceUnit: UnitEnum
     subject: Component!
-    predicate: ComponentRelationPredicateEnum!
     object: Component!
+  }
+
+type Contains
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    predicate: String!
+  }
+
+type Controls
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    predicate: String!
+  }
+
+type CoordinateSet
+  {
+    coordinateSystem: CoordinateSystemEnum
+    xCoord: Float
+    yCoord: Float
+    zCoord: Float
+    rCoord: Float
+    thetaCoord: Float
+    phiCoord: Float
   }
 
 type CrabCavity
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    components: [MultipoleComponent]
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
   }
 
 type DiagnosticDevice
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
   }
 
-interface ElectricMultipoleP
-  {
-    components: [MultipoleComponent]
-  }
-
-interface FloorP
-  {
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-  }
-
-interface HasLongitudinalPlacement
-  {
-    length: Float
-    sPosition: Float
-  }
-
-type Kicker implements ElectricMultipoleP, MagneticMultipoleP
+interface Edge
   {
     id: String!
-    type: Component!
-    nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
-    functions: [PhysicalFunctionEnum]!
-    beamlineRelation: PhysicalRelationEnum!
+    subject: String!
+    predicate: String!
+    object: String!
+  }
+
+type ElectricMultipoleParamGroup
+  {
+    id: String!
+    elecComponents: [MultipoleParameterGroup]
+  }
+
+type Facility
+  {
+    identifiers: [Identifier]
+    components: [Component]
+    beamlines: [BeamLine]
+    signals: [Signal]
+    signalBindings: [SignalBinding]
+    componentRelations: [ComponentRelation]
+  }
+
+type FloorParamGroup
+  {
+    id: String!
     x: Float
     y: Float
     z: Float
     theta: Float
     phi: Float
     psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+  }
+
+interface HasBendP
+  {
+    bendP: BendParamGroup
+  }
+
+interface HasBodyShiftP
+  {
+    bodyShiftP: BodyShiftParamGroup
+  }
+
+type HasCommandSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
+  }
+
+type HasConnectingBranch
+  {
+    id: String!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    beamlineContext: BeamLine!
+    predicate: String!
+    context: RelationContextEnum!
+  }
+
+interface HasElectricMultipoleP
+  {
+    electricMultipoleP: ElectricMultipoleParamGroup
+  }
+
+interface HasFloorP
+  {
+    floorP: FloorParamGroup
+  }
+
+type HasLimitSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
+  }
+
+interface HasLongitudinalPlacementP
+  {
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+  }
+
+interface HasMagneticMultipoleP
+  {
+    magneticMultipoleP: MagneticMultipoleParamGroup
+  }
+
+interface HasMetaP
+  {
+    metaP: MetaParamGroup
+  }
+
+type HasReadbackSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
+  }
+
+interface HasReferenceP
+  {
+    referenceP: ReferenceParamGroup
+  }
+
+interface HasRFP
+  {
+    rFP: RFParamGroup
+  }
+
+type HasSetpointSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
+  }
+
+type HasSignal
+  {
+    id: String!
+    subject: PhysicalComponent!
+    object: Signal!
+    predicate: String!
+  }
+
+interface HasSolenoidP
+  {
+    solenoidP: SolenoidParamGroup
+  }
+
+interface HasTwissP
+  {
+    twissP: TwissParamGroup
+  }
+
+type Identifier
+  {
+    identifierType: IdentifierTypeEnum
+    identifierValue: String
+  }
+
+type Intersects
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    predicate: String!
+  }
+
+type IsPartOf
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    predicate: String!
+  }
+
+type Kicker implements HasElectricMultipoleP, HasMagneticMultipoleP
+  {
+    id: String!
+    kind: String!
+    alias: [String]
+    nativeTypes: [String]
+    metaP: MetaParamGroup
+    functions: [PhysicalFunctionEnum]!
+    beamlineRelation: PhysicalRelationEnum!
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
     plane: PlaneEnum
-    components: [MultipoleComponent]
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
   }
 
-type Magnet implements ReferenceP, BodyShiftP, TwissP
+type LongitudinalPlacementParamGroup
   {
     id: String!
-    type: Component!
-    nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
-    functions: [PhysicalFunctionEnum]!
-    beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
     length: Float
     sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
   }
 
-interface MagneticMultipoleP
-  {
-    components: [MultipoleComponent]
-  }
-
-type Marker implements TwissP
+type Magnet implements HasReferenceP, HasBodyShiftP, HasTwissP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
+    functions: [PhysicalFunctionEnum]!
+    beamlineRelation: PhysicalRelationEnum!
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+  }
+
+type MagneticMultipoleParamGroup
+  {
+    id: String!
+    magComponents: [MultipoleParameterGroup]
+  }
+
+type Marker implements HasTwissP
+  {
+    id: String!
+    kind: String!
+    alias: [String]
+    nativeTypes: [String]
+    metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
     beamlineRelation: VirtualRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+    floorP: FloorParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
   }
 
-type MetadataEntry
-  {
-    key: String!
-    value: String!
-    datatype: DataTypeEnum
-  }
-
-interface MetaP
-  {
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
-  }
-
-type Multipole implements ElectricMultipoleP, MagneticMultipoleP
+type MetaParamGroup
   {
     id: String!
-    type: Component!
-    nativeTypes: [String]
     description: String
+    alias: [String]
     label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
-    functions: [PhysicalFunctionEnum]!
-    beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
-    components: [MultipoleComponent]
+    additionalMetadata: [AdditionalMetadata]
   }
 
-type MultipoleComponent
+type MountedOn
+  {
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    coordinates: CoordinateSet
+    predicate: String!
+  }
+
+type Multipole implements HasElectricMultipoleP, HasMagneticMultipoleP
+  {
+    id: String!
+    kind: String!
+    alias: [String]
+    nativeTypes: [String]
+    metaP: MetaParamGroup
+    functions: [PhysicalFunctionEnum]!
+    beamlineRelation: PhysicalRelationEnum!
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
+  }
+
+type MultipoleParameterGroup
   {
     order: Int!
     tilt: Float
@@ -806,297 +815,217 @@ type MultipoleComponent
     ks: Float
   }
 
-type NARAD
+type NearestTo
   {
-    type: Component!
-    description: String
-    physicalComponents: [PhysicalComponent]
-    virtualComponents: [VirtualComponent]
-    beamlines: [Beamline]
-    supportingFacilityComponents: [SupportingFacilityComponent]
-    signals: [Signal]
-    signalBindings: [SignalBinding]
-    componentRelations: [ComponentRelation]
+    id: String!
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    distanceValue: Float
+    distanceUnit: UnitEnum
+    toleranceValue: Float
+    toleranceUnit: UnitEnum
+    coordinates: CoordinateSet
+    predicate: String!
+  }
+
+interface Node
+  {
+    id: String!
+    kind: String!
+    alias: [String]
   }
 
 type NormalConductingRFCavity
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    components: [MultipoleComponent]
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    rFP: RFParamGroup
   }
 
 type Octupole
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
-    components: [MultipoleComponent]
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
   }
 
-type PhysicalComponent implements FloorP, HasLongitudinalPlacement
+type Overlaps
   {
     id: String!
-    type: Component!
-    nativeTypes: [String]
+    context: RelationContextEnum!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    coordinates: CoordinateSet
+    predicate: String!
+  }
+
+type PALSAccelerator
+  {
+    kind: String!
     description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    affiliation: Affiliation
+    version: String
+    authors: [Author]
+    notes: [String]
+    facility: Facility
+  }
+
+interface ParamGroup
+  {
+    id: String!
+  }
+
+type PhysicalComponent implements HasFloorP, HasLongitudinalPlacementP
+  {
+    id: String!
+    kind: String!
+    alias: [String]
+    nativeTypes: [String]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+  }
+
+type Precedes
+  {
+    id: String!
+    componentDirection: DirectionEnum
+    referenceFrame: ReferenceFrameEnum
+    subject: Component!
+    object: Component!
+    beamlineContext: BeamLine!
+    predicate: String!
+    context: RelationContextEnum!
   }
 
 type Quadrupole
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
-    components: [MultipoleComponent]
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
   }
 
-type RadiationMonitor implements BodyShiftP
+type RadiationMonitor implements HasBodyShiftP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    bodyShiftP: BodyShiftParamGroup
   }
 
-interface ReferenceP
+type ReferenceParamGroup
   {
+    id: String!
     speciesRef: String
     pcRef: Float
     eTotRef: Float
     timeRef: Float
   }
 
-interface Relationship
+type RFCavity implements HasRFP
   {
     id: String!
-    subject: String!
-    predicate: String!
-    object: String!
-  }
-
-interface RFCavity
-  {
-    id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    components: [MultipoleComponent]
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    rFP: RFParamGroup
+  }
+
+type RFParamGroup
+  {
+    id: String!
+    frequency: Float
+    harmon: Int
+    voltage: Float
+    phase: Float
+    multipassPhase: Float
+    cavityType: CavityTypeEnum
+    numCells: Int
+    zeroPhase: ZeroPhaseEnum
+    lActive: Float
+    dERef: Float
   }
 
 type Sextupole
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
-    components: [MultipoleComponent]
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
   }
 
-type Signal implements MetaP
+type Signal implements HasMetaP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     signalRole: SignalRoleEnum!
     sourceSystem: SourceSystemEnum!
     nativeDescription: String
@@ -1106,65 +1035,37 @@ type Signal implements MetaP
     nativeUnit: UnitEnum!
     accessProtocol: String
     archiveIdentifier: String
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
   }
 
-type SignalBinding
+interface SignalBinding
   {
     id: String!
+    predicate: String!
     subject: PhysicalComponent!
-    predicate: SignalBindingPredicateEnum!
     object: Signal!
   }
 
-type Solenoid implements SolenoidP
+type Solenoid implements HasSolenoidP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
-    ksol: Float
-    bsol: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    solenoidP: SolenoidParamGroup
   }
 
-interface SolenoidP
+type SolenoidParamGroup
   {
+    id: String!
     ksol: Float
     bsol: Float
   }
@@ -1172,74 +1073,39 @@ interface SolenoidP
 type SuperConductingRFCavity
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [PhysicalFunctionEnum]!
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
-    speciesRef: String
-    pcRef: Float
-    eTotRef: Float
-    timeRef: Float
-    components: [MultipoleComponent]
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
-    alphaA: Float
-    alphaB: Float
-    betaA: Float
-    betaB: Float
-    etaX: Float
-    etaY: Float
-    etapX: Float
-    etapY: Float
-    phiA: Float
-    phiB: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
+    referenceP: ReferenceParamGroup
+    electricMultipoleP: ElectricMultipoleParamGroup
+    magneticMultipoleP: MagneticMultipoleParamGroup
+    bodyShiftP: BodyShiftParamGroup
+    twissP: TwissParamGroup
+    rFP: RFParamGroup
   }
 
-type SupportingFacilityComponent implements FloorP, HasLongitudinalPlacement, BodyShiftP
+type SupportingFacilityComponent implements HasFloorP, HasLongitudinalPlacementP, HasBodyShiftP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     beamlineRelation: PhysicalRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
-    length: Float
-    sPosition: Float
+    floorP: FloorParamGroup
+    longitudinalPlacementP: LongitudinalPlacementParamGroup
     functions: [FacilityFunctionEnum]!
-    xOffset: Float
-    yOffset: Float
-    zOffset: Float
-    xRot: Float
-    yRot: Float
-    zRot: Float
+    bodyShiftP: BodyShiftParamGroup
   }
 
-interface TwissP
+type TwissParamGroup
   {
+    id: String!
     alphaA: Float
     alphaB: Float
     betaA: Float
@@ -1252,21 +1118,14 @@ interface TwissP
     phiB: Float
   }
 
-type VirtualComponent implements FloorP
+type VirtualComponent implements HasFloorP
   {
     id: String!
-    type: Component!
+    kind: String!
+    alias: [String]
     nativeTypes: [String]
-    description: String
-    label: String
-    alias: String
-    additionalMetadata: [MetadataEntry]
+    metaP: MetaParamGroup
     functions: [VirtualFunctionEnum]!
     beamlineRelation: VirtualRelationEnum!
-    x: Float
-    y: Float
-    z: Float
-    theta: Float
-    phi: Float
-    psi: Float
+    floorP: FloorParamGroup
   }

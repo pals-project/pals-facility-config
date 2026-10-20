@@ -13,16 +13,10 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class ComponentRelation extends Relationship {
+public abstract class ComponentRelation extends Edge {
 
   private String context;
-  private Beamline beamlineContext;
+  private String componentDirection;
   private String referenceFrame;
-  private Float distanceValue;
-  private String distanceUnit;
-  private String axis;
-  private String direction;
-  private Float toleranceValue;
-  private String toleranceUnit;
 
 }
