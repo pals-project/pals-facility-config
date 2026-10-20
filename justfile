@@ -100,11 +100,14 @@ gen-doc: _gen-yaml && _add-artifacts
 # Export the example instance as Turtle RDF
 [group('model development')]
 gen-instance-ttl instance_file="examples/core_acc_narad_instance.yaml": _ensure_project_owl
+  uv run python3 src/resolve_instance_ids.py \
+    --instance_file {{instance_file}} \
+    --output_file {{dest}}/owl/{{file_stem(instance_file)}}.resolved.yaml
   uv run linkml-convert \
     -s {{source_schema_path}} \
     -C PALSAccelerator \
     -t ttl \
-    {{instance_file}} \
+    {{dest}}/owl/{{file_stem(instance_file)}}.resolved.yaml \
     -o {{dest}}/owl/{{file_stem(instance_file)}}.ttl
 
 # Build docs and run test server

@@ -88,13 +88,23 @@ def generate_rdf(schema_path: Path, instance_path: Path, gen_owl_args: str) -> I
     gen_owl_command = ["uv", "run", "gen-owl", *([gen_owl_args] if gen_owl_args else []), str(schema_path)]
     run_command(gen_owl_command, cwd=REPO_ROOT, stdout=paths.schema_ttl)
 
+    resolved_instance = instance_path.with_suffix(".resolved.yaml")
+    run_command(
+        [
+            "uv", "run", "python3", "src/resolve_instance_ids.py",
+            "--instance_file", str(instance_path),
+            "--output_file", str(resolved_instance),
+        ],
+        cwd=REPO_ROOT,
+    )
+
     run_command(
         [
             "uv", "run", "linkml-convert",
             "-s", str(schema_path),
             "-C", target_class,
             "-t", "ttl",
-            str(instance_path),
+            str(resolved_instance),
             "-o", str(paths.instance_raw_ttl),
         ],
         cwd=REPO_ROOT,
