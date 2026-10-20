@@ -3,7 +3,7 @@ description: PALS-NARAD representation of a validated subset of the Jefferson La
 kind: PALSAccelerator
 version: null # in progress
 affiliation: 
-  id: inst:jefferson-lab
+  id: jefferson-lab
   name: Thomas Jefferson National Accelerator Facility
   identifiers:
     - identifier_type: ROR
@@ -13,7 +13,7 @@ authors:
     email: dianam@jlab.org
     orcid: https://orcid.org/0000-0002-8520-1631
     affiliation: 
-      id: inst:jefferson-lab
+      id: jefferson-lab
       name: Thomas Jefferson National Accelerator Facility
       identifiers:
         - identifier_type: ROR
@@ -22,11 +22,12 @@ notes:
   - "This is a work in progress to define the JLab UITF injector beamline in the accelerator_core LinkML schema. The original
     data was automatically ported, then manually updated from a prior instance format to conform to the new schema."
 facility:
+  id_namespace: tag:jlab.org,2026:uitf/
   identifiers:
     - identifier_type: URL
       identifier_value: https://www.jlab.org/accelerator/uitf
   components:
-    - id: inst:RF_LASER
+    - id: RF_LASER
       kind: SuperConductingRFCavity
       native_types:
       - RFCavity
@@ -37,7 +38,7 @@ facility:
         - Focusing
       beamline_relation: Inline
       FloorP:
-        id: inst:RF_LASER/FloorP
+        id: RF_LASER/FloorP
         x: 10.6125874
         y: 21.0668
         z: 31.65814
@@ -45,14 +46,14 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:RF_LASER/LongitudinalPlacementP
+        id: RF_LASER/LongitudinalPlacementP
         length: 0.0
       ReferenceP:
-        id: inst:RF_LASER/ReferenceP
+        id: RF_LASER/ReferenceP
         species_ref: electron
         pc_ref: 0.465144443755972
       TwissP:
-        id: inst:RF_LASER/TwissP
+        id: RF_LASER/TwissP
         alpha_a: -1.987749019418206
         alpha_b: 1.587714437254934
         beta_a: 0.155406734272248
@@ -64,11 +65,11 @@ facility:
         phi_a: 0.0
         phi_b: 0.0
       RFP:
-        id: inst:RF_LASER/RFP
+        id: RF_LASER/RFP
         frequency: 1497000000.0
         voltage: 0.0
         phase: 0.0
-    - id: inst:IPMK101
+    - id: IPMK101
       kind: BeamPositionMonitor
       native_types:
       - BPM
@@ -78,7 +79,7 @@ facility:
         - BeamPositionMeasurement
       beamline_relation: Inline
       FloorP:
-        id: inst:IPMK101/FloorP
+        id: IPMK101/FloorP
         x: 10.50809805776206
         y: 21.0668
         z: 32.04809953376817
@@ -86,18 +87,18 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:IPMK101/LongitudinalPlacementP
+        id: IPMK101/LongitudinalPlacementP
         length: 0.0
       BodyShiftP:
-        id: inst:IPMK101/BodyShiftP
+        id: IPMK101/BodyShiftP
         x_offset: 0.0
         y_offset: 0.0
       ReferenceP:
-        id: inst:IPMK101/ReferenceP
+        id: IPMK101/ReferenceP
         species_ref: electron
         pc_ref: 0.465144443755972
       TwissP:
-        id: inst:IPMK101/TwissP
+        id: IPMK101/TwissP
         alpha_a: -14.84984297191979
         alpha_b: -3.340915259171737
         beta_a: 6.953008935571263
@@ -109,7 +110,7 @@ facility:
         phi_a: 0.3988706025888786
         phi_b: 2.288691122909796
       MetaP:
-        id: inst:IPMK101/MetaP
+        id: IPMK101/MetaP
         description: Digital receiver (stripline) beam position monitor.
         additional_metadata:
           - key: Pass
@@ -122,7 +123,7 @@ facility:
             value: iocipmk101
           - key: electrode_rotation_deg
             value: "45.0"
-    - id: inst:IPMK102
+    - id: IPMK102
       kind: BeamPositionMonitor
       native_types:
       - BPM
@@ -132,7 +133,7 @@ facility:
         - BeamPositionMeasurement
       beamline_relation: Inline
       FloorP:
-        id: inst:IPMK102/FloorP
+        id: IPMK102/FloorP
         x: 10.40715771291403
         y: 21.0668
         z: 32.42481402897189
@@ -140,18 +141,18 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:IPMK102/LongitudinalPlacementP
+        id: IPMK102/LongitudinalPlacementP
         length: 0.0
       BodyShiftP:
-        id: inst:IPMK102/BodyShiftP
+        id: IPMK102/BodyShiftP
         x_offset: 0.0
         y_offset: 0.0
       ReferenceP:
-        id: inst:IPMK102/ReferenceP
+        id: IPMK102/ReferenceP
         species_ref: electron
         pc_ref: 0.465144443755972
       TwissP:
-        id: inst:IPMK102/TwissP
+        id: IPMK102/TwissP
         alpha_a: 14.89750177210773
         alpha_b: 1.862421495338784
         beta_a: 11.37559232654712
@@ -163,7 +164,7 @@ facility:
         phi_a: 0.4327902197303953
         phi_b: 2.470627522339067
       MetaP:
-        id: inst:IPMK102/MetaP
+        id: IPMK102/MetaP
         description: Digital receiver (stripline) beam position monitor.
         additional_metadata:
           - key: Pass
@@ -176,7 +177,7 @@ facility:
             value: iocipmk102
           - key: electrode_rotation_deg
             value: "45.0"
-    - id: inst:MBHK101H
+    - id: MBHK101H
       kind: Kicker
       native_types:
       - Corrector
@@ -187,7 +188,7 @@ facility:
       beamline_relation: Inline
       plane: Horizontal
       FloorP:
-        id: inst:MBHK101H/FloorP
+        id: MBHK101H/FloorP
         x: 10.50809805750324
         y: 21.0668
         z: 32.04809953473409
@@ -195,14 +196,14 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:MBHK101H/LongitudinalPlacementP
+        id: MBHK101H/LongitudinalPlacementP
         length: 0.0
       ReferenceP:
-        id: inst:MBHK101H/ReferenceP
+        id: MBHK101H/ReferenceP
         species_ref: electron
         pc_ref: 0.465144443755972
       TwissP:
-        id: inst:MBHK101H/TwissP
+        id: MBHK101H/TwissP
         alpha_a: -14.84984300377907
         alpha_b: -3.340915271379903
         beta_a: 6.953008965270949
@@ -214,7 +215,7 @@ facility:
         phi_a: 0.3988706027327012
         phi_b: 2.288691123913615
       MetaP:
-        id: inst:MBHK101H/MetaP
+        id: MBHK101H/MetaP
         description: horizontal steering corrector magnet.
         additional_metadata:
           - key: HCOSystem
@@ -241,7 +242,7 @@ facility:
             value: "1Amp"
           - key: KICK
             value: "0"
-    - id: inst:MBHK101V
+    - id: MBHK101V
       kind: Kicker
       native_types:
       - Corrector
@@ -252,7 +253,7 @@ facility:
       beamline_relation: Inline
       plane: Vertical
       FloorP:
-        id: inst:MBHK101V/FloorP
+        id: MBHK101V/FloorP
         x: 10.50809805724442
         y: 21.0668
         z: 32.04809953570002
@@ -260,14 +261,14 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:MBHK101V/LongitudinalPlacementP
+        id: MBHK101V/LongitudinalPlacementP
         length: 0.0
       ReferenceP:
-        id: inst:MBHK101V/ReferenceP
+        id: MBHK101V/ReferenceP
         species_ref: electron
         pc_ref: 0.465144443755972
       TwissP:
-        id: inst:MBHK101V/TwissP
+        id: MBHK101V/TwissP
         alpha_a: -14.84984303563834
         alpha_b: -3.340915283588069
         beta_a: 6.953008994970635
@@ -279,7 +280,7 @@ facility:
         phi_a: 0.3988706028765238
         phi_b: 2.288691124917435
       MetaP:
-        id: inst:MBHK101V/MetaP
+        id: MBHK101V/MetaP
         description: vertical steering corrector magnet.
         additional_metadata:
           - key: HCOSystem
@@ -306,7 +307,7 @@ facility:
             value: "1Amp"
           - key: KICK
             value: "0"
-    - id: inst:MFRM604V
+    - id: MFRM604V
       kind: Kicker
       native_types:
       - Corrector
@@ -317,7 +318,7 @@ facility:
       beamline_relation: Inline
       plane: Vertical
       FloorP:
-        id: inst:MFRM604V/FloorP
+        id: MFRM604V/FloorP
         x: 10.24767958498776
         y: 21.0668
         z: 52.62398370424354
@@ -325,14 +326,14 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:MFRM604V/LongitudinalPlacementP
+        id: MFRM604V/LongitudinalPlacementP
         length: 1.0e-06
       ReferenceP:
-        id: inst:MFRM604V/ReferenceP
+        id: MFRM604V/ReferenceP
         species_ref: electron
         pc_ref: 0.465144255654231
       TwissP:
-        id: inst:MFRM604V/TwissP
+        id: MFRM604V/TwissP
         alpha_a: 127.4277193468357
         alpha_b: -62.7583704942617
         beta_a: 81.85819717045146
@@ -344,7 +345,7 @@ facility:
         phi_a: 12.96869356373805
         phi_b: 15.0512986935019
       MetaP:
-        id: inst:MFRM604V/MetaP
+        id: MFRM604V/MetaP
         description: vertical steering corrector magnet.
         additional_metadata:
           - key: ControlsUnits
@@ -357,7 +358,7 @@ facility:
             value: '0'
           - key: Comments
             value: Raster
-    - id: inst:MFRM604H
+    - id: MFRM604H
       kind: Kicker
       native_types:
       - Corrector
@@ -368,7 +369,7 @@ facility:
       beamline_relation: Inline
       plane: Horizontal
       FloorP:
-        id: inst:MFRM604H/FloorP
+        id: MFRM604H/FloorP
         x: 10.24767958495496
         y: 21.0668
         z: 52.78731737091019
@@ -376,14 +377,14 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:MFRM604H/LongitudinalPlacementP
+        id: MFRM604H/LongitudinalPlacementP
         length: 1.0e-06
       ReferenceP:
-        id: inst:MFRM604H/ReferenceP
+        id: MFRM604H/ReferenceP
         species_ref: electron
         pc_ref: 0.465144255654231
       TwissP:
-        id: inst:MFRM604H/TwissP
+        id: MFRM604H/TwissP
         alpha_a: 95.02599658618053
         alpha_b: -67.51923256692868
         beta_a: 45.52401608348776
@@ -395,7 +396,7 @@ facility:
         phi_a: 12.97136918635243
         phi_b: 15.05242196252455
       MetaP:
-        id: inst:MFRM604H/MetaP
+        id: MFRM604H/MetaP
         description: horizontal steering corrector magnet.
         additional_metadata:
           - key: ControlsUnits
@@ -408,7 +409,7 @@ facility:
             value: '0'
           - key: Comments
             value: Raster
-    - id: inst:MFHK101
+    - id: MFHK101
       kind: Solenoid
       native_types:
       - Solenoid
@@ -417,7 +418,7 @@ facility:
         - Focusing
       beamline_relation: Inline
       FloorP:
-        id: inst:MFHK101/FloorP
+        id: MFHK101/FloorP
         x: 10.43495454283887
         y: 21.0668
         z: 32.32107484748639
@@ -425,17 +426,17 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:MFHK101/LongitudinalPlacementP
+        id: MFHK101/LongitudinalPlacementP
         length: 0.0762
       SolenoidP:
-        id: inst:MFHK101/SolenoidP
+        id: MFHK101/SolenoidP
         Ksol: -11.6540717
       ReferenceP:
-        id: inst:MFHK101/ReferenceP
+        id: MFHK101/ReferenceP
         species_ref: electron
         pc_ref: 0.465144443755972
       TwissP:
-        id: inst:MFHK101/TwissP
+        id: MFHK101/TwissP
         alpha_a: 17.00227041491529
         alpha_b: 2.034480014161481
         beta_a: 14.80158650370627
@@ -447,7 +448,7 @@ facility:
         phi_a: 0.4245134122427604
         phi_b: 2.434715554013777
       MetaP:
-        id: inst:MFHK101/MetaP
+        id: MFHK101/MetaP
         description: Focusing solenoid in the injector line.
         additional_metadata:
           - key: HCOSystem
@@ -478,7 +479,7 @@ facility:
             value: "2021-03-15"
           - key: SurveyZ
             value: ".576"
-    - id: inst:ITVK201
+    - id: ITVK201
       kind: BeamProfileMonitor
       native_types:
       - DiagnosticDevice
@@ -488,7 +489,7 @@ facility:
         - BeamProfileMeasurement
       beamline_relation: Inline
       FloorP:
-        id: inst:ITVK201/FloorP
+        id: ITVK201/FloorP
         x: 10.36079987637277
         y: 21.0668
         z: 32.59782383013385
@@ -496,10 +497,10 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:ITVK201/LongitudinalPlacementP
+        id: ITVK201/LongitudinalPlacementP
         length: 0.0
       TwissP:
-        id: inst:ITVK201/TwissP
+        id: ITVK201/TwissP
         alpha_a: 1.171553470644124
         alpha_b: -2.314118176337514
         beta_a: 4.601746608248333
@@ -511,10 +512,10 @@ facility:
         phi_a: 0.5069577519370357
         phi_b: 2.66460447810394
       ReferenceP:
-        id: inst:ITVK201/ReferenceP
+        id: ITVK201/ReferenceP
         pc_ref: 0.465144307216256
       MetaP:
-        id: inst:ITVK201/MetaP
+        id: ITVK201/MetaP
         description: Beam viewer/screen (ITV).
         additional_metadata:
           - key: HCOSystem
@@ -539,7 +540,7 @@ facility:
             value: '2021-03-15'
           - key: SurveyZ
             value: "1.173"
-    - id: inst:IFYK203
+    - id: IFYK203
       kind: BeamProfileMonitor
       native_types:
       - DiagnosticDevice
@@ -549,7 +550,7 @@ facility:
         - BeamCurrentMeasurement
       beamline_relation: Inline
       FloorP:
-        id: inst:IFYK203/FloorP
+        id: IFYK203/FloorP
         x: 10.24767958845076
         y: 21.0668
         z: 35.38227495834539
@@ -557,10 +558,10 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:IFYK203/LongitudinalPlacementP
+        id: IFYK203/LongitudinalPlacementP
         length: 0.0
       TwissP:
-        id: inst:IFYK203/TwissP
+        id: IFYK203/TwissP
         alpha_a: 0.6793535478139585
         alpha_b: -2.410769525371156
         beta_a: 5.739541313096026
@@ -572,10 +573,10 @@ facility:
         phi_a: 3.656659260426662
         phi_b: 5.842555382724905
       ReferenceP:
-        id: inst:IFYK203/ReferenceP
+        id: IFYK203/ReferenceP
         pc_ref: 0.465144443755972
       MetaP:
-        id: inst:IFYK203/MetaP
+        id: IFYK203/MetaP
         description: Faraday cup beam-current diagnostic.
         alias: 
           - FC1
@@ -596,7 +597,7 @@ facility:
             value: '6'
           - key: Controlled_by
             value: iocitf2
-    - id: inst:ISLK302
+    - id: ISLK302
       kind: Aperture
       native_types:
       - DiagnosticDevice
@@ -606,7 +607,7 @@ facility:
         - Measurement
       beamline_relation: Inline
       FloorP:
-        id: inst:ISLK302/FloorP
+        id: ISLK302/FloorP
         x: 10.24767958824433
         y: 21.0668
         z: 36.41006257925551
@@ -614,10 +615,10 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:ISLK302/LongitudinalPlacementP
+        id: ISLK302/LongitudinalPlacementP
         length: 0.0
       TwissP:
-        id: inst:ISLK302/TwissP
+        id: ISLK302/TwissP
         alpha_a: -3.858268006057215
         alpha_b: -0.8076529802215013
         beta_a: 0.5948258722684887
@@ -629,14 +630,14 @@ facility:
         phi_a: 6.571489045228137
         phi_b: 8.12028738860876
       ReferenceP:
-        id: inst:ISLK302/ReferenceP
+        id: ISLK302/ReferenceP
         pc_ref: 0.465144443755972
       MetaP:
-        id: inst:ISLK302/MetaP
+        id: ISLK302/MetaP
         alias: 
           - Aperture 2
         additional_metadata: []
-    - id: inst:IYGK302
+    - id: IYGK302
       kind: BeamProfileMonitor
       native_types:
       - DiagnosticDevice
@@ -646,7 +647,7 @@ facility:
         - BeamProfileMeasurement
       beamline_relation: Inline
       FloorP:
-        id: inst:IYGK302/FloorP
+        id: IYGK302/FloorP
         x: 10.24767958824338
         y: 21.0668
         z: 36.41478530309348
@@ -654,13 +655,13 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:IYGK302/LongitudinalPlacementP
+        id: IYGK302/LongitudinalPlacementP
         length: 0.0
       ReferenceP:
-        id: inst:IYGK302/ReferenceP
+        id: IYGK302/ReferenceP
         pc_ref: 0.465144443755972
       MetaP:
-        id: inst:IYGK302/MetaP
+        id: IYGK302/MetaP
         description: YAG scintillator beam-profile viewer.
         additional_metadata:
           - key: HCOSystem
@@ -685,7 +686,7 @@ facility:
             value: '2021-03-15'
           - key: SurveyZ
             value: '4.6462'
-    - id: inst:ICBK403
+    - id: ICBK403
       kind: BeamProfileMonitor
       native_types:
       - DiagnosticDevice
@@ -695,7 +696,7 @@ facility:
         - BeamPositionMeasurement
       beamline_relation: Inline
       FloorP:
-        id: inst:ICBK403/FloorP
+        id: ICBK403/FloorP
         x: 10.24767958759353
         y: 21.0668
         z: 39.65027536938226
@@ -703,10 +704,10 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:ICBK403/LongitudinalPlacementP
+        id: ICBK403/LongitudinalPlacementP
         length: 0.0
       TwissP:
-        id: inst:ICBK403/TwissP
+        id: ICBK403/TwissP
         alpha_a: 30.60218195988063
         alpha_b: 11.23736624619686
         beta_a: 26.59111198538222
@@ -718,15 +719,15 @@ facility:
         phi_a: 9.848886790593667
         phi_b: 11.97924000797064
       ReferenceP:
-        id: inst:ICBK403/ReferenceP
+        id: ICBK403/ReferenceP
         species_ref: electron
         pc_ref: 0.465144255654231
       MetaP:
-        id: inst:ICBK403/MetaP
+        id: ICBK403/MetaP
         alias: 
           - Yao Cavity
         additional_metadata: []
-    - id: inst:MDSK201
+    - id: MDSK201
       kind: Bend
       native_types:
       - Dipole
@@ -735,7 +736,7 @@ facility:
         - Steering
       beamline_relation: Inline
       FloorP:
-        id: inst:MDSK201/FloorP
+        id: MDSK201/FloorP
         x: 10.24767958891485
         y: 21.0668
         z: 33.07167495458577
@@ -743,14 +744,14 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:MDSK201/LongitudinalPlacementP
+        id: MDSK201/LongitudinalPlacementP
         length: 0.1027699
       ReferenceP:
-        id: inst:MDSK201/ReferenceP
+        id: MDSK201/ReferenceP
         species_ref: electron
         pc_ref: 0.465144443755972
       TwissP:
-        id: inst:MDSK201/TwissP
+        id: MDSK201/TwissP
         alpha_a: 1.734799300973817
         alpha_b: 1.209268332594004
         beta_a: 0.2470028288493974
@@ -762,17 +763,17 @@ facility:
         phi_a: 0.8537295440373742
         phi_b: 2.879105169640403
       BendP:
-        id: inst:MDSK201/BendP
+        id: MDSK201/BendP
         angle_ref: -0.261799388
         e1: -0.130899694
         e2: -0.130899694
       MagneticMultipoleP:
-        id: inst:MDSK201/MagneticMultipoleP
+        id: MDSK201/MagneticMultipoleP
         mag_components:
         - order: 1
           Kn: -5.933092236836
       MetaP:
-        id: inst:MDSK201/MetaP
+        id: MDSK201/MetaP
         alias:
           - 15 Deg Bend 
         additional_metadata:
@@ -804,7 +805,7 @@ facility:
             value: '2021-03-15'
           - key: SurveyZ
             value: '1.338'
-    - id: inst:MQWK202
+    - id: MQWK202
       kind: Quadrupole
       native_types:
       - Quadrupole
@@ -814,7 +815,7 @@ facility:
         - Focusing
       beamline_relation: Inline
       FloorP:
-        id: inst:MQWK202/FloorP
+        id: MQWK202/FloorP
         x: 10.2476795886932
         y: 21.0668
         z: 34.17524568998951
@@ -822,14 +823,14 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:MQWK202/LongitudinalPlacementP
+        id: MQWK202/LongitudinalPlacementP
         length: 0.125
       ReferenceP:
-        id: inst:MQWK202/ReferenceP
+        id: MQWK202/ReferenceP
         species_ref: electron
         pc_ref: 0.465144443755972
       TwissP:
-        id: inst:MQWK202/TwissP
+        id: MQWK202/TwissP
         alpha_a: -0.5436044560404847
         alpha_b: -0.7328475380936091
         beta_a: 5.268390231757493
@@ -841,12 +842,12 @@ facility:
         phi_a: 3.449724803972426
         phi_b: 5.1629744953913
       MagneticMultipoleP:
-        id: inst:MQWK202/MagneticMultipoleP
+        id: MQWK202/MagneticMultipoleP
         mag_components:
         - order: 1
           Kn: 0.0
       MetaP:
-        id: inst:MQWK202/MetaP
+        id: MQWK202/MetaP
         description: Focusing/defocusing quadrupole magnet.
         additional_metadata:
           - key: HCOSystem
@@ -881,7 +882,7 @@ facility:
             value: '.0159'
           - key: BORE
             value: '0'
-    - id: inst:RM11
+    - id: RM11
       kind: SuperConductingRFCavity
       native_types:
       - RFCavity
@@ -891,7 +892,7 @@ facility:
         - BeamAcceleration
       beamline_relation: Inline
       FloorP:
-        id: inst:RM11/FloorP
+        id: RM11/FloorP
         x: 10.24767958726352
         y: 21.0668
         z: 41.293371816671
@@ -899,14 +900,14 @@ facility:
         phi: 0.0
         psi: 0.0
       LongitudinalPlacementP:
-        id: inst:RM11/LongitudinalPlacementP
+        id: RM11/LongitudinalPlacementP
         length: 0.5
       ReferenceP:
-        id: inst:RM11/ReferenceP
+        id: RM11/ReferenceP
         species_ref: electron
         pc_ref: 0.465144255654231
       TwissP:
-        id: inst:RM11/TwissP
+        id: RM11/TwissP
         alpha_a: -27.32665933627831
         alpha_b: -6.909431348341881
         beta_a: 21.20911239952727
@@ -918,12 +919,12 @@ facility:
         phi_a: 12.92123568016702
         phi_b: 14.88834594146045
       RFP:
-        id: inst:RM11/RFP
+        id: RM11/RFP
         frequency: 500000000.0
         voltage: 0.0
         phase: 0.0
       MetaP:
-        id: inst:RM11/MetaP
+        id: RM11/MetaP
         description: Superconducting (cryomodule) RF accelerating cavity.
         additional_metadata:
           - key: HCOSystem
@@ -944,7 +945,7 @@ facility:
             value: iocitfrffcc1
           - key: FCC
             value: fcc_773
-    - id: inst:S_IS_20CM
+    - id: S_IS_20CM
       kind: Marker
       native_types:
       - Marker
@@ -953,7 +954,7 @@ facility:
         - Mark
       beamline_relation: Inline
       FloorP:
-        id: inst:S_IS_20CM/FloorP
+        id: S_IS_20CM/FloorP
         x: 10.56082359094069
         y: 21.0668
         z: 31.85132516524742
@@ -961,7 +962,7 @@ facility:
         phi: 0.0
         psi: 0.0
       TwissP:
-        id: inst:S_IS_20CM/TwissP
+        id: S_IS_20CM/TwissP
         alpha_a: -8.359604379977313
         alpha_b: -0.8539187577256651
         beta_a: 2.224877414151352
@@ -973,17 +974,17 @@ facility:
         phi_a: 0.347052717594763
         phi_b: 1.715491573922409
       MetaP:
-        id: inst:S_IS_20CM/MetaP
+        id: S_IS_20CM/MetaP
         description: Reference marker 20 cm downstream of the gun.
   beamlines:
-    - id: inst:GUN_thru_MV
+    - id: GUN_thru_MV
       kind: BeamLine
       functions: 
         - BeamLineSection
       beamline_relation: Inline
       multipass: false
       FloorP:
-        id: inst:GUN_thru_MV/FloorP
+        id: GUN_thru_MV/FloorP
         x: 0.0
         y: 0.0
         z: 0.0
@@ -992,7 +993,7 @@ facility:
         psi: 0.0
       description: UITF injector beamline from the gun/laser through the MV (medium-velocity) section.
   signals:
-    - id: inst:RK11.GET
+    - id: RK11.GET
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1004,7 +1005,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - gradient_setpoint
-    - id: inst:RK11.GMES
+    - id: RK11.GMES
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1016,7 +1017,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - gradient_readback
-    - id: inst:RK11.STAT
+    - id: RK11.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1029,7 +1030,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:IPMK101.XPOS
+    - id: IPMK101.XPOS
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1041,7 +1042,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - horizontal_beam_position
-    - id: inst:IPMK101.YPOS
+    - id: IPMK101.YPOS
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1053,7 +1054,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - vertical_beam_position
-    - id: inst:IPMK101.STAT
+    - id: IPMK101.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1066,7 +1067,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:IPMK102.XPOS
+    - id: IPMK102.XPOS
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1078,7 +1079,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - horizontal_beam_position
-    - id: inst:IPMK102.YPOS
+    - id: IPMK102.YPOS
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1090,7 +1091,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - vertical_beam_position
-    - id: inst:IPMK102.STAT
+    - id: IPMK102.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1103,7 +1104,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:MBHK101H.S
+    - id: MBHK101H.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1115,7 +1116,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_setpoint
-    - id: inst:MBHK101HM
+    - id: MBHK101HM
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1127,7 +1128,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_readback
-    - id: inst:MBHK101H.HMIN
+    - id: MBHK101H.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1140,7 +1141,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_min
-    - id: inst:MBHK101H.HMAX
+    - id: MBHK101H.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1153,7 +1154,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_max
-    - id: inst:MBHK101H.STAT
+    - id: MBHK101H.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1166,7 +1167,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:MBHK101H.KICK
+    - id: MBHK101H.KICK
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1178,7 +1179,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - kick_setpoint
-    - id: inst:MBHK101V.S
+    - id: MBHK101V.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1190,7 +1191,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_setpoint
-    - id: inst:MBHK101VM
+    - id: MBHK101VM
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1202,7 +1203,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_readback
-    - id: inst:MBHK101V.HMIN
+    - id: MBHK101V.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1215,7 +1216,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_min
-    - id: inst:MBHK101V.HMAX
+    - id: MBHK101V.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1228,7 +1229,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_max
-    - id: inst:MBHK101V.STAT
+    - id: MBHK101V.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1241,7 +1242,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:MBHK101V.KICK
+    - id: MBHK101V.KICK
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1253,7 +1254,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - kick_setpoint
-    - id: inst:MFRM604V.S
+    - id: MFRM604V.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1265,7 +1266,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_setpoint
-    - id: inst:MFRM604VM
+    - id: MFRM604VM
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1277,7 +1278,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_readback
-    - id: inst:MFRM604V.HMIN
+    - id: MFRM604V.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1290,7 +1291,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_min
-    - id: inst:MFRM604V.HMAX
+    - id: MFRM604V.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1303,7 +1304,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_max
-    - id: inst:MFRM604V.STAT
+    - id: MFRM604V.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1316,7 +1317,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:MFRM604V.KICK
+    - id: MFRM604V.KICK
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1328,7 +1329,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - kick_setpoint
-    - id: inst:MFRM604H.S
+    - id: MFRM604H.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1340,7 +1341,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_setpoint
-    - id: inst:MFRM604HM
+    - id: MFRM604HM
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1352,7 +1353,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_readback
-    - id: inst:MFRM604H.HMIN
+    - id: MFRM604H.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1365,7 +1366,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_min
-    - id: inst:MFRM604H.HMAX
+    - id: MFRM604H.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1378,7 +1379,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_max
-    - id: inst:MFRM604H.STAT
+    - id: MFRM604H.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1391,7 +1392,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:MFRM604H.KICK
+    - id: MFRM604H.KICK
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1403,7 +1404,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - kick_setpoint
-    - id: inst:MDSK201.S
+    - id: MDSK201.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1415,7 +1416,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_setpoint
-    - id: inst:MDSK201M
+    - id: MDSK201M
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1427,7 +1428,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_readback
-    - id: inst:MDSK201.HMIN
+    - id: MDSK201.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1440,7 +1441,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_min
-    - id: inst:MDSK201.HMAX
+    - id: MDSK201.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1453,7 +1454,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_max
-    - id: inst:MDSK201.STAT
+    - id: MDSK201.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1466,7 +1467,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:MDSK201.BDL
+    - id: MDSK201.BDL
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1478,7 +1479,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - field_setpoint
-    - id: inst:MQWK202.S
+    - id: MQWK202.S
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1490,7 +1491,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_setpoint
-    - id: inst:MQWK202M
+    - id: MQWK202M
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1502,7 +1503,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_readback
-    - id: inst:MQWK202.HMIN
+    - id: MQWK202.HMIN
       kind: Signal
       signal_role: MinimumLimit
       source_system: EPICS
@@ -1515,7 +1516,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_min
-    - id: inst:MQWK202.HMAX
+    - id: MQWK202.HMAX
       kind: Signal
       signal_role: MaximumLimit
       source_system: EPICS
@@ -1528,7 +1529,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - current_max
-    - id: inst:MQWK202.STAT
+    - id: MQWK202.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1541,7 +1542,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - status
-    - id: inst:MQWK202.BDL
+    - id: MQWK202.BDL
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1554,7 +1555,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - strength_setpoint
-    - id: inst:RM11.GET
+    - id: RM11.GET
       kind: Signal
       signal_role: Setpoint
       source_system: EPICS
@@ -1566,7 +1567,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - gradient_setpoint
-    - id: inst:RM11.GMES
+    - id: RM11.GMES
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1578,7 +1579,7 @@ facility:
       access_protocol: EPICS Channel Access
       alias:
         - gradient_readback
-    - id: inst:RM11.STAT
+    - id: RM11.STAT
       kind: Signal
       signal_role: Readback
       source_system: EPICS
@@ -1592,274 +1593,274 @@ facility:
       alias:
         - status
   signal_bindings:
-    - id: inst:RF_LASER_GET
-      subject: inst:RF_LASER
+    - id: RF_LASER_GET
+      subject: RF_LASER
       predicate: HasSetpointSignal
-      object: inst:RK11.GET
-    - id: inst:RF_LASER_GMES
-      subject: inst:RF_LASER
+      object: RK11.GET
+    - id: RF_LASER_GMES
+      subject: RF_LASER
       predicate: HasReadbackSignal
-      object: inst:RK11.GMES
-    - id: inst:RF_LASER_STAT
-      subject: inst:RF_LASER
+      object: RK11.GMES
+    - id: RF_LASER_STAT
+      subject: RF_LASER
       predicate: HasReadbackSignal
-      object: inst:RK11.STAT
-    - id: inst:IPMK101_XPOS
-      subject: inst:IPMK101
+      object: RK11.STAT
+    - id: IPMK101_XPOS
+      subject: IPMK101
       predicate: HasReadbackSignal
-      object: inst:IPMK101.XPOS
-    - id: inst:IPMK101_YPOS
-      subject: inst:IPMK101
+      object: IPMK101.XPOS
+    - id: IPMK101_YPOS
+      subject: IPMK101
       predicate: HasReadbackSignal
-      object: inst:IPMK101.YPOS
-    - id: inst:IPMK101_STAT
-      subject: inst:IPMK101
+      object: IPMK101.YPOS
+    - id: IPMK101_STAT
+      subject: IPMK101
       predicate: HasReadbackSignal
-      object: inst:IPMK101.STAT
-    - id: inst:IPMK102_XPOS
-      subject: inst:IPMK102
+      object: IPMK101.STAT
+    - id: IPMK102_XPOS
+      subject: IPMK102
       predicate: HasReadbackSignal
-      object: inst:IPMK102.XPOS
-    - id: inst:IPMK102_YPOS
-      subject: inst:IPMK102
+      object: IPMK102.XPOS
+    - id: IPMK102_YPOS
+      subject: IPMK102
       predicate: HasReadbackSignal
-      object: inst:IPMK102.YPOS
-    - id: inst:IPMK102_STAT
-      subject: inst:IPMK102
+      object: IPMK102.YPOS
+    - id: IPMK102_STAT
+      subject: IPMK102
       predicate: HasReadbackSignal
-      object: inst:IPMK102.STAT
-    - id: inst:MBHK101H_S
-      subject: inst:MBHK101H
+      object: IPMK102.STAT
+    - id: MBHK101H_S
+      subject: MBHK101H
       predicate: HasSetpointSignal
-      object: inst:MBHK101H.S
-    - id: inst:MBHK101H_RB
-      subject: inst:MBHK101H
+      object: MBHK101H.S
+    - id: MBHK101H_RB
+      subject: MBHK101H
       predicate: HasReadbackSignal
-      object: inst:MBHK101HM
-    - id: inst:MBHK101H_LMIN
-      subject: inst:MBHK101H
+      object: MBHK101HM
+    - id: MBHK101H_LMIN
+      subject: MBHK101H
       predicate: HasLimitSignal
-      object: inst:MBHK101H.HMIN
-    - id: inst:MBHK101H_LMAX
-      subject: inst:MBHK101H
+      object: MBHK101H.HMIN
+    - id: MBHK101H_LMAX
+      subject: MBHK101H
       predicate: HasLimitSignal
-      object: inst:MBHK101H.HMAX
-    - id: inst:MBHK101H_STAT
-      subject: inst:MBHK101H
+      object: MBHK101H.HMAX
+    - id: MBHK101H_STAT
+      subject: MBHK101H
       predicate: HasReadbackSignal
-      object: inst:MBHK101H.STAT
-    - id: inst:MBHK101H_KICK
-      subject: inst:MBHK101H
+      object: MBHK101H.STAT
+    - id: MBHK101H_KICK
+      subject: MBHK101H
       predicate: HasSetpointSignal
-      object: inst:MBHK101H.KICK
-    - id: inst:MBHK101V_S
-      subject: inst:MBHK101V
+      object: MBHK101H.KICK
+    - id: MBHK101V_S
+      subject: MBHK101V
       predicate: HasSetpointSignal
-      object: inst:MBHK101V.S
-    - id: inst:MBHK101V_RB
-      subject: inst:MBHK101V
+      object: MBHK101V.S
+    - id: MBHK101V_RB
+      subject: MBHK101V
       predicate: HasReadbackSignal
-      object: inst:MBHK101VM
-    - id: inst:MBHK101V_LMIN
-      subject: inst:MBHK101V
+      object: MBHK101VM
+    - id: MBHK101V_LMIN
+      subject: MBHK101V
       predicate: HasLimitSignal
-      object: inst:MBHK101V.HMIN
-    - id: inst:MBHK101V_LMAX
-      subject: inst:MBHK101V
+      object: MBHK101V.HMIN
+    - id: MBHK101V_LMAX
+      subject: MBHK101V
       predicate: HasLimitSignal
-      object: inst:MBHK101V.HMAX
-    - id: inst:MBHK101V_STAT
-      subject: inst:MBHK101V
+      object: MBHK101V.HMAX
+    - id: MBHK101V_STAT
+      subject: MBHK101V
       predicate: HasReadbackSignal
-      object: inst:MBHK101V.STAT
-    - id: inst:MBHK101V_KICK
-      subject: inst:MBHK101V
+      object: MBHK101V.STAT
+    - id: MBHK101V_KICK
+      subject: MBHK101V
       predicate: HasSetpointSignal
-      object: inst:MBHK101V.KICK
-    - id: inst:MFRM604V_S
-      subject: inst:MFRM604V
+      object: MBHK101V.KICK
+    - id: MFRM604V_S
+      subject: MFRM604V
       predicate: HasSetpointSignal
-      object: inst:MFRM604V.S
-    - id: inst:MFRM604V_RB
-      subject: inst:MFRM604V
+      object: MFRM604V.S
+    - id: MFRM604V_RB
+      subject: MFRM604V
       predicate: HasReadbackSignal
-      object: inst:MFRM604VM
-    - id: inst:MFRM604V_LMIN
-      subject: inst:MFRM604V
+      object: MFRM604VM
+    - id: MFRM604V_LMIN
+      subject: MFRM604V
       predicate: HasLimitSignal
-      object: inst:MFRM604V.HMIN
-    - id: inst:MFRM604V_LMAX
-      subject: inst:MFRM604V
+      object: MFRM604V.HMIN
+    - id: MFRM604V_LMAX
+      subject: MFRM604V
       predicate: HasLimitSignal
-      object: inst:MFRM604V.HMAX
-    - id: inst:MFRM604V_STAT
-      subject: inst:MFRM604V
+      object: MFRM604V.HMAX
+    - id: MFRM604V_STAT
+      subject: MFRM604V
       predicate: HasReadbackSignal
-      object: inst:MFRM604V.STAT
-    - id: inst:MFRM604V_KICK
-      subject: inst:MFRM604V
+      object: MFRM604V.STAT
+    - id: MFRM604V_KICK
+      subject: MFRM604V
       predicate: HasSetpointSignal
-      object: inst:MFRM604V.KICK
-    - id: inst:MFRM604H_S
-      subject: inst:MFRM604H
+      object: MFRM604V.KICK
+    - id: MFRM604H_S
+      subject: MFRM604H
       predicate: HasSetpointSignal
-      object: inst:MFRM604H.S
-    - id: inst:MFRM604H_RB
-      subject: inst:MFRM604H
+      object: MFRM604H.S
+    - id: MFRM604H_RB
+      subject: MFRM604H
       predicate: HasReadbackSignal
-      object: inst:MFRM604HM
-    - id: inst:MFRM604H_LMIN
-      subject: inst:MFRM604H
+      object: MFRM604HM
+    - id: MFRM604H_LMIN
+      subject: MFRM604H
       predicate: HasLimitSignal
-      object: inst:MFRM604H.HMIN
-    - id: inst:MFRM604H_LMAX
-      subject: inst:MFRM604H
+      object: MFRM604H.HMIN
+    - id: MFRM604H_LMAX
+      subject: MFRM604H
       predicate: HasLimitSignal
-      object: inst:MFRM604H.HMAX
-    - id: inst:MFRM604H_STAT
-      subject: inst:MFRM604H
+      object: MFRM604H.HMAX
+    - id: MFRM604H_STAT
+      subject: MFRM604H
       predicate: HasReadbackSignal
-      object: inst:MFRM604H.STAT
-    - id: inst:MFRM604H_KICK
-      subject: inst:MFRM604H
+      object: MFRM604H.STAT
+    - id: MFRM604H_KICK
+      subject: MFRM604H
       predicate: HasSetpointSignal
-      object: inst:MFRM604H.KICK
-    - id: inst:MDSK201_S
-      subject: inst:MDSK201
+      object: MFRM604H.KICK
+    - id: MDSK201_S
+      subject: MDSK201
       predicate: HasSetpointSignal
-      object: inst:MDSK201.S
-    - id: inst:MDSK201_RB
-      subject: inst:MDSK201
+      object: MDSK201.S
+    - id: MDSK201_RB
+      subject: MDSK201
       predicate: HasReadbackSignal
-      object: inst:MDSK201M
-    - id: inst:MDSK201_LMIN
-      subject: inst:MDSK201
+      object: MDSK201M
+    - id: MDSK201_LMIN
+      subject: MDSK201
       predicate: HasLimitSignal
-      object: inst:MDSK201.HMIN
-    - id: inst:MDSK201_LMAX
-      subject: inst:MDSK201
+      object: MDSK201.HMIN
+    - id: MDSK201_LMAX
+      subject: MDSK201
       predicate: HasLimitSignal
-      object: inst:MDSK201.HMAX
-    - id: inst:MDSK201_STAT
-      subject: inst:MDSK201
+      object: MDSK201.HMAX
+    - id: MDSK201_STAT
+      subject: MDSK201
       predicate: HasReadbackSignal
-      object: inst:MDSK201.STAT
-    - id: inst:MDSK201_BDL
-      subject: inst:MDSK201
+      object: MDSK201.STAT
+    - id: MDSK201_BDL
+      subject: MDSK201
       predicate: HasSetpointSignal
-      object: inst:MDSK201.BDL
-    - id: inst:MQWK202_S
-      subject: inst:MQWK202
+      object: MDSK201.BDL
+    - id: MQWK202_S
+      subject: MQWK202
       predicate: HasSetpointSignal
-      object: inst:MQWK202.S
-    - id: inst:MQWK202_RB
-      subject: inst:MQWK202
+      object: MQWK202.S
+    - id: MQWK202_RB
+      subject: MQWK202
       predicate: HasReadbackSignal
-      object: inst:MQWK202M
-    - id: inst:MQWK202_LMIN
-      subject: inst:MQWK202
+      object: MQWK202M
+    - id: MQWK202_LMIN
+      subject: MQWK202
       predicate: HasLimitSignal
-      object: inst:MQWK202.HMIN
-    - id: inst:MQWK202_LMAX
-      subject: inst:MQWK202
+      object: MQWK202.HMIN
+    - id: MQWK202_LMAX
+      subject: MQWK202
       predicate: HasLimitSignal
-      object: inst:MQWK202.HMAX
-    - id: inst:MQWK202_STAT
-      subject: inst:MQWK202
+      object: MQWK202.HMAX
+    - id: MQWK202_STAT
+      subject: MQWK202
       predicate: HasReadbackSignal
-      object: inst:MQWK202.STAT
-    - id: inst:MQWK202_BDL
-      subject: inst:MQWK202
+      object: MQWK202.STAT
+    - id: MQWK202_BDL
+      subject: MQWK202
       predicate: HasSetpointSignal
-      object: inst:MQWK202.BDL
-    - id: inst:RM11_GET
-      subject: inst:RM11
+      object: MQWK202.BDL
+    - id: RM11_GET
+      subject: RM11
       predicate: HasSetpointSignal
-      object: inst:RM11.GET
-    - id: inst:RM11_GMES
-      subject: inst:RM11
+      object: RM11.GET
+    - id: RM11_GMES
+      subject: RM11
       predicate: HasReadbackSignal
-      object: inst:RM11.GMES
-    - id: inst:RM11_STAT
-      subject: inst:RM11
+      object: RM11.GMES
+    - id: RM11_STAT
+      subject: RM11
       predicate: HasReadbackSignal
-      object: inst:RM11.STAT
+      object: RM11.STAT
   component_relations:
-    - id: inst:RF_LASER_to_S_IS_20CM
-      subject: inst:RF_LASER
+    - id: RF_LASER_to_S_IS_20CM
+      subject: RF_LASER
       predicate: Precedes
-      object: inst:S_IS_20CM
+      object: S_IS_20CM
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:S_IS_20CM_to_IPMK101
-      subject: inst:S_IS_20CM
+      beamline_context: GUN_thru_MV
+    - id: S_IS_20CM_to_IPMK101
+      subject: S_IS_20CM
       predicate: Precedes
-      object: inst:IPMK101
+      object: IPMK101
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:IPMK101_to_MBHK101H
-      subject: inst:IPMK101
+      beamline_context: GUN_thru_MV
+    - id: IPMK101_to_MBHK101H
+      subject: IPMK101
       predicate: Precedes
-      object: inst:MBHK101H
+      object: MBHK101H
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:MBHK101H_to_MBHK101V
-      subject: inst:MBHK101H
+      beamline_context: GUN_thru_MV
+    - id: MBHK101H_to_MBHK101V
+      subject: MBHK101H
       predicate: Precedes
-      object: inst:MBHK101V
+      object: MBHK101V
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:MBHK101V_to_MFHK101
-      subject: inst:MBHK101V
+      beamline_context: GUN_thru_MV
+    - id: MBHK101V_to_MFHK101
+      subject: MBHK101V
       predicate: Precedes
-      object: inst:MFHK101
+      object: MFHK101
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:MFHK101_to_IPMK102
-      subject: inst:MFHK101
+      beamline_context: GUN_thru_MV
+    - id: MFHK101_to_IPMK102
+      subject: MFHK101
       predicate: Precedes
-      object: inst:IPMK102
+      object: IPMK102
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:IPMK102_to_ITVK201
-      subject: inst:IPMK102
+      beamline_context: GUN_thru_MV
+    - id: IPMK102_to_ITVK201
+      subject: IPMK102
       predicate: Precedes
-      object: inst:ITVK201
+      object: ITVK201
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:ITVK201_to_MDSK201
-      subject: inst:ITVK201
+      beamline_context: GUN_thru_MV
+    - id: ITVK201_to_MDSK201
+      subject: ITVK201
       predicate: Precedes
-      object: inst:MDSK201
+      object: MDSK201
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:MDSK201_to_MQWK202
-      subject: inst:MDSK201
+      beamline_context: GUN_thru_MV
+    - id: MDSK201_to_MQWK202
+      subject: MDSK201
       predicate: Precedes
-      object: inst:MQWK202
+      object: MQWK202
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:MQWK202_to_IFYK203
-      subject: inst:MQWK202
+      beamline_context: GUN_thru_MV
+    - id: MQWK202_to_IFYK203
+      subject: MQWK202
       predicate: Precedes
-      object: inst:IFYK203
+      object: IFYK203
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:IFYK203_to_ISLK302
-      subject: inst:IFYK203
+      beamline_context: GUN_thru_MV
+    - id: IFYK203_to_ISLK302
+      subject: IFYK203
       predicate: Precedes
-      object: inst:ISLK302
+      object: ISLK302
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:ISLK302_to_IYGK302
-      subject: inst:ISLK302
+      beamline_context: GUN_thru_MV
+    - id: ISLK302_to_IYGK302
+      subject: ISLK302
       predicate: Precedes
-      object: inst:IYGK302
+      object: IYGK302
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
-    - id: inst:IYGK302_to_RM11
-      subject: inst:IYGK302
+      beamline_context: GUN_thru_MV
+    - id: IYGK302_to_RM11
+      subject: IYGK302
       predicate: Precedes
-      object: inst:RM11
+      object: RM11
       context: beamline_order
-      beamline_context: inst:GUN_thru_MV
+      beamline_context: GUN_thru_MV

@@ -6,11 +6,12 @@ notes:
 - Model-only drifts, controllers, constants, and lattice records are omitted because the current accelerator-core
   schema has no direct representation for them.
 facility:
+  id_namespace: tag:bnl.gov,2026:bta/
   identifiers:
   - identifier_type: LOCAL
     identifier_value: BTA
   components:
-  - id: inst:BEGINNING_B1
+  - id: BEGINNING_B1
     kind: BeginningEle
     native_types:
     - BeginningEle
@@ -21,7 +22,7 @@ facility:
     ReferenceP:
       pc_ref: 2160058016.715229
       species_ref: proton
-      id: inst:BEGINNING_B1/ReferenceP
+      id: BEGINNING_B1/ReferenceP
     TwissP:
       beta_a: 12.5509384
       beta_b: 4.072941886974975
@@ -29,15 +30,15 @@ facility:
       alpha_b: -0.6499756770851368
       eta_x: 2.7207960780961375
       etap_x: -0.4222600658627664
-      id: inst:BEGINNING_B1/TwissP
-  - id: inst:BTASTART
+      id: BEGINNING_B1/TwissP
+  - id: BTASTART
     kind: Marker
     native_types:
     - Marker
     functions:
     - Mark
     beamline_relation: Inline
-  - id: inst:DHF6A
+  - id: DHF6A
     kind: Bend
     native_types:
     - Bend
@@ -47,17 +48,17 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.25
-      id: inst:DHF6A/LongitudinalPlacementP
+      id: DHF6A/LongitudinalPlacementP
     BendP:
       g_ref: -0.057192
       e2: -0.07149
-      id: inst:DHF6A/BendP
+      id: DHF6A/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: -0.057192
-      id: inst:DHF6A/MagneticMultipoleP
-  - id: inst:DHF6T
+      id: DHF6A/MagneticMultipoleP
+  - id: DHF6T
     kind: Kicker
     native_types:
     - Kicker
@@ -67,9 +68,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DHF6T/LongitudinalPlacementP
+      id: DHF6T/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DRF6A
+  - id: DRF6A
     kind: Drift
     native_types:
     - Drift
@@ -78,8 +79,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.03949999999999998
-      id: inst:DRF6A/LongitudinalPlacementP
-  - id: inst:DHF6B
+      id: DRF6A/LongitudinalPlacementP
+  - id: DHF6B
     kind: Bend
     native_types:
     - Bend
@@ -89,18 +90,18 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.3269
-      id: inst:DHF6B/LongitudinalPlacementP
+      id: DHF6B/LongitudinalPlacementP
     BendP:
       g_ref: -0.044728314115607806
       e1: -0.03324
       e2: -0.07149
-      id: inst:DHF6B/BendP
+      id: DHF6B/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: -0.04472831411560781
-      id: inst:DHF6B/MagneticMultipoleP
-  - id: inst:DRF6B
+      id: DHF6B/MagneticMultipoleP
+  - id: DRF6B
     kind: Drift
     native_types:
     - Drift
@@ -109,8 +110,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4064
-      id: inst:DRF6B/LongitudinalPlacementP
-  - id: inst:PUEH001
+      id: DRF6B/LongitudinalPlacementP
+  - id: PUEH001
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -120,8 +121,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUEH001/LongitudinalPlacementP
-  - id: inst:DR001
+      id: PUEH001/LongitudinalPlacementP
+  - id: DR001
     kind: Drift
     native_types:
     - Drift
@@ -130,8 +131,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.2518000000000002
-      id: inst:DR001/LongitudinalPlacementP
-  - id: inst:MW006
+      id: DR001/LongitudinalPlacementP
+  - id: MW006
     kind: BeamProfileMonitor
     native_types:
     - Marker
@@ -140,7 +141,7 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:MW006/LongitudinalPlacementP
+      id: MW006/LongitudinalPlacementP
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -156,8 +157,8 @@ facility:
       - key: spacing_y
         value: '0.0015'
         datatype: Float
-      id: inst:MW006/MetaP
-  - id: inst:DR006
+      id: MW006/MetaP
+  - id: DR006
     kind: Drift
     native_types:
     - Drift
@@ -166,8 +167,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.43259999999999993
-      id: inst:DR006/LongitudinalPlacementP
-  - id: inst:DV007
+      id: DR006/LongitudinalPlacementP
+  - id: DV007
     kind: Kicker
     native_types:
     - Kicker
@@ -177,14 +178,14 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.2286
-      id: inst:DV007/LongitudinalPlacementP
+      id: DV007/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Ks: 0.00019785396946390708
-      id: inst:DV007/MagneticMultipoleP
+      id: DV007/MagneticMultipoleP
     plane: Vertical
-  - id: inst:DR007
+  - id: DR007
     kind: Drift
     native_types:
     - Drift
@@ -193,8 +194,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.16060000000000002
-      id: inst:DR007/LongitudinalPlacementP
-  - id: inst:QV1
+      id: DR007/LongitudinalPlacementP
+  - id: QV1
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -203,13 +204,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5588
-      id: inst:QV1/LongitudinalPlacementP
+      id: QV1/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: -0.543789268756699
-      id: inst:QV1/MagneticMultipoleP
-  - id: inst:DRQ1
+      id: QV1/MagneticMultipoleP
+  - id: DRQ1
     kind: Drift
     native_types:
     - Drift
@@ -218,8 +219,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4031500000000003
-      id: inst:DRQ1/LongitudinalPlacementP
-  - id: inst:DH1A
+      id: DRQ1/LongitudinalPlacementP
+  - id: DH1A
     kind: Bend
     native_types:
     - Bend
@@ -229,18 +230,18 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.2666536729738865
-      id: inst:DH1A/LongitudinalPlacementP
+      id: DH1A/LongitudinalPlacementP
     BendP:
       g_ref: 0.06818582244610812
       edge1_int: 0.02065
       edge2_int: 0.02065
-      id: inst:DH1A/BendP
+      id: DH1A/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.0681858224461081
-      id: inst:DH1A/MagneticMultipoleP
-  - id: inst:DH1T
+      id: DH1A/MagneticMultipoleP
+  - id: DH1T
     kind: Kicker
     native_types:
     - Kicker
@@ -250,9 +251,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DH1T/LongitudinalPlacementP
+      id: DH1T/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DH1B
+  - id: DH1B
     kind: Bend
     native_types:
     - Bend
@@ -262,18 +263,18 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.2666536729738865
-      id: inst:DH1B/LongitudinalPlacementP
+      id: DH1B/LongitudinalPlacementP
     BendP:
       g_ref: 0.06818582244610812
       edge1_int: 0.02065
       edge2_int: 0.02065
-      id: inst:DH1B/BendP
+      id: DH1B/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.0681858224461081
-      id: inst:DH1B/MagneticMultipoleP
-  - id: inst:DRD1
+      id: DH1B/MagneticMultipoleP
+  - id: DRD1
     kind: Drift
     native_types:
     - Drift
@@ -282,8 +283,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.353954
-      id: inst:DRD1/LongitudinalPlacementP
-  - id: inst:QH2A
+      id: DRD1/LongitudinalPlacementP
+  - id: QH2A
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -292,13 +293,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5588
-      id: inst:QH2A/LongitudinalPlacementP
+      id: QH2A/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: 1.0492993067514023
-      id: inst:QH2A/MagneticMultipoleP
-  - id: inst:DRQ2A
+      id: QH2A/MagneticMultipoleP
+  - id: DRQ2A
     kind: Drift
     native_types:
     - Drift
@@ -307,8 +308,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.14119599999999966
-      id: inst:DRQ2A/LongitudinalPlacementP
-  - id: inst:QH2B
+      id: DRQ2A/LongitudinalPlacementP
+  - id: QH2B
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -317,13 +318,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5588
-      id: inst:QH2B/LongitudinalPlacementP
+      id: QH2B/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: 1.0492993067514023
-      id: inst:QH2B/MagneticMultipoleP
-  - id: inst:DRQ2B
+      id: QH2B/MagneticMultipoleP
+  - id: DRQ2B
     kind: Drift
     native_types:
     - Drift
@@ -332,15 +333,15 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4599000000000001
-      id: inst:DRQ2B/LongitudinalPlacementP
-  - id: inst:XF019
+      id: DRQ2B/LongitudinalPlacementP
+  - id: XF019
     kind: Marker
     native_types:
     - Marker
     functions:
     - Mark
     beamline_relation: Inline
-  - id: inst:DR019
+  - id: DR019
     kind: Drift
     native_types:
     - Drift
@@ -349,8 +350,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.3256999999999993
-      id: inst:DR019/LongitudinalPlacementP
-  - id: inst:QV3
+      id: DR019/LongitudinalPlacementP
+  - id: QV3
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -359,13 +360,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5588
-      id: inst:QV3/LongitudinalPlacementP
+      id: QV3/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: -1.4212102570001448
-      id: inst:QV3/MagneticMultipoleP
-  - id: inst:DRQ3
+      id: QV3/MagneticMultipoleP
+  - id: DRQ3
     kind: Drift
     native_types:
     - Drift
@@ -374,15 +375,15 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.3706000000000004
-      id: inst:DRQ3/LongitudinalPlacementP
-  - id: inst:FOIL024
+      id: DRQ3/LongitudinalPlacementP
+  - id: FOIL024
     kind: Marker
     native_types:
     - Marker
     functions:
     - Mark
     beamline_relation: Inline
-  - id: inst:DR024A
+  - id: DR024A
     kind: Drift
     native_types:
     - Drift
@@ -391,8 +392,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.012100000000000347
-      id: inst:DR024A/LongitudinalPlacementP
-  - id: inst:DV030
+      id: DR024A/LongitudinalPlacementP
+  - id: DV030
     kind: Kicker
     native_types:
     - Kicker
@@ -402,9 +403,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.2438
-      id: inst:DV030/LongitudinalPlacementP
+      id: DV030/LongitudinalPlacementP
     plane: Vertical
-  - id: inst:DR024B
+  - id: DR024B
     kind: Drift
     native_types:
     - Drift
@@ -413,8 +414,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.6880999999999995
-      id: inst:DR024B/LongitudinalPlacementP
-  - id: inst:QH4
+      id: DR024B/LongitudinalPlacementP
+  - id: QH4
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -423,13 +424,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5588
-      id: inst:QH4/LongitudinalPlacementP
+      id: QH4/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: 1.3799174639073808
-      id: inst:QH4/MagneticMultipoleP
-  - id: inst:DRQ4
+      id: QH4/MagneticMultipoleP
+  - id: DRQ4
     kind: Drift
     native_types:
     - Drift
@@ -438,8 +439,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.48617500000000113
-      id: inst:DRQ4/LongitudinalPlacementP
-  - id: inst:DH2
+      id: DRQ4/LongitudinalPlacementP
+  - id: DH2
     kind: Bend
     native_types:
     - Bend
@@ -449,22 +450,22 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.42385
-      id: inst:DH2/LongitudinalPlacementP
+      id: DH2/LongitudinalPlacementP
     BendP:
       g_ref: 0.1137446624172288
       edge1_int: 0.02891
       edge2_int: 0.02891
       e1: 0.05058
       e2: 0.05058
-      id: inst:DH2/BendP
+      id: DH2/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.11374466241722879
       - order: 1
         Kn: 0.00019564081935763354
-      id: inst:DH2/MagneticMultipoleP
-  - id: inst:DRD2
+      id: DH2/MagneticMultipoleP
+  - id: DRD2
     kind: Drift
     native_types:
     - Drift
@@ -473,8 +474,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4714249999999991
-      id: inst:DRD2/LongitudinalPlacementP
-  - id: inst:QV5
+      id: DRD2/LongitudinalPlacementP
+  - id: QV5
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -483,13 +484,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QV5/LongitudinalPlacementP
+      id: QV5/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: -0.013354833631008985
-      id: inst:QV5/MagneticMultipoleP
-  - id: inst:DH23T
+      id: QV5/MagneticMultipoleP
+  - id: DH23T
     kind: Kicker
     native_types:
     - Kicker
@@ -499,9 +500,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DH23T/LongitudinalPlacementP
+      id: DH23T/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DRQ5
+  - id: DRQ5
     kind: Drift
     native_types:
     - Drift
@@ -510,8 +511,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.11834999999999998
-      id: inst:DRQ5/LongitudinalPlacementP
-  - id: inst:PUEV046
+      id: DRQ5/LongitudinalPlacementP
+  - id: PUEV046
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -521,8 +522,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUEV046/LongitudinalPlacementP
-  - id: inst:DR046
+      id: PUEV046/LongitudinalPlacementP
+  - id: DR046
     kind: Drift
     native_types:
     - Drift
@@ -531,8 +532,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.8646750000000023
-      id: inst:DR046/LongitudinalPlacementP
-  - id: inst:DH3
+      id: DR046/LongitudinalPlacementP
+  - id: DH3
     kind: Bend
     native_types:
     - Bend
@@ -542,22 +543,22 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.42385
-      id: inst:DH3/LongitudinalPlacementP
+      id: DH3/LongitudinalPlacementP
     BendP:
       g_ref: 0.1137446624172288
       edge1_int: 0.02891
       edge2_int: 0.02891
       e1: 0.05058
       e2: 0.05058
-      id: inst:DH3/BendP
+      id: DH3/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.11374466241722879
       - order: 1
         Kn: 0.00019564081935763354
-      id: inst:DH3/MagneticMultipoleP
-  - id: inst:DRD3
+      id: DH3/MagneticMultipoleP
+  - id: DRD3
     kind: Drift
     native_types:
     - Drift
@@ -566,8 +567,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4897249999999973
-      id: inst:DRD3/LongitudinalPlacementP
-  - id: inst:QH6
+      id: DRD3/LongitudinalPlacementP
+  - id: QH6
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -576,13 +577,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QH6/LongitudinalPlacementP
+      id: QH6/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: 0.9743513509122018
-      id: inst:QH6/MagneticMultipoleP
-  - id: inst:DRQ6
+      id: QH6/MagneticMultipoleP
+  - id: DRQ6
     kind: Drift
     native_types:
     - Drift
@@ -591,15 +592,15 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4714500000000008
-      id: inst:DRQ6/LongitudinalPlacementP
-  - id: inst:XF059
+      id: DRQ6/LongitudinalPlacementP
+  - id: XF059
     kind: Marker
     native_types:
     - Marker
     functions:
     - Mark
     beamline_relation: Inline
-  - id: inst:DR059
+  - id: DR059
     kind: Drift
     native_types:
     - Drift
@@ -608,8 +609,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4698999999999991
-      id: inst:DR059/LongitudinalPlacementP
-  - id: inst:MW060
+      id: DR059/LongitudinalPlacementP
+  - id: MW060
     kind: BeamProfileMonitor
     native_types:
     - Marker
@@ -618,7 +619,7 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:MW060/LongitudinalPlacementP
+      id: MW060/LongitudinalPlacementP
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -634,8 +635,8 @@ facility:
       - key: spacing_y
         value: '0.0025'
         datatype: Float
-      id: inst:MW060/MetaP
-  - id: inst:DR060
+      id: MW060/MetaP
+  - id: DR060
     kind: Drift
     native_types:
     - Drift
@@ -644,8 +645,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4601500000000023
-      id: inst:DR060/LongitudinalPlacementP
-  - id: inst:QV7
+      id: DR060/LongitudinalPlacementP
+  - id: QV7
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -654,13 +655,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QV7/LongitudinalPlacementP
+      id: QV7/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: -0.8675096450596528
-      id: inst:QV7/MagneticMultipoleP
-  - id: inst:DRQ7Y
+      id: QV7/MagneticMultipoleP
+  - id: DRQ7Y
     kind: Drift
     native_types:
     - Drift
@@ -669,15 +670,15 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 4.25075
-      id: inst:DRQ7Y/LongitudinalPlacementP
-  - id: inst:MK077
+      id: DRQ7Y/LongitudinalPlacementP
+  - id: MK077
     kind: Marker
     native_types:
     - Marker
     functions:
     - Mark
     beamline_relation: Inline
-  - id: inst:DRQ7Z
+  - id: DRQ7Z
     kind: Drift
     native_types:
     - Drift
@@ -686,8 +687,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 4.25075
-      id: inst:DRQ7Z/LongitudinalPlacementP
-  - id: inst:QH8
+      id: DRQ7Z/LongitudinalPlacementP
+  - id: QH8
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -696,13 +697,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QH8/LongitudinalPlacementP
+      id: QH8/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: 0.31882795472842496
-      id: inst:QH8/MagneticMultipoleP
-  - id: inst:DRQ8
+      id: QH8/MagneticMultipoleP
+  - id: DRQ8
     kind: Drift
     native_types:
     - Drift
@@ -711,8 +712,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.7341
-      id: inst:DRQ8/LongitudinalPlacementP
-  - id: inst:DH4A
+      id: DRQ8/LongitudinalPlacementP
+  - id: DH4A
     kind: Bend
     native_types:
     - Bend
@@ -722,18 +723,18 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.26665081030218785
-      id: inst:DH4A/LongitudinalPlacementP
+      id: DH4A/LongitudinalPlacementP
     BendP:
       g_ref: 0.03202690436350769
       edge1_int: 0.02065
       edge2_int: 0.02065
-      id: inst:DH4A/BendP
+      id: DH4A/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.032026904363507684
-      id: inst:DH4A/MagneticMultipoleP
-  - id: inst:DH4T
+      id: DH4A/MagneticMultipoleP
+  - id: DH4T
     kind: Kicker
     native_types:
     - Kicker
@@ -743,9 +744,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DH4T/LongitudinalPlacementP
+      id: DH4T/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DH4B
+  - id: DH4B
     kind: Bend
     native_types:
     - Bend
@@ -755,18 +756,18 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.26665081030218785
-      id: inst:DH4B/LongitudinalPlacementP
+      id: DH4B/LongitudinalPlacementP
     BendP:
       g_ref: 0.03202690436350769
       edge1_int: 0.02065
       edge2_int: 0.02065
-      id: inst:DH4B/BendP
+      id: DH4B/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.032026904363507684
-      id: inst:DH4B/MagneticMultipoleP
-  - id: inst:DRD4
+      id: DH4B/MagneticMultipoleP
+  - id: DRD4
     kind: Drift
     native_types:
     - Drift
@@ -775,8 +776,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.8078999999999987
-      id: inst:DRD4/LongitudinalPlacementP
-  - id: inst:QV9
+      id: DRD4/LongitudinalPlacementP
+  - id: QV9
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -785,13 +786,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QV9/LongitudinalPlacementP
+      id: QV9/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: -0.7925788082089091
-      id: inst:QV9/MagneticMultipoleP
-  - id: inst:DRQ9A
+      id: QV9/MagneticMultipoleP
+  - id: DRQ9A
     kind: Drift
     native_types:
     - Drift
@@ -800,8 +801,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.670250000000003
-      id: inst:DRQ9A/LongitudinalPlacementP
-  - id: inst:DV120
+      id: DRQ9A/LongitudinalPlacementP
+  - id: DV120
     kind: Kicker
     native_types:
     - Kicker
@@ -811,9 +812,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.2438
-      id: inst:DV120/LongitudinalPlacementP
+      id: DV120/LongitudinalPlacementP
     plane: Vertical
-  - id: inst:DRQ9B
+  - id: DRQ9B
     kind: Drift
     native_types:
     - Drift
@@ -822,8 +823,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.567049999999995
-      id: inst:DRQ9B/LongitudinalPlacementP
-  - id: inst:QH10
+      id: DRQ9B/LongitudinalPlacementP
+  - id: QH10
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -832,13 +833,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QH10/LongitudinalPlacementP
+      id: QH10/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: 0.6942945538633392
-      id: inst:QH10/MagneticMultipoleP
-  - id: inst:DRQ10
+      id: QH10/MagneticMultipoleP
+  - id: DRQ10
     kind: Drift
     native_types:
     - Drift
@@ -847,8 +848,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 5.030150000000003
-      id: inst:DRQ10/LongitudinalPlacementP
-  - id: inst:MW125
+      id: DRQ10/LongitudinalPlacementP
+  - id: MW125
     kind: BeamProfileMonitor
     native_types:
     - Marker
@@ -857,7 +858,7 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:MW125/LongitudinalPlacementP
+      id: MW125/LongitudinalPlacementP
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -873,8 +874,8 @@ facility:
       - key: spacing_y
         value: '0.0025'
         datatype: Float
-      id: inst:MW125/MetaP
-  - id: inst:DR125
+      id: MW125/MetaP
+  - id: DR125
     kind: Drift
     native_types:
     - Drift
@@ -883,8 +884,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.43049999999999866
-      id: inst:DR125/LongitudinalPlacementP
-  - id: inst:DH127
+      id: DR125/LongitudinalPlacementP
+  - id: DH127
     kind: Kicker
     native_types:
     - Kicker
@@ -894,9 +895,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.2438
-      id: inst:DH127/LongitudinalPlacementP
+      id: DH127/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DR127
+  - id: DR127
     kind: Drift
     native_types:
     - Drift
@@ -905,8 +906,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.29639999999999805
-      id: inst:DR127/LongitudinalPlacementP
-  - id: inst:PUEV129
+      id: DR127/LongitudinalPlacementP
+  - id: PUEV129
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -916,8 +917,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUEV129/LongitudinalPlacementP
-  - id: inst:DR129
+      id: PUEV129/LongitudinalPlacementP
+  - id: DR129
     kind: Drift
     native_types:
     - Drift
@@ -926,8 +927,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.11834999999999998
-      id: inst:DR129/LongitudinalPlacementP
-  - id: inst:QV11
+      id: DR129/LongitudinalPlacementP
+  - id: QV11
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -936,13 +937,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QV11/LongitudinalPlacementP
+      id: QV11/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: -0.3671828230083464
-      id: inst:QV11/MagneticMultipoleP
-  - id: inst:DRQ11
+      id: QV11/MagneticMultipoleP
+  - id: DRQ11
     kind: Drift
     native_types:
     - Drift
@@ -951,15 +952,15 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 3.01295
-      id: inst:DRQ11/LongitudinalPlacementP
-  - id: inst:MK139
+      id: DRQ11/LongitudinalPlacementP
+  - id: MK139
     kind: Marker
     native_types:
     - Marker
     functions:
     - Mark
     beamline_relation: Inline
-  - id: inst:DR139
+  - id: DR139
     kind: Drift
     native_types:
     - Drift
@@ -968,8 +969,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.552500000000002
-      id: inst:DR139/LongitudinalPlacementP
-  - id: inst:DR141
+      id: DR139/LongitudinalPlacementP
+  - id: DR141
     kind: Drift
     native_types:
     - Drift
@@ -978,8 +979,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.41820000000000185
-      id: inst:DR141/LongitudinalPlacementP
-  - id: inst:PUEH143
+      id: DR141/LongitudinalPlacementP
+  - id: PUEH143
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -989,8 +990,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUEH143/LongitudinalPlacementP
-  - id: inst:DR143
+      id: PUEH143/LongitudinalPlacementP
+  - id: DR143
     kind: Drift
     native_types:
     - Drift
@@ -999,8 +1000,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.11834999999999998
-      id: inst:DR143/LongitudinalPlacementP
-  - id: inst:QH12
+      id: DR143/LongitudinalPlacementP
+  - id: QH12
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -1009,13 +1010,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QH12/LongitudinalPlacementP
+      id: QH12/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: 0.4868974442913689
-      id: inst:QH12/MagneticMultipoleP
-  - id: inst:DRQ12
+      id: QH12/MagneticMultipoleP
+  - id: DRQ12
     kind: Drift
     native_types:
     - Drift
@@ -1024,15 +1025,15 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 3.7802499999999988
-      id: inst:DRQ12/LongitudinalPlacementP
-  - id: inst:MK156
+      id: DRQ12/LongitudinalPlacementP
+  - id: MK156
     kind: Marker
     native_types:
     - Marker
     functions:
     - Mark
     beamline_relation: Inline
-  - id: inst:DR156
+  - id: DR156
     kind: Drift
     native_types:
     - Drift
@@ -1041,8 +1042,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.430600000000002
-      id: inst:DR156/LongitudinalPlacementP
-  - id: inst:DH158
+      id: DR156/LongitudinalPlacementP
+  - id: DH158
     kind: Kicker
     native_types:
     - Kicker
@@ -1052,9 +1053,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.2438
-      id: inst:DH158/LongitudinalPlacementP
+      id: DH158/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DR158
+  - id: DR158
     kind: Drift
     native_types:
     - Drift
@@ -1063,8 +1064,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.29639999999999805
-      id: inst:DR158/LongitudinalPlacementP
-  - id: inst:PUEV160
+      id: DR158/LongitudinalPlacementP
+  - id: PUEV160
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -1074,8 +1075,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUEV160/LongitudinalPlacementP
-  - id: inst:DR160
+      id: PUEV160/LongitudinalPlacementP
+  - id: DR160
     kind: Drift
     native_types:
     - Drift
@@ -1084,8 +1085,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.11834999999999998
-      id: inst:DR160/LongitudinalPlacementP
-  - id: inst:QV13
+      id: DR160/LongitudinalPlacementP
+  - id: QV13
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -1094,13 +1095,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QV13/LongitudinalPlacementP
+      id: QV13/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: -0.9895450067507202
-      id: inst:QV13/MagneticMultipoleP
-  - id: inst:DRQ13
+      id: QV13/MagneticMultipoleP
+  - id: DRQ13
     kind: Drift
     native_types:
     - Drift
@@ -1109,8 +1110,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5969500000000032
-      id: inst:DRQ13/LongitudinalPlacementP
-  - id: inst:MW166
+      id: DRQ13/LongitudinalPlacementP
+  - id: MW166
     kind: BeamProfileMonitor
     native_types:
     - Marker
@@ -1119,7 +1120,7 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:MW166/LongitudinalPlacementP
+      id: MW166/LongitudinalPlacementP
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -1135,8 +1136,8 @@ facility:
       - key: spacing_y
         value: '0.0025'
         datatype: Float
-      id: inst:MW166/MetaP
-  - id: inst:DR166
+      id: MW166/MetaP
+  - id: DR166
     kind: Drift
     native_types:
     - Drift
@@ -1145,8 +1146,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5523999999999987
-      id: inst:DR166/LongitudinalPlacementP
-  - id: inst:DR168
+      id: DR166/LongitudinalPlacementP
+  - id: DR168
     kind: Drift
     native_types:
     - Drift
@@ -1155,8 +1156,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.41829999999999806
-      id: inst:DR168/LongitudinalPlacementP
-  - id: inst:PUEH170
+      id: DR168/LongitudinalPlacementP
+  - id: PUEH170
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -1166,8 +1167,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUEH170/LongitudinalPlacementP
-  - id: inst:DR170
+      id: PUEH170/LongitudinalPlacementP
+  - id: DR170
     kind: Drift
     native_types:
     - Drift
@@ -1176,8 +1177,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.11834999999999998
-      id: inst:DR170/LongitudinalPlacementP
-  - id: inst:QH14
+      id: DR170/LongitudinalPlacementP
+  - id: QH14
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -1186,13 +1187,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4985
-      id: inst:QH14/LongitudinalPlacementP
+      id: QH14/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: 0.748989790597664
-      id: inst:QH14/MagneticMultipoleP
-  - id: inst:DRQ14
+      id: QH14/MagneticMultipoleP
+  - id: DRQ14
     kind: Drift
     native_types:
     - Drift
@@ -1201,8 +1202,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5067499999999983
-      id: inst:DRQ14/LongitudinalPlacementP
-  - id: inst:DH5A
+      id: DRQ14/LongitudinalPlacementP
+  - id: DH5A
     kind: Bend
     native_types:
     - Bend
@@ -1212,18 +1213,18 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.6229286126725115
-      id: inst:DH5A/LongitudinalPlacementP
+      id: DH5A/LongitudinalPlacementP
     BendP:
       g_ref: -0.1130065284655793
       edge1_int: 0.02065
       edge2_int: 0.02065
-      id: inst:DH5A/BendP
+      id: DH5A/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: -0.1130065284655793
-      id: inst:DH5A/MagneticMultipoleP
-  - id: inst:DH5T
+      id: DH5A/MagneticMultipoleP
+  - id: DH5T
     kind: Kicker
     native_types:
     - Kicker
@@ -1233,9 +1234,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DH5T/LongitudinalPlacementP
+      id: DH5T/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DH5B
+  - id: DH5B
     kind: Bend
     native_types:
     - Bend
@@ -1245,18 +1246,18 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.6229286126725115
-      id: inst:DH5B/LongitudinalPlacementP
+      id: DH5B/LongitudinalPlacementP
     BendP:
       g_ref: -0.1130065284655793
       edge1_int: 0.02065
       edge2_int: 0.02065
-      id: inst:DH5B/BendP
+      id: DH5B/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: -0.1130065284655793
-      id: inst:DH5B/MagneticMultipoleP
-  - id: inst:DRD5
+      id: DH5B/MagneticMultipoleP
+  - id: DRD5
     kind: Drift
     native_types:
     - Drift
@@ -1265,8 +1266,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.4516000000000008
-      id: inst:DRD5/LongitudinalPlacementP
-  - id: inst:DV181
+      id: DRD5/LongitudinalPlacementP
+  - id: DV181
     kind: Kicker
     native_types:
     - Kicker
@@ -1276,9 +1277,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.2438
-      id: inst:DV181/LongitudinalPlacementP
+      id: DV181/LongitudinalPlacementP
     plane: Vertical
-  - id: inst:DR181
+  - id: DR181
     kind: Drift
     native_types:
     - Drift
@@ -1287,15 +1288,15 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.3797999999999996
-      id: inst:DR181/LongitudinalPlacementP
-  - id: inst:XF183
+      id: DR181/LongitudinalPlacementP
+  - id: XF183
     kind: Marker
     native_types:
     - Marker
     functions:
     - Mark
     beamline_relation: Inline
-  - id: inst:DR183
+  - id: DR183
     kind: Drift
     native_types:
     - Drift
@@ -1304,8 +1305,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5255000000000035
-      id: inst:DR183/LongitudinalPlacementP
-  - id: inst:QV15
+      id: DR183/LongitudinalPlacementP
+  - id: QV15
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -1314,13 +1315,13 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.5588
-      id: inst:QV15/LongitudinalPlacementP
+      id: QV15/LongitudinalPlacementP
     MagneticMultipoleP:
       mag_components:
       - order: 1
         Kn: -0.71933765439868
-      id: inst:QV15/MagneticMultipoleP
-  - id: inst:M1
+      id: QV15/MagneticMultipoleP
+  - id: M1
     kind: Drift
     native_types:
     - Drift
@@ -1329,8 +1330,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.2606
-      id: inst:M1/LongitudinalPlacementP
-  - id: inst:L20SPTM1
+      id: M1/LongitudinalPlacementP
+  - id: L20SPTM1
     kind: Bend
     native_types:
     - Bend
@@ -1340,16 +1341,16 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.2309543850148328
-      id: inst:L20SPTM1/LongitudinalPlacementP
+      id: L20SPTM1/LongitudinalPlacementP
     BendP:
       g_ref: 0.04457110731957698
-      id: inst:L20SPTM1/BendP
+      id: L20SPTM1/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.04457110731957699
-      id: inst:L20SPTM1/MagneticMultipoleP
-  - id: inst:DHL20T
+      id: L20SPTM1/MagneticMultipoleP
+  - id: DHL20T
     kind: Kicker
     native_types:
     - Kicker
@@ -1359,9 +1360,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DHL20T/LongitudinalPlacementP
+      id: DHL20T/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:L20SPTM2
+  - id: L20SPTM2
     kind: Bend
     native_types:
     - Bend
@@ -1371,16 +1372,16 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.2309543850148328
-      id: inst:L20SPTM2/LongitudinalPlacementP
+      id: L20SPTM2/LongitudinalPlacementP
     BendP:
       g_ref: 0.04457110731957698
-      id: inst:L20SPTM2/BendP
+      id: L20SPTM2/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.04457110731957699
-      id: inst:L20SPTM2/MagneticMultipoleP
-  - id: inst:MM_A01BF
+      id: L20SPTM2/MagneticMultipoleP
+  - id: MM_A01BF
     kind: Bend
     native_types:
     - Bend
@@ -1390,10 +1391,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.0066461824881423
-      id: inst:MM_A01BF/LongitudinalPlacementP
+      id: MM_A01BF/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229642227363
-      id: inst:MM_A01BF/BendP
+      id: MM_A01BF/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1402,8 +1403,8 @@ facility:
         Kn: 0.04850457979108316
       - order: 2
         Kn: 0.010112690671265677
-      id: inst:MM_A01BF/MagneticMultipoleP
-  - id: inst:D2S_001
+      id: MM_A01BF/MagneticMultipoleP
+  - id: D2S_001
     kind: Drift
     native_types:
     - Drift
@@ -1412,8 +1413,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.609514656
-      id: inst:D2S_001/LongitudinalPlacementP
-  - id: inst:MM_A02BF
+      id: D2S_001/LongitudinalPlacementP
+  - id: MM_A02BF
     kind: Bend
     native_types:
     - Bend
@@ -1423,10 +1424,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.0066461824881423
-      id: inst:MM_A02BF/LongitudinalPlacementP
+      id: MM_A02BF/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229642227363
-      id: inst:MM_A02BF/BendP
+      id: MM_A02BF/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1435,8 +1436,8 @@ facility:
         Kn: 0.04850457979108316
       - order: 2
         Kn: 0.010112690671265677
-      id: inst:MM_A02BF/MagneticMultipoleP
-  - id: inst:DPUE_001
+      id: MM_A02BF/MagneticMultipoleP
+  - id: DPUE_001
     kind: Drift
     native_types:
     - Drift
@@ -1445,8 +1446,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.287
-      id: inst:DPUE_001/LongitudinalPlacementP
-  - id: inst:PUE_A02
+      id: DPUE_001/LongitudinalPlacementP
+  - id: PUE_A02
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -1456,11 +1457,11 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUE_A02/LongitudinalPlacementP
+      id: PUE_A02/LongitudinalPlacementP
     MetaP:
       label: “AGSBPM”
-      id: inst:PUE_A02/MetaP
-  - id: inst:DHCA02
+      id: PUE_A02/MetaP
+  - id: DHCA02
     kind: Kicker
     native_types:
     - Kicker
@@ -1470,9 +1471,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DHCA02/LongitudinalPlacementP
+      id: DHCA02/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DVCA02
+  - id: DVCA02
     kind: Kicker
     native_types:
     - Kicker
@@ -1482,9 +1483,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DVCA02/LongitudinalPlacementP
+      id: DVCA02/LongitudinalPlacementP
     plane: Vertical
-  - id: inst:D2TX_001
+  - id: D2TX_001
     kind: Drift
     native_types:
     - Drift
@@ -1493,8 +1494,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.322485192
-      id: inst:D2TX_001/LongitudinalPlacementP
-  - id: inst:MM_A03CD
+      id: D2TX_001/LongitudinalPlacementP
+  - id: MM_A03CD
     kind: Bend
     native_types:
     - Bend
@@ -1504,10 +1505,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A03CD/LongitudinalPlacementP
+      id: MM_A03CD/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A03CD/BendP
+      id: MM_A03CD/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1516,8 +1517,8 @@ facility:
         Kn: -0.04863291582125736
       - order: 2
         Kn: 0.008756616595046793
-      id: inst:MM_A03CD/MagneticMultipoleP
-  - id: inst:DSQ_001
+      id: MM_A03CD/MagneticMultipoleP
+  - id: DSQ_001
     kind: Drift
     native_types:
     - Drift
@@ -1526,8 +1527,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.37104735600000005
-      id: inst:DSQ_001/LongitudinalPlacementP
-  - id: inst:QHFV
+      id: DSQ_001/LongitudinalPlacementP
+  - id: QHFV
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -1536,8 +1537,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.39088
-      id: inst:QHFV/LongitudinalPlacementP
-  - id: inst:QPOL
+      id: QHFV/LongitudinalPlacementP
+  - id: QPOL
     kind: Quadrupole
     native_types:
     - Quadrupole
@@ -1546,8 +1547,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.39088
-      id: inst:QPOL/LongitudinalPlacementP
-  - id: inst:DSQ_002
+      id: QPOL/LongitudinalPlacementP
+  - id: DSQ_002
     kind: Drift
     native_types:
     - Drift
@@ -1556,8 +1557,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.37104735600000005
-      id: inst:DSQ_002/LongitudinalPlacementP
-  - id: inst:MM_A04CD
+      id: DSQ_002/LongitudinalPlacementP
+  - id: MM_A04CD
     kind: Bend
     native_types:
     - Bend
@@ -1567,10 +1568,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A04CD/LongitudinalPlacementP
+      id: MM_A04CD/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A04CD/BendP
+      id: MM_A04CD/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1579,8 +1580,8 @@ facility:
         Kn: -0.04863291582125736
       - order: 2
         Kn: 0.008756616595046793
-      id: inst:MM_A04CD/MagneticMultipoleP
-  - id: inst:DPUE_002
+      id: MM_A04CD/MagneticMultipoleP
+  - id: DPUE_002
     kind: Drift
     native_types:
     - Drift
@@ -1589,8 +1590,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.287
-      id: inst:DPUE_002/LongitudinalPlacementP
-  - id: inst:PUE_A04
+      id: DPUE_002/LongitudinalPlacementP
+  - id: PUE_A04
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -1600,11 +1601,11 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUE_A04/LongitudinalPlacementP
+      id: PUE_A04/LongitudinalPlacementP
     MetaP:
       label: “AGSBPM”
-      id: inst:PUE_A04/MetaP
-  - id: inst:D2LX_001
+      id: PUE_A04/MetaP
+  - id: D2LX_001
     kind: Drift
     native_types:
     - Drift
@@ -1613,8 +1614,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.32245471200000003
-      id: inst:D2LX_001/LongitudinalPlacementP
-  - id: inst:MM_A05AF
+      id: D2LX_001/LongitudinalPlacementP
+  - id: MM_A05AF
     kind: Bend
     native_types:
     - Bend
@@ -1624,10 +1625,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A05AF/LongitudinalPlacementP
+      id: MM_A05AF/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A05AF/BendP
+      id: MM_A05AF/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1636,8 +1637,8 @@ facility:
         Kn: 0.04870190658303816
       - order: 2
         Kn: 0.008723426564620421
-      id: inst:MM_A05AF/MagneticMultipoleP
-  - id: inst:D2H_A05_001
+      id: MM_A05AF/MagneticMultipoleP
+  - id: D2H_A05_001
     kind: Drift
     native_types:
     - Drift
@@ -1646,8 +1647,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.26192735600000006
-      id: inst:D2H_A05_001/LongitudinalPlacementP
-  - id: inst:KCKRA05
+      id: D2H_A05_001/LongitudinalPlacementP
+  - id: KCKRA05
     kind: Bend
     native_types:
     - Bend
@@ -1657,16 +1658,16 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.0000003750000985
-      id: inst:KCKRA05/LongitudinalPlacementP
+      id: KCKRA05/LongitudinalPlacementP
     BendP:
       g_ref: 0.0029999988750001264
-      id: inst:KCKRA05/BendP
+      id: KCKRA05/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
         Kn: 0.0029999988750001264
-      id: inst:KCKRA05/MagneticMultipoleP
-  - id: inst:D2H_A05_002
+      id: KCKRA05/MagneticMultipoleP
+  - id: D2H_A05_002
     kind: Drift
     native_types:
     - Drift
@@ -1675,8 +1676,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.26192735600000006
-      id: inst:D2H_A05_002/LongitudinalPlacementP
-  - id: inst:MM_A06AF
+      id: D2H_A05_002/LongitudinalPlacementP
+  - id: MM_A06AF
     kind: Bend
     native_types:
     - Bend
@@ -1686,10 +1687,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A06AF/LongitudinalPlacementP
+      id: MM_A06AF/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A06AF/BendP
+      id: MM_A06AF/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1698,8 +1699,8 @@ facility:
         Kn: 0.04870190658303816
       - order: 2
         Kn: 0.008723426564620421
-      id: inst:MM_A06AF/MagneticMultipoleP
-  - id: inst:D2L
+      id: MM_A06AF/MagneticMultipoleP
+  - id: D2L
     kind: Drift
     native_types:
     - Drift
@@ -1708,8 +1709,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.609454712
-      id: inst:D2L/LongitudinalPlacementP
-  - id: inst:MM_A07CD
+      id: D2L/LongitudinalPlacementP
+  - id: MM_A07CD
     kind: Bend
     native_types:
     - Bend
@@ -1719,10 +1720,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A07CD/LongitudinalPlacementP
+      id: MM_A07CD/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A07CD/BendP
+      id: MM_A07CD/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1731,8 +1732,8 @@ facility:
         Kn: -0.04863291582125736
       - order: 2
         Kn: 0.008756616595046793
-      id: inst:MM_A07CD/MagneticMultipoleP
-  - id: inst:DSS_001
+      id: MM_A07CD/MagneticMultipoleP
+  - id: DSS_001
     kind: Drift
     native_types:
     - Drift
@@ -1741,8 +1742,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.43442735600000004
-      id: inst:DSS_001/LongitudinalPlacementP
-  - id: inst:SXV
+      id: DSS_001/LongitudinalPlacementP
+  - id: SXV
     kind: Sextupole
     native_types:
     - Sextupole
@@ -1751,8 +1752,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.655
-      id: inst:SXV/LongitudinalPlacementP
-  - id: inst:DSS_002
+      id: SXV/LongitudinalPlacementP
+  - id: DSS_002
     kind: Drift
     native_types:
     - Drift
@@ -1761,8 +1762,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.43442735600000004
-      id: inst:DSS_002/LongitudinalPlacementP
-  - id: inst:MM_A08CD
+      id: DSS_002/LongitudinalPlacementP
+  - id: MM_A08CD
     kind: Bend
     native_types:
     - Bend
@@ -1772,10 +1773,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A08CD/LongitudinalPlacementP
+      id: MM_A08CD/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A08CD/BendP
+      id: MM_A08CD/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1784,8 +1785,8 @@ facility:
         Kn: -0.04863291582125736
       - order: 2
         Kn: 0.008756616595046793
-      id: inst:MM_A08CD/MagneticMultipoleP
-  - id: inst:DPUE_003
+      id: MM_A08CD/MagneticMultipoleP
+  - id: DPUE_003
     kind: Drift
     native_types:
     - Drift
@@ -1794,8 +1795,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.287
-      id: inst:DPUE_003/LongitudinalPlacementP
-  - id: inst:PUE_A08
+      id: DPUE_003/LongitudinalPlacementP
+  - id: PUE_A08
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -1805,11 +1806,11 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUE_A08/LongitudinalPlacementP
+      id: PUE_A08/LongitudinalPlacementP
     MetaP:
       label: “AGSBPM”
-      id: inst:PUE_A08/MetaP
-  - id: inst:DHCA08
+      id: PUE_A08/MetaP
+  - id: DHCA08
     kind: Kicker
     native_types:
     - Kicker
@@ -1819,9 +1820,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DHCA08/LongitudinalPlacementP
+      id: DHCA08/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DVCA08
+  - id: DVCA08
     kind: Kicker
     native_types:
     - Kicker
@@ -1831,9 +1832,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DVCA08/LongitudinalPlacementP
+      id: DVCA08/LongitudinalPlacementP
     plane: Vertical
-  - id: inst:D2TX_002
+  - id: D2TX_002
     kind: Drift
     native_types:
     - Drift
@@ -1842,8 +1843,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.322485192
-      id: inst:D2TX_002/LongitudinalPlacementP
-  - id: inst:MM_A09BF
+      id: D2TX_002/LongitudinalPlacementP
+  - id: MM_A09BF
     kind: Bend
     native_types:
     - Bend
@@ -1853,10 +1854,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.0066461824881423
-      id: inst:MM_A09BF/LongitudinalPlacementP
+      id: MM_A09BF/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229642227363
-      id: inst:MM_A09BF/BendP
+      id: MM_A09BF/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1865,8 +1866,8 @@ facility:
         Kn: 0.04850457979108316
       - order: 2
         Kn: 0.010112690671265677
-      id: inst:MM_A09BF/MagneticMultipoleP
-  - id: inst:D2S_002
+      id: MM_A09BF/MagneticMultipoleP
+  - id: D2S_002
     kind: Drift
     native_types:
     - Drift
@@ -1875,8 +1876,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.609514656
-      id: inst:D2S_002/LongitudinalPlacementP
-  - id: inst:MM_A10BF
+      id: D2S_002/LongitudinalPlacementP
+  - id: MM_A10BF
     kind: Bend
     native_types:
     - Bend
@@ -1886,10 +1887,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.0066461824881423
-      id: inst:MM_A10BF/LongitudinalPlacementP
+      id: MM_A10BF/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229642227363
-      id: inst:MM_A10BF/BendP
+      id: MM_A10BF/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1898,8 +1899,8 @@ facility:
         Kn: 0.04850457979108316
       - order: 2
         Kn: 0.010112690671265677
-      id: inst:MM_A10BF/MagneticMultipoleP
-  - id: inst:D10_001
+      id: MM_A10BF/MagneticMultipoleP
+  - id: D10_001
     kind: Drift
     native_types:
     - Drift
@@ -1908,8 +1909,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.523839218
-      id: inst:D10_001/LongitudinalPlacementP
-  - id: inst:D10_002
+      id: D10_001/LongitudinalPlacementP
+  - id: D10_002
     kind: Drift
     native_types:
     - Drift
@@ -1918,8 +1919,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 1.523839218
-      id: inst:D10_002/LongitudinalPlacementP
-  - id: inst:MM_A11BD
+      id: D10_002/LongitudinalPlacementP
+  - id: MM_A11BD
     kind: Bend
     native_types:
     - Bend
@@ -1929,10 +1930,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.0066461824881423
-      id: inst:MM_A11BD/LongitudinalPlacementP
+      id: MM_A11BD/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229642227363
-      id: inst:MM_A11BD/BendP
+      id: MM_A11BD/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1941,8 +1942,8 @@ facility:
         Kn: -0.0484198946267085
       - order: 2
         Kn: 0.010003388034307203
-      id: inst:MM_A11BD/MagneticMultipoleP
-  - id: inst:D2S_003
+      id: MM_A11BD/MagneticMultipoleP
+  - id: D2S_003
     kind: Drift
     native_types:
     - Drift
@@ -1951,8 +1952,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.609514656
-      id: inst:D2S_003/LongitudinalPlacementP
-  - id: inst:MM_A12BD
+      id: D2S_003/LongitudinalPlacementP
+  - id: MM_A12BD
     kind: Bend
     native_types:
     - Bend
@@ -1962,10 +1963,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.0066461824881423
-      id: inst:MM_A12BD/LongitudinalPlacementP
+      id: MM_A12BD/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229642227363
-      id: inst:MM_A12BD/BendP
+      id: MM_A12BD/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -1974,8 +1975,8 @@ facility:
         Kn: -0.0484198946267085
       - order: 2
         Kn: 0.010003388034307203
-      id: inst:MM_A12BD/MagneticMultipoleP
-  - id: inst:DPUE_004
+      id: MM_A12BD/MagneticMultipoleP
+  - id: DPUE_004
     kind: Drift
     native_types:
     - Drift
@@ -1984,8 +1985,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.287
-      id: inst:DPUE_004/LongitudinalPlacementP
-  - id: inst:PUE_A12
+      id: DPUE_004/LongitudinalPlacementP
+  - id: PUE_A12
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -1995,11 +1996,11 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUE_A12/LongitudinalPlacementP
+      id: PUE_A12/LongitudinalPlacementP
     MetaP:
       label: “AGSBPM”
-      id: inst:PUE_A12/MetaP
-  - id: inst:DHCA12
+      id: PUE_A12/MetaP
+  - id: DHCA12
     kind: Kicker
     native_types:
     - Kicker
@@ -2009,9 +2010,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DHCA12/LongitudinalPlacementP
+      id: DHCA12/LongitudinalPlacementP
     plane: Horizontal
-  - id: inst:DVCA12
+  - id: DVCA12
     kind: Kicker
     native_types:
     - Kicker
@@ -2021,9 +2022,9 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:DVCA12/LongitudinalPlacementP
+      id: DVCA12/LongitudinalPlacementP
     plane: Vertical
-  - id: inst:D2TX_003
+  - id: D2TX_003
     kind: Drift
     native_types:
     - Drift
@@ -2032,8 +2033,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.322485192
-      id: inst:D2TX_003/LongitudinalPlacementP
-  - id: inst:MM_A13CF
+      id: D2TX_003/LongitudinalPlacementP
+  - id: MM_A13CF
     kind: Bend
     native_types:
     - Bend
@@ -2043,10 +2044,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A13CF/LongitudinalPlacementP
+      id: MM_A13CF/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A13CF/BendP
+      id: MM_A13CF/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -2055,8 +2056,8 @@ facility:
         Kn: 0.048742537207373
       - order: 2
         Kn: 0.008845277832145091
-      id: inst:MM_A13CF/MagneticMultipoleP
-  - id: inst:DSS_003
+      id: MM_A13CF/MagneticMultipoleP
+  - id: DSS_003
     kind: Drift
     native_types:
     - Drift
@@ -2065,8 +2066,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.43442735600000004
-      id: inst:DSS_003/LongitudinalPlacementP
-  - id: inst:SXH
+      id: DSS_003/LongitudinalPlacementP
+  - id: SXH
     kind: Sextupole
     native_types:
     - Sextupole
@@ -2075,8 +2076,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.655
-      id: inst:SXH/LongitudinalPlacementP
-  - id: inst:DSS_004
+      id: SXH/LongitudinalPlacementP
+  - id: DSS_004
     kind: Drift
     native_types:
     - Drift
@@ -2085,8 +2086,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.43442735600000004
-      id: inst:DSS_004/LongitudinalPlacementP
-  - id: inst:MM_A14CF
+      id: DSS_004/LongitudinalPlacementP
+  - id: MM_A14CF
     kind: Bend
     native_types:
     - Bend
@@ -2096,10 +2097,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A14CF/LongitudinalPlacementP
+      id: MM_A14CF/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A14CF/BendP
+      id: MM_A14CF/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -2108,8 +2109,8 @@ facility:
         Kn: 0.048742537207373
       - order: 2
         Kn: 0.008845277832145091
-      id: inst:MM_A14CF/MagneticMultipoleP
-  - id: inst:DPUE_005
+      id: MM_A14CF/MagneticMultipoleP
+  - id: DPUE_005
     kind: Drift
     native_types:
     - Drift
@@ -2118,8 +2119,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.287
-      id: inst:DPUE_005/LongitudinalPlacementP
-  - id: inst:PUE_A14
+      id: DPUE_005/LongitudinalPlacementP
+  - id: PUE_A14
     kind: BeamPositionMonitor
     native_types:
     - Instrument
@@ -2129,11 +2130,11 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:PUE_A14/LongitudinalPlacementP
+      id: PUE_A14/LongitudinalPlacementP
     MetaP:
       label: “AGSBPM”
-      id: inst:PUE_A14/MetaP
-  - id: inst:D2LX_002
+      id: PUE_A14/MetaP
+  - id: D2LX_002
     kind: Drift
     native_types:
     - Drift
@@ -2142,8 +2143,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.32245471200000003
-      id: inst:D2LX_002/LongitudinalPlacementP
-  - id: inst:MM_A15AD
+      id: D2LX_002/LongitudinalPlacementP
+  - id: MM_A15AD
     kind: Bend
     native_types:
     - Bend
@@ -2153,10 +2154,10 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 2.387677802013313
-      id: inst:MM_A15AD/LongitudinalPlacementP
+      id: MM_A15AD/LongitudinalPlacementP
     BendP:
       g_ref: -0.011712229630153455
-      id: inst:MM_A15AD/BendP
+      id: MM_A15AD/BendP
     MagneticMultipoleP:
       mag_components:
       - order: 0
@@ -2165,8 +2166,8 @@ facility:
         Kn: -0.0486098096672228
       - order: 2
         Kn: 0.008609656995266375
-      id: inst:MM_A15AD/MagneticMultipoleP
-  - id: inst:D2H
+      id: MM_A15AD/MagneticMultipoleP
+  - id: D2H
     kind: Drift
     native_types:
     - Drift
@@ -2175,8 +2176,8 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.7619273560000001
-      id: inst:D2H/LongitudinalPlacementP
-  - id: inst:MWA15
+      id: D2H/LongitudinalPlacementP
+  - id: MWA15
     kind: BeamProfileMonitor
     native_types:
     - Marker
@@ -2185,7 +2186,7 @@ facility:
     beamline_relation: Inline
     LongitudinalPlacementP:
       length: 0.0
-      id: inst:MWA15/LongitudinalPlacementP
+      id: MWA15/LongitudinalPlacementP
     MetaP:
       description: Multiwire beam-profile monitor.
       additional_metadata:
@@ -2201,8 +2202,8 @@ facility:
       - key: spacing_y
         value: '0.002'
         datatype: Float
-      id: inst:MWA15/MetaP
-  - id: inst:END_B0
+      id: MWA15/MetaP
+  - id: END_B0
     kind: Marker
     native_types:
     - Marker
@@ -2210,7 +2211,7 @@ facility:
     - Mark
     beamline_relation: Inline
   beamlines:
-  - id: inst:BTA_LINE
+  - id: BTA_LINE
     kind: BeamLine
     functions:
     - BeamLineSection
@@ -2219,7 +2220,7 @@ facility:
     periodic: false
     description: BTA beamline imported from bta.pals.yaml.
   signals:
-  - id: inst:btaMW006Cntl:horInDataM
+  - id: btaMW006Cntl:horInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2231,7 +2232,7 @@ facility:
     access_protocol: ADO
     alias:
     - horizontal_profile
-  - id: inst:btaMW006Cntl:verInDataM
+  - id: btaMW006Cntl:verInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2243,7 +2244,7 @@ facility:
     access_protocol: ADO
     alias:
     - vertical_profile
-  - id: inst:btaMW006Cntl:harpIsM
+  - id: btaMW006Cntl:harpIsM
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2255,7 +2256,7 @@ facility:
     access_protocol: ADO
     alias:
     - insertion_status
-  - id: inst:bta-tv7-ps:setpointS
+  - id: bta-tv7-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2267,7 +2268,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-tv7-ps:currentM
+  - id: bta-tv7-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2279,7 +2280,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-tv7-ps:rangeC
+  - id: bta-tv7-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2299,8 +2300,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-tv7-ps:rangeC/MetaP
-  - id: inst:bta-tv7-ps:stateS
+      id: bta-tv7-ps:rangeC/MetaP
+  - id: bta-tv7-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2312,7 +2313,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qd1-ps:setpointS
+  - id: bta-qd1-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2324,7 +2325,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qd1-ps:currentM
+  - id: bta-qd1-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2336,7 +2337,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qd1-ps:rangeC
+  - id: bta-qd1-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2356,8 +2357,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qd1-ps:rangeC/MetaP
-  - id: inst:bta-qd1-ps:stateS
+      id: bta-qd1-ps:rangeC/MetaP
+  - id: bta-qd1-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2369,7 +2370,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-th1-ps:setpointS
+  - id: bta-th1-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2381,7 +2382,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-th1-ps:currentM
+  - id: bta-th1-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2393,7 +2394,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-th1-ps:rangeC
+  - id: bta-th1-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2413,8 +2414,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-th1-ps:rangeC/MetaP
-  - id: inst:bta-th1-ps:stateS
+      id: bta-th1-ps:rangeC/MetaP
+  - id: bta-th1-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2426,7 +2427,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qf2-ps:setpointS
+  - id: bta-qf2-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2438,7 +2439,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qf2-ps:currentM
+  - id: bta-qf2-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2450,7 +2451,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qf2-ps:rangeC
+  - id: bta-qf2-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2470,8 +2471,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qf2-ps:rangeC/MetaP
-  - id: inst:bta-qf2-ps:stateS
+      id: bta-qf2-ps:rangeC/MetaP
+  - id: bta-qf2-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2483,7 +2484,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qd3-ps:setpointS
+  - id: bta-qd3-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2495,7 +2496,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qd3-ps:currentM
+  - id: bta-qd3-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2507,7 +2508,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qd3-ps:rangeC
+  - id: bta-qd3-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2527,8 +2528,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qd3-ps:rangeC/MetaP
-  - id: inst:bta-qd3-ps:stateS
+      id: bta-qd3-ps:rangeC/MetaP
+  - id: bta-qd3-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2540,7 +2541,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-tv30-ps:setpointS
+  - id: bta-tv30-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2552,7 +2553,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-tv30-ps:currentM
+  - id: bta-tv30-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2564,7 +2565,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-tv30-ps:rangeC
+  - id: bta-tv30-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2584,8 +2585,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-tv30-ps:rangeC/MetaP
-  - id: inst:bta-tv30-ps:stateS
+      id: bta-tv30-ps:rangeC/MetaP
+  - id: bta-tv30-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2597,7 +2598,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qf4-ps:setpointS
+  - id: bta-qf4-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2609,7 +2610,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qf4-ps:currentM
+  - id: bta-qf4-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2621,7 +2622,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qf4-ps:rangeC
+  - id: bta-qf4-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2641,8 +2642,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qf4-ps:rangeC/MetaP
-  - id: inst:bta-qf4-ps:stateS
+      id: bta-qf4-ps:rangeC/MetaP
+  - id: bta-qf4-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2654,7 +2655,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qd5-ps:setpointS
+  - id: bta-qd5-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2666,7 +2667,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qd5-ps:currentM
+  - id: bta-qd5-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2678,7 +2679,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qd5-ps:rangeC
+  - id: bta-qd5-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2698,8 +2699,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qd5-ps:rangeC/MetaP
-  - id: inst:bta-qd5-ps:stateS
+      id: bta-qd5-ps:rangeC/MetaP
+  - id: bta-qd5-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2711,7 +2712,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-th23-ps:setpointS
+  - id: bta-th23-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2723,7 +2724,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-th23-ps:currentM
+  - id: bta-th23-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2735,7 +2736,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-th23-ps:rangeC
+  - id: bta-th23-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2755,8 +2756,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-th23-ps:rangeC/MetaP
-  - id: inst:bta-th23-ps:stateS
+      id: bta-th23-ps:rangeC/MetaP
+  - id: bta-th23-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2768,7 +2769,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qf6-ps:setpointS
+  - id: bta-qf6-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2780,7 +2781,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qf6-ps:currentM
+  - id: bta-qf6-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2792,7 +2793,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qf6-ps:rangeC
+  - id: bta-qf6-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2812,8 +2813,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qf6-ps:rangeC/MetaP
-  - id: inst:bta-qf6-ps:stateS
+      id: bta-qf6-ps:rangeC/MetaP
+  - id: bta-qf6-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2825,7 +2826,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:btaMW060Cntl:horInDataM
+  - id: btaMW060Cntl:horInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2837,7 +2838,7 @@ facility:
     access_protocol: ADO
     alias:
     - horizontal_profile
-  - id: inst:btaMW060Cntl:verInDataM
+  - id: btaMW060Cntl:verInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2849,7 +2850,7 @@ facility:
     access_protocol: ADO
     alias:
     - vertical_profile
-  - id: inst:btaMW060Cntl:harpIsM
+  - id: btaMW060Cntl:harpIsM
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2861,7 +2862,7 @@ facility:
     access_protocol: ADO
     alias:
     - insertion_status
-  - id: inst:bta-qd7-ps:setpointS
+  - id: bta-qd7-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2873,7 +2874,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qd7-ps:currentM
+  - id: bta-qd7-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2885,7 +2886,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qd7-ps:rangeC
+  - id: bta-qd7-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2905,8 +2906,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qd7-ps:rangeC/MetaP
-  - id: inst:bta-qd7-ps:stateS
+      id: bta-qd7-ps:rangeC/MetaP
+  - id: bta-qd7-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2918,7 +2919,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qf8-ps:setpointS
+  - id: bta-qf8-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2930,7 +2931,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qf8-ps:currentM
+  - id: bta-qf8-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2942,7 +2943,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qf8-ps:rangeC
+  - id: bta-qf8-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -2962,8 +2963,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qf8-ps:rangeC/MetaP
-  - id: inst:bta-qf8-ps:stateS
+      id: bta-qf8-ps:rangeC/MetaP
+  - id: bta-qf8-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -2975,7 +2976,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-th4-ps:setpointS
+  - id: bta-th4-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -2987,7 +2988,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-th4-ps:currentM
+  - id: bta-th4-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -2999,7 +3000,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-th4-ps:rangeC
+  - id: bta-th4-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3019,8 +3020,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-th4-ps:rangeC/MetaP
-  - id: inst:bta-th4-ps:stateS
+      id: bta-th4-ps:rangeC/MetaP
+  - id: bta-th4-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3032,7 +3033,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qd9-ps:setpointS
+  - id: bta-qd9-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3044,7 +3045,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qd9-ps:currentM
+  - id: bta-qd9-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3056,7 +3057,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qd9-ps:rangeC
+  - id: bta-qd9-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3076,8 +3077,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qd9-ps:rangeC/MetaP
-  - id: inst:bta-qd9-ps:stateS
+      id: bta-qd9-ps:rangeC/MetaP
+  - id: bta-qd9-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3089,7 +3090,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-tv120-ps:setpointS
+  - id: bta-tv120-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3101,7 +3102,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-tv120-ps:currentM
+  - id: bta-tv120-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3113,7 +3114,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-tv120-ps:rangeC
+  - id: bta-tv120-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3133,8 +3134,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-tv120-ps:rangeC/MetaP
-  - id: inst:bta-tv120-ps:stateS
+      id: bta-tv120-ps:rangeC/MetaP
+  - id: bta-tv120-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3146,7 +3147,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qf10-ps:setpointS
+  - id: bta-qf10-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3158,7 +3159,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qf10-ps:currentM
+  - id: bta-qf10-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3170,7 +3171,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qf10-ps:rangeC
+  - id: bta-qf10-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3190,8 +3191,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qf10-ps:rangeC/MetaP
-  - id: inst:bta-qf10-ps:stateS
+      id: bta-qf10-ps:rangeC/MetaP
+  - id: bta-qf10-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3203,7 +3204,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:btaMW125Cntl:horInDataM
+  - id: btaMW125Cntl:horInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3215,7 +3216,7 @@ facility:
     access_protocol: ADO
     alias:
     - horizontal_profile
-  - id: inst:btaMW125Cntl:verInDataM
+  - id: btaMW125Cntl:verInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3227,7 +3228,7 @@ facility:
     access_protocol: ADO
     alias:
     - vertical_profile
-  - id: inst:btaMW125Cntl:harpIsM
+  - id: btaMW125Cntl:harpIsM
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3239,7 +3240,7 @@ facility:
     access_protocol: ADO
     alias:
     - insertion_status
-  - id: inst:bta-th127-ps:setpointS
+  - id: bta-th127-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3251,7 +3252,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-th127-ps:currentM
+  - id: bta-th127-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3263,7 +3264,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-th127-ps:rangeC
+  - id: bta-th127-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3283,8 +3284,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-th127-ps:rangeC/MetaP
-  - id: inst:bta-th127-ps:stateS
+      id: bta-th127-ps:rangeC/MetaP
+  - id: bta-th127-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3296,7 +3297,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qd11-ps:setpointS
+  - id: bta-qd11-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3308,7 +3309,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qd11-ps:currentM
+  - id: bta-qd11-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3320,7 +3321,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qd11-ps:rangeC
+  - id: bta-qd11-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3340,8 +3341,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qd11-ps:rangeC/MetaP
-  - id: inst:bta-qd11-ps:stateS
+      id: bta-qd11-ps:rangeC/MetaP
+  - id: bta-qd11-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3353,7 +3354,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qf12-ps:setpointS
+  - id: bta-qf12-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3365,7 +3366,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qf12-ps:currentM
+  - id: bta-qf12-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3377,7 +3378,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qf12-ps:rangeC
+  - id: bta-qf12-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3397,8 +3398,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qf12-ps:rangeC/MetaP
-  - id: inst:bta-qf12-ps:stateS
+      id: bta-qf12-ps:rangeC/MetaP
+  - id: bta-qf12-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3410,7 +3411,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-th158-ps:setpointS
+  - id: bta-th158-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3422,7 +3423,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-th158-ps:currentM
+  - id: bta-th158-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3434,7 +3435,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-th158-ps:rangeC
+  - id: bta-th158-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3454,8 +3455,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-th158-ps:rangeC/MetaP
-  - id: inst:bta-th158-ps:stateS
+      id: bta-th158-ps:rangeC/MetaP
+  - id: bta-th158-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3467,7 +3468,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qd13-ps:setpointS
+  - id: bta-qd13-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3479,7 +3480,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qd13-ps:currentM
+  - id: bta-qd13-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3491,7 +3492,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qd13-ps:rangeC
+  - id: bta-qd13-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3511,8 +3512,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qd13-ps:rangeC/MetaP
-  - id: inst:bta-qd13-ps:stateS
+      id: bta-qd13-ps:rangeC/MetaP
+  - id: bta-qd13-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3524,7 +3525,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:btaMW166Cntl:horInDataM
+  - id: btaMW166Cntl:horInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3536,7 +3537,7 @@ facility:
     access_protocol: ADO
     alias:
     - horizontal_profile
-  - id: inst:btaMW166Cntl:verInDataM
+  - id: btaMW166Cntl:verInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3548,7 +3549,7 @@ facility:
     access_protocol: ADO
     alias:
     - vertical_profile
-  - id: inst:btaMW166Cntl:harpIsM
+  - id: btaMW166Cntl:harpIsM
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3560,7 +3561,7 @@ facility:
     access_protocol: ADO
     alias:
     - insertion_status
-  - id: inst:bta-qf14-ps:setpointS
+  - id: bta-qf14-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3572,7 +3573,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qf14-ps:currentM
+  - id: bta-qf14-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3584,7 +3585,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qf14-ps:rangeC
+  - id: bta-qf14-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3604,8 +3605,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qf14-ps:rangeC/MetaP
-  - id: inst:bta-qf14-ps:stateS
+      id: bta-qf14-ps:rangeC/MetaP
+  - id: bta-qf14-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3617,7 +3618,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-th5-ps:setpointS
+  - id: bta-th5-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3629,7 +3630,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-th5-ps:currentM
+  - id: bta-th5-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3641,7 +3642,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-th5-ps:rangeC
+  - id: bta-th5-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3661,8 +3662,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-th5-ps:rangeC/MetaP
-  - id: inst:bta-th5-ps:stateS
+      id: bta-th5-ps:rangeC/MetaP
+  - id: bta-th5-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3674,7 +3675,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-tv181-ps:setpointS
+  - id: bta-tv181-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3686,7 +3687,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-tv181-ps:currentM
+  - id: bta-tv181-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3698,7 +3699,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-tv181-ps:rangeC
+  - id: bta-tv181-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3718,8 +3719,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-tv181-ps:rangeC/MetaP
-  - id: inst:bta-tv181-ps:stateS
+      id: bta-tv181-ps:rangeC/MetaP
+  - id: bta-tv181-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3731,7 +3732,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:bta-qd15-ps:setpointS
+  - id: bta-qd15-ps:setpointS
     kind: Signal
     signal_role: Setpoint
     source_system: Other
@@ -3743,7 +3744,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_setpoint
-  - id: inst:bta-qd15-ps:currentM
+  - id: bta-qd15-ps:currentM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3755,7 +3756,7 @@ facility:
     access_protocol: ADO
     alias:
     - current_readback
-  - id: inst:bta-qd15-ps:rangeC
+  - id: bta-qd15-ps:rangeC
     kind: Signal
     signal_role: RangeLimit
     source_system: Other
@@ -3775,8 +3776,8 @@ facility:
       - key: array_length
         value: '2'
         datatype: Integer
-      id: inst:bta-qd15-ps:rangeC/MetaP
-  - id: inst:bta-qd15-ps:stateS
+      id: bta-qd15-ps:rangeC/MetaP
+  - id: bta-qd15-ps:stateS
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3788,7 +3789,7 @@ facility:
     access_protocol: ADO
     alias:
     - magnet_status
-  - id: inst:adrA15MWCntl:horInDataM
+  - id: adrA15MWCntl:horInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3800,7 +3801,7 @@ facility:
     access_protocol: ADO
     alias:
     - horizontal_profile
-  - id: inst:adrA15MWCntl:verInDataM
+  - id: adrA15MWCntl:verInDataM
     kind: Signal
     signal_role: Readback
     source_system: Other
@@ -3812,7 +3813,7 @@ facility:
     access_protocol: ADO
     alias:
     - vertical_profile
-  - id: inst:adrA15MWCntl:harpIsM
+  - id: adrA15MWCntl:harpIsM
     kind: Signal
     signal_role: Status
     source_system: Other
@@ -3825,1464 +3826,1464 @@ facility:
     alias:
     - insertion_status
   signal_bindings:
-  - id: inst:MW006.horizontal_profile_binding
-    subject: inst:MW006
-    predicate: pals:has_readback_signal
-    object: inst:btaMW006Cntl:horInDataM
-  - id: inst:MW006.vertical_profile_binding
-    subject: inst:MW006
-    predicate: pals:has_readback_signal
-    object: inst:btaMW006Cntl:verInDataM
-  - id: inst:MW006.insertion_status_binding
-    subject: inst:MW006
-    predicate: pals:has_signal
-    object: inst:btaMW006Cntl:harpIsM
-  - id: inst:DV007.current_setpoint_binding
-    subject: inst:DV007
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-tv7-ps:setpointS
-  - id: inst:DV007.current_readback_binding
-    subject: inst:DV007
-    predicate: pals:has_readback_signal
-    object: inst:bta-tv7-ps:currentM
-  - id: inst:DV007.current_range_binding
-    subject: inst:DV007
-    predicate: pals:has_limit_signal
-    object: inst:bta-tv7-ps:rangeC
-  - id: inst:DV007.magnet_status_binding
-    subject: inst:DV007
-    predicate: pals:has_signal
-    object: inst:bta-tv7-ps:stateS
-  - id: inst:QV1.current_setpoint_binding
-    subject: inst:QV1
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qd1-ps:setpointS
-  - id: inst:QV1.current_readback_binding
-    subject: inst:QV1
-    predicate: pals:has_readback_signal
-    object: inst:bta-qd1-ps:currentM
-  - id: inst:QV1.current_range_binding
-    subject: inst:QV1
-    predicate: pals:has_limit_signal
-    object: inst:bta-qd1-ps:rangeC
-  - id: inst:QV1.magnet_status_binding
-    subject: inst:QV1
-    predicate: pals:has_signal
-    object: inst:bta-qd1-ps:stateS
-  - id: inst:DH1T.current_setpoint_binding
-    subject: inst:DH1T
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-th1-ps:setpointS
-  - id: inst:DH1T.current_readback_binding
-    subject: inst:DH1T
-    predicate: pals:has_readback_signal
-    object: inst:bta-th1-ps:currentM
-  - id: inst:DH1T.current_range_binding
-    subject: inst:DH1T
-    predicate: pals:has_limit_signal
-    object: inst:bta-th1-ps:rangeC
-  - id: inst:DH1T.magnet_status_binding
-    subject: inst:DH1T
-    predicate: pals:has_signal
-    object: inst:bta-th1-ps:stateS
-  - id: inst:QH2A.current_setpoint_binding
-    subject: inst:QH2A
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qf2-ps:setpointS
-  - id: inst:QH2A.current_readback_binding
-    subject: inst:QH2A
-    predicate: pals:has_readback_signal
-    object: inst:bta-qf2-ps:currentM
-  - id: inst:QH2A.current_range_binding
-    subject: inst:QH2A
-    predicate: pals:has_limit_signal
-    object: inst:bta-qf2-ps:rangeC
-  - id: inst:QH2A.magnet_status_binding
-    subject: inst:QH2A
-    predicate: pals:has_signal
-    object: inst:bta-qf2-ps:stateS
-  - id: inst:QH2B.current_setpoint_binding
-    subject: inst:QH2B
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qf2-ps:setpointS
-  - id: inst:QH2B.current_readback_binding
-    subject: inst:QH2B
-    predicate: pals:has_readback_signal
-    object: inst:bta-qf2-ps:currentM
-  - id: inst:QH2B.current_range_binding
-    subject: inst:QH2B
-    predicate: pals:has_limit_signal
-    object: inst:bta-qf2-ps:rangeC
-  - id: inst:QH2B.magnet_status_binding
-    subject: inst:QH2B
-    predicate: pals:has_signal
-    object: inst:bta-qf2-ps:stateS
-  - id: inst:QV3.current_setpoint_binding
-    subject: inst:QV3
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qd3-ps:setpointS
-  - id: inst:QV3.current_readback_binding
-    subject: inst:QV3
-    predicate: pals:has_readback_signal
-    object: inst:bta-qd3-ps:currentM
-  - id: inst:QV3.current_range_binding
-    subject: inst:QV3
-    predicate: pals:has_limit_signal
-    object: inst:bta-qd3-ps:rangeC
-  - id: inst:QV3.magnet_status_binding
-    subject: inst:QV3
-    predicate: pals:has_signal
-    object: inst:bta-qd3-ps:stateS
-  - id: inst:DV030.current_setpoint_binding
-    subject: inst:DV030
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-tv30-ps:setpointS
-  - id: inst:DV030.current_readback_binding
-    subject: inst:DV030
-    predicate: pals:has_readback_signal
-    object: inst:bta-tv30-ps:currentM
-  - id: inst:DV030.current_range_binding
-    subject: inst:DV030
-    predicate: pals:has_limit_signal
-    object: inst:bta-tv30-ps:rangeC
-  - id: inst:DV030.magnet_status_binding
-    subject: inst:DV030
-    predicate: pals:has_signal
-    object: inst:bta-tv30-ps:stateS
-  - id: inst:QH4.current_setpoint_binding
-    subject: inst:QH4
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qf4-ps:setpointS
-  - id: inst:QH4.current_readback_binding
-    subject: inst:QH4
-    predicate: pals:has_readback_signal
-    object: inst:bta-qf4-ps:currentM
-  - id: inst:QH4.current_range_binding
-    subject: inst:QH4
-    predicate: pals:has_limit_signal
-    object: inst:bta-qf4-ps:rangeC
-  - id: inst:QH4.magnet_status_binding
-    subject: inst:QH4
-    predicate: pals:has_signal
-    object: inst:bta-qf4-ps:stateS
-  - id: inst:QV5.current_setpoint_binding
-    subject: inst:QV5
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qd5-ps:setpointS
-  - id: inst:QV5.current_readback_binding
-    subject: inst:QV5
-    predicate: pals:has_readback_signal
-    object: inst:bta-qd5-ps:currentM
-  - id: inst:QV5.current_range_binding
-    subject: inst:QV5
-    predicate: pals:has_limit_signal
-    object: inst:bta-qd5-ps:rangeC
-  - id: inst:QV5.magnet_status_binding
-    subject: inst:QV5
-    predicate: pals:has_signal
-    object: inst:bta-qd5-ps:stateS
-  - id: inst:DH23T.current_setpoint_binding
-    subject: inst:DH23T
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-th23-ps:setpointS
-  - id: inst:DH23T.current_readback_binding
-    subject: inst:DH23T
-    predicate: pals:has_readback_signal
-    object: inst:bta-th23-ps:currentM
-  - id: inst:DH23T.current_range_binding
-    subject: inst:DH23T
-    predicate: pals:has_limit_signal
-    object: inst:bta-th23-ps:rangeC
-  - id: inst:DH23T.magnet_status_binding
-    subject: inst:DH23T
-    predicate: pals:has_signal
-    object: inst:bta-th23-ps:stateS
-  - id: inst:QH6.current_setpoint_binding
-    subject: inst:QH6
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qf6-ps:setpointS
-  - id: inst:QH6.current_readback_binding
-    subject: inst:QH6
-    predicate: pals:has_readback_signal
-    object: inst:bta-qf6-ps:currentM
-  - id: inst:QH6.current_range_binding
-    subject: inst:QH6
-    predicate: pals:has_limit_signal
-    object: inst:bta-qf6-ps:rangeC
-  - id: inst:QH6.magnet_status_binding
-    subject: inst:QH6
-    predicate: pals:has_signal
-    object: inst:bta-qf6-ps:stateS
-  - id: inst:MW060.horizontal_profile_binding
-    subject: inst:MW060
-    predicate: pals:has_readback_signal
-    object: inst:btaMW060Cntl:horInDataM
-  - id: inst:MW060.vertical_profile_binding
-    subject: inst:MW060
-    predicate: pals:has_readback_signal
-    object: inst:btaMW060Cntl:verInDataM
-  - id: inst:MW060.insertion_status_binding
-    subject: inst:MW060
-    predicate: pals:has_signal
-    object: inst:btaMW060Cntl:harpIsM
-  - id: inst:QV7.current_setpoint_binding
-    subject: inst:QV7
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qd7-ps:setpointS
-  - id: inst:QV7.current_readback_binding
-    subject: inst:QV7
-    predicate: pals:has_readback_signal
-    object: inst:bta-qd7-ps:currentM
-  - id: inst:QV7.current_range_binding
-    subject: inst:QV7
-    predicate: pals:has_limit_signal
-    object: inst:bta-qd7-ps:rangeC
-  - id: inst:QV7.magnet_status_binding
-    subject: inst:QV7
-    predicate: pals:has_signal
-    object: inst:bta-qd7-ps:stateS
-  - id: inst:QH8.current_setpoint_binding
-    subject: inst:QH8
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qf8-ps:setpointS
-  - id: inst:QH8.current_readback_binding
-    subject: inst:QH8
-    predicate: pals:has_readback_signal
-    object: inst:bta-qf8-ps:currentM
-  - id: inst:QH8.current_range_binding
-    subject: inst:QH8
-    predicate: pals:has_limit_signal
-    object: inst:bta-qf8-ps:rangeC
-  - id: inst:QH8.magnet_status_binding
-    subject: inst:QH8
-    predicate: pals:has_signal
-    object: inst:bta-qf8-ps:stateS
-  - id: inst:DH4T.current_setpoint_binding
-    subject: inst:DH4T
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-th4-ps:setpointS
-  - id: inst:DH4T.current_readback_binding
-    subject: inst:DH4T
-    predicate: pals:has_readback_signal
-    object: inst:bta-th4-ps:currentM
-  - id: inst:DH4T.current_range_binding
-    subject: inst:DH4T
-    predicate: pals:has_limit_signal
-    object: inst:bta-th4-ps:rangeC
-  - id: inst:DH4T.magnet_status_binding
-    subject: inst:DH4T
-    predicate: pals:has_signal
-    object: inst:bta-th4-ps:stateS
-  - id: inst:QV9.current_setpoint_binding
-    subject: inst:QV9
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qd9-ps:setpointS
-  - id: inst:QV9.current_readback_binding
-    subject: inst:QV9
-    predicate: pals:has_readback_signal
-    object: inst:bta-qd9-ps:currentM
-  - id: inst:QV9.current_range_binding
-    subject: inst:QV9
-    predicate: pals:has_limit_signal
-    object: inst:bta-qd9-ps:rangeC
-  - id: inst:QV9.magnet_status_binding
-    subject: inst:QV9
-    predicate: pals:has_signal
-    object: inst:bta-qd9-ps:stateS
-  - id: inst:DV120.current_setpoint_binding
-    subject: inst:DV120
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-tv120-ps:setpointS
-  - id: inst:DV120.current_readback_binding
-    subject: inst:DV120
-    predicate: pals:has_readback_signal
-    object: inst:bta-tv120-ps:currentM
-  - id: inst:DV120.current_range_binding
-    subject: inst:DV120
-    predicate: pals:has_limit_signal
-    object: inst:bta-tv120-ps:rangeC
-  - id: inst:DV120.magnet_status_binding
-    subject: inst:DV120
-    predicate: pals:has_signal
-    object: inst:bta-tv120-ps:stateS
-  - id: inst:QH10.current_setpoint_binding
-    subject: inst:QH10
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qf10-ps:setpointS
-  - id: inst:QH10.current_readback_binding
-    subject: inst:QH10
-    predicate: pals:has_readback_signal
-    object: inst:bta-qf10-ps:currentM
-  - id: inst:QH10.current_range_binding
-    subject: inst:QH10
-    predicate: pals:has_limit_signal
-    object: inst:bta-qf10-ps:rangeC
-  - id: inst:QH10.magnet_status_binding
-    subject: inst:QH10
-    predicate: pals:has_signal
-    object: inst:bta-qf10-ps:stateS
-  - id: inst:MW125.horizontal_profile_binding
-    subject: inst:MW125
-    predicate: pals:has_readback_signal
-    object: inst:btaMW125Cntl:horInDataM
-  - id: inst:MW125.vertical_profile_binding
-    subject: inst:MW125
-    predicate: pals:has_readback_signal
-    object: inst:btaMW125Cntl:verInDataM
-  - id: inst:MW125.insertion_status_binding
-    subject: inst:MW125
-    predicate: pals:has_signal
-    object: inst:btaMW125Cntl:harpIsM
-  - id: inst:DH127.current_setpoint_binding
-    subject: inst:DH127
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-th127-ps:setpointS
-  - id: inst:DH127.current_readback_binding
-    subject: inst:DH127
-    predicate: pals:has_readback_signal
-    object: inst:bta-th127-ps:currentM
-  - id: inst:DH127.current_range_binding
-    subject: inst:DH127
-    predicate: pals:has_limit_signal
-    object: inst:bta-th127-ps:rangeC
-  - id: inst:DH127.magnet_status_binding
-    subject: inst:DH127
-    predicate: pals:has_signal
-    object: inst:bta-th127-ps:stateS
-  - id: inst:QV11.current_setpoint_binding
-    subject: inst:QV11
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qd11-ps:setpointS
-  - id: inst:QV11.current_readback_binding
-    subject: inst:QV11
-    predicate: pals:has_readback_signal
-    object: inst:bta-qd11-ps:currentM
-  - id: inst:QV11.current_range_binding
-    subject: inst:QV11
-    predicate: pals:has_limit_signal
-    object: inst:bta-qd11-ps:rangeC
-  - id: inst:QV11.magnet_status_binding
-    subject: inst:QV11
-    predicate: pals:has_signal
-    object: inst:bta-qd11-ps:stateS
-  - id: inst:QH12.current_setpoint_binding
-    subject: inst:QH12
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qf12-ps:setpointS
-  - id: inst:QH12.current_readback_binding
-    subject: inst:QH12
-    predicate: pals:has_readback_signal
-    object: inst:bta-qf12-ps:currentM
-  - id: inst:QH12.current_range_binding
-    subject: inst:QH12
-    predicate: pals:has_limit_signal
-    object: inst:bta-qf12-ps:rangeC
-  - id: inst:QH12.magnet_status_binding
-    subject: inst:QH12
-    predicate: pals:has_signal
-    object: inst:bta-qf12-ps:stateS
-  - id: inst:DH158.current_setpoint_binding
-    subject: inst:DH158
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-th158-ps:setpointS
-  - id: inst:DH158.current_readback_binding
-    subject: inst:DH158
-    predicate: pals:has_readback_signal
-    object: inst:bta-th158-ps:currentM
-  - id: inst:DH158.current_range_binding
-    subject: inst:DH158
-    predicate: pals:has_limit_signal
-    object: inst:bta-th158-ps:rangeC
-  - id: inst:DH158.magnet_status_binding
-    subject: inst:DH158
-    predicate: pals:has_signal
-    object: inst:bta-th158-ps:stateS
-  - id: inst:QV13.current_setpoint_binding
-    subject: inst:QV13
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qd13-ps:setpointS
-  - id: inst:QV13.current_readback_binding
-    subject: inst:QV13
-    predicate: pals:has_readback_signal
-    object: inst:bta-qd13-ps:currentM
-  - id: inst:QV13.current_range_binding
-    subject: inst:QV13
-    predicate: pals:has_limit_signal
-    object: inst:bta-qd13-ps:rangeC
-  - id: inst:QV13.magnet_status_binding
-    subject: inst:QV13
-    predicate: pals:has_signal
-    object: inst:bta-qd13-ps:stateS
-  - id: inst:MW166.horizontal_profile_binding
-    subject: inst:MW166
-    predicate: pals:has_readback_signal
-    object: inst:btaMW166Cntl:horInDataM
-  - id: inst:MW166.vertical_profile_binding
-    subject: inst:MW166
-    predicate: pals:has_readback_signal
-    object: inst:btaMW166Cntl:verInDataM
-  - id: inst:MW166.insertion_status_binding
-    subject: inst:MW166
-    predicate: pals:has_signal
-    object: inst:btaMW166Cntl:harpIsM
-  - id: inst:QH14.current_setpoint_binding
-    subject: inst:QH14
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qf14-ps:setpointS
-  - id: inst:QH14.current_readback_binding
-    subject: inst:QH14
-    predicate: pals:has_readback_signal
-    object: inst:bta-qf14-ps:currentM
-  - id: inst:QH14.current_range_binding
-    subject: inst:QH14
-    predicate: pals:has_limit_signal
-    object: inst:bta-qf14-ps:rangeC
-  - id: inst:QH14.magnet_status_binding
-    subject: inst:QH14
-    predicate: pals:has_signal
-    object: inst:bta-qf14-ps:stateS
-  - id: inst:DH5T.current_setpoint_binding
-    subject: inst:DH5T
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-th5-ps:setpointS
-  - id: inst:DH5T.current_readback_binding
-    subject: inst:DH5T
-    predicate: pals:has_readback_signal
-    object: inst:bta-th5-ps:currentM
-  - id: inst:DH5T.current_range_binding
-    subject: inst:DH5T
-    predicate: pals:has_limit_signal
-    object: inst:bta-th5-ps:rangeC
-  - id: inst:DH5T.magnet_status_binding
-    subject: inst:DH5T
-    predicate: pals:has_signal
-    object: inst:bta-th5-ps:stateS
-  - id: inst:DV181.current_setpoint_binding
-    subject: inst:DV181
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-tv181-ps:setpointS
-  - id: inst:DV181.current_readback_binding
-    subject: inst:DV181
-    predicate: pals:has_readback_signal
-    object: inst:bta-tv181-ps:currentM
-  - id: inst:DV181.current_range_binding
-    subject: inst:DV181
-    predicate: pals:has_limit_signal
-    object: inst:bta-tv181-ps:rangeC
-  - id: inst:DV181.magnet_status_binding
-    subject: inst:DV181
-    predicate: pals:has_signal
-    object: inst:bta-tv181-ps:stateS
-  - id: inst:QV15.current_setpoint_binding
-    subject: inst:QV15
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-qd15-ps:setpointS
-  - id: inst:QV15.current_readback_binding
-    subject: inst:QV15
-    predicate: pals:has_readback_signal
-    object: inst:bta-qd15-ps:currentM
-  - id: inst:QV15.current_range_binding
-    subject: inst:QV15
-    predicate: pals:has_limit_signal
-    object: inst:bta-qd15-ps:rangeC
-  - id: inst:QV15.magnet_status_binding
-    subject: inst:QV15
-    predicate: pals:has_signal
-    object: inst:bta-qd15-ps:stateS
-  - id: inst:MWA15.horizontal_profile_binding
-    subject: inst:MWA15
-    predicate: pals:has_readback_signal
-    object: inst:adrA15MWCntl:horInDataM
-  - id: inst:MWA15.vertical_profile_binding
-    subject: inst:MWA15
-    predicate: pals:has_readback_signal
-    object: inst:adrA15MWCntl:verInDataM
-  - id: inst:MWA15.insertion_status_binding
-    subject: inst:MWA15
-    predicate: pals:has_signal
-    object: inst:adrA15MWCntl:harpIsM
+  - id: MW006.horizontal_profile_binding
+    subject: MW006
+    predicate: HasReadbackSignal
+    object: btaMW006Cntl:horInDataM
+  - id: MW006.vertical_profile_binding
+    subject: MW006
+    predicate: HasReadbackSignal
+    object: btaMW006Cntl:verInDataM
+  - id: MW006.insertion_status_binding
+    subject: MW006
+    predicate: HasSignal
+    object: btaMW006Cntl:harpIsM
+  - id: DV007.current_setpoint_binding
+    subject: DV007
+    predicate: HasSetpointSignal
+    object: bta-tv7-ps:setpointS
+  - id: DV007.current_readback_binding
+    subject: DV007
+    predicate: HasReadbackSignal
+    object: bta-tv7-ps:currentM
+  - id: DV007.current_range_binding
+    subject: DV007
+    predicate: HasLimitSignal
+    object: bta-tv7-ps:rangeC
+  - id: DV007.magnet_status_binding
+    subject: DV007
+    predicate: HasSignal
+    object: bta-tv7-ps:stateS
+  - id: QV1.current_setpoint_binding
+    subject: QV1
+    predicate: HasSetpointSignal
+    object: bta-qd1-ps:setpointS
+  - id: QV1.current_readback_binding
+    subject: QV1
+    predicate: HasReadbackSignal
+    object: bta-qd1-ps:currentM
+  - id: QV1.current_range_binding
+    subject: QV1
+    predicate: HasLimitSignal
+    object: bta-qd1-ps:rangeC
+  - id: QV1.magnet_status_binding
+    subject: QV1
+    predicate: HasSignal
+    object: bta-qd1-ps:stateS
+  - id: DH1T.current_setpoint_binding
+    subject: DH1T
+    predicate: HasSetpointSignal
+    object: bta-th1-ps:setpointS
+  - id: DH1T.current_readback_binding
+    subject: DH1T
+    predicate: HasReadbackSignal
+    object: bta-th1-ps:currentM
+  - id: DH1T.current_range_binding
+    subject: DH1T
+    predicate: HasLimitSignal
+    object: bta-th1-ps:rangeC
+  - id: DH1T.magnet_status_binding
+    subject: DH1T
+    predicate: HasSignal
+    object: bta-th1-ps:stateS
+  - id: QH2A.current_setpoint_binding
+    subject: QH2A
+    predicate: HasSetpointSignal
+    object: bta-qf2-ps:setpointS
+  - id: QH2A.current_readback_binding
+    subject: QH2A
+    predicate: HasReadbackSignal
+    object: bta-qf2-ps:currentM
+  - id: QH2A.current_range_binding
+    subject: QH2A
+    predicate: HasLimitSignal
+    object: bta-qf2-ps:rangeC
+  - id: QH2A.magnet_status_binding
+    subject: QH2A
+    predicate: HasSignal
+    object: bta-qf2-ps:stateS
+  - id: QH2B.current_setpoint_binding
+    subject: QH2B
+    predicate: HasSetpointSignal
+    object: bta-qf2-ps:setpointS
+  - id: QH2B.current_readback_binding
+    subject: QH2B
+    predicate: HasReadbackSignal
+    object: bta-qf2-ps:currentM
+  - id: QH2B.current_range_binding
+    subject: QH2B
+    predicate: HasLimitSignal
+    object: bta-qf2-ps:rangeC
+  - id: QH2B.magnet_status_binding
+    subject: QH2B
+    predicate: HasSignal
+    object: bta-qf2-ps:stateS
+  - id: QV3.current_setpoint_binding
+    subject: QV3
+    predicate: HasSetpointSignal
+    object: bta-qd3-ps:setpointS
+  - id: QV3.current_readback_binding
+    subject: QV3
+    predicate: HasReadbackSignal
+    object: bta-qd3-ps:currentM
+  - id: QV3.current_range_binding
+    subject: QV3
+    predicate: HasLimitSignal
+    object: bta-qd3-ps:rangeC
+  - id: QV3.magnet_status_binding
+    subject: QV3
+    predicate: HasSignal
+    object: bta-qd3-ps:stateS
+  - id: DV030.current_setpoint_binding
+    subject: DV030
+    predicate: HasSetpointSignal
+    object: bta-tv30-ps:setpointS
+  - id: DV030.current_readback_binding
+    subject: DV030
+    predicate: HasReadbackSignal
+    object: bta-tv30-ps:currentM
+  - id: DV030.current_range_binding
+    subject: DV030
+    predicate: HasLimitSignal
+    object: bta-tv30-ps:rangeC
+  - id: DV030.magnet_status_binding
+    subject: DV030
+    predicate: HasSignal
+    object: bta-tv30-ps:stateS
+  - id: QH4.current_setpoint_binding
+    subject: QH4
+    predicate: HasSetpointSignal
+    object: bta-qf4-ps:setpointS
+  - id: QH4.current_readback_binding
+    subject: QH4
+    predicate: HasReadbackSignal
+    object: bta-qf4-ps:currentM
+  - id: QH4.current_range_binding
+    subject: QH4
+    predicate: HasLimitSignal
+    object: bta-qf4-ps:rangeC
+  - id: QH4.magnet_status_binding
+    subject: QH4
+    predicate: HasSignal
+    object: bta-qf4-ps:stateS
+  - id: QV5.current_setpoint_binding
+    subject: QV5
+    predicate: HasSetpointSignal
+    object: bta-qd5-ps:setpointS
+  - id: QV5.current_readback_binding
+    subject: QV5
+    predicate: HasReadbackSignal
+    object: bta-qd5-ps:currentM
+  - id: QV5.current_range_binding
+    subject: QV5
+    predicate: HasLimitSignal
+    object: bta-qd5-ps:rangeC
+  - id: QV5.magnet_status_binding
+    subject: QV5
+    predicate: HasSignal
+    object: bta-qd5-ps:stateS
+  - id: DH23T.current_setpoint_binding
+    subject: DH23T
+    predicate: HasSetpointSignal
+    object: bta-th23-ps:setpointS
+  - id: DH23T.current_readback_binding
+    subject: DH23T
+    predicate: HasReadbackSignal
+    object: bta-th23-ps:currentM
+  - id: DH23T.current_range_binding
+    subject: DH23T
+    predicate: HasLimitSignal
+    object: bta-th23-ps:rangeC
+  - id: DH23T.magnet_status_binding
+    subject: DH23T
+    predicate: HasSignal
+    object: bta-th23-ps:stateS
+  - id: QH6.current_setpoint_binding
+    subject: QH6
+    predicate: HasSetpointSignal
+    object: bta-qf6-ps:setpointS
+  - id: QH6.current_readback_binding
+    subject: QH6
+    predicate: HasReadbackSignal
+    object: bta-qf6-ps:currentM
+  - id: QH6.current_range_binding
+    subject: QH6
+    predicate: HasLimitSignal
+    object: bta-qf6-ps:rangeC
+  - id: QH6.magnet_status_binding
+    subject: QH6
+    predicate: HasSignal
+    object: bta-qf6-ps:stateS
+  - id: MW060.horizontal_profile_binding
+    subject: MW060
+    predicate: HasReadbackSignal
+    object: btaMW060Cntl:horInDataM
+  - id: MW060.vertical_profile_binding
+    subject: MW060
+    predicate: HasReadbackSignal
+    object: btaMW060Cntl:verInDataM
+  - id: MW060.insertion_status_binding
+    subject: MW060
+    predicate: HasSignal
+    object: btaMW060Cntl:harpIsM
+  - id: QV7.current_setpoint_binding
+    subject: QV7
+    predicate: HasSetpointSignal
+    object: bta-qd7-ps:setpointS
+  - id: QV7.current_readback_binding
+    subject: QV7
+    predicate: HasReadbackSignal
+    object: bta-qd7-ps:currentM
+  - id: QV7.current_range_binding
+    subject: QV7
+    predicate: HasLimitSignal
+    object: bta-qd7-ps:rangeC
+  - id: QV7.magnet_status_binding
+    subject: QV7
+    predicate: HasSignal
+    object: bta-qd7-ps:stateS
+  - id: QH8.current_setpoint_binding
+    subject: QH8
+    predicate: HasSetpointSignal
+    object: bta-qf8-ps:setpointS
+  - id: QH8.current_readback_binding
+    subject: QH8
+    predicate: HasReadbackSignal
+    object: bta-qf8-ps:currentM
+  - id: QH8.current_range_binding
+    subject: QH8
+    predicate: HasLimitSignal
+    object: bta-qf8-ps:rangeC
+  - id: QH8.magnet_status_binding
+    subject: QH8
+    predicate: HasSignal
+    object: bta-qf8-ps:stateS
+  - id: DH4T.current_setpoint_binding
+    subject: DH4T
+    predicate: HasSetpointSignal
+    object: bta-th4-ps:setpointS
+  - id: DH4T.current_readback_binding
+    subject: DH4T
+    predicate: HasReadbackSignal
+    object: bta-th4-ps:currentM
+  - id: DH4T.current_range_binding
+    subject: DH4T
+    predicate: HasLimitSignal
+    object: bta-th4-ps:rangeC
+  - id: DH4T.magnet_status_binding
+    subject: DH4T
+    predicate: HasSignal
+    object: bta-th4-ps:stateS
+  - id: QV9.current_setpoint_binding
+    subject: QV9
+    predicate: HasSetpointSignal
+    object: bta-qd9-ps:setpointS
+  - id: QV9.current_readback_binding
+    subject: QV9
+    predicate: HasReadbackSignal
+    object: bta-qd9-ps:currentM
+  - id: QV9.current_range_binding
+    subject: QV9
+    predicate: HasLimitSignal
+    object: bta-qd9-ps:rangeC
+  - id: QV9.magnet_status_binding
+    subject: QV9
+    predicate: HasSignal
+    object: bta-qd9-ps:stateS
+  - id: DV120.current_setpoint_binding
+    subject: DV120
+    predicate: HasSetpointSignal
+    object: bta-tv120-ps:setpointS
+  - id: DV120.current_readback_binding
+    subject: DV120
+    predicate: HasReadbackSignal
+    object: bta-tv120-ps:currentM
+  - id: DV120.current_range_binding
+    subject: DV120
+    predicate: HasLimitSignal
+    object: bta-tv120-ps:rangeC
+  - id: DV120.magnet_status_binding
+    subject: DV120
+    predicate: HasSignal
+    object: bta-tv120-ps:stateS
+  - id: QH10.current_setpoint_binding
+    subject: QH10
+    predicate: HasSetpointSignal
+    object: bta-qf10-ps:setpointS
+  - id: QH10.current_readback_binding
+    subject: QH10
+    predicate: HasReadbackSignal
+    object: bta-qf10-ps:currentM
+  - id: QH10.current_range_binding
+    subject: QH10
+    predicate: HasLimitSignal
+    object: bta-qf10-ps:rangeC
+  - id: QH10.magnet_status_binding
+    subject: QH10
+    predicate: HasSignal
+    object: bta-qf10-ps:stateS
+  - id: MW125.horizontal_profile_binding
+    subject: MW125
+    predicate: HasReadbackSignal
+    object: btaMW125Cntl:horInDataM
+  - id: MW125.vertical_profile_binding
+    subject: MW125
+    predicate: HasReadbackSignal
+    object: btaMW125Cntl:verInDataM
+  - id: MW125.insertion_status_binding
+    subject: MW125
+    predicate: HasSignal
+    object: btaMW125Cntl:harpIsM
+  - id: DH127.current_setpoint_binding
+    subject: DH127
+    predicate: HasSetpointSignal
+    object: bta-th127-ps:setpointS
+  - id: DH127.current_readback_binding
+    subject: DH127
+    predicate: HasReadbackSignal
+    object: bta-th127-ps:currentM
+  - id: DH127.current_range_binding
+    subject: DH127
+    predicate: HasLimitSignal
+    object: bta-th127-ps:rangeC
+  - id: DH127.magnet_status_binding
+    subject: DH127
+    predicate: HasSignal
+    object: bta-th127-ps:stateS
+  - id: QV11.current_setpoint_binding
+    subject: QV11
+    predicate: HasSetpointSignal
+    object: bta-qd11-ps:setpointS
+  - id: QV11.current_readback_binding
+    subject: QV11
+    predicate: HasReadbackSignal
+    object: bta-qd11-ps:currentM
+  - id: QV11.current_range_binding
+    subject: QV11
+    predicate: HasLimitSignal
+    object: bta-qd11-ps:rangeC
+  - id: QV11.magnet_status_binding
+    subject: QV11
+    predicate: HasSignal
+    object: bta-qd11-ps:stateS
+  - id: QH12.current_setpoint_binding
+    subject: QH12
+    predicate: HasSetpointSignal
+    object: bta-qf12-ps:setpointS
+  - id: QH12.current_readback_binding
+    subject: QH12
+    predicate: HasReadbackSignal
+    object: bta-qf12-ps:currentM
+  - id: QH12.current_range_binding
+    subject: QH12
+    predicate: HasLimitSignal
+    object: bta-qf12-ps:rangeC
+  - id: QH12.magnet_status_binding
+    subject: QH12
+    predicate: HasSignal
+    object: bta-qf12-ps:stateS
+  - id: DH158.current_setpoint_binding
+    subject: DH158
+    predicate: HasSetpointSignal
+    object: bta-th158-ps:setpointS
+  - id: DH158.current_readback_binding
+    subject: DH158
+    predicate: HasReadbackSignal
+    object: bta-th158-ps:currentM
+  - id: DH158.current_range_binding
+    subject: DH158
+    predicate: HasLimitSignal
+    object: bta-th158-ps:rangeC
+  - id: DH158.magnet_status_binding
+    subject: DH158
+    predicate: HasSignal
+    object: bta-th158-ps:stateS
+  - id: QV13.current_setpoint_binding
+    subject: QV13
+    predicate: HasSetpointSignal
+    object: bta-qd13-ps:setpointS
+  - id: QV13.current_readback_binding
+    subject: QV13
+    predicate: HasReadbackSignal
+    object: bta-qd13-ps:currentM
+  - id: QV13.current_range_binding
+    subject: QV13
+    predicate: HasLimitSignal
+    object: bta-qd13-ps:rangeC
+  - id: QV13.magnet_status_binding
+    subject: QV13
+    predicate: HasSignal
+    object: bta-qd13-ps:stateS
+  - id: MW166.horizontal_profile_binding
+    subject: MW166
+    predicate: HasReadbackSignal
+    object: btaMW166Cntl:horInDataM
+  - id: MW166.vertical_profile_binding
+    subject: MW166
+    predicate: HasReadbackSignal
+    object: btaMW166Cntl:verInDataM
+  - id: MW166.insertion_status_binding
+    subject: MW166
+    predicate: HasSignal
+    object: btaMW166Cntl:harpIsM
+  - id: QH14.current_setpoint_binding
+    subject: QH14
+    predicate: HasSetpointSignal
+    object: bta-qf14-ps:setpointS
+  - id: QH14.current_readback_binding
+    subject: QH14
+    predicate: HasReadbackSignal
+    object: bta-qf14-ps:currentM
+  - id: QH14.current_range_binding
+    subject: QH14
+    predicate: HasLimitSignal
+    object: bta-qf14-ps:rangeC
+  - id: QH14.magnet_status_binding
+    subject: QH14
+    predicate: HasSignal
+    object: bta-qf14-ps:stateS
+  - id: DH5T.current_setpoint_binding
+    subject: DH5T
+    predicate: HasSetpointSignal
+    object: bta-th5-ps:setpointS
+  - id: DH5T.current_readback_binding
+    subject: DH5T
+    predicate: HasReadbackSignal
+    object: bta-th5-ps:currentM
+  - id: DH5T.current_range_binding
+    subject: DH5T
+    predicate: HasLimitSignal
+    object: bta-th5-ps:rangeC
+  - id: DH5T.magnet_status_binding
+    subject: DH5T
+    predicate: HasSignal
+    object: bta-th5-ps:stateS
+  - id: DV181.current_setpoint_binding
+    subject: DV181
+    predicate: HasSetpointSignal
+    object: bta-tv181-ps:setpointS
+  - id: DV181.current_readback_binding
+    subject: DV181
+    predicate: HasReadbackSignal
+    object: bta-tv181-ps:currentM
+  - id: DV181.current_range_binding
+    subject: DV181
+    predicate: HasLimitSignal
+    object: bta-tv181-ps:rangeC
+  - id: DV181.magnet_status_binding
+    subject: DV181
+    predicate: HasSignal
+    object: bta-tv181-ps:stateS
+  - id: QV15.current_setpoint_binding
+    subject: QV15
+    predicate: HasSetpointSignal
+    object: bta-qd15-ps:setpointS
+  - id: QV15.current_readback_binding
+    subject: QV15
+    predicate: HasReadbackSignal
+    object: bta-qd15-ps:currentM
+  - id: QV15.current_range_binding
+    subject: QV15
+    predicate: HasLimitSignal
+    object: bta-qd15-ps:rangeC
+  - id: QV15.magnet_status_binding
+    subject: QV15
+    predicate: HasSignal
+    object: bta-qd15-ps:stateS
+  - id: MWA15.horizontal_profile_binding
+    subject: MWA15
+    predicate: HasReadbackSignal
+    object: adrA15MWCntl:horInDataM
+  - id: MWA15.vertical_profile_binding
+    subject: MWA15
+    predicate: HasReadbackSignal
+    object: adrA15MWCntl:verInDataM
+  - id: MWA15.insertion_status_binding
+    subject: MWA15
+    predicate: HasSignal
+    object: adrA15MWCntl:harpIsM
   component_relations:
-  - id: inst:BEGINNING_B1_PRECEDES_BTASTART
-    subject: inst:BEGINNING_B1
-    predicate: pals:precedes
-    object: inst:BTASTART
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:BTASTART_PRECEDES_DHF6A
-    subject: inst:BTASTART
-    predicate: pals:precedes
-    object: inst:DHF6A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DHF6A_PRECEDES_DHF6T
-    subject: inst:DHF6A
-    predicate: pals:precedes
-    object: inst:DHF6T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DHF6T_PRECEDES_DRF6A
-    subject: inst:DHF6T
-    predicate: pals:precedes
-    object: inst:DRF6A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRF6A_PRECEDES_DHF6B
-    subject: inst:DRF6A
-    predicate: pals:precedes
-    object: inst:DHF6B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DHF6B_PRECEDES_DRF6B
-    subject: inst:DHF6B
-    predicate: pals:precedes
-    object: inst:DRF6B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRF6B_PRECEDES_PUEH001
-    subject: inst:DRF6B
-    predicate: pals:precedes
-    object: inst:PUEH001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUEH001_PRECEDES_DR001
-    subject: inst:PUEH001
-    predicate: pals:precedes
-    object: inst:DR001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR001_PRECEDES_MW006
-    subject: inst:DR001
-    predicate: pals:precedes
-    object: inst:MW006
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MW006_PRECEDES_DR006
-    subject: inst:MW006
-    predicate: pals:precedes
-    object: inst:DR006
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR006_PRECEDES_DV007
-    subject: inst:DR006
-    predicate: pals:precedes
-    object: inst:DV007
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DV007_PRECEDES_DR007
-    subject: inst:DV007
-    predicate: pals:precedes
-    object: inst:DR007
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR007_PRECEDES_QV1
-    subject: inst:DR007
-    predicate: pals:precedes
-    object: inst:QV1
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QV1_PRECEDES_DRQ1
-    subject: inst:QV1
-    predicate: pals:precedes
-    object: inst:DRQ1
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ1_PRECEDES_DH1A
-    subject: inst:DRQ1
-    predicate: pals:precedes
-    object: inst:DH1A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH1A_PRECEDES_DH1T
-    subject: inst:DH1A
-    predicate: pals:precedes
-    object: inst:DH1T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH1T_PRECEDES_DH1B
-    subject: inst:DH1T
-    predicate: pals:precedes
-    object: inst:DH1B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH1B_PRECEDES_DRD1
-    subject: inst:DH1B
-    predicate: pals:precedes
-    object: inst:DRD1
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRD1_PRECEDES_QH2A
-    subject: inst:DRD1
-    predicate: pals:precedes
-    object: inst:QH2A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QH2A_PRECEDES_DRQ2A
-    subject: inst:QH2A
-    predicate: pals:precedes
-    object: inst:DRQ2A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ2A_PRECEDES_QH2B
-    subject: inst:DRQ2A
-    predicate: pals:precedes
-    object: inst:QH2B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QH2B_PRECEDES_DRQ2B
-    subject: inst:QH2B
-    predicate: pals:precedes
-    object: inst:DRQ2B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ2B_PRECEDES_XF019
-    subject: inst:DRQ2B
-    predicate: pals:precedes
-    object: inst:XF019
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:XF019_PRECEDES_DR019
-    subject: inst:XF019
-    predicate: pals:precedes
-    object: inst:DR019
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR019_PRECEDES_QV3
-    subject: inst:DR019
-    predicate: pals:precedes
-    object: inst:QV3
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QV3_PRECEDES_DRQ3
-    subject: inst:QV3
-    predicate: pals:precedes
-    object: inst:DRQ3
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ3_PRECEDES_FOIL024
-    subject: inst:DRQ3
-    predicate: pals:precedes
-    object: inst:FOIL024
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:FOIL024_PRECEDES_DR024A
-    subject: inst:FOIL024
-    predicate: pals:precedes
-    object: inst:DR024A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR024A_PRECEDES_DV030
-    subject: inst:DR024A
-    predicate: pals:precedes
-    object: inst:DV030
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DV030_PRECEDES_DR024B
-    subject: inst:DV030
-    predicate: pals:precedes
-    object: inst:DR024B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR024B_PRECEDES_QH4
-    subject: inst:DR024B
-    predicate: pals:precedes
-    object: inst:QH4
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QH4_PRECEDES_DRQ4
-    subject: inst:QH4
-    predicate: pals:precedes
-    object: inst:DRQ4
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ4_PRECEDES_DH2
-    subject: inst:DRQ4
-    predicate: pals:precedes
-    object: inst:DH2
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH2_PRECEDES_DRD2
-    subject: inst:DH2
-    predicate: pals:precedes
-    object: inst:DRD2
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRD2_PRECEDES_QV5
-    subject: inst:DRD2
-    predicate: pals:precedes
-    object: inst:QV5
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QV5_PRECEDES_DH23T
-    subject: inst:QV5
-    predicate: pals:precedes
-    object: inst:DH23T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH23T_PRECEDES_DRQ5
-    subject: inst:DH23T
-    predicate: pals:precedes
-    object: inst:DRQ5
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ5_PRECEDES_PUEV046
-    subject: inst:DRQ5
-    predicate: pals:precedes
-    object: inst:PUEV046
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUEV046_PRECEDES_DR046
-    subject: inst:PUEV046
-    predicate: pals:precedes
-    object: inst:DR046
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR046_PRECEDES_DH3
-    subject: inst:DR046
-    predicate: pals:precedes
-    object: inst:DH3
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH3_PRECEDES_DRD3
-    subject: inst:DH3
-    predicate: pals:precedes
-    object: inst:DRD3
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRD3_PRECEDES_QH6
-    subject: inst:DRD3
-    predicate: pals:precedes
-    object: inst:QH6
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QH6_PRECEDES_DRQ6
-    subject: inst:QH6
-    predicate: pals:precedes
-    object: inst:DRQ6
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ6_PRECEDES_XF059
-    subject: inst:DRQ6
-    predicate: pals:precedes
-    object: inst:XF059
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:XF059_PRECEDES_DR059
-    subject: inst:XF059
-    predicate: pals:precedes
-    object: inst:DR059
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR059_PRECEDES_MW060
-    subject: inst:DR059
-    predicate: pals:precedes
-    object: inst:MW060
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MW060_PRECEDES_DR060
-    subject: inst:MW060
-    predicate: pals:precedes
-    object: inst:DR060
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR060_PRECEDES_QV7
-    subject: inst:DR060
-    predicate: pals:precedes
-    object: inst:QV7
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QV7_PRECEDES_DRQ7Y
-    subject: inst:QV7
-    predicate: pals:precedes
-    object: inst:DRQ7Y
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ7Y_PRECEDES_MK077
-    subject: inst:DRQ7Y
-    predicate: pals:precedes
-    object: inst:MK077
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MK077_PRECEDES_DRQ7Z
-    subject: inst:MK077
-    predicate: pals:precedes
-    object: inst:DRQ7Z
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ7Z_PRECEDES_QH8
-    subject: inst:DRQ7Z
-    predicate: pals:precedes
-    object: inst:QH8
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QH8_PRECEDES_DRQ8
-    subject: inst:QH8
-    predicate: pals:precedes
-    object: inst:DRQ8
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ8_PRECEDES_DH4A
-    subject: inst:DRQ8
-    predicate: pals:precedes
-    object: inst:DH4A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH4A_PRECEDES_DH4T
-    subject: inst:DH4A
-    predicate: pals:precedes
-    object: inst:DH4T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH4T_PRECEDES_DH4B
-    subject: inst:DH4T
-    predicate: pals:precedes
-    object: inst:DH4B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH4B_PRECEDES_DRD4
-    subject: inst:DH4B
-    predicate: pals:precedes
-    object: inst:DRD4
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRD4_PRECEDES_QV9
-    subject: inst:DRD4
-    predicate: pals:precedes
-    object: inst:QV9
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QV9_PRECEDES_DRQ9A
-    subject: inst:QV9
-    predicate: pals:precedes
-    object: inst:DRQ9A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ9A_PRECEDES_DV120
-    subject: inst:DRQ9A
-    predicate: pals:precedes
-    object: inst:DV120
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DV120_PRECEDES_DRQ9B
-    subject: inst:DV120
-    predicate: pals:precedes
-    object: inst:DRQ9B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ9B_PRECEDES_QH10
-    subject: inst:DRQ9B
-    predicate: pals:precedes
-    object: inst:QH10
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QH10_PRECEDES_DRQ10
-    subject: inst:QH10
-    predicate: pals:precedes
-    object: inst:DRQ10
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ10_PRECEDES_MW125
-    subject: inst:DRQ10
-    predicate: pals:precedes
-    object: inst:MW125
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MW125_PRECEDES_DR125
-    subject: inst:MW125
-    predicate: pals:precedes
-    object: inst:DR125
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR125_PRECEDES_DH127
-    subject: inst:DR125
-    predicate: pals:precedes
-    object: inst:DH127
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH127_PRECEDES_DR127
-    subject: inst:DH127
-    predicate: pals:precedes
-    object: inst:DR127
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR127_PRECEDES_PUEV129
-    subject: inst:DR127
-    predicate: pals:precedes
-    object: inst:PUEV129
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUEV129_PRECEDES_DR129
-    subject: inst:PUEV129
-    predicate: pals:precedes
-    object: inst:DR129
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR129_PRECEDES_QV11
-    subject: inst:DR129
-    predicate: pals:precedes
-    object: inst:QV11
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QV11_PRECEDES_DRQ11
-    subject: inst:QV11
-    predicate: pals:precedes
-    object: inst:DRQ11
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ11_PRECEDES_MK139
-    subject: inst:DRQ11
-    predicate: pals:precedes
-    object: inst:MK139
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MK139_PRECEDES_DR139
-    subject: inst:MK139
-    predicate: pals:precedes
-    object: inst:DR139
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR139_PRECEDES_DR141
-    subject: inst:DR139
-    predicate: pals:precedes
-    object: inst:DR141
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR141_PRECEDES_PUEH143
-    subject: inst:DR141
-    predicate: pals:precedes
-    object: inst:PUEH143
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUEH143_PRECEDES_DR143
-    subject: inst:PUEH143
-    predicate: pals:precedes
-    object: inst:DR143
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR143_PRECEDES_QH12
-    subject: inst:DR143
-    predicate: pals:precedes
-    object: inst:QH12
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QH12_PRECEDES_DRQ12
-    subject: inst:QH12
-    predicate: pals:precedes
-    object: inst:DRQ12
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ12_PRECEDES_MK156
-    subject: inst:DRQ12
-    predicate: pals:precedes
-    object: inst:MK156
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MK156_PRECEDES_DR156
-    subject: inst:MK156
-    predicate: pals:precedes
-    object: inst:DR156
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR156_PRECEDES_DH158
-    subject: inst:DR156
-    predicate: pals:precedes
-    object: inst:DH158
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH158_PRECEDES_DR158
-    subject: inst:DH158
-    predicate: pals:precedes
-    object: inst:DR158
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR158_PRECEDES_PUEV160
-    subject: inst:DR158
-    predicate: pals:precedes
-    object: inst:PUEV160
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUEV160_PRECEDES_DR160
-    subject: inst:PUEV160
-    predicate: pals:precedes
-    object: inst:DR160
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR160_PRECEDES_QV13
-    subject: inst:DR160
-    predicate: pals:precedes
-    object: inst:QV13
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QV13_PRECEDES_DRQ13
-    subject: inst:QV13
-    predicate: pals:precedes
-    object: inst:DRQ13
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ13_PRECEDES_MW166
-    subject: inst:DRQ13
-    predicate: pals:precedes
-    object: inst:MW166
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MW166_PRECEDES_DR166
-    subject: inst:MW166
-    predicate: pals:precedes
-    object: inst:DR166
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR166_PRECEDES_DR168
-    subject: inst:DR166
-    predicate: pals:precedes
-    object: inst:DR168
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR168_PRECEDES_PUEH170
-    subject: inst:DR168
-    predicate: pals:precedes
-    object: inst:PUEH170
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUEH170_PRECEDES_DR170
-    subject: inst:PUEH170
-    predicate: pals:precedes
-    object: inst:DR170
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR170_PRECEDES_QH14
-    subject: inst:DR170
-    predicate: pals:precedes
-    object: inst:QH14
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QH14_PRECEDES_DRQ14
-    subject: inst:QH14
-    predicate: pals:precedes
-    object: inst:DRQ14
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRQ14_PRECEDES_DH5A
-    subject: inst:DRQ14
-    predicate: pals:precedes
-    object: inst:DH5A
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH5A_PRECEDES_DH5T
-    subject: inst:DH5A
-    predicate: pals:precedes
-    object: inst:DH5T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH5T_PRECEDES_DH5B
-    subject: inst:DH5T
-    predicate: pals:precedes
-    object: inst:DH5B
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DH5B_PRECEDES_DRD5
-    subject: inst:DH5B
-    predicate: pals:precedes
-    object: inst:DRD5
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DRD5_PRECEDES_DV181
-    subject: inst:DRD5
-    predicate: pals:precedes
-    object: inst:DV181
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DV181_PRECEDES_DR181
-    subject: inst:DV181
-    predicate: pals:precedes
-    object: inst:DR181
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR181_PRECEDES_XF183
-    subject: inst:DR181
-    predicate: pals:precedes
-    object: inst:XF183
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:XF183_PRECEDES_DR183
-    subject: inst:XF183
-    predicate: pals:precedes
-    object: inst:DR183
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DR183_PRECEDES_QV15
-    subject: inst:DR183
-    predicate: pals:precedes
-    object: inst:QV15
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QV15_PRECEDES_M1
-    subject: inst:QV15
-    predicate: pals:precedes
-    object: inst:M1
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:M1_PRECEDES_L20SPTM1
-    subject: inst:M1
-    predicate: pals:precedes
-    object: inst:L20SPTM1
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:L20SPTM1_PRECEDES_DHL20T
-    subject: inst:L20SPTM1
-    predicate: pals:precedes
-    object: inst:DHL20T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DHL20T_PRECEDES_L20SPTM2
-    subject: inst:DHL20T
-    predicate: pals:precedes
-    object: inst:L20SPTM2
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:L20SPTM2_PRECEDES_MM_A01BF
-    subject: inst:L20SPTM2
-    predicate: pals:precedes
-    object: inst:MM_A01BF
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A01BF_PRECEDES_D2S_001
-    subject: inst:MM_A01BF
-    predicate: pals:precedes
-    object: inst:D2S_001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2S_001_PRECEDES_MM_A02BF
-    subject: inst:D2S_001
-    predicate: pals:precedes
-    object: inst:MM_A02BF
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A02BF_PRECEDES_DPUE_001
-    subject: inst:MM_A02BF
-    predicate: pals:precedes
-    object: inst:DPUE_001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_001_PRECEDES_PUE_A02
-    subject: inst:DPUE_001
-    predicate: pals:precedes
-    object: inst:PUE_A02
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A02_PRECEDES_DHCA02
-    subject: inst:PUE_A02
-    predicate: pals:precedes
-    object: inst:DHCA02
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DHCA02_PRECEDES_DVCA02
-    subject: inst:DHCA02
-    predicate: pals:precedes
-    object: inst:DVCA02
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DVCA02_PRECEDES_D2TX_001
-    subject: inst:DVCA02
-    predicate: pals:precedes
-    object: inst:D2TX_001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2TX_001_PRECEDES_MM_A03CD
-    subject: inst:D2TX_001
-    predicate: pals:precedes
-    object: inst:MM_A03CD
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A03CD_PRECEDES_DSQ_001
-    subject: inst:MM_A03CD
-    predicate: pals:precedes
-    object: inst:DSQ_001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DSQ_001_PRECEDES_QHFV
-    subject: inst:DSQ_001
-    predicate: pals:precedes
-    object: inst:QHFV
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QHFV_PRECEDES_QPOL
-    subject: inst:QHFV
-    predicate: pals:precedes
-    object: inst:QPOL
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:QPOL_PRECEDES_DSQ_002
-    subject: inst:QPOL
-    predicate: pals:precedes
-    object: inst:DSQ_002
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DSQ_002_PRECEDES_MM_A04CD
-    subject: inst:DSQ_002
-    predicate: pals:precedes
-    object: inst:MM_A04CD
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A04CD_PRECEDES_DPUE_002
-    subject: inst:MM_A04CD
-    predicate: pals:precedes
-    object: inst:DPUE_002
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_002_PRECEDES_PUE_A04
-    subject: inst:DPUE_002
-    predicate: pals:precedes
-    object: inst:PUE_A04
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A04_PRECEDES_D2LX_001
-    subject: inst:PUE_A04
-    predicate: pals:precedes
-    object: inst:D2LX_001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2LX_001_PRECEDES_MM_A05AF
-    subject: inst:D2LX_001
-    predicate: pals:precedes
-    object: inst:MM_A05AF
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A05AF_PRECEDES_D2H_A05_001
-    subject: inst:MM_A05AF
-    predicate: pals:precedes
-    object: inst:D2H_A05_001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2H_A05_001_PRECEDES_KCKRA05
-    subject: inst:D2H_A05_001
-    predicate: pals:precedes
-    object: inst:KCKRA05
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:KCKRA05_PRECEDES_D2H_A05_002
-    subject: inst:KCKRA05
-    predicate: pals:precedes
-    object: inst:D2H_A05_002
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2H_A05_002_PRECEDES_MM_A06AF
-    subject: inst:D2H_A05_002
-    predicate: pals:precedes
-    object: inst:MM_A06AF
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A06AF_PRECEDES_D2L
-    subject: inst:MM_A06AF
-    predicate: pals:precedes
-    object: inst:D2L
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2L_PRECEDES_MM_A07CD
-    subject: inst:D2L
-    predicate: pals:precedes
-    object: inst:MM_A07CD
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A07CD_PRECEDES_DSS_001
-    subject: inst:MM_A07CD
-    predicate: pals:precedes
-    object: inst:DSS_001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DSS_001_PRECEDES_SXV
-    subject: inst:DSS_001
-    predicate: pals:precedes
-    object: inst:SXV
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:SXV_PRECEDES_DSS_002
-    subject: inst:SXV
-    predicate: pals:precedes
-    object: inst:DSS_002
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DSS_002_PRECEDES_MM_A08CD
-    subject: inst:DSS_002
-    predicate: pals:precedes
-    object: inst:MM_A08CD
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A08CD_PRECEDES_DPUE_003
-    subject: inst:MM_A08CD
-    predicate: pals:precedes
-    object: inst:DPUE_003
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_003_PRECEDES_PUE_A08
-    subject: inst:DPUE_003
-    predicate: pals:precedes
-    object: inst:PUE_A08
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A08_PRECEDES_DHCA08
-    subject: inst:PUE_A08
-    predicate: pals:precedes
-    object: inst:DHCA08
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DHCA08_PRECEDES_DVCA08
-    subject: inst:DHCA08
-    predicate: pals:precedes
-    object: inst:DVCA08
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DVCA08_PRECEDES_D2TX_002
-    subject: inst:DVCA08
-    predicate: pals:precedes
-    object: inst:D2TX_002
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2TX_002_PRECEDES_MM_A09BF
-    subject: inst:D2TX_002
-    predicate: pals:precedes
-    object: inst:MM_A09BF
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A09BF_PRECEDES_D2S_002
-    subject: inst:MM_A09BF
-    predicate: pals:precedes
-    object: inst:D2S_002
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2S_002_PRECEDES_MM_A10BF
-    subject: inst:D2S_002
-    predicate: pals:precedes
-    object: inst:MM_A10BF
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A10BF_PRECEDES_D10_001
-    subject: inst:MM_A10BF
-    predicate: pals:precedes
-    object: inst:D10_001
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D10_001_PRECEDES_D10_002
-    subject: inst:D10_001
-    predicate: pals:precedes
-    object: inst:D10_002
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D10_002_PRECEDES_MM_A11BD
-    subject: inst:D10_002
-    predicate: pals:precedes
-    object: inst:MM_A11BD
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A11BD_PRECEDES_D2S_003
-    subject: inst:MM_A11BD
-    predicate: pals:precedes
-    object: inst:D2S_003
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2S_003_PRECEDES_MM_A12BD
-    subject: inst:D2S_003
-    predicate: pals:precedes
-    object: inst:MM_A12BD
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A12BD_PRECEDES_DPUE_004
-    subject: inst:MM_A12BD
-    predicate: pals:precedes
-    object: inst:DPUE_004
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_004_PRECEDES_PUE_A12
-    subject: inst:DPUE_004
-    predicate: pals:precedes
-    object: inst:PUE_A12
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A12_PRECEDES_DHCA12
-    subject: inst:PUE_A12
-    predicate: pals:precedes
-    object: inst:DHCA12
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DHCA12_PRECEDES_DVCA12
-    subject: inst:DHCA12
-    predicate: pals:precedes
-    object: inst:DVCA12
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DVCA12_PRECEDES_D2TX_003
-    subject: inst:DVCA12
-    predicate: pals:precedes
-    object: inst:D2TX_003
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2TX_003_PRECEDES_MM_A13CF
-    subject: inst:D2TX_003
-    predicate: pals:precedes
-    object: inst:MM_A13CF
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A13CF_PRECEDES_DSS_003
-    subject: inst:MM_A13CF
-    predicate: pals:precedes
-    object: inst:DSS_003
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DSS_003_PRECEDES_SXH
-    subject: inst:DSS_003
-    predicate: pals:precedes
-    object: inst:SXH
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:SXH_PRECEDES_DSS_004
-    subject: inst:SXH
-    predicate: pals:precedes
-    object: inst:DSS_004
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DSS_004_PRECEDES_MM_A14CF
-    subject: inst:DSS_004
-    predicate: pals:precedes
-    object: inst:MM_A14CF
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A14CF_PRECEDES_DPUE_005
-    subject: inst:MM_A14CF
-    predicate: pals:precedes
-    object: inst:DPUE_005
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:DPUE_005_PRECEDES_PUE_A14
-    subject: inst:DPUE_005
-    predicate: pals:precedes
-    object: inst:PUE_A14
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:PUE_A14_PRECEDES_D2LX_002
-    subject: inst:PUE_A14
-    predicate: pals:precedes
-    object: inst:D2LX_002
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2LX_002_PRECEDES_MM_A15AD
-    subject: inst:D2LX_002
-    predicate: pals:precedes
-    object: inst:MM_A15AD
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MM_A15AD_PRECEDES_D2H
-    subject: inst:MM_A15AD
-    predicate: pals:precedes
-    object: inst:D2H
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:D2H_PRECEDES_MWA15
-    subject: inst:D2H
-    predicate: pals:precedes
-    object: inst:MWA15
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:MWA15_PRECEDES_END_B0
-    subject: inst:MWA15
-    predicate: pals:precedes
-    object: inst:END_B0
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
+  - id: BEGINNING_B1_PRECEDES_BTASTART
+    subject: BEGINNING_B1
+    predicate: Precedes
+    object: BTASTART
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: BTASTART_PRECEDES_DHF6A
+    subject: BTASTART
+    predicate: Precedes
+    object: DHF6A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DHF6A_PRECEDES_DHF6T
+    subject: DHF6A
+    predicate: Precedes
+    object: DHF6T
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DHF6T_PRECEDES_DRF6A
+    subject: DHF6T
+    predicate: Precedes
+    object: DRF6A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRF6A_PRECEDES_DHF6B
+    subject: DRF6A
+    predicate: Precedes
+    object: DHF6B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DHF6B_PRECEDES_DRF6B
+    subject: DHF6B
+    predicate: Precedes
+    object: DRF6B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRF6B_PRECEDES_PUEH001
+    subject: DRF6B
+    predicate: Precedes
+    object: PUEH001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUEH001_PRECEDES_DR001
+    subject: PUEH001
+    predicate: Precedes
+    object: DR001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR001_PRECEDES_MW006
+    subject: DR001
+    predicate: Precedes
+    object: MW006
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MW006_PRECEDES_DR006
+    subject: MW006
+    predicate: Precedes
+    object: DR006
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR006_PRECEDES_DV007
+    subject: DR006
+    predicate: Precedes
+    object: DV007
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DV007_PRECEDES_DR007
+    subject: DV007
+    predicate: Precedes
+    object: DR007
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR007_PRECEDES_QV1
+    subject: DR007
+    predicate: Precedes
+    object: QV1
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QV1_PRECEDES_DRQ1
+    subject: QV1
+    predicate: Precedes
+    object: DRQ1
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ1_PRECEDES_DH1A
+    subject: DRQ1
+    predicate: Precedes
+    object: DH1A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH1A_PRECEDES_DH1T
+    subject: DH1A
+    predicate: Precedes
+    object: DH1T
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH1T_PRECEDES_DH1B
+    subject: DH1T
+    predicate: Precedes
+    object: DH1B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH1B_PRECEDES_DRD1
+    subject: DH1B
+    predicate: Precedes
+    object: DRD1
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRD1_PRECEDES_QH2A
+    subject: DRD1
+    predicate: Precedes
+    object: QH2A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QH2A_PRECEDES_DRQ2A
+    subject: QH2A
+    predicate: Precedes
+    object: DRQ2A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ2A_PRECEDES_QH2B
+    subject: DRQ2A
+    predicate: Precedes
+    object: QH2B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QH2B_PRECEDES_DRQ2B
+    subject: QH2B
+    predicate: Precedes
+    object: DRQ2B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ2B_PRECEDES_XF019
+    subject: DRQ2B
+    predicate: Precedes
+    object: XF019
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: XF019_PRECEDES_DR019
+    subject: XF019
+    predicate: Precedes
+    object: DR019
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR019_PRECEDES_QV3
+    subject: DR019
+    predicate: Precedes
+    object: QV3
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QV3_PRECEDES_DRQ3
+    subject: QV3
+    predicate: Precedes
+    object: DRQ3
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ3_PRECEDES_FOIL024
+    subject: DRQ3
+    predicate: Precedes
+    object: FOIL024
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: FOIL024_PRECEDES_DR024A
+    subject: FOIL024
+    predicate: Precedes
+    object: DR024A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR024A_PRECEDES_DV030
+    subject: DR024A
+    predicate: Precedes
+    object: DV030
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DV030_PRECEDES_DR024B
+    subject: DV030
+    predicate: Precedes
+    object: DR024B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR024B_PRECEDES_QH4
+    subject: DR024B
+    predicate: Precedes
+    object: QH4
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QH4_PRECEDES_DRQ4
+    subject: QH4
+    predicate: Precedes
+    object: DRQ4
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ4_PRECEDES_DH2
+    subject: DRQ4
+    predicate: Precedes
+    object: DH2
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH2_PRECEDES_DRD2
+    subject: DH2
+    predicate: Precedes
+    object: DRD2
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRD2_PRECEDES_QV5
+    subject: DRD2
+    predicate: Precedes
+    object: QV5
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QV5_PRECEDES_DH23T
+    subject: QV5
+    predicate: Precedes
+    object: DH23T
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH23T_PRECEDES_DRQ5
+    subject: DH23T
+    predicate: Precedes
+    object: DRQ5
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ5_PRECEDES_PUEV046
+    subject: DRQ5
+    predicate: Precedes
+    object: PUEV046
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUEV046_PRECEDES_DR046
+    subject: PUEV046
+    predicate: Precedes
+    object: DR046
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR046_PRECEDES_DH3
+    subject: DR046
+    predicate: Precedes
+    object: DH3
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH3_PRECEDES_DRD3
+    subject: DH3
+    predicate: Precedes
+    object: DRD3
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRD3_PRECEDES_QH6
+    subject: DRD3
+    predicate: Precedes
+    object: QH6
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QH6_PRECEDES_DRQ6
+    subject: QH6
+    predicate: Precedes
+    object: DRQ6
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ6_PRECEDES_XF059
+    subject: DRQ6
+    predicate: Precedes
+    object: XF059
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: XF059_PRECEDES_DR059
+    subject: XF059
+    predicate: Precedes
+    object: DR059
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR059_PRECEDES_MW060
+    subject: DR059
+    predicate: Precedes
+    object: MW060
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MW060_PRECEDES_DR060
+    subject: MW060
+    predicate: Precedes
+    object: DR060
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR060_PRECEDES_QV7
+    subject: DR060
+    predicate: Precedes
+    object: QV7
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QV7_PRECEDES_DRQ7Y
+    subject: QV7
+    predicate: Precedes
+    object: DRQ7Y
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ7Y_PRECEDES_MK077
+    subject: DRQ7Y
+    predicate: Precedes
+    object: MK077
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MK077_PRECEDES_DRQ7Z
+    subject: MK077
+    predicate: Precedes
+    object: DRQ7Z
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ7Z_PRECEDES_QH8
+    subject: DRQ7Z
+    predicate: Precedes
+    object: QH8
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QH8_PRECEDES_DRQ8
+    subject: QH8
+    predicate: Precedes
+    object: DRQ8
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ8_PRECEDES_DH4A
+    subject: DRQ8
+    predicate: Precedes
+    object: DH4A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH4A_PRECEDES_DH4T
+    subject: DH4A
+    predicate: Precedes
+    object: DH4T
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH4T_PRECEDES_DH4B
+    subject: DH4T
+    predicate: Precedes
+    object: DH4B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH4B_PRECEDES_DRD4
+    subject: DH4B
+    predicate: Precedes
+    object: DRD4
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRD4_PRECEDES_QV9
+    subject: DRD4
+    predicate: Precedes
+    object: QV9
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QV9_PRECEDES_DRQ9A
+    subject: QV9
+    predicate: Precedes
+    object: DRQ9A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ9A_PRECEDES_DV120
+    subject: DRQ9A
+    predicate: Precedes
+    object: DV120
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DV120_PRECEDES_DRQ9B
+    subject: DV120
+    predicate: Precedes
+    object: DRQ9B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ9B_PRECEDES_QH10
+    subject: DRQ9B
+    predicate: Precedes
+    object: QH10
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QH10_PRECEDES_DRQ10
+    subject: QH10
+    predicate: Precedes
+    object: DRQ10
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ10_PRECEDES_MW125
+    subject: DRQ10
+    predicate: Precedes
+    object: MW125
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MW125_PRECEDES_DR125
+    subject: MW125
+    predicate: Precedes
+    object: DR125
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR125_PRECEDES_DH127
+    subject: DR125
+    predicate: Precedes
+    object: DH127
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH127_PRECEDES_DR127
+    subject: DH127
+    predicate: Precedes
+    object: DR127
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR127_PRECEDES_PUEV129
+    subject: DR127
+    predicate: Precedes
+    object: PUEV129
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUEV129_PRECEDES_DR129
+    subject: PUEV129
+    predicate: Precedes
+    object: DR129
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR129_PRECEDES_QV11
+    subject: DR129
+    predicate: Precedes
+    object: QV11
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QV11_PRECEDES_DRQ11
+    subject: QV11
+    predicate: Precedes
+    object: DRQ11
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ11_PRECEDES_MK139
+    subject: DRQ11
+    predicate: Precedes
+    object: MK139
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MK139_PRECEDES_DR139
+    subject: MK139
+    predicate: Precedes
+    object: DR139
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR139_PRECEDES_DR141
+    subject: DR139
+    predicate: Precedes
+    object: DR141
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR141_PRECEDES_PUEH143
+    subject: DR141
+    predicate: Precedes
+    object: PUEH143
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUEH143_PRECEDES_DR143
+    subject: PUEH143
+    predicate: Precedes
+    object: DR143
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR143_PRECEDES_QH12
+    subject: DR143
+    predicate: Precedes
+    object: QH12
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QH12_PRECEDES_DRQ12
+    subject: QH12
+    predicate: Precedes
+    object: DRQ12
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ12_PRECEDES_MK156
+    subject: DRQ12
+    predicate: Precedes
+    object: MK156
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MK156_PRECEDES_DR156
+    subject: MK156
+    predicate: Precedes
+    object: DR156
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR156_PRECEDES_DH158
+    subject: DR156
+    predicate: Precedes
+    object: DH158
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH158_PRECEDES_DR158
+    subject: DH158
+    predicate: Precedes
+    object: DR158
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR158_PRECEDES_PUEV160
+    subject: DR158
+    predicate: Precedes
+    object: PUEV160
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUEV160_PRECEDES_DR160
+    subject: PUEV160
+    predicate: Precedes
+    object: DR160
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR160_PRECEDES_QV13
+    subject: DR160
+    predicate: Precedes
+    object: QV13
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QV13_PRECEDES_DRQ13
+    subject: QV13
+    predicate: Precedes
+    object: DRQ13
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ13_PRECEDES_MW166
+    subject: DRQ13
+    predicate: Precedes
+    object: MW166
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MW166_PRECEDES_DR166
+    subject: MW166
+    predicate: Precedes
+    object: DR166
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR166_PRECEDES_DR168
+    subject: DR166
+    predicate: Precedes
+    object: DR168
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR168_PRECEDES_PUEH170
+    subject: DR168
+    predicate: Precedes
+    object: PUEH170
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUEH170_PRECEDES_DR170
+    subject: PUEH170
+    predicate: Precedes
+    object: DR170
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR170_PRECEDES_QH14
+    subject: DR170
+    predicate: Precedes
+    object: QH14
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QH14_PRECEDES_DRQ14
+    subject: QH14
+    predicate: Precedes
+    object: DRQ14
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRQ14_PRECEDES_DH5A
+    subject: DRQ14
+    predicate: Precedes
+    object: DH5A
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH5A_PRECEDES_DH5T
+    subject: DH5A
+    predicate: Precedes
+    object: DH5T
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH5T_PRECEDES_DH5B
+    subject: DH5T
+    predicate: Precedes
+    object: DH5B
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DH5B_PRECEDES_DRD5
+    subject: DH5B
+    predicate: Precedes
+    object: DRD5
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DRD5_PRECEDES_DV181
+    subject: DRD5
+    predicate: Precedes
+    object: DV181
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DV181_PRECEDES_DR181
+    subject: DV181
+    predicate: Precedes
+    object: DR181
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR181_PRECEDES_XF183
+    subject: DR181
+    predicate: Precedes
+    object: XF183
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: XF183_PRECEDES_DR183
+    subject: XF183
+    predicate: Precedes
+    object: DR183
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DR183_PRECEDES_QV15
+    subject: DR183
+    predicate: Precedes
+    object: QV15
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QV15_PRECEDES_M1
+    subject: QV15
+    predicate: Precedes
+    object: M1
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: M1_PRECEDES_L20SPTM1
+    subject: M1
+    predicate: Precedes
+    object: L20SPTM1
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: L20SPTM1_PRECEDES_DHL20T
+    subject: L20SPTM1
+    predicate: Precedes
+    object: DHL20T
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DHL20T_PRECEDES_L20SPTM2
+    subject: DHL20T
+    predicate: Precedes
+    object: L20SPTM2
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: L20SPTM2_PRECEDES_MM_A01BF
+    subject: L20SPTM2
+    predicate: Precedes
+    object: MM_A01BF
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A01BF_PRECEDES_D2S_001
+    subject: MM_A01BF
+    predicate: Precedes
+    object: D2S_001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2S_001_PRECEDES_MM_A02BF
+    subject: D2S_001
+    predicate: Precedes
+    object: MM_A02BF
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A02BF_PRECEDES_DPUE_001
+    subject: MM_A02BF
+    predicate: Precedes
+    object: DPUE_001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DPUE_001_PRECEDES_PUE_A02
+    subject: DPUE_001
+    predicate: Precedes
+    object: PUE_A02
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUE_A02_PRECEDES_DHCA02
+    subject: PUE_A02
+    predicate: Precedes
+    object: DHCA02
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DHCA02_PRECEDES_DVCA02
+    subject: DHCA02
+    predicate: Precedes
+    object: DVCA02
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DVCA02_PRECEDES_D2TX_001
+    subject: DVCA02
+    predicate: Precedes
+    object: D2TX_001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2TX_001_PRECEDES_MM_A03CD
+    subject: D2TX_001
+    predicate: Precedes
+    object: MM_A03CD
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A03CD_PRECEDES_DSQ_001
+    subject: MM_A03CD
+    predicate: Precedes
+    object: DSQ_001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DSQ_001_PRECEDES_QHFV
+    subject: DSQ_001
+    predicate: Precedes
+    object: QHFV
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QHFV_PRECEDES_QPOL
+    subject: QHFV
+    predicate: Precedes
+    object: QPOL
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: QPOL_PRECEDES_DSQ_002
+    subject: QPOL
+    predicate: Precedes
+    object: DSQ_002
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DSQ_002_PRECEDES_MM_A04CD
+    subject: DSQ_002
+    predicate: Precedes
+    object: MM_A04CD
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A04CD_PRECEDES_DPUE_002
+    subject: MM_A04CD
+    predicate: Precedes
+    object: DPUE_002
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DPUE_002_PRECEDES_PUE_A04
+    subject: DPUE_002
+    predicate: Precedes
+    object: PUE_A04
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUE_A04_PRECEDES_D2LX_001
+    subject: PUE_A04
+    predicate: Precedes
+    object: D2LX_001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2LX_001_PRECEDES_MM_A05AF
+    subject: D2LX_001
+    predicate: Precedes
+    object: MM_A05AF
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A05AF_PRECEDES_D2H_A05_001
+    subject: MM_A05AF
+    predicate: Precedes
+    object: D2H_A05_001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2H_A05_001_PRECEDES_KCKRA05
+    subject: D2H_A05_001
+    predicate: Precedes
+    object: KCKRA05
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: KCKRA05_PRECEDES_D2H_A05_002
+    subject: KCKRA05
+    predicate: Precedes
+    object: D2H_A05_002
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2H_A05_002_PRECEDES_MM_A06AF
+    subject: D2H_A05_002
+    predicate: Precedes
+    object: MM_A06AF
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A06AF_PRECEDES_D2L
+    subject: MM_A06AF
+    predicate: Precedes
+    object: D2L
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2L_PRECEDES_MM_A07CD
+    subject: D2L
+    predicate: Precedes
+    object: MM_A07CD
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A07CD_PRECEDES_DSS_001
+    subject: MM_A07CD
+    predicate: Precedes
+    object: DSS_001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DSS_001_PRECEDES_SXV
+    subject: DSS_001
+    predicate: Precedes
+    object: SXV
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: SXV_PRECEDES_DSS_002
+    subject: SXV
+    predicate: Precedes
+    object: DSS_002
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DSS_002_PRECEDES_MM_A08CD
+    subject: DSS_002
+    predicate: Precedes
+    object: MM_A08CD
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A08CD_PRECEDES_DPUE_003
+    subject: MM_A08CD
+    predicate: Precedes
+    object: DPUE_003
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DPUE_003_PRECEDES_PUE_A08
+    subject: DPUE_003
+    predicate: Precedes
+    object: PUE_A08
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUE_A08_PRECEDES_DHCA08
+    subject: PUE_A08
+    predicate: Precedes
+    object: DHCA08
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DHCA08_PRECEDES_DVCA08
+    subject: DHCA08
+    predicate: Precedes
+    object: DVCA08
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DVCA08_PRECEDES_D2TX_002
+    subject: DVCA08
+    predicate: Precedes
+    object: D2TX_002
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2TX_002_PRECEDES_MM_A09BF
+    subject: D2TX_002
+    predicate: Precedes
+    object: MM_A09BF
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A09BF_PRECEDES_D2S_002
+    subject: MM_A09BF
+    predicate: Precedes
+    object: D2S_002
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2S_002_PRECEDES_MM_A10BF
+    subject: D2S_002
+    predicate: Precedes
+    object: MM_A10BF
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A10BF_PRECEDES_D10_001
+    subject: MM_A10BF
+    predicate: Precedes
+    object: D10_001
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D10_001_PRECEDES_D10_002
+    subject: D10_001
+    predicate: Precedes
+    object: D10_002
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D10_002_PRECEDES_MM_A11BD
+    subject: D10_002
+    predicate: Precedes
+    object: MM_A11BD
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A11BD_PRECEDES_D2S_003
+    subject: MM_A11BD
+    predicate: Precedes
+    object: D2S_003
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2S_003_PRECEDES_MM_A12BD
+    subject: D2S_003
+    predicate: Precedes
+    object: MM_A12BD
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A12BD_PRECEDES_DPUE_004
+    subject: MM_A12BD
+    predicate: Precedes
+    object: DPUE_004
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DPUE_004_PRECEDES_PUE_A12
+    subject: DPUE_004
+    predicate: Precedes
+    object: PUE_A12
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUE_A12_PRECEDES_DHCA12
+    subject: PUE_A12
+    predicate: Precedes
+    object: DHCA12
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DHCA12_PRECEDES_DVCA12
+    subject: DHCA12
+    predicate: Precedes
+    object: DVCA12
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DVCA12_PRECEDES_D2TX_003
+    subject: DVCA12
+    predicate: Precedes
+    object: D2TX_003
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2TX_003_PRECEDES_MM_A13CF
+    subject: D2TX_003
+    predicate: Precedes
+    object: MM_A13CF
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A13CF_PRECEDES_DSS_003
+    subject: MM_A13CF
+    predicate: Precedes
+    object: DSS_003
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DSS_003_PRECEDES_SXH
+    subject: DSS_003
+    predicate: Precedes
+    object: SXH
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: SXH_PRECEDES_DSS_004
+    subject: SXH
+    predicate: Precedes
+    object: DSS_004
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DSS_004_PRECEDES_MM_A14CF
+    subject: DSS_004
+    predicate: Precedes
+    object: MM_A14CF
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A14CF_PRECEDES_DPUE_005
+    subject: MM_A14CF
+    predicate: Precedes
+    object: DPUE_005
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: DPUE_005_PRECEDES_PUE_A14
+    subject: DPUE_005
+    predicate: Precedes
+    object: PUE_A14
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: PUE_A14_PRECEDES_D2LX_002
+    subject: PUE_A14
+    predicate: Precedes
+    object: D2LX_002
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2LX_002_PRECEDES_MM_A15AD
+    subject: D2LX_002
+    predicate: Precedes
+    object: MM_A15AD
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MM_A15AD_PRECEDES_D2H
+    subject: MM_A15AD
+    predicate: Precedes
+    object: D2H
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: D2H_PRECEDES_MWA15
+    subject: D2H
+    predicate: Precedes
+    object: MWA15
+    context: beamline_order
+    beamline_context: BTA_LINE
+  - id: MWA15_PRECEDES_END_B0
+    subject: MWA15
+    predicate: Precedes
+    object: END_B0
+    context: beamline_order
+    beamline_context: BTA_LINE

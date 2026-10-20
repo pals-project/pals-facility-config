@@ -6,9 +6,11 @@ description: >-
   their beamline relationships, and associated control-system signals.
 license: https://creativecommons.org/publicdomain/zero/1.0/
 
+# No _base on purpose. Bare identifiers in instance data (e.g. RF_LASER) are
+# made absolute with the base IRI each data file declares in Facility.id_namespace.
+# A schema-wide _base would put every facility's instances in one shared namespace.
 prefixes:
   linkml: https://w3id.org/linkml/
-  _base: https://pals-project.readthedocs.io/
   pals: https://pals-project.readthedocs.io/  # used only in *_mappings to PALS documentation; not a resolvable vocabulary
   acc: https://example.org/accelerator-core/  # this schema's own classes, slots and predicates
   qudt: http://qudt.org/vocab/unit/
@@ -18,7 +20,6 @@ prefixes:
   BFO: http://purl.obolibrary.org/obo/BFO_
   om: http://www.ontology-of-units-of-measure.org/resource/om-2/
   saref: https://saref.etsi.org/core/v4.1.1/
-  inst: https://example.org/pals-instance/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   xsd: http://www.w3.org/2001/XMLSchema#
 
@@ -216,6 +217,24 @@ classes:
   Facility:
     description: A facility that houses one or more accelerators.
     attributes:
+      id_namespace:
+        description: >-
+          Base IRI for this facility's instance identifiers. Identifiers in the data
+          (id, subject, object, beamline_context) are written bare, e.g. RF_LASER,
+          and are made absolute by prefixing this value on export to RDF or Neo4j,
+          e.g. tag:jlab.org,2026:uitf/ + RF_LASER.
+          Required, with no schema-wide default, so that facilities cannot silently
+          share a namespace and collide. Any absolute IRI is accepted, resolvable
+          (https://...) or not (tag:..., urn:...). It must end in '/', '#' or ':'
+          so that simple concatenation yields a well-formed IRI.
+        range: uri
+        required: true
+        pattern: "^[A-Za-z][A-Za-z0-9+.\\-]*:[^\\s<>\"{}|\\\\^`]*[/#:]$"
+        examples:
+          - value: "https://example.org/accelerator-core/facility/01gq9xj92/"
+          - value: "tag:jlab.org,2026:uitf/"
+          - value: "urn:example:facility/01gq9xj92"
+          - value: "http://example.org/facility/01gq9xj92"
       components:
         description: A list of physical components in the accelerator system.
         range: Component
@@ -604,7 +623,6 @@ classes:
       beta_a:
         description: Twiss beta parameter in the horizontal plane.
         range: float
-        minimum_value: 0.0
         close_mappings:
           - pals:beta_a
         aliases:
@@ -613,7 +631,6 @@ classes:
       beta_b:
         description: Twiss beta parameter in the vertical plane.
         range: float
-        minimum_value: 0.0
         close_mappings:
           - pals:beta_b
         aliases:
@@ -622,7 +639,6 @@ classes:
       eta_x:
         description: Twiss dispersion parameter in the horizontal plane.
         range: float
-        minimum_value: 0.0
         close_mappings:
           - pals:eta_x
         aliases:
@@ -630,7 +646,6 @@ classes:
       eta_y:
         description: Twiss dispersion parameter in the vertical plane.
         range: float
-        minimum_value: 0.0
         close_mappings:
           - pals:eta_y
         aliases:
