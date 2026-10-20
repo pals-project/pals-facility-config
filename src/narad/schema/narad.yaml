@@ -912,7 +912,7 @@ classes:
         postconditions:
           slot_conditions:
             multipole_geometry:
-              equals_expression: follows_ref_geometry
+              equals_string: follows_ref_geometry
       - description: "ref_geometry must be arc"
         preconditions:
           slot_conditions:
@@ -921,7 +921,7 @@ classes:
         postconditions:
           slot_conditions:
             ref_geometry:
-              equals_expression: arc
+              equals_string: arc
     exact_mappings:
       - pals:BendP
 
@@ -1599,7 +1599,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: SignalBinding
     annotations:
       rdf_predicate: pals:has_signal
 
@@ -1611,7 +1610,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: HasSetpointSignal
     annotations:
       rdf_predicate: pals:has_setpoint_signal
 
@@ -1623,7 +1621,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: HasReadbackSignal
     annotations:
       rdf_predicate: pals:has_readback_signal
   
@@ -1635,7 +1632,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: HasCommandSignal
     annotations:
       rdf_predicate: pals:has_command_signal
 
@@ -1647,7 +1643,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: HasLimitSignal
     annotations:
       rdf_predicate: pals:has_limit_signal
 
@@ -1686,13 +1681,12 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: Precedes
       context:
         description: >-
           The frame of reference / domain in which this relationship is asserted to hold.
-          For pals:precedes, this is the Beamline context = beamline_context.
+          For Precedes, this is always beamline_order; the specific BeamLine is given in beamline_context.
         required: true
-        equals_expression: beamline_context
+        equals_string: beamline_order
     annotations:
       rdf_predicate: pals:precedes
   
@@ -1710,7 +1704,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: Contains
     annotations:
       rdf_predicate: pals:contains
       
@@ -1727,7 +1720,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: Controls
     annotations:
       rdf_predicate: pals:controls
   
@@ -1745,7 +1737,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: IsPartOf
     annotations:
       rdf_predicate: pals:is_part_of
     
@@ -1769,7 +1760,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: AdjacentTo
     annotations:
       rdf_predicate: pals:adjacent_to
 
@@ -1788,7 +1778,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: Overlaps
     annotations:
       rdf_predicate: pals:overlaps
   
@@ -1807,13 +1796,12 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: HasConnectingBranch
       context:
         description: >-
           The frame of reference / domain in which this relationship is asserted to hold.
-          For pals:has_connecting_branch, this is the Beamline context = beamline_context.
+          For HasConnectingBranch, this is always beamline_order; the specific BeamLine is given in beamline_context.
         required: true
-        equals_expression: beamline_context
+        equals_string: beamline_order
     annotations:
       rdf_predicate: pals:has_connecting_branch
 
@@ -1832,7 +1820,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: MountedOn
     annotations:
       rdf_predicate: pals:mounted_on
      
@@ -1849,7 +1836,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: Intersects
     annotations:
       rdf_predicate: pals:intersects
 
@@ -1872,7 +1858,6 @@ classes:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
-        equals_expression: NearestTo
     annotations:
       rdf_predicate: pals:nearest_to
 
