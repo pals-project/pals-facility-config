@@ -22,7 +22,7 @@ authors:
 notes:
 - ' '
 facility:
-  id_namespace: tag:jlab.org,2026:uitf/
+  id_namespace: https://uitf/
   identifiers:
   - identifier_type: URL
     identifier_value: https://www.jlab.org/accelerator/uitf

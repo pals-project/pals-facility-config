@@ -22,7 +22,7 @@ notes:
   - "This is a work in progress to define the JLab UITF injector beamline in the accelerator_core LinkML schema. The original
     data was automatically ported, then manually updated from a prior instance format to conform to the new schema."
 facility:
-  id_namespace: tag:jlab.org,2026:uitf/
+  id_namespace: https://uitf/
   identifiers:
     - identifier_type: URL
       identifier_value: https://www.jlab.org/accelerator/uitf

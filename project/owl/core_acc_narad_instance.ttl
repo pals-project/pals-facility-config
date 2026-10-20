@@ -1,2084 +1,2080 @@
-@base <https://pals-project.readthedocs.io/> .
-@prefix inst: <https://example.org/pals-instance/> .
-@prefix pals: <https://pals-project.readthedocs.io/> .
-@prefix quantitykind: <http://qudt.org/vocab/quantitykind/> .
-@prefix qudt: <http://qudt.org/vocab/unit/> .
+@prefix acc: <https://example.org/accelerator-core/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://example.org/pals-instance/GUN_thru_MV/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "0.0"^^xsd:float ;
-    <x> "0.0"^^xsd:float ;
-    <y> "0.0"^^xsd:float ;
-    <z> "0.0"^^xsd:float .
+<https://uitf/GUN_thru_MV/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "0.0"^^xsd:float ;
+    acc:x "0.0"^^xsd:float ;
+    acc:y "0.0"^^xsd:float ;
+    acc:z "0.0"^^xsd:float .
 
-inst:ICBK403 a "BeamProfileMonitor" ;
-    <FloorP> <https://example.org/pals-instance/ICBK403/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/ICBK403/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/ICBK403/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/ICBK403/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/ICBK403/TwissP> ;
-    <native_types> "BrockCavity",
+<https://uitf/ICBK403> a "BeamProfileMonitor" ;
+    acc:FloorP <https://uitf/ICBK403/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/ICBK403/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/ICBK403/MetaP> ;
+    acc:ReferenceP <https://uitf/ICBK403/ReferenceP> ;
+    acc:TwissP <https://uitf/ICBK403/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "BeamPositionMeasurement" ;
+    acc:native_types "BrockCavity",
         "DiagnosticDevice",
-        "MONITOR" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "BeamPositionMeasurement" .
+        "MONITOR" .
 
-<https://example.org/pals-instance/ICBK403/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.24767958759353"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "39.65027536938226"^^xsd:float .
+<https://uitf/ICBK403/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.24767958759353"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "39.65027536938226"^^xsd:float .
 
-<https://example.org/pals-instance/ICBK403/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/ICBK403/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/ICBK403/MetaP> a <MetaParamGroup> ;
-    <alias> "Yao Cavity" .
+<https://uitf/ICBK403/MetaP> a acc:MetaParamGroup ;
+    acc:alias "Yao Cavity" .
 
-<https://example.org/pals-instance/ICBK403/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144255654231"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/ICBK403/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144255654231"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/ICBK403/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "30.60218195988063"^^xsd:float ;
-    <alpha_b> "11.23736624619686"^^xsd:float ;
-    <beta_a> "26.59111198538222"^^xsd:float ;
-    <beta_b> "11.5243852815062"^^xsd:float ;
-    <eta_x> "-0.216205961533844"^^xsd:float ;
-    <eta_y> "0.1407489603879643"^^xsd:float ;
-    <etap_x> "0.2771216678132173"^^xsd:float ;
-    <etap_y> "-0.1804047694567548"^^xsd:float ;
-    <phi_a> "9.848886790593667"^^xsd:float ;
-    <phi_b> "11.97924000797064"^^xsd:float .
+<https://uitf/ICBK403/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "30.60218195988063"^^xsd:float ;
+    acc:alpha_b "11.23736624619686"^^xsd:float ;
+    acc:beta_a "26.59111198538222"^^xsd:float ;
+    acc:beta_b "11.5243852815062"^^xsd:float ;
+    acc:eta_x "-0.216205961533844"^^xsd:float ;
+    acc:eta_y "0.1407489603879643"^^xsd:float ;
+    acc:etap_x "0.2771216678132173"^^xsd:float ;
+    acc:etap_y "-0.1804047694567548"^^xsd:float ;
+    acc:phi_a "9.848886790593667"^^xsd:float ;
+    acc:phi_b "11.97924000797064"^^xsd:float .
 
-<https://example.org/pals-instance/IFYK203/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.24767958845076"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "35.38227495834539"^^xsd:float .
+<https://uitf/IFYK203/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.24767958845076"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "35.38227495834539"^^xsd:float .
 
-<https://example.org/pals-instance/IFYK203/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/IFYK203/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/IFYK203/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "InsertedChannel" ;
-            <value> "5" ],
-        [ a <AdditionalMetadata> ;
-            <key> "RetractedChannel" ;
-            <value> "6" ],
-        [ a <AdditionalMetadata> ;
-            <key> "LimitSwitchCard" ;
-            <value> "ITF12C0943ADDR2" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TransitionMode" ;
-            <value> "CW" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ActuatorCard" ;
-            <value> "ITF12C0922ADDR1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ActuatorChannel" ;
-            <value> "11" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitf2" ],
-        [ a <AdditionalMetadata> ;
-            <key> "InsertedMode" ;
-            <value> "CW" ] ;
-    <alias> "FC1" ;
-    <description> "Faraday cup beam-current diagnostic." .
+<https://uitf/IFYK203/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "ActuatorChannel" ;
+            acc:value "11" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitf2" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ActuatorCard" ;
+            acc:value "ITF12C0922ADDR1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TransitionMode" ;
+            acc:value "CW" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedChannel" ;
+            acc:value "5" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "RetractedChannel" ;
+            acc:value "6" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "LimitSwitchCard" ;
+            acc:value "ITF12C0943ADDR2" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedMode" ;
+            acc:value "CW" ] ;
+    acc:alias "FC1" ;
+    acc:description "Faraday cup beam-current diagnostic." .
 
-<https://example.org/pals-instance/IFYK203/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float .
+<https://uitf/IFYK203/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float .
 
-<https://example.org/pals-instance/IFYK203/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "0.6793535478139585"^^xsd:float ;
-    <alpha_b> "-2.410769525371156"^^xsd:float ;
-    <beta_a> "5.739541313096026"^^xsd:float ;
-    <beta_b> "5.12752181828262"^^xsd:float ;
-    <eta_x> "-0.07602361780044277"^^xsd:float ;
-    <eta_y> "0.02927268864227073"^^xsd:float ;
-    <etap_x> "0.07832412649498344"^^xsd:float ;
-    <etap_y> "-0.03015849329985609"^^xsd:float ;
-    <phi_a> "3.656659260426662"^^xsd:float ;
-    <phi_b> "5.842555382724905"^^xsd:float .
+<https://uitf/IFYK203/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "0.6793535478139585"^^xsd:float ;
+    acc:alpha_b "-2.410769525371156"^^xsd:float ;
+    acc:beta_a "5.739541313096026"^^xsd:float ;
+    acc:beta_b "5.12752181828262"^^xsd:float ;
+    acc:eta_x "-0.07602361780044277"^^xsd:float ;
+    acc:eta_y "0.02927268864227073"^^xsd:float ;
+    acc:etap_x "0.07832412649498344"^^xsd:float ;
+    acc:etap_y "-0.03015849329985609"^^xsd:float ;
+    acc:phi_a "3.656659260426662"^^xsd:float ;
+    acc:phi_b "5.842555382724905"^^xsd:float .
 
-inst:IFYK203_to_ISLK302 rdf:object inst:ISLK302 ;
+<https://uitf/IFYK203_to_ISLK302> rdf:object <https://uitf/ISLK302> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:IFYK203 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/IFYK203> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/IPMK101/BodyShiftP> a <BodyShiftParamGroup> ;
-    <x_offset> "0.0"^^xsd:float ;
-    <y_offset> "0.0"^^xsd:float .
+<https://uitf/IPMK101/BodyShiftP> a acc:BodyShiftParamGroup ;
+    acc:x_offset "0.0"^^xsd:float ;
+    acc:y_offset "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/IPMK101/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-15.0000000115079"^^xsd:float ;
-    <x> "10.50809805776206"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "32.04809953376817"^^xsd:float .
+<https://uitf/IPMK101/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-15.0000000115079"^^xsd:float ;
+    acc:x "10.50809805776206"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "32.04809953376817"^^xsd:float .
 
-<https://example.org/pals-instance/IPMK101/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/IPMK101/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/IPMK101/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "Pass" ;
-            <value> "non-muxed" ],
-        [ a <AdditionalMetadata> ;
-            <key> "CanType" ;
-            <value> "Stripline" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocipmk101" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Sensitivity" ;
-            <value> "9.9" ],
-        [ a <AdditionalMetadata> ;
-            <key> "electrode_rotation_deg" ;
-            <value> "45.0" ] ;
-    <description> "Digital receiver (stripline) beam position monitor." .
+<https://uitf/IPMK101/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "Sensitivity" ;
+            acc:value "9.9" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "electrode_rotation_deg" ;
+            acc:value "45.0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocipmk101" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "CanType" ;
+            acc:value "Stripline" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Pass" ;
+            acc:value "non-muxed" ] ;
+    acc:description "Digital receiver (stripline) beam position monitor." .
 
-<https://example.org/pals-instance/IPMK101/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/IPMK101/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/IPMK101/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "-14.84984297191979"^^xsd:float ;
-    <alpha_b> "-3.340915259171737"^^xsd:float ;
-    <beta_a> "6.953008935571263"^^xsd:float ;
-    <beta_b> "0.9961950709032026"^^xsd:float ;
-    <eta_x> "-6.195761260338309e-16"^^xsd:float ;
-    <eta_y> "1.827005505037094e-16"^^xsd:float ;
-    <etap_x> "-1.23859828244279e-15"^^xsd:float ;
-    <etap_y> "3.967937356187314e-16"^^xsd:float ;
-    <phi_a> "0.3988706025888786"^^xsd:float ;
-    <phi_b> "2.288691122909796"^^xsd:float .
+<https://uitf/IPMK101/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "-14.84984297191979"^^xsd:float ;
+    acc:alpha_b "-3.340915259171737"^^xsd:float ;
+    acc:beta_a "6.953008935571263"^^xsd:float ;
+    acc:beta_b "0.9961950709032026"^^xsd:float ;
+    acc:eta_x "-6.195761260338309e-16"^^xsd:float ;
+    acc:eta_y "1.827005505037094e-16"^^xsd:float ;
+    acc:etap_x "-1.23859828244279e-15"^^xsd:float ;
+    acc:etap_y "3.967937356187314e-16"^^xsd:float ;
+    acc:phi_a "0.3988706025888786"^^xsd:float ;
+    acc:phi_b "2.288691122909796"^^xsd:float .
 
-inst:IPMK101_STAT rdf:object inst:IPMK101.STAT ;
+<https://uitf/IPMK101_STAT> rdf:object <https://uitf/IPMK101.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:IPMK101 .
+    rdf:subject <https://uitf/IPMK101> .
 
-inst:IPMK101_XPOS rdf:object inst:IPMK101.XPOS ;
+<https://uitf/IPMK101_XPOS> rdf:object <https://uitf/IPMK101.XPOS> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:IPMK101 .
+    rdf:subject <https://uitf/IPMK101> .
 
-inst:IPMK101_YPOS rdf:object inst:IPMK101.YPOS ;
+<https://uitf/IPMK101_YPOS> rdf:object <https://uitf/IPMK101.YPOS> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:IPMK101 .
+    rdf:subject <https://uitf/IPMK101> .
 
-inst:IPMK101_to_MBHK101H rdf:object inst:MBHK101H ;
+<https://uitf/IPMK101_to_MBHK101H> rdf:object <https://uitf/MBHK101H> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:IPMK101 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/IPMK101> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/IPMK102/BodyShiftP> a <BodyShiftParamGroup> ;
-    <x_offset> "0.0"^^xsd:float ;
-    <y_offset> "0.0"^^xsd:float .
+<https://uitf/IPMK102/BodyShiftP> a acc:BodyShiftParamGroup ;
+    acc:x_offset "0.0"^^xsd:float ;
+    acc:y_offset "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/IPMK102/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-15.0000000115079"^^xsd:float ;
-    <x> "10.40715771291403"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "32.42481402897189"^^xsd:float .
+<https://uitf/IPMK102/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-15.0000000115079"^^xsd:float ;
+    acc:x "10.40715771291403"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "32.42481402897189"^^xsd:float .
 
-<https://example.org/pals-instance/IPMK102/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/IPMK102/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/IPMK102/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "Sensitivity" ;
-            <value> "9.9" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocipmk102" ],
-        [ a <AdditionalMetadata> ;
-            <key> "CanType" ;
-            <value> "Stripline" ],
-        [ a <AdditionalMetadata> ;
-            <key> "electrode_rotation_deg" ;
-            <value> "45.0" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Pass" ;
-            <value> "non-muxed" ] ;
-    <description> "Digital receiver (stripline) beam position monitor." .
+<https://uitf/IPMK102/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "CanType" ;
+            acc:value "Stripline" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocipmk102" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Pass" ;
+            acc:value "non-muxed" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Sensitivity" ;
+            acc:value "9.9" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "electrode_rotation_deg" ;
+            acc:value "45.0" ] ;
+    acc:description "Digital receiver (stripline) beam position monitor." .
 
-<https://example.org/pals-instance/IPMK102/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/IPMK102/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/IPMK102/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "14.89750177210773"^^xsd:float ;
-    <alpha_b> "1.862421495338784"^^xsd:float ;
-    <beta_a> "11.37559232654712"^^xsd:float ;
-    <beta_b> "2.789302935981829"^^xsd:float ;
-    <eta_x> "-7.933607584001334e-16"^^xsd:float ;
-    <eta_y> "-1.165656573211613e-16"^^xsd:float ;
-    <etap_x> "1.098940560030332e-15"^^xsd:float ;
-    <etap_y> "1.861070952494128e-16"^^xsd:float ;
-    <phi_a> "0.4327902197303953"^^xsd:float ;
-    <phi_b> "2.470627522339067"^^xsd:float .
+<https://uitf/IPMK102/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "14.89750177210773"^^xsd:float ;
+    acc:alpha_b "1.862421495338784"^^xsd:float ;
+    acc:beta_a "11.37559232654712"^^xsd:float ;
+    acc:beta_b "2.789302935981829"^^xsd:float ;
+    acc:eta_x "-7.933607584001334e-16"^^xsd:float ;
+    acc:eta_y "-1.165656573211613e-16"^^xsd:float ;
+    acc:etap_x "1.098940560030332e-15"^^xsd:float ;
+    acc:etap_y "1.861070952494128e-16"^^xsd:float ;
+    acc:phi_a "0.4327902197303953"^^xsd:float ;
+    acc:phi_b "2.470627522339067"^^xsd:float .
 
-inst:IPMK102_STAT rdf:object inst:IPMK102.STAT ;
+<https://uitf/IPMK102_STAT> rdf:object <https://uitf/IPMK102.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:IPMK102 .
+    rdf:subject <https://uitf/IPMK102> .
 
-inst:IPMK102_XPOS rdf:object inst:IPMK102.XPOS ;
+<https://uitf/IPMK102_XPOS> rdf:object <https://uitf/IPMK102.XPOS> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:IPMK102 .
+    rdf:subject <https://uitf/IPMK102> .
 
-inst:IPMK102_YPOS rdf:object inst:IPMK102.YPOS ;
+<https://uitf/IPMK102_YPOS> rdf:object <https://uitf/IPMK102.YPOS> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:IPMK102 .
+    rdf:subject <https://uitf/IPMK102> .
 
-inst:IPMK102_to_ITVK201 rdf:object inst:ITVK201 ;
+<https://uitf/IPMK102_to_ITVK201> rdf:object <https://uitf/ITVK201> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:IPMK102 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/IPMK102> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/ISLK302/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.24767958824433"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "36.41006257925551"^^xsd:float .
+<https://uitf/ISLK302/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.24767958824433"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "36.41006257925551"^^xsd:float .
 
-<https://example.org/pals-instance/ISLK302/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/ISLK302/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/ISLK302/MetaP> a <MetaParamGroup> ;
-    <alias> "Aperture 2" .
+<https://uitf/ISLK302/MetaP> a acc:MetaParamGroup ;
+    acc:alias "Aperture 2" .
 
-<https://example.org/pals-instance/ISLK302/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float .
+<https://uitf/ISLK302/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float .
 
-<https://example.org/pals-instance/ISLK302/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "-3.858268006057215"^^xsd:float ;
-    <alpha_b> "-0.8076529802215013"^^xsd:float ;
-    <beta_a> "0.5948258722684887"^^xsd:float ;
-    <beta_b> "0.05821205562820486"^^xsd:float ;
-    <eta_x> "0.04461580387531681"^^xsd:float ;
-    <eta_y> "-0.03452473060152621"^^xsd:float ;
-    <etap_x> "0.1194074695296224"^^xsd:float ;
-    <etap_y> "-0.09240023398078684"^^xsd:float ;
-    <phi_a> "6.571489045228137"^^xsd:float ;
-    <phi_b> "8.12028738860876"^^xsd:float .
+<https://uitf/ISLK302/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "-3.858268006057215"^^xsd:float ;
+    acc:alpha_b "-0.8076529802215013"^^xsd:float ;
+    acc:beta_a "0.5948258722684887"^^xsd:float ;
+    acc:beta_b "0.05821205562820486"^^xsd:float ;
+    acc:eta_x "0.04461580387531681"^^xsd:float ;
+    acc:eta_y "-0.03452473060152621"^^xsd:float ;
+    acc:etap_x "0.1194074695296224"^^xsd:float ;
+    acc:etap_y "-0.09240023398078684"^^xsd:float ;
+    acc:phi_a "6.571489045228137"^^xsd:float ;
+    acc:phi_b "8.12028738860876"^^xsd:float .
 
-inst:ISLK302_to_IYGK302 rdf:object inst:IYGK302 ;
+<https://uitf/ISLK302_to_IYGK302> rdf:object <https://uitf/IYGK302> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:ISLK302 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/ISLK302> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/ITVK201/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-15.0000000115079"^^xsd:float ;
-    <x> "10.36079987637277"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "32.59782383013385"^^xsd:float .
+<https://uitf/ITVK201/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-15.0000000115079"^^xsd:float ;
+    acc:x "10.36079987637277"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "32.59782383013385"^^xsd:float .
 
-<https://example.org/pals-instance/ITVK201/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/ITVK201/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/ITVK201/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "LimitSwitchCard" ;
-            <value> "ITF12C0943ADDR1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "SurveyZ" ;
-            <value> "1.173" ],
-        [ a <AdditionalMetadata> ;
-            <key> "InsertedChannel" ;
-            <value> "1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HCOSystem" ;
-            <value> "UITF Viewers" ],
-        [ a <AdditionalMetadata> ;
-            <key> "RetractedChannel" ;
-            <value> "2" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitf2" ],
-        [ a <AdditionalMetadata> ;
-            <key> "InsertedMode" ;
-            <value> "Viewer Limited" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ActuatorChannel" ;
-            <value> "1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "SurveyDate" ;
-            <value> "2021-03-15" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ActuatorCard" ;
-            <value> "ITF12C0922ADDR1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TransitionMode" ;
-            <value> "Viewer Limited" ] ;
-    <description> "Beam viewer/screen (ITV)." .
+<https://uitf/ITVK201/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "SurveyZ" ;
+            acc:value "1.173" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TransitionMode" ;
+            acc:value "Viewer Limited" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "RetractedChannel" ;
+            acc:value "2" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedMode" ;
+            acc:value "Viewer Limited" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ActuatorChannel" ;
+            acc:value "1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyDate" ;
+            acc:value "2021-03-15" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Viewers" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitf2" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "LimitSwitchCard" ;
+            acc:value "ITF12C0943ADDR1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ActuatorCard" ;
+            acc:value "ITF12C0922ADDR1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedChannel" ;
+            acc:value "1" ] ;
+    acc:description "Beam viewer/screen (ITV)." .
 
-<https://example.org/pals-instance/ITVK201/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144307216256"^^xsd:float .
+<https://uitf/ITVK201/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144307216256"^^xsd:float .
 
-<https://example.org/pals-instance/ITVK201/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "1.171553470644124"^^xsd:float ;
-    <alpha_b> "-2.314118176337514"^^xsd:float ;
-    <beta_a> "4.601746608248333"^^xsd:float ;
-    <beta_b> "2.773229855167892"^^xsd:float ;
-    <eta_x> "-4.710678300625306e-16"^^xsd:float ;
-    <eta_y> "-5.600027578757882e-17"^^xsd:float ;
-    <etap_x> "2.220575170188978e-16"^^xsd:float ;
-    <etap_y> "6.790236489597769e-17"^^xsd:float ;
-    <phi_a> "0.5069577519370357"^^xsd:float ;
-    <phi_b> "2.66460447810394"^^xsd:float .
+<https://uitf/ITVK201/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "1.171553470644124"^^xsd:float ;
+    acc:alpha_b "-2.314118176337514"^^xsd:float ;
+    acc:beta_a "4.601746608248333"^^xsd:float ;
+    acc:beta_b "2.773229855167892"^^xsd:float ;
+    acc:eta_x "-4.710678300625306e-16"^^xsd:float ;
+    acc:eta_y "-5.600027578757882e-17"^^xsd:float ;
+    acc:etap_x "2.220575170188978e-16"^^xsd:float ;
+    acc:etap_y "6.790236489597769e-17"^^xsd:float ;
+    acc:phi_a "0.5069577519370357"^^xsd:float ;
+    acc:phi_b "2.66460447810394"^^xsd:float .
 
-inst:ITVK201_to_MDSK201 rdf:object inst:MDSK201 ;
+<https://uitf/ITVK201_to_MDSK201> rdf:object <https://uitf/MDSK201> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:ITVK201 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/ITVK201> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/IYGK302/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.24767958824338"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "36.41478530309348"^^xsd:float .
+<https://uitf/IYGK302/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.24767958824338"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "36.41478530309348"^^xsd:float .
 
-<https://example.org/pals-instance/IYGK302/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/IYGK302/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/IYGK302/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "HCOSystem" ;
-            <value> "UITF Viewers" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TransitionMode" ;
-            <value> "Viewer Limited" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ActuatorChannel" ;
-            <value> "6" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitf2" ],
-        [ a <AdditionalMetadata> ;
-            <key> "SurveyZ" ;
-            <value> "4.6462" ],
-        [ a <AdditionalMetadata> ;
-            <key> "LimitSwitchCard" ;
-            <value> "ITF12C0943ADDR1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "SurveyDate" ;
-            <value> "2021-03-15" ],
-        [ a <AdditionalMetadata> ;
-            <key> "InsertedMode" ;
-            <value> "Viewer Limited" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ActuatorCard" ;
-            <value> "ITF12C0922ADDR1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "InsertedChannel" ;
-            <value> "11" ],
-        [ a <AdditionalMetadata> ;
-            <key> "RetractedChannel" ;
-            <value> "12" ] ;
-    <description> "YAG scintillator beam-profile viewer." .
+<https://uitf/IYGK302/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "ActuatorChannel" ;
+            acc:value "6" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Viewers" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitf2" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedChannel" ;
+            acc:value "11" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedMode" ;
+            acc:value "Viewer Limited" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyDate" ;
+            acc:value "2021-03-15" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "RetractedChannel" ;
+            acc:value "12" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ActuatorCard" ;
+            acc:value "ITF12C0922ADDR1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "LimitSwitchCard" ;
+            acc:value "ITF12C0943ADDR1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyZ" ;
+            acc:value "4.6462" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TransitionMode" ;
+            acc:value "Viewer Limited" ] ;
+    acc:description "YAG scintillator beam-profile viewer." .
 
-<https://example.org/pals-instance/IYGK302/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float .
+<https://uitf/IYGK302/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float .
 
-inst:IYGK302_to_RM11 rdf:object inst:RM11 ;
+<https://uitf/IYGK302_to_RM11> rdf:object <https://uitf/RM11> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:IYGK302 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/IYGK302> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/MBHK101H/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-15.0000000115079"^^xsd:float ;
-    <x> "10.50809805750324"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "32.04809953473409"^^xsd:float .
+<https://uitf/MBHK101H/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-15.0000000115079"^^xsd:float ;
+    acc:x "10.50809805750324"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "32.04809953473409"^^xsd:float .
 
-<https://example.org/pals-instance/MBHK101H/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/MBHK101H/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/MBHK101H/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "ControlsUnits" ;
-            <value> "milliAmps" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Hmax" ;
-            <value> ".999" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Housed_by" ;
-            <value> "ITF02" ],
-        [ a <AdditionalMetadata> ;
-            <key> "KICK" ;
-            <value> "0" ],
-        [ a <AdditionalMetadata> ;
-            <key> "FieldMap" ;
-            <value> "Data ( text/plain; charset=us-ascii )" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitfmag" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Powered_by" ;
-            <value> "ITF02" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystDwellTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystRampTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "NoHyst" ;
-            <value> "1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TrimCardType" ;
-            <value> "1Amp" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HCOSystem" ;
-            <value> "UITF Correctors" ] ;
-    <description> "horizontal steering corrector magnet." .
+<https://uitf/MBHK101H/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "KICK" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "1Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystDwellTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Hmax" ;
+            acc:value ".999" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Housed_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Correctors" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "FieldMap" ;
+            acc:value "Data ( text/plain; charset=us-ascii )" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Powered_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystRampTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "milliAmps" ] ;
+    acc:description "horizontal steering corrector magnet." .
 
-<https://example.org/pals-instance/MBHK101H/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/MBHK101H/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/MBHK101H/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "-14.84984300377907"^^xsd:float ;
-    <alpha_b> "-3.340915271379903"^^xsd:float ;
-    <beta_a> "6.953008965270949"^^xsd:float ;
-    <beta_b> "0.9961950775850331"^^xsd:float ;
-    <eta_x> "-6.195761272724292e-16"^^xsd:float ;
-    <eta_y> "1.827005509005031e-16"^^xsd:float ;
-    <etap_x> "-1.23859828244279e-15"^^xsd:float ;
-    <etap_y> "3.967937356187314e-16"^^xsd:float ;
-    <phi_a> "0.3988706027327012"^^xsd:float ;
-    <phi_b> "2.288691123913615"^^xsd:float .
+<https://uitf/MBHK101H/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "-14.84984300377907"^^xsd:float ;
+    acc:alpha_b "-3.340915271379903"^^xsd:float ;
+    acc:beta_a "6.953008965270949"^^xsd:float ;
+    acc:beta_b "0.9961950775850331"^^xsd:float ;
+    acc:eta_x "-6.195761272724292e-16"^^xsd:float ;
+    acc:eta_y "1.827005509005031e-16"^^xsd:float ;
+    acc:etap_x "-1.23859828244279e-15"^^xsd:float ;
+    acc:etap_y "3.967937356187314e-16"^^xsd:float ;
+    acc:phi_a "0.3988706027327012"^^xsd:float ;
+    acc:phi_b "2.288691123913615"^^xsd:float .
 
-inst:MBHK101H_KICK rdf:object inst:MBHK101H.KICK ;
+<https://uitf/MBHK101H_KICK> rdf:object <https://uitf/MBHK101H.KICK> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MBHK101H .
+    rdf:subject <https://uitf/MBHK101H> .
 
-inst:MBHK101H_LMAX rdf:object inst:MBHK101H.HMAX ;
+<https://uitf/MBHK101H_LMAX> rdf:object <https://uitf/MBHK101H.HMAX> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MBHK101H .
+    rdf:subject <https://uitf/MBHK101H> .
 
-inst:MBHK101H_LMIN rdf:object inst:MBHK101H.HMIN ;
+<https://uitf/MBHK101H_LMIN> rdf:object <https://uitf/MBHK101H.HMIN> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MBHK101H .
+    rdf:subject <https://uitf/MBHK101H> .
 
-inst:MBHK101H_RB rdf:object inst:MBHK101HM ;
+<https://uitf/MBHK101H_RB> rdf:object <https://uitf/MBHK101HM> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MBHK101H .
+    rdf:subject <https://uitf/MBHK101H> .
 
-inst:MBHK101H_S rdf:object inst:MBHK101H.S ;
+<https://uitf/MBHK101H_S> rdf:object <https://uitf/MBHK101H.S> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MBHK101H .
+    rdf:subject <https://uitf/MBHK101H> .
 
-inst:MBHK101H_STAT rdf:object inst:MBHK101H.STAT ;
+<https://uitf/MBHK101H_STAT> rdf:object <https://uitf/MBHK101H.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MBHK101H .
+    rdf:subject <https://uitf/MBHK101H> .
 
-inst:MBHK101H_to_MBHK101V rdf:object inst:MBHK101V ;
+<https://uitf/MBHK101H_to_MBHK101V> rdf:object <https://uitf/MBHK101V> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:MBHK101H ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/MBHK101H> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/MBHK101V/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-15.0000000115079"^^xsd:float ;
-    <x> "10.50809805724442"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "32.04809953570002"^^xsd:float .
+<https://uitf/MBHK101V/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-15.0000000115079"^^xsd:float ;
+    acc:x "10.50809805724442"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "32.04809953570002"^^xsd:float .
 
-<https://example.org/pals-instance/MBHK101V/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/MBHK101V/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/MBHK101V/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "KICK" ;
-            <value> "0" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Powered_by" ;
-            <value> "ITF02" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HCOSystem" ;
-            <value> "UITF Correctors" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystRampTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitfmag" ],
-        [ a <AdditionalMetadata> ;
-            <key> "NoHyst" ;
-            <value> "1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Hmax" ;
-            <value> ".999" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Housed_by" ;
-            <value> "ITF02" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ControlsUnits" ;
-            <value> "milliAmps" ],
-        [ a <AdditionalMetadata> ;
-            <key> "FieldMap" ;
-            <value> "Data ( text/plain; charset=us-ascii )" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystDwellTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TrimCardType" ;
-            <value> "1Amp" ] ;
-    <description> "vertical steering corrector magnet." .
+<https://uitf/MBHK101V/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Hmax" ;
+            acc:value ".999" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Powered_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Correctors" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "FieldMap" ;
+            acc:value "Data ( text/plain; charset=us-ascii )" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystRampTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "1Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Housed_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "KICK" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "milliAmps" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystDwellTime" ;
+            acc:value "4" ] ;
+    acc:description "vertical steering corrector magnet." .
 
-<https://example.org/pals-instance/MBHK101V/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/MBHK101V/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/MBHK101V/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "-14.84984303563834"^^xsd:float ;
-    <alpha_b> "-3.340915283588069"^^xsd:float ;
-    <beta_a> "6.953008994970635"^^xsd:float ;
-    <beta_b> "0.9961950842668637"^^xsd:float ;
-    <eta_x> "-6.195761285110275e-16"^^xsd:float ;
-    <eta_y> "1.827005512972969e-16"^^xsd:float ;
-    <etap_x> "-1.23859828244279e-15"^^xsd:float ;
-    <etap_y> "3.967937356187314e-16"^^xsd:float ;
-    <phi_a> "0.3988706028765238"^^xsd:float ;
-    <phi_b> "2.288691124917435"^^xsd:float .
+<https://uitf/MBHK101V/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "-14.84984303563834"^^xsd:float ;
+    acc:alpha_b "-3.340915283588069"^^xsd:float ;
+    acc:beta_a "6.953008994970635"^^xsd:float ;
+    acc:beta_b "0.9961950842668637"^^xsd:float ;
+    acc:eta_x "-6.195761285110275e-16"^^xsd:float ;
+    acc:eta_y "1.827005512972969e-16"^^xsd:float ;
+    acc:etap_x "-1.23859828244279e-15"^^xsd:float ;
+    acc:etap_y "3.967937356187314e-16"^^xsd:float ;
+    acc:phi_a "0.3988706028765238"^^xsd:float ;
+    acc:phi_b "2.288691124917435"^^xsd:float .
 
-inst:MBHK101V_KICK rdf:object inst:MBHK101V.KICK ;
+<https://uitf/MBHK101V_KICK> rdf:object <https://uitf/MBHK101V.KICK> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MBHK101V .
+    rdf:subject <https://uitf/MBHK101V> .
 
-inst:MBHK101V_LMAX rdf:object inst:MBHK101V.HMAX ;
+<https://uitf/MBHK101V_LMAX> rdf:object <https://uitf/MBHK101V.HMAX> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MBHK101V .
+    rdf:subject <https://uitf/MBHK101V> .
 
-inst:MBHK101V_LMIN rdf:object inst:MBHK101V.HMIN ;
+<https://uitf/MBHK101V_LMIN> rdf:object <https://uitf/MBHK101V.HMIN> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MBHK101V .
+    rdf:subject <https://uitf/MBHK101V> .
 
-inst:MBHK101V_RB rdf:object inst:MBHK101VM ;
+<https://uitf/MBHK101V_RB> rdf:object <https://uitf/MBHK101VM> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MBHK101V .
+    rdf:subject <https://uitf/MBHK101V> .
 
-inst:MBHK101V_S rdf:object inst:MBHK101V.S ;
+<https://uitf/MBHK101V_S> rdf:object <https://uitf/MBHK101V.S> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MBHK101V .
+    rdf:subject <https://uitf/MBHK101V> .
 
-inst:MBHK101V_STAT rdf:object inst:MBHK101V.STAT ;
+<https://uitf/MBHK101V_STAT> rdf:object <https://uitf/MBHK101V.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MBHK101V .
+    rdf:subject <https://uitf/MBHK101V> .
 
-inst:MBHK101V_to_MFHK101 rdf:object inst:MFHK101 ;
+<https://uitf/MBHK101V_to_MFHK101> rdf:object <https://uitf/MFHK101> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:MBHK101V ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/MBHK101V> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/MDSK201/BendP> a <BendParamGroup> ;
-    <angle_ref> "-0.261799388"^^xsd:float ;
-    <e1> "-0.130899694"^^xsd:float ;
-    <e2> "-0.130899694"^^xsd:float .
+<https://uitf/MDSK201/BendP> a acc:BendParamGroup ;
+    acc:angle_ref "-0.261799388"^^xsd:float ;
+    acc:e1 "-0.130899694"^^xsd:float ;
+    acc:e2 "-0.130899694"^^xsd:float .
 
-<https://example.org/pals-instance/MDSK201/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.24767958891485"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "33.07167495458577"^^xsd:float .
+<https://uitf/MDSK201/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.24767958891485"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "33.07167495458577"^^xsd:float .
 
-<https://example.org/pals-instance/MDSK201/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.1027699"^^xsd:float .
+<https://uitf/MDSK201/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.1027699"^^xsd:float .
 
-<https://example.org/pals-instance/MDSK201/MagneticMultipoleP> a <MagneticMultipoleParamGroup> ;
-    <mag_components> [ a <MultipoleParameterGroup> ;
-            <Kn> "-5.933092236836"^^xsd:float ;
-            <order> 1 ] .
+<https://uitf/MDSK201/MagneticMultipoleP> a acc:MagneticMultipoleParamGroup ;
+    acc:mag_components [ a acc:MultipoleParameterGroup ;
+            acc:Kn "-5.933092236836"^^xsd:float ;
+            acc:order 1 ] .
 
-<https://example.org/pals-instance/MDSK201/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "HystRampTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Powered_by" ;
-            <value> "ITF02" ],
-        [ a <AdditionalMetadata> ;
-            <key> "SurveyDate" ;
-            <value> "2021-03-15" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HCOSystem" ;
-            <value> "UITF Dipoles" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Housed_by" ;
-            <value> "ITF02" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TrimCardType" ;
-            <value> "10Amp" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystDwellTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ControlsUnits" ;
-            <value> "Amps" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HGAP" ;
-            <value> ".0641927050701428" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitfmag" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Hmax" ;
-            <value> "3.5" ],
-        [ a <AdditionalMetadata> ;
-            <key> "FieldMap" ;
-            <value> "Data ( text/plain; charset=us-ascii )" ],
-        [ a <AdditionalMetadata> ;
-            <key> "SurveyZ" ;
-            <value> "1.338" ],
-        [ a <AdditionalMetadata> ;
-            <key> "NoHyst" ;
-            <value> "1" ] ;
-    <alias> "15 Deg Bend" .
+<https://uitf/MDSK201/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "HystDwellTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystRampTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyDate" ;
+            acc:value "2021-03-15" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Dipoles" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HGAP" ;
+            acc:value ".0641927050701428" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyZ" ;
+            acc:value "1.338" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "FieldMap" ;
+            acc:value "Data ( text/plain; charset=us-ascii )" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Hmax" ;
+            acc:value "3.5" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "Amps" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "10Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Powered_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Housed_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ] ;
+    acc:alias "15 Deg Bend" .
 
-<https://example.org/pals-instance/MDSK201/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/MDSK201/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/MDSK201/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "1.734799300973817"^^xsd:float ;
-    <alpha_b> "1.209268332594004"^^xsd:float ;
-    <beta_a> "0.2470028288493974"^^xsd:float ;
-    <beta_b> "0.9718599589904877"^^xsd:float ;
-    <eta_x> "-0.01344596285648782"^^xsd:float ;
-    <eta_y> "7.666874501197557e-18"^^xsd:float ;
-    <etap_x> "-0.2660525403059775"^^xsd:float ;
-    <etap_y> "1.869237913056299e-16"^^xsd:float ;
-    <phi_a> "0.8537295440373742"^^xsd:float ;
-    <phi_b> "2.879105169640403"^^xsd:float .
+<https://uitf/MDSK201/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "1.734799300973817"^^xsd:float ;
+    acc:alpha_b "1.209268332594004"^^xsd:float ;
+    acc:beta_a "0.2470028288493974"^^xsd:float ;
+    acc:beta_b "0.9718599589904877"^^xsd:float ;
+    acc:eta_x "-0.01344596285648782"^^xsd:float ;
+    acc:eta_y "7.666874501197557e-18"^^xsd:float ;
+    acc:etap_x "-0.2660525403059775"^^xsd:float ;
+    acc:etap_y "1.869237913056299e-16"^^xsd:float ;
+    acc:phi_a "0.8537295440373742"^^xsd:float ;
+    acc:phi_b "2.879105169640403"^^xsd:float .
 
-inst:MDSK201_BDL rdf:object inst:MDSK201.BDL ;
+<https://uitf/MDSK201_BDL> rdf:object <https://uitf/MDSK201.BDL> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MDSK201 .
+    rdf:subject <https://uitf/MDSK201> .
 
-inst:MDSK201_LMAX rdf:object inst:MDSK201.HMAX ;
+<https://uitf/MDSK201_LMAX> rdf:object <https://uitf/MDSK201.HMAX> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MDSK201 .
+    rdf:subject <https://uitf/MDSK201> .
 
-inst:MDSK201_LMIN rdf:object inst:MDSK201.HMIN ;
+<https://uitf/MDSK201_LMIN> rdf:object <https://uitf/MDSK201.HMIN> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MDSK201 .
+    rdf:subject <https://uitf/MDSK201> .
 
-inst:MDSK201_RB rdf:object inst:MDSK201M ;
+<https://uitf/MDSK201_RB> rdf:object <https://uitf/MDSK201M> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MDSK201 .
+    rdf:subject <https://uitf/MDSK201> .
 
-inst:MDSK201_S rdf:object inst:MDSK201.S ;
+<https://uitf/MDSK201_S> rdf:object <https://uitf/MDSK201.S> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MDSK201 .
+    rdf:subject <https://uitf/MDSK201> .
 
-inst:MDSK201_STAT rdf:object inst:MDSK201.STAT ;
+<https://uitf/MDSK201_STAT> rdf:object <https://uitf/MDSK201.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MDSK201 .
+    rdf:subject <https://uitf/MDSK201> .
 
-inst:MDSK201_to_MQWK202 rdf:object inst:MQWK202 ;
+<https://uitf/MDSK201_to_MQWK202> rdf:object <https://uitf/MQWK202> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:MDSK201 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/MDSK201> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/MFHK101/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-15.0000000115079"^^xsd:float ;
-    <x> "10.43495454283887"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "32.32107484748639"^^xsd:float .
+<https://uitf/MFHK101/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-15.0000000115079"^^xsd:float ;
+    acc:x "10.43495454283887"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "32.32107484748639"^^xsd:float .
 
-<https://example.org/pals-instance/MFHK101/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0762"^^xsd:float .
+<https://uitf/MFHK101/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0762"^^xsd:float .
 
-<https://example.org/pals-instance/MFHK101/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "Winding" ;
-            <value> "SingleWound" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HCOSystem" ;
-            <value> "UITF Solenoids" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Housed_by" ;
-            <value> "ITF02" ],
-        [ a <AdditionalMetadata> ;
-            <key> "SurveyDate" ;
-            <value> "2021-03-15" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystDwellTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Powered_by" ;
-            <value> "ITF02" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystRampTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TrimCardType" ;
-            <value> "10Amp" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Hmax" ;
-            <value> "3" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ControlsUnits" ;
-            <value> "Amps" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitfmag" ],
-        [ a <AdditionalMetadata> ;
-            <key> "FieldMap" ;
-            <value> "Data ( text/plain; charset=us-ascii )" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Tilt" ;
-            <value> "0" ],
-        [ a <AdditionalMetadata> ;
-            <key> "SurveyZ" ;
-            <value> ".576" ] ;
-    <description> "Focusing solenoid in the injector line." .
+<https://uitf/MFHK101/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "Amps" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Hmax" ;
+            acc:value "3" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Tilt" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystDwellTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Housed_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystRampTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Powered_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Solenoids" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "FieldMap" ;
+            acc:value "Data ( text/plain; charset=us-ascii )" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyDate" ;
+            acc:value "2021-03-15" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyZ" ;
+            acc:value ".576" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "10Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Winding" ;
+            acc:value "SingleWound" ] ;
+    acc:description "Focusing solenoid in the injector line." .
 
-<https://example.org/pals-instance/MFHK101/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/MFHK101/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/MFHK101/SolenoidP> a <SolenoidParamGroup> ;
-    <Ksol> "-11.6540717"^^xsd:float .
+<https://uitf/MFHK101/SolenoidP> a acc:SolenoidParamGroup ;
+    acc:Ksol "-11.6540717"^^xsd:float .
 
-<https://example.org/pals-instance/MFHK101/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "17.00227041491529"^^xsd:float ;
-    <alpha_b> "2.034480014161481"^^xsd:float ;
-    <beta_a> "14.80158650370627"^^xsd:float ;
-    <beta_b> "3.207825106053682"^^xsd:float ;
-    <eta_x> "-9.113855498511374e-16"^^xsd:float ;
-    <eta_y> "-1.365533180766782e-16"^^xsd:float ;
-    <etap_x> "1.098940560030332e-15"^^xsd:float ;
-    <etap_y> "1.861070952494128e-16"^^xsd:float ;
-    <phi_a> "0.4245134122427604"^^xsd:float ;
-    <phi_b> "2.434715554013777"^^xsd:float .
+<https://uitf/MFHK101/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "17.00227041491529"^^xsd:float ;
+    acc:alpha_b "2.034480014161481"^^xsd:float ;
+    acc:beta_a "14.80158650370627"^^xsd:float ;
+    acc:beta_b "3.207825106053682"^^xsd:float ;
+    acc:eta_x "-9.113855498511374e-16"^^xsd:float ;
+    acc:eta_y "-1.365533180766782e-16"^^xsd:float ;
+    acc:etap_x "1.098940560030332e-15"^^xsd:float ;
+    acc:etap_y "1.861070952494128e-16"^^xsd:float ;
+    acc:phi_a "0.4245134122427604"^^xsd:float ;
+    acc:phi_b "2.434715554013777"^^xsd:float .
 
-inst:MFHK101_to_IPMK102 rdf:object inst:IPMK102 ;
+<https://uitf/MFHK101_to_IPMK102> rdf:object <https://uitf/IPMK102> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:MFHK101 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/MFHK101> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/MFRM604H/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.24767958495496"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "52.78731737091019"^^xsd:float .
+<https://uitf/MFRM604H/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.24767958495496"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "52.78731737091019"^^xsd:float .
 
-<https://example.org/pals-instance/MFRM604H/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "1e-06"^^xsd:float .
+<https://uitf/MFRM604H/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "1e-06"^^xsd:float .
 
-<https://example.org/pals-instance/MFRM604H/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "ControlsUnits" ;
-            <value> "milliAmps" ],
-        [ a <AdditionalMetadata> ;
-            <key> "KICK" ;
-            <value> "0" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Comments" ;
-            <value> "Raster" ],
-        [ a <AdditionalMetadata> ;
-            <key> "NoHyst" ;
-            <value> "1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TrimCardType" ;
-            <value> "NA" ] ;
-    <description> "horizontal steering corrector magnet." .
+<https://uitf/MFRM604H/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "milliAmps" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "NA" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Comments" ;
+            acc:value "Raster" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "KICK" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ] ;
+    acc:description "horizontal steering corrector magnet." .
 
-<https://example.org/pals-instance/MFRM604H/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144255654231"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/MFRM604H/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144255654231"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/MFRM604H/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "95.02599658618053"^^xsd:float ;
-    <alpha_b> "-67.51923256692868"^^xsd:float ;
-    <beta_a> "45.52401608348776"^^xsd:float ;
-    <beta_b> "156.4373175342656"^^xsd:float ;
-    <eta_x> "0.3016569526764957"^^xsd:float ;
-    <eta_y> "-0.6426290761704515"^^xsd:float ;
-    <etap_x> "-0.651181426230172"^^xsd:float ;
-    <etap_y> "-0.2659016158366157"^^xsd:float ;
-    <phi_a> "12.97136918635243"^^xsd:float ;
-    <phi_b> "15.05242196252455"^^xsd:float .
+<https://uitf/MFRM604H/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "95.02599658618053"^^xsd:float ;
+    acc:alpha_b "-67.51923256692868"^^xsd:float ;
+    acc:beta_a "45.52401608348776"^^xsd:float ;
+    acc:beta_b "156.4373175342656"^^xsd:float ;
+    acc:eta_x "0.3016569526764957"^^xsd:float ;
+    acc:eta_y "-0.6426290761704515"^^xsd:float ;
+    acc:etap_x "-0.651181426230172"^^xsd:float ;
+    acc:etap_y "-0.2659016158366157"^^xsd:float ;
+    acc:phi_a "12.97136918635243"^^xsd:float ;
+    acc:phi_b "15.05242196252455"^^xsd:float .
 
-inst:MFRM604H_KICK rdf:object inst:MFRM604H.KICK ;
+<https://uitf/MFRM604H_KICK> rdf:object <https://uitf/MFRM604H.KICK> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MFRM604H .
+    rdf:subject <https://uitf/MFRM604H> .
 
-inst:MFRM604H_LMAX rdf:object inst:MFRM604H.HMAX ;
+<https://uitf/MFRM604H_LMAX> rdf:object <https://uitf/MFRM604H.HMAX> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MFRM604H .
+    rdf:subject <https://uitf/MFRM604H> .
 
-inst:MFRM604H_LMIN rdf:object inst:MFRM604H.HMIN ;
+<https://uitf/MFRM604H_LMIN> rdf:object <https://uitf/MFRM604H.HMIN> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MFRM604H .
+    rdf:subject <https://uitf/MFRM604H> .
 
-inst:MFRM604H_RB rdf:object inst:MFRM604HM ;
+<https://uitf/MFRM604H_RB> rdf:object <https://uitf/MFRM604HM> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MFRM604H .
+    rdf:subject <https://uitf/MFRM604H> .
 
-inst:MFRM604H_S rdf:object inst:MFRM604H.S ;
+<https://uitf/MFRM604H_S> rdf:object <https://uitf/MFRM604H.S> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MFRM604H .
+    rdf:subject <https://uitf/MFRM604H> .
 
-inst:MFRM604H_STAT rdf:object inst:MFRM604H.STAT ;
+<https://uitf/MFRM604H_STAT> rdf:object <https://uitf/MFRM604H.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MFRM604H .
+    rdf:subject <https://uitf/MFRM604H> .
 
-<https://example.org/pals-instance/MFRM604V/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.24767958498776"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "52.62398370424354"^^xsd:float .
+<https://uitf/MFRM604V/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.24767958498776"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "52.62398370424354"^^xsd:float .
 
-<https://example.org/pals-instance/MFRM604V/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "1e-06"^^xsd:float .
+<https://uitf/MFRM604V/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "1e-06"^^xsd:float .
 
-<https://example.org/pals-instance/MFRM604V/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "NoHyst" ;
-            <value> "1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "KICK" ;
-            <value> "0" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TrimCardType" ;
-            <value> "NA" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ControlsUnits" ;
-            <value> "milliAmps" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Comments" ;
-            <value> "Raster" ] ;
-    <description> "vertical steering corrector magnet." .
+<https://uitf/MFRM604V/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "KICK" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Comments" ;
+            acc:value "Raster" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "milliAmps" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "NA" ] ;
+    acc:description "vertical steering corrector magnet." .
 
-<https://example.org/pals-instance/MFRM604V/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144255654231"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/MFRM604V/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144255654231"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/MFRM604V/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "127.4277193468357"^^xsd:float ;
-    <alpha_b> "-62.7583704942617"^^xsd:float ;
-    <beta_a> "81.85819717045146"^^xsd:float ;
-    <beta_b> "135.1585989417374"^^xsd:float ;
-    <eta_x> "0.4080168026878965"^^xsd:float ;
-    <eta_y> "-0.5991983902832668"^^xsd:float ;
-    <etap_x> "-0.651181426230172"^^xsd:float ;
-    <etap_y> "-0.2659016158366157"^^xsd:float ;
-    <phi_a> "12.96869356373805"^^xsd:float ;
-    <phi_b> "15.0512986935019"^^xsd:float .
+<https://uitf/MFRM604V/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "127.4277193468357"^^xsd:float ;
+    acc:alpha_b "-62.7583704942617"^^xsd:float ;
+    acc:beta_a "81.85819717045146"^^xsd:float ;
+    acc:beta_b "135.1585989417374"^^xsd:float ;
+    acc:eta_x "0.4080168026878965"^^xsd:float ;
+    acc:eta_y "-0.5991983902832668"^^xsd:float ;
+    acc:etap_x "-0.651181426230172"^^xsd:float ;
+    acc:etap_y "-0.2659016158366157"^^xsd:float ;
+    acc:phi_a "12.96869356373805"^^xsd:float ;
+    acc:phi_b "15.0512986935019"^^xsd:float .
 
-inst:MFRM604V_KICK rdf:object inst:MFRM604V.KICK ;
+<https://uitf/MFRM604V_KICK> rdf:object <https://uitf/MFRM604V.KICK> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MFRM604V .
+    rdf:subject <https://uitf/MFRM604V> .
 
-inst:MFRM604V_LMAX rdf:object inst:MFRM604V.HMAX ;
+<https://uitf/MFRM604V_LMAX> rdf:object <https://uitf/MFRM604V.HMAX> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MFRM604V .
+    rdf:subject <https://uitf/MFRM604V> .
 
-inst:MFRM604V_LMIN rdf:object inst:MFRM604V.HMIN ;
+<https://uitf/MFRM604V_LMIN> rdf:object <https://uitf/MFRM604V.HMIN> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MFRM604V .
+    rdf:subject <https://uitf/MFRM604V> .
 
-inst:MFRM604V_RB rdf:object inst:MFRM604VM ;
+<https://uitf/MFRM604V_RB> rdf:object <https://uitf/MFRM604VM> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MFRM604V .
+    rdf:subject <https://uitf/MFRM604V> .
 
-inst:MFRM604V_S rdf:object inst:MFRM604V.S ;
+<https://uitf/MFRM604V_S> rdf:object <https://uitf/MFRM604V.S> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MFRM604V .
+    rdf:subject <https://uitf/MFRM604V> .
 
-inst:MFRM604V_STAT rdf:object inst:MFRM604V.STAT ;
+<https://uitf/MFRM604V_STAT> rdf:object <https://uitf/MFRM604V.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MFRM604V .
+    rdf:subject <https://uitf/MFRM604V> .
 
-<https://example.org/pals-instance/MQWK202/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.2476795886932"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "34.17524568998951"^^xsd:float .
+<https://uitf/MQWK202/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.2476795886932"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "34.17524568998951"^^xsd:float .
 
-<https://example.org/pals-instance/MQWK202/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.125"^^xsd:float .
+<https://uitf/MQWK202/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.125"^^xsd:float .
 
-<https://example.org/pals-instance/MQWK202/MagneticMultipoleP> a <MagneticMultipoleParamGroup> ;
-    <mag_components> [ a <MultipoleParameterGroup> ;
-            <Kn> "0.0"^^xsd:float ;
-            <order> 1 ] .
+<https://uitf/MQWK202/MagneticMultipoleP> a acc:MagneticMultipoleParamGroup ;
+    acc:mag_components [ a acc:MultipoleParameterGroup ;
+            acc:Kn "0.0"^^xsd:float ;
+            acc:order 1 ] .
 
-<https://example.org/pals-instance/MQWK202/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitfmag" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ControlsUnits" ;
-            <value> "Amps" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystDwellTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "TrimCardType" ;
-            <value> "10Amp" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Resistance" ;
-            <value> "1.01" ],
-        [ a <AdditionalMetadata> ;
-            <key> "NoHyst" ;
-            <value> "1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Limit" ;
-            <value> "24.25" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HCOSystem" ;
-            <value> "UITF Quads" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HystRampTime" ;
-            <value> "4" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Hmax" ;
-            <value> "9.9" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Usage" ;
-            <value> "Matching" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Radius" ;
-            <value> ".0159" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Powered_by" ;
-            <value> "ITF03" ],
-        [ a <AdditionalMetadata> ;
-            <key> "BORE" ;
-            <value> "0" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Housed_by" ;
-            <value> "ITF03" ],
-        [ a <AdditionalMetadata> ;
-            <key> "FieldMap" ;
-            <value> "Data ( text/plain; charset=us-ascii )" ] ;
-    <description> "Focusing/defocusing quadrupole magnet." .
+<https://uitf/MQWK202/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "Resistance" ;
+            acc:value "1.01" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Usage" ;
+            acc:value "Matching" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "BORE" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "10Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Radius" ;
+            acc:value ".0159" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "FieldMap" ;
+            acc:value "Data ( text/plain; charset=us-ascii )" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystRampTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Hmax" ;
+            acc:value "9.9" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Powered_by" ;
+            acc:value "ITF03" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Quads" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Housed_by" ;
+            acc:value "ITF03" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Limit" ;
+            acc:value "24.25" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystDwellTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "Amps" ] ;
+    acc:description "Focusing/defocusing quadrupole magnet." .
 
-<https://example.org/pals-instance/MQWK202/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/MQWK202/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/MQWK202/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "-0.5436044560404847"^^xsd:float ;
-    <alpha_b> "-0.7328475380936091"^^xsd:float ;
-    <beta_a> "5.268390231757493"^^xsd:float ;
-    <beta_b> "0.6302896683893651"^^xsd:float ;
-    <eta_x> "-0.1496075628172073"^^xsd:float ;
-    <eta_y> "0.05760598787041097"^^xsd:float ;
-    <etap_x> "0.0525380705251388"^^xsd:float ;
-    <etap_y> "-0.02022964211444155"^^xsd:float ;
-    <phi_a> "3.449724803972426"^^xsd:float ;
-    <phi_b> "5.1629744953913"^^xsd:float .
+<https://uitf/MQWK202/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "-0.5436044560404847"^^xsd:float ;
+    acc:alpha_b "-0.7328475380936091"^^xsd:float ;
+    acc:beta_a "5.268390231757493"^^xsd:float ;
+    acc:beta_b "0.6302896683893651"^^xsd:float ;
+    acc:eta_x "-0.1496075628172073"^^xsd:float ;
+    acc:eta_y "0.05760598787041097"^^xsd:float ;
+    acc:etap_x "0.0525380705251388"^^xsd:float ;
+    acc:etap_y "-0.02022964211444155"^^xsd:float ;
+    acc:phi_a "3.449724803972426"^^xsd:float ;
+    acc:phi_b "5.1629744953913"^^xsd:float .
 
-inst:MQWK202_BDL rdf:object inst:MQWK202.BDL ;
+<https://uitf/MQWK202_BDL> rdf:object <https://uitf/MQWK202.BDL> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MQWK202 .
+    rdf:subject <https://uitf/MQWK202> .
 
-inst:MQWK202_LMAX rdf:object inst:MQWK202.HMAX ;
+<https://uitf/MQWK202_LMAX> rdf:object <https://uitf/MQWK202.HMAX> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MQWK202 .
+    rdf:subject <https://uitf/MQWK202> .
 
-inst:MQWK202_LMIN rdf:object inst:MQWK202.HMIN ;
+<https://uitf/MQWK202_LMIN> rdf:object <https://uitf/MQWK202.HMIN> ;
     rdf:predicate "HasLimitSignal" ;
-    rdf:subject inst:MQWK202 .
+    rdf:subject <https://uitf/MQWK202> .
 
-inst:MQWK202_RB rdf:object inst:MQWK202M ;
+<https://uitf/MQWK202_RB> rdf:object <https://uitf/MQWK202M> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MQWK202 .
+    rdf:subject <https://uitf/MQWK202> .
 
-inst:MQWK202_S rdf:object inst:MQWK202.S ;
+<https://uitf/MQWK202_S> rdf:object <https://uitf/MQWK202.S> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:MQWK202 .
+    rdf:subject <https://uitf/MQWK202> .
 
-inst:MQWK202_STAT rdf:object inst:MQWK202.STAT ;
+<https://uitf/MQWK202_STAT> rdf:object <https://uitf/MQWK202.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:MQWK202 .
+    rdf:subject <https://uitf/MQWK202> .
 
-inst:MQWK202_to_IFYK203 rdf:object inst:IFYK203 ;
+<https://uitf/MQWK202_to_IFYK203> rdf:object <https://uitf/IFYK203> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:MQWK202 ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/MQWK202> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/RF_LASER/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-15.0000000115079"^^xsd:float ;
-    <x> "10.6125874"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "31.65814"^^xsd:float .
+<https://uitf/RF_LASER/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-15.0000000115079"^^xsd:float ;
+    acc:x "10.6125874"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "31.65814"^^xsd:float .
 
-<https://example.org/pals-instance/RF_LASER/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.0"^^xsd:float .
+<https://uitf/RF_LASER/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/RF_LASER/RFP> a <RFParamGroup> ;
-    <frequency> "1497000000.0"^^xsd:float ;
-    <phase> "0.0"^^xsd:float ;
-    <voltage> "0.0"^^xsd:float .
+<https://uitf/RF_LASER/RFP> a acc:RFParamGroup ;
+    acc:frequency "1497000000.0"^^xsd:float ;
+    acc:phase "0.0"^^xsd:float ;
+    acc:voltage "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/RF_LASER/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144443755972"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/RF_LASER/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144443755972"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/RF_LASER/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "-1.987749019418206"^^xsd:float ;
-    <alpha_b> "1.587714437254934"^^xsd:float ;
-    <beta_a> "0.155406734272248"^^xsd:float ;
-    <beta_b> "0.2884001693215617"^^xsd:float ;
-    <eta_x> "-1.195344089290542e-16"^^xsd:float ;
-    <eta_y> "2.250864348451503e-17"^^xsd:float ;
-    <etap_x> "-1.23859828244279e-15"^^xsd:float ;
-    <etap_y> "3.967937356187314e-16"^^xsd:float ;
-    <phi_a> "0.0"^^xsd:float ;
-    <phi_b> "0.0"^^xsd:float .
+<https://uitf/RF_LASER/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "-1.987749019418206"^^xsd:float ;
+    acc:alpha_b "1.587714437254934"^^xsd:float ;
+    acc:beta_a "0.155406734272248"^^xsd:float ;
+    acc:beta_b "0.2884001693215617"^^xsd:float ;
+    acc:eta_x "-1.195344089290542e-16"^^xsd:float ;
+    acc:eta_y "2.250864348451503e-17"^^xsd:float ;
+    acc:etap_x "-1.23859828244279e-15"^^xsd:float ;
+    acc:etap_y "3.967937356187314e-16"^^xsd:float ;
+    acc:phi_a "0.0"^^xsd:float ;
+    acc:phi_b "0.0"^^xsd:float .
 
-inst:RF_LASER_GET rdf:object inst:RK11.GET ;
+<https://uitf/RF_LASER_GET> rdf:object <https://uitf/RK11.GET> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:RF_LASER .
+    rdf:subject <https://uitf/RF_LASER> .
 
-inst:RF_LASER_GMES rdf:object inst:RK11.GMES ;
+<https://uitf/RF_LASER_GMES> rdf:object <https://uitf/RK11.GMES> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:RF_LASER .
+    rdf:subject <https://uitf/RF_LASER> .
 
-inst:RF_LASER_STAT rdf:object inst:RK11.STAT ;
+<https://uitf/RF_LASER_STAT> rdf:object <https://uitf/RK11.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:RF_LASER .
+    rdf:subject <https://uitf/RF_LASER> .
 
-inst:RF_LASER_to_S_IS_20CM rdf:object inst:S_IS_20CM ;
+<https://uitf/RF_LASER_to_S_IS_20CM> rdf:object <https://uitf/S_IS_20CM> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:RF_LASER ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/RF_LASER> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-<https://example.org/pals-instance/RM11/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-1.15078924901353e-08"^^xsd:float ;
-    <x> "10.24767958726352"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "41.293371816671"^^xsd:float .
+<https://uitf/RM11/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-1.15078924901353e-08"^^xsd:float ;
+    acc:x "10.24767958726352"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "41.293371816671"^^xsd:float .
 
-<https://example.org/pals-instance/RM11/LongitudinalPlacementP> a <LongitudinalPlacementParamGroup> ;
-    <length> "0.5"^^xsd:float .
+<https://uitf/RM11/LongitudinalPlacementP> a acc:LongitudinalPlacementParamGroup ;
+    acc:length "0.5"^^xsd:float .
 
-<https://example.org/pals-instance/RM11/MetaP> a <MetaParamGroup> ;
-    <additional_metadata> [ a <AdditionalMetadata> ;
-            <key> "CavityType" ;
-            <value> "C75" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Controlled_by" ;
-            <value> "iocitfrffcc1" ],
-        [ a <AdditionalMetadata> ;
-            <key> "FCC" ;
-            <value> "fcc_773" ],
-        [ a <AdditionalMetadata> ;
-            <key> "ROQ" ;
-            <value> "1067" ],
-        [ a <AdditionalMetadata> ;
-            <key> "PhaseRMS" ;
-            <value> ".04" ],
-        [ a <AdditionalMetadata> ;
-            <key> "HCOSystem" ;
-            <value> "UITF RF Cavities" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Qexternal" ;
-            <value> "1.15E+07" ],
-        [ a <AdditionalMetadata> ;
-            <key> "Q0" ;
-            <value> "1E+09" ],
-        [ a <AdditionalMetadata> ;
-            <key> "MaxGSET" ;
-            <value> "11" ] ;
-    <description> "Superconducting (cryomodule) RF accelerating cavity." .
+<https://uitf/RM11/MetaP> a acc:MetaParamGroup ;
+    acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfrffcc1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF RF Cavities" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "PhaseRMS" ;
+            acc:value ".04" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Qexternal" ;
+            acc:value "1.15E+07" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "MaxGSET" ;
+            acc:value "11" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "FCC" ;
+            acc:value "fcc_773" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Q0" ;
+            acc:value "1E+09" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "CavityType" ;
+            acc:value "C75" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ROQ" ;
+            acc:value "1067" ] ;
+    acc:description "Superconducting (cryomodule) RF accelerating cavity." .
 
-<https://example.org/pals-instance/RM11/RFP> a <RFParamGroup> ;
-    <frequency> "500000000.0"^^xsd:float ;
-    <phase> "0.0"^^xsd:float ;
-    <voltage> "0.0"^^xsd:float .
+<https://uitf/RM11/RFP> a acc:RFParamGroup ;
+    acc:frequency "500000000.0"^^xsd:float ;
+    acc:phase "0.0"^^xsd:float ;
+    acc:voltage "0.0"^^xsd:float .
 
-<https://example.org/pals-instance/RM11/ReferenceP> a <ReferenceParamGroup> ;
-    <pc_ref> "0.465144255654231"^^xsd:float ;
-    <species_ref> "electron" .
+<https://uitf/RM11/ReferenceP> a acc:ReferenceParamGroup ;
+    acc:pc_ref "0.465144255654231"^^xsd:float ;
+    acc:species_ref "electron" .
 
-<https://example.org/pals-instance/RM11/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "-27.32665933627831"^^xsd:float ;
-    <alpha_b> "-6.909431348341881"^^xsd:float ;
-    <beta_a> "21.20911239952727"^^xsd:float ;
-    <beta_b> "4.413170826743687"^^xsd:float ;
-    <eta_x> "0.239131666316787"^^xsd:float ;
-    <eta_y> "-0.1556734753803759"^^xsd:float ;
-    <etap_x> "0.2771216678132173"^^xsd:float ;
-    <etap_y> "-0.1804047694567548"^^xsd:float ;
-    <phi_a> "12.92123568016702"^^xsd:float ;
-    <phi_b> "14.88834594146045"^^xsd:float .
+<https://uitf/RM11/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "-27.32665933627831"^^xsd:float ;
+    acc:alpha_b "-6.909431348341881"^^xsd:float ;
+    acc:beta_a "21.20911239952727"^^xsd:float ;
+    acc:beta_b "4.413170826743687"^^xsd:float ;
+    acc:eta_x "0.239131666316787"^^xsd:float ;
+    acc:eta_y "-0.1556734753803759"^^xsd:float ;
+    acc:etap_x "0.2771216678132173"^^xsd:float ;
+    acc:etap_y "-0.1804047694567548"^^xsd:float ;
+    acc:phi_a "12.92123568016702"^^xsd:float ;
+    acc:phi_b "14.88834594146045"^^xsd:float .
 
-inst:RM11_GET rdf:object inst:RM11.GET ;
+<https://uitf/RM11_GET> rdf:object <https://uitf/RM11.GET> ;
     rdf:predicate "HasSetpointSignal" ;
-    rdf:subject inst:RM11 .
+    rdf:subject <https://uitf/RM11> .
 
-inst:RM11_GMES rdf:object inst:RM11.GMES ;
+<https://uitf/RM11_GMES> rdf:object <https://uitf/RM11.GMES> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:RM11 .
+    rdf:subject <https://uitf/RM11> .
 
-inst:RM11_STAT rdf:object inst:RM11.STAT ;
+<https://uitf/RM11_STAT> rdf:object <https://uitf/RM11.STAT> ;
     rdf:predicate "HasReadbackSignal" ;
-    rdf:subject inst:RM11 .
+    rdf:subject <https://uitf/RM11> .
 
-<https://example.org/pals-instance/S_IS_20CM/FloorP> a <FloorParamGroup> ;
-    <phi> "0.0"^^xsd:float ;
-    <psi> "0.0"^^xsd:float ;
-    <theta> "-15.0000000115079"^^xsd:float ;
-    <x> "10.56082359094069"^^xsd:float ;
-    <y> "21.0668"^^xsd:float ;
-    <z> "31.85132516524742"^^xsd:float .
+<https://uitf/S_IS_20CM/FloorP> a acc:FloorParamGroup ;
+    acc:phi "0.0"^^xsd:float ;
+    acc:psi "0.0"^^xsd:float ;
+    acc:theta "-15.0000000115079"^^xsd:float ;
+    acc:x "10.56082359094069"^^xsd:float ;
+    acc:y "21.0668"^^xsd:float ;
+    acc:z "31.85132516524742"^^xsd:float .
 
-<https://example.org/pals-instance/S_IS_20CM/MetaP> a <MetaParamGroup> ;
-    <description> "Reference marker 20 cm downstream of the gun." .
+<https://uitf/S_IS_20CM/MetaP> a acc:MetaParamGroup ;
+    acc:description "Reference marker 20 cm downstream of the gun." .
 
-<https://example.org/pals-instance/S_IS_20CM/TwissP> a <TwissParamGroup> ;
-    <alpha_a> "-8.359604379977313"^^xsd:float ;
-    <alpha_b> "-0.8539187577256651"^^xsd:float ;
-    <beta_a> "2.224877414151352"^^xsd:float ;
-    <beta_b> "0.1416410334157079"^^xsd:float ;
-    <eta_x> "-3.672540654176122e-16"^^xsd:float ;
-    <eta_y> "1.018673906082613e-16"^^xsd:float ;
-    <etap_x> "-1.23859828244279e-15"^^xsd:float ;
-    <etap_y> "3.967937356187314e-16"^^xsd:float ;
-    <phi_a> "0.347052717594763"^^xsd:float ;
-    <phi_b> "1.715491573922409"^^xsd:float .
+<https://uitf/S_IS_20CM/TwissP> a acc:TwissParamGroup ;
+    acc:alpha_a "-8.359604379977313"^^xsd:float ;
+    acc:alpha_b "-0.8539187577256651"^^xsd:float ;
+    acc:beta_a "2.224877414151352"^^xsd:float ;
+    acc:beta_b "0.1416410334157079"^^xsd:float ;
+    acc:eta_x "-3.672540654176122e-16"^^xsd:float ;
+    acc:eta_y "1.018673906082613e-16"^^xsd:float ;
+    acc:etap_x "-1.23859828244279e-15"^^xsd:float ;
+    acc:etap_y "3.967937356187314e-16"^^xsd:float ;
+    acc:phi_a "0.347052717594763"^^xsd:float ;
+    acc:phi_b "1.715491573922409"^^xsd:float .
 
-inst:S_IS_20CM_to_IPMK101 rdf:object inst:IPMK101 ;
+<https://uitf/S_IS_20CM_to_IPMK101> rdf:object <https://uitf/IPMK101> ;
     rdf:predicate "Precedes" ;
-    rdf:subject inst:S_IS_20CM ;
-    <beamline_context> inst:GUN_thru_MV ;
-    <context> "beamline_order" .
+    rdf:subject <https://uitf/S_IS_20CM> ;
+    acc:beamline_context <https://uitf/GUN_thru_MV> ;
+    acc:context "beamline_order" .
 
-inst:IPMK101.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/IPMK101.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:IPMK101.XPOS a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "horizontal_beam_position" ;
-    <canonical_signal_type> "HorizontalBeamPosition" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured horizontal beam position." ;
-    <native_unit> qudt:MilliM ;
-    <quantity_kind> "BeamPosition" ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/IPMK101.XPOS> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "horizontal_beam_position" ;
+    acc:canonical_signal_type "HorizontalBeamPosition" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured horizontal beam position." ;
+    acc:native_unit "mm" ;
+    acc:quantity_kind "BeamPosition" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:IPMK101.YPOS a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "vertical_beam_position" ;
-    <canonical_signal_type> "VerticalBeamPosition" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured vertical beam position." ;
-    <native_unit> qudt:MilliM ;
-    <quantity_kind> "BeamPosition" ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/IPMK101.YPOS> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "vertical_beam_position" ;
+    acc:canonical_signal_type "VerticalBeamPosition" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured vertical beam position." ;
+    acc:native_unit "mm" ;
+    acc:quantity_kind "BeamPosition" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:IPMK102.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/IPMK102.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:IPMK102.XPOS a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "horizontal_beam_position" ;
-    <canonical_signal_type> "HorizontalBeamPosition" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured horizontal beam position." ;
-    <native_unit> qudt:MilliM ;
-    <quantity_kind> "BeamPosition" ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/IPMK102.XPOS> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "horizontal_beam_position" ;
+    acc:canonical_signal_type "HorizontalBeamPosition" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured horizontal beam position." ;
+    acc:native_unit "mm" ;
+    acc:quantity_kind "BeamPosition" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:IPMK102.YPOS a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "vertical_beam_position" ;
-    <canonical_signal_type> "VerticalBeamPosition" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured vertical beam position." ;
-    <native_unit> qudt:MilliM ;
-    <quantity_kind> "BeamPosition" ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/IPMK102.YPOS> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "vertical_beam_position" ;
+    acc:canonical_signal_type "VerticalBeamPosition" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured vertical beam position." ;
+    acc:native_unit "mm" ;
+    acc:quantity_kind "BeamPosition" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101H.HMAX a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_max" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:maxInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101H.HMAX> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_max" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MaximumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101H.HMIN a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_min" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:minInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101H.HMIN> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_min" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MinimumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101H.KICK a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "kick_setpoint" ;
-    <canonical_signal_type> "IntegratedFieldSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired integrated corrector kick or equivalent model quantity." ;
-    <native_unit> qudt:T-M ;
-    <quantity_kind> quantitykind:MagneticFluxPerLength ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101H.KICK> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "kick_setpoint" ;
+    acc:canonical_signal_type "IntegratedFieldSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired integrated corrector kick or equivalent model quantity." ;
+    acc:native_unit "T_M" ;
+    acc:quantity_kind "IntegratedMagneticField" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101H.S a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_setpoint" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired magnet current command." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101H.S> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_setpoint" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired magnet current command." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101H.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101H.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101HM a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_readback" ;
-    <canonical_signal_type> "MagnetCurrentReadback" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured magnet current." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101HM> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_readback" ;
+    acc:canonical_signal_type "MagnetCurrentReadback" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured magnet current." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101V.HMAX a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_max" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:maxInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101V.HMAX> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_max" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MaximumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101V.HMIN a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_min" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:minInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101V.HMIN> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_min" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MinimumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101V.KICK a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "kick_setpoint" ;
-    <canonical_signal_type> "IntegratedFieldSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired integrated corrector kick or equivalent model quantity." ;
-    <native_unit> qudt:T-M ;
-    <quantity_kind> quantitykind:MagneticFluxPerLength ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101V.KICK> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "kick_setpoint" ;
+    acc:canonical_signal_type "IntegratedFieldSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired integrated corrector kick or equivalent model quantity." ;
+    acc:native_unit "T_M" ;
+    acc:quantity_kind "IntegratedMagneticField" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101V.S a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_setpoint" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired magnet current command." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101V.S> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_setpoint" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired magnet current command." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101V.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101V.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MBHK101VM a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_readback" ;
-    <canonical_signal_type> "MagnetCurrentReadback" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured magnet current." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MBHK101VM> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_readback" ;
+    acc:canonical_signal_type "MagnetCurrentReadback" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured magnet current." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MDSK201.BDL a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "field_setpoint" ;
-    <canonical_signal_type> "IntegratedFieldSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired dipole bend field or equivalent model quantity." ;
-    <native_unit> qudt:T-M ;
-    <quantity_kind> quantitykind:MagneticFluxPerLength ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MDSK201.BDL> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "field_setpoint" ;
+    acc:canonical_signal_type "IntegratedFieldSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired dipole bend field or equivalent model quantity." ;
+    acc:native_unit "T_M" ;
+    acc:quantity_kind "IntegratedMagneticField" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MDSK201.HMAX a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_max" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:maxInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MDSK201.HMAX> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_max" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MaximumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MDSK201.HMIN a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_min" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:minInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MDSK201.HMIN> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_min" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MinimumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MDSK201.S a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_setpoint" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired magnet current command." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MDSK201.S> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_setpoint" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired magnet current command." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MDSK201.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MDSK201.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MDSK201M a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_readback" ;
-    <canonical_signal_type> "MagnetCurrentReadback" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured magnet current." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MDSK201M> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_readback" ;
+    acc:canonical_signal_type "MagnetCurrentReadback" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured magnet current." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604H.HMAX a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_max" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:maxInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604H.HMAX> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_max" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MaximumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604H.HMIN a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_min" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:minInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604H.HMIN> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_min" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MinimumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604H.KICK a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "kick_setpoint" ;
-    <canonical_signal_type> "IntegratedFieldSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired integrated corrector kick or equivalent model quantity." ;
-    <native_unit> qudt:T-M ;
-    <quantity_kind> quantitykind:MagneticFluxPerLength ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604H.KICK> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "kick_setpoint" ;
+    acc:canonical_signal_type "IntegratedFieldSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired integrated corrector kick or equivalent model quantity." ;
+    acc:native_unit "T_M" ;
+    acc:quantity_kind "IntegratedMagneticField" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604H.S a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_setpoint" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired magnet current command." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604H.S> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_setpoint" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired magnet current command." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604H.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604H.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604HM a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_readback" ;
-    <canonical_signal_type> "MagnetCurrentReadback" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured magnet current." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604HM> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_readback" ;
+    acc:canonical_signal_type "MagnetCurrentReadback" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured magnet current." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604V.HMAX a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_max" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:maxInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604V.HMAX> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_max" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MaximumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604V.HMIN a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_min" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:minInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604V.HMIN> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_min" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MinimumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604V.KICK a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "kick_setpoint" ;
-    <canonical_signal_type> "IntegratedFieldSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired integrated corrector kick or equivalent model quantity." ;
-    <native_unit> qudt:T-M ;
-    <quantity_kind> quantitykind:MagneticFluxPerLength ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604V.KICK> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "kick_setpoint" ;
+    acc:canonical_signal_type "IntegratedFieldSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired integrated corrector kick or equivalent model quantity." ;
+    acc:native_unit "T_M" ;
+    acc:quantity_kind "IntegratedMagneticField" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604V.S a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_setpoint" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired magnet current command." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604V.S> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_setpoint" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired magnet current command." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604V.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604V.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MFRM604VM a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_readback" ;
-    <canonical_signal_type> "MagnetCurrentReadback" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured magnet current." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MFRM604VM> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_readback" ;
+    acc:canonical_signal_type "MagnetCurrentReadback" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured magnet current." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MQWK202.BDL a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "strength_setpoint" ;
-    <canonical_signal_type> "MagnetFieldSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired integrated quadrupole strength or equivalent model quantity. (Gradient quantity; no dedicated canonical/quantity-kind exists yet.)" ;
-    <native_unit> "G_per_cm" ;
-    <quantity_kind> quantitykind:MagneticFluxPerLength ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MQWK202.BDL> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "strength_setpoint" ;
+    acc:canonical_signal_type "MagnetFieldSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired integrated quadrupole strength or equivalent model quantity. (Gradient quantity; no dedicated canonical/quantity-kind exists yet.)" ;
+    acc:native_unit "G_per_cm" ;
+    acc:quantity_kind "IntegratedMagneticField" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MQWK202.HMAX a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_max" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:maxInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MQWK202.HMAX> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_max" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Maximum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MaximumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MQWK202.HMIN a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_min" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> xsd:minInclusive ;
-    <source_system> "EPICS" .
+<https://uitf/MQWK202.HMIN> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_min" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Minimum allowed current setting. (No dedicated canonical \"limit\" type exists yet; using closest available.)" ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "MinimumLimit" ;
+    acc:source_system "EPICS" .
 
-inst:MQWK202.S a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_setpoint" ;
-    <canonical_signal_type> "MagnetCurrentSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Desired magnet current command." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MQWK202.S> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_setpoint" ;
+    acc:canonical_signal_type "MagnetCurrentSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Desired magnet current command." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:MQWK202.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MQWK202.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:MQWK202M a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "current_readback" ;
-    <canonical_signal_type> "MagnetCurrentReadback" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured magnet current." ;
-    <native_unit> qudt:A ;
-    <quantity_kind> quantitykind:ElectricCurrent ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/MQWK202M> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "current_readback" ;
+    acc:canonical_signal_type "MagnetCurrentReadback" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured magnet current." ;
+    acc:native_unit "A" ;
+    acc:quantity_kind "ElectricCurrent" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:RK11.GET a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "gradient_setpoint" ;
-    <canonical_signal_type> "GradientSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Requested cavity gradient setpoint." ;
-    <native_unit> qudt:MegaV-PER-M ;
-    <quantity_kind> quantitykind:ElectricFieldStrength ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/RK11.GET> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "gradient_setpoint" ;
+    acc:canonical_signal_type "GradientSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Requested cavity gradient setpoint." ;
+    acc:native_unit "MV_per_m" ;
+    acc:quantity_kind "CavityGradient" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:RK11.GMES a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "gradient_readback" ;
-    <canonical_signal_type> "GradientReadback" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured cavity gradient readback." ;
-    <native_unit> qudt:MegaV-PER-M ;
-    <quantity_kind> quantitykind:ElectricFieldStrength ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/RK11.GMES> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "gradient_readback" ;
+    acc:canonical_signal_type "GradientReadback" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured cavity gradient readback." ;
+    acc:native_unit "MV_per_m" ;
+    acc:quantity_kind "CavityGradient" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:RK11.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/RK11.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:RM11.GET a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "gradient_setpoint" ;
-    <canonical_signal_type> "GradientSetpoint" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Requested cavity gradient setpoint." ;
-    <native_unit> qudt:MegaV-PER-M ;
-    <quantity_kind> quantitykind:ElectricFieldStrength ;
-    <signal_role> sosa:ActuatableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/RM11.GET> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "gradient_setpoint" ;
+    acc:canonical_signal_type "GradientSetpoint" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Requested cavity gradient setpoint." ;
+    acc:native_unit "MV_per_m" ;
+    acc:quantity_kind "CavityGradient" ;
+    acc:signal_role "Setpoint" ;
+    acc:source_system "EPICS" .
 
-inst:RM11.GMES a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "gradient_readback" ;
-    <canonical_signal_type> "GradientReadback" ;
-    <native_data_type> xsd:float ;
-    <native_description> "Measured cavity gradient readback." ;
-    <native_unit> qudt:MegaV-PER-M ;
-    <quantity_kind> quantitykind:ElectricFieldStrength ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/RM11.GMES> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "gradient_readback" ;
+    acc:canonical_signal_type "GradientReadback" ;
+    acc:native_data_type "Float" ;
+    acc:native_description "Measured cavity gradient readback." ;
+    acc:native_unit "MV_per_m" ;
+    acc:quantity_kind "CavityGradient" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:RM11.STAT a "Signal" ;
-    <access_protocol> "EPICS Channel Access" ;
-    <alias> "status" ;
-    <canonical_signal_type> "Status" ;
-    <native_data_type> xsd:string ;
-    <native_description> "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
-    <native_unit> "none" ;
-    <quantity_kind> sosa:ObservableProperty ;
-    <signal_role> sosa:ObservableProperty ;
-    <source_system> "EPICS" .
+<https://uitf/RM11.STAT> a "Signal" ;
+    acc:access_protocol "EPICS Channel Access" ;
+    acc:alias "status" ;
+    acc:canonical_signal_type "Status" ;
+    acc:native_data_type "String" ;
+    acc:native_description "Generic instrument status readback. (Old capability role=\"readback\"; semantic meaning is a status value.)" ;
+    acc:native_unit "none" ;
+    acc:quantity_kind "State" ;
+    acc:signal_role "Readback" ;
+    acc:source_system "EPICS" .
 
-inst:jefferson-lab a <Affiliation> ;
-    <identifiers> [ a <Identifier> ;
-            <identifier_type> "ROR" ;
-            <identifier_value> "https://ror.org/01gq9xj92" ],
-        [ a <Identifier> ;
-            <identifier_type> "ROR" ;
-            <identifier_value> "https://ror.org/01gq9xj92" ] ;
-    <name> "Thomas Jefferson National Accelerator Facility" .
+<https://uitf/jefferson-lab> a acc:Affiliation ;
+    acc:identifiers [ a acc:Identifier ;
+            acc:identifier_type "ROR" ;
+            acc:identifier_value "https://ror.org/01gq9xj92" ],
+        [ a acc:Identifier ;
+            acc:identifier_type "ROR" ;
+            acc:identifier_value "https://ror.org/01gq9xj92" ] ;
+    acc:name "Thomas Jefferson National Accelerator Facility" .
 
-inst:IFYK203 a "BeamProfileMonitor" ;
-    <FloorP> <https://example.org/pals-instance/IFYK203/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/IFYK203/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/IFYK203/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/IFYK203/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/IFYK203/TwissP> ;
-    <native_types> "DiagnosticDevice",
+<https://uitf/IFYK203> a "BeamProfileMonitor" ;
+    acc:FloorP <https://uitf/IFYK203/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/IFYK203/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/IFYK203/MetaP> ;
+    acc:ReferenceP <https://uitf/IFYK203/ReferenceP> ;
+    acc:TwissP <https://uitf/IFYK203/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "BeamCurrentMeasurement" ;
+    acc:native_types "DiagnosticDevice",
         "FaradayCup",
-        "MONITOR" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "BeamCurrentMeasurement" .
+        "MONITOR" .
 
-inst:ISLK302 a "Aperture" ;
-    <FloorP> <https://example.org/pals-instance/ISLK302/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/ISLK302/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/ISLK302/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/ISLK302/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/ISLK302/TwissP> ;
-    <native_types> "Aperture",
+<https://uitf/ISLK302> a "Aperture" ;
+    acc:FloorP <https://uitf/ISLK302/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/ISLK302/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/ISLK302/MetaP> ;
+    acc:ReferenceP <https://uitf/ISLK302/ReferenceP> ;
+    acc:TwissP <https://uitf/ISLK302/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Measurement" ;
+    acc:native_types "Aperture",
         "DiagnosticDevice",
-        "MONITOR" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "Measurement" .
+        "MONITOR" .
 
-inst:ITVK201 a "BeamProfileMonitor" ;
-    <FloorP> <https://example.org/pals-instance/ITVK201/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/ITVK201/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/ITVK201/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/ITVK201/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/ITVK201/TwissP> ;
-    <native_types> "DiagnosticDevice",
+<https://uitf/ITVK201> a "BeamProfileMonitor" ;
+    acc:FloorP <https://uitf/ITVK201/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/ITVK201/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/ITVK201/MetaP> ;
+    acc:ReferenceP <https://uitf/ITVK201/ReferenceP> ;
+    acc:TwissP <https://uitf/ITVK201/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "BeamProfileMeasurement" ;
+    acc:native_types "DiagnosticDevice",
         "MONITOR",
-        "Standard" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "BeamProfileMeasurement" .
+        "Standard" .
 
-inst:IYGK302 a "BeamProfileMonitor" ;
-    <FloorP> <https://example.org/pals-instance/IYGK302/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/IYGK302/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/IYGK302/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/IYGK302/ReferenceP> ;
-    <native_types> "DiagnosticDevice",
+<https://uitf/IYGK302> a "BeamProfileMonitor" ;
+    acc:FloorP <https://uitf/IYGK302/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/IYGK302/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/IYGK302/MetaP> ;
+    acc:ReferenceP <https://uitf/IYGK302/ReferenceP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "BeamProfileMeasurement" ;
+    acc:native_types "DiagnosticDevice",
         "MONITOR",
-        "YAG" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "BeamProfileMeasurement" .
+        "YAG" .
 
-inst:MFHK101 a "Solenoid" ;
-    <FloorP> <https://example.org/pals-instance/MFHK101/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/MFHK101/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/MFHK101/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/MFHK101/ReferenceP> ;
-    <SolenoidP> <https://example.org/pals-instance/MFHK101/SolenoidP> ;
-    <TwissP> <https://example.org/pals-instance/MFHK101/TwissP> ;
-    <native_types> "SOLE",
-        "Solenoid" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "Focusing" .
+<https://uitf/MFHK101> a "Solenoid" ;
+    acc:FloorP <https://uitf/MFHK101/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/MFHK101/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/MFHK101/MetaP> ;
+    acc:ReferenceP <https://uitf/MFHK101/ReferenceP> ;
+    acc:SolenoidP <https://uitf/MFHK101/SolenoidP> ;
+    acc:TwissP <https://uitf/MFHK101/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Focusing" ;
+    acc:native_types "SOLE",
+        "Solenoid" .
 
-inst:S_IS_20CM a "Marker" ;
-    <FloorP> <https://example.org/pals-instance/S_IS_20CM/FloorP> ;
-    <MetaP> <https://example.org/pals-instance/S_IS_20CM/MetaP> ;
-    <TwissP> <https://example.org/pals-instance/S_IS_20CM/TwissP> ;
-    <native_types> "Mark",
-        "Marker" ;
-    <virtual_beamline_relation> "Inline" ;
-    <virtual_function> <Marker> .
+<https://uitf/S_IS_20CM> a "Marker" ;
+    acc:FloorP <https://uitf/S_IS_20CM/FloorP> ;
+    acc:MetaP <https://uitf/S_IS_20CM/MetaP> ;
+    acc:TwissP <https://uitf/S_IS_20CM/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Mark" ;
+    acc:native_types "Mark",
+        "Marker" .
 
-inst:RF_LASER a "SuperConductingRFCavity" ;
-    <FloorP> <https://example.org/pals-instance/RF_LASER/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/RF_LASER/LongitudinalPlacementP> ;
-    <RFP> <https://example.org/pals-instance/RF_LASER/RFP> ;
-    <ReferenceP> <https://example.org/pals-instance/RF_LASER/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/RF_LASER/TwissP> ;
-    <native_types> "RFCA",
+<https://uitf/RF_LASER> a "SuperConductingRFCavity" ;
+    acc:FloorP <https://uitf/RF_LASER/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/RF_LASER/LongitudinalPlacementP> ;
+    acc:RFP <https://uitf/RF_LASER/RFP> ;
+    acc:ReferenceP <https://uitf/RF_LASER/ReferenceP> ;
+    acc:TwissP <https://uitf/RF_LASER/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "BeamAcceleration",
+        "Focusing" ;
+    acc:native_types "RFCA",
         "RFCavity",
-        "WarmCavity" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "BeamAcceleration",
-        "Focusing" .
+        "WarmCavity" .
 
-inst:RM11 a "SuperConductingRFCavity" ;
-    <FloorP> <https://example.org/pals-instance/RM11/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/RM11/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/RM11/MetaP> ;
-    <RFP> <https://example.org/pals-instance/RM11/RFP> ;
-    <ReferenceP> <https://example.org/pals-instance/RM11/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/RM11/TwissP> ;
-    <native_types> "CryoCavity",
+<https://uitf/RM11> a "SuperConductingRFCavity" ;
+    acc:FloorP <https://uitf/RM11/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/RM11/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/RM11/MetaP> ;
+    acc:RFP <https://uitf/RM11/RFP> ;
+    acc:ReferenceP <https://uitf/RM11/ReferenceP> ;
+    acc:TwissP <https://uitf/RM11/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "BeamAcceleration" ;
+    acc:native_types "CryoCavity",
         "RFCA",
-        "RFCavity" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "BeamAcceleration" .
+        "RFCavity" .
 
-inst:IPMK101 a "BeamPositionMonitor" ;
-    <BodyShiftP> <https://example.org/pals-instance/IPMK101/BodyShiftP> ;
-    <FloorP> <https://example.org/pals-instance/IPMK101/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/IPMK101/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/IPMK101/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/IPMK101/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/IPMK101/TwissP> ;
-    <native_types> "BPM",
+<https://uitf/IPMK101> a "BeamPositionMonitor" ;
+    acc:BodyShiftP <https://uitf/IPMK101/BodyShiftP> ;
+    acc:FloorP <https://uitf/IPMK101/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/IPMK101/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/IPMK101/MetaP> ;
+    acc:ReferenceP <https://uitf/IPMK101/ReferenceP> ;
+    acc:TwissP <https://uitf/IPMK101/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "BeamPositionMeasurement" ;
+    acc:native_types "BPM",
         "DRBPM",
-        "MONITOR" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "BeamPositionMeasurement" .
+        "MONITOR" .
 
-inst:IPMK102 a "BeamPositionMonitor" ;
-    <BodyShiftP> <https://example.org/pals-instance/IPMK102/BodyShiftP> ;
-    <FloorP> <https://example.org/pals-instance/IPMK102/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/IPMK102/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/IPMK102/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/IPMK102/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/IPMK102/TwissP> ;
-    <native_types> "BPM",
+<https://uitf/IPMK102> a "BeamPositionMonitor" ;
+    acc:BodyShiftP <https://uitf/IPMK102/BodyShiftP> ;
+    acc:FloorP <https://uitf/IPMK102/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/IPMK102/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/IPMK102/MetaP> ;
+    acc:ReferenceP <https://uitf/IPMK102/ReferenceP> ;
+    acc:TwissP <https://uitf/IPMK102/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "BeamPositionMeasurement" ;
+    acc:native_types "BPM",
         "DRBPM",
-        "MONITOR" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "BeamPositionMeasurement" .
+        "MONITOR" .
 
-inst:MFRM604H a "Kicker" ;
-    <FloorP> <https://example.org/pals-instance/MFRM604H/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/MFRM604H/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/MFRM604H/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/MFRM604H/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/MFRM604H/TwissP> ;
-    <native_types> "Corrector",
+<https://uitf/MFRM604H> a "Kicker" ;
+    acc:FloorP <https://uitf/MFRM604H/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/MFRM604H/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/MFRM604H/MetaP> ;
+    acc:ReferenceP <https://uitf/MFRM604H/ReferenceP> ;
+    acc:TwissP <https://uitf/MFRM604H/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Steering" ;
+    acc:native_types "Corrector",
         "HDiagKicker",
         "HKICK" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "Steering" ;
-    <plane> "Horizontal" .
+    acc:plane "Horizontal" .
 
-inst:MFRM604V a "Kicker" ;
-    <FloorP> <https://example.org/pals-instance/MFRM604V/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/MFRM604V/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/MFRM604V/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/MFRM604V/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/MFRM604V/TwissP> ;
-    <native_types> "Corrector",
+<https://uitf/MFRM604V> a "Kicker" ;
+    acc:FloorP <https://uitf/MFRM604V/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/MFRM604V/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/MFRM604V/MetaP> ;
+    acc:ReferenceP <https://uitf/MFRM604V/ReferenceP> ;
+    acc:TwissP <https://uitf/MFRM604V/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Steering" ;
+    acc:native_types "Corrector",
         "VDiagKicker",
         "VKICK" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "Steering" ;
-    <plane> "Vertical" .
+    acc:plane "Vertical" .
 
-inst:MBHK101H a "Kicker" ;
-    <FloorP> <https://example.org/pals-instance/MBHK101H/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/MBHK101H/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/MBHK101H/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/MBHK101H/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/MBHK101H/TwissP> ;
-    <native_types> "Corrector",
+<https://uitf/MBHK101H> a "Kicker" ;
+    acc:FloorP <https://uitf/MBHK101H/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/MBHK101H/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/MBHK101H/MetaP> ;
+    acc:ReferenceP <https://uitf/MBHK101H/ReferenceP> ;
+    acc:TwissP <https://uitf/MBHK101H/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Steering" ;
+    acc:native_types "Corrector",
         "HCorrector",
         "HKICK" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "Steering" ;
-    <plane> "Horizontal" .
+    acc:plane "Horizontal" .
 
-inst:MBHK101V a "Kicker" ;
-    <FloorP> <https://example.org/pals-instance/MBHK101V/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/MBHK101V/LongitudinalPlacementP> ;
-    <MetaP> <https://example.org/pals-instance/MBHK101V/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/MBHK101V/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/MBHK101V/TwissP> ;
-    <native_types> "Corrector",
+<https://uitf/MBHK101V> a "Kicker" ;
+    acc:FloorP <https://uitf/MBHK101V/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/MBHK101V/LongitudinalPlacementP> ;
+    acc:MetaP <https://uitf/MBHK101V/MetaP> ;
+    acc:ReferenceP <https://uitf/MBHK101V/ReferenceP> ;
+    acc:TwissP <https://uitf/MBHK101V/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Steering" ;
+    acc:native_types "Corrector",
         "VCorrector",
         "VKICK" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "Steering" ;
-    <plane> "Vertical" .
+    acc:plane "Vertical" .
 
-inst:MDSK201 a "Bend" ;
-    <BendP> <https://example.org/pals-instance/MDSK201/BendP> ;
-    <FloorP> <https://example.org/pals-instance/MDSK201/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/MDSK201/LongitudinalPlacementP> ;
-    <MagneticMultipoleP> <https://example.org/pals-instance/MDSK201/MagneticMultipoleP> ;
-    <MetaP> <https://example.org/pals-instance/MDSK201/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/MDSK201/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/MDSK201/TwissP> ;
-    <native_types> "CSBEND",
-        "Dipole" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "Steering" .
+<https://uitf/MDSK201> a "Bend" ;
+    acc:BendP <https://uitf/MDSK201/BendP> ;
+    acc:FloorP <https://uitf/MDSK201/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/MDSK201/LongitudinalPlacementP> ;
+    acc:MagneticMultipoleP <https://uitf/MDSK201/MagneticMultipoleP> ;
+    acc:MetaP <https://uitf/MDSK201/MetaP> ;
+    acc:ReferenceP <https://uitf/MDSK201/ReferenceP> ;
+    acc:TwissP <https://uitf/MDSK201/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Steering" ;
+    acc:native_types "CSBEND",
+        "Dipole" .
 
-inst:MQWK202 a "Quadrupole" ;
-    <FloorP> <https://example.org/pals-instance/MQWK202/FloorP> ;
-    <LongitudinalPlacementP> <https://example.org/pals-instance/MQWK202/LongitudinalPlacementP> ;
-    <MagneticMultipoleP> <https://example.org/pals-instance/MQWK202/MagneticMultipoleP> ;
-    <MetaP> <https://example.org/pals-instance/MQWK202/MetaP> ;
-    <ReferenceP> <https://example.org/pals-instance/MQWK202/ReferenceP> ;
-    <TwissP> <https://example.org/pals-instance/MQWK202/TwissP> ;
-    <native_types> "KQUAD",
+<https://uitf/MQWK202> a "Quadrupole" ;
+    acc:FloorP <https://uitf/MQWK202/FloorP> ;
+    acc:LongitudinalPlacementP <https://uitf/MQWK202/LongitudinalPlacementP> ;
+    acc:MagneticMultipoleP <https://uitf/MQWK202/MagneticMultipoleP> ;
+    acc:MetaP <https://uitf/MQWK202/MetaP> ;
+    acc:ReferenceP <https://uitf/MQWK202/ReferenceP> ;
+    acc:TwissP <https://uitf/MQWK202/TwissP> ;
+    acc:beamline_relation "Inline" ;
+    acc:functions "Focusing" ;
+    acc:native_types "KQUAD",
         "QW",
-        "Quadrupole" ;
-    <physical_beamline_relation> "Inline" ;
-    <physical_function> "Focusing" .
+        "Quadrupole" .
 
-inst:GUN_thru_MV a "BeamLine" ;
-    <FloorP> <https://example.org/pals-instance/GUN_thru_MV/FloorP> ;
-    <description> "UITF injector beamline from the gun/laser through the MV (medium-velocity) section." ;
-    <multipass> false ;
-    <virtual_beamline_relation> "Inline" ;
-    <virtual_function> <BeamLine> .
+<https://uitf/GUN_thru_MV> a "BeamLine" ;
+    acc:FloorP <https://uitf/GUN_thru_MV/FloorP> ;
+    acc:beamline_relation "Inline" ;
+    acc:description "UITF injector beamline from the gun/laser through the MV (medium-velocity) section." ;
+    acc:functions "BeamLineSection" ;
+    acc:multipass false .
 
 [] a "PALSAccelerator" ;
-    <affiliation> inst:jefferson-lab ;
-    <authors> [ a <Author> ;
-            <affiliation> inst:jefferson-lab ;
-            <email> "dianam@jlab.org" ;
-            <name> "Diana McSpadden" ;
-            <orcid> "https://orcid.org/0000-0002-8520-1631" ] ;
-    <description> "PALS-NARAD representation of a validated subset of the Jefferson Lab UITF injector beamline, ported from a prior instance format to conform to the accelerator_core LinkML schema." ;
-    <facility> [ a <Facility> ;
-            <beamlines> inst:GUN_thru_MV ;
-            <component_relations> inst:IFYK203_to_ISLK302,
-                inst:IPMK101_to_MBHK101H,
-                inst:IPMK102_to_ITVK201,
-                inst:ISLK302_to_IYGK302,
-                inst:ITVK201_to_MDSK201,
-                inst:IYGK302_to_RM11,
-                inst:MBHK101H_to_MBHK101V,
-                inst:MBHK101V_to_MFHK101,
-                inst:MDSK201_to_MQWK202,
-                inst:MFHK101_to_IPMK102,
-                inst:MQWK202_to_IFYK203,
-                inst:RF_LASER_to_S_IS_20CM,
-                inst:S_IS_20CM_to_IPMK101 ;
-            <components> inst:ICBK403,
-                inst:IFYK203,
-                inst:IPMK101,
-                inst:IPMK102,
-                inst:ISLK302,
-                inst:ITVK201,
-                inst:IYGK302,
-                inst:MBHK101H,
-                inst:MBHK101V,
-                inst:MDSK201,
-                inst:MFHK101,
-                inst:MFRM604H,
-                inst:MFRM604V,
-                inst:MQWK202,
-                inst:RF_LASER,
-                inst:RM11,
-                inst:S_IS_20CM ;
-            <identifiers> [ a <Identifier> ;
-                    <identifier_type> "URL" ;
-                    <identifier_value> "https://www.jlab.org/accelerator/uitf" ] ;
-            <signal_bindings> inst:IPMK101_STAT,
-                inst:IPMK101_XPOS,
-                inst:IPMK101_YPOS,
-                inst:IPMK102_STAT,
-                inst:IPMK102_XPOS,
-                inst:IPMK102_YPOS,
-                inst:MBHK101H_KICK,
-                inst:MBHK101H_LMAX,
-                inst:MBHK101H_LMIN,
-                inst:MBHK101H_RB,
-                inst:MBHK101H_S,
-                inst:MBHK101H_STAT,
-                inst:MBHK101V_KICK,
-                inst:MBHK101V_LMAX,
-                inst:MBHK101V_LMIN,
-                inst:MBHK101V_RB,
-                inst:MBHK101V_S,
-                inst:MBHK101V_STAT,
-                inst:MDSK201_BDL,
-                inst:MDSK201_LMAX,
-                inst:MDSK201_LMIN,
-                inst:MDSK201_RB,
-                inst:MDSK201_S,
-                inst:MDSK201_STAT,
-                inst:MFRM604H_KICK,
-                inst:MFRM604H_LMAX,
-                inst:MFRM604H_LMIN,
-                inst:MFRM604H_RB,
-                inst:MFRM604H_S,
-                inst:MFRM604H_STAT,
-                inst:MFRM604V_KICK,
-                inst:MFRM604V_LMAX,
-                inst:MFRM604V_LMIN,
-                inst:MFRM604V_RB,
-                inst:MFRM604V_S,
-                inst:MFRM604V_STAT,
-                inst:MQWK202_BDL,
-                inst:MQWK202_LMAX,
-                inst:MQWK202_LMIN,
-                inst:MQWK202_RB,
-                inst:MQWK202_S,
-                inst:MQWK202_STAT,
-                inst:RF_LASER_GET,
-                inst:RF_LASER_GMES,
-                inst:RF_LASER_STAT,
-                inst:RM11_GET,
-                inst:RM11_GMES,
-                inst:RM11_STAT ;
-            <signals> inst:IPMK101.STAT,
-                inst:IPMK101.XPOS,
-                inst:IPMK101.YPOS,
-                inst:IPMK102.STAT,
-                inst:IPMK102.XPOS,
-                inst:IPMK102.YPOS,
-                inst:MBHK101H.HMAX,
-                inst:MBHK101H.HMIN,
-                inst:MBHK101H.KICK,
-                inst:MBHK101H.S,
-                inst:MBHK101H.STAT,
-                inst:MBHK101HM,
-                inst:MBHK101V.HMAX,
-                inst:MBHK101V.HMIN,
-                inst:MBHK101V.KICK,
-                inst:MBHK101V.S,
-                inst:MBHK101V.STAT,
-                inst:MBHK101VM,
-                inst:MDSK201.BDL,
-                inst:MDSK201.HMAX,
-                inst:MDSK201.HMIN,
-                inst:MDSK201.S,
-                inst:MDSK201.STAT,
-                inst:MDSK201M,
-                inst:MFRM604H.HMAX,
-                inst:MFRM604H.HMIN,
-                inst:MFRM604H.KICK,
-                inst:MFRM604H.S,
-                inst:MFRM604H.STAT,
-                inst:MFRM604HM,
-                inst:MFRM604V.HMAX,
-                inst:MFRM604V.HMIN,
-                inst:MFRM604V.KICK,
-                inst:MFRM604V.S,
-                inst:MFRM604V.STAT,
-                inst:MFRM604VM,
-                inst:MQWK202.BDL,
-                inst:MQWK202.HMAX,
-                inst:MQWK202.HMIN,
-                inst:MQWK202.S,
-                inst:MQWK202.STAT,
-                inst:MQWK202M,
-                inst:RK11.GET,
-                inst:RK11.GMES,
-                inst:RK11.STAT,
-                inst:RM11.GET,
-                inst:RM11.GMES,
-                inst:RM11.STAT ] ;
-    <notes> "This is a work in progress to define the JLab UITF injector beamline in the accelerator_core LinkML schema. The original data was automatically ported, then manually updated from a prior instance format to conform to the new schema." .
+    acc:affiliation <https://uitf/jefferson-lab> ;
+    acc:authors [ a acc:Author ;
+            acc:affiliation <https://uitf/jefferson-lab> ;
+            acc:email "dianam@jlab.org" ;
+            acc:name "Diana McSpadden" ;
+            acc:orcid "https://orcid.org/0000-0002-8520-1631" ] ;
+    acc:description "PALS-NARAD representation of a validated subset of the Jefferson Lab UITF injector beamline, ported from a prior instance format to conform to the accelerator_core LinkML schema." ;
+    acc:facility [ a acc:Facility ;
+            acc:beamlines <https://uitf/GUN_thru_MV> ;
+            acc:component_relations <https://uitf/IFYK203_to_ISLK302>,
+                <https://uitf/IPMK101_to_MBHK101H>,
+                <https://uitf/IPMK102_to_ITVK201>,
+                <https://uitf/ISLK302_to_IYGK302>,
+                <https://uitf/ITVK201_to_MDSK201>,
+                <https://uitf/IYGK302_to_RM11>,
+                <https://uitf/MBHK101H_to_MBHK101V>,
+                <https://uitf/MBHK101V_to_MFHK101>,
+                <https://uitf/MDSK201_to_MQWK202>,
+                <https://uitf/MFHK101_to_IPMK102>,
+                <https://uitf/MQWK202_to_IFYK203>,
+                <https://uitf/RF_LASER_to_S_IS_20CM>,
+                <https://uitf/S_IS_20CM_to_IPMK101> ;
+            acc:components <https://uitf/ICBK403>,
+                <https://uitf/IFYK203>,
+                <https://uitf/IPMK101>,
+                <https://uitf/IPMK102>,
+                <https://uitf/ISLK302>,
+                <https://uitf/ITVK201>,
+                <https://uitf/IYGK302>,
+                <https://uitf/MBHK101H>,
+                <https://uitf/MBHK101V>,
+                <https://uitf/MDSK201>,
+                <https://uitf/MFHK101>,
+                <https://uitf/MFRM604H>,
+                <https://uitf/MFRM604V>,
+                <https://uitf/MQWK202>,
+                <https://uitf/RF_LASER>,
+                <https://uitf/RM11>,
+                <https://uitf/S_IS_20CM> ;
+            acc:id_namespace "https://uitf/"^^xsd:anyURI ;
+            acc:identifiers [ a acc:Identifier ;
+                    acc:identifier_type "URL" ;
+                    acc:identifier_value "https://www.jlab.org/accelerator/uitf" ] ;
+            acc:signal_bindings <https://uitf/IPMK101_STAT>,
+                <https://uitf/IPMK101_XPOS>,
+                <https://uitf/IPMK101_YPOS>,
+                <https://uitf/IPMK102_STAT>,
+                <https://uitf/IPMK102_XPOS>,
+                <https://uitf/IPMK102_YPOS>,
+                <https://uitf/MBHK101H_KICK>,
+                <https://uitf/MBHK101H_LMAX>,
+                <https://uitf/MBHK101H_LMIN>,
+                <https://uitf/MBHK101H_RB>,
+                <https://uitf/MBHK101H_S>,
+                <https://uitf/MBHK101H_STAT>,
+                <https://uitf/MBHK101V_KICK>,
+                <https://uitf/MBHK101V_LMAX>,
+                <https://uitf/MBHK101V_LMIN>,
+                <https://uitf/MBHK101V_RB>,
+                <https://uitf/MBHK101V_S>,
+                <https://uitf/MBHK101V_STAT>,
+                <https://uitf/MDSK201_BDL>,
+                <https://uitf/MDSK201_LMAX>,
+                <https://uitf/MDSK201_LMIN>,
+                <https://uitf/MDSK201_RB>,
+                <https://uitf/MDSK201_S>,
+                <https://uitf/MDSK201_STAT>,
+                <https://uitf/MFRM604H_KICK>,
+                <https://uitf/MFRM604H_LMAX>,
+                <https://uitf/MFRM604H_LMIN>,
+                <https://uitf/MFRM604H_RB>,
+                <https://uitf/MFRM604H_S>,
+                <https://uitf/MFRM604H_STAT>,
+                <https://uitf/MFRM604V_KICK>,
+                <https://uitf/MFRM604V_LMAX>,
+                <https://uitf/MFRM604V_LMIN>,
+                <https://uitf/MFRM604V_RB>,
+                <https://uitf/MFRM604V_S>,
+                <https://uitf/MFRM604V_STAT>,
+                <https://uitf/MQWK202_BDL>,
+                <https://uitf/MQWK202_LMAX>,
+                <https://uitf/MQWK202_LMIN>,
+                <https://uitf/MQWK202_RB>,
+                <https://uitf/MQWK202_S>,
+                <https://uitf/MQWK202_STAT>,
+                <https://uitf/RF_LASER_GET>,
+                <https://uitf/RF_LASER_GMES>,
+                <https://uitf/RF_LASER_STAT>,
+                <https://uitf/RM11_GET>,
+                <https://uitf/RM11_GMES>,
+                <https://uitf/RM11_STAT> ;
+            acc:signals <https://uitf/IPMK101.STAT>,
+                <https://uitf/IPMK101.XPOS>,
+                <https://uitf/IPMK101.YPOS>,
+                <https://uitf/IPMK102.STAT>,
+                <https://uitf/IPMK102.XPOS>,
+                <https://uitf/IPMK102.YPOS>,
+                <https://uitf/MBHK101H.HMAX>,
+                <https://uitf/MBHK101H.HMIN>,
+                <https://uitf/MBHK101H.KICK>,
+                <https://uitf/MBHK101H.S>,
+                <https://uitf/MBHK101H.STAT>,
+                <https://uitf/MBHK101HM>,
+                <https://uitf/MBHK101V.HMAX>,
+                <https://uitf/MBHK101V.HMIN>,
+                <https://uitf/MBHK101V.KICK>,
+                <https://uitf/MBHK101V.S>,
+                <https://uitf/MBHK101V.STAT>,
+                <https://uitf/MBHK101VM>,
+                <https://uitf/MDSK201.BDL>,
+                <https://uitf/MDSK201.HMAX>,
+                <https://uitf/MDSK201.HMIN>,
+                <https://uitf/MDSK201.S>,
+                <https://uitf/MDSK201.STAT>,
+                <https://uitf/MDSK201M>,
+                <https://uitf/MFRM604H.HMAX>,
+                <https://uitf/MFRM604H.HMIN>,
+                <https://uitf/MFRM604H.KICK>,
+                <https://uitf/MFRM604H.S>,
+                <https://uitf/MFRM604H.STAT>,
+                <https://uitf/MFRM604HM>,
+                <https://uitf/MFRM604V.HMAX>,
+                <https://uitf/MFRM604V.HMIN>,
+                <https://uitf/MFRM604V.KICK>,
+                <https://uitf/MFRM604V.S>,
+                <https://uitf/MFRM604V.STAT>,
+                <https://uitf/MFRM604VM>,
+                <https://uitf/MQWK202.BDL>,
+                <https://uitf/MQWK202.HMAX>,
+                <https://uitf/MQWK202.HMIN>,
+                <https://uitf/MQWK202.S>,
+                <https://uitf/MQWK202.STAT>,
+                <https://uitf/MQWK202M>,
+                <https://uitf/RK11.GET>,
+                <https://uitf/RK11.GMES>,
+                <https://uitf/RK11.STAT>,
+                <https://uitf/RM11.GET>,
+                <https://uitf/RM11.GMES>,
+                <https://uitf/RM11.STAT> ] ;
+    acc:notes "This is a work in progress to define the JLab UITF injector beamline in the accelerator_core LinkML schema. The original data was automatically ported, then manually updated from a prior instance format to conform to the new schema." .
 
