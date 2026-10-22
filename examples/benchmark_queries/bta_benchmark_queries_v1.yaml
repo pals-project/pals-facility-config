@@ -1,0 +1,67 @@
+# Direct signal retrieval
+- Q: Give me the horizontal profile, vertical profile, and insertion status signals for the first multiwire monitor.
+  Ans: btaMW006Cntl:horInDataM, btaMW006Cntl:verInDataM, btaMW006Cntl:harpIsM
+- Q: What is the current setpoint signal for QV7?
+  Ans: bta-qd7-ps:setpointS
+- Q: What is the current readback signal for QH10?
+  Ans: bta-qf10-ps:currentM
+- Q: What is the status signal for DV120?
+  Ans: bta-tv120-ps:stateS
+- Q: Give me all control signals associated with QV11.
+  Ans: bta-qd11-ps:setpointS, bta-qd11-ps:currentM, bta-qd11-ps:rangeC, bta-qd11-ps:stateS
+- Q: What signal reports whether MW166 is inserted?
+  Ans: btaMW166Cntl:harpIsM
+- Q: Give me the horizontal and vertical profile signals for MWA15.
+  Ans: adrA15MWCntl:horInDataM, adrA15MWCntl:verInDataM
+- Q: What is the current range signal for QH10, and how is its array ordered?
+  Ans: bta-qf10-ps:rangeC; the array order is maximum, minimum.
+  # Beamline order queries
+- Q: What is the first beam profile monitor in the BtA beamline?
+  Ans: MW006
+- Q: What is the second beam profile monitor in the beamline?
+  Ans: MW060
+- Q: What is the first beam profile monitor downstream of QH6?
+  Ans: MW060
+- Q: Give me the profile and insertion status signals for the first beam profile monitor downstream of QH6.
+  Ans: btaMW060Cntl:horInDataM, btaMW060Cntl:verInDataM, btaMW060Cntl:harpIsM
+- Q: What is the first quadrupole downstream of MW060?
+  Ans: QV7
+- Q: What is the first kicker downstream of MW125?
+  Ans: DH127
+- Q: List all multiwire monitors in beamline order.
+  Ans: MW006, MW060, MW125, MW166, MWA15
+# Position and optics queries
+- Q: What is the longitudinal position of MW060?
+  Ans: 20.639 meters
+- Q: How far downstream is MW060 from QH6?
+  Ans: 0.942 meters
+- Q: What are the horizontal and vertical beta functions at QV7?
+  Ans: Horizontal: 12.748 meters; vertical: 50.107 meters
+- Q: What is the horizontal beta function at the first quadrupole downstream of MW060?
+  Ans: 12.748 meters at QV7
+- Q: What is the vertical beta function at the first kicker downstream of QH10?
+  Ans: 3.9856 meters at DH127
+- Q: Which quadrupole has the largest horizontal beta function?
+  Ans: QH14, with beta_a = 47.41 meters
+- Q: What are the horizontal dispersion and dispersion slope at QH10?
+  Ans: eta_x = -2.168 meters; etap_x = 0.30647
+- Q: What are the horizontal and vertical phase advances at QH2A?
+  Ans: phi_a = 14.795; phi_b = 14.119
+# Aggregation and relationship queries
+- Q: How many beam profile monitors are in the BtA beamline?
+  Ans: 5
+- Q: Which quadrupoles share the bta-qf2-ps power supply signals?
+  Ans: QH2A and QH2B
+- Q: Which quadrupoles do not have control signal bindings in this instance?
+  Ans: QHFV and QPOL
+- Q: Give me the unique current setpoint signals associated with the quadrupoles.
+  Ans: bta-qd1-ps:setpointS, bta-qf2-ps:setpointS, bta-qd3-ps:setpointS, bta-qf4-ps:setpointS, bta-qd5-ps:setpointS, bta-qf6-ps:setpointS, bta-qd7-ps:setpointS, bta-qf8-ps:setpointS, bta-qd9-ps:setpointS, bta-qf10-ps:setpointS, bta-qd11-ps:setpointS, bta-qf12-ps:setpointS, bta-qd13-ps:setpointS, bta-qf14-ps:setpointS, bta-qd15-ps:setpointS
+- Q: Which multiwire monitor has 64 horizontal wires?
+  Ans: MWA15
+- Q: What are the wire counts and spacings for MW006?
+  Ans: 32 horizontal wires and 32 vertical wires, with 0.0015 meter spacing in both planes.
+# Missing data awareness
+- Q: What is the horizontal position signal for the first BPM?
+  Ans: No horizontal position signal is associated with PUEH001 in the current instance.
+- Q: What is the horizontal beta function at MW060?
+  Ans: It is not available; MW060 has no TwissP in the current instance.
