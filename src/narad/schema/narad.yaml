@@ -124,7 +124,7 @@ slots:
     description: >-
       The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order).
       Only an edge-property slot for edges that are defined with respect to a specific BeamLine.
-    required: true
+    required: false
 
   distance_value:
     description: >-
@@ -1478,6 +1478,9 @@ classes:
 
   BeamProfileMonitor:
     description: A diagnostic device used to measure transverse beam profile.
+    aliases:
+      - viewer
+      - profile monitor
     is_a: DiagnosticDevice
     mixins:
       - HasReferenceP
@@ -1799,12 +1802,16 @@ classes:
       such as within a BeamLineSection or other organizational grouping.
     exact_mappings:
       - BFO:0000051
+    slots:
+      - beamline_context
     slot_usage:
       predicate:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
         equals_string: Contains
+      beamline_context:
+        required: false
     annotations:
       rdf_predicate: acc:contains
       
@@ -1832,16 +1839,22 @@ classes:
       such as a magnet being part of a BeamLineSection.
     exact_mappings:
       - BFO:0000050
+    slots:
+      - context
+      - beamline_context
     slot_usage:
       predicate:
         description: >-
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
         equals_string: IsPartOf
+      context:
+        required: false
+      beamline_context:
+        required: false
     annotations:
       rdf_predicate: acc:is_part_of
     
-
   AdjacentTo:
     is_a: ComponentRelation
     description: >-
@@ -2424,11 +2437,35 @@ enums:
   RelationContextEnum:
     permissible_values:
       beamline_order:
+        aliases:
+          - beamline order
+          - beamline sequence
+          - order
+          - sequence
+        description: The order of components along the beamline.
       Euclidean_3D:
+        aliases:
+          - 3D Euclidean space
+        description: 3D Euclidean space.
       Euclidean_2D:
+        aliases:
+          - 2D Euclidean space
+        description: 2D Euclidean space.
       floorplan:
+        aliases:
+          - floor plan
+        description: Floorplan coordinate system.
       containment:
+        aliases:
+          - containment
+          - contains
+        description: Containment relationship context.
       installation_mounting:
+        aliases:
+          - installation
+          - mounting
+          - mounted
+        description: Installation or mounting context.
 
   ReferenceFrameEnum:
     permissible_values:

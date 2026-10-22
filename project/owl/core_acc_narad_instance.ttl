@@ -65,29 +65,29 @@
 
 <https://uitf/IFYK203/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "ActuatorChannel" ;
-            acc:value "11" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitf2" ],
+            acc:key "TransitionMode" ;
+            acc:value "CW" ],
         [ a acc:AdditionalMetadata ;
             acc:key "ActuatorCard" ;
             acc:value "ITF12C0922ADDR1" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "TransitionMode" ;
+            acc:key "ActuatorChannel" ;
+            acc:value "11" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedMode" ;
             acc:value "CW" ],
         [ a acc:AdditionalMetadata ;
             acc:key "InsertedChannel" ;
             acc:value "5" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "RetractedChannel" ;
-            acc:value "6" ],
+            acc:key "Controlled_by" ;
+            acc:value "iocitf2" ],
         [ a acc:AdditionalMetadata ;
             acc:key "LimitSwitchCard" ;
             acc:value "ITF12C0943ADDR2" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "InsertedMode" ;
-            acc:value "CW" ] ;
+            acc:key "RetractedChannel" ;
+            acc:value "6" ] ;
     acc:alias "FC1" ;
     acc:description "Faraday cup beam-current diagnostic." .
 
@@ -129,20 +129,20 @@
 
 <https://uitf/IPMK101/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "Sensitivity" ;
-            acc:value "9.9" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "electrode_rotation_deg" ;
-            acc:value "45.0" ],
-        [ a acc:AdditionalMetadata ;
             acc:key "Controlled_by" ;
             acc:value "iocipmk101" ],
         [ a acc:AdditionalMetadata ;
             acc:key "CanType" ;
             acc:value "Stripline" ],
         [ a acc:AdditionalMetadata ;
+            acc:key "electrode_rotation_deg" ;
+            acc:value "45.0" ],
+        [ a acc:AdditionalMetadata ;
             acc:key "Pass" ;
-            acc:value "non-muxed" ] ;
+            acc:value "non-muxed" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Sensitivity" ;
+            acc:value "9.9" ] ;
     acc:description "Digital receiver (stripline) beam position monitor." .
 
 <https://uitf/IPMK101/ReferenceP> a acc:ReferenceParamGroup ;
@@ -196,12 +196,6 @@
 
 <https://uitf/IPMK102/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "CanType" ;
-            acc:value "Stripline" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocipmk102" ],
-        [ a acc:AdditionalMetadata ;
             acc:key "Pass" ;
             acc:value "non-muxed" ],
         [ a acc:AdditionalMetadata ;
@@ -209,7 +203,13 @@
             acc:value "9.9" ],
         [ a acc:AdditionalMetadata ;
             acc:key "electrode_rotation_deg" ;
-            acc:value "45.0" ] ;
+            acc:value "45.0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "CanType" ;
+            acc:value "Stripline" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocipmk102" ] ;
     acc:description "Digital receiver (stripline) beam position monitor." .
 
 <https://uitf/IPMK102/ReferenceP> a acc:ReferenceParamGroup ;
@@ -297,14 +297,23 @@
             acc:key "SurveyZ" ;
             acc:value "1.173" ],
         [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Viewers" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ActuatorCard" ;
+            acc:value "ITF12C0922ADDR1" ],
+        [ a acc:AdditionalMetadata ;
             acc:key "TransitionMode" ;
             acc:value "Viewer Limited" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedChannel" ;
+            acc:value "1" ],
         [ a acc:AdditionalMetadata ;
             acc:key "RetractedChannel" ;
             acc:value "2" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "InsertedMode" ;
-            acc:value "Viewer Limited" ],
+            acc:key "Controlled_by" ;
+            acc:value "iocitf2" ],
         [ a acc:AdditionalMetadata ;
             acc:key "ActuatorChannel" ;
             acc:value "1" ],
@@ -312,20 +321,11 @@
             acc:key "SurveyDate" ;
             acc:value "2021-03-15" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "HCOSystem" ;
-            acc:value "UITF Viewers" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitf2" ],
+            acc:key "InsertedMode" ;
+            acc:value "Viewer Limited" ],
         [ a acc:AdditionalMetadata ;
             acc:key "LimitSwitchCard" ;
-            acc:value "ITF12C0943ADDR1" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "ActuatorCard" ;
-            acc:value "ITF12C0922ADDR1" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "InsertedChannel" ;
-            acc:value "1" ] ;
+            acc:value "ITF12C0943ADDR1" ] ;
     acc:description "Beam viewer/screen (ITV)." .
 
 <https://uitf/ITVK201/ReferenceP> a acc:ReferenceParamGroup ;
@@ -362,38 +362,38 @@
 
 <https://uitf/IYGK302/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "ActuatorChannel" ;
-            acc:value "6" ],
-        [ a acc:AdditionalMetadata ;
             acc:key "HCOSystem" ;
             acc:value "UITF Viewers" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitf2" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "InsertedChannel" ;
-            acc:value "11" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "InsertedMode" ;
-            acc:value "Viewer Limited" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "SurveyDate" ;
-            acc:value "2021-03-15" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "RetractedChannel" ;
-            acc:value "12" ],
         [ a acc:AdditionalMetadata ;
             acc:key "ActuatorCard" ;
             acc:value "ITF12C0922ADDR1" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "LimitSwitchCard" ;
-            acc:value "ITF12C0943ADDR1" ],
+            acc:key "TransitionMode" ;
+            acc:value "Viewer Limited" ],
         [ a acc:AdditionalMetadata ;
             acc:key "SurveyZ" ;
             acc:value "4.6462" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "TransitionMode" ;
-            acc:value "Viewer Limited" ] ;
+            acc:key "InsertedChannel" ;
+            acc:value "11" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyDate" ;
+            acc:value "2021-03-15" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "LimitSwitchCard" ;
+            acc:value "ITF12C0943ADDR1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "InsertedMode" ;
+            acc:value "Viewer Limited" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitf2" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "RetractedChannel" ;
+            acc:value "12" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ActuatorChannel" ;
+            acc:value "6" ] ;
     acc:description "YAG scintillator beam-profile viewer." .
 
 <https://uitf/IYGK302/ReferenceP> a acc:ReferenceParamGroup ;
@@ -418,41 +418,41 @@
 
 <https://uitf/MBHK101H/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "KICK" ;
-            acc:value "0" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "TrimCardType" ;
-            acc:value "1Amp" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitfmag" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "HystDwellTime" ;
-            acc:value "4" ],
+            acc:key "ControlsUnits" ;
+            acc:value "milliAmps" ],
         [ a acc:AdditionalMetadata ;
             acc:key "Hmax" ;
             acc:value ".999" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "Housed_by" ;
+            acc:key "Powered_by" ;
             acc:value "ITF02" ],
         [ a acc:AdditionalMetadata ;
             acc:key "HCOSystem" ;
             acc:value "UITF Correctors" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "NoHyst" ;
-            acc:value "1" ],
-        [ a acc:AdditionalMetadata ;
             acc:key "FieldMap" ;
             acc:value "Data ( text/plain; charset=us-ascii )" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "Powered_by" ;
+            acc:key "TrimCardType" ;
+            acc:value "1Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystDwellTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Housed_by" ;
             acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ],
         [ a acc:AdditionalMetadata ;
             acc:key "HystRampTime" ;
             acc:value "4" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "ControlsUnits" ;
-            acc:value "milliAmps" ] ;
+            acc:key "KICK" ;
+            acc:value "0" ] ;
     acc:description "horizontal steering corrector magnet." .
 
 <https://uitf/MBHK101H/ReferenceP> a acc:ReferenceParamGroup ;
@@ -514,20 +514,32 @@
 
 <https://uitf/MBHK101V/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "NoHyst" ;
-            acc:value "1" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Hmax" ;
-            acc:value ".999" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitfmag" ],
-        [ a acc:AdditionalMetadata ;
             acc:key "Powered_by" ;
             acc:value "ITF02" ],
         [ a acc:AdditionalMetadata ;
             acc:key "HCOSystem" ;
             acc:value "UITF Correctors" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Housed_by" ;
+            acc:value "ITF02" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Hmax" ;
+            acc:value ".999" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystDwellTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "1Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "milliAmps" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ],
         [ a acc:AdditionalMetadata ;
             acc:key "FieldMap" ;
             acc:value "Data ( text/plain; charset=us-ascii )" ],
@@ -535,20 +547,8 @@
             acc:key "HystRampTime" ;
             acc:value "4" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "TrimCardType" ;
-            acc:value "1Amp" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Housed_by" ;
-            acc:value "ITF02" ],
-        [ a acc:AdditionalMetadata ;
             acc:key "KICK" ;
-            acc:value "0" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "ControlsUnits" ;
-            acc:value "milliAmps" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "HystDwellTime" ;
-            acc:value "4" ] ;
+            acc:value "0" ] ;
     acc:description "vertical steering corrector magnet." .
 
 <https://uitf/MBHK101V/ReferenceP> a acc:ReferenceParamGroup ;
@@ -620,47 +620,47 @@
 
 <https://uitf/MDSK201/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "HystDwellTime" ;
-            acc:value "4" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitfmag" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "HystRampTime" ;
-            acc:value "4" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "SurveyDate" ;
-            acc:value "2021-03-15" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "HCOSystem" ;
-            acc:value "UITF Dipoles" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "HGAP" ;
-            acc:value ".0641927050701428" ],
+            acc:key "Hmax" ;
+            acc:value "3.5" ],
         [ a acc:AdditionalMetadata ;
             acc:key "SurveyZ" ;
             acc:value "1.338" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "FieldMap" ;
-            acc:value "Data ( text/plain; charset=us-ascii )" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Hmax" ;
-            acc:value "3.5" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "ControlsUnits" ;
-            acc:value "Amps" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "TrimCardType" ;
-            acc:value "10Amp" ],
+            acc:key "HCOSystem" ;
+            acc:value "UITF Dipoles" ],
         [ a acc:AdditionalMetadata ;
             acc:key "Powered_by" ;
             acc:value "ITF02" ],
         [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "Amps" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystRampTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "10Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "FieldMap" ;
+            acc:value "Data ( text/plain; charset=us-ascii )" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ],
+        [ a acc:AdditionalMetadata ;
             acc:key "Housed_by" ;
             acc:value "ITF02" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "NoHyst" ;
-            acc:value "1" ] ;
+            acc:key "HystDwellTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HGAP" ;
+            acc:value ".0641927050701428" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyDate" ;
+            acc:value "2021-03-15" ] ;
     acc:alias "15 Deg Bend" .
 
 <https://uitf/MDSK201/ReferenceP> a acc:ReferenceParamGroup ;
@@ -722,25 +722,13 @@
 
 <https://uitf/MFHK101/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "ControlsUnits" ;
-            acc:value "Amps" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Hmax" ;
-            acc:value "3" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Tilt" ;
-            acc:value "0" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "HystDwellTime" ;
-            acc:value "4" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitfmag" ],
+            acc:key "FieldMap" ;
+            acc:value "Data ( text/plain; charset=us-ascii )" ],
         [ a acc:AdditionalMetadata ;
             acc:key "Housed_by" ;
             acc:value "ITF02" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "HystRampTime" ;
+            acc:key "HystDwellTime" ;
             acc:value "4" ],
         [ a acc:AdditionalMetadata ;
             acc:key "Powered_by" ;
@@ -749,20 +737,32 @@
             acc:key "HCOSystem" ;
             acc:value "UITF Solenoids" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "FieldMap" ;
-            acc:value "Data ( text/plain; charset=us-ascii )" ],
+            acc:key "Winding" ;
+            acc:value "SingleWound" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "SurveyDate" ;
-            acc:value "2021-03-15" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "SurveyZ" ;
-            acc:value ".576" ],
+            acc:key "HystRampTime" ;
+            acc:value "4" ],
         [ a acc:AdditionalMetadata ;
             acc:key "TrimCardType" ;
             acc:value "10Amp" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "Winding" ;
-            acc:value "SingleWound" ] ;
+            acc:key "SurveyDate" ;
+            acc:value "2021-03-15" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Tilt" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "SurveyZ" ;
+            acc:value ".576" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ControlsUnits" ;
+            acc:value "Amps" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Hmax" ;
+            acc:value "3" ] ;
     acc:description "Focusing solenoid in the injector line." .
 
 <https://uitf/MFHK101/ReferenceP> a acc:ReferenceParamGroup ;
@@ -803,20 +803,20 @@
 
 <https://uitf/MFRM604H/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "KICK" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
             acc:key "ControlsUnits" ;
             acc:value "milliAmps" ],
         [ a acc:AdditionalMetadata ;
             acc:key "TrimCardType" ;
             acc:value "NA" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "Comments" ;
-            acc:value "Raster" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "KICK" ;
-            acc:value "0" ],
-        [ a acc:AdditionalMetadata ;
             acc:key "NoHyst" ;
-            acc:value "1" ] ;
+            acc:value "1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Comments" ;
+            acc:value "Raster" ] ;
     acc:description "horizontal steering corrector magnet." .
 
 <https://uitf/MFRM604H/ReferenceP> a acc:ReferenceParamGroup ;
@@ -875,14 +875,14 @@
             acc:key "KICK" ;
             acc:value "0" ],
         [ a acc:AdditionalMetadata ;
+            acc:key "NoHyst" ;
+            acc:value "1" ],
+        [ a acc:AdditionalMetadata ;
             acc:key "Comments" ;
             acc:value "Raster" ],
         [ a acc:AdditionalMetadata ;
             acc:key "ControlsUnits" ;
             acc:value "milliAmps" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "NoHyst" ;
-            acc:value "1" ],
         [ a acc:AdditionalMetadata ;
             acc:key "TrimCardType" ;
             acc:value "NA" ] ;
@@ -946,49 +946,49 @@
 
 <https://uitf/MQWK202/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
+            acc:key "Powered_by" ;
+            acc:value "ITF03" ],
+        [ a acc:AdditionalMetadata ;
             acc:key "Resistance" ;
             acc:value "1.01" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Usage" ;
-            acc:value "Matching" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitfmag" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "BORE" ;
-            acc:value "0" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "TrimCardType" ;
-            acc:value "10Amp" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Radius" ;
-            acc:value ".0159" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "FieldMap" ;
-            acc:value "Data ( text/plain; charset=us-ascii )" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "HystRampTime" ;
-            acc:value "4" ],
         [ a acc:AdditionalMetadata ;
             acc:key "Hmax" ;
             acc:value "9.9" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "Powered_by" ;
-            acc:value "ITF03" ],
+            acc:key "Limit" ;
+            acc:value "24.25" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "HCOSystem" ;
-            acc:value "UITF Quads" ],
+            acc:key "Controlled_by" ;
+            acc:value "iocitfmag" ],
         [ a acc:AdditionalMetadata ;
             acc:key "Housed_by" ;
             acc:value "ITF03" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "Limit" ;
-            acc:value "24.25" ],
-        [ a acc:AdditionalMetadata ;
             acc:key "NoHyst" ;
             acc:value "1" ],
         [ a acc:AdditionalMetadata ;
+            acc:key "TrimCardType" ;
+            acc:value "10Amp" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "FieldMap" ;
+            acc:value "Data ( text/plain; charset=us-ascii )" ],
+        [ a acc:AdditionalMetadata ;
             acc:key "HystDwellTime" ;
+            acc:value "4" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF Quads" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "BORE" ;
+            acc:value "0" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Usage" ;
+            acc:value "Matching" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Radius" ;
+            acc:value ".0159" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "HystRampTime" ;
             acc:value "4" ],
         [ a acc:AdditionalMetadata ;
             acc:key "ControlsUnits" ;
@@ -1104,14 +1104,23 @@
 
 <https://uitf/RM11/MetaP> a acc:MetaParamGroup ;
     acc:additional_metadata [ a acc:AdditionalMetadata ;
-            acc:key "Controlled_by" ;
-            acc:value "iocitfrffcc1" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "HCOSystem" ;
-            acc:value "UITF RF Cavities" ],
+            acc:key "FCC" ;
+            acc:value "fcc_773" ],
         [ a acc:AdditionalMetadata ;
             acc:key "PhaseRMS" ;
             acc:value ".04" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Controlled_by" ;
+            acc:value "iocitfrffcc1" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "CavityType" ;
+            acc:value "C75" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "ROQ" ;
+            acc:value "1067" ],
+        [ a acc:AdditionalMetadata ;
+            acc:key "Q0" ;
+            acc:value "1E+09" ],
         [ a acc:AdditionalMetadata ;
             acc:key "Qexternal" ;
             acc:value "1.15E+07" ],
@@ -1119,17 +1128,8 @@
             acc:key "MaxGSET" ;
             acc:value "11" ],
         [ a acc:AdditionalMetadata ;
-            acc:key "FCC" ;
-            acc:value "fcc_773" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "Q0" ;
-            acc:value "1E+09" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "CavityType" ;
-            acc:value "C75" ],
-        [ a acc:AdditionalMetadata ;
-            acc:key "ROQ" ;
-            acc:value "1067" ] ;
+            acc:key "HCOSystem" ;
+            acc:value "UITF RF Cavities" ] ;
     acc:description "Superconducting (cryomodule) RF accelerating cavity." .
 
 <https://uitf/RM11/RFP> a acc:RFParamGroup ;

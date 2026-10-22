@@ -16341,6 +16341,16 @@ facility:
       theta: 0.0
       phi: 0.0
       psi: 0.0
+  - id: KV
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
+  - id: MV
+    kind: BeamLine
+    functions:
+    - BeamLineSection
+    beamline_relation: Inline
   signals:
   - id: IPMK101.STAT
     kind: Signal
@@ -26064,6 +26074,94 @@ facility:
     predicate: HasReadbackSignal
     object: RM12STAT
   component_relations:
+  - id: KV_to_MV
+    subject: KV
+    predicate: Precedes
+    object: MV
+    context: beamline_order
+    component_direction: upstream
+  - id: KV_to_GUN_thru_MV
+    subject: KV
+    predicate: IsPartOf
+    object: GUN_thru_MV
+    context: containment
+  - id: MV_to_GUN_thru_MV
+    subject: MV
+    predicate: IsPartOf
+    object: GUN_thru_MV
+    context: containment
+  - id: KV_to_RF_LASER
+    subject: KV
+    predicate: Contains
+    object: RF_LASER
+    context: containment
+    beamline_context: KV
+  - id: GUN_thru_MV_to_RF_LASER
+    subject: GUN_thru_MV
+    predicate: Contains
+    object: RF_LASER
+    context: containment
+    beamline_context: GUN_thru_MV
+  - id: KV_to_VIPK101
+    subject: KV
+    predicate: Contains
+    object: VIPK101
+    context: containment
+    beamline_context: KV
+  - id: GUN_thru_MV_to_VIPK101
+    subject: GUN_thru_MV
+    predicate: Contains
+    object: VIPK101
+    context: containment
+    beamline_context: GUN_thru_MV
+  - id: KV_to_S_IS_20CM
+    subject: KV
+    predicate: Contains
+    object: S_IS_20CM
+    context: containment
+    beamline_context: KV
+  - id: GUN_thru_MV_to_S_IS_20CM
+    subject: GUN_thru_MV
+    predicate: Contains
+    object: S_IS_20CM
+    context: containment
+    beamline_context: GUN_thru_MV
+  - id: KV_to_IPMK101
+    subject: KV
+    predicate: Contains
+    object: IPMK101
+    context: containment
+    beamline_context: KV
+  - id: GUN_thru_MV_to_IPMK101
+    subject: GUN_thru_MV
+    predicate: Contains
+    object: IPMK101
+    context: containment
+    beamline_context: GUN_thru_MV
+  - id: MV_to_VBVM101
+    subject: MV
+    predicate: Contains
+    object: VBVM101
+    context: containment
+    beamline_context: MV
+  - id: GUN_thru_MV_to_VBVM101
+    subject: GUN_thru_MV
+    predicate: Contains
+    object: VBVM101
+    context: containment
+    beamline_context: GUN_thru_MV
+  - id: MV_to_VIPM101B
+    subject: MV
+    predicate: Contains
+    object: VIPM101B
+    context: containment
+    beamline_context: MV
+  - id: GUN_thru_MV_to_VIPM101B
+    subject: GUN_thru_MV
+    predicate: Contains
+    object: VIPM101B
+    context: containment
+    beamline_context: GUN_thru_MV
   - id: RF_LASER_to_VIPK101
     subject: RF_LASER
     predicate: Precedes
