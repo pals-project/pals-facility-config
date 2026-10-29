@@ -11,12 +11,28 @@
     pals:species_ref "proton" .
 
 <https://example.org/pals-instance/BEGINNING_B1/TwissP> a pals:TwissParamGroup ;
-    pals:alpha_a "1.8249910306663342"^^xsd:float ;
-    pals:alpha_b "-0.6499756770851368"^^xsd:float ;
-    pals:beta_a "12.5509384"^^xsd:float ;
-    pals:beta_b "4.072941886974975"^^xsd:float ;
-    pals:eta_x "2.7207960780961375"^^xsd:float ;
-    pals:etap_x "-0.4222600658627664"^^xsd:float .
+    pals:alpha_a "1.825"^^xsd:float ;
+    pals:alpha_b "-0.64998"^^xsd:float ;
+    pals:beta_a "12.551"^^xsd:float ;
+    pals:beta_b "4.0729"^^xsd:float ;
+    pals:eta_x "2.7208"^^xsd:float ;
+    pals:eta_y "0.0"^^xsd:float ;
+    pals:etap_x "-0.42226"^^xsd:float ;
+    pals:etap_y "0.0"^^xsd:float ;
+    pals:phi_a "13.281"^^xsd:float ;
+    pals:phi_b "13.334"^^xsd:float .
+
+<https://example.org/pals-instance/BTASTART/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.825"^^xsd:float ;
+    pals:alpha_b "-0.64998"^^xsd:float ;
+    pals:beta_a "12.551"^^xsd:float ;
+    pals:beta_b "4.0729"^^xsd:float ;
+    pals:eta_x "2.7208"^^xsd:float ;
+    pals:eta_y "0.0"^^xsd:float ;
+    pals:etap_x "-0.42226"^^xsd:float ;
+    pals:etap_y "0.0"^^xsd:float ;
+    pals:phi_a "13.281"^^xsd:float ;
+    pals:phi_b "13.334"^^xsd:float .
 
 inst:BTA_LINE_BEGINNING_B1_PRECEDES_BTASTART rdf:object inst:BTASTART ;
     rdf:predicate "pals:precedes"^^xsd:anyURI ;
@@ -126,7 +142,7 @@ inst:BTA_LINE_DH158_PRECEDES_DR158 rdf:object inst:DR158 ;
     pals:beamline_context inst:BTA_LINE ;
     pals:context "beamline_order" .
 
-inst:BTA_LINE_DH1A_PRECEDES_DH1T rdf:object inst:DH1T ;
+inst:BTA_LINE_DH1A_PRECEDES_DH1B rdf:object inst:DH1B ;
     rdf:predicate "pals:precedes"^^xsd:anyURI ;
     rdf:subject inst:DH1A ;
     pals:beamline_context inst:BTA_LINE ;
@@ -135,18 +151,6 @@ inst:BTA_LINE_DH1A_PRECEDES_DH1T rdf:object inst:DH1T ;
 inst:BTA_LINE_DH1B_PRECEDES_DRD1 rdf:object inst:DRD1 ;
     rdf:predicate "pals:precedes"^^xsd:anyURI ;
     rdf:subject inst:DH1B ;
-    pals:beamline_context inst:BTA_LINE ;
-    pals:context "beamline_order" .
-
-inst:BTA_LINE_DH1T_PRECEDES_DH1B rdf:object inst:DH1B ;
-    rdf:predicate "pals:precedes"^^xsd:anyURI ;
-    rdf:subject inst:DH1T ;
-    pals:beamline_context inst:BTA_LINE ;
-    pals:context "beamline_order" .
-
-inst:BTA_LINE_DH23T_PRECEDES_DRQ5 rdf:object inst:DRQ5 ;
-    rdf:predicate "pals:precedes"^^xsd:anyURI ;
-    rdf:subject inst:DH23T ;
     pals:beamline_context inst:BTA_LINE ;
     pals:context "beamline_order" .
 
@@ -954,7 +958,7 @@ inst:BTA_LINE_QV3_PRECEDES_DRQ3 rdf:object inst:DRQ3 ;
     pals:beamline_context inst:BTA_LINE ;
     pals:context "beamline_order" .
 
-inst:BTA_LINE_QV5_PRECEDES_DH23T rdf:object inst:DH23T ;
+inst:BTA_LINE_QV5_PRECEDES_DRQ5 rdf:object inst:DRQ5 ;
     rdf:predicate "pals:precedes"^^xsd:anyURI ;
     rdf:subject inst:QV5 ;
     pals:beamline_context inst:BTA_LINE ;
@@ -1003,46 +1007,60 @@ inst:BTA_LINE_XF183_PRECEDES_DR183 rdf:object inst:DR183 ;
     pals:context "beamline_order" .
 
 <https://example.org/pals-instance/D10_001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.523839218"^^xsd:float .
+    pals:length "1.523839218"^^xsd:float ;
+    pals:s_position "96.661"^^xsd:float .
 
 <https://example.org/pals-instance/D10_002/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.523839218"^^xsd:float .
+    pals:length "1.523839218"^^xsd:float ;
+    pals:s_position "98.185"^^xsd:float .
 
 <https://example.org/pals-instance/D2H/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.7619273560000001"^^xsd:float .
+    pals:length "0.7619273560000001"^^xsd:float ;
+    pals:s_position "113.475"^^xsd:float .
 
 <https://example.org/pals-instance/D2H_A05_001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.26192735600000006"^^xsd:float .
+    pals:length "0.26192735600000006"^^xsd:float ;
+    pals:s_position "79.346"^^xsd:float .
 
 <https://example.org/pals-instance/D2H_A05_002/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.26192735600000006"^^xsd:float .
+    pals:length "0.26192735600000006"^^xsd:float ;
+    pals:s_position "80.608"^^xsd:float .
 
 <https://example.org/pals-instance/D2L/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.609454712"^^xsd:float .
+    pals:length "0.609454712"^^xsd:float ;
+    pals:s_position "83.605"^^xsd:float .
 
 <https://example.org/pals-instance/D2LX_001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.32245471200000003"^^xsd:float .
+    pals:length "0.32245471200000003"^^xsd:float ;
+    pals:s_position "76.697"^^xsd:float .
 
 <https://example.org/pals-instance/D2LX_002/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.32245471200000003"^^xsd:float .
+    pals:length "0.32245471200000003"^^xsd:float ;
+    pals:s_position "110.326"^^xsd:float .
 
 <https://example.org/pals-instance/D2S_001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.609514656"^^xsd:float .
+    pals:length "0.609514656"^^xsd:float ;
+    pals:s_position "67.172"^^xsd:float .
 
 <https://example.org/pals-instance/D2S_002/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.609514656"^^xsd:float .
+    pals:length "0.609514656"^^xsd:float ;
+    pals:s_position "93.13"^^xsd:float .
 
 <https://example.org/pals-instance/D2S_003/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.609514656"^^xsd:float .
+    pals:length "0.609514656"^^xsd:float ;
+    pals:s_position "100.801"^^xsd:float .
 
 <https://example.org/pals-instance/D2TX_001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.322485192"^^xsd:float .
+    pals:length "0.322485192"^^xsd:float ;
+    pals:s_position "69.788"^^xsd:float .
 
 <https://example.org/pals-instance/D2TX_002/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.322485192"^^xsd:float .
+    pals:length "0.322485192"^^xsd:float ;
+    pals:s_position "90.514"^^xsd:float .
 
 <https://example.org/pals-instance/D2TX_003/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.322485192"^^xsd:float .
+    pals:length "0.322485192"^^xsd:float ;
+    pals:s_position "103.417"^^xsd:float .
 
 inst:DH127.current_range_binding rdf:object <https://example.org/pals-instance/bta-th127-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1061,7 +1079,20 @@ inst:DH127.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     rdf:subject inst:DH127 .
 
 <https://example.org/pals-instance/DH127/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.2438"^^xsd:float .
+    pals:length "0.2438"^^xsd:float ;
+    pals:s_position "42.855"^^xsd:float .
+
+<https://example.org/pals-instance/DH127/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-0.39168"^^xsd:float ;
+    pals:alpha_b "-0.047367"^^xsd:float ;
+    pals:beta_a "1.882"^^xsd:float ;
+    pals:beta_b "3.9856"^^xsd:float ;
+    pals:eta_x "-0.41976"^^xsd:float ;
+    pals:eta_y "-0.011442"^^xsd:float ;
+    pals:etap_x "0.30647"^^xsd:float ;
+    pals:etap_y "-0.0016281"^^xsd:float ;
+    pals:phi_a "23.699"^^xsd:float ;
+    pals:phi_b "19.015"^^xsd:float .
 
 inst:DH158.current_range_binding rdf:object <https://example.org/pals-instance/bta-th158-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1080,7 +1111,20 @@ inst:DH158.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     rdf:subject inst:DH158 .
 
 <https://example.org/pals-instance/DH158/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.2438"^^xsd:float .
+    pals:length "0.2438"^^xsd:float ;
+    pals:s_position "52.824"^^xsd:float .
+
+<https://example.org/pals-instance/DH158/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.5815"^^xsd:float ;
+    pals:alpha_b "-7.5045"^^xsd:float ;
+    pals:beta_a "16.058"^^xsd:float ;
+    pals:beta_b "51.961"^^xsd:float ;
+    pals:eta_x "1.1324"^^xsd:float ;
+    pals:eta_y "-0.019288"^^xsd:float ;
+    pals:etap_x "0.026447"^^xsd:float ;
+    pals:etap_y "-0.0018537"^^xsd:float ;
+    pals:phi_a "24.687"^^xsd:float ;
+    pals:phi_b "20.671"^^xsd:float .
 
 <https://example.org/pals-instance/DH1A/BendP> a pals:BendParamGroup ;
     pals:edge1_int "0.02065"^^xsd:float ;
@@ -1088,12 +1132,25 @@ inst:DH158.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     pals:g_ref "0.06818582244610812"^^xsd:float .
 
 <https://example.org/pals-instance/DH1A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.2666536729738865"^^xsd:float .
+    pals:length "0.2666536729738865"^^xsd:float ;
+    pals:s_position "6.325"^^xsd:float .
 
 <https://example.org/pals-instance/DH1A/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.0681858224461081"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/DH1A/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.5642"^^xsd:float ;
+    pals:alpha_b "2.9935"^^xsd:float ;
+    pals:beta_a "5.2955"^^xsd:float ;
+    pals:beta_b "14.113"^^xsd:float ;
+    pals:eta_x "-0.63811"^^xsd:float ;
+    pals:eta_y "-5.4476e-05"^^xsd:float ;
+    pals:etap_x "-0.56193"^^xsd:float ;
+    pals:etap_y "6.9986e-06"^^xsd:float ;
+    pals:phi_a "14.624"^^xsd:float ;
+    pals:phi_b "14.014"^^xsd:float .
 
 <https://example.org/pals-instance/DH1B/BendP> a pals:BendParamGroup ;
     pals:edge1_int "0.02065"^^xsd:float ;
@@ -1101,31 +1158,25 @@ inst:DH158.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     pals:g_ref "0.06818582244610812"^^xsd:float .
 
 <https://example.org/pals-instance/DH1B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.2666536729738865"^^xsd:float .
+    pals:length "0.2666536729738865"^^xsd:float ;
+    pals:s_position "6.592"^^xsd:float .
 
 <https://example.org/pals-instance/DH1B/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.0681858224461081"^^xsd:float ;
             pals:order 0 ] .
 
-inst:DH1T.current_range_binding rdf:object <https://example.org/pals-instance/bta-th1-ps:rangeC> ;
-    rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
-    rdf:subject inst:DH1T .
-
-inst:DH1T.current_readback_binding rdf:object <https://example.org/pals-instance/bta-th1-ps:currentM> ;
-    rdf:predicate "pals:has_readback_signal"^^xsd:anyURI ;
-    rdf:subject inst:DH1T .
-
-inst:DH1T.current_setpoint_binding rdf:object <https://example.org/pals-instance/bta-th1-ps:setpointS> ;
-    rdf:predicate "pals:has_setpoint_signal"^^xsd:anyURI ;
-    rdf:subject inst:DH1T .
-
-inst:DH1T.magnet_status_binding rdf:object <https://example.org/pals-instance/bta-th1-ps:stateS> ;
-    rdf:predicate "pals:has_signal"^^xsd:anyURI ;
-    rdf:subject inst:DH1T .
-
-<https://example.org/pals-instance/DH1T/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+<https://example.org/pals-instance/DH1B/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.7378"^^xsd:float ;
+    pals:alpha_b "2.816"^^xsd:float ;
+    pals:beta_a "6.1759"^^xsd:float ;
+    pals:beta_b "12.564"^^xsd:float ;
+    pals:eta_x "-0.78552"^^xsd:float ;
+    pals:eta_y "-6.2521e-05"^^xsd:float ;
+    pals:etap_x "-0.54374"^^xsd:float ;
+    pals:etap_y "6.7264e-06"^^xsd:float ;
+    pals:phi_a "14.671"^^xsd:float ;
+    pals:phi_b "14.034"^^xsd:float .
 
 <https://example.org/pals-instance/DH2/BendP> a pals:BendParamGroup ;
     pals:e1 "0.05058"^^xsd:float ;
@@ -1135,7 +1186,8 @@ inst:DH1T.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     pals:g_ref "0.1137446624172288"^^xsd:float .
 
 <https://example.org/pals-instance/DH2/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.42385"^^xsd:float .
+    pals:length "2.42385"^^xsd:float ;
+    pals:s_position "14.332"^^xsd:float .
 
 <https://example.org/pals-instance/DH2/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
@@ -1145,24 +1197,17 @@ inst:DH1T.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
             pals:Kn "0.11374466241722879"^^xsd:float ;
             pals:order 0 ] .
 
-inst:DH23T.current_range_binding rdf:object <https://example.org/pals-instance/bta-th23-ps:rangeC> ;
-    rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
-    rdf:subject inst:DH23T .
-
-inst:DH23T.current_readback_binding rdf:object <https://example.org/pals-instance/bta-th23-ps:currentM> ;
-    rdf:predicate "pals:has_readback_signal"^^xsd:anyURI ;
-    rdf:subject inst:DH23T .
-
-inst:DH23T.current_setpoint_binding rdf:object <https://example.org/pals-instance/bta-th23-ps:setpointS> ;
-    rdf:predicate "pals:has_setpoint_signal"^^xsd:anyURI ;
-    rdf:subject inst:DH23T .
-
-inst:DH23T.magnet_status_binding rdf:object <https://example.org/pals-instance/bta-th23-ps:stateS> ;
-    rdf:predicate "pals:has_signal"^^xsd:anyURI ;
-    rdf:subject inst:DH23T .
-
-<https://example.org/pals-instance/DH23T/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+<https://example.org/pals-instance/DH2/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.6486"^^xsd:float ;
+    pals:alpha_b "-0.097079"^^xsd:float ;
+    pals:beta_a "1.5263"^^xsd:float ;
+    pals:beta_b "11.121"^^xsd:float ;
+    pals:eta_x "0.94256"^^xsd:float ;
+    pals:eta_y "0.0012026"^^xsd:float ;
+    pals:etap_x "0.18625"^^xsd:float ;
+    pals:etap_y "0.00039324"^^xsd:float ;
+    pals:phi_a "18.048"^^xsd:float ;
+    pals:phi_b "14.549"^^xsd:float .
 
 <https://example.org/pals-instance/DH3/BendP> a pals:BendParamGroup ;
     pals:e1 "0.05058"^^xsd:float ;
@@ -1172,7 +1217,8 @@ inst:DH23T.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     pals:g_ref "0.1137446624172288"^^xsd:float .
 
 <https://example.org/pals-instance/DH3/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.42385"^^xsd:float .
+    pals:length "2.42385"^^xsd:float ;
+    pals:s_position "18.709"^^xsd:float .
 
 <https://example.org/pals-instance/DH3/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
@@ -1182,18 +1228,43 @@ inst:DH23T.magnet_status_binding rdf:object <https://example.org/pals-instance/b
             pals:Kn "0.00019564081935763354"^^xsd:float ;
             pals:order 1 ] .
 
+<https://example.org/pals-instance/DH3/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-8.4132"^^xsd:float ;
+    pals:alpha_b "-0.29228"^^xsd:float ;
+    pals:beta_a "32.66"^^xsd:float ;
+    pals:beta_b "12.858"^^xsd:float ;
+    pals:eta_x "2.0776"^^xsd:float ;
+    pals:eta_y "0.002638"^^xsd:float ;
+    pals:etap_x "0.4361"^^xsd:float ;
+    pals:etap_y "0.0003796"^^xsd:float ;
+    pals:phi_a "20.532"^^xsd:float ;
+    pals:phi_b "14.92"^^xsd:float .
+
 <https://example.org/pals-instance/DH4A/BendP> a pals:BendParamGroup ;
     pals:edge1_int "0.02065"^^xsd:float ;
     pals:edge2_int "0.02065"^^xsd:float ;
     pals:g_ref "0.03202690436350769"^^xsd:float .
 
 <https://example.org/pals-instance/DH4A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.26665081030218785"^^xsd:float .
+    pals:length "0.26665081030218785"^^xsd:float ;
+    pals:s_position "31.598"^^xsd:float .
 
 <https://example.org/pals-instance/DH4A/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.032026904363507684"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/DH4A/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.4585"^^xsd:float ;
+    pals:alpha_b "-7.5933"^^xsd:float ;
+    pals:beta_a "10.583"^^xsd:float ;
+    pals:beta_b "23.648"^^xsd:float ;
+    pals:eta_x "-0.72838"^^xsd:float ;
+    pals:eta_y "0.002234"^^xsd:float ;
+    pals:etap_x "-0.085981"^^xsd:float ;
+    pals:etap_y "-0.00021274"^^xsd:float ;
+    pals:phi_a "21.442"^^xsd:float ;
+    pals:phi_b "17.845"^^xsd:float .
 
 <https://example.org/pals-instance/DH4B/BendP> a pals:BendParamGroup ;
     pals:edge1_int "0.02065"^^xsd:float ;
@@ -1201,12 +1272,25 @@ inst:DH23T.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     pals:g_ref "0.03202690436350769"^^xsd:float .
 
 <https://example.org/pals-instance/DH4B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.26665081030218785"^^xsd:float .
+    pals:length "0.26665081030218785"^^xsd:float ;
+    pals:s_position "31.865"^^xsd:float .
 
 <https://example.org/pals-instance/DH4B/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.032026904363507684"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/DH4B/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.3797"^^xsd:float ;
+    pals:alpha_b "-8.2495"^^xsd:float ;
+    pals:beta_a "9.826"^^xsd:float ;
+    pals:beta_b "27.872"^^xsd:float ;
+    pals:eta_x "-0.75017"^^xsd:float ;
+    pals:eta_y "0.0022414"^^xsd:float ;
+    pals:etap_x "-0.077441"^^xsd:float ;
+    pals:etap_y "-0.00021313"^^xsd:float ;
+    pals:phi_a "21.468"^^xsd:float ;
+    pals:phi_b "17.855"^^xsd:float .
 
 inst:DH4T.current_range_binding rdf:object <https://example.org/pals-instance/bta-th4-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1225,7 +1309,20 @@ inst:DH4T.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:DH4T .
 
 <https://example.org/pals-instance/DH4T/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "31.598"^^xsd:float .
+
+<https://example.org/pals-instance/DH4T/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.4585"^^xsd:float ;
+    pals:alpha_b "-7.5933"^^xsd:float ;
+    pals:beta_a "10.583"^^xsd:float ;
+    pals:beta_b "23.648"^^xsd:float ;
+    pals:eta_x "-0.72838"^^xsd:float ;
+    pals:eta_y "0.002234"^^xsd:float ;
+    pals:etap_x "-0.085981"^^xsd:float ;
+    pals:etap_y "-0.00021274"^^xsd:float ;
+    pals:phi_a "21.442"^^xsd:float ;
+    pals:phi_b "17.845"^^xsd:float .
 
 <https://example.org/pals-instance/DH5A/BendP> a pals:BendParamGroup ;
     pals:edge1_int "0.02065"^^xsd:float ;
@@ -1233,12 +1330,25 @@ inst:DH4T.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     pals:g_ref "-0.1130065284655793"^^xsd:float .
 
 <https://example.org/pals-instance/DH5A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.6229286126725115"^^xsd:float .
+    pals:length "0.6229286126725115"^^xsd:float ;
+    pals:s_position "57.051"^^xsd:float .
 
 <https://example.org/pals-instance/DH5A/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.1130065284655793"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/DH5A/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "5.8466"^^xsd:float ;
+    pals:alpha_b "-1.3815"^^xsd:float ;
+    pals:beta_a "32.841"^^xsd:float ;
+    pals:beta_b "0.77248"^^xsd:float ;
+    pals:eta_x "2.0792"^^xsd:float ;
+    pals:eta_y "0.0065872"^^xsd:float ;
+    pals:etap_x "-0.35704"^^xsd:float ;
+    pals:etap_y "0.0067319"^^xsd:float ;
+    pals:phi_a "24.846"^^xsd:float ;
+    pals:phi_b "23.079"^^xsd:float .
 
 <https://example.org/pals-instance/DH5B/BendP> a pals:BendParamGroup ;
     pals:edge1_int "0.02065"^^xsd:float ;
@@ -1246,12 +1356,25 @@ inst:DH4T.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     pals:g_ref "-0.1130065284655793"^^xsd:float .
 
 <https://example.org/pals-instance/DH5B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.6229286126725115"^^xsd:float .
+    pals:length "0.6229286126725115"^^xsd:float ;
+    pals:s_position "57.674"^^xsd:float .
 
 <https://example.org/pals-instance/DH5B/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.1130065284655793"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/DH5B/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "5.1798"^^xsd:float ;
+    pals:alpha_b "-3.7048"^^xsd:float ;
+    pals:beta_a "25.978"^^xsd:float ;
+    pals:beta_b "3.9477"^^xsd:float ;
+    pals:eta_x "1.8351"^^xsd:float ;
+    pals:eta_y "0.010863"^^xsd:float ;
+    pals:etap_x "-0.42747"^^xsd:float ;
+    pals:etap_y "0.0066682"^^xsd:float ;
+    pals:phi_a "24.867"^^xsd:float ;
+    pals:phi_b "23.444"^^xsd:float .
 
 inst:DH5T.current_range_binding rdf:object <https://example.org/pals-instance/bta-th5-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1270,28 +1393,93 @@ inst:DH5T.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:DH5T .
 
 <https://example.org/pals-instance/DH5T/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "57.051"^^xsd:float .
+
+<https://example.org/pals-instance/DH5T/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "5.8466"^^xsd:float ;
+    pals:alpha_b "-1.3815"^^xsd:float ;
+    pals:beta_a "32.841"^^xsd:float ;
+    pals:beta_b "0.77248"^^xsd:float ;
+    pals:eta_x "2.0792"^^xsd:float ;
+    pals:eta_y "0.0065872"^^xsd:float ;
+    pals:etap_x "-0.35704"^^xsd:float ;
+    pals:etap_y "0.0067319"^^xsd:float ;
+    pals:phi_a "24.846"^^xsd:float ;
+    pals:phi_b "23.079"^^xsd:float .
 
 <https://example.org/pals-instance/DHCA02/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "69.466"^^xsd:float .
+
+<https://example.org/pals-instance/DHCA02/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "2.7041"^^xsd:float ;
+    pals:alpha_b "-4.2596"^^xsd:float ;
+    pals:beta_a "21.653"^^xsd:float ;
+    pals:beta_b "33.325"^^xsd:float ;
+    pals:eta_x "0.99667"^^xsd:float ;
+    pals:eta_y "0.0029522"^^xsd:float ;
+    pals:etap_x "-0.16951"^^xsd:float ;
+    pals:etap_y "-0.0012764"^^xsd:float ;
+    pals:phi_a "25.458"^^xsd:float ;
+    pals:phi_b "24.041"^^xsd:float .
 
 <https://example.org/pals-instance/DHCA08/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "90.192"^^xsd:float .
+
+<https://example.org/pals-instance/DHCA08/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.4304"^^xsd:float ;
+    pals:alpha_b "1.9274"^^xsd:float ;
+    pals:beta_a "11.408"^^xsd:float ;
+    pals:beta_b "10.966"^^xsd:float ;
+    pals:eta_x "-2.2814"^^xsd:float ;
+    pals:eta_y "-0.024704"^^xsd:float ;
+    pals:etap_x "-0.4497"^^xsd:float ;
+    pals:etap_y "0.0023679"^^xsd:float ;
+    pals:phi_a "27.031"^^xsd:float ;
+    pals:phi_b "24.945"^^xsd:float .
 
 <https://example.org/pals-instance/DHCA12/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "103.094"^^xsd:float .
+
+<https://example.org/pals-instance/DHCA12/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-2.5047"^^xsd:float ;
+    pals:alpha_b "0.89617"^^xsd:float ;
+    pals:beta_a "18.054"^^xsd:float ;
+    pals:beta_b "13.387"^^xsd:float ;
+    pals:eta_x "-4.2397"^^xsd:float ;
+    pals:eta_y "-0.023558"^^xsd:float ;
+    pals:etap_x "-0.59273"^^xsd:float ;
+    pals:etap_y "0.0037235"^^xsd:float ;
+    pals:phi_a "28.023"^^xsd:float ;
+    pals:phi_b "26.536"^^xsd:float .
 
 <https://example.org/pals-instance/DHF6A/BendP> a pals:BendParamGroup ;
     pals:e2 "-0.07149"^^xsd:float ;
     pals:g_ref "-0.057192"^^xsd:float .
 
 <https://example.org/pals-instance/DHF6A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.25"^^xsd:float .
+    pals:length "1.25"^^xsd:float ;
+    pals:s_position "1.25"^^xsd:float .
 
 <https://example.org/pals-instance/DHF6A/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.057192"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/DHF6A/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.393"^^xsd:float ;
+    pals:alpha_b "-1.061"^^xsd:float ;
+    pals:beta_a "8.4782"^^xsd:float ;
+    pals:beta_b "6.2436"^^xsd:float ;
+    pals:eta_x "2.1418"^^xsd:float ;
+    pals:eta_y "0.0"^^xsd:float ;
+    pals:etap_x "-0.49495"^^xsd:float ;
+    pals:etap_y "0.0"^^xsd:float ;
+    pals:phi_a "13.403"^^xsd:float ;
+    pals:phi_b "13.585"^^xsd:float .
 
 <https://example.org/pals-instance/DHF6B/BendP> a pals:BendParamGroup ;
     pals:e1 "-0.03324"^^xsd:float ;
@@ -1299,192 +1487,289 @@ inst:DH5T.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     pals:g_ref "-0.044728314115607806"^^xsd:float .
 
 <https://example.org/pals-instance/DHF6B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.3269"^^xsd:float .
+    pals:length "1.3269"^^xsd:float ;
+    pals:s_position "2.616"^^xsd:float .
 
 <https://example.org/pals-instance/DHF6B/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.04472831411560781"^^xsd:float ;
             pals:order 0 ] .
 
+<https://example.org/pals-instance/DHF6B/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.90861"^^xsd:float ;
+    pals:alpha_b "-1.4813"^^xsd:float ;
+    pals:beta_a "5.3232"^^xsd:float ;
+    pals:beta_b "9.748"^^xsd:float ;
+    pals:eta_x "1.427"^^xsd:float ;
+    pals:eta_y "0.0"^^xsd:float ;
+    pals:etap_x "-0.55131"^^xsd:float ;
+    pals:etap_y "0.0"^^xsd:float ;
+    pals:phi_a "13.608"^^xsd:float ;
+    pals:phi_b "13.761"^^xsd:float .
+
 <https://example.org/pals-instance/DHF6T/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "1.25"^^xsd:float .
+
+<https://example.org/pals-instance/DHF6T/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.393"^^xsd:float ;
+    pals:alpha_b "-1.061"^^xsd:float ;
+    pals:beta_a "8.4782"^^xsd:float ;
+    pals:beta_b "6.2436"^^xsd:float ;
+    pals:eta_x "2.1418"^^xsd:float ;
+    pals:eta_y "0.0"^^xsd:float ;
+    pals:etap_x "-0.49495"^^xsd:float ;
+    pals:etap_y "0.0"^^xsd:float ;
+    pals:phi_a "13.403"^^xsd:float ;
+    pals:phi_b "13.585"^^xsd:float .
 
 <https://example.org/pals-instance/DHL20T/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "63.325"^^xsd:float .
+
+<https://example.org/pals-instance/DHL20T/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.9685"^^xsd:float ;
+    pals:alpha_b "1.0498"^^xsd:float ;
+    pals:beta_a "22.003"^^xsd:float ;
+    pals:beta_b "22.323"^^xsd:float ;
+    pals:eta_x "1.0814"^^xsd:float ;
+    pals:eta_y "0.014316"^^xsd:float ;
+    pals:etap_x "0.058607"^^xsd:float ;
+    pals:etap_y "-0.0025327"^^xsd:float ;
+    pals:phi_a "25.234"^^xsd:float ;
+    pals:phi_b "23.758"^^xsd:float .
 
 <https://example.org/pals-instance/DPUE_001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.287"^^xsd:float .
+    pals:length "0.287"^^xsd:float ;
+    pals:s_position "69.466"^^xsd:float .
 
 <https://example.org/pals-instance/DPUE_002/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.287"^^xsd:float .
+    pals:length "0.287"^^xsd:float ;
+    pals:s_position "76.374"^^xsd:float .
 
 <https://example.org/pals-instance/DPUE_003/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.287"^^xsd:float .
+    pals:length "0.287"^^xsd:float ;
+    pals:s_position "90.192"^^xsd:float .
 
 <https://example.org/pals-instance/DPUE_004/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.287"^^xsd:float .
+    pals:length "0.287"^^xsd:float ;
+    pals:s_position "103.094"^^xsd:float .
 
 <https://example.org/pals-instance/DPUE_005/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.287"^^xsd:float .
+    pals:length "0.287"^^xsd:float ;
+    pals:s_position "110.003"^^xsd:float .
 
 <https://example.org/pals-instance/DR001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.2518000000000002"^^xsd:float .
+    pals:length "1.2518000000000002"^^xsd:float ;
+    pals:s_position "4.275"^^xsd:float .
 
 <https://example.org/pals-instance/DR006/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.43259999999999993"^^xsd:float .
+    pals:length "0.43259999999999993"^^xsd:float ;
+    pals:s_position "4.707"^^xsd:float .
 
 <https://example.org/pals-instance/DR007/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.16060000000000002"^^xsd:float .
+    pals:length "0.16060000000000002"^^xsd:float ;
+    pals:s_position "5.096"^^xsd:float .
 
 <https://example.org/pals-instance/DR019/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.3256999999999993"^^xsd:float .
+    pals:length "0.3256999999999993"^^xsd:float ;
+    pals:s_position "8.99"^^xsd:float .
 
 <https://example.org/pals-instance/DR024A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.012100000000000347"^^xsd:float .
+    pals:length "0.012100000000000347"^^xsd:float ;
+    pals:s_position "9.932"^^xsd:float .
 
 <https://example.org/pals-instance/DR024B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.6880999999999995"^^xsd:float .
+    pals:length "0.6880999999999995"^^xsd:float ;
+    pals:s_position "10.863"^^xsd:float .
 
 <https://example.org/pals-instance/DR046/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.8646750000000023"^^xsd:float .
+    pals:length "0.8646750000000023"^^xsd:float ;
+    pals:s_position "16.285"^^xsd:float .
 
 <https://example.org/pals-instance/DR059/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4698999999999991"^^xsd:float .
+    pals:length "0.4698999999999991"^^xsd:float ;
+    pals:s_position "20.639"^^xsd:float .
 
 <https://example.org/pals-instance/DR060/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4601500000000023"^^xsd:float .
+    pals:length "0.4601500000000023"^^xsd:float ;
+    pals:s_position "21.099"^^xsd:float .
 
 <https://example.org/pals-instance/DR125/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.43049999999999866"^^xsd:float .
+    pals:length "0.43049999999999866"^^xsd:float ;
+    pals:s_position "42.611"^^xsd:float .
 
 <https://example.org/pals-instance/DR127/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.29639999999999805"^^xsd:float .
+    pals:length "0.29639999999999805"^^xsd:float ;
+    pals:s_position "43.152"^^xsd:float .
 
 <https://example.org/pals-instance/DR129/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.11834999999999998"^^xsd:float .
+    pals:length "0.11834999999999998"^^xsd:float ;
+    pals:s_position "43.27"^^xsd:float .
 
 <https://example.org/pals-instance/DR139/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.552500000000002"^^xsd:float .
+    pals:length "0.552500000000002"^^xsd:float ;
+    pals:s_position "47.334"^^xsd:float .
 
 <https://example.org/pals-instance/DR141/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.41820000000000185"^^xsd:float .
+    pals:length "0.41820000000000185"^^xsd:float ;
+    pals:s_position "47.752"^^xsd:float .
 
 <https://example.org/pals-instance/DR143/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.11834999999999998"^^xsd:float .
+    pals:length "0.11834999999999998"^^xsd:float ;
+    pals:s_position "47.87"^^xsd:float .
 
 <https://example.org/pals-instance/DR156/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.430600000000002"^^xsd:float .
+    pals:length "0.430600000000002"^^xsd:float ;
+    pals:s_position "52.58"^^xsd:float .
 
 <https://example.org/pals-instance/DR158/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.29639999999999805"^^xsd:float .
+    pals:length "0.29639999999999805"^^xsd:float ;
+    pals:s_position "53.12"^^xsd:float .
 
 <https://example.org/pals-instance/DR160/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.11834999999999998"^^xsd:float .
+    pals:length "0.11834999999999998"^^xsd:float ;
+    pals:s_position "53.238"^^xsd:float .
 
 <https://example.org/pals-instance/DR166/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5523999999999987"^^xsd:float .
+    pals:length "0.5523999999999987"^^xsd:float ;
+    pals:s_position "54.886"^^xsd:float .
 
 <https://example.org/pals-instance/DR168/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.41829999999999806"^^xsd:float .
+    pals:length "0.41829999999999806"^^xsd:float ;
+    pals:s_position "55.304"^^xsd:float .
 
 <https://example.org/pals-instance/DR170/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.11834999999999998"^^xsd:float .
+    pals:length "0.11834999999999998"^^xsd:float ;
+    pals:s_position "55.423"^^xsd:float .
 
 <https://example.org/pals-instance/DR181/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.3797999999999996"^^xsd:float .
+    pals:length "0.3797999999999996"^^xsd:float ;
+    pals:s_position "58.749"^^xsd:float .
 
 <https://example.org/pals-instance/DR183/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5255000000000035"^^xsd:float .
+    pals:length "0.5255000000000035"^^xsd:float ;
+    pals:s_position "59.275"^^xsd:float .
 
 <https://example.org/pals-instance/DRD1/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.353954"^^xsd:float .
+    pals:length "0.353954"^^xsd:float ;
+    pals:s_position "6.946"^^xsd:float .
 
 <https://example.org/pals-instance/DRD2/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4714249999999991"^^xsd:float .
+    pals:length "0.4714249999999991"^^xsd:float ;
+    pals:s_position "14.804"^^xsd:float .
 
 <https://example.org/pals-instance/DRD3/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4897249999999973"^^xsd:float .
+    pals:length "0.4897249999999973"^^xsd:float ;
+    pals:s_position "19.199"^^xsd:float .
 
 <https://example.org/pals-instance/DRD4/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.8078999999999987"^^xsd:float .
+    pals:length "1.8078999999999987"^^xsd:float ;
+    pals:s_position "33.673"^^xsd:float .
 
 <https://example.org/pals-instance/DRD5/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4516000000000008"^^xsd:float .
+    pals:length "0.4516000000000008"^^xsd:float ;
+    pals:s_position "58.125"^^xsd:float .
 
 <https://example.org/pals-instance/DRF6A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.03949999999999998"^^xsd:float .
+    pals:length "0.03949999999999998"^^xsd:float ;
+    pals:s_position "1.289"^^xsd:float .
 
 <https://example.org/pals-instance/DRF6B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4064"^^xsd:float .
+    pals:length "0.4064"^^xsd:float ;
+    pals:s_position "3.023"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ1/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4031500000000003"^^xsd:float .
+    pals:length "0.4031500000000003"^^xsd:float ;
+    pals:s_position "6.058"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ10/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "5.030150000000003"^^xsd:float .
+    pals:length "5.030150000000003"^^xsd:float ;
+    pals:s_position "42.181"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ11/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "3.01295"^^xsd:float .
+    pals:length "3.01295"^^xsd:float ;
+    pals:s_position "46.781"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ12/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "3.7802499999999988"^^xsd:float .
+    pals:length "3.7802499999999988"^^xsd:float ;
+    pals:s_position "52.149"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ13/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5969500000000032"^^xsd:float .
+    pals:length "0.5969500000000032"^^xsd:float ;
+    pals:s_position "54.334"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ14/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5067499999999983"^^xsd:float .
+    pals:length "0.5067499999999983"^^xsd:float ;
+    pals:s_position "56.428"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ2A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.14119599999999966"^^xsd:float .
+    pals:length "0.14119599999999966"^^xsd:float ;
+    pals:s_position "7.646"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ2B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4599000000000001"^^xsd:float .
+    pals:length "0.4599000000000001"^^xsd:float ;
+    pals:s_position "8.664"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ3/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.3706000000000004"^^xsd:float .
+    pals:length "0.3706000000000004"^^xsd:float ;
+    pals:s_position "9.919"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ4/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.48617500000000113"^^xsd:float .
+    pals:length "0.48617500000000113"^^xsd:float ;
+    pals:s_position "11.908"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ5/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.11834999999999998"^^xsd:float .
+    pals:length "0.11834999999999998"^^xsd:float ;
+    pals:s_position "15.421"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ6/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4714500000000008"^^xsd:float .
+    pals:length "0.4714500000000008"^^xsd:float ;
+    pals:s_position "20.169"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ7Y/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "4.25075"^^xsd:float .
+    pals:length "4.25075"^^xsd:float ;
+    pals:s_position "25.848"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ7Z/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "4.25075"^^xsd:float .
+    pals:length "4.25075"^^xsd:float ;
+    pals:s_position "30.099"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ8/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.7341"^^xsd:float .
+    pals:length "0.7341"^^xsd:float ;
+    pals:s_position "31.331"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ9A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.670250000000003"^^xsd:float .
+    pals:length "0.670250000000003"^^xsd:float ;
+    pals:s_position "34.841"^^xsd:float .
 
 <https://example.org/pals-instance/DRQ9B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.567049999999995"^^xsd:float .
+    pals:length "1.567049999999995"^^xsd:float ;
+    pals:s_position "36.652"^^xsd:float .
 
 <https://example.org/pals-instance/DSQ_001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.37104735600000005"^^xsd:float .
+    pals:length "0.37104735600000005"^^xsd:float ;
+    pals:s_position "72.547"^^xsd:float .
 
 <https://example.org/pals-instance/DSQ_002/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.37104735600000005"^^xsd:float .
+    pals:length "0.37104735600000005"^^xsd:float ;
+    pals:s_position "73.7"^^xsd:float .
 
 <https://example.org/pals-instance/DSS_001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.43442735600000004"^^xsd:float .
+    pals:length "0.43442735600000004"^^xsd:float ;
+    pals:s_position "86.428"^^xsd:float .
 
 <https://example.org/pals-instance/DSS_002/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.43442735600000004"^^xsd:float .
+    pals:length "0.43442735600000004"^^xsd:float ;
+    pals:s_position "87.517"^^xsd:float .
 
 <https://example.org/pals-instance/DSS_003/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.43442735600000004"^^xsd:float .
+    pals:length "0.43442735600000004"^^xsd:float ;
+    pals:s_position "106.239"^^xsd:float .
 
 <https://example.org/pals-instance/DSS_004/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.43442735600000004"^^xsd:float .
+    pals:length "0.43442735600000004"^^xsd:float ;
+    pals:s_position "107.329"^^xsd:float .
 
 inst:DV007.current_range_binding rdf:object <https://example.org/pals-instance/bta-tv7-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1503,12 +1788,25 @@ inst:DV007.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     rdf:subject inst:DV007 .
 
 <https://example.org/pals-instance/DV007/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.2286"^^xsd:float .
+    pals:length "0.2286"^^xsd:float ;
+    pals:s_position "4.936"^^xsd:float .
 
 <https://example.org/pals-instance/DV007/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Ks "0.00019785396946390708"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/DV007/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.11318"^^xsd:float ;
+    pals:alpha_b "-2.2413"^^xsd:float ;
+    pals:beta_a "2.9533"^^xsd:float ;
+    pals:beta_b "18.382"^^xsd:float ;
+    pals:eta_x "0.14828"^^xsd:float ;
+    pals:eta_y "-5.1697e-06"^^xsd:float ;
+    pals:etap_x "-0.55131"^^xsd:float ;
+    pals:etap_y "0.0"^^xsd:float ;
+    pals:phi_a "14.232"^^xsd:float ;
+    pals:phi_b "13.935"^^xsd:float .
 
 inst:DV030.current_range_binding rdf:object <https://example.org/pals-instance/bta-tv30-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1527,7 +1825,20 @@ inst:DV030.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     rdf:subject inst:DV030 .
 
 <https://example.org/pals-instance/DV030/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.2438"^^xsd:float .
+    pals:length "0.2438"^^xsd:float ;
+    pals:s_position "10.175"^^xsd:float .
+
+<https://example.org/pals-instance/DV030/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-8.9887"^^xsd:float ;
+    pals:alpha_b "16.668"^^xsd:float ;
+    pals:beta_a "10.529"^^xsd:float ;
+    pals:beta_b "35.803"^^xsd:float ;
+    pals:eta_x "0.3295"^^xsd:float ;
+    pals:eta_y "-0.00027741"^^xsd:float ;
+    pals:etap_x "0.54512"^^xsd:float ;
+    pals:etap_y "0.00030165"^^xsd:float ;
+    pals:phi_a "17.555"^^xsd:float ;
+    pals:phi_b "14.21"^^xsd:float .
 
 inst:DV120.current_range_binding rdf:object <https://example.org/pals-instance/bta-tv120-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1546,7 +1857,20 @@ inst:DV120.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     rdf:subject inst:DV120 .
 
 <https://example.org/pals-instance/DV120/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.2438"^^xsd:float .
+    pals:length "0.2438"^^xsd:float ;
+    pals:s_position "35.085"^^xsd:float .
+
+<https://example.org/pals-instance/DV120/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-2.089"^^xsd:float ;
+    pals:alpha_b "10.999"^^xsd:float ;
+    pals:beta_a "9.4901"^^xsd:float ;
+    pals:beta_b "42.847"^^xsd:float ;
+    pals:eta_x "-1.4292"^^xsd:float ;
+    pals:eta_y "0.00077699"^^xsd:float ;
+    pals:etap_x "-0.44856"^^xsd:float ;
+    pals:etap_y "-0.0010737"^^xsd:float ;
+    pals:phi_a "21.916"^^xsd:float ;
+    pals:phi_b "17.922"^^xsd:float .
 
 inst:DV181.current_range_binding rdf:object <https://example.org/pals-instance/bta-tv181-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -1565,296 +1889,631 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
     rdf:subject inst:DV181 .
 
 <https://example.org/pals-instance/DV181/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.2438"^^xsd:float .
+    pals:length "0.2438"^^xsd:float ;
+    pals:s_position "58.369"^^xsd:float .
+
+<https://example.org/pals-instance/DV181/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "4.4348"^^xsd:float ;
+    pals:alpha_b "-6.2988"^^xsd:float ;
+    pals:beta_a "19.292"^^xsd:float ;
+    pals:beta_b "10.904"^^xsd:float ;
+    pals:eta_x "1.5378"^^xsd:float ;
+    pals:eta_y "0.015589"^^xsd:float ;
+    pals:etap_x "-0.42747"^^xsd:float ;
+    pals:etap_y "0.0066682"^^xsd:float ;
+    pals:phi_a "24.898"^^xsd:float ;
+    pals:phi_b "23.55"^^xsd:float .
 
 <https://example.org/pals-instance/DVCA02/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "69.466"^^xsd:float .
+
+<https://example.org/pals-instance/DVCA02/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "2.7041"^^xsd:float ;
+    pals:alpha_b "-4.2596"^^xsd:float ;
+    pals:beta_a "21.653"^^xsd:float ;
+    pals:beta_b "33.325"^^xsd:float ;
+    pals:eta_x "0.99667"^^xsd:float ;
+    pals:eta_y "0.0029522"^^xsd:float ;
+    pals:etap_x "-0.16951"^^xsd:float ;
+    pals:etap_y "-0.0012764"^^xsd:float ;
+    pals:phi_a "25.458"^^xsd:float ;
+    pals:phi_b "24.041"^^xsd:float .
 
 <https://example.org/pals-instance/DVCA08/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "90.192"^^xsd:float .
+
+<https://example.org/pals-instance/DVCA08/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.4304"^^xsd:float ;
+    pals:alpha_b "1.9274"^^xsd:float ;
+    pals:beta_a "11.408"^^xsd:float ;
+    pals:beta_b "10.966"^^xsd:float ;
+    pals:eta_x "-2.2814"^^xsd:float ;
+    pals:eta_y "-0.024704"^^xsd:float ;
+    pals:etap_x "-0.4497"^^xsd:float ;
+    pals:etap_y "0.0023679"^^xsd:float ;
+    pals:phi_a "27.031"^^xsd:float ;
+    pals:phi_b "24.945"^^xsd:float .
 
 <https://example.org/pals-instance/DVCA12/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "103.094"^^xsd:float .
+
+<https://example.org/pals-instance/DVCA12/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-2.5047"^^xsd:float ;
+    pals:alpha_b "0.89617"^^xsd:float ;
+    pals:beta_a "18.054"^^xsd:float ;
+    pals:beta_b "13.387"^^xsd:float ;
+    pals:eta_x "-4.2397"^^xsd:float ;
+    pals:eta_y "-0.023558"^^xsd:float ;
+    pals:etap_x "-0.59273"^^xsd:float ;
+    pals:etap_y "0.0037235"^^xsd:float ;
+    pals:phi_a "28.023"^^xsd:float ;
+    pals:phi_b "26.536"^^xsd:float .
+
+<https://example.org/pals-instance/END_B0/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.025604"^^xsd:float ;
+    pals:alpha_b "-0.51066"^^xsd:float ;
+    pals:beta_a "13.922"^^xsd:float ;
+    pals:beta_b "45.665"^^xsd:float ;
+    pals:eta_x "-3.7227"^^xsd:float ;
+    pals:eta_y "-0.010352"^^xsd:float ;
+    pals:etap_x "0.030909"^^xsd:float ;
+    pals:etap_y "0.0013406"^^xsd:float ;
+    pals:phi_a "28.524"^^xsd:float ;
+    pals:phi_b "27.09"^^xsd:float .
+
+<https://example.org/pals-instance/FOIL024/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-7.0006"^^xsd:float ;
+    pals:alpha_b "18.661"^^xsd:float ;
+    pals:beta_a "6.437"^^xsd:float ;
+    pals:beta_b "44.844"^^xsd:float ;
+    pals:eta_x "0.19"^^xsd:float ;
+    pals:eta_y "-0.00038459"^^xsd:float ;
+    pals:etap_x "0.54512"^^xsd:float ;
+    pals:etap_y "0.00030165"^^xsd:float ;
+    pals:phi_a "17.524"^^xsd:float ;
+    pals:phi_b "14.204"^^xsd:float .
 
 <https://example.org/pals-instance/KCKRA05/BendP> a pals:BendParamGroup ;
     pals:g_ref "0.0029999988750001264"^^xsd:float .
 
 <https://example.org/pals-instance/KCKRA05/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.0000003750000985"^^xsd:float .
+    pals:length "1.0000003750000985"^^xsd:float ;
+    pals:s_position "80.346"^^xsd:float .
 
 <https://example.org/pals-instance/KCKRA05/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.0029999988750001264"^^xsd:float ;
             pals:order 0 ] .
 
+<https://example.org/pals-instance/KCKRA05/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.29659"^^xsd:float ;
+    pals:alpha_b "0.70682"^^xsd:float ;
+    pals:beta_a "22.05"^^xsd:float ;
+    pals:beta_b "16.716"^^xsd:float ;
+    pals:eta_x "-0.28418"^^xsd:float ;
+    pals:eta_y "-0.011847"^^xsd:float ;
+    pals:etap_x "-0.12524"^^xsd:float ;
+    pals:etap_y "-0.0018224"^^xsd:float ;
+    pals:phi_a "26.112"^^xsd:float ;
+    pals:phi_b "24.391"^^xsd:float .
+
 <https://example.org/pals-instance/L20SPTM1/BendP> a pals:BendParamGroup ;
     pals:g_ref "0.04457110731957698"^^xsd:float .
 
 <https://example.org/pals-instance/L20SPTM1/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.2309543850148328"^^xsd:float .
+    pals:length "1.2309543850148328"^^xsd:float ;
+    pals:s_position "63.325"^^xsd:float .
 
 <https://example.org/pals-instance/L20SPTM1/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04457110731957699"^^xsd:float ;
             pals:order 0 ] .
 
+<https://example.org/pals-instance/L20SPTM1/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.9685"^^xsd:float ;
+    pals:alpha_b "1.0498"^^xsd:float ;
+    pals:beta_a "22.003"^^xsd:float ;
+    pals:beta_b "22.323"^^xsd:float ;
+    pals:eta_x "1.0814"^^xsd:float ;
+    pals:eta_y "0.014316"^^xsd:float ;
+    pals:etap_x "0.058607"^^xsd:float ;
+    pals:etap_y "-0.0025327"^^xsd:float ;
+    pals:phi_a "25.234"^^xsd:float ;
+    pals:phi_b "23.758"^^xsd:float .
+
 <https://example.org/pals-instance/L20SPTM2/BendP> a pals:BendParamGroup ;
     pals:g_ref "0.04457110731957698"^^xsd:float .
 
 <https://example.org/pals-instance/L20SPTM2/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "1.2309543850148328"^^xsd:float .
+    pals:length "1.2309543850148328"^^xsd:float ;
+    pals:s_position "64.556"^^xsd:float .
 
 <https://example.org/pals-instance/L20SPTM2/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04457110731957699"^^xsd:float ;
             pals:order 0 ] .
 
+<https://example.org/pals-instance/L20SPTM2/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-2.2411"^^xsd:float ;
+    pals:alpha_b "0.9822"^^xsd:float ;
+    pals:beta_a "27.182"^^xsd:float ;
+    pals:beta_b "19.818"^^xsd:float ;
+    pals:eta_x "1.1872"^^xsd:float ;
+    pals:eta_y "0.011201"^^xsd:float ;
+    pals:etap_x "0.11349"^^xsd:float ;
+    pals:etap_y "-0.002565"^^xsd:float ;
+    pals:phi_a "25.285"^^xsd:float ;
+    pals:phi_b "23.817"^^xsd:float .
+
 <https://example.org/pals-instance/M1/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.2606"^^xsd:float .
+    pals:length "2.2606"^^xsd:float ;
+    pals:s_position "62.094"^^xsd:float .
+
+<https://example.org/pals-instance/MK077/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-0.10083"^^xsd:float ;
+    pals:alpha_b "2.5305"^^xsd:float ;
+    pals:beta_a "12.097"^^xsd:float ;
+    pals:beta_b "5.8929"^^xsd:float ;
+    pals:eta_x "0.24585"^^xsd:float ;
+    pals:eta_y "0.0039479"^^xsd:float ;
+    pals:etap_x "-0.19039"^^xsd:float ;
+    pals:etap_y "-0.00056786"^^xsd:float ;
+    pals:phi_a "20.997"^^xsd:float ;
+    pals:phi_b "15.302"^^xsd:float .
+
+<https://example.org/pals-instance/MK139/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-4.5586"^^xsd:float ;
+    pals:alpha_b "-0.47415"^^xsd:float ;
+    pals:beta_a "21.749"^^xsd:float ;
+    pals:beta_b "3.9611"^^xsd:float ;
+    pals:eta_x "0.65099"^^xsd:float ;
+    pals:eta_y "-0.010773"^^xsd:float ;
+    pals:etap_x "0.26618"^^xsd:float ;
+    pals:etap_y "0.00063469"^^xsd:float ;
+    pals:phi_a "24.441"^^xsd:float ;
+    pals:phi_b "20.113"^^xsd:float .
+
+<https://example.org/pals-instance/MK156/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.7286"^^xsd:float ;
+    pals:alpha_b "-6.7606"^^xsd:float ;
+    pals:beta_a "18.291"^^xsd:float ;
+    pals:beta_b "42.341"^^xsd:float ;
+    pals:eta_x "1.1145"^^xsd:float ;
+    pals:eta_y "-0.017963"^^xsd:float ;
+    pals:etap_x "0.026447"^^xsd:float ;
+    pals:etap_y "-0.0018537"^^xsd:float ;
+    pals:phi_a "24.647"^^xsd:float ;
+    pals:phi_b "20.657"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A01BF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A01BF/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.0066461824881423"^^xsd:float .
+    pals:length "2.0066461824881423"^^xsd:float ;
+    pals:s_position "66.563"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A01BF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.010112690671265677"^^xsd:float ;
-            pals:order 2 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04850457979108316"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.010112690671265677"^^xsd:float ;
+            pals:order 2 ],
+        [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229642227363"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/MM_A01BF/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.50449"^^xsd:float ;
+    pals:alpha_b "-1.0185"^^xsd:float ;
+    pals:beta_a "30.913"^^xsd:float ;
+    pals:beta_b "19.886"^^xsd:float ;
+    pals:eta_x "1.2703"^^xsd:float ;
+    pals:eta_y "0.0070616"^^xsd:float ;
+    pals:etap_x "-0.032005"^^xsd:float ;
+    pals:etap_y "-0.0017058"^^xsd:float ;
+    pals:phi_a "25.352"^^xsd:float ;
+    pals:phi_b "23.922"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A02BF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A02BF/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.0066461824881423"^^xsd:float .
+    pals:length "2.0066461824881423"^^xsd:float ;
+    pals:s_position "69.179"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A02BF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
+            pals:Kn "-0.011712229642227363"^^xsd:float ;
+            pals:order 0 ],
+        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.010112690671265677"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04850457979108316"^^xsd:float ;
-            pals:order 1 ],
-        [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229642227363"^^xsd:float ;
-            pals:order 0 ] .
+            pals:order 1 ] .
+
+<https://example.org/pals-instance/MM_A02BF/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "2.8142"^^xsd:float ;
+    pals:alpha_b "-4.0947"^^xsd:float ;
+    pals:beta_a "23.237"^^xsd:float ;
+    pals:beta_b "30.927"^^xsd:float ;
+    pals:eta_x "1.0453"^^xsd:float ;
+    pals:eta_y "0.0032854"^^xsd:float ;
+    pals:etap_x "-0.16951"^^xsd:float ;
+    pals:etap_y "-0.0012764"^^xsd:float ;
+    pals:phi_a "25.445"^^xsd:float ;
+    pals:phi_b "24.032"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A03CD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A03CD/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "72.176"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A03CD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
-            pals:order 0 ],
+            pals:Kn "0.008756616595046793"^^xsd:float ;
+            pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.04863291582125735"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.008756616595046793"^^xsd:float ;
-            pals:order 2 ] .
+            pals:Kn "-0.011712229630153455"^^xsd:float ;
+            pals:order 0 ] .
+
+<https://example.org/pals-instance/MM_A03CD/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.28342"^^xsd:float ;
+    pals:alpha_b "0.14409"^^xsd:float ;
+    pals:beta_a "13.681"^^xsd:float ;
+    pals:beta_b "47.473"^^xsd:float ;
+    pals:eta_x "0.61784"^^xsd:float ;
+    pals:eta_y "-0.00053984"^^xsd:float ;
+    pals:etap_x "-0.10831"^^xsd:float ;
+    pals:etap_y "-0.0014117"^^xsd:float ;
+    pals:phi_a "25.625"^^xsd:float ;
+    pals:phi_b "24.106"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A04CD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A04CD/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "76.087"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A04CD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.008756616595046793"^^xsd:float ;
-            pals:order 2 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229630153455"^^xsd:float ;
             pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.04863291582125735"^^xsd:float ;
-            pals:order 1 ] .
+            pals:order 1 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.008756616595046793"^^xsd:float ;
+            pals:order 2 ] .
+
+<https://example.org/pals-instance/MM_A04CD/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.768"^^xsd:float ;
+    pals:alpha_b "4.5335"^^xsd:float ;
+    pals:beta_a "16.513"^^xsd:float ;
+    pals:beta_b "34.835"^^xsd:float ;
+    pals:eta_x "0.21218"^^xsd:float ;
+    pals:eta_y "-0.0056093"^^xsd:float ;
+    pals:etap_x "-0.0979"^^xsd:float ;
+    pals:etap_y "-0.00092647"^^xsd:float ;
+    pals:phi_a "25.911"^^xsd:float ;
+    pals:phi_b "24.194"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A05AF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A05AF/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "79.085"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A05AF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.04870190658303816"^^xsd:float ;
-            pals:order 1 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229630153455"^^xsd:float ;
             pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008723426564620421"^^xsd:float ;
-            pals:order 2 ] .
+            pals:order 2 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.04870190658303816"^^xsd:float ;
+            pals:order 1 ] .
+
+<https://example.org/pals-instance/MM_A05AF/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.35885"^^xsd:float ;
+    pals:alpha_b "0.81986"^^xsd:float ;
+    pals:beta_a "22.877"^^xsd:float ;
+    pals:beta_b "18.643"^^xsd:float ;
+    pals:eta_x "-0.12385"^^xsd:float ;
+    pals:eta_y "-0.0095409"^^xsd:float ;
+    pals:etap_x "-0.12824"^^xsd:float ;
+    pals:etap_y "-0.0018225"^^xsd:float ;
+    pals:phi_a "26.056"^^xsd:float ;
+    pals:phi_b "24.32"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A06AF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A06AF/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "82.996"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A06AF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229630153455"^^xsd:float ;
-            pals:order 0 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04870190658303816"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
+            pals:Kn "-0.011712229630153455"^^xsd:float ;
+            pals:order 0 ],
+        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008723426564620421"^^xsd:float ;
             pals:order 2 ] .
+
+<https://example.org/pals-instance/MM_A06AF/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "2.1438"^^xsd:float ;
+    pals:alpha_b "-1.4238"^^xsd:float ;
+    pals:beta_a "15.499"^^xsd:float ;
+    pals:beta_b "17.974"^^xsd:float ;
+    pals:eta_x "-0.59195"^^xsd:float ;
+    pals:eta_y "-0.018532"^^xsd:float ;
+    pals:etap_x "-0.099759"^^xsd:float ;
+    pals:etap_y "-0.0035652"^^xsd:float ;
+    pals:phi_a "26.248"^^xsd:float ;
+    pals:phi_b "24.554"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A07CD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A07CD/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "85.993"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A07CD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:KnL "-0.0279650307"^^xsd:float ;
-            pals:order 0 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008756616595046793"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
             pals:KnL "0.0"^^xsd:float ;
-            pals:order 1 ] .
+            pals:order 1 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:KnL "-0.0279650307"^^xsd:float ;
+            pals:order 0 ] .
+
+<https://example.org/pals-instance/MM_A07CD/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.25502"^^xsd:float ;
+    pals:alpha_b "0.81332"^^xsd:float ;
+    pals:beta_a "8.2512"^^xsd:float ;
+    pals:beta_b "21.652"^^xsd:float ;
+    pals:eta_x "-1.0288"^^xsd:float ;
+    pals:eta_y "-0.025902"^^xsd:float ;
+    pals:etap_x "-0.22255"^^xsd:float ;
+    pals:etap_y "-0.00078072"^^xsd:float ;
+    pals:phi_a "26.534"^^xsd:float ;
+    pals:phi_b "24.696"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A08CD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A08CD/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "89.905"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A08CD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008756616595046793"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:KnL "-0.0279650307"^^xsd:float ;
-            pals:order 0 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:KnL "0.0"^^xsd:float ;
-            pals:order 1 ] .
+            pals:order 1 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:KnL "-0.0279650307"^^xsd:float ;
+            pals:order 0 ] .
+
+<https://example.org/pals-instance/MM_A08CD/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.3538"^^xsd:float ;
+    pals:alpha_b "2.0507"^^xsd:float ;
+    pals:beta_a "10.609"^^xsd:float ;
+    pals:beta_b "12.107"^^xsd:float ;
+    pals:eta_x "-2.1524"^^xsd:float ;
+    pals:eta_y "-0.025352"^^xsd:float ;
+    pals:etap_x "-0.4497"^^xsd:float ;
+    pals:etap_y "0.0023679"^^xsd:float ;
+    pals:phi_a "27.005"^^xsd:float ;
+    pals:phi_b "24.92"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A09BF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A09BF/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.0066461824881423"^^xsd:float .
+    pals:length "2.0066461824881423"^^xsd:float ;
+    pals:s_position "92.521"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A09BF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.010112690671265677"^^xsd:float ;
-            pals:order 2 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229642227363"^^xsd:float ;
             pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04850457979108316"^^xsd:float ;
-            pals:order 1 ] .
+            pals:order 1 ],
+        [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.010112690671265677"^^xsd:float ;
+            pals:order 2 ] .
+
+<https://example.org/pals-instance/MM_A09BF/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-0.378"^^xsd:float ;
+    pals:alpha_b "0.47669"^^xsd:float ;
+    pals:beta_a "16.428"^^xsd:float ;
+    pals:beta_b "5.4949"^^xsd:float ;
+    pals:eta_x "-3.0898"^^xsd:float ;
+    pals:eta_y "-0.021583"^^xsd:float ;
+    pals:etap_x "-0.20066"^^xsd:float ;
+    pals:etap_y "0.00022473"^^xsd:float ;
+    pals:phi_a "27.195"^^xsd:float ;
+    pals:phi_b "25.263"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A10BF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A10BF/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.0066461824881423"^^xsd:float .
+    pals:length "2.0066461824881423"^^xsd:float ;
+    pals:s_position "95.137"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A10BF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.010112690671265677"^^xsd:float ;
-            pals:order 2 ],
+            pals:Kn "-0.011712229642227363"^^xsd:float ;
+            pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.04850457979108316"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.011712229642227363"^^xsd:float ;
-            pals:order 0 ] .
+            pals:Kn "0.010112690671265677"^^xsd:float ;
+            pals:order 2 ] .
+
+<https://example.org/pals-instance/MM_A10BF/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.0516"^^xsd:float ;
+    pals:alpha_b "-0.57704"^^xsd:float ;
+    pals:beta_a "15.559"^^xsd:float ;
+    pals:beta_b "5.4428"^^xsd:float ;
+    pals:eta_x "-3.3163"^^xsd:float ;
+    pals:eta_y "-0.023215"^^xsd:float ;
+    pals:etap_x "0.098455"^^xsd:float ;
+    pals:etap_y "-0.0018845"^^xsd:float ;
+    pals:phi_a "27.351"^^xsd:float ;
+    pals:phi_b "25.788"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A11BD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A11BD/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.0066461824881423"^^xsd:float .
+    pals:length "2.0066461824881423"^^xsd:float ;
+    pals:s_position "100.191"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A11BD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
+            pals:Kn "-0.0484198946267085"^^xsd:float ;
+            pals:order 1 ],
+        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.010003388034307203"^^xsd:float ;
             pals:order 2 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229642227363"^^xsd:float ;
-            pals:order 0 ],
-        [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.0484198946267085"^^xsd:float ;
-            pals:order 1 ] .
+            pals:order 0 ] .
+
+<https://example.org/pals-instance/MM_A11BD/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-0.55113"^^xsd:float ;
+    pals:alpha_b "-0.31127"^^xsd:float ;
+    pals:beta_a "10.24"^^xsd:float ;
+    pals:beta_b "14.747"^^xsd:float ;
+    pals:eta_x "-3.135"^^xsd:float ;
+    pals:eta_y "-0.029989"^^xsd:float ;
+    pals:etap_x "-0.21877"^^xsd:float ;
+    pals:etap_y "0.0010472"^^xsd:float ;
+    pals:phi_a "27.795"^^xsd:float ;
+    pals:phi_b "26.34"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A12BD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229642227363"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A12BD/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.0066461824881423"^^xsd:float .
+    pals:length "2.0066461824881423"^^xsd:float ;
+    pals:s_position "102.807"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A12BD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.010003388034307203"^^xsd:float ;
-            pals:order 2 ],
+            pals:Kn "-0.0484198946267085"^^xsd:float ;
+            pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229642227363"^^xsd:float ;
             pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:Kn "-0.0484198946267085"^^xsd:float ;
-            pals:order 1 ] .
+            pals:Kn "0.010003388034307203"^^xsd:float ;
+            pals:order 2 ] .
+
+<https://example.org/pals-instance/MM_A12BD/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-2.3891"^^xsd:float ;
+    pals:alpha_b "0.93483"^^xsd:float ;
+    pals:beta_a "16.649"^^xsd:float ;
+    pals:beta_b "13.912"^^xsd:float ;
+    pals:eta_x "-4.0695"^^xsd:float ;
+    pals:eta_y "-0.024612"^^xsd:float ;
+    pals:etap_x "-0.59273"^^xsd:float ;
+    pals:etap_y "0.0037235"^^xsd:float ;
+    pals:phi_a "28.007"^^xsd:float ;
+    pals:phi_b "26.515"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A13CF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A13CF/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "105.805"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A13CF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.008845277832145091"^^xsd:float ;
-            pals:order 2 ],
-        [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.048742537207372996"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
+            pals:Kn "0.008845277832145091"^^xsd:float ;
+            pals:order 2 ],
+        [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.011712229630153455"^^xsd:float ;
             pals:order 0 ] .
+
+<https://example.org/pals-instance/MM_A13CF/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-0.20208"^^xsd:float ;
+    pals:alpha_b "-0.79226"^^xsd:float ;
+    pals:beta_a "27.189"^^xsd:float ;
+    pals:beta_b "12.69"^^xsd:float ;
+    pals:eta_x "-5.2124"^^xsd:float ;
+    pals:eta_y "-0.016386"^^xsd:float ;
+    pals:etap_x "-0.046782"^^xsd:float ;
+    pals:etap_y "0.0015124"^^xsd:float ;
+    pals:phi_a "28.139"^^xsd:float ;
+    pals:phi_b "26.758"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A14CF/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A14CF/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "109.716"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A14CF/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
-            pals:Kn "0.008845277832145091"^^xsd:float ;
-            pals:order 2 ],
+            pals:KnL "-0.0279650307"^^xsd:float ;
+            pals:order 0 ],
         [ a pals:MultipoleParameterGroup ;
             pals:KnL "0.0"^^xsd:float ;
             pals:order 1 ],
         [ a pals:MultipoleParameterGroup ;
-            pals:KnL "-0.0279650307"^^xsd:float ;
-            pals:order 0 ] .
+            pals:Kn "0.008845277832145091"^^xsd:float ;
+            pals:order 2 ] .
+
+<https://example.org/pals-instance/MM_A14CF/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "2.4739"^^xsd:float ;
+    pals:alpha_b "-4.0899"^^xsd:float ;
+    pals:beta_a "22.059"^^xsd:float ;
+    pals:beta_b "26.52"^^xsd:float ;
+    pals:eta_x "-4.7056"^^xsd:float ;
+    pals:eta_y "-0.012659"^^xsd:float ;
+    pals:etap_x "0.51979"^^xsd:float ;
+    pals:etap_y "-5.4848e-05"^^xsd:float ;
+    pals:phi_a "28.286"^^xsd:float ;
+    pals:phi_b "26.991"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A15AD/BendP> a pals:BendParamGroup ;
     pals:g_ref "-0.011712229630153455"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A15AD/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "2.387677802013313"^^xsd:float .
+    pals:length "2.387677802013313"^^xsd:float ;
+    pals:s_position "112.713"^^xsd:float .
 
 <https://example.org/pals-instance/MM_A15AD/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
@@ -1866,6 +2525,18 @@ inst:DV181.magnet_status_binding rdf:object <https://example.org/pals-instance/b
         [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.008609656995266375"^^xsd:float ;
             pals:order 2 ] .
+
+<https://example.org/pals-instance/MM_A15AD/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.080366"^^xsd:float ;
+    pals:alpha_b "-0.48962"^^xsd:float ;
+    pals:beta_a "14.003"^^xsd:float ;
+    pals:beta_b "44.903"^^xsd:float ;
+    pals:eta_x "-3.7462"^^xsd:float ;
+    pals:eta_y "-0.01135"^^xsd:float ;
+    pals:etap_x "0.030909"^^xsd:float ;
+    pals:etap_y "0.0013406"^^xsd:float ;
+    pals:phi_a "28.469"^^xsd:float ;
+    pals:phi_b "27.073"^^xsd:float .
 
 inst:MW006.horizontal_profile_binding rdf:object <https://example.org/pals-instance/btaMW006Cntl:horInDataM> ;
     rdf:predicate "pals:has_readback_signal"^^xsd:anyURI ;
@@ -1880,25 +2551,26 @@ inst:MW006.vertical_profile_binding rdf:object <https://example.org/pals-instanc
     rdf:subject inst:MW006 .
 
 <https://example.org/pals-instance/MW006/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "4.275"^^xsd:float .
 
 <https://example.org/pals-instance/MW006/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "nbr_wires_y" ;
-            pals:value "32" ],
-        [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:float ;
-            pals:key "spacing_x" ;
-            pals:value "0.0015" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_y" ;
             pals:value "0.0015" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "nbr_wires_x" ;
-            pals:value "32" ] ;
+            pals:value "32" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "nbr_wires_y" ;
+            pals:value "32" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:float ;
+            pals:key "spacing_x" ;
+            pals:value "0.0015" ] ;
     pals:description "Multiwire beam-profile monitor." .
 
 inst:MW060.horizontal_profile_binding rdf:object <https://example.org/pals-instance/btaMW060Cntl:horInDataM> ;
@@ -1914,14 +2586,11 @@ inst:MW060.vertical_profile_binding rdf:object <https://example.org/pals-instanc
     rdf:subject inst:MW060 .
 
 <https://example.org/pals-instance/MW060/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "20.639"^^xsd:float .
 
 <https://example.org/pals-instance/MW060/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:float ;
-            pals:key "spacing_x" ;
-            pals:value "0.0025" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_y" ;
             pals:value "0.0025" ],
@@ -1929,6 +2598,10 @@ inst:MW060.vertical_profile_binding rdf:object <https://example.org/pals-instanc
             pals:datatype xsd:integer ;
             pals:key "nbr_wires_y" ;
             pals:value "32" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:float ;
+            pals:key "spacing_x" ;
+            pals:value "0.0025" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "nbr_wires_x" ;
@@ -1948,25 +2621,26 @@ inst:MW125.vertical_profile_binding rdf:object <https://example.org/pals-instanc
     rdf:subject inst:MW125 .
 
 <https://example.org/pals-instance/MW125/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "42.181"^^xsd:float .
 
 <https://example.org/pals-instance/MW125/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "nbr_wires_y" ;
-            pals:value "32" ],
+            pals:datatype xsd:float ;
+            pals:key "spacing_y" ;
+            pals:value "0.0025" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
-            pals:key "nbr_wires_x" ;
+            pals:key "nbr_wires_y" ;
             pals:value "32" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_x" ;
             pals:value "0.0025" ],
         [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:float ;
-            pals:key "spacing_y" ;
-            pals:value "0.0025" ] ;
+            pals:datatype xsd:integer ;
+            pals:key "nbr_wires_x" ;
+            pals:value "32" ] ;
     pals:description "Multiwire beam-profile monitor." .
 
 inst:MW166.horizontal_profile_binding rdf:object <https://example.org/pals-instance/btaMW166Cntl:horInDataM> ;
@@ -1982,14 +2656,11 @@ inst:MW166.vertical_profile_binding rdf:object <https://example.org/pals-instanc
     rdf:subject inst:MW166 .
 
 <https://example.org/pals-instance/MW166/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "54.334"^^xsd:float .
 
 <https://example.org/pals-instance/MW166/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "nbr_wires_x" ;
-            pals:value "32" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_y" ;
             pals:value "0.0025" ],
@@ -1997,6 +2668,10 @@ inst:MW166.vertical_profile_binding rdf:object <https://example.org/pals-instanc
             pals:datatype xsd:float ;
             pals:key "spacing_x" ;
             pals:value "0.0025" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "nbr_wires_x" ;
+            pals:value "32" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "nbr_wires_y" ;
@@ -2016,71 +2691,83 @@ inst:MWA15.vertical_profile_binding rdf:object <https://example.org/pals-instanc
     rdf:subject inst:MWA15 .
 
 <https://example.org/pals-instance/MWA15/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "113.475"^^xsd:float .
 
 <https://example.org/pals-instance/MWA15/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:float ;
-            pals:key "spacing_y" ;
-            pals:value "0.002" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "nbr_wires_y" ;
             pals:value "32" ],
         [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "nbr_wires_x" ;
-            pals:value "64" ],
+            pals:datatype xsd:float ;
+            pals:key "spacing_y" ;
+            pals:value "0.002" ],
         [ a pals:AdditionalMetadata ;
             pals:datatype xsd:float ;
             pals:key "spacing_x" ;
-            pals:value "0.002" ] ;
+            pals:value "0.002" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "nbr_wires_x" ;
+            pals:value "64" ] ;
     pals:description "Multiwire beam-profile monitor." .
 
 <https://example.org/pals-instance/PUEH001/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "3.023"^^xsd:float .
 
 <https://example.org/pals-instance/PUEH143/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "47.752"^^xsd:float .
 
 <https://example.org/pals-instance/PUEH170/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "55.304"^^xsd:float .
 
 <https://example.org/pals-instance/PUEV046/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "15.421"^^xsd:float .
 
 <https://example.org/pals-instance/PUEV129/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "43.152"^^xsd:float .
 
 <https://example.org/pals-instance/PUEV160/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "53.12"^^xsd:float .
 
 <https://example.org/pals-instance/PUE_A02/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "69.466"^^xsd:float .
 
 <https://example.org/pals-instance/PUE_A02/MetaP> a pals:MetaParamGroup ;
     pals:label "“AGSBPM”" .
 
 <https://example.org/pals-instance/PUE_A04/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "76.374"^^xsd:float .
 
 <https://example.org/pals-instance/PUE_A04/MetaP> a pals:MetaParamGroup ;
     pals:label "“AGSBPM”" .
 
 <https://example.org/pals-instance/PUE_A08/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "90.192"^^xsd:float .
 
 <https://example.org/pals-instance/PUE_A08/MetaP> a pals:MetaParamGroup ;
     pals:label "“AGSBPM”" .
 
 <https://example.org/pals-instance/PUE_A12/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "103.094"^^xsd:float .
 
 <https://example.org/pals-instance/PUE_A12/MetaP> a pals:MetaParamGroup ;
     pals:label "“AGSBPM”" .
 
 <https://example.org/pals-instance/PUE_A14/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.0"^^xsd:float .
+    pals:length "0.0"^^xsd:float ;
+    pals:s_position "110.003"^^xsd:float .
 
 <https://example.org/pals-instance/PUE_A14/MetaP> a pals:MetaParamGroup ;
     pals:label "“AGSBPM”" .
@@ -2102,12 +2789,25 @@ inst:QH10.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:QH10 .
 
 <https://example.org/pals-instance/QH10/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "37.151"^^xsd:float .
 
 <https://example.org/pals-instance/QH10/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.6942945538633392"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QH10/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "3.1044"^^xsd:float ;
+    pals:alpha_b "1.3871"^^xsd:float ;
+    pals:beta_a "17.357"^^xsd:float ;
+    pals:beta_b "11.628"^^xsd:float ;
+    pals:eta_x "-2.168"^^xsd:float ;
+    pals:eta_y "-0.0019795"^^xsd:float ;
+    pals:etap_x "0.30647"^^xsd:float ;
+    pals:etap_y "-0.0016281"^^xsd:float ;
+    pals:phi_a "22.066"^^xsd:float ;
+    pals:phi_b "18.022"^^xsd:float .
 
 inst:QH12.current_range_binding rdf:object <https://example.org/pals-instance/bta-qf12-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2126,12 +2826,25 @@ inst:QH12.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:QH12 .
 
 <https://example.org/pals-instance/QH12/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "48.369"^^xsd:float .
 
 <https://example.org/pals-instance/QH12/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.4868974442913689"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QH12/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "2.5528"^^xsd:float ;
+    pals:alpha_b "-2.5907"^^xsd:float ;
+    pals:beta_a "34.475"^^xsd:float ;
+    pals:beta_b "6.9911"^^xsd:float ;
+    pals:eta_x "1.0146"^^xsd:float ;
+    pals:eta_y "-0.010532"^^xsd:float ;
+    pals:etap_x "0.026447"^^xsd:float ;
+    pals:etap_y "-0.0018537"^^xsd:float ;
+    pals:phi_a "24.496"^^xsd:float ;
+    pals:phi_b "20.435"^^xsd:float .
 
 inst:QH14.current_range_binding rdf:object <https://example.org/pals-instance/bta-qf14-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2150,12 +2863,25 @@ inst:QH14.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:QH14 .
 
 <https://example.org/pals-instance/QH14/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "55.921"^^xsd:float .
 
 <https://example.org/pals-instance/QH14/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.748989790597664"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QH14/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "7.0562"^^xsd:float ;
+    pals:alpha_b "2.875"^^xsd:float ;
+    pals:beta_a "47.41"^^xsd:float ;
+    pals:beta_b "2.459"^^xsd:float ;
+    pals:eta_x "2.4248"^^xsd:float ;
+    pals:eta_y "-0.0012113"^^xsd:float ;
+    pals:etap_x "-0.28662"^^xsd:float ;
+    pals:etap_y "0.0067649"^^xsd:float ;
+    pals:phi_a "24.817"^^xsd:float ;
+    pals:phi_b "20.897"^^xsd:float .
 
 inst:QH2A.current_range_binding rdf:object <https://example.org/pals-instance/bta-qf2-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2174,12 +2900,25 @@ inst:QH2A.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:QH2A .
 
 <https://example.org/pals-instance/QH2A/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5588"^^xsd:float .
+    pals:length "0.5588"^^xsd:float ;
+    pals:s_position "7.504"^^xsd:float .
 
 <https://example.org/pals-instance/QH2A/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "1.0492993067514023"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QH2A/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "2.3897"^^xsd:float ;
+    pals:alpha_b "-3.761"^^xsd:float ;
+    pals:beta_a "7.2225"^^xsd:float ;
+    pals:beta_b "11.264"^^xsd:float ;
+    pals:eta_x "-1.1096"^^xsd:float ;
+    pals:eta_y "-0.00011991"^^xsd:float ;
+    pals:etap_x "0.08556"^^xsd:float ;
+    pals:etap_y "-4.6926e-05"^^xsd:float ;
+    pals:phi_a "14.795"^^xsd:float ;
+    pals:phi_b "14.119"^^xsd:float .
 
 inst:QH2B.current_range_binding rdf:object <https://example.org/pals-instance/bta-qf2-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2198,12 +2937,25 @@ inst:QH2B.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:QH2B .
 
 <https://example.org/pals-instance/QH2B/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5588"^^xsd:float .
+    pals:length "0.5588"^^xsd:float ;
+    pals:s_position "8.204"^^xsd:float .
 
 <https://example.org/pals-instance/QH2B/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "1.0492993067514023"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QH2B/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "3.5828"^^xsd:float ;
+    pals:alpha_b "-16.694"^^xsd:float ;
+    pals:beta_a "2.8917"^^xsd:float ;
+    pals:beta_b "22.775"^^xsd:float ;
+    pals:eta_x "-0.87734"^^xsd:float ;
+    pals:eta_y "-0.0002746"^^xsd:float ;
+    pals:etap_x "0.68088"^^xsd:float ;
+    pals:etap_y "-0.00016269"^^xsd:float ;
+    pals:phi_a "14.937"^^xsd:float ;
+    pals:phi_b "14.166"^^xsd:float .
 
 inst:QH4.current_range_binding rdf:object <https://example.org/pals-instance/bta-qf4-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2222,12 +2974,25 @@ inst:QH4.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
     rdf:subject inst:QH4 .
 
 <https://example.org/pals-instance/QH4/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5588"^^xsd:float .
+    pals:length "0.5588"^^xsd:float ;
+    pals:s_position "11.422"^^xsd:float .
 
 <https://example.org/pals-instance/QH4/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "1.3799174639073808"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QH4/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "8.2396"^^xsd:float ;
+    pals:alpha_b "0.065159"^^xsd:float ;
+    pals:beta_a "30.574"^^xsd:float ;
+    pals:beta_b "10.975"^^xsd:float ;
+    pals:eta_x "0.84137"^^xsd:float ;
+    pals:eta_y "0.00021451"^^xsd:float ;
+    pals:etap_x "-0.073291"^^xsd:float ;
+    pals:etap_y "0.00039133"^^xsd:float ;
+    pals:phi_a "17.615"^^xsd:float ;
+    pals:phi_b "14.283"^^xsd:float .
 
 inst:QH6.current_range_binding rdf:object <https://example.org/pals-instance/bta-qf6-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2246,12 +3011,25 @@ inst:QH6.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
     rdf:subject inst:QH6 .
 
 <https://example.org/pals-instance/QH6/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "19.697"^^xsd:float .
 
 <https://example.org/pals-instance/QH6/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.9743513509122018"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QH6/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "10.847"^^xsd:float ;
+    pals:alpha_b "-8.0356"^^xsd:float ;
+    pals:beta_a "40.69"^^xsd:float ;
+    pals:beta_b "17.03"^^xsd:float ;
+    pals:eta_x "2.2281"^^xsd:float ;
+    pals:eta_y "0.0032487"^^xsd:float ;
+    pals:etap_x "-0.68415"^^xsd:float ;
+    pals:etap_y "0.0018264"^^xsd:float ;
+    pals:phi_a "20.557"^^xsd:float ;
+    pals:phi_b "14.992"^^xsd:float .
 
 inst:QH8.current_range_binding rdf:object <https://example.org/pals-instance/bta-qf8-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2270,18 +3048,57 @@ inst:QH8.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
     rdf:subject inst:QH8 .
 
 <https://example.org/pals-instance/QH8/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "30.597"^^xsd:float .
 
 <https://example.org/pals-instance/QH8/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "0.31882795472842496"^^xsd:float ;
             pals:order 1 ] .
 
+<https://example.org/pals-instance/QH8/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.7542"^^xsd:float ;
+    pals:alpha_b "-5.1126"^^xsd:float ;
+    pals:beta_a "13.798"^^xsd:float ;
+    pals:beta_b "10.929"^^xsd:float ;
+    pals:eta_x "-0.63493"^^xsd:float ;
+    pals:eta_y "0.0022084"^^xsd:float ;
+    pals:etap_x "-0.094521"^^xsd:float ;
+    pals:etap_y "-0.00021239"^^xsd:float ;
+    pals:phi_a "21.359"^^xsd:float ;
+    pals:phi_b "17.782"^^xsd:float .
+
 <https://example.org/pals-instance/QHFV/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.39088"^^xsd:float .
+    pals:length "0.39088"^^xsd:float ;
+    pals:s_position "72.938"^^xsd:float .
+
+<https://example.org/pals-instance/QHFV/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.22326"^^xsd:float ;
+    pals:alpha_b "0.12771"^^xsd:float ;
+    pals:beta_a "13.295"^^xsd:float ;
+    pals:beta_b "47.266"^^xsd:float ;
+    pals:eta_x "0.53531"^^xsd:float ;
+    pals:eta_y "-0.0016021"^^xsd:float ;
+    pals:etap_x "-0.10831"^^xsd:float ;
+    pals:etap_y "-0.0014117"^^xsd:float ;
+    pals:phi_a "25.682"^^xsd:float ;
+    pals:phi_b "24.122"^^xsd:float .
 
 <https://example.org/pals-instance/QPOL/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.39088"^^xsd:float .
+    pals:length "0.39088"^^xsd:float ;
+    pals:s_position "73.329"^^xsd:float .
+
+<https://example.org/pals-instance/QPOL/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.19239"^^xsd:float ;
+    pals:alpha_b "0.1193"^^xsd:float ;
+    pals:beta_a "13.133"^^xsd:float ;
+    pals:beta_b "47.169"^^xsd:float ;
+    pals:eta_x "0.49298"^^xsd:float ;
+    pals:eta_y "-0.0021471"^^xsd:float ;
+    pals:etap_x "-0.10831"^^xsd:float ;
+    pals:etap_y "-0.0014117"^^xsd:float ;
+    pals:phi_a "25.711"^^xsd:float ;
+    pals:phi_b "24.13"^^xsd:float .
 
 inst:QV1.current_range_binding rdf:object <https://example.org/pals-instance/bta-qd1-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2300,12 +3117,25 @@ inst:QV1.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
     rdf:subject inst:QV1 .
 
 <https://example.org/pals-instance/QV1/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5588"^^xsd:float .
+    pals:length "0.5588"^^xsd:float ;
+    pals:s_position "5.655"^^xsd:float .
 
 <https://example.org/pals-instance/QV1/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.543789268756699"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QV1/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.1283"^^xsd:float ;
+    pals:alpha_b "3.4506"^^xsd:float ;
+    pals:beta_a "3.4921"^^xsd:float ;
+    pals:beta_b "18.425"^^xsd:float ;
+    pals:eta_x "-0.25198"^^xsd:float ;
+    pals:eta_y "-3.4229e-05"^^xsd:float ;
+    pals:etap_x "-0.58011"^^xsd:float ;
+    pals:etap_y "7.2993e-06"^^xsd:float ;
+    pals:phi_a "14.468"^^xsd:float ;
+    pals:phi_b "13.972"^^xsd:float .
 
 inst:QV11.current_range_binding rdf:object <https://example.org/pals-instance/bta-qd11-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2324,12 +3154,25 @@ inst:QV11.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:QV11 .
 
 <https://example.org/pals-instance/QV11/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "43.768"^^xsd:float .
 
 <https://example.org/pals-instance/QV11/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.3671828230083464"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QV11/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.5413"^^xsd:float ;
+    pals:alpha_b "0.45748"^^xsd:float ;
+    pals:beta_a "3.3706"^^xsd:float ;
+    pals:beta_b "3.9109"^^xsd:float ;
+    pals:eta_x "-0.15099"^^xsd:float ;
+    pals:eta_y "-0.012411"^^xsd:float ;
+    pals:etap_x "0.26618"^^xsd:float ;
+    pals:etap_y "0.00063469"^^xsd:float ;
+    pals:phi_a "24.081"^^xsd:float ;
+    pals:phi_b "19.242"^^xsd:float .
 
 inst:QV13.current_range_binding rdf:object <https://example.org/pals-instance/bta-qd13-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2348,12 +3191,25 @@ inst:QV13.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:QV13 .
 
 <https://example.org/pals-instance/QV13/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "53.737"^^xsd:float .
 
 <https://example.org/pals-instance/QV13/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.9895450067507202"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QV13/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-6.3894"^^xsd:float ;
+    pals:alpha_b "19.481"^^xsd:float ;
+    pals:beta_a "17.044"^^xsd:float ;
+    pals:beta_b "52.112"^^xsd:float ;
+    pals:eta_x "1.3005"^^xsd:float ;
+    pals:eta_y "-0.018542"^^xsd:float ;
+    pals:etap_x "0.61716"^^xsd:float ;
+    pals:etap_y "0.0078852"^^xsd:float ;
+    pals:phi_a "24.746"^^xsd:float ;
+    pals:phi_b "20.687"^^xsd:float .
 
 inst:QV15.current_range_binding rdf:object <https://example.org/pals-instance/bta-qd15-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2372,12 +3228,25 @@ inst:QV15.magnet_status_binding rdf:object <https://example.org/pals-instance/bt
     rdf:subject inst:QV15 .
 
 <https://example.org/pals-instance/QV15/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5588"^^xsd:float .
+    pals:length "0.5588"^^xsd:float ;
+    pals:s_position "59.833"^^xsd:float .
 
 <https://example.org/pals-instance/QV15/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.71933765439868"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QV15/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.1951"^^xsd:float ;
+    pals:alpha_b "1.3057"^^xsd:float ;
+    pals:beta_a "10.959"^^xsd:float ;
+    pals:beta_b "30.428"^^xsd:float ;
+    pals:eta_x "1.0346"^^xsd:float ;
+    pals:eta_y "0.022974"^^xsd:float ;
+    pals:etap_x "0.0037283"^^xsd:float ;
+    pals:etap_y "-0.0024931"^^xsd:float ;
+    pals:phi_a "25.008"^^xsd:float ;
+    pals:phi_b "23.624"^^xsd:float .
 
 inst:QV3.current_range_binding rdf:object <https://example.org/pals-instance/bta-qd3-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2396,12 +3265,25 @@ inst:QV3.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
     rdf:subject inst:QV3 .
 
 <https://example.org/pals-instance/QV3/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.5588"^^xsd:float .
+    pals:length "0.5588"^^xsd:float ;
+    pals:s_position "9.549"^^xsd:float .
 
 <https://example.org/pals-instance/QV3/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-1.4212102570001448"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QV3/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-4.1215"^^xsd:float ;
+    pals:alpha_b "21.547"^^xsd:float ;
+    pals:beta_a "2.3152"^^xsd:float ;
+    pals:beta_b "59.744"^^xsd:float ;
+    pals:eta_x "-0.012021"^^xsd:float ;
+    pals:eta_y "-0.00053981"^^xsd:float ;
+    pals:etap_x "0.54512"^^xsd:float ;
+    pals:etap_y "0.00030165"^^xsd:float ;
+    pals:phi_a "17.428"^^xsd:float ;
+    pals:phi_b "14.196"^^xsd:float .
 
 inst:QV5.current_range_binding rdf:object <https://example.org/pals-instance/bta-qd5-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2420,12 +3302,25 @@ inst:QV5.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
     rdf:subject inst:QV5 .
 
 <https://example.org/pals-instance/QV5/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "15.302"^^xsd:float .
 
 <https://example.org/pals-instance/QV5/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.013354833631008985"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QV5/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-0.71687"^^xsd:float ;
+    pals:alpha_b "-0.10948"^^xsd:float ;
+    pals:beta_a "0.62111"^^xsd:float ;
+    pals:beta_b "11.357"^^xsd:float ;
+    pals:eta_x "1.125"^^xsd:float ;
+    pals:eta_y "0.0015339"^^xsd:float ;
+    pals:etap_x "0.19343"^^xsd:float ;
+    pals:etap_y "0.00038359"^^xsd:float ;
+    pals:phi_a "19.692"^^xsd:float ;
+    pals:phi_b "14.635"^^xsd:float .
 
 inst:QV7.current_range_binding rdf:object <https://example.org/pals-instance/bta-qd7-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2444,12 +3339,25 @@ inst:QV7.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
     rdf:subject inst:QV7 .
 
 <https://example.org/pals-instance/QV7/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "21.597"^^xsd:float .
 
 <https://example.org/pals-instance/QV7/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.8675096450596528"^^xsd:float ;
             pals:order 1 ] .
+
+<https://example.org/pals-instance/QV7/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.25414"^^xsd:float ;
+    pals:alpha_b "7.8709"^^xsd:float ;
+    pals:beta_a "12.748"^^xsd:float ;
+    pals:beta_b "50.107"^^xsd:float ;
+    pals:eta_x "1.0551"^^xsd:float ;
+    pals:eta_y "0.0055967"^^xsd:float ;
+    pals:etap_x "-0.19039"^^xsd:float ;
+    pals:etap_y "-0.00056786"^^xsd:float ;
+    pals:phi_a "20.648"^^xsd:float ;
+    pals:phi_b "15.052"^^xsd:float .
 
 inst:QV9.current_range_binding rdf:object <https://example.org/pals-instance/bta-qd9-ps:rangeC> ;
     rdf:predicate "pals:has_limit_signal"^^xsd:anyURI ;
@@ -2468,18 +3376,93 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
     rdf:subject inst:QV9 .
 
 <https://example.org/pals-instance/QV9/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.4985"^^xsd:float .
+    pals:length "0.4985"^^xsd:float ;
+    pals:s_position "34.171"^^xsd:float .
 
 <https://example.org/pals-instance/QV9/MagneticMultipoleP> a pals:MagneticMultipoleParamGroup ;
     pals:mag_components [ a pals:MultipoleParameterGroup ;
             pals:Kn "-0.7925788082089091"^^xsd:float ;
             pals:order 1 ] .
 
+<https://example.org/pals-instance/QV9/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-1.5724"^^xsd:float ;
+    pals:alpha_b "13.601"^^xsd:float ;
+    pals:beta_a "6.1434"^^xsd:float ;
+    pals:beta_b "65.333"^^xsd:float ;
+    pals:eta_x "-1.0192"^^xsd:float ;
+    pals:eta_y "0.0019618"^^xsd:float ;
+    pals:etap_x "-0.44856"^^xsd:float ;
+    pals:etap_y "-0.0010737"^^xsd:float ;
+    pals:phi_a "21.796"^^xsd:float ;
+    pals:phi_b "17.905"^^xsd:float .
+
 <https://example.org/pals-instance/SXH/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.655"^^xsd:float .
+    pals:length "0.655"^^xsd:float ;
+    pals:s_position "106.894"^^xsd:float .
+
+<https://example.org/pals-instance/SXH/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "-0.24379"^^xsd:float ;
+    pals:alpha_b "-0.932"^^xsd:float ;
+    pals:beta_a "27.675"^^xsd:float ;
+    pals:beta_b "14.569"^^xsd:float ;
+    pals:eta_x "-5.2633"^^xsd:float ;
+    pals:eta_y "-0.014807"^^xsd:float ;
+    pals:etap_x "-0.046782"^^xsd:float ;
+    pals:etap_y "0.0015124"^^xsd:float ;
+    pals:phi_a "28.179"^^xsd:float ;
+    pals:phi_b "26.838"^^xsd:float .
 
 <https://example.org/pals-instance/SXV/LongitudinalPlacementP> a pals:LongitudinalPlacementParamGroup ;
-    pals:length "0.655"^^xsd:float .
+    pals:length "0.655"^^xsd:float ;
+    pals:s_position "87.083"^^xsd:float .
+
+<https://example.org/pals-instance/SXV/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "0.1144"^^xsd:float ;
+    pals:alpha_b "0.72972"^^xsd:float ;
+    pals:beta_a "7.8488"^^xsd:float ;
+    pals:beta_b "19.971"^^xsd:float ;
+    pals:eta_x "-1.2713"^^xsd:float ;
+    pals:eta_y "-0.026778"^^xsd:float ;
+    pals:etap_x "-0.22255"^^xsd:float ;
+    pals:etap_y "-0.00078072"^^xsd:float ;
+    pals:phi_a "26.67"^^xsd:float ;
+    pals:phi_b "24.749"^^xsd:float .
+
+<https://example.org/pals-instance/XF019/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "1.3823"^^xsd:float ;
+    pals:alpha_b "-22.342"^^xsd:float ;
+    pals:beta_a "0.60832"^^xsd:float ;
+    pals:beta_b "40.727"^^xsd:float ;
+    pals:eta_x "-0.5642"^^xsd:float ;
+    pals:eta_y "-0.00043956"^^xsd:float ;
+    pals:etap_x "0.68088"^^xsd:float ;
+    pals:etap_y "-0.00016269"^^xsd:float ;
+    pals:phi_a "15.291"^^xsd:float ;
+    pals:phi_b "14.181"^^xsd:float .
+
+<https://example.org/pals-instance/XF059/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "9.4722"^^xsd:float ;
+    pals:alpha_b "-9.8509"^^xsd:float ;
+    pals:beta_a "31.11"^^xsd:float ;
+    pals:beta_b "25.463"^^xsd:float ;
+    pals:eta_x "1.9056"^^xsd:float ;
+    pals:eta_y "0.0039457"^^xsd:float ;
+    pals:etap_x "-0.68415"^^xsd:float ;
+    pals:etap_y "0.0018264"^^xsd:float ;
+    pals:phi_a "20.57"^^xsd:float ;
+    pals:phi_b "15.015"^^xsd:float .
+
+<https://example.org/pals-instance/XF183/TwissP> a pals:TwissParamGroup ;
+    pals:alpha_a "4.0279"^^xsd:float ;
+    pals:alpha_b "-7.7155"^^xsd:float ;
+    pals:beta_a "16.078"^^xsd:float ;
+    pals:beta_b "16.227"^^xsd:float ;
+    pals:eta_x "1.3755"^^xsd:float ;
+    pals:eta_y "0.01817"^^xsd:float ;
+    pals:etap_x "-0.42747"^^xsd:float ;
+    pals:etap_y "0.0066682"^^xsd:float ;
+    pals:phi_a "24.92"^^xsd:float ;
+    pals:phi_b "23.579"^^xsd:float .
 
 <https://example.org/pals-instance/bta-qd1-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2493,43 +3476,43 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-qd11-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-qd13-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-qd15-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-qd3-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-qd5-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2553,6 +3536,16 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-qd9-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
+
+<https://example.org/pals-instance/bta-qf10-ps:rangeC/MetaP> a pals:MetaParamGroup ;
+    pals:additional_metadata [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
             pals:value "2" ],
@@ -2561,25 +3554,15 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
             pals:key "array_order" ;
             pals:value "maximum,minimum" ] .
 
-<https://example.org/pals-instance/bta-qf10-ps:rangeC/MetaP> a pals:MetaParamGroup ;
-    pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ] .
-
 <https://example.org/pals-instance/bta-qf12-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-qf14-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2593,13 +3576,13 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-qf2-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-qf4-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2613,25 +3596,15 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-qf6-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
+            pals:value "maximum,minimum" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:integer ;
+            pals:key "array_length" ;
+            pals:value "2" ] .
 
 <https://example.org/pals-instance/bta-qf8-ps:rangeC/MetaP> a pals:MetaParamGroup ;
-    pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ],
-        [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ] .
-
-<https://example.org/pals-instance/bta-th1-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
             pals:datatype xsd:string ;
             pals:key "array_order" ;
@@ -2643,16 +3616,6 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-th127-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:integer ;
-            pals:key "array_length" ;
-            pals:value "2" ] .
-
-<https://example.org/pals-instance/bta-th158-ps:rangeC/MetaP> a pals:MetaParamGroup ;
-    pals:additional_metadata [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
             pals:value "2" ],
@@ -2661,7 +3624,7 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
             pals:key "array_order" ;
             pals:value "maximum,minimum" ] .
 
-<https://example.org/pals-instance/bta-th23-ps:rangeC/MetaP> a pals:MetaParamGroup ;
+<https://example.org/pals-instance/bta-th158-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
@@ -2713,13 +3676,13 @@ inst:QV9.magnet_status_binding rdf:object <https://example.org/pals-instance/bta
 
 <https://example.org/pals-instance/bta-tv30-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
-            pals:datatype xsd:string ;
-            pals:key "array_order" ;
-            pals:value "maximum,minimum" ],
-        [ a pals:AdditionalMetadata ;
             pals:datatype xsd:integer ;
             pals:key "array_length" ;
-            pals:value "2" ] .
+            pals:value "2" ],
+        [ a pals:AdditionalMetadata ;
+            pals:datatype xsd:string ;
+            pals:key "array_order" ;
+            pals:value "maximum,minimum" ] .
 
 <https://example.org/pals-instance/bta-tv7-ps:rangeC/MetaP> a pals:MetaParamGroup ;
     pals:additional_metadata [ a pals:AdditionalMetadata ;
@@ -2739,7 +3702,8 @@ inst:BEGINNING_B1 pals:ReferenceP <https://example.org/pals-instance/BEGINNING_B
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
 
-inst:END_B0 pals:kind "Marker" ;
+inst:END_B0 pals:TwissP <https://example.org/pals-instance/END_B0/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
@@ -3407,51 +4371,6 @@ inst:END_B0 pals:kind "Marker" ;
     pals:signal_role "Status" ;
     pals:source_system "Other" .
 
-<https://example.org/pals-instance/bta-th1-ps:currentM> pals:access_protocol "ADO" ;
-    pals:alias "current_readback" ;
-    pals:canonical_signal_type "MagnetCurrentReadback" ;
-    pals:kind "Signal" ;
-    pals:native_data_type xsd:float ;
-    pals:native_description "Measured magnet current." ;
-    pals:native_unit "A" ;
-    pals:quantity_kind quantitykind:ElectricCurrent ;
-    pals:signal_role sosa:ObservableProperty ;
-    pals:source_system "Other" .
-
-<https://example.org/pals-instance/bta-th1-ps:rangeC> pals:MetaP <https://example.org/pals-instance/bta-th1-ps:rangeC/MetaP> ;
-    pals:access_protocol "ADO" ;
-    pals:alias "current_range" ;
-    pals:canonical_signal_type "MagnetCurrentRange" ;
-    pals:kind "Signal" ;
-    pals:native_data_type "FloatArray" ;
-    pals:native_description "Allowed magnet-current range returned as [maximum, minimum]." ;
-    pals:native_unit "A" ;
-    pals:quantity_kind quantitykind:ElectricCurrent ;
-    pals:signal_role ssn_system:OperatingRange ;
-    pals:source_system "Other" .
-
-<https://example.org/pals-instance/bta-th1-ps:setpointS> pals:access_protocol "ADO" ;
-    pals:alias "current_setpoint" ;
-    pals:canonical_signal_type "MagnetCurrentSetpoint" ;
-    pals:kind "Signal" ;
-    pals:native_data_type xsd:float ;
-    pals:native_description "Desired magnet current command." ;
-    pals:native_unit "A" ;
-    pals:quantity_kind quantitykind:ElectricCurrent ;
-    pals:signal_role sosa:ActuatableProperty ;
-    pals:source_system "Other" .
-
-<https://example.org/pals-instance/bta-th1-ps:stateS> pals:access_protocol "ADO" ;
-    pals:alias "magnet_status" ;
-    pals:canonical_signal_type "Status" ;
-    pals:kind "Signal" ;
-    pals:native_data_type xsd:string ;
-    pals:native_description "Power-supply or device state summary." ;
-    pals:native_unit "none" ;
-    pals:quantity_kind sosa:ObservableProperty ;
-    pals:signal_role "Status" ;
-    pals:source_system "Other" .
-
 <https://example.org/pals-instance/bta-th127-ps:currentM> pals:access_protocol "ADO" ;
     pals:alias "current_readback" ;
     pals:canonical_signal_type "MagnetCurrentReadback" ;
@@ -3532,51 +4451,6 @@ inst:END_B0 pals:kind "Marker" ;
     pals:source_system "Other" .
 
 <https://example.org/pals-instance/bta-th158-ps:stateS> pals:access_protocol "ADO" ;
-    pals:alias "magnet_status" ;
-    pals:canonical_signal_type "Status" ;
-    pals:kind "Signal" ;
-    pals:native_data_type xsd:string ;
-    pals:native_description "Power-supply or device state summary." ;
-    pals:native_unit "none" ;
-    pals:quantity_kind sosa:ObservableProperty ;
-    pals:signal_role "Status" ;
-    pals:source_system "Other" .
-
-<https://example.org/pals-instance/bta-th23-ps:currentM> pals:access_protocol "ADO" ;
-    pals:alias "current_readback" ;
-    pals:canonical_signal_type "MagnetCurrentReadback" ;
-    pals:kind "Signal" ;
-    pals:native_data_type xsd:float ;
-    pals:native_description "Measured magnet current." ;
-    pals:native_unit "A" ;
-    pals:quantity_kind quantitykind:ElectricCurrent ;
-    pals:signal_role sosa:ObservableProperty ;
-    pals:source_system "Other" .
-
-<https://example.org/pals-instance/bta-th23-ps:rangeC> pals:MetaP <https://example.org/pals-instance/bta-th23-ps:rangeC/MetaP> ;
-    pals:access_protocol "ADO" ;
-    pals:alias "current_range" ;
-    pals:canonical_signal_type "MagnetCurrentRange" ;
-    pals:kind "Signal" ;
-    pals:native_data_type "FloatArray" ;
-    pals:native_description "Allowed magnet-current range returned as [maximum, minimum]." ;
-    pals:native_unit "A" ;
-    pals:quantity_kind quantitykind:ElectricCurrent ;
-    pals:signal_role ssn_system:OperatingRange ;
-    pals:source_system "Other" .
-
-<https://example.org/pals-instance/bta-th23-ps:setpointS> pals:access_protocol "ADO" ;
-    pals:alias "current_setpoint" ;
-    pals:canonical_signal_type "MagnetCurrentSetpoint" ;
-    pals:kind "Signal" ;
-    pals:native_data_type xsd:float ;
-    pals:native_description "Desired magnet current command." ;
-    pals:native_unit "A" ;
-    pals:quantity_kind quantitykind:ElectricCurrent ;
-    pals:signal_role sosa:ActuatableProperty ;
-    pals:source_system "Other" .
-
-<https://example.org/pals-instance/bta-th23-ps:stateS> pals:access_protocol "ADO" ;
     pals:alias "magnet_status" ;
     pals:canonical_signal_type "Status" ;
     pals:kind "Signal" ;
@@ -3989,7 +4863,8 @@ inst:END_B0 pals:kind "Marker" ;
     pals:signal_role sosa:ObservableProperty ;
     pals:source_system "Other" .
 
-inst:BTASTART pals:kind "Marker" ;
+inst:BTASTART pals:TwissP <https://example.org/pals-instance/BTASTART/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
@@ -4081,6 +4956,7 @@ inst:D2TX_003 pals:LongitudinalPlacementP <https://example.org/pals-instance/D2T
 inst:DH1A pals:BendP <https://example.org/pals-instance/DH1A/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DH1A/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DH1A/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DH1A/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4090,6 +4966,7 @@ inst:DH1A pals:BendP <https://example.org/pals-instance/DH1A/BendP> ;
 inst:DH1B pals:BendP <https://example.org/pals-instance/DH1B/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DH1B/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DH1B/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DH1B/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4099,6 +4976,7 @@ inst:DH1B pals:BendP <https://example.org/pals-instance/DH1B/BendP> ;
 inst:DH2 pals:BendP <https://example.org/pals-instance/DH2/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DH2/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DH2/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DH2/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4108,6 +4986,7 @@ inst:DH2 pals:BendP <https://example.org/pals-instance/DH2/BendP> ;
 inst:DH3 pals:BendP <https://example.org/pals-instance/DH3/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DH3/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DH3/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DH3/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4117,6 +4996,7 @@ inst:DH3 pals:BendP <https://example.org/pals-instance/DH3/BendP> ;
 inst:DH4A pals:BendP <https://example.org/pals-instance/DH4A/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DH4A/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DH4A/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DH4A/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4126,6 +5006,7 @@ inst:DH4A pals:BendP <https://example.org/pals-instance/DH4A/BendP> ;
 inst:DH4B pals:BendP <https://example.org/pals-instance/DH4B/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DH4B/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DH4B/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DH4B/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4135,6 +5016,7 @@ inst:DH4B pals:BendP <https://example.org/pals-instance/DH4B/BendP> ;
 inst:DH5A pals:BendP <https://example.org/pals-instance/DH5A/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DH5A/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DH5A/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DH5A/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4144,6 +5026,7 @@ inst:DH5A pals:BendP <https://example.org/pals-instance/DH5A/BendP> ;
 inst:DH5B pals:BendP <https://example.org/pals-instance/DH5B/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DH5B/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DH5B/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DH5B/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4151,6 +5034,7 @@ inst:DH5B pals:BendP <https://example.org/pals-instance/DH5B/BendP> ;
     pals:physical_function "Steering" .
 
 inst:DHCA02 pals:LongitudinalPlacementP <https://example.org/pals-instance/DHCA02/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DHCA02/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -4159,6 +5043,7 @@ inst:DHCA02 pals:LongitudinalPlacementP <https://example.org/pals-instance/DHCA0
     pals:plane "Horizontal" .
 
 inst:DHCA08 pals:LongitudinalPlacementP <https://example.org/pals-instance/DHCA08/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DHCA08/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -4167,6 +5052,7 @@ inst:DHCA08 pals:LongitudinalPlacementP <https://example.org/pals-instance/DHCA0
     pals:plane "Horizontal" .
 
 inst:DHCA12 pals:LongitudinalPlacementP <https://example.org/pals-instance/DHCA12/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DHCA12/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -4177,6 +5063,7 @@ inst:DHCA12 pals:LongitudinalPlacementP <https://example.org/pals-instance/DHCA1
 inst:DHF6A pals:BendP <https://example.org/pals-instance/DHF6A/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DHF6A/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DHF6A/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DHF6A/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4186,6 +5073,7 @@ inst:DHF6A pals:BendP <https://example.org/pals-instance/DHF6A/BendP> ;
 inst:DHF6B pals:BendP <https://example.org/pals-instance/DHF6B/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/DHF6B/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DHF6B/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DHF6B/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4193,6 +5081,7 @@ inst:DHF6B pals:BendP <https://example.org/pals-instance/DHF6B/BendP> ;
     pals:physical_function "Steering" .
 
 inst:DHF6T pals:LongitudinalPlacementP <https://example.org/pals-instance/DHF6T/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DHF6T/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -4201,6 +5090,7 @@ inst:DHF6T pals:LongitudinalPlacementP <https://example.org/pals-instance/DHF6T/
     pals:plane "Horizontal" .
 
 inst:DHL20T pals:LongitudinalPlacementP <https://example.org/pals-instance/DHL20T/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DHL20T/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -4557,6 +5447,7 @@ inst:DSS_004 pals:LongitudinalPlacementP <https://example.org/pals-instance/DSS_
     pals:virtual_function pals:Drift .
 
 inst:DVCA02 pals:LongitudinalPlacementP <https://example.org/pals-instance/DVCA02/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DVCA02/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "Kicker",
         "VKicker" ;
@@ -4565,6 +5456,7 @@ inst:DVCA02 pals:LongitudinalPlacementP <https://example.org/pals-instance/DVCA0
     pals:plane "Vertical" .
 
 inst:DVCA08 pals:LongitudinalPlacementP <https://example.org/pals-instance/DVCA08/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DVCA08/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "Kicker",
         "VKicker" ;
@@ -4573,6 +5465,7 @@ inst:DVCA08 pals:LongitudinalPlacementP <https://example.org/pals-instance/DVCA0
     pals:plane "Vertical" .
 
 inst:DVCA12 pals:LongitudinalPlacementP <https://example.org/pals-instance/DVCA12/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DVCA12/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "Kicker",
         "VKicker" ;
@@ -4580,7 +5473,8 @@ inst:DVCA12 pals:LongitudinalPlacementP <https://example.org/pals-instance/DVCA1
     pals:physical_function "Steering" ;
     pals:plane "Vertical" .
 
-inst:FOIL024 pals:kind "Marker" ;
+inst:FOIL024 pals:TwissP <https://example.org/pals-instance/FOIL024/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
@@ -4588,6 +5482,7 @@ inst:FOIL024 pals:kind "Marker" ;
 inst:KCKRA05 pals:BendP <https://example.org/pals-instance/KCKRA05/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/KCKRA05/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/KCKRA05/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/KCKRA05/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4597,6 +5492,7 @@ inst:KCKRA05 pals:BendP <https://example.org/pals-instance/KCKRA05/BendP> ;
 inst:L20SPTM1 pals:BendP <https://example.org/pals-instance/L20SPTM1/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/L20SPTM1/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/L20SPTM1/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/L20SPTM1/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4606,6 +5502,7 @@ inst:L20SPTM1 pals:BendP <https://example.org/pals-instance/L20SPTM1/BendP> ;
 inst:L20SPTM2 pals:BendP <https://example.org/pals-instance/L20SPTM2/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/L20SPTM2/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/L20SPTM2/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/L20SPTM2/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4618,17 +5515,20 @@ inst:M1 pals:LongitudinalPlacementP <https://example.org/pals-instance/M1/Longit
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Drift .
 
-inst:MK077 pals:kind "Marker" ;
+inst:MK077 pals:TwissP <https://example.org/pals-instance/MK077/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
 
-inst:MK139 pals:kind "Marker" ;
+inst:MK139 pals:TwissP <https://example.org/pals-instance/MK139/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
 
-inst:MK156 pals:kind "Marker" ;
+inst:MK156 pals:TwissP <https://example.org/pals-instance/MK156/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
@@ -4636,6 +5536,7 @@ inst:MK156 pals:kind "Marker" ;
 inst:MM_A01BF pals:BendP <https://example.org/pals-instance/MM_A01BF/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A01BF/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A01BF/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A01BF/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4645,6 +5546,7 @@ inst:MM_A01BF pals:BendP <https://example.org/pals-instance/MM_A01BF/BendP> ;
 inst:MM_A02BF pals:BendP <https://example.org/pals-instance/MM_A02BF/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A02BF/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A02BF/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A02BF/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4654,6 +5556,7 @@ inst:MM_A02BF pals:BendP <https://example.org/pals-instance/MM_A02BF/BendP> ;
 inst:MM_A03CD pals:BendP <https://example.org/pals-instance/MM_A03CD/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A03CD/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A03CD/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A03CD/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4663,6 +5566,7 @@ inst:MM_A03CD pals:BendP <https://example.org/pals-instance/MM_A03CD/BendP> ;
 inst:MM_A04CD pals:BendP <https://example.org/pals-instance/MM_A04CD/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A04CD/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A04CD/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A04CD/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4672,6 +5576,7 @@ inst:MM_A04CD pals:BendP <https://example.org/pals-instance/MM_A04CD/BendP> ;
 inst:MM_A05AF pals:BendP <https://example.org/pals-instance/MM_A05AF/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A05AF/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A05AF/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A05AF/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4681,6 +5586,7 @@ inst:MM_A05AF pals:BendP <https://example.org/pals-instance/MM_A05AF/BendP> ;
 inst:MM_A06AF pals:BendP <https://example.org/pals-instance/MM_A06AF/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A06AF/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A06AF/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A06AF/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4690,6 +5596,7 @@ inst:MM_A06AF pals:BendP <https://example.org/pals-instance/MM_A06AF/BendP> ;
 inst:MM_A07CD pals:BendP <https://example.org/pals-instance/MM_A07CD/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A07CD/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A07CD/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A07CD/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4699,6 +5606,7 @@ inst:MM_A07CD pals:BendP <https://example.org/pals-instance/MM_A07CD/BendP> ;
 inst:MM_A08CD pals:BendP <https://example.org/pals-instance/MM_A08CD/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A08CD/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A08CD/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A08CD/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4708,6 +5616,7 @@ inst:MM_A08CD pals:BendP <https://example.org/pals-instance/MM_A08CD/BendP> ;
 inst:MM_A09BF pals:BendP <https://example.org/pals-instance/MM_A09BF/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A09BF/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A09BF/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A09BF/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4717,6 +5626,7 @@ inst:MM_A09BF pals:BendP <https://example.org/pals-instance/MM_A09BF/BendP> ;
 inst:MM_A10BF pals:BendP <https://example.org/pals-instance/MM_A10BF/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A10BF/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A10BF/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A10BF/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4726,6 +5636,7 @@ inst:MM_A10BF pals:BendP <https://example.org/pals-instance/MM_A10BF/BendP> ;
 inst:MM_A11BD pals:BendP <https://example.org/pals-instance/MM_A11BD/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A11BD/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A11BD/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A11BD/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4735,6 +5646,7 @@ inst:MM_A11BD pals:BendP <https://example.org/pals-instance/MM_A11BD/BendP> ;
 inst:MM_A12BD pals:BendP <https://example.org/pals-instance/MM_A12BD/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A12BD/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A12BD/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A12BD/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4744,6 +5656,7 @@ inst:MM_A12BD pals:BendP <https://example.org/pals-instance/MM_A12BD/BendP> ;
 inst:MM_A13CF pals:BendP <https://example.org/pals-instance/MM_A13CF/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A13CF/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A13CF/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A13CF/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4753,6 +5666,7 @@ inst:MM_A13CF pals:BendP <https://example.org/pals-instance/MM_A13CF/BendP> ;
 inst:MM_A14CF pals:BendP <https://example.org/pals-instance/MM_A14CF/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A14CF/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A14CF/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A14CF/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4762,6 +5676,7 @@ inst:MM_A14CF pals:BendP <https://example.org/pals-instance/MM_A14CF/BendP> ;
 inst:MM_A15AD pals:BendP <https://example.org/pals-instance/MM_A15AD/BendP> ;
     pals:LongitudinalPlacementP <https://example.org/pals-instance/MM_A15AD/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/MM_A15AD/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/MM_A15AD/TwissP> ;
     pals:kind "Bend" ;
     pals:native_types "Bend",
         "SBend" ;
@@ -4851,40 +5766,47 @@ inst:PUE_A14 pals:LongitudinalPlacementP <https://example.org/pals-instance/PUE_
     pals:physical_function "BeamPositionMeasurement" .
 
 inst:QHFV pals:LongitudinalPlacementP <https://example.org/pals-instance/QHFV/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/QHFV/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "Focusing" .
 
 inst:QPOL pals:LongitudinalPlacementP <https://example.org/pals-instance/QPOL/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/QPOL/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "Focusing" .
 
 inst:SXH pals:LongitudinalPlacementP <https://example.org/pals-instance/SXH/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/SXH/TwissP> ;
     pals:kind "Sextupole" ;
     pals:native_types "Sextupole" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "Focusing" .
 
 inst:SXV pals:LongitudinalPlacementP <https://example.org/pals-instance/SXV/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/SXV/TwissP> ;
     pals:kind "Sextupole" ;
     pals:native_types "Sextupole" ;
     pals:physical_beamline_relation "Inline" ;
     pals:physical_function "Focusing" .
 
-inst:XF019 pals:kind "Marker" ;
+inst:XF019 pals:TwissP <https://example.org/pals-instance/XF019/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
 
-inst:XF059 pals:kind "Marker" ;
+inst:XF059 pals:TwissP <https://example.org/pals-instance/XF059/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
 
-inst:XF183 pals:kind "Marker" ;
+inst:XF183 pals:TwissP <https://example.org/pals-instance/XF183/TwissP> ;
+    pals:kind "Marker" ;
     pals:native_types "Marker" ;
     pals:virtual_beamline_relation "Inline" ;
     pals:virtual_function pals:Marker .
@@ -4975,6 +5897,7 @@ inst:MWA15 pals:LongitudinalPlacementP <https://example.org/pals-instance/MWA15/
     pals:physical_function "BeamProfileMeasurement" .
 
 inst:DH127 pals:LongitudinalPlacementP <https://example.org/pals-instance/DH127/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DH127/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -4983,22 +5906,7 @@ inst:DH127 pals:LongitudinalPlacementP <https://example.org/pals-instance/DH127/
     pals:plane "Horizontal" .
 
 inst:DH158 pals:LongitudinalPlacementP <https://example.org/pals-instance/DH158/LongitudinalPlacementP> ;
-    pals:kind "Kicker" ;
-    pals:native_types "HKicker",
-        "Kicker" ;
-    pals:physical_beamline_relation "Inline" ;
-    pals:physical_function "Steering" ;
-    pals:plane "Horizontal" .
-
-inst:DH1T pals:LongitudinalPlacementP <https://example.org/pals-instance/DH1T/LongitudinalPlacementP> ;
-    pals:kind "Kicker" ;
-    pals:native_types "HKicker",
-        "Kicker" ;
-    pals:physical_beamline_relation "Inline" ;
-    pals:physical_function "Steering" ;
-    pals:plane "Horizontal" .
-
-inst:DH23T pals:LongitudinalPlacementP <https://example.org/pals-instance/DH23T/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DH158/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -5007,6 +5915,7 @@ inst:DH23T pals:LongitudinalPlacementP <https://example.org/pals-instance/DH23T/
     pals:plane "Horizontal" .
 
 inst:DH4T pals:LongitudinalPlacementP <https://example.org/pals-instance/DH4T/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DH4T/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -5015,6 +5924,7 @@ inst:DH4T pals:LongitudinalPlacementP <https://example.org/pals-instance/DH4T/Lo
     pals:plane "Horizontal" .
 
 inst:DH5T pals:LongitudinalPlacementP <https://example.org/pals-instance/DH5T/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DH5T/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "HKicker",
         "Kicker" ;
@@ -5024,6 +5934,7 @@ inst:DH5T pals:LongitudinalPlacementP <https://example.org/pals-instance/DH5T/Lo
 
 inst:DV007 pals:LongitudinalPlacementP <https://example.org/pals-instance/DV007/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/DV007/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/DV007/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "Kicker",
         "VKicker" ;
@@ -5032,6 +5943,7 @@ inst:DV007 pals:LongitudinalPlacementP <https://example.org/pals-instance/DV007/
     pals:plane "Vertical" .
 
 inst:DV030 pals:LongitudinalPlacementP <https://example.org/pals-instance/DV030/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DV030/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "Kicker",
         "VKicker" ;
@@ -5040,6 +5952,7 @@ inst:DV030 pals:LongitudinalPlacementP <https://example.org/pals-instance/DV030/
     pals:plane "Vertical" .
 
 inst:DV120 pals:LongitudinalPlacementP <https://example.org/pals-instance/DV120/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DV120/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "Kicker",
         "VKicker" ;
@@ -5048,6 +5961,7 @@ inst:DV120 pals:LongitudinalPlacementP <https://example.org/pals-instance/DV120/
     pals:plane "Vertical" .
 
 inst:DV181 pals:LongitudinalPlacementP <https://example.org/pals-instance/DV181/LongitudinalPlacementP> ;
+    pals:TwissP <https://example.org/pals-instance/DV181/TwissP> ;
     pals:kind "Kicker" ;
     pals:native_types "Kicker",
         "VKicker" ;
@@ -5057,6 +5971,7 @@ inst:DV181 pals:LongitudinalPlacementP <https://example.org/pals-instance/DV181/
 
 inst:QH10 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH10/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QH10/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QH10/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5064,6 +5979,7 @@ inst:QH10 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH10/Lo
 
 inst:QH12 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH12/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QH12/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QH12/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5071,6 +5987,7 @@ inst:QH12 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH12/Lo
 
 inst:QH14 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH14/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QH14/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QH14/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5078,6 +5995,7 @@ inst:QH14 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH14/Lo
 
 inst:QH2A pals:LongitudinalPlacementP <https://example.org/pals-instance/QH2A/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QH2A/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QH2A/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5085,6 +6003,7 @@ inst:QH2A pals:LongitudinalPlacementP <https://example.org/pals-instance/QH2A/Lo
 
 inst:QH2B pals:LongitudinalPlacementP <https://example.org/pals-instance/QH2B/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QH2B/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QH2B/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5092,6 +6011,7 @@ inst:QH2B pals:LongitudinalPlacementP <https://example.org/pals-instance/QH2B/Lo
 
 inst:QH4 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH4/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QH4/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QH4/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5099,6 +6019,7 @@ inst:QH4 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH4/Long
 
 inst:QH6 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH6/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QH6/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QH6/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5106,6 +6027,7 @@ inst:QH6 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH6/Long
 
 inst:QH8 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH8/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QH8/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QH8/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5113,6 +6035,7 @@ inst:QH8 pals:LongitudinalPlacementP <https://example.org/pals-instance/QH8/Long
 
 inst:QV1 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV1/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QV1/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QV1/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5120,6 +6043,7 @@ inst:QV1 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV1/Long
 
 inst:QV11 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV11/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QV11/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QV11/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5127,6 +6051,7 @@ inst:QV11 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV11/Lo
 
 inst:QV13 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV13/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QV13/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QV13/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5134,6 +6059,7 @@ inst:QV13 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV13/Lo
 
 inst:QV15 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV15/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QV15/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QV15/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5141,6 +6067,7 @@ inst:QV15 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV15/Lo
 
 inst:QV3 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV3/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QV3/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QV3/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5148,6 +6075,7 @@ inst:QV3 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV3/Long
 
 inst:QV5 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV5/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QV5/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QV5/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5155,6 +6083,7 @@ inst:QV5 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV5/Long
 
 inst:QV7 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV7/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QV7/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QV7/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5162,6 +6091,7 @@ inst:QV7 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV7/Long
 
 inst:QV9 pals:LongitudinalPlacementP <https://example.org/pals-instance/QV9/LongitudinalPlacementP> ;
     pals:MagneticMultipoleP <https://example.org/pals-instance/QV9/MagneticMultipoleP> ;
+    pals:TwissP <https://example.org/pals-instance/QV9/TwissP> ;
     pals:kind "Quadrupole" ;
     pals:native_types "Quadrupole" ;
     pals:physical_beamline_relation "Inline" ;
@@ -5195,10 +6125,8 @@ inst:BTA_LINE pals:description "Beamline imported from PALSParserPy branch bta_l
                 inst:BTA_LINE_D2TX_003_PRECEDES_MM_A13CF,
                 inst:BTA_LINE_DH127_PRECEDES_DR127,
                 inst:BTA_LINE_DH158_PRECEDES_DR158,
-                inst:BTA_LINE_DH1A_PRECEDES_DH1T,
+                inst:BTA_LINE_DH1A_PRECEDES_DH1B,
                 inst:BTA_LINE_DH1B_PRECEDES_DRD1,
-                inst:BTA_LINE_DH1T_PRECEDES_DH1B,
-                inst:BTA_LINE_DH23T_PRECEDES_DRQ5,
                 inst:BTA_LINE_DH2_PRECEDES_DRD2,
                 inst:BTA_LINE_DH3_PRECEDES_DRD3,
                 inst:BTA_LINE_DH4A_PRECEDES_DH4T,
@@ -5333,7 +6261,7 @@ inst:BTA_LINE pals:description "Beamline imported from PALSParserPy branch bta_l
                 inst:BTA_LINE_QV15_PRECEDES_M1,
                 inst:BTA_LINE_QV1_PRECEDES_DRQ1,
                 inst:BTA_LINE_QV3_PRECEDES_DRQ3,
-                inst:BTA_LINE_QV5_PRECEDES_DH23T,
+                inst:BTA_LINE_QV5_PRECEDES_DRQ5,
                 inst:BTA_LINE_QV7_PRECEDES_DRQ7Y,
                 inst:BTA_LINE_QV9_PRECEDES_DRQ9A,
                 inst:BTA_LINE_SXH_PRECEDES_DSS_004,
@@ -5361,9 +6289,7 @@ inst:BTA_LINE pals:description "Beamline imported from PALSParserPy branch bta_l
                 inst:DH158,
                 inst:DH1A,
                 inst:DH1B,
-                inst:DH1T,
                 inst:DH2,
-                inst:DH23T,
                 inst:DH3,
                 inst:DH4A,
                 inst:DH4B,
@@ -5517,14 +6443,6 @@ inst:BTA_LINE pals:description "Beamline imported from PALSParserPy branch bta_l
                 inst:DH158.current_readback_binding,
                 inst:DH158.current_setpoint_binding,
                 inst:DH158.magnet_status_binding,
-                inst:DH1T.current_range_binding,
-                inst:DH1T.current_readback_binding,
-                inst:DH1T.current_setpoint_binding,
-                inst:DH1T.magnet_status_binding,
-                inst:DH23T.current_range_binding,
-                inst:DH23T.current_readback_binding,
-                inst:DH23T.current_setpoint_binding,
-                inst:DH23T.magnet_status_binding,
                 inst:DH4T.current_range_binding,
                 inst:DH4T.current_readback_binding,
                 inst:DH4T.current_setpoint_binding,
@@ -5691,10 +6609,6 @@ inst:BTA_LINE pals:description "Beamline imported from PALSParserPy branch bta_l
                 <https://example.org/pals-instance/bta-qf8-ps:rangeC>,
                 <https://example.org/pals-instance/bta-qf8-ps:setpointS>,
                 <https://example.org/pals-instance/bta-qf8-ps:stateS>,
-                <https://example.org/pals-instance/bta-th1-ps:currentM>,
-                <https://example.org/pals-instance/bta-th1-ps:rangeC>,
-                <https://example.org/pals-instance/bta-th1-ps:setpointS>,
-                <https://example.org/pals-instance/bta-th1-ps:stateS>,
                 <https://example.org/pals-instance/bta-th127-ps:currentM>,
                 <https://example.org/pals-instance/bta-th127-ps:rangeC>,
                 <https://example.org/pals-instance/bta-th127-ps:setpointS>,
@@ -5703,10 +6617,6 @@ inst:BTA_LINE pals:description "Beamline imported from PALSParserPy branch bta_l
                 <https://example.org/pals-instance/bta-th158-ps:rangeC>,
                 <https://example.org/pals-instance/bta-th158-ps:setpointS>,
                 <https://example.org/pals-instance/bta-th158-ps:stateS>,
-                <https://example.org/pals-instance/bta-th23-ps:currentM>,
-                <https://example.org/pals-instance/bta-th23-ps:rangeC>,
-                <https://example.org/pals-instance/bta-th23-ps:setpointS>,
-                <https://example.org/pals-instance/bta-th23-ps:stateS>,
                 <https://example.org/pals-instance/bta-th4-ps:currentM>,
                 <https://example.org/pals-instance/bta-th4-ps:rangeC>,
                 <https://example.org/pals-instance/bta-th4-ps:setpointS>,

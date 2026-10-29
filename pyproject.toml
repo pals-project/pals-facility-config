@@ -17,6 +17,7 @@ dynamic = ["version"]
 dependencies = [
   "jsonasobj2>=1.0.4",
   "linkml-runtime>=1.9.4",
+  "palsparserpy",
   "pydantic>=2.0",
   "PyYAML>=6.0",
   "rdflib>=6.0",
@@ -79,3 +80,6 @@ extend-exclude = [
   "src/narad/datamodel/narad_core_acc_pydantic.py",
   "src/narad/datamodel/narad_core_acc.py",
 ]
+
+[tool.uv.sources]
+palsparserpy = { path = "../../PALS/PALSParserPy", editable = true }

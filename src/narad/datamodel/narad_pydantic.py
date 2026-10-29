@@ -1090,6 +1090,10 @@ class TwissParamGroup(ParamGroup):
     beta_b: Optional[float] = Field(default=None, description="""Twiss beta parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['beta_y', 'betay'],
          'domain_of': ['TwissParamGroup'],
          'slot_uri': 'pals:beta_b'} })
+    cmat11: Optional[float] = Field(default=None, description="""c[1,1] coupling matrix component.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:cmat11'} })
+    cmat12: Optional[float] = Field(default=None, description="""c[1,2] coupling matrix component.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:cmat12'} })
+    cmat21: Optional[float] = Field(default=None, description="""c[2,1] coupling matrix component.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:cmat21'} })
+    cmat22: Optional[float] = Field(default=None, description="""c[2,2] coupling matrix component.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:cmat22'} })
     eta_x: Optional[float] = Field(default=None, description="""Twiss dispersion parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etax'],
          'domain_of': ['TwissParamGroup'],
          'slot_uri': 'pals:eta_x'} })
@@ -1102,12 +1106,22 @@ class TwissParamGroup(ParamGroup):
     etap_y: Optional[float] = Field(default=None, description="""Twiss dispersion slope parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['etapy'],
          'domain_of': ['TwissParamGroup'],
          'slot_uri': 'pals:etap_y'} })
+    deta_x_ds: Optional[float] = Field(default=None, description="""Twiss dispersion derivative parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:deta_x_ds'} })
+    deta_y_ds: Optional[float] = Field(default=None, description="""Twiss dispersion derivative parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:deta_y_ds'} })
     phi_a: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_x', 'phix', 'psi_x', 'psix'],
          'domain_of': ['TwissParamGroup'],
          'slot_uri': 'pals:phi_a'} })
     phi_b: Optional[float] = Field(default=None, description="""Twiss phase advance parameter in the vertical plane.""", json_schema_extra = { "linkml_meta": {'aliases': ['phi_y', 'phiy', 'psi_y', 'psiy'],
          'domain_of': ['TwissParamGroup'],
          'slot_uri': 'pals:phi_b'} })
+    dbeta_a_dpz: Optional[float] = Field(default=None, description="""Twiss beta dependence on momentum in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:dbeta_a_dpz'} })
+    dalpha_a_dpz: Optional[float] = Field(default=None, description="""Twiss alpha dependence on momentum in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:dalpha_a_dpz'} })
+    dbeta_b_dpz: Optional[float] = Field(default=None, description="""Twiss beta dependence on momentum in the vertical plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:dbeta_b_dpz'} })
+    dalpha_b_dpz: Optional[float] = Field(default=None, description="""Twiss alpha dependence on momentum in the vertical plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:dalpha_b_dpz'} })
+    deta_x_dpz: Optional[float] = Field(default=None, description="""Twiss dispersion dependence on momentum in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:deta_x_dpz'} })
+    detap_x_dpz: Optional[float] = Field(default=None, description="""Twiss dispersion slope dependence on momentum in the horizontal plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:detap_x_dpz'} })
+    deta_y_dpz: Optional[float] = Field(default=None, description="""Twiss dispersion dependence on momentum in the vertical plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:deta_y_dpz'} })
+    detap_y_dpz: Optional[float] = Field(default=None, description="""Twiss dispersion slope dependence on momentum in the vertical plane.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TwissParamGroup'], 'slot_uri': 'pals:detap_y_dpz'} })
     id: str = Field(default=..., description="""A unique identifier for the instance.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Node', 'Affiliation', 'ParamGroup', 'Edge'],
          'slot_uri': 'pals:id'} })
 

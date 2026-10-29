@@ -322,31 +322,6 @@ facility:
       eta_y: -5.4476e-05
       etap_y: 6.9986e-06
       phi_b: 14.014
-  - id: inst:DH1T
-    kind: Kicker
-    native_types:
-    - Kicker
-    - HKicker
-    functions:
-    - Steering
-    beamline_relation: Inline
-    plane: Horizontal
-    LongitudinalPlacementP:
-      id: inst:DH1T/LongitudinalPlacementP
-      length: 0.0
-      s_position: 6.325
-    TwissP:
-      id: inst:DH1T/TwissP
-      beta_a: 5.2955
-      alpha_a: -1.5642
-      eta_x: -0.63811
-      etap_x: -0.56193
-      phi_a: 14.624
-      beta_b: 14.113
-      alpha_b: 2.9935
-      eta_y: -5.4476e-05
-      etap_y: 6.9986e-06
-      phi_b: 14.014
   - id: inst:DH1B
     kind: Bend
     native_types:
@@ -711,31 +686,6 @@ facility:
       s_position: 15.302
     TwissP:
       id: inst:QV5/TwissP
-      beta_a: 0.62111
-      alpha_a: -0.71687
-      eta_x: 1.125
-      etap_x: 0.19343
-      phi_a: 19.692
-      beta_b: 11.357
-      alpha_b: -0.10948
-      eta_y: 0.0015339
-      etap_y: 0.00038359
-      phi_b: 14.635
-  - id: inst:DH23T
-    kind: Kicker
-    native_types:
-    - Kicker
-    - HKicker
-    functions:
-    - Steering
-    beamline_relation: Inline
-    plane: Horizontal
-    LongitudinalPlacementP:
-      id: inst:DH23T/LongitudinalPlacementP
-      length: 0.0
-      s_position: 15.302
-    TwissP:
-      id: inst:DH23T/TwissP
       beta_a: 0.62111
       alpha_a: -0.71687
       eta_x: 1.125
@@ -3286,14 +3236,8 @@ facility:
     object: inst:DH1A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:BTA_LINE_DH1A_PRECEDES_DH1T
+  - id: inst:BTA_LINE_DH1A_PRECEDES_DH1B
     subject: inst:DH1A
-    predicate: pals:precedes
-    object: inst:DH1T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:BTA_LINE_DH1T_PRECEDES_DH1B
-    subject: inst:DH1T
     predicate: pals:precedes
     object: inst:DH1B
     context: beamline_order
@@ -3406,14 +3350,8 @@ facility:
     object: inst:QV5
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:BTA_LINE_QV5_PRECEDES_DH23T
+  - id: inst:BTA_LINE_QV5_PRECEDES_DRQ5
     subject: inst:QV5
-    predicate: pals:precedes
-    object: inst:DH23T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:BTA_LINE_DH23T_PRECEDES_DRQ5
-    subject: inst:DH23T
     predicate: pals:precedes
     object: inst:DRQ5
     context: beamline_order

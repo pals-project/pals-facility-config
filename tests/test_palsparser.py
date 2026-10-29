@@ -97,10 +97,27 @@ def test_bta_lattice_is_parsed_and_expanded() -> None:
     element_names = [entry.keys()[0] for entry in line]
 
     assert lattices.problems == []
-    assert len(element_names) == 165
+    assert len(element_names) == 163
+    assert {"dh1t", "dh23t"}.isdisjoint(element_names)
     assert element_names[0] == "beginning_b1"
     assert element_names[-1] == "end_b0"
     assert "mw006" in element_names
+
+
+def test_bta_twiss_update_matches_current_lattice(tmp_path: Path) -> None:
+    output = tmp_path / "bta_with_twiss.yaml"
+    subprocess.run(
+        [sys.executable, str(BTA_FILE.with_name("update_bta_twiss.py")),
+         "--output", str(output)],
+        check=True, capture_output=True, text=True,
+    )
+    document = yaml.safe_load(output.read_text())
+    components = document["facility"]["components"]
+    assert len(components) == 163
+    assert {"inst:DH1T", "inst:DH23T"}.isdisjoint(c["id"] for c in components)
+    dh1b = next(c for c in components if c["id"] == "inst:DH1B")
+    assert dh1b["LongitudinalPlacementP"]["s_position"] == 6.592
+    assert "beta_a" in dh1b["TwissP"]
 
 
 def test_translator_derives_multipass_and_reports_unsupported_elements(

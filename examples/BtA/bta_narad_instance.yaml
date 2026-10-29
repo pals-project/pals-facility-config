@@ -343,31 +343,6 @@ facility:
       id: inst:DH1A/LongitudinalPlacementP
       length: 0.2666536729738865
       s_position: 6.325
-  - id: inst:DH1T
-    kind: Kicker
-    native_types:
-    - Kicker
-    - HKicker
-    functions:
-    - Steering
-    beamline_relation: Inline
-    plane: Horizontal
-    TwissP:
-      id: inst:DH1T/TwissP
-      alpha_a: -1.5642
-      alpha_b: 2.9935
-      beta_a: 5.2955
-      beta_b: 14.113
-      eta_x: -0.63811
-      eta_y: -5.4476e-05
-      etap_x: -0.56193
-      etap_y: 6.9986e-06
-      phi_a: 14.624
-      phi_b: 14.014
-    LongitudinalPlacementP:
-      id: inst:DH1T/LongitudinalPlacementP
-      length: 0.0
-      s_position: 6.325
   - id: inst:DH1B
     kind: Bend
     native_types:
@@ -741,31 +716,6 @@ facility:
     LongitudinalPlacementP:
       id: inst:QV5/LongitudinalPlacementP
       length: 0.4985
-      s_position: 15.302
-  - id: inst:DH23T
-    kind: Kicker
-    native_types:
-    - Kicker
-    - HKicker
-    functions:
-    - Steering
-    beamline_relation: Inline
-    plane: Horizontal
-    TwissP:
-      id: inst:DH23T/TwissP
-      alpha_a: -0.71687
-      alpha_b: -0.10948
-      beta_a: 0.62111
-      beta_b: 11.357
-      eta_x: 1.125
-      eta_y: 0.0015339
-      etap_x: 0.19343
-      etap_y: 0.00038359
-      phi_a: 19.692
-      phi_b: 14.635
-    LongitudinalPlacementP:
-      id: inst:DH23T/LongitudinalPlacementP
-      length: 0.0
       s_position: 15.302
   - id: inst:DRQ5
     kind: Drift
@@ -3433,63 +3383,6 @@ facility:
     native_data_type: String
     native_unit: none
     access_protocol: ADO
-  - id: inst:bta-th1-ps:setpointS
-    kind: Signal
-    alias:
-    - current_setpoint
-    signal_role: Setpoint
-    source_system: Other
-    native_description: Desired magnet current command.
-    canonical_signal_type: MagnetCurrentSetpoint
-    quantity_kind: ElectricCurrent
-    native_data_type: Float
-    native_unit: A
-    access_protocol: ADO
-  - id: inst:bta-th1-ps:currentM
-    kind: Signal
-    alias:
-    - current_readback
-    signal_role: Readback
-    source_system: Other
-    native_description: Measured magnet current.
-    canonical_signal_type: MagnetCurrentReadback
-    quantity_kind: ElectricCurrent
-    native_data_type: Float
-    native_unit: A
-    access_protocol: ADO
-  - id: inst:bta-th1-ps:rangeC
-    kind: Signal
-    alias:
-    - current_range
-    MetaP:
-      id: inst:bta-th1-ps:rangeC/MetaP
-      additional_metadata:
-      - key: array_order
-        value: maximum,minimum
-        datatype: String
-      - key: array_length
-        value: '2'
-        datatype: Integer
-    signal_role: RangeLimit
-    source_system: Other
-    native_description: Allowed magnet-current range returned as [maximum, minimum].
-    canonical_signal_type: MagnetCurrentRange
-    quantity_kind: ElectricCurrent
-    native_data_type: FloatArray
-    native_unit: A
-    access_protocol: ADO
-  - id: inst:bta-th1-ps:stateS
-    kind: Signal
-    alias:
-    - magnet_status
-    signal_role: Status
-    source_system: Other
-    native_description: Power-supply or device state summary.
-    canonical_signal_type: Status
-    quantity_kind: State
-    native_data_type: String
-    native_unit: none
-    access_protocol: ADO
   - id: inst:bta-qf2-ps:setpointS
     kind: Signal
     alias:
@@ -3764,63 +3657,6 @@ facility:
     native_unit: A
     access_protocol: ADO
   - id: inst:bta-qd5-ps:stateS
-    kind: Signal
-    alias:
-    - magnet_status
-    signal_role: Status
-    source_system: Other
-    native_description: Power-supply or device state summary.
-    canonical_signal_type: Status
-    quantity_kind: State
-    native_data_type: String
-    native_unit: none
-    access_protocol: ADO
-  - id: inst:bta-th23-ps:setpointS
-    kind: Signal
-    alias:
-    - current_setpoint
-    signal_role: Setpoint
-    source_system: Other
-    native_description: Desired magnet current command.
-    canonical_signal_type: MagnetCurrentSetpoint
-    quantity_kind: ElectricCurrent
-    native_data_type: Float
-    native_unit: A
-    access_protocol: ADO
-  - id: inst:bta-th23-ps:currentM
-    kind: Signal
-    alias:
-    - current_readback
-    signal_role: Readback
-    source_system: Other
-    native_description: Measured magnet current.
-    canonical_signal_type: MagnetCurrentReadback
-    quantity_kind: ElectricCurrent
-    native_data_type: Float
-    native_unit: A
-    access_protocol: ADO
-  - id: inst:bta-th23-ps:rangeC
-    kind: Signal
-    alias:
-    - current_range
-    MetaP:
-      id: inst:bta-th23-ps:rangeC/MetaP
-      additional_metadata:
-      - key: array_order
-        value: maximum,minimum
-        datatype: String
-      - key: array_length
-        value: '2'
-        datatype: Integer
-    signal_role: RangeLimit
-    source_system: Other
-    native_description: Allowed magnet-current range returned as [maximum, minimum].
-    canonical_signal_type: MagnetCurrentRange
-    quantity_kind: ElectricCurrent
-    native_data_type: FloatArray
-    native_unit: A
-    access_protocol: ADO
-  - id: inst:bta-th23-ps:stateS
     kind: Signal
     alias:
     - magnet_status
@@ -4933,22 +4769,6 @@ facility:
     subject: inst:QV1
     predicate: pals:has_signal
     object: inst:bta-qd1-ps:stateS
-  - id: inst:DH1T.current_setpoint_binding
-    subject: inst:DH1T
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-th1-ps:setpointS
-  - id: inst:DH1T.current_readback_binding
-    subject: inst:DH1T
-    predicate: pals:has_readback_signal
-    object: inst:bta-th1-ps:currentM
-  - id: inst:DH1T.current_range_binding
-    subject: inst:DH1T
-    predicate: pals:has_limit_signal
-    object: inst:bta-th1-ps:rangeC
-  - id: inst:DH1T.magnet_status_binding
-    subject: inst:DH1T
-    predicate: pals:has_signal
-    object: inst:bta-th1-ps:stateS
   - id: inst:QH2A.current_setpoint_binding
     subject: inst:QH2A
     predicate: pals:has_setpoint_signal
@@ -5045,22 +4865,6 @@ facility:
     subject: inst:QV5
     predicate: pals:has_signal
     object: inst:bta-qd5-ps:stateS
-  - id: inst:DH23T.current_setpoint_binding
-    subject: inst:DH23T
-    predicate: pals:has_setpoint_signal
-    object: inst:bta-th23-ps:setpointS
-  - id: inst:DH23T.current_readback_binding
-    subject: inst:DH23T
-    predicate: pals:has_readback_signal
-    object: inst:bta-th23-ps:currentM
-  - id: inst:DH23T.current_range_binding
-    subject: inst:DH23T
-    predicate: pals:has_limit_signal
-    object: inst:bta-th23-ps:rangeC
-  - id: inst:DH23T.magnet_status_binding
-    subject: inst:DH23T
-    predicate: pals:has_signal
-    object: inst:bta-th23-ps:stateS
   - id: inst:QH6.current_setpoint_binding
     subject: inst:QH6
     predicate: pals:has_setpoint_signal
@@ -5456,14 +5260,8 @@ facility:
     object: inst:DH1A
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:BTA_LINE_DH1A_PRECEDES_DH1T
+  - id: inst:BTA_LINE_DH1A_PRECEDES_DH1B
     subject: inst:DH1A
-    predicate: pals:precedes
-    object: inst:DH1T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:BTA_LINE_DH1T_PRECEDES_DH1B
-    subject: inst:DH1T
     predicate: pals:precedes
     object: inst:DH1B
     context: beamline_order
@@ -5576,14 +5374,8 @@ facility:
     object: inst:QV5
     context: beamline_order
     beamline_context: inst:BTA_LINE
-  - id: inst:BTA_LINE_QV5_PRECEDES_DH23T
+  - id: inst:BTA_LINE_QV5_PRECEDES_DRQ5
     subject: inst:QV5
-    predicate: pals:precedes
-    object: inst:DH23T
-    context: beamline_order
-    beamline_context: inst:BTA_LINE
-  - id: inst:BTA_LINE_DH23T_PRECEDES_DRQ5
-    subject: inst:DH23T
     predicate: pals:precedes
     object: inst:DRQ5
     context: beamline_order

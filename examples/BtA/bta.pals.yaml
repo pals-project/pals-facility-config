@@ -1465,11 +1465,6 @@ PALS:
         Bmad:
           Bmad_key: SBend
 
-    - dh1t: 
-        kind: Kicker
-        Bmad:
-          Bmad_key: HKicker
-
     - dh1b: 
         kind: Bend
         length:  2.66653672973886480E-001
@@ -1574,11 +1569,6 @@ PALS:
         length:  4.98499999999999999E-001
         MagneticMultipoleP:
           Kn1: -1.33548336310089846E-002
-
-    - dh23t: 
-        kind: Kicker
-        Bmad:
-          Bmad_key: HKicker
 
     - drq5: 
         kind: Drift
@@ -2266,9 +2256,9 @@ PALS:
     - bta_line: 
         kind: BeamLine
         line: [ beginning_b1, btastart, dhf6a, dhf6t, drf6a, dhf6b, drf6b, pueh001, dr001,
-               mw006, dr006, dv007, dr007, qv1, drq1, dh1a, dh1t, dh1b, drd1, qh2a, drq2a, qh2b,
+               mw006, dr006, dv007, dr007, qv1, drq1, dh1a, dh1b, drd1, qh2a, drq2a, qh2b,
                drq2b, xf019, dr019, qv3, drq3, foil024, dr024a, dv030, dr024b, qh4, drq4, dh2, drd2,
-               qv5, dh23t, drq5, puev046, dr046, dh3, drd3, qh6, drq6, xf059, dr059, mw060, dr060,
+               qv5, drq5, puev046, dr046, dh3, drd3, qh6, drq6, xf059, dr059, mw060, dr060,
                qv7, drq7y, mk077, drq7z, qh8, drq8, dh4a, dh4t, dh4b, drd4, qv9, drq9a, dv120, drq9b,
                qh10, drq10, mw125, dr125, dh127, dr127, puev129, dr129, qv11, drq11, mk139, dr139,
                dr141, pueh143, dr143, qh12, drq12, mk156, dr156, dh158, dr158, puev160, dr160, qv13,

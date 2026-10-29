@@ -1,5 +1,5 @@
 # Auto generated from narad.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-20T18:54:15
+# Generation date: 2026-10-19T16:06:21
 # Schema: accelerator_core
 #
 # id: https://w3id.org/accelerator-core
@@ -965,12 +965,26 @@ class TwissParamGroup(ParamGroup):
     alpha_b: Optional[float] = None
     beta_a: Optional[float] = None
     beta_b: Optional[float] = None
+    cmat11: Optional[float] = None
+    cmat12: Optional[float] = None
+    cmat21: Optional[float] = None
+    cmat22: Optional[float] = None
     eta_x: Optional[float] = None
     eta_y: Optional[float] = None
     etap_x: Optional[float] = None
     etap_y: Optional[float] = None
+    deta_x_ds: Optional[float] = None
+    deta_y_ds: Optional[float] = None
     phi_a: Optional[float] = None
     phi_b: Optional[float] = None
+    dbeta_a_dpz: Optional[float] = None
+    dalpha_a_dpz: Optional[float] = None
+    dbeta_b_dpz: Optional[float] = None
+    dalpha_b_dpz: Optional[float] = None
+    deta_x_dpz: Optional[float] = None
+    detap_x_dpz: Optional[float] = None
+    deta_y_dpz: Optional[float] = None
+    detap_y_dpz: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -990,6 +1004,18 @@ class TwissParamGroup(ParamGroup):
         if self.beta_b is not None and not isinstance(self.beta_b, float):
             self.beta_b = float(self.beta_b)
 
+        if self.cmat11 is not None and not isinstance(self.cmat11, float):
+            self.cmat11 = float(self.cmat11)
+
+        if self.cmat12 is not None and not isinstance(self.cmat12, float):
+            self.cmat12 = float(self.cmat12)
+
+        if self.cmat21 is not None and not isinstance(self.cmat21, float):
+            self.cmat21 = float(self.cmat21)
+
+        if self.cmat22 is not None and not isinstance(self.cmat22, float):
+            self.cmat22 = float(self.cmat22)
+
         if self.eta_x is not None and not isinstance(self.eta_x, float):
             self.eta_x = float(self.eta_x)
 
@@ -1002,11 +1028,41 @@ class TwissParamGroup(ParamGroup):
         if self.etap_y is not None and not isinstance(self.etap_y, float):
             self.etap_y = float(self.etap_y)
 
+        if self.deta_x_ds is not None and not isinstance(self.deta_x_ds, float):
+            self.deta_x_ds = float(self.deta_x_ds)
+
+        if self.deta_y_ds is not None and not isinstance(self.deta_y_ds, float):
+            self.deta_y_ds = float(self.deta_y_ds)
+
         if self.phi_a is not None and not isinstance(self.phi_a, float):
             self.phi_a = float(self.phi_a)
 
         if self.phi_b is not None and not isinstance(self.phi_b, float):
             self.phi_b = float(self.phi_b)
+
+        if self.dbeta_a_dpz is not None and not isinstance(self.dbeta_a_dpz, float):
+            self.dbeta_a_dpz = float(self.dbeta_a_dpz)
+
+        if self.dalpha_a_dpz is not None and not isinstance(self.dalpha_a_dpz, float):
+            self.dalpha_a_dpz = float(self.dalpha_a_dpz)
+
+        if self.dbeta_b_dpz is not None and not isinstance(self.dbeta_b_dpz, float):
+            self.dbeta_b_dpz = float(self.dbeta_b_dpz)
+
+        if self.dalpha_b_dpz is not None and not isinstance(self.dalpha_b_dpz, float):
+            self.dalpha_b_dpz = float(self.dalpha_b_dpz)
+
+        if self.deta_x_dpz is not None and not isinstance(self.deta_x_dpz, float):
+            self.deta_x_dpz = float(self.deta_x_dpz)
+
+        if self.detap_x_dpz is not None and not isinstance(self.detap_x_dpz, float):
+            self.detap_x_dpz = float(self.detap_x_dpz)
+
+        if self.deta_y_dpz is not None and not isinstance(self.deta_y_dpz, float):
+            self.deta_y_dpz = float(self.deta_y_dpz)
+
+        if self.detap_y_dpz is not None and not isinstance(self.detap_y_dpz, float):
+            self.detap_y_dpz = float(self.detap_y_dpz)
 
         super().__post_init__(**kwargs)
 
@@ -4177,6 +4233,18 @@ slots.twissParamGroup__beta_a = Slot(uri=PALS.beta_a, name="twissParamGroup__bet
 slots.twissParamGroup__beta_b = Slot(uri=PALS.beta_b, name="twissParamGroup__beta_b", curie=PALS.curie('beta_b'),
                    model_uri=PALS.twissParamGroup__beta_b, domain=None, range=Optional[float])
 
+slots.twissParamGroup__cmat11 = Slot(uri=PALS.cmat11, name="twissParamGroup__cmat11", curie=PALS.curie('cmat11'),
+                   model_uri=PALS.twissParamGroup__cmat11, domain=None, range=Optional[float])
+
+slots.twissParamGroup__cmat12 = Slot(uri=PALS.cmat12, name="twissParamGroup__cmat12", curie=PALS.curie('cmat12'),
+                   model_uri=PALS.twissParamGroup__cmat12, domain=None, range=Optional[float])
+
+slots.twissParamGroup__cmat21 = Slot(uri=PALS.cmat21, name="twissParamGroup__cmat21", curie=PALS.curie('cmat21'),
+                   model_uri=PALS.twissParamGroup__cmat21, domain=None, range=Optional[float])
+
+slots.twissParamGroup__cmat22 = Slot(uri=PALS.cmat22, name="twissParamGroup__cmat22", curie=PALS.curie('cmat22'),
+                   model_uri=PALS.twissParamGroup__cmat22, domain=None, range=Optional[float])
+
 slots.twissParamGroup__eta_x = Slot(uri=PALS.eta_x, name="twissParamGroup__eta_x", curie=PALS.curie('eta_x'),
                    model_uri=PALS.twissParamGroup__eta_x, domain=None, range=Optional[float])
 
@@ -4189,11 +4257,41 @@ slots.twissParamGroup__etap_x = Slot(uri=PALS.etap_x, name="twissParamGroup__eta
 slots.twissParamGroup__etap_y = Slot(uri=PALS.etap_y, name="twissParamGroup__etap_y", curie=PALS.curie('etap_y'),
                    model_uri=PALS.twissParamGroup__etap_y, domain=None, range=Optional[float])
 
+slots.twissParamGroup__deta_x_ds = Slot(uri=PALS.deta_x_ds, name="twissParamGroup__deta_x_ds", curie=PALS.curie('deta_x_ds'),
+                   model_uri=PALS.twissParamGroup__deta_x_ds, domain=None, range=Optional[float])
+
+slots.twissParamGroup__deta_y_ds = Slot(uri=PALS.deta_y_ds, name="twissParamGroup__deta_y_ds", curie=PALS.curie('deta_y_ds'),
+                   model_uri=PALS.twissParamGroup__deta_y_ds, domain=None, range=Optional[float])
+
 slots.twissParamGroup__phi_a = Slot(uri=PALS.phi_a, name="twissParamGroup__phi_a", curie=PALS.curie('phi_a'),
                    model_uri=PALS.twissParamGroup__phi_a, domain=None, range=Optional[float])
 
 slots.twissParamGroup__phi_b = Slot(uri=PALS.phi_b, name="twissParamGroup__phi_b", curie=PALS.curie('phi_b'),
                    model_uri=PALS.twissParamGroup__phi_b, domain=None, range=Optional[float])
+
+slots.twissParamGroup__dbeta_a_dpz = Slot(uri=PALS.dbeta_a_dpz, name="twissParamGroup__dbeta_a_dpz", curie=PALS.curie('dbeta_a_dpz'),
+                   model_uri=PALS.twissParamGroup__dbeta_a_dpz, domain=None, range=Optional[float])
+
+slots.twissParamGroup__dalpha_a_dpz = Slot(uri=PALS.dalpha_a_dpz, name="twissParamGroup__dalpha_a_dpz", curie=PALS.curie('dalpha_a_dpz'),
+                   model_uri=PALS.twissParamGroup__dalpha_a_dpz, domain=None, range=Optional[float])
+
+slots.twissParamGroup__dbeta_b_dpz = Slot(uri=PALS.dbeta_b_dpz, name="twissParamGroup__dbeta_b_dpz", curie=PALS.curie('dbeta_b_dpz'),
+                   model_uri=PALS.twissParamGroup__dbeta_b_dpz, domain=None, range=Optional[float])
+
+slots.twissParamGroup__dalpha_b_dpz = Slot(uri=PALS.dalpha_b_dpz, name="twissParamGroup__dalpha_b_dpz", curie=PALS.curie('dalpha_b_dpz'),
+                   model_uri=PALS.twissParamGroup__dalpha_b_dpz, domain=None, range=Optional[float])
+
+slots.twissParamGroup__deta_x_dpz = Slot(uri=PALS.deta_x_dpz, name="twissParamGroup__deta_x_dpz", curie=PALS.curie('deta_x_dpz'),
+                   model_uri=PALS.twissParamGroup__deta_x_dpz, domain=None, range=Optional[float])
+
+slots.twissParamGroup__detap_x_dpz = Slot(uri=PALS.detap_x_dpz, name="twissParamGroup__detap_x_dpz", curie=PALS.curie('detap_x_dpz'),
+                   model_uri=PALS.twissParamGroup__detap_x_dpz, domain=None, range=Optional[float])
+
+slots.twissParamGroup__deta_y_dpz = Slot(uri=PALS.deta_y_dpz, name="twissParamGroup__deta_y_dpz", curie=PALS.curie('deta_y_dpz'),
+                   model_uri=PALS.twissParamGroup__deta_y_dpz, domain=None, range=Optional[float])
+
+slots.twissParamGroup__detap_y_dpz = Slot(uri=PALS.detap_y_dpz, name="twissParamGroup__detap_y_dpz", curie=PALS.curie('detap_y_dpz'),
+                   model_uri=PALS.twissParamGroup__detap_y_dpz, domain=None, range=Optional[float])
 
 slots.hasRFP__RFP = Slot(uri=PALS.RFP, name="hasRFP__RFP", curie=PALS.curie('RFP'),
                    model_uri=PALS.hasRFP__RFP, domain=None, range=Optional[Union[dict, RFParamGroup]])

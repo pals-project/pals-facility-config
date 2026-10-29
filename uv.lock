@@ -2207,6 +2207,7 @@ dependencies = [
     { name = "jsonasobj2" },
     { name = "linkml-runtime", version = "1.9.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "linkml-runtime", version = "1.10.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+    { name = "palsparserpy" },
     { name = "pydantic" },
     { name = "pyyaml" },
     { name = "rdflib" },
@@ -2229,6 +2230,7 @@ dev = [
 requires-dist = [
     { name = "jsonasobj2", specifier = ">=1.0.4" },
     { name = "linkml-runtime", specifier = ">=1.9.4" },
+    { name = "palsparserpy", editable = "../../PALS/PALSParserPy" },
     { name = "pydantic", specifier = ">=2.0" },
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "rdflib", specifier = ">=6.0" },
@@ -2405,6 +2407,20 @@ sdist = { url = "https://files.pythonhosted.org/packages/ec/46/68dde5b6bc00c1296
 wheels = [
     { url = "https://files.pythonhosted.org/packages/90/96/04b8e52da071d28f5e21a805b19cb9390aa17a47462ac87f5e2696b9566d/paginate-0.5.7-py2.py3-none-any.whl", hash = "sha256:b885e2af73abcf01d9559fd5216b57ef722f8c42affbb63942377668e35c7591", size = 13746, upload-time = "2024-08-25T14:17:22.55Z" },
 ]
+
+[[package]]
+name = "palsparserpy"
+version = "0.1.0"
+source = { editable = "../../PALS/PALSParserPy" }
+
+[package.metadata]
+requires-dist = [
+    { name = "myst-parser", marker = "extra == 'docs'" },
+    { name = "pytest", marker = "extra == 'test'" },
+    { name = "sphinx", marker = "extra == 'docs'" },
+    { name = "sphinx-book-theme", marker = "extra == 'docs'" },
+]
+provides-extras = ["test", "docs"]
 
 [[package]]
 name = "pandocfilters"

@@ -27,47 +27,45 @@ parser dependency.
 
 ## Environment Setup
 
-Run the following commands from the NARAD-DataServices repository root. The
-first command creates `.venv` and installs the dependencies declared in
-`pyproject.toml` and locked in `uv.lock`:
+The project declares
+[PALSParserPy](https://github.com/pals-project/PALSParserPy) as an editable local
+dependency. `uv sync` installs it automatically alongside the other dependencies
+and retains it on subsequent syncs. The wrapper uses the shared library built by
+[PALSParserCpp](https://github.com/pals-project/PALSParserCpp).
+
+The configured checkout layout is:
+
+```text
+Documents/
+├── NARAD/
+│   └── NARAD-DataServices/
+└── PALS/
+    ├── PALSParserCpp/
+    └── PALSParserPy/
+```
+
+For a fresh setup, run these commands from the NARAD-DataServices repository root
+(skip cloning and building if the parser checkouts and C++ build already exist):
 
 ```console
+mkdir -p ../../PALS
+git clone https://github.com/pals-project/PALSParserCpp.git ../../PALS/PALSParserCpp
+git clone https://github.com/pals-project/PALSParserPy.git ../../PALS/PALSParserPy
+cmake -S ../../PALS/PALSParserCpp -B ../../PALS/PALSParserCpp/build
+cmake --build ../../PALS/PALSParserCpp/build
 uv sync
 ```
 
-The main project uses
-[PALSParserPy](https://github.com/pals-project/PALSParserPy), a thin Python
-wrapper around the shared library built by
-[PALSParserCpp](https://github.com/pals-project/PALSParserCpp). Clone the two
-parser repositories side by side, build the C++ library, and then install the
-Python wrapper into the NARAD uv environment. This follows the upstream
-[PALSParserPy installation guide](https://pals-project.github.io/PALSParserPy/guide/installation.html):
-
-```console
-cd ..
-git clone https://github.com/pals-project/PALSParserCpp.git
-git clone https://github.com/pals-project/PALSParserPy.git
-
-cd PALSParserCpp && cmake -S . -B build && cmake --build build && cd ..
-
-cd PALSParserPy
-uv pip install --python ../NARAD-DataServices/.venv/bin/python -e .
-cd ../NARAD-DataServices
-```
-
-The expected checkout layout is:
-
-```text
-parent-directory/
-├── NARAD-DataServices/
-├── PALSParserCpp/
-└── PALSParserPy/
-```
+The local source is configured in `[tool.uv.sources]` in `pyproject.toml`. If your
+Python wrapper checkout is elsewhere, update it with
+`uv add --editable /path/to/PALSParserPy`. This also updates `uv.lock`.
 
 If PALSParserCpp is stored elsewhere, set `PALS_PARSER_CPP_DIR` to its checkout
 or `PALS_PARSER_CPP_LIB` to the compiled shared library before using
-PALSParserPy. Because PALSParserPy is installed separately rather than declared
-in `pyproject.toml`, reinstall it after a future exact `uv sync` removes it.
+PALSParserPy. `uv sync` installs the Python wrapper; the C++ library is built
+separately. See the upstream
+[PALSParserPy installation guide](https://pals-project.github.io/PALSParserPy/guide/installation.html)
+for details.
 
 Verify the complete environment with:
 

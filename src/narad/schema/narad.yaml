@@ -591,6 +591,22 @@ classes:
         aliases:
           - beta_y
           - betay
+      cmat11:
+        description: c[1,1] coupling matrix component.
+        range: float
+        slot_uri: pals:cmat11
+      cmat12:
+        description: c[1,2] coupling matrix component.
+        range: float
+        slot_uri: pals:cmat12
+      cmat21:
+        description: c[2,1] coupling matrix component.
+        range: float
+        slot_uri: pals:cmat21
+      cmat22:
+        description: c[2,2] coupling matrix component.
+        range: float
+        slot_uri: pals:cmat22
       eta_x:
         description: Twiss dispersion parameter in the horizontal plane.
         range: float
@@ -615,6 +631,14 @@ classes:
         slot_uri: pals:etap_y
         aliases:
           - etapy
+      deta_x_ds:
+        description: Twiss dispersion derivative parameter in the horizontal plane.
+        range: float
+        slot_uri: pals:deta_x_ds
+      deta_y_ds:
+        description: Twiss dispersion derivative parameter in the vertical plane.
+        range: float
+        slot_uri: pals:deta_y_ds
       phi_a:
         description: Twiss phase advance parameter in the horizontal plane.
         range: float
@@ -633,6 +657,38 @@ classes:
           - phiy
           - psi_y
           - psiy
+      dbeta_a_dpz:
+        description: Twiss beta dependence on momentum in the horizontal plane.
+        range: float
+        slot_uri: pals:dbeta_a_dpz
+      dalpha_a_dpz:
+        description: Twiss alpha dependence on momentum in the horizontal plane.
+        range: float
+        slot_uri: pals:dalpha_a_dpz
+      dbeta_b_dpz:
+        description: Twiss beta dependence on momentum in the vertical plane.
+        range: float
+        slot_uri: pals:dbeta_b_dpz
+      dalpha_b_dpz:
+        description: Twiss alpha dependence on momentum in the vertical plane.
+        range: float
+        slot_uri: pals:dalpha_b_dpz
+      deta_x_dpz:
+        description: Twiss dispersion dependence on momentum in the horizontal plane.
+        range: float
+        slot_uri: pals:deta_x_dpz
+      detap_x_dpz:
+        description: Twiss dispersion slope dependence on momentum in the horizontal plane.
+        range: float
+        slot_uri: pals:detap_x_dpz
+      deta_y_dpz:
+        description: Twiss dispersion dependence on momentum in the vertical plane.
+        range: float
+        slot_uri: pals:deta_y_dpz
+      detap_y_dpz:
+        description: Twiss dispersion slope dependence on momentum in the vertical plane.
+        range: float
+        slot_uri: pals:detap_y_dpz
 
   HasRFP:
     mixin: true
