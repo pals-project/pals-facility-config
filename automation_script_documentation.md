@@ -1,7 +1,7 @@
 # Automation Script — Automated NARAD Q&A Pipeline
 
-This document describes the work done on this branch: an automation script that
-turns the previously manual, multi-step workflow
+This document describes [`src/run_pipeline.py`](src/run_pipeline.py), which runs
+the whole NARAD Q&A workflow in a single command:
 
 ```
 LinkML schema + instance YAML
@@ -11,27 +11,29 @@ LinkML schema + instance YAML
   --> answers to a batch of questions
 ```
 
-into a single command.
+## 1. What the script automates
 
-## 1. What problem this solves
+One run of the script performs every step of the workflow:
 
-Before this branch, running the NARAD Q&A pipeline required:
-
-1. Manually running several `just` recipes (`gen-owl`, `gen-instance-ttl`, `gen-post`)
-   to turn a LinkML schema + instance YAML into RDF/Turtle files, and knowing which
-   recipe took which file as input (this was ambiguous/undocumented).
-2. Manually copying/renaming those `.ttl` files to the exact hardcoded paths that
-   `docker-compose.yml` expected (`project/owl/narad.owl.ttl`,
-   `project/owl/core_acc_narad_instance.ttl`) before starting the stack.
-3. Running `docker compose up -d` and waiting for `neo4j-kg` → `neo4j-init` →
-   `gradio-chat` to come up in the right order.
-4. Manually typing each benchmark question into the Gradio chat UI, one at a
-   time, and copying the answers out by hand.
-
-This branch replaces steps 1–4 with a single script:
-[`src/run_pipeline.py`](src/run_pipeline.py).
+1. Converts the LinkML schema + instance YAML into RDF/Turtle files.
+2. Points `docker-compose.yml` at those files and starts the stack, so
+   `neo4j-kg` → `neo4j-init` → `gradio-chat` come up in the right order and
+   the graph is imported.
+3. Sends each benchmark question to the `gradio-chat` app through its API,
+   just as if it were typed into the chat UI.
+4. Writes every answer, next to its question, into a single YAML file.
 
 ## 2. Inputs and outputs
+
+### Prerequisites
+
+Before the first run:
+
+1. **Docker** is installed and running (the script drives `docker compose`).
+2. **`uv`** is installed, and the dev dependencies are synced (`uv sync`).
+3. **`.env`** exists at the repo root. Copy it from `.env.example` and fill in
+   at least the variables marked required in §5 (Neo4j credentials and the
+   LLM API key, base URL and model name).
 
 ### Command
 
@@ -135,8 +137,7 @@ fails fast if any concrete `Edge` subclass in the schema lacks an
 
 1. `resolve_target_class(schema_path)` — uses LinkML's `SchemaView` to find the
    schema's `tree_root: true` class automatically (e.g. `PALSAccelerator`),
-   instead of hardcoding the class name like the old `justfile` recipe did.
-   This makes the script schema-agnostic.
+   so the class name is not hardcoded and the script works with any schema.
 2. `uv run gen-owl <schema>.yaml > <schema>.owl.ttl` — generates the OWL/RDF
    version of the schema (the "TBox").
 3. `uv run python3 src/resolve_instance_ids.py --instance_file <instance>.yaml --output_file <instance>.resolved.yaml`
@@ -170,13 +171,13 @@ step 3 is always kept.
    (`neo4j_data`, `neo4j_plugins`), guaranteeing a clean graph.
 3. Runs `docker compose up -d --build`. `--build` rebuilds the `gradio-chat`
    image, whose code (`main.py`, `kg_agent.py`) is copied in at build time, so
-   source changes are always picked up. `docker-compose.yml`'s `neo4j-kg` service now
+   source changes are always picked up. `docker-compose.yml`'s `neo4j-kg` service
    mounts:
    ```yaml
    - ${NEO4J_SCHEMA_TTL_PATH:-./project/owl/narad.owl.ttl}:/data/narad.owl.ttl
    - ${NEO4J_INSTANCE_TTL_PATH:-./project/owl/core_acc_narad_instance_rdf.ttl}:/data/narad_instance.ttl
    ```
-   so it picks up the freshly generated files (falling back to the old default
+   so it picks up the freshly generated files (falling back to the default
    paths if the env vars aren't set, e.g. for manual `docker compose up -d`
    runs).
 4. Compose then brings up the dependency chain automatically:
@@ -230,30 +231,44 @@ point (e.g. RDF generation or Docker startup errors), they are left on disk.
    and written to `--answers` as YAML only after the last question is
    answered, so the file does not exist while the run is in progress.
 
+To see what the agent is doing while a question is in progress (e.g. to check
+whether a long run is still working), follow the `gradio-chat` container's
+logs in another terminal. They show the Cypher queries the agent sends to
+Neo4j:
+
+```bash
+docker logs -f gradio_chat
+```
+
 ### Stage 6 — After the run
 
 The Docker containers/volumes are **left running** intentionally, so you can
-continue using the interactive Gradio UI afterwards without rebuilding the
-graph.
+continue using the interactive Gradio UI (at `--gradio-url`, by default
+`http://localhost:7860`) afterwards without rebuilding the graph.
 
-## 4. Supporting changes made on this branch
+To stop the stack when you are done:
 
-Beyond the new driver script, the following existing files were changed to
-make the automation possible and fix bugs discovered while testing it
-end-to-end:
+```bash
+docker compose down      # stop and remove the containers; keeps the Neo4j volumes
+docker compose down -v   # also delete the volumes, i.e. wipe the imported graph
+```
+
+The next pipeline run does a `down -v` itself unless `--no-fresh` is passed,
+so neither command is required between runs.
+
+## 4. Supporting configuration
+
+The script relies on the following settings in other files:
 
 - **[`docker-compose.yml`](docker-compose.yml)**
-  - `neo4j-kg`'s TTL volume mounts are now overridable via
+  - `neo4j-kg`'s TTL volume mounts are overridable via
     `NEO4J_SCHEMA_TTL_PATH` / `NEO4J_INSTANCE_TTL_PATH` (set automatically by
     `run_pipeline.py`; not meant to be set by hand in `.env`).
-  - Fixed a pre-existing bug: the instance volume now defaults to
-    `core_acc_narad_instance_rdf.ttl` (the **postprocessed** file), not the
-    raw `core_acc_narad_instance.ttl` — the raw file is missing correctly
-    typed relationship predicates.
-  - `gradio-chat`'s `environment:` block now also forwards
-    `OPENAI_TEMPERATURE`, `OPENAI_SYSTEM_PROMPT`, `NEO4J_DATABASE`,
-    `NEO4J_AGENT_MAX_ITERATIONS`, and `NEO4J_MANUAL_QUERY` from `.env` (previously
-    silently ignored by Compose even though `.env.example` implied otherwise).
+  - The instance volume defaults to `core_acc_narad_instance_rdf.ttl` (the
+    **postprocessed** file), not the raw `core_acc_narad_instance.ttl`, because
+    the raw file is missing correctly typed relationship predicates.
+  - `gradio-chat`'s `environment:` block forwards the variables listed in §5
+    from `.env` into the container.
     `NEO4J_URI` is intentionally **not** forwarded — the container's value is
     hardcoded to `bolt://neo4j-kg:7687` (the Docker-network service name), or
     the containerized app cannot reach Neo4j at all. See §5 for why it should
@@ -265,25 +280,21 @@ end-to-end:
     descriptions for the same schema the graph was built from.
 
 - **[`src/llm/main.py`](src/llm/main.py)**
-  - `model_name` Dropdown now has `allow_custom_value=True`, so API-driven
+  - `model_name` Dropdown has `allow_custom_value=True`, so API-driven
     calls (from `run_pipeline.py`) can set a model name without first calling
     the UI's "Refresh Models" button.
   - `demo.launch(..., show_error=True)` so the real exception (e.g. an OpenAI
     API error) is returned to API callers, instead of a generic
     `AppError: ...has not enabled verbose error reporting` message.
 
-- **[`pyproject.toml`](pyproject.toml) / `uv.lock`** — added `gradio-client`,
-  `python-dotenv`, `pyyaml` to the `dev` dependency group so `run_pipeline.py`
-  can run under `uv run`.
+- **[`pyproject.toml`](pyproject.toml) / `uv.lock`** — `gradio-client`,
+  `python-dotenv` and `pyyaml` are in the `dev` dependency group so
+  `run_pipeline.py` can run under `uv run`.
 
-- **[`.env.example`](.env.example)** — documented every environment variable
-  actually consulted by `main.py`/`kg_agent.py`/`run_pipeline.py`, including
-  which ones are forwarded into the `gradio-chat` container by
-  `docker-compose.yml` versus which only affect `run_pipeline.py`.
-
-- **[`examples/benchmark_queries/UITF_v1.yaml`](examples/benchmark_queries/UITF_v1.yaml)**
-  — reformatted from the old ad-hoc `Q1: """..."""` / `Ans1: """..."""` text
-  format into the `{Q, Ans}` YAML list format `run_pipeline.py` expects.
+- **[`.env.example`](.env.example)** — documents every environment variable
+  consulted by `main.py`/`kg_agent.py`/`run_pipeline.py`, including which ones
+  are forwarded into the `gradio-chat` container by `docker-compose.yml` versus
+  which only affect `run_pipeline.py`.
 
 ## 5. Environment variables
 
@@ -326,8 +337,8 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
   from `.env` via `value=os.getenv(...)`, calling `gradio_client(...).view_api()`
   against a running `gradio-chat` instance reveals those default values in
   plaintext to **anyone with network access to port 7860**, authenticated or
-  not. This is a pre-existing exposure surfaced (not introduced) while
-  building this pipeline, and is not yet fixed on this branch.
+  not. This exposure comes from `main.py` itself, not from the pipeline, and
+  is not fixed yet.
 - **Answers can differ between the interactive UI and the automated pipeline**
   even with the same model / 0 temperature, for two reasons unrelated to the
   pipeline's correctness: (1) LLM hallucination — e.g. confusing a device's
@@ -339,7 +350,7 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
   effect for benchmarking).
 - **Only `--transformation RDF` is implemented.** Any other value raises
   `NotImplementedError` — this is a placeholder for future non-RDF
-  transformation strategies, per the original design brief for this branch.
+  transformation strategies.
 
 ## 7. Example Run
 
