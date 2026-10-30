@@ -100,7 +100,7 @@ gen-doc: _gen-yaml && _add-artifacts
 
 # Export the example instance as Turtle RDF
 [group('model development')]
-gen-instance-ttl instance_file="examples/core_acc_narad_instance.yaml": _ensure_project_owl
+gen-instance-ttl instance_file="examples/GUN_thru_MV.linkml.yaml": _ensure_project_owl
   uv run python3 src/resolve_instance_ids.py \
     --instance_file {{instance_file}} \
     --output_file {{dest}}/owl/{{file_stem(instance_file)}}.resolved.yaml
@@ -127,19 +127,19 @@ gen-python:
 
 # Postprocess raw instance ttl: fix literal kind/predicate values into proper resources
 [group('model development')]
-gen-post instance_file="examples/core_acc_narad_instance.yaml": (gen-instance-ttl instance_file)
+gen-post instance_file="examples/GUN_thru_MV.linkml.yaml": (gen-instance-ttl instance_file)
   uv run python3 src/postprocess_for_rdf.py \
     --instance_file {{dest}}/owl/{{file_stem(instance_file)}}.ttl \
     --output_file {{dest}}/owl/{{file_stem(instance_file)}}_rdf.ttl
 
 # Full pipeline for a given instance file: gen-owl, gen-instance-ttl, postprocess, merge
 [group('model development')]
-gen-post-merge instance_file="examples/core_acc_narad_instance.yaml": (gen-merge instance_file)
+gen-post-merge instance_file="examples/GUN_thru_MV.linkml.yaml": (gen-merge instance_file)
   @echo "Done: {{dest}}/owl/{{file_stem(instance_file)}}_full.ttl"
 
 # Merge the ontology with the postprocessed instance data
 [group('model development')]
-gen-merge instance_file="examples/core_acc_narad_instance.yaml": gen-owl (gen-post instance_file)
+gen-merge instance_file="examples/GUN_thru_MV.linkml.yaml": gen-owl (gen-post instance_file)
   uv run python3 src/merge_graphs.py \
     --schema_file {{dest}}/owl/{{schema_name}}.owl.ttl \
     --instance_file {{dest}}/owl/{{file_stem(instance_file)}}_rdf.ttl \

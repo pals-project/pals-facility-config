@@ -117,7 +117,7 @@ def main():
     """
     Postprocesses the RDF graph to replace bare class names with PALS URIs for predicate-designating classes.
 
-    This script reads an RDF graph from 'project/owl/core_acc_narad_instance.ttl', replaces bare class names
+    This script reads an RDF graph from 'project/owl/GUN_thru_MV.linkml.ttl', replaces bare class names
     with their corresponding PALS URIs for predicate-designating classes, and writes the modified graph back
     to the same file.
 
@@ -127,7 +127,7 @@ def main():
             --output_file <output_file_full_path> \
             
     Example usage:
-    python3 postprocess_for_rdf.py --instance_file project/owl/core_acc_narad_instance.ttl --output_file project/owl/core_acc_narad_instance_rdf.ttl
+    python3 postprocess_for_rdf.py --instance_file project/owl/GUN_thru_MV.linkml.ttl --output_file project/owl/GUN_thru_MV.linkml_rdf.ttl
 
     """
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -136,12 +136,12 @@ def main():
                 help="Path to the LinkML schema file",
             )
     ap.add_argument(
-            "--instance_file", default="project/owl/core_acc_narad_instance.ttl",
+            "--instance_file", default="project/owl/GUN_thru_MV.linkml.ttl",
             help="Path to the instance file (RDF graph) to postprocess",
         )
     ap.add_argument(
-        "--output_file", default="project/owl/core_acc_narad_instance_rdf.ttl",
-        help="Path to the output postprocessed RDF graph (default: project/owl/core_acc_narad_instance_rdf.ttl)",
+        "--output_file", default="project/owl/GUN_thru_MV.linkml_rdf.ttl",
+        help="Path to the output postprocessed RDF graph (default: project/owl/GUN_thru_MV.linkml_rdf.ttl)",
     )
     args = ap.parse_args()
 

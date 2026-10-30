@@ -15,7 +15,7 @@ def main():
     Example usage:
     python3 merge_graphs.py \
         --schema_file project/owl/narad.owl.ttl \
-        --instance_file project/owl/core_acc_narad_instance.ttl \ 
+        --instance_file project/owl/GUN_thru_MV.linkml.ttl \
         --output_file project/owl/narad_full.ttl
     """
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)

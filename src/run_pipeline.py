@@ -4,12 +4,12 @@
 Build the graph and start gradio-chat, then ask questions in its web UI:
     uv run python3 src/run_pipeline.py \\
         --schema src/narad/schema/narad.yaml \\
-        --instance examples/core_acc_narad_instance.yaml
+        --instance examples/GUN_thru_MV.linkml.yaml
 
 Also run a batch of benchmark questions and write the answers to a file:
     uv run python3 src/run_pipeline.py \\
         --schema src/narad/schema/narad.yaml \\
-        --instance examples/core_acc_narad_instance.yaml \\
+        --instance examples/GUN_thru_MV.linkml.yaml \\
         --queries examples/benchmark_queries/UITF_v1.yaml \\
         --answers examples/benchmark_queries/UITF_v1_LLM_answers.yaml
 """

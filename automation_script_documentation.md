@@ -65,7 +65,7 @@ uv run python3 src/run_pipeline.py \
 | Argument      | Meaning                                                                 | Example |
 |---------------|--------------------------------------------------------------------------|---------|
 | `--schema`    | LinkML schema YAML (source of truth for the data model)                  | `src/narad/schema/narad.yaml` |
-| `--instance`  | LinkML instance YAML (the actual accelerator data to load into the graph) | `examples/core_acc_narad_instance.yaml` |
+| `--instance`  | LinkML instance YAML (the actual accelerator data to load into the graph) | `examples/GUN_thru_MV.linkml.yaml` |
 
 ### Benchmark inputs (optional, given together)
 
@@ -168,8 +168,8 @@ fails fast if any concrete `Edge` subclass in the schema lacks an
    have correctly-typed relationship edges for the graph import to use.
 
 Result: four intermediate files sitting next to the schema/instance sources,
-e.g. `src/narad/schema/narad.owl.ttl`, `examples/core_acc_narad_instance.resolved.yaml`,
-`examples/core_acc_narad_instance.ttl` and `examples/core_acc_narad_instance_rdf.ttl`.
+e.g. `src/narad/schema/narad.owl.ttl`, `examples/GUN_thru_MV.linkml.resolved.yaml`,
+`examples/GUN_thru_MV.linkml.ttl` and `examples/GUN_thru_MV.linkml_rdf.ttl`.
 These are deleted in Stage 4 unless `--keep-intermediate-files` is passed, and
 are git-ignored either way.
 
@@ -189,7 +189,7 @@ are git-ignored either way.
    mounts:
    ```yaml
    - ${NEO4J_SCHEMA_TTL_PATH:-./project/owl/narad.owl.ttl}:/data/narad.owl.ttl
-   - ${NEO4J_INSTANCE_TTL_PATH:-./project/owl/core_acc_narad_instance_rdf.ttl}:/data/narad_instance.ttl
+   - ${NEO4J_INSTANCE_TTL_PATH:-./project/owl/GUN_thru_MV.linkml_rdf.ttl}:/data/narad_instance.ttl
    ```
    so it picks up the freshly generated files. If the env vars aren't set
    (e.g. a manual `docker compose up -d`), it falls back to the default paths,
@@ -284,8 +284,8 @@ The script relies on the following settings in other files:
   - `neo4j-kg`'s TTL volume mounts are overridable via
     `NEO4J_SCHEMA_TTL_PATH` / `NEO4J_INSTANCE_TTL_PATH` (set automatically by
     `run_pipeline.py`; not meant to be set by hand in `.env`).
-  - The instance volume defaults to `core_acc_narad_instance_rdf.ttl` (the
-    **postprocessed** file), not the raw `core_acc_narad_instance.ttl`, because
+  - The instance volume defaults to `GUN_thru_MV.linkml_rdf.ttl` (the
+    **postprocessed** file), not the raw `GUN_thru_MV.linkml.ttl`, because
     the raw file is missing correctly typed relationship predicates.
   - `gradio-chat`'s `environment:` block forwards the variables listed in §5
     from `.env` into the container.
@@ -380,7 +380,7 @@ Build the graph and start the chat app, then ask questions by hand at
 ```bash
 uv run python3 src/run_pipeline.py \
   --schema src/narad/schema/narad.yaml \
-  --instance examples/core_acc_narad_instance.yaml
+  --instance examples/GUN_thru_MV.linkml.yaml
 ```
 
 Do the same, then also run the UITF benchmark questions and write the answers:
@@ -388,7 +388,7 @@ Do the same, then also run the UITF benchmark questions and write the answers:
 ```bash
 uv run python3 src/run_pipeline.py \
   --schema src/narad/schema/narad.yaml \
-  --instance examples/core_acc_narad_instance.yaml \
+  --instance examples/GUN_thru_MV.linkml.yaml \
   --queries examples/benchmark_queries/UITF_v1.yaml \
   --answers examples/benchmark_queries/UITF_v1_LLM_answers.yaml
 ```

@@ -6,8 +6,8 @@ because the schema deliberately has no schema-wide _base (each facility declares
 so this step prefixes every identifier with id_namespace before `linkml-convert` runs.
 
 Example usage:
-python3 src/resolve_instance_ids.py --instance_file examples/core_acc_narad_instance.yaml \
-        --output_file project/owl/core_acc_narad_instance.resolved.yaml
+python3 src/resolve_instance_ids.py --instance_file examples/GUN_thru_MV.linkml.yaml \
+        --output_file project/owl/GUN_thru_MV.linkml.resolved.yaml
 """
 import argparse
 import re
