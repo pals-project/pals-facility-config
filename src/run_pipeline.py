@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """Automates: LinkML schema/instance -> RDF -> Neo4j graph -> LLM Q&A via gradio-chat.
 
-Example usage:
+Build the graph and start gradio-chat, then ask questions in its web UI:
+    uv run python3 src/run_pipeline.py \\
+        --schema src/narad/schema/narad.yaml \\
+        --instance examples/core_acc_narad_instance.yaml
+
+Also run a batch of benchmark questions and write the answers to a file:
     uv run python3 src/run_pipeline.py \\
         --schema src/narad/schema/narad.yaml \\
         --instance examples/core_acc_narad_instance.yaml \\
@@ -24,16 +29,16 @@ import yaml
 from dotenv import load_dotenv
 from gradio_client import Client
 from linkml_runtime.utils.schemaview import SchemaView
-from rdflib import Graph, URIRef, RDF, Literal, Namespace
 from postprocess_for_rdf import load_predicate_uris
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 @dataclass
 class IntermediatePaths:
-    """Paths to the RDF files generated from a LinkML schema/instance pair."""
+    """Paths to the intermediate files generated from a LinkML schema/instance pair."""
 
     schema_ttl: Path
+    resolved_instance: Path
     instance_raw_ttl: Path
     instance_rdf_ttl: Path
 
@@ -81,6 +86,7 @@ def generate_rdf(schema_path: Path, instance_path: Path, gen_owl_args: str) -> I
     target_class = resolve_target_class(schema_path)
     paths = IntermediatePaths(
         schema_ttl=schema_path.with_suffix(".owl.ttl"),
+        resolved_instance=instance_path.with_suffix(".resolved.yaml"),
         instance_raw_ttl=instance_path.with_suffix(".ttl"),
         instance_rdf_ttl=instance_path.with_name(f"{instance_path.stem}_rdf.ttl"),
     )
@@ -88,12 +94,11 @@ def generate_rdf(schema_path: Path, instance_path: Path, gen_owl_args: str) -> I
     gen_owl_command = ["uv", "run", "gen-owl", *([gen_owl_args] if gen_owl_args else []), str(schema_path)]
     run_command(gen_owl_command, cwd=REPO_ROOT, stdout=paths.schema_ttl)
 
-    resolved_instance = instance_path.with_suffix(".resolved.yaml")
     run_command(
         [
             "uv", "run", "python3", "src/resolve_instance_ids.py",
             "--instance_file", str(instance_path),
-            "--output_file", str(resolved_instance),
+            "--output_file", str(paths.resolved_instance),
         ],
         cwd=REPO_ROOT,
     )
@@ -104,7 +109,7 @@ def generate_rdf(schema_path: Path, instance_path: Path, gen_owl_args: str) -> I
             "-s", str(schema_path),
             "-C", target_class,
             "-t", "ttl",
-            str(resolved_instance),
+            str(paths.resolved_instance),
             "-o", str(paths.instance_raw_ttl),
         ],
         cwd=REPO_ROOT,
@@ -253,8 +258,8 @@ def run_benchmark(
 
 
 def delete_intermediate_files(paths: IntermediatePaths) -> None:
-    """Remove the generated RDF intermediate files from disk."""
-    for path in (paths.schema_ttl, paths.instance_raw_ttl, paths.instance_rdf_ttl):
+    """Remove the generated intermediate files from disk."""
+    for path in (paths.schema_ttl, paths.resolved_instance, paths.instance_raw_ttl, paths.instance_rdf_ttl):
         path.unlink(missing_ok=True)
 
 
@@ -264,15 +269,18 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--schema", required=True, help="Path to the LinkML schema YAML")
     parser.add_argument("--instance", required=True, help="Path to the LinkML instance YAML")
     parser.add_argument("--transformation", default="RDF", help="Transformation to apply (only 'RDF' is supported)")
-    parser.add_argument("--queries", required=True, help="Path to the queries YAML file")
-    parser.add_argument("--answers", required=True, help="Path to write the answers YAML file")
+    parser.add_argument(
+        "--queries",
+        help="Path to the queries YAML file. Omit (with --answers) to only build the graph and start gradio-chat",
+    )
+    parser.add_argument("--answers", help="Path to write the answers YAML file (required with --queries)")
     parser.add_argument("--gen-owl-args", default="", help="Extra args forwarded to `gen-owl`")
     parser.add_argument("--compose-file", default=str(REPO_ROOT / "docker-compose.yml"))
     parser.add_argument("--gradio-url", default="http://localhost:7860")
     parser.add_argument("--startup-timeout", type=float, default=180.0, help="Seconds to wait for gradio-chat to come up")
     parser.add_argument(
         "--keep-intermediate-files", action="store_true",
-        help="Keep the generated RDF files (*.owl.ttl, *.ttl, *_rdf.ttl) instead of deleting them after Neo4j import",
+        help="Keep the generated intermediate files (*.owl.ttl, *.resolved.yaml, *.ttl, *_rdf.ttl) instead of deleting them after Neo4j import",
     )
     parser.add_argument("--no-fresh", dest="fresh", action="store_false", help="Skip `docker compose down -v` before starting")
     parser.add_argument(
@@ -285,11 +293,14 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="Key to write the LLM's answer under in each answers entry (must not already exist in the queries entry)",
     )
     parser.set_defaults(fresh=True)
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if (args.queries is None) != (args.answers is None):
+        parser.error("--queries and --answers must be given together")
+    return args
 
 
 def main(argv: list[str]) -> int:
-    """Run the full schema/instance -> RDF -> Neo4j -> LLM benchmark pipeline."""
+    """Build the graph and start gradio-chat, then run the benchmark queries if any were given."""
     args = parse_args(argv)
     load_dotenv(REPO_ROOT / ".env")
 
@@ -298,7 +309,7 @@ def main(argv: list[str]) -> int:
 
     schema_path = Path(args.schema).resolve()
     instance_path = Path(args.instance).resolve()
-    answers_path = normalize_answers_path(Path(args.answers).resolve())
+    answers_path = normalize_answers_path(Path(args.answers).resolve()) if args.answers else None
 
 
     load_predicate_uris(str(schema_path)) # fail fast if there are missing rdf_predicate annotations
@@ -308,6 +319,11 @@ def main(argv: list[str]) -> int:
     client = wait_for_gradio_ready(args.gradio_url, timeout_seconds=args.startup_timeout)
     if not args.keep_intermediate_files:
         delete_intermediate_files(paths)
+
+    if answers_path is None:
+        print(f"gradio-chat is ready at {args.gradio_url} -- ask your questions there.")
+        print("The stack keeps running; stop it with `docker compose down`.")
+        return 0
 
     run_benchmark(
         client,
