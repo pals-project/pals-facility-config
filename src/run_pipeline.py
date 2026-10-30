@@ -6,7 +6,7 @@ Example usage:
         --schema src/narad/schema/narad.yaml \\
         --instance examples/core_acc_narad_instance.yaml \\
         --queries examples/benchmark_queries/UITF_v1.yaml \\
-        --answers examples/benchmark_queries/UITF_v1_answers.yaml
+        --answers examples/benchmark_queries/UITF_v1_LLM_answers.yaml
 """
 
 from __future__ import annotations

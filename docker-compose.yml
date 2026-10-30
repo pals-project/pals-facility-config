@@ -12,6 +12,7 @@ services:
       - NEO4J_dbms_unmanaged__extension__classes=n10s.endpoint=/rdf
     volumes:
       # Overridable so the automation driver can point at freshly generated RDF files.
+      # The defaults are where `just gen-owl` / `just gen-post` write their output.
       - ${NEO4J_SCHEMA_TTL_PATH:-./project/owl/narad.owl.ttl}:/data/narad.owl.ttl
       - ${NEO4J_INSTANCE_TTL_PATH:-./project/owl/core_acc_narad_instance_rdf.ttl}:/data/narad_instance.ttl
       - neo4j_data:/data
