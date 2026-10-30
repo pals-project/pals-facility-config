@@ -2,9 +2,10 @@ services:
   neo4j-kg:
     image: neo4j:5-community
     container_name: neo4j_kg
+    # Published on 127.0.0.1 only, so the stack is reachable from this machine but not the network.
     ports:
-      - "7474:7474" # HTTP / Neo4j Browser
-      - "7687:7687" # Bolt protocol
+      - "127.0.0.1:7474:7474" # HTTP / Neo4j Browser
+      - "127.0.0.1:7687:7687" # Bolt protocol
     environment:
       - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
       - NEO4J_PLUGINS=["apoc", "n10s"]
@@ -41,7 +42,8 @@ services:
     build: ./src/llm
     container_name: gradio_chat
     ports:
-      - "7860:7860"
+      # 127.0.0.1 only: the Gradio API exposes the prefilled API key and Neo4j password (see automation_script_documentation.md §6).
+      - "127.0.0.1:7860:7860"
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OPENAI_BASE_URL=${OPENAI_BASE_URL}

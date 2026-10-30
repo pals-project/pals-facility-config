@@ -356,9 +356,11 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
   `main.py`'s `api_key`/`neo4j_password` Textbox components are pre-filled
   from `.env` via `value=os.getenv(...)`, calling `gradio_client(...).view_api()`
   against a running `gradio-chat` instance reveals those default values in
-  plaintext to **anyone with network access to port 7860**, authenticated or
-  not. This exposure comes from `main.py` itself, not from the pipeline, and
-  is not fixed yet.
+  plaintext to **anyone who can reach port 7860**, authenticated or not.
+  As a mitigation, `docker-compose.yml` publishes port 7860 (and Neo4j's 7474
+  and 7687) on `127.0.0.1` only, so only users on the same machine can reach
+  them. The exposure itself comes from `main.py`, not from the pipeline, and is
+  not fixed yet; the real fix is to stop pre-filling those fields in the UI.
 - **Answers can differ between the interactive UI and the automated pipeline**
   even with the same model / 0 temperature, for two reasons unrelated to the
   pipeline's correctness: (1) LLM hallucination — e.g. confusing a device's
