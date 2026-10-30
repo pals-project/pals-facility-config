@@ -89,7 +89,7 @@ is an error.
 | `--startup-timeout` | `180` seconds | How long to wait for `gradio-chat` to become reachable before giving up. |
 | `--keep-intermediate-files` | off (i.e. delete by default) | Keep the generated `.owl.ttl`/`.resolved.yaml`/`.ttl`/`_rdf.ttl` files. Without this flag they are deleted as soon as the graph has been built (before any questions are asked). |
 | `--no-fresh` | off (i.e. fresh by default) | Skip `docker compose down -v` before `up -d`. **Not safe** if the RDF content changed since the last run — see §6. |
-| `--accumulate-history` | off (i.e. each question is asked independently by default) | Ask the questions as one continuous conversation, passing the prior chat history with each question. |
+| `--accumulate-history` | off (i.e. each question is asked independently by default) | Benchmark runs only: ask the questions as one continuous conversation, passing the prior chat history with each question. The chat UI always keeps its conversation history (see Stage 6). |
 | `--question-key` | `Q` | Key in each queries entry holding the question text. |
 | `--llm-answer-key` | `LLM_Ans` | Key to write the LLM's answer under in each answers entry; the script asserts this key does not already exist in the queries entry. |
 
@@ -265,6 +265,22 @@ docker logs -f gradio_chat
 The Docker containers/volumes are **left running** intentionally, so you can
 continue using the interactive Gradio UI (at `--gradio-url`, by default
 `http://localhost:7860`) afterwards without rebuilding the graph.
+
+**Conversation history in the chat UI.** The UI keeps the conversation: each
+message is sent to the LLM together with every earlier question and answer
+from the same chat (see `respond()` in `src/llm/main.py`), so follow-up
+questions work. This is independent of `--accumulate-history`, which only
+affects benchmark runs (by default each benchmark question is asked with an
+empty history). Things to know:
+
+- Only the questions and final answers are kept, not the Cypher queries or
+  the Neo4j results behind them, so a follow-up may make the agent query the
+  graph again.
+- There is no limit: the whole conversation is resent with every message, so
+  long chats cost more per question and can eventually exceed the model's
+  context window. Click **Clear** to start a new conversation.
+- Each browser tab has its own conversation, and reloading the page starts a
+  new one.
 
 To stop the stack when you are done:
 
