@@ -101,9 +101,9 @@ def absolutize_turtle(text: str) -> str:
     """
     Drop the @base line and rewrite relative IRIs (e.g. <ICBK403>) as absolute IRIs by plain concatenation.
 
-    Facility.id_namespace is a tag:/urn: style base, which has no '//' and which RFC 3986 resolvers (rdflib's
-    parser, RDF4J/n10s) handle inconsistently. The namespace is required to end in '/', '#' or ':', so
-    concatenation is what it means.
+    The base is the file:/// root from resolve_instance_ids.py, which RFC 3986 resolvers (rdflib's parser,
+    RDF4J/n10s) can handle inconsistently with relative references, so plain concatenation is used instead.
+    The prefix is removed again in src/llm/graph_init.cypher.
     """
     match = _BASE_LINE.search(text)
     if match is None:

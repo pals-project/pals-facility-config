@@ -22,6 +22,16 @@ CALL n10s.rdf.import.fetch(
   "Turtle"
 );
 
+// 0. Instance ids reach n10s as file:///<id>. src/resolve_instance_ids.py adds that prefix because
+//    linkml-convert needs an absolute IRI for every id (including ids with a colon, which it would
+//    otherwise read as a CURIE), and n10s needs a uri on every node. The prefix carries no meaning,
+//    and it misleads the LLM, so strip it here: the graph exposes the bare id (e.g. MFHK101),
+//    matching what users type. This runs before step 3 so relation_uri stays equal to the relation
+//    node's uri. Ontology nodes (https://example.org/...) are untouched.
+MATCH (n:Resource)
+WHERE n.uri STARTS WITH 'file:///'
+SET n.uri = substring(n.uri, 8);
+
 // 1. Copy rdfs__label or label properties into a primary 'name' attribute
 MATCH (n)
 WHERE n.rdfs__label IS NOT NULL AND n.name IS NULL

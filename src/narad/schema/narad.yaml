@@ -7,8 +7,10 @@ description: >-
 license: https://creativecommons.org/publicdomain/zero/1.0/
 
 # No _base on purpose. Bare identifiers in instance data (e.g. RF_LASER) are
-# made absolute with the base IRI each data file declares in Facility.id_namespace.
-# A schema-wide _base would put every facility's instances in one shared namespace.
+# made absolute by src/resolve_instance_ids.py, which prefixes them with file:///. That prefix
+# exists only so linkml-convert and n10s accept the ids; src/llm/graph_init.cypher removes it
+# again, so the Neo4j graph holds the bare ids. See the docstring in resolve_instance_ids.py.
+# There is no per-facility namespace: load one facility per graph.
 prefixes:
   linkml: https://w3id.org/linkml/
   pals: https://pals-project.readthedocs.io/  # used only in *_mappings to PALS documentation; not a resolvable vocabulary
@@ -217,24 +219,6 @@ classes:
   Facility:
     description: A facility that houses one or more accelerators.
     attributes:
-      id_namespace:
-        description: >-
-          Base IRI for this facility's instance identifiers. Identifiers in the data
-          (id, subject, object, beamline_context) are written bare, e.g. RF_LASER,
-          and are made absolute by prefixing this value on export to RDF or Neo4j,
-          e.g. tag:jlab.org,2026:uitf/ + RF_LASER.
-          Required, with no schema-wide default, so that facilities cannot silently
-          share a namespace and collide. Any absolute IRI is accepted, resolvable
-          (https://...) or not (tag:..., urn:...). It must end in '/', '#' or ':'
-          so that simple concatenation yields a well-formed IRI.
-        range: uri
-        required: true
-        pattern: "^[A-Za-z][A-Za-z0-9+.\\-]*:[^\\s<>\"{}|\\\\^`]*[/#:]$"
-        examples:
-          - value: "https://example.org/accelerator-core/facility/01gq9xj92/"
-          - value: "tag:jlab.org,2026:uitf/"
-          - value: "urn:example:facility/01gq9xj92"
-          - value: "http://example.org/facility/01gq9xj92"
       components:
         description: A list of physical components in the accelerator system.
         range: Component

@@ -6,7 +6,6 @@ notes:
 - Model-only drifts, controllers, constants, and lattice records are omitted because the current accelerator-core
   schema has no direct representation for them.
 facility:
-  id_namespace: https://bta/
   identifiers:
   - identifier_type: LOCAL
     identifier_value: BTA

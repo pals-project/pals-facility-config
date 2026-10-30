@@ -155,8 +155,11 @@ fails fast if any concrete `Edge` subclass in the schema lacks an
 2. `uv run gen-owl <schema>.yaml > <schema>.owl.ttl` — generates the OWL/RDF
    version of the schema (the "TBox").
 3. `uv run python3 src/resolve_instance_ids.py --instance_file <instance>.yaml --output_file <instance>.resolved.yaml`
-   — makes the instance's bare identifiers absolute using its
-   `Facility.id_namespace`.
+   — makes the instance's bare identifiers absolute by prefixing
+   them with `file:///`. The prefix is scaffolding: `linkml-convert` cannot turn a bare id into an
+   IRI without a base, and `-P _base=...` is not enough because ids containing a colon (e.g.
+   `btaMW006Cntl:horInDataM`) are misread as CURIEs. `src/llm/graph_init.cypher` strips the
+   prefix again after the Neo4j import, so the graph and the LLM see the bare ids.
 4. `uv run linkml-convert -s <schema>.yaml -C <tree_root_class> -t ttl <instance>.resolved.yaml -o <instance>.ttl`
    — converts the resolved instance YAML data to raw RDF/Turtle (the "ABox").
 5. `uv run python3 src/postprocess_for_rdf.py --schema <schema>.yaml --instance_file <instance>.ttl --output_file <instance>_rdf.ttl`
