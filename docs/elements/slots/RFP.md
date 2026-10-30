@@ -22,10 +22,10 @@ Alias: RFP
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [RFCavity](../classes/RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation. |  no  |
-| [HasRFP](../classes/HasRFP.md) |  |  no  |
 | [NormalConductingRFCavity](../classes/NormalConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting. |  no  |
 | [SuperConductingRFCavity](../classes/SuperConductingRFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation, which is superconducting. |  no  |
+| [RFCavity](../classes/RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation. |  no  |
+| [HasRFP](../classes/HasRFP.md) |  |  no  |
 
 
 

@@ -22,8 +22,8 @@ Alias: BendP
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [HasBendP](../classes/HasBendP.md) |  |  no  |
 | [Bend](../classes/Bend.md) | Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight. |  no  |
+| [HasBendP](../classes/HasBendP.md) |  |  no  |
 
 
 

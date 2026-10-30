@@ -95,7 +95,8 @@ lint:
 # Generate md documentation for the schema and add artifacts
 [group('model development')]
 gen-doc: _gen-yaml && _add-artifacts
-  uv run gen-doc {{gen_doc_args}} -d {{docdir}} {{source_schema_path}} --truncate-descriptions False --diagram-type er_diagram --example-directory doc_examples/ --subfolder-type-separation --template-directory docs/templates-linkml
+  # A fixed hash seed keeps gen-doc's table row order stable, so regenerating unchanged docs gives no diff.
+  PYTHONHASHSEED=0 uv run gen-doc {{gen_doc_args}} -d {{docdir}} {{source_schema_path}} --truncate-descriptions False --diagram-type er_diagram --example-directory doc_examples/ --subfolder-type-separation --template-directory docs/templates-linkml
 
 # Export the example instance as Turtle RDF
 [group('model development')]
