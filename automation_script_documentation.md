@@ -46,7 +46,7 @@ uv run python3 src/run_pipeline.py \
   [--compose-file docker-compose.yml] \
   [--gradio-url http://localhost:7860] \
   [--startup-timeout 180] \
-  [--delete-intermediate-files] \
+  [--keep-intermediate-files] \
   [--no-fresh] \
   [--accumulate-history] \
   [--question-key Q] \
@@ -71,7 +71,7 @@ uv run python3 src/run_pipeline.py \
 | `--compose-file` | `docker-compose.yml` at repo root | Which compose file to drive. |
 | `--gradio-url` | `http://localhost:7860` | Where the driver (running on the **host**) reaches the published `gradio-chat` port. |
 | `--startup-timeout` | `180` seconds | How long to wait for `gradio-chat` to become reachable before giving up. |
-| `--delete-intermediate-files` | off | Delete the generated `.ttl`/`.owl.ttl` files as soon as the graph has been built (before the questions are asked). |
+| `--keep-intermediate-files` | off (i.e. delete by default) | Keep the generated `.owl.ttl`/`.ttl`/`_rdf.ttl` files. Without this flag they are deleted as soon as the graph has been built (before the questions are asked). |
 | `--no-fresh` | off (i.e. fresh by default) | Skip `docker compose down -v` before `up -d`. **Not safe** if the RDF content changed since the last run — see §6. |
 | `--accumulate-history` | off (i.e. each question is asked independently by default) | Ask the questions as one continuous conversation, passing the prior chat history with each question. |
 | `--question-key` | `Q` | Key in each queries entry holding the question text. |
@@ -131,7 +131,7 @@ hardcoded `project/owl/` directory.
 Before generating anything, `main()` calls `load_predicate_uris(schema_path)`
 (from [`src/postprocess_for_rdf.py`](src/postprocess_for_rdf.py)), which
 fails fast if any concrete `Edge` subclass in the schema lacks an
-`rdf_predicate` annotation, since step 4 below needs it.
+`rdf_predicate` annotation, since step 5 below needs it.
 
 1. `resolve_target_class(schema_path)` — uses LinkML's `SchemaView` to find the
    schema's `tree_root: true` class automatically (e.g. `PALSAccelerator`),
@@ -139,9 +139,12 @@ fails fast if any concrete `Edge` subclass in the schema lacks an
    This makes the script schema-agnostic.
 2. `uv run gen-owl <schema>.yaml > <schema>.owl.ttl` — generates the OWL/RDF
    version of the schema (the "TBox").
-3. `uv run linkml-convert -s <schema>.yaml -C <tree_root_class> -t ttl <instance>.yaml -o <instance>.ttl`
-   — converts the instance YAML data to raw RDF/Turtle (the "ABox").
-4. `uv run python3 src/postprocess_for_rdf.py --schema <schema>.yaml --instance_file <instance>.ttl --output_file <instance>_rdf.ttl`
+3. `uv run python3 src/resolve_instance_ids.py --instance_file <instance>.yaml --output_file <instance>.resolved.yaml`
+   — makes the instance's bare identifiers absolute using its
+   `Facility.id_namespace`.
+4. `uv run linkml-convert -s <schema>.yaml -C <tree_root_class> -t ttl <instance>.resolved.yaml -o <instance>.ttl`
+   — converts the resolved instance YAML data to raw RDF/Turtle (the "ABox").
+5. `uv run python3 src/postprocess_for_rdf.py --schema <schema>.yaml --instance_file <instance>.ttl --output_file <instance>_rdf.ttl`
    — rewrites bare relation-class instances (e.g. `HasSignal`, `Contains`) into
    proper RDF predicate URIs, using the existing [`src/postprocess_for_rdf.py`](src/postprocess_for_rdf.py)
    script. The predicate URIs come from each relation class's `rdf_predicate`
@@ -149,9 +152,11 @@ fails fast if any concrete `Edge` subclass in the schema lacks an
    hardcoded map. This step is required — the raw `linkml-convert` output alone does not
    have correctly-typed relationship edges for the graph import to use.
 
-Result: three files sitting next to the schema/instance sources, e.g.
+Result: three RDF files sitting next to the schema/instance sources, e.g.
 `src/narad/schema/narad.owl.ttl`, `examples/core_acc_narad_instance.ttl`,
-`examples/core_acc_narad_instance_rdf.ttl`.
+`examples/core_acc_narad_instance_rdf.ttl`. These are deleted in Stage 4 unless
+`--keep-intermediate-files` is passed. The `<instance>.resolved.yaml` file from
+step 3 is always kept.
 
 ### Stage 3 — Start the Docker stack (`docker_compose_up`)
 
@@ -186,10 +191,11 @@ Polls `gradio_client.Client(url)` every 3 seconds (up to `--startup-timeout`)
 until the `gradio-chat` container's web server responds, since building/starting
 that container can take a while (image build on first run, then app startup).
 
-If `--delete-intermediate-files` was passed, the three generated `.ttl` files
+Unless `--keep-intermediate-files` was passed, the three generated `.ttl` files
 from Stage 2 are deleted at this point. `gradio-chat` only starts after
 `neo4j-init` has finished importing them, so the graph no longer needs them,
-and they are removed even if a later stage fails.
+and they are removed even if a later stage fails. If the run fails before this
+point (e.g. RDF generation or Docker startup errors), they are left on disk.
 
 ### Stage 5 — Ask every question (`run_benchmark` / `query_gradio`)
 
@@ -205,7 +211,13 @@ and they are removed even if a later stage fails.
    `/respond` API endpoint via `gradio_client`, exactly as if a human had
    typed the question into the chat UI and clicked Send. By default history is
    reset to empty before every question; with `--accumulate-history` it
-   passes the running `history` list so far instead.
+   passes the running `history` list so far instead. Each question can take a
+   while, since the agent may make several LLM and Cypher round-trips, so the
+   script prints progress to the terminal:
+   ```
+   Responding to query #2 of 11
+       answered in 38.4s
+   ```
 4. `extract_message_text()` normalizes the assistant's reply: newer Gradio/LLM
    responses can return `content` as a list of `{"type": "text", "text": ...}`
    blocks instead of a plain string; this flattens either shape into plain
@@ -215,7 +227,8 @@ and they are removed even if a later stage fails.
    `--llm-answer-key` field (`LLM_Ans` by default) added for the LLM's answer.
    The script asserts that key isn't already present in the entry, to avoid
    silently overwriting existing data. All results are collected into a list
-   and written to `--answers` as YAML.
+   and written to `--answers` as YAML only after the last question is
+   answered, so the file does not exist while the run is in progress.
 
 ### Stage 6 — After the run
 
@@ -335,6 +348,8 @@ uv run python3 src/run_pipeline.py \
   --schema src/narad/schema/narad.yaml \
   --instance examples/core_acc_narad_instance.yaml \
   --queries examples/benchmark_queries/UITF_v1.yaml \
-  --answers examples/benchmark_queries/UITF_v1_LLM_answers.yaml \
-  --delete-intermediate-files
+  --answers examples/benchmark_queries/UITF_v1_LLM_answers.yaml
 ```
+
+The generated `.ttl` files are deleted once the graph is built. Add
+`--keep-intermediate-files` to keep them, e.g. to inspect the RDF.
