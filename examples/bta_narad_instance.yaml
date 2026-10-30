@@ -1,4 +1,4 @@
-clkind: PALSAccelerator
+kind: PALSAccelerator
 description: NARAD representation of the BtA beamline enriched with ADO controls.
 version: 0.1.0
 notes:
