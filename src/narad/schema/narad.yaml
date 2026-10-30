@@ -621,33 +621,47 @@ classes:
           - alpha_y
           - alphay
       beta_a:
-        description: Twiss beta parameter in the horizontal plane.
+        description: Twiss beta parameter in the horizontal plane. Must be strictly positive (> 0).
         range: float
+        minimum_value: 0
+        none_of:  # minimum_value is inclusive; this excludes 0 itself
+          - equals_number: 0
         close_mappings:
           - pals:beta_a
+        unit:
+          ucum_code: m
         aliases:
           - beta_x
           - betax
       beta_b:
-        description: Twiss beta parameter in the vertical plane.
+        description: Twiss beta parameter in the vertical plane. Must be strictly positive (> 0).
         range: float
+        minimum_value: 0
+        none_of:  # minimum_value is inclusive; this excludes 0 itself
+          - equals_number: 0
         close_mappings:
           - pals:beta_b
+        unit:
+          ucum_code: m
         aliases:
           - beta_y
           - betay
       eta_x:
-        description: Twiss dispersion parameter in the horizontal plane.
+        description: Twiss dispersion parameter in the horizontal plane. May be any real value.
         range: float
         close_mappings:
           - pals:eta_x
+        unit:
+          ucum_code: m
         aliases:
           - etax
       eta_y:
-        description: Twiss dispersion parameter in the vertical plane.
+        description: Twiss dispersion parameter in the vertical plane. May be any real value.
         range: float
         close_mappings:
           - pals:eta_y
+        unit:
+          ucum_code: m
         aliases:
           - etay
       etap_x:
@@ -655,6 +669,9 @@ classes:
         range: float
         close_mappings:
           - pals:etap_x
+        unit:
+          ucum_code: "1"
+          descriptive_name: dimensionless
         aliases:
           - etapx
       etap_y:
@@ -662,6 +679,9 @@ classes:
         range: float
         close_mappings:
           - pals:etap_y
+        unit:
+          ucum_code: "1"
+          descriptive_name: dimensionless
         aliases:
           - etapy
       phi_a:
@@ -669,6 +689,8 @@ classes:
         range: float
         close_mappings:
           - pals:phi_a
+        unit:
+          ucum_code: rad
         aliases:
           - phi_x
           - phix
@@ -679,6 +701,8 @@ classes:
         range: float
         close_mappings:
           - pals:phi_b
+        unit:
+          ucum_code: rad
         aliases:
           - phi_y
           - phiy

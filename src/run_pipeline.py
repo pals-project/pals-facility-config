@@ -235,11 +235,14 @@ def run_benchmark(
         entries = yaml.safe_load(handle)
     history: list[dict[str, str]] = []
     results: list[dict[str, str]] = []
-    for entry in entries:
+    for index, entry in enumerate(entries, start=1):
         question = entry[question_key].strip()
         if not accumulate_history:
             history = []
+        print(f"Responding to query #{index} of {len(entries)}", flush=True)
+        started = time.monotonic()
         answer, history = query_gradio(client, question, history, settings)
+        print(f"    answered in {time.monotonic() - started:.1f}s", flush=True)
         assert llm_answer_key not in entry, f"Entry already contains '{llm_answer_key}' !!!"
         result = copy.deepcopy(entry)
         result[llm_answer_key] = answer
@@ -267,7 +270,10 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--compose-file", default=str(REPO_ROOT / "docker-compose.yml"))
     parser.add_argument("--gradio-url", default="http://localhost:7860")
     parser.add_argument("--startup-timeout", type=float, default=180.0, help="Seconds to wait for gradio-chat to come up")
-    parser.add_argument("--delete-intermediate-files", action="store_true")
+    parser.add_argument(
+        "--keep-intermediate-files", action="store_true",
+        help="Keep the generated RDF files (*.owl.ttl, *.ttl, *_rdf.ttl) instead of deleting them after Neo4j import",
+    )
     parser.add_argument("--no-fresh", dest="fresh", action="store_false", help="Skip `docker compose down -v` before starting")
     parser.add_argument(
         "--accumulate-history", action="store_true",
@@ -300,7 +306,7 @@ def main(argv: list[str]) -> int:
     docker_compose_up(paths, schema_path, fresh=args.fresh, compose_file=Path(args.compose_file))
     # gradio-chat only starts after neo4j-init has imported the RDF, so the files are no longer needed.
     client = wait_for_gradio_ready(args.gradio_url, timeout_seconds=args.startup_timeout)
-    if args.delete_intermediate_files:
+    if not args.keep_intermediate_files:
         delete_intermediate_files(paths)
 
     run_benchmark(
