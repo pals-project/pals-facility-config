@@ -9,7 +9,7 @@ _The protocol used to access the signal in the source system,  such as EPICS Cha
 
 
 
-URI: [pals:slot/access_protocol](https://pals-project.readthedocs.io/slot/access_protocol)
+URI: [acc:slot/access_protocol](https://example.org/accelerator-core/slot/access_protocol)
 Alias: access_protocol
 
 <!-- no inheritance hierarchy -->
@@ -77,8 +77,8 @@ Alias: access_protocol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:access_protocol |
-| native | pals:access_protocol |
+| self | acc:access_protocol |
+| native | acc:access_protocol |
 
 
 

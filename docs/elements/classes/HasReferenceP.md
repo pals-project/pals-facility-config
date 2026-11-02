@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasReferenceP](https://pals-project.readthedocs.io/class/HasReferenceP)
+URI: [acc:class/HasReferenceP](https://example.org/accelerator-core/class/HasReferenceP)
 
 
 ```mermaid
@@ -17,6 +17,7 @@ ReferenceParamGroup {
     float pc_ref  
     string species_ref  
     float time_ref  
+    string id  
 }
 
 HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
@@ -51,6 +52,7 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 | [BeamPositionMonitor](../classes/BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position. |
 | [Aperture](../classes/Aperture.md) | A diagnostic or limiting aperture element used to constrain or characterize beam passage. |
 | [Cavity](../classes/Cavity.md) | A cavity used for beam acceleration or manipulation. |
+| [BeginningEle](../classes/BeginningEle.md) | Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference parameters; otherwise it is expected to be the first element in the branch. |
 
 
 
@@ -83,8 +85,8 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasReferenceP |
-| native | pals:HasReferenceP |
+| self | acc:HasReferenceP |
+| native | acc:HasReferenceP |
 
 
 

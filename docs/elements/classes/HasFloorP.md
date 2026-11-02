@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasFloorP](https://pals-project.readthedocs.io/class/HasFloorP)
+URI: [acc:class/HasFloorP](https://example.org/accelerator-core/class/HasFloorP)
 
 
 ```mermaid
@@ -16,6 +16,7 @@ FloorParamGroup {
     float x  
     float y  
     float z  
+    string id  
 }
 HasFloorP {
 
@@ -84,8 +85,8 @@ HasFloorP ||--|o FloorParamGroup : "FloorP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasFloorP |
-| native | pals:HasFloorP |
+| self | acc:HasFloorP |
+| native | acc:HasFloorP |
 
 
 

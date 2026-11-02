@@ -1,0 +1,424 @@
+# Automation Script — Automated NARAD Q&A Pipeline
+
+This document describes [`src/run_pipeline.py`](src/run_pipeline.py), which runs
+the whole NARAD Q&A workflow in a single command:
+
+```
+LinkML schema + instance YAML
+  --> RDF (Turtle)
+  --> Neo4j knowledge graph
+  --> gradio-chat (LLM + Neo4j Cypher agent)
+  --> questions asked in the chat UI, or answers to a batch of questions
+```
+
+## 1. What the script automates
+
+One run of the script:
+
+1. Converts the LinkML schema + instance YAML into RDF/Turtle files.
+2. Points `docker-compose.yml` at those files and starts the stack, so
+   `neo4j-kg` → `neo4j-init` → `gradio-chat` come up in the right order and
+   the graph is imported.
+3. Leaves `gradio-chat` running, so users can ask questions one by one in its
+   web UI.
+
+If `--queries` and `--answers` are also given, it then runs a benchmark:
+
+4. Sends each benchmark question to the `gradio-chat` app through its API,
+   just as if it were typed into the chat UI.
+5. Writes every answer, next to its question, into a single YAML file.
+
+## 2. Inputs and outputs
+
+### Prerequisites
+
+Before the first run:
+
+1. **Docker** is installed and running (the script drives `docker compose`).
+2. **`uv`** is installed, and the dev dependencies are synced (`uv sync`).
+3. **`.env`** exists at the repo root. Copy it from `.env.example` and fill in
+   at least the variables marked required in §5 (Neo4j credentials and the
+   LLM API key, base URL and model name).
+
+### Command
+
+```bash
+uv run python3 src/run_pipeline.py \
+  --schema      <path to LinkML schema YAML> \
+  --instance    <path to LinkML instance YAML> \
+  [--queries    <path to questions YAML> \
+   --answers    <path to write answers YAML>] \
+  [--transformation RDF] \
+  [--gen-owl-args "..."] \
+  [--compose-file docker-compose.yml] \
+  [--gradio-url http://localhost:7860] \
+  [--startup-timeout 180] \
+  [--keep-intermediate-files] \
+  [--no-fresh] \
+  [--accumulate-history] \
+  [--question-key Q] \
+  [--llm-answer-key LLM_Ans]
+```
+
+### Required inputs
+
+| Argument      | Meaning                                                                 | Example |
+|---------------|--------------------------------------------------------------------------|---------|
+| `--schema`    | LinkML schema YAML (source of truth for the data model)                  | `src/narad/schema/narad.yaml` |
+| `--instance`  | LinkML instance YAML (the actual accelerator data to load into the graph) | `examples/GUN_thru_MV.linkml.yaml` |
+
+### Benchmark inputs (optional, given together)
+
+Without these two, the script stops once `gradio-chat` is ready and prints its
+URL, so questions can be asked by hand in the chat UI. Giving only one of them
+is an error.
+
+| Argument      | Meaning                                                                 | Example |
+|---------------|--------------------------------------------------------------------------|---------|
+| `--queries`   | YAML file with the benchmark questions to ask                            | `examples/benchmark_queries/UITF_v1.yaml` |
+| `--answers`   | Where to write the LLM's answers                                         | `examples/benchmark_queries/UITF_v1_LLM_answers.yaml` |
+
+### Optional inputs
+
+| Argument | Default | Meaning |
+|----------|---------|---------|
+| `--transformation` | `RDF` | Which intermediate representation to build the graph from. Only `RDF` is implemented; anything else raises `NotImplementedError` (a placeholder for future transformation strategies). |
+| `--gen-owl-args` | `""` | Extra CLI args forwarded to `gen-owl` (mirrors `LINKML_GENERATORS_OWL_ARGS` in `config.public.mk`). |
+| `--compose-file` | `docker-compose.yml` at repo root | Which compose file to drive. |
+| `--gradio-url` | `http://localhost:7860` | Where the driver (running on the **host**) reaches the published `gradio-chat` port. |
+| `--startup-timeout` | `180` seconds | How long to wait for `gradio-chat` to become reachable before giving up. |
+| `--keep-intermediate-files` | off (i.e. delete by default) | Keep the generated `.owl.ttl`/`.resolved.yaml`/`.ttl`/`_rdf.ttl` files. Without this flag they are deleted as soon as the graph has been built (before any questions are asked). |
+| `--no-fresh` | off (i.e. fresh by default) | Skip `docker compose down -v` before `up -d`. **Not safe** if the RDF content changed since the last run — see §6. |
+| `--accumulate-history` | off (i.e. each question is asked independently by default) | Benchmark runs only: ask the questions as one continuous conversation, passing the prior chat history with each question. Ignored when `--queries`/`--answers` are not given. The chat UI always keeps its conversation history, with or without this flag (see Stage 6). |
+| `--question-key` | `Q` | Key in each queries entry holding the question text. |
+| `--llm-answer-key` | `LLM_Ans` | Key to write the LLM's answer under in each answers entry; the script asserts this key does not already exist in the queries entry. |
+
+### Queries file format (`--queries`)
+
+A YAML list of `{Q, Ans}` dicts, e.g. [`examples/benchmark_queries/UITF_v1.yaml`](examples/benchmark_queries/UITF_v1.yaml):
+
+```yaml
+- Q: Give me the signals for the horizontal and vertical beam positions and status at the first BPM
+  Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
+- Q: What's the status signal of MFHK101?
+  Ans: MFHK101.STAT
+```
+
+Only the `Q` field is ever sent to the LLM. `Ans` is the human-authored expected
+answer for reference/grading; if present, it is carried through into the
+generated answers file (see below) so an evaluator can compare it against the
+LLM's answer without checking multiple files.
+
+### Answers file format (`--answers`)
+
+A YAML list of `{Q, Ans, LLM_Ans}` dicts, one per question, in the same order as
+the input file. `Ans` is only included if it was present in the corresponding
+queries entry:
+
+```yaml
+- Q: Give me the signals for the horizontal and vertical beam positions and status at the first BPM
+  Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
+  LLM_Ans: 'The first BPM is **IPMK101** ... `IPMK101.XPOS` ... `IPMK101.YPOS` ... `IPMK101.STAT` ...'
+- Q: What's the status signal of MFHK101?
+  Ans: MFHK101.STAT
+  LLM_Ans: 'The status signal for **MFHK101** is `MFHK101.STAT` ...'
+```
+
+If `--answers` has no file extension, `.yaml` is appended automatically. If it
+has an extension other than `.yml`/`.yaml`, the script raises an error rather
+than silently writing YAML content into e.g. a `.txt` file.
+
+## 3. Step-by-step: what the script actually does
+
+`main()` in [`src/run_pipeline.py`](src/run_pipeline.py) runs these stages in order:
+
+### Stage 1 — Load environment
+
+`load_dotenv(REPO_ROOT / ".env")` loads secrets/config from `.env` into the
+process environment (API keys, Neo4j credentials, model name, etc. — see §5).
+
+### Stage 2 — Generate RDF (`generate_rdf`)
+
+This reproduces the `gen-owl` / `gen-instance-ttl` / `gen-post` `justfile`
+recipes, but calls the underlying tools directly instead of going through
+`just`, and writes the outputs **next to the source files** instead of a
+hardcoded `project/owl/` directory.
+
+Before generating anything, `main()` calls `load_predicate_uris(schema_path)`
+(from [`src/postprocess_for_rdf.py`](src/postprocess_for_rdf.py)), which
+fails fast if any concrete `Edge` subclass in the schema lacks an
+`rdf_predicate` annotation, since step 5 below needs it.
+
+1. `resolve_target_class(schema_path)` — uses LinkML's `SchemaView` to find the
+   schema's `tree_root: true` class automatically (e.g. `PALSAccelerator`),
+   so the class name is not hardcoded and the script works with any schema.
+2. `uv run gen-owl <schema>.yaml > <schema>.owl.ttl` — generates the OWL/RDF
+   version of the schema (the "TBox").
+3. `uv run python3 src/resolve_instance_ids.py --instance_file <instance>.yaml --output_file <instance>.resolved.yaml`
+   — makes the instance's bare identifiers absolute by prefixing
+   them with `file:///`. The prefix is scaffolding: `linkml-convert` cannot turn a bare id into an
+   IRI without a base, and `-P _base=...` is not enough because ids containing a colon (e.g.
+   `btaMW006Cntl:horInDataM`) are misread as CURIEs. `src/llm/graph_init.cypher` strips the
+   prefix again after the Neo4j import, so the graph and the LLM see the bare ids.
+4. `uv run linkml-convert -s <schema>.yaml -C <tree_root_class> -t ttl <instance>.resolved.yaml -o <instance>.ttl`
+   — converts the resolved instance YAML data to raw RDF/Turtle (the "ABox").
+5. `uv run python3 src/postprocess_for_rdf.py --schema <schema>.yaml --instance_file <instance>.ttl --output_file <instance>_rdf.ttl`
+   — rewrites bare relation-class instances (e.g. `HasSignal`, `Contains`) into
+   proper RDF predicate URIs, using the existing [`src/postprocess_for_rdf.py`](src/postprocess_for_rdf.py)
+   script. The predicate URIs come from each relation class's `rdf_predicate`
+   annotation in `--schema` (e.g. `Precedes` → `pals:precedes`), not a
+   hardcoded map. This step is required — the raw `linkml-convert` output alone does not
+   have correctly-typed relationship edges for the graph import to use.
+
+Result: four intermediate files sitting next to the schema/instance sources,
+e.g. `src/narad/schema/narad.owl.ttl`, `examples/GUN_thru_MV.linkml.resolved.yaml`,
+`examples/GUN_thru_MV.linkml.ttl` and `examples/GUN_thru_MV.linkml_rdf.ttl`.
+These are deleted in Stage 4 unless `--keep-intermediate-files` is passed, and
+are git-ignored either way.
+
+### Stage 3 — Start the Docker stack (`docker_compose_up`)
+
+1. Sets three environment variables for the `docker compose` subprocess only:
+   `NEO4J_SCHEMA_TTL_PATH` and `NEO4J_INSTANCE_TTL_PATH`, pointing at the files
+   generated in Stage 2, and `LINKML_SCHEMA_HOST_PATH`, pointing at the
+   `--schema` YAML so `gradio-chat` describes the same schema to the LLM that
+   the graph was built from.
+2. If `--no-fresh` was **not** passed (the default): runs
+   `docker compose down -v` to remove any previous containers **and volumes**
+   (`neo4j_data`, `neo4j_plugins`), guaranteeing a clean graph.
+3. Runs `docker compose up -d --build`. `--build` rebuilds the `gradio-chat`
+   image, whose code (`main.py`, `kg_agent.py`) is copied in at build time, so
+   source changes are always picked up. `docker-compose.yml`'s `neo4j-kg` service
+   mounts:
+   ```yaml
+   - ${NEO4J_SCHEMA_TTL_PATH:-./project/owl/narad.owl.ttl}:/data/narad.owl.ttl
+   - ${NEO4J_INSTANCE_TTL_PATH:-./project/owl/GUN_thru_MV.linkml_rdf.ttl}:/data/narad_instance.ttl
+   ```
+   so it picks up the freshly generated files. If the env vars aren't set
+   (e.g. a manual `docker compose up -d`), it falls back to the default paths,
+   which are where `just gen-owl` and `just gen-post` write their output.
+4. Compose then brings up the dependency chain automatically:
+   `neo4j-kg` (starts, waits for healthcheck) → `neo4j-init` (runs
+   `graph_init.cypher`, imports the schema + instance TTL into Neo4j via the
+   `n10s` plugin, then exits) → `gradio-chat` (starts once `neo4j-init`
+   completes successfully).
+
+### Stage 4 — Wait for the chat app (`wait_for_gradio_ready`)
+
+Polls `gradio_client.Client(url)` every 3 seconds (up to `--startup-timeout`)
+until the `gradio-chat` container's web server responds, since building/starting
+that container can take a while (image build on first run, then app startup).
+
+Unless `--keep-intermediate-files` was passed, the four intermediate files
+from Stage 2 are deleted at this point. `gradio-chat` only starts after
+`neo4j-init` has finished importing them, so the graph no longer needs them,
+and they are removed even if a later stage fails. If the run fails before this
+point (e.g. RDF generation or Docker startup errors), they are left on disk.
+
+If `--queries`/`--answers` were not given, the script stops here: it prints
+the `gradio-chat` URL and exits, leaving the stack running for questions to be
+asked in the chat UI (see Stage 6).
+
+### Stage 5 — Ask every question (`run_benchmark` / `query_gradio`)
+
+Only runs when `--queries` and `--answers` are given.
+
+1. Reads every entry from `--queries` (a list of dicts) directly, with no schema
+   validation beyond requiring the `--question-key` field (`Q` by default) on
+   each entry.
+2. `load_gradio_settings()` builds the full parameter set the `/respond` API
+   endpoint expects (model name, base URL, API key, temperature, system
+   prompt, graph-context toggle, Neo4j URI/user/password/database, reasoning
+   toggle) from environment variables, mirroring the defaults `main.py`'s UI
+   uses.
+3. For each question, `query_gradio()` calls the `gradio-chat` app's
+   `/respond` API endpoint via `gradio_client`, exactly as if a human had
+   typed the question into the chat UI and clicked Send. By default history is
+   reset to empty before every question; with `--accumulate-history` it
+   passes the running `history` list so far instead. Each question can take a
+   while, since the agent may make several LLM and Cypher round-trips, so the
+   script prints progress to the terminal:
+   ```
+   Responding to query #2 of 11
+       answered in 38.4s
+   ```
+4. `extract_message_text()` normalizes the assistant's reply: newer Gradio/LLM
+   responses can return `content` as a list of `{"type": "text", "text": ...}`
+   blocks instead of a plain string; this flattens either shape into plain
+   text before it's written out.
+5. For each question, the result dict is a deep copy of the original queries
+   entry (so `Ans` and any other extra fields are preserved as-is) with the
+   `--llm-answer-key` field (`LLM_Ans` by default) added for the LLM's answer.
+   The script asserts that key isn't already present in the entry, to avoid
+   silently overwriting existing data. All results are collected into a list
+   and written to `--answers` as YAML only after the last question is
+   answered, so the file does not exist while the run is in progress.
+
+To see what the agent is doing while a question is in progress (e.g. to check
+whether a long run is still working), follow the `gradio-chat` container's
+logs in another terminal. They show the Cypher queries the agent sends to
+Neo4j:
+
+```bash
+docker logs -f gradio_chat
+```
+
+### Stage 6 — After the run
+
+The Docker containers/volumes are **left running** intentionally, so you can
+continue using the interactive Gradio UI (at `--gradio-url`, by default
+`http://localhost:7860`) afterwards without rebuilding the graph.
+
+**Conversation history in the chat UI.** The UI keeps the conversation: each
+message is sent to the LLM together with every earlier question and answer
+from the same chat (see `respond()` in `src/llm/main.py`), so follow-up
+questions work. This is independent of `--accumulate-history`, which only
+affects benchmark runs (by default each benchmark question is asked with an
+empty history). Things to know:
+
+- Only the questions and final answers are kept, not the Cypher queries or
+  the Neo4j results behind them, so a follow-up may make the agent query the
+  graph again.
+- There is no limit: the whole conversation is resent with every message, so
+  long chats cost more per question and can eventually exceed the model's
+  context window. Click **Clear** to start a new conversation.
+- Each browser tab has its own conversation, and reloading the page starts a
+  new one.
+- Benchmark questions sent by the script do not appear in the browser and are
+  not part of any UI conversation: each API call carries only the history the
+  script passes it (none by default, or the earlier benchmark questions with
+  `--accumulate-history`).
+
+To stop the stack when you are done:
+
+```bash
+docker compose down      # stop and remove the containers; keeps the Neo4j volumes
+docker compose down -v   # also delete the volumes, i.e. wipe the imported graph
+```
+
+The next pipeline run does a `down -v` itself unless `--no-fresh` is passed,
+so neither command is required between runs.
+
+## 4. Supporting configuration
+
+The script relies on the following settings in other files:
+
+- **[`docker-compose.yml`](docker-compose.yml)**
+  - `neo4j-kg`'s TTL volume mounts are overridable via
+    `NEO4J_SCHEMA_TTL_PATH` / `NEO4J_INSTANCE_TTL_PATH` (set automatically by
+    `run_pipeline.py`; not meant to be set by hand in `.env`).
+  - The instance volume defaults to `GUN_thru_MV.linkml_rdf.ttl` (the
+    **postprocessed** file), not the raw `GUN_thru_MV.linkml.ttl`, because
+    the raw file is missing correctly typed relationship predicates.
+  - `gradio-chat`'s `environment:` block forwards the variables listed in §5
+    from `.env` into the container.
+    `NEO4J_URI` is intentionally **not** forwarded — the container's value is
+    hardcoded to `bolt://neo4j-kg:7687` (the Docker-network service name), or
+    the containerized app cannot reach Neo4j at all. See §5 for why it should
+    not be set in `.env` either.
+  - `gradio-chat` mounts the `--schema` YAML read-only at `/app/narad.yaml`
+    (`${LINKML_SCHEMA_HOST_PATH:-./src/narad/schema/narad.yaml}`, set
+    automatically by `run_pipeline.py`) and points `LINKML_SCHEMA_FILE` at it,
+    so `kg_agent.py` can give the LLM the schema's class, slot, and enum
+    descriptions for the same schema the graph was built from.
+
+- **[`src/llm/main.py`](src/llm/main.py)**
+  - `model_name` Dropdown has `allow_custom_value=True`, so API-driven
+    calls (from `run_pipeline.py`) can set a model name without first calling
+    the UI's "Refresh Models" button.
+  - `demo.launch(..., show_error=True)` so the real exception (e.g. an OpenAI
+    API error) is returned to API callers, instead of a generic
+    `AppError: ...has not enabled verbose error reporting` message.
+
+- **[`pyproject.toml`](pyproject.toml) / `uv.lock`** — `gradio-client`,
+  `python-dotenv` and `pyyaml` are in the `dev` dependency group so
+  `run_pipeline.py` can run under `uv run`.
+
+- **[`.env.example`](.env.example)** — documents every environment variable
+  consulted by `main.py`/`kg_agent.py`/`run_pipeline.py`, including which ones
+  are forwarded into the `gradio-chat` container by `docker-compose.yml` versus
+  which only affect `run_pipeline.py`.
+
+## 5. Environment variables
+
+See [`.env.example`](.env.example) for the full annotated list. In summary:
+
+- **Required for the stack to start at all:** `NEO4J_USER`, `NEO4J_PASSWORD`,
+  `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `LLM_MODEL_NAME`.
+- **Forwarded into `gradio-chat` by `docker-compose.yml`** (affect both the
+  interactive UI and `run_pipeline.py`): the above, plus
+  `USE_GRAPH_CONTEXT`, `SHOW_REASONING`, `NEO4J_TRACE_MAX_CHARS`,
+  `NEO4J_SCHEMA_CACHE_TTL_SECONDS`, `OPENAI_TEMPERATURE`,
+  `OPENAI_SYSTEM_PROMPT`, `NEO4J_DATABASE`, `NEO4J_AGENT_MAX_ITERATIONS`,
+  `NEO4J_MANUAL_QUERY`, `NEO4J_RETURN_WARNINGS`.
+- **`NEO4J_RETURN_WARNINGS`** (default `true`; only an explicit `false`
+  turns it off): appends Neo4j's query warnings, such as "label does not
+  exist", to each query result the LLM agent sees, so it can revise a query
+  that references a nonexistent label, relationship type, or property instead
+  of trusting an empty result. Set it to `false` to compare benchmark runs
+  with and without it.
+- **Do not set in `.env`:** `NEO4J_URI`. It must stay `bolt://neo4j-kg:7687`
+  inside Docker, and `docker-compose.yml` hardcodes that for the container.
+  But `run_pipeline.py` reads `NEO4J_URI` from `.env` (defaulting to
+  `bolt://neo4j-kg:7687`) and sends it with every question, which overrides
+  the container's value — so e.g. `NEO4J_URI=bolt://localhost:7687` in `.env`
+  would make every pipeline query fail to reach Neo4j.
+- **Internal, set only by `run_pipeline.py` itself:**
+  `NEO4J_SCHEMA_TTL_PATH`, `NEO4J_INSTANCE_TTL_PATH`, `LINKML_SCHEMA_HOST_PATH`.
+
+## 6. Known caveats / things to be aware of
+
+- **`--no-fresh` is only safe if the RDF content is unchanged since the last
+  `up`.** Regenerating the `.ttl` files changes the volume-mount config for
+  `neo4j-kg`, which makes Compose recreate that container, which in turn
+  forces `neo4j-init` to re-run against a `neo4j_data` volume that may already
+  contain a fully-imported graph — this trips the `n10s_unique_uri` constraint
+  and fails. Default `--fresh` behaviour (`docker compose down -v`) avoids
+  this entirely at the cost of always rebuilding the graph from scratch.
+- **Secrets are visible via the Gradio app's public API schema.** Because
+  `main.py`'s `api_key`/`neo4j_password` Textbox components are pre-filled
+  from `.env` via `value=os.getenv(...)`, calling `gradio_client(...).view_api()`
+  against a running `gradio-chat` instance reveals those default values in
+  plaintext to **anyone who can reach port 7860**, authenticated or not.
+  As a mitigation, `docker-compose.yml` publishes port 7860 (and Neo4j's 7474
+  and 7687) on `127.0.0.1` only, so only users on the same machine can reach
+  them. The exposure itself comes from `main.py`, not from the pipeline, and is
+  not fixed yet; the real fix is to stop pre-filling those fields in the UI.
+- **Answers can differ between the interactive UI and the automated pipeline**
+  even with the same model / 0 temperature, for two reasons unrelated to the
+  pipeline's correctness: (1) LLM hallucination — e.g. confusing a device's
+  physical floor-survey coordinates (`FloorP.x`/`.y`) with an unrelated beam
+  position signal (`IPMK101.XPOS`/`.YPOS`) that has no value populated in the
+  graph; (2) non-deterministic agentic tool-use search paths, which can be
+  further influenced by prior chat history. The chat UI always sends the
+  earlier questions and answers of the same chat, while the pipeline asks
+  each question in isolation unless `--accumulate-history` is used, so the
+  same question can get a different answer in the middle of a UI chat than in
+  a benchmark run. Click **Clear** in the UI to compare like with like.
+- **Only `--transformation RDF` is implemented.** Any other value raises
+  `NotImplementedError` — this is a placeholder for future non-RDF
+  transformation strategies.
+
+## 7. Example Runs
+
+Build the graph and start the chat app, then ask questions by hand at
+`http://localhost:7860`:
+
+```bash
+uv run python3 src/run_pipeline.py \
+  --schema src/narad/schema/narad.yaml \
+  --instance examples/GUN_thru_MV.linkml.yaml
+```
+
+Do the same, then also run the UITF benchmark questions and write the answers:
+
+```bash
+uv run python3 src/run_pipeline.py \
+  --schema src/narad/schema/narad.yaml \
+  --instance examples/GUN_thru_MV.linkml.yaml \
+  --queries examples/benchmark_queries/UITF_v1.yaml \
+  --answers examples/benchmark_queries/UITF_v1_LLM_answers.yaml
+```
+
+In both cases the intermediate files are deleted once the graph is built. Add
+`--keep-intermediate-files` to keep them, e.g. to inspect the RDF.

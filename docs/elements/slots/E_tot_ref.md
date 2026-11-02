@@ -9,7 +9,7 @@ _[eV] Reference total energy_
 
 
 
-URI: [pals:E_tot_ref](https://pals-project.readthedocs.io/E_tot_ref)
+URI: [acc:slot/E_tot_ref](https://example.org/accelerator-core/slot/E_tot_ref)
 Alias: E_tot_ref
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: E_tot_ref
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [ReferenceParamGroup](../classes/ReferenceParamGroup.md) |
-| Slot URI | [pals:E_tot_ref](https://pals-project.readthedocs.io/E_tot_ref) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: E_tot_ref
 | --- | --- |
 | Owner | [ReferenceParamGroup](../classes/ReferenceParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `eV`
+
+</details>
 
 
 
@@ -83,8 +88,9 @@ Alias: E_tot_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:E_tot_ref |
-| native | pals:E_tot_ref |
+| self | acc:E_tot_ref |
+| native | acc:E_tot_ref |
+| close | pals:E_tot_ref |
 
 
 
@@ -98,13 +104,16 @@ description: '[eV] Reference total energy'
 from_schema: https://w3id.org/accelerator-core
 aliases:
 - ETotal
+close_mappings:
+- pals:E_tot_ref
 rank: 1000
-slot_uri: pals:E_tot_ref
 alias: E_tot_ref
 owner: ReferenceParamGroup
 domain_of:
 - ReferenceParamGroup
 range: float
+unit:
+  ucum_code: eV
 
 ```
 </details>

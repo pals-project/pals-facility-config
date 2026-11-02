@@ -9,7 +9,7 @@ _Rotation around the X-axis in the facility floor plan._
 
 
 
-URI: [pals:x_rot](https://pals-project.readthedocs.io/x_rot)
+URI: [acc:slot/x_rot](https://example.org/accelerator-core/slot/x_rot)
 Alias: x_rot
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: x_rot
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
-| Slot URI | [pals:x_rot](https://pals-project.readthedocs.io/x_rot) |
 
 ### Cardinality and Requirements
 
@@ -85,8 +84,9 @@ Alias: x_rot
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:x_rot |
-| native | pals:x_rot |
+| self | acc:x_rot |
+| native | acc:x_rot |
+| close | pals:x_rot |
 
 
 
@@ -102,8 +102,9 @@ aliases:
 - delta_phi
 - phi_shift
 - GlobalOffsetPhi
+close_mappings:
+- pals:x_rot
 rank: 1000
-slot_uri: pals:x_rot
 alias: x_rot
 owner: BodyShiftParamGroup
 domain_of:

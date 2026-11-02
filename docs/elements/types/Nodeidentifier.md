@@ -1,11 +1,52 @@
+# Type: Nodeidentifier 
 
-# Type: nodeidentifier
 
-A URI, CURIE or BNODE that represents a node in a model.
 
-URI: [linkml:Nodeidentifier](https://w3id.org/linkml/Nodeidentifier)
 
-|  |  |  |
-| --- | --- | --- |
-| Root (builtin) type | | **NodeIdentifier** |
-| Representation | | str |
+_A URI, CURIE or BNODE that represents a node in a model._
+
+
+
+URI: [shex:nonLiteral](http://www.w3.org/ns/shex#nonLiteral)
+
+## Type Properties
+
+| Property | Value |
+| --- | --- |
+| Base | `NodeIdentifier` |
+| Type URI | [shex:nonLiteral](http://www.w3.org/ns/shex#nonLiteral) |
+| Representation | `str` |
+
+
+
+
+
+
+## Notes
+
+* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "nodeidentifier".
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | shex:nonLiteral |
+| native | acc:nodeidentifier |
+
+

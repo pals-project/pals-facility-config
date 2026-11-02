@@ -9,7 +9,7 @@ _Length-integrated normal component._
 
 
 
-URI: [pals:slot/EnL](https://pals-project.readthedocs.io/slot/EnL)
+URI: [acc:slot/EnL](https://example.org/accelerator-core/slot/EnL)
 Alias: EnL
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: EnL
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -77,8 +77,8 @@ Alias: EnL
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:EnL |
-| native | pals:EnL |
+| self | acc:EnL |
+| native | acc:EnL |
 | broad | pals:EnNL |
 
 

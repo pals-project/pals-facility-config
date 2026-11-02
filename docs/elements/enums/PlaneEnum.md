@@ -7,7 +7,7 @@ _Controlled values for transverse plane._
 
 
 
-URI: [pals:enum/PlaneEnum](https://pals-project.readthedocs.io/enum/PlaneEnum)
+URI: [acc:enum/PlaneEnum](https://example.org/accelerator-core/enum/PlaneEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

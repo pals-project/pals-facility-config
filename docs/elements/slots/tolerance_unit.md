@@ -3,8 +3,13 @@
 # Slot: tolerance_unit 
 
 
+_Unit of the tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship._
 
-URI: [pals:slot/tolerance_unit](https://pals-project.readthedocs.io/slot/tolerance_unit)
+
+
+
+
+URI: [acc:slot/tolerance_unit](https://example.org/accelerator-core/slot/tolerance_unit)
 Alias: tolerance_unit
 
 <!-- no inheritance hierarchy -->
@@ -17,7 +22,8 @@ Alias: tolerance_unit
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ComponentRelation](../classes/ComponentRelation.md) | Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds. |  no  |
+| [NearestTo](../classes/NearestTo.md) | A relationship indicating that the subject component is nearest to the object component in a specified context,  such as a diagnostic device nearest to a magnet. |  no  |
+| [AdjacentTo](../classes/AdjacentTo.md) | A relationship indicating that the subject component is adjacent to the object component and not overlapping<br> in a specified context, such as radiation detector and a magnet. |  no  |
 
 
 
@@ -31,19 +37,12 @@ Alias: tolerance_unit
 | Property | Value |
 | --- | --- |
 | Range | [UnitEnum](../enums/UnitEnum.md) |
-| Domain Of | [ComponentRelation](../classes/ComponentRelation.md) |
+| Domain Of | [AdjacentTo](../classes/AdjacentTo.md), [NearestTo](../classes/NearestTo.md) |
 
 ### Cardinality and Requirements
 
 | Property | Value |
 | --- | --- |
-### Slot Characteristics
-
-| Property | Value |
-| --- | --- |
-| Owner | [ComponentRelation](../classes/ComponentRelation.md) |
-
-
 
 
 
@@ -72,8 +71,8 @@ Alias: tolerance_unit
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:tolerance_unit |
-| native | pals:tolerance_unit |
+| self | acc:tolerance_unit |
+| native | acc:tolerance_unit |
 
 
 
@@ -83,12 +82,15 @@ Alias: tolerance_unit
 <details>
 ```yaml
 name: tolerance_unit
+description: Unit of the tolerance value for the distance between two components in
+  a relationship. Only an edge-property slot for edges that require a tolerance value
+  between two components in a relationship.
 from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: tolerance_unit
-owner: ComponentRelation
 domain_of:
-- ComponentRelation
+- AdjacentTo
+- NearestTo
 range: UnitEnum
 
 ```

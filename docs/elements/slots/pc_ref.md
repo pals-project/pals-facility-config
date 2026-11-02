@@ -9,7 +9,7 @@ _[momentum*c] Reference momentum times speed of light._
 
 
 
-URI: [pals:pc_ref](https://pals-project.readthedocs.io/pc_ref)
+URI: [acc:slot/pc_ref](https://example.org/accelerator-core/slot/pc_ref)
 Alias: pc_ref
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: pc_ref
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [ReferenceParamGroup](../classes/ReferenceParamGroup.md) |
-| Slot URI | [pals:pc_ref](https://pals-project.readthedocs.io/pc_ref) |
 
 ### Cardinality and Requirements
 
@@ -83,8 +82,9 @@ Alias: pc_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:pc_ref |
-| native | pals:pc_ref |
+| self | acc:pc_ref |
+| native | acc:pc_ref |
+| close | pals:pc_ref |
 
 
 
@@ -98,8 +98,9 @@ description: '[momentum*c] Reference momentum times speed of light.'
 from_schema: https://w3id.org/accelerator-core
 aliases:
 - pCentral
+close_mappings:
+- pals:pc_ref
 rank: 1000
-slot_uri: pals:pc_ref
 alias: pc_ref
 owner: ReferenceParamGroup
 domain_of:

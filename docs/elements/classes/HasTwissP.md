@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasTwissP](https://pals-project.readthedocs.io/class/HasTwissP)
+URI: [acc:class/HasTwissP](https://example.org/accelerator-core/class/HasTwissP)
 
 
 ```mermaid
@@ -23,6 +23,7 @@ TwissParamGroup {
     float etap_y  
     float phi_a  
     float phi_b  
+    string id  
 }
 
 HasTwissP ||--|o TwissParamGroup : "TwissP"
@@ -58,6 +59,7 @@ HasTwissP ||--|o TwissParamGroup : "TwissP"
 | [Aperture](../classes/Aperture.md) | A diagnostic or limiting aperture element used to constrain or characterize beam passage. |
 | [Cavity](../classes/Cavity.md) | A cavity used for beam acceleration or manipulation. |
 | [Marker](../classes/Marker.md) | A virtual component used as a reference point or marker in the beamline structure. |
+| [BeginningEle](../classes/BeginningEle.md) | Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference parameters; otherwise it is expected to be the first element in the branch. |
 
 
 
@@ -90,8 +92,8 @@ HasTwissP ||--|o TwissParamGroup : "TwissP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasTwissP |
-| native | pals:HasTwissP |
+| self | acc:HasTwissP |
+| native | acc:HasTwissP |
 
 
 

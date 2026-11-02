@@ -9,7 +9,7 @@ _Additional notes or comments about the representation of a particle accelerator
 
 
 
-URI: [pals:slot/notes](https://pals-project.readthedocs.io/slot/notes)
+URI: [acc:slot/notes](https://example.org/accelerator-core/slot/notes)
 Alias: notes
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: notes
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:notes |
-| native | pals:notes |
+| self | acc:notes |
+| native | acc:notes |
 
 
 

@@ -9,7 +9,7 @@ _Rotation around the Z-axis in the facility floor plan._
 
 
 
-URI: [pals:z_rot](https://pals-project.readthedocs.io/z_rot)
+URI: [acc:slot/z_rot](https://example.org/accelerator-core/slot/z_rot)
 Alias: z_rot
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: z_rot
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
-| Slot URI | [pals:z_rot](https://pals-project.readthedocs.io/z_rot) |
 
 ### Cardinality and Requirements
 
@@ -85,8 +84,9 @@ Alias: z_rot
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:z_rot |
-| native | pals:z_rot |
+| self | acc:z_rot |
+| native | acc:z_rot |
+| close | pals:z_rot |
 
 
 
@@ -102,8 +102,9 @@ aliases:
 - delta_psi
 - psi_shift
 - GlobalOffsetPsi
+close_mappings:
+- pals:z_rot
 rank: 1000
-slot_uri: pals:z_rot
 alias: z_rot
 owner: BodyShiftParamGroup
 domain_of:

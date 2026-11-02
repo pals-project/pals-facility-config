@@ -9,7 +9,7 @@ _Entrance end fringe field integral._
 
 
 
-URI: [pals:edge1_int](https://pals-project.readthedocs.io/edge1_int)
+URI: [acc:slot/edge1_int](https://example.org/accelerator-core/slot/edge1_int)
 Alias: edge1_int
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: edge1_int
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: edge1_int
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:edge1_int](https://pals-project.readthedocs.io/edge1_int) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: edge1_int
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `T.m`
+
+</details>
 
 
 
@@ -78,8 +83,9 @@ Alias: edge1_int
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:edge1_int |
-| native | pals:edge1_int |
+| self | acc:edge1_int |
+| native | acc:edge1_int |
+| close | pals:edge1_int |
 
 
 
@@ -91,13 +97,16 @@ Alias: edge1_int
 name: edge1_int
 description: Entrance end fringe field integral.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:edge1_int
 rank: 1000
-slot_uri: pals:edge1_int
 alias: edge1_int
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: T.m
 
 ```
 </details>

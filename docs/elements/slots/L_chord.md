@@ -9,7 +9,7 @@ _Chord length of the bend._
 
 
 
-URI: [pals:L_chord](https://pals-project.readthedocs.io/L_chord)
+URI: [acc:slot/L_chord](https://example.org/accelerator-core/slot/L_chord)
 Alias: L_chord
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: L_chord
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: L_chord
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:L_chord](https://pals-project.readthedocs.io/L_chord) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: L_chord
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `m`
+
+</details>
 
 
 
@@ -78,8 +83,9 @@ Alias: L_chord
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:L_chord |
-| native | pals:L_chord |
+| self | acc:L_chord |
+| native | acc:L_chord |
+| close | pals:L_chord |
 
 
 
@@ -91,13 +97,16 @@ Alias: L_chord
 name: L_chord
 description: Chord length of the bend.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:L_chord
 rank: 1000
-slot_uri: pals:L_chord
 alias: L_chord
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: m
 
 ```
 </details>

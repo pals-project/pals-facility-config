@@ -9,7 +9,7 @@ _The native data type of the signal in the source system,  such as String, Integ
 
 
 
-URI: [pals:slot/native_data_type](https://pals-project.readthedocs.io/slot/native_data_type)
+URI: [acc:slot/native_data_type](https://example.org/accelerator-core/slot/native_data_type)
 Alias: native_data_type
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: native_data_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:native_data_type |
-| native | pals:native_data_type |
+| self | acc:native_data_type |
+| native | acc:native_data_type |
 
 
 

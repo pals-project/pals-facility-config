@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasRFP](https://pals-project.readthedocs.io/class/HasRFP)
+URI: [acc:class/HasRFP](https://example.org/accelerator-core/class/HasRFP)
 
 
 ```mermaid
@@ -23,6 +23,7 @@ RFParamGroup {
     float phase  
     float voltage  
     ZeroPhaseEnum zero_phase  
+    string id  
 }
 
 HasRFP ||--|o RFParamGroup : "RFP"
@@ -85,8 +86,8 @@ HasRFP ||--|o RFParamGroup : "RFP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasRFP |
-| native | pals:HasRFP |
+| self | acc:HasRFP |
+| native | acc:HasRFP |
 
 
 

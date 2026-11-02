@@ -2,7 +2,7 @@
 
 
 
-URI: [pals:enum/DirectionEnum](https://pals-project.readthedocs.io/enum/DirectionEnum)
+URI: [acc:enum/DirectionEnum](https://example.org/accelerator-core/enum/DirectionEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

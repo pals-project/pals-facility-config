@@ -9,7 +9,7 @@ _Twiss alpha parameter in the horizontal plane._
 
 
 
-URI: [pals:alpha_a](https://pals-project.readthedocs.io/alpha_a)
+URI: [acc:slot/alpha_a](https://example.org/accelerator-core/slot/alpha_a)
 Alias: alpha_a
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: alpha_a
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [TwissParamGroup](../classes/TwissParamGroup.md) |
-| Slot URI | [pals:alpha_a](https://pals-project.readthedocs.io/alpha_a) |
 
 ### Cardinality and Requirements
 
@@ -84,8 +83,9 @@ Alias: alpha_a
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:alpha_a |
-| native | pals:alpha_a |
+| self | acc:alpha_a |
+| native | acc:alpha_a |
+| close | pals:alpha_a |
 
 
 
@@ -100,8 +100,9 @@ from_schema: https://w3id.org/accelerator-core
 aliases:
 - alpha_x
 - alphax
+close_mappings:
+- pals:alpha_a
 rank: 1000
-slot_uri: pals:alpha_a
 alias: alpha_a
 owner: TwissParamGroup
 domain_of:

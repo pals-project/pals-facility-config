@@ -11,7 +11,7 @@ _If value is greater than 1, the beamline is repeated that many times._
 
 
 
-URI: [pals:repeat](https://pals-project.readthedocs.io/repeat)
+URI: [acc:slot/repeat](https://example.org/accelerator-core/slot/repeat)
 Alias: repeat
 
 <!-- no inheritance hierarchy -->
@@ -39,7 +39,6 @@ Alias: repeat
 | --- | --- |
 | Range | [Integer](../types/Integer.md) |
 | Domain Of | [BeamLine](../classes/BeamLine.md) |
-| Slot URI | [pals:repeat](https://pals-project.readthedocs.io/repeat) |
 
 ### Cardinality and Requirements
 
@@ -80,8 +79,9 @@ Alias: repeat
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:repeat |
-| native | pals:repeat |
+| self | acc:repeat |
+| native | acc:repeat |
+| close | pals:repeat |
 
 
 
@@ -96,8 +96,9 @@ description: 'Repetition count. If not provided, the default assumption is that 
 
   If value is greater than 1, the beamline is repeated that many times.'
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:repeat
 rank: 1000
-slot_uri: pals:repeat
 alias: repeat
 owner: BeamLine
 domain_of:

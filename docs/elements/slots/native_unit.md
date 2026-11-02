@@ -9,7 +9,7 @@ _The native unit of the signal in the source system._
 
 
 
-URI: [pals:slot/native_unit](https://pals-project.readthedocs.io/slot/native_unit)
+URI: [acc:slot/native_unit](https://example.org/accelerator-core/slot/native_unit)
 Alias: native_unit
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: native_unit
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:native_unit |
-| native | pals:native_unit |
+| self | acc:native_unit |
+| native | acc:native_unit |
 
 
 

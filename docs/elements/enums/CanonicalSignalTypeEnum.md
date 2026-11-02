@@ -7,7 +7,7 @@ _Portable semantic meanings for important signals._
 
 
 
-URI: [pals:enum/CanonicalSignalTypeEnum](https://pals-project.readthedocs.io/enum/CanonicalSignalTypeEnum)
+URI: [acc:enum/CanonicalSignalTypeEnum](https://example.org/accelerator-core/enum/CanonicalSignalTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -23,6 +23,7 @@ URI: [pals:enum/CanonicalSignalTypeEnum](https://pals-project.readthedocs.io/enu
 | MagnetCurrentSetpoint | None | Magnet current setpoint signal. |
 | MagnetCurrentReadback | None | Magnet current readback signal. |
 | MagnetFieldSetpoint | None | Magnet field setpoint signal. |
+| MagnetCurrentRange | None | Magnet current range signal. |
 | IntegratedFieldSetpoint | None | Integrated magnetic field setpoint signal. |
 | IntegratedFieldReadback | None | Integrated magnetic field readback signal. |
 | VacuumPressure | None | Vacuum pressure signal. |
@@ -108,6 +109,9 @@ permissible_values:
   MagnetFieldSetpoint:
     text: MagnetFieldSetpoint
     description: Magnet field setpoint signal.
+  MagnetCurrentRange:
+    text: MagnetCurrentRange
+    description: Magnet current range signal.
   IntegratedFieldSetpoint:
     text: IntegratedFieldSetpoint
     description: Integrated magnetic field setpoint signal.

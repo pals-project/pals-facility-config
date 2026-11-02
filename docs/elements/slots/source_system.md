@@ -9,7 +9,7 @@ _The source system from which the signal originates, such as EPICS, PALS-Ext, MY
 
 
 
-URI: [pals:slot/source_system](https://pals-project.readthedocs.io/slot/source_system)
+URI: [acc:slot/source_system](https://example.org/accelerator-core/slot/source_system)
 Alias: source_system
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: source_system
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:source_system |
-| native | pals:source_system |
+| self | acc:source_system |
+| native | acc:source_system |
 
 
 

@@ -9,7 +9,7 @@ _A unique and ideally persistent identifier for the facility, such as a DOI or R
 
 
 
-URI: [pals:slot/identifiers](https://pals-project.readthedocs.io/slot/identifiers)
+URI: [acc:slot/identifiers](https://example.org/accelerator-core/slot/identifiers)
 Alias: identifiers
 
 <!-- no inheritance hierarchy -->
@@ -72,8 +72,8 @@ Alias: identifiers
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:identifiers |
-| native | pals:identifiers |
+| self | acc:identifiers |
+| native | acc:identifiers |
 
 
 

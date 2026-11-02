@@ -9,7 +9,7 @@ _Electric multipole components, one per order N._
 
 
 
-URI: [pals:slot/elec_components](https://pals-project.readthedocs.io/slot/elec_components)
+URI: [acc:slot/elec_components](https://example.org/accelerator-core/slot/elec_components)
 Alias: elec_components
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: elec_components
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ElectricMultipoleParamGroup](../classes/ElectricMultipoleParamGroup.md) | Mixin for electric multipole parameters, <br>which can be used to describe the electric field components of an accelerator element.<br>This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS).<br>Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7<br>  tilt: 0.7<br>- order: 3<br>  En: 27.3<br>- order: 2<br>  EnL: 3.47e1<br>``` |  no  |
+| [ElectricMultipoleParamGroup](../classes/ElectricMultipoleParamGroup.md) | Mixin for electric multipole parameters,  which can be used to describe the electric field components of an accelerator element. This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7<br>  tilt: 0.7<br>- order: 3<br>  En: 27.3<br>- order: 2<br>  EnL: 3.47e1<br>``` |  no  |
 
 
 
@@ -78,8 +78,8 @@ Alias: elec_components
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:elec_components |
-| native | pals:elec_components |
+| self | acc:elec_components |
+| native | acc:elec_components |
 
 
 

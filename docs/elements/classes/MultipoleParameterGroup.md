@@ -3,17 +3,13 @@
 # Class: MultipoleParameterGroup 
 
 
-_A single order's electric (or magnetic) multipole component._
-
-_Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both._
-
-_Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components._
+_A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components._
 
 
 
 
 
-URI: [pals:class/MultipoleParameterGroup](https://pals-project.readthedocs.io/class/MultipoleParameterGroup)
+URI: [acc:class/MultipoleParameterGroup](https://example.org/accelerator-core/class/MultipoleParameterGroup)
 
 
 ```mermaid
@@ -162,8 +158,8 @@ MultipoleParameterGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:MultipoleParameterGroup |
-| native | pals:MultipoleParameterGroup |
+| self | acc:MultipoleParameterGroup |
+| native | acc:MultipoleParameterGroup |
 
 
 
@@ -179,13 +175,10 @@ MultipoleParameterGroup {
 <details>
 ```yaml
 name: MultipoleParameterGroup
-description: 'A single order''s electric (or magnetic) multipole component.
-
-  Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles
-  should be present, not both.
-
-  Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins
-  to represent individual multipole components.'
+description: A single order's electric (or magnetic) multipole component. Only the
+  fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should
+  be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and
+  MagneticMultipoleP mixins to represent individual multipole components.
 from_schema: https://w3id.org/accelerator-core
 attributes:
   order:
@@ -207,6 +200,8 @@ attributes:
     domain_of:
     - MultipoleParameterGroup
     range: float
+    unit:
+      ucum_code: rad
   En:
     name: En
     description: Normal component of the field.
@@ -457,13 +452,10 @@ rules:
 <details>
 ```yaml
 name: MultipoleParameterGroup
-description: 'A single order''s electric (or magnetic) multipole component.
-
-  Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles
-  should be present, not both.
-
-  Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins
-  to represent individual multipole components.'
+description: A single order's electric (or magnetic) multipole component. Only the
+  fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should
+  be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and
+  MagneticMultipoleP mixins to represent individual multipole components.
 from_schema: https://w3id.org/accelerator-core
 attributes:
   order:
@@ -489,6 +481,8 @@ attributes:
     domain_of:
     - MultipoleParameterGroup
     range: float
+    unit:
+      ucum_code: rad
   En:
     name: En
     description: Normal component of the field.

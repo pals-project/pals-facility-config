@@ -9,7 +9,7 @@ _The ORCID identifier of the author._
 
 
 
-URI: [pals:slot/orcid](https://pals-project.readthedocs.io/slot/orcid)
+URI: [acc:slot/orcid](https://example.org/accelerator-core/slot/orcid)
 Alias: orcid
 
 <!-- no inheritance hierarchy -->
@@ -84,8 +84,8 @@ Alias: orcid
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:orcid |
-| native | pals:orcid |
+| self | acc:orcid |
+| native | acc:orcid |
 
 
 

@@ -4,13 +4,13 @@
 
 
 
-URI: [pals:class/HasElectricMultipoleP](https://pals-project.readthedocs.io/class/HasElectricMultipoleP)
+URI: [acc:class/HasElectricMultipoleP](https://example.org/accelerator-core/class/HasElectricMultipoleP)
 
 
 ```mermaid
 erDiagram
 ElectricMultipoleParamGroup {
-
+    string id  
 }
 HasElectricMultipoleP {
 
@@ -91,8 +91,8 @@ HasElectricMultipoleP ||--|o ElectricMultipoleParamGroup : "ElectricMultipoleP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasElectricMultipoleP |
-| native | pals:HasElectricMultipoleP |
+| self | acc:HasElectricMultipoleP |
+| native | acc:HasElectricMultipoleP |
 
 
 

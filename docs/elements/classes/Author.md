@@ -9,7 +9,7 @@ _Contains authorship information for a representation of an accelerator facility
 
 
 
-URI: [pals:class/Author](https://pals-project.readthedocs.io/class/Author)
+URI: [acc:class/Author](https://example.org/accelerator-core/class/Author)
 
 
 ```mermaid
@@ -85,8 +85,8 @@ Author ||--|o Affiliation : "affiliation"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Author |
-| native | pals:Author |
+| self | acc:Author |
+| native | acc:Author |
 
 
 

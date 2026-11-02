@@ -9,7 +9,7 @@ _Rotation around the Z-axis in the facility floor plan._
 
 
 
-URI: [pals:psi](https://pals-project.readthedocs.io/psi)
+URI: [acc:slot/psi](https://example.org/accelerator-core/slot/psi)
 Alias: psi
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: psi
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [FloorParamGroup](../classes/FloorParamGroup.md) |
-| Slot URI | [pals:psi](https://pals-project.readthedocs.io/psi) |
 
 ### Cardinality and Requirements
 
@@ -85,8 +84,9 @@ Alias: psi
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:psi |
-| native | pals:psi |
+| self | acc:psi |
+| native | acc:psi |
+| close | pals:psi |
 
 
 
@@ -102,8 +102,9 @@ aliases:
 - psi_angle
 - Model_Roll
 - Rotation
+close_mappings:
+- pals:psi
 rank: 1000
-slot_uri: pals:psi
 alias: psi
 owner: FloorParamGroup
 domain_of:

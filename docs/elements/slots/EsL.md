@@ -9,7 +9,7 @@ _Length-integrated skew component._
 
 
 
-URI: [pals:slot/EsL](https://pals-project.readthedocs.io/slot/EsL)
+URI: [acc:slot/EsL](https://example.org/accelerator-core/slot/EsL)
 Alias: EsL
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: EsL
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -77,8 +77,8 @@ Alias: EsL
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:EsL |
-| native | pals:EsL |
+| self | acc:EsL |
+| native | acc:EsL |
 | broad | pals:EsNL |
 
 

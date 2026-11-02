@@ -9,7 +9,7 @@ _Indicates whether orbit and Twiss parameters periodic. If not provided, the def
 
 
 
-URI: [pals:periodic](https://pals-project.readthedocs.io/periodic)
+URI: [acc:slot/periodic](https://example.org/accelerator-core/slot/periodic)
 Alias: periodic
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: periodic
 | --- | --- |
 | Range | [Boolean](../types/Boolean.md) |
 | Domain Of | [BeamLine](../classes/BeamLine.md) |
-| Slot URI | [pals:periodic](https://pals-project.readthedocs.io/periodic) |
 
 ### Cardinality and Requirements
 
@@ -78,8 +77,9 @@ Alias: periodic
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:periodic |
-| native | pals:periodic |
+| self | acc:periodic |
+| native | acc:periodic |
+| close | pals:periodic |
 
 
 
@@ -92,8 +92,9 @@ name: periodic
 description: Indicates whether orbit and Twiss parameters periodic. If not provided,
   the default assumption is that the BeamLine is not periodic.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:periodic
 rank: 1000
-slot_uri: pals:periodic
 alias: periodic
 owner: BeamLine
 domain_of:

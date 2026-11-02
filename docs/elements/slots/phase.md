@@ -9,7 +9,7 @@ _RF phase. rad/2pi RF phase in 0 to 2*pi_
 
 
 
-URI: [pals:phase](https://pals-project.readthedocs.io/phase)
+URI: [acc:slot/phase](https://example.org/accelerator-core/slot/phase)
 Alias: phase
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: phase
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:phase](https://pals-project.readthedocs.io/phase) |
 
 ### Cardinality and Requirements
 
@@ -78,8 +77,9 @@ Alias: phase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:phase |
-| native | pals:phase |
+| self | acc:phase |
+| native | acc:phase |
+| close | pals:phase |
 
 
 
@@ -91,8 +91,9 @@ Alias: phase
 name: phase
 description: RF phase. rad/2pi RF phase in 0 to 2*pi
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:phase
 rank: 1000
-slot_uri: pals:phase
 alias: phase
 owner: RFParamGroup
 domain_of:

@@ -9,7 +9,7 @@ _Dipole magnet used to bend the beam. 2 poles. The major difference between this
 
 
 
-URI: [pals:class/Bend](https://pals-project.readthedocs.io/class/Bend)
+URI: [acc:class/Bend](https://example.org/accelerator-core/class/Bend)
 
 
 ```mermaid
@@ -21,6 +21,7 @@ AdditionalMetadata {
 }
 Bend {
     string id  
+    stringList alias  
     PhysicalRelationEnum beamline_relation  
     PhysicalFunctionEnumList functions  
     string kind  
@@ -47,6 +48,7 @@ BendParamGroup {
     ReferenceGeometryEnum ref_geometry  
     float rho_ref  
     float tilt_ref  
+    string id  
 }
 BodyShiftParamGroup {
     float x_offset  
@@ -55,9 +57,10 @@ BodyShiftParamGroup {
     float y_rot  
     float z_offset  
     float z_rot  
+    string id  
 }
 ElectricMultipoleParamGroup {
-
+    string id  
 }
 FloorParamGroup {
     float phi  
@@ -66,18 +69,21 @@ FloorParamGroup {
     float x  
     float y  
     float z  
+    string id  
 }
 LongitudinalPlacementParamGroup {
     float length  
     float s_position  
+    string id  
 }
 MagneticMultipoleParamGroup {
-
+    string id  
 }
 MetaParamGroup {
     string description  
-    string alias  
+    stringList alias  
     string label  
+    string id  
 }
 MultipoleParameterGroup {
     float Bn  
@@ -96,6 +102,7 @@ ReferenceParamGroup {
     float pc_ref  
     string species_ref  
     float time_ref  
+    string id  
 }
 TwissParamGroup {
     float alpha_a  
@@ -108,6 +115,7 @@ TwissParamGroup {
     float etap_y  
     float phi_a  
     float phi_b  
+    string id  
 }
 
 Bend ||--|o BendParamGroup : "BendP"
@@ -129,11 +137,12 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 
 ## Inheritance
-* [Component](../classes/Component.md) [ [HasMetaP](../classes/HasMetaP.md)]
-    * [PhysicalComponent](../classes/PhysicalComponent.md) [ [HasFloorP](../classes/HasFloorP.md) [HasLongitudinalPlacementP](../classes/HasLongitudinalPlacementP.md)]
-        * [Magnet](../classes/Magnet.md) [ [HasReferenceP](../classes/HasReferenceP.md) [HasBodyShiftP](../classes/HasBodyShiftP.md) [HasTwissP](../classes/HasTwissP.md)]
-            * [Multipole](../classes/Multipole.md) [ [HasElectricMultipoleP](../classes/HasElectricMultipoleP.md) [HasMagneticMultipoleP](../classes/HasMagneticMultipoleP.md)]
-                * **Bend** [ [HasBendP](../classes/HasBendP.md)]
+* [Node](../classes/Node.md)
+    * [Component](../classes/Component.md) [ [HasMetaP](../classes/HasMetaP.md)]
+        * [PhysicalComponent](../classes/PhysicalComponent.md) [ [HasFloorP](../classes/HasFloorP.md) [HasLongitudinalPlacementP](../classes/HasLongitudinalPlacementP.md)]
+            * [Magnet](../classes/Magnet.md) [ [HasReferenceP](../classes/HasReferenceP.md) [HasBodyShiftP](../classes/HasBodyShiftP.md) [HasTwissP](../classes/HasTwissP.md)]
+                * [Multipole](../classes/Multipole.md) [ [HasElectricMultipoleP](../classes/HasElectricMultipoleP.md) [HasMagneticMultipoleP](../classes/HasMagneticMultipoleP.md)]
+                    * **Bend** [ [HasBendP](../classes/HasBendP.md)]
 
 
 ## Slots
@@ -146,14 +155,15 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 | [ReferenceP](../slots/ReferenceP.md) | 0..1 <br/> [ReferenceParamGroup](../classes/ReferenceParamGroup.md) | A mixin for reference parameters that are aligned with PALS ReferenceP (Reference Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasReferenceP](../classes/HasReferenceP.md) |
 | [BodyShiftP](../slots/BodyShiftP.md) | 0..1 <br/> [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) | A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasBodyShiftP](../classes/HasBodyShiftP.md) |
 | [TwissP](../slots/TwissP.md) | 0..1 <br/> [TwissParamGroup](../classes/TwissParamGroup.md) | A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasTwissP](../classes/HasTwissP.md) |
-| [functions](../slots/functions.md) | 1..* <br/> [PhysicalFunctionEnum](../enums/PhysicalFunctionEnum.md) | The function of the physical component,  which can be used to identify the component across different source systems. | [PhysicalComponent](../classes/PhysicalComponent.md) |
+| [functions](../slots/functions.md) | * <br/> [PhysicalFunctionEnum](../enums/PhysicalFunctionEnum.md) | The function of the physical component,  which can be used to identify the component across different source systems. | [PhysicalComponent](../classes/PhysicalComponent.md) |
 | [beamline_relation](../slots/beamline_relation.md) | 1 <br/> [PhysicalRelationEnum](../enums/PhysicalRelationEnum.md) | The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems. | [PhysicalComponent](../classes/PhysicalComponent.md) |
 | [FloorP](../slots/FloorP.md) | 0..1 <br/> [FloorParamGroup](../classes/FloorParamGroup.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasFloorP](../classes/HasFloorP.md) |
 | [LongitudinalPlacementP](../slots/LongitudinalPlacementP.md) | 0..1 <br/> [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md) | A mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasLongitudinalPlacementP](../classes/HasLongitudinalPlacementP.md) |
-| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [Component](../classes/Component.md) |
-| [kind](../slots/kind.md) | 1 <br/> [String](../types/String.md) | The LinkML class name of this instance. | [Component](../classes/Component.md) |
 | [native_types](../slots/native_types.md) | * <br/> [String](../types/String.md) | The native type of the component in the source system, which can be used to identify the component across different source systems. | [Component](../classes/Component.md) |
 | [MetaP](../slots/MetaP.md) | 0..1 <br/> [MetaParamGroup](../classes/MetaParamGroup.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasMetaP](../classes/HasMetaP.md) |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [Node](../classes/Node.md) |
+| [kind](../slots/kind.md) | 1 <br/> [String](../types/String.md) | The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix). | [Node](../classes/Node.md) |
+| [alias](../slots/alias.md) | * <br/> [String](../types/String.md) | An alternative name or identifier for the instance. | [Node](../classes/Node.md) |
 
 
 
@@ -192,8 +202,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Bend |
-| native | pals:Bend |
+| self | acc:Bend |
+| native | acc:Bend |
 | exact | pals:Bend |
 
 
@@ -327,24 +337,25 @@ attributes:
     description: The function of the physical component,  which can be used to identify
       the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:physical_function
     rank: 1000
-    slot_uri: pals:physical_function
     alias: functions
     owner: Bend
     domain_of:
     - PhysicalComponent
     - VirtualComponent
-    - SupportingFacilityComponent
     range: PhysicalFunctionEnum
-    required: true
+    required: false
     multivalued: true
   beamline_relation:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
       can be used to identify the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:physical_beamline_relation
     rank: 1000
-    slot_uri: pals:physical_beamline_relation
     alias: beamline_relation
     owner: Bend
     domain_of:
@@ -379,37 +390,6 @@ attributes:
     - HasLongitudinalPlacementP
     range: LongitudinalPlacementParamGroup
     inlined: true
-  id:
-    name: id
-    description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:id
-    identifier: true
-    alias: id
-    owner: Bend
-    domain_of:
-    - Affiliation
-    - Component
-    - Signal
-    - Relationship
-    range: string
-    required: true
-  kind:
-    name: kind
-    description: The LinkML class name of this instance.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:kind
-    designates_type: true
-    alias: kind
-    owner: Bend
-    domain_of:
-    - PALSAccelerator
-    - Component
-    - Signal
-    range: string
-    required: true
   native_types:
     name: native_types
     description: The native type of the component in the source system, which can
@@ -435,6 +415,52 @@ attributes:
     - HasMetaP
     range: MetaParamGroup
     inlined: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: Bend
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
+  kind:
+    name: kind
+    description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
+      (no prefix).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: rdf:type
+    designates_type: true
+    alias: kind
+    owner: Bend
+    domain_of:
+    - Node
+    - PALSAccelerator
+    range: string
+    required: true
+  alias:
+    name: alias
+    description: An alternative name or identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:alias
+    rank: 1000
+    alias: alias
+    owner: Bend
+    domain_of:
+    - Node
+    - MetaParamGroup
+    range: string
+    multivalued: true
 
 ```
 </details>

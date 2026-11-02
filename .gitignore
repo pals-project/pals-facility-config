@@ -9,6 +9,17 @@ __pycache__/
 dist/
 build/
 
+# Generated from the LinkML schema; regenerate with `just gen-project` / `just gen-python` / `just gen-doc`
+/project/
+/src/narad/datamodel/
+/docs/schema/
+
+# Intermediate files written by src/run_pipeline.py and the gen-* just recipes
+*.resolved.yaml
+*.owl.ttl
+*_rdf.ttl
+/examples/*.ttl
+
 # type checking and linting artifacts
 .mypy_cache/
 .pytype/
@@ -34,4 +45,11 @@ htmlcov/
 # Ignore macOS Finder metadata
 .DS_Store
 **/.DS_Store
+
+# IDE / editor config
+.idea/
+.vscode/
+*.swp
+
+# Environment files with secrets
 .env

@@ -2,7 +2,7 @@
 
 
 
-URI: [pals:enum/ReferenceFrameEnum](https://pals-project.readthedocs.io/enum/ReferenceFrameEnum)
+URI: [acc:enum/ReferenceFrameEnum](https://example.org/accelerator-core/enum/ReferenceFrameEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

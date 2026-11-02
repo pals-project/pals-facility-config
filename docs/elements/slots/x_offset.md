@@ -9,7 +9,7 @@ _Shift in the X direction in the facility floor plan._
 
 
 
-URI: [pals:x_offset](https://pals-project.readthedocs.io/x_offset)
+URI: [acc:slot/x_offset](https://example.org/accelerator-core/slot/x_offset)
 Alias: x_offset
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: x_offset
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
-| Slot URI | [pals:x_offset](https://pals-project.readthedocs.io/x_offset) |
 
 ### Cardinality and Requirements
 
@@ -85,8 +84,9 @@ Alias: x_offset
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:x_offset |
-| native | pals:x_offset |
+| self | acc:x_offset |
+| native | acc:x_offset |
+| close | pals:x_offset |
 
 
 
@@ -102,8 +102,9 @@ aliases:
 - delta_x
 - x_shift
 - GlobalOffsetX
+close_mappings:
+- pals:x_offset
 rank: 1000
-slot_uri: pals:x_offset
 alias: x_offset
 owner: BodyShiftParamGroup
 domain_of:

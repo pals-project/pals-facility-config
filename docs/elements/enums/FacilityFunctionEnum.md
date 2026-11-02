@@ -7,7 +7,7 @@ _Broad structural or support functions._
 
 
 
-URI: [pals:enum/FacilityFunctionEnum](https://pals-project.readthedocs.io/enum/FacilityFunctionEnum)
+URI: [acc:enum/FacilityFunctionEnum](https://example.org/accelerator-core/enum/FacilityFunctionEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -22,6 +22,12 @@ URI: [pals:enum/FacilityFunctionEnum](https://pals-project.readthedocs.io/enum/F
 
 
 
+
+## Slots
+
+| Name | Description |
+| ---  | --- |
+| [facility_functions](../slots/facility_functions.md) | The function of the supporting facility component,  which can be used to identify the component across different source systems. |
 
 
 

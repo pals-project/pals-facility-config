@@ -9,7 +9,7 @@ _Additional metadata or annotations for the instance._
 
 
 
-URI: [pals:slot/additional_metadata](https://pals-project.readthedocs.io/slot/additional_metadata)
+URI: [acc:slot/additional_metadata](https://example.org/accelerator-core/slot/additional_metadata)
 Alias: additional_metadata
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: additional_metadata
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:additional_metadata |
-| native | pals:additional_metadata |
+| self | acc:additional_metadata |
+| native | acc:additional_metadata |
 
 
 

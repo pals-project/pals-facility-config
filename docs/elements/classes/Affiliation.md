@@ -9,7 +9,7 @@ _Contains affiliation information for an author or component, such as a ROR._
 
 
 
-URI: [pals:class/Affiliation](https://pals-project.readthedocs.io/class/Affiliation)
+URI: [acc:class/Affiliation](https://example.org/accelerator-core/class/Affiliation)
 
 
 ```mermaid
@@ -79,8 +79,8 @@ Affiliation ||--}o Identifier : "identifiers"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Affiliation |
-| native | pals:Affiliation |
+| self | acc:Affiliation |
+| native | acc:Affiliation |
 
 
 
@@ -120,16 +120,17 @@ attributes:
     name: id
     description: A unique identifier for the instance.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
     rank: 1000
-    slot_uri: pals:id
     identifier: true
     alias: id
     owner: Affiliation
     domain_of:
+    - Node
     - Affiliation
-    - Component
-    - Signal
-    - Relationship
+    - ParamGroup
+    - Edge
     range: string
     required: true
   name:

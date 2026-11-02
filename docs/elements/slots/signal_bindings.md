@@ -9,7 +9,7 @@ _A list of signal bindings in the accelerator system (Component <-> Signal relat
 
 
 
-URI: [pals:slot/signal_bindings](https://pals-project.readthedocs.io/slot/signal_bindings)
+URI: [acc:slot/signal_bindings](https://example.org/accelerator-core/slot/signal_bindings)
 Alias: signal_bindings
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: signal_bindings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:signal_bindings |
-| native | pals:signal_bindings |
+| self | acc:signal_bindings |
+| native | acc:signal_bindings |
 
 
 

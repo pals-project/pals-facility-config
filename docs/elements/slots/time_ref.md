@@ -9,7 +9,7 @@ _[s] Reference time_
 
 
 
-URI: [pals:time_ref](https://pals-project.readthedocs.io/time_ref)
+URI: [acc:slot/time_ref](https://example.org/accelerator-core/slot/time_ref)
 Alias: time_ref
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: time_ref
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [ReferenceParamGroup](../classes/ReferenceParamGroup.md) |
-| Slot URI | [pals:time_ref](https://pals-project.readthedocs.io/time_ref) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: time_ref
 | --- | --- |
 | Owner | [ReferenceParamGroup](../classes/ReferenceParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `s`
+
+</details>
 
 
 
@@ -83,8 +88,9 @@ Alias: time_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:time_ref |
-| native | pals:time_ref |
+| self | acc:time_ref |
+| native | acc:time_ref |
+| close | pals:time_ref |
 
 
 
@@ -98,13 +104,16 @@ description: '[s] Reference time'
 from_schema: https://w3id.org/accelerator-core
 aliases:
 - tRef
+close_mappings:
+- pals:time_ref
 rank: 1000
-slot_uri: pals:time_ref
 alias: time_ref
 owner: ReferenceParamGroup
 domain_of:
 - ReferenceParamGroup
 range: float
+unit:
+  ucum_code: s
 
 ```
 </details>

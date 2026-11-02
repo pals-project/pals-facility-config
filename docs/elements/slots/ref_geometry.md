@@ -9,7 +9,7 @@ _Reference geometry type. Must be `arc`._
 
 
 
-URI: [pals:ref_geometry](https://pals-project.readthedocs.io/ref_geometry)
+URI: [acc:slot/ref_geometry](https://example.org/accelerator-core/slot/ref_geometry)
 Alias: ref_geometry
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: ref_geometry
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: ref_geometry
 | --- | --- |
 | Range | [ReferenceGeometryEnum](../enums/ReferenceGeometryEnum.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:ref_geometry](https://pals-project.readthedocs.io/ref_geometry) |
 
 ### Cardinality and Requirements
 
@@ -78,8 +77,9 @@ Alias: ref_geometry
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:ref_geometry |
-| native | pals:ref_geometry |
+| self | acc:ref_geometry |
+| native | acc:ref_geometry |
+| close | pals:ref_geometry |
 
 
 
@@ -91,8 +91,9 @@ Alias: ref_geometry
 name: ref_geometry
 description: Reference geometry type. Must be `arc`.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:ref_geometry
 rank: 1000
-slot_uri: pals:ref_geometry
 alias: ref_geometry
 owner: BendParamGroup
 domain_of:

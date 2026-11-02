@@ -7,7 +7,7 @@ _The geometric configuration of the multipole field.  Sets the geometry used to 
 
 
 
-URI: [pals:enum/MultipoleGeometryEnum](https://pals-project.readthedocs.io/enum/MultipoleGeometryEnum)
+URI: [acc:enum/MultipoleGeometryEnum](https://example.org/accelerator-core/enum/MultipoleGeometryEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

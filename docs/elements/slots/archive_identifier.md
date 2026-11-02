@@ -9,7 +9,7 @@ _The identifier used to reference the signal in an archival system._
 
 
 
-URI: [pals:slot/archive_identifier](https://pals-project.readthedocs.io/slot/archive_identifier)
+URI: [acc:slot/archive_identifier](https://example.org/accelerator-core/slot/archive_identifier)
 Alias: archive_identifier
 
 <!-- no inheritance hierarchy -->
@@ -77,8 +77,8 @@ Alias: archive_identifier
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:archive_identifier |
-| native | pals:archive_identifier |
+| self | acc:archive_identifier |
+| native | acc:archive_identifier |
 
 
 

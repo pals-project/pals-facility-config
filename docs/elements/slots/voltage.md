@@ -9,7 +9,7 @@ _RF voltage._
 
 
 
-URI: [pals:voltage](https://pals-project.readthedocs.io/voltage)
+URI: [acc:slot/voltage](https://example.org/accelerator-core/slot/voltage)
 Alias: voltage
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: voltage
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:voltage](https://pals-project.readthedocs.io/voltage) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: voltage
 | --- | --- |
 | Owner | [RFParamGroup](../classes/RFParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `V`
+
+</details>
 
 
 
@@ -78,8 +83,9 @@ Alias: voltage
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:voltage |
-| native | pals:voltage |
+| self | acc:voltage |
+| native | acc:voltage |
+| close | pals:voltage |
 
 
 
@@ -91,13 +97,16 @@ Alias: voltage
 name: voltage
 description: RF voltage.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:voltage
 rank: 1000
-slot_uri: pals:voltage
 alias: voltage
 owner: RFParamGroup
 domain_of:
 - RFParamGroup
 range: float
+unit:
+  ucum_code: V
 
 ```
 </details>

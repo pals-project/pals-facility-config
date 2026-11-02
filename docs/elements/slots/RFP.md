@@ -9,7 +9,7 @@ _A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for in
 
 
 
-URI: [pals:slot/RFP](https://pals-project.readthedocs.io/slot/RFP)
+URI: [acc:slot/RFP](https://example.org/accelerator-core/slot/RFP)
 Alias: RFP
 
 <!-- no inheritance hierarchy -->
@@ -80,8 +80,8 @@ Alias: RFP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:RFP |
-| native | pals:RFP |
+| self | acc:RFP |
+| native | acc:RFP |
 
 
 

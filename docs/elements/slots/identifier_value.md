@@ -9,7 +9,7 @@ _The value of the identifier._
 
 
 
-URI: [pals:slot/identifier_value](https://pals-project.readthedocs.io/slot/identifier_value)
+URI: [acc:slot/identifier_value](https://example.org/accelerator-core/slot/identifier_value)
 Alias: identifier_value
 
 <!-- no inheritance hierarchy -->
@@ -77,8 +77,8 @@ Alias: identifier_value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:identifier_value |
-| native | pals:identifier_value |
+| self | acc:identifier_value |
+| native | acc:identifier_value |
 
 
 

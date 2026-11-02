@@ -9,7 +9,7 @@ _A single generic key/value metadata entry, used as a GraphQL-compatible replace
 
 
 
-URI: [pals:class/AdditionalMetadata](https://pals-project.readthedocs.io/class/AdditionalMetadata)
+URI: [acc:class/AdditionalMetadata](https://example.org/accelerator-core/class/AdditionalMetadata)
 
 
 ```mermaid
@@ -75,8 +75,8 @@ AdditionalMetadata {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:AdditionalMetadata |
-| native | pals:AdditionalMetadata |
+| self | acc:AdditionalMetadata |
+| native | acc:AdditionalMetadata |
 
 
 

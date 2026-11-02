@@ -9,7 +9,7 @@ _Global Z coordinate in the facility floor plan._
 
 
 
-URI: [pals:z](https://pals-project.readthedocs.io/z)
+URI: [acc:slot/z](https://example.org/accelerator-core/slot/z)
 Alias: z
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: z
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [FloorParamGroup](../classes/FloorParamGroup.md) |
-| Slot URI | [pals:z](https://pals-project.readthedocs.io/z) |
 
 ### Cardinality and Requirements
 
@@ -85,8 +84,9 @@ Alias: z
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:z |
-| native | pals:z |
+| self | acc:z |
+| native | acc:z |
+| close | pals:z |
 
 
 
@@ -102,8 +102,9 @@ aliases:
 - z_coordinate
 - ModelZ
 - z coordinate
+close_mappings:
+- pals:z
 rank: 1000
-slot_uri: pals:z
 alias: z
 owner: FloorParamGroup
 domain_of:

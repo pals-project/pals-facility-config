@@ -2,17 +2,17 @@
 
 
 
-URI: [pals:enum/RelationContextEnum](https://pals-project.readthedocs.io/enum/RelationContextEnum)
+URI: [acc:enum/RelationContextEnum](https://example.org/accelerator-core/enum/RelationContextEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
 | --- | --- | --- |
-| beamline_order | None |  |
-| Euclidean_3D | None |  |
-| Euclidean_2D | None |  |
-| floorplan | None |  |
-| containment | None |  |
-| installation_mounting | None |  |
+| beamline_order | None | The order of components along the beamline. |
+| Euclidean_3D | None | 3D Euclidean space. |
+| Euclidean_2D | None | 2D Euclidean space. |
+| floorplan | None | Floorplan coordinate system. |
+| containment | None | Containment relationship context. |
+| installation_mounting | None | Installation or mounting context. |
 
 
 
@@ -58,16 +58,40 @@ rank: 1000
 permissible_values:
   beamline_order:
     text: beamline_order
+    description: The order of components along the beamline.
+    aliases:
+    - beamline order
+    - beamline sequence
+    - order
+    - sequence
   Euclidean_3D:
     text: Euclidean_3D
+    description: 3D Euclidean space.
+    aliases:
+    - 3D Euclidean space
   Euclidean_2D:
     text: Euclidean_2D
+    description: 2D Euclidean space.
+    aliases:
+    - 2D Euclidean space
   floorplan:
     text: floorplan
+    description: Floorplan coordinate system.
+    aliases:
+    - floor plan
   containment:
     text: containment
+    description: Containment relationship context.
+    aliases:
+    - containment
+    - contains
   installation_mounting:
     text: installation_mounting
+    description: Installation or mounting context.
+    aliases:
+    - installation
+    - mounting
+    - mounted
 
 ```
 </details>

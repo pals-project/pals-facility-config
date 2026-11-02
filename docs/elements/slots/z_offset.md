@@ -9,7 +9,7 @@ _Shift in the Z direction in the facility floor plan._
 
 
 
-URI: [pals:z_offset](https://pals-project.readthedocs.io/z_offset)
+URI: [acc:slot/z_offset](https://example.org/accelerator-core/slot/z_offset)
 Alias: z_offset
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: z_offset
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
-| Slot URI | [pals:z_offset](https://pals-project.readthedocs.io/z_offset) |
 
 ### Cardinality and Requirements
 
@@ -85,8 +84,9 @@ Alias: z_offset
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:z_offset |
-| native | pals:z_offset |
+| self | acc:z_offset |
+| native | acc:z_offset |
+| close | pals:z_offset |
 
 
 
@@ -102,8 +102,9 @@ aliases:
 - delta_z
 - z_shift
 - GlobalOffsetZ
+close_mappings:
+- pals:z_offset
 rank: 1000
-slot_uri: pals:z_offset
 alias: z_offset
 owner: BodyShiftParamGroup
 domain_of:

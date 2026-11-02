@@ -9,7 +9,7 @@ _Exit end pole face rotation with respect to a rectangular geometry._
 
 
 
-URI: [pals:e2_rect](https://pals-project.readthedocs.io/e2_rect)
+URI: [acc:slot/e2_rect](https://example.org/accelerator-core/slot/e2_rect)
 Alias: e2_rect
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: e2_rect
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: e2_rect
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:e2_rect](https://pals-project.readthedocs.io/e2_rect) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: e2_rect
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `rad`
+
+</details>
 
 
 
@@ -78,8 +83,9 @@ Alias: e2_rect
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:e2_rect |
-| native | pals:e2_rect |
+| self | acc:e2_rect |
+| native | acc:e2_rect |
+| close | pals:e2_rect |
 
 
 
@@ -91,13 +97,16 @@ Alias: e2_rect
 name: e2_rect
 description: Exit end pole face rotation with respect to a rectangular geometry.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:e2_rect
 rank: 1000
-slot_uri: pals:e2_rect
 alias: e2_rect
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: rad
 
 ```
 </details>

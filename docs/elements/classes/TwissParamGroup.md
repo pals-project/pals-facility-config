@@ -9,7 +9,7 @@ _Mixin for Twiss parameters, which can be used to describe the beam optics of an
 
 
 
-URI: [pals:class/TwissParamGroup](https://pals-project.readthedocs.io/class/TwissParamGroup)
+URI: [acc:class/TwissParamGroup](https://example.org/accelerator-core/class/TwissParamGroup)
 
 
 ```mermaid
@@ -25,6 +25,7 @@ TwissParamGroup {
     float etap_y  
     float phi_a  
     float phi_b  
+    string id  
 }
 
 
@@ -33,7 +34,11 @@ TwissParamGroup {
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **TwissParamGroup**
+
 
 ## Slots
 
@@ -41,14 +46,15 @@ TwissParamGroup {
 | ---  | --- | --- | --- |
 | [alpha_a](../slots/alpha_a.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss alpha parameter in the horizontal plane. | direct |
 | [alpha_b](../slots/alpha_b.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss alpha parameter in the vertical plane. | direct |
-| [beta_a](../slots/beta_a.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss beta parameter in the horizontal plane. | direct |
-| [beta_b](../slots/beta_b.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss beta parameter in the vertical plane. | direct |
-| [eta_x](../slots/eta_x.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss dispersion parameter in the horizontal plane. | direct |
-| [eta_y](../slots/eta_y.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss dispersion parameter in the vertical plane. | direct |
+| [beta_a](../slots/beta_a.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss beta parameter in the horizontal plane. Must be strictly positive (> 0). | direct |
+| [beta_b](../slots/beta_b.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss beta parameter in the vertical plane. Must be strictly positive (> 0). | direct |
+| [eta_x](../slots/eta_x.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss dispersion parameter in the horizontal plane. May be any real value. | direct |
+| [eta_y](../slots/eta_y.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss dispersion parameter in the vertical plane. May be any real value. | direct |
 | [etap_x](../slots/etap_x.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss dispersion slope parameter in the horizontal plane. | direct |
 | [etap_y](../slots/etap_y.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss dispersion slope parameter in the vertical plane. | direct |
 | [phi_a](../slots/phi_a.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss phase advance parameter in the horizontal plane. | direct |
 | [phi_b](../slots/phi_b.md) | 0..1 <br/> [Float](../types/Float.md) | Twiss phase advance parameter in the vertical plane. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -77,6 +83,7 @@ TwissParamGroup {
 | [NormalConductingRFCavity](../classes/NormalConductingRFCavity.md) | [TwissP](../slots/TwissP.md) | range | [TwissParamGroup](../classes/TwissParamGroup.md) |
 | [SuperConductingRFCavity](../classes/SuperConductingRFCavity.md) | [TwissP](../slots/TwissP.md) | range | [TwissParamGroup](../classes/TwissParamGroup.md) |
 | [Marker](../classes/Marker.md) | [TwissP](../slots/TwissP.md) | range | [TwissParamGroup](../classes/TwissParamGroup.md) |
+| [BeginningEle](../classes/BeginningEle.md) | [TwissP](../slots/TwissP.md) | range | [TwissParamGroup](../classes/TwissParamGroup.md) |
 
 
 
@@ -107,8 +114,8 @@ TwissParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:TwissParamGroup |
-| native | pals:TwissParamGroup |
+| self | acc:TwissParamGroup |
+| native | acc:TwissParamGroup |
 | broad | pals:TwissP |
 
 
@@ -130,6 +137,7 @@ description: Mixin for Twiss parameters, which can be used to describe the beam 
 from_schema: https://w3id.org/accelerator-core
 broad_mappings:
 - pals:TwissP
+is_a: ParamGroup
 attributes:
   alpha_a:
     name: alpha_a
@@ -138,8 +146,9 @@ attributes:
     aliases:
     - alpha_x
     - alphax
+    close_mappings:
+    - pals:alpha_a
     rank: 1000
-    slot_uri: pals:alpha_a
     domain_of:
     - TwissParamGroup
     range: float
@@ -150,79 +159,110 @@ attributes:
     aliases:
     - alpha_y
     - alphay
+    close_mappings:
+    - pals:alpha_b
     rank: 1000
-    slot_uri: pals:alpha_b
     domain_of:
     - TwissParamGroup
     range: float
   beta_a:
     name: beta_a
-    description: Twiss beta parameter in the horizontal plane.
+    description: Twiss beta parameter in the horizontal plane. Must be strictly positive
+      (> 0).
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - beta_x
     - betax
+    close_mappings:
+    - pals:beta_a
     rank: 1000
-    slot_uri: pals:beta_a
     domain_of:
     - TwissParamGroup
     range: float
+    minimum_value: 0
+    unit:
+      ucum_code: m
+    none_of:
+    - equals_number: 0
   beta_b:
     name: beta_b
-    description: Twiss beta parameter in the vertical plane.
+    description: Twiss beta parameter in the vertical plane. Must be strictly positive
+      (> 0).
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - beta_y
     - betay
+    close_mappings:
+    - pals:beta_b
     rank: 1000
-    slot_uri: pals:beta_b
     domain_of:
     - TwissParamGroup
     range: float
+    minimum_value: 0
+    unit:
+      ucum_code: m
+    none_of:
+    - equals_number: 0
   eta_x:
     name: eta_x
-    description: Twiss dispersion parameter in the horizontal plane.
+    description: Twiss dispersion parameter in the horizontal plane. May be any real
+      value.
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - etax
+    close_mappings:
+    - pals:eta_x
     rank: 1000
-    slot_uri: pals:eta_x
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      ucum_code: m
   eta_y:
     name: eta_y
-    description: Twiss dispersion parameter in the vertical plane.
+    description: Twiss dispersion parameter in the vertical plane. May be any real
+      value.
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - etay
+    close_mappings:
+    - pals:eta_y
     rank: 1000
-    slot_uri: pals:eta_y
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      ucum_code: m
   etap_x:
     name: etap_x
     description: Twiss dispersion slope parameter in the horizontal plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - etapx
+    close_mappings:
+    - pals:etap_x
     rank: 1000
-    slot_uri: pals:etap_x
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      descriptive_name: dimensionless
+      ucum_code: '1'
   etap_y:
     name: etap_y
     description: Twiss dispersion slope parameter in the vertical plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - etapy
+    close_mappings:
+    - pals:etap_y
     rank: 1000
-    slot_uri: pals:etap_y
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      descriptive_name: dimensionless
+      ucum_code: '1'
   phi_a:
     name: phi_a
     description: Twiss phase advance parameter in the horizontal plane.
@@ -232,11 +272,14 @@ attributes:
     - phix
     - psi_x
     - psix
+    close_mappings:
+    - pals:phi_a
     rank: 1000
-    slot_uri: pals:phi_a
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      ucum_code: rad
   phi_b:
     name: phi_b
     description: Twiss phase advance parameter in the vertical plane.
@@ -246,11 +289,14 @@ attributes:
     - phiy
     - psi_y
     - psiy
+    close_mappings:
+    - pals:phi_b
     rank: 1000
-    slot_uri: pals:phi_b
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      ucum_code: rad
 
 ```
 </details>
@@ -265,6 +311,7 @@ description: Mixin for Twiss parameters, which can be used to describe the beam 
 from_schema: https://w3id.org/accelerator-core
 broad_mappings:
 - pals:TwissP
+is_a: ParamGroup
 attributes:
   alpha_a:
     name: alpha_a
@@ -273,8 +320,9 @@ attributes:
     aliases:
     - alpha_x
     - alphax
+    close_mappings:
+    - pals:alpha_a
     rank: 1000
-    slot_uri: pals:alpha_a
     alias: alpha_a
     owner: TwissParamGroup
     domain_of:
@@ -287,8 +335,9 @@ attributes:
     aliases:
     - alpha_y
     - alphay
+    close_mappings:
+    - pals:alpha_b
     rank: 1000
-    slot_uri: pals:alpha_b
     alias: alpha_b
     owner: TwissParamGroup
     domain_of:
@@ -296,84 +345,114 @@ attributes:
     range: float
   beta_a:
     name: beta_a
-    description: Twiss beta parameter in the horizontal plane.
+    description: Twiss beta parameter in the horizontal plane. Must be strictly positive
+      (> 0).
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - beta_x
     - betax
+    close_mappings:
+    - pals:beta_a
     rank: 1000
-    slot_uri: pals:beta_a
     alias: beta_a
     owner: TwissParamGroup
     domain_of:
     - TwissParamGroup
     range: float
+    minimum_value: 0
+    unit:
+      ucum_code: m
+    none_of:
+    - equals_number: 0
   beta_b:
     name: beta_b
-    description: Twiss beta parameter in the vertical plane.
+    description: Twiss beta parameter in the vertical plane. Must be strictly positive
+      (> 0).
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - beta_y
     - betay
+    close_mappings:
+    - pals:beta_b
     rank: 1000
-    slot_uri: pals:beta_b
     alias: beta_b
     owner: TwissParamGroup
     domain_of:
     - TwissParamGroup
     range: float
+    minimum_value: 0
+    unit:
+      ucum_code: m
+    none_of:
+    - equals_number: 0
   eta_x:
     name: eta_x
-    description: Twiss dispersion parameter in the horizontal plane.
+    description: Twiss dispersion parameter in the horizontal plane. May be any real
+      value.
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - etax
+    close_mappings:
+    - pals:eta_x
     rank: 1000
-    slot_uri: pals:eta_x
     alias: eta_x
     owner: TwissParamGroup
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      ucum_code: m
   eta_y:
     name: eta_y
-    description: Twiss dispersion parameter in the vertical plane.
+    description: Twiss dispersion parameter in the vertical plane. May be any real
+      value.
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - etay
+    close_mappings:
+    - pals:eta_y
     rank: 1000
-    slot_uri: pals:eta_y
     alias: eta_y
     owner: TwissParamGroup
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      ucum_code: m
   etap_x:
     name: etap_x
     description: Twiss dispersion slope parameter in the horizontal plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - etapx
+    close_mappings:
+    - pals:etap_x
     rank: 1000
-    slot_uri: pals:etap_x
     alias: etap_x
     owner: TwissParamGroup
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      descriptive_name: dimensionless
+      ucum_code: '1'
   etap_y:
     name: etap_y
     description: Twiss dispersion slope parameter in the vertical plane.
     from_schema: https://w3id.org/accelerator-core
     aliases:
     - etapy
+    close_mappings:
+    - pals:etap_y
     rank: 1000
-    slot_uri: pals:etap_y
     alias: etap_y
     owner: TwissParamGroup
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      descriptive_name: dimensionless
+      ucum_code: '1'
   phi_a:
     name: phi_a
     description: Twiss phase advance parameter in the horizontal plane.
@@ -383,13 +462,16 @@ attributes:
     - phix
     - psi_x
     - psix
+    close_mappings:
+    - pals:phi_a
     rank: 1000
-    slot_uri: pals:phi_a
     alias: phi_a
     owner: TwissParamGroup
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      ucum_code: rad
   phi_b:
     name: phi_b
     description: Twiss phase advance parameter in the vertical plane.
@@ -399,13 +481,33 @@ attributes:
     - phiy
     - psi_y
     - psiy
+    close_mappings:
+    - pals:phi_b
     rank: 1000
-    slot_uri: pals:phi_b
     alias: phi_b
     owner: TwissParamGroup
     domain_of:
     - TwissParamGroup
     range: float
+    unit:
+      ucum_code: rad
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: TwissParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 
 ```
 </details>

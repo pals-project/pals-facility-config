@@ -9,7 +9,7 @@ _A unique, and ideally persistent, identifier for a facility, such as a DOI or R
 
 
 
-URI: [pals:class/Identifier](https://pals-project.readthedocs.io/class/Identifier)
+URI: [acc:class/Identifier](https://example.org/accelerator-core/class/Identifier)
 
 
 ```mermaid
@@ -74,8 +74,8 @@ Identifier {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Identifier |
-| native | pals:Identifier |
+| self | acc:Identifier |
+| native | acc:Identifier |
 
 
 

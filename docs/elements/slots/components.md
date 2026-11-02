@@ -9,7 +9,7 @@ _A list of physical components in the accelerator system._
 
 
 
-URI: [pals:slot/components](https://pals-project.readthedocs.io/slot/components)
+URI: [acc:slot/components](https://example.org/accelerator-core/slot/components)
 Alias: components
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: components
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:components |
-| native | pals:components |
+| self | acc:components |
+| native | acc:components |
 
 
 

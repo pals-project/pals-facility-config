@@ -9,7 +9,7 @@ _The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK._
 
 
 
-URI: [pals:slot/identifier_type](https://pals-project.readthedocs.io/slot/identifier_type)
+URI: [acc:slot/identifier_type](https://example.org/accelerator-core/slot/identifier_type)
 Alias: identifier_type
 
 <!-- no inheritance hierarchy -->
@@ -77,8 +77,8 @@ Alias: identifier_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:identifier_type |
-| native | pals:identifier_type |
+| self | acc:identifier_type |
+| native | acc:identifier_type |
 
 
 

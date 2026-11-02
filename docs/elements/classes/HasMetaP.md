@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasMetaP](https://pals-project.readthedocs.io/class/HasMetaP)
+URI: [acc:class/HasMetaP](https://example.org/accelerator-core/class/HasMetaP)
 
 
 ```mermaid
@@ -19,8 +19,9 @@ HasMetaP {
 }
 MetaParamGroup {
     string description  
-    string alias  
+    stringList alias  
     string label  
+    string id  
 }
 
 HasMetaP ||--|o MetaParamGroup : "MetaP"
@@ -85,8 +86,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasMetaP |
-| native | pals:HasMetaP |
+| self | acc:HasMetaP |
+| native | acc:HasMetaP |
 
 
 

@@ -9,7 +9,7 @@ _Rotation around the X-axis in the facility floor plan._
 
 
 
-URI: [pals:phi](https://pals-project.readthedocs.io/phi)
+URI: [acc:slot/phi](https://example.org/accelerator-core/slot/phi)
 Alias: phi
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: phi
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [FloorParamGroup](../classes/FloorParamGroup.md) |
-| Slot URI | [pals:phi](https://pals-project.readthedocs.io/phi) |
 
 ### Cardinality and Requirements
 
@@ -85,8 +84,9 @@ Alias: phi
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:phi |
-| native | pals:phi |
+| self | acc:phi |
+| native | acc:phi |
+| close | pals:phi |
 
 
 
@@ -102,8 +102,9 @@ aliases:
 - phi_angle
 - ModelPitch
 - Model_Pitch
+close_mappings:
+- pals:phi
 rank: 1000
-slot_uri: pals:phi
 alias: phi
 owner: FloorParamGroup
 domain_of:

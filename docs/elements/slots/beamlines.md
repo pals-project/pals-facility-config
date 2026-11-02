@@ -9,7 +9,7 @@ _A list of beamlines in the accelerator system._
 
 
 
-URI: [pals:slot/beamlines](https://pals-project.readthedocs.io/slot/beamlines)
+URI: [acc:slot/beamlines](https://example.org/accelerator-core/slot/beamlines)
 Alias: beamlines
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: beamlines
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:beamlines |
-| native | pals:beamlines |
+| self | acc:beamlines |
+| native | acc:beamlines |
 
 
 

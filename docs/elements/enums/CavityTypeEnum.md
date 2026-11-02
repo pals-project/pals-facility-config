@@ -7,7 +7,7 @@ _The type of cavity, which determines the field configuration and mode structure
 
 
 
-URI: [pals:enum/CavityTypeEnum](https://pals-project.readthedocs.io/enum/CavityTypeEnum)
+URI: [acc:enum/CavityTypeEnum](https://example.org/accelerator-core/enum/CavityTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

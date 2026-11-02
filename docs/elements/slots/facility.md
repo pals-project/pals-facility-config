@@ -9,7 +9,7 @@ _A facility that contains lattice elements (physical and virtual), beamlines, pa
 
 
 
-URI: [pals:slot/facility](https://pals-project.readthedocs.io/slot/facility)
+URI: [acc:slot/facility](https://example.org/accelerator-core/slot/facility)
 Alias: facility
 
 <!-- no inheritance hierarchy -->
@@ -77,8 +77,8 @@ Alias: facility
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:facility |
-| native | pals:facility |
+| self | acc:facility |
+| native | acc:facility |
 
 
 

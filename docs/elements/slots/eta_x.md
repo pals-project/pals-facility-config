@@ -3,13 +3,13 @@
 # Slot: eta_x 
 
 
-_Twiss dispersion parameter in the horizontal plane._
+_Twiss dispersion parameter in the horizontal plane. May be any real value._
 
 
 
 
 
-URI: [pals:eta_x](https://pals-project.readthedocs.io/eta_x)
+URI: [acc:slot/eta_x](https://example.org/accelerator-core/slot/eta_x)
 Alias: eta_x
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: eta_x
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [TwissParamGroup](../classes/TwissParamGroup.md) |
-| Slot URI | [pals:eta_x](https://pals-project.readthedocs.io/eta_x) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: eta_x
 | --- | --- |
 | Owner | [TwissParamGroup](../classes/TwissParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `m`
+
+</details>
 
 
 
@@ -83,8 +88,9 @@ Alias: eta_x
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:eta_x |
-| native | pals:eta_x |
+| self | acc:eta_x |
+| native | acc:eta_x |
+| close | pals:eta_x |
 
 
 
@@ -94,17 +100,20 @@ Alias: eta_x
 <details>
 ```yaml
 name: eta_x
-description: Twiss dispersion parameter in the horizontal plane.
+description: Twiss dispersion parameter in the horizontal plane. May be any real value.
 from_schema: https://w3id.org/accelerator-core
 aliases:
 - etax
+close_mappings:
+- pals:eta_x
 rank: 1000
-slot_uri: pals:eta_x
 alias: eta_x
 owner: TwissParamGroup
 domain_of:
 - TwissParamGroup
 range: float
+unit:
+  ucum_code: m
 
 ```
 </details>

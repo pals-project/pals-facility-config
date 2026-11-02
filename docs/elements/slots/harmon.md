@@ -9,7 +9,7 @@ _RF harmonic number._
 
 
 
-URI: [pals:harmon](https://pals-project.readthedocs.io/harmon)
+URI: [acc:slot/harmon](https://example.org/accelerator-core/slot/harmon)
 Alias: harmon
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: harmon
 | --- | --- |
 | Range | [Integer](../types/Integer.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:harmon](https://pals-project.readthedocs.io/harmon) |
 
 ### Cardinality and Requirements
 
@@ -78,8 +77,9 @@ Alias: harmon
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:harmon |
-| native | pals:harmon |
+| self | acc:harmon |
+| native | acc:harmon |
+| close | pals:harmon |
 
 
 
@@ -91,8 +91,9 @@ Alias: harmon
 name: harmon
 description: RF harmonic number.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:harmon
 rank: 1000
-slot_uri: pals:harmon
 alias: harmon
 owner: RFParamGroup
 domain_of:

@@ -9,7 +9,7 @@ _A human-readable description of the signal in the source system._
 
 
 
-URI: [pals:slot/native_description](https://pals-project.readthedocs.io/slot/native_description)
+URI: [acc:slot/native_description](https://example.org/accelerator-core/slot/native_description)
 Alias: native_description
 
 <!-- no inheritance hierarchy -->
@@ -77,8 +77,8 @@ Alias: native_description
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:native_description |
-| native | pals:native_description |
+| self | acc:native_description |
+| native | acc:native_description |
 
 
 
