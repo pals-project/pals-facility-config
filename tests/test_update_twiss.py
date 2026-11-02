@@ -1,4 +1,4 @@
-"""Regression coverage for the Booster table importer."""
+"""Regression coverage for the shared Twiss table importer."""
 
 import importlib.util
 from pathlib import Path
@@ -9,7 +9,7 @@ import yaml
 
 
 BOOSTER = Path(__file__).resolve().parents[1] / "examples" / "Booster"
-spec = importlib.util.spec_from_file_location("booster_update_twiss", BOOSTER / "update_twiss.py")
+spec = importlib.util.spec_from_file_location("update_twiss", BOOSTER.parent / "update_twiss.py")
 updater = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = updater
 spec.loader.exec_module(updater)
@@ -74,3 +74,35 @@ def test_booster_table_preserves_beginning_optics():
         if name not in rows[0].twiss:
             assert beginning["TwissP"][name] == value
     assert beginning["TwissP"]["beta_a"] == rows[0].twiss["beta_a"]
+
+
+def test_partial_overlap_repeated_names_and_missing_values(tmp_path):
+    table = tmp_path / "twiss.dat"
+    table.write_text(
+        "# name s beta_a beta_b\n"
+        "removed 1.0 99.0 99.0\n"
+        "mark 2.0 6.0 ---\n"
+        "MARK 3.0 7.0 8.0\n"
+        "mark 4.0 99.0 99.0\n"
+    )
+    document = {
+        "kind": "PALSAccelerator",
+        "facility": {"components": [
+            {"id": "inst:MARK", "kind": "Marker",
+             "TwissP": {"id": "inst:first", "beta_b": 10.0, "dbeta_a_dpz": 23.0}},
+            {"id": "inst:MARK_002", "kind": "Marker"},
+            {"id": "inst:OTHER", "kind": "Marker",
+             "TwissP": {"id": "inst:other", "beta_a": 11.0}},
+        ]},
+    }
+    for component in document["facility"]["components"]:
+        component.update(functions=["Mark"], beamline_relation="Inline")
+    assert updater.add_twiss_data(document, updater.read_twiss_table(table)) == (0, 2)
+    first, second, other = document["facility"]["components"]
+    assert first["TwissP"] == {
+        "id": "inst:first", "beta_a": 6.0, "beta_b": 10.0, "dbeta_a_dpz": 23.0,
+    }
+    assert second["TwissP"] == {
+        "id": "inst:MARK_002/TwissP", "beta_a": 7.0, "beta_b": 8.0,
+    }
+    assert other["TwissP"] == {"id": "inst:other", "beta_a": 11.0}

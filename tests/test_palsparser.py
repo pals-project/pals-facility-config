@@ -107,7 +107,9 @@ def test_bta_lattice_is_parsed_and_expanded() -> None:
 def test_bta_twiss_update_matches_current_lattice(tmp_path: Path) -> None:
     output = tmp_path / "bta_with_twiss.yaml"
     subprocess.run(
-        [sys.executable, str(BTA_FILE.with_name("update_bta_twiss.py")),
+        [sys.executable, str(EXAMPLES_DIR / "update_twiss.py"),
+         "--input", str(BTA_FILE.with_name("bta_narad_skeleton_palsparserpy.yaml")),
+         "--twiss", str(BTA_FILE.with_name("bta_twiss.dat")),
          "--output", str(output)],
         check=True, capture_output=True, text=True,
     )

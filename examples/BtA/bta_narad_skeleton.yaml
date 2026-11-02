@@ -20,13 +20,13 @@ facility:
       pc_ref: 2160058016.715229
     TwissP:
       id: inst:BEGINNING_B1/TwissP
-      beta_a: 12.551
       alpha_a: 1.825
+      alpha_b: -0.64998
+      beta_a: 12.551
+      beta_b: 4.0729
       eta_x: 2.7208
       etap_x: -0.42226
       phi_a: 13.281
-      beta_b: 4.0729
-      alpha_b: -0.64998
       eta_y: 0.0
       etap_y: 0.0
       phi_b: 13.334

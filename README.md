@@ -80,10 +80,31 @@ BtA instance with:
 ```console
 uv run python src/narad_system/schema/palsparserpy_to_narad.py \
   -input examples/BtA/bta.pals.yaml
-uv run python examples/BtA/update_bta_twiss.py \
+uv run python examples/update_twiss.py \
+  --twiss examples/BtA/bta_twiss.dat \
   --input examples/BtA/bta_narad_skeleton_palsparserpy.yaml
 uv run python examples/BtA/generate_narad_bta_instance.py
 ```
+
+`examples/update_twiss.py` also works with Booster and other NARAD YAML files:
+
+```console
+uv run python examples/update_twiss.py \
+  --twiss examples/Booster/booster_twiss.dat \
+  --input examples/Booster/booster_narad_skeleton_palsparserpy.yaml \
+  --output /tmp/booster_with_twiss.yaml
+```
+
+Both `--input` and `--twiss` are required. Omit `--output` to update the input
+in place. The importer reads column names from a header containing `name` and
+`s`, supports reordered or additional columns and Fortran `D` exponents, and
+stops before `Lord Elements:`. It updates only matching YAML components (names
+are case insensitive; repeated names match in occurrence order). Unmatched
+components and table rows are left alone. Supported Twiss fields present in
+the table overwrite those fields in YAML; existing extra fields, group IDs,
+and values marked `---` in the table are preserved. Positions are updated only
+for component kinds supporting `LongitudinalPlacementP`. The result is validated
+against the NARAD model before writing.
 
 ## Known PALS-to-NARAD Gaps
 

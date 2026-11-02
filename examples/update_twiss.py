@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Add s positions and Twiss parameters from a Bmad table to a BtA skeleton.
+"""Merge s positions and Twiss parameters from a Bmad table into a NARAD skeleton.
 
-By default the script updates ``bta_narad_skeleton_palsparserpy.yaml`` in place.  Use
-``--output`` to write a separate file instead.
+Columns are identified by the table header, in any order. Columns named for
+NARAD TwissP fields are imported; other columns are ignored. Existing TwissP
+fields absent from the table (or marked ``---``) are preserved.
+
+Only matching YAML components are updated; unmatched table rows are ignored.
+Repeated names are matched in occurrence order, ignoring case.
+Supply ``--input`` and ``--twiss`` explicitly. The input is updated in place
+unless ``--output`` specifies a separate file.
 """
 
 from __future__ import annotations
@@ -12,29 +18,17 @@ from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 import re
-from typing import Any
+from typing import Any, Optional
 
 import yaml
 
 from narad.datamodel import narad_pydantic as narad_model
 
 
-HERE = Path(__file__).resolve().parent
-DEFAULT_TWISS = HERE / "bta_twiss.dat"
-DEFAULT_SKELETON = HERE / "bta_narad_skeleton_palsparserpy.yaml"
-
-TWISS_COLUMNS = (
-    "beta_a",
-    "alpha_a",
-    "eta_x",
-    "etap_x",
-    "phi_a",
-    "beta_b",
-    "alpha_b",
-    "eta_y",
-    "etap_y",
-    "phi_b",
-)
+TWISS_COLUMNS = {
+    name for name, field in narad_model.TwissParamGroup.model_fields.items()
+    if field.annotation == Optional[float]
+}
 
 
 @dataclass(frozen=True)
@@ -47,25 +41,44 @@ class TwissRow:
 def read_twiss_table(path: Path) -> list[TwissRow]:
     """Read the main lattice rows, excluding the trailing Lord Elements table."""
     rows: list[TwissRow] = []
+    columns: list[str] | None = None
     with path.open(encoding="utf-8") as stream:
         for line_number, line in enumerate(stream, start=1):
             if line.strip() == "Lord Elements:":
                 break
-            fields = line.split()
-            if not fields or fields[0].startswith("#"):
+            fields = line.strip().removeprefix("#").split()
+            if not fields:
                 continue
-            if len(fields) != 15 or not fields[0].isdigit():
-                raise ValueError(f"{path}:{line_number}: expected a 15-column Twiss row")
+            header = [field.casefold() for field in fields]
+            if "name" in header and "s" in header:
+                if len(set(header)) != len(header):
+                    raise ValueError(f"{path}:{line_number}: duplicate column names")
+                columns = header
+                continue
+            if line.lstrip().startswith("#"):
+                continue
+            if columns is None:
+                raise ValueError(f"{path}:{line_number}: expected a header containing name and s")
+            if len(fields) != len(columns):
+                raise ValueError(
+                    f"{path}:{line_number}: expected {len(columns)} columns from header, "
+                    f"got {len(fields)}"
+                )
+            record = dict(zip(columns, fields))
             try:
-                values = [float(value) for value in fields[5:]]
-                s_position = float(fields[3])
+                twiss = {
+                    name: float(value.replace("D", "E").replace("d", "e"))
+                    for name, value in record.items()
+                    if name in TWISS_COLUMNS and value != "---"
+                }
+                s_position = float(record["s"].replace("D", "E").replace("d", "e"))
             except ValueError as error:
                 raise ValueError(f"{path}:{line_number}: invalid numeric value") from error
             rows.append(
                 TwissRow(
-                    name=fields[1],
+                    name=record["name"],
                     s_position=s_position,
-                    twiss=dict(zip(TWISS_COLUMNS, values)),
+                    twiss=twiss,
                 )
             )
     if not rows:
@@ -113,23 +126,11 @@ def add_twiss_data(document: dict[str, Any], rows: list[TwissRow]) -> tuple[int,
             placement["s_position"] = row.s_position
             s_count += 1
 
-        if "TwissP" in model.model_fields:
-            component["TwissP"] = {
-                "id": f"{component['id']}/TwissP",
-                **row.twiss,
-            }
+        if "TwissP" in model.model_fields and row.twiss:
+            twiss = component.setdefault("TwissP", {})
+            twiss.setdefault("id", f"{component['id']}/TwissP")
+            twiss.update(row.twiss)
             twiss_count += 1
-
-    unmatched_rows = [
-        row.name
-        for name, named_rows in rows_by_name.items()
-        for row in named_rows[used_by_name[name] :]
-    ]
-    if unmatched_rows:
-        raise ValueError(
-            "NARAD skeleton has no matching component(s) for Twiss rows: "
-            + ", ".join(unmatched_rows)
-        )
 
     # Catch unsupported parameter groups or malformed values before overwriting a file.
     narad_model.PALSAccelerator.model_validate(document)
@@ -138,8 +139,8 @@ def add_twiss_data(document: dict[str, Any], rows: list[TwissRow]) -> tuple[int,
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--twiss", type=Path, default=DEFAULT_TWISS, help="Bmad Twiss table")
-    parser.add_argument("--input", type=Path, default=DEFAULT_SKELETON, help="input NARAD skeleton")
+    parser.add_argument("--twiss", type=Path, required=True, help="Bmad Twiss table")
+    parser.add_argument("--input", type=Path, required=True, help="input NARAD YAML")
     parser.add_argument(
         "--output",
         type=Path,
