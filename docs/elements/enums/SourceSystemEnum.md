@@ -7,7 +7,7 @@ _Controlled values for facility-local source systems._
 
 
 
-URI: [pals:enum/SourceSystemEnum](https://pals-project.readthedocs.io/enum/SourceSystemEnum)
+URI: [acc:enum/SourceSystemEnum](https://example.org/accelerator-core/enum/SourceSystemEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasSolenoidP](https://pals-project.readthedocs.io/class/HasSolenoidP)
+URI: [acc:class/HasSolenoidP](https://example.org/accelerator-core/class/HasSolenoidP)
 
 
 ```mermaid
@@ -15,6 +15,7 @@ HasSolenoidP {
 SolenoidParamGroup {
     float Bsol  
     float Ksol  
+    string id  
 }
 
 HasSolenoidP ||--|o SolenoidParamGroup : "SolenoidP"
@@ -77,8 +78,8 @@ HasSolenoidP ||--|o SolenoidParamGroup : "SolenoidP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasSolenoidP |
-| native | pals:HasSolenoidP |
+| self | acc:HasSolenoidP |
+| native | acc:HasSolenoidP |
 
 
 

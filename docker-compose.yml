@@ -1,0 +1,77 @@
+services:
+  neo4j-kg:
+    image: neo4j:5-community
+    container_name: neo4j_kg
+    # Published on 127.0.0.1 only, so the stack is reachable from this machine but not the network.
+    ports:
+      - "127.0.0.1:7474:7474" # HTTP / Neo4j Browser
+      - "127.0.0.1:7687:7687" # Bolt protocol
+    environment:
+      - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
+      - NEO4J_PLUGINS=["apoc", "n10s"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*,n10s.*
+      - NEO4J_dbms_unmanaged__extension__classes=n10s.endpoint=/rdf
+    volumes:
+      # Overridable so the automation driver can point at freshly generated RDF files.
+      # The defaults are where `just gen-owl` / `just gen-post` write their output.
+      - ${NEO4J_SCHEMA_TTL_PATH:-./project/owl/narad.owl.ttl}:/data/narad.owl.ttl
+      - ${NEO4J_INSTANCE_TTL_PATH:-./project/owl/GUN_thru_MV.linkml_rdf.ttl}:/data/narad_instance.ttl
+      - neo4j_data:/data
+      - neo4j_plugins:/plugins
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u ${NEO4J_USER} -p ${NEO4J_PASSWORD} 'RETURN 1;' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  neo4j-init:
+    image: neo4j:5-community
+    container_name: neo4j_kg_init
+    depends_on:
+      neo4j-kg:
+        condition: service_healthy
+    environment:
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+    volumes:
+      - ./src/llm/graph_init.cypher:/graph_init.cypher:ro
+    entrypoint: ["bash", "-c", "echo 'Neo4j is healthy – running graph_init.cypher …' && cat /graph_init.cypher | cypher-shell -a bolt://neo4j-kg:7687 -u \"$$NEO4J_USER\" -p \"$$NEO4J_PASSWORD\" --non-interactive && echo 'Graph initialisation complete.'"]
+    restart: "no"
+
+  gradio-chat:
+    build: ./src/llm
+    container_name: gradio_chat
+    ports:
+      # 127.0.0.1 only: the Gradio API exposes the prefilled API key and Neo4j password (see automation_script_documentation.md §6).
+      - "127.0.0.1:7860:7860"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - LLM_MODEL_NAME=${LLM_MODEL_NAME}
+      - OPENAI_TEMPERATURE=${OPENAI_TEMPERATURE:-0.7}
+      - OPENAI_SYSTEM_PROMPT=${OPENAI_SYSTEM_PROMPT:-}
+      # Hardcoded (not .env-overridable): must stay the compose service name for
+      # the container to reach Neo4j on the Docker network -- "localhost" here
+      # would point at the gradio-chat container itself, not neo4j-kg.
+      - NEO4J_URI=bolt://neo4j-kg:7687
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+      - NEO4J_DATABASE=${NEO4J_DATABASE:-neo4j}
+      - NEO4J_AGENT_MAX_ITERATIONS=${NEO4J_AGENT_MAX_ITERATIONS:-6}
+      - NEO4J_MANUAL_QUERY=${NEO4J_MANUAL_QUERY:-MATCH (n) RETURN n LIMIT 25}
+      - USE_GRAPH_CONTEXT=${USE_GRAPH_CONTEXT:-true}
+      - SHOW_REASONING=${SHOW_REASONING:-false}
+      - NEO4J_RETURN_WARNINGS=${NEO4J_RETURN_WARNINGS:-true}
+      - NEO4J_TRACE_MAX_CHARS=${NEO4J_TRACE_MAX_CHARS:-4000}
+      - NEO4J_SCHEMA_CACHE_TTL_SECONDS=${NEO4J_SCHEMA_CACHE_TTL_SECONDS:-300}
+      - LINKML_SCHEMA_FILE=/app/narad.yaml
+    volumes:
+      - ${LINKML_SCHEMA_HOST_PATH:-./src/narad/schema/narad.yaml}:/app/narad.yaml:ro
+    depends_on:
+      neo4j-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+volumes:
+  neo4j_data:
+  neo4j_plugins:

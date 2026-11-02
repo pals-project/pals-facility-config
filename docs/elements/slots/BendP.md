@@ -9,7 +9,7 @@ _A mixin for bend parameters that are aligned with PALS BendP (Bend Parameters) 
 
 
 
-URI: [pals:slot/BendP](https://pals-project.readthedocs.io/slot/BendP)
+URI: [acc:slot/BendP](https://example.org/accelerator-core/slot/BendP)
 Alias: BendP
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: BendP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:BendP |
-| native | pals:BendP |
+| self | acc:BendP |
+| native | acc:BendP |
 
 
 

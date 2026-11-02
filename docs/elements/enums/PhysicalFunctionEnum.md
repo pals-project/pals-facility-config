@@ -7,7 +7,7 @@ _Broad device-level functions._
 
 
 
-URI: [pals:enum/PhysicalFunctionEnum](https://pals-project.readthedocs.io/enum/PhysicalFunctionEnum)
+URI: [acc:enum/PhysicalFunctionEnum](https://example.org/accelerator-core/enum/PhysicalFunctionEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

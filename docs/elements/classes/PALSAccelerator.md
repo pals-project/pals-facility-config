@@ -9,7 +9,7 @@ _Root container for accelerator core components, semantic signals, and local bin
 
 
 
-URI: [pals:class/PALSAccelerator](https://pals-project.readthedocs.io/class/PALSAccelerator)
+URI: [acc:class/PALSAccelerator](https://example.org/accelerator-core/class/PALSAccelerator)
 
 
 ```mermaid
@@ -31,30 +31,27 @@ BeamLine {
     boolean periodic  
     integer repeat  
     string id  
+    stringList alias  
     string kind  
     stringList native_types  
     VirtualRelationEnum beamline_relation  
     VirtualFunctionEnumList functions  
 }
 Component {
-    string id  
-    string kind  
     stringList native_types  
+    string id  
+    stringList alias  
+    string kind  
 }
 ComponentRelation {
-    AxisEnum axis  
     DirectionEnum component_direction  
     RelationContextEnum context  
-    UnitEnum distance_unit  
-    float distance_value  
-    ComponentRelationPredicateEnum predicate  
     ReferenceFrameEnum reference_frame  
-    UnitEnum tolerance_unit  
-    float tolerance_value  
     string id  
+    string predicate  
 }
 Facility {
-
+    uri id_namespace  
 }
 Identifier {
     IdentifierTypeEnum identifier_type  
@@ -67,22 +64,22 @@ PALSAccelerator {
     string version  
 }
 Signal {
-    string id  
     string access_protocol  
-    string alias  
     string archive_identifier  
     CanonicalSignalTypeEnum canonical_signal_type  
-    string kind  
     DataTypeEnum native_data_type  
     string native_description  
     UnitEnum native_unit  
     QuantityKindEnum quantity_kind  
     SignalRoleEnum signal_role  
     SourceSystemEnum source_system  
+    string id  
+    stringList alias  
+    string kind  
 }
 SignalBinding {
-    SignalBindingPredicateEnum predicate  
     string id  
+    string predicate  
 }
 
 Affiliation ||--}o Identifier : "identifiers"
@@ -90,7 +87,6 @@ Author ||--|o Affiliation : "affiliation"
 BeamLine ||--|o FloorParamGroup : "FloorP"
 BeamLine ||--|o MetaParamGroup : "MetaP"
 Component ||--|o MetaParamGroup : "MetaP"
-ComponentRelation ||--|o BeamLine : "beamline_context"
 ComponentRelation ||--|| Component : "object, subject"
 Facility ||--}o BeamLine : "beamlines"
 Facility ||--}o Component : "components"
@@ -122,7 +118,7 @@ SignalBinding ||--|| Signal : "object"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [kind](../slots/kind.md) | 1 <br/> [String](../types/String.md) | The LinkML class name of this instance. | direct |
+| [kind](../slots/kind.md) | 1 <br/> [String](../types/String.md) | The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix). | direct |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) | A human-readable description of the instance. | direct |
 | [affiliation](../slots/affiliation.md) | 0..1 <br/> [Affiliation](../classes/Affiliation.md) | The affiliation of the author or component, as a ROR. | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | Version of the representation of a particle accelerator and its operations. | direct |
@@ -162,8 +158,8 @@ SignalBinding ||--|| Signal : "object"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:PALSAccelerator |
-| native | pals:PALSAccelerator |
+| self | acc:PALSAccelerator |
+| native | acc:PALSAccelerator |
 
 
 
@@ -295,17 +291,17 @@ attributes:
     range: Facility
   kind:
     name: kind
-    description: The LinkML class name of this instance.
+    description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
+      (no prefix).
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
-    slot_uri: pals:kind
+    slot_uri: rdf:type
     designates_type: true
     alias: kind
     owner: PALSAccelerator
     domain_of:
+    - Node
     - PALSAccelerator
-    - Component
-    - Signal
     range: string
     required: true
   description:

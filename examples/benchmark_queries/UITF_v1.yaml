@@ -1,0 +1,22 @@
+- Q: Give me the signals for the horizontal and vertical beam positions and status at the first BPM
+  Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
+- Q: What's the status signal of MFHK101?
+  Ans: MFHK101.STAT
+- Q: What's the status signal of the second solenoid along the beamline?
+  Ans: MFBK202.STAT
+- Q: Give me the strength signals of all quadrupoles
+  Ans: MQWK202.BDL, MQWK203.BDL, MQJM501.BDL–504.BDL, MQJM603.BDL, MQJM604.BDL
+- Q: Give me the name of the first viewer downstream of MBHK102V
+  Ans: ITVK201
+- Q: Give me betax function at the first viewer downstream of MBHK102V
+  Ans: 4.60175 meters
+- Q: horizontal beta function at the first viewer downstream of MBHK102V
+  Ans: 4.60175 meters
+- Q: What beamlines are part of the GUN_thru_MV section?
+  Ans: KV and MV
+- Q: What components are contained within the GUN_thru_MV section?
+  Ans: RF_LASER, VIPK101, S_IS_20CM, IPMK101
+- Q: What is the first component in the MV section?
+  Ans: VBVM101
+- Q: What components are part of the MV section?
+  Ans: VBVM101, VIPM101B

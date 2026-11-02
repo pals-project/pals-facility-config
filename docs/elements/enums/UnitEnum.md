@@ -7,7 +7,7 @@ _Engineering units using ASCII-safe enum names. Values map to QUDT unit IRIs wit
 
 
 
-URI: [pals:enum/UnitEnum](https://pals-project.readthedocs.io/enum/UnitEnum)
+URI: [acc:enum/UnitEnum](https://example.org/accelerator-core/enum/UnitEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -18,6 +18,7 @@ URI: [pals:enum/UnitEnum](https://pals-project.readthedocs.io/enum/UnitEnum)
 | eV_per_c | None | momentum in electron volts per speed of light |
 | eV_per_c2 | None | mass in electron volts per speed of light squared |
 | fundamental_charge | None | fundamental charge |
+| Gauss | None | gauss (magnetic flux density) |
 | G_per_cm | None | gauss per centimeter |
 | Hz | None | hertz |
 | kW | None | kilowatt |
@@ -44,9 +45,9 @@ URI: [pals:enum/UnitEnum](https://pals-project.readthedocs.io/enum/UnitEnum)
 
 | Name | Description |
 | ---  | --- |
+| [distance_unit](../slots/distance_unit.md) | Unit of the distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship. |
+| [tolerance_unit](../slots/tolerance_unit.md) | Unit of the tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship. |
 | [native_unit](../slots/native_unit.md) | The native unit of the signal in the source system. |
-| [distance_unit](../slots/distance_unit.md) |  |
-| [tolerance_unit](../slots/tolerance_unit.md) |  |
 
 
 
@@ -86,12 +87,18 @@ permissible_values:
   A:
     text: A
     description: ampere
+    exact_mappings:
+    - qudt:A
   degree:
     text: degree
     description: degree
+    exact_mappings:
+    - qudt:DEG
   eV:
     text: eV
     description: electron volt
+    exact_mappings:
+    - qudt:EV
   eV_per_c:
     text: eV_per_c
     description: momentum in electron volts per speed of light
@@ -101,32 +108,49 @@ permissible_values:
   fundamental_charge:
     text: fundamental_charge
     description: fundamental charge
+  Gauss:
+    text: Gauss
+    description: gauss (magnetic flux density)
   G_per_cm:
     text: G_per_cm
     description: gauss per centimeter
   Hz:
     text: Hz
     description: hertz
+    exact_mappings:
+    - qudt:HZ
   kW:
     text: kW
     description: kilowatt
+    related_mappings:
+    - qudt:KiloW
   m:
     text: m
     description: meter
+    exact_mappings:
+    - qudt:M
   mm:
     text: mm
     description: millimeter
+    exact_mappings:
+    - qudt:MilliM
   mrem_per_h:
     text: mrem_per_h
     description: millirem per hour. Kept as a local accelerator unit value because
       QUDT publishes related radiation units but no exact millirem-per-hour unit in
       the checked vocabulary.
+    exact_mappings:
+    - qudt:MREM-PER-H
   MV_per_m:
     text: MV_per_m
     description: megavolt per meter
+    exact_mappings:
+    - qudt:MegaV-PER-M
   PA:
     text: PA
     description: pascal
+    exact_mappings:
+    - qudt:PA
   randians_pi2:
     text: randians_pi2
     description: radians divided by 2 pi - angles and phases
@@ -138,24 +162,38 @@ permissible_values:
   seconds:
     text: seconds
     description: second
+    exact_mappings:
+    - qudt:SEC
   T:
     text: T
     description: tesla
+    exact_mappings:
+    - qudt:T
   T_M:
     text: T_M
     description: tesla meter
+    exact_mappings:
+    - qudt:T-M
   Torr:
     text: Torr
     description: torr
+    exact_mappings:
+    - qudt:TORR
   V:
     text: V
     description: volt
+    exact_mappings:
+    - qudt:V
   V_per_m:
     text: V_per_m
     description: volt per meter
+    exact_mappings:
+    - qudt:V-PER-M
   unitless:
     text: unitless
     description: dimensionless numeric value
+    exact_mappings:
+    - qudt:NUM
   none:
     text: none
     description: no unit or not applicable

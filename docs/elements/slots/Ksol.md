@@ -9,7 +9,7 @@ _Normalized solenoid strength._
 
 
 
-URI: [pals:Ksol](https://pals-project.readthedocs.io/Ksol)
+URI: [acc:slot/Ksol](https://example.org/accelerator-core/slot/Ksol)
 Alias: Ksol
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: Ksol
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [SolenoidParamGroup](../classes/SolenoidParamGroup.md) |
-| Slot URI | [pals:Ksol](https://pals-project.readthedocs.io/Ksol) |
 
 ### Cardinality and Requirements
 
@@ -78,8 +77,9 @@ Alias: Ksol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Ksol |
-| native | pals:Ksol |
+| self | acc:Ksol |
+| native | acc:Ksol |
+| close | pals:Ksol |
 
 
 
@@ -91,8 +91,9 @@ Alias: Ksol
 name: Ksol
 description: Normalized solenoid strength.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:Ksol
 rank: 1000
-slot_uri: pals:Ksol
 alias: Ksol
 owner: SolenoidParamGroup
 domain_of:

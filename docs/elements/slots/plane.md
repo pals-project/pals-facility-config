@@ -9,7 +9,7 @@ _The transverse plane in which the kicker operates, either horizontal or vertica
 
 
 
-URI: [pals:slot/plane](https://pals-project.readthedocs.io/slot/plane)
+URI: [acc:slot/plane](https://example.org/accelerator-core/slot/plane)
 Alias: plane
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: plane
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:plane |
-| native | pals:plane |
+| self | acc:plane |
+| native | acc:plane |
 
 
 

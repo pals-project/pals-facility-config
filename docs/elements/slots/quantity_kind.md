@@ -9,7 +9,7 @@ _The physical quantity kind of the signal._
 
 
 
-URI: [pals:slot/quantity_kind](https://pals-project.readthedocs.io/slot/quantity_kind)
+URI: [acc:slot/quantity_kind](https://example.org/accelerator-core/slot/quantity_kind)
 Alias: quantity_kind
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: quantity_kind
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:quantity_kind |
-| native | pals:quantity_kind |
+| self | acc:quantity_kind |
+| native | acc:quantity_kind |
 
 
 

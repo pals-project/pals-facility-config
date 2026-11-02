@@ -9,7 +9,7 @@ _Mixin for solenoid-specific parameters._
 
 
 
-URI: [pals:class/SolenoidParamGroup](https://pals-project.readthedocs.io/class/SolenoidParamGroup)
+URI: [acc:class/SolenoidParamGroup](https://example.org/accelerator-core/class/SolenoidParamGroup)
 
 
 ```mermaid
@@ -17,6 +17,7 @@ erDiagram
 SolenoidParamGroup {
     float Bsol  
     float Ksol  
+    string id  
 }
 
 
@@ -25,7 +26,11 @@ SolenoidParamGroup {
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **SolenoidParamGroup**
+
 
 ## Slots
 
@@ -33,6 +38,7 @@ SolenoidParamGroup {
 | ---  | --- | --- | --- |
 | [Ksol](../slots/Ksol.md) | 0..1 <br/> [Float](../types/Float.md) | Normalized solenoid strength. | direct |
 | [Bsol](../slots/Bsol.md) | 0..1 <br/> [Float](../types/Float.md) | Solenoid field. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -86,8 +92,8 @@ SolenoidParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:SolenoidParamGroup |
-| native | pals:SolenoidParamGroup |
+| self | acc:SolenoidParamGroup |
+| native | acc:SolenoidParamGroup |
 | exact | pals:SolenoidP |
 
 
@@ -108,13 +114,15 @@ description: Mixin for solenoid-specific parameters.
 from_schema: https://w3id.org/accelerator-core
 exact_mappings:
 - pals:SolenoidP
+is_a: ParamGroup
 attributes:
   Ksol:
     name: Ksol
     description: Normalized solenoid strength.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:Ksol
     rank: 1000
-    slot_uri: pals:Ksol
     domain_of:
     - SolenoidParamGroup
     range: float
@@ -122,11 +130,14 @@ attributes:
     name: Bsol
     description: Solenoid field.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:Bsol
     rank: 1000
-    slot_uri: pals:Bsol
     domain_of:
     - SolenoidParamGroup
     range: float
+    unit:
+      ucum_code: T
 rules:
 - preconditions:
     slot_conditions:
@@ -157,13 +168,15 @@ description: Mixin for solenoid-specific parameters.
 from_schema: https://w3id.org/accelerator-core
 exact_mappings:
 - pals:SolenoidP
+is_a: ParamGroup
 attributes:
   Ksol:
     name: Ksol
     description: Normalized solenoid strength.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:Ksol
     rank: 1000
-    slot_uri: pals:Ksol
     alias: Ksol
     owner: SolenoidParamGroup
     domain_of:
@@ -173,13 +186,33 @@ attributes:
     name: Bsol
     description: Solenoid field.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:Bsol
     rank: 1000
-    slot_uri: pals:Bsol
     alias: Bsol
     owner: SolenoidParamGroup
     domain_of:
     - SolenoidParamGroup
     range: float
+    unit:
+      ucum_code: T
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: SolenoidParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 rules:
 - preconditions:
     slot_conditions:

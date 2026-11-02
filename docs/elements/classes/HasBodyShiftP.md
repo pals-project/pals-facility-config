@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasBodyShiftP](https://pals-project.readthedocs.io/class/HasBodyShiftP)
+URI: [acc:class/HasBodyShiftP](https://example.org/accelerator-core/class/HasBodyShiftP)
 
 
 ```mermaid
@@ -16,6 +16,7 @@ BodyShiftParamGroup {
     float y_rot  
     float z_offset  
     float z_rot  
+    string id  
 }
 HasBodyShiftP {
 
@@ -87,8 +88,8 @@ HasBodyShiftP ||--|o BodyShiftParamGroup : "BodyShiftP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasBodyShiftP |
-| native | pals:HasBodyShiftP |
+| self | acc:HasBodyShiftP |
+| native | acc:HasBodyShiftP |
 
 
 

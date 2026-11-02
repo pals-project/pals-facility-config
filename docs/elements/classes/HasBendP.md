@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasBendP](https://pals-project.readthedocs.io/class/HasBendP)
+URI: [acc:class/HasBendP](https://example.org/accelerator-core/class/HasBendP)
 
 
 ```mermaid
@@ -30,6 +30,7 @@ BendParamGroup {
     ReferenceGeometryEnum ref_geometry  
     float rho_ref  
     float tilt_ref  
+    string id  
 }
 HasBendP {
 
@@ -95,8 +96,8 @@ HasBendP ||--|o BendParamGroup : "BendP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasBendP |
-| native | pals:HasBendP |
+| self | acc:HasBendP |
+| native | acc:HasBendP |
 
 
 

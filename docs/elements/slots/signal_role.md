@@ -9,7 +9,7 @@ _The role of the signal in the control system, such as setpoint, readback, statu
 
 
 
-URI: [pals:slot/signal_role](https://pals-project.readthedocs.io/slot/signal_role)
+URI: [acc:slot/signal_role](https://example.org/accelerator-core/slot/signal_role)
 Alias: signal_role
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: signal_role
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:signal_role |
-| native | pals:signal_role |
+| self | acc:signal_role |
+| native | acc:signal_role |
 
 
 

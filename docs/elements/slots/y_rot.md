@@ -9,7 +9,7 @@ _Rotation around the Y-axis in the facility floor plan._
 
 
 
-URI: [pals:y_rot](https://pals-project.readthedocs.io/y_rot)
+URI: [acc:slot/y_rot](https://example.org/accelerator-core/slot/y_rot)
 Alias: y_rot
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: y_rot
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
-| Slot URI | [pals:y_rot](https://pals-project.readthedocs.io/y_rot) |
 
 ### Cardinality and Requirements
 
@@ -85,8 +84,9 @@ Alias: y_rot
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:y_rot |
-| native | pals:y_rot |
+| self | acc:y_rot |
+| native | acc:y_rot |
+| close | pals:y_rot |
 
 
 
@@ -102,8 +102,9 @@ aliases:
 - delta_theta
 - theta_shift
 - GlobalOffsetTheta
+close_mappings:
+- pals:y_rot
 rank: 1000
-slot_uri: pals:y_rot
 alias: y_rot
 owner: BodyShiftParamGroup
 domain_of:

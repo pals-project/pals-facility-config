@@ -9,7 +9,7 @@ _A list of signals in the accelerator system._
 
 
 
-URI: [pals:slot/signals](https://pals-project.readthedocs.io/slot/signals)
+URI: [acc:slot/signals](https://example.org/accelerator-core/slot/signals)
 Alias: signals
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: signals
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:signals |
-| native | pals:signals |
+| self | acc:signals |
+| native | acc:signals |
 
 
 

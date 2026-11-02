@@ -1,0 +1,303 @@
+- Q: Give me the signals for the horizontal and vertical beam positions and status
+    at the first BPM
+  Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
+  LLM_Ans: Do you mean the first BPM along a particular beamline (e.g. MV or KV)?
+    I can list beamlines I see (and the BPMs at their starts) — which beamline should
+    I use?
+- Q: What's the status signal of MFHK101?
+  Ans: MFHK101.STAT
+  LLM_Ans: "I couldn't find a component named MFHK101 in the graph.\n\nWhat I tried\
+    \ and found\n- I ran searches for nodes with key/uri/name/alias/value containing\
+    \ \"MFHK101\" and got no matches.\n- I did list Kicker components and found many\
+    \ similarly‑named kickers such as:\n  - file:///uitf/MBHK101H\n  - file:///uitf/MBHK101V\n\
+    \  - file:///uitf/MBHK101AH\n  - file:///uitf/MBHK101AV\n  (So there are nearby\
+    \ names with MBHK101 — please confirm whether you meant MFHK101 or one of these.)\n\
+    \nHow you (or I, if you confirm) can get the status signal\n- To locate the component\
+    \ exactly:\n  MATCH (c)\n  WHERE c.key = 'MFHK101' OR c.uri ENDS WITH 'MFHK101'\
+    \ OR 'MFHK101' IN c.alias\n  RETURN labels(c), c.uri, c.key, c.alias LIMIT 10\n\
+    \n- To return any status/readback signal once the component node is known (replace\
+    \ the WHERE clause or uri with the confirmed component):\n  MATCH (c)-[:has_readback_signal]->(s:Signal)\n\
+    \  WHERE c.uri = 'file:///uitf/<COMPONENT_URI>'  // e.g. 'file:///uitf/MBHK101H'\n\
+    \  RETURN s.uri AS signal_uri, s.canonical_signal_type AS canonical_type, s.signal_role\
+    \ AS role, s.native_unit AS unit LIMIT 20\n\nNote on likely signal type\n- Status\
+    \ signals are typically represented with canonical_signal_type = DeviceStatus\
+    \ or Status and are exposed via has_readback_signal / has_setpoint_signal relationships\
+    \ in this graph.\n\nNext step\n- Please confirm the exact identifier (MFHK101\
+    \ vs MBHK101H/MBHK101V, etc.) or tell me which of the similar nodes above you\
+    \ meant and I will run the status-signal query and return the signal(s)."
+- Q: What's the status signal of the second solenoid along the beamline?
+  Ans: MFBK202.STAT
+  LLM_Ans: 'The status signal is file:///uitf/MFBK202.STAT — a Readback signal with
+    canonical type "Status" (native description: "Power-supply or device state summary.").'
+- Q: Give me the strength signals of all quadrupoles
+  Ans: MQWK202.BDL, MQWK203.BDL, MQJM501.BDL–504.BDL, MQJM603.BDL, MQJM604.BDL
+  LLM_Ans: "Here are the strength-related signals for every Quadrupole (setpoints/readbacks/fieldsetpoints).\
+    \ I list the instance id (short form), the signal short name, the full signal\
+    \ URI, the canonical semantic type, unit, and the relation type we found.\n\n\
+    - MQJM501\n  - Magnet current setpoint: MQJM501.S — file:///uitf/MQJM501.S — Canonical:\
+    \ MagnetCurrentSetpoint — Unit: A — relation: has_setpoint_signal\n  - Magnet\
+    \ current readback: MQJM501M — file:///uitf/MQJM501M — Canonical: MagnetCurrentReadback\
+    \ — Unit: A — relation: has_readback_signal\n  - Magnet field setpoint (integrated):\
+    \ MQJM501.BDL — file:///uitf/MQJM501.BDL — Canonical: MagnetFieldSetpoint — Unit:\
+    \ Gauss — relation: has_setpoint_signal\n  - Limits (current setpoint limits):\
+    \ MQJM501.HMIN / MQJM501.HMAX — file:///uitf/MQJM501.HMIN , file:///uitf/MQJM501.HMAX\
+    \ — Canonical: MagnetCurrentSetpoint — Unit: A — relation: has_limit_signal\n\n\
+    - MQJM502\n  - Magnet current setpoint: MQJM502.S — file:///uitf/MQJM502.S — Canonical:\
+    \ MagnetCurrentSetpoint — Unit: A — relation: has_setpoint_signal\n  - Magnet\
+    \ current readback: MQJM502M — file:///uitf/MQJM502M — Canonical: MagnetCurrentReadback\
+    \ — Unit: A — relation: has_readback_signal\n  - Magnet field setpoint (integrated):\
+    \ MQJM502.BDL — file:///uitf/MQJM502.BDL — Canonical: MagnetFieldSetpoint — Unit:\
+    \ Gauss — relation: has_setpoint_signal\n  - Limits (current setpoint limits):\
+    \ MQJM502.HMIN / MQJM502.HMAX — file:///uitf/MQJM502.HMIN , file:///uitf/MQJM502.HMAX\
+    \ — Canonical: MagnetCurrentSetpoint — Unit: A — relation: has_limit_signal\n\n\
+    - MQJM503\n  - Magnet current setpoint: MQJM503.S — file:///uitf/MQJM503.S — Canonical:\
+    \ MagnetCurrentSetpoint — Unit: A — relation: has_setpoint_signal\n  - Magnet\
+    \ current readback: MQJM503M — file:///uitf/MQJM503M — Canonical: MagnetCurrentReadback\
+    \ — Unit: A — relation: has_readback_signal\n  - Magnet field setpoint (integrated):\
+    \ MQJM503.BDL — file:///uitf/MQJM503.BDL — Canonical: MagnetFieldSetpoint — Unit:\
+    \ Gauss — relation: has_setpoint_signal\n  - Limits (current setpoint limits):\
+    \ MQJM503.HMIN / MQJM503.HMAX — file:///uitf/MQJM503.HMIN , file:///uitf/MQJM503.HMAX\
+    \ — Canonical: MagnetCurrentSetpoint — Unit: A — relation: has_limit_signal\n\n\
+    - MQJM504\n  - Magnet current setpoint: MQJM504.S — file:///uitf/MQJM504.S — Canonical:\
+    \ MagnetCurrentSetpoint — Unit: A — relation: has_setpoint_signal\n  - Magnet\
+    \ current readback: MQJM504M — file:///uitf/MQJM504M — Canonical: MagnetCurrentReadback\
+    \ — Unit: A — relation: has_readback_signal\n  - Magnet field setpoint (integrated):\
+    \ MQJM504.BDL — file:///uitf/MQJM504.BDL — Canonical: MagnetFieldSetpoint — Unit:\
+    \ Gauss — relation: has_setpoint_signal\n  - Limits (current setpoint limits):\
+    \ MQJM504.HMIN / MQJM504.HMAX — file:///uitf/MQJM504.HMIN , file:///uitf/MQJM504.HMAX\
+    \ — Canonical: MagnetCurrentSetpoint — Unit: A — relation: has_limit_signal\n\n\
+    - MQJM603\n  - Magnet current setpoint: MQJM603.S — file:///uitf/MQJM603.S — Canonical:\
+    \ MagnetCurrentSetpoint — Unit: A — relation: has_setpoint_signal\n  - Magnet\
+    \ current readback: MQJM603M — file:///uitf/MQJM603M — Canonical: MagnetCurrentReadback\
+    \ — Unit: A — relation: has_readback_signal\n  - Magnet field setpoint (integrated):\
+    \ MQJM603.BDL — file:///uitf/MQJM603.BDL — Canonical: MagnetFieldSetpoint — Unit:\
+    \ Gauss — relation: has_setpoint_signal\n  - Limits (current setpoint limits):\
+    \ MQJM603.HMIN / MQJM603.HMAX — file:///uitf/MQJM603.HMIN , file:///uitf/MQJM603.HMAX\
+    \ — Canonical: MagnetCurrentSetpoint — Unit: A — relation: has_limit_signal\n\n\
+    - MQJM604\n  - Magnet current setpoint: MQJM604.S — file:///uitf/MQJM604.S — Canonical:\
+    \ MagnetCurrentSetpoint — Unit: A — relation: has_setpoint_signal\n  - Magnet\
+    \ current readback: MQJM604M — file:///uitf/MQJM604M — Canonical: MagnetCurrentReadback\
+    \ — Unit: A — relation: has_readback_signal\n  - Magnet field setpoint (integrated):\
+    \ MQJM604.BDL — file:///uitf/MQJM604.BDL — Canonical: MagnetFieldSetpoint — Unit:\
+    \ Gauss — relation: has_setpoint_signal\n  - Limits (current setpoint limits):\
+    \ MQJM604.HMIN / MQJM604.HMAX — file:///uitf/MQJM604.HMIN , file:///uitf/MQJM604.HMAX\
+    \ — Canonical: MagnetCurrentSetpoint — Unit: A — relation: has_limit_signal\n\n\
+    - MQWK202\n  - Magnet current setpoint: MQWK202.S — file:///uitf/MQWK202.S — Canonical:\
+    \ MagnetCurrentSetpoint — Unit: A — relation: has_setpoint_signal\n  - Magnet\
+    \ current readback: MQWK202M — file:///uitf/MQWK202M — Canonical: MagnetCurrentReadback\
+    \ — Unit: A — relation: has_readback_signal\n  - Magnet field setpoint (integrated):\
+    \ MQWK202.BDL — file:///uitf/MQWK202.BDL — Canonical: MagnetFieldSetpoint — Unit:\
+    \ Gauss — relation: has_setpoint_signal\n  - Limits (current setpoint limits):\
+    \ MQWK202.HMIN / MQWK202.HMAX — file:///uitf/MQWK202.HMIN , file:///uitf/MQWK202.HMAX\
+    \ — Canonical: MagnetCurrentSetpoint — Unit: A — relation: has_limit_signal\n\n\
+    - MQWK203\n  - Magnet current setpoint: MQWK203.S — file:///uitf/MQWK203.S — Canonical:\
+    \ MagnetCurrentSetpoint — Unit: A — relation: has_setpoint_signal\n  - Magnet\
+    \ current readback: MQWK203M — file:///uitf/MQWK203M — Canonical: MagnetCurrentReadback\
+    \ — Unit: A — relation: has_readback_signal\n  - Magnet field setpoint (integrated):\
+    \ MQWK203.BDL — file:///uitf/MQWK203.BDL — Canonical: MagnetFieldSetpoint — Unit:\
+    \ Gauss — relation: has_setpoint_signal\n  - Limits (current setpoint limits):\
+    \ MQWK203.HMIN / MQWK203.HMAX — file:///uitf/MQWK203.HMIN , file:///uitf/MQWK203.HMAX\
+    \ — Canonical: MagnetCurrentSetpoint — Unit: A — relation: has_limit_signal\n\n\
+    Notes\n- I treated \"strength signals\" as signals whose canonical types indicate\
+    \ magnet strength: MagnetCurrentSetpoint, MagnetCurrentReadback, MagnetFieldSetpoint\
+    \ (integrated field), and similar integrated-field semantics. I also included\
+    \ the min/max limit signals (HMIN/HMAX) as they are current-setpoint limits.\n\
+    - If you want only the active setpoint and readback (exclude limits and/or integrated-field\
+    \ signals), tell me which types to include/exclude and I’ll filter the list accordingly.\n\
+    - I can also return this as CSV/JSON, or include additional properties (source_system,\
+    \ access_protocol, relation-node qualifiers) if you need them."
+- Q: Give me the name of the first viewer downstream of MBHK102V
+  Ans: ITVK201
+  LLM_Ans: 'The first viewer downstream of MBHK102V is ITVK201 (BeamProfileMonitor),
+    uri: file:///uitf/ITVK201 — found 2 precedes hops downstream of file:///uitf/MBHK102V.'
+- Q: Give me betax function at the first viewer downstream of MBHK102V
+  Ans: 4.60175 meters
+  LLM_Ans: "The first viewer (BeamProfileMonitor) downstream of MBHK102V is ITVK201.\
+    \ Its Twiss beta in the horizontal plane (betax / beta_a) is 4.601746608248333\
+    \ (from TwissP node file:///uitf/ITVK201/TwissP). \n\nNote: the TWISS value is\
+    \ stored as beta_a in the TwissP record (alias betax). Units are not explicit\
+    \ in the record; TWISS beta is normally expressed in meters."
+- Q: horizontal beta function at the first viewer downstream of MBHK102V
+  Ans: 4.60175 meters
+  LLM_Ans: "The first BeamProfileMonitor (viewer) downstream of MBHK102V is ITVK201.\
+    \  \nHorizontal beta (Twiss beta_x, TwissP.beta_a) at ITVK201 = 4.601746608248333\
+    \ m (≈ 4.602 m).  \n\nSource: facility graph (precedes beamline order, TwissP.beta_a\
+    \ on ITVK201)."
+- Q: What beamlines are part of the GUN_thru_MV section?
+  Ans: KV and MV
+  LLM_Ans: "From the graph, the BeamLine with uri file:///uitf/GUN_thru_MV contains\
+    \ these components:\n\n- RF_LASER — NormalConductingRFCavity (uri: file:///uitf/RF_LASER)\
+    \  \n- IPMK101 — BeamPositionMonitor (uri: file:///uitf/IPMK101)  \n- S_IS_20CM\
+    \ — Marker (uri: file:///uitf/S_IS_20CM)  \n- VBVM101 — SupportingFacilityComponent\
+    \ (uri: file:///uitf/VBVM101)  \n- VIPK101 — SupportingFacilityComponent (uri:\
+    \ file:///uitf/VIPK101)  \n- VIPM101B — SupportingFacilityComponent (uri: file:///uitf/VIPM101B)\n\
+    \nNote: none of the contained nodes returned in the query are labeled as BeamLine\
+    \ nodes — they are diagnostics, a cavity, a marker, and supporting facility components.\
+    \ If you meant a different definition of “beamlines” (for example other BeamLine\
+    \ nodes contained in a higher-level section), tell me and I’ll search that scope."
+- Q: What components are contained within the GUN_thru_MV section?
+  Ans: RF_LASER, VIPK101, S_IS_20CM, IPMK101
+  LLM_Ans: "According to the graph URIs found for the GUN_thru_MV BeamLine, the section\
+    \ contains the following components (inferred from the reified \"Contains\" relationship\
+    \ nodes):\n\n- IPMK101\n- S_IS_20CM\n- VIPK101\n- RF_LASER\n- VBVM101\n- VIPM101B\n\
+    \nNotes:\n- These names were extracted from relation-node URIs of the form file:///uitf/GUN_thru_MV_to_<COMPONENT>.\
+    \  \n- There are also relation URIs like file:///uitf/KV_to_GUN_thru_MV and file:///uitf/MV_to_GUN_thru_MV\
+    \ (connections to other sections), which are not components contained within the\
+    \ section.\n- If you want, I can fetch each contained component's labels, classes,\
+    \ and properties (type, length/s_position, floor coordinates, or associated signals)."
+- Q: What is the first component in the MV section?
+  Ans: VBVM101
+  LLM_Ans: 'I could confirm there is a BeamLine node for the MV section (uri = file:///uitf/MV),
+    but my queries did not return any beamline-order (Precedes) entries that identify
+    a first/starting component for that beamline. Therefore I cannot reliably state
+    the first component in MV from the available graph results.
+
+
+    What I found
+
+    - BeamLine: file:///uitf/MV (exists)
+
+    - No Precedes-based start node was returned for that beamline in the queries I
+    ran.
+
+
+    Possible reasons
+
+    - The MV beamline may not have Precedes (beamline-order) relations loaded, or
+    the beamline-order is encoded differently (e.g. different relation node URI, different
+    beamline_context value, or only direct precedes relationships without the expected
+    relation_uri link).
+
+    - There may be permission or data-model differences that prevented the specific
+    pattern-match from returning rows.
+
+
+    If you want to locate the first component yourself (or let me try again), run
+    one of these Cypher queries against the graph (they handle the two common graph
+    encodings):
+
+
+    1) Using the reified Precedes nodes:
+
+    MATCH (bl:BeamLine {uri:''file:///uitf/MV''})
+
+    MATCH (pre:Precedes)-[:beamline_context]->(bl)
+
+    MATCH (pre)-[:subject]->(s)
+
+    OPTIONAL MATCH (pre2:Precedes)-[:beamline_context]->(bl), (pre2)-[:object]->(s)
+
+    WITH s, count(pre2) AS incoming
+
+    WHERE incoming = 0
+
+    RETURN DISTINCT labels(s) AS labels, s.uri AS uri, s.name AS name, s.alias AS
+    alias LIMIT 50;
+
+
+    2) Using direct precedes relationships that reference a reified relation via relation_uri:
+
+    MATCH (bl:BeamLine {uri:''file:///uitf/MV''})
+
+    MATCH (a)-[r:precedes]->(b)
+
+    WHERE r.relation_uri IS NOT NULL
+
+    MATCH (rel:Precedes {uri: r.relation_uri})-[:beamline_context]->(bl)
+
+    OPTIONAL MATCH (c)-[r2:precedes]->(a)
+
+    WHERE r2.relation_uri IS NOT NULL
+
+    MATCH (rel2:Precedes {uri: r2.relation_uri})-[:beamline_context]->(bl)
+
+    WITH a, count(r2) AS inCount
+
+    WHERE inCount = 0
+
+    RETURN DISTINCT labels(a) AS labels, a.uri AS uri, a.name AS name, a.alias AS
+    alias LIMIT 50;
+
+
+    If you can run one of those queries and paste the result, or give me a likely
+    component id/alias in MV to disambiguate, I will identify the first component.'
+- Q: What components are part of the MV section?
+  Ans: VBVM101, VIPM101B
+  LLM_Ans: 'Short answer
+
+    - I found a BeamLine node for the MV section: uri = file:///uitf/MV.
+
+    - I could not retrieve the list of components contained in that MV beamline within
+    the carried-out queries (the attempted traversal of Precedes edges / reified relation
+    nodes returned no rows in this session).
+
+
+    What I did and why it failed
+
+    - I searched for BeamLine nodes and confirmed the existence of a BeamLine with
+    uri file:///uitf/MV.
+
+    - The facility uses reified relation nodes (Precedes instances) with a beamline_context
+    property to record beamline order. In this snapshot the component membership is
+    normally reached by following the reified Precedes node back to the subject/object
+    components.
+
+    - My attempt to traverse those Precedes → subject/object → beamline_context paths
+    returned no rows in the queries I ran (so I could not produce a component list
+    here).
+
+
+    Useful Cypher queries you can run (or I can run if you allow more tool calls)
+
+    1) Use the reified Precedes nodes (preferred when qualifiers like beamline_context
+    are present):
+
+    MATCH (bl:BeamLine {uri:''file:///uitf/MV''})<-[:beamline_context]-(r:Precedes)
+
+    MATCH (r)-[:subject]->(c1)
+
+    MATCH (r)-[:object]->(c2)
+
+    RETURN DISTINCT c1.uri AS subject_uri, labels(c1) AS subject_labels, c2.uri AS
+    object_uri, labels(c2) AS object_labels, r.uri AS relation_uri, r.context AS context
+
+    ORDER BY subject_uri
+
+    LIMIT 500;
+
+
+    2) If direct precedes relationships exist between component nodes, you can list
+    components by traversing those relationships and then resolving the reified node
+    (via relation_uri):
+
+    MATCH (c)-[rel:precedes]->(d)
+
+    WHERE rel.relation_uri IS NOT NULL
+
+    MATCH (r:Precedes {uri: rel.relation_uri})
+
+    WHERE r.beamline_context = (MATCH (b:BeamLine {uri:''file:///uitf/MV''}) RETURN
+    b.uri)[0]
+
+    RETURN DISTINCT c.uri AS component_uri, labels(c) AS labels
+
+    LIMIT 500;
+
+
+    3) A simpler direct approach (if the graph used direct edges from a Facility node):
+
+    MATCH (f:Facility)-[:components]->(c)
+
+    WHERE c.uri IS NOT NULL AND c.uri CONTAINS ''/MV''
+
+    RETURN c.uri AS uri, labels(c) AS labels
+
+    LIMIT 500;
+
+
+    Next steps
+
+    - If you want, I can run one of the above queries to return the exact component
+    list for MV (I stopped because we reached the tool-call limit). Tell me which
+    query to run or allow further queries and I will fetch the components and present
+    them.'

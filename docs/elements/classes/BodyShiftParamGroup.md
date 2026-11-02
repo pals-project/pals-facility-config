@@ -9,7 +9,7 @@ _Mixin class for floor plan shift parameters that are aligned with PALS BodyShif
 
 
 
-URI: [pals:class/BodyShiftParamGroup](https://pals-project.readthedocs.io/class/BodyShiftParamGroup)
+URI: [acc:class/BodyShiftParamGroup](https://example.org/accelerator-core/class/BodyShiftParamGroup)
 
 
 ```mermaid
@@ -21,6 +21,7 @@ BodyShiftParamGroup {
     float y_rot  
     float z_offset  
     float z_rot  
+    string id  
 }
 
 
@@ -29,7 +30,11 @@ BodyShiftParamGroup {
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **BodyShiftParamGroup**
+
 
 ## Slots
 
@@ -41,6 +46,7 @@ BodyShiftParamGroup {
 | [x_rot](../slots/x_rot.md) | 0..1 <br/> [Float](../types/Float.md) | Rotation around the X-axis in the facility floor plan. | direct |
 | [y_rot](../slots/y_rot.md) | 0..1 <br/> [Float](../types/Float.md) | Rotation around the Y-axis in the facility floor plan. | direct |
 | [z_rot](../slots/z_rot.md) | 0..1 <br/> [Float](../types/Float.md) | Rotation around the Z-axis in the facility floor plan. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -71,6 +77,7 @@ BodyShiftParamGroup {
 | [SupportingFacilityComponent](../classes/SupportingFacilityComponent.md) | [BodyShiftP](../slots/BodyShiftP.md) | range | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
 | [BookkeepingComponent](../classes/BookkeepingComponent.md) | [BodyShiftP](../slots/BodyShiftP.md) | range | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
 | [Marker](../classes/Marker.md) | [BodyShiftP](../slots/BodyShiftP.md) | range | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
+| [BeginningEle](../classes/BeginningEle.md) | [BodyShiftP](../slots/BodyShiftP.md) | range | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
 | [BeamLineSection](../classes/BeamLineSection.md) | [BodyShiftP](../slots/BodyShiftP.md) | range | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
 
 
@@ -102,8 +109,8 @@ BodyShiftParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:BodyShiftParamGroup |
-| native | pals:BodyShiftParamGroup |
+| self | acc:BodyShiftParamGroup |
+| native | acc:BodyShiftParamGroup |
 | broad | pals:BodyShiftP |
 
 
@@ -126,6 +133,7 @@ description: Mixin class for floor plan shift parameters that are aligned with P
 from_schema: https://w3id.org/accelerator-core
 broad_mappings:
 - pals:BodyShiftP
+is_a: ParamGroup
 attributes:
   x_offset:
     name: x_offset
@@ -135,8 +143,9 @@ attributes:
     - delta_x
     - x_shift
     - GlobalOffsetX
+    close_mappings:
+    - pals:x_offset
     rank: 1000
-    slot_uri: pals:x_offset
     domain_of:
     - BodyShiftParamGroup
     range: float
@@ -148,8 +157,9 @@ attributes:
     - delta_y
     - y_shift
     - GlobalOffsetY
+    close_mappings:
+    - pals:y_offset
     rank: 1000
-    slot_uri: pals:y_offset
     domain_of:
     - BodyShiftParamGroup
     range: float
@@ -161,8 +171,9 @@ attributes:
     - delta_z
     - z_shift
     - GlobalOffsetZ
+    close_mappings:
+    - pals:z_offset
     rank: 1000
-    slot_uri: pals:z_offset
     domain_of:
     - BodyShiftParamGroup
     range: float
@@ -174,8 +185,9 @@ attributes:
     - delta_phi
     - phi_shift
     - GlobalOffsetPhi
+    close_mappings:
+    - pals:x_rot
     rank: 1000
-    slot_uri: pals:x_rot
     domain_of:
     - BodyShiftParamGroup
     range: float
@@ -187,8 +199,9 @@ attributes:
     - delta_theta
     - theta_shift
     - GlobalOffsetTheta
+    close_mappings:
+    - pals:y_rot
     rank: 1000
-    slot_uri: pals:y_rot
     domain_of:
     - BodyShiftParamGroup
     range: float
@@ -200,8 +213,9 @@ attributes:
     - delta_psi
     - psi_shift
     - GlobalOffsetPsi
+    close_mappings:
+    - pals:z_rot
     rank: 1000
-    slot_uri: pals:z_rot
     domain_of:
     - BodyShiftParamGroup
     range: float
@@ -220,6 +234,7 @@ description: Mixin class for floor plan shift parameters that are aligned with P
 from_schema: https://w3id.org/accelerator-core
 broad_mappings:
 - pals:BodyShiftP
+is_a: ParamGroup
 attributes:
   x_offset:
     name: x_offset
@@ -229,8 +244,9 @@ attributes:
     - delta_x
     - x_shift
     - GlobalOffsetX
+    close_mappings:
+    - pals:x_offset
     rank: 1000
-    slot_uri: pals:x_offset
     alias: x_offset
     owner: BodyShiftParamGroup
     domain_of:
@@ -244,8 +260,9 @@ attributes:
     - delta_y
     - y_shift
     - GlobalOffsetY
+    close_mappings:
+    - pals:y_offset
     rank: 1000
-    slot_uri: pals:y_offset
     alias: y_offset
     owner: BodyShiftParamGroup
     domain_of:
@@ -259,8 +276,9 @@ attributes:
     - delta_z
     - z_shift
     - GlobalOffsetZ
+    close_mappings:
+    - pals:z_offset
     rank: 1000
-    slot_uri: pals:z_offset
     alias: z_offset
     owner: BodyShiftParamGroup
     domain_of:
@@ -274,8 +292,9 @@ attributes:
     - delta_phi
     - phi_shift
     - GlobalOffsetPhi
+    close_mappings:
+    - pals:x_rot
     rank: 1000
-    slot_uri: pals:x_rot
     alias: x_rot
     owner: BodyShiftParamGroup
     domain_of:
@@ -289,8 +308,9 @@ attributes:
     - delta_theta
     - theta_shift
     - GlobalOffsetTheta
+    close_mappings:
+    - pals:y_rot
     rank: 1000
-    slot_uri: pals:y_rot
     alias: y_rot
     owner: BodyShiftParamGroup
     domain_of:
@@ -304,13 +324,31 @@ attributes:
     - delta_psi
     - psi_shift
     - GlobalOffsetPsi
+    close_mappings:
+    - pals:z_rot
     rank: 1000
-    slot_uri: pals:z_rot
     alias: z_rot
     owner: BodyShiftParamGroup
     domain_of:
     - BodyShiftParamGroup
     range: float
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: BodyShiftParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 
 ```
 </details>

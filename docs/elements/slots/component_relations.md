@@ -9,7 +9,7 @@ _A list of component relations in the accelerator system (Component <-> Componen
 
 
 
-URI: [pals:slot/component_relations](https://pals-project.readthedocs.io/slot/component_relations)
+URI: [acc:slot/component_relations](https://example.org/accelerator-core/slot/component_relations)
 Alias: component_relations
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: component_relations
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:component_relations |
-| native | pals:component_relations |
+| self | acc:component_relations |
+| native | acc:component_relations |
 
 
 

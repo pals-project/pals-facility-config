@@ -9,7 +9,7 @@ _Twiss phase advance parameter in the horizontal plane._
 
 
 
-URI: [pals:phi_a](https://pals-project.readthedocs.io/phi_a)
+URI: [acc:slot/phi_a](https://example.org/accelerator-core/slot/phi_a)
 Alias: phi_a
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: phi_a
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [TwissParamGroup](../classes/TwissParamGroup.md) |
-| Slot URI | [pals:phi_a](https://pals-project.readthedocs.io/phi_a) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: phi_a
 | --- | --- |
 | Owner | [TwissParamGroup](../classes/TwissParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `rad`
+
+</details>
 
 
 
@@ -86,8 +91,9 @@ Alias: phi_a
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:phi_a |
-| native | pals:phi_a |
+| self | acc:phi_a |
+| native | acc:phi_a |
+| close | pals:phi_a |
 
 
 
@@ -104,13 +110,16 @@ aliases:
 - phix
 - psi_x
 - psix
+close_mappings:
+- pals:phi_a
 rank: 1000
-slot_uri: pals:phi_a
 alias: phi_a
 owner: TwissParamGroup
 domain_of:
 - TwissParamGroup
 range: float
+unit:
+  ucum_code: rad
 
 ```
 </details>

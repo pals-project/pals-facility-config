@@ -9,7 +9,7 @@ _The canonical semantic meaning of the signal._
 
 
 
-URI: [pals:slot/canonical_signal_type](https://pals-project.readthedocs.io/slot/canonical_signal_type)
+URI: [acc:slot/canonical_signal_type](https://example.org/accelerator-core/slot/canonical_signal_type)
 Alias: canonical_signal_type
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: canonical_signal_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:canonical_signal_type |
-| native | pals:canonical_signal_type |
+| self | acc:canonical_signal_type |
+| native | acc:canonical_signal_type |
 
 
 

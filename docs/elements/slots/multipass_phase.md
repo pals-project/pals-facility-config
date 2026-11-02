@@ -9,7 +9,7 @@ _rad/2pi RF Phase added to multipass elements_
 
 
 
-URI: [pals:multipass_phase](https://pals-project.readthedocs.io/multipass_phase)
+URI: [acc:slot/multipass_phase](https://example.org/accelerator-core/slot/multipass_phase)
 Alias: multipass_phase
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: multipass_phase
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:multipass_phase](https://pals-project.readthedocs.io/multipass_phase) |
 
 ### Cardinality and Requirements
 
@@ -78,8 +77,9 @@ Alias: multipass_phase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:multipass_phase |
-| native | pals:multipass_phase |
+| self | acc:multipass_phase |
+| native | acc:multipass_phase |
+| close | pals:multipass_phase |
 
 
 
@@ -91,8 +91,9 @@ Alias: multipass_phase
 name: multipass_phase
 description: rad/2pi RF Phase added to multipass elements
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:multipass_phase
 rank: 1000
-slot_uri: pals:multipass_phase
 alias: multipass_phase
 owner: RFParamGroup
 domain_of:

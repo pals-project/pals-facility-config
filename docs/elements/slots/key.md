@@ -9,7 +9,7 @@ _The metadata field name._
 
 
 
-URI: [pals:slot/key](https://pals-project.readthedocs.io/slot/key)
+URI: [acc:slot/key](https://example.org/accelerator-core/slot/key)
 Alias: key
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: key
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:key |
-| native | pals:key |
+| self | acc:key |
+| native | acc:key |
 
 
 

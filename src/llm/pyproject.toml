@@ -1,0 +1,12 @@
+[project]
+name = "narad-llm-chat"
+version = "0.1.0"
+description = "Gradio-based LLM chat interface for querying the NARAD accelerator knowledge graph"
+readme = "../../README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "gradio>=6.26.0",
+    "langchain-neo4j>=0.10.0",
+    "langchain-openai>=1.6.0",
+    "neo4j>=5.28.2",
+]

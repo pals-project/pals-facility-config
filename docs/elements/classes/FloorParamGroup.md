@@ -9,7 +9,7 @@ _Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor 
 
 
 
-URI: [pals:class/FloorParamGroup](https://pals-project.readthedocs.io/class/FloorParamGroup)
+URI: [acc:class/FloorParamGroup](https://example.org/accelerator-core/class/FloorParamGroup)
 
 
 ```mermaid
@@ -21,6 +21,7 @@ FloorParamGroup {
     float x  
     float y  
     float z  
+    string id  
 }
 
 
@@ -29,7 +30,11 @@ FloorParamGroup {
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **FloorParamGroup**
+
 
 ## Slots
 
@@ -41,6 +46,7 @@ FloorParamGroup {
 | [theta](../slots/theta.md) | 0..1 <br/> [Float](../types/Float.md) | Orientation angle around the Y-axis in the facility floor plan. | direct |
 | [phi](../slots/phi.md) | 0..1 <br/> [Float](../types/Float.md) | Rotation around the X-axis in the facility floor plan. | direct |
 | [psi](../slots/psi.md) | 0..1 <br/> [Float](../types/Float.md) | Rotation around the Z-axis in the facility floor plan. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -76,6 +82,8 @@ FloorParamGroup {
 | [SupportingFacilityComponent](../classes/SupportingFacilityComponent.md) | [FloorP](../slots/FloorP.md) | range | [FloorParamGroup](../classes/FloorParamGroup.md) |
 | [BookkeepingComponent](../classes/BookkeepingComponent.md) | [FloorP](../slots/FloorP.md) | range | [FloorParamGroup](../classes/FloorParamGroup.md) |
 | [Marker](../classes/Marker.md) | [FloorP](../slots/FloorP.md) | range | [FloorParamGroup](../classes/FloorParamGroup.md) |
+| [BeginningEle](../classes/BeginningEle.md) | [FloorP](../slots/FloorP.md) | range | [FloorParamGroup](../classes/FloorParamGroup.md) |
+| [Drift](../classes/Drift.md) | [FloorP](../slots/FloorP.md) | range | [FloorParamGroup](../classes/FloorParamGroup.md) |
 | [BeamLineSection](../classes/BeamLineSection.md) | [FloorP](../slots/FloorP.md) | range | [FloorParamGroup](../classes/FloorParamGroup.md) |
 
 
@@ -107,8 +115,8 @@ FloorParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:FloorParamGroup |
-| native | pals:FloorParamGroup |
+| self | acc:FloorParamGroup |
+| native | acc:FloorParamGroup |
 | broad | pals:FloorP |
 
 
@@ -131,6 +139,7 @@ description: Mixin class for floor plan parameters that are aligned with PALS Fl
 from_schema: https://w3id.org/accelerator-core
 broad_mappings:
 - pals:FloorP
+is_a: ParamGroup
 attributes:
   x:
     name: x
@@ -140,8 +149,9 @@ attributes:
     - x_coordinate
     - ModelX
     - x coordinate
+    close_mappings:
+    - pals:x
     rank: 1000
-    slot_uri: pals:x
     domain_of:
     - FloorParamGroup
     range: float
@@ -153,8 +163,9 @@ attributes:
     - y_coordinate
     - ModelY
     - y coordinate
+    close_mappings:
+    - pals:y
     rank: 1000
-    slot_uri: pals:y
     domain_of:
     - FloorParamGroup
     range: float
@@ -166,8 +177,9 @@ attributes:
     - z_coordinate
     - ModelZ
     - z coordinate
+    close_mappings:
+    - pals:z
     rank: 1000
-    slot_uri: pals:z
     domain_of:
     - FloorParamGroup
     range: float
@@ -179,8 +191,9 @@ attributes:
     - theta_angle
     - ModelYaw
     - Model_Yaw
+    close_mappings:
+    - pals:theta
     rank: 1000
-    slot_uri: pals:theta
     domain_of:
     - FloorParamGroup
     range: float
@@ -192,8 +205,9 @@ attributes:
     - phi_angle
     - ModelPitch
     - Model_Pitch
+    close_mappings:
+    - pals:phi
     rank: 1000
-    slot_uri: pals:phi
     domain_of:
     - FloorParamGroup
     range: float
@@ -205,8 +219,9 @@ attributes:
     - psi_angle
     - Model_Roll
     - Rotation
+    close_mappings:
+    - pals:psi
     rank: 1000
-    slot_uri: pals:psi
     domain_of:
     - FloorParamGroup
     range: float
@@ -225,6 +240,7 @@ description: Mixin class for floor plan parameters that are aligned with PALS Fl
 from_schema: https://w3id.org/accelerator-core
 broad_mappings:
 - pals:FloorP
+is_a: ParamGroup
 attributes:
   x:
     name: x
@@ -234,8 +250,9 @@ attributes:
     - x_coordinate
     - ModelX
     - x coordinate
+    close_mappings:
+    - pals:x
     rank: 1000
-    slot_uri: pals:x
     alias: x
     owner: FloorParamGroup
     domain_of:
@@ -249,8 +266,9 @@ attributes:
     - y_coordinate
     - ModelY
     - y coordinate
+    close_mappings:
+    - pals:y
     rank: 1000
-    slot_uri: pals:y
     alias: y
     owner: FloorParamGroup
     domain_of:
@@ -264,8 +282,9 @@ attributes:
     - z_coordinate
     - ModelZ
     - z coordinate
+    close_mappings:
+    - pals:z
     rank: 1000
-    slot_uri: pals:z
     alias: z
     owner: FloorParamGroup
     domain_of:
@@ -279,8 +298,9 @@ attributes:
     - theta_angle
     - ModelYaw
     - Model_Yaw
+    close_mappings:
+    - pals:theta
     rank: 1000
-    slot_uri: pals:theta
     alias: theta
     owner: FloorParamGroup
     domain_of:
@@ -294,8 +314,9 @@ attributes:
     - phi_angle
     - ModelPitch
     - Model_Pitch
+    close_mappings:
+    - pals:phi
     rank: 1000
-    slot_uri: pals:phi
     alias: phi
     owner: FloorParamGroup
     domain_of:
@@ -309,13 +330,31 @@ attributes:
     - psi_angle
     - Model_Roll
     - Rotation
+    close_mappings:
+    - pals:psi
     rank: 1000
-    slot_uri: pals:psi
     alias: psi
     owner: FloorParamGroup
     domain_of:
     - FloorParamGroup
     range: float
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: FloorParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 
 ```
 </details>

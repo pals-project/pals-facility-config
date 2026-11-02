@@ -9,7 +9,7 @@ _The name of the entity. For example, the name of the person or organization._
 
 
 
-URI: [pals:slot/name](https://pals-project.readthedocs.io/slot/name)
+URI: [acc:slot/name](https://example.org/accelerator-core/slot/name)
 Alias: name
 
 <!-- no inheritance hierarchy -->
@@ -71,8 +71,8 @@ Alias: name
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:name |
-| native | pals:name |
+| self | acc:name |
+| native | acc:name |
 
 
 

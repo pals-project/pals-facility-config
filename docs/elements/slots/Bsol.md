@@ -9,7 +9,7 @@ _Solenoid field._
 
 
 
-URI: [pals:Bsol](https://pals-project.readthedocs.io/Bsol)
+URI: [acc:slot/Bsol](https://example.org/accelerator-core/slot/Bsol)
 Alias: Bsol
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: Bsol
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [SolenoidParamGroup](../classes/SolenoidParamGroup.md) |
-| Slot URI | [pals:Bsol](https://pals-project.readthedocs.io/Bsol) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: Bsol
 | --- | --- |
 | Owner | [SolenoidParamGroup](../classes/SolenoidParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `T`
+
+</details>
 
 
 
@@ -78,8 +83,9 @@ Alias: Bsol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Bsol |
-| native | pals:Bsol |
+| self | acc:Bsol |
+| native | acc:Bsol |
+| close | pals:Bsol |
 
 
 
@@ -91,13 +97,16 @@ Alias: Bsol
 name: Bsol
 description: Solenoid field.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:Bsol
 rank: 1000
-slot_uri: pals:Bsol
 alias: Bsol
 owner: SolenoidParamGroup
 domain_of:
 - SolenoidParamGroup
 range: float
+unit:
+  ucum_code: T
 
 ```
 </details>

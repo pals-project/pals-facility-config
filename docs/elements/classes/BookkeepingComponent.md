@@ -9,7 +9,7 @@ _A virtual component that represents a bookkeeping or organizational role in the
 
 
 
-URI: [pals:class/BookkeepingComponent](https://pals-project.readthedocs.io/class/BookkeepingComponent)
+URI: [acc:class/BookkeepingComponent](https://example.org/accelerator-core/class/BookkeepingComponent)
 
 
 ```mermaid
@@ -26,9 +26,11 @@ BodyShiftParamGroup {
     float y_rot  
     float z_offset  
     float z_rot  
+    string id  
 }
 BookkeepingComponent {
     string id  
+    stringList alias  
     string kind  
     stringList native_types  
     VirtualRelationEnum beamline_relation  
@@ -41,11 +43,13 @@ FloorParamGroup {
     float x  
     float y  
     float z  
+    string id  
 }
 MetaParamGroup {
     string description  
-    string alias  
+    stringList alias  
     string label  
+    string id  
 }
 
 BookkeepingComponent ||--|o BodyShiftParamGroup : "BodyShiftP"
@@ -59,11 +63,13 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 
 ## Inheritance
-* [Component](../classes/Component.md) [ [HasMetaP](../classes/HasMetaP.md)]
-    * [VirtualComponent](../classes/VirtualComponent.md) [ [HasFloorP](../classes/HasFloorP.md)]
-        * **BookkeepingComponent** [ [HasBodyShiftP](../classes/HasBodyShiftP.md)]
-            * [Marker](../classes/Marker.md) [ [HasTwissP](../classes/HasTwissP.md)]
-            * [BeamLineSection](../classes/BeamLineSection.md) [ [HasFloorP](../classes/HasFloorP.md)]
+* [Node](../classes/Node.md)
+    * [Component](../classes/Component.md) [ [HasMetaP](../classes/HasMetaP.md)]
+        * [VirtualComponent](../classes/VirtualComponent.md) [ [HasFloorP](../classes/HasFloorP.md)]
+            * **BookkeepingComponent** [ [HasBodyShiftP](../classes/HasBodyShiftP.md)]
+                * [Marker](../classes/Marker.md) [ [HasTwissP](../classes/HasTwissP.md)]
+                * [BeginningEle](../classes/BeginningEle.md) [ [HasReferenceP](../classes/HasReferenceP.md) [HasTwissP](../classes/HasTwissP.md)]
+                * [BeamLineSection](../classes/BeamLineSection.md) [ [HasFloorP](../classes/HasFloorP.md)]
 
 
 ## Slots
@@ -74,10 +80,11 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 | [functions](../slots/functions.md) | 1..* <br/> [VirtualFunctionEnum](../enums/VirtualFunctionEnum.md) | The function of the virtual component,  which can be used to identify the component across different source systems. | [VirtualComponent](../classes/VirtualComponent.md) |
 | [beamline_relation](../slots/beamline_relation.md) | 1 <br/> [VirtualRelationEnum](../enums/VirtualRelationEnum.md) | The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems. | [VirtualComponent](../classes/VirtualComponent.md) |
 | [FloorP](../slots/FloorP.md) | 0..1 <br/> [FloorParamGroup](../classes/FloorParamGroup.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasFloorP](../classes/HasFloorP.md) |
-| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [Component](../classes/Component.md) |
-| [kind](../slots/kind.md) | 1 <br/> [String](../types/String.md) | The LinkML class name of this instance. | [Component](../classes/Component.md) |
 | [native_types](../slots/native_types.md) | * <br/> [String](../types/String.md) | The native type of the component in the source system, which can be used to identify the component across different source systems. | [Component](../classes/Component.md) |
 | [MetaP](../slots/MetaP.md) | 0..1 <br/> [MetaParamGroup](../classes/MetaParamGroup.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasMetaP](../classes/HasMetaP.md) |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [Node](../classes/Node.md) |
+| [kind](../slots/kind.md) | 1 <br/> [String](../types/String.md) | The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix). | [Node](../classes/Node.md) |
+| [alias](../slots/alias.md) | * <br/> [String](../types/String.md) | An alternative name or identifier for the instance. | [Node](../classes/Node.md) |
 
 
 
@@ -111,8 +118,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:BookkeepingComponent |
-| native | pals:BookkeepingComponent |
+| self | acc:BookkeepingComponent |
+| native | acc:BookkeepingComponent |
 | broad | pals:BookkeepingElement |
 
 
@@ -179,13 +186,13 @@ attributes:
     description: The function of the virtual component,  which can be used to identify
       the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: pals:virtual_function
+    close_mappings:
+    - pals:virtual_function
     alias: functions
     owner: BookkeepingComponent
     domain_of:
     - PhysicalComponent
     - VirtualComponent
-    - SupportingFacilityComponent
     range: VirtualFunctionEnum
     required: true
     multivalued: true
@@ -194,7 +201,8 @@ attributes:
     description: The relationship of the virtual component to the beamline,  which
       can be used to identify the component across different source systems.
     from_schema: https://w3id.org/accelerator-core
-    slot_uri: pals:virtual_beamline_relation
+    close_mappings:
+    - pals:virtual_beamline_relation
     alias: beamline_relation
     owner: BookkeepingComponent
     domain_of:
@@ -215,37 +223,6 @@ attributes:
     - HasFloorP
     range: FloorParamGroup
     inlined: true
-  id:
-    name: id
-    description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:id
-    identifier: true
-    alias: id
-    owner: BookkeepingComponent
-    domain_of:
-    - Affiliation
-    - Component
-    - Signal
-    - Relationship
-    range: string
-    required: true
-  kind:
-    name: kind
-    description: The LinkML class name of this instance.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:kind
-    designates_type: true
-    alias: kind
-    owner: BookkeepingComponent
-    domain_of:
-    - PALSAccelerator
-    - Component
-    - Signal
-    range: string
-    required: true
   native_types:
     name: native_types
     description: The native type of the component in the source system, which can
@@ -271,6 +248,52 @@ attributes:
     - HasMetaP
     range: MetaParamGroup
     inlined: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: BookkeepingComponent
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
+  kind:
+    name: kind
+    description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
+      (no prefix).
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    slot_uri: rdf:type
+    designates_type: true
+    alias: kind
+    owner: BookkeepingComponent
+    domain_of:
+    - Node
+    - PALSAccelerator
+    range: string
+    required: true
+  alias:
+    name: alias
+    description: An alternative name or identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:alias
+    rank: 1000
+    alias: alias
+    owner: BookkeepingComponent
+    domain_of:
+    - Node
+    - MetaParamGroup
+    range: string
+    multivalued: true
 
 ```
 </details>

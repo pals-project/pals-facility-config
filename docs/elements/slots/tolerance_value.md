@@ -3,8 +3,13 @@
 # Slot: tolerance_value 
 
 
+_Tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship._
 
-URI: [pals:slot/tolerance_value](https://pals-project.readthedocs.io/slot/tolerance_value)
+
+
+
+
+URI: [acc:slot/tolerance_value](https://example.org/accelerator-core/slot/tolerance_value)
 Alias: tolerance_value
 
 <!-- no inheritance hierarchy -->
@@ -17,7 +22,8 @@ Alias: tolerance_value
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ComponentRelation](../classes/ComponentRelation.md) | Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds. |  no  |
+| [NearestTo](../classes/NearestTo.md) | A relationship indicating that the subject component is nearest to the object component in a specified context,  such as a diagnostic device nearest to a magnet. |  no  |
+| [AdjacentTo](../classes/AdjacentTo.md) | A relationship indicating that the subject component is adjacent to the object component and not overlapping<br> in a specified context, such as radiation detector and a magnet. |  no  |
 
 
 
@@ -31,19 +37,12 @@ Alias: tolerance_value
 | Property | Value |
 | --- | --- |
 | Range | [Float](../types/Float.md) |
-| Domain Of | [ComponentRelation](../classes/ComponentRelation.md) |
+| Domain Of | [AdjacentTo](../classes/AdjacentTo.md), [NearestTo](../classes/NearestTo.md) |
 
 ### Cardinality and Requirements
 
 | Property | Value |
 | --- | --- |
-### Slot Characteristics
-
-| Property | Value |
-| --- | --- |
-| Owner | [ComponentRelation](../classes/ComponentRelation.md) |
-
-
 
 
 
@@ -72,8 +71,8 @@ Alias: tolerance_value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:tolerance_value |
-| native | pals:tolerance_value |
+| self | acc:tolerance_value |
+| native | acc:tolerance_value |
 
 
 
@@ -83,12 +82,15 @@ Alias: tolerance_value
 <details>
 ```yaml
 name: tolerance_value
+description: Tolerance value for the distance between two components in a relationship.
+  Only an edge-property slot for edges that require a tolerance value between two
+  components in a relationship.
 from_schema: https://w3id.org/accelerator-core
 rank: 1000
 alias: tolerance_value
-owner: ComponentRelation
 domain_of:
-- ComponentRelation
+- AdjacentTo
+- NearestTo
 range: float
 
 ```

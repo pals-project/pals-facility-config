@@ -9,7 +9,7 @@ _The email address of the author._
 
 
 
-URI: [pals:slot/email](https://pals-project.readthedocs.io/slot/email)
+URI: [acc:slot/email](https://example.org/accelerator-core/slot/email)
 Alias: email
 
 <!-- no inheritance hierarchy -->
@@ -84,8 +84,8 @@ Alias: email
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:email |
-| native | pals:email |
+| self | acc:email |
+| native | acc:email |
 
 
 

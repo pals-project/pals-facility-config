@@ -9,7 +9,7 @@ _Magnetic multipole components, one per order N._
 
 
 
-URI: [pals:slot/mag_components](https://pals-project.readthedocs.io/slot/mag_components)
+URI: [acc:slot/mag_components](https://example.org/accelerator-core/slot/mag_components)
 Alias: mag_components
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: mag_components
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:mag_components |
-| native | pals:mag_components |
+| self | acc:mag_components |
+| native | acc:mag_components |
 
 
 

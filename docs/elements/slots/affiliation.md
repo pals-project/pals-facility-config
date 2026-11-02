@@ -9,7 +9,7 @@ _The affiliation of the author or component, as a ROR._
 
 
 
-URI: [pals:slot/affiliation](https://pals-project.readthedocs.io/slot/affiliation)
+URI: [acc:slot/affiliation](https://example.org/accelerator-core/slot/affiliation)
 Alias: affiliation
 
 <!-- no inheritance hierarchy -->
@@ -71,8 +71,8 @@ Alias: affiliation
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:affiliation |
-| native | pals:affiliation |
+| self | acc:affiliation |
+| native | acc:affiliation |
 
 
 

@@ -9,7 +9,7 @@ _Contains the authorship information for this representation of an accelerator f
 
 
 
-URI: [pals:slot/authors](https://pals-project.readthedocs.io/slot/authors)
+URI: [acc:slot/authors](https://example.org/accelerator-core/slot/authors)
 Alias: authors
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: authors
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:authors |
-| native | pals:authors |
+| self | acc:authors |
+| native | acc:authors |
 
 
 

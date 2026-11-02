@@ -9,7 +9,7 @@ _A facility that houses one or more accelerators._
 
 
 
-URI: [pals:class/Facility](https://pals-project.readthedocs.io/class/Facility)
+URI: [acc:class/Facility](https://example.org/accelerator-core/class/Facility)
 
 
 ```mermaid
@@ -22,65 +22,77 @@ BeamLine {
     boolean periodic  
     integer repeat  
     string id  
+    stringList alias  
     string kind  
     stringList native_types  
     VirtualRelationEnum beamline_relation  
     VirtualFunctionEnumList functions  
 }
 Component {
-    string id  
-    string kind  
     stringList native_types  
+    string id  
+    stringList alias  
+    string kind  
 }
 ComponentRelation {
-    AxisEnum axis  
     DirectionEnum component_direction  
     RelationContextEnum context  
-    UnitEnum distance_unit  
-    float distance_value  
-    ComponentRelationPredicateEnum predicate  
     ReferenceFrameEnum reference_frame  
-    UnitEnum tolerance_unit  
-    float tolerance_value  
     string id  
+    string predicate  
 }
 Facility {
-
+    uri id_namespace  
+}
+FloorParamGroup {
+    float phi  
+    float psi  
+    float theta  
+    float x  
+    float y  
+    float z  
+    string id  
 }
 Identifier {
     IdentifierTypeEnum identifier_type  
     string identifier_value  
 }
+MetaParamGroup {
+    string description  
+    stringList alias  
+    string label  
+    string id  
+}
 PhysicalComponent {
     PhysicalRelationEnum beamline_relation  
     PhysicalFunctionEnumList functions  
     string id  
+    stringList alias  
     string kind  
     stringList native_types  
 }
 Signal {
-    string id  
     string access_protocol  
-    string alias  
     string archive_identifier  
     CanonicalSignalTypeEnum canonical_signal_type  
-    string kind  
     DataTypeEnum native_data_type  
     string native_description  
     UnitEnum native_unit  
     QuantityKindEnum quantity_kind  
     SignalRoleEnum signal_role  
     SourceSystemEnum source_system  
+    string id  
+    stringList alias  
+    string kind  
 }
 SignalBinding {
-    SignalBindingPredicateEnum predicate  
     string id  
+    string predicate  
 }
 
 BeamLine ||--|o FloorParamGroup : "FloorP"
 BeamLine ||--|o MetaParamGroup : "MetaP"
 Component ||--|o MetaParamGroup : "MetaP"
-ComponentRelation ||--|o BeamLine : "beamline_context"
 ComponentRelation ||--|| Component : "object, subject"
 Facility ||--}o BeamLine : "beamlines"
 Facility ||--}o Component : "components"
@@ -88,6 +100,7 @@ Facility ||--}o ComponentRelation : "component_relations"
 Facility ||--}o Identifier : "identifiers"
 Facility ||--}o Signal : "signals"
 Facility ||--}o SignalBinding : "signal_bindings"
+MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 PhysicalComponent ||--|o FloorParamGroup : "FloorP"
 PhysicalComponent ||--|o LongitudinalPlacementParamGroup : "LongitudinalPlacementP"
 PhysicalComponent ||--|o MetaParamGroup : "MetaP"
@@ -106,6 +119,7 @@ SignalBinding ||--|| Signal : "object"
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [identifiers](../slots/identifiers.md) | * <br/> [Identifier](../classes/Identifier.md) | A unique and ideally persistent identifier for the facility, such as a DOI or ROR. | direct |
+| [id_namespace](../slots/id_namespace.md) | 1 <br/> [Uri](../types/Uri.md) | Base IRI for this facility's instance identifiers. Identifiers in the data (id, subject, object, beamline_context) are written bare, e.g. RF_LASER, and are made absolute by prefixing this value on export to RDF or Neo4j, e.g. tag:jlab.org,2026:uitf/ + RF_LASER. Required, with no schema-wide default, so that facilities cannot silently share a namespace and collide. Any absolute IRI is accepted, resolvable (https://...) or not (tag:..., urn:...). It must end in '/', '#' or ':' so that simple concatenation yields a well-formed IRI. | direct |
 | [components](../slots/components.md) | * <br/> [Component](../classes/Component.md) | A list of physical components in the accelerator system. | direct |
 | [beamlines](../slots/beamlines.md) | * <br/> [BeamLine](../classes/BeamLine.md) | A list of beamlines in the accelerator system. | direct |
 | [signals](../slots/signals.md) | * <br/> [Signal](../classes/Signal.md) | A list of signals in the accelerator system. | direct |
@@ -151,8 +165,8 @@ SignalBinding ||--|| Signal : "object"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Facility |
-| native | pals:Facility |
+| self | acc:Facility |
+| native | acc:Facility |
 
 
 
@@ -173,6 +187,27 @@ from_schema: https://w3id.org/accelerator-core
 slots:
 - identifiers
 attributes:
+  id_namespace:
+    name: id_namespace
+    description: Base IRI for this facility's instance identifiers. Identifiers in
+      the data (id, subject, object, beamline_context) are written bare, e.g. RF_LASER,
+      and are made absolute by prefixing this value on export to RDF or Neo4j, e.g.
+      tag:jlab.org,2026:uitf/ + RF_LASER. Required, with no schema-wide default, so
+      that facilities cannot silently share a namespace and collide. Any absolute
+      IRI is accepted, resolvable (https://...) or not (tag:..., urn:...). It must
+      end in '/', '#' or ':' so that simple concatenation yields a well-formed IRI.
+    examples:
+    - value: https://example.org/accelerator-core/facility/01gq9xj92/
+    - value: tag:jlab.org,2026:uitf/
+    - value: urn:example:facility/01gq9xj92
+    - value: http://example.org/facility/01gq9xj92
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    domain_of:
+    - Facility
+    range: uri
+    required: true
+    pattern: ^[A-Za-z][A-Za-z0-9+.\-]*:[^\s<>"{}|\\^`]*[/#:]$
   components:
     name: components
     description: A list of physical components in the accelerator system.
@@ -242,6 +277,29 @@ name: Facility
 description: A facility that houses one or more accelerators.
 from_schema: https://w3id.org/accelerator-core
 attributes:
+  id_namespace:
+    name: id_namespace
+    description: Base IRI for this facility's instance identifiers. Identifiers in
+      the data (id, subject, object, beamline_context) are written bare, e.g. RF_LASER,
+      and are made absolute by prefixing this value on export to RDF or Neo4j, e.g.
+      tag:jlab.org,2026:uitf/ + RF_LASER. Required, with no schema-wide default, so
+      that facilities cannot silently share a namespace and collide. Any absolute
+      IRI is accepted, resolvable (https://...) or not (tag:..., urn:...). It must
+      end in '/', '#' or ':' so that simple concatenation yields a well-formed IRI.
+    examples:
+    - value: https://example.org/accelerator-core/facility/01gq9xj92/
+    - value: tag:jlab.org,2026:uitf/
+    - value: urn:example:facility/01gq9xj92
+    - value: http://example.org/facility/01gq9xj92
+    from_schema: https://w3id.org/accelerator-core
+    rank: 1000
+    alias: id_namespace
+    owner: Facility
+    domain_of:
+    - Facility
+    range: uri
+    required: true
+    pattern: ^[A-Za-z][A-Za-z0-9+.\-]*:[^\s<>"{}|\\^`]*[/#:]$
   components:
     name: components
     description: A list of physical components in the accelerator system.

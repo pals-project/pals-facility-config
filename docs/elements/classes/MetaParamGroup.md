@@ -9,7 +9,7 @@ _Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata 
 
 
 
-URI: [pals:class/MetaParamGroup](https://pals-project.readthedocs.io/class/MetaParamGroup)
+URI: [acc:class/MetaParamGroup](https://example.org/accelerator-core/class/MetaParamGroup)
 
 
 ```mermaid
@@ -21,8 +21,9 @@ AdditionalMetadata {
 }
 MetaParamGroup {
     string description  
-    string alias  
+    stringList alias  
     string label  
+    string id  
 }
 
 MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
@@ -31,16 +32,21 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **MetaParamGroup**
+
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) | A human-readable description of the instance. | direct |
-| [alias](../slots/alias.md) | 0..1 <br/> [String](../types/String.md) | An alternative name or identifier for the instance. | direct |
+| [alias](../slots/alias.md) | * <br/> [String](../types/String.md) | An alternative name or identifier for the instance. | direct |
 | [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md) | A label string. | direct |
 | [additional_metadata](../slots/additional_metadata.md) | * <br/> [AdditionalMetadata](../classes/AdditionalMetadata.md) | Additional metadata or annotations for the instance. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -78,6 +84,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 | [SupportingFacilityComponent](../classes/SupportingFacilityComponent.md) | [MetaP](../slots/MetaP.md) | range | [MetaParamGroup](../classes/MetaParamGroup.md) |
 | [BookkeepingComponent](../classes/BookkeepingComponent.md) | [MetaP](../slots/MetaP.md) | range | [MetaParamGroup](../classes/MetaParamGroup.md) |
 | [Marker](../classes/Marker.md) | [MetaP](../slots/MetaP.md) | range | [MetaParamGroup](../classes/MetaParamGroup.md) |
+| [BeginningEle](../classes/BeginningEle.md) | [MetaP](../slots/MetaP.md) | range | [MetaParamGroup](../classes/MetaParamGroup.md) |
+| [Drift](../classes/Drift.md) | [MetaP](../slots/MetaP.md) | range | [MetaParamGroup](../classes/MetaParamGroup.md) |
 | [BeamLineSection](../classes/BeamLineSection.md) | [MetaP](../slots/MetaP.md) | range | [MetaParamGroup](../classes/MetaParamGroup.md) |
 
 
@@ -109,8 +117,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:MetaParamGroup |
-| native | pals:MetaParamGroup |
+| self | acc:MetaParamGroup |
+| native | acc:MetaParamGroup |
 | broad | pals:MetaP |
 
 
@@ -133,6 +141,7 @@ description: Mixin class for metadata parameters that are aligned with PALS Meta
 from_schema: https://w3id.org/accelerator-core
 broad_mappings:
 - pals:MetaP
+is_a: ParamGroup
 slots:
 - description
 - alias
@@ -141,8 +150,9 @@ attributes:
     name: label
     description: A label string.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:label
     rank: 1000
-    slot_uri: pals:label
     domain_of:
     - MetaParamGroup
     range: string
@@ -172,13 +182,15 @@ description: Mixin class for metadata parameters that are aligned with PALS Meta
 from_schema: https://w3id.org/accelerator-core
 broad_mappings:
 - pals:MetaP
+is_a: ParamGroup
 attributes:
   label:
     name: label
     description: A label string.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:label
     rank: 1000
-    slot_uri: pals:label
     alias: label
     owner: MetaParamGroup
     domain_of:
@@ -213,14 +225,33 @@ attributes:
     name: alias
     description: An alternative name or identifier for the instance.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:alias
     rank: 1000
-    slot_uri: pals:alias
     alias: alias
     owner: MetaParamGroup
     domain_of:
+    - Node
     - MetaParamGroup
-    - Signal
     range: string
+    multivalued: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: MetaParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 
 ```
 </details>

@@ -9,7 +9,7 @@ _Version of the representation of a particle accelerator and its operations._
 
 
 
-URI: [pals:slot/version](https://pals-project.readthedocs.io/slot/version)
+URI: [acc:slot/version](https://example.org/accelerator-core/slot/version)
 Alias: version
 
 <!-- no inheritance hierarchy -->
@@ -84,8 +84,8 @@ Alias: version
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:version |
-| native | pals:version |
+| self | acc:version |
+| native | acc:version |
 
 
 

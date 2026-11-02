@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasLongitudinalPlacementP](https://pals-project.readthedocs.io/class/HasLongitudinalPlacementP)
+URI: [acc:class/HasLongitudinalPlacementP](https://example.org/accelerator-core/class/HasLongitudinalPlacementP)
 
 
 ```mermaid
@@ -15,6 +15,7 @@ HasLongitudinalPlacementP {
 LongitudinalPlacementParamGroup {
     float length  
     float s_position  
+    string id  
 }
 
 HasLongitudinalPlacementP ||--|o LongitudinalPlacementParamGroup : "LongitudinalPlacementP"
@@ -46,6 +47,7 @@ HasLongitudinalPlacementP ||--|o LongitudinalPlacementParamGroup : "Longitudinal
 | --- | --- |
 | [PhysicalComponent](../classes/PhysicalComponent.md) | A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system. |
 | [SupportingFacilityComponent](../classes/SupportingFacilityComponent.md) | A physical component that supports accelerator operation  without a specific beam-pipe placement,  such as a power supply, control rack, or radiation detector. These can include Girders, Racks, Power Supplies,  and other physical infrastructure components that are important for understanding  the structure and function of the accelerator system but are not inline with the beamline. |
+| [Drift](../classes/Drift.md) | A field-free space between beamline components. A Drift is a virtual beamline component whose longitudinal extent preserves the separation between adjacent physical or virtual components. |
 
 
 
@@ -78,8 +80,8 @@ HasLongitudinalPlacementP ||--|o LongitudinalPlacementParamGroup : "Longitudinal
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasLongitudinalPlacementP |
-| native | pals:HasLongitudinalPlacementP |
+| self | acc:HasLongitudinalPlacementP |
+| native | acc:HasLongitudinalPlacementP |
 
 
 

@@ -9,7 +9,7 @@ _RF frequency._
 
 
 
-URI: [pals:frequency](https://pals-project.readthedocs.io/frequency)
+URI: [acc:slot/frequency](https://example.org/accelerator-core/slot/frequency)
 Alias: frequency
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: frequency
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:frequency](https://pals-project.readthedocs.io/frequency) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: frequency
 | --- | --- |
 | Owner | [RFParamGroup](../classes/RFParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `Hz`
+
+</details>
 
 
 
@@ -78,8 +83,9 @@ Alias: frequency
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:frequency |
-| native | pals:frequency |
+| self | acc:frequency |
+| native | acc:frequency |
+| close | pals:frequency |
 
 
 
@@ -91,13 +97,16 @@ Alias: frequency
 name: frequency
 description: RF frequency.
 from_schema: https://w3id.org/accelerator-core
+close_mappings:
+- pals:frequency
 rank: 1000
-slot_uri: pals:frequency
 alias: frequency
 owner: RFParamGroup
 domain_of:
 - RFParamGroup
 range: float
+unit:
+  ucum_code: Hz
 
 ```
 </details>

@@ -3,13 +3,15 @@
 # Class: SignalBinding 
 
 
-_Association between a PhysicalComponent and one of its Signals, e.g. QUAD1.QUAD1_STATUS_binding._
+_Association between a PhysicalComponent and one of its Signals, e.g. QUAD1 component to QUAD1.STATUS signal._
 
 
 
 
+* __NOTE__: this is an abstract class and should not be instantiated directly
 
-URI: [pals:class/SignalBinding](https://pals-project.readthedocs.io/class/SignalBinding)
+
+URI: [acc:class/SignalBinding](https://example.org/accelerator-core/class/SignalBinding)
 
 
 ```mermaid
@@ -21,40 +23,44 @@ FloorParamGroup {
     float x  
     float y  
     float z  
+    string id  
 }
 LongitudinalPlacementParamGroup {
     float length  
     float s_position  
+    string id  
 }
 MetaParamGroup {
     string description  
-    string alias  
+    stringList alias  
     string label  
+    string id  
 }
 PhysicalComponent {
     PhysicalRelationEnum beamline_relation  
     PhysicalFunctionEnumList functions  
     string id  
+    stringList alias  
     string kind  
     stringList native_types  
 }
 Signal {
-    string id  
     string access_protocol  
-    string alias  
     string archive_identifier  
     CanonicalSignalTypeEnum canonical_signal_type  
-    string kind  
     DataTypeEnum native_data_type  
     string native_description  
     UnitEnum native_unit  
     QuantityKindEnum quantity_kind  
     SignalRoleEnum signal_role  
     SourceSystemEnum source_system  
+    string id  
+    stringList alias  
+    string kind  
 }
 SignalBinding {
-    SignalBindingPredicateEnum predicate  
     string id  
+    string predicate  
 }
 
 MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
@@ -71,18 +77,23 @@ SignalBinding ||--|| Signal : "object"
 
 
 ## Inheritance
-* [Relationship](../classes/Relationship.md)
+* [Edge](../classes/Edge.md)
     * **SignalBinding**
+        * [HasSignal](../classes/HasSignal.md)
+        * [HasSetpointSignal](../classes/HasSetpointSignal.md)
+        * [HasReadbackSignal](../classes/HasReadbackSignal.md)
+        * [HasCommandSignal](../classes/HasCommandSignal.md)
+        * [HasLimitSignal](../classes/HasLimitSignal.md)
 
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [Relationship](../classes/Relationship.md) |
-| [subject](../slots/subject.md) | 1 <br/> [PhysicalComponent](../classes/PhysicalComponent.md) |  | [Relationship](../classes/Relationship.md) |
-| [predicate](../slots/predicate.md) | 1 <br/> [SignalBindingPredicateEnum](../enums/SignalBindingPredicateEnum.md) |  | [Relationship](../classes/Relationship.md) |
-| [object](../slots/object.md) | 1 <br/> [Signal](../classes/Signal.md) |  | [Relationship](../classes/Relationship.md) |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [Edge](../classes/Edge.md) |
+| [subject](../slots/subject.md) | 1 <br/> [PhysicalComponent](../classes/PhysicalComponent.md) |  | [Edge](../classes/Edge.md) |
+| [predicate](../slots/predicate.md) | 1 <br/> [String](../types/String.md) |  | [Edge](../classes/Edge.md) |
+| [object](../slots/object.md) | 1 <br/> [Signal](../classes/Signal.md) |  | [Edge](../classes/Edge.md) |
 
 
 
@@ -123,8 +134,8 @@ SignalBinding ||--|| Signal : "object"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:SignalBinding |
-| native | pals:SignalBinding |
+| self | acc:SignalBinding |
+| native | acc:SignalBinding |
 
 
 
@@ -141,16 +152,14 @@ SignalBinding ||--|| Signal : "object"
 ```yaml
 name: SignalBinding
 description: Association between a PhysicalComponent and one of its Signals, e.g.
-  QUAD1.QUAD1_STATUS_binding.
+  QUAD1 component to QUAD1.STATUS signal.
 from_schema: https://w3id.org/accelerator-core
-is_a: Relationship
+is_a: Edge
+abstract: true
 slot_usage:
   subject:
     name: subject
     range: PhysicalComponent
-  predicate:
-    name: predicate
-    range: SignalBindingPredicateEnum
   object:
     name: object
     range: Signal
@@ -164,16 +173,14 @@ slot_usage:
 ```yaml
 name: SignalBinding
 description: Association between a PhysicalComponent and one of its Signals, e.g.
-  QUAD1.QUAD1_STATUS_binding.
+  QUAD1 component to QUAD1.STATUS signal.
 from_schema: https://w3id.org/accelerator-core
-is_a: Relationship
+is_a: Edge
+abstract: true
 slot_usage:
   subject:
     name: subject
     range: PhysicalComponent
-  predicate:
-    name: predicate
-    range: SignalBindingPredicateEnum
   object:
     name: object
     range: Signal
@@ -182,16 +189,17 @@ attributes:
     name: id
     description: A unique identifier for the instance.
     from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
     rank: 1000
-    slot_uri: pals:id
     identifier: true
     alias: id
     owner: SignalBinding
     domain_of:
+    - Node
     - Affiliation
-    - Component
-    - Signal
-    - Relationship
+    - ParamGroup
+    - Edge
     range: string
     required: true
   subject:
@@ -202,8 +210,7 @@ attributes:
     alias: subject
     owner: SignalBinding
     domain_of:
-    - Relationship
-    relational_role: SUBJECT
+    - Edge
     range: PhysicalComponent
     required: true
   predicate:
@@ -211,12 +218,12 @@ attributes:
     from_schema: https://w3id.org/accelerator-core
     rank: 1000
     slot_uri: rdf:predicate
+    designates_type: true
     alias: predicate
     owner: SignalBinding
     domain_of:
-    - Relationship
-    relational_role: PREDICATE
-    range: SignalBindingPredicateEnum
+    - Edge
+    range: string
     required: true
   object:
     name: object
@@ -226,8 +233,7 @@ attributes:
     alias: object
     owner: SignalBinding
     domain_of:
-    - Relationship
-    relational_role: OBJECT
+    - Edge
     range: Signal
     required: true
 

@@ -7,7 +7,7 @@ _Controlled values for virtual relation to the beamline._
 
 
 
-URI: [pals:enum/VirtualRelationEnum](https://pals-project.readthedocs.io/enum/VirtualRelationEnum)
+URI: [acc:enum/VirtualRelationEnum](https://example.org/accelerator-core/enum/VirtualRelationEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

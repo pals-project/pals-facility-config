@@ -9,7 +9,7 @@ _Normal component of the magnetic field._
 
 
 
-URI: [pals:slot/Bn](https://pals-project.readthedocs.io/slot/Bn)
+URI: [acc:slot/Bn](https://example.org/accelerator-core/slot/Bn)
 Alias: Bn
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: Bn
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -77,8 +77,8 @@ Alias: Bn
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Bn |
-| native | pals:Bn |
+| self | acc:Bn |
+| native | acc:Bn |
 | broad | pals:BnN |
 
 

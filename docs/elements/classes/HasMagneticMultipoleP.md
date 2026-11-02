@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasMagneticMultipoleP](https://pals-project.readthedocs.io/class/HasMagneticMultipoleP)
+URI: [acc:class/HasMagneticMultipoleP](https://example.org/accelerator-core/class/HasMagneticMultipoleP)
 
 
 ```mermaid
@@ -13,7 +13,7 @@ HasMagneticMultipoleP {
 
 }
 MagneticMultipoleParamGroup {
-
+    string id  
 }
 MultipoleParameterGroup {
     float Bn  
@@ -91,8 +91,8 @@ MagneticMultipoleParamGroup ||--}o MultipoleParameterGroup : "mag_components"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasMagneticMultipoleP |
-| native | pals:HasMagneticMultipoleP |
+| self | acc:HasMagneticMultipoleP |
+| native | acc:HasMagneticMultipoleP |
 
 
 

@@ -7,17 +7,17 @@ _Controlled values for identifier types._
 
 
 
-URI: [pals:enum/IdentifierTypeEnum](https://pals-project.readthedocs.io/enum/IdentifierTypeEnum)
+URI: [acc:enum/IdentifierTypeEnum](https://example.org/accelerator-core/enum/IdentifierTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
 | --- | --- | --- |
-| DOI | http://purl.org/spar/datacite/doi | Digital Object Identifier. |
-| PURL | http://purl.org/spar/datacite/purl | Persistent Uniform Resource Locator. |
-| ROR | http://purl.org/spar/datacite/ror | Research Organization Registry identifier. |
-| LOCAL | http://purl.org/spar/datacite/local-resource-identifier-scheme | Local identifier, specific to the facility or source system. |
-| URL | http://purl.org/spar/datacite/url | Uniform Resource Locator. |
-| ARK | http://purl.org/spar/datacite/ark | Archival Resource Key. |
+| DOI | None | Digital Object Identifier. |
+| PURL | None | Persistent Uniform Resource Locator. |
+| ROR | None | Research Organization Registry identifier. |
+| LOCAL | None | Local identifier, specific to the facility or source system. |
+| URL | None | Uniform Resource Locator. |
+| ARK | None | Archival Resource Key. |
 
 
 
@@ -65,27 +65,33 @@ permissible_values:
   DOI:
     text: DOI
     description: Digital Object Identifier.
-    meaning: http://purl.org/spar/datacite/doi
+    exact_mappings:
+    - http://purl.org/spar/datacite/doi
   PURL:
     text: PURL
     description: Persistent Uniform Resource Locator.
-    meaning: http://purl.org/spar/datacite/purl
+    exact_mappings:
+    - http://purl.org/spar/datacite/purl
   ROR:
     text: ROR
     description: Research Organization Registry identifier.
-    meaning: http://purl.org/spar/datacite/ror
+    exact_mappings:
+    - http://purl.org/spar/datacite/ror
   LOCAL:
     text: LOCAL
     description: Local identifier, specific to the facility or source system.
-    meaning: http://purl.org/spar/datacite/local-resource-identifier-scheme
+    exact_mappings:
+    - http://purl.org/spar/datacite/local-resource-identifier-scheme
   URL:
     text: URL
     description: Uniform Resource Locator.
-    meaning: http://purl.org/spar/datacite/url
+    exact_mappings:
+    - http://purl.org/spar/datacite/url
   ARK:
     text: ARK
     description: Archival Resource Key.
-    meaning: http://purl.org/spar/datacite/ark
+    exact_mappings:
+    - http://purl.org/spar/datacite/ark
 
 ```
 </details>

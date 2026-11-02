@@ -3,13 +3,7 @@
 # Class: ElectricMultipoleParamGroup 
 
 
-_Mixin for electric multipole parameters, _
-
-_which can be used to describe the electric field components of an accelerator element._
-
-_This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS)._
-
-_Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7_
+_Mixin for electric multipole parameters,  which can be used to describe the electric field components of an accelerator element. This mixin is aligned with PALS ElectricMultipoleP for interoperability with the Particle Accelerator Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml elec_components: - order: 7_
 
 _  tilt: 0.7_
 
@@ -27,13 +21,13 @@ _```_
 
 
 
-URI: [pals:class/ElectricMultipoleParamGroup](https://pals-project.readthedocs.io/class/ElectricMultipoleParamGroup)
+URI: [acc:class/ElectricMultipoleParamGroup](https://example.org/accelerator-core/class/ElectricMultipoleParamGroup)
 
 
 ```mermaid
 erDiagram
 ElectricMultipoleParamGroup {
-
+    string id  
 }
 MultipoleParameterGroup {
     float Bn  
@@ -54,13 +48,18 @@ ElectricMultipoleParamGroup ||--}o MultipoleParameterGroup : "elec_components"
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **ElectricMultipoleParamGroup**
+
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [elec_components](../slots/elec_components.md) | * <br/> [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | Electric multipole components, one per order N. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -113,8 +112,8 @@ ElectricMultipoleParamGroup ||--}o MultipoleParameterGroup : "elec_components"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:ElectricMultipoleParamGroup |
-| native | pals:ElectricMultipoleParamGroup |
+| self | acc:ElectricMultipoleParamGroup |
+| native | acc:ElectricMultipoleParamGroup |
 | exact | pals:ElectricMultipoleP |
 | broad | pals:ElectricMultipoleP |
 
@@ -132,17 +131,18 @@ ElectricMultipoleParamGroup ||--}o MultipoleParameterGroup : "elec_components"
 <details>
 ```yaml
 name: ElectricMultipoleParamGroup
-description: "Mixin for electric multipole parameters, \nwhich can be used to describe\
-  \ the electric field components of an accelerator element.\nThis mixin is aligned\
+description: "Mixin for electric multipole parameters,  which can be used to describe\
+  \ the electric field components of an accelerator element. This mixin is aligned\
   \ with PALS ElectricMultipoleP for interoperability with the Particle Accelerator\
-  \ Language Standard (PALS).\nExample with three multipole components (N=0,1,2):\
-  \ ```yaml elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order:\
-  \ 2\n  EnL: 3.47e1\n```"
+  \ Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml\
+  \ elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order: 2\n\
+  \  EnL: 3.47e1\n```"
 from_schema: https://w3id.org/accelerator-core
 exact_mappings:
 - pals:ElectricMultipoleP
 broad_mappings:
 - pals:ElectricMultipoleP
+is_a: ParamGroup
 attributes:
   elec_components:
     name: elec_components
@@ -164,17 +164,18 @@ attributes:
 <details>
 ```yaml
 name: ElectricMultipoleParamGroup
-description: "Mixin for electric multipole parameters, \nwhich can be used to describe\
-  \ the electric field components of an accelerator element.\nThis mixin is aligned\
+description: "Mixin for electric multipole parameters,  which can be used to describe\
+  \ the electric field components of an accelerator element. This mixin is aligned\
   \ with PALS ElectricMultipoleP for interoperability with the Particle Accelerator\
-  \ Language Standard (PALS).\nExample with three multipole components (N=0,1,2):\
-  \ ```yaml elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order:\
-  \ 2\n  EnL: 3.47e1\n```"
+  \ Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml\
+  \ elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order: 2\n\
+  \  EnL: 3.47e1\n```"
 from_schema: https://w3id.org/accelerator-core
 exact_mappings:
 - pals:ElectricMultipoleP
 broad_mappings:
 - pals:ElectricMultipoleP
+is_a: ParamGroup
 attributes:
   elec_components:
     name: elec_components
@@ -189,6 +190,23 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/accelerator-core
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: ElectricMultipoleParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 
 ```
 </details>

@@ -7,7 +7,7 @@ _The zero phase reference for the cavity, which determines the phase of the RF f
 
 
 
-URI: [pals:enum/ZeroPhaseEnum](https://pals-project.readthedocs.io/enum/ZeroPhaseEnum)
+URI: [acc:enum/ZeroPhaseEnum](https://example.org/accelerator-core/enum/ZeroPhaseEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |

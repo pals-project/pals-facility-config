@@ -1,16 +1,52 @@
+# Type: Float 
 
-# Type: float
 
-A real number that conforms to the xsd:float specification
 
-URI: [linkml:Float](https://w3id.org/linkml/Float)
 
-|  |  |  |
-| --- | --- | --- |
-| Root (builtin) type | | **float** |
+_A real number that conforms to the xsd:float specification_
 
-## Other properties
 
-|  |  |  |
-| --- | --- | --- |
-| **Exact Mappings:** | | schema:Float |
+
+URI: [xsd:float](http://www.w3.org/2001/XMLSchema#float)
+
+## Type Properties
+
+| Property | Value |
+| --- | --- |
+| Base | `float` |
+| Type URI | [xsd:float](http://www.w3.org/2001/XMLSchema#float) |
+
+
+
+
+
+
+## Notes
+
+* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "float".
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/accelerator-core
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | xsd:float |
+| native | acc:float |
+| exact | schema:Float |
+
+

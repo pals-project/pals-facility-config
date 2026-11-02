@@ -9,7 +9,7 @@ _The metadata value, serialized as a string._
 
 
 
-URI: [pals:slot/value](https://pals-project.readthedocs.io/slot/value)
+URI: [acc:slot/value](https://example.org/accelerator-core/slot/value)
 Alias: value
 
 <!-- no inheritance hierarchy -->
@@ -78,8 +78,8 @@ Alias: value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:value |
-| native | pals:value |
+| self | acc:value |
+| native | acc:value |
 
 
 

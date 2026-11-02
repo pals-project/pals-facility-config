@@ -9,7 +9,7 @@ _Hint for the value's original type, so consumers can parse it back (e.g. float,
 
 
 
-URI: [pals:slot/datatype](https://pals-project.readthedocs.io/slot/datatype)
+URI: [acc:slot/datatype](https://example.org/accelerator-core/slot/datatype)
 Alias: datatype
 
 <!-- no inheritance hierarchy -->
@@ -77,8 +77,8 @@ Alias: datatype
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:datatype |
-| native | pals:datatype |
+| self | acc:datatype |
+| native | acc:datatype |
 
 
 
