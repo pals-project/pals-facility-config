@@ -89,7 +89,7 @@ is an error.
 | `--startup-timeout` | `180` seconds | How long to wait for `gradio-chat` to become reachable before giving up. |
 | `--keep-intermediate-files` | off (i.e. delete by default) | Keep the generated `.owl.ttl`/`.resolved.yaml`/`.ttl`/`_rdf.ttl` files. Without this flag they are deleted as soon as the graph has been built (before any questions are asked). |
 | `--no-fresh` | off (i.e. fresh by default) | Skip `docker compose down -v` before `up -d`. **Not safe** if the RDF content changed since the last run — see §6. |
-| `--accumulate-history` | off (i.e. each question is asked independently by default) | Benchmark runs only: ask the questions as one continuous conversation, passing the prior chat history with each question. The chat UI always keeps its conversation history (see Stage 6). |
+| `--accumulate-history` | off (i.e. each question is asked independently by default) | Benchmark runs only: ask the questions as one continuous conversation, passing the prior chat history with each question. Ignored when `--queries`/`--answers` are not given. The chat UI always keeps its conversation history, with or without this flag (see Stage 6). |
 | `--question-key` | `Q` | Key in each queries entry holding the question text. |
 | `--llm-answer-key` | `LLM_Ans` | Key to write the LLM's answer under in each answers entry; the script asserts this key does not already exist in the queries entry. |
 
@@ -284,6 +284,10 @@ empty history). Things to know:
   context window. Click **Clear** to start a new conversation.
 - Each browser tab has its own conversation, and reloading the page starts a
   new one.
+- Benchmark questions sent by the script do not appear in the browser and are
+  not part of any UI conversation: each API call carries only the history the
+  script passes it (none by default, or the earlier benchmark questions with
+  `--accumulate-history`).
 
 To stop the stack when you are done:
 
@@ -386,9 +390,11 @@ See [`.env.example`](.env.example) for the full annotated list. In summary:
   physical floor-survey coordinates (`FloorP.x`/`.y`) with an unrelated beam
   position signal (`IPMK101.XPOS`/`.YPOS`) that has no value populated in the
   graph; (2) non-deterministic agentic tool-use search paths, which can be
-  further influenced by prior chat history when `--accumulate-history` is
-  used (the default asks each question in isolation, which reduces this
-  effect for benchmarking).
+  further influenced by prior chat history. The chat UI always sends the
+  earlier questions and answers of the same chat, while the pipeline asks
+  each question in isolation unless `--accumulate-history` is used, so the
+  same question can get a different answer in the middle of a UI chat than in
+  a benchmark run. Click **Clear** in the UI to compare like with like.
 - **Only `--transformation RDF` is implemented.** Any other value raises
   `NotImplementedError` — this is a placeholder for future non-RDF
   transformation strategies.
