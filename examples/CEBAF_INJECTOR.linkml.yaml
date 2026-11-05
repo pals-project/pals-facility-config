@@ -9,7 +9,8 @@ affiliation:
   identifiers:
   - identifier_type: ROR
     identifier_value: https://ror.org/01gq9xj92
-authors: [He Zhang @ Jefferson Lab]
+authors:
+- name: He Zhang
 notes:
 - 'CEBAF Injector at Jefferson Lab, single pass. '
 facility:
