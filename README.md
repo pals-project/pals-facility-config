@@ -86,6 +86,20 @@ uv run python examples/update_twiss.py \
 uv run python examples/BtA/generate_narad_bta_instance.py
 ```
 
+Generate the hypothetical EIC toy ring instance with fictional EPICS PVs using:
+
+```console
+uv run python examples/EIC/generate_narad_eic_instance.py
+```
+
+This reads `examples/EIC/toy_ring_narad_skeleton_palsparserpy.yaml` and writes
+`examples/EIC/toy_ring_narad_instance.yaml`. Naming rules and signal semantics
+are configured at the top of the script. Each corrector gets H and V supply
+status, current setpoint, current readback, and minimum/maximum allowed setpoint
+signals (`Current-SP.DRVL` / `Current-SP.DRVH`, current in A); each BPM
+gets X and Y position readbacks in mm. Use `--input` and `--output` to override
+the default paths.
+
 `examples/update_twiss.py` also works with Booster and other NARAD YAML files:
 
 ```console
