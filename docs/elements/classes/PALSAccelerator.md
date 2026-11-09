@@ -51,7 +51,7 @@ ComponentRelation {
     string predicate  
 }
 Facility {
-    uri id_namespace  
+
 }
 Identifier {
     IdentifierTypeEnum identifier_type  
