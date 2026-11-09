@@ -150,7 +150,7 @@ def main():
     all_classes = schema_view.all_classes()
 
     def class_uri(name: str) -> URIRef:
-        """Expanded URI of a schema class, e.g. BeamProfileMonitor -> acc:BeamProfileMonitor (the schema's default_prefix)."""
+        """Expanded URI of a schema class, e.g. BeamProfileMonitor -> pals_config:BeamProfileMonitor (the schema's default_prefix)."""
         return URIRef(schema_view.get_uri(name, expand=True))
 
     class_for_predicate = {uri: class_uri(name) for name, uri in predicate_uri.items()}
