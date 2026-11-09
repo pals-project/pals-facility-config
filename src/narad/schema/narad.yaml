@@ -2338,8 +2338,6 @@ enums:
         description: fundamental charge
       Gauss:
         description: gauss (magnetic flux density)
-      G_per_cm:
-        description: gauss per centimeter
       G_cm:
         description: gauss centimeter, a magnetic field integral. 1 G.cm = 1e-6 T.m
         unit:
