@@ -14,6 +14,8 @@ license: https://creativecommons.org/publicdomain/zero/1.0/
 prefixes:
   linkml: https://w3id.org/linkml/
   pals: https://pals-project.readthedocs.io/  # used only in *_mappings to PALS documentation; not a resolvable vocabulary
+  schema: http://schema.org/
+  dcterms: http://purl.org/dc/terms/
   acc: https://example.org/accelerator-core/  # this schema's own classes, slots and predicates
   qudt: http://qudt.org/vocab/unit/
   quantitykind: http://qudt.org/vocab/quantitykind/
@@ -52,6 +54,20 @@ imports:
 #         A "wipe the graph and reload fresh each time" (not merge-based), then this is less of a problem.
 #   * Nodes with this issue cannnot rely on order of elements in a list, because the blank node IDs are not stable.
 
+types:
+  iso8601_datetime:
+    typeof: string
+    description: >-
+      Strict ISO 8601 date-time string allowing optional milliseconds and timezones, 
+      e.g., 2024-06-05T14:30:00Z+05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset +05:00 (America/New_York).
+    pattern: '^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?$'
+
+  isodate:
+    typeof: string
+    description: >-
+      Strict ISO 8601 date string (YYYY-MM-DD).
+      e.g., 2024-06-05 for June 5th, 2024.
+    pattern: '^\d{4}-\d{2}-\d{2}$'
 
 slots:
   id:
@@ -183,11 +199,47 @@ classes:
         description: Version of the representation of a particle accelerator and its operations.
         pattern: "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         range: string
+        required: false
+        ifabsent: ("0.0.0")
+      temporal_coverage:
+        range: TemporalCoverageClass
+        required: false
+        description: >-
+          Temporal coverage for time-based datasets, if applicable.
+          Container for elements describing the start_date and end_date of the data instance's temporal coverage 
+          in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00).
+          Use temporal_coverage when the dataset describes a specific historical or projected time period.
+          This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant.
+        related_mappings:
+          - dcterms:temporal
+          - schema:temporalCoverage
       authors:
         description: Contains the authorship information for this representation of an accelerator facility and its operations.
         range: Author
         multivalued: true
         inlined_as_list: true
+      created_date:
+        range: isodate
+        description: >-
+          The date the PALS/NARAD data instance of the facility configuration was first created, in ISO 8601 format (YYYY-MM-DD). 
+          Provides temporal context for the data instance and can be used for tracking its age and relevance.
+        required: true
+      updated_date:
+          range: isodate
+          description: >-
+            The date the data instance for the facility configuration was last updated, in ISO 8601 format (YYYY-MM-DD). Date of most recent update; revise on every change/version to the data instance, including minor edits and version updates. 
+            This provides temporal context for the data instance and can be used for tracking its currency and maintenance.
+      change_log:
+        range: ChangeLogEntryClass
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        description: >-
+          Running history of meaningful changes to a data instance of a facility's configuration.
+          Add a new entry every time the instance is updated.
+          Do not overwrite or delete prior entries.
+          If there have been no changes since creation, include a single entry with the creation date and the summary 'Initial creation'.
+        required: true
       notes:
         description: Additional notes or comments about the representation of a particle accelerator and its operations.
         range: string
@@ -201,6 +253,36 @@ classes:
       - description
       - affiliation
   
+  TemporalCoverageClass:
+    description: >-
+      Temporal coverage for time-based datasets, if applicable.
+        Container for elements describing the start_date and end_date of the data instance's temporal coverage 
+        in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00).
+        Use temporal_coverage when the dataset describes a specific historical or projected time period.
+        This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant.
+    attributes:
+      start_date:
+        range: string
+        pattern: iso8601_datetime
+        description: "Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm )."
+        related_mappings:
+          - schema:temporalCoverage
+        narrow_mappings:
+          - dcterms:date
+      end_date:
+        range: string
+        pattern: iso8601_datetime
+        description: "End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm )."
+        related_mappings:
+          - schema:temporalCoverage
+        narrow_mappings:
+          - dcterms:date
+      slots:
+        - description
+      slot_usage:
+        description:
+          description: Detailed description of the temporal coverage.
+
   Author:
     description: Contains authorship information for a representation of an accelerator facility and its operations.
     attributes:
@@ -215,6 +297,25 @@ classes:
     slots:
       - name
       - affiliation
+  
+  ChangeLogEntryClass:
+    description: "An individual entry in the change log, documenting a specific change to the data instance."
+    attributes:
+      change_date:
+        range: isodate
+        description: The date the change was made, in ISO 8601 format (YYYY-MM-DD).
+        identifier: true
+        required: true
+      instance_version:
+        range: string
+        ifabsent: string(0.0.0)
+        pattern: '^\d+\.\d+(\.\d+)?$'
+        description: The version of the data instance that was changed.
+        required: true
+      summary:
+        range: string
+        description: A brief summary of the change.
+        required: true
 
   Facility:
     description: A facility that houses one or more accelerators.
