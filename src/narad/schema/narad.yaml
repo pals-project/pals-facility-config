@@ -1,5 +1,6 @@
-id: https://w3id.org/accelerator-core
-name: accelerator_core
+id: https://w3id.org/pals-config
+name: pals_config
+version: 0.0.1
 title: Accelerator Core Ontology
 description: >-
   A lightweight LinkML schema for facility-agnostic accelerator components,
@@ -13,21 +14,21 @@ license: https://creativecommons.org/publicdomain/zero/1.0/
 # There is no per-facility namespace: load one facility per graph.
 prefixes:
   linkml: https://w3id.org/linkml/
-  pals: https://pals-project.readthedocs.io/  # used only in *_mappings to PALS documentation; not a resolvable vocabulary
-  schema: http://schema.org/
+  pals: https://pals-project.readthedocs.io/  # NEED TO CREATE with a w3id extension: used only in *_mappings to PALS documentation; not a resolvable vocabulary
+  pals_config: https://w3id.org/pals-config/  # NEED TO CREATE: vocabulary: classes, slots, predicates
+  schema: http://schema.org/  # must match linkml:types, which declares http:// (https:// breaks linkml-convert)
   dcterms: http://purl.org/dc/terms/
-  acc: https://example.org/accelerator-core/  # this schema's own classes, slots and predicates
-  qudt: http://qudt.org/vocab/unit/
-  quantitykind: http://qudt.org/vocab/quantitykind/
   sosa: http://www.w3.org/ns/sosa/
+  skos: http://www.w3.org/2004/02/skos/core#
+  unit: http://qudt.org/vocab/unit/
+  quantitykind: http://qudt.org/vocab/quantitykind/
   RO: http://purl.obolibrary.org/obo/RO_
   BFO: http://purl.obolibrary.org/obo/BFO_
-  om: http://www.ontology-of-units-of-measure.org/resource/om-2/
-  saref: https://saref.etsi.org/core/v4.1.1/
+  saref: https://saref.etsi.org/core/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   xsd: http://www.w3.org/2001/XMLSchema#
 
-default_prefix: acc
+default_prefix: pals_config
 default_range: string
 
 imports:
@@ -97,6 +98,9 @@ slots:
     range: string
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix).
     slot_uri: rdf:type
+    related_mappings:
+      - rdf:type
+      - saref:DeviceKind
   
   subject:
     slot_uri: rdf:subject
@@ -149,13 +153,16 @@ slots:
       Distance value between two components in a relationship.
       Only an edge-property slot for edges that require a distance value between two components in a relationship.
     range: float
-    slot_uri: om:Distance
+    exact_mappings:
+      - quantitykind:Distance
 
   distance_unit:
     description: >-
       Unit of the distance value between two components in a relationship.
       Only an edge-property slot for edges that require a distance value between two components in a relationship.
     range: UnitEnum
+    related_mappings:
+      - saref:UnitOfMeasure
 
   tolerance_value:
     description: >-
@@ -168,6 +175,8 @@ slots:
       Unit of the tolerance value for the distance between two components in a relationship.
       Only an edge-property slot for edges that require a tolerance value between two components in a relationship.
     range: UnitEnum
+    related_mappings:
+      - saref:UnitOfMeasure
 
   coordinates:
     range: CoordinateSet
@@ -294,9 +303,12 @@ classes:
         description: The ORCID identifier of the author.
         range: string
         pattern: "^https://orcid\\.org/\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$"
+        related_mappings:
+          - schema:creator
     slots:
       - name
       - affiliation
+    
   
   ChangeLogEntryClass:
     description: "An individual entry in the change log, documenting a specific change to the data instance."
@@ -304,7 +316,6 @@ classes:
       change_date:
         range: isodate
         description: The date the change was made, in ISO 8601 format (YYYY-MM-DD).
-        identifier: true
         required: true
       instance_version:
         range: string
@@ -316,6 +327,8 @@ classes:
         range: string
         description: A brief summary of the change.
         required: true
+        exact_mappings:
+          - skos:changeNote
 
   Facility:
     description: A facility that houses one or more accelerators.
@@ -1466,8 +1479,8 @@ classes:
         description: The identifier used to reference the signal in an archival system.
         range: string
     broad_mappings:
-      - sosa:Sensor
-      - sosa:Actuator
+      - sosa:SOSASensor
+      - sosa:SOSAActuator
 
   #---- Subclass component classes ------------------------------------------------
   Magnet:
@@ -1770,7 +1783,6 @@ classes:
   # ---- Relationships: SignalBindings and Component Relations ------------------------------------------------
   Edge:
     abstract: true
-    class_uri: rdf:Statement
     description: Abstract base for subject-predicate-object associations.
     slots:
       - id
@@ -1800,7 +1812,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_signal
+      rdf_predicate: pals_config:has_signal
 
   HasSetpointSignal:
     is_a: SignalBinding
@@ -1812,7 +1824,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_setpoint_signal
+      rdf_predicate: pals_config:has_setpoint_signal
 
   HasReadbackSignal:
     is_a: SignalBinding
@@ -1824,7 +1836,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_readback_signal
+      rdf_predicate: pals_config:has_readback_signal
   
   HasCommandSignal:
     is_a: SignalBinding
@@ -1836,7 +1848,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_command_signal
+      rdf_predicate: pals_config:has_command_signal
 
   HasLimitSignal:
     is_a: SignalBinding
@@ -1848,7 +1860,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_limit_signal
+      rdf_predicate: pals_config:has_limit_signal
 
   ComponentRelation:
     abstract: true
@@ -1875,7 +1887,7 @@ classes:
     description: >-
       A relationship indicating that the subject component precedes the object component in a specified context, 
       such as along a beamline.
-    exact_mappings:
+    related_mappings:
       - BFO:0000063
     slots:
       - beamline_context
@@ -1901,7 +1913,7 @@ classes:
             context:
               equals_string: beamline_order
     annotations:
-      rdf_predicate: acc:precedes
+      rdf_predicate: pals_config:precedes
   
 
   Contains:
@@ -1909,7 +1921,7 @@ classes:
     description: >-
       A relationship indicating that the subject component contains the object component in a specified context, 
       such as within a BeamLineSection or other organizational grouping.
-    exact_mappings:
+    related_mappings:
       - BFO:0000051
     slots:
       - beamline_context
@@ -1922,15 +1934,13 @@ classes:
       beamline_context:
         required: false
     annotations:
-      rdf_predicate: acc:contains
+      rdf_predicate: pals_config:contains
       
   Controls:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component controls the object component in a specified context, 
       such as a power supply controlling a magnet.
-    exact_mappings:
-      - saref:controls
     slot_usage:
       predicate:
         description: >-
@@ -1938,7 +1948,9 @@ classes:
         required: true
         equals_string: Controls
     annotations:
-      rdf_predicate: acc:controls
+      rdf_predicate: pals_config:controls
+    related_mappings:
+      - saref:targets#saref-controls
   
 
   IsPartOf:
@@ -1962,14 +1974,14 @@ classes:
       beamline_context:
         required: false
     annotations:
-      rdf_predicate: acc:is_part_of
+      rdf_predicate: pals_config:is_part_of
     
   AdjacentTo:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component is adjacent to the object component and not overlapping
        in a specified context, such as radiation detector and a magnet.
-    exact_mappings:
+    related_mappings:
       - RO:0002220
     slots:
       - distance_value
@@ -1984,14 +1996,14 @@ classes:
         required: true
         equals_string: AdjacentTo
     annotations:
-      rdf_predicate: acc:adjacent_to
+      rdf_predicate: pals_config:adjacent_to
 
   Overlaps:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component overlaps the object component in a specified context, 
       such as a magnet and a diagnostic device.
-    exact_mappings:
+    related_mappings:
       - RO:0002131
     slots:
       - coordinates
@@ -2002,14 +2014,14 @@ classes:
         required: true
         equals_string: Overlaps
     annotations:
-      rdf_predicate: acc:overlaps
+      rdf_predicate: pals_config:overlaps
   
   HasConnectingBranch:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component has a connecting branch to the object component in a specified context, 
       such as a beamline section having a fork as a connecting branch.
-    exact_mappings:
+    related_mappings:
       - RO:0002253
     slots:
       - beamline_context
@@ -2035,14 +2047,14 @@ classes:
             context:
               equals_string: beamline_order
     annotations:
-      rdf_predicate: acc:has_connecting_branch
+      rdf_predicate: pals_config:has_connecting_branch
 
   MountedOn:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component is mounted on the object component in a specified context, 
       such as a diagnostic device mounted on a magnet.
-    broad_mappings:
+    related_mappings:
       - RO:0002371
     slots:
       - coordinates
@@ -2053,14 +2065,14 @@ classes:
         required: true
         equals_string: MountedOn
     annotations:
-      rdf_predicate: acc:mounted_on
+      rdf_predicate: pals_config:mounted_on
      
   Intersects:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component intersects the object component in a specified context, 
       such as a beamline and a diagnostic device.
-    broad_mappings:
+    related_mappings:
       - RO:0015011
     slot_usage:
       predicate:
@@ -2069,15 +2081,13 @@ classes:
         required: true
         equals_string: Intersects
     annotations:
-      rdf_predicate: acc:intersects
+      rdf_predicate: pals_config:intersects
 
   NearestTo:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component is nearest to the object component in a specified context, 
       such as a diagnostic device nearest to a magnet.
-    broad_mappings:
-      - RO:0002325
     slots:
       - distance_value
       - distance_unit
@@ -2091,7 +2101,7 @@ classes:
         required: true
         equals_string: NearestTo
     annotations:
-      rdf_predicate: acc:nearest_to
+      rdf_predicate: pals_config:nearest_to
 
   CoordinateSet:
     description: >-
@@ -2298,17 +2308,17 @@ enums:
       Setpoint:
         description: Requested or configured value.
         exact_mappings:
-          - sosa:ActuatableProperty
+          - sosa:SOSAActuatableProperty
       Readback:
         description: Measured or reported value.
         exact_mappings:
-          - sosa:ObservableProperty
+          - sosa:SOSAObservableProperty
       Status:
         description: State or condition indicator.
       Command:
         description: Command or action trigger.
         exact_mappings:
-          - sosa:ActuatableProperty
+          - sosa:SOSAActuatableProperty
       MinimumLimit:
         description: Minimum allowed signal value.
         exact_mappings:
@@ -2319,8 +2329,6 @@ enums:
           - xsd:maxInclusive
       RangeLimit:
         description: A signal containing both upper and lower allowed limits.
-        exact_mappings:
-          - acc:RangeLimit
 
   CanonicalSignalTypeEnum:
     description: Portable semantic meanings for important signals.
@@ -2374,7 +2382,7 @@ enums:
       State:
         description: Device state or condition.
         exact_mappings:
-          - sosa:ObservableProperty
+          - sosa:SOSAObservableProperty
       ElectricCurrent:
         description: Electric current.
         exact_mappings:
@@ -2405,8 +2413,6 @@ enums:
           - quantitykind:Power
       CavityPhase:
         description: Cavity phase.
-        exact_mappings:
-          - quantitykind:PhaseAngle
       CavityGradient:
         description: Cavity accelerating gradient.
         exact_mappings:
@@ -2420,15 +2426,15 @@ enums:
       A:
         description: ampere
         exact_mappings:
-          - qudt:A
+          - unit:A
       degree:
         description: degree
         exact_mappings:
-          - qudt:DEG
+          - unit:DEG
       eV:
         description: electron volt
         exact_mappings:
-          - qudt:EV
+          - unit:EV
       eV_per_c:
         description: momentum in electron volts per speed of light
       eV_per_c2:
@@ -2437,39 +2443,39 @@ enums:
         description: fundamental charge
       Gauss:
         description: gauss (magnetic flux density)
+        exact_mappings:
+          - unit:GAUSS
       G_per_cm:
         description: gauss per centimeter
       Hz:
         description: hertz
         exact_mappings:
-          - qudt:HZ
+          - unit:HZ
       kW:
         description: kilowatt
         related_mappings:
-          - qudt:KiloW
+          - unit:KiloW
       m:
         description: meter
         exact_mappings:
-          - qudt:M
+          - unit:M
       mm:
         description: millimeter
         exact_mappings:
-          - qudt:MilliM
+          - unit:MilliM
       mrem_per_h:
         description: >-
           millirem per hour. Kept as a local accelerator unit value because
           QUDT publishes related radiation units but no exact millirem-per-hour
           unit in the checked vocabulary.
-        exact_mappings:
-          - qudt:MREM-PER-H
       MV_per_m:
         description: megavolt per meter
         exact_mappings:
-          - qudt:MegaV-PER-M
+          - unit:MegaV-PER-M
       PA:
         description: pascal
         exact_mappings:
-          - qudt:PA
+          - unit:PA
       randians_pi2:
         description: radians divided by 2 pi - angles and phases
       rem_per_h:
@@ -2480,31 +2486,31 @@ enums:
       seconds:
         description: second
         exact_mappings:
-          - qudt:SEC
+          - unit:SEC
       T:
         description: tesla
         exact_mappings:
-          - qudt:T
+          - unit:T
       T_M:
         description: tesla meter
         exact_mappings:
-          - qudt:T-M
+          - unit:T-M
       Torr:
         description: torr
         exact_mappings:
-          - qudt:TORR
+          - unit:TORR
       V:
         description: volt
         exact_mappings:
-          - qudt:V
+          - unit:V
       V_per_m:
         description: volt per meter
         exact_mappings:
-          - qudt:V-PER-M
+          - unit:V-PER-M
       unitless:
         description: dimensionless numeric value
         exact_mappings:
-          - qudt:NUM
+          - unit:NUM
       none:
         description: no unit or not applicable
 
@@ -2529,8 +2535,6 @@ enums:
           - xsd:boolean
       FloatArray:
         description: An array of floating-point values.
-        exact_mappings:
-          - acc:FloatArray
 
 
   CoordinateSystemEnum:
