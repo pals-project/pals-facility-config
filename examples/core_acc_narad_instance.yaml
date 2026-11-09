@@ -21,30 +21,30 @@ authors:
 created_date: "2026-06-03"
 updated_date: "2026-11-09"
 change_log:
-    - change_date: "2026-06-03"
-      instance_version: 0.0.0
-      summary: "Initial creation"
-    - change_date: "2026-07-07"
-      instance_version: 0.0.1
-      summary: "Fully compliant example of a subsection of UITF. Updated schema to support."
-    - change_date: "2026-07-24"
-      instance_version: 0.0.2
-      summary: "Authors now included."
-    - change_date: "2026-08-13"
-      instance_version: 0.0.3
-      summary: "Updating to property graph structure."
-    - change_date: "2026-08-23"
-      instance_version: 0.0.4
-      summary: "Updated LinkML schema and example data instance to using SignalBindings and Component Relations."
-    - change_date: "2026-10-20"
-      instance_version: 0.0.5
-      summary: "Updated to conform to facility.id_namespace requirements."
-    - change_date: "2026-11-09"
-      instance_version: 0.0.6
-      summary: "Remove Facility.id_namespace."
-    - change_date: "2026-11-09"
-      instance_version: 0.0.7
-      summary: "Added created_date, updated_date, and change_log."
+  - change_date: "2026-06-03"
+    instance_version: 0.0.0
+    summary: "Initial creation"
+  - change_date: "2026-07-07"
+    instance_version: 0.0.1
+    summary: "Fully compliant example of a subsection of UITF. Updated schema to support."
+  - change_date: "2026-07-24"
+    instance_version: 0.0.2
+    summary: "Authors now included."
+  - change_date: "2026-08-13"
+    instance_version: 0.0.3
+    summary: "Updating to property graph structure."
+  - change_date: "2026-08-23"
+    instance_version: 0.0.4
+    summary: "Updated LinkML schema and example data instance to using SignalBindings and Component Relations."
+  - change_date: "2026-10-20"
+    instance_version: 0.0.5
+    summary: "Updated to conform to facility.id_namespace requirements."
+  - change_date: "2026-11-09"
+    instance_version: 0.0.6
+    summary: "Remove Facility.id_namespace."
+  - change_date: "2026-11-09"
+    instance_version: 0.0.7
+    summary: "Added created_date, updated_date, and change_log."
 notes:
   - "This is a work in progress to define the JLab UITF injector beamline in the accelerator_core LinkML schema. The original
     data was automatically ported, then manually updated from a prior instance format to conform to the new schema."
