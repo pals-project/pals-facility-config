@@ -2282,6 +2282,8 @@ enums:
         description: Integrated magnetic field.
         exact_mappings:
           - quantitykind:MagneticFluxPerLength
+      IntegratedMagneticFieldGradient:
+        description: Integrated magnetic field gradient.
       MagneticField:
         description: Magnetic field.
         exact_mappings:
@@ -2338,6 +2340,10 @@ enums:
         description: gauss (magnetic flux density)
       G_per_cm:
         description: gauss per centimeter
+      G_cm:
+        description: gauss centimeter, a magnetic field integral. 1 G.cm = 1e-6 T.m
+        unit:
+          ucum_code: G.cm
       Hz:
         description: hertz
         exact_mappings:
