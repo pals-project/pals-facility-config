@@ -9,7 +9,7 @@ _Rotation around the X-axis in the facility floor plan._
 
 
 
-URI: [acc:slot/phi](https://example.org/accelerator-core/slot/phi)
+URI: [pals_config:slot/phi](https://w3id.org/pals-config/slot/phi)
 Alias: phi
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: phi
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: phi
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:phi |
-| native | acc:phi |
+| self | pals_config:phi |
+| native | pals_config:phi |
 | close | pals:phi |
 
 
@@ -97,7 +97,7 @@ Alias: phi
 ```yaml
 name: phi
 description: Rotation around the X-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - phi_angle
 - ModelPitch

@@ -9,7 +9,7 @@ _The frame of reference / domain in which this relationship is asserted to hold.
 
 
 
-URI: [acc:slot/context](https://example.org/accelerator-core/slot/context)
+URI: [pals_config:slot/context](https://w3id.org/pals-config/slot/context)
 Alias: context
 
 <!-- no inheritance hierarchy -->
@@ -72,7 +72,7 @@ Alias: context
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -81,8 +81,8 @@ Alias: context
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:context |
-| native | acc:context |
+| self | pals_config:context |
+| native | pals_config:context |
 
 
 
@@ -94,7 +94,7 @@ Alias: context
 name: context
 description: The frame of reference / domain in which this relationship is asserted
   to hold.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: context
 domain_of:

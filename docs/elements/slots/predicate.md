@@ -82,7 +82,7 @@ Alias: predicate
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -92,7 +92,7 @@ Alias: predicate
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | rdf:predicate |
-| native | acc:predicate |
+| native | pals_config:predicate |
 
 
 
@@ -102,7 +102,7 @@ Alias: predicate
 <details>
 ```yaml
 name: predicate
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 slot_uri: rdf:predicate
 designates_type: true

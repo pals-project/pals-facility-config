@@ -9,7 +9,7 @@ _The protocol used to access the signal in the source system,  such as EPICS Cha
 
 
 
-URI: [acc:slot/access_protocol](https://example.org/accelerator-core/slot/access_protocol)
+URI: [pals_config:slot/access_protocol](https://w3id.org/pals-config/slot/access_protocol)
 Alias: access_protocol
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: access_protocol
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: access_protocol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:access_protocol |
-| native | acc:access_protocol |
+| self | pals_config:access_protocol |
+| native | pals_config:access_protocol |
 
 
 
@@ -90,7 +90,7 @@ Alias: access_protocol
 name: access_protocol
 description: The protocol used to access the signal in the source system,  such as
   EPICS Channel Access, PALS-Ext, MYA, or a simulation service.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: access_protocol
 owner: Signal

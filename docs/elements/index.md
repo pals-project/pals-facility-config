@@ -2,9 +2,9 @@
 
 A lightweight LinkML schema for facility-agnostic accelerator components, their beamline relationships, and associated control-system signals.
 
-URI: https://w3id.org/accelerator-core
+URI: https://w3id.org/pals-config
 
-Name: accelerator_core
+Name: pals_config
 
 
 
@@ -15,6 +15,7 @@ Name: accelerator_core
 | [AdditionalMetadata](classes/AdditionalMetadata.md) | A single generic key/value metadata entry, used as a GraphQL-compatible replacement for an open-ended (range: Any) field. A list of these represents an arbitrary, extensible bag of program-specific metadata. |
 | [Affiliation](classes/Affiliation.md) | Contains affiliation information for an author or component, such as a ROR. |
 | [Author](classes/Author.md) | Contains authorship information for a representation of an accelerator facility and its operations. |
+| [ChangeLogEntryClass](classes/ChangeLogEntryClass.md) | An individual entry in the change log, documenting a specific change to the data instance. |
 | [CoordinateSet](classes/CoordinateSet.md) | A set of coordinates that define the spatial relationship between two components. This can include Cartesian coordinates, cylindrical coordinates, or other coordinate systems as needed. Useful for defining the spatial relationship where the relationship is not strictly linear or where the components are not aligned along a single axis. |
 | [Edge](classes/Edge.md) | Abstract base for subject-predicate-object associations. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ComponentRelation](classes/ComponentRelation.md) | Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds. |
@@ -92,6 +93,7 @@ Name: accelerator_core
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[RFParamGroup](classes/RFParamGroup.md) | Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS). |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SolenoidParamGroup](classes/SolenoidParamGroup.md) | Mixin for solenoid-specific parameters. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TwissParamGroup](classes/TwissParamGroup.md) | Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element. |
+| [TemporalCoverageClass](classes/TemporalCoverageClass.md) | Temporal coverage for time-based datasets, if applicable.<br>  Container for elements describing the start_date and end_date of the data instance's temporal coverage <br>  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00).<br>  Use temporal_coverage when the dataset describes a specific historical or projected time period.<br>  This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant. |
 
 
 
@@ -122,12 +124,15 @@ Name: accelerator_core
 | [Bsol](slots/Bsol.md) | Solenoid field. |
 | [canonical_signal_type](slots/canonical_signal_type.md) | The canonical semantic meaning of the signal. |
 | [cavity_type](slots/cavity_type.md) | Cavity type |
+| [change_date](slots/change_date.md) | The date the change was made, in ISO 8601 format (YYYY-MM-DD). |
+| [change_log](slots/change_log.md) | Running history of meaningful changes to a data instance of a facility's configuration. Add a new entry every time the instance is updated. Do not overwrite or delete prior entries. If there have been no changes since creation, include a single entry with the creation date and the summary 'Initial creation'. |
 | [component_direction](slots/component_direction.md) |  |
 | [component_relations](slots/component_relations.md) | A list of component relations in the accelerator system (Component <-> Component relationships). |
 | [components](slots/components.md) | A list of physical components in the accelerator system. |
 | [context](slots/context.md) | The frame of reference / domain in which this relationship is asserted to hold. |
 | [coordinate_system](slots/coordinate_system.md) | The coordinate system used for the coordinates (e.g., Cartesian, Cylindrical). |
 | [coordinates](slots/coordinates.md) | A set of coordinates that define the spatial relationship between the two components. Only an edge-property slot for edges that require a set of coordinates to define the spatial relationship between two components in a relationship. |
+| [created_date](slots/created_date.md) | The date the PALS/NARAD data instance of the facility configuration was first created, in ISO 8601 format (YYYY-MM-DD).  Provides temporal context for the data instance and can be used for tracking its age and relevance. |
 | [datatype](slots/datatype.md) | Hint for the value's original type, so consumers can parse it back (e.g. float, integer, boolean) rather than treating everything as an opaque string. |
 | [dE_ref](slots/dE_ref.md) | Reference energy gain. |
 | [description](slots/description.md) | A human-readable description of the instance. |
@@ -145,6 +150,7 @@ Name: accelerator_core
 | [ElectricMultipoleP](slots/ElectricMultipoleP.md) | A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). |
 | [email](slots/email.md) | The email address of the author. |
 | [En](slots/En.md) | Normal component of the field. |
+| [end_date](slots/end_date.md) | End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). |
 | [EnL](slots/EnL.md) | Length-integrated normal component. |
 | [Es](slots/Es.md) | Skew component of the field. |
 | [EsL](slots/EsL.md) | Length-integrated skew component. |
@@ -163,10 +169,10 @@ Name: accelerator_core
 | [h2](slots/h2.md) | Exit end pole face curvature |
 | [harmon](slots/harmon.md) | RF harmonic number. |
 | [id](slots/id.md) | A unique identifier for the instance. |
-| [id_namespace](slots/id_namespace.md) | Base IRI for this facility's instance identifiers. Identifiers in the data (id, subject, object, beamline_context) are written bare, e.g. RF_LASER, and are made absolute by prefixing this value on export to RDF or Neo4j, e.g. tag:jlab.org,2026:uitf/ + RF_LASER. Required, with no schema-wide default, so that facilities cannot silently share a namespace and collide. Any absolute IRI is accepted, resolvable (https://...) or not (tag:..., urn:...). It must end in '/', '#' or ':' so that simple concatenation yields a well-formed IRI. |
 | [identifier_type](slots/identifier_type.md) | The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK. |
 | [identifier_value](slots/identifier_value.md) | The value of the identifier. |
 | [identifiers](slots/identifiers.md) | A unique and ideally persistent identifier for the facility, such as a DOI or ROR. |
+| [instance_version](slots/instance_version.md) | The version of the data instance that was changed. |
 | [key](slots/key.md) | The metadata field name. |
 | [kind](slots/kind.md) | The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix). |
 | [Kn](slots/Kn.md) | Normalized normal component. |
@@ -217,10 +223,15 @@ Name: accelerator_core
 | [signal_bindings](slots/signal_bindings.md) | A list of signal bindings in the accelerator system (Component <-> Signal relationships). |
 | [signal_role](slots/signal_role.md) | The role of the signal in the control system, such as setpoint, readback, status, command, or limit. |
 | [signals](slots/signals.md) | A list of signals in the accelerator system. |
+| [slot_usage](slots/slot_usage.md) | JsonObj(description='Detailed description of the temporal coverage.') |
+| [slots](slots/slots.md) |  |
 | [SolenoidP](slots/SolenoidP.md) | A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). |
 | [source_system](slots/source_system.md) | The source system from which the signal originates, such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service. |
 | [species_ref](slots/species_ref.md) | A reference to a species or particle type, such as an ion, electron, or proton. |
+| [start_date](slots/start_date.md) | Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). |
 | [subject](slots/subject.md) |  |
+| [summary](slots/summary.md) | A brief summary of the change. |
+| [temporal_coverage](slots/temporal_coverage.md) | Temporal coverage for time-based datasets, if applicable. Container for elements describing the start_date and end_date of the data instance's temporal coverage  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00). Use temporal_coverage when the dataset describes a specific historical or projected time period. This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant. |
 | [theta](slots/theta.md) | Orientation angle around the Y-axis in the facility floor plan. |
 | [theta_coord](slots/theta_coord.md) | The angular coordinate in cylindrical coordinates (in radians). |
 | [tilt](slots/tilt.md) | Tilt of the Nth multipole. |
@@ -229,6 +240,7 @@ Name: accelerator_core
 | [tolerance_unit](slots/tolerance_unit.md) | Unit of the tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship. |
 | [tolerance_value](slots/tolerance_value.md) | Tolerance value for the distance between two components in a relationship. Only an edge-property slot for edges that require a tolerance value between two components in a relationship. |
 | [TwissP](slots/TwissP.md) | A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). |
+| [updated_date](slots/updated_date.md) | The date the data instance for the facility configuration was last updated, in ISO 8601 format (YYYY-MM-DD). Date of most recent update; revise on every change/version to the data instance, including minor edits and version updates.  This provides temporal context for the data instance and can be used for tracking its currency and maintenance. |
 | [value](slots/value.md) | The metadata value, serialized as a string. |
 | [version](slots/version.md) | Version of the representation of a particle accelerator and its operations. |
 | [voltage](slots/voltage.md) | RF voltage. |
@@ -287,6 +299,8 @@ Name: accelerator_core
 | [Double](types/Double.md) | A real number that conforms to the xsd:double specification |
 | [Float](types/Float.md) | A real number that conforms to the xsd:float specification |
 | [Integer](types/Integer.md) | An integer |
+| [Iso8601Datetime](types/Iso8601Datetime.md) | Strict ISO 8601 date-time string allowing optional milliseconds and timezones,  e.g., 2024-06-05T14:30:00Z+05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset +05:00 (America/New_York). |
+| [Isodate](types/Isodate.md) | Strict ISO 8601 date string (YYYY-MM-DD). e.g., 2024-06-05 for June 5th, 2024. |
 | [Jsonpath](types/Jsonpath.md) | A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form. |
 | [Jsonpointer](types/Jsonpointer.md) | A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form. |
 | [Ncname](types/Ncname.md) | Prefix part of CURIE |

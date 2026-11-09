@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:slot/reference_frame](https://example.org/accelerator-core/slot/reference_frame)
+URI: [pals_config:slot/reference_frame](https://w3id.org/pals-config/slot/reference_frame)
 Alias: reference_frame
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: reference_frame
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: reference_frame
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:reference_frame |
-| native | acc:reference_frame |
+| self | pals_config:reference_frame |
+| native | pals_config:reference_frame |
 
 
 
@@ -94,7 +94,7 @@ Alias: reference_frame
 <details>
 ```yaml
 name: reference_frame
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: reference_frame
 owner: ComponentRelation

@@ -9,7 +9,7 @@ _A virtual component that represents a bookkeeping or organizational role in the
 
 
 
-URI: [acc:class/BookkeepingComponent](https://example.org/accelerator-core/class/BookkeepingComponent)
+URI: [pals_config:class/BookkeepingComponent](https://w3id.org/pals-config/class/BookkeepingComponent)
 
 
 ```mermaid
@@ -109,7 +109,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -118,8 +118,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:BookkeepingComponent |
-| native | acc:BookkeepingComponent |
+| self | pals_config:BookkeepingComponent |
+| native | pals_config:BookkeepingComponent |
 | broad | pals:BookkeepingElement |
 
 
@@ -141,7 +141,7 @@ description: A virtual component that represents a bookkeeping or organizational
   include BeamLineSections, Markers, Forks, and other virtual components that are
   important for understanding  the structure and function of the accelerator system
   but are not physical devices.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:BookkeepingElement
 is_a: VirtualComponent
@@ -161,7 +161,7 @@ description: A virtual component that represents a bookkeeping or organizational
   include BeamLineSections, Markers, Forks, and other virtual components that are
   important for understanding  the structure and function of the accelerator system
   but are not physical devices.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:BookkeepingElement
 is_a: VirtualComponent
@@ -173,7 +173,7 @@ attributes:
     description: A mixin for floor plan shift parameters that are aligned with PALS
       BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
       Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BodyShiftP
     owner: BookkeepingComponent
@@ -185,7 +185,7 @@ attributes:
     name: functions
     description: The function of the virtual component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_function
     alias: functions
@@ -200,7 +200,7 @@ attributes:
     name: beamline_relation
     description: The relationship of the virtual component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_beamline_relation
     alias: beamline_relation
@@ -215,7 +215,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: BookkeepingComponent
@@ -227,7 +227,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: BookkeepingComponent
@@ -240,7 +240,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: BookkeepingComponent
@@ -251,7 +251,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -269,7 +269,10 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - rdf:type
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -283,7 +286,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

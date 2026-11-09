@@ -9,7 +9,7 @@ _Electric multipole components, one per order N._
 
 
 
-URI: [acc:slot/elec_components](https://example.org/accelerator-core/slot/elec_components)
+URI: [pals_config:slot/elec_components](https://w3id.org/pals-config/slot/elec_components)
 Alias: elec_components
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: elec_components
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: elec_components
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:elec_components |
-| native | acc:elec_components |
+| self | pals_config:elec_components |
+| native | pals_config:elec_components |
 
 
 
@@ -90,7 +90,7 @@ Alias: elec_components
 ```yaml
 name: elec_components
 description: Electric multipole components, one per order N.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: elec_components
 owner: ElectricMultipoleParamGroup

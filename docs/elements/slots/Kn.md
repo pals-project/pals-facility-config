@@ -9,7 +9,7 @@ _Normalized normal component._
 
 
 
-URI: [acc:slot/Kn](https://example.org/accelerator-core/slot/Kn)
+URI: [pals_config:slot/Kn](https://w3id.org/pals-config/slot/Kn)
 Alias: Kn
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: Kn
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Kn
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Kn |
-| native | acc:Kn |
+| self | pals_config:Kn |
+| native | pals_config:Kn |
 | broad | pals:KnN |
 
 
@@ -90,7 +90,7 @@ Alias: Kn
 ```yaml
 name: Kn
 description: Normalized normal component.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:KnN
 rank: 1000

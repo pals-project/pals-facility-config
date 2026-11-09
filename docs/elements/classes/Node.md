@@ -11,7 +11,7 @@ _Abstract base class for all node entities in the accelerator core ontology. Thi
 * __NOTE__: this is an abstract class and should not be instantiated directly
 
 
-URI: [acc:class/Node](https://example.org/accelerator-core/class/Node)
+URI: [pals_config:class/Node](https://w3id.org/pals-config/class/Node)
 
 
 ```mermaid
@@ -66,7 +66,7 @@ Node {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -75,8 +75,8 @@ Node {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Node |
-| native | acc:Node |
+| self | pals_config:Node |
+| native | pals_config:Node |
 
 
 
@@ -97,7 +97,7 @@ description: 'Abstract base class for all node entities in the accelerator core 
   is not intended to be instantiated directly, but serves as a common ancestor for
   all other classes. Allows for the use of kind: as a discriminator for the type of
   node in the ontology.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 abstract: true
 slots:
 - id
@@ -117,13 +117,13 @@ description: 'Abstract base class for all node entities in the accelerator core 
   is not intended to be instantiated directly, but serves as a common ancestor for
   all other classes. Allows for the use of kind: as a discriminator for the type of
   node in the ontology.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 abstract: true
 attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -141,7 +141,10 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - rdf:type
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -155,7 +158,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

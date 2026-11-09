@@ -9,7 +9,7 @@ _Skew component of the magnetic field._
 
 
 
-URI: [acc:slot/Bs](https://example.org/accelerator-core/slot/Bs)
+URI: [pals_config:slot/Bs](https://w3id.org/pals-config/slot/Bs)
 Alias: Bs
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: Bs
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Bs
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Bs |
-| native | acc:Bs |
+| self | pals_config:Bs |
+| native | pals_config:Bs |
 | broad | pals:BsN |
 
 
@@ -90,7 +90,7 @@ Alias: Bs
 ```yaml
 name: Bs
 description: Skew component of the magnetic field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:BsN
 rank: 1000

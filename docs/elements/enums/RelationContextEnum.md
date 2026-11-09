@@ -2,7 +2,7 @@
 
 
 
-URI: [acc:enum/RelationContextEnum](https://example.org/accelerator-core/enum/RelationContextEnum)
+URI: [pals_config:enum/RelationContextEnum](https://w3id.org/pals-config/enum/RelationContextEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -41,7 +41,7 @@ URI: [acc:enum/RelationContextEnum](https://example.org/accelerator-core/enum/Re
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -53,7 +53,7 @@ URI: [acc:enum/RelationContextEnum](https://example.org/accelerator-core/enum/Re
 <details>
 ```yaml
 name: RelationContextEnum
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   beamline_order:

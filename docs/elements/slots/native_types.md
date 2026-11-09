@@ -9,7 +9,7 @@ _The native type of the component in the source system, which can be used to ide
 
 
 
-URI: [acc:slot/native_types](https://example.org/accelerator-core/slot/native_types)
+URI: [pals_config:slot/native_types](https://w3id.org/pals-config/slot/native_types)
 Alias: native_types
 
 <!-- no inheritance hierarchy -->
@@ -97,7 +97,7 @@ Alias: native_types
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -106,8 +106,8 @@ Alias: native_types
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:native_types |
-| native | acc:native_types |
+| self | pals_config:native_types |
+| native | pals_config:native_types |
 
 
 
@@ -119,7 +119,7 @@ Alias: native_types
 name: native_types
 description: The native type of the component in the source system, which can be used
   to identify the component across different source systems.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: native_types
 owner: Component

@@ -9,7 +9,7 @@ _A list of beamlines in the accelerator system._
 
 
 
-URI: [acc:slot/beamlines](https://example.org/accelerator-core/slot/beamlines)
+URI: [pals_config:slot/beamlines](https://w3id.org/pals-config/slot/beamlines)
 Alias: beamlines
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: beamlines
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: beamlines
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:beamlines |
-| native | acc:beamlines |
+| self | pals_config:beamlines |
+| native | pals_config:beamlines |
 
 
 
@@ -90,7 +90,7 @@ Alias: beamlines
 ```yaml
 name: beamlines
 description: A list of beamlines in the accelerator system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: beamlines
 owner: Facility

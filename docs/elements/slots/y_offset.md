@@ -9,7 +9,7 @@ _Shift in the Y direction in the facility floor plan._
 
 
 
-URI: [acc:slot/y_offset](https://example.org/accelerator-core/slot/y_offset)
+URI: [pals_config:slot/y_offset](https://w3id.org/pals-config/slot/y_offset)
 Alias: y_offset
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: y_offset
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: y_offset
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:y_offset |
-| native | acc:y_offset |
+| self | pals_config:y_offset |
+| native | pals_config:y_offset |
 | close | pals:y_offset |
 
 
@@ -97,7 +97,7 @@ Alias: y_offset
 ```yaml
 name: y_offset
 description: Shift in the Y direction in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - delta_y
 - y_shift

@@ -9,7 +9,7 @@ _The coordinate system used for the coordinates (e.g., Cartesian, Cylindrical)._
 
 
 
-URI: [acc:slot/coordinate_system](https://example.org/accelerator-core/slot/coordinate_system)
+URI: [pals_config:slot/coordinate_system](https://w3id.org/pals-config/slot/coordinate_system)
 Alias: coordinate_system
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: coordinate_system
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: coordinate_system
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:coordinate_system |
-| native | acc:coordinate_system |
+| self | pals_config:coordinate_system |
+| native | pals_config:coordinate_system |
 
 
 
@@ -89,7 +89,7 @@ Alias: coordinate_system
 ```yaml
 name: coordinate_system
 description: The coordinate system used for the coordinates (e.g., Cartesian, Cylindrical).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: coordinate_system
 owner: CoordinateSet

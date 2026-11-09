@@ -9,7 +9,7 @@ _Version of the representation of a particle accelerator and its operations._
 
 
 
-URI: [acc:slot/version](https://example.org/accelerator-core/slot/version)
+URI: [pals_config:slot/version](https://w3id.org/pals-config/slot/version)
 Alias: version
 
 <!-- no inheritance hierarchy -->
@@ -46,6 +46,7 @@ Alias: version
 
 | Property | Value |
 | --- | --- |
+| If Absent | `("0.0.0")` |
 | Owner | [PALSAccelerator](../classes/PALSAccelerator.md) |
 
 
@@ -75,7 +76,7 @@ Alias: version
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +85,8 @@ Alias: version
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:version |
-| native | acc:version |
+| self | pals_config:version |
+| native | pals_config:version |
 
 
 
@@ -96,13 +97,15 @@ Alias: version
 ```yaml
 name: version
 description: Version of the representation of a particle accelerator and its operations.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
+ifabsent: ("0.0.0")
 alias: version
 owner: PALSAccelerator
 domain_of:
 - PALSAccelerator
 range: string
+required: false
 pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
 
 ```

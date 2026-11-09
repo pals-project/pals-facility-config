@@ -9,7 +9,7 @@ _A mixin for electric multipole parameters that are aligned with PALS ElectricMu
 
 
 
-URI: [acc:slot/ElectricMultipoleP](https://example.org/accelerator-core/slot/ElectricMultipoleP)
+URI: [pals_config:slot/ElectricMultipoleP](https://w3id.org/pals-config/slot/ElectricMultipoleP)
 Alias: ElectricMultipoleP
 
 <!-- no inheritance hierarchy -->
@@ -80,7 +80,7 @@ Alias: ElectricMultipoleP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -89,8 +89,8 @@ Alias: ElectricMultipoleP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:ElectricMultipoleP |
-| native | acc:ElectricMultipoleP |
+| self | pals_config:ElectricMultipoleP |
+| native | pals_config:ElectricMultipoleP |
 
 
 
@@ -103,7 +103,7 @@ name: ElectricMultipoleP
 description: A mixin for electric multipole parameters that are aligned with PALS
   ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the
   Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: ElectricMultipoleP
 owner: HasElectricMultipoleP

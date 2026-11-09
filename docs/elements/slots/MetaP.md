@@ -9,7 +9,7 @@ _A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Para
 
 
 
-URI: [acc:slot/MetaP](https://example.org/accelerator-core/slot/MetaP)
+URI: [pals_config:slot/MetaP](https://w3id.org/pals-config/slot/MetaP)
 Alias: MetaP
 
 <!-- no inheritance hierarchy -->
@@ -98,7 +98,7 @@ Alias: MetaP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -107,8 +107,8 @@ Alias: MetaP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:MetaP |
-| native | acc:MetaP |
+| self | pals_config:MetaP |
+| native | pals_config:MetaP |
 
 
 
@@ -121,7 +121,7 @@ name: MetaP
 description: A mixin for metadata parameters that are aligned with PALS MetaP (Metadata
   Parameters) for interoperability with the Particle Accelerator Language Standard
   (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: MetaP
 owner: HasMetaP

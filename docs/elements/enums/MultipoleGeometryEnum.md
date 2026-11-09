@@ -7,7 +7,7 @@ _The geometric configuration of the multipole field.  Sets the geometry used to 
 
 
 
-URI: [acc:enum/MultipoleGeometryEnum](https://example.org/accelerator-core/enum/MultipoleGeometryEnum)
+URI: [pals_config:enum/MultipoleGeometryEnum](https://w3id.org/pals-config/enum/MultipoleGeometryEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -46,7 +46,7 @@ URI: [acc:enum/MultipoleGeometryEnum](https://example.org/accelerator-core/enum/
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -60,7 +60,7 @@ URI: [acc:enum/MultipoleGeometryEnum](https://example.org/accelerator-core/enum/
 name: MultipoleGeometryEnum
 description: The geometric configuration of the multipole field.  Sets the geometry
   used to calculate multipoles.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   follows_ref_geometry:

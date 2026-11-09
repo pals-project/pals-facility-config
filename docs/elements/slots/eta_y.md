@@ -9,7 +9,7 @@ _Twiss dispersion parameter in the vertical plane. May be any real value._
 
 
 
-URI: [acc:slot/eta_y](https://example.org/accelerator-core/slot/eta_y)
+URI: [pals_config:slot/eta_y](https://w3id.org/pals-config/slot/eta_y)
 Alias: eta_y
 
 <!-- no inheritance hierarchy -->
@@ -79,7 +79,7 @@ Alias: eta_y
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -88,8 +88,8 @@ Alias: eta_y
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:eta_y |
-| native | acc:eta_y |
+| self | pals_config:eta_y |
+| native | pals_config:eta_y |
 | close | pals:eta_y |
 
 
@@ -101,7 +101,7 @@ Alias: eta_y
 ```yaml
 name: eta_y
 description: Twiss dispersion parameter in the vertical plane. May be any real value.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - etay
 close_mappings:

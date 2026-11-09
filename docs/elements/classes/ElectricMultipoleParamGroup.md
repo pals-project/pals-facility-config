@@ -21,7 +21,7 @@ _```_
 
 
 
-URI: [acc:class/ElectricMultipoleParamGroup](https://example.org/accelerator-core/class/ElectricMultipoleParamGroup)
+URI: [pals_config:class/ElectricMultipoleParamGroup](https://w3id.org/pals-config/class/ElectricMultipoleParamGroup)
 
 
 ```mermaid
@@ -103,7 +103,7 @@ ElectricMultipoleParamGroup ||--}o MultipoleParameterGroup : "elec_components"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -112,8 +112,8 @@ ElectricMultipoleParamGroup ||--}o MultipoleParameterGroup : "elec_components"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:ElectricMultipoleParamGroup |
-| native | acc:ElectricMultipoleParamGroup |
+| self | pals_config:ElectricMultipoleParamGroup |
+| native | pals_config:ElectricMultipoleParamGroup |
 | exact | pals:ElectricMultipoleP |
 | broad | pals:ElectricMultipoleP |
 
@@ -137,7 +137,7 @@ description: "Mixin for electric multipole parameters,  which can be used to des
   \ Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml\
   \ elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order: 2\n\
   \  EnL: 3.47e1\n```"
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:ElectricMultipoleP
 broad_mappings:
@@ -147,7 +147,7 @@ attributes:
   elec_components:
     name: elec_components
     description: Electric multipole components, one per order N.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - ElectricMultipoleParamGroup
@@ -170,7 +170,7 @@ description: "Mixin for electric multipole parameters,  which can be used to des
   \ Language Standard (PALS). Example with three multipole components (N=0,1,2): ```yaml\
   \ elec_components: - order: 7\n  tilt: 0.7\n- order: 3\n  En: 27.3\n- order: 2\n\
   \  EnL: 3.47e1\n```"
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:ElectricMultipoleP
 broad_mappings:
@@ -180,7 +180,7 @@ attributes:
   elec_components:
     name: elec_components
     description: Electric multipole components, one per order N.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: elec_components
     owner: ElectricMultipoleParamGroup
@@ -193,7 +193,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

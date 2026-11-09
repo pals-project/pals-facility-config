@@ -11,7 +11,7 @@ _Abstract base for subject-predicate-object associations._
 * __NOTE__: this is an abstract class and should not be instantiated directly
 
 
-URI: [rdf:Statement](http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement)
+URI: [pals_config:class/Edge](https://w3id.org/pals-config/class/Edge)
 
 
 ```mermaid
@@ -34,13 +34,6 @@ Edge {
 * **Edge**
     * [SignalBinding](../classes/SignalBinding.md)
     * [ComponentRelation](../classes/ComponentRelation.md)
-
-
-## Class Properties
-
-| Property | Value |
-| --- | --- |
-| Class URI | [rdf:Statement](http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement) |
 
 
 ## Slots
@@ -75,7 +68,7 @@ Edge {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +77,8 @@ Edge {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | rdf:Statement |
-| native | acc:Edge |
+| self | pals_config:Edge |
+| native | pals_config:Edge |
 
 
 
@@ -102,14 +95,13 @@ Edge {
 ```yaml
 name: Edge
 description: Abstract base for subject-predicate-object associations.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 abstract: true
 slots:
 - id
 - subject
 - predicate
 - object
-class_uri: rdf:Statement
 
 ```
 </details>
@@ -120,13 +112,13 @@ class_uri: rdf:Statement
 ```yaml
 name: Edge
 description: Abstract base for subject-predicate-object associations.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 abstract: true
 attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -142,7 +134,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -153,7 +145,7 @@ attributes:
     required: true
   predicate:
     name: predicate
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -165,7 +157,7 @@ attributes:
     required: true
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object
@@ -174,7 +166,6 @@ attributes:
     - Edge
     range: string
     required: true
-class_uri: rdf:Statement
 
 ```
 </details>

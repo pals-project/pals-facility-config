@@ -9,7 +9,7 @@ _The native data type of the signal in the source system,  such as String, Integ
 
 
 
-URI: [acc:slot/native_data_type](https://example.org/accelerator-core/slot/native_data_type)
+URI: [pals_config:slot/native_data_type](https://w3id.org/pals-config/slot/native_data_type)
 Alias: native_data_type
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: native_data_type
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: native_data_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:native_data_type |
-| native | acc:native_data_type |
+| self | pals_config:native_data_type |
+| native | pals_config:native_data_type |
 
 
 
@@ -91,7 +91,7 @@ Alias: native_data_type
 name: native_data_type
 description: The native data type of the signal in the source system,  such as String,
   Integer, Float, or Boolean.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: native_data_type
 owner: Signal

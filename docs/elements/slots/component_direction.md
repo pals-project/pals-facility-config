@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:slot/component_direction](https://example.org/accelerator-core/slot/component_direction)
+URI: [pals_config:slot/component_direction](https://w3id.org/pals-config/slot/component_direction)
 Alias: component_direction
 
 <!-- no inheritance hierarchy -->
@@ -73,7 +73,7 @@ Alias: component_direction
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -82,8 +82,8 @@ Alias: component_direction
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:component_direction |
-| native | acc:component_direction |
+| self | pals_config:component_direction |
+| native | pals_config:component_direction |
 
 
 
@@ -93,7 +93,7 @@ Alias: component_direction
 <details>
 ```yaml
 name: component_direction
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: component_direction
 owner: ComponentRelation

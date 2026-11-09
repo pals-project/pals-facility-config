@@ -9,7 +9,7 @@ _Reference bend angle._
 
 
 
-URI: [acc:slot/angle_ref](https://example.org/accelerator-core/slot/angle_ref)
+URI: [pals_config:slot/angle_ref](https://w3id.org/pals-config/slot/angle_ref)
 Alias: angle_ref
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: angle_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: angle_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:angle_ref |
-| native | acc:angle_ref |
+| self | pals_config:angle_ref |
+| native | pals_config:angle_ref |
 | close | pals:angle_ref |
 
 
@@ -96,7 +96,7 @@ Alias: angle_ref
 ```yaml
 name: angle_ref
 description: Reference bend angle.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:angle_ref
 rank: 1000

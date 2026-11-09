@@ -9,7 +9,7 @@ _Active acceleration length._
 
 
 
-URI: [acc:slot/L_active](https://example.org/accelerator-core/slot/L_active)
+URI: [pals_config:slot/L_active](https://w3id.org/pals-config/slot/L_active)
 Alias: L_active
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: L_active
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: L_active
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:L_active |
-| native | acc:L_active |
+| self | pals_config:L_active |
+| native | pals_config:L_active |
 | close | pals:L_active |
 
 
@@ -96,7 +96,7 @@ Alias: L_active
 ```yaml
 name: L_active
 description: Active acceleration length.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:L_active
 rank: 1000

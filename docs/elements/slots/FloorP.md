@@ -9,7 +9,7 @@ _A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan
 
 
 
-URI: [acc:slot/FloorP](https://example.org/accelerator-core/slot/FloorP)
+URI: [pals_config:slot/FloorP](https://w3id.org/pals-config/slot/FloorP)
 Alias: FloorP
 
 <!-- no inheritance hierarchy -->
@@ -96,7 +96,7 @@ Alias: FloorP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -105,8 +105,8 @@ Alias: FloorP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:FloorP |
-| native | acc:FloorP |
+| self | pals_config:FloorP |
+| native | pals_config:FloorP |
 
 
 
@@ -119,7 +119,7 @@ name: FloorP
 description: A mixin for floor plan parameters that are aligned with PALS FloorP (Floor
   Plan Parameters) for interoperability with the Particle Accelerator Language Standard
   (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: FloorP
 owner: HasFloorP

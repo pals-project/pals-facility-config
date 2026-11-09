@@ -9,7 +9,7 @@ _Reference tilt of the bend._
 
 
 
-URI: [acc:slot/tilt_ref](https://example.org/accelerator-core/slot/tilt_ref)
+URI: [pals_config:slot/tilt_ref](https://w3id.org/pals-config/slot/tilt_ref)
 Alias: tilt_ref
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: tilt_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: tilt_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:tilt_ref |
-| native | acc:tilt_ref |
+| self | pals_config:tilt_ref |
+| native | pals_config:tilt_ref |
 | close | pals:tilt_ref |
 
 
@@ -96,7 +96,7 @@ Alias: tilt_ref
 ```yaml
 name: tilt_ref
 description: Reference tilt of the bend.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:tilt_ref
 rank: 1000

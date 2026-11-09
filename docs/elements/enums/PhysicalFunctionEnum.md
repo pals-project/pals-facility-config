@@ -7,7 +7,7 @@ _Broad device-level functions._
 
 
 
-URI: [acc:enum/PhysicalFunctionEnum](https://example.org/accelerator-core/enum/PhysicalFunctionEnum)
+URI: [pals_config:enum/PhysicalFunctionEnum](https://w3id.org/pals-config/enum/PhysicalFunctionEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -52,7 +52,7 @@ URI: [acc:enum/PhysicalFunctionEnum](https://example.org/accelerator-core/enum/P
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -65,7 +65,7 @@ URI: [acc:enum/PhysicalFunctionEnum](https://example.org/accelerator-core/enum/P
 ```yaml
 name: PhysicalFunctionEnum
 description: Broad device-level functions.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Focusing:

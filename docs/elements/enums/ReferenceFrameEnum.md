@@ -2,7 +2,7 @@
 
 
 
-URI: [acc:enum/ReferenceFrameEnum](https://example.org/accelerator-core/enum/ReferenceFrameEnum)
+URI: [pals_config:enum/ReferenceFrameEnum](https://w3id.org/pals-config/enum/ReferenceFrameEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -39,7 +39,7 @@ URI: [acc:enum/ReferenceFrameEnum](https://example.org/accelerator-core/enum/Ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -51,7 +51,7 @@ URI: [acc:enum/ReferenceFrameEnum](https://example.org/accelerator-core/enum/Ref
 <details>
 ```yaml
 name: ReferenceFrameEnum
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   beam_direction:

@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:slot/functions](https://example.org/accelerator-core/slot/functions)
+URI: [pals_config:slot/functions](https://w3id.org/pals-config/slot/functions)
 Alias: functions
 
 <!-- no inheritance hierarchy -->
@@ -85,8 +85,8 @@ Alias: functions
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:functions |
-| native | acc:functions |
+| self | pals_config:functions |
+| native | pals_config:functions |
 
 
 

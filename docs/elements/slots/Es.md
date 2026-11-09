@@ -9,7 +9,7 @@ _Skew component of the field._
 
 
 
-URI: [acc:slot/Es](https://example.org/accelerator-core/slot/Es)
+URI: [pals_config:slot/Es](https://w3id.org/pals-config/slot/Es)
 Alias: Es
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: Es
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Es
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Es |
-| native | acc:Es |
+| self | pals_config:Es |
+| native | pals_config:Es |
 | broad | pals:EsN |
 
 
@@ -90,7 +90,7 @@ Alias: Es
 ```yaml
 name: Es
 description: Skew component of the field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:EsN
 rank: 1000

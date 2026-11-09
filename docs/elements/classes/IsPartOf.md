@@ -9,7 +9,7 @@ _A relationship indicating that the subject component is part of the object comp
 
 
 
-URI: [acc:class/IsPartOf](https://example.org/accelerator-core/class/IsPartOf)
+URI: [pals_config:class/IsPartOf](https://w3id.org/pals-config/class/IsPartOf)
 
 
 ```mermaid
@@ -110,7 +110,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | acc:is_part_of |
+| rdf_predicate | pals_config:is_part_of |
 
 
 
@@ -118,7 +118,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -127,8 +127,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:IsPartOf |
-| native | acc:IsPartOf |
+| self | pals_config:IsPartOf |
+| native | pals_config:IsPartOf |
 | exact | BFO:0000050 |
 
 
@@ -148,10 +148,10 @@ name: IsPartOf
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:is_part_of
+    value: pals_config:is_part_of
 description: A relationship indicating that the subject component is part of the object
   component in a specified context,  such as a magnet being part of a BeamLineSection.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - BFO:0000050
 is_a: ComponentRelation
@@ -183,10 +183,10 @@ name: IsPartOf
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:is_part_of
+    value: pals_config:is_part_of
 description: A relationship indicating that the subject component is part of the object
   component in a specified context,  such as a magnet being part of a BeamLineSection.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - BFO:0000050
 is_a: ComponentRelation
@@ -208,7 +208,7 @@ attributes:
     name: context
     description: The frame of reference / domain in which this relationship is asserted
       to hold.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: IsPartOf
@@ -222,7 +222,7 @@ attributes:
     description: The specific BeamLine this relationship is defined with respect to
       (relevant when context=beamline_order). Only an edge-property slot for edges
       that are defined with respect to a specific BeamLine.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: beamline_context
     owner: IsPartOf
@@ -235,7 +235,7 @@ attributes:
     required: false
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: IsPartOf
@@ -244,7 +244,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: IsPartOf
@@ -255,7 +255,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -271,7 +271,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -284,7 +284,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -297,7 +297,7 @@ attributes:
     equals_string: IsPartOf
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

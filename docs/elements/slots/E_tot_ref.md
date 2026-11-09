@@ -9,7 +9,7 @@ _[eV] Reference total energy_
 
 
 
-URI: [acc:slot/E_tot_ref](https://example.org/accelerator-core/slot/E_tot_ref)
+URI: [pals_config:slot/E_tot_ref](https://w3id.org/pals-config/slot/E_tot_ref)
 Alias: E_tot_ref
 
 <!-- no inheritance hierarchy -->
@@ -79,7 +79,7 @@ Alias: E_tot_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -88,8 +88,8 @@ Alias: E_tot_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:E_tot_ref |
-| native | acc:E_tot_ref |
+| self | pals_config:E_tot_ref |
+| native | pals_config:E_tot_ref |
 | close | pals:E_tot_ref |
 
 
@@ -101,7 +101,7 @@ Alias: E_tot_ref
 ```yaml
 name: E_tot_ref
 description: '[eV] Reference total energy'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - ETotal
 close_mappings:

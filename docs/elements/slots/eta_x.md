@@ -9,7 +9,7 @@ _Twiss dispersion parameter in the horizontal plane. May be any real value._
 
 
 
-URI: [acc:slot/eta_x](https://example.org/accelerator-core/slot/eta_x)
+URI: [pals_config:slot/eta_x](https://w3id.org/pals-config/slot/eta_x)
 Alias: eta_x
 
 <!-- no inheritance hierarchy -->
@@ -79,7 +79,7 @@ Alias: eta_x
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -88,8 +88,8 @@ Alias: eta_x
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:eta_x |
-| native | acc:eta_x |
+| self | pals_config:eta_x |
+| native | pals_config:eta_x |
 | close | pals:eta_x |
 
 
@@ -101,7 +101,7 @@ Alias: eta_x
 ```yaml
 name: eta_x
 description: Twiss dispersion parameter in the horizontal plane. May be any real value.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - etax
 close_mappings:

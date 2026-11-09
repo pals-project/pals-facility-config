@@ -9,7 +9,7 @@ _The metadata field name._
 
 
 
-URI: [acc:slot/key](https://example.org/accelerator-core/slot/key)
+URI: [pals_config:slot/key](https://w3id.org/pals-config/slot/key)
 Alias: key
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: key
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: key
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:key |
-| native | acc:key |
+| self | pals_config:key |
+| native | pals_config:key |
 
 
 
@@ -90,7 +90,7 @@ Alias: key
 ```yaml
 name: key
 description: The metadata field name.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: key
 owner: AdditionalMetadata

@@ -9,7 +9,7 @@ _Unit of the distance value between two components in a relationship. Only an ed
 
 
 
-URI: [acc:slot/distance_unit](https://example.org/accelerator-core/slot/distance_unit)
+URI: [pals_config:slot/distance_unit](https://w3id.org/pals-config/slot/distance_unit)
 Alias: distance_unit
 
 <!-- no inheritance hierarchy -->
@@ -62,7 +62,7 @@ Alias: distance_unit
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -71,8 +71,9 @@ Alias: distance_unit
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:distance_unit |
-| native | acc:distance_unit |
+| self | pals_config:distance_unit |
+| native | pals_config:distance_unit |
+| related | saref:UnitOfMeasure |
 
 
 
@@ -85,7 +86,9 @@ name: distance_unit
 description: Unit of the distance value between two components in a relationship.
   Only an edge-property slot for edges that require a distance value between two components
   in a relationship.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+related_mappings:
+- saref:UnitOfMeasure
 rank: 1000
 alias: distance_unit
 domain_of:

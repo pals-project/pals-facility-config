@@ -9,7 +9,7 @@ _The metadata value, serialized as a string._
 
 
 
-URI: [acc:slot/value](https://example.org/accelerator-core/slot/value)
+URI: [pals_config:slot/value](https://w3id.org/pals-config/slot/value)
 Alias: value
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: value
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:value |
-| native | acc:value |
+| self | pals_config:value |
+| native | pals_config:value |
 
 
 
@@ -90,7 +90,7 @@ Alias: value
 ```yaml
 name: value
 description: The metadata value, serialized as a string.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: value
 owner: AdditionalMetadata

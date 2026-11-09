@@ -9,7 +9,7 @@ _Additional notes or comments about the representation of a particle accelerator
 
 
 
-URI: [acc:slot/notes](https://example.org/accelerator-core/slot/notes)
+URI: [pals_config:slot/notes](https://w3id.org/pals-config/slot/notes)
 Alias: notes
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: notes
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: notes
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:notes |
-| native | acc:notes |
+| self | pals_config:notes |
+| native | pals_config:notes |
 
 
 
@@ -91,7 +91,7 @@ Alias: notes
 name: notes
 description: Additional notes or comments about the representation of a particle accelerator
   and its operations.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: notes
 owner: PALSAccelerator

@@ -9,7 +9,7 @@ _Twiss phase advance parameter in the horizontal plane._
 
 
 
-URI: [acc:slot/phi_a](https://example.org/accelerator-core/slot/phi_a)
+URI: [pals_config:slot/phi_a](https://w3id.org/pals-config/slot/phi_a)
 Alias: phi_a
 
 <!-- no inheritance hierarchy -->
@@ -82,7 +82,7 @@ Alias: phi_a
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -91,8 +91,8 @@ Alias: phi_a
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:phi_a |
-| native | acc:phi_a |
+| self | pals_config:phi_a |
+| native | pals_config:phi_a |
 | close | pals:phi_a |
 
 
@@ -104,7 +104,7 @@ Alias: phi_a
 ```yaml
 name: phi_a
 description: Twiss phase advance parameter in the horizontal plane.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - phi_x
 - phix

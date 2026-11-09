@@ -9,7 +9,7 @@ _[s] Reference time_
 
 
 
-URI: [acc:slot/time_ref](https://example.org/accelerator-core/slot/time_ref)
+URI: [pals_config:slot/time_ref](https://w3id.org/pals-config/slot/time_ref)
 Alias: time_ref
 
 <!-- no inheritance hierarchy -->
@@ -79,7 +79,7 @@ Alias: time_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -88,8 +88,8 @@ Alias: time_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:time_ref |
-| native | acc:time_ref |
+| self | pals_config:time_ref |
+| native | pals_config:time_ref |
 | close | pals:time_ref |
 
 
@@ -101,7 +101,7 @@ Alias: time_ref
 ```yaml
 name: time_ref
 description: '[s] Reference time'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - tRef
 close_mappings:

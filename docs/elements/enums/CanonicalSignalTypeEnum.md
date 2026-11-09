@@ -7,7 +7,7 @@ _Portable semantic meanings for important signals._
 
 
 
-URI: [acc:enum/CanonicalSignalTypeEnum](https://example.org/accelerator-core/enum/CanonicalSignalTypeEnum)
+URI: [pals_config:enum/CanonicalSignalTypeEnum](https://w3id.org/pals-config/enum/CanonicalSignalTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -60,7 +60,7 @@ URI: [acc:enum/CanonicalSignalTypeEnum](https://example.org/accelerator-core/enu
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -73,7 +73,7 @@ URI: [acc:enum/CanonicalSignalTypeEnum](https://example.org/accelerator-core/enu
 ```yaml
 name: CanonicalSignalTypeEnum
 description: Portable semantic meanings for important signals.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   HorizontalBeamPosition:

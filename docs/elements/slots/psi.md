@@ -9,7 +9,7 @@ _Rotation around the Z-axis in the facility floor plan._
 
 
 
-URI: [acc:slot/psi](https://example.org/accelerator-core/slot/psi)
+URI: [pals_config:slot/psi](https://w3id.org/pals-config/slot/psi)
 Alias: psi
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: psi
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: psi
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:psi |
-| native | acc:psi |
+| self | pals_config:psi |
+| native | pals_config:psi |
 | close | pals:psi |
 
 
@@ -97,7 +97,7 @@ Alias: psi
 ```yaml
 name: psi
 description: Rotation around the Z-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - psi_angle
 - Model_Roll

@@ -9,7 +9,7 @@ _The x-coordinate in the specified coordinate system._
 
 
 
-URI: [acc:slot/x_coord](https://example.org/accelerator-core/slot/x_coord)
+URI: [pals_config:slot/x_coord](https://w3id.org/pals-config/slot/x_coord)
 Alias: x_coord
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: x_coord
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: x_coord
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:x_coord |
-| native | acc:x_coord |
+| self | pals_config:x_coord |
+| native | pals_config:x_coord |
 
 
 
@@ -89,7 +89,7 @@ Alias: x_coord
 ```yaml
 name: x_coord
 description: The x-coordinate in the specified coordinate system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: x_coord
 owner: CoordinateSet

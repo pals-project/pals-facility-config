@@ -9,7 +9,7 @@ _Shift in the Z direction in the facility floor plan._
 
 
 
-URI: [acc:slot/z_offset](https://example.org/accelerator-core/slot/z_offset)
+URI: [pals_config:slot/z_offset](https://w3id.org/pals-config/slot/z_offset)
 Alias: z_offset
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: z_offset
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: z_offset
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:z_offset |
-| native | acc:z_offset |
+| self | pals_config:z_offset |
+| native | pals_config:z_offset |
 | close | pals:z_offset |
 
 
@@ -97,7 +97,7 @@ Alias: z_offset
 ```yaml
 name: z_offset
 description: Shift in the Z direction in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - delta_z
 - z_shift

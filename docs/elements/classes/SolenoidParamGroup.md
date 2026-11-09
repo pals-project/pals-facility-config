@@ -9,7 +9,7 @@ _Mixin for solenoid-specific parameters._
 
 
 
-URI: [acc:class/SolenoidParamGroup](https://example.org/accelerator-core/class/SolenoidParamGroup)
+URI: [pals_config:class/SolenoidParamGroup](https://w3id.org/pals-config/class/SolenoidParamGroup)
 
 
 ```mermaid
@@ -83,7 +83,7 @@ SolenoidParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -92,8 +92,8 @@ SolenoidParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:SolenoidParamGroup |
-| native | acc:SolenoidParamGroup |
+| self | pals_config:SolenoidParamGroup |
+| native | pals_config:SolenoidParamGroup |
 | exact | pals:SolenoidP |
 
 
@@ -111,7 +111,7 @@ SolenoidParamGroup {
 ```yaml
 name: SolenoidParamGroup
 description: Mixin for solenoid-specific parameters.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:SolenoidP
 is_a: ParamGroup
@@ -119,7 +119,7 @@ attributes:
   Ksol:
     name: Ksol
     description: Normalized solenoid strength.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:Ksol
     rank: 1000
@@ -129,7 +129,7 @@ attributes:
   Bsol:
     name: Bsol
     description: Solenoid field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:Bsol
     rank: 1000
@@ -165,7 +165,7 @@ rules:
 ```yaml
 name: SolenoidParamGroup
 description: Mixin for solenoid-specific parameters.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:SolenoidP
 is_a: ParamGroup
@@ -173,7 +173,7 @@ attributes:
   Ksol:
     name: Ksol
     description: Normalized solenoid strength.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:Ksol
     rank: 1000
@@ -185,7 +185,7 @@ attributes:
   Bsol:
     name: Bsol
     description: Solenoid field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:Bsol
     rank: 1000
@@ -199,7 +199,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

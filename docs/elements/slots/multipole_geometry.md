@@ -9,7 +9,7 @@ _Multipole geometry type. Must be `follows_ref_geometry`._
 
 
 
-URI: [acc:slot/multipole_geometry](https://example.org/accelerator-core/slot/multipole_geometry)
+URI: [pals_config:slot/multipole_geometry](https://w3id.org/pals-config/slot/multipole_geometry)
 Alias: multipole_geometry
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: multipole_geometry
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: multipole_geometry
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:multipole_geometry |
-| native | acc:multipole_geometry |
+| self | pals_config:multipole_geometry |
+| native | pals_config:multipole_geometry |
 | close | pals:multipole_geometry |
 
 
@@ -90,7 +90,7 @@ Alias: multipole_geometry
 ```yaml
 name: multipole_geometry
 description: Multipole geometry type. Must be `follows_ref_geometry`.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:multipole_geometry
 rank: 1000

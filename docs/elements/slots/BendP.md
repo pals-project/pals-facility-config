@@ -9,7 +9,7 @@ _A mixin for bend parameters that are aligned with PALS BendP (Bend Parameters) 
 
 
 
-URI: [acc:slot/BendP](https://example.org/accelerator-core/slot/BendP)
+URI: [pals_config:slot/BendP](https://w3id.org/pals-config/slot/BendP)
 Alias: BendP
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: BendP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: BendP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:BendP |
-| native | acc:BendP |
+| self | pals_config:BendP |
+| native | pals_config:BendP |
 
 
 
@@ -91,7 +91,7 @@ Alias: BendP
 name: BendP
 description: A mixin for bend parameters that are aligned with PALS BendP (Bend Parameters)
   for interoperability with the Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: BendP
 owner: HasBendP

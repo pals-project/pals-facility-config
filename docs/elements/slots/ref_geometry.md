@@ -9,7 +9,7 @@ _Reference geometry type. Must be `arc`._
 
 
 
-URI: [acc:slot/ref_geometry](https://example.org/accelerator-core/slot/ref_geometry)
+URI: [pals_config:slot/ref_geometry](https://w3id.org/pals-config/slot/ref_geometry)
 Alias: ref_geometry
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: ref_geometry
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: ref_geometry
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:ref_geometry |
-| native | acc:ref_geometry |
+| self | pals_config:ref_geometry |
+| native | pals_config:ref_geometry |
 | close | pals:ref_geometry |
 
 
@@ -90,7 +90,7 @@ Alias: ref_geometry
 ```yaml
 name: ref_geometry
 description: Reference geometry type. Must be `arc`.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:ref_geometry
 rank: 1000

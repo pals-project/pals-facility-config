@@ -9,7 +9,7 @@ _Tilt of the Nth multipole._
 
 
 
-URI: [acc:slot/tilt](https://example.org/accelerator-core/slot/tilt)
+URI: [pals_config:slot/tilt](https://w3id.org/pals-config/slot/tilt)
 Alias: tilt
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: tilt
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: tilt
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:tilt |
-| native | acc:tilt |
+| self | pals_config:tilt |
+| native | pals_config:tilt |
 | broad | pals:tilt |
 
 
@@ -96,7 +96,7 @@ Alias: tilt
 ```yaml
 name: tilt
 description: Tilt of the Nth multipole.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:tilt
 rank: 1000

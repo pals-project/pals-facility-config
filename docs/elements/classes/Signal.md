@@ -9,7 +9,7 @@ _Semantic meaning of a control-system signal associated with a component._
 
 
 
-URI: [acc:class/Signal](https://example.org/accelerator-core/class/Signal)
+URI: [pals_config:class/Signal](https://w3id.org/pals-config/class/Signal)
 
 
 ```mermaid
@@ -107,7 +107,7 @@ Signal ||--|o MetaParamGroup : "MetaP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -116,9 +116,9 @@ Signal ||--|o MetaParamGroup : "MetaP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Signal |
-| native | acc:Signal |
-| broad | sosa:Sensor, sosa:Actuator |
+| self | pals_config:Signal |
+| native | pals_config:Signal |
+| broad | sosa:SOSASensor, sosa:SOSAActuator |
 
 
 
@@ -135,10 +135,10 @@ Signal ||--|o MetaParamGroup : "MetaP"
 ```yaml
 name: Signal
 description: Semantic meaning of a control-system signal associated with a component.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
-- sosa:Sensor
-- sosa:Actuator
+- sosa:SOSASensor
+- sosa:SOSAActuator
 is_a: Node
 mixins:
 - HasMetaP
@@ -147,7 +147,7 @@ attributes:
     name: signal_role
     description: The role of the signal in the control system, such as setpoint, readback,
       status, command, or limit.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -157,7 +157,7 @@ attributes:
     name: source_system
     description: The source system from which the signal originates, such as EPICS,
       PALS-Ext, MYA, an element database, a channel database, or a simulation service.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -166,7 +166,7 @@ attributes:
   native_description:
     name: native_description
     description: A human-readable description of the signal in the source system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -174,7 +174,7 @@ attributes:
   canonical_signal_type:
     name: canonical_signal_type
     description: The canonical semantic meaning of the signal.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -183,7 +183,7 @@ attributes:
   quantity_kind:
     name: quantity_kind
     description: The physical quantity kind of the signal.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -193,7 +193,7 @@ attributes:
     name: native_data_type
     description: The native data type of the signal in the source system,  such as
       String, Integer, Float, or Boolean.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -202,7 +202,7 @@ attributes:
   native_unit:
     name: native_unit
     description: The native unit of the signal in the source system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -212,7 +212,7 @@ attributes:
     name: access_protocol
     description: The protocol used to access the signal in the source system,  such
       as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -220,7 +220,7 @@ attributes:
   archive_identifier:
     name: archive_identifier
     description: The identifier used to reference the signal in an archival system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Signal
@@ -235,10 +235,10 @@ attributes:
 ```yaml
 name: Signal
 description: Semantic meaning of a control-system signal associated with a component.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
-- sosa:Sensor
-- sosa:Actuator
+- sosa:SOSASensor
+- sosa:SOSAActuator
 is_a: Node
 mixins:
 - HasMetaP
@@ -247,7 +247,7 @@ attributes:
     name: signal_role
     description: The role of the signal in the control system, such as setpoint, readback,
       status, command, or limit.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: signal_role
     owner: Signal
@@ -259,7 +259,7 @@ attributes:
     name: source_system
     description: The source system from which the signal originates, such as EPICS,
       PALS-Ext, MYA, an element database, a channel database, or a simulation service.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: source_system
     owner: Signal
@@ -270,7 +270,7 @@ attributes:
   native_description:
     name: native_description
     description: A human-readable description of the signal in the source system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_description
     owner: Signal
@@ -280,7 +280,7 @@ attributes:
   canonical_signal_type:
     name: canonical_signal_type
     description: The canonical semantic meaning of the signal.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: canonical_signal_type
     owner: Signal
@@ -291,7 +291,7 @@ attributes:
   quantity_kind:
     name: quantity_kind
     description: The physical quantity kind of the signal.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: quantity_kind
     owner: Signal
@@ -303,7 +303,7 @@ attributes:
     name: native_data_type
     description: The native data type of the signal in the source system,  such as
       String, Integer, Float, or Boolean.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_data_type
     owner: Signal
@@ -314,7 +314,7 @@ attributes:
   native_unit:
     name: native_unit
     description: The native unit of the signal in the source system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_unit
     owner: Signal
@@ -326,7 +326,7 @@ attributes:
     name: access_protocol
     description: The protocol used to access the signal in the source system,  such
       as EPICS Channel Access, PALS-Ext, MYA, or a simulation service.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: access_protocol
     owner: Signal
@@ -336,7 +336,7 @@ attributes:
   archive_identifier:
     name: archive_identifier
     description: The identifier used to reference the signal in an archival system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: archive_identifier
     owner: Signal
@@ -348,7 +348,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: Signal
@@ -359,7 +359,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -377,7 +377,10 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - rdf:type
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -391,7 +394,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

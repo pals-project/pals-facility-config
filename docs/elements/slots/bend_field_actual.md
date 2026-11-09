@@ -9,7 +9,7 @@ _Actual bend field._
 
 
 
-URI: [acc:slot/bend_field_actual](https://example.org/accelerator-core/slot/bend_field_actual)
+URI: [pals_config:slot/bend_field_actual](https://w3id.org/pals-config/slot/bend_field_actual)
 Alias: bend_field_actual
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: bend_field_actual
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: bend_field_actual
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:bend_field_actual |
-| native | acc:bend_field_actual |
+| self | pals_config:bend_field_actual |
+| native | pals_config:bend_field_actual |
 | close | pals:bend_field_actual |
 
 
@@ -96,7 +96,7 @@ Alias: bend_field_actual
 ```yaml
 name: bend_field_actual
 description: Actual bend field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:bend_field_actual
 rank: 1000

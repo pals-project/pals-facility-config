@@ -9,7 +9,7 @@ _Longitudinal position of the element along the beamline._
 
 
 
-URI: [acc:slot/s_position](https://example.org/accelerator-core/slot/s_position)
+URI: [pals_config:slot/s_position](https://w3id.org/pals-config/slot/s_position)
 Alias: s_position
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: s_position
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: s_position
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:s_position |
-| native | acc:s_position |
+| self | pals_config:s_position |
+| native | pals_config:s_position |
 | close | pals:s_position |
 
 
@@ -96,7 +96,7 @@ Alias: s_position
 ```yaml
 name: s_position
 description: Longitudinal position of the element along the beamline.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:s_position
 rank: 1000

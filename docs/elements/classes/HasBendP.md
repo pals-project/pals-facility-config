@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:class/HasBendP](https://example.org/accelerator-core/class/HasBendP)
+URI: [pals_config:class/HasBendP](https://w3id.org/pals-config/class/HasBendP)
 
 
 ```mermaid
@@ -87,7 +87,7 @@ HasBendP ||--|o BendParamGroup : "BendP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -96,8 +96,8 @@ HasBendP ||--|o BendParamGroup : "BendP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasBendP |
-| native | acc:HasBendP |
+| self | pals_config:HasBendP |
+| native | pals_config:HasBendP |
 
 
 
@@ -113,7 +113,7 @@ HasBendP ||--|o BendParamGroup : "BendP"
 <details>
 ```yaml
 name: HasBendP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   BendP:
@@ -121,7 +121,7 @@ attributes:
     description: A mixin for bend parameters that are aligned with PALS BendP (Bend
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasBendP
@@ -136,7 +136,7 @@ attributes:
 <details>
 ```yaml
 name: HasBendP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   BendP:
@@ -144,7 +144,7 @@ attributes:
     description: A mixin for bend parameters that are aligned with PALS BendP (Bend
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BendP
     owner: HasBendP

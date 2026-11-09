@@ -9,7 +9,7 @@ _Indicates whether the BeamLine is a multipass BeamLine, where the beam passes t
 
 
 
-URI: [acc:slot/multipass](https://example.org/accelerator-core/slot/multipass)
+URI: [pals_config:slot/multipass](https://w3id.org/pals-config/slot/multipass)
 Alias: multipass
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: multipass
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: multipass
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:multipass |
-| native | acc:multipass |
+| self | pals_config:multipass |
+| native | pals_config:multipass |
 | close | pals:multipass |
 
 
@@ -92,7 +92,7 @@ name: multipass
 description: Indicates whether the BeamLine is a multipass BeamLine, where the beam
   passes through the same physical elements multiple times. If not provided, the default
   assumption is that the BeamLine is single-pass.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:multipass
 rank: 1000

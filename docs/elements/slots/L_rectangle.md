@@ -9,7 +9,7 @@ _Rectangular length._
 
 
 
-URI: [acc:slot/L_rectangle](https://example.org/accelerator-core/slot/L_rectangle)
+URI: [pals_config:slot/L_rectangle](https://w3id.org/pals-config/slot/L_rectangle)
 Alias: L_rectangle
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: L_rectangle
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: L_rectangle
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:L_rectangle |
-| native | acc:L_rectangle |
+| self | pals_config:L_rectangle |
+| native | pals_config:L_rectangle |
 | close | pals:L_rectangle |
 
 
@@ -96,7 +96,7 @@ Alias: L_rectangle
 ```yaml
 name: L_rectangle
 description: Rectangular length.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:L_rectangle
 rank: 1000

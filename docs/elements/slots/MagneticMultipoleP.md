@@ -9,7 +9,7 @@ _A mixin for magnetic multipole parameters that are aligned with PALS MagneticMu
 
 
 
-URI: [acc:slot/MagneticMultipoleP](https://example.org/accelerator-core/slot/MagneticMultipoleP)
+URI: [pals_config:slot/MagneticMultipoleP](https://w3id.org/pals-config/slot/MagneticMultipoleP)
 Alias: MagneticMultipoleP
 
 <!-- no inheritance hierarchy -->
@@ -80,7 +80,7 @@ Alias: MagneticMultipoleP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -89,8 +89,8 @@ Alias: MagneticMultipoleP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:MagneticMultipoleP |
-| native | acc:MagneticMultipoleP |
+| self | pals_config:MagneticMultipoleP |
+| native | pals_config:MagneticMultipoleP |
 
 
 
@@ -103,7 +103,7 @@ name: MagneticMultipoleP
 description: A mixin for magnetic multipole parameters that are aligned with PALS
   MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with the
   Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: MagneticMultipoleP
 owner: HasMagneticMultipoleP

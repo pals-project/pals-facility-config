@@ -9,7 +9,7 @@ _A field-free space between beamline components. A Drift is a virtual beamline c
 
 
 
-URI: [acc:class/Drift](https://example.org/accelerator-core/class/Drift)
+URI: [pals_config:class/Drift](https://w3id.org/pals-config/class/Drift)
 
 
 ```mermaid
@@ -102,7 +102,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -111,8 +111,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Drift |
-| native | acc:Drift |
+| self | pals_config:Drift |
+| native | pals_config:Drift |
 | exact | pals:Drift |
 
 
@@ -132,7 +132,7 @@ name: Drift
 description: A field-free space between beamline components. A Drift is a virtual
   beamline component whose longitudinal extent preserves the separation between adjacent
   physical or virtual components.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:Drift
 is_a: VirtualComponent
@@ -150,7 +150,7 @@ name: Drift
 description: A field-free space between beamline components. A Drift is a virtual
   beamline component whose longitudinal extent preserves the separation between adjacent
   physical or virtual components.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:Drift
 is_a: VirtualComponent
@@ -163,7 +163,7 @@ attributes:
       (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
       (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: LongitudinalPlacementP
     owner: Drift
@@ -175,7 +175,7 @@ attributes:
     name: functions
     description: The function of the virtual component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_function
     alias: functions
@@ -190,7 +190,7 @@ attributes:
     name: beamline_relation
     description: The relationship of the virtual component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_beamline_relation
     alias: beamline_relation
@@ -205,7 +205,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: Drift
@@ -217,7 +217,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: Drift
@@ -230,7 +230,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: Drift
@@ -241,7 +241,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -259,7 +259,10 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - rdf:type
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -273,7 +276,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

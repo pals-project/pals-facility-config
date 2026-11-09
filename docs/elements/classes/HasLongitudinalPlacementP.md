@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:class/HasLongitudinalPlacementP](https://example.org/accelerator-core/class/HasLongitudinalPlacementP)
+URI: [pals_config:class/HasLongitudinalPlacementP](https://w3id.org/pals-config/class/HasLongitudinalPlacementP)
 
 
 ```mermaid
@@ -71,7 +71,7 @@ HasLongitudinalPlacementP ||--|o LongitudinalPlacementParamGroup : "Longitudinal
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -80,8 +80,8 @@ HasLongitudinalPlacementP ||--|o LongitudinalPlacementParamGroup : "Longitudinal
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasLongitudinalPlacementP |
-| native | acc:HasLongitudinalPlacementP |
+| self | pals_config:HasLongitudinalPlacementP |
+| native | pals_config:HasLongitudinalPlacementP |
 
 
 
@@ -97,7 +97,7 @@ HasLongitudinalPlacementP ||--|o LongitudinalPlacementParamGroup : "Longitudinal
 <details>
 ```yaml
 name: HasLongitudinalPlacementP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   LongitudinalPlacementP:
@@ -106,7 +106,7 @@ attributes:
       (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
       (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasLongitudinalPlacementP
@@ -121,7 +121,7 @@ attributes:
 <details>
 ```yaml
 name: HasLongitudinalPlacementP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   LongitudinalPlacementP:
@@ -130,7 +130,7 @@ attributes:
       (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
       (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: LongitudinalPlacementP
     owner: HasLongitudinalPlacementP

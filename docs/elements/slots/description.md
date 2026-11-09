@@ -9,7 +9,7 @@ _A human-readable description of the instance._
 
 
 
-URI: [acc:slot/description](https://example.org/accelerator-core/slot/description)
+URI: [pals_config:slot/description](https://w3id.org/pals-config/slot/description)
 Alias: description
 
 <!-- no inheritance hierarchy -->
@@ -63,7 +63,7 @@ Alias: description
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -72,8 +72,8 @@ Alias: description
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:description |
-| native | acc:description |
+| self | pals_config:description |
+| native | pals_config:description |
 
 
 
@@ -84,7 +84,7 @@ Alias: description
 ```yaml
 name: description
 description: A human-readable description of the instance.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: description
 domain_of:

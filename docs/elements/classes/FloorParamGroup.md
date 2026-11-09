@@ -9,7 +9,7 @@ _Mixin class for floor plan parameters that are aligned with PALS FloorP (Floor 
 
 
 
-URI: [acc:class/FloorParamGroup](https://example.org/accelerator-core/class/FloorParamGroup)
+URI: [pals_config:class/FloorParamGroup](https://w3id.org/pals-config/class/FloorParamGroup)
 
 
 ```mermaid
@@ -106,7 +106,7 @@ FloorParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -115,8 +115,8 @@ FloorParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:FloorParamGroup |
-| native | acc:FloorParamGroup |
+| self | pals_config:FloorParamGroup |
+| native | pals_config:FloorParamGroup |
 | broad | pals:FloorP |
 
 
@@ -136,7 +136,7 @@ name: FloorParamGroup
 description: Mixin class for floor plan parameters that are aligned with PALS FloorP
   (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:FloorP
 is_a: ParamGroup
@@ -144,7 +144,7 @@ attributes:
   x:
     name: x
     description: Global X coordinate in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - x_coordinate
     - ModelX
@@ -158,7 +158,7 @@ attributes:
   y:
     name: y
     description: Global Y coordinate in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - y_coordinate
     - ModelY
@@ -172,7 +172,7 @@ attributes:
   z:
     name: z
     description: Global Z coordinate in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - z_coordinate
     - ModelZ
@@ -186,7 +186,7 @@ attributes:
   theta:
     name: theta
     description: Orientation angle around the Y-axis in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - theta_angle
     - ModelYaw
@@ -200,7 +200,7 @@ attributes:
   phi:
     name: phi
     description: Rotation around the X-axis in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - phi_angle
     - ModelPitch
@@ -214,7 +214,7 @@ attributes:
   psi:
     name: psi
     description: Rotation around the Z-axis in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - psi_angle
     - Model_Roll
@@ -237,7 +237,7 @@ name: FloorParamGroup
 description: Mixin class for floor plan parameters that are aligned with PALS FloorP
   (Floor Plan Parameters)  for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:FloorP
 is_a: ParamGroup
@@ -245,7 +245,7 @@ attributes:
   x:
     name: x
     description: Global X coordinate in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - x_coordinate
     - ModelX
@@ -261,7 +261,7 @@ attributes:
   y:
     name: y
     description: Global Y coordinate in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - y_coordinate
     - ModelY
@@ -277,7 +277,7 @@ attributes:
   z:
     name: z
     description: Global Z coordinate in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - z_coordinate
     - ModelZ
@@ -293,7 +293,7 @@ attributes:
   theta:
     name: theta
     description: Orientation angle around the Y-axis in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - theta_angle
     - ModelYaw
@@ -309,7 +309,7 @@ attributes:
   phi:
     name: phi
     description: Rotation around the X-axis in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - phi_angle
     - ModelPitch
@@ -325,7 +325,7 @@ attributes:
   psi:
     name: psi
     description: Rotation around the Z-axis in the facility floor plan.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - psi_angle
     - Model_Roll
@@ -341,7 +341,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

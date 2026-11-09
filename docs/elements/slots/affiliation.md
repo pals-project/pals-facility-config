@@ -9,7 +9,7 @@ _The affiliation of the author or component, as a ROR._
 
 
 
-URI: [acc:slot/affiliation](https://example.org/accelerator-core/slot/affiliation)
+URI: [pals_config:slot/affiliation](https://w3id.org/pals-config/slot/affiliation)
 Alias: affiliation
 
 <!-- no inheritance hierarchy -->
@@ -62,7 +62,7 @@ Alias: affiliation
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -71,8 +71,8 @@ Alias: affiliation
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:affiliation |
-| native | acc:affiliation |
+| self | pals_config:affiliation |
+| native | pals_config:affiliation |
 
 
 
@@ -83,7 +83,7 @@ Alias: affiliation
 ```yaml
 name: affiliation
 description: The affiliation of the author or component, as a ROR.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: affiliation
 domain_of:

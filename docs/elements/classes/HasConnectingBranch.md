@@ -9,7 +9,7 @@ _A relationship indicating that the subject component has a connecting branch to
 
 
 
-URI: [acc:class/HasConnectingBranch](https://example.org/accelerator-core/class/HasConnectingBranch)
+URI: [pals_config:class/HasConnectingBranch](https://w3id.org/pals-config/class/HasConnectingBranch)
 
 
 ```mermaid
@@ -122,7 +122,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | acc:has_connecting_branch |
+| rdf_predicate | pals_config:has_connecting_branch |
 
 
 
@@ -130,7 +130,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -139,9 +139,9 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasConnectingBranch |
-| native | acc:HasConnectingBranch |
-| exact | RO:0002253 |
+| self | pals_config:HasConnectingBranch |
+| native | pals_config:HasConnectingBranch |
+| related | RO:0002253 |
 
 
 
@@ -160,12 +160,12 @@ name: HasConnectingBranch
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:has_connecting_branch
+    value: pals_config:has_connecting_branch
 description: A relationship indicating that the subject component has a connecting
   branch to the object component in a specified context,  such as a beamline section
   having a fork as a connecting branch.
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
+from_schema: https://w3id.org/pals-config
+related_mappings:
 - RO:0002253
 is_a: ComponentRelation
 slots:
@@ -207,12 +207,12 @@ name: HasConnectingBranch
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:has_connecting_branch
+    value: pals_config:has_connecting_branch
 description: A relationship indicating that the subject component has a connecting
   branch to the object component in a specified context,  such as a beamline section
   having a fork as a connecting branch.
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
+from_schema: https://w3id.org/pals-config
+related_mappings:
 - RO:0002253
 is_a: ComponentRelation
 slot_usage:
@@ -234,7 +234,7 @@ attributes:
     description: The specific BeamLine this relationship is defined with respect to
       (relevant when context=beamline_order). Only an edge-property slot for edges
       that are defined with respect to a specific BeamLine.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: beamline_context
     owner: HasConnectingBranch
@@ -250,7 +250,7 @@ attributes:
     description: The frame of reference / domain in which this relationship is asserted
       to hold. For HasConnectingBranch, this is always beamline_order; the specific
       BeamLine is given in beamline_context.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: HasConnectingBranch
@@ -261,7 +261,7 @@ attributes:
     required: true
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: HasConnectingBranch
@@ -270,7 +270,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: HasConnectingBranch
@@ -281,7 +281,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -297,7 +297,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -310,7 +310,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -323,7 +323,7 @@ attributes:
     equals_string: HasConnectingBranch
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

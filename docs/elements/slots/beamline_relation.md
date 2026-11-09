@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:slot/beamline_relation](https://example.org/accelerator-core/slot/beamline_relation)
+URI: [pals_config:slot/beamline_relation](https://w3id.org/pals-config/slot/beamline_relation)
 Alias: beamline_relation
 
 <!-- no inheritance hierarchy -->
@@ -85,8 +85,8 @@ Alias: beamline_relation
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:beamline_relation |
-| native | acc:beamline_relation |
+| self | pals_config:beamline_relation |
+| native | pals_config:beamline_relation |
 
 
 

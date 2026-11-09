@@ -7,7 +7,7 @@ _Controlled values for virtual relation to the beamline._
 
 
 
-URI: [acc:enum/VirtualRelationEnum](https://example.org/accelerator-core/enum/VirtualRelationEnum)
+URI: [pals_config:enum/VirtualRelationEnum](https://w3id.org/pals-config/enum/VirtualRelationEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -37,7 +37,7 @@ URI: [acc:enum/VirtualRelationEnum](https://example.org/accelerator-core/enum/Vi
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -50,7 +50,7 @@ URI: [acc:enum/VirtualRelationEnum](https://example.org/accelerator-core/enum/Vi
 ```yaml
 name: VirtualRelationEnum
 description: Controlled values for virtual relation to the beamline.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Inline:

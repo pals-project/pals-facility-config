@@ -7,7 +7,7 @@ _Broad structural or support functions._
 
 
 
-URI: [acc:enum/FacilityFunctionEnum](https://example.org/accelerator-core/enum/FacilityFunctionEnum)
+URI: [pals_config:enum/FacilityFunctionEnum](https://w3id.org/pals-config/enum/FacilityFunctionEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -47,7 +47,7 @@ URI: [acc:enum/FacilityFunctionEnum](https://example.org/accelerator-core/enum/F
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -60,7 +60,7 @@ URI: [acc:enum/FacilityFunctionEnum](https://example.org/accelerator-core/enum/F
 ```yaml
 name: FacilityFunctionEnum
 description: Broad structural or support functions.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Support:

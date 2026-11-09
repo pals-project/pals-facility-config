@@ -7,7 +7,7 @@ _Controlled values for identifier types._
 
 
 
-URI: [acc:enum/IdentifierTypeEnum](https://example.org/accelerator-core/enum/IdentifierTypeEnum)
+URI: [pals_config:enum/IdentifierTypeEnum](https://w3id.org/pals-config/enum/IdentifierTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -46,7 +46,7 @@ URI: [acc:enum/IdentifierTypeEnum](https://example.org/accelerator-core/enum/Ide
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -59,7 +59,7 @@ URI: [acc:enum/IdentifierTypeEnum](https://example.org/accelerator-core/enum/Ide
 ```yaml
 name: IdentifierTypeEnum
 description: Controlled values for identifier types.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   DOI:

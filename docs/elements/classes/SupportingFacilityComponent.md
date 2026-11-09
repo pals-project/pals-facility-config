@@ -9,7 +9,7 @@ _A physical component that supports accelerator operation  without a specific be
 
 
 
-URI: [acc:class/SupportingFacilityComponent](https://example.org/accelerator-core/class/SupportingFacilityComponent)
+URI: [pals_config:class/SupportingFacilityComponent](https://w3id.org/pals-config/class/SupportingFacilityComponent)
 
 
 ```mermaid
@@ -115,7 +115,7 @@ SupportingFacilityComponent ||--|o MetaParamGroup : "MetaP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -124,8 +124,8 @@ SupportingFacilityComponent ||--|o MetaParamGroup : "MetaP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:SupportingFacilityComponent |
-| native | acc:SupportingFacilityComponent |
+| self | pals_config:SupportingFacilityComponent |
+| native | pals_config:SupportingFacilityComponent |
 | broad | pals:StructuralElement |
 
 
@@ -147,7 +147,7 @@ description: A physical component that supports accelerator operation  without a
   These can include Girders, Racks, Power Supplies,  and other physical infrastructure
   components that are important for understanding  the structure and function of the
   accelerator system but are not inline with the beamline.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:StructuralElement
 is_a: PhysicalComponent
@@ -160,7 +160,7 @@ attributes:
     name: facility_functions
     description: The function of the supporting facility component,  which can be
       used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:supporting_facility_function
     rank: 1000
@@ -183,7 +183,7 @@ description: A physical component that supports accelerator operation  without a
   These can include Girders, Racks, Power Supplies,  and other physical infrastructure
   components that are important for understanding  the structure and function of the
   accelerator system but are not inline with the beamline.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:StructuralElement
 is_a: PhysicalComponent
@@ -196,7 +196,7 @@ attributes:
     name: facility_functions
     description: The function of the supporting facility component,  which can be
       used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:supporting_facility_function
     rank: 1000
@@ -212,7 +212,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: SupportingFacilityComponent
@@ -226,7 +226,7 @@ attributes:
       (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
       (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: LongitudinalPlacementP
     owner: SupportingFacilityComponent
@@ -239,7 +239,7 @@ attributes:
     description: A mixin for floor plan shift parameters that are aligned with PALS
       BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
       Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BodyShiftP
     owner: SupportingFacilityComponent
@@ -251,7 +251,7 @@ attributes:
     name: functions
     description: The function of the physical component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_function
     rank: 1000
@@ -267,7 +267,7 @@ attributes:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_beamline_relation
     rank: 1000
@@ -282,7 +282,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: SupportingFacilityComponent
@@ -295,7 +295,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: SupportingFacilityComponent
@@ -306,7 +306,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -324,7 +324,10 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - rdf:type
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -338,7 +341,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

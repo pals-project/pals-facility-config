@@ -9,7 +9,7 @@ _The physical quantity kind of the signal._
 
 
 
-URI: [acc:slot/quantity_kind](https://example.org/accelerator-core/slot/quantity_kind)
+URI: [pals_config:slot/quantity_kind](https://w3id.org/pals-config/slot/quantity_kind)
 Alias: quantity_kind
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: quantity_kind
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: quantity_kind
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:quantity_kind |
-| native | acc:quantity_kind |
+| self | pals_config:quantity_kind |
+| native | pals_config:quantity_kind |
 
 
 
@@ -90,7 +90,7 @@ Alias: quantity_kind
 ```yaml
 name: quantity_kind
 description: The physical quantity kind of the signal.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: quantity_kind
 owner: Signal

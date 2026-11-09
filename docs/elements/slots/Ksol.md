@@ -9,7 +9,7 @@ _Normalized solenoid strength._
 
 
 
-URI: [acc:slot/Ksol](https://example.org/accelerator-core/slot/Ksol)
+URI: [pals_config:slot/Ksol](https://w3id.org/pals-config/slot/Ksol)
 Alias: Ksol
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: Ksol
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Ksol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Ksol |
-| native | acc:Ksol |
+| self | pals_config:Ksol |
+| native | pals_config:Ksol |
 | close | pals:Ksol |
 
 
@@ -90,7 +90,7 @@ Alias: Ksol
 ```yaml
 name: Ksol
 description: Normalized solenoid strength.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:Ksol
 rank: 1000

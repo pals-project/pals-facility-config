@@ -9,7 +9,7 @@ _A single generic key/value metadata entry, used as a GraphQL-compatible replace
 
 
 
-URI: [acc:class/AdditionalMetadata](https://example.org/accelerator-core/class/AdditionalMetadata)
+URI: [pals_config:class/AdditionalMetadata](https://w3id.org/pals-config/class/AdditionalMetadata)
 
 
 ```mermaid
@@ -66,7 +66,7 @@ AdditionalMetadata {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -75,8 +75,8 @@ AdditionalMetadata {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:AdditionalMetadata |
-| native | acc:AdditionalMetadata |
+| self | pals_config:AdditionalMetadata |
+| native | pals_config:AdditionalMetadata |
 
 
 
@@ -95,12 +95,12 @@ name: AdditionalMetadata
 description: 'A single generic key/value metadata entry, used as a GraphQL-compatible
   replacement for an open-ended (range: Any) field. A list of these represents an
   arbitrary, extensible bag of program-specific metadata.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   key:
     name: key
     description: The metadata field name.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - AdditionalMetadata
@@ -109,7 +109,7 @@ attributes:
   value:
     name: value
     description: The metadata value, serialized as a string.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - AdditionalMetadata
@@ -120,7 +120,7 @@ attributes:
     description: Hint for the value's original type, so consumers can parse it back
       (e.g. float, integer, boolean) rather than treating everything as an opaque
       string.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - AdditionalMetadata
@@ -137,12 +137,12 @@ name: AdditionalMetadata
 description: 'A single generic key/value metadata entry, used as a GraphQL-compatible
   replacement for an open-ended (range: Any) field. A list of these represents an
   arbitrary, extensible bag of program-specific metadata.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   key:
     name: key
     description: The metadata field name.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: key
     owner: AdditionalMetadata
@@ -153,7 +153,7 @@ attributes:
   value:
     name: value
     description: The metadata value, serialized as a string.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: value
     owner: AdditionalMetadata
@@ -166,7 +166,7 @@ attributes:
     description: Hint for the value's original type, so consumers can parse it back
       (e.g. float, integer, boolean) rather than treating everything as an opaque
       string.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: datatype
     owner: AdditionalMetadata

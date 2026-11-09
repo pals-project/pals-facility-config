@@ -9,7 +9,7 @@ _Actual bend strength = 1/radius_actual_
 
 
 
-URI: [acc:slot/g_actual](https://example.org/accelerator-core/slot/g_actual)
+URI: [pals_config:slot/g_actual](https://w3id.org/pals-config/slot/g_actual)
 Alias: g_actual
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: g_actual
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: g_actual
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:g_actual |
-| native | acc:g_actual |
+| self | pals_config:g_actual |
+| native | pals_config:g_actual |
 | close | pals:g_actual |
 
 
@@ -96,7 +96,7 @@ Alias: g_actual
 ```yaml
 name: g_actual
 description: Actual bend strength = 1/radius_actual
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:g_actual
 rank: 1000

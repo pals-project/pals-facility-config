@@ -9,7 +9,7 @@ _A list of signal bindings in the accelerator system (Component <-> Signal relat
 
 
 
-URI: [acc:slot/signal_bindings](https://example.org/accelerator-core/slot/signal_bindings)
+URI: [pals_config:slot/signal_bindings](https://w3id.org/pals-config/slot/signal_bindings)
 Alias: signal_bindings
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: signal_bindings
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: signal_bindings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:signal_bindings |
-| native | acc:signal_bindings |
+| self | pals_config:signal_bindings |
+| native | pals_config:signal_bindings |
 
 
 
@@ -91,7 +91,7 @@ Alias: signal_bindings
 name: signal_bindings
 description: A list of signal bindings in the accelerator system (Component <-> Signal
   relationships).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: signal_bindings
 owner: Facility

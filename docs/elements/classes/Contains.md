@@ -9,7 +9,7 @@ _A relationship indicating that the subject component contains the object compon
 
 
 
-URI: [acc:class/Contains](https://example.org/accelerator-core/class/Contains)
+URI: [pals_config:class/Contains](https://w3id.org/pals-config/class/Contains)
 
 
 ```mermaid
@@ -110,7 +110,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | acc:contains |
+| rdf_predicate | pals_config:contains |
 
 
 
@@ -118,7 +118,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -127,9 +127,9 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Contains |
-| native | acc:Contains |
-| exact | BFO:0000051 |
+| self | pals_config:Contains |
+| native | pals_config:Contains |
+| related | BFO:0000051 |
 
 
 
@@ -148,12 +148,12 @@ name: Contains
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:contains
+    value: pals_config:contains
 description: A relationship indicating that the subject component contains the object
   component in a specified context,  such as within a BeamLineSection or other organizational
   grouping.
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
+from_schema: https://w3id.org/pals-config
+related_mappings:
 - BFO:0000051
 is_a: ComponentRelation
 slots:
@@ -180,12 +180,12 @@ name: Contains
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:contains
+    value: pals_config:contains
 description: A relationship indicating that the subject component contains the object
   component in a specified context,  such as within a BeamLineSection or other organizational
   grouping.
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
+from_schema: https://w3id.org/pals-config
+related_mappings:
 - BFO:0000051
 is_a: ComponentRelation
 slot_usage:
@@ -204,7 +204,7 @@ attributes:
     description: The specific BeamLine this relationship is defined with respect to
       (relevant when context=beamline_order). Only an edge-property slot for edges
       that are defined with respect to a specific BeamLine.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: beamline_context
     owner: Contains
@@ -219,7 +219,7 @@ attributes:
     name: context
     description: The frame of reference / domain in which this relationship is asserted
       to hold.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: Contains
@@ -230,7 +230,7 @@ attributes:
     required: true
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: Contains
@@ -239,7 +239,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: Contains
@@ -250,7 +250,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -266,7 +266,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -279,7 +279,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -292,7 +292,7 @@ attributes:
     equals_string: Contains
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

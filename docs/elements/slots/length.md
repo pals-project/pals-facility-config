@@ -9,7 +9,7 @@ _Length of the element (arc length for bends)._
 
 
 
-URI: [acc:slot/length](https://example.org/accelerator-core/slot/length)
+URI: [pals_config:slot/length](https://w3id.org/pals-config/slot/length)
 Alias: length
 
 <!-- no inheritance hierarchy -->
@@ -62,7 +62,7 @@ Alias: length
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -71,8 +71,8 @@ Alias: length
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:length |
-| native | acc:length |
+| self | pals_config:length |
+| native | pals_config:length |
 | close | pals:length |
 
 
@@ -84,7 +84,7 @@ Alias: length
 ```yaml
 name: length
 description: Length of the element (arc length for bends).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:length
 rank: 1000

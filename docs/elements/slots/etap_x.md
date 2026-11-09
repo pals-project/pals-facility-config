@@ -9,7 +9,7 @@ _Twiss dispersion slope parameter in the horizontal plane._
 
 
 
-URI: [acc:slot/etap_x](https://example.org/accelerator-core/slot/etap_x)
+URI: [pals_config:slot/etap_x](https://w3id.org/pals-config/slot/etap_x)
 Alias: etap_x
 
 <!-- no inheritance hierarchy -->
@@ -79,7 +79,7 @@ Alias: etap_x
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -88,8 +88,8 @@ Alias: etap_x
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:etap_x |
-| native | acc:etap_x |
+| self | pals_config:etap_x |
+| native | pals_config:etap_x |
 | close | pals:etap_x |
 
 
@@ -101,7 +101,7 @@ Alias: etap_x
 ```yaml
 name: etap_x
 description: Twiss dispersion slope parameter in the horizontal plane.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - etapx
 close_mappings:

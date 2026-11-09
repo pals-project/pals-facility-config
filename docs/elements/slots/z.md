@@ -9,7 +9,7 @@ _Global Z coordinate in the facility floor plan._
 
 
 
-URI: [acc:slot/z](https://example.org/accelerator-core/slot/z)
+URI: [pals_config:slot/z](https://w3id.org/pals-config/slot/z)
 Alias: z
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: z
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: z
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:z |
-| native | acc:z |
+| self | pals_config:z |
+| native | pals_config:z |
 | close | pals:z |
 
 
@@ -97,7 +97,7 @@ Alias: z
 ```yaml
 name: z
 description: Global Z coordinate in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - z_coordinate
 - ModelZ

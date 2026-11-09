@@ -11,7 +11,7 @@ _ in a specified context, such as radiation detector and a magnet._
 
 
 
-URI: [acc:class/AdjacentTo](https://example.org/accelerator-core/class/AdjacentTo)
+URI: [pals_config:class/AdjacentTo](https://w3id.org/pals-config/class/AdjacentTo)
 
 
 ```mermaid
@@ -104,7 +104,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | acc:adjacent_to |
+| rdf_predicate | pals_config:adjacent_to |
 
 
 
@@ -112,7 +112,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -121,9 +121,9 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:AdjacentTo |
-| native | acc:AdjacentTo |
-| exact | RO:0002220 |
+| self | pals_config:AdjacentTo |
+| native | pals_config:AdjacentTo |
+| related | RO:0002220 |
 
 
 
@@ -142,12 +142,12 @@ name: AdjacentTo
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:adjacent_to
+    value: pals_config:adjacent_to
 description: "A relationship indicating that the subject component is adjacent to\
   \ the object component and not overlapping\n in a specified context, such as radiation\
   \ detector and a magnet."
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
+from_schema: https://w3id.org/pals-config
+related_mappings:
 - RO:0002220
 is_a: ComponentRelation
 slots:
@@ -175,12 +175,12 @@ name: AdjacentTo
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:adjacent_to
+    value: pals_config:adjacent_to
 description: "A relationship indicating that the subject component is adjacent to\
   \ the object component and not overlapping\n in a specified context, such as radiation\
   \ detector and a magnet."
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
+from_schema: https://w3id.org/pals-config
+related_mappings:
 - RO:0002220
 is_a: ComponentRelation
 slot_usage:
@@ -196,9 +196,10 @@ attributes:
     description: Distance value between two components in a relationship. Only an
       edge-property slot for edges that require a distance value between two components
       in a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    exact_mappings:
+    - quantitykind:Distance
     rank: 1000
-    slot_uri: om:Distance
     alias: distance_value
     owner: AdjacentTo
     domain_of:
@@ -210,7 +211,9 @@ attributes:
     description: Unit of the distance value between two components in a relationship.
       Only an edge-property slot for edges that require a distance value between two
       components in a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:UnitOfMeasure
     rank: 1000
     alias: distance_unit
     owner: AdjacentTo
@@ -223,7 +226,7 @@ attributes:
     description: Tolerance value for the distance between two components in a relationship.
       Only an edge-property slot for edges that require a tolerance value between
       two components in a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: tolerance_value
     owner: AdjacentTo
@@ -236,7 +239,9 @@ attributes:
     description: Unit of the tolerance value for the distance between two components
       in a relationship. Only an edge-property slot for edges that require a tolerance
       value between two components in a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:UnitOfMeasure
     rank: 1000
     alias: tolerance_unit
     owner: AdjacentTo
@@ -250,7 +255,7 @@ attributes:
       the two components. Only an edge-property slot for edges that require a set
       of coordinates to define the spatial relationship between two components in
       a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: coordinates
     owner: AdjacentTo
@@ -266,7 +271,7 @@ attributes:
     name: context
     description: The frame of reference / domain in which this relationship is asserted
       to hold.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: AdjacentTo
@@ -277,7 +282,7 @@ attributes:
     required: true
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: AdjacentTo
@@ -286,7 +291,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: AdjacentTo
@@ -297,7 +302,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -313,7 +318,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -326,7 +331,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -339,7 +344,7 @@ attributes:
     equals_string: AdjacentTo
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

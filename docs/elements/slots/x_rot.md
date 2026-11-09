@@ -9,7 +9,7 @@ _Rotation around the X-axis in the facility floor plan._
 
 
 
-URI: [acc:slot/x_rot](https://example.org/accelerator-core/slot/x_rot)
+URI: [pals_config:slot/x_rot](https://w3id.org/pals-config/slot/x_rot)
 Alias: x_rot
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: x_rot
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: x_rot
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:x_rot |
-| native | acc:x_rot |
+| self | pals_config:x_rot |
+| native | pals_config:x_rot |
 | close | pals:x_rot |
 
 
@@ -97,7 +97,7 @@ Alias: x_rot
 ```yaml
 name: x_rot
 description: Rotation around the X-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - delta_phi
 - phi_shift

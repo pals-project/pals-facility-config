@@ -9,7 +9,7 @@ _Mixin for RF parameters, which can be used to describe the RF properties of an 
 
 
 
-URI: [acc:class/RFParamGroup](https://example.org/accelerator-core/class/RFParamGroup)
+URI: [pals_config:class/RFParamGroup](https://w3id.org/pals-config/class/RFParamGroup)
 
 
 ```mermaid
@@ -89,7 +89,7 @@ RFParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -98,8 +98,8 @@ RFParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:RFParamGroup |
-| native | acc:RFParamGroup |
+| self | pals_config:RFParamGroup |
+| native | pals_config:RFParamGroup |
 | broad | pals:RFP |
 
 
@@ -119,7 +119,7 @@ name: RFParamGroup
 description: Mixin for RF parameters, which can be used to describe the RF properties
   of an accelerator element. This mixin is aligned with PALS RFP for interoperability
   with the Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:RFP
 is_a: ParamGroup
@@ -127,7 +127,7 @@ attributes:
   frequency:
     name: frequency
     description: RF frequency.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:frequency
     rank: 1000
@@ -139,7 +139,7 @@ attributes:
   harmon:
     name: harmon
     description: RF harmonic number.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:harmon
     rank: 1000
@@ -149,7 +149,7 @@ attributes:
   voltage:
     name: voltage
     description: RF voltage.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:voltage
     rank: 1000
@@ -161,7 +161,7 @@ attributes:
   phase:
     name: phase
     description: RF phase. rad/2pi RF phase in 0 to 2*pi
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:phase
     rank: 1000
@@ -171,7 +171,7 @@ attributes:
   multipass_phase:
     name: multipass_phase
     description: rad/2pi RF Phase added to multipass elements
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:multipass_phase
     rank: 1000
@@ -181,7 +181,7 @@ attributes:
   cavity_type:
     name: cavity_type
     description: Cavity type
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:cavity_type
     rank: 1000
@@ -191,7 +191,7 @@ attributes:
   num_cells:
     name: num_cells
     description: Number of cells in the cavity
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:num_cells
     rank: 1000
@@ -201,7 +201,7 @@ attributes:
   zero_phase:
     name: zero_phase
     description: Sets what phase = 0 means.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:zero_phase
     rank: 1000
@@ -211,7 +211,7 @@ attributes:
   L_active:
     name: L_active
     description: Active acceleration length.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:L_active
     rank: 1000
@@ -223,7 +223,7 @@ attributes:
   dE_ref:
     name: dE_ref
     description: Reference energy gain.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:dE_ref
     rank: 1000
@@ -244,7 +244,7 @@ name: RFParamGroup
 description: Mixin for RF parameters, which can be used to describe the RF properties
   of an accelerator element. This mixin is aligned with PALS RFP for interoperability
   with the Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:RFP
 is_a: ParamGroup
@@ -252,7 +252,7 @@ attributes:
   frequency:
     name: frequency
     description: RF frequency.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:frequency
     rank: 1000
@@ -266,7 +266,7 @@ attributes:
   harmon:
     name: harmon
     description: RF harmonic number.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:harmon
     rank: 1000
@@ -278,7 +278,7 @@ attributes:
   voltage:
     name: voltage
     description: RF voltage.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:voltage
     rank: 1000
@@ -292,7 +292,7 @@ attributes:
   phase:
     name: phase
     description: RF phase. rad/2pi RF phase in 0 to 2*pi
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:phase
     rank: 1000
@@ -304,7 +304,7 @@ attributes:
   multipass_phase:
     name: multipass_phase
     description: rad/2pi RF Phase added to multipass elements
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:multipass_phase
     rank: 1000
@@ -316,7 +316,7 @@ attributes:
   cavity_type:
     name: cavity_type
     description: Cavity type
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:cavity_type
     rank: 1000
@@ -328,7 +328,7 @@ attributes:
   num_cells:
     name: num_cells
     description: Number of cells in the cavity
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:num_cells
     rank: 1000
@@ -340,7 +340,7 @@ attributes:
   zero_phase:
     name: zero_phase
     description: Sets what phase = 0 means.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:zero_phase
     rank: 1000
@@ -352,7 +352,7 @@ attributes:
   L_active:
     name: L_active
     description: Active acceleration length.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:L_active
     rank: 1000
@@ -366,7 +366,7 @@ attributes:
   dE_ref:
     name: dE_ref
     description: Reference energy gain.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:dE_ref
     rank: 1000
@@ -380,7 +380,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

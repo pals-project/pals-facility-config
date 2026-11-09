@@ -9,7 +9,7 @@ _A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (
 
 
 
-URI: [acc:slot/BodyShiftP](https://example.org/accelerator-core/slot/BodyShiftP)
+URI: [pals_config:slot/BodyShiftP](https://w3id.org/pals-config/slot/BodyShiftP)
 Alias: BodyShiftP
 
 <!-- no inheritance hierarchy -->
@@ -90,7 +90,7 @@ Alias: BodyShiftP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -99,8 +99,8 @@ Alias: BodyShiftP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:BodyShiftP |
-| native | acc:BodyShiftP |
+| self | pals_config:BodyShiftP |
+| native | pals_config:BodyShiftP |
 
 
 
@@ -113,7 +113,7 @@ name: BodyShiftP
 description: A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP
   (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator
   Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: BodyShiftP
 owner: HasBodyShiftP

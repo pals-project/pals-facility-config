@@ -9,7 +9,7 @@ _Mixin for Twiss parameters, which can be used to describe the beam optics of an
 
 
 
-URI: [acc:class/TwissParamGroup](https://example.org/accelerator-core/class/TwissParamGroup)
+URI: [pals_config:class/TwissParamGroup](https://w3id.org/pals-config/class/TwissParamGroup)
 
 
 ```mermaid
@@ -105,7 +105,7 @@ TwissParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -114,8 +114,8 @@ TwissParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:TwissParamGroup |
-| native | acc:TwissParamGroup |
+| self | pals_config:TwissParamGroup |
+| native | pals_config:TwissParamGroup |
 | broad | pals:TwissP |
 
 
@@ -134,7 +134,7 @@ TwissParamGroup {
 name: TwissParamGroup
 description: Mixin for Twiss parameters, which can be used to describe the beam optics
   of an accelerator element.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:TwissP
 is_a: ParamGroup
@@ -142,7 +142,7 @@ attributes:
   alpha_a:
     name: alpha_a
     description: Twiss alpha parameter in the horizontal plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - alpha_x
     - alphax
@@ -155,7 +155,7 @@ attributes:
   alpha_b:
     name: alpha_b
     description: Twiss alpha parameter in the vertical plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - alpha_y
     - alphay
@@ -169,7 +169,7 @@ attributes:
     name: beta_a
     description: Twiss beta parameter in the horizontal plane. Must be strictly positive
       (> 0).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - beta_x
     - betax
@@ -188,7 +188,7 @@ attributes:
     name: beta_b
     description: Twiss beta parameter in the vertical plane. Must be strictly positive
       (> 0).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - beta_y
     - betay
@@ -207,7 +207,7 @@ attributes:
     name: eta_x
     description: Twiss dispersion parameter in the horizontal plane. May be any real
       value.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - etax
     close_mappings:
@@ -222,7 +222,7 @@ attributes:
     name: eta_y
     description: Twiss dispersion parameter in the vertical plane. May be any real
       value.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - etay
     close_mappings:
@@ -236,7 +236,7 @@ attributes:
   etap_x:
     name: etap_x
     description: Twiss dispersion slope parameter in the horizontal plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - etapx
     close_mappings:
@@ -251,7 +251,7 @@ attributes:
   etap_y:
     name: etap_y
     description: Twiss dispersion slope parameter in the vertical plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - etapy
     close_mappings:
@@ -266,7 +266,7 @@ attributes:
   phi_a:
     name: phi_a
     description: Twiss phase advance parameter in the horizontal plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - phi_x
     - phix
@@ -283,7 +283,7 @@ attributes:
   phi_b:
     name: phi_b
     description: Twiss phase advance parameter in the vertical plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - phi_y
     - phiy
@@ -308,7 +308,7 @@ attributes:
 name: TwissParamGroup
 description: Mixin for Twiss parameters, which can be used to describe the beam optics
   of an accelerator element.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:TwissP
 is_a: ParamGroup
@@ -316,7 +316,7 @@ attributes:
   alpha_a:
     name: alpha_a
     description: Twiss alpha parameter in the horizontal plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - alpha_x
     - alphax
@@ -331,7 +331,7 @@ attributes:
   alpha_b:
     name: alpha_b
     description: Twiss alpha parameter in the vertical plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - alpha_y
     - alphay
@@ -347,7 +347,7 @@ attributes:
     name: beta_a
     description: Twiss beta parameter in the horizontal plane. Must be strictly positive
       (> 0).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - beta_x
     - betax
@@ -368,7 +368,7 @@ attributes:
     name: beta_b
     description: Twiss beta parameter in the vertical plane. Must be strictly positive
       (> 0).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - beta_y
     - betay
@@ -389,7 +389,7 @@ attributes:
     name: eta_x
     description: Twiss dispersion parameter in the horizontal plane. May be any real
       value.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - etax
     close_mappings:
@@ -406,7 +406,7 @@ attributes:
     name: eta_y
     description: Twiss dispersion parameter in the vertical plane. May be any real
       value.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - etay
     close_mappings:
@@ -422,7 +422,7 @@ attributes:
   etap_x:
     name: etap_x
     description: Twiss dispersion slope parameter in the horizontal plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - etapx
     close_mappings:
@@ -439,7 +439,7 @@ attributes:
   etap_y:
     name: etap_y
     description: Twiss dispersion slope parameter in the vertical plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - etapy
     close_mappings:
@@ -456,7 +456,7 @@ attributes:
   phi_a:
     name: phi_a
     description: Twiss phase advance parameter in the horizontal plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - phi_x
     - phix
@@ -475,7 +475,7 @@ attributes:
   phi_b:
     name: phi_b
     description: Twiss phase advance parameter in the vertical plane.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - phi_y
     - phiy
@@ -494,7 +494,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

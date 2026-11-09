@@ -9,7 +9,7 @@ _A human-readable description of the signal in the source system._
 
 
 
-URI: [acc:slot/native_description](https://example.org/accelerator-core/slot/native_description)
+URI: [pals_config:slot/native_description](https://w3id.org/pals-config/slot/native_description)
 Alias: native_description
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: native_description
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: native_description
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:native_description |
-| native | acc:native_description |
+| self | pals_config:native_description |
+| native | pals_config:native_description |
 
 
 
@@ -89,7 +89,7 @@ Alias: native_description
 ```yaml
 name: native_description
 description: A human-readable description of the signal in the source system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: native_description
 owner: Signal

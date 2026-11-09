@@ -9,7 +9,7 @@ _A list of signals in the accelerator system._
 
 
 
-URI: [acc:slot/signals](https://example.org/accelerator-core/slot/signals)
+URI: [pals_config:slot/signals](https://w3id.org/pals-config/slot/signals)
 Alias: signals
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: signals
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: signals
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:signals |
-| native | acc:signals |
+| self | pals_config:signals |
+| native | pals_config:signals |
 
 
 
@@ -90,7 +90,7 @@ Alias: signals
 ```yaml
 name: signals
 description: A list of signals in the accelerator system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: signals
 owner: Facility

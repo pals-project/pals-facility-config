@@ -9,7 +9,7 @@ _Mixin for an element's extent and position along the longitudinal (beam-directi
 
 
 
-URI: [acc:class/LongitudinalPlacementParamGroup](https://example.org/accelerator-core/class/LongitudinalPlacementParamGroup)
+URI: [pals_config:class/LongitudinalPlacementParamGroup](https://w3id.org/pals-config/class/LongitudinalPlacementParamGroup)
 
 
 ```mermaid
@@ -104,7 +104,7 @@ LongitudinalPlacementParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -113,8 +113,8 @@ LongitudinalPlacementParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:LongitudinalPlacementParamGroup |
-| native | acc:LongitudinalPlacementParamGroup |
+| self | pals_config:LongitudinalPlacementParamGroup |
+| native | pals_config:LongitudinalPlacementParamGroup |
 
 
 
@@ -133,7 +133,7 @@ name: LongitudinalPlacementParamGroup
 description: Mixin for an element's extent and position along the longitudinal (beam-direction,
   "s") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
   One (or both) `length` or `s_position` must be present.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 is_a: ParamGroup
 slots:
 - length
@@ -141,7 +141,7 @@ attributes:
   s_position:
     name: s_position
     description: Longitudinal position of the element along the beamline.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:s_position
     rank: 1000
@@ -179,13 +179,13 @@ name: LongitudinalPlacementParamGroup
 description: Mixin for an element's extent and position along the longitudinal (beam-direction,
   "s") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
   One (or both) `length` or `s_position` must be present.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 is_a: ParamGroup
 attributes:
   s_position:
     name: s_position
     description: Longitudinal position of the element along the beamline.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:s_position
     rank: 1000
@@ -199,7 +199,7 @@ attributes:
   length:
     name: length
     description: Length of the element (arc length for bends).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:length
     rank: 1000
@@ -212,7 +212,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

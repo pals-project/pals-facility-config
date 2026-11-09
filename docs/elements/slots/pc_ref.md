@@ -9,7 +9,7 @@ _[momentum*c] Reference momentum times speed of light._
 
 
 
-URI: [acc:slot/pc_ref](https://example.org/accelerator-core/slot/pc_ref)
+URI: [pals_config:slot/pc_ref](https://w3id.org/pals-config/slot/pc_ref)
 Alias: pc_ref
 
 <!-- no inheritance hierarchy -->
@@ -73,7 +73,7 @@ Alias: pc_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -82,8 +82,8 @@ Alias: pc_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:pc_ref |
-| native | acc:pc_ref |
+| self | pals_config:pc_ref |
+| native | pals_config:pc_ref |
 | close | pals:pc_ref |
 
 
@@ -95,7 +95,7 @@ Alias: pc_ref
 ```yaml
 name: pc_ref
 description: '[momentum*c] Reference momentum times speed of light.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - pCentral
 close_mappings:

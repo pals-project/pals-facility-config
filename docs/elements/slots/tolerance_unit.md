@@ -9,7 +9,7 @@ _Unit of the tolerance value for the distance between two components in a relati
 
 
 
-URI: [acc:slot/tolerance_unit](https://example.org/accelerator-core/slot/tolerance_unit)
+URI: [pals_config:slot/tolerance_unit](https://w3id.org/pals-config/slot/tolerance_unit)
 Alias: tolerance_unit
 
 <!-- no inheritance hierarchy -->
@@ -62,7 +62,7 @@ Alias: tolerance_unit
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -71,8 +71,9 @@ Alias: tolerance_unit
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:tolerance_unit |
-| native | acc:tolerance_unit |
+| self | pals_config:tolerance_unit |
+| native | pals_config:tolerance_unit |
+| related | saref:UnitOfMeasure |
 
 
 
@@ -85,7 +86,9 @@ name: tolerance_unit
 description: Unit of the tolerance value for the distance between two components in
   a relationship. Only an edge-property slot for edges that require a tolerance value
   between two components in a relationship.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+related_mappings:
+- saref:UnitOfMeasure
 rank: 1000
 alias: tolerance_unit
 domain_of:

@@ -11,7 +11,7 @@ _A general class for accelerator components, which can be specialized into more 
 * __NOTE__: this is an abstract class and should not be instantiated directly
 
 
-URI: [acc:class/Component](https://example.org/accelerator-core/class/Component)
+URI: [pals_config:class/Component](https://w3id.org/pals-config/class/Component)
 
 
 ```mermaid
@@ -111,7 +111,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -120,8 +120,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Component |
-| native | acc:Component |
+| self | pals_config:Component |
+| native | pals_config:Component |
 | broad | pals:Element |
 
 
@@ -140,7 +140,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 name: Component
 description: A general class for accelerator components, which can be specialized
   into more specific types like AcceleratorDevice, Magnet, etc.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:Element
 is_a: Node
@@ -152,7 +152,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Component
@@ -169,7 +169,7 @@ attributes:
 name: Component
 description: A general class for accelerator components, which can be specialized
   into more specific types like AcceleratorDevice, Magnet, etc.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:Element
 is_a: Node
@@ -181,7 +181,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: Component
@@ -194,7 +194,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: Component
@@ -205,7 +205,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -223,7 +223,10 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - rdf:type
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -237,7 +240,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

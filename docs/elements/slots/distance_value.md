@@ -9,7 +9,7 @@ _Distance value between two components in a relationship. Only an edge-property 
 
 
 
-URI: [om:Distance](http://www.ontology-of-units-of-measure.org/resource/om-2/Distance)
+URI: [pals_config:slot/distance_value](https://w3id.org/pals-config/slot/distance_value)
 Alias: distance_value
 
 <!-- no inheritance hierarchy -->
@@ -38,7 +38,6 @@ Alias: distance_value
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [AdjacentTo](../classes/AdjacentTo.md), [NearestTo](../classes/NearestTo.md) |
-| Slot URI | [om:Distance](http://www.ontology-of-units-of-measure.org/resource/om-2/Distance) |
 
 ### Cardinality and Requirements
 
@@ -63,7 +62,7 @@ Alias: distance_value
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -72,8 +71,9 @@ Alias: distance_value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | om:Distance |
-| native | acc:distance_value |
+| self | pals_config:distance_value |
+| native | pals_config:distance_value |
+| exact | quantitykind:Distance |
 
 
 
@@ -85,9 +85,10 @@ Alias: distance_value
 name: distance_value
 description: Distance value between two components in a relationship. Only an edge-property
   slot for edges that require a distance value between two components in a relationship.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+exact_mappings:
+- quantitykind:Distance
 rank: 1000
-slot_uri: om:Distance
 alias: distance_value
 domain_of:
 - AdjacentTo

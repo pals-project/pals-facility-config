@@ -9,7 +9,7 @@ _A set of coordinates that define the spatial relationship between the two compo
 
 
 
-URI: [acc:slot/coordinates](https://example.org/accelerator-core/slot/coordinates)
+URI: [pals_config:slot/coordinates](https://w3id.org/pals-config/slot/coordinates)
 Alias: coordinates
 
 <!-- no inheritance hierarchy -->
@@ -65,7 +65,7 @@ Alias: coordinates
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -74,8 +74,8 @@ Alias: coordinates
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:coordinates |
-| native | acc:coordinates |
+| self | pals_config:coordinates |
+| native | pals_config:coordinates |
 
 
 
@@ -88,7 +88,7 @@ name: coordinates
 description: A set of coordinates that define the spatial relationship between the
   two components. Only an edge-property slot for edges that require a set of coordinates
   to define the spatial relationship between two components in a relationship.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: coordinates
 domain_of:

@@ -9,7 +9,7 @@ _The angular coordinate in cylindrical coordinates (in radians)._
 
 
 
-URI: [acc:slot/theta_coord](https://example.org/accelerator-core/slot/theta_coord)
+URI: [pals_config:slot/theta_coord](https://w3id.org/pals-config/slot/theta_coord)
 Alias: theta_coord
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: theta_coord
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: theta_coord
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:theta_coord |
-| native | acc:theta_coord |
+| self | pals_config:theta_coord |
+| native | pals_config:theta_coord |
 
 
 
@@ -89,7 +89,7 @@ Alias: theta_coord
 ```yaml
 name: theta_coord
 description: The angular coordinate in cylindrical coordinates (in radians).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: theta_coord
 owner: CoordinateSet

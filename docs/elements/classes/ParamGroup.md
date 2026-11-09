@@ -11,7 +11,7 @@ _Abstract base for inlined PALS parameter-group objects, giving each an identifi
 * __NOTE__: this is an abstract class and should not be instantiated directly
 
 
-URI: [acc:class/ParamGroup](https://example.org/accelerator-core/class/ParamGroup)
+URI: [pals_config:class/ParamGroup](https://w3id.org/pals-config/class/ParamGroup)
 
 
 ```mermaid
@@ -71,7 +71,7 @@ ParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -80,8 +80,8 @@ ParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:ParamGroup |
-| native | acc:ParamGroup |
+| self | pals_config:ParamGroup |
+| native | pals_config:ParamGroup |
 
 
 
@@ -100,7 +100,7 @@ name: ParamGroup
 description: Abstract base for inlined PALS parameter-group objects, giving each an
   identifier so it resolves to a stable node/IRI rather than a blank node when exported
   to RDF.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 abstract: true
 slots:
 - id
@@ -116,13 +116,13 @@ name: ParamGroup
 description: Abstract base for inlined PALS parameter-group objects, giving each an
   identifier so it resolves to a stable node/IRI rather than a blank node when exported
   to RDF.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 abstract: true
 attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

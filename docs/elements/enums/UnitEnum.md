@@ -7,7 +7,7 @@ _Engineering units using ASCII-safe enum names. Values map to QUDT unit IRIs wit
 
 
 
-URI: [acc:enum/UnitEnum](https://example.org/accelerator-core/enum/UnitEnum)
+URI: [pals_config:enum/UnitEnum](https://w3id.org/pals-config/enum/UnitEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -67,7 +67,7 @@ URI: [acc:enum/UnitEnum](https://example.org/accelerator-core/enum/UnitEnum)
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -81,24 +81,24 @@ URI: [acc:enum/UnitEnum](https://example.org/accelerator-core/enum/UnitEnum)
 name: UnitEnum
 description: Engineering units using ASCII-safe enum names. Values map to QUDT unit
   IRIs with the LinkML meaning field when an exact QUDT unit is available.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   A:
     text: A
     description: ampere
     exact_mappings:
-    - qudt:A
+    - unit:A
   degree:
     text: degree
     description: degree
     exact_mappings:
-    - qudt:DEG
+    - unit:DEG
   eV:
     text: eV
     description: electron volt
     exact_mappings:
-    - qudt:EV
+    - unit:EV
   eV_per_c:
     text: eV_per_c
     description: momentum in electron volts per speed of light
@@ -111,6 +111,8 @@ permissible_values:
   Gauss:
     text: Gauss
     description: gauss (magnetic flux density)
+    exact_mappings:
+    - unit:GAUSS
   G_per_cm:
     text: G_per_cm
     description: gauss per centimeter
@@ -118,39 +120,37 @@ permissible_values:
     text: Hz
     description: hertz
     exact_mappings:
-    - qudt:HZ
+    - unit:HZ
   kW:
     text: kW
     description: kilowatt
     related_mappings:
-    - qudt:KiloW
+    - unit:KiloW
   m:
     text: m
     description: meter
     exact_mappings:
-    - qudt:M
+    - unit:M
   mm:
     text: mm
     description: millimeter
     exact_mappings:
-    - qudt:MilliM
+    - unit:MilliM
   mrem_per_h:
     text: mrem_per_h
     description: millirem per hour. Kept as a local accelerator unit value because
       QUDT publishes related radiation units but no exact millirem-per-hour unit in
       the checked vocabulary.
-    exact_mappings:
-    - qudt:MREM-PER-H
   MV_per_m:
     text: MV_per_m
     description: megavolt per meter
     exact_mappings:
-    - qudt:MegaV-PER-M
+    - unit:MegaV-PER-M
   PA:
     text: PA
     description: pascal
     exact_mappings:
-    - qudt:PA
+    - unit:PA
   randians_pi2:
     text: randians_pi2
     description: radians divided by 2 pi - angles and phases
@@ -163,37 +163,37 @@ permissible_values:
     text: seconds
     description: second
     exact_mappings:
-    - qudt:SEC
+    - unit:SEC
   T:
     text: T
     description: tesla
     exact_mappings:
-    - qudt:T
+    - unit:T
   T_M:
     text: T_M
     description: tesla meter
     exact_mappings:
-    - qudt:T-M
+    - unit:T-M
   Torr:
     text: Torr
     description: torr
     exact_mappings:
-    - qudt:TORR
+    - unit:TORR
   V:
     text: V
     description: volt
     exact_mappings:
-    - qudt:V
+    - unit:V
   V_per_m:
     text: V_per_m
     description: volt per meter
     exact_mappings:
-    - qudt:V-PER-M
+    - unit:V-PER-M
   unitless:
     text: unitless
     description: dimensionless numeric value
     exact_mappings:
-    - qudt:NUM
+    - unit:NUM
   none:
     text: none
     description: no unit or not applicable

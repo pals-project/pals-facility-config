@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:class/HasReferenceP](https://example.org/accelerator-core/class/HasReferenceP)
+URI: [pals_config:class/HasReferenceP](https://w3id.org/pals-config/class/HasReferenceP)
 
 
 ```mermaid
@@ -76,7 +76,7 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +85,8 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasReferenceP |
-| native | acc:HasReferenceP |
+| self | pals_config:HasReferenceP |
+| native | pals_config:HasReferenceP |
 
 
 
@@ -102,7 +102,7 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 <details>
 ```yaml
 name: HasReferenceP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   ReferenceP:
@@ -110,7 +110,7 @@ attributes:
     description: A mixin for reference parameters that are aligned with PALS ReferenceP
       (Reference Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasReferenceP
@@ -125,7 +125,7 @@ attributes:
 <details>
 ```yaml
 name: HasReferenceP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   ReferenceP:
@@ -133,7 +133,7 @@ attributes:
     description: A mixin for reference parameters that are aligned with PALS ReferenceP
       (Reference Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ReferenceP
     owner: HasReferenceP

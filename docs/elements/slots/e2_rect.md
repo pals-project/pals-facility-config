@@ -9,7 +9,7 @@ _Exit end pole face rotation with respect to a rectangular geometry._
 
 
 
-URI: [acc:slot/e2_rect](https://example.org/accelerator-core/slot/e2_rect)
+URI: [pals_config:slot/e2_rect](https://w3id.org/pals-config/slot/e2_rect)
 Alias: e2_rect
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: e2_rect
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: e2_rect
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:e2_rect |
-| native | acc:e2_rect |
+| self | pals_config:e2_rect |
+| native | pals_config:e2_rect |
 | close | pals:e2_rect |
 
 
@@ -96,7 +96,7 @@ Alias: e2_rect
 ```yaml
 name: e2_rect
 description: Exit end pole face rotation with respect to a rectangular geometry.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:e2_rect
 rank: 1000
