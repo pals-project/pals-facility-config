@@ -115,7 +115,7 @@ ElectricMultipoleParamGroup ||--}o MultipoleParameterGroup : "elec_components"
 | self | pals_config:ElectricMultipoleParamGroup |
 | native | pals_config:ElectricMultipoleParamGroup |
 | exact | pals:ElectricMultipoleP |
-| broad | pals:ElectricMultipoleP |
+| broad | pals_parametergroups:electricmultipolep-electric-multipole-parameters |
 
 
 
@@ -141,7 +141,7 @@ from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:ElectricMultipoleP
 broad_mappings:
-- pals:ElectricMultipoleP
+- pals_parametergroups:electricmultipolep-electric-multipole-parameters
 is_a: ParamGroup
 attributes:
   elec_components:
@@ -174,7 +174,7 @@ from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:ElectricMultipoleP
 broad_mappings:
-- pals:ElectricMultipoleP
+- pals_parametergroups:electricmultipolep-electric-multipole-parameters
 is_a: ParamGroup
 attributes:
   elec_components:

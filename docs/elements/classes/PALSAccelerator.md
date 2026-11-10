@@ -67,6 +67,7 @@ PALSAccelerator {
     isodate created_date  
     string kind  
     stringList notes  
+    string schema_version  
     isodate updated_date  
     string version  
 }
@@ -137,6 +138,7 @@ SignalBinding ||--|| Signal : "object"
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) | A human-readable description of the instance. | direct |
 | [affiliation](../slots/affiliation.md) | 0..1 <br/> [Affiliation](../classes/Affiliation.md) | The affiliation of the author or component, as a ROR. | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | Version of the representation of a particle accelerator and its operations. | direct |
+| [schema_version](../slots/schema_version.md) | 0..1 <br/> [String](../types/String.md) | Version of the schema used for this representation of a particle accelerator and its operations. Should follow the semantic versioning convention (MAJOR.MINOR.PATCH). Should match the schema version of the NARAD/PALS instance configuration schema being used. | direct |
 | [temporal_coverage](../slots/temporal_coverage.md) | 0..1 <br/> [TemporalCoverageClass](../classes/TemporalCoverageClass.md) | Temporal coverage for time-based datasets, if applicable. Container for elements describing the start_date and end_date of the data instance's temporal coverage  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00). Use temporal_coverage when the dataset describes a specific historical or projected time period. This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant. | direct |
 | [authors](../slots/authors.md) | * <br/> [Author](../classes/Author.md) | Contains the authorship information for this representation of an accelerator facility and its operations. | direct |
 | [created_date](../slots/created_date.md) | 1 <br/> [Isodate](../types/Isodate.md) | The date the PALS/NARAD data instance of the facility configuration was first created, in ISO 8601 format (YYYY-MM-DD).  Provides temporal context for the data instance and can be used for tracking its age and relevance. | direct |
@@ -208,6 +210,20 @@ attributes:
     from_schema: https://w3id.org/pals-config
     rank: 1000
     ifabsent: ("0.0.0")
+    domain_of:
+    - PALSAccelerator
+    range: string
+    required: false
+    pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
+  schema_version:
+    name: schema_version
+    description: Version of the schema used for this representation of a particle
+      accelerator and its operations. Should follow the semantic versioning convention
+      (MAJOR.MINOR.PATCH). Should match the schema version of the NARAD/PALS instance
+      configuration schema being used.
+    from_schema: https://w3id.org/pals-config
+    rank: 1000
+    ifabsent: ("0.0.1")
     domain_of:
     - PALSAccelerator
     range: string
@@ -322,6 +338,22 @@ attributes:
     rank: 1000
     ifabsent: ("0.0.0")
     alias: version
+    owner: PALSAccelerator
+    domain_of:
+    - PALSAccelerator
+    range: string
+    required: false
+    pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
+  schema_version:
+    name: schema_version
+    description: Version of the schema used for this representation of a particle
+      accelerator and its operations. Should follow the semantic versioning convention
+      (MAJOR.MINOR.PATCH). Should match the schema version of the NARAD/PALS instance
+      configuration schema being used.
+    from_schema: https://w3id.org/pals-config
+    rank: 1000
+    ifabsent: ("0.0.1")
+    alias: schema_version
     owner: PALSAccelerator
     domain_of:
     - PALSAccelerator

@@ -1,6 +1,6 @@
-# Accelerator Core Ontology
+# PALS facility configuration
 
-A lightweight LinkML schema for facility-agnostic accelerator components, their beamline relationships, and associated control-system signals.
+A lightweight LinkML schema for facility-agnostic accelerator facility configuration, their beamline relationships, and associated control-system signals.
 
 URI: https://w3id.org/pals-config
 
@@ -220,6 +220,7 @@ Name: pals_config
 | [RFP](slots/RFP.md) | A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). |
 | [rho_ref](slots/rho_ref.md) | Reference bend radius. |
 | [s_position](slots/s_position.md) | Longitudinal position of the element along the beamline. |
+| [schema_version](slots/schema_version.md) | Version of the schema used for this representation of a particle accelerator and its operations. Should follow the semantic versioning convention (MAJOR.MINOR.PATCH). Should match the schema version of the NARAD/PALS instance configuration schema being used. |
 | [signal_bindings](slots/signal_bindings.md) | A list of signal bindings in the accelerator system (Component <-> Signal relationships). |
 | [signal_role](slots/signal_role.md) | The role of the signal in the control system, such as setpoint, readback, status, command, or limit. |
 | [signals](slots/signals.md) | A list of signals in the accelerator system. |

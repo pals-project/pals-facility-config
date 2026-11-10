@@ -176,7 +176,7 @@ Quadrupole ||--|o TwissParamGroup : "TwissP"
 | ---  | ---  |
 | self | pals_config:Quadrupole |
 | native | pals_config:Quadrupole |
-| exact | pals:Quadrupole |
+| exact | pals_elementkinds:s-quadrupole |
 
 
 
@@ -198,7 +198,7 @@ description: 'A magnet primarily used to focus or defocus the beam. 4 poles.
   both.'
 from_schema: https://w3id.org/pals-config
 exact_mappings:
-- pals:Quadrupole
+- pals_elementkinds:s-quadrupole
 is_a: Multipole
 
 ```
@@ -215,7 +215,7 @@ description: 'A magnet primarily used to focus or defocus the beam. 4 poles.
   both.'
 from_schema: https://w3id.org/pals-config
 exact_mappings:
-- pals:Quadrupole
+- pals_elementkinds:s-quadrupole
 is_a: Multipole
 attributes:
   ElectricMultipoleP:
