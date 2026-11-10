@@ -32,6 +32,7 @@ _SCHEMA_DETAIL_KEYS = (
     "aliases",
     "inlined",
     "inlined_as_list",
+    "unit",
 )
 
 

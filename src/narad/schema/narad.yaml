@@ -40,7 +40,7 @@ imports:
 # Otherwise, mixins change the shape of the class graph, and you have a generator flag to control which shape you get.
 
 # REGARDING the unit for parameters: this will need to be a step in the alignment because UITF parameter units may not match PALS expected units
-# Example is pCentral which may be MeV (UITF) or GeV (CEBAF) but PALS expects eV. This is a known issue and will need to be addressed in the future.
+# Example is pCentral (pc_ref), which is MeV/c in both UITF and CEBAF data but PALS expects eV. This is a known issue and will need to be addressed in the future.
 
 # Comments on id's for mag_ and elec_components, Identifiers, and Additional metadata
 # Currently each of these do not have an id slot.
@@ -504,8 +504,10 @@ classes:
         close_mappings:
           - pals:species_ref
       pc_ref:
-        description: "[momentum*c] Reference momentum times speed of light." # PALS asked for eV, doesn't matc UITF/CEBAF data.
+        description: "[MeV] Reference momentum times speed of light, i.e. beam momentum in MeV/c." # PALS asks for eV; UITF/CEBAF data is in MeV/c.
         range: float
+        unit:
+          ucum_code: MeV
         close_mappings:
           - pals:pc_ref
         aliases:
