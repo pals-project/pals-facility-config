@@ -1,6 +1,7 @@
 description: Skeleton NARAD representation of the BTA beamline generated from bta.pals.yaml.
 kind: PALSAccelerator
 version: 0.0.2
+schema_version: 0.0.1
 created_date: "2026-10-22"
 updated_date: "2026-10-30"
 change_log:

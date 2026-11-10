@@ -3,6 +3,7 @@ description: PALS-NARAD representation of a validated subset of the Jefferson La
   LinkML schema.
 kind: PALSAccelerator
 version: 0.0.1
+schema_version: 0.0.1
 affiliation:
   id: jefferson-lab
   name: Thomas Jefferson National Accelerator Facility
