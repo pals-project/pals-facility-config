@@ -9,10 +9,9 @@ affiliation:
   identifiers:
   - identifier_type: ROR
     identifier_value: https://ror.org/02vwzrd76
-authors:
-- name: He Zhang
+authors: []
 notes:
-- 'CEBAF Injector at Jefferson Lab, single pass. '
+- ' '
 facility:
   identifiers:
   - identifier_type: URL
@@ -16853,6 +16852,9 @@ facility:
       - key: TrimCardType
         value: NA
         datatype: String
+      - key: Unpowered
+        value: '1'
+        datatype: String
       - key: Usage
         value: Helicity
         datatype: String
@@ -17072,6 +17074,9 @@ facility:
         datatype: String
       - key: TrimCardType
         value: NA
+        datatype: String
+      - key: Unpowered
+        value: '1'
         datatype: String
       - key: emitx
         value: '8.137979546096002E-08'
@@ -17881,6 +17886,9 @@ facility:
         datatype: String
       - key: TrimCardType
         value: NA
+        datatype: String
+      - key: Unpowered
+        value: '1'
         datatype: String
       - key: emitx
         value: '8.137823575639615E-08'
@@ -18920,6 +18928,9 @@ facility:
       - key: TrimCardType
         value: NA
         datatype: String
+      - key: Unpowered
+        value: '1'
+        datatype: String
       - key: emitx
         value: '8.138253690292678E-08'
         datatype: String
@@ -19764,6 +19775,9 @@ facility:
       - key: TrimCardType
         value: NA
         datatype: String
+      - key: Unpowered
+        value: '1'
+        datatype: String
       - key: Usage
         value: Helicity
         datatype: String
@@ -20492,6 +20506,9 @@ facility:
       - key: TrimCardType
         value: NA
         datatype: String
+      - key: Unpowered
+        value: '1'
+        datatype: String
       - key: Usage
         value: Helicity
         datatype: String
@@ -20628,6 +20645,9 @@ facility:
         datatype: String
       - key: TrimCardType
         value: NA
+        datatype: String
+      - key: Unpowered
+        value: '1'
         datatype: String
       - key: emitx
         value: '8.138253690292684E-08'
@@ -21130,6 +21150,9 @@ facility:
       - key: SegMask
         value: S_acc+A_Inj5MeV+A_Site+A_Injector
         datatype: String
+      - key: Unpowered
+        value: '1'
+        datatype: String
       - key: Usage
         value: Beamline
         datatype: String
@@ -21173,6 +21196,9 @@ facility:
         datatype: String
       - key: SegMask
         value: S_acc+A_Inj5MeV+A_Site+A_Injector
+        datatype: String
+      - key: Unpowered
+        value: '1'
         datatype: String
       - key: Usage
         value: Beamline
@@ -37377,6 +37403,9 @@ facility:
       - key: SegMask
         value: S_acc+A_Site+A_Injector
         datatype: String
+      - key: Unpowered
+        value: '1'
+        datatype: String
       - key: Usage
         value: Beamline
         datatype: String
@@ -37470,6 +37499,9 @@ facility:
         datatype: String
       - key: SegMask
         value: S_acc+A_Site+A_Injector
+        datatype: String
+      - key: Unpowered
+        value: '1'
         datatype: String
       - key: Usage
         value: Beamline
@@ -40196,6 +40228,9 @@ facility:
       - key: TransitionMode
         value: CW
         datatype: String
+      - key: Unpowered
+        value: '1'
+        datatype: String
       - key: alphax.1
         value: '-3.562430963664912'
         datatype: String
@@ -40486,6 +40521,11 @@ facility:
       angle_ref: -0.0959931089
       e1: -0.0959931089
       e2: 0.0
+    MagneticMultipoleP:
+      id: MBL0R04/MagneticMultipoleP
+      mag_components:
+      - order: 1
+        Kn: 0.0
     FloorP:
       id: MBL0R04/FloorP
       x: 80.5999579224169
@@ -40494,6 +40534,22 @@ facility:
       phi: -2.74001811591885e-07
       psi: -2.41815535443148e-15
       theta: -1.39971454947826e-05
+    ReferenceP:
+      id: MBL0R04/ReferenceP
+      pc_ref: 119.633211637199
+      species_ref: electron
+    TwissP:
+      id: MBL0R04/TwissP
+      alpha_a: -3.562430963664912
+      alpha_b: 1.360501999251497
+      beta_a: 18.23858003038774
+      beta_b: 7.346400943513273
+      etap_x: -0.009609628411497345
+      etap_y: 0.0
+      eta_x: -0.01162758936578265
+      eta_y: 0.0
+      phi_a: 14.50637255767945
+      phi_b: 9.95146553747592
     MetaP:
       id: MBL0R04/MetaP
       additional_metadata:
@@ -47218,7 +47274,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47290,7 +47346,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47362,7 +47418,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47434,7 +47490,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47506,7 +47562,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47578,7 +47634,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47650,7 +47706,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47722,7 +47778,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47794,7 +47850,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47866,7 +47922,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -47938,7 +47994,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
@@ -49858,7 +49914,7 @@ facility:
     kind: Signal
     signal_role: Setpoint
     source_system: EPICS
-    native_description: Desired integrated solenoid field or equivalent model quantity.
+    native_description: Peak on-axis magnetic field.
     canonical_signal_type: MagnetFieldSetpoint
     quantity_kind: MagneticField
     native_data_type: Float
