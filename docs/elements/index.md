@@ -163,7 +163,6 @@ Name: accelerator_core
 | [h2](slots/h2.md) | Exit end pole face curvature |
 | [harmon](slots/harmon.md) | RF harmonic number. |
 | [id](slots/id.md) | A unique identifier for the instance. |
-| [id_namespace](slots/id_namespace.md) | Base IRI for this facility's instance identifiers. Identifiers in the data (id, subject, object, beamline_context) are written bare, e.g. RF_LASER, and are made absolute by prefixing this value on export to RDF or Neo4j, e.g. tag:jlab.org,2026:uitf/ + RF_LASER. Required, with no schema-wide default, so that facilities cannot silently share a namespace and collide. Any absolute IRI is accepted, resolvable (https://...) or not (tag:..., urn:...). It must end in '/', '#' or ':' so that simple concatenation yields a well-formed IRI. |
 | [identifier_type](slots/identifier_type.md) | The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK. |
 | [identifier_value](slots/identifier_value.md) | The value of the identifier. |
 | [identifiers](slots/identifiers.md) | A unique and ideally persistent identifier for the facility, such as a DOI or ROR. |

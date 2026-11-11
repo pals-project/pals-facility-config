@@ -252,9 +252,9 @@ def run_benchmark(
         result = copy.deepcopy(entry)
         result[llm_answer_key] = answer
         results.append(result)
-
-    with answers_path.open("w") as handle:
-        yaml.safe_dump(results, handle, allow_unicode=True, sort_keys=False)
+        # Rewrite the file after every answer so progress can be followed while the benchmark runs.
+        with answers_path.open("w") as handle:
+            yaml.safe_dump(results, handle, allow_unicode=True, sort_keys=False)
 
 
 def delete_intermediate_files(paths: IntermediatePaths) -> None:

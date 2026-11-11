@@ -15,7 +15,7 @@
 - Q: What beamlines are part of the GUN_thru_MV section?
   Ans: KV and MV
 - Q: What components are contained within the GUN_thru_MV section?
-  Ans: RF_LASER, VIPK101, S_IS_20CM, IPMK101
+  Ans: RF_LASER, VIPK101, S_IS_20CM, IPMK101, VBVM101, VIPM101B
 - Q: What is the first component in the MV section?
   Ans: VBVM101
 - Q: What components are part of the MV section?

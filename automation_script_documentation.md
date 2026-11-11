@@ -163,11 +163,21 @@ fails fast if any concrete `Edge` subclass in the schema lacks an
 4. `uv run linkml-convert -s <schema>.yaml -C <tree_root_class> -t ttl <instance>.resolved.yaml -o <instance>.ttl`
    — converts the resolved instance YAML data to raw RDF/Turtle (the "ABox").
 5. `uv run python3 src/postprocess_for_rdf.py --schema <schema>.yaml --instance_file <instance>.ttl --output_file <instance>_rdf.ttl`
-   — rewrites bare relation-class instances (e.g. `HasSignal`, `Contains`) into
-   proper RDF predicate URIs, using the existing [`src/postprocess_for_rdf.py`](src/postprocess_for_rdf.py)
-   script. The predicate URIs come from each relation class's `rdf_predicate`
-   annotation in `--schema` (e.g. `Precedes` → `pals:precedes`), not a
-   hardcoded map. This step is required — the raw `linkml-convert` output alone does not
+   — fixes the raw output using the existing [`src/postprocess_for_rdf.py`](src/postprocess_for_rdf.py)
+   script:
+   - each `kind` literal becomes the schema class IRI (e.g. `"BeamPositionMonitor"` →
+     `acc:BeamPositionMonitor`);
+   - each relation's `predicate` literal (e.g. `HasSignal`, `Precedes`) becomes the IRI in
+     that relation class's `rdf_predicate` annotation in `--schema` (e.g. `Precedes` →
+     `acc:precedes`, `HasSignal` → `pals:has_signal`), not a hardcoded map;
+   - for every relation it also adds a direct subject → object edge with that predicate
+     (e.g. `RF_LASER precedes VIPK101`), which becomes a Neo4j relationship the agent can
+     traverse. The relation node itself is kept for its qualifiers (`context`,
+     `beamline_context`). After the import, `src/llm/graph_init.cypher` replaces these
+     edges with one per relation node, each with a `relation_uri` property pointing back
+     to its relation node, so a pair listed in two beamlines gets two edges.
+
+   This step is required — the raw `linkml-convert` output alone does not
    have correctly-typed relationship edges for the graph import to use.
 
 Result: four intermediate files sitting next to the schema/instance sources,
@@ -254,14 +264,21 @@ Only runs when `--queries` and `--answers` are given.
    and written to `--answers` as YAML only after the last question is
    answered, so the file does not exist while the run is in progress.
 
-To see what the agent is doing while a question is in progress (e.g. to check
-whether a long run is still working), follow the `gradio-chat` container's
-logs in another terminal. They show the Cypher queries the agent sends to
-Neo4j:
+The agent's Cypher queries are not logged. The `gradio-chat` container's logs
+(`docker logs -f gradio_chat`) only show a query when Neo4j returns a warning for
+it, e.g. a nonexistent property. To see what the agent is doing while a question
+is in progress (e.g. to check whether a long run is still working), list the
+queries currently running in Neo4j:
 
 ```bash
-docker logs -f gradio_chat
+docker exec neo4j_kg sh -c 'cypher-shell -u "${NEO4J_AUTH%%/*}" -p "${NEO4J_AUTH#*/}" \
+  "SHOW TRANSACTIONS YIELD transactionId, elapsedTime, currentQuery"'
 ```
+
+A query that runs for minutes can be stopped with
+`TERMINATE TRANSACTION "<transactionId>"` in the same way; the agent then gets an
+error back and can try another query. In the chat UI, each answer's
+**Query Trace** lists every Cypher query and its result.
 
 ### Stage 6 — After the run
 
