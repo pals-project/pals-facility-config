@@ -282,26 +282,24 @@ classes:
         This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant.
     attributes:
       start_date:
-        range: string
-        pattern: iso8601_datetime
+        range: iso8601_datetime
         description: "Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm )."
         related_mappings:
           - schema:temporalCoverage
         narrow_mappings:
           - dcterms:date
       end_date:
-        range: string
-        pattern: iso8601_datetime
+        range: iso8601_datetime
         description: "End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm )."
         related_mappings:
           - schema:temporalCoverage
         narrow_mappings:
           - dcterms:date
-      slots:
-        - description
-      slot_usage:
-        description:
-          description: Detailed description of the temporal coverage.
+    slots:
+      - description
+    slot_usage:
+      description:
+        description: Detailed description of the temporal coverage.
 
   Author:
     description: Contains authorship information for a representation of an accelerator facility and its operations.
