@@ -155,21 +155,19 @@ is_a: Component
 mixins:
 - HasFloorP
 - HasLongitudinalPlacementP
-attributes:
+slots:
+- functions
+slot_usage:
   functions:
     name: functions
     description: The function of the physical component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_function
-    rank: 1000
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: PhysicalFunctionEnum
     required: false
     multivalued: true
+attributes:
   beamline_relation:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
@@ -203,7 +201,32 @@ is_a: Component
 mixins:
 - HasFloorP
 - HasLongitudinalPlacementP
+slot_usage:
+  functions:
+    name: functions
+    description: The function of the physical component,  which can be used to identify
+      the component across different source systems.
+    close_mappings:
+    - pals:physical_function
+    range: PhysicalFunctionEnum
+    required: false
+    multivalued: true
 attributes:
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the physical component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:physical_beamline_relation
+    rank: 1000
+    alias: beamline_relation
+    owner: PhysicalComponent
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: PhysicalRelationEnum
+    required: true
   functions:
     name: functions
     description: The function of the physical component,  which can be used to identify
@@ -220,21 +243,6 @@ attributes:
     range: PhysicalFunctionEnum
     required: false
     multivalued: true
-  beamline_relation:
-    name: beamline_relation
-    description: The relationship of the physical component to the beamline,  which
-      can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/pals-config
-    close_mappings:
-    - pals:physical_beamline_relation
-    rank: 1000
-    alias: beamline_relation
-    owner: PhysicalComponent
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
-    range: PhysicalRelationEnum
-    required: true
   FloorP:
     name: FloorP
     description: A mixin for floor plan parameters that are aligned with PALS FloorP

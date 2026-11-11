@@ -218,6 +218,7 @@ attributes:
     owner: MetaParamGroup
     domain_of:
     - PALSAccelerator
+    - TemporalCoverageClass
     - MetaParamGroup
     - BeamLine
     range: string

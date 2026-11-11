@@ -22,10 +22,10 @@ AdditionalMetadata {
 BeginningEle {
     string id  
     stringList alias  
+    VirtualFunctionEnumList functions  
     string kind  
     stringList native_types  
     VirtualRelationEnum beamline_relation  
-    VirtualFunctionEnumList functions  
 }
 BodyShiftParamGroup {
     float x_offset  
@@ -236,6 +236,7 @@ attributes:
     from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_function
+    rank: 1000
     alias: functions
     owner: BeginningEle
     domain_of:

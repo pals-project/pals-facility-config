@@ -35,8 +35,8 @@ MetaParamGroup {
     string id  
 }
 VirtualComponent {
-    VirtualRelationEnum beamline_relation  
     VirtualFunctionEnumList functions  
+    VirtualRelationEnum beamline_relation  
     string id  
     stringList alias  
     string kind  
@@ -136,20 +136,19 @@ broad_mappings:
 is_a: Component
 mixins:
 - HasFloorP
-attributes:
+slots:
+- functions
+slot_usage:
   functions:
     name: functions
     description: The function of the virtual component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_function
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: VirtualFunctionEnum
     required: true
     multivalued: true
+attributes:
   beamline_relation:
     name: beamline_relation
     description: The relationship of the virtual component to the beamline,  which
@@ -183,22 +182,17 @@ broad_mappings:
 is_a: Component
 mixins:
 - HasFloorP
-attributes:
+slot_usage:
   functions:
     name: functions
     description: The function of the virtual component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_function
-    alias: functions
-    owner: VirtualComponent
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: VirtualFunctionEnum
     required: true
     multivalued: true
+attributes:
   beamline_relation:
     name: beamline_relation
     description: The relationship of the virtual component to the beamline,  which
@@ -213,6 +207,22 @@ attributes:
     - VirtualComponent
     range: VirtualRelationEnum
     required: true
+  functions:
+    name: functions
+    description: The function of the virtual component,  which can be used to identify
+      the component across different source systems.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:virtual_function
+    rank: 1000
+    alias: functions
+    owner: VirtualComponent
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: VirtualFunctionEnum
+    required: true
+    multivalued: true
   FloorP:
     name: FloorP
     description: A mixin for floor plan parameters that are aligned with PALS FloorP

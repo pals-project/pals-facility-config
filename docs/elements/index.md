@@ -162,7 +162,7 @@ Name: pals_config
 | [facility_functions](slots/facility_functions.md) | The function of the supporting facility component,  which can be used to identify the component across different source systems. |
 | [FloorP](slots/FloorP.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). |
 | [frequency](slots/frequency.md) | RF frequency. |
-| [functions](slots/functions.md) | The function of the physical component,  which can be used to identify the component across different source systems. |
+| [functions](slots/functions.md) | The function of the component,  which can be used to identify the component across different source systems. |
 | [g_actual](slots/g_actual.md) | Actual bend strength = 1/radius_actual |
 | [g_ref](slots/g_ref.md) | Reference bend strength = 1/radius_ref |
 | [h1](slots/h1.md) | Entrance end pole face curvature |
@@ -224,8 +224,6 @@ Name: pals_config
 | [signal_bindings](slots/signal_bindings.md) | A list of signal bindings in the accelerator system (Component <-> Signal relationships). |
 | [signal_role](slots/signal_role.md) | The role of the signal in the control system, such as setpoint, readback, status, command, or limit. |
 | [signals](slots/signals.md) | A list of signals in the accelerator system. |
-| [slot_usage](slots/slot_usage.md) | JsonObj(description='Detailed description of the temporal coverage.') |
-| [slots](slots/slots.md) |  |
 | [SolenoidP](slots/SolenoidP.md) | A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). |
 | [source_system](slots/source_system.md) | The source system from which the signal originates, such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service. |
 | [species_ref](slots/species_ref.md) | A reference to a species or particle type, such as an ion, electron, or proton. |

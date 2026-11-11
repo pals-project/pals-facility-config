@@ -35,7 +35,7 @@ Alias: end_date
 
 | Property | Value |
 | --- | --- |
-| Range | [String](../types/String.md) |
+| Range | [Iso8601Datetime](../types/Iso8601Datetime.md) |
 | Domain Of | [TemporalCoverageClass](../classes/TemporalCoverageClass.md) |
 
 ### Cardinality and Requirements
@@ -47,13 +47,6 @@ Alias: end_date
 | Property | Value |
 | --- | --- |
 | Owner | [TemporalCoverageClass](../classes/TemporalCoverageClass.md) |
-
-
-### Value Constraints
-
-| Property | Value |
-| --- | --- |
-| Regex Pattern | `iso8601_datetime` |
 
 
 
@@ -109,8 +102,7 @@ alias: end_date
 owner: TemporalCoverageClass
 domain_of:
 - TemporalCoverageClass
-range: string
-pattern: iso8601_datetime
+range: iso8601_datetime
 
 ```
 </details>

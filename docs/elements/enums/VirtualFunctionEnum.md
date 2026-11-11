@@ -21,6 +21,12 @@ URI: [pals_config:enum/VirtualFunctionEnum](https://w3id.org/pals-config/enum/Vi
 
 
 
+## Slots
+
+| Name | Description |
+| ---  | --- |
+| [functions](../slots/functions.md) | The function of the virtual component,  which can be used to identify the component across different source systems. |
+
 
 
 

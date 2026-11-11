@@ -32,10 +32,10 @@ BeamLine {
     integer repeat  
     string id  
     stringList alias  
+    VirtualFunctionEnumList functions  
     string kind  
     stringList native_types  
     VirtualRelationEnum beamline_relation  
-    VirtualFunctionEnumList functions  
 }
 ChangeLogEntryClass {
     isodate change_date  
@@ -90,10 +90,9 @@ SignalBinding {
     string predicate  
 }
 TemporalCoverageClass {
-    string end_date  
-    string slot_usage  
-    string slots  
-    string start_date  
+    string description  
+    iso8601_datetime end_date  
+    iso8601_datetime start_date  
 }
 
 Affiliation ||--}o Identifier : "identifiers"
@@ -489,6 +488,7 @@ attributes:
     owner: PALSAccelerator
     domain_of:
     - PALSAccelerator
+    - TemporalCoverageClass
     - MetaParamGroup
     - BeamLine
     range: string

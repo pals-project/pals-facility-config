@@ -23,10 +23,9 @@ URI: [pals_config:class/TemporalCoverageClass](https://w3id.org/pals-config/clas
 ```mermaid
 erDiagram
 TemporalCoverageClass {
-    string end_date  
-    string slot_usage  
-    string slots  
-    string start_date  
+    string description  
+    iso8601_datetime end_date  
+    iso8601_datetime start_date  
 }
 
 
@@ -41,10 +40,9 @@ TemporalCoverageClass {
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [start_date](../slots/start_date.md) | 0..1 <br/> [String](../types/String.md) | Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). | direct |
-| [end_date](../slots/end_date.md) | 0..1 <br/> [String](../types/String.md) | End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). | direct |
-| [slots](../slots/slots.md) | 0..1 <br/> [String](../types/String.md) |  | direct |
-| [slot_usage](../slots/slot_usage.md) | 0..1 <br/> [String](../types/String.md) | JsonObj(description='Detailed description of the temporal coverage.') | direct |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) | Detailed description of the temporal coverage. | direct |
+| [start_date](../slots/start_date.md) | 0..1 <br/> [Iso8601Datetime](../types/Iso8601Datetime.md) | Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). | direct |
+| [end_date](../slots/end_date.md) | 0..1 <br/> [Iso8601Datetime](../types/Iso8601Datetime.md) | End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). | direct |
 
 
 
@@ -109,6 +107,12 @@ description: "Temporal coverage for time-based datasets, if applicable.\n  Conta
   \ time period.\n  This may not apply to simulations where temporal coverage of a\
   \ specific facility during a specific time is not relevant."
 from_schema: https://w3id.org/pals-config
+slots:
+- description
+slot_usage:
+  description:
+    name: description
+    description: Detailed description of the temporal coverage.
 attributes:
   start_date:
     name: start_date
@@ -122,8 +126,7 @@ attributes:
     rank: 1000
     domain_of:
     - TemporalCoverageClass
-    range: string
-    pattern: iso8601_datetime
+    range: iso8601_datetime
   end_date:
     name: end_date
     description: End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm
@@ -136,23 +139,7 @@ attributes:
     rank: 1000
     domain_of:
     - TemporalCoverageClass
-    range: string
-    pattern: iso8601_datetime
-  slots:
-    name: slots
-    id_prefixes:
-    - description
-    from_schema: https://w3id.org/pals-config
-    rank: 1000
-    domain_of:
-    - TemporalCoverageClass
-  slot_usage:
-    name: slot_usage
-    description: JsonObj(description='Detailed description of the temporal coverage.')
-    from_schema: https://w3id.org/pals-config
-    rank: 1000
-    domain_of:
-    - TemporalCoverageClass
+    range: iso8601_datetime
 
 ```
 </details>
@@ -169,6 +156,10 @@ description: "Temporal coverage for time-based datasets, if applicable.\n  Conta
   \ time period.\n  This may not apply to simulations where temporal coverage of a\
   \ specific facility during a specific time is not relevant."
 from_schema: https://w3id.org/pals-config
+slot_usage:
+  description:
+    name: description
+    description: Detailed description of the temporal coverage.
 attributes:
   start_date:
     name: start_date
@@ -184,8 +175,7 @@ attributes:
     owner: TemporalCoverageClass
     domain_of:
     - TemporalCoverageClass
-    range: string
-    pattern: iso8601_datetime
+    range: iso8601_datetime
   end_date:
     name: end_date
     description: End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm
@@ -200,28 +190,19 @@ attributes:
     owner: TemporalCoverageClass
     domain_of:
     - TemporalCoverageClass
-    range: string
-    pattern: iso8601_datetime
-  slots:
-    name: slots
-    id_prefixes:
-    - description
+    range: iso8601_datetime
+  description:
+    name: description
+    description: Detailed description of the temporal coverage.
     from_schema: https://w3id.org/pals-config
     rank: 1000
-    alias: slots
+    alias: description
     owner: TemporalCoverageClass
     domain_of:
+    - PALSAccelerator
     - TemporalCoverageClass
-    range: string
-  slot_usage:
-    name: slot_usage
-    description: JsonObj(description='Detailed description of the temporal coverage.')
-    from_schema: https://w3id.org/pals-config
-    rank: 1000
-    alias: slot_usage
-    owner: TemporalCoverageClass
-    domain_of:
-    - TemporalCoverageClass
+    - MetaParamGroup
+    - BeamLine
     range: string
 
 ```
