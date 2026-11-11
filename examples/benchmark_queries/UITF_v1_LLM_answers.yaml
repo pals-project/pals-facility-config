@@ -111,7 +111,7 @@
 
     Both relationships have the context **containment**.'
 - Q: What components are contained within the GUN_thru_MV section?
-  Ans: RF_LASER, VIPK101, S_IS_20CM, IPMK101
+  Ans: RF_LASER, VIPK101, S_IS_20CM, IPMK101, VBVM101, VIPM101B
   LLM_Ans: 'The **GUN_thru_MV** section contains these six components:
 
 
