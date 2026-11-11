@@ -63,13 +63,13 @@ types:
     uri: xsd:dateTime
     base: str
     description: >-
-      Strict ISO 8601 date-time string allowing optional milliseconds and timezones, 
-      e.g., 2024-06-05T14:30:00Z+05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset +05:00 (America/New_York).
+      Strict ISO 8601 date-time string allowing optional fractional seconds and timezones, 
+      e.g., 2024-06-05T14:30:00-05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset -05:00 (America/New_York).
     pattern: '^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?$'
 
   isodate:
     typeof: string
-    uri: xsd:dateTime
+    uri: xsd:date
     base: str
     description: >-
       Strict ISO 8601 date string (YYYY-MM-DD).
@@ -242,7 +242,7 @@ classes:
         description: >-
           Temporal coverage for time-based datasets, if applicable.
           Container for elements describing the start_date and end_date of the data instance's temporal coverage 
-          in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00).
+          in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00-05:00).
           Use temporal_coverage when the dataset describes a specific historical or projected time period.
           This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant.
         related_mappings:
@@ -292,20 +292,20 @@ classes:
     description: >-
       Temporal coverage for time-based datasets, if applicable.
         Container for elements describing the start_date and end_date of the data instance's temporal coverage 
-        in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00).
+        in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SS±hh:mm for offset (e.g., 2024-06-05T14:30:00-04:00) or YYYY-MM-DDTHH:MM:SSZ for UTC (e.g., 2024-06-05T14:30:00Z).
         Use temporal_coverage when the dataset describes a specific historical or projected time period.
         This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant.
     attributes:
       start_date:
         range: iso8601_datetime
-        description: "Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm )."
+        description: "Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC)."
         related_mappings:
           - schema:temporalCoverage
         narrow_mappings:
           - dcterms:date
       end_date:
         range: iso8601_datetime
-        description: "End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm )."
+        description: "End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC)."
         related_mappings:
           - schema:temporalCoverage
         narrow_mappings:

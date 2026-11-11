@@ -3,7 +3,7 @@
 
 
 
-_Strict ISO 8601 date-time string allowing optional milliseconds and timezones,  e.g., 2024-06-05T14:30:00Z+05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset +05:00 (America/New_York)._
+_Strict ISO 8601 date-time string allowing optional fractional seconds and timezones,  e.g., 2024-06-05T14:30:00-05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset -05:00 (America/New_York)._
 
 
 

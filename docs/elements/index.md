@@ -93,7 +93,7 @@ Name: pals_config
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[RFParamGroup](classes/RFParamGroup.md) | Mixin for RF parameters, which can be used to describe the RF properties of an accelerator element. This mixin is aligned with PALS RFP for interoperability with the Particle Accelerator Language Standard (PALS). |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SolenoidParamGroup](classes/SolenoidParamGroup.md) | Mixin for solenoid-specific parameters. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TwissParamGroup](classes/TwissParamGroup.md) | Mixin for Twiss parameters, which can be used to describe the beam optics of an accelerator element. |
-| [TemporalCoverageClass](classes/TemporalCoverageClass.md) | Temporal coverage for time-based datasets, if applicable.<br>  Container for elements describing the start_date and end_date of the data instance's temporal coverage <br>  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00).<br>  Use temporal_coverage when the dataset describes a specific historical or projected time period.<br>  This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant. |
+| [TemporalCoverageClass](classes/TemporalCoverageClass.md) | Temporal coverage for time-based datasets, if applicable.<br>  Container for elements describing the start_date and end_date of the data instance's temporal coverage <br>  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SS±hh:mm for offset (e.g., 2024-06-05T14:30:00-04:00) or YYYY-MM-DDTHH:MM:SSZ for UTC (e.g., 2024-06-05T14:30:00Z).<br>  Use temporal_coverage when the dataset describes a specific historical or projected time period.<br>  This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant. |
 
 
 
@@ -150,7 +150,7 @@ Name: pals_config
 | [ElectricMultipoleP](slots/ElectricMultipoleP.md) | A mixin for electric multipole parameters that are aligned with PALS ElectricMultipoleP (Electric Multipole Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). |
 | [email](slots/email.md) | The email address of the author. |
 | [En](slots/En.md) | Normal component of the field. |
-| [end_date](slots/end_date.md) | End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). |
+| [end_date](slots/end_date.md) | End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC). |
 | [EnL](slots/EnL.md) | Length-integrated normal component. |
 | [Es](slots/Es.md) | Skew component of the field. |
 | [EsL](slots/EsL.md) | Length-integrated skew component. |
@@ -227,10 +227,10 @@ Name: pals_config
 | [SolenoidP](slots/SolenoidP.md) | A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). |
 | [source_system](slots/source_system.md) | The source system from which the signal originates, such as EPICS, PALS-Ext, MYA, an element database, a channel database, or a simulation service. |
 | [species_ref](slots/species_ref.md) | A reference to a species or particle type, such as an ion, electron, or proton. |
-| [start_date](slots/start_date.md) | Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). |
+| [start_date](slots/start_date.md) | Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC). |
 | [subject](slots/subject.md) |  |
 | [summary](slots/summary.md) | A brief summary of the change. |
-| [temporal_coverage](slots/temporal_coverage.md) | Temporal coverage for time-based datasets, if applicable. Container for elements describing the start_date and end_date of the data instance's temporal coverage  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00). Use temporal_coverage when the dataset describes a specific historical or projected time period. This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant. |
+| [temporal_coverage](slots/temporal_coverage.md) | Temporal coverage for time-based datasets, if applicable. Container for elements describing the start_date and end_date of the data instance's temporal coverage  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00-05:00). Use temporal_coverage when the dataset describes a specific historical or projected time period. This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant. |
 | [theta](slots/theta.md) | Orientation angle around the Y-axis in the facility floor plan. |
 | [theta_coord](slots/theta_coord.md) | The angular coordinate in cylindrical coordinates (in radians). |
 | [tilt](slots/tilt.md) | Tilt of the Nth multipole. |
@@ -298,7 +298,7 @@ Name: pals_config
 | [Double](types/Double.md) | A real number that conforms to the xsd:double specification |
 | [Float](types/Float.md) | A real number that conforms to the xsd:float specification |
 | [Integer](types/Integer.md) | An integer |
-| [Iso8601Datetime](types/Iso8601Datetime.md) | Strict ISO 8601 date-time string allowing optional milliseconds and timezones,  e.g., 2024-06-05T14:30:00Z+05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset +05:00 (America/New_York). |
+| [Iso8601Datetime](types/Iso8601Datetime.md) | Strict ISO 8601 date-time string allowing optional fractional seconds and timezones,  e.g., 2024-06-05T14:30:00-05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset -05:00 (America/New_York). |
 | [Isodate](types/Isodate.md) | Strict ISO 8601 date string (YYYY-MM-DD). e.g., 2024-06-05 for June 5th, 2024. |
 | [Jsonpath](types/Jsonpath.md) | A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form. |
 | [Jsonpointer](types/Jsonpointer.md) | A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form. |

@@ -7,7 +7,7 @@ _Strict ISO 8601 date string (YYYY-MM-DD). e.g., 2024-06-05 for June 5th, 2024._
 
 
 
-URI: [xsd:dateTime](http://www.w3.org/2001/XMLSchema#dateTime)
+URI: [xsd:date](http://www.w3.org/2001/XMLSchema#date)
 
 ## Type Properties
 
@@ -15,7 +15,7 @@ URI: [xsd:dateTime](http://www.w3.org/2001/XMLSchema#dateTime)
 | --- | --- |
 | Type Of | [String](../types/String.md) |
 | Base | `str` |
-| Type URI | [xsd:dateTime](http://www.w3.org/2001/XMLSchema#dateTime) |
+| Type URI | [xsd:date](http://www.w3.org/2001/XMLSchema#date) |
 ## Value Constraints
 
 | Property | Value |
@@ -49,7 +49,7 @@ URI: [xsd:dateTime](http://www.w3.org/2001/XMLSchema#dateTime)
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | xsd:dateTime |
+| self | xsd:date |
 | native | pals_config:isodate |
 
 

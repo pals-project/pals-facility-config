@@ -7,7 +7,7 @@ _Temporal coverage for time-based datasets, if applicable._
 
 _  Container for elements describing the start_date and end_date of the data instance's temporal coverage _
 
-_  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00)._
+_  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SS±hh:mm for offset (e.g., 2024-06-05T14:30:00-04:00) or YYYY-MM-DDTHH:MM:SSZ for UTC (e.g., 2024-06-05T14:30:00Z)._
 
 _  Use temporal_coverage when the dataset describes a specific historical or projected time period._
 
@@ -41,8 +41,8 @@ TemporalCoverageClass {
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) | Detailed description of the temporal coverage. | direct |
-| [start_date](../slots/start_date.md) | 0..1 <br/> [Iso8601Datetime](../types/Iso8601Datetime.md) | Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). | direct |
-| [end_date](../slots/end_date.md) | 0..1 <br/> [Iso8601Datetime](../types/Iso8601Datetime.md) | End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm ). | direct |
+| [start_date](../slots/start_date.md) | 0..1 <br/> [Iso8601Datetime](../types/Iso8601Datetime.md) | Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC). | direct |
+| [end_date](../slots/end_date.md) | 0..1 <br/> [Iso8601Datetime](../types/Iso8601Datetime.md) | End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC). | direct |
 
 
 
@@ -102,7 +102,8 @@ TemporalCoverageClass {
 name: TemporalCoverageClass
 description: "Temporal coverage for time-based datasets, if applicable.\n  Container\
   \ for elements describing the start_date and end_date of the data instance's temporal\
-  \ coverage \n  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00).\n\
+  \ coverage \n  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SS±hh:mm for offset\
+  \ (e.g., 2024-06-05T14:30:00-04:00) or YYYY-MM-DDTHH:MM:SSZ for UTC (e.g., 2024-06-05T14:30:00Z).\n\
   \  Use temporal_coverage when the dataset describes a specific historical or projected\
   \ time period.\n  This may not apply to simulations where temporal coverage of a\
   \ specific facility during a specific time is not relevant."
@@ -117,7 +118,7 @@ attributes:
   start_date:
     name: start_date
     description: Start date of the dataset's temporal coverage in ISO 8601 format
-      (YYYY-MM-DDTHH:MM:SSZ±hh:mm ).
+      (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC).
     from_schema: https://w3id.org/pals-config
     related_mappings:
     - schema:temporalCoverage
@@ -129,8 +130,8 @@ attributes:
     range: iso8601_datetime
   end_date:
     name: end_date
-    description: End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm
-      ).
+    description: End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm
+      for offset or YYYY-MM-DDTHH:MM:SSZ for UTC).
     from_schema: https://w3id.org/pals-config
     related_mappings:
     - schema:temporalCoverage
@@ -151,7 +152,8 @@ attributes:
 name: TemporalCoverageClass
 description: "Temporal coverage for time-based datasets, if applicable.\n  Container\
   \ for elements describing the start_date and end_date of the data instance's temporal\
-  \ coverage \n  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SSZ±hh:mm (e.g., 2024-06-05T14:30:00Z+05:00).\n\
+  \ coverage \n  in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SS±hh:mm for offset\
+  \ (e.g., 2024-06-05T14:30:00-04:00) or YYYY-MM-DDTHH:MM:SSZ for UTC (e.g., 2024-06-05T14:30:00Z).\n\
   \  Use temporal_coverage when the dataset describes a specific historical or projected\
   \ time period.\n  This may not apply to simulations where temporal coverage of a\
   \ specific facility during a specific time is not relevant."
@@ -164,7 +166,7 @@ attributes:
   start_date:
     name: start_date
     description: Start date of the dataset's temporal coverage in ISO 8601 format
-      (YYYY-MM-DDTHH:MM:SSZ±hh:mm ).
+      (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC).
     from_schema: https://w3id.org/pals-config
     related_mappings:
     - schema:temporalCoverage
@@ -178,8 +180,8 @@ attributes:
     range: iso8601_datetime
   end_date:
     name: end_date
-    description: End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ±hh:mm
-      ).
+    description: End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm
+      for offset or YYYY-MM-DDTHH:MM:SSZ for UTC).
     from_schema: https://w3id.org/pals-config
     related_mappings:
     - schema:temporalCoverage
