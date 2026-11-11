@@ -1,5 +1,5 @@
 description: PALS-NARAD representation of a validated subset of the Jefferson Lab
-  UITF injector beamline, ported from a prior instance format to conform to the accelerator_core
+  UITF injector beamline, ported from a prior instance format to conform to the PALS facility configuration
   LinkML schema.
 kind: PALSAccelerator
 version: 0.0.1
