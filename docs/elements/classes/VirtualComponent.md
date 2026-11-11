@@ -35,8 +35,8 @@ MetaParamGroup {
     string id  
 }
 VirtualComponent {
-    VirtualFunctionEnumList functions  
     VirtualRelationEnum beamline_relation  
+    VirtualFunctionEnumList functions  
     string id  
     stringList alias  
     string kind  
@@ -138,6 +138,7 @@ mixins:
 - HasFloorP
 slots:
 - functions
+- beamline_relation
 slot_usage:
   functions:
     name: functions
@@ -148,17 +149,12 @@ slot_usage:
     range: VirtualFunctionEnum
     required: true
     multivalued: true
-attributes:
   beamline_relation:
     name: beamline_relation
     description: The relationship of the virtual component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_beamline_relation
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: VirtualRelationEnum
     required: true
 
@@ -192,21 +188,15 @@ slot_usage:
     range: VirtualFunctionEnum
     required: true
     multivalued: true
-attributes:
   beamline_relation:
     name: beamline_relation
     description: The relationship of the virtual component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_beamline_relation
-    alias: beamline_relation
-    owner: VirtualComponent
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: VirtualRelationEnum
     required: true
+attributes:
   functions:
     name: functions
     description: The function of the virtual component,  which can be used to identify
@@ -223,6 +213,21 @@ attributes:
     range: VirtualFunctionEnum
     required: true
     multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the virtual component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:virtual_beamline_relation
+    rank: 1000
+    alias: beamline_relation
+    owner: VirtualComponent
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: VirtualRelationEnum
+    required: true
   FloorP:
     name: FloorP
     description: A mixin for floor plan parameters that are aligned with PALS FloorP

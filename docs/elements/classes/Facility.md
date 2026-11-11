@@ -23,10 +23,10 @@ BeamLine {
     integer repeat  
     string id  
     stringList alias  
+    VirtualRelationEnum beamline_relation  
     VirtualFunctionEnumList functions  
     string kind  
     stringList native_types  
-    VirtualRelationEnum beamline_relation  
 }
 Component {
     stringList native_types  

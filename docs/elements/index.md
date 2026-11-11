@@ -111,7 +111,7 @@ Name: pals_config
 | [archive_identifier](slots/archive_identifier.md) | The identifier used to reference the signal in an archival system. |
 | [authors](slots/authors.md) | Contains the authorship information for this representation of an accelerator facility and its operations. |
 | [beamline_context](slots/beamline_context.md) | The specific BeamLine this relationship is defined with respect to (relevant when context=beamline_order). Only an edge-property slot for edges that are defined with respect to a specific BeamLine. |
-| [beamline_relation](slots/beamline_relation.md) | The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems. |
+| [beamline_relation](slots/beamline_relation.md) | The relationship of the component to the beamline,  which can be used to identify the component across different source systems. |
 | [beamlines](slots/beamlines.md) | A list of beamlines in the accelerator system. |
 | [bend_field_actual](slots/bend_field_actual.md) | Actual bend field. |
 | [bend_field_ref](slots/bend_field_ref.md) | Reference bend field. |

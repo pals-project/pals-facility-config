@@ -3,6 +3,11 @@
 # Slot: beamline_relation 
 
 
+_The relationship of the component to the beamline,  which can be used to identify the component across different source systems._
+
+
+
+
 
 URI: [pals_config:slot/beamline_relation](https://w3id.org/pals-config/slot/beamline_relation)
 Alias: beamline_relation
@@ -33,10 +38,10 @@ Alias: beamline_relation
 | [BeginningEle](../classes/BeginningEle.md) | Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference parameters; otherwise it is expected to be the first element in the branch. |  no  |
 | [BeamLineSection](../classes/BeamLineSection.md) | A virtual component used to represent a section of the BeamLine for organizational or functional grouping of components. |  no  |
 | [BookkeepingComponent](../classes/BookkeepingComponent.md) | A virtual component that represents a bookkeeping or organizational role in the accelerator system,  such as a BeamLineSection, Marker or a Fork. These can include BeamLineSections, Markers, Forks, and other virtual components that are important for understanding  the structure and function of the accelerator system but are not physical devices. |  no  |
-| [PhysicalComponent](../classes/PhysicalComponent.md) | A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system. |  no  |
+| [PhysicalComponent](../classes/PhysicalComponent.md) | A physical item that participates in or supports accelerator operation.  This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks that are important for understanding the structure and function of the accelerator system. |  yes  |
 | [Bend](../classes/Bend.md) | Dipole magnet used to bend the beam. 2 poles. The major difference between this element and other physical elements is that with a Bend  the curvilinear coordinate system is an arc with finite curvature  and for the other elements the curvilinear coordinate system is straight. |  no  |
 | [BeamProfileMonitor](../classes/BeamProfileMonitor.md) | A diagnostic device used to measure transverse beam profile. |  no  |
-| [VirtualComponent](../classes/VirtualComponent.md) | A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices. |  no  |
+| [VirtualComponent](../classes/VirtualComponent.md) | A virtual or logical component that represents a concept, function, or role in the accelerator  beamline operation but does not have a physical instantiation.  This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces that are important for understanding the structure and function of the accelerator system but are not physical devices. |  yes  |
 | [RFCavity](../classes/RFCavity.md) | A cavity used for RF acceleration or longitudinal manipulation. |  no  |
 | [BeamLine](../classes/BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam path. |  no  |
 | [Magnet](../classes/Magnet.md) | An accelerator device that produces a magnetic field for beam control. |  no  |
@@ -64,6 +69,7 @@ Alias: beamline_relation
 
 | Property | Value |
 | --- | --- |
+| Required | Yes |
 
 
 
@@ -77,6 +83,13 @@ Alias: beamline_relation
 ## Identifier and Mapping Information
 
 
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -96,11 +109,16 @@ Alias: beamline_relation
 <details>
 ```yaml
 name: beamline_relation
+description: The relationship of the component to the beamline,  which can be used
+  to identify the component across different source systems.
+from_schema: https://w3id.org/pals-config
+rank: 1000
 alias: beamline_relation
 domain_of:
 - PhysicalComponent
 - VirtualComponent
 range: string
+required: true
 
 ```
 </details>

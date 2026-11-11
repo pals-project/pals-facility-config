@@ -28,10 +28,10 @@ BeamLine {
     integer repeat  
     string id  
     stringList alias  
+    VirtualRelationEnum beamline_relation  
     VirtualFunctionEnumList functions  
     string kind  
     stringList native_types  
-    VirtualRelationEnum beamline_relation  
 }
 FloorParamGroup {
     float phi  
@@ -333,6 +333,7 @@ attributes:
     from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_beamline_relation
+    rank: 1000
     alias: beamline_relation
     owner: BeamLine
     domain_of:

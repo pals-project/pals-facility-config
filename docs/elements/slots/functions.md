@@ -69,7 +69,6 @@ Alias: functions
 
 | Property | Value |
 | --- | --- |
-| Multivalued | Yes |
 
 
 
@@ -119,7 +118,6 @@ domain_of:
 - VirtualComponent
 range: string
 required: false
-multivalued: true
 
 ```
 </details>

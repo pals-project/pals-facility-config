@@ -46,7 +46,7 @@ Alias: version
 
 | Property | Value |
 | --- | --- |
-| If Absent | `("0.0.0")` |
+| If Absent | `(0.0.0)` |
 | Owner | [PALSAccelerator](../classes/PALSAccelerator.md) |
 
 
@@ -99,7 +99,7 @@ name: version
 description: Version of the representation of a particle accelerator and its operations.
 from_schema: https://w3id.org/pals-config
 rank: 1000
-ifabsent: ("0.0.0")
+ifabsent: (0.0.0)
 alias: version
 owner: PALSAccelerator
 domain_of:

@@ -32,10 +32,10 @@ BeamLine {
     integer repeat  
     string id  
     stringList alias  
+    VirtualRelationEnum beamline_relation  
     VirtualFunctionEnumList functions  
     string kind  
     stringList native_types  
-    VirtualRelationEnum beamline_relation  
 }
 ChangeLogEntryClass {
     isodate change_date  
@@ -208,7 +208,7 @@ attributes:
     description: Version of the representation of a particle accelerator and its operations.
     from_schema: https://w3id.org/pals-config
     rank: 1000
-    ifabsent: ("0.0.0")
+    ifabsent: (0.0.0)
     domain_of:
     - PALSAccelerator
     range: string
@@ -222,7 +222,7 @@ attributes:
       configuration schema being used.
     from_schema: https://w3id.org/pals-config
     rank: 1000
-    ifabsent: ("0.0.1")
+    ifabsent: (0.0.1)
     domain_of:
     - PALSAccelerator
     range: string
@@ -335,7 +335,7 @@ attributes:
     description: Version of the representation of a particle accelerator and its operations.
     from_schema: https://w3id.org/pals-config
     rank: 1000
-    ifabsent: ("0.0.0")
+    ifabsent: (0.0.0)
     alias: version
     owner: PALSAccelerator
     domain_of:
@@ -351,7 +351,7 @@ attributes:
       configuration schema being used.
     from_schema: https://w3id.org/pals-config
     rank: 1000
-    ifabsent: ("0.0.1")
+    ifabsent: (0.0.1)
     alias: schema_version
     owner: PALSAccelerator
     domain_of:

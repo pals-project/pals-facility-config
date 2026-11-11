@@ -157,6 +157,7 @@ mixins:
 - HasLongitudinalPlacementP
 slots:
 - functions
+- beamline_relation
 slot_usage:
   functions:
     name: functions
@@ -167,18 +168,12 @@ slot_usage:
     range: PhysicalFunctionEnum
     required: false
     multivalued: true
-attributes:
   beamline_relation:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_beamline_relation
-    rank: 1000
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: PhysicalRelationEnum
     required: true
 
@@ -211,22 +206,15 @@ slot_usage:
     range: PhysicalFunctionEnum
     required: false
     multivalued: true
-attributes:
   beamline_relation:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_beamline_relation
-    rank: 1000
-    alias: beamline_relation
-    owner: PhysicalComponent
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: PhysicalRelationEnum
     required: true
+attributes:
   functions:
     name: functions
     description: The function of the physical component,  which can be used to identify
@@ -243,6 +231,21 @@ attributes:
     range: PhysicalFunctionEnum
     required: false
     multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the physical component to the beamline,  which
+      can be used to identify the component across different source systems.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:physical_beamline_relation
+    rank: 1000
+    alias: beamline_relation
+    owner: PhysicalComponent
+    domain_of:
+    - PhysicalComponent
+    - VirtualComponent
+    range: PhysicalRelationEnum
+    required: true
   FloorP:
     name: FloorP
     description: A mixin for floor plan parameters that are aligned with PALS FloorP

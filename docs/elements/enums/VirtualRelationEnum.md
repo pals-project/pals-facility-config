@@ -19,6 +19,12 @@ URI: [pals_config:enum/VirtualRelationEnum](https://w3id.org/pals-config/enum/Vi
 
 
 
+## Slots
+
+| Name | Description |
+| ---  | --- |
+| [beamline_relation](../slots/beamline_relation.md) | The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems. |
+
 
 
 
