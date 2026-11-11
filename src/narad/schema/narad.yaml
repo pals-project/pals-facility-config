@@ -60,6 +60,8 @@ imports:
 types:
   iso8601_datetime:
     typeof: string
+    uri: xsd:dateTime
+    base: str
     description: >-
       Strict ISO 8601 date-time string allowing optional milliseconds and timezones, 
       e.g., 2024-06-05T14:30:00Z+05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset +05:00 (America/New_York).
@@ -67,6 +69,8 @@ types:
 
   isodate:
     typeof: string
+    uri: xsd:dateTime
+    base: str
     description: >-
       Strict ISO 8601 date string (YYYY-MM-DD).
       e.g., 2024-06-05 for June 5th, 2024.
@@ -116,6 +120,18 @@ slots:
 
   object:
     slot_uri: rdf:object
+    required: true
+  
+  functions:
+    description: >-
+      The function of the component, 
+      which can be used to identify the component across different source systems.
+    required: false
+  
+  beamline_relation:
+    description: >-
+      The relationship of the component to the beamline, 
+      which can be used to identify the component across different source systems.
     required: true
   
   affiliation:
@@ -1338,12 +1354,15 @@ classes:
       A physical item that participates in or supports accelerator operation. 
       This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks
       that are important for understanding the structure and function of the accelerator system.
-    attributes:
+    slots:
+      - functions
+      - beamline_relation
+    slot_usage:
       functions:
         description: >-
           The function of the physical component, 
           which can be used to identify the component across different source systems.
-        required: false  # SupportingFacilityComponent uses facility_functions instead
+        required: false
         multivalued: true
         close_mappings:
           - pals:physical_function
@@ -1368,7 +1387,10 @@ classes:
       beamline operation but does not have a physical instantiation. 
       This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces
       that are important for understanding the structure and function of the accelerator system but are not physical devices.
-    attributes:
+    slots:
+      - functions
+      - beamline_relation
+    slot_usage:
       functions:
         description: >-
           The function of the virtual component, 
