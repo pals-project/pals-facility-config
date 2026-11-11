@@ -105,7 +105,6 @@ slots:
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix).
     slot_uri: rdf:type
     related_mappings:
-      - rdf:type
       - saref:DeviceKind
   
   subject:
@@ -1509,9 +1508,8 @@ classes:
       archive_identifier:
         description: The identifier used to reference the signal in an archival system.
         range: string
-    broad_mappings:
-      - sosa:Sensor
-      - sosa:Actuator
+    related_mappings:
+      - saref:Property
 
   #---- Subclass component classes ------------------------------------------------
   Magnet:
@@ -1569,7 +1567,7 @@ classes:
       Only one of the electric or magnetic multipole components should be present, not both.
     is_a: Multipole
     exact_mappings:
-      - pals_elementkinds:s-quadrupole
+      - pals:Quadrupole
 
   Octupole:
     description: >-
@@ -1578,7 +1576,7 @@ classes:
       Only one of the electric or magnetic multipole components should be present, not both.
     is_a: Multipole
     exact_mappings:
-      - pals:s-octupole
+      - pals:Octupole
 
   Sextupole:
     description: >-
@@ -1611,14 +1609,13 @@ classes:
       - HCorrector
       - VCorrector
       - VDiagKicker
-      - HDiagKicker # DM: made this one up
+      - HDiagKicker
 
   ACKicker:
     description: >-
       An ACKicker element simulates a time-dependent kicker. 
       It is like a Kicker element except that the field varies in time. 
       This element requires a user supplied time-dependent expression.
-    # DM: what additional parameters/attributes/slots are needed for an ACKicker from a vanilla Kicker?
     is_a: Kicker
     exact_mappings:
       - pals:ACKicker
@@ -1684,7 +1681,7 @@ classes:
     description: A cavity used for transverse beam manipulation, such as crabbing or deflecting.
     is_a: Cavity
     exact_mappings:
-      - pals:CrabCavity # Question about this for PALS folks
+      - pals:CrabCavity
 
   RFCavity:
     description: A cavity used for RF acceleration or longitudinal manipulation.
@@ -1699,13 +1696,13 @@ classes:
     description: A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
     is_a: RFCavity
     broad_mappings:
-      - pals:RFCavity # DM: not in PALS
+      - pals:RFCavity
   
   SuperConductingRFCavity:
     description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
     is_a: RFCavity
     broad_mappings:
-      - pals:RFCavity # DM: not in PALS
+      - pals:RFCavity
   
   SupportingFacilityComponent:
     is_a: PhysicalComponent
@@ -1918,8 +1915,6 @@ classes:
     description: >-
       A relationship indicating that the subject component precedes the object component in a specified context, 
       such as along a beamline.
-    related_mappings:
-      - BFO:0000063
     slots:
       - beamline_context
     slot_usage:
@@ -1980,8 +1975,6 @@ classes:
         equals_string: Controls
     annotations:
       rdf_predicate: pals_config:controls
-    related_mappings:
-      - saref:targets#saref-controls
   
 
   IsPartOf:
@@ -2103,8 +2096,6 @@ classes:
     description: >-
       A relationship indicating that the subject component intersects the object component in a specified context, 
       such as a beamline and a diagnostic device.
-    related_mappings:
-      - RO:0015011
     slot_usage:
       predicate:
         description: >-
@@ -2338,26 +2329,22 @@ enums:
     permissible_values:
       Setpoint:
         description: Requested or configured value.
-        exact_mappings:
+        broad_mappings:
           - sosa:ActuatableProperty
       Readback:
         description: Measured or reported value.
-        exact_mappings:
+        broad_mappings:
           - sosa:ObservableProperty
       Status:
         description: State or condition indicator.
       Command:
         description: Command or action trigger.
-        exact_mappings:
+        broad_mappings:
           - sosa:ActuatableProperty
       MinimumLimit:
         description: Minimum allowed signal value.
-        exact_mappings:
-          - xsd:minInclusive
       MaximumLimit:
         description: Maximum allowed signal value.
-        exact_mappings:
-          - xsd:maxInclusive
       RangeLimit:
         description: A signal containing both upper and lower allowed limits.
 
@@ -2484,7 +2471,7 @@ enums:
           - unit:HZ
       kW:
         description: kilowatt
-        related_mappings:
+        exact_mappings:
           - unit:KiloW
       m:
         description: meter
@@ -2541,7 +2528,7 @@ enums:
       unitless:
         description: dimensionless numeric value
         exact_mappings:
-          - unit:NUM
+          - unit:UNITLESS
       none:
         description: no unit or not applicable
 

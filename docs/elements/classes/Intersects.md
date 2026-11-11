@@ -102,7 +102,6 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 | ---  | ---  |
 | self | pals_config:Intersects |
 | native | pals_config:Intersects |
-| related | RO:0015011 |
 
 
 
@@ -125,8 +124,6 @@ annotations:
 description: A relationship indicating that the subject component intersects the object
   component in a specified context,  such as a beamline and a diagnostic device.
 from_schema: https://w3id.org/pals-config
-related_mappings:
-- RO:0015011
 is_a: ComponentRelation
 slot_usage:
   predicate:
@@ -151,8 +148,6 @@ annotations:
 description: A relationship indicating that the subject component intersects the object
   component in a specified context,  such as a beamline and a diagnostic device.
 from_schema: https://w3id.org/pals-config
-related_mappings:
-- RO:0015011
 is_a: ComponentRelation
 slot_usage:
   predicate:

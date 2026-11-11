@@ -112,7 +112,7 @@ Alias: kind
 | ---  | ---  |
 | self | rdf:type |
 | native | pals_config:kind |
-| related | rdf:type, saref:DeviceKind |
+| related | saref:DeviceKind |
 
 
 
@@ -126,7 +126,6 @@ description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamP
   (no prefix).
 from_schema: https://w3id.org/pals-config
 related_mappings:
-- rdf:type
 - saref:DeviceKind
 rank: 1000
 slot_uri: rdf:type

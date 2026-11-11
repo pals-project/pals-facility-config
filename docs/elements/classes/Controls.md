@@ -102,7 +102,6 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 | ---  | ---  |
 | self | pals_config:Controls |
 | native | pals_config:Controls |
-| related | saref:targets#saref-controls |
 
 
 
@@ -125,8 +124,6 @@ annotations:
 description: A relationship indicating that the subject component controls the object
   component in a specified context,  such as a power supply controlling a magnet.
 from_schema: https://w3id.org/pals-config
-related_mappings:
-- saref:targets#saref-controls
 is_a: ComponentRelation
 slot_usage:
   predicate:
@@ -151,8 +148,6 @@ annotations:
 description: A relationship indicating that the subject component controls the object
   component in a specified context,  such as a power supply controlling a magnet.
 from_schema: https://w3id.org/pals-config
-related_mappings:
-- saref:targets#saref-controls
 is_a: ComponentRelation
 slot_usage:
   predicate:

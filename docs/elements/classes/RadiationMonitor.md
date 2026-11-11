@@ -284,7 +284,6 @@ attributes:
       (no prefix).
     from_schema: https://w3id.org/pals-config
     related_mappings:
-    - rdf:type
     - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type

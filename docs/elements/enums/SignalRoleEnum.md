@@ -66,12 +66,12 @@ permissible_values:
   Setpoint:
     text: Setpoint
     description: Requested or configured value.
-    exact_mappings:
+    broad_mappings:
     - sosa:ActuatableProperty
   Readback:
     text: Readback
     description: Measured or reported value.
-    exact_mappings:
+    broad_mappings:
     - sosa:ObservableProperty
   Status:
     text: Status
@@ -79,18 +79,14 @@ permissible_values:
   Command:
     text: Command
     description: Command or action trigger.
-    exact_mappings:
+    broad_mappings:
     - sosa:ActuatableProperty
   MinimumLimit:
     text: MinimumLimit
     description: Minimum allowed signal value.
-    exact_mappings:
-    - xsd:minInclusive
   MaximumLimit:
     text: MaximumLimit
     description: Maximum allowed signal value.
-    exact_mappings:
-    - xsd:maxInclusive
   RangeLimit:
     text: RangeLimit
     description: A signal containing both upper and lower allowed limits.

@@ -141,7 +141,6 @@ Precedes ||--|| Component : "object, subject"
 | ---  | ---  |
 | self | pals_config:Precedes |
 | native | pals_config:Precedes |
-| related | BFO:0000063 |
 
 
 
@@ -164,8 +163,6 @@ annotations:
 description: A relationship indicating that the subject component precedes the object
   component in a specified context,  such as along a beamline.
 from_schema: https://w3id.org/pals-config
-related_mappings:
-- BFO:0000063
 is_a: ComponentRelation
 slots:
 - beamline_context
@@ -210,8 +207,6 @@ annotations:
 description: A relationship indicating that the subject component precedes the object
   component in a specified context,  such as along a beamline.
 from_schema: https://w3id.org/pals-config
-related_mappings:
-- BFO:0000063
 is_a: ComponentRelation
 slot_usage:
   predicate:

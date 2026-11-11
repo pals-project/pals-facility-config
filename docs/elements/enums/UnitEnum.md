@@ -124,7 +124,7 @@ permissible_values:
   kW:
     text: kW
     description: kilowatt
-    related_mappings:
+    exact_mappings:
     - unit:KiloW
   m:
     text: m
@@ -193,7 +193,7 @@ permissible_values:
     text: unitless
     description: dimensionless numeric value
     exact_mappings:
-    - unit:NUM
+    - unit:UNITLESS
   none:
     text: none
     description: no unit or not applicable

@@ -176,7 +176,7 @@ Octupole ||--|o TwissParamGroup : "TwissP"
 | ---  | ---  |
 | self | pals_config:Octupole |
 | native | pals_config:Octupole |
-| exact | pals:s-octupole |
+| exact | pals:Octupole |
 
 
 
@@ -198,7 +198,7 @@ description: 'A magnet primarily used to focus or defocus the beam. 8 poles.
   both.'
 from_schema: https://w3id.org/pals-config
 exact_mappings:
-- pals:s-octupole
+- pals:Octupole
 is_a: Multipole
 
 ```
@@ -215,7 +215,7 @@ description: 'A magnet primarily used to focus or defocus the beam. 8 poles.
   both.'
 from_schema: https://w3id.org/pals-config
 exact_mappings:
-- pals:s-octupole
+- pals:Octupole
 is_a: Multipole
 attributes:
   ElectricMultipoleP:
@@ -389,7 +389,6 @@ attributes:
       (no prefix).
     from_schema: https://w3id.org/pals-config
     related_mappings:
-    - rdf:type
     - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
