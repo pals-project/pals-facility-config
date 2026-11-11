@@ -118,7 +118,7 @@ Signal ||--|o MetaParamGroup : "MetaP"
 | ---  | ---  |
 | self | pals_config:Signal |
 | native | pals_config:Signal |
-| broad | sosa:SOSASensor, sosa:SOSAActuator |
+| broad | sosa:Sensor, sosa:Actuator |
 
 
 
@@ -137,8 +137,8 @@ name: Signal
 description: Semantic meaning of a control-system signal associated with a component.
 from_schema: https://w3id.org/pals-config
 broad_mappings:
-- sosa:SOSASensor
-- sosa:SOSAActuator
+- sosa:Sensor
+- sosa:Actuator
 is_a: Node
 mixins:
 - HasMetaP
@@ -237,8 +237,8 @@ name: Signal
 description: Semantic meaning of a control-system signal associated with a component.
 from_schema: https://w3id.org/pals-config
 broad_mappings:
-- sosa:SOSASensor
-- sosa:SOSAActuator
+- sosa:Sensor
+- sosa:Actuator
 is_a: Node
 mixins:
 - HasMetaP

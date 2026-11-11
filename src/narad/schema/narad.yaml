@@ -1510,8 +1510,8 @@ classes:
         description: The identifier used to reference the signal in an archival system.
         range: string
     broad_mappings:
-      - sosa:SOSASensor
-      - sosa:SOSAActuator
+      - sosa:Sensor
+      - sosa:Actuator
 
   #---- Subclass component classes ------------------------------------------------
   Magnet:
@@ -2339,17 +2339,17 @@ enums:
       Setpoint:
         description: Requested or configured value.
         exact_mappings:
-          - sosa:SOSAActuatableProperty
+          - sosa:ActuatableProperty
       Readback:
         description: Measured or reported value.
         exact_mappings:
-          - sosa:SOSAObservableProperty
+          - sosa:ObservableProperty
       Status:
         description: State or condition indicator.
       Command:
         description: Command or action trigger.
         exact_mappings:
-          - sosa:SOSAActuatableProperty
+          - sosa:ActuatableProperty
       MinimumLimit:
         description: Minimum allowed signal value.
         exact_mappings:
@@ -2413,7 +2413,7 @@ enums:
       State:
         description: Device state or condition.
         exact_mappings:
-          - sosa:SOSAObservableProperty
+          - sosa:ObservableProperty
       ElectricCurrent:
         description: Electric current.
         exact_mappings:

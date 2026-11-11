@@ -67,12 +67,12 @@ permissible_values:
     text: Setpoint
     description: Requested or configured value.
     exact_mappings:
-    - sosa:SOSAActuatableProperty
+    - sosa:ActuatableProperty
   Readback:
     text: Readback
     description: Measured or reported value.
     exact_mappings:
-    - sosa:SOSAObservableProperty
+    - sosa:ObservableProperty
   Status:
     text: Status
     description: State or condition indicator.
@@ -80,7 +80,7 @@ permissible_values:
     text: Command
     description: Command or action trigger.
     exact_mappings:
-    - sosa:SOSAActuatableProperty
+    - sosa:ActuatableProperty
   MinimumLimit:
     text: MinimumLimit
     description: Minimum allowed signal value.

@@ -74,7 +74,7 @@ permissible_values:
     text: State
     description: Device state or condition.
     exact_mappings:
-    - sosa:SOSAObservableProperty
+    - sosa:ObservableProperty
   ElectricCurrent:
     text: ElectricCurrent
     description: Electric current.
