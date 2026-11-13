@@ -19,7 +19,7 @@ URI: [pals_config:enum/UnitEnum](https://w3id.org/pals-config/enum/UnitEnum)
 | eV_per_c2 | None | mass in electron volts per speed of light squared |
 | fundamental_charge | None | fundamental charge |
 | Gauss | None | gauss (magnetic flux density) |
-| G_per_cm | None | gauss per centimeter |
+| G_cm | None | gauss centimeter, a magnetic field integral. 1 G.cm = 1e-6 T.m |
 | Hz | None | hertz |
 | kW | None | kilowatt |
 | m | None | meter |
@@ -111,11 +111,11 @@ permissible_values:
   Gauss:
     text: Gauss
     description: gauss (magnetic flux density)
-    exact_mappings:
-    - unit:GAUSS
-  G_per_cm:
-    text: G_per_cm
-    description: gauss per centimeter
+  G_cm:
+    text: G_cm
+    description: gauss centimeter, a magnetic field integral. 1 G.cm = 1e-6 T.m
+    unit:
+      ucum_code: G.cm
   Hz:
     text: Hz
     description: hertz

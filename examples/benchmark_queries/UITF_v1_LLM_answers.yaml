@@ -1,0 +1,157 @@
+- Q: Give me the signals for the horizontal and vertical beam positions and status
+    at the first BPM
+  Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
+  LLM_Ans: 'The first BPM is **IPMK101** on the **KV beamline**.
+
+
+    Its requested readback signals are:
+
+
+    | Measurement | Signal | Unit | Description |
+
+    |---|---|---:|---|
+
+    | Horizontal beam position | `IPMK101.XPOS` | mm | Measured horizontal beam position
+    |
+
+    | Vertical beam position | `IPMK101.YPOS` | mm | Measured vertical beam position
+    |
+
+    | BPM status | `IPMK101.STAT` | — | Beam position monitor status readback |
+
+
+    There are also relative-position readbacks: `IPMK101XPRL` and `IPMK101YPRL`.'
+- Q: What's the status signal of MFHK101?
+  Ans: MFHK101.STAT
+  LLM_Ans: "The status signal for **MFHK101** is **`MFHK101.STAT`**.\n\n- **Role:**\
+    \ Readback  \n- **Canonical type:** Status  \n- **Quantity:** Device state  \n\
+    - **Unit:** None"
+- Q: What's the status signal of the second solenoid along the beamline?
+  Ans: MFBK202.STAT
+  LLM_Ans: 'The second solenoid along the beamline is **MFBK202**. Its status signal
+    is:
+
+
+    - **Signal:** `MFBK202.STAT`
+
+    - **Role:** Readback
+
+    - **Canonical type:** Status
+
+    - **Quantity:** State
+
+    - **Data type:** String
+
+    - **Description:** Power-supply or device state summary.'
+- Q: Give me the strength signals of all quadrupoles
+  Ans: MQWK202.BDL, MQWK203.BDL, MQJM501.BDL–504.BDL, MQJM603.BDL, MQJM604.BDL
+  LLM_Ans: 'Strength-related signals for all quadrupoles are:
+
+
+    | Quadrupole | Field setpoint | Current setpoint | Current readback | Current
+    limits |
+
+    |---|---|---|---|---|
+
+    | **MQJM501** | `MQJM501.BDL` (Gauss) | `MQJM501.S` (A) | `MQJM501M` (A) | `MQJM501.HMIN`,
+    `MQJM501.HMAX` (A) |
+
+    | **MQJM502** | `MQJM502.BDL` (Gauss) | `MQJM502.S` (A) | `MQJM502M` (A) | `MQJM502.HMIN`,
+    `MQJM502.HMAX` (A) |
+
+    | **MQJM503** | `MQJM503.BDL` (Gauss) | `MQJM503.S` (A) | `MQJM503M` (A) | `MQJM503.HMIN`,
+    `MQJM503.HMAX` (A) |
+
+    | **MQJM504** | `MQJM504.BDL` (Gauss) | `MQJM504.S` (A) | `MQJM504M` (A) | `MQJM504.HMIN`,
+    `MQJM504.HMAX` (A) |
+
+    | **MQJM603** | `MQJM603.BDL` (Gauss) | `MQJM603.S` (A) | `MQJM603M` (A) | `MQJM603.HMIN`,
+    `MQJM603.HMAX` (A) |
+
+    | **MQJM604** | `MQJM604.BDL` (Gauss) | `MQJM604.S` (A) | `MQJM604M` (A) | `MQJM604.HMIN`,
+    `MQJM604.HMAX` (A) |
+
+    | **MQWK202** | `MQWK202.BDL` (Gauss) | `MQWK202.S` (A) | `MQWK202M` (A) | `MQWK202.HMIN`,
+    `MQWK202.HMAX` (A) |
+
+    | **MQWK203** | `MQWK203.BDL` (Gauss) | `MQWK203.S` (A) | `MQWK203M` (A) | `MQWK203.HMIN`,
+    `MQWK203.HMAX` (A) |
+
+
+    `BDL` is the integrated magnetic-field-gradient setpoint; `S` is the magnet-current
+    setpoint.'
+- Q: Give me the name of the first viewer downstream of MBHK102V
+  Ans: ITVK201
+  LLM_Ans: The first viewer downstream of **MBHK102V** is **ITVK201**.
+- Q: Give me betax function at the first viewer downstream of MBHK102V
+  Ans: 4.60175 meters
+  LLM_Ans: 'The first viewer downstream of **MBHK102V** is **ITVK201**.
+
+
+    Its horizontal Twiss beta function (**βₓ / betax**) is:
+
+
+    **βₓ = 4.601746608248333 m**'
+- Q: horizontal beta function at the first viewer downstream of MBHK102V
+  Ans: 4.60175 meters
+  LLM_Ans: 'The first viewer downstream of **MBHK102V** is **ITVK201**. Its horizontal
+    beta function (`beta_a`) is:
+
+
+    **βₓ = 4.601746608 m**'
+- Q: What beamlines are part of the GUN_thru_MV section?
+  Ans: KV and MV
+  LLM_Ans: 'The beamlines that are part of **GUN_thru_MV** are:
+
+
+    - **KV**
+
+    - **MV**
+
+
+    Both relationships have the context **containment**.'
+- Q: What components are contained within the GUN_thru_MV section?
+  Ans: RF_LASER, VIPK101, S_IS_20CM, IPMK101, VBVM101, VIPM101B
+  LLM_Ans: 'The **GUN_thru_MV** section contains these six components:
+
+
+    - **S_IS_20CM** — Marker
+
+    - **VBVM101** — Beamline valve/supporting facility component
+
+    - **VIPK101** — UHV pump/supporting facility component
+
+    - **IPMK101** — Beam Position Monitor
+
+    - **RF_LASER** — Normal-conducting RF cavity
+
+    - **VIPM101B** — Ion pump/supporting facility component'
+- Q: What is the first component in the MV section?
+  Ans: VBVM101
+  LLM_Ans: The first component in the **MV section** is **RM11**, a **SuperConductingRFCavity**.
+- Q: What components are part of the MV section?
+  Ans: VBVM101, VIPM101B
+  LLM_Ans: "The **MV beamline section** contains **101 components**, in beamline order:\n\
+    \n1. VBVM101  \n2. VIPM101B  \n3. VQGM101  \n4. VIPM1011  \n5. RM12  \n6. VIPM1012\
+    \  \n7. VBVM201  \n8. VIPM201  \n9. IYGM201  \n10. IPMM201  \n11. MLHM201H  \n\
+    12. MLHM201V  \n13. VMVM301  \n14. VDPM301A  \n15. VIPM301A  \n16. VDPM301B  \n\
+    17. VIPM301B  \n18. VDPM301C  \n19. VMVM401  \n20. MLHM401H  \n21. MLHM401V  \n\
+    22. VFVM401  \n23. ILMM401  \n24. SBCM401  \n25. VIPM401  \n26. IYGM401  \n27.\
+    \ IFYM401  \n28. VBVM501  \n29. ICVM501  \n30. IPMM501  \n31. MLHM501H  \n32.\
+    \ MLHM501V  \n33. MQJM501  \n34. MLHM502H  \n35. MLHM502V  \n36. IPMM502  \n37.\
+    \ MQJM502  \n38. MLHM503H  \n39. MLHM503V  \n40. IPMM503  \n41. MQJM503  \n42.\
+    \ MLHM504H  \n43. MLHM504V  \n44. IPMM504  \n45. MQJM504  \n46. MBHM504AH  \n\
+    47. MBHM504AV  \n48. IPMM505  \n49. IYGM505  \n50. VIPM505  \n51. IHAM505  \n\
+    52. VBVM506  \n53. VGPM506  \n54. RHKM506  \n55. IYGM506  \n56. VIPM506  \n57.\
+    \ VBVM601  \n58. ILMM601  \n59. MLHM601AH  \n60. MLHM601AV  \n61. IPMM601  \n\
+    62. MDLM601  \n63. ITVM801  \n64. IFYM802  \n65. IYGM802  \n66. MBHM601BH  \n\
+    67. MBHM601BV  \n68. IHAM601  \n69. IYGM601  \n70. VIPM601  \n71. VBVM602  \n\
+    72. IPMM602  \n73. MBHM602H  \n74. MBHM602V  \n75. MBHM603H  \n76. MBHM603V  \n\
+    77. MQJM603  \n78. MBHM604H  \n79. MBHM604V  \n80. ILMM604U  \n81. ILMM604D  \n\
+    82. ILMM604L  \n83. ILMM604R  \n84. MFRM604V  \n85. MFRM604H  \n86. MQJM604  \n\
+    87. IPMM604  \n88. IYGM604  \n89. VIPM604  \n90. MBHM605H  \n91. MBHM605V  \n\
+    92. ILMM605  \n93. MBHM605AH  \n94. MBHM605AV  \n95. IHAM605  \n96. IYGM605  \n\
+    97. VIPM605  \n98. IFYM606  \n99. VCGM606  \n100. VIPM606  \n101. ITVM606  \n\n\
+    The section includes kickers, quadrupoles, beam-position and beam-profile monitors,\
+    \ radiation monitors, a superconducting RF cavity (`RM12`), a bend (`MDLM601`),\
+    \ a marker (`RHKM506`), diagnostic devices, and supporting facility components."

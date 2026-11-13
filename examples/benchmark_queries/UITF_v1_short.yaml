@@ -1,6 +1,0 @@
-- Q: Give me the signals for the horizontal and vertical beam positions and status at the first BPM
-  Ans: IPMK101.XPOS, IPMK101.YPOS, IPMK101.STAT
-- Q: What's the status signal of MFHK101?
-  Ans: MFHK101.STAT
-- Q: What's the status signal of the second solenoid along the beamline?
-  Ans: MFBK202.STAT
