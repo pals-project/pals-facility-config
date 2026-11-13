@@ -16,6 +16,7 @@ URI: [pals_config:enum/QuantityKindEnum](https://w3id.org/pals-config/enum/Quant
 | State | None | Device state or condition. |
 | ElectricCurrent | None | Electric current. |
 | IntegratedMagneticField | None | Integrated magnetic field. |
+| IntegratedMagneticFieldGradient | None | Integrated magnetic field gradient. |
 | MagneticField | None | Magnetic field. |
 | Pressure | None | Gas or vacuum pressure. |
 | DoseRate | None | Radiation dose rate. |
@@ -85,6 +86,9 @@ permissible_values:
     description: Integrated magnetic field.
     exact_mappings:
     - quantitykind:MagneticFluxPerLength
+  IntegratedMagneticFieldGradient:
+    text: IntegratedMagneticFieldGradient
+    description: Integrated magnetic field gradient.
   MagneticField:
     text: MagneticField
     description: Magnetic field.
