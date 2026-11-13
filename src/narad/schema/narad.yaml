@@ -88,7 +88,7 @@ slots:
   name:
     description: >-
       The name of the entity.
-      For example, the name of the person or organization.
+      For example, the name of the component.
     range: string
   
   alias:
