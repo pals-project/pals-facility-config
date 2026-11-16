@@ -9,7 +9,7 @@ _A mixin for reference parameters that are aligned with PALS ReferenceP (Referen
 
 
 
-URI: [acc:slot/ReferenceP](https://example.org/accelerator-core/slot/ReferenceP)
+URI: [pals_config:slot/ReferenceP](https://w3id.org/pals-config/slot/ReferenceP)
 Alias: ReferenceP
 
 <!-- no inheritance hierarchy -->
@@ -86,7 +86,7 @@ Alias: ReferenceP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -95,8 +95,8 @@ Alias: ReferenceP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:ReferenceP |
-| native | acc:ReferenceP |
+| self | pals_config:ReferenceP |
+| native | pals_config:ReferenceP |
 
 
 
@@ -109,7 +109,7 @@ name: ReferenceP
 description: A mixin for reference parameters that are aligned with PALS ReferenceP
   (Reference Parameters) for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: ReferenceP
 owner: HasReferenceP

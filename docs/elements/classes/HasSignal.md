@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:class/HasSignal](https://example.org/accelerator-core/class/HasSignal)
+URI: [pals_config:class/HasSignal](https://w3id.org/pals-config/class/HasSignal)
 
 
 ```mermaid
@@ -106,7 +106,7 @@ Signal ||--|o MetaParamGroup : "MetaP"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | pals:has_signal |
+| rdf_predicate | pals_config:has_signal |
 
 
 
@@ -114,7 +114,7 @@ Signal ||--|o MetaParamGroup : "MetaP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -123,8 +123,8 @@ Signal ||--|o MetaParamGroup : "MetaP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasSignal |
-| native | acc:HasSignal |
+| self | pals_config:HasSignal |
+| native | pals_config:HasSignal |
 | close | pals:HasSignalRelation |
 
 
@@ -144,8 +144,8 @@ name: HasSignal
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: pals:has_signal
-from_schema: https://w3id.org/accelerator-core
+    value: pals_config:has_signal
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:HasSignalRelation
 is_a: SignalBinding
@@ -167,8 +167,8 @@ name: HasSignal
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: pals:has_signal
-from_schema: https://w3id.org/accelerator-core
+    value: pals_config:has_signal
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:HasSignalRelation
 is_a: SignalBinding
@@ -182,7 +182,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -198,7 +198,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -211,7 +211,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -223,7 +223,7 @@ attributes:
     required: true
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

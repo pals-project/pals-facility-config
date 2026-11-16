@@ -9,7 +9,7 @@ _The canonical semantic meaning of the signal._
 
 
 
-URI: [acc:slot/canonical_signal_type](https://example.org/accelerator-core/slot/canonical_signal_type)
+URI: [pals_config:slot/canonical_signal_type](https://w3id.org/pals-config/slot/canonical_signal_type)
 Alias: canonical_signal_type
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: canonical_signal_type
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: canonical_signal_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:canonical_signal_type |
-| native | acc:canonical_signal_type |
+| self | pals_config:canonical_signal_type |
+| native | pals_config:canonical_signal_type |
 
 
 
@@ -90,7 +90,7 @@ Alias: canonical_signal_type
 ```yaml
 name: canonical_signal_type
 description: The canonical semantic meaning of the signal.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: canonical_signal_type
 owner: Signal

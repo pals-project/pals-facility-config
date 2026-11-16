@@ -9,7 +9,7 @@ _Entrance end fringe field integral._
 
 
 
-URI: [acc:slot/edge1_int](https://example.org/accelerator-core/slot/edge1_int)
+URI: [pals_config:slot/edge1_int](https://w3id.org/pals-config/slot/edge1_int)
 Alias: edge1_int
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: edge1_int
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: edge1_int
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:edge1_int |
-| native | acc:edge1_int |
+| self | pals_config:edge1_int |
+| native | pals_config:edge1_int |
 | close | pals:edge1_int |
 
 
@@ -96,7 +96,7 @@ Alias: edge1_int
 ```yaml
 name: edge1_int
 description: Entrance end fringe field integral.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:edge1_int
 rank: 1000

@@ -9,7 +9,7 @@ _The azimuthal angle in spherical coordinates (in radians)._
 
 
 
-URI: [acc:slot/phi_coord](https://example.org/accelerator-core/slot/phi_coord)
+URI: [pals_config:slot/phi_coord](https://w3id.org/pals-config/slot/phi_coord)
 Alias: phi_coord
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: phi_coord
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: phi_coord
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:phi_coord |
-| native | acc:phi_coord |
+| self | pals_config:phi_coord |
+| native | pals_config:phi_coord |
 
 
 
@@ -89,7 +89,7 @@ Alias: phi_coord
 ```yaml
 name: phi_coord
 description: The azimuthal angle in spherical coordinates (in radians).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: phi_coord
 owner: CoordinateSet

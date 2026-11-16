@@ -9,7 +9,7 @@ _A set of coordinates that define the spatial relationship between two component
 
 
 
-URI: [acc:class/CoordinateSet](https://example.org/accelerator-core/class/CoordinateSet)
+URI: [pals_config:class/CoordinateSet](https://w3id.org/pals-config/class/CoordinateSet)
 
 
 ```mermaid
@@ -77,7 +77,7 @@ CoordinateSet {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -86,8 +86,8 @@ CoordinateSet {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:CoordinateSet |
-| native | acc:CoordinateSet |
+| self | pals_config:CoordinateSet |
+| native | pals_config:CoordinateSet |
 
 
 
@@ -108,13 +108,13 @@ description: A set of coordinates that define the spatial relationship between t
   other coordinate systems as needed. Useful for defining the spatial relationship
   where the relationship is not strictly linear or where the components are not aligned
   along a single axis.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   coordinate_system:
     name: coordinate_system
     description: The coordinate system used for the coordinates (e.g., Cartesian,
       Cylindrical).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - CoordinateSet
@@ -122,7 +122,7 @@ attributes:
   x_coord:
     name: x_coord
     description: The x-coordinate in the specified coordinate system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - CoordinateSet
@@ -130,7 +130,7 @@ attributes:
   y_coord:
     name: y_coord
     description: The y-coordinate in the specified coordinate system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - CoordinateSet
@@ -138,7 +138,7 @@ attributes:
   z_coord:
     name: z_coord
     description: The z-coordinate in the specified coordinate system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - CoordinateSet
@@ -146,7 +146,7 @@ attributes:
   r_coord:
     name: r_coord
     description: The radial distance in cylindrical coordinates.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - CoordinateSet
@@ -154,7 +154,7 @@ attributes:
   theta_coord:
     name: theta_coord
     description: The angular coordinate in cylindrical coordinates (in radians).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - CoordinateSet
@@ -162,7 +162,7 @@ attributes:
   phi_coord:
     name: phi_coord
     description: The azimuthal angle in spherical coordinates (in radians).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - CoordinateSet
@@ -181,13 +181,13 @@ description: A set of coordinates that define the spatial relationship between t
   other coordinate systems as needed. Useful for defining the spatial relationship
   where the relationship is not strictly linear or where the components are not aligned
   along a single axis.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   coordinate_system:
     name: coordinate_system
     description: The coordinate system used for the coordinates (e.g., Cartesian,
       Cylindrical).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: coordinate_system
     owner: CoordinateSet
@@ -197,7 +197,7 @@ attributes:
   x_coord:
     name: x_coord
     description: The x-coordinate in the specified coordinate system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: x_coord
     owner: CoordinateSet
@@ -207,7 +207,7 @@ attributes:
   y_coord:
     name: y_coord
     description: The y-coordinate in the specified coordinate system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: y_coord
     owner: CoordinateSet
@@ -217,7 +217,7 @@ attributes:
   z_coord:
     name: z_coord
     description: The z-coordinate in the specified coordinate system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: z_coord
     owner: CoordinateSet
@@ -227,7 +227,7 @@ attributes:
   r_coord:
     name: r_coord
     description: The radial distance in cylindrical coordinates.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: r_coord
     owner: CoordinateSet
@@ -237,7 +237,7 @@ attributes:
   theta_coord:
     name: theta_coord
     description: The angular coordinate in cylindrical coordinates (in radians).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: theta_coord
     owner: CoordinateSet
@@ -247,7 +247,7 @@ attributes:
   phi_coord:
     name: phi_coord
     description: The azimuthal angle in spherical coordinates (in radians).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: phi_coord
     owner: CoordinateSet

@@ -7,7 +7,7 @@ _Controlled values for physical relation to the beamline._
 
 
 
-URI: [acc:enum/PhysicalRelationEnum](https://example.org/accelerator-core/enum/PhysicalRelationEnum)
+URI: [pals_config:enum/PhysicalRelationEnum](https://w3id.org/pals-config/enum/PhysicalRelationEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -44,7 +44,7 @@ URI: [acc:enum/PhysicalRelationEnum](https://example.org/accelerator-core/enum/P
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -57,7 +57,7 @@ URI: [acc:enum/PhysicalRelationEnum](https://example.org/accelerator-core/enum/P
 ```yaml
 name: PhysicalRelationEnum
 description: Controlled values for physical relation to the beamline.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Inline:

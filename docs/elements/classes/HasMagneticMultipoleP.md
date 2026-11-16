@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:class/HasMagneticMultipoleP](https://example.org/accelerator-core/class/HasMagneticMultipoleP)
+URI: [pals_config:class/HasMagneticMultipoleP](https://w3id.org/pals-config/class/HasMagneticMultipoleP)
 
 
 ```mermaid
@@ -82,7 +82,7 @@ MagneticMultipoleParamGroup ||--}o MultipoleParameterGroup : "mag_components"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -91,8 +91,8 @@ MagneticMultipoleParamGroup ||--}o MultipoleParameterGroup : "mag_components"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasMagneticMultipoleP |
-| native | acc:HasMagneticMultipoleP |
+| self | pals_config:HasMagneticMultipoleP |
+| native | pals_config:HasMagneticMultipoleP |
 
 
 
@@ -108,7 +108,7 @@ MagneticMultipoleParamGroup ||--}o MultipoleParameterGroup : "mag_components"
 <details>
 ```yaml
 name: HasMagneticMultipoleP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   MagneticMultipoleP:
@@ -116,7 +116,7 @@ attributes:
     description: A mixin for magnetic multipole parameters that are aligned with PALS
       MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasMagneticMultipoleP
@@ -131,7 +131,7 @@ attributes:
 <details>
 ```yaml
 name: HasMagneticMultipoleP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   MagneticMultipoleP:
@@ -139,7 +139,7 @@ attributes:
     description: A mixin for magnetic multipole parameters that are aligned with PALS
       MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MagneticMultipoleP
     owner: HasMagneticMultipoleP

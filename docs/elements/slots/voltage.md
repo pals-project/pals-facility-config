@@ -9,7 +9,7 @@ _RF voltage._
 
 
 
-URI: [acc:slot/voltage](https://example.org/accelerator-core/slot/voltage)
+URI: [pals_config:slot/voltage](https://w3id.org/pals-config/slot/voltage)
 Alias: voltage
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: voltage
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: voltage
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:voltage |
-| native | acc:voltage |
+| self | pals_config:voltage |
+| native | pals_config:voltage |
 | close | pals:voltage |
 
 
@@ -96,7 +96,7 @@ Alias: voltage
 ```yaml
 name: voltage
 description: RF voltage.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:voltage
 rank: 1000

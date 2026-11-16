@@ -9,7 +9,7 @@ _A label string._
 
 
 
-URI: [acc:slot/label](https://example.org/accelerator-core/slot/label)
+URI: [pals_config:slot/label](https://w3id.org/pals-config/slot/label)
 Alias: label
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: label
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: label
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:label |
-| native | acc:label |
+| self | pals_config:label |
+| native | pals_config:label |
 | close | pals:label |
 
 
@@ -90,7 +90,7 @@ Alias: label
 ```yaml
 name: label
 description: A label string.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:label
 rank: 1000

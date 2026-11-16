@@ -9,7 +9,7 @@ _Contains affiliation information for an author or component, such as a ROR._
 
 
 
-URI: [acc:class/Affiliation](https://example.org/accelerator-core/class/Affiliation)
+URI: [pals_config:class/Affiliation](https://w3id.org/pals-config/class/Affiliation)
 
 
 ```mermaid
@@ -36,7 +36,7 @@ Affiliation ||--}o Identifier : "identifiers"
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | direct |
-| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | The name of the entity. For example, the name of the person or organization. | direct |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | The name of the entity. For example, the name of the component. | direct |
 | [identifiers](../slots/identifiers.md) | * <br/> [Identifier](../classes/Identifier.md) | A unique and ideally persistent identifier for the facility, such as a DOI or ROR. | direct |
 
 
@@ -70,7 +70,7 @@ Affiliation ||--}o Identifier : "identifiers"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -79,8 +79,8 @@ Affiliation ||--}o Identifier : "identifiers"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Affiliation |
-| native | acc:Affiliation |
+| self | pals_config:Affiliation |
+| native | pals_config:Affiliation |
 
 
 
@@ -98,7 +98,7 @@ Affiliation ||--}o Identifier : "identifiers"
 name: Affiliation
 description: Contains affiliation information for an author or component, such as
   a ROR.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 slots:
 - id
 - name
@@ -114,12 +114,12 @@ slots:
 name: Affiliation
 description: Contains affiliation information for an author or component, such as
   a ROR.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -135,8 +135,8 @@ attributes:
     required: true
   name:
     name: name
-    description: The name of the entity. For example, the name of the person or organization.
-    from_schema: https://w3id.org/accelerator-core
+    description: The name of the entity. For example, the name of the component.
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: name
     owner: Affiliation
@@ -148,7 +148,7 @@ attributes:
     name: identifiers
     description: A unique and ideally persistent identifier for the facility, such
       as a DOI or ROR.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: identifiers
     owner: Affiliation

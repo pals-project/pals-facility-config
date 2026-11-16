@@ -9,7 +9,7 @@ _Sets what phase = 0 means._
 
 
 
-URI: [acc:slot/zero_phase](https://example.org/accelerator-core/slot/zero_phase)
+URI: [pals_config:slot/zero_phase](https://w3id.org/pals-config/slot/zero_phase)
 Alias: zero_phase
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: zero_phase
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: zero_phase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:zero_phase |
-| native | acc:zero_phase |
+| self | pals_config:zero_phase |
+| native | pals_config:zero_phase |
 | close | pals:zero_phase |
 
 
@@ -90,7 +90,7 @@ Alias: zero_phase
 ```yaml
 name: zero_phase
 description: Sets what phase = 0 means.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:zero_phase
 rank: 1000

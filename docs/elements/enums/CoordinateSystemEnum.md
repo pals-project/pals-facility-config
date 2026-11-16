@@ -7,7 +7,7 @@ _Coordinate systems for spatial relationships._
 
 
 
-URI: [acc:enum/CoordinateSystemEnum](https://example.org/accelerator-core/enum/CoordinateSystemEnum)
+URI: [pals_config:enum/CoordinateSystemEnum](https://w3id.org/pals-config/enum/CoordinateSystemEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -43,7 +43,7 @@ URI: [acc:enum/CoordinateSystemEnum](https://example.org/accelerator-core/enum/C
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -56,7 +56,7 @@ URI: [acc:enum/CoordinateSystemEnum](https://example.org/accelerator-core/enum/C
 ```yaml
 name: CoordinateSystemEnum
 description: Coordinate systems for spatial relationships.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Cartesian:

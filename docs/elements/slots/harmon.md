@@ -9,7 +9,7 @@ _RF harmonic number._
 
 
 
-URI: [acc:slot/harmon](https://example.org/accelerator-core/slot/harmon)
+URI: [pals_config:slot/harmon](https://w3id.org/pals-config/slot/harmon)
 Alias: harmon
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: harmon
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: harmon
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:harmon |
-| native | acc:harmon |
+| self | pals_config:harmon |
+| native | pals_config:harmon |
 | close | pals:harmon |
 
 
@@ -90,7 +90,7 @@ Alias: harmon
 ```yaml
 name: harmon
 description: RF harmonic number.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:harmon
 rank: 1000

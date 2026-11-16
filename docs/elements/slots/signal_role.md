@@ -9,7 +9,7 @@ _The role of the signal in the control system, such as setpoint, readback, statu
 
 
 
-URI: [acc:slot/signal_role](https://example.org/accelerator-core/slot/signal_role)
+URI: [pals_config:slot/signal_role](https://w3id.org/pals-config/slot/signal_role)
 Alias: signal_role
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: signal_role
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: signal_role
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:signal_role |
-| native | acc:signal_role |
+| self | pals_config:signal_role |
+| native | pals_config:signal_role |
 
 
 
@@ -91,7 +91,7 @@ Alias: signal_role
 name: signal_role
 description: The role of the signal in the control system, such as setpoint, readback,
   status, command, or limit.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: signal_role
 owner: Signal

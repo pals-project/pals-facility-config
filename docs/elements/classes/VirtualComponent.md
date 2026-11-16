@@ -9,7 +9,7 @@ _A virtual or logical component that represents a concept, function, or role in 
 
 
 
-URI: [acc:class/VirtualComponent](https://example.org/accelerator-core/class/VirtualComponent)
+URI: [pals_config:class/VirtualComponent](https://w3id.org/pals-config/class/VirtualComponent)
 
 
 ```mermaid
@@ -97,7 +97,7 @@ VirtualComponent ||--|o MetaParamGroup : "MetaP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -106,8 +106,8 @@ VirtualComponent ||--|o MetaParamGroup : "MetaP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:VirtualComponent |
-| native | acc:VirtualComponent |
+| self | pals_config:VirtualComponent |
+| native | pals_config:VirtualComponent |
 | broad | pals:Element, pals:BookkeepingElement |
 
 
@@ -129,24 +129,23 @@ description: A virtual or logical component that represents a concept, function,
   can be used to capture abstract components, such as Markers, BeamLineSections, and
   FacilitySpaces that are important for understanding the structure and function of
   the accelerator system but are not physical devices.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:Element
 - pals:BookkeepingElement
 is_a: Component
 mixins:
 - HasFloorP
-attributes:
+slots:
+- functions
+- beamline_relation
+slot_usage:
   functions:
     name: functions
     description: The function of the virtual component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
     close_mappings:
     - pals:virtual_function
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: VirtualFunctionEnum
     required: true
     multivalued: true
@@ -154,12 +153,8 @@ attributes:
     name: beamline_relation
     description: The relationship of the virtual component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
     close_mappings:
     - pals:virtual_beamline_relation
-    domain_of:
-    - PhysicalComponent
-    - VirtualComponent
     range: VirtualRelationEnum
     required: true
 
@@ -176,21 +171,40 @@ description: A virtual or logical component that represents a concept, function,
   can be used to capture abstract components, such as Markers, BeamLineSections, and
   FacilitySpaces that are important for understanding the structure and function of
   the accelerator system but are not physical devices.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:Element
 - pals:BookkeepingElement
 is_a: Component
 mixins:
 - HasFloorP
+slot_usage:
+  functions:
+    name: functions
+    description: The function of the virtual component,  which can be used to identify
+      the component across different source systems.
+    close_mappings:
+    - pals:virtual_function
+    range: VirtualFunctionEnum
+    required: true
+    multivalued: true
+  beamline_relation:
+    name: beamline_relation
+    description: The relationship of the virtual component to the beamline,  which
+      can be used to identify the component across different source systems.
+    close_mappings:
+    - pals:virtual_beamline_relation
+    range: VirtualRelationEnum
+    required: true
 attributes:
   functions:
     name: functions
     description: The function of the virtual component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_function
+    rank: 1000
     alias: functions
     owner: VirtualComponent
     domain_of:
@@ -203,9 +217,10 @@ attributes:
     name: beamline_relation
     description: The relationship of the virtual component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:virtual_beamline_relation
+    rank: 1000
     alias: beamline_relation
     owner: VirtualComponent
     domain_of:
@@ -218,7 +233,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: VirtualComponent
@@ -230,7 +245,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: VirtualComponent
@@ -243,7 +258,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: VirtualComponent
@@ -254,7 +269,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -272,7 +287,9 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -286,7 +303,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

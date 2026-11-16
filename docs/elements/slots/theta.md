@@ -9,7 +9,7 @@ _Orientation angle around the Y-axis in the facility floor plan._
 
 
 
-URI: [acc:slot/theta](https://example.org/accelerator-core/slot/theta)
+URI: [pals_config:slot/theta](https://w3id.org/pals-config/slot/theta)
 Alias: theta
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: theta
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: theta
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:theta |
-| native | acc:theta |
+| self | pals_config:theta |
+| native | pals_config:theta |
 | close | pals:theta |
 
 
@@ -97,7 +97,7 @@ Alias: theta
 ```yaml
 name: theta
 description: Orientation angle around the Y-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - theta_angle
 - ModelYaw

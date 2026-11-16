@@ -9,7 +9,7 @@ _A relationship indicating that the subject component is mounted on the object c
 
 
 
-URI: [acc:class/MountedOn](https://example.org/accelerator-core/class/MountedOn)
+URI: [pals_config:class/MountedOn](https://w3id.org/pals-config/class/MountedOn)
 
 
 ```mermaid
@@ -94,7 +94,7 @@ MountedOn ||--|| Component : "object, subject"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | acc:mounted_on |
+| rdf_predicate | pals_config:mounted_on |
 
 
 
@@ -102,7 +102,7 @@ MountedOn ||--|| Component : "object, subject"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -111,9 +111,9 @@ MountedOn ||--|| Component : "object, subject"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:MountedOn |
-| native | acc:MountedOn |
-| broad | RO:0002371 |
+| self | pals_config:MountedOn |
+| native | pals_config:MountedOn |
+| related | RO:0002371 |
 
 
 
@@ -132,12 +132,12 @@ name: MountedOn
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:mounted_on
+    value: pals_config:mounted_on
 description: A relationship indicating that the subject component is mounted on the
   object component in a specified context,  such as a diagnostic device mounted on
   a magnet.
-from_schema: https://w3id.org/accelerator-core
-broad_mappings:
+from_schema: https://w3id.org/pals-config
+related_mappings:
 - RO:0002371
 is_a: ComponentRelation
 slots:
@@ -161,12 +161,12 @@ name: MountedOn
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:mounted_on
+    value: pals_config:mounted_on
 description: A relationship indicating that the subject component is mounted on the
   object component in a specified context,  such as a diagnostic device mounted on
   a magnet.
-from_schema: https://w3id.org/accelerator-core
-broad_mappings:
+from_schema: https://w3id.org/pals-config
+related_mappings:
 - RO:0002371
 is_a: ComponentRelation
 slot_usage:
@@ -183,7 +183,7 @@ attributes:
       the two components. Only an edge-property slot for edges that require a set
       of coordinates to define the spatial relationship between two components in
       a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: coordinates
     owner: MountedOn
@@ -199,7 +199,7 @@ attributes:
     name: context
     description: The frame of reference / domain in which this relationship is asserted
       to hold.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: MountedOn
@@ -210,7 +210,7 @@ attributes:
     required: true
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: MountedOn
@@ -219,7 +219,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: MountedOn
@@ -230,7 +230,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -246,7 +246,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -259,7 +259,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -272,7 +272,7 @@ attributes:
     equals_string: MountedOn
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

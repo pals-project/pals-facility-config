@@ -9,7 +9,7 @@ _A single order's electric (or magnetic) multipole component. Only the fields su
 
 
 
-URI: [acc:class/MultipoleParameterGroup](https://example.org/accelerator-core/class/MultipoleParameterGroup)
+URI: [pals_config:class/MultipoleParameterGroup](https://w3id.org/pals-config/class/MultipoleParameterGroup)
 
 
 ```mermaid
@@ -149,7 +149,7 @@ MultipoleParameterGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -158,8 +158,8 @@ MultipoleParameterGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:MultipoleParameterGroup |
-| native | acc:MultipoleParameterGroup |
+| self | pals_config:MultipoleParameterGroup |
+| native | pals_config:MultipoleParameterGroup |
 
 
 
@@ -179,12 +179,12 @@ description: A single order's electric (or magnetic) multipole component. Only t
   fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should
   be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and
   MagneticMultipoleP mixins to represent individual multipole components.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   order:
     name: order
     description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - MultipoleParameterGroup
@@ -193,7 +193,7 @@ attributes:
   tilt:
     name: tilt
     description: Tilt of the Nth multipole.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:tilt
     rank: 1000
@@ -205,7 +205,7 @@ attributes:
   En:
     name: En
     description: Normal component of the field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EnN
     rank: 1000
@@ -215,7 +215,7 @@ attributes:
   Es:
     name: Es
     description: Skew component of the field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EsN
     rank: 1000
@@ -225,7 +225,7 @@ attributes:
   EnL:
     name: EnL
     description: Length-integrated normal component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EnNL
     rank: 1000
@@ -235,7 +235,7 @@ attributes:
   EsL:
     name: EsL
     description: Length-integrated skew component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EsNL
     rank: 1000
@@ -245,7 +245,7 @@ attributes:
   Bn:
     name: Bn
     description: Normal component of the magnetic field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:BnN
     rank: 1000
@@ -255,7 +255,7 @@ attributes:
   Bs:
     name: Bs
     description: Skew component of the magnetic field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:BsN
     rank: 1000
@@ -265,7 +265,7 @@ attributes:
   Kn:
     name: Kn
     description: Normalized normal component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:KnN
     rank: 1000
@@ -275,7 +275,7 @@ attributes:
   Ks:
     name: Ks
     description: Normalized skew component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:KsN
     rank: 1000
@@ -456,12 +456,12 @@ description: A single order's electric (or magnetic) multipole component. Only t
   fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should
   be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and
   MagneticMultipoleP mixins to represent individual multipole components.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   order:
     name: order
     description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: order
     owner: MultipoleParameterGroup
@@ -472,7 +472,7 @@ attributes:
   tilt:
     name: tilt
     description: Tilt of the Nth multipole.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:tilt
     rank: 1000
@@ -486,7 +486,7 @@ attributes:
   En:
     name: En
     description: Normal component of the field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EnN
     rank: 1000
@@ -498,7 +498,7 @@ attributes:
   Es:
     name: Es
     description: Skew component of the field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EsN
     rank: 1000
@@ -510,7 +510,7 @@ attributes:
   EnL:
     name: EnL
     description: Length-integrated normal component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EnNL
     rank: 1000
@@ -522,7 +522,7 @@ attributes:
   EsL:
     name: EsL
     description: Length-integrated skew component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EsNL
     rank: 1000
@@ -534,7 +534,7 @@ attributes:
   Bn:
     name: Bn
     description: Normal component of the magnetic field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:BnN
     rank: 1000
@@ -546,7 +546,7 @@ attributes:
   Bs:
     name: Bs
     description: Skew component of the magnetic field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:BsN
     rank: 1000
@@ -558,7 +558,7 @@ attributes:
   Kn:
     name: Kn
     description: Normalized normal component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:KnN
     rank: 1000
@@ -570,7 +570,7 @@ attributes:
   Ks:
     name: Ks
     description: Normalized skew component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:KsN
     rank: 1000

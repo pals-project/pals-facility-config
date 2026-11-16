@@ -101,7 +101,7 @@ Alias: kind
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -111,7 +111,8 @@ Alias: kind
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | rdf:type |
-| native | acc:kind |
+| native | pals_config:kind |
+| related | saref:DeviceKind |
 
 
 
@@ -123,7 +124,9 @@ Alias: kind
 name: kind
 description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
   (no prefix).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+related_mappings:
+- saref:DeviceKind
 rank: 1000
 slot_uri: rdf:type
 designates_type: true

@@ -9,7 +9,7 @@ _The specific BeamLine this relationship is defined with respect to (relevant wh
 
 
 
-URI: [acc:slot/beamline_context](https://example.org/accelerator-core/slot/beamline_context)
+URI: [pals_config:slot/beamline_context](https://w3id.org/pals-config/slot/beamline_context)
 Alias: beamline_context
 
 <!-- no inheritance hierarchy -->
@@ -64,7 +64,7 @@ Alias: beamline_context
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -73,8 +73,8 @@ Alias: beamline_context
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:beamline_context |
-| native | acc:beamline_context |
+| self | pals_config:beamline_context |
+| native | pals_config:beamline_context |
 
 
 
@@ -87,7 +87,7 @@ name: beamline_context
 description: The specific BeamLine this relationship is defined with respect to (relevant
   when context=beamline_order). Only an edge-property slot for edges that are defined
   with respect to a specific BeamLine.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: beamline_context
 domain_of:

@@ -9,7 +9,7 @@ _Normal component of the field._
 
 
 
-URI: [acc:slot/En](https://example.org/accelerator-core/slot/En)
+URI: [pals_config:slot/En](https://w3id.org/pals-config/slot/En)
 Alias: En
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: En
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: En
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:En |
-| native | acc:En |
+| self | pals_config:En |
+| native | pals_config:En |
 | broad | pals:EnN |
 
 
@@ -90,7 +90,7 @@ Alias: En
 ```yaml
 name: En
 description: Normal component of the field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:EnN
 rank: 1000

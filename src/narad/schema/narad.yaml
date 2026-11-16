@@ -1,8 +1,9 @@
-id: https://w3id.org/accelerator-core
-name: accelerator_core
-title: Accelerator Core Ontology
+id: https://w3id.org/pals-config
+name: pals_config
+version: 0.0.1
+title: PALS facility configuration
 description: >-
-  A lightweight LinkML schema for facility-agnostic accelerator components,
+  A lightweight LinkML schema for facility-agnostic accelerator facility configuration,
   their beamline relationships, and associated control-system signals.
 license: https://creativecommons.org/publicdomain/zero/1.0/
 
@@ -13,19 +14,23 @@ license: https://creativecommons.org/publicdomain/zero/1.0/
 # There is no per-facility namespace: load one facility per graph.
 prefixes:
   linkml: https://w3id.org/linkml/
-  pals: https://pals-project.readthedocs.io/  # used only in *_mappings to PALS documentation; not a resolvable vocabulary
-  acc: https://example.org/accelerator-core/  # this schema's own classes, slots and predicates
-  qudt: http://qudt.org/vocab/unit/
-  quantitykind: http://qudt.org/vocab/quantitykind/
+  pals_elementkinds: https://pals-project.readthedocs.io/en/latest/lattice-element-kinds.html#
+  pals_parametergroups: https://pals-project.readthedocs.io/en/latest/lattice-element-parameter-groups.html#
+  pals: https://pals-project.readthedocs.io/  # NEED TO CREATE with a w3id extension: used only in *_mappings to PALS documentation; not a resolvable vocabulary
+  pals_config: https://w3id.org/pals-config/  # NEED TO CREATE: vocabulary: classes, slots, predicates
+  schema: http://schema.org/  # must match linkml:types, which declares http:// (https:// breaks linkml-convert)
+  dcterms: http://purl.org/dc/terms/
   sosa: http://www.w3.org/ns/sosa/
+  skos: http://www.w3.org/2004/02/skos/core#
+  unit: http://qudt.org/vocab/unit/
+  quantitykind: http://qudt.org/vocab/quantitykind/
   RO: http://purl.obolibrary.org/obo/RO_
   BFO: http://purl.obolibrary.org/obo/BFO_
-  om: http://www.ontology-of-units-of-measure.org/resource/om-2/
-  saref: https://saref.etsi.org/core/v4.1.1/
+  saref: https://saref.etsi.org/core/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   xsd: http://www.w3.org/2001/XMLSchema#
 
-default_prefix: acc
+default_prefix: pals_config
 default_range: string
 
 imports:
@@ -52,6 +57,24 @@ imports:
 #         A "wipe the graph and reload fresh each time" (not merge-based), then this is less of a problem.
 #   * Nodes with this issue cannnot rely on order of elements in a list, because the blank node IDs are not stable.
 
+types:
+  iso8601_datetime:
+    typeof: string
+    uri: xsd:dateTime
+    base: str
+    description: >-
+      Strict ISO 8601 date-time string allowing optional fractional seconds and timezones, 
+      e.g., 2024-06-05T14:30:00-05:00 for June 5th, 2024 at 14:30:00 (2:30 PM) with UTC timezone offset -05:00 (America/New_York).
+    pattern: '^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?$'
+
+  isodate:
+    typeof: string
+    uri: xsd:date
+    base: str
+    description: >-
+      Strict ISO 8601 date string (YYYY-MM-DD).
+      e.g., 2024-06-05 for June 5th, 2024.
+    pattern: '^\d{4}-\d{2}-\d{2}$'
 
 slots:
   id:
@@ -65,7 +88,7 @@ slots:
   name:
     description: >-
       The name of the entity.
-      For example, the name of the person or organization.
+      For example, the name of the component.
     range: string
   
   alias:
@@ -81,6 +104,8 @@ slots:
     range: string
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix).
     slot_uri: rdf:type
+    related_mappings:
+      - saref:DeviceKind
   
   subject:
     slot_uri: rdf:subject
@@ -94,6 +119,18 @@ slots:
 
   object:
     slot_uri: rdf:object
+    required: true
+  
+  functions:
+    description: >-
+      The function of the component, 
+      which can be used to identify the component across different source systems.
+    required: false
+  
+  beamline_relation:
+    description: >-
+      The relationship of the component to the beamline, 
+      which can be used to identify the component across different source systems.
     required: true
   
   affiliation:
@@ -133,13 +170,16 @@ slots:
       Distance value between two components in a relationship.
       Only an edge-property slot for edges that require a distance value between two components in a relationship.
     range: float
-    slot_uri: om:Distance
+    exact_mappings:
+      - quantitykind:Distance
 
   distance_unit:
     description: >-
       Unit of the distance value between two components in a relationship.
       Only an edge-property slot for edges that require a distance value between two components in a relationship.
     range: UnitEnum
+    related_mappings:
+      - saref:UnitOfMeasure
 
   tolerance_value:
     description: >-
@@ -152,6 +192,8 @@ slots:
       Unit of the tolerance value for the distance between two components in a relationship.
       Only an edge-property slot for edges that require a tolerance value between two components in a relationship.
     range: UnitEnum
+    related_mappings:
+      - saref:UnitOfMeasure
 
   coordinates:
     range: CoordinateSet
@@ -183,11 +225,56 @@ classes:
         description: Version of the representation of a particle accelerator and its operations.
         pattern: "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         range: string
+        required: false
+        ifabsent: string(0.0.0)
+      schema_version:
+        description: >-
+          Version of the schema used for this representation of a particle accelerator and its operations.
+          Should follow the semantic versioning convention (MAJOR.MINOR.PATCH).
+          Should match the schema version of the NARAD/PALS instance configuration schema being used.
+        pattern: "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        range: string
+        required: false
+        ifabsent: string(0.0.1)
+      temporal_coverage:
+        range: TemporalCoverageClass
+        required: false
+        description: >-
+          Temporal coverage for time-based datasets, if applicable.
+          Container for elements describing the start_date and end_date of the data instance's temporal coverage 
+          in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SS±hh:mm for offset (e.g., 2024-06-05T14:30:00-04:00) or YYYY-MM-DDTHH:MM:SSZ for UTC (e.g., 2024-06-05T14:30:00Z).
+          Use temporal_coverage when the dataset describes a specific historical or projected time period.
+          This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant.
+        related_mappings:
+          - dcterms:temporal
+          - schema:temporalCoverage
       authors:
         description: Contains the authorship information for this representation of an accelerator facility and its operations.
         range: Author
         multivalued: true
         inlined_as_list: true
+      created_date:
+        range: isodate
+        description: >-
+          The date the PALS/NARAD data instance of the facility configuration was first created, in ISO 8601 format (YYYY-MM-DD). 
+          Provides temporal context for the data instance and can be used for tracking its age and relevance.
+        required: true
+      updated_date:
+          range: isodate
+          description: >-
+            The date the data instance for the facility configuration was last updated, in ISO 8601 format (YYYY-MM-DD). Date of most recent update; revise on every change/version to the data instance, including minor edits and version updates. 
+            This provides temporal context for the data instance and can be used for tracking its currency and maintenance.
+      change_log:
+        range: ChangeLogEntryClass
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        description: >-
+          Running history of meaningful changes to a data instance of a facility's configuration.
+          Add a new entry every time the instance is updated.
+          Do not overwrite or delete prior entries.
+          If there have been no changes since creation, include a single entry with the creation date and the summary 'Initial creation'.
+        required: true
       notes:
         description: Additional notes or comments about the representation of a particle accelerator and its operations.
         range: string
@@ -201,6 +288,34 @@ classes:
       - description
       - affiliation
   
+  TemporalCoverageClass:
+    description: >-
+      Temporal coverage for time-based datasets, if applicable.
+        Container for elements describing the start_date and end_date of the data instance's temporal coverage 
+        in ISO 8601 datetime format YYYY-MM-DDTHH:MM:SS±hh:mm for offset (e.g., 2024-06-05T14:30:00-04:00) or YYYY-MM-DDTHH:MM:SSZ for UTC (e.g., 2024-06-05T14:30:00Z).
+        Use temporal_coverage when the dataset describes a specific historical or projected time period.
+        This may not apply to simulations where temporal coverage of a specific facility during a specific time is not relevant.
+    attributes:
+      start_date:
+        range: iso8601_datetime
+        description: "Start date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC)."
+        related_mappings:
+          - schema:temporalCoverage
+        narrow_mappings:
+          - dcterms:date
+      end_date:
+        range: iso8601_datetime
+        description: "End date of the dataset's temporal coverage in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±hh:mm for offset or YYYY-MM-DDTHH:MM:SSZ for UTC)."
+        related_mappings:
+          - schema:temporalCoverage
+        narrow_mappings:
+          - dcterms:date
+    slots:
+      - description
+    slot_usage:
+      description:
+        description: Detailed description of the temporal coverage.
+
   Author:
     description: Contains authorship information for a representation of an accelerator facility and its operations.
     attributes:
@@ -212,9 +327,33 @@ classes:
         description: The ORCID identifier of the author.
         range: string
         pattern: "^https://orcid\\.org/\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$"
+        related_mappings:
+          - schema:creator
     slots:
       - name
       - affiliation
+    
+  
+  ChangeLogEntryClass:
+    description: "An individual entry in the change log, documenting a specific change to the data instance."
+    attributes:
+      change_date:
+        range: isodate
+        description: The date the change was made, in ISO 8601 format (YYYY-MM-DD).
+        required: true
+      instance_version:
+        range: string
+        pattern: "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        description: >-
+          The version of the data instance that was changed.
+          If this is the initial creation, it should be set to 0.0.0.
+        required: true
+      summary:
+        range: string
+        description: A brief summary of the change.
+        required: true
+        exact_mappings:
+          - skos:changeNote
 
   Facility:
     description: A facility that houses one or more accelerators.
@@ -804,7 +943,7 @@ classes:
         multivalued: true
         inlined_as_list: true
     broad_mappings:
-      - pals:ElectricMultipoleP
+      - pals_parametergroups:electricmultipolep-electric-multipole-parameters
   
   HasMagneticMultipoleP:
     mixin: true
@@ -1217,12 +1356,15 @@ classes:
       A physical item that participates in or supports accelerator operation. 
       This can be used to capture physical components, such as magnets, cavities, diagnostics, vacuum devices, and racks
       that are important for understanding the structure and function of the accelerator system.
-    attributes:
+    slots:
+      - functions
+      - beamline_relation
+    slot_usage:
       functions:
         description: >-
           The function of the physical component, 
           which can be used to identify the component across different source systems.
-        required: false  # SupportingFacilityComponent uses facility_functions instead
+        required: false
         multivalued: true
         close_mappings:
           - pals:physical_function
@@ -1247,7 +1389,10 @@ classes:
       beamline operation but does not have a physical instantiation. 
       This can be used to capture abstract components, such as Markers, BeamLineSections, and FacilitySpaces
       that are important for understanding the structure and function of the accelerator system but are not physical devices.
-    attributes:
+    slots:
+      - functions
+      - beamline_relation
+    slot_usage:
       functions:
         description: >-
           The function of the virtual component, 
@@ -1366,9 +1511,8 @@ classes:
       archive_identifier:
         description: The identifier used to reference the signal in an archival system.
         range: string
-    broad_mappings:
-      - sosa:Sensor
-      - sosa:Actuator
+    related_mappings:
+      - saref:Property
 
   #---- Subclass component classes ------------------------------------------------
   Magnet:
@@ -1468,14 +1612,13 @@ classes:
       - HCorrector
       - VCorrector
       - VDiagKicker
-      - HDiagKicker # DM: made this one up
+      - HDiagKicker
 
   ACKicker:
     description: >-
       An ACKicker element simulates a time-dependent kicker. 
       It is like a Kicker element except that the field varies in time. 
       This element requires a user supplied time-dependent expression.
-    # DM: what additional parameters/attributes/slots are needed for an ACKicker from a vanilla Kicker?
     is_a: Kicker
     exact_mappings:
       - pals:ACKicker
@@ -1541,7 +1684,7 @@ classes:
     description: A cavity used for transverse beam manipulation, such as crabbing or deflecting.
     is_a: Cavity
     exact_mappings:
-      - pals:CrabCavity # Question about this for PALS folks
+      - pals:CrabCavity
 
   RFCavity:
     description: A cavity used for RF acceleration or longitudinal manipulation.
@@ -1556,13 +1699,13 @@ classes:
     description: A cavity used for RF acceleration or longitudinal manipulation, which is normal conducting.
     is_a: RFCavity
     broad_mappings:
-      - pals:RFCavity # DM: not in PALS
+      - pals:RFCavity
   
   SuperConductingRFCavity:
     description: A cavity used for RF acceleration or longitudinal manipulation, which is superconducting.
     is_a: RFCavity
     broad_mappings:
-      - pals:RFCavity # DM: not in PALS
+      - pals:RFCavity
   
   SupportingFacilityComponent:
     is_a: PhysicalComponent
@@ -1671,7 +1814,6 @@ classes:
   # ---- Relationships: SignalBindings and Component Relations ------------------------------------------------
   Edge:
     abstract: true
-    class_uri: rdf:Statement
     description: Abstract base for subject-predicate-object associations.
     slots:
       - id
@@ -1701,7 +1843,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_signal
+      rdf_predicate: pals_config:has_signal
 
   HasSetpointSignal:
     is_a: SignalBinding
@@ -1713,7 +1855,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_setpoint_signal
+      rdf_predicate: pals_config:has_setpoint_signal
 
   HasReadbackSignal:
     is_a: SignalBinding
@@ -1725,7 +1867,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_readback_signal
+      rdf_predicate: pals_config:has_readback_signal
   
   HasCommandSignal:
     is_a: SignalBinding
@@ -1737,7 +1879,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_command_signal
+      rdf_predicate: pals_config:has_command_signal
 
   HasLimitSignal:
     is_a: SignalBinding
@@ -1749,7 +1891,7 @@ classes:
           The predicate of the relationship, which can be used to identify the relationship across different source systems.
         required: true
     annotations:
-      rdf_predicate: pals:has_limit_signal
+      rdf_predicate: pals_config:has_limit_signal
 
   ComponentRelation:
     abstract: true
@@ -1776,8 +1918,6 @@ classes:
     description: >-
       A relationship indicating that the subject component precedes the object component in a specified context, 
       such as along a beamline.
-    exact_mappings:
-      - BFO:0000063
     slots:
       - beamline_context
     slot_usage:
@@ -1802,7 +1942,7 @@ classes:
             context:
               equals_string: beamline_order
     annotations:
-      rdf_predicate: acc:precedes
+      rdf_predicate: pals_config:precedes
   
 
   Contains:
@@ -1810,7 +1950,7 @@ classes:
     description: >-
       A relationship indicating that the subject component contains the object component in a specified context, 
       such as within a BeamLineSection or other organizational grouping.
-    exact_mappings:
+    related_mappings:
       - BFO:0000051
     slots:
       - beamline_context
@@ -1823,15 +1963,13 @@ classes:
       beamline_context:
         required: false
     annotations:
-      rdf_predicate: acc:contains
+      rdf_predicate: pals_config:contains
       
   Controls:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component controls the object component in a specified context, 
       such as a power supply controlling a magnet.
-    exact_mappings:
-      - saref:controls
     slot_usage:
       predicate:
         description: >-
@@ -1839,7 +1977,7 @@ classes:
         required: true
         equals_string: Controls
     annotations:
-      rdf_predicate: acc:controls
+      rdf_predicate: pals_config:controls
   
 
   IsPartOf:
@@ -1863,14 +2001,14 @@ classes:
       beamline_context:
         required: false
     annotations:
-      rdf_predicate: acc:is_part_of
+      rdf_predicate: pals_config:is_part_of
     
   AdjacentTo:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component is adjacent to the object component and not overlapping
        in a specified context, such as radiation detector and a magnet.
-    exact_mappings:
+    related_mappings:
       - RO:0002220
     slots:
       - distance_value
@@ -1885,14 +2023,14 @@ classes:
         required: true
         equals_string: AdjacentTo
     annotations:
-      rdf_predicate: acc:adjacent_to
+      rdf_predicate: pals_config:adjacent_to
 
   Overlaps:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component overlaps the object component in a specified context, 
       such as a magnet and a diagnostic device.
-    exact_mappings:
+    related_mappings:
       - RO:0002131
     slots:
       - coordinates
@@ -1903,14 +2041,14 @@ classes:
         required: true
         equals_string: Overlaps
     annotations:
-      rdf_predicate: acc:overlaps
+      rdf_predicate: pals_config:overlaps
   
   HasConnectingBranch:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component has a connecting branch to the object component in a specified context, 
       such as a beamline section having a fork as a connecting branch.
-    exact_mappings:
+    related_mappings:
       - RO:0002253
     slots:
       - beamline_context
@@ -1936,14 +2074,14 @@ classes:
             context:
               equals_string: beamline_order
     annotations:
-      rdf_predicate: acc:has_connecting_branch
+      rdf_predicate: pals_config:has_connecting_branch
 
   MountedOn:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component is mounted on the object component in a specified context, 
       such as a diagnostic device mounted on a magnet.
-    broad_mappings:
+    related_mappings:
       - RO:0002371
     slots:
       - coordinates
@@ -1954,15 +2092,13 @@ classes:
         required: true
         equals_string: MountedOn
     annotations:
-      rdf_predicate: acc:mounted_on
+      rdf_predicate: pals_config:mounted_on
      
   Intersects:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component intersects the object component in a specified context, 
       such as a beamline and a diagnostic device.
-    broad_mappings:
-      - RO:0015011
     slot_usage:
       predicate:
         description: >-
@@ -1970,15 +2106,13 @@ classes:
         required: true
         equals_string: Intersects
     annotations:
-      rdf_predicate: acc:intersects
+      rdf_predicate: pals_config:intersects
 
   NearestTo:
     is_a: ComponentRelation
     description: >-
       A relationship indicating that the subject component is nearest to the object component in a specified context, 
       such as a diagnostic device nearest to a magnet.
-    broad_mappings:
-      - RO:0002325
     slots:
       - distance_value
       - distance_unit
@@ -1992,7 +2126,7 @@ classes:
         required: true
         equals_string: NearestTo
     annotations:
-      rdf_predicate: acc:nearest_to
+      rdf_predicate: pals_config:nearest_to
 
   CoordinateSet:
     description: >-
@@ -2198,30 +2332,24 @@ enums:
     permissible_values:
       Setpoint:
         description: Requested or configured value.
-        exact_mappings:
+        broad_mappings:
           - sosa:ActuatableProperty
       Readback:
         description: Measured or reported value.
-        exact_mappings:
+        broad_mappings:
           - sosa:ObservableProperty
       Status:
         description: State or condition indicator.
       Command:
         description: Command or action trigger.
-        exact_mappings:
+        broad_mappings:
           - sosa:ActuatableProperty
       MinimumLimit:
         description: Minimum allowed signal value.
-        exact_mappings:
-          - xsd:minInclusive
       MaximumLimit:
         description: Maximum allowed signal value.
-        exact_mappings:
-          - xsd:maxInclusive
       RangeLimit:
         description: A signal containing both upper and lower allowed limits.
-        exact_mappings:
-          - acc:RangeLimit
 
   CanonicalSignalTypeEnum:
     description: Portable semantic meanings for important signals.
@@ -2308,8 +2436,6 @@ enums:
           - quantitykind:Power
       CavityPhase:
         description: Cavity phase.
-        exact_mappings:
-          - quantitykind:PhaseAngle
       CavityGradient:
         description: Cavity accelerating gradient.
         exact_mappings:
@@ -2323,15 +2449,15 @@ enums:
       A:
         description: ampere
         exact_mappings:
-          - qudt:A
+          - unit:A
       degree:
         description: degree
         exact_mappings:
-          - qudt:DEG
+          - unit:DEG
       eV:
         description: electron volt
         exact_mappings:
-          - qudt:EV
+          - unit:EV
       eV_per_c:
         description: momentum in electron volts per speed of light
       eV_per_c2:
@@ -2340,6 +2466,8 @@ enums:
         description: fundamental charge
       Gauss:
         description: gauss (magnetic flux density)
+        exact_mappings:
+          - unit:GAUSS
       G_cm:
         description: gauss centimeter, a magnetic field integral. 1 G.cm = 1e-6 T.m
         unit:
@@ -2347,34 +2475,32 @@ enums:
       Hz:
         description: hertz
         exact_mappings:
-          - qudt:HZ
+          - unit:HZ
       kW:
         description: kilowatt
-        related_mappings:
-          - qudt:KiloW
+        exact_mappings:
+          - unit:KiloW
       m:
         description: meter
         exact_mappings:
-          - qudt:M
+          - unit:M
       mm:
         description: millimeter
         exact_mappings:
-          - qudt:MilliM
+          - unit:MilliM
       mrem_per_h:
         description: >-
           millirem per hour. Kept as a local accelerator unit value because
           QUDT publishes related radiation units but no exact millirem-per-hour
           unit in the checked vocabulary.
-        exact_mappings:
-          - qudt:MREM-PER-H
       MV_per_m:
         description: megavolt per meter
         exact_mappings:
-          - qudt:MegaV-PER-M
+          - unit:MegaV-PER-M
       PA:
         description: pascal
         exact_mappings:
-          - qudt:PA
+          - unit:PA
       randians_pi2:
         description: radians divided by 2 pi - angles and phases
       rem_per_h:
@@ -2385,31 +2511,31 @@ enums:
       seconds:
         description: second
         exact_mappings:
-          - qudt:SEC
+          - unit:SEC
       T:
         description: tesla
         exact_mappings:
-          - qudt:T
+          - unit:T
       T_M:
         description: tesla meter
         exact_mappings:
-          - qudt:T-M
+          - unit:T-M
       Torr:
         description: torr
         exact_mappings:
-          - qudt:TORR
+          - unit:TORR
       V:
         description: volt
         exact_mappings:
-          - qudt:V
+          - unit:V
       V_per_m:
         description: volt per meter
         exact_mappings:
-          - qudt:V-PER-M
+          - unit:V-PER-M
       unitless:
         description: dimensionless numeric value
         exact_mappings:
-          - qudt:NUM
+          - unit:UNITLESS
       none:
         description: no unit or not applicable
 
@@ -2434,8 +2560,6 @@ enums:
           - xsd:boolean
       FloatArray:
         description: An array of floating-point values.
-        exact_mappings:
-          - acc:FloatArray
 
 
   CoordinateSystemEnum:

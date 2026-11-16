@@ -9,7 +9,7 @@ _Solenoid field._
 
 
 
-URI: [acc:slot/Bsol](https://example.org/accelerator-core/slot/Bsol)
+URI: [pals_config:slot/Bsol](https://w3id.org/pals-config/slot/Bsol)
 Alias: Bsol
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: Bsol
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: Bsol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Bsol |
-| native | acc:Bsol |
+| self | pals_config:Bsol |
+| native | pals_config:Bsol |
 | close | pals:Bsol |
 
 
@@ -96,7 +96,7 @@ Alias: Bsol
 ```yaml
 name: Bsol
 description: Solenoid field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:Bsol
 rank: 1000

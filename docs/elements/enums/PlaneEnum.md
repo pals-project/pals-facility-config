@@ -7,7 +7,7 @@ _Controlled values for transverse plane._
 
 
 
-URI: [acc:enum/PlaneEnum](https://example.org/accelerator-core/enum/PlaneEnum)
+URI: [pals_config:enum/PlaneEnum](https://w3id.org/pals-config/enum/PlaneEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -42,7 +42,7 @@ URI: [acc:enum/PlaneEnum](https://example.org/accelerator-core/enum/PlaneEnum)
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -55,7 +55,7 @@ URI: [acc:enum/PlaneEnum](https://example.org/accelerator-core/enum/PlaneEnum)
 ```yaml
 name: PlaneEnum
 description: Controlled values for transverse plane.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Horizontal:

@@ -9,7 +9,7 @@ _rad/2pi RF Phase added to multipass elements_
 
 
 
-URI: [acc:slot/multipass_phase](https://example.org/accelerator-core/slot/multipass_phase)
+URI: [pals_config:slot/multipass_phase](https://w3id.org/pals-config/slot/multipass_phase)
 Alias: multipass_phase
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: multipass_phase
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: multipass_phase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:multipass_phase |
-| native | acc:multipass_phase |
+| self | pals_config:multipass_phase |
+| native | pals_config:multipass_phase |
 | close | pals:multipass_phase |
 
 
@@ -90,7 +90,7 @@ Alias: multipass_phase
 ```yaml
 name: multipass_phase
 description: rad/2pi RF Phase added to multipass elements
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:multipass_phase
 rank: 1000

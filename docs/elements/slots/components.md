@@ -9,7 +9,7 @@ _A list of physical components in the accelerator system._
 
 
 
-URI: [acc:slot/components](https://example.org/accelerator-core/slot/components)
+URI: [pals_config:slot/components](https://w3id.org/pals-config/slot/components)
 Alias: components
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: components
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: components
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:components |
-| native | acc:components |
+| self | pals_config:components |
+| native | pals_config:components |
 
 
 
@@ -90,7 +90,7 @@ Alias: components
 ```yaml
 name: components
 description: A list of physical components in the accelerator system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: components
 owner: Facility

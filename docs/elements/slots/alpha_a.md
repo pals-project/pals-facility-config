@@ -9,7 +9,7 @@ _Twiss alpha parameter in the horizontal plane._
 
 
 
-URI: [acc:slot/alpha_a](https://example.org/accelerator-core/slot/alpha_a)
+URI: [pals_config:slot/alpha_a](https://w3id.org/pals-config/slot/alpha_a)
 Alias: alpha_a
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: alpha_a
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: alpha_a
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:alpha_a |
-| native | acc:alpha_a |
+| self | pals_config:alpha_a |
+| native | pals_config:alpha_a |
 | close | pals:alpha_a |
 
 
@@ -96,7 +96,7 @@ Alias: alpha_a
 ```yaml
 name: alpha_a
 description: Twiss alpha parameter in the horizontal plane.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - alpha_x
 - alphax

@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:class/HasBodyShiftP](https://example.org/accelerator-core/class/HasBodyShiftP)
+URI: [pals_config:class/HasBodyShiftP](https://w3id.org/pals-config/class/HasBodyShiftP)
 
 
 ```mermaid
@@ -79,7 +79,7 @@ HasBodyShiftP ||--|o BodyShiftParamGroup : "BodyShiftP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -88,8 +88,8 @@ HasBodyShiftP ||--|o BodyShiftParamGroup : "BodyShiftP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasBodyShiftP |
-| native | acc:HasBodyShiftP |
+| self | pals_config:HasBodyShiftP |
+| native | pals_config:HasBodyShiftP |
 
 
 
@@ -105,7 +105,7 @@ HasBodyShiftP ||--|o BodyShiftParamGroup : "BodyShiftP"
 <details>
 ```yaml
 name: HasBodyShiftP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   BodyShiftP:
@@ -113,7 +113,7 @@ attributes:
     description: A mixin for floor plan shift parameters that are aligned with PALS
       BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
       Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasBodyShiftP
@@ -128,7 +128,7 @@ attributes:
 <details>
 ```yaml
 name: HasBodyShiftP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   BodyShiftP:
@@ -136,7 +136,7 @@ attributes:
     description: A mixin for floor plan shift parameters that are aligned with PALS
       BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
       Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BodyShiftP
     owner: HasBodyShiftP

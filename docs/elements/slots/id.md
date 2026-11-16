@@ -9,7 +9,7 @@ _A unique identifier for the instance._
 
 
 
-URI: [acc:slot/id](https://example.org/accelerator-core/slot/id)
+URI: [pals_config:slot/id](https://w3id.org/pals-config/slot/id)
 Alias: id
 
 <!-- no inheritance hierarchy -->
@@ -130,7 +130,7 @@ Alias: id
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -139,8 +139,8 @@ Alias: id
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:id |
-| native | acc:id |
+| self | pals_config:id |
+| native | pals_config:id |
 | close | pals:id |
 
 
@@ -152,7 +152,7 @@ Alias: id
 ```yaml
 name: id
 description: A unique identifier for the instance.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:id
 rank: 1000

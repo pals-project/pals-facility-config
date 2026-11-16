@@ -9,7 +9,7 @@ _The function of the supporting facility component,  which can be used to identi
 
 
 
-URI: [acc:slot/facility_functions](https://example.org/accelerator-core/slot/facility_functions)
+URI: [pals_config:slot/facility_functions](https://w3id.org/pals-config/slot/facility_functions)
 Alias: facility_functions
 
 <!-- no inheritance hierarchy -->
@@ -70,7 +70,7 @@ Alias: facility_functions
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -79,8 +79,8 @@ Alias: facility_functions
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:facility_functions |
-| native | acc:facility_functions |
+| self | pals_config:facility_functions |
+| native | pals_config:facility_functions |
 | close | pals:supporting_facility_function |
 
 
@@ -93,7 +93,7 @@ Alias: facility_functions
 name: facility_functions
 description: The function of the supporting facility component,  which can be used
   to identify the component across different source systems.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:supporting_facility_function
 rank: 1000

@@ -9,7 +9,7 @@ _A mixin for an element's extent and position along the longitudinal (beam-direc
 
 
 
-URI: [acc:slot/LongitudinalPlacementP](https://example.org/accelerator-core/slot/LongitudinalPlacementP)
+URI: [pals_config:slot/LongitudinalPlacementP](https://w3id.org/pals-config/slot/LongitudinalPlacementP)
 Alias: LongitudinalPlacementP
 
 <!-- no inheritance hierarchy -->
@@ -90,7 +90,7 @@ Alias: LongitudinalPlacementP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -99,8 +99,8 @@ Alias: LongitudinalPlacementP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:LongitudinalPlacementP |
-| native | acc:LongitudinalPlacementP |
+| self | pals_config:LongitudinalPlacementP |
+| native | pals_config:LongitudinalPlacementP |
 
 
 
@@ -114,7 +114,7 @@ description: A mixin for an element's extent and position along the longitudinal
   "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement
   Parameters) for interoperability with the Particle Accelerator Language Standard
   (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: LongitudinalPlacementP
 owner: HasLongitudinalPlacementP

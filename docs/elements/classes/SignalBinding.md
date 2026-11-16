@@ -11,7 +11,7 @@ _Association between a PhysicalComponent and one of its Signals, e.g. QUAD1 comp
 * __NOTE__: this is an abstract class and should not be instantiated directly
 
 
-URI: [acc:class/SignalBinding](https://example.org/accelerator-core/class/SignalBinding)
+URI: [pals_config:class/SignalBinding](https://w3id.org/pals-config/class/SignalBinding)
 
 
 ```mermaid
@@ -125,7 +125,7 @@ SignalBinding ||--|| Signal : "object"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -134,8 +134,8 @@ SignalBinding ||--|| Signal : "object"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:SignalBinding |
-| native | acc:SignalBinding |
+| self | pals_config:SignalBinding |
+| native | pals_config:SignalBinding |
 
 
 
@@ -153,7 +153,7 @@ SignalBinding ||--|| Signal : "object"
 name: SignalBinding
 description: Association between a PhysicalComponent and one of its Signals, e.g.
   QUAD1 component to QUAD1.STATUS signal.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 is_a: Edge
 abstract: true
 slot_usage:
@@ -174,7 +174,7 @@ slot_usage:
 name: SignalBinding
 description: Association between a PhysicalComponent and one of its Signals, e.g.
   QUAD1 component to QUAD1.STATUS signal.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 is_a: Edge
 abstract: true
 slot_usage:
@@ -188,7 +188,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -204,7 +204,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -215,7 +215,7 @@ attributes:
     required: true
   predicate:
     name: predicate
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -227,7 +227,7 @@ attributes:
     required: true
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

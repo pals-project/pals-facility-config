@@ -11,7 +11,7 @@ _If value is greater than 1, the beamline is repeated that many times._
 
 
 
-URI: [acc:slot/repeat](https://example.org/accelerator-core/slot/repeat)
+URI: [pals_config:slot/repeat](https://w3id.org/pals-config/slot/repeat)
 Alias: repeat
 
 <!-- no inheritance hierarchy -->
@@ -70,7 +70,7 @@ Alias: repeat
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -79,8 +79,8 @@ Alias: repeat
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:repeat |
-| native | acc:repeat |
+| self | pals_config:repeat |
+| native | pals_config:repeat |
 | close | pals:repeat |
 
 
@@ -95,7 +95,7 @@ description: 'Repetition count. If not provided, the default assumption is that 
   beamline is not repeated and the value is 1.
 
   If value is greater than 1, the beamline is repeated that many times.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:repeat
 rank: 1000

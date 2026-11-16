@@ -9,7 +9,7 @@ _Normal component of the magnetic field._
 
 
 
-URI: [acc:slot/Bn](https://example.org/accelerator-core/slot/Bn)
+URI: [pals_config:slot/Bn](https://w3id.org/pals-config/slot/Bn)
 Alias: Bn
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: Bn
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Bn
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Bn |
-| native | acc:Bn |
+| self | pals_config:Bn |
+| native | pals_config:Bn |
 | broad | pals:BnN |
 
 
@@ -90,7 +90,7 @@ Alias: Bn
 ```yaml
 name: Bn
 description: Normal component of the magnetic field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:BnN
 rank: 1000

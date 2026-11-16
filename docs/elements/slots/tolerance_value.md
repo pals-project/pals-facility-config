@@ -9,7 +9,7 @@ _Tolerance value for the distance between two components in a relationship. Only
 
 
 
-URI: [acc:slot/tolerance_value](https://example.org/accelerator-core/slot/tolerance_value)
+URI: [pals_config:slot/tolerance_value](https://w3id.org/pals-config/slot/tolerance_value)
 Alias: tolerance_value
 
 <!-- no inheritance hierarchy -->
@@ -62,7 +62,7 @@ Alias: tolerance_value
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -71,8 +71,8 @@ Alias: tolerance_value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:tolerance_value |
-| native | acc:tolerance_value |
+| self | pals_config:tolerance_value |
+| native | pals_config:tolerance_value |
 
 
 
@@ -85,7 +85,7 @@ name: tolerance_value
 description: Tolerance value for the distance between two components in a relationship.
   Only an edge-property slot for edges that require a tolerance value between two
   components in a relationship.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: tolerance_value
 domain_of:

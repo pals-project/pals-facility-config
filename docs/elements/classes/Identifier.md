@@ -9,7 +9,7 @@ _A unique, and ideally persistent, identifier for a facility, such as a DOI or R
 
 
 
-URI: [acc:class/Identifier](https://example.org/accelerator-core/class/Identifier)
+URI: [pals_config:class/Identifier](https://w3id.org/pals-config/class/Identifier)
 
 
 ```mermaid
@@ -65,7 +65,7 @@ Identifier {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -74,8 +74,8 @@ Identifier {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Identifier |
-| native | acc:Identifier |
+| self | pals_config:Identifier |
+| native | pals_config:Identifier |
 
 
 
@@ -93,13 +93,13 @@ Identifier {
 name: Identifier
 description: A unique, and ideally persistent, identifier for a facility, such as
   a DOI or ROR.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   identifier_type:
     name: identifier_type
     description: The type of identifier, such as DOI | PURL | ROR | LOCAL | URL |
       ARK.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Identifier
@@ -107,7 +107,7 @@ attributes:
   identifier_value:
     name: identifier_value
     description: The value of the identifier.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Identifier
@@ -123,13 +123,13 @@ attributes:
 name: Identifier
 description: A unique, and ideally persistent, identifier for a facility, such as
   a DOI or ROR.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   identifier_type:
     name: identifier_type
     description: The type of identifier, such as DOI | PURL | ROR | LOCAL | URL |
       ARK.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: identifier_type
     owner: Identifier
@@ -139,7 +139,7 @@ attributes:
   identifier_value:
     name: identifier_value
     description: The value of the identifier.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: identifier_value
     owner: Identifier

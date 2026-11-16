@@ -9,7 +9,7 @@ _Mixin for bend parameters, which can be used to describe the bending properties
 
 
 
-URI: [acc:class/BendParamGroup](https://example.org/accelerator-core/class/BendParamGroup)
+URI: [pals_config:class/BendParamGroup](https://w3id.org/pals-config/class/BendParamGroup)
 
 
 ```mermaid
@@ -127,7 +127,7 @@ BendParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -136,8 +136,8 @@ BendParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:BendParamGroup |
-| native | acc:BendParamGroup |
+| self | pals_config:BendParamGroup |
+| native | pals_config:BendParamGroup |
 | exact | pals:BendP |
 
 
@@ -157,7 +157,7 @@ name: BendParamGroup
 description: Mixin for bend parameters, which can be used to describe the bending
   properties of an accelerator element. This mixin is aligned with PALS BendP for
   interoperability with the Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:BendP
 is_a: ParamGroup
@@ -165,7 +165,7 @@ attributes:
   angle_ref:
     name: angle_ref
     description: Reference bend angle.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:angle_ref
     rank: 1000
@@ -177,7 +177,7 @@ attributes:
   bend_field_ref:
     name: bend_field_ref
     description: Reference bend field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:bend_field_ref
     rank: 1000
@@ -189,7 +189,7 @@ attributes:
   bend_field_actual:
     name: bend_field_actual
     description: Actual bend field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:bend_field_actual
     rank: 1000
@@ -201,7 +201,7 @@ attributes:
   e1:
     name: e1
     description: Entrance end pole face rotation with respect to a sector geometry.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:e1
     rank: 1000
@@ -213,7 +213,7 @@ attributes:
   e2:
     name: e2
     description: Exit end pole face rotation with respect to a sector geometry.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:e2
     rank: 1000
@@ -225,7 +225,7 @@ attributes:
   e1_rect:
     name: e1_rect
     description: Entrance end pole face rotation with respect to a rectangular geometry.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:e1_rect
     rank: 1000
@@ -237,7 +237,7 @@ attributes:
   e2_rect:
     name: e2_rect
     description: Exit end pole face rotation with respect to a rectangular geometry.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:e2_rect
     rank: 1000
@@ -249,7 +249,7 @@ attributes:
   edge1_int:
     name: edge1_int
     description: Entrance end fringe field integral.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:edge1_int
     rank: 1000
@@ -261,7 +261,7 @@ attributes:
   edge2_int:
     name: edge2_int
     description: Exit end fringe field integral.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:edge2_int
     rank: 1000
@@ -273,7 +273,7 @@ attributes:
   g_ref:
     name: g_ref
     description: Reference bend strength = 1/radius_ref
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:g_ref
     rank: 1000
@@ -285,7 +285,7 @@ attributes:
   g_actual:
     name: g_actual
     description: Actual bend strength = 1/radius_actual
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:g_actual
     rank: 1000
@@ -297,7 +297,7 @@ attributes:
   h1:
     name: h1
     description: Entrance end pole face curvature
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:h1
     rank: 1000
@@ -309,7 +309,7 @@ attributes:
   h2:
     name: h2
     description: Exit end pole face curvature
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:h2
     rank: 1000
@@ -321,7 +321,7 @@ attributes:
   L_chord:
     name: L_chord
     description: Chord length of the bend.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:L_chord
     rank: 1000
@@ -333,7 +333,7 @@ attributes:
   L_sagitta:
     name: L_sagitta
     description: Output parameter. Sagitta length.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:L_sagitta
     rank: 1000
@@ -345,7 +345,7 @@ attributes:
   L_rectangle:
     name: L_rectangle
     description: Rectangular length.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:L_rectangle
     rank: 1000
@@ -357,7 +357,7 @@ attributes:
   multipole_geometry:
     name: multipole_geometry
     description: Multipole geometry type. Must be `follows_ref_geometry`.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:multipole_geometry
     rank: 1000
@@ -367,7 +367,7 @@ attributes:
   ref_geometry:
     name: ref_geometry
     description: Reference geometry type. Must be `arc`.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:ref_geometry
     rank: 1000
@@ -377,7 +377,7 @@ attributes:
   rho_ref:
     name: rho_ref
     description: Reference bend radius.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:rho_ref
     rank: 1000
@@ -389,7 +389,7 @@ attributes:
   tilt_ref:
     name: tilt_ref
     description: Reference tilt of the bend.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:tilt_ref
     rank: 1000
@@ -433,7 +433,7 @@ name: BendParamGroup
 description: Mixin for bend parameters, which can be used to describe the bending
   properties of an accelerator element. This mixin is aligned with PALS BendP for
   interoperability with the Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:BendP
 is_a: ParamGroup
@@ -441,7 +441,7 @@ attributes:
   angle_ref:
     name: angle_ref
     description: Reference bend angle.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:angle_ref
     rank: 1000
@@ -455,7 +455,7 @@ attributes:
   bend_field_ref:
     name: bend_field_ref
     description: Reference bend field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:bend_field_ref
     rank: 1000
@@ -469,7 +469,7 @@ attributes:
   bend_field_actual:
     name: bend_field_actual
     description: Actual bend field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:bend_field_actual
     rank: 1000
@@ -483,7 +483,7 @@ attributes:
   e1:
     name: e1
     description: Entrance end pole face rotation with respect to a sector geometry.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:e1
     rank: 1000
@@ -497,7 +497,7 @@ attributes:
   e2:
     name: e2
     description: Exit end pole face rotation with respect to a sector geometry.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:e2
     rank: 1000
@@ -511,7 +511,7 @@ attributes:
   e1_rect:
     name: e1_rect
     description: Entrance end pole face rotation with respect to a rectangular geometry.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:e1_rect
     rank: 1000
@@ -525,7 +525,7 @@ attributes:
   e2_rect:
     name: e2_rect
     description: Exit end pole face rotation with respect to a rectangular geometry.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:e2_rect
     rank: 1000
@@ -539,7 +539,7 @@ attributes:
   edge1_int:
     name: edge1_int
     description: Entrance end fringe field integral.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:edge1_int
     rank: 1000
@@ -553,7 +553,7 @@ attributes:
   edge2_int:
     name: edge2_int
     description: Exit end fringe field integral.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:edge2_int
     rank: 1000
@@ -567,7 +567,7 @@ attributes:
   g_ref:
     name: g_ref
     description: Reference bend strength = 1/radius_ref
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:g_ref
     rank: 1000
@@ -581,7 +581,7 @@ attributes:
   g_actual:
     name: g_actual
     description: Actual bend strength = 1/radius_actual
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:g_actual
     rank: 1000
@@ -595,7 +595,7 @@ attributes:
   h1:
     name: h1
     description: Entrance end pole face curvature
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:h1
     rank: 1000
@@ -609,7 +609,7 @@ attributes:
   h2:
     name: h2
     description: Exit end pole face curvature
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:h2
     rank: 1000
@@ -623,7 +623,7 @@ attributes:
   L_chord:
     name: L_chord
     description: Chord length of the bend.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:L_chord
     rank: 1000
@@ -637,7 +637,7 @@ attributes:
   L_sagitta:
     name: L_sagitta
     description: Output parameter. Sagitta length.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:L_sagitta
     rank: 1000
@@ -651,7 +651,7 @@ attributes:
   L_rectangle:
     name: L_rectangle
     description: Rectangular length.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:L_rectangle
     rank: 1000
@@ -665,7 +665,7 @@ attributes:
   multipole_geometry:
     name: multipole_geometry
     description: Multipole geometry type. Must be `follows_ref_geometry`.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:multipole_geometry
     rank: 1000
@@ -677,7 +677,7 @@ attributes:
   ref_geometry:
     name: ref_geometry
     description: Reference geometry type. Must be `arc`.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:ref_geometry
     rank: 1000
@@ -689,7 +689,7 @@ attributes:
   rho_ref:
     name: rho_ref
     description: Reference bend radius.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:rho_ref
     rank: 1000
@@ -703,7 +703,7 @@ attributes:
   tilt_ref:
     name: tilt_ref
     description: Reference tilt of the bend.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:tilt_ref
     rank: 1000
@@ -717,7 +717,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

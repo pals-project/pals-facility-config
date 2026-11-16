@@ -9,7 +9,7 @@ _Entrance end pole face rotation with respect to a rectangular geometry._
 
 
 
-URI: [acc:slot/e1_rect](https://example.org/accelerator-core/slot/e1_rect)
+URI: [pals_config:slot/e1_rect](https://w3id.org/pals-config/slot/e1_rect)
 Alias: e1_rect
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: e1_rect
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: e1_rect
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:e1_rect |
-| native | acc:e1_rect |
+| self | pals_config:e1_rect |
+| native | pals_config:e1_rect |
 | close | pals:e1_rect |
 
 
@@ -96,7 +96,7 @@ Alias: e1_rect
 ```yaml
 name: e1_rect
 description: Entrance end pole face rotation with respect to a rectangular geometry.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:e1_rect
 rank: 1000

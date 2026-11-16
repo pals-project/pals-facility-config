@@ -9,7 +9,7 @@ _A facility that contains lattice elements (physical and virtual), beamlines, pa
 
 
 
-URI: [acc:slot/facility](https://example.org/accelerator-core/slot/facility)
+URI: [pals_config:slot/facility](https://w3id.org/pals-config/slot/facility)
 Alias: facility
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: facility
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: facility
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:facility |
-| native | acc:facility |
+| self | pals_config:facility |
+| native | pals_config:facility |
 
 
 
@@ -90,7 +90,7 @@ Alias: facility
 name: facility
 description: A facility that contains lattice elements (physical and virtual), beamlines,
   parameter set commands, signals, etc.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: facility
 owner: PALSAccelerator

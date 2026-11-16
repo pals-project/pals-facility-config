@@ -7,7 +7,7 @@ _The zero phase reference for the cavity, which determines the phase of the RF f
 
 
 
-URI: [acc:enum/ZeroPhaseEnum](https://example.org/accelerator-core/enum/ZeroPhaseEnum)
+URI: [pals_config:enum/ZeroPhaseEnum](https://w3id.org/pals-config/enum/ZeroPhaseEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -43,7 +43,7 @@ URI: [acc:enum/ZeroPhaseEnum](https://example.org/accelerator-core/enum/ZeroPhas
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -57,7 +57,7 @@ URI: [acc:enum/ZeroPhaseEnum](https://example.org/accelerator-core/enum/ZeroPhas
 name: ZeroPhaseEnum
 description: The zero phase reference for the cavity, which determines the phase of
   the RF field at the entrance of the cavity.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   ACCELERATING:

@@ -9,7 +9,7 @@ _RF frequency._
 
 
 
-URI: [acc:slot/frequency](https://example.org/accelerator-core/slot/frequency)
+URI: [pals_config:slot/frequency](https://w3id.org/pals-config/slot/frequency)
 Alias: frequency
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: frequency
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: frequency
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:frequency |
-| native | acc:frequency |
+| self | pals_config:frequency |
+| native | pals_config:frequency |
 | close | pals:frequency |
 
 
@@ -96,7 +96,7 @@ Alias: frequency
 ```yaml
 name: frequency
 description: RF frequency.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:frequency
 rank: 1000

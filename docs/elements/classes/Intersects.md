@@ -9,7 +9,7 @@ _A relationship indicating that the subject component intersects the object comp
 
 
 
-URI: [acc:class/Intersects](https://example.org/accelerator-core/class/Intersects)
+URI: [pals_config:class/Intersects](https://w3id.org/pals-config/class/Intersects)
 
 
 ```mermaid
@@ -83,7 +83,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | acc:intersects |
+| rdf_predicate | pals_config:intersects |
 
 
 
@@ -91,7 +91,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -100,9 +100,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Intersects |
-| native | acc:Intersects |
-| broad | RO:0015011 |
+| self | pals_config:Intersects |
+| native | pals_config:Intersects |
 
 
 
@@ -121,12 +120,10 @@ name: Intersects
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:intersects
+    value: pals_config:intersects
 description: A relationship indicating that the subject component intersects the object
   component in a specified context,  such as a beamline and a diagnostic device.
-from_schema: https://w3id.org/accelerator-core
-broad_mappings:
-- RO:0015011
+from_schema: https://w3id.org/pals-config
 is_a: ComponentRelation
 slot_usage:
   predicate:
@@ -147,12 +144,10 @@ name: Intersects
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:intersects
+    value: pals_config:intersects
 description: A relationship indicating that the subject component intersects the object
   component in a specified context,  such as a beamline and a diagnostic device.
-from_schema: https://w3id.org/accelerator-core
-broad_mappings:
-- RO:0015011
+from_schema: https://w3id.org/pals-config
 is_a: ComponentRelation
 slot_usage:
   predicate:
@@ -166,7 +161,7 @@ attributes:
     name: context
     description: The frame of reference / domain in which this relationship is asserted
       to hold.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: Intersects
@@ -177,7 +172,7 @@ attributes:
     required: true
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: Intersects
@@ -186,7 +181,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: Intersects
@@ -197,7 +192,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -213,7 +208,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -226,7 +221,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -239,7 +234,7 @@ attributes:
     equals_string: Intersects
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

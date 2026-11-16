@@ -9,7 +9,7 @@ _Output parameter. Sagitta length._
 
 
 
-URI: [acc:slot/L_sagitta](https://example.org/accelerator-core/slot/L_sagitta)
+URI: [pals_config:slot/L_sagitta](https://w3id.org/pals-config/slot/L_sagitta)
 Alias: L_sagitta
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: L_sagitta
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: L_sagitta
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:L_sagitta |
-| native | acc:L_sagitta |
+| self | pals_config:L_sagitta |
+| native | pals_config:L_sagitta |
 | close | pals:L_sagitta |
 
 
@@ -96,7 +96,7 @@ Alias: L_sagitta
 ```yaml
 name: L_sagitta
 description: Output parameter. Sagitta length.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:L_sagitta
 rank: 1000

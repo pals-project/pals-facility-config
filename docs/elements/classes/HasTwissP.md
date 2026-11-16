@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:class/HasTwissP](https://example.org/accelerator-core/class/HasTwissP)
+URI: [pals_config:class/HasTwissP](https://w3id.org/pals-config/class/HasTwissP)
 
 
 ```mermaid
@@ -83,7 +83,7 @@ HasTwissP ||--|o TwissParamGroup : "TwissP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -92,8 +92,8 @@ HasTwissP ||--|o TwissParamGroup : "TwissP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasTwissP |
-| native | acc:HasTwissP |
+| self | pals_config:HasTwissP |
+| native | pals_config:HasTwissP |
 
 
 
@@ -109,7 +109,7 @@ HasTwissP ||--|o TwissParamGroup : "TwissP"
 <details>
 ```yaml
 name: HasTwissP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   TwissP:
@@ -117,7 +117,7 @@ attributes:
     description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasTwissP
@@ -132,7 +132,7 @@ attributes:
 <details>
 ```yaml
 name: HasTwissP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   TwissP:
@@ -140,7 +140,7 @@ attributes:
     description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: TwissP
     owner: HasTwissP

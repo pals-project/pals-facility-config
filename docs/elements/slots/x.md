@@ -9,7 +9,7 @@ _Global X coordinate in the facility floor plan._
 
 
 
-URI: [acc:slot/x](https://example.org/accelerator-core/slot/x)
+URI: [pals_config:slot/x](https://w3id.org/pals-config/slot/x)
 Alias: x
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: x
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: x
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:x |
-| native | acc:x |
+| self | pals_config:x |
+| native | pals_config:x |
 | close | pals:x |
 
 
@@ -97,7 +97,7 @@ Alias: x
 ```yaml
 name: x
 description: Global X coordinate in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - x_coordinate
 - ModelX

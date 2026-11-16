@@ -9,7 +9,7 @@ _Reference bend field._
 
 
 
-URI: [acc:slot/bend_field_ref](https://example.org/accelerator-core/slot/bend_field_ref)
+URI: [pals_config:slot/bend_field_ref](https://w3id.org/pals-config/slot/bend_field_ref)
 Alias: bend_field_ref
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: bend_field_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: bend_field_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:bend_field_ref |
-| native | acc:bend_field_ref |
+| self | pals_config:bend_field_ref |
+| native | pals_config:bend_field_ref |
 | close | pals:bend_field_ref |
 
 
@@ -96,7 +96,7 @@ Alias: bend_field_ref
 ```yaml
 name: bend_field_ref
 description: Reference bend field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:bend_field_ref
 rank: 1000

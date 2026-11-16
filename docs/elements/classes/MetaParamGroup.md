@@ -9,7 +9,7 @@ _Mixin class for metadata parameters that are aligned with PALS MetaP (Metadata 
 
 
 
-URI: [acc:class/MetaParamGroup](https://example.org/accelerator-core/class/MetaParamGroup)
+URI: [pals_config:class/MetaParamGroup](https://w3id.org/pals-config/class/MetaParamGroup)
 
 
 ```mermaid
@@ -108,7 +108,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -117,8 +117,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:MetaParamGroup |
-| native | acc:MetaParamGroup |
+| self | pals_config:MetaParamGroup |
+| native | pals_config:MetaParamGroup |
 | broad | pals:MetaP |
 
 
@@ -138,7 +138,7 @@ name: MetaParamGroup
 description: Mixin class for metadata parameters that are aligned with PALS MetaP
   (Metadata Parameters) for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:MetaP
 is_a: ParamGroup
@@ -149,7 +149,7 @@ attributes:
   label:
     name: label
     description: A label string.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:label
     rank: 1000
@@ -159,7 +159,7 @@ attributes:
   additional_metadata:
     name: additional_metadata
     description: Additional metadata or annotations for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - MetaParamGroup
@@ -179,7 +179,7 @@ name: MetaParamGroup
 description: Mixin class for metadata parameters that are aligned with PALS MetaP
   (Metadata Parameters) for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:MetaP
 is_a: ParamGroup
@@ -187,7 +187,7 @@ attributes:
   label:
     name: label
     description: A label string.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:label
     rank: 1000
@@ -199,7 +199,7 @@ attributes:
   additional_metadata:
     name: additional_metadata
     description: Additional metadata or annotations for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: additional_metadata
     owner: MetaParamGroup
@@ -212,19 +212,20 @@ attributes:
   description:
     name: description
     description: A human-readable description of the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: description
     owner: MetaParamGroup
     domain_of:
     - PALSAccelerator
+    - TemporalCoverageClass
     - MetaParamGroup
     - BeamLine
     range: string
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000
@@ -238,7 +239,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

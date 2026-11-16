@@ -9,7 +9,7 @@ _Shift in the X direction in the facility floor plan._
 
 
 
-URI: [acc:slot/x_offset](https://example.org/accelerator-core/slot/x_offset)
+URI: [pals_config:slot/x_offset](https://w3id.org/pals-config/slot/x_offset)
 Alias: x_offset
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: x_offset
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: x_offset
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:x_offset |
-| native | acc:x_offset |
+| self | pals_config:x_offset |
+| native | pals_config:x_offset |
 | close | pals:x_offset |
 
 
@@ -97,7 +97,7 @@ Alias: x_offset
 ```yaml
 name: x_offset
 description: Shift in the X direction in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - delta_x
 - x_shift

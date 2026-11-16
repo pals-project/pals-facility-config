@@ -9,7 +9,7 @@ _Mixin for reference parameters that are aligned with PALS ReferenceP (Reference
 
 
 
-URI: [acc:class/ReferenceParamGroup](https://example.org/accelerator-core/class/ReferenceParamGroup)
+URI: [pals_config:class/ReferenceParamGroup](https://w3id.org/pals-config/class/ReferenceParamGroup)
 
 
 ```mermaid
@@ -39,7 +39,7 @@ ReferenceParamGroup {
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [species_ref](../slots/species_ref.md) | 0..1 <br/> [String](../types/String.md) | A reference to a species or particle type, such as an ion, electron, or proton. | direct |
-| [pc_ref](../slots/pc_ref.md) | 0..1 <br/> [Float](../types/Float.md) | [momentum*c] Reference momentum times speed of light. | direct |
+| [pc_ref](../slots/pc_ref.md) | 0..1 <br/> [Float](../types/Float.md) | [MeV] Reference momentum times speed of light, i.e. beam momentum in MeV/c. | direct |
 | [E_tot_ref](../slots/E_tot_ref.md) | 0..1 <br/> [Float](../types/Float.md) | [eV] Reference total energy | direct |
 | [time_ref](../slots/time_ref.md) | 0..1 <br/> [Float](../types/Float.md) | [s] Reference time | direct |
 | [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
@@ -92,7 +92,7 @@ ReferenceParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -101,8 +101,8 @@ ReferenceParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:ReferenceParamGroup |
-| native | acc:ReferenceParamGroup |
+| self | pals_config:ReferenceParamGroup |
+| native | pals_config:ReferenceParamGroup |
 | broad | pals:ReferenceP |
 
 
@@ -122,7 +122,7 @@ name: ReferenceParamGroup
 description: Mixin for reference parameters that are aligned with PALS ReferenceP
   (Reference Parameters)  for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:ReferenceP
 is_a: ParamGroup
@@ -131,7 +131,7 @@ attributes:
     name: species_ref
     description: A reference to a species or particle type, such as an ion, electron,
       or proton.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:species_ref
     rank: 1000
@@ -140,8 +140,9 @@ attributes:
     range: string
   pc_ref:
     name: pc_ref
-    description: '[momentum*c] Reference momentum times speed of light.'
-    from_schema: https://w3id.org/accelerator-core
+    description: '[MeV] Reference momentum times speed of light, i.e. beam momentum
+      in MeV/c.'
+    from_schema: https://w3id.org/pals-config
     aliases:
     - pCentral
     close_mappings:
@@ -150,10 +151,12 @@ attributes:
     domain_of:
     - ReferenceParamGroup
     range: float
+    unit:
+      ucum_code: MeV
   E_tot_ref:
     name: E_tot_ref
     description: '[eV] Reference total energy'
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - ETotal
     close_mappings:
@@ -167,7 +170,7 @@ attributes:
   time_ref:
     name: time_ref
     description: '[s] Reference time'
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - tRef
     close_mappings:
@@ -190,7 +193,7 @@ name: ReferenceParamGroup
 description: Mixin for reference parameters that are aligned with PALS ReferenceP
   (Reference Parameters)  for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:ReferenceP
 is_a: ParamGroup
@@ -199,7 +202,7 @@ attributes:
     name: species_ref
     description: A reference to a species or particle type, such as an ion, electron,
       or proton.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:species_ref
     rank: 1000
@@ -210,8 +213,9 @@ attributes:
     range: string
   pc_ref:
     name: pc_ref
-    description: '[momentum*c] Reference momentum times speed of light.'
-    from_schema: https://w3id.org/accelerator-core
+    description: '[MeV] Reference momentum times speed of light, i.e. beam momentum
+      in MeV/c.'
+    from_schema: https://w3id.org/pals-config
     aliases:
     - pCentral
     close_mappings:
@@ -222,10 +226,12 @@ attributes:
     domain_of:
     - ReferenceParamGroup
     range: float
+    unit:
+      ucum_code: MeV
   E_tot_ref:
     name: E_tot_ref
     description: '[eV] Reference total energy'
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - ETotal
     close_mappings:
@@ -241,7 +247,7 @@ attributes:
   time_ref:
     name: time_ref
     description: '[s] Reference time'
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     aliases:
     - tRef
     close_mappings:
@@ -257,7 +263,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000

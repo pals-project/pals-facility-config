@@ -9,7 +9,7 @@ _RF phase. rad/2pi RF phase in 0 to 2*pi_
 
 
 
-URI: [acc:slot/phase](https://example.org/accelerator-core/slot/phase)
+URI: [pals_config:slot/phase](https://w3id.org/pals-config/slot/phase)
 Alias: phase
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: phase
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: phase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:phase |
-| native | acc:phase |
+| self | pals_config:phase |
+| native | pals_config:phase |
 | close | pals:phase |
 
 
@@ -90,7 +90,7 @@ Alias: phase
 ```yaml
 name: phase
 description: RF phase. rad/2pi RF phase in 0 to 2*pi
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:phase
 rank: 1000

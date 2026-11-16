@@ -9,7 +9,7 @@ _Rotation around the Y-axis in the facility floor plan._
 
 
 
-URI: [acc:slot/y_rot](https://example.org/accelerator-core/slot/y_rot)
+URI: [pals_config:slot/y_rot](https://w3id.org/pals-config/slot/y_rot)
 Alias: y_rot
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: y_rot
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: y_rot
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:y_rot |
-| native | acc:y_rot |
+| self | pals_config:y_rot |
+| native | pals_config:y_rot |
 | close | pals:y_rot |
 
 
@@ -97,7 +97,7 @@ Alias: y_rot
 ```yaml
 name: y_rot
 description: Rotation around the Y-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - delta_theta
 - theta_shift

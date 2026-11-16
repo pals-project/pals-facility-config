@@ -9,7 +9,7 @@ _An ACKicker element simulates a time-dependent kicker.  It is like a Kicker ele
 
 
 
-URI: [acc:class/ACKicker](https://example.org/accelerator-core/class/ACKicker)
+URI: [pals_config:class/ACKicker](https://w3id.org/pals-config/class/ACKicker)
 
 
 ```mermaid
@@ -165,7 +165,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -174,8 +174,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:ACKicker |
-| native | acc:ACKicker |
+| self | pals_config:ACKicker |
+| native | pals_config:ACKicker |
 | exact | pals:ACKicker |
 
 
@@ -195,7 +195,7 @@ name: ACKicker
 description: An ACKicker element simulates a time-dependent kicker.  It is like a
   Kicker element except that the field varies in time.  This element requires a user
   supplied time-dependent expression.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:ACKicker
 is_a: Kicker
@@ -211,7 +211,7 @@ name: ACKicker
 description: An ACKicker element simulates a time-dependent kicker.  It is like a
   Kicker element except that the field varies in time.  This element requires a user
   supplied time-dependent expression.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:ACKicker
 is_a: Kicker
@@ -220,7 +220,7 @@ attributes:
     name: plane
     description: The transverse plane in which the kicker operates, either horizontal
       or vertical.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: plane
     owner: ACKicker
@@ -232,7 +232,7 @@ attributes:
     description: A mixin for electric multipole parameters that are aligned with PALS
       ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ElectricMultipoleP
     owner: ACKicker
@@ -245,7 +245,7 @@ attributes:
     description: A mixin for magnetic multipole parameters that are aligned with PALS
       MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MagneticMultipoleP
     owner: ACKicker
@@ -258,7 +258,7 @@ attributes:
     description: A mixin for reference parameters that are aligned with PALS ReferenceP
       (Reference Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ReferenceP
     owner: ACKicker
@@ -271,7 +271,7 @@ attributes:
     description: A mixin for floor plan shift parameters that are aligned with PALS
       BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
       Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BodyShiftP
     owner: ACKicker
@@ -284,7 +284,7 @@ attributes:
     description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: TwissP
     owner: ACKicker
@@ -296,7 +296,7 @@ attributes:
     name: functions
     description: The function of the physical component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_function
     rank: 1000
@@ -312,7 +312,7 @@ attributes:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_beamline_relation
     rank: 1000
@@ -328,7 +328,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: ACKicker
@@ -342,7 +342,7 @@ attributes:
       (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
       (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: LongitudinalPlacementP
     owner: ACKicker
@@ -354,7 +354,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: ACKicker
@@ -367,7 +367,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: ACKicker
@@ -378,7 +378,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -396,7 +396,9 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -410,7 +412,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

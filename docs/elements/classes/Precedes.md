@@ -9,7 +9,7 @@ _A relationship indicating that the subject component precedes the object compon
 
 
 
-URI: [acc:class/Precedes](https://example.org/accelerator-core/class/Precedes)
+URI: [pals_config:class/Precedes](https://w3id.org/pals-config/class/Precedes)
 
 
 ```mermaid
@@ -23,10 +23,10 @@ BeamLine {
     integer repeat  
     string id  
     stringList alias  
-    string kind  
-    stringList native_types  
     VirtualRelationEnum beamline_relation  
     VirtualFunctionEnumList functions  
+    string kind  
+    stringList native_types  
 }
 Component {
     stringList native_types  
@@ -122,7 +122,7 @@ Precedes ||--|| Component : "object, subject"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | acc:precedes |
+| rdf_predicate | pals_config:precedes |
 
 
 
@@ -130,7 +130,7 @@ Precedes ||--|| Component : "object, subject"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -139,9 +139,8 @@ Precedes ||--|| Component : "object, subject"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Precedes |
-| native | acc:Precedes |
-| exact | BFO:0000063 |
+| self | pals_config:Precedes |
+| native | pals_config:Precedes |
 
 
 
@@ -160,12 +159,10 @@ name: Precedes
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:precedes
+    value: pals_config:precedes
 description: A relationship indicating that the subject component precedes the object
   component in a specified context,  such as along a beamline.
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
-- BFO:0000063
+from_schema: https://w3id.org/pals-config
 is_a: ComponentRelation
 slots:
 - beamline_context
@@ -206,12 +203,10 @@ name: Precedes
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:precedes
+    value: pals_config:precedes
 description: A relationship indicating that the subject component precedes the object
   component in a specified context,  such as along a beamline.
-from_schema: https://w3id.org/accelerator-core
-exact_mappings:
-- BFO:0000063
+from_schema: https://w3id.org/pals-config
 is_a: ComponentRelation
 slot_usage:
   predicate:
@@ -232,7 +227,7 @@ attributes:
     description: The specific BeamLine this relationship is defined with respect to
       (relevant when context=beamline_order). Only an edge-property slot for edges
       that are defined with respect to a specific BeamLine.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: beamline_context
     owner: Precedes
@@ -248,7 +243,7 @@ attributes:
     description: The frame of reference / domain in which this relationship is asserted
       to hold. For Precedes, this is always beamline_order; the specific BeamLine
       is given in beamline_context.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: Precedes
@@ -259,7 +254,7 @@ attributes:
     required: true
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: Precedes
@@ -268,7 +263,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: Precedes
@@ -279,7 +274,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -295,7 +290,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -308,7 +303,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -321,7 +316,7 @@ attributes:
     equals_string: Precedes
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

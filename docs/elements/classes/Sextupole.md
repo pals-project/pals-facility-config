@@ -11,7 +11,7 @@ _Only one of the electric or magnetic multipole components should be present, no
 
 
 
-URI: [acc:class/Sextupole](https://example.org/accelerator-core/class/Sextupole)
+URI: [pals_config:class/Sextupole](https://w3id.org/pals-config/class/Sextupole)
 
 
 ```mermaid
@@ -165,7 +165,7 @@ Sextupole ||--|o TwissParamGroup : "TwissP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -174,8 +174,8 @@ Sextupole ||--|o TwissParamGroup : "TwissP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Sextupole |
-| native | acc:Sextupole |
+| self | pals_config:Sextupole |
+| native | pals_config:Sextupole |
 | exact | pals:Sextupole |
 
 
@@ -196,7 +196,7 @@ description: 'A magnet primarily used to focus or defocus the beam. 6 poles.
 
   Only one of the electric or magnetic multipole components should be present, not
   both.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:Sextupole
 is_a: Multipole
@@ -213,7 +213,7 @@ description: 'A magnet primarily used to focus or defocus the beam. 6 poles.
 
   Only one of the electric or magnetic multipole components should be present, not
   both.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 exact_mappings:
 - pals:Sextupole
 is_a: Multipole
@@ -223,7 +223,7 @@ attributes:
     description: A mixin for electric multipole parameters that are aligned with PALS
       ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ElectricMultipoleP
     owner: Sextupole
@@ -236,7 +236,7 @@ attributes:
     description: A mixin for magnetic multipole parameters that are aligned with PALS
       MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MagneticMultipoleP
     owner: Sextupole
@@ -249,7 +249,7 @@ attributes:
     description: A mixin for reference parameters that are aligned with PALS ReferenceP
       (Reference Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ReferenceP
     owner: Sextupole
@@ -262,7 +262,7 @@ attributes:
     description: A mixin for floor plan shift parameters that are aligned with PALS
       BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
       Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BodyShiftP
     owner: Sextupole
@@ -275,7 +275,7 @@ attributes:
     description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: TwissP
     owner: Sextupole
@@ -287,7 +287,7 @@ attributes:
     name: functions
     description: The function of the physical component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_function
     rank: 1000
@@ -303,7 +303,7 @@ attributes:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_beamline_relation
     rank: 1000
@@ -319,7 +319,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: Sextupole
@@ -333,7 +333,7 @@ attributes:
       (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
       (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: LongitudinalPlacementP
     owner: Sextupole
@@ -345,7 +345,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: Sextupole
@@ -358,7 +358,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: Sextupole
@@ -369,7 +369,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -387,7 +387,9 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -401,7 +403,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

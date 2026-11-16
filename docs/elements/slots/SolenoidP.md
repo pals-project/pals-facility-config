@@ -9,7 +9,7 @@ _A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (
 
 
 
-URI: [acc:slot/SolenoidP](https://example.org/accelerator-core/slot/SolenoidP)
+URI: [pals_config:slot/SolenoidP](https://w3id.org/pals-config/slot/SolenoidP)
 Alias: SolenoidP
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: SolenoidP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: SolenoidP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:SolenoidP |
-| native | acc:SolenoidP |
+| self | pals_config:SolenoidP |
+| native | pals_config:SolenoidP |
 
 
 
@@ -92,7 +92,7 @@ name: SolenoidP
 description: A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP
   (Solenoid Parameters) for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: SolenoidP
 owner: HasSolenoidP

@@ -9,7 +9,7 @@ _The radial distance in cylindrical coordinates._
 
 
 
-URI: [acc:slot/r_coord](https://example.org/accelerator-core/slot/r_coord)
+URI: [pals_config:slot/r_coord](https://w3id.org/pals-config/slot/r_coord)
 Alias: r_coord
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: r_coord
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: r_coord
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:r_coord |
-| native | acc:r_coord |
+| self | pals_config:r_coord |
+| native | pals_config:r_coord |
 
 
 
@@ -89,7 +89,7 @@ Alias: r_coord
 ```yaml
 name: r_coord
 description: The radial distance in cylindrical coordinates.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: r_coord
 owner: CoordinateSet

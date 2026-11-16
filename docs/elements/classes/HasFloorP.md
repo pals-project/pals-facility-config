@@ -4,7 +4,7 @@
 
 
 
-URI: [acc:class/HasFloorP](https://example.org/accelerator-core/class/HasFloorP)
+URI: [pals_config:class/HasFloorP](https://w3id.org/pals-config/class/HasFloorP)
 
 
 ```mermaid
@@ -76,7 +76,7 @@ HasFloorP ||--|o FloorParamGroup : "FloorP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +85,8 @@ HasFloorP ||--|o FloorParamGroup : "FloorP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:HasFloorP |
-| native | acc:HasFloorP |
+| self | pals_config:HasFloorP |
+| native | pals_config:HasFloorP |
 
 
 
@@ -102,7 +102,7 @@ HasFloorP ||--|o FloorParamGroup : "FloorP"
 <details>
 ```yaml
 name: HasFloorP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   FloorP:
@@ -110,7 +110,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasFloorP
@@ -125,7 +125,7 @@ attributes:
 <details>
 ```yaml
 name: HasFloorP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   FloorP:
@@ -133,7 +133,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: HasFloorP

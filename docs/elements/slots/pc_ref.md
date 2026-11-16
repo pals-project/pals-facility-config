@@ -3,13 +3,13 @@
 # Slot: pc_ref 
 
 
-_[momentum*c] Reference momentum times speed of light._
+_[MeV] Reference momentum times speed of light, i.e. beam momentum in MeV/c._
 
 
 
 
 
-URI: [acc:slot/pc_ref](https://example.org/accelerator-core/slot/pc_ref)
+URI: [pals_config:slot/pc_ref](https://w3id.org/pals-config/slot/pc_ref)
 Alias: pc_ref
 
 <!-- no inheritance hierarchy -->
@@ -49,6 +49,12 @@ Alias: pc_ref
 | Owner | [ReferenceParamGroup](../classes/ReferenceParamGroup.md) |
 
 
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `MeV`
+
+</details>
+
 
 
 
@@ -73,7 +79,7 @@ Alias: pc_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -82,8 +88,8 @@ Alias: pc_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:pc_ref |
-| native | acc:pc_ref |
+| self | pals_config:pc_ref |
+| native | pals_config:pc_ref |
 | close | pals:pc_ref |
 
 
@@ -94,8 +100,9 @@ Alias: pc_ref
 <details>
 ```yaml
 name: pc_ref
-description: '[momentum*c] Reference momentum times speed of light.'
-from_schema: https://w3id.org/accelerator-core
+description: '[MeV] Reference momentum times speed of light, i.e. beam momentum in
+  MeV/c.'
+from_schema: https://w3id.org/pals-config
 aliases:
 - pCentral
 close_mappings:
@@ -106,6 +113,8 @@ owner: ReferenceParamGroup
 domain_of:
 - ReferenceParamGroup
 range: float
+unit:
+  ucum_code: MeV
 
 ```
 </details>

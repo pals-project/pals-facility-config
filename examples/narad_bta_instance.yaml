@@ -1,6 +1,19 @@
 description: Skeleton NARAD representation of the BTA beamline generated from bta.pals.yaml.
 kind: PALSAccelerator
-version: 0.1.0
+version: 0.0.2
+schema_version: 0.0.1
+created_date: "2026-10-22"
+updated_date: "2026-10-30"
+change_log:
+- change_date: "2026-10-22"
+  instance_version: 0.0.0
+  summary: Initial creation.
+- change_date: "2026-10-30"
+  instance_version: 0.0.1
+  summary: Corrected small typo by changing clkind to kind at the first line in narad_bta_instance.yaml
+- change_date: "2026-10-30"
+  instance_version: 0.0.2
+  summary: Updated version to 0.0.2 to reflect the latest changes.
 notes:
 - Generated from a PALS lattice export and enriched with ADO signals defined by local naming rules.
 - Model-only drifts, controllers, constants, and lattice records are omitted because the current accelerator-core

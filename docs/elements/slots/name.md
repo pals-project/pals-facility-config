@@ -3,13 +3,13 @@
 # Slot: name 
 
 
-_The name of the entity. For example, the name of the person or organization._
+_The name of the entity. For example, the name of the component._
 
 
 
 
 
-URI: [acc:slot/name](https://example.org/accelerator-core/slot/name)
+URI: [pals_config:slot/name](https://w3id.org/pals-config/slot/name)
 Alias: name
 
 <!-- no inheritance hierarchy -->
@@ -62,7 +62,7 @@ Alias: name
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -71,8 +71,8 @@ Alias: name
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:name |
-| native | acc:name |
+| self | pals_config:name |
+| native | pals_config:name |
 
 
 
@@ -82,8 +82,8 @@ Alias: name
 <details>
 ```yaml
 name: name
-description: The name of the entity. For example, the name of the person or organization.
-from_schema: https://w3id.org/accelerator-core
+description: The name of the entity. For example, the name of the component.
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: name
 domain_of:

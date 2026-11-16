@@ -9,7 +9,7 @@ _A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss Parameter
 
 
 
-URI: [acc:slot/TwissP](https://example.org/accelerator-core/slot/TwissP)
+URI: [pals_config:slot/TwissP](https://w3id.org/pals-config/slot/TwissP)
 Alias: TwissP
 
 <!-- no inheritance hierarchy -->
@@ -87,7 +87,7 @@ Alias: TwissP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -96,8 +96,8 @@ Alias: TwissP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:TwissP |
-| native | acc:TwissP |
+| self | pals_config:TwissP |
+| native | pals_config:TwissP |
 
 
 
@@ -110,7 +110,7 @@ name: TwissP
 description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
   Parameters) for interoperability with the Particle Accelerator Language Standard
   (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: TwissP
 owner: HasTwissP

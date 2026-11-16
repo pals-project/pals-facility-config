@@ -9,7 +9,7 @@ _Number of cells in the cavity_
 
 
 
-URI: [acc:slot/num_cells](https://example.org/accelerator-core/slot/num_cells)
+URI: [pals_config:slot/num_cells](https://w3id.org/pals-config/slot/num_cells)
 Alias: num_cells
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: num_cells
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: num_cells
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:num_cells |
-| native | acc:num_cells |
+| self | pals_config:num_cells |
+| native | pals_config:num_cells |
 | close | pals:num_cells |
 
 
@@ -90,7 +90,7 @@ Alias: num_cells
 ```yaml
 name: num_cells
 description: Number of cells in the cavity
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:num_cells
 rank: 1000

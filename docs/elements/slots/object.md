@@ -75,7 +75,7 @@ Alias: object
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,7 +85,7 @@ Alias: object
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | rdf:object |
-| native | acc:object |
+| native | pals_config:object |
 
 
 
@@ -95,7 +95,7 @@ Alias: object
 <details>
 ```yaml
 name: object
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 slot_uri: rdf:object
 alias: object

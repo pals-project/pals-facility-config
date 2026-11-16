@@ -7,7 +7,7 @@ _Physical quantity kinds for signals._
 
 
 
-URI: [acc:enum/QuantityKindEnum](https://example.org/accelerator-core/enum/QuantityKindEnum)
+URI: [pals_config:enum/QuantityKindEnum](https://w3id.org/pals-config/enum/QuantityKindEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -52,7 +52,7 @@ URI: [acc:enum/QuantityKindEnum](https://example.org/accelerator-core/enum/Quant
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -65,7 +65,7 @@ URI: [acc:enum/QuantityKindEnum](https://example.org/accelerator-core/enum/Quant
 ```yaml
 name: QuantityKindEnum
 description: Physical quantity kinds for signals.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   BeamPosition:
@@ -117,8 +117,6 @@ permissible_values:
   CavityPhase:
     text: CavityPhase
     description: Cavity phase.
-    exact_mappings:
-    - quantitykind:PhaseAngle
   CavityGradient:
     text: CavityGradient
     description: Cavity accelerating gradient.

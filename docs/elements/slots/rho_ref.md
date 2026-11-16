@@ -9,7 +9,7 @@ _Reference bend radius._
 
 
 
-URI: [acc:slot/rho_ref](https://example.org/accelerator-core/slot/rho_ref)
+URI: [pals_config:slot/rho_ref](https://w3id.org/pals-config/slot/rho_ref)
 Alias: rho_ref
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: rho_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: rho_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:rho_ref |
-| native | acc:rho_ref |
+| self | pals_config:rho_ref |
+| native | pals_config:rho_ref |
 | close | pals:rho_ref |
 
 
@@ -96,7 +96,7 @@ Alias: rho_ref
 ```yaml
 name: rho_ref
 description: Reference bend radius.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:rho_ref
 rank: 1000

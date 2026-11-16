@@ -7,7 +7,7 @@ _Data types for parameter values._
 
 
 
-URI: [acc:enum/DataTypeEnum](https://example.org/accelerator-core/enum/DataTypeEnum)
+URI: [pals_config:enum/DataTypeEnum](https://w3id.org/pals-config/enum/DataTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -46,7 +46,7 @@ URI: [acc:enum/DataTypeEnum](https://example.org/accelerator-core/enum/DataTypeE
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -59,7 +59,7 @@ URI: [acc:enum/DataTypeEnum](https://example.org/accelerator-core/enum/DataTypeE
 ```yaml
 name: DataTypeEnum
 description: Data types for parameter values.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   String:
@@ -85,8 +85,6 @@ permissible_values:
   FloatArray:
     text: FloatArray
     description: An array of floating-point values.
-    exact_mappings:
-    - acc:FloatArray
 
 ```
 </details>

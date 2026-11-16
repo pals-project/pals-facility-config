@@ -9,7 +9,7 @@ _Reference bend strength = 1/radius_ref_
 
 
 
-URI: [acc:slot/g_ref](https://example.org/accelerator-core/slot/g_ref)
+URI: [pals_config:slot/g_ref](https://w3id.org/pals-config/slot/g_ref)
 Alias: g_ref
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: g_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: g_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:g_ref |
-| native | acc:g_ref |
+| self | pals_config:g_ref |
+| native | pals_config:g_ref |
 | close | pals:g_ref |
 
 
@@ -96,7 +96,7 @@ Alias: g_ref
 ```yaml
 name: g_ref
 description: Reference bend strength = 1/radius_ref
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:g_ref
 rank: 1000

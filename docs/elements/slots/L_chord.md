@@ -9,7 +9,7 @@ _Chord length of the bend._
 
 
 
-URI: [acc:slot/L_chord](https://example.org/accelerator-core/slot/L_chord)
+URI: [pals_config:slot/L_chord](https://w3id.org/pals-config/slot/L_chord)
 Alias: L_chord
 
 <!-- no inheritance hierarchy -->
@@ -74,7 +74,7 @@ Alias: L_chord
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +83,8 @@ Alias: L_chord
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:L_chord |
-| native | acc:L_chord |
+| self | pals_config:L_chord |
+| native | pals_config:L_chord |
 | close | pals:L_chord |
 
 
@@ -96,7 +96,7 @@ Alias: L_chord
 ```yaml
 name: L_chord
 description: Chord length of the bend.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:L_chord
 rank: 1000

@@ -9,7 +9,7 @@ _A relationship indicating that the subject component is nearest to the object c
 
 
 
-URI: [acc:class/NearestTo](https://example.org/accelerator-core/class/NearestTo)
+URI: [pals_config:class/NearestTo](https://w3id.org/pals-config/class/NearestTo)
 
 
 ```mermaid
@@ -102,7 +102,7 @@ NearestTo ||--|| Component : "object, subject"
 
 | property | value |
 | --- | --- |
-| rdf_predicate | acc:nearest_to |
+| rdf_predicate | pals_config:nearest_to |
 
 
 
@@ -110,7 +110,7 @@ NearestTo ||--|| Component : "object, subject"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -119,9 +119,8 @@ NearestTo ||--|| Component : "object, subject"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:NearestTo |
-| native | acc:NearestTo |
-| broad | RO:0002325 |
+| self | pals_config:NearestTo |
+| native | pals_config:NearestTo |
 
 
 
@@ -140,13 +139,11 @@ name: NearestTo
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:nearest_to
+    value: pals_config:nearest_to
 description: A relationship indicating that the subject component is nearest to the
   object component in a specified context,  such as a diagnostic device nearest to
   a magnet.
-from_schema: https://w3id.org/accelerator-core
-broad_mappings:
-- RO:0002325
+from_schema: https://w3id.org/pals-config
 is_a: ComponentRelation
 slots:
 - distance_value
@@ -173,13 +170,11 @@ name: NearestTo
 annotations:
   rdf_predicate:
     tag: rdf_predicate
-    value: acc:nearest_to
+    value: pals_config:nearest_to
 description: A relationship indicating that the subject component is nearest to the
   object component in a specified context,  such as a diagnostic device nearest to
   a magnet.
-from_schema: https://w3id.org/accelerator-core
-broad_mappings:
-- RO:0002325
+from_schema: https://w3id.org/pals-config
 is_a: ComponentRelation
 slot_usage:
   predicate:
@@ -194,9 +189,10 @@ attributes:
     description: Distance value between two components in a relationship. Only an
       edge-property slot for edges that require a distance value between two components
       in a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    exact_mappings:
+    - quantitykind:Distance
     rank: 1000
-    slot_uri: om:Distance
     alias: distance_value
     owner: NearestTo
     domain_of:
@@ -208,7 +204,9 @@ attributes:
     description: Unit of the distance value between two components in a relationship.
       Only an edge-property slot for edges that require a distance value between two
       components in a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:UnitOfMeasure
     rank: 1000
     alias: distance_unit
     owner: NearestTo
@@ -221,7 +219,7 @@ attributes:
     description: Tolerance value for the distance between two components in a relationship.
       Only an edge-property slot for edges that require a tolerance value between
       two components in a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: tolerance_value
     owner: NearestTo
@@ -234,7 +232,9 @@ attributes:
     description: Unit of the tolerance value for the distance between two components
       in a relationship. Only an edge-property slot for edges that require a tolerance
       value between two components in a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:UnitOfMeasure
     rank: 1000
     alias: tolerance_unit
     owner: NearestTo
@@ -248,7 +248,7 @@ attributes:
       the two components. Only an edge-property slot for edges that require a set
       of coordinates to define the spatial relationship between two components in
       a relationship.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: coordinates
     owner: NearestTo
@@ -264,7 +264,7 @@ attributes:
     name: context
     description: The frame of reference / domain in which this relationship is asserted
       to hold.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: NearestTo
@@ -275,7 +275,7 @@ attributes:
     required: true
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: NearestTo
@@ -284,7 +284,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: NearestTo
@@ -295,7 +295,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -311,7 +311,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -324,7 +324,7 @@ attributes:
     name: predicate
     description: The predicate of the relationship, which can be used to identify
       the relationship across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -337,7 +337,7 @@ attributes:
     equals_string: NearestTo
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

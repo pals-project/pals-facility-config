@@ -9,7 +9,7 @@ _The z-coordinate in the specified coordinate system._
 
 
 
-URI: [acc:slot/z_coord](https://example.org/accelerator-core/slot/z_coord)
+URI: [pals_config:slot/z_coord](https://w3id.org/pals-config/slot/z_coord)
 Alias: z_coord
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: z_coord
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: z_coord
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:z_coord |
-| native | acc:z_coord |
+| self | pals_config:z_coord |
+| native | pals_config:z_coord |
 
 
 
@@ -89,7 +89,7 @@ Alias: z_coord
 ```yaml
 name: z_coord
 description: The z-coordinate in the specified coordinate system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: z_coord
 owner: CoordinateSet

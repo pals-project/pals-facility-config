@@ -9,7 +9,7 @@ _Length-integrated normal component._
 
 
 
-URI: [acc:slot/EnL](https://example.org/accelerator-core/slot/EnL)
+URI: [pals_config:slot/EnL](https://w3id.org/pals-config/slot/EnL)
 Alias: EnL
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: EnL
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: EnL
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:EnL |
-| native | acc:EnL |
+| self | pals_config:EnL |
+| native | pals_config:EnL |
 | broad | pals:EnNL |
 
 
@@ -90,7 +90,7 @@ Alias: EnL
 ```yaml
 name: EnL
 description: Length-integrated normal component.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:EnNL
 rank: 1000

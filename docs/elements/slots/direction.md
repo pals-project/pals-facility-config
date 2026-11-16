@@ -9,7 +9,7 @@ _Beam direction along the BeamLine: +1 or -1. Longitudinal orientation. Default 
 
 
 
-URI: [acc:slot/direction](https://example.org/accelerator-core/slot/direction)
+URI: [pals_config:slot/direction](https://w3id.org/pals-config/slot/direction)
 Alias: direction
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: direction
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: direction
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:direction |
-| native | acc:direction |
+| self | pals_config:direction |
+| native | pals_config:direction |
 | close | pals:direction |
 
 
@@ -91,7 +91,7 @@ Alias: direction
 name: direction
 description: 'Beam direction along the BeamLine: +1 or -1. Longitudinal orientation.
   Default is +1.'
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:direction
 rank: 1000

@@ -11,7 +11,7 @@ _Association between two Components (Physical or Virtual), with supporting conte
 * __NOTE__: this is an abstract class and should not be instantiated directly
 
 
-URI: [acc:class/ComponentRelation](https://example.org/accelerator-core/class/ComponentRelation)
+URI: [pals_config:class/ComponentRelation](https://w3id.org/pals-config/class/ComponentRelation)
 
 
 ```mermaid
@@ -102,7 +102,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -111,8 +111,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:ComponentRelation |
-| native | acc:ComponentRelation |
+| self | pals_config:ComponentRelation |
+| native | pals_config:ComponentRelation |
 
 
 
@@ -130,7 +130,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 name: ComponentRelation
 description: Association between two Components (Physical or Virtual), with supporting
   contextual/qualifying information about how and where the relationship holds.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 is_a: Edge
 abstract: true
 slots:
@@ -145,14 +145,14 @@ slot_usage:
 attributes:
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - ComponentRelation
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - ComponentRelation
@@ -169,7 +169,7 @@ attributes:
 name: ComponentRelation
 description: Association between two Components (Physical or Virtual), with supporting
   contextual/qualifying information about how and where the relationship holds.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 is_a: Edge
 abstract: true
 slot_usage:
@@ -182,7 +182,7 @@ slot_usage:
 attributes:
   component_direction:
     name: component_direction
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_direction
     owner: ComponentRelation
@@ -191,7 +191,7 @@ attributes:
     range: DirectionEnum
   reference_frame:
     name: reference_frame
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: reference_frame
     owner: ComponentRelation
@@ -203,7 +203,7 @@ attributes:
     name: context
     description: The frame of reference / domain in which this relationship is asserted
       to hold.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: context
     owner: ComponentRelation
@@ -215,7 +215,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -231,7 +231,7 @@ attributes:
     required: true
   subject:
     name: subject
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:subject
     alias: subject
@@ -242,7 +242,7 @@ attributes:
     required: true
   predicate:
     name: predicate
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:predicate
     designates_type: true
@@ -254,7 +254,7 @@ attributes:
     required: true
   object:
     name: object
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     slot_uri: rdf:object
     alias: object

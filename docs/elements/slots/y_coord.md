@@ -9,7 +9,7 @@ _The y-coordinate in the specified coordinate system._
 
 
 
-URI: [acc:slot/y_coord](https://example.org/accelerator-core/slot/y_coord)
+URI: [pals_config:slot/y_coord](https://w3id.org/pals-config/slot/y_coord)
 Alias: y_coord
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: y_coord
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: y_coord
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:y_coord |
-| native | acc:y_coord |
+| self | pals_config:y_coord |
+| native | pals_config:y_coord |
 
 
 
@@ -89,7 +89,7 @@ Alias: y_coord
 ```yaml
 name: y_coord
 description: The y-coordinate in the specified coordinate system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: y_coord
 owner: CoordinateSet

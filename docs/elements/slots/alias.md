@@ -9,7 +9,7 @@ _An alternative name or identifier for the instance._
 
 
 
-URI: [acc:slot/alias](https://example.org/accelerator-core/slot/alias)
+URI: [pals_config:slot/alias](https://w3id.org/pals-config/slot/alias)
 Alias: alias
 
 <!-- no inheritance hierarchy -->
@@ -93,7 +93,7 @@ Alias: alias
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -102,8 +102,8 @@ Alias: alias
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:alias |
-| native | acc:alias |
+| self | pals_config:alias |
+| native | pals_config:alias |
 | close | pals:alias |
 
 
@@ -115,7 +115,7 @@ Alias: alias
 ```yaml
 name: alias
 description: An alternative name or identifier for the instance.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 close_mappings:
 - pals:alias
 rank: 1000

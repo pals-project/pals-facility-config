@@ -75,7 +75,7 @@ Alias: subject
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,7 +85,7 @@ Alias: subject
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | rdf:subject |
-| native | acc:subject |
+| native | pals_config:subject |
 
 
 
@@ -95,7 +95,7 @@ Alias: subject
 <details>
 ```yaml
 name: subject
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 slot_uri: rdf:subject
 alias: subject

@@ -9,7 +9,7 @@ _Length-integrated skew component._
 
 
 
-URI: [acc:slot/EsL](https://example.org/accelerator-core/slot/EsL)
+URI: [pals_config:slot/EsL](https://w3id.org/pals-config/slot/EsL)
 Alias: EsL
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: EsL
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: EsL
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:EsL |
-| native | acc:EsL |
+| self | pals_config:EsL |
+| native | pals_config:EsL |
 | broad | pals:EsNL |
 
 
@@ -90,7 +90,7 @@ Alias: EsL
 ```yaml
 name: EsL
 description: Length-integrated skew component.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:EsNL
 rank: 1000

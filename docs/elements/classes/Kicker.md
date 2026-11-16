@@ -13,7 +13,7 @@ _Only one of the electric or magnetic multipole components should be present, no
 
 
 
-URI: [acc:class/Kicker](https://example.org/accelerator-core/class/Kicker)
+URI: [pals_config:class/Kicker](https://w3id.org/pals-config/class/Kicker)
 
 
 ```mermaid
@@ -178,7 +178,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -187,8 +187,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Kicker |
-| native | acc:Kicker |
+| self | pals_config:Kicker |
+| native | pals_config:Kicker |
 | broad | pals:Kicker |
 
 
@@ -209,7 +209,7 @@ description: "A magnet primarily used to steer the beam.\nCan deflect the beam t
   \ in both planes, or a single plane, depending on the design and parameters of the\
   \ kicker. \nOnly one of the electric or magnetic multipole components should be\
   \ present, not both."
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - Corrector
 - HCorrector
@@ -227,7 +227,7 @@ attributes:
     name: plane
     description: The transverse plane in which the kicker operates, either horizontal
       or vertical.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Kicker
@@ -245,7 +245,7 @@ description: "A magnet primarily used to steer the beam.\nCan deflect the beam t
   \ in both planes, or a single plane, depending on the design and parameters of the\
   \ kicker. \nOnly one of the electric or magnetic multipole components should be\
   \ present, not both."
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - Corrector
 - HCorrector
@@ -263,7 +263,7 @@ attributes:
     name: plane
     description: The transverse plane in which the kicker operates, either horizontal
       or vertical.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: plane
     owner: Kicker
@@ -275,7 +275,7 @@ attributes:
     description: A mixin for electric multipole parameters that are aligned with PALS
       ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ElectricMultipoleP
     owner: Kicker
@@ -288,7 +288,7 @@ attributes:
     description: A mixin for magnetic multipole parameters that are aligned with PALS
       MagneticMultipoleP (Magnetic Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MagneticMultipoleP
     owner: Kicker
@@ -301,7 +301,7 @@ attributes:
     description: A mixin for reference parameters that are aligned with PALS ReferenceP
       (Reference Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ReferenceP
     owner: Kicker
@@ -314,7 +314,7 @@ attributes:
     description: A mixin for floor plan shift parameters that are aligned with PALS
       BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
       Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BodyShiftP
     owner: Kicker
@@ -327,7 +327,7 @@ attributes:
     description: A mixin for Twiss parameters that are aligned with PALS TwissP (Twiss
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: TwissP
     owner: Kicker
@@ -339,7 +339,7 @@ attributes:
     name: functions
     description: The function of the physical component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_function
     rank: 1000
@@ -355,7 +355,7 @@ attributes:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:physical_beamline_relation
     rank: 1000
@@ -371,7 +371,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: Kicker
@@ -385,7 +385,7 @@ attributes:
       (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
       (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: LongitudinalPlacementP
     owner: Kicker
@@ -397,7 +397,7 @@ attributes:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: Kicker
@@ -410,7 +410,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: Kicker
@@ -421,7 +421,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:id
     rank: 1000
@@ -439,7 +439,9 @@ attributes:
     name: kind
     description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
       (no prefix).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:DeviceKind
     rank: 1000
     slot_uri: rdf:type
     designates_type: true
@@ -453,7 +455,7 @@ attributes:
   alias:
     name: alias
     description: An alternative name or identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     close_mappings:
     - pals:alias
     rank: 1000

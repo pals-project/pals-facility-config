@@ -7,7 +7,7 @@ _Roles for control-system signals._
 
 
 
-URI: [acc:enum/SignalRoleEnum](https://example.org/accelerator-core/enum/SignalRoleEnum)
+URI: [pals_config:enum/SignalRoleEnum](https://w3id.org/pals-config/enum/SignalRoleEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -47,7 +47,7 @@ URI: [acc:enum/SignalRoleEnum](https://example.org/accelerator-core/enum/SignalR
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -60,18 +60,18 @@ URI: [acc:enum/SignalRoleEnum](https://example.org/accelerator-core/enum/SignalR
 ```yaml
 name: SignalRoleEnum
 description: Roles for control-system signals.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Setpoint:
     text: Setpoint
     description: Requested or configured value.
-    exact_mappings:
+    broad_mappings:
     - sosa:ActuatableProperty
   Readback:
     text: Readback
     description: Measured or reported value.
-    exact_mappings:
+    broad_mappings:
     - sosa:ObservableProperty
   Status:
     text: Status
@@ -79,23 +79,17 @@ permissible_values:
   Command:
     text: Command
     description: Command or action trigger.
-    exact_mappings:
+    broad_mappings:
     - sosa:ActuatableProperty
   MinimumLimit:
     text: MinimumLimit
     description: Minimum allowed signal value.
-    exact_mappings:
-    - xsd:minInclusive
   MaximumLimit:
     text: MaximumLimit
     description: Maximum allowed signal value.
-    exact_mappings:
-    - xsd:maxInclusive
   RangeLimit:
     text: RangeLimit
     description: A signal containing both upper and lower allowed limits.
-    exact_mappings:
-    - acc:RangeLimit
 
 ```
 </details>

@@ -9,7 +9,7 @@ _A mixin for RF parameters that are aligned with PALS RFP (RF Parameters) for in
 
 
 
-URI: [acc:slot/RFP](https://example.org/accelerator-core/slot/RFP)
+URI: [pals_config:slot/RFP](https://w3id.org/pals-config/slot/RFP)
 Alias: RFP
 
 <!-- no inheritance hierarchy -->
@@ -71,7 +71,7 @@ Alias: RFP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -80,8 +80,8 @@ Alias: RFP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:RFP |
-| native | acc:RFP |
+| self | pals_config:RFP |
+| native | pals_config:RFP |
 
 
 
@@ -93,7 +93,7 @@ Alias: RFP
 name: RFP
 description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters)
   for interoperability with the Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: RFP
 owner: HasRFP

@@ -9,7 +9,7 @@ _A facility that houses one or more accelerators._
 
 
 
-URI: [acc:class/Facility](https://example.org/accelerator-core/class/Facility)
+URI: [pals_config:class/Facility](https://w3id.org/pals-config/class/Facility)
 
 
 ```mermaid
@@ -23,10 +23,10 @@ BeamLine {
     integer repeat  
     string id  
     stringList alias  
-    string kind  
-    stringList native_types  
     VirtualRelationEnum beamline_relation  
     VirtualFunctionEnumList functions  
+    string kind  
+    stringList native_types  
 }
 Component {
     stringList native_types  
@@ -155,7 +155,7 @@ SignalBinding ||--|| Signal : "object"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -164,8 +164,8 @@ SignalBinding ||--|| Signal : "object"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:Facility |
-| native | acc:Facility |
+| self | pals_config:Facility |
+| native | pals_config:Facility |
 
 
 
@@ -182,14 +182,14 @@ SignalBinding ||--|| Signal : "object"
 ```yaml
 name: Facility
 description: A facility that houses one or more accelerators.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 slots:
 - identifiers
 attributes:
   components:
     name: components
     description: A list of physical components in the accelerator system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Facility
@@ -200,7 +200,7 @@ attributes:
   beamlines:
     name: beamlines
     description: A list of beamlines in the accelerator system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Facility
@@ -211,7 +211,7 @@ attributes:
   signals:
     name: signals
     description: A list of signals in the accelerator system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Facility
@@ -223,7 +223,7 @@ attributes:
     name: signal_bindings
     description: A list of signal bindings in the accelerator system (Component <->
       Signal relationships).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Facility
@@ -235,7 +235,7 @@ attributes:
     name: component_relations
     description: A list of component relations in the accelerator system (Component
       <-> Component relationships).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Facility
@@ -253,12 +253,12 @@ attributes:
 ```yaml
 name: Facility
 description: A facility that houses one or more accelerators.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   components:
     name: components
     description: A list of physical components in the accelerator system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: components
     owner: Facility
@@ -271,7 +271,7 @@ attributes:
   beamlines:
     name: beamlines
     description: A list of beamlines in the accelerator system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: beamlines
     owner: Facility
@@ -284,7 +284,7 @@ attributes:
   signals:
     name: signals
     description: A list of signals in the accelerator system.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: signals
     owner: Facility
@@ -298,7 +298,7 @@ attributes:
     name: signal_bindings
     description: A list of signal bindings in the accelerator system (Component <->
       Signal relationships).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: signal_bindings
     owner: Facility
@@ -312,7 +312,7 @@ attributes:
     name: component_relations
     description: A list of component relations in the accelerator system (Component
       <-> Component relationships).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: component_relations
     owner: Facility
@@ -326,7 +326,7 @@ attributes:
     name: identifiers
     description: A unique and ideally persistent identifier for the facility, such
       as a DOI or ROR.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: identifiers
     owner: Facility

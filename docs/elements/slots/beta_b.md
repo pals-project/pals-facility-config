@@ -9,7 +9,7 @@ _Twiss beta parameter in the vertical plane. Must be strictly positive (> 0)._
 
 
 
-URI: [acc:slot/beta_b](https://example.org/accelerator-core/slot/beta_b)
+URI: [pals_config:slot/beta_b](https://w3id.org/pals-config/slot/beta_b)
 Alias: beta_b
 
 <!-- no inheritance hierarchy -->
@@ -96,7 +96,7 @@ Value must not satisfy any of:
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -105,8 +105,8 @@ Value must not satisfy any of:
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | acc:beta_b |
-| native | acc:beta_b |
+| self | pals_config:beta_b |
+| native | pals_config:beta_b |
 | close | pals:beta_b |
 
 
@@ -119,7 +119,7 @@ Value must not satisfy any of:
 name: beta_b
 description: Twiss beta parameter in the vertical plane. Must be strictly positive
   (> 0).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - beta_y
 - betay
