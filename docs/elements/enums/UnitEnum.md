@@ -111,6 +111,8 @@ permissible_values:
   Gauss:
     text: Gauss
     description: gauss (magnetic flux density)
+    exact_mappings:
+    - unit:GAUSS
   G_cm:
     text: G_cm
     description: gauss centimeter, a magnetic field integral. 1 G.cm = 1e-6 T.m

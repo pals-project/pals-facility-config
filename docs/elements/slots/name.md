@@ -3,7 +3,7 @@
 # Slot: name 
 
 
-_The name of the entity. For example, the name of the person or organization._
+_The name of the entity. For example, the name of the component._
 
 
 
@@ -82,7 +82,7 @@ Alias: name
 <details>
 ```yaml
 name: name
-description: The name of the entity. For example, the name of the person or organization.
+description: The name of the entity. For example, the name of the component.
 from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: name

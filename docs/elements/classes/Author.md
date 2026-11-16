@@ -41,7 +41,7 @@ Author ||--|o Affiliation : "affiliation"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | The name of the entity. For example, the name of the person or organization. | direct |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | The name of the entity. For example, the name of the component. | direct |
 | [affiliation](../slots/affiliation.md) | 0..1 <br/> [Affiliation](../classes/Affiliation.md) | The affiliation of the author or component, as a ROR. | direct |
 | [email](../slots/email.md) | 0..1 <br/> [String](../types/String.md) | The email address of the author. | direct |
 | [orcid](../slots/orcid.md) | 0..1 <br/> [String](../types/String.md) | The ORCID identifier of the author. | direct |
@@ -168,7 +168,7 @@ attributes:
     pattern: ^https://orcid\.org/\d{4}-\d{4}-\d{4}-\d{3}[\dX]$
   name:
     name: name
-    description: The name of the entity. For example, the name of the person or organization.
+    description: The name of the entity. For example, the name of the component.
     from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: name

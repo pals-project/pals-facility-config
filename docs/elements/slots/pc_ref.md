@@ -3,7 +3,7 @@
 # Slot: pc_ref 
 
 
-_[momentum*c] Reference momentum times speed of light._
+_[MeV] Reference momentum times speed of light, i.e. beam momentum in MeV/c._
 
 
 
@@ -48,6 +48,12 @@ Alias: pc_ref
 | --- | --- |
 | Owner | [ReferenceParamGroup](../classes/ReferenceParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `MeV`
+
+</details>
 
 
 
@@ -94,7 +100,8 @@ Alias: pc_ref
 <details>
 ```yaml
 name: pc_ref
-description: '[momentum*c] Reference momentum times speed of light.'
+description: '[MeV] Reference momentum times speed of light, i.e. beam momentum in
+  MeV/c.'
 from_schema: https://w3id.org/pals-config
 aliases:
 - pCentral
@@ -106,6 +113,8 @@ owner: ReferenceParamGroup
 domain_of:
 - ReferenceParamGroup
 range: float
+unit:
+  ucum_code: MeV
 
 ```
 </details>

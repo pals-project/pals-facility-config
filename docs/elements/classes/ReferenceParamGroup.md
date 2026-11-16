@@ -39,7 +39,7 @@ ReferenceParamGroup {
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [species_ref](../slots/species_ref.md) | 0..1 <br/> [String](../types/String.md) | A reference to a species or particle type, such as an ion, electron, or proton. | direct |
-| [pc_ref](../slots/pc_ref.md) | 0..1 <br/> [Float](../types/Float.md) | [momentum*c] Reference momentum times speed of light. | direct |
+| [pc_ref](../slots/pc_ref.md) | 0..1 <br/> [Float](../types/Float.md) | [MeV] Reference momentum times speed of light, i.e. beam momentum in MeV/c. | direct |
 | [E_tot_ref](../slots/E_tot_ref.md) | 0..1 <br/> [Float](../types/Float.md) | [eV] Reference total energy | direct |
 | [time_ref](../slots/time_ref.md) | 0..1 <br/> [Float](../types/Float.md) | [s] Reference time | direct |
 | [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
@@ -140,7 +140,8 @@ attributes:
     range: string
   pc_ref:
     name: pc_ref
-    description: '[momentum*c] Reference momentum times speed of light.'
+    description: '[MeV] Reference momentum times speed of light, i.e. beam momentum
+      in MeV/c.'
     from_schema: https://w3id.org/pals-config
     aliases:
     - pCentral
@@ -150,6 +151,8 @@ attributes:
     domain_of:
     - ReferenceParamGroup
     range: float
+    unit:
+      ucum_code: MeV
   E_tot_ref:
     name: E_tot_ref
     description: '[eV] Reference total energy'
@@ -210,7 +213,8 @@ attributes:
     range: string
   pc_ref:
     name: pc_ref
-    description: '[momentum*c] Reference momentum times speed of light.'
+    description: '[MeV] Reference momentum times speed of light, i.e. beam momentum
+      in MeV/c.'
     from_schema: https://w3id.org/pals-config
     aliases:
     - pCentral
@@ -222,6 +226,8 @@ attributes:
     domain_of:
     - ReferenceParamGroup
     range: float
+    unit:
+      ucum_code: MeV
   E_tot_ref:
     name: E_tot_ref
     description: '[eV] Reference total energy'

@@ -46,7 +46,7 @@ Alias: schema_version
 
 | Property | Value |
 | --- | --- |
-| If Absent | `(0.0.1)` |
+| If Absent | `string(0.0.1)` |
 | Owner | [PALSAccelerator](../classes/PALSAccelerator.md) |
 
 
@@ -102,7 +102,7 @@ description: Version of the schema used for this representation of a particle ac
   being used.
 from_schema: https://w3id.org/pals-config
 rank: 1000
-ifabsent: (0.0.1)
+ifabsent: string(0.0.1)
 alias: schema_version
 owner: PALSAccelerator
 domain_of:

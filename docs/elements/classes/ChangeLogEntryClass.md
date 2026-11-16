@@ -33,7 +33,7 @@ ChangeLogEntryClass {
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [change_date](../slots/change_date.md) | 1 <br/> [Isodate](../types/Isodate.md) | The date the change was made, in ISO 8601 format (YYYY-MM-DD). | direct |
-| [instance_version](../slots/instance_version.md) | 1 <br/> [String](../types/String.md) | The version of the data instance that was changed. | direct |
+| [instance_version](../slots/instance_version.md) | 1 <br/> [String](../types/String.md) | The version of the data instance that was changed. If this is the initial creation, it should be set to 0.0.0. | direct |
 | [summary](../slots/summary.md) | 1 <br/> [String](../types/String.md) | A brief summary of the change. | direct |
 
 
@@ -107,15 +107,15 @@ attributes:
     required: true
   instance_version:
     name: instance_version
-    description: The version of the data instance that was changed.
+    description: The version of the data instance that was changed. If this is the
+      initial creation, it should be set to 0.0.0.
     from_schema: https://w3id.org/pals-config
     rank: 1000
-    ifabsent: string(0.0.0)
     domain_of:
     - ChangeLogEntryClass
     range: string
     required: true
-    pattern: ^\d+\.\d+(\.\d+)?$
+    pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
   summary:
     name: summary
     description: A brief summary of the change.
@@ -153,17 +153,17 @@ attributes:
     required: true
   instance_version:
     name: instance_version
-    description: The version of the data instance that was changed.
+    description: The version of the data instance that was changed. If this is the
+      initial creation, it should be set to 0.0.0.
     from_schema: https://w3id.org/pals-config
     rank: 1000
-    ifabsent: string(0.0.0)
     alias: instance_version
     owner: ChangeLogEntryClass
     domain_of:
     - ChangeLogEntryClass
     range: string
     required: true
-    pattern: ^\d+\.\d+(\.\d+)?$
+    pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
   summary:
     name: summary
     description: A brief summary of the change.

@@ -36,7 +36,7 @@ Affiliation ||--}o Identifier : "identifiers"
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | direct |
-| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | The name of the entity. For example, the name of the person or organization. | direct |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | The name of the entity. For example, the name of the component. | direct |
 | [identifiers](../slots/identifiers.md) | * <br/> [Identifier](../classes/Identifier.md) | A unique and ideally persistent identifier for the facility, such as a DOI or ROR. | direct |
 
 
@@ -135,7 +135,7 @@ attributes:
     required: true
   name:
     name: name
-    description: The name of the entity. For example, the name of the person or organization.
+    description: The name of the entity. For example, the name of the component.
     from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: name

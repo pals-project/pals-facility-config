@@ -172,7 +172,7 @@ Name: pals_config
 | [identifier_type](slots/identifier_type.md) | The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK. |
 | [identifier_value](slots/identifier_value.md) | The value of the identifier. |
 | [identifiers](slots/identifiers.md) | A unique and ideally persistent identifier for the facility, such as a DOI or ROR. |
-| [instance_version](slots/instance_version.md) | The version of the data instance that was changed. |
+| [instance_version](slots/instance_version.md) | The version of the data instance that was changed. If this is the initial creation, it should be set to 0.0.0. |
 | [key](slots/key.md) | The metadata field name. |
 | [kind](slots/kind.md) | The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix). |
 | [Kn](slots/Kn.md) | Normalized normal component. |
@@ -191,7 +191,7 @@ Name: pals_config
 | [multipass](slots/multipass.md) | Indicates whether the BeamLine is a multipass BeamLine, where the beam passes through the same physical elements multiple times. If not provided, the default assumption is that the BeamLine is single-pass. |
 | [multipass_phase](slots/multipass_phase.md) | rad/2pi RF Phase added to multipass elements |
 | [multipole_geometry](slots/multipole_geometry.md) | Multipole geometry type. Must be `follows_ref_geometry`. |
-| [name](slots/name.md) | The name of the entity. For example, the name of the person or organization. |
+| [name](slots/name.md) | The name of the entity. For example, the name of the component. |
 | [native_data_type](slots/native_data_type.md) | The native data type of the signal in the source system,  such as String, Integer, Float, or Boolean. |
 | [native_description](slots/native_description.md) | A human-readable description of the signal in the source system. |
 | [native_types](slots/native_types.md) | The native type of the component in the source system, which can be used to identify the component across different source systems. |
@@ -201,7 +201,7 @@ Name: pals_config
 | [object](slots/object.md) |  |
 | [orcid](slots/orcid.md) | The ORCID identifier of the author. |
 | [order](slots/order.md) | Multipole order N (0 = dipole, 1 = quadrupole, etc.) |
-| [pc_ref](slots/pc_ref.md) | [momentum*c] Reference momentum times speed of light. |
+| [pc_ref](slots/pc_ref.md) | [MeV] Reference momentum times speed of light, i.e. beam momentum in MeV/c. |
 | [periodic](slots/periodic.md) | Indicates whether orbit and Twiss parameters periodic. If not provided, the default assumption is that the BeamLine is not periodic. |
 | [phase](slots/phase.md) | RF phase. rad/2pi RF phase in 0 to 2*pi |
 | [phi](slots/phi.md) | Rotation around the X-axis in the facility floor plan. |

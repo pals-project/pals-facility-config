@@ -3,7 +3,7 @@
 # Slot: instance_version 
 
 
-_The version of the data instance that was changed._
+_The version of the data instance that was changed. If this is the initial creation, it should be set to 0.0.0._
 
 
 
@@ -47,7 +47,6 @@ Alias: instance_version
 
 | Property | Value |
 | --- | --- |
-| If Absent | `string(0.0.0)` |
 | Owner | [ChangeLogEntryClass](../classes/ChangeLogEntryClass.md) |
 
 
@@ -55,7 +54,7 @@ Alias: instance_version
 
 | Property | Value |
 | --- | --- |
-| Regex Pattern | `^\d+\.\d+(\.\d+)?$` |
+| Regex Pattern | `^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$` |
 
 
 
@@ -97,17 +96,17 @@ Alias: instance_version
 <details>
 ```yaml
 name: instance_version
-description: The version of the data instance that was changed.
+description: The version of the data instance that was changed. If this is the initial
+  creation, it should be set to 0.0.0.
 from_schema: https://w3id.org/pals-config
 rank: 1000
-ifabsent: string(0.0.0)
 alias: instance_version
 owner: ChangeLogEntryClass
 domain_of:
 - ChangeLogEntryClass
 range: string
 required: true
-pattern: ^\d+\.\d+(\.\d+)?$
+pattern: ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
 
 ```
 </details>
