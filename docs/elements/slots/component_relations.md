@@ -9,7 +9,7 @@ _A list of component relations in the accelerator system (Component <-> Componen
 
 
 
-URI: [pals:slot/component_relations](https://pals-project.readthedocs.io/slot/component_relations)
+URI: [pals_config:slot/component_relations](https://w3id.org/pals-config/slot/component_relations)
 Alias: component_relations
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: component_relations
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: component_relations
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:component_relations |
-| native | pals:component_relations |
+| self | pals_config:component_relations |
+| native | pals_config:component_relations |
 
 
 
@@ -91,7 +91,7 @@ Alias: component_relations
 name: component_relations
 description: A list of component relations in the accelerator system (Component <->
   Component relationships).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: component_relations
 owner: Facility

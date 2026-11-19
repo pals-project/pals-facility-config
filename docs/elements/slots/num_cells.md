@@ -9,7 +9,7 @@ _Number of cells in the cavity_
 
 
 
-URI: [pals:num_cells](https://pals-project.readthedocs.io/num_cells)
+URI: [pals_config:slot/num_cells](https://w3id.org/pals-config/slot/num_cells)
 Alias: num_cells
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: num_cells
 | --- | --- |
 | Range | [Integer](../types/Integer.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:num_cells](https://pals-project.readthedocs.io/num_cells) |
 
 ### Cardinality and Requirements
 
@@ -69,7 +68,7 @@ Alias: num_cells
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +77,9 @@ Alias: num_cells
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:num_cells |
-| native | pals:num_cells |
+| self | pals_config:num_cells |
+| native | pals_config:num_cells |
+| close | pals:num_cells |
 
 
 
@@ -90,9 +90,10 @@ Alias: num_cells
 ```yaml
 name: num_cells
 description: Number of cells in the cavity
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:num_cells
 rank: 1000
-slot_uri: pals:num_cells
 alias: num_cells
 owner: RFParamGroup
 domain_of:

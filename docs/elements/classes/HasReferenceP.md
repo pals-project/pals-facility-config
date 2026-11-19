@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasReferenceP](https://pals-project.readthedocs.io/class/HasReferenceP)
+URI: [pals_config:class/HasReferenceP](https://w3id.org/pals-config/class/HasReferenceP)
 
 
 ```mermaid
@@ -17,6 +17,7 @@ ReferenceParamGroup {
     float pc_ref  
     string species_ref  
     float time_ref  
+    string id  
 }
 
 HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
@@ -51,6 +52,7 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 | [BeamPositionMonitor](../classes/BeamPositionMonitor.md) | A diagnostic device used to measure transverse beam position. |
 | [Aperture](../classes/Aperture.md) | A diagnostic or limiting aperture element used to constrain or characterize beam passage. |
 | [Cavity](../classes/Cavity.md) | A cavity used for beam acceleration or manipulation. |
+| [BeginningEle](../classes/BeginningEle.md) | Initial element at the start of a beamline branch. It holds the initial reference and Twiss parameters for the branch. A BeginningEle may be omitted when the branch is reached through a Fork that propagates its reference parameters; otherwise it is expected to be the first element in the branch. |
 
 
 
@@ -74,7 +76,7 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +85,8 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasReferenceP |
-| native | pals:HasReferenceP |
+| self | pals_config:HasReferenceP |
+| native | pals_config:HasReferenceP |
 
 
 
@@ -100,7 +102,7 @@ HasReferenceP ||--|o ReferenceParamGroup : "ReferenceP"
 <details>
 ```yaml
 name: HasReferenceP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   ReferenceP:
@@ -108,7 +110,7 @@ attributes:
     description: A mixin for reference parameters that are aligned with PALS ReferenceP
       (Reference Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasReferenceP
@@ -123,7 +125,7 @@ attributes:
 <details>
 ```yaml
 name: HasReferenceP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   ReferenceP:
@@ -131,7 +133,7 @@ attributes:
     description: A mixin for reference parameters that are aligned with PALS ReferenceP
       (Reference Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ReferenceP
     owner: HasReferenceP

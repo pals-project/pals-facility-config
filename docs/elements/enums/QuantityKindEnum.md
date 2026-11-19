@@ -7,22 +7,23 @@ _Physical quantity kinds for signals._
 
 
 
-URI: [pals:enum/QuantityKindEnum](https://pals-project.readthedocs.io/enum/QuantityKindEnum)
+URI: [pals_config:enum/QuantityKindEnum](https://w3id.org/pals-config/enum/QuantityKindEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
 | --- | --- | --- |
 | BeamPosition | None | Beam transverse position. |
-| State | sosa:ObservableProperty | Device state or condition. |
-| ElectricCurrent | quantitykind:ElectricCurrent | Electric current. |
-| IntegratedMagneticField | quantitykind:MagneticFluxPerLength | Integrated magnetic field. |
-| MagneticField | quantitykind:MagneticFluxDensity | Magnetic field. |
-| Pressure | quantitykind:Pressure | Gas or vacuum pressure. |
-| DoseRate | quantitykind:AbsorbedDoseRate | Radiation dose rate. |
-| Voltage | quantitykind:Voltage | Electric potential difference. |
-| Power | quantitykind:Power | Power. |
-| CavityPhase | quantitykind:PhaseAngle | Cavity phase. |
-| CavityGradient | quantitykind:ElectricFieldStrength | Cavity accelerating gradient. |
+| State | None | Device state or condition. |
+| ElectricCurrent | None | Electric current. |
+| IntegratedMagneticField | None | Integrated magnetic field. |
+| IntegratedMagneticFieldGradient | None | Integrated magnetic field gradient. |
+| MagneticField | None | Magnetic field. |
+| Pressure | None | Gas or vacuum pressure. |
+| DoseRate | None | Radiation dose rate. |
+| Voltage | None | Electric potential difference. |
+| Power | None | Power. |
+| CavityPhase | None | Cavity phase. |
+| CavityGradient | None | Cavity accelerating gradient. |
 
 
 
@@ -51,7 +52,7 @@ URI: [pals:enum/QuantityKindEnum](https://pals-project.readthedocs.io/enum/Quant
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -64,7 +65,7 @@ URI: [pals:enum/QuantityKindEnum](https://pals-project.readthedocs.io/enum/Quant
 ```yaml
 name: QuantityKindEnum
 description: Physical quantity kinds for signals.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   BeamPosition:
@@ -73,43 +74,54 @@ permissible_values:
   State:
     text: State
     description: Device state or condition.
-    meaning: sosa:ObservableProperty
+    exact_mappings:
+    - sosa:ObservableProperty
   ElectricCurrent:
     text: ElectricCurrent
     description: Electric current.
-    meaning: quantitykind:ElectricCurrent
+    exact_mappings:
+    - quantitykind:ElectricCurrent
   IntegratedMagneticField:
     text: IntegratedMagneticField
     description: Integrated magnetic field.
-    meaning: quantitykind:MagneticFluxPerLength
+    exact_mappings:
+    - quantitykind:MagneticFluxPerLength
+  IntegratedMagneticFieldGradient:
+    text: IntegratedMagneticFieldGradient
+    description: Integrated magnetic field gradient.
   MagneticField:
     text: MagneticField
     description: Magnetic field.
-    meaning: quantitykind:MagneticFluxDensity
+    exact_mappings:
+    - quantitykind:MagneticFluxDensity
   Pressure:
     text: Pressure
     description: Gas or vacuum pressure.
-    meaning: quantitykind:Pressure
+    exact_mappings:
+    - quantitykind:Pressure
   DoseRate:
     text: DoseRate
     description: Radiation dose rate.
-    meaning: quantitykind:AbsorbedDoseRate
+    exact_mappings:
+    - quantitykind:AbsorbedDoseRate
   Voltage:
     text: Voltage
     description: Electric potential difference.
-    meaning: quantitykind:Voltage
+    exact_mappings:
+    - quantitykind:Voltage
   Power:
     text: Power
     description: Power.
-    meaning: quantitykind:Power
+    exact_mappings:
+    - quantitykind:Power
   CavityPhase:
     text: CavityPhase
     description: Cavity phase.
-    meaning: quantitykind:PhaseAngle
   CavityGradient:
     text: CavityGradient
     description: Cavity accelerating gradient.
-    meaning: quantitykind:ElectricFieldStrength
+    exact_mappings:
+    - quantitykind:ElectricFieldStrength
 
 ```
 </details>

@@ -3,17 +3,13 @@
 # Class: LongitudinalPlacementParamGroup 
 
 
-_Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis. _
-
-_Corresponds to PALS's ungrouped element parameters `length` and `s_position`._
-
-_One (or both) `length` or `s_position` must be present._
+_Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`. One (or both) `length` or `s_position` must be present._
 
 
 
 
 
-URI: [pals:class/LongitudinalPlacementParamGroup](https://pals-project.readthedocs.io/class/LongitudinalPlacementParamGroup)
+URI: [pals_config:class/LongitudinalPlacementParamGroup](https://w3id.org/pals-config/class/LongitudinalPlacementParamGroup)
 
 
 ```mermaid
@@ -21,6 +17,7 @@ erDiagram
 LongitudinalPlacementParamGroup {
     float length  
     float s_position  
+    string id  
 }
 
 
@@ -29,7 +26,11 @@ LongitudinalPlacementParamGroup {
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **LongitudinalPlacementParamGroup**
+
 
 ## Slots
 
@@ -37,6 +38,7 @@ LongitudinalPlacementParamGroup {
 | ---  | --- | --- | --- |
 | [length](../slots/length.md) | 0..1 <br/> [Float](../types/Float.md) | Length of the element (arc length for bends). | direct |
 | [s_position](../slots/s_position.md) | 0..1 <br/> [Float](../types/Float.md) | Longitudinal position of the element along the beamline. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -68,6 +70,7 @@ LongitudinalPlacementParamGroup {
 | [NormalConductingRFCavity](../classes/NormalConductingRFCavity.md) | [LongitudinalPlacementP](../slots/LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md) |
 | [SuperConductingRFCavity](../classes/SuperConductingRFCavity.md) | [LongitudinalPlacementP](../slots/LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md) |
 | [SupportingFacilityComponent](../classes/SupportingFacilityComponent.md) | [LongitudinalPlacementP](../slots/LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md) |
+| [Drift](../classes/Drift.md) | [LongitudinalPlacementP](../slots/LongitudinalPlacementP.md) | range | [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md) |
 
 
 
@@ -101,7 +104,7 @@ LongitudinalPlacementParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -110,8 +113,8 @@ LongitudinalPlacementParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:LongitudinalPlacementParamGroup |
-| native | pals:LongitudinalPlacementParamGroup |
+| self | pals_config:LongitudinalPlacementParamGroup |
+| native | pals_config:LongitudinalPlacementParamGroup |
 
 
 
@@ -127,22 +130,26 @@ LongitudinalPlacementParamGroup {
 <details>
 ```yaml
 name: LongitudinalPlacementParamGroup
-description: "Mixin for an element's extent and position along the longitudinal (beam-direction,\
-  \ \"s\") axis. \nCorresponds to PALS's ungrouped element parameters `length` and\
-  \ `s_position`.\nOne (or both) `length` or `s_position` must be present."
-from_schema: https://w3id.org/accelerator-core
+description: Mixin for an element's extent and position along the longitudinal (beam-direction,
+  "s") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
+  One (or both) `length` or `s_position` must be present.
+from_schema: https://w3id.org/pals-config
+is_a: ParamGroup
 slots:
 - length
 attributes:
   s_position:
     name: s_position
     description: Longitudinal position of the element along the beamline.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:s_position
     rank: 1000
-    slot_uri: pals:s_position
     domain_of:
     - LongitudinalPlacementParamGroup
     range: float
+    unit:
+      ucum_code: m
 rules:
 - preconditions:
     slot_conditions:
@@ -169,34 +176,56 @@ rules:
 <details>
 ```yaml
 name: LongitudinalPlacementParamGroup
-description: "Mixin for an element's extent and position along the longitudinal (beam-direction,\
-  \ \"s\") axis. \nCorresponds to PALS's ungrouped element parameters `length` and\
-  \ `s_position`.\nOne (or both) `length` or `s_position` must be present."
-from_schema: https://w3id.org/accelerator-core
+description: Mixin for an element's extent and position along the longitudinal (beam-direction,
+  "s") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`.
+  One (or both) `length` or `s_position` must be present.
+from_schema: https://w3id.org/pals-config
+is_a: ParamGroup
 attributes:
   s_position:
     name: s_position
     description: Longitudinal position of the element along the beamline.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:s_position
     rank: 1000
-    slot_uri: pals:s_position
     alias: s_position
     owner: LongitudinalPlacementParamGroup
     domain_of:
     - LongitudinalPlacementParamGroup
     range: float
+    unit:
+      ucum_code: m
   length:
     name: length
     description: Length of the element (arc length for bends).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:length
     rank: 1000
-    slot_uri: pals:length
     alias: length
     owner: LongitudinalPlacementParamGroup
     domain_of:
     - LongitudinalPlacementParamGroup
     - BeamLine
     range: float
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: LongitudinalPlacementParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 rules:
 - preconditions:
     slot_conditions:

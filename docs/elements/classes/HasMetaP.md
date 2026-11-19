@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasMetaP](https://pals-project.readthedocs.io/class/HasMetaP)
+URI: [pals_config:class/HasMetaP](https://w3id.org/pals-config/class/HasMetaP)
 
 
 ```mermaid
@@ -19,8 +19,9 @@ HasMetaP {
 }
 MetaParamGroup {
     string description  
-    string alias  
+    stringList alias  
     string label  
+    string id  
 }
 
 HasMetaP ||--|o MetaParamGroup : "MetaP"
@@ -76,7 +77,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +86,8 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasMetaP |
-| native | pals:HasMetaP |
+| self | pals_config:HasMetaP |
+| native | pals_config:HasMetaP |
 
 
 
@@ -102,7 +103,7 @@ MetaParamGroup ||--}o AdditionalMetadata : "additional_metadata"
 <details>
 ```yaml
 name: HasMetaP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   MetaP:
@@ -110,7 +111,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasMetaP
@@ -125,7 +126,7 @@ attributes:
 <details>
 ```yaml
 name: HasMetaP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   MetaP:
@@ -133,7 +134,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: HasMetaP

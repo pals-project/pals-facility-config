@@ -9,7 +9,7 @@ _Twiss dispersion slope parameter in the vertical plane._
 
 
 
-URI: [pals:etap_y](https://pals-project.readthedocs.io/etap_y)
+URI: [pals_config:slot/etap_y](https://w3id.org/pals-config/slot/etap_y)
 Alias: etap_y
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: etap_y
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [TwissParamGroup](../classes/TwissParamGroup.md) |
-| Slot URI | [pals:etap_y](https://pals-project.readthedocs.io/etap_y) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: etap_y
 | --- | --- |
 | Owner | [TwissParamGroup](../classes/TwissParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `1` (dimensionless)
+
+</details>
 
 
 
@@ -74,7 +79,7 @@ Alias: etap_y
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -83,8 +88,9 @@ Alias: etap_y
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:etap_y |
-| native | pals:etap_y |
+| self | pals_config:etap_y |
+| native | pals_config:etap_y |
+| close | pals:etap_y |
 
 
 
@@ -95,16 +101,20 @@ Alias: etap_y
 ```yaml
 name: etap_y
 description: Twiss dispersion slope parameter in the vertical plane.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - etapy
+close_mappings:
+- pals:etap_y
 rank: 1000
-slot_uri: pals:etap_y
 alias: etap_y
 owner: TwissParamGroup
 domain_of:
 - TwissParamGroup
 range: float
+unit:
+  descriptive_name: dimensionless
+  ucum_code: '1'
 
 ```
 </details>

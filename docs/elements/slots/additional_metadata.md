@@ -9,7 +9,7 @@ _Additional metadata or annotations for the instance._
 
 
 
-URI: [pals:slot/additional_metadata](https://pals-project.readthedocs.io/slot/additional_metadata)
+URI: [pals_config:slot/additional_metadata](https://w3id.org/pals-config/slot/additional_metadata)
 Alias: additional_metadata
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: additional_metadata
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: additional_metadata
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:additional_metadata |
-| native | pals:additional_metadata |
+| self | pals_config:additional_metadata |
+| native | pals_config:additional_metadata |
 
 
 
@@ -90,7 +90,7 @@ Alias: additional_metadata
 ```yaml
 name: additional_metadata
 description: Additional metadata or annotations for the instance.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: additional_metadata
 owner: MetaParamGroup

@@ -7,7 +7,7 @@ _Broad structural or support functions._
 
 
 
-URI: [pals:enum/FacilityFunctionEnum](https://pals-project.readthedocs.io/enum/FacilityFunctionEnum)
+URI: [pals_config:enum/FacilityFunctionEnum](https://w3id.org/pals-config/enum/FacilityFunctionEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -22,6 +22,12 @@ URI: [pals:enum/FacilityFunctionEnum](https://pals-project.readthedocs.io/enum/F
 
 
 
+
+## Slots
+
+| Name | Description |
+| ---  | --- |
+| [facility_functions](../slots/facility_functions.md) | The function of the supporting facility component,  which can be used to identify the component across different source systems. |
 
 
 
@@ -41,7 +47,7 @@ URI: [pals:enum/FacilityFunctionEnum](https://pals-project.readthedocs.io/enum/F
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -54,7 +60,7 @@ URI: [pals:enum/FacilityFunctionEnum](https://pals-project.readthedocs.io/enum/F
 ```yaml
 name: FacilityFunctionEnum
 description: Broad structural or support functions.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Support:

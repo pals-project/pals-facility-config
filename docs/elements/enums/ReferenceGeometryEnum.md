@@ -7,7 +7,7 @@ _The reference geometry used to calculate multipoles.  Sets the geometry used to
 
 
 
-URI: [pals:enum/ReferenceGeometryEnum](https://pals-project.readthedocs.io/enum/ReferenceGeometryEnum)
+URI: [pals_config:enum/ReferenceGeometryEnum](https://w3id.org/pals-config/enum/ReferenceGeometryEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -44,7 +44,7 @@ URI: [pals:enum/ReferenceGeometryEnum](https://pals-project.readthedocs.io/enum/
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -58,7 +58,7 @@ URI: [pals:enum/ReferenceGeometryEnum](https://pals-project.readthedocs.io/enum/
 name: ReferenceGeometryEnum
 description: The reference geometry used to calculate multipoles.  Sets the geometry
   used to calculate multipoles.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   arc:

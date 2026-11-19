@@ -9,7 +9,7 @@ _Global Y coordinate in the facility floor plan._
 
 
 
-URI: [pals:y](https://pals-project.readthedocs.io/y)
+URI: [pals_config:slot/y](https://w3id.org/pals-config/slot/y)
 Alias: y
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: y
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [FloorParamGroup](../classes/FloorParamGroup.md) |
-| Slot URI | [pals:y](https://pals-project.readthedocs.io/y) |
 
 ### Cardinality and Requirements
 
@@ -76,7 +75,7 @@ Alias: y
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +84,9 @@ Alias: y
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:y |
-| native | pals:y |
+| self | pals_config:y |
+| native | pals_config:y |
+| close | pals:y |
 
 
 
@@ -97,13 +97,14 @@ Alias: y
 ```yaml
 name: y
 description: Global Y coordinate in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - y_coordinate
 - ModelY
 - y coordinate
+close_mappings:
+- pals:y
 rank: 1000
-slot_uri: pals:y
 alias: y
 owner: FloorParamGroup
 domain_of:

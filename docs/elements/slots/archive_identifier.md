@@ -9,7 +9,7 @@ _The identifier used to reference the signal in an archival system._
 
 
 
-URI: [pals:slot/archive_identifier](https://pals-project.readthedocs.io/slot/archive_identifier)
+URI: [pals_config:slot/archive_identifier](https://w3id.org/pals-config/slot/archive_identifier)
 Alias: archive_identifier
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: archive_identifier
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: archive_identifier
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:archive_identifier |
-| native | pals:archive_identifier |
+| self | pals_config:archive_identifier |
+| native | pals_config:archive_identifier |
 
 
 
@@ -89,7 +89,7 @@ Alias: archive_identifier
 ```yaml
 name: archive_identifier
 description: The identifier used to reference the signal in an archival system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: archive_identifier
 owner: Signal

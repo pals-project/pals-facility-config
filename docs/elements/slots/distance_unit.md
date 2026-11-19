@@ -3,8 +3,13 @@
 # Slot: distance_unit 
 
 
+_Unit of the distance value between two components in a relationship. Only an edge-property slot for edges that require a distance value between two components in a relationship._
 
-URI: [pals:slot/distance_unit](https://pals-project.readthedocs.io/slot/distance_unit)
+
+
+
+
+URI: [pals_config:slot/distance_unit](https://w3id.org/pals-config/slot/distance_unit)
 Alias: distance_unit
 
 <!-- no inheritance hierarchy -->
@@ -17,7 +22,8 @@ Alias: distance_unit
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ComponentRelation](../classes/ComponentRelation.md) | Association between two Components (Physical or Virtual), with supporting contextual/qualifying information about how and where the relationship holds. |  no  |
+| [NearestTo](../classes/NearestTo.md) | A relationship indicating that the subject component is nearest to the object component in a specified context,  such as a diagnostic device nearest to a magnet. |  no  |
+| [AdjacentTo](../classes/AdjacentTo.md) | A relationship indicating that the subject component is adjacent to the object component and not overlapping<br> in a specified context, such as radiation detector and a magnet. |  no  |
 
 
 
@@ -31,19 +37,12 @@ Alias: distance_unit
 | Property | Value |
 | --- | --- |
 | Range | [UnitEnum](../enums/UnitEnum.md) |
-| Domain Of | [ComponentRelation](../classes/ComponentRelation.md) |
+| Domain Of | [AdjacentTo](../classes/AdjacentTo.md), [NearestTo](../classes/NearestTo.md) |
 
 ### Cardinality and Requirements
 
 | Property | Value |
 | --- | --- |
-### Slot Characteristics
-
-| Property | Value |
-| --- | --- |
-| Owner | [ComponentRelation](../classes/ComponentRelation.md) |
-
-
 
 
 
@@ -63,7 +62,7 @@ Alias: distance_unit
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -72,8 +71,9 @@ Alias: distance_unit
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:distance_unit |
-| native | pals:distance_unit |
+| self | pals_config:distance_unit |
+| native | pals_config:distance_unit |
+| related | saref:UnitOfMeasure |
 
 
 
@@ -83,12 +83,17 @@ Alias: distance_unit
 <details>
 ```yaml
 name: distance_unit
-from_schema: https://w3id.org/accelerator-core
+description: Unit of the distance value between two components in a relationship.
+  Only an edge-property slot for edges that require a distance value between two components
+  in a relationship.
+from_schema: https://w3id.org/pals-config
+related_mappings:
+- saref:UnitOfMeasure
 rank: 1000
 alias: distance_unit
-owner: ComponentRelation
 domain_of:
-- ComponentRelation
+- AdjacentTo
+- NearestTo
 range: UnitEnum
 
 ```

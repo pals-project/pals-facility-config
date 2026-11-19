@@ -9,7 +9,7 @@ _Global X coordinate in the facility floor plan._
 
 
 
-URI: [pals:x](https://pals-project.readthedocs.io/x)
+URI: [pals_config:slot/x](https://w3id.org/pals-config/slot/x)
 Alias: x
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: x
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [FloorParamGroup](../classes/FloorParamGroup.md) |
-| Slot URI | [pals:x](https://pals-project.readthedocs.io/x) |
 
 ### Cardinality and Requirements
 
@@ -76,7 +75,7 @@ Alias: x
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +84,9 @@ Alias: x
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:x |
-| native | pals:x |
+| self | pals_config:x |
+| native | pals_config:x |
+| close | pals:x |
 
 
 
@@ -97,13 +97,14 @@ Alias: x
 ```yaml
 name: x
 description: Global X coordinate in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - x_coordinate
 - ModelX
 - x coordinate
+close_mappings:
+- pals:x
 rank: 1000
-slot_uri: pals:x
 alias: x
 owner: FloorParamGroup
 domain_of:

@@ -9,7 +9,7 @@ _A reference to a species or particle type, such as an ion, electron, or proton.
 
 
 
-URI: [pals:species_ref](https://pals-project.readthedocs.io/species_ref)
+URI: [pals_config:slot/species_ref](https://w3id.org/pals-config/slot/species_ref)
 Alias: species_ref
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: species_ref
 | --- | --- |
 | Range | [String](../types/String.md) |
 | Domain Of | [ReferenceParamGroup](../classes/ReferenceParamGroup.md) |
-| Slot URI | [pals:species_ref](https://pals-project.readthedocs.io/species_ref) |
 
 ### Cardinality and Requirements
 
@@ -69,7 +68,7 @@ Alias: species_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +77,9 @@ Alias: species_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:species_ref |
-| native | pals:species_ref |
+| self | pals_config:species_ref |
+| native | pals_config:species_ref |
+| close | pals:species_ref |
 
 
 
@@ -91,9 +91,10 @@ Alias: species_ref
 name: species_ref
 description: A reference to a species or particle type, such as an ion, electron,
   or proton.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:species_ref
 rank: 1000
-slot_uri: pals:species_ref
 alias: species_ref
 owner: ReferenceParamGroup
 domain_of:

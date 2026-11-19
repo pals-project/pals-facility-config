@@ -9,7 +9,7 @@ _Contains the authorship information for this representation of an accelerator f
 
 
 
-URI: [pals:slot/authors](https://pals-project.readthedocs.io/slot/authors)
+URI: [pals_config:slot/authors](https://w3id.org/pals-config/slot/authors)
 Alias: authors
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: authors
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: authors
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:authors |
-| native | pals:authors |
+| self | pals_config:authors |
+| native | pals_config:authors |
 
 
 
@@ -91,7 +91,7 @@ Alias: authors
 name: authors
 description: Contains the authorship information for this representation of an accelerator
   facility and its operations.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: authors
 owner: PALSAccelerator

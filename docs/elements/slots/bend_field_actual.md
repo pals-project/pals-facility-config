@@ -9,7 +9,7 @@ _Actual bend field._
 
 
 
-URI: [pals:bend_field_actual](https://pals-project.readthedocs.io/bend_field_actual)
+URI: [pals_config:slot/bend_field_actual](https://w3id.org/pals-config/slot/bend_field_actual)
 Alias: bend_field_actual
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: bend_field_actual
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: bend_field_actual
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:bend_field_actual](https://pals-project.readthedocs.io/bend_field_actual) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: bend_field_actual
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `T`
+
+</details>
 
 
 
@@ -69,7 +74,7 @@ Alias: bend_field_actual
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +83,9 @@ Alias: bend_field_actual
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:bend_field_actual |
-| native | pals:bend_field_actual |
+| self | pals_config:bend_field_actual |
+| native | pals_config:bend_field_actual |
+| close | pals:bend_field_actual |
 
 
 
@@ -90,14 +96,17 @@ Alias: bend_field_actual
 ```yaml
 name: bend_field_actual
 description: Actual bend field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:bend_field_actual
 rank: 1000
-slot_uri: pals:bend_field_actual
 alias: bend_field_actual
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: T
 
 ```
 </details>

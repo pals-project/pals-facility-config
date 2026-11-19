@@ -9,7 +9,7 @@ _Rotation around the Z-axis in the facility floor plan._
 
 
 
-URI: [pals:z_rot](https://pals-project.readthedocs.io/z_rot)
+URI: [pals_config:slot/z_rot](https://w3id.org/pals-config/slot/z_rot)
 Alias: z_rot
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: z_rot
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
-| Slot URI | [pals:z_rot](https://pals-project.readthedocs.io/z_rot) |
 
 ### Cardinality and Requirements
 
@@ -76,7 +75,7 @@ Alias: z_rot
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +84,9 @@ Alias: z_rot
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:z_rot |
-| native | pals:z_rot |
+| self | pals_config:z_rot |
+| native | pals_config:z_rot |
+| close | pals:z_rot |
 
 
 
@@ -97,13 +97,14 @@ Alias: z_rot
 ```yaml
 name: z_rot
 description: Rotation around the Z-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - delta_psi
 - psi_shift
 - GlobalOffsetPsi
+close_mappings:
+- pals:z_rot
 rank: 1000
-slot_uri: pals:z_rot
 alias: z_rot
 owner: BodyShiftParamGroup
 domain_of:

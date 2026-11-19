@@ -9,7 +9,7 @@ _Tilt of the Nth multipole._
 
 
 
-URI: [pals:slot/tilt](https://pals-project.readthedocs.io/slot/tilt)
+URI: [pals_config:slot/tilt](https://w3id.org/pals-config/slot/tilt)
 Alias: tilt
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: tilt
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -49,6 +49,12 @@ Alias: tilt
 | Owner | [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) |
 
 
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `rad`
+
+</details>
+
 
 
 
@@ -68,7 +74,7 @@ Alias: tilt
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +83,8 @@ Alias: tilt
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:tilt |
-| native | pals:tilt |
+| self | pals_config:tilt |
+| native | pals_config:tilt |
 | broad | pals:tilt |
 
 
@@ -90,7 +96,7 @@ Alias: tilt
 ```yaml
 name: tilt
 description: Tilt of the Nth multipole.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:tilt
 rank: 1000
@@ -99,6 +105,8 @@ owner: MultipoleParameterGroup
 domain_of:
 - MultipoleParameterGroup
 range: float
+unit:
+  ucum_code: rad
 
 ```
 </details>

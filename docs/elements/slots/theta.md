@@ -9,7 +9,7 @@ _Orientation angle around the Y-axis in the facility floor plan._
 
 
 
-URI: [pals:theta](https://pals-project.readthedocs.io/theta)
+URI: [pals_config:slot/theta](https://w3id.org/pals-config/slot/theta)
 Alias: theta
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: theta
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [FloorParamGroup](../classes/FloorParamGroup.md) |
-| Slot URI | [pals:theta](https://pals-project.readthedocs.io/theta) |
 
 ### Cardinality and Requirements
 
@@ -76,7 +75,7 @@ Alias: theta
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +84,9 @@ Alias: theta
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:theta |
-| native | pals:theta |
+| self | pals_config:theta |
+| native | pals_config:theta |
+| close | pals:theta |
 
 
 
@@ -97,13 +97,14 @@ Alias: theta
 ```yaml
 name: theta
 description: Orientation angle around the Y-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - theta_angle
 - ModelYaw
 - Model_Yaw
+close_mappings:
+- pals:theta
 rank: 1000
-slot_uri: pals:theta
 alias: theta
 owner: FloorParamGroup
 domain_of:

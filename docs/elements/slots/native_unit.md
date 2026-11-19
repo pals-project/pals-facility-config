@@ -9,7 +9,7 @@ _The native unit of the signal in the source system._
 
 
 
-URI: [pals:slot/native_unit](https://pals-project.readthedocs.io/slot/native_unit)
+URI: [pals_config:slot/native_unit](https://w3id.org/pals-config/slot/native_unit)
 Alias: native_unit
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: native_unit
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: native_unit
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:native_unit |
-| native | pals:native_unit |
+| self | pals_config:native_unit |
+| native | pals_config:native_unit |
 
 
 
@@ -90,7 +90,7 @@ Alias: native_unit
 ```yaml
 name: native_unit
 description: The native unit of the signal in the source system.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: native_unit
 owner: Signal

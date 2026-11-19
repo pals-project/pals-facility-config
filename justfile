@@ -95,26 +95,54 @@ lint:
 # Generate md documentation for the schema and add artifacts
 [group('model development')]
 gen-doc: _gen-yaml && _add-artifacts
-  uv run gen-doc {{gen_doc_args}} -d {{docdir}} {{source_schema_path}} --truncate-descriptions False --diagram-type er_diagram --example-directory doc_examples/ --subfolder-type-separation --template-directory docs/templates-linkml
+  # A fixed hash seed keeps gen-doc's table row order stable, so regenerating unchanged docs gives no diff.
+  PYTHONHASHSEED=0 uv run gen-doc {{gen_doc_args}} -d {{docdir}} {{source_schema_path}} --truncate-descriptions False --diagram-type er_diagram --example-directory doc_examples/ --subfolder-type-separation --template-directory docs/templates-linkml
 
-# Export the example instance as Turtle RDF
+# Export an instance as Turtle RDF
 [group('model development')]
-gen-instance-ttl: _ensure_project_owl
+gen-instance-ttl instance_file="examples/GUN_thru_MV.linkml.yaml": _ensure_project_owl
+  uv run python3 src/resolve_instance_ids.py \
+    --instance_file {{instance_file}} \
+    --output_file {{dest}}/owl/{{file_stem(instance_file)}}.resolved.yaml
   uv run linkml-convert \
     -s {{source_schema_path}} \
     -C PALSAccelerator \
     -t ttl \
-    examples/core_acc_narad_instance.yaml \
-    -o {{dest}}/owl/core_acc_narad_instance.ttl
+    {{dest}}/owl/{{file_stem(instance_file)}}.resolved.yaml \
+    -o {{dest}}/owl/{{file_stem(instance_file)}}.ttl
 
 # Build docs and run test server
 [group('model development')]
 testdoc: gen-doc _serve
 
+# Generate just the OWL ontology (schema -> TBox)
+[group('model development')]
+gen-owl: _ensure_project_owl
+  uv run gen-owl {{gen_owl_args}} {{source_schema_path}} > "{{dest}}/owl/{{schema_name}}.owl.ttl"
+
 # Generate the Python data models (dataclasses & pydantic)
 gen-python:
   uv run gen-project -d  {{pymodel}} -I python {{source_schema_path}}
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
+
+# Postprocess raw instance TTL into RDF resources and relation predicates
+[group('model development')]
+gen-post instance_file="examples/GUN_thru_MV.linkml.yaml": (gen-instance-ttl instance_file)
+  uv run python3 src/postprocess_for_rdf.py \
+    --instance_file {{dest}}/owl/{{file_stem(instance_file)}}.ttl \
+    --output_file {{dest}}/owl/{{file_stem(instance_file)}}_rdf.ttl
+
+# Generate and merge the ontology and postprocessed instance graphs
+[group('model development')]
+gen-post-merge instance_file="examples/GUN_thru_MV.linkml.yaml": (gen-merge instance_file)
+  @echo "Done: {{dest}}/owl/{{file_stem(instance_file)}}_full.ttl"
+
+[group('model development')]
+gen-merge instance_file="examples/GUN_thru_MV.linkml.yaml": gen-owl (gen-post instance_file)
+  uv run python3 src/merge_graphs.py \
+    --schema_file {{dest}}/owl/{{schema_name}}.owl.ttl \
+    --instance_file {{dest}}/owl/{{file_stem(instance_file)}}_rdf.ttl \
+    --output_file {{dest}}/owl/{{file_stem(instance_file)}}_full.ttl
 
 # Generate project files including Python data model
 [group('model development')]
@@ -153,7 +181,6 @@ _post_upgrade_v020py:
     tasks = [
         (Path("src/docs/files"), Path("docs")),
         (Path("src/docs/templates"), Path("docs/templates-linkml")),
-        (Path("src/data/examples"), Path("tests/data/")),
     ]
     for src, dest in tasks:
         for path_obj in src.rglob("*"):
@@ -201,17 +228,11 @@ _test-schema:
 _test-python: gen-python
   uv run python -m pytest
 
-# Run example tests
-_test-examples: _ensure_examples_output
-  uv run linkml-run-examples \
-    --input-formats json \
-    --input-formats yaml \
-    --output-formats json \
-    --output-formats yaml \
-    --counter-example-input-directory tests/data/invalid \
-    --input-directory tests/data/valid \
-    --output-directory examples/output \
-    --schema {{source_schema_path}} > examples/output/README.md
+# Validate the tracked final NARAD instances
+_test-examples:
+  uv run linkml-validate --schema {{source_schema_path}} examples/bta_narad_instance.yaml
+  uv run linkml-validate --schema {{source_schema_path}} examples/booster_narad_instance.yaml
+  uv run linkml-validate --schema {{source_schema_path}} examples/toy_ring_narad_instance.yaml
 
 # Add the merged model to docs/schema.
 _gen-yaml:

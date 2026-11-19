@@ -9,7 +9,7 @@ _A diagnostic device used to monitor radiation dose or dose rate._
 
 
 
-URI: [pals:class/RadiationMonitor](https://pals-project.readthedocs.io/class/RadiationMonitor)
+URI: [pals_config:class/RadiationMonitor](https://w3id.org/pals-config/class/RadiationMonitor)
 
 
 ```mermaid
@@ -26,6 +26,7 @@ BodyShiftParamGroup {
     float y_rot  
     float z_offset  
     float z_rot  
+    string id  
 }
 FloorParamGroup {
     float phi  
@@ -34,18 +35,22 @@ FloorParamGroup {
     float x  
     float y  
     float z  
+    string id  
 }
 LongitudinalPlacementParamGroup {
     float length  
     float s_position  
+    string id  
 }
 MetaParamGroup {
     string description  
-    string alias  
+    stringList alias  
     string label  
+    string id  
 }
 RadiationMonitor {
     string id  
+    stringList alias  
     PhysicalRelationEnum beamline_relation  
     PhysicalFunctionEnumList functions  
     string kind  
@@ -64,10 +69,11 @@ RadiationMonitor ||--|o MetaParamGroup : "MetaP"
 
 
 ## Inheritance
-* [Component](../classes/Component.md) [ [HasMetaP](../classes/HasMetaP.md)]
-    * [PhysicalComponent](../classes/PhysicalComponent.md) [ [HasFloorP](../classes/HasFloorP.md) [HasLongitudinalPlacementP](../classes/HasLongitudinalPlacementP.md)]
-        * [DiagnosticDevice](../classes/DiagnosticDevice.md)
-            * **RadiationMonitor** [ [HasBodyShiftP](../classes/HasBodyShiftP.md)]
+* [Node](../classes/Node.md)
+    * [Component](../classes/Component.md) [ [HasMetaP](../classes/HasMetaP.md)]
+        * [PhysicalComponent](../classes/PhysicalComponent.md) [ [HasFloorP](../classes/HasFloorP.md) [HasLongitudinalPlacementP](../classes/HasLongitudinalPlacementP.md)]
+            * [DiagnosticDevice](../classes/DiagnosticDevice.md)
+                * **RadiationMonitor** [ [HasBodyShiftP](../classes/HasBodyShiftP.md)]
 
 
 ## Slots
@@ -75,14 +81,15 @@ RadiationMonitor ||--|o MetaParamGroup : "MetaP"
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [BodyShiftP](../slots/BodyShiftP.md) | 0..1 <br/> [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) | A mixin for floor plan shift parameters that are aligned with PALS BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasBodyShiftP](../classes/HasBodyShiftP.md) |
-| [functions](../slots/functions.md) | 1..* <br/> [PhysicalFunctionEnum](../enums/PhysicalFunctionEnum.md) | The function of the physical component,  which can be used to identify the component across different source systems. | [PhysicalComponent](../classes/PhysicalComponent.md) |
+| [functions](../slots/functions.md) | * <br/> [PhysicalFunctionEnum](../enums/PhysicalFunctionEnum.md) | The function of the physical component,  which can be used to identify the component across different source systems. | [PhysicalComponent](../classes/PhysicalComponent.md) |
 | [beamline_relation](../slots/beamline_relation.md) | 1 <br/> [PhysicalRelationEnum](../enums/PhysicalRelationEnum.md) | The relationship of the physical component to the beamline,  which can be used to identify the component across different source systems. | [PhysicalComponent](../classes/PhysicalComponent.md) |
 | [FloorP](../slots/FloorP.md) | 0..1 <br/> [FloorParamGroup](../classes/FloorParamGroup.md) | A mixin for floor plan parameters that are aligned with PALS FloorP (Floor Plan Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasFloorP](../classes/HasFloorP.md) |
 | [LongitudinalPlacementP](../slots/LongitudinalPlacementP.md) | 0..1 <br/> [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md) | A mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasLongitudinalPlacementP](../classes/HasLongitudinalPlacementP.md) |
-| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [Component](../classes/Component.md) |
-| [kind](../slots/kind.md) | 1 <br/> [String](../types/String.md) | The LinkML class name of this instance. | [Component](../classes/Component.md) |
 | [native_types](../slots/native_types.md) | * <br/> [String](../types/String.md) | The native type of the component in the source system, which can be used to identify the component across different source systems. | [Component](../classes/Component.md) |
 | [MetaP](../slots/MetaP.md) | 0..1 <br/> [MetaParamGroup](../classes/MetaParamGroup.md) | A mixin for metadata parameters that are aligned with PALS MetaP (Metadata Parameters) for interoperability with the Particle Accelerator Language Standard (PALS). | [HasMetaP](../classes/HasMetaP.md) |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [Node](../classes/Node.md) |
+| [kind](../slots/kind.md) | 1 <br/> [String](../types/String.md) | The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor` (no prefix). | [Node](../classes/Node.md) |
+| [alias](../slots/alias.md) | * <br/> [String](../types/String.md) | An alternative name or identifier for the instance. | [Node](../classes/Node.md) |
 
 
 
@@ -107,7 +114,7 @@ RadiationMonitor ||--|o MetaParamGroup : "MetaP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -116,8 +123,8 @@ RadiationMonitor ||--|o MetaParamGroup : "MetaP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:RadiationMonitor |
-| native | pals:RadiationMonitor |
+| self | pals_config:RadiationMonitor |
+| native | pals_config:RadiationMonitor |
 | broad | pals:Instrument |
 
 
@@ -135,7 +142,7 @@ RadiationMonitor ||--|o MetaParamGroup : "MetaP"
 ```yaml
 name: RadiationMonitor
 description: A diagnostic device used to monitor radiation dose or dose rate.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:Instrument
 is_a: DiagnosticDevice
@@ -151,7 +158,7 @@ mixins:
 ```yaml
 name: RadiationMonitor
 description: A diagnostic device used to monitor radiation dose or dose rate.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:Instrument
 is_a: DiagnosticDevice
@@ -163,7 +170,7 @@ attributes:
     description: A mixin for floor plan shift parameters that are aligned with PALS
       BodyShiftP (Floor Plan Shift Parameters) for interoperability with the Particle
       Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BodyShiftP
     owner: RadiationMonitor
@@ -175,25 +182,26 @@ attributes:
     name: functions
     description: The function of the physical component,  which can be used to identify
       the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:physical_function
     rank: 1000
-    slot_uri: pals:physical_function
     alias: functions
     owner: RadiationMonitor
     domain_of:
     - PhysicalComponent
     - VirtualComponent
-    - SupportingFacilityComponent
     range: PhysicalFunctionEnum
-    required: true
+    required: false
     multivalued: true
   beamline_relation:
     name: beamline_relation
     description: The relationship of the physical component to the beamline,  which
       can be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:physical_beamline_relation
     rank: 1000
-    slot_uri: pals:physical_beamline_relation
     alias: beamline_relation
     owner: RadiationMonitor
     domain_of:
@@ -206,7 +214,7 @@ attributes:
     description: A mixin for floor plan parameters that are aligned with PALS FloorP
       (Floor Plan Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: FloorP
     owner: RadiationMonitor
@@ -220,7 +228,7 @@ attributes:
       (beam-direction, "s") axis that are aligned with PALS LongitudinalPlacementP
       (Longitudinal Placement Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: LongitudinalPlacementP
     owner: RadiationMonitor
@@ -228,42 +236,11 @@ attributes:
     - HasLongitudinalPlacementP
     range: LongitudinalPlacementParamGroup
     inlined: true
-  id:
-    name: id
-    description: A unique identifier for the instance.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:id
-    identifier: true
-    alias: id
-    owner: RadiationMonitor
-    domain_of:
-    - Affiliation
-    - Component
-    - Signal
-    - Relationship
-    range: string
-    required: true
-  kind:
-    name: kind
-    description: The LinkML class name of this instance.
-    from_schema: https://w3id.org/accelerator-core
-    rank: 1000
-    slot_uri: pals:kind
-    designates_type: true
-    alias: kind
-    owner: RadiationMonitor
-    domain_of:
-    - PALSAccelerator
-    - Component
-    - Signal
-    range: string
-    required: true
   native_types:
     name: native_types
     description: The native type of the component in the source system, which can
       be used to identify the component across different source systems.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: native_types
     owner: RadiationMonitor
@@ -276,7 +253,7 @@ attributes:
     description: A mixin for metadata parameters that are aligned with PALS MetaP
       (Metadata Parameters) for interoperability with the Particle Accelerator Language
       Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: MetaP
     owner: RadiationMonitor
@@ -284,6 +261,54 @@ attributes:
     - HasMetaP
     range: MetaParamGroup
     inlined: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: RadiationMonitor
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
+  kind:
+    name: kind
+    description: The LinkML class name of this instance, e.g. `Quadrupole` or `BeamProfileMonitor`
+      (no prefix).
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - saref:DeviceKind
+    rank: 1000
+    slot_uri: rdf:type
+    designates_type: true
+    alias: kind
+    owner: RadiationMonitor
+    domain_of:
+    - Node
+    - PALSAccelerator
+    range: string
+    required: true
+  alias:
+    name: alias
+    description: An alternative name or identifier for the instance.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:alias
+    rank: 1000
+    alias: alias
+    owner: RadiationMonitor
+    domain_of:
+    - Node
+    - MetaParamGroup
+    range: string
+    multivalued: true
 
 ```
 </details>

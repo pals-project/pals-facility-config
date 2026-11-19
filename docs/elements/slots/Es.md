@@ -9,7 +9,7 @@ _Skew component of the field._
 
 
 
-URI: [pals:slot/Es](https://pals-project.readthedocs.io/slot/Es)
+URI: [pals_config:slot/Es](https://w3id.org/pals-config/slot/Es)
 Alias: Es
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: Es
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -68,7 +68,7 @@ Alias: Es
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Es
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Es |
-| native | pals:Es |
+| self | pals_config:Es |
+| native | pals_config:Es |
 | broad | pals:EsN |
 
 
@@ -90,7 +90,7 @@ Alias: Es
 ```yaml
 name: Es
 description: Skew component of the field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:EsN
 rank: 1000

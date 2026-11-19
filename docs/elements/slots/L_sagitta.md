@@ -9,7 +9,7 @@ _Output parameter. Sagitta length._
 
 
 
-URI: [pals:L_sagitta](https://pals-project.readthedocs.io/L_sagitta)
+URI: [pals_config:slot/L_sagitta](https://w3id.org/pals-config/slot/L_sagitta)
 Alias: L_sagitta
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: L_sagitta
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: L_sagitta
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:L_sagitta](https://pals-project.readthedocs.io/L_sagitta) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: L_sagitta
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `m`
+
+</details>
 
 
 
@@ -69,7 +74,7 @@ Alias: L_sagitta
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +83,9 @@ Alias: L_sagitta
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:L_sagitta |
-| native | pals:L_sagitta |
+| self | pals_config:L_sagitta |
+| native | pals_config:L_sagitta |
+| close | pals:L_sagitta |
 
 
 
@@ -90,14 +96,17 @@ Alias: L_sagitta
 ```yaml
 name: L_sagitta
 description: Output parameter. Sagitta length.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:L_sagitta
 rank: 1000
-slot_uri: pals:L_sagitta
 alias: L_sagitta
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: m
 
 ```
 </details>

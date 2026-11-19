@@ -9,7 +9,7 @@ _Rectangular length._
 
 
 
-URI: [pals:L_rectangle](https://pals-project.readthedocs.io/L_rectangle)
+URI: [pals_config:slot/L_rectangle](https://w3id.org/pals-config/slot/L_rectangle)
 Alias: L_rectangle
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: L_rectangle
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: L_rectangle
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:L_rectangle](https://pals-project.readthedocs.io/L_rectangle) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: L_rectangle
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `m`
+
+</details>
 
 
 
@@ -69,7 +74,7 @@ Alias: L_rectangle
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +83,9 @@ Alias: L_rectangle
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:L_rectangle |
-| native | pals:L_rectangle |
+| self | pals_config:L_rectangle |
+| native | pals_config:L_rectangle |
+| close | pals:L_rectangle |
 
 
 
@@ -90,14 +96,17 @@ Alias: L_rectangle
 ```yaml
 name: L_rectangle
 description: Rectangular length.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:L_rectangle
 rank: 1000
-slot_uri: pals:L_rectangle
 alias: L_rectangle
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: m
 
 ```
 </details>

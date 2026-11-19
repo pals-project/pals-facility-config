@@ -9,7 +9,7 @@ _The transverse plane in which the kicker operates, either horizontal or vertica
 
 
 
-URI: [pals:slot/plane](https://pals-project.readthedocs.io/slot/plane)
+URI: [pals_config:slot/plane](https://w3id.org/pals-config/slot/plane)
 Alias: plane
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: plane
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: plane
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:plane |
-| native | pals:plane |
+| self | pals_config:plane |
+| native | pals_config:plane |
 
 
 
@@ -91,7 +91,7 @@ Alias: plane
 name: plane
 description: The transverse plane in which the kicker operates, either horizontal
   or vertical.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: plane
 owner: Kicker

@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasSolenoidP](https://pals-project.readthedocs.io/class/HasSolenoidP)
+URI: [pals_config:class/HasSolenoidP](https://w3id.org/pals-config/class/HasSolenoidP)
 
 
 ```mermaid
@@ -15,6 +15,7 @@ HasSolenoidP {
 SolenoidParamGroup {
     float Bsol  
     float Ksol  
+    string id  
 }
 
 HasSolenoidP ||--|o SolenoidParamGroup : "SolenoidP"
@@ -68,7 +69,7 @@ HasSolenoidP ||--|o SolenoidParamGroup : "SolenoidP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +78,8 @@ HasSolenoidP ||--|o SolenoidParamGroup : "SolenoidP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasSolenoidP |
-| native | pals:HasSolenoidP |
+| self | pals_config:HasSolenoidP |
+| native | pals_config:HasSolenoidP |
 
 
 
@@ -94,7 +95,7 @@ HasSolenoidP ||--|o SolenoidParamGroup : "SolenoidP"
 <details>
 ```yaml
 name: HasSolenoidP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   SolenoidP:
@@ -102,7 +103,7 @@ attributes:
     description: A mixin for solenoid-specific parameters that are aligned with PALS
       SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasSolenoidP
@@ -117,7 +118,7 @@ attributes:
 <details>
 ```yaml
 name: HasSolenoidP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   SolenoidP:
@@ -125,7 +126,7 @@ attributes:
     description: A mixin for solenoid-specific parameters that are aligned with PALS
       SolenoidP (Solenoid Parameters) for interoperability with the Particle Accelerator
       Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: SolenoidP
     owner: HasSolenoidP

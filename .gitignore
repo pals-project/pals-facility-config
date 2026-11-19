@@ -9,6 +9,20 @@ __pycache__/
 dist/
 build/
 
+# Generated from the LinkML schema; regenerate with the gen-* just recipes
+/project/
+/src/narad/datamodel/
+/docs/schema/
+
+# Intermediate RDF files
+*.resolved.yaml
+*.owl.ttl
+*_rdf.ttl
+/examples/*.ttl
+
+# Reproducible PALS-to-NARAD skeletons and other local translation intermediates
+/.local/translation/
+
 # type checking and linting artifacts
 .mypy_cache/
 .pytype/

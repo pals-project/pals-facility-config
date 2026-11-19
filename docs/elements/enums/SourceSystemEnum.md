@@ -7,7 +7,7 @@ _Controlled values for facility-local source systems._
 
 
 
-URI: [pals:enum/SourceSystemEnum](https://pals-project.readthedocs.io/enum/SourceSystemEnum)
+URI: [pals_config:enum/SourceSystemEnum](https://w3id.org/pals-config/enum/SourceSystemEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -48,7 +48,7 @@ URI: [pals:enum/SourceSystemEnum](https://pals-project.readthedocs.io/enum/Sourc
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -61,7 +61,7 @@ URI: [pals:enum/SourceSystemEnum](https://pals-project.readthedocs.io/enum/Sourc
 ```yaml
 name: SourceSystemEnum
 description: Controlled values for facility-local source systems.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   EPICS:

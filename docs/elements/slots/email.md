@@ -9,7 +9,7 @@ _The email address of the author._
 
 
 
-URI: [pals:slot/email](https://pals-project.readthedocs.io/slot/email)
+URI: [pals_config:slot/email](https://w3id.org/pals-config/slot/email)
 Alias: email
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: email
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,8 @@ Alias: email
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:email |
-| native | pals:email |
+| self | pals_config:email |
+| native | pals_config:email |
 
 
 
@@ -96,7 +96,7 @@ Alias: email
 ```yaml
 name: email
 description: The email address of the author.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: email
 owner: Author

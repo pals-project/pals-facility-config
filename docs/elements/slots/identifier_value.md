@@ -9,7 +9,7 @@ _The value of the identifier._
 
 
 
-URI: [pals:slot/identifier_value](https://pals-project.readthedocs.io/slot/identifier_value)
+URI: [pals_config:slot/identifier_value](https://w3id.org/pals-config/slot/identifier_value)
 Alias: identifier_value
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: identifier_value
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: identifier_value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:identifier_value |
-| native | pals:identifier_value |
+| self | pals_config:identifier_value |
+| native | pals_config:identifier_value |
 
 
 
@@ -89,7 +89,7 @@ Alias: identifier_value
 ```yaml
 name: identifier_value
 description: The value of the identifier.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: identifier_value
 owner: Identifier

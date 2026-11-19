@@ -9,7 +9,7 @@ _The source system from which the signal originates, such as EPICS, PALS-Ext, MY
 
 
 
-URI: [pals:slot/source_system](https://pals-project.readthedocs.io/slot/source_system)
+URI: [pals_config:slot/source_system](https://w3id.org/pals-config/slot/source_system)
 Alias: source_system
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: source_system
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: source_system
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:source_system |
-| native | pals:source_system |
+| self | pals_config:source_system |
+| native | pals_config:source_system |
 
 
 
@@ -91,7 +91,7 @@ Alias: source_system
 name: source_system
 description: The source system from which the signal originates, such as EPICS, PALS-Ext,
   MYA, an element database, a channel database, or a simulation service.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: source_system
 owner: Signal

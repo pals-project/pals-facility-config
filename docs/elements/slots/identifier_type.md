@@ -9,7 +9,7 @@ _The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK._
 
 
 
-URI: [pals:slot/identifier_type](https://pals-project.readthedocs.io/slot/identifier_type)
+URI: [pals_config:slot/identifier_type](https://w3id.org/pals-config/slot/identifier_type)
 Alias: identifier_type
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: identifier_type
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: identifier_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:identifier_type |
-| native | pals:identifier_type |
+| self | pals_config:identifier_type |
+| native | pals_config:identifier_type |
 
 
 
@@ -89,7 +89,7 @@ Alias: identifier_type
 ```yaml
 name: identifier_type
 description: The type of identifier, such as DOI | PURL | ROR | LOCAL | URL | ARK.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: identifier_type
 owner: Identifier

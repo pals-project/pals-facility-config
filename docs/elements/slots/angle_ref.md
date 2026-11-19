@@ -9,7 +9,7 @@ _Reference bend angle._
 
 
 
-URI: [pals:angle_ref](https://pals-project.readthedocs.io/angle_ref)
+URI: [pals_config:slot/angle_ref](https://w3id.org/pals-config/slot/angle_ref)
 Alias: angle_ref
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: angle_ref
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: angle_ref
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:angle_ref](https://pals-project.readthedocs.io/angle_ref) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: angle_ref
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `rad`
+
+</details>
 
 
 
@@ -69,7 +74,7 @@ Alias: angle_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +83,9 @@ Alias: angle_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:angle_ref |
-| native | pals:angle_ref |
+| self | pals_config:angle_ref |
+| native | pals_config:angle_ref |
+| close | pals:angle_ref |
 
 
 
@@ -90,14 +96,17 @@ Alias: angle_ref
 ```yaml
 name: angle_ref
 description: Reference bend angle.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:angle_ref
 rank: 1000
-slot_uri: pals:angle_ref
 alias: angle_ref
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: rad
 
 ```
 </details>

@@ -9,7 +9,7 @@ _Normalized skew component._
 
 
 
-URI: [pals:slot/Ks](https://pals-project.readthedocs.io/slot/Ks)
+URI: [pals_config:slot/Ks](https://w3id.org/pals-config/slot/Ks)
 Alias: Ks
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: Ks
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -68,7 +68,7 @@ Alias: Ks
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Ks
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Ks |
-| native | pals:Ks |
+| self | pals_config:Ks |
+| native | pals_config:Ks |
 | broad | pals:KsN |
 
 
@@ -90,7 +90,7 @@ Alias: Ks
 ```yaml
 name: Ks
 description: Normalized skew component.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:KsN
 rank: 1000

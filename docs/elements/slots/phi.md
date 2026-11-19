@@ -9,7 +9,7 @@ _Rotation around the X-axis in the facility floor plan._
 
 
 
-URI: [pals:phi](https://pals-project.readthedocs.io/phi)
+URI: [pals_config:slot/phi](https://w3id.org/pals-config/slot/phi)
 Alias: phi
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: phi
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [FloorParamGroup](../classes/FloorParamGroup.md) |
-| Slot URI | [pals:phi](https://pals-project.readthedocs.io/phi) |
 
 ### Cardinality and Requirements
 
@@ -76,7 +75,7 @@ Alias: phi
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +84,9 @@ Alias: phi
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:phi |
-| native | pals:phi |
+| self | pals_config:phi |
+| native | pals_config:phi |
+| close | pals:phi |
 
 
 
@@ -97,13 +97,14 @@ Alias: phi
 ```yaml
 name: phi
 description: Rotation around the X-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - phi_angle
 - ModelPitch
 - Model_Pitch
+close_mappings:
+- pals:phi
 rank: 1000
-slot_uri: pals:phi
 alias: phi
 owner: FloorParamGroup
 domain_of:

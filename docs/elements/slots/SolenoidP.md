@@ -9,7 +9,7 @@ _A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP (
 
 
 
-URI: [pals:slot/SolenoidP](https://pals-project.readthedocs.io/slot/SolenoidP)
+URI: [pals_config:slot/SolenoidP](https://w3id.org/pals-config/slot/SolenoidP)
 Alias: SolenoidP
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,8 @@ Alias: SolenoidP
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Solenoid](../classes/Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing.<br>A solenoid is an element whose magnetic field is dominated by a field whose direction is aligned with the magnetic axis. |  no  |
 | [HasSolenoidP](../classes/HasSolenoidP.md) |  |  no  |
+| [Solenoid](../classes/Solenoid.md) | A magnet with a primarily longitudinal magnetic field used for focusing.<br>A solenoid is an element whose magnetic field is dominated by a field whose direction is aligned with the magnetic axis. |  no  |
 
 
 
@@ -69,7 +69,7 @@ Alias: SolenoidP
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: SolenoidP
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:SolenoidP |
-| native | pals:SolenoidP |
+| self | pals_config:SolenoidP |
+| native | pals_config:SolenoidP |
 
 
 
@@ -92,7 +92,7 @@ name: SolenoidP
 description: A mixin for solenoid-specific parameters that are aligned with PALS SolenoidP
   (Solenoid Parameters) for interoperability with the Particle Accelerator Language
   Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: SolenoidP
 owner: HasSolenoidP

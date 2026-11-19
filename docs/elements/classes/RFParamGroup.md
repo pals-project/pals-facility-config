@@ -9,7 +9,7 @@ _Mixin for RF parameters, which can be used to describe the RF properties of an 
 
 
 
-URI: [pals:class/RFParamGroup](https://pals-project.readthedocs.io/class/RFParamGroup)
+URI: [pals_config:class/RFParamGroup](https://w3id.org/pals-config/class/RFParamGroup)
 
 
 ```mermaid
@@ -19,12 +19,14 @@ RFParamGroup {
     CavityTypeEnum cavity_type  
     float dE_ref  
     float frequency  
+    float gradient  
     integer harmon  
     float multipass_phase  
     integer num_cells  
     float phase  
     float voltage  
     ZeroPhaseEnum zero_phase  
+    string id  
 }
 
 
@@ -33,7 +35,11 @@ RFParamGroup {
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **RFParamGroup**
+
 
 ## Slots
 
@@ -42,6 +48,7 @@ RFParamGroup {
 | [frequency](../slots/frequency.md) | 0..1 <br/> [Float](../types/Float.md) | RF frequency. | direct |
 | [harmon](../slots/harmon.md) | 0..1 <br/> [Integer](../types/Integer.md) | RF harmonic number. | direct |
 | [voltage](../slots/voltage.md) | 0..1 <br/> [Float](../types/Float.md) | RF voltage. | direct |
+| [gradient](../slots/gradient.md) | 0..1 <br/> [Float](../types/Float.md) | RF accelerating gradient. | direct |
 | [phase](../slots/phase.md) | 0..1 <br/> [Float](../types/Float.md) | RF phase. rad/2pi RF phase in 0 to 2*pi | direct |
 | [multipass_phase](../slots/multipass_phase.md) | 0..1 <br/> [Float](../types/Float.md) | rad/2pi RF Phase added to multipass elements | direct |
 | [cavity_type](../slots/cavity_type.md) | 0..1 <br/> [CavityTypeEnum](../enums/CavityTypeEnum.md) | Cavity type | direct |
@@ -49,6 +56,7 @@ RFParamGroup {
 | [zero_phase](../slots/zero_phase.md) | 0..1 <br/> [ZeroPhaseEnum](../enums/ZeroPhaseEnum.md) | Sets what phase = 0 means. | direct |
 | [L_active](../slots/L_active.md) | 0..1 <br/> [Float](../types/Float.md) | Active acceleration length. | direct |
 | [dE_ref](../slots/dE_ref.md) | 0..1 <br/> [Float](../types/Float.md) | Reference energy gain. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -83,7 +91,7 @@ RFParamGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -92,8 +100,8 @@ RFParamGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:RFParamGroup |
-| native | pals:RFParamGroup |
+| self | pals_config:RFParamGroup |
+| native | pals_config:RFParamGroup |
 | broad | pals:RFP |
 
 
@@ -113,100 +121,131 @@ name: RFParamGroup
 description: Mixin for RF parameters, which can be used to describe the RF properties
   of an accelerator element. This mixin is aligned with PALS RFP for interoperability
   with the Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:RFP
+is_a: ParamGroup
 attributes:
   frequency:
     name: frequency
     description: RF frequency.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:frequency
     rank: 1000
-    slot_uri: pals:frequency
     domain_of:
     - RFParamGroup
     range: float
+    unit:
+      ucum_code: Hz
   harmon:
     name: harmon
     description: RF harmonic number.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:harmon
     rank: 1000
-    slot_uri: pals:harmon
     domain_of:
     - RFParamGroup
     range: integer
   voltage:
     name: voltage
     description: RF voltage.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:voltage
     rank: 1000
-    slot_uri: pals:voltage
     domain_of:
     - RFParamGroup
     range: float
+    unit:
+      ucum_code: V
+  gradient:
+    name: gradient
+    description: RF accelerating gradient.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:gradient
+    rank: 1000
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: V/m
   phase:
     name: phase
     description: RF phase. rad/2pi RF phase in 0 to 2*pi
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:phase
     rank: 1000
-    slot_uri: pals:phase
     domain_of:
     - RFParamGroup
     range: float
   multipass_phase:
     name: multipass_phase
     description: rad/2pi RF Phase added to multipass elements
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:multipass_phase
     rank: 1000
-    slot_uri: pals:multipass_phase
     domain_of:
     - RFParamGroup
     range: float
   cavity_type:
     name: cavity_type
     description: Cavity type
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:cavity_type
     rank: 1000
-    slot_uri: pals:cavity_type
     domain_of:
     - RFParamGroup
     range: CavityTypeEnum
   num_cells:
     name: num_cells
     description: Number of cells in the cavity
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:num_cells
     rank: 1000
-    slot_uri: pals:num_cells
     domain_of:
     - RFParamGroup
     range: integer
   zero_phase:
     name: zero_phase
     description: Sets what phase = 0 means.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:zero_phase
     rank: 1000
-    slot_uri: pals:zero_phase
     domain_of:
     - RFParamGroup
     range: ZeroPhaseEnum
   L_active:
     name: L_active
     description: Active acceleration length.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:L_active
     rank: 1000
-    slot_uri: pals:L_active
     domain_of:
     - RFParamGroup
     range: float
+    unit:
+      ucum_code: m
   dE_ref:
     name: dE_ref
     description: Reference energy gain.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:dE_ref
     rank: 1000
-    slot_uri: pals:dE_ref
     domain_of:
     - RFParamGroup
     range: float
+    unit:
+      ucum_code: eV
 
 ```
 </details>
@@ -219,27 +258,32 @@ name: RFParamGroup
 description: Mixin for RF parameters, which can be used to describe the RF properties
   of an accelerator element. This mixin is aligned with PALS RFP for interoperability
   with the Particle Accelerator Language Standard (PALS).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:RFP
+is_a: ParamGroup
 attributes:
   frequency:
     name: frequency
     description: RF frequency.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:frequency
     rank: 1000
-    slot_uri: pals:frequency
     alias: frequency
     owner: RFParamGroup
     domain_of:
     - RFParamGroup
     range: float
+    unit:
+      ucum_code: Hz
   harmon:
     name: harmon
     description: RF harmonic number.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:harmon
     rank: 1000
-    slot_uri: pals:harmon
     alias: harmon
     owner: RFParamGroup
     domain_of:
@@ -248,20 +292,38 @@ attributes:
   voltage:
     name: voltage
     description: RF voltage.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:voltage
     rank: 1000
-    slot_uri: pals:voltage
     alias: voltage
     owner: RFParamGroup
     domain_of:
     - RFParamGroup
     range: float
+    unit:
+      ucum_code: V
+  gradient:
+    name: gradient
+    description: RF accelerating gradient.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:gradient
+    rank: 1000
+    alias: gradient
+    owner: RFParamGroup
+    domain_of:
+    - RFParamGroup
+    range: float
+    unit:
+      ucum_code: V/m
   phase:
     name: phase
     description: RF phase. rad/2pi RF phase in 0 to 2*pi
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:phase
     rank: 1000
-    slot_uri: pals:phase
     alias: phase
     owner: RFParamGroup
     domain_of:
@@ -270,9 +332,10 @@ attributes:
   multipass_phase:
     name: multipass_phase
     description: rad/2pi RF Phase added to multipass elements
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:multipass_phase
     rank: 1000
-    slot_uri: pals:multipass_phase
     alias: multipass_phase
     owner: RFParamGroup
     domain_of:
@@ -281,9 +344,10 @@ attributes:
   cavity_type:
     name: cavity_type
     description: Cavity type
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:cavity_type
     rank: 1000
-    slot_uri: pals:cavity_type
     alias: cavity_type
     owner: RFParamGroup
     domain_of:
@@ -292,9 +356,10 @@ attributes:
   num_cells:
     name: num_cells
     description: Number of cells in the cavity
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:num_cells
     rank: 1000
-    slot_uri: pals:num_cells
     alias: num_cells
     owner: RFParamGroup
     domain_of:
@@ -303,9 +368,10 @@ attributes:
   zero_phase:
     name: zero_phase
     description: Sets what phase = 0 means.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:zero_phase
     rank: 1000
-    slot_uri: pals:zero_phase
     alias: zero_phase
     owner: RFParamGroup
     domain_of:
@@ -314,25 +380,48 @@ attributes:
   L_active:
     name: L_active
     description: Active acceleration length.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:L_active
     rank: 1000
-    slot_uri: pals:L_active
     alias: L_active
     owner: RFParamGroup
     domain_of:
     - RFParamGroup
     range: float
+    unit:
+      ucum_code: m
   dE_ref:
     name: dE_ref
     description: Reference energy gain.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:dE_ref
     rank: 1000
-    slot_uri: pals:dE_ref
     alias: dE_ref
     owner: RFParamGroup
     domain_of:
     - RFParamGroup
     range: float
+    unit:
+      ucum_code: eV
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: RFParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 
 ```
 </details>

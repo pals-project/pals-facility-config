@@ -77,35 +77,43 @@ uv run pytest
 For example, generate a PALSParserPy-based NARAD skeleton and then the enriched
 BtA instance with:
 
+Translator code and facility enrichment rules are kept in `src/translators/`.
+PALS inputs are tracked in `examples/pals_inputs/`, while final NARAD instances
+remain directly under `examples/`.
+Reproducible skeletons are written to the ignored
+`.local/translation/skeletons/` workspace.
+
 ```console
-uv run python src/narad_system/schema/palsparserpy_to_narad.py \
-  -input examples/BtA/bta.pals.yaml
-uv run python examples/update_twiss.py \
-  --twiss examples/BtA/bta_twiss.dat \
-  --input examples/BtA/bta_narad_skeleton_palsparserpy.yaml
-uv run python examples/BtA/generate_narad_bta_instance.py
+uv run python src/translators/palsparserpy_to_narad.py \
+  -input examples/pals_inputs/bta.pals.yaml
+uv run python src/translators/update_twiss.py \
+  --twiss src/translators/resources/bta_twiss.dat \
+  --input .local/translation/skeletons/bta_narad_skeleton_palsparserpy.yaml
+uv run python src/translators/enrichers/bta.py
 ```
 
 Generate the hypothetical EIC toy ring instance with fictional EPICS PVs using:
 
 ```console
-uv run python examples/EIC/generate_narad_eic_instance.py
+uv run python src/translators/palsparserpy_to_narad.py \
+  -input examples/pals_inputs/toy_ring.pals.yaml
+uv run python src/translators/enrichers/toy_ring.py
 ```
 
-This reads `examples/EIC/toy_ring_narad_skeleton_palsparserpy.yaml` and writes
-`examples/EIC/toy_ring_narad_instance.yaml`. Naming rules and signal semantics
+This reads `.local/translation/skeletons/toy_ring_narad_skeleton_palsparserpy.yaml`
+and writes `examples/toy_ring_narad_instance.yaml`. Naming rules and signal semantics
 are configured at the top of the script. Each corrector gets H and V supply
 status, current setpoint, current readback, and minimum/maximum allowed setpoint
 signals (`Current-SP.DRVL` / `Current-SP.DRVH`, current in A); each BPM
 gets X and Y position readbacks in mm. Use `--input` and `--output` to override
 the default paths.
 
-`examples/update_twiss.py` also works with Booster and other NARAD YAML files:
+`src/translators/update_twiss.py` also works with Booster and other NARAD YAML files:
 
 ```console
-uv run python examples/update_twiss.py \
-  --twiss examples/Booster/booster_twiss.dat \
-  --input examples/Booster/booster_narad_skeleton_palsparserpy.yaml \
+uv run python src/translators/update_twiss.py \
+  --twiss src/translators/resources/booster_twiss.dat \
+  --input .local/translation/skeletons/booster_narad_skeleton_palsparserpy.yaml \
   --output /tmp/booster_with_twiss.yaml
 ```
 
@@ -143,23 +151,26 @@ the original PALS source.
 
 
 ## Repository Structure
-* [docs/](docs/) - mkdocs-managed documentation
-* [examples/](examples/) - Examples of using the schema
-  * [archived/](examples/archived) -- archived examples
-  * core_acc_narad_instance.yaml -- example of a core accelerator instance
-* [project/](project/) - project files (these files are auto-generated, do not edit)
-* [src/](src/) - source files (edit these)
-  * [archived/](src/archived) -- archived files
-  * [narad](src/narad)
-    * [schema/](src/narad/schema) -- LinkML schema (edit this)
-    * [datamodel/](src/narad/datamodel) -- generated Python datamodel
-    * narad.yaml -- LinkML schema for NARAD data services
-* [tests/](tests/) - Python tests
-  * [data/](tests/data) - Example data files for testing
+
+* [docs/](docs/) — generated and maintained documentation resources.
+* [examples/](examples/) — final NARAD instances that validate against the
+  current schema.
+  * [pals_inputs/](examples/pals_inputs/) — PALS source lattices used by the
+    translators.
+* [src/narad/schema/](src/narad/schema/) — the authoritative LinkML schema.
+* [src/translators/](src/translators/) — temporary in-repository PALS-to-NARAD
+  translation and facility-enrichment workflow.
+* [tests/](tests/) — translator, enrichment, and schema regression tests and
+  their small test fixtures.
+
+The `project/`, `src/narad/datamodel/`, and `docs/schema/` directories are
+generated locally and ignored by Git. Translation skeletons and other
+intermediates are written under `.local/translation/`, which is also ignored.
 
 ## Using the Schemas
-* ```just gen-project```
-  * Example of generating the project from the schema. This will generate a Python datamodel and associated files in `project/`: (json/jsonld schemas, OWL, sqlschema, etc).
+* `just gen-project`
+  * Generates project artifacts under `project/` and Python models under
+    `src/narad/datamodel/`. These outputs are reproducible and are not tracked.
 
 * `just gen-doc`
   * Generates documentation from the schema into `docs/elements/`. The recipe
@@ -174,19 +185,25 @@ the original PALS source.
   * To pass extra flags, set `LINKML_GENERATORS_DOC_ARGS` in
     `config.public.mk`.
 
-* ```just gen-python```
-  * Example of generating the Python datamodel from the schema. This will generate Python classes in `src/narad/datamodel/` that correspond to the classes defined in the LinkML schema.
+* `just gen-python`
+  * Generates Python classes in `src/narad/datamodel/` from the LinkML schema.
 
-* ```uv run linkml-validate --schema src/narad/schema/narad.yaml  examples/core_acc_narad_instance.yaml```
-  * Example of validating an entire data file against the schema. Add --target-class [CLASS_NAME] to validate against a specific class in the schema.
+* Validate a final instance:
 
-* Examples of invalid data files are in `tests/data/invalid/` and valid data files are in `tests/data/valid/`. You can validate these using the above command.
-  * ```uv run linkml-validate --schema src/narad/schema/narad.yaml tests/data/invalid/narad_invalid.yaml --target-class NaradCapability```
+  ```console
+  uv run linkml-validate \
+    --schema src/narad/schema/narad.yaml \
+    examples/bta_narad_instance.yaml
+  ```
 
-* Generating an OWL/RDF graph of the schema:
-  * ```uv run gen-owl  src/narad/schema/narad.yaml > "project/owl/narad.owl.ttl"```
-  * This will generate an OWL/RDF graph of the schema in the `project/owl/` directory.  
+  Replace the instance path with any other tracked instance, including
+  `examples/booster_narad_instance.yaml`,
+  `examples/toy_ring_narad_instance.yaml`,
+  `examples/GUN_thru_MV.linkml.yaml`, or `examples/INJECTOR.linkml.yaml`.
 
-  * Generate an OWL/RDF graph of the schema and instance data:
-    * ```uv run linkml-convert -s src/narad/schema/narad.yaml -t rdf examples/core_acc_narad_instance.yaml -o project/owl/core_acc_narad_instance.ttl```
-      * this will generate an OWL/RDF graph of the instance data in Turtle format. You can also use other formats such as RDF/XML or JSON-LD by changing the output file extension.
+* Generate the OWL schema into the ignored project directory:
+
+  ```console
+  mkdir -p project/owl
+  uv run gen-owl src/narad/schema/narad.yaml > project/owl/narad.owl.ttl
+  ```

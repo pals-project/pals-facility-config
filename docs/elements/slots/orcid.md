@@ -9,7 +9,7 @@ _The ORCID identifier of the author._
 
 
 
-URI: [pals:slot/orcid](https://pals-project.readthedocs.io/slot/orcid)
+URI: [pals_config:slot/orcid](https://w3id.org/pals-config/slot/orcid)
 Alias: orcid
 
 <!-- no inheritance hierarchy -->
@@ -75,7 +75,7 @@ Alias: orcid
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +84,9 @@ Alias: orcid
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:orcid |
-| native | pals:orcid |
+| self | pals_config:orcid |
+| native | pals_config:orcid |
+| related | schema:creator |
 
 
 
@@ -96,7 +97,9 @@ Alias: orcid
 ```yaml
 name: orcid
 description: The ORCID identifier of the author.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+related_mappings:
+- schema:creator
 rank: 1000
 alias: orcid
 owner: Author

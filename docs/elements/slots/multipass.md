@@ -9,7 +9,7 @@ _Indicates whether the BeamLine is a multipass BeamLine, where the beam passes t
 
 
 
-URI: [pals:multipass](https://pals-project.readthedocs.io/multipass)
+URI: [pals_config:slot/multipass](https://w3id.org/pals-config/slot/multipass)
 Alias: multipass
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: multipass
 | --- | --- |
 | Range | [Boolean](../types/Boolean.md) |
 | Domain Of | [BeamLine](../classes/BeamLine.md) |
-| Slot URI | [pals:multipass](https://pals-project.readthedocs.io/multipass) |
 
 ### Cardinality and Requirements
 
@@ -69,7 +68,7 @@ Alias: multipass
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +77,9 @@ Alias: multipass
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:multipass |
-| native | pals:multipass |
+| self | pals_config:multipass |
+| native | pals_config:multipass |
+| close | pals:multipass |
 
 
 
@@ -92,9 +92,10 @@ name: multipass
 description: Indicates whether the BeamLine is a multipass BeamLine, where the beam
   passes through the same physical elements multiple times. If not provided, the default
   assumption is that the BeamLine is single-pass.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:multipass
 rank: 1000
-slot_uri: pals:multipass
 alias: multipass
 owner: BeamLine
 domain_of:

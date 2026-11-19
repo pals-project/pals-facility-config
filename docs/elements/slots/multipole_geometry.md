@@ -9,7 +9,7 @@ _Multipole geometry type. Must be `follows_ref_geometry`._
 
 
 
-URI: [pals:multipole_geometry](https://pals-project.readthedocs.io/multipole_geometry)
+URI: [pals_config:slot/multipole_geometry](https://w3id.org/pals-config/slot/multipole_geometry)
 Alias: multipole_geometry
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: multipole_geometry
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: multipole_geometry
 | --- | --- |
 | Range | [MultipoleGeometryEnum](../enums/MultipoleGeometryEnum.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:multipole_geometry](https://pals-project.readthedocs.io/multipole_geometry) |
 
 ### Cardinality and Requirements
 
@@ -69,7 +68,7 @@ Alias: multipole_geometry
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +77,9 @@ Alias: multipole_geometry
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:multipole_geometry |
-| native | pals:multipole_geometry |
+| self | pals_config:multipole_geometry |
+| native | pals_config:multipole_geometry |
+| close | pals:multipole_geometry |
 
 
 
@@ -90,9 +90,10 @@ Alias: multipole_geometry
 ```yaml
 name: multipole_geometry
 description: Multipole geometry type. Must be `follows_ref_geometry`.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:multipole_geometry
 rank: 1000
-slot_uri: pals:multipole_geometry
 alias: multipole_geometry
 owner: BendParamGroup
 domain_of:

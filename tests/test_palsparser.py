@@ -7,26 +7,26 @@ import pytest
 import yaml
 
 from narad.datamodel import narad_pydantic as narad_model
-from narad_system.schema.palsparserpy_to_narad import (
+from translators.palsparserpy_to_narad import (
     component_functions,
     component_model,
-    concrete_component_models,
     magnetic_multipoles,
+    translatable_component_models,
 )
 
 
 EXAMPLES_DIR = Path(__file__).resolve().parents[1] / "examples"
-FODO_FILE = EXAMPLES_DIR / "fodo.pals.yaml"
-IOTA_FILE = EXAMPLES_DIR / "iota.pals.yaml"
-BTA_FILE = EXAMPLES_DIR / "BtA" / "bta.pals.yaml"
+PALS_INPUTS_DIR = EXAMPLES_DIR / "pals_inputs"
+FODO_FILE = PALS_INPUTS_DIR / "fodo.pals.yaml"
+IOTA_FILE = PALS_INPUTS_DIR / "iota.pals.yaml"
+BTA_FILE = PALS_INPUTS_DIR / "bta.pals.yaml"
 MULTIPASS_FILE = Path(__file__).with_name("review_multipass.pals.yaml")
 CONVERT_FILE = Path(__file__).with_name("convert.pals.yaml")
 EX_FILE = Path(__file__).with_name("ex.pals.yaml")
 TRANSLATOR = (
     Path(__file__).resolve().parents[1]
     / "src"
-    / "narad_system"
-    / "schema"
+    / "translators"
     / "palsparserpy_to_narad.py"
 )
 CUSTOM_TRANSLATOR = TRANSLATOR.with_name("pals_to_narad.py")
@@ -107,9 +107,9 @@ def test_bta_lattice_is_parsed_and_expanded() -> None:
 def test_bta_twiss_update_matches_current_lattice(tmp_path: Path) -> None:
     output = tmp_path / "bta_with_twiss.yaml"
     subprocess.run(
-        [sys.executable, str(EXAMPLES_DIR / "update_twiss.py"),
-         "--input", str(BTA_FILE.with_name("bta_narad_skeleton_palsparserpy.yaml")),
-         "--twiss", str(BTA_FILE.with_name("bta_twiss.dat")),
+        [sys.executable, str(EXAMPLES_DIR.parent / "src/translators/update_twiss.py"),
+         "--input", str(EXAMPLES_DIR.parent / ".local/translation/skeletons/bta_narad_skeleton_palsparserpy.yaml"),
+         "--twiss", str(EXAMPLES_DIR.parent / "src/translators/resources/bta_twiss.dat"),
          "--output", str(output)],
         check=True, capture_output=True, text=True,
     )
@@ -246,10 +246,10 @@ def test_component_kind_resolution_uses_schema_mappings() -> None:
     assert component_model("Instrument") is narad_model.DiagnosticDevice
 
 
-def test_every_concrete_component_has_a_schema_default_function() -> None:
+def test_every_translatable_component_has_a_default_function() -> None:
     missing = [
         model.__name__
-        for model in concrete_component_models()
+        for model in translatable_component_models()
         if component_functions(model) is None
     ]
 

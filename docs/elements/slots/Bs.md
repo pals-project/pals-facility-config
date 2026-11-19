@@ -9,7 +9,7 @@ _Skew component of the magnetic field._
 
 
 
-URI: [pals:slot/Bs](https://pals-project.readthedocs.io/slot/Bs)
+URI: [pals_config:slot/Bs](https://w3id.org/pals-config/slot/Bs)
 Alias: Bs
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: Bs
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -68,7 +68,7 @@ Alias: Bs
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Bs
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Bs |
-| native | pals:Bs |
+| self | pals_config:Bs |
+| native | pals_config:Bs |
 | broad | pals:BsN |
 
 
@@ -90,7 +90,7 @@ Alias: Bs
 ```yaml
 name: Bs
 description: Skew component of the magnetic field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:BsN
 rank: 1000

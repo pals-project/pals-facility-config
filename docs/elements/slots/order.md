@@ -9,7 +9,7 @@ _Multipole order N (0 = dipole, 1 = quadrupole, etc.)_
 
 
 
-URI: [pals:slot/order](https://pals-project.readthedocs.io/slot/order)
+URI: [pals_config:slot/order](https://w3id.org/pals-config/slot/order)
 Alias: order
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: order
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -69,7 +69,7 @@ Alias: order
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: order
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:order |
-| native | pals:order |
+| self | pals_config:order |
+| native | pals_config:order |
 
 
 
@@ -90,7 +90,7 @@ Alias: order
 ```yaml
 name: order
 description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: order
 owner: MultipoleParameterGroup

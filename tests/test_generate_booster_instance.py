@@ -8,9 +8,10 @@ import pytest
 import yaml
 
 
-BOOSTER = Path(__file__).resolve().parents[1] / "examples" / "Booster"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+BOOSTER = REPO_ROOT / "examples"
 spec = importlib.util.spec_from_file_location(
-    "booster_generator", BOOSTER / "generate_narad_booster_instance.py"
+    "booster_generator", REPO_ROOT / "src/translators/enrichers/booster.py"
 )
 generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(generator)
@@ -137,7 +138,7 @@ def test_main_dipole_range_layout_and_shared_bindings():
 
 
 def test_booster_enrichment_preserves_skeleton_and_validates():
-    skeleton = yaml.safe_load((BOOSTER / "booster_narad_skeleton_palsparserpy.yaml").read_text())
+    skeleton = yaml.safe_load((REPO_ROOT / ".local/translation/skeletons/booster_narad_skeleton_palsparserpy.yaml").read_text())
     original = deepcopy(skeleton)
     document = generator.enrich_document(skeleton)
     assert skeleton == original

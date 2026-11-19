@@ -2,7 +2,7 @@
 
 
 
-URI: [pals:enum/DirectionEnum](https://pals-project.readthedocs.io/enum/DirectionEnum)
+URI: [pals_config:enum/DirectionEnum](https://w3id.org/pals-config/enum/DirectionEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -39,7 +39,7 @@ URI: [pals:enum/DirectionEnum](https://pals-project.readthedocs.io/enum/Directio
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -51,7 +51,7 @@ URI: [pals:enum/DirectionEnum](https://pals-project.readthedocs.io/enum/Directio
 <details>
 ```yaml
 name: DirectionEnum
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   upstream:

@@ -3,13 +3,13 @@
 # Slot: beta_a 
 
 
-_Twiss beta parameter in the horizontal plane._
+_Twiss beta parameter in the horizontal plane. Must be strictly positive (> 0)._
 
 
 
 
 
-URI: [pals:beta_a](https://pals-project.readthedocs.io/beta_a)
+URI: [pals_config:slot/beta_a](https://w3id.org/pals-config/slot/beta_a)
 Alias: beta_a
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: beta_a
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [TwissParamGroup](../classes/TwissParamGroup.md) |
-| Slot URI | [pals:beta_a](https://pals-project.readthedocs.io/beta_a) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,28 @@ Alias: beta_a
 | --- | --- |
 | Owner | [TwissParamGroup](../classes/TwissParamGroup.md) |
 
+
+### Value Constraints
+
+| Property | Value |
+| --- | --- |
+| Minimum Value | 0 |
+
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `m`
+
+</details>
+
+<details>
+<summary>Expressions & Logic</summary>
+#### None Of
+
+Value must not satisfy any of:
+- AnonymousSlotExpression({'equals_number': 0})
+
+</details>
 
 
 
@@ -75,7 +96,7 @@ Alias: beta_a
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +105,9 @@ Alias: beta_a
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:beta_a |
-| native | pals:beta_a |
+| self | pals_config:beta_a |
+| native | pals_config:beta_a |
+| close | pals:beta_a |
 
 
 
@@ -95,18 +117,25 @@ Alias: beta_a
 <details>
 ```yaml
 name: beta_a
-description: Twiss beta parameter in the horizontal plane.
-from_schema: https://w3id.org/accelerator-core
+description: Twiss beta parameter in the horizontal plane. Must be strictly positive
+  (> 0).
+from_schema: https://w3id.org/pals-config
 aliases:
 - beta_x
 - betax
+close_mappings:
+- pals:beta_a
 rank: 1000
-slot_uri: pals:beta_a
 alias: beta_a
 owner: TwissParamGroup
 domain_of:
 - TwissParamGroup
 range: float
+minimum_value: 0
+unit:
+  ucum_code: m
+none_of:
+- equals_number: 0
 
 ```
 </details>

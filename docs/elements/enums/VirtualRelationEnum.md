@@ -7,7 +7,7 @@ _Controlled values for virtual relation to the beamline._
 
 
 
-URI: [pals:enum/VirtualRelationEnum](https://pals-project.readthedocs.io/enum/VirtualRelationEnum)
+URI: [pals_config:enum/VirtualRelationEnum](https://w3id.org/pals-config/enum/VirtualRelationEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -18,6 +18,12 @@ URI: [pals:enum/VirtualRelationEnum](https://pals-project.readthedocs.io/enum/Vi
 
 
 
+
+## Slots
+
+| Name | Description |
+| ---  | --- |
+| [beamline_relation](../slots/beamline_relation.md) | The relationship of the virtual component to the beamline,  which can be used to identify the component across different source systems. |
 
 
 
@@ -37,7 +43,7 @@ URI: [pals:enum/VirtualRelationEnum](https://pals-project.readthedocs.io/enum/Vi
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -50,7 +56,7 @@ URI: [pals:enum/VirtualRelationEnum](https://pals-project.readthedocs.io/enum/Vi
 ```yaml
 name: VirtualRelationEnum
 description: Controlled values for virtual relation to the beamline.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   Inline:

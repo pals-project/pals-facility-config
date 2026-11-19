@@ -9,7 +9,7 @@ _Global Z coordinate in the facility floor plan._
 
 
 
-URI: [pals:z](https://pals-project.readthedocs.io/z)
+URI: [pals_config:slot/z](https://w3id.org/pals-config/slot/z)
 Alias: z
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: z
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [FloorParamGroup](../classes/FloorParamGroup.md) |
-| Slot URI | [pals:z](https://pals-project.readthedocs.io/z) |
 
 ### Cardinality and Requirements
 
@@ -76,7 +75,7 @@ Alias: z
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +84,9 @@ Alias: z
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:z |
-| native | pals:z |
+| self | pals_config:z |
+| native | pals_config:z |
+| close | pals:z |
 
 
 
@@ -97,13 +97,14 @@ Alias: z
 ```yaml
 name: z
 description: Global Z coordinate in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - z_coordinate
 - ModelZ
 - z coordinate
+close_mappings:
+- pals:z
 rank: 1000
-slot_uri: pals:z
 alias: z
 owner: FloorParamGroup
 domain_of:

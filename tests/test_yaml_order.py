@@ -1,4 +1,4 @@
-from narad_system.schema.yaml_order import order_document_components
+from translators.yaml_order import order_document_components
 
 
 def test_serialized_components_put_identity_before_parameter_groups() -> None:

@@ -9,7 +9,7 @@ _Reference tilt of the bend._
 
 
 
-URI: [pals:tilt_ref](https://pals-project.readthedocs.io/tilt_ref)
+URI: [pals_config:slot/tilt_ref](https://w3id.org/pals-config/slot/tilt_ref)
 Alias: tilt_ref
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: tilt_ref
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: tilt_ref
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:tilt_ref](https://pals-project.readthedocs.io/tilt_ref) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: tilt_ref
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `rad`
+
+</details>
 
 
 
@@ -69,7 +74,7 @@ Alias: tilt_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +83,9 @@ Alias: tilt_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:tilt_ref |
-| native | pals:tilt_ref |
+| self | pals_config:tilt_ref |
+| native | pals_config:tilt_ref |
+| close | pals:tilt_ref |
 
 
 
@@ -90,14 +96,17 @@ Alias: tilt_ref
 ```yaml
 name: tilt_ref
 description: Reference tilt of the bend.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:tilt_ref
 rank: 1000
-slot_uri: pals:tilt_ref
 alias: tilt_ref
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: rad
 
 ```
 </details>

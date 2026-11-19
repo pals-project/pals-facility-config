@@ -1,11 +1,52 @@
+# Type: Ncname 
 
-# Type: ncname
 
-Prefix part of CURIE
 
-URI: [linkml:Ncname](https://w3id.org/linkml/Ncname)
 
-|  |  |  |
-| --- | --- | --- |
-| Root (builtin) type | | **NCName** |
-| Representation | | str |
+_Prefix part of CURIE_
+
+
+
+URI: [xsd:string](http://www.w3.org/2001/XMLSchema#string)
+
+## Type Properties
+
+| Property | Value |
+| --- | --- |
+| Base | `NCName` |
+| Type URI | [xsd:string](http://www.w3.org/2001/XMLSchema#string) |
+| Representation | `str` |
+
+
+
+
+
+
+## Notes
+
+* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "ncname".
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/pals-config
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | xsd:string |
+| native | pals_config:ncname |
+
+

@@ -7,7 +7,7 @@ _Portable semantic meanings for important signals._
 
 
 
-URI: [pals:enum/CanonicalSignalTypeEnum](https://pals-project.readthedocs.io/enum/CanonicalSignalTypeEnum)
+URI: [pals_config:enum/CanonicalSignalTypeEnum](https://w3id.org/pals-config/enum/CanonicalSignalTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -23,6 +23,7 @@ URI: [pals:enum/CanonicalSignalTypeEnum](https://pals-project.readthedocs.io/enu
 | MagnetCurrentSetpoint | None | Magnet current setpoint signal. |
 | MagnetCurrentReadback | None | Magnet current readback signal. |
 | MagnetFieldSetpoint | None | Magnet field setpoint signal. |
+| MagnetCurrentRange | None | Magnet current range signal. |
 | IntegratedFieldSetpoint | None | Integrated magnetic field setpoint signal. |
 | IntegratedFieldReadback | None | Integrated magnetic field readback signal. |
 | VacuumPressure | None | Vacuum pressure signal. |
@@ -59,7 +60,7 @@ URI: [pals:enum/CanonicalSignalTypeEnum](https://pals-project.readthedocs.io/enu
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -72,7 +73,7 @@ URI: [pals:enum/CanonicalSignalTypeEnum](https://pals-project.readthedocs.io/enu
 ```yaml
 name: CanonicalSignalTypeEnum
 description: Portable semantic meanings for important signals.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   HorizontalBeamPosition:
@@ -108,6 +109,9 @@ permissible_values:
   MagnetFieldSetpoint:
     text: MagnetFieldSetpoint
     description: Magnet field setpoint signal.
+  MagnetCurrentRange:
+    text: MagnetCurrentRange
+    description: Magnet current range signal.
   IntegratedFieldSetpoint:
     text: IntegratedFieldSetpoint
     description: Integrated magnetic field setpoint signal.

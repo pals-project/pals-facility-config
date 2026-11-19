@@ -9,7 +9,7 @@ _Normalized normal component._
 
 
 
-URI: [pals:slot/Kn](https://pals-project.readthedocs.io/slot/Kn)
+URI: [pals_config:slot/Kn](https://w3id.org/pals-config/slot/Kn)
 Alias: Kn
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: Kn
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -68,7 +68,7 @@ Alias: Kn
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: Kn
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Kn |
-| native | pals:Kn |
+| self | pals_config:Kn |
+| native | pals_config:Kn |
 | broad | pals:KnN |
 
 
@@ -90,7 +90,7 @@ Alias: Kn
 ```yaml
 name: Kn
 description: Normalized normal component.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:KnN
 rank: 1000

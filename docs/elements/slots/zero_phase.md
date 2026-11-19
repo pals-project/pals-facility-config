@@ -9,7 +9,7 @@ _Sets what phase = 0 means._
 
 
 
-URI: [pals:zero_phase](https://pals-project.readthedocs.io/zero_phase)
+URI: [pals_config:slot/zero_phase](https://w3id.org/pals-config/slot/zero_phase)
 Alias: zero_phase
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: zero_phase
 | --- | --- |
 | Range | [ZeroPhaseEnum](../enums/ZeroPhaseEnum.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:zero_phase](https://pals-project.readthedocs.io/zero_phase) |
 
 ### Cardinality and Requirements
 
@@ -69,7 +68,7 @@ Alias: zero_phase
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +77,9 @@ Alias: zero_phase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:zero_phase |
-| native | pals:zero_phase |
+| self | pals_config:zero_phase |
+| native | pals_config:zero_phase |
+| close | pals:zero_phase |
 
 
 
@@ -90,9 +90,10 @@ Alias: zero_phase
 ```yaml
 name: zero_phase
 description: Sets what phase = 0 means.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:zero_phase
 rank: 1000
-slot_uri: pals:zero_phase
 alias: zero_phase
 owner: RFParamGroup
 domain_of:

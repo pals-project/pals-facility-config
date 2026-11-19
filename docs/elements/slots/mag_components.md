@@ -9,7 +9,7 @@ _Magnetic multipole components, one per order N._
 
 
 
-URI: [pals:slot/mag_components](https://pals-project.readthedocs.io/slot/mag_components)
+URI: [pals_config:slot/mag_components](https://w3id.org/pals-config/slot/mag_components)
 Alias: mag_components
 
 <!-- no inheritance hierarchy -->
@@ -69,7 +69,7 @@ Alias: mag_components
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +78,8 @@ Alias: mag_components
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:mag_components |
-| native | pals:mag_components |
+| self | pals_config:mag_components |
+| native | pals_config:mag_components |
 
 
 
@@ -90,7 +90,7 @@ Alias: mag_components
 ```yaml
 name: mag_components
 description: Magnetic multipole components, one per order N.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: mag_components
 owner: MagneticMultipoleParamGroup

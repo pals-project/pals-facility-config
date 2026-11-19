@@ -9,7 +9,7 @@ _Hint for the value's original type, so consumers can parse it back (e.g. float,
 
 
 
-URI: [pals:slot/datatype](https://pals-project.readthedocs.io/slot/datatype)
+URI: [pals_config:slot/datatype](https://w3id.org/pals-config/slot/datatype)
 Alias: datatype
 
 <!-- no inheritance hierarchy -->
@@ -68,7 +68,7 @@ Alias: datatype
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: datatype
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:datatype |
-| native | pals:datatype |
+| self | pals_config:datatype |
+| native | pals_config:datatype |
 
 
 
@@ -90,7 +90,7 @@ Alias: datatype
 name: datatype
 description: Hint for the value's original type, so consumers can parse it back (e.g.
   float, integer, boolean) rather than treating everything as an opaque string.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: datatype
 owner: AdditionalMetadata

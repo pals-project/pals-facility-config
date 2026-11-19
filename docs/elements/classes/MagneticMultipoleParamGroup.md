@@ -25,23 +25,27 @@ _```_
 
 
 
-URI: [pals:class/MagneticMultipoleParamGroup](https://pals-project.readthedocs.io/class/MagneticMultipoleParamGroup)
+URI: [pals_config:class/MagneticMultipoleParamGroup](https://w3id.org/pals-config/class/MagneticMultipoleParamGroup)
 
 
 ```mermaid
 erDiagram
 MagneticMultipoleParamGroup {
-
+    string id  
 }
 MultipoleParameterGroup {
     float Bn  
+    float BnL  
     float Bs  
+    float BsL  
     float En  
     float EnL  
     float Es  
     float EsL  
     float Kn  
+    float KnL  
     float Ks  
+    float KsL  
     integer order  
     float tilt  
 }
@@ -52,13 +56,18 @@ MagneticMultipoleParamGroup ||--}o MultipoleParameterGroup : "mag_components"
 
 
 
-<!-- no inheritance hierarchy -->
+
+## Inheritance
+* [ParamGroup](../classes/ParamGroup.md)
+    * **MagneticMultipoleParamGroup**
+
 
 ## Slots
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [mag_components](../slots/mag_components.md) | * <br/> [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | Magnetic multipole components, one per order N. | direct |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) | A unique identifier for the instance. | [ParamGroup](../classes/ParamGroup.md) |
 
 
 
@@ -102,7 +111,7 @@ MagneticMultipoleParamGroup ||--}o MultipoleParameterGroup : "mag_components"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -111,8 +120,8 @@ MagneticMultipoleParamGroup ||--}o MultipoleParameterGroup : "mag_components"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:MagneticMultipoleParamGroup |
-| native | pals:MagneticMultipoleParamGroup |
+| self | pals_config:MagneticMultipoleParamGroup |
+| native | pals_config:MagneticMultipoleParamGroup |
 | broad | pals:MagneticMultipoleP |
 
 
@@ -136,14 +145,15 @@ description: "Mixin for magnetic multipole parameters,  which can be used to des
   \ mag_components: - order: 7\n  tilt: 0.7\n- order: 3\n  Bn: 27.3\n- order: 2\n\
   \  BnL: 3.47e1\n- order: 1\n  Kn: 0.85     # normalized form, e.g. a quadrupole's\
   \ k1-like strength\n```"
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:MagneticMultipoleP
+is_a: ParamGroup
 attributes:
   mag_components:
     name: mag_components
     description: Magnetic multipole components, one per order N.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - MagneticMultipoleParamGroup
@@ -167,14 +177,15 @@ description: "Mixin for magnetic multipole parameters,  which can be used to des
   \ mag_components: - order: 7\n  tilt: 0.7\n- order: 3\n  Bn: 27.3\n- order: 2\n\
   \  BnL: 3.47e1\n- order: 1\n  Kn: 0.85     # normalized form, e.g. a quadrupole's\
   \ k1-like strength\n```"
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:MagneticMultipoleP
+is_a: ParamGroup
 attributes:
   mag_components:
     name: mag_components
     description: Magnetic multipole components, one per order N.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: mag_components
     owner: MagneticMultipoleParamGroup
@@ -184,6 +195,23 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
+  id:
+    name: id
+    description: A unique identifier for the instance.
+    from_schema: https://w3id.org/pals-config
+    close_mappings:
+    - pals:id
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: MagneticMultipoleParamGroup
+    domain_of:
+    - Node
+    - Affiliation
+    - ParamGroup
+    - Edge
+    range: string
+    required: true
 
 ```
 </details>

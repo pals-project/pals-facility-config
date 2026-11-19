@@ -4,18 +4,19 @@
 
 
 
-URI: [pals:class/HasBendP](https://pals-project.readthedocs.io/class/HasBendP)
+URI: [pals_config:class/HasBendP](https://w3id.org/pals-config/class/HasBendP)
 
 
 ```mermaid
 erDiagram
 BendParamGroup {
+    float Bn0_ref  
+    boolean Kn0_from_g_ref  
     float L_chord  
     float L_rectangle  
     float L_sagitta  
     float angle_ref  
     float bend_field_actual  
-    float bend_field_ref  
     float e1  
     float e1_rect  
     float e2  
@@ -27,9 +28,10 @@ BendParamGroup {
     float h1  
     float h2  
     MultipoleGeometryEnum multipole_geometry  
+    float radius_ref  
     ReferenceGeometryEnum ref_geometry  
-    float rho_ref  
     float tilt_ref  
+    string id  
 }
 HasBendP {
 
@@ -86,7 +88,7 @@ HasBendP ||--|o BendParamGroup : "BendP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -95,8 +97,8 @@ HasBendP ||--|o BendParamGroup : "BendP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasBendP |
-| native | pals:HasBendP |
+| self | pals_config:HasBendP |
+| native | pals_config:HasBendP |
 
 
 
@@ -112,7 +114,7 @@ HasBendP ||--|o BendParamGroup : "BendP"
 <details>
 ```yaml
 name: HasBendP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   BendP:
@@ -120,7 +122,7 @@ attributes:
     description: A mixin for bend parameters that are aligned with PALS BendP (Bend
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasBendP
@@ -135,7 +137,7 @@ attributes:
 <details>
 ```yaml
 name: HasBendP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   BendP:
@@ -143,7 +145,7 @@ attributes:
     description: A mixin for bend parameters that are aligned with PALS BendP (Bend
       Parameters) for interoperability with the Particle Accelerator Language Standard
       (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: BendP
     owner: HasBendP

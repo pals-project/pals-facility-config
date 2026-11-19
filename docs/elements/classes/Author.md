@@ -9,7 +9,7 @@ _Contains authorship information for a representation of an accelerator facility
 
 
 
-URI: [pals:class/Author](https://pals-project.readthedocs.io/class/Author)
+URI: [pals_config:class/Author](https://w3id.org/pals-config/class/Author)
 
 
 ```mermaid
@@ -41,7 +41,7 @@ Author ||--|o Affiliation : "affiliation"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | The name of the entity. For example, the name of the person or organization. | direct |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | The name of the entity. For example, the name of the component. | direct |
 | [affiliation](../slots/affiliation.md) | 0..1 <br/> [Affiliation](../classes/Affiliation.md) | The affiliation of the author or component, as a ROR. | direct |
 | [email](../slots/email.md) | 0..1 <br/> [String](../types/String.md) | The email address of the author. | direct |
 | [orcid](../slots/orcid.md) | 0..1 <br/> [String](../types/String.md) | The ORCID identifier of the author. | direct |
@@ -76,7 +76,7 @@ Author ||--|o Affiliation : "affiliation"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +85,8 @@ Author ||--|o Affiliation : "affiliation"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:Author |
-| native | pals:Author |
+| self | pals_config:Author |
+| native | pals_config:Author |
 
 
 
@@ -104,7 +104,7 @@ Author ||--|o Affiliation : "affiliation"
 name: Author
 description: Contains authorship information for a representation of an accelerator
   facility and its operations.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 slots:
 - name
 - affiliation
@@ -112,7 +112,7 @@ attributes:
   email:
     name: email
     description: The email address of the author.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - Author
@@ -121,7 +121,9 @@ attributes:
   orcid:
     name: orcid
     description: The ORCID identifier of the author.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - schema:creator
     rank: 1000
     domain_of:
     - Author
@@ -138,12 +140,12 @@ attributes:
 name: Author
 description: Contains authorship information for a representation of an accelerator
   facility and its operations.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 attributes:
   email:
     name: email
     description: The email address of the author.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: email
     owner: Author
@@ -154,7 +156,9 @@ attributes:
   orcid:
     name: orcid
     description: The ORCID identifier of the author.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
+    related_mappings:
+    - schema:creator
     rank: 1000
     alias: orcid
     owner: Author
@@ -164,8 +168,8 @@ attributes:
     pattern: ^https://orcid\.org/\d{4}-\d{4}-\d{4}-\d{3}[\dX]$
   name:
     name: name
-    description: The name of the entity. For example, the name of the person or organization.
-    from_schema: https://w3id.org/accelerator-core
+    description: The name of the entity. For example, the name of the component.
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: name
     owner: Author
@@ -176,7 +180,7 @@ attributes:
   affiliation:
     name: affiliation
     description: The affiliation of the author or component, as a ROR.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: affiliation
     owner: Author

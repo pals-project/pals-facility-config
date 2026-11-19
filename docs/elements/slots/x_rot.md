@@ -9,7 +9,7 @@ _Rotation around the X-axis in the facility floor plan._
 
 
 
-URI: [pals:x_rot](https://pals-project.readthedocs.io/x_rot)
+URI: [pals_config:slot/x_rot](https://w3id.org/pals-config/slot/x_rot)
 Alias: x_rot
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: x_rot
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BodyShiftParamGroup](../classes/BodyShiftParamGroup.md) |
-| Slot URI | [pals:x_rot](https://pals-project.readthedocs.io/x_rot) |
 
 ### Cardinality and Requirements
 
@@ -76,7 +75,7 @@ Alias: x_rot
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +84,9 @@ Alias: x_rot
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:x_rot |
-| native | pals:x_rot |
+| self | pals_config:x_rot |
+| native | pals_config:x_rot |
+| close | pals:x_rot |
 
 
 
@@ -97,13 +97,14 @@ Alias: x_rot
 ```yaml
 name: x_rot
 description: Rotation around the X-axis in the facility floor plan.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - delta_phi
 - phi_shift
 - GlobalOffsetPhi
+close_mappings:
+- pals:x_rot
 rank: 1000
-slot_uri: pals:x_rot
 alias: x_rot
 owner: BodyShiftParamGroup
 domain_of:

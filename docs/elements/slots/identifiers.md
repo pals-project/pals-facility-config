@@ -9,7 +9,7 @@ _A unique and ideally persistent identifier for the facility, such as a DOI or R
 
 
 
-URI: [pals:slot/identifiers](https://pals-project.readthedocs.io/slot/identifiers)
+URI: [pals_config:slot/identifiers](https://w3id.org/pals-config/slot/identifiers)
 Alias: identifiers
 
 <!-- no inheritance hierarchy -->
@@ -63,7 +63,7 @@ Alias: identifiers
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -72,8 +72,8 @@ Alias: identifiers
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:identifiers |
-| native | pals:identifiers |
+| self | pals_config:identifiers |
+| native | pals_config:identifiers |
 
 
 
@@ -85,7 +85,7 @@ Alias: identifiers
 name: identifiers
 description: A unique and ideally persistent identifier for the facility, such as
   a DOI or ROR.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 alias: identifiers
 domain_of:

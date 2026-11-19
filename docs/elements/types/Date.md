@@ -1,17 +1,54 @@
+# Type: Date 
 
-# Type: date
 
-a date (year, month and day) in an idealized calendar
 
-URI: [linkml:Date](https://w3id.org/linkml/Date)
 
-|  |  |  |
-| --- | --- | --- |
-| Root (builtin) type | | **XSDDate** |
-| Representation | | str |
+_a date (year, month and day) in an idealized calendar_
 
-## Other properties
 
-|  |  |  |
-| --- | --- | --- |
-| **Exact Mappings:** | | schema:Date |
+
+URI: [xsd:date](http://www.w3.org/2001/XMLSchema#date)
+
+## Type Properties
+
+| Property | Value |
+| --- | --- |
+| Base | `XSDDate` |
+| Type URI | [xsd:date](http://www.w3.org/2001/XMLSchema#date) |
+| Representation | `str` |
+
+
+
+
+
+
+## Notes
+
+* URI is dateTime because OWL reasoners don't work with straight date or time
+* If you are authoring schemas in LinkML YAML, the type is referenced with the lower case "date".
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/pals-config
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | xsd:date |
+| native | pals_config:date |
+| exact | schema:Date |
+
+

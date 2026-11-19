@@ -9,7 +9,7 @@ _A label string._
 
 
 
-URI: [pals:label](https://pals-project.readthedocs.io/label)
+URI: [pals_config:slot/label](https://w3id.org/pals-config/slot/label)
 Alias: label
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: label
 | --- | --- |
 | Range | [String](../types/String.md) |
 | Domain Of | [MetaParamGroup](../classes/MetaParamGroup.md) |
-| Slot URI | [pals:label](https://pals-project.readthedocs.io/label) |
 
 ### Cardinality and Requirements
 
@@ -69,7 +68,7 @@ Alias: label
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +77,9 @@ Alias: label
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:label |
-| native | pals:label |
+| self | pals_config:label |
+| native | pals_config:label |
+| close | pals:label |
 
 
 
@@ -90,9 +90,10 @@ Alias: label
 ```yaml
 name: label
 description: A label string.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:label
 rank: 1000
-slot_uri: pals:label
 alias: label
 owner: MetaParamGroup
 domain_of:

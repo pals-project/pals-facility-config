@@ -9,7 +9,7 @@ _Twiss alpha parameter in the vertical plane._
 
 
 
-URI: [pals:alpha_b](https://pals-project.readthedocs.io/alpha_b)
+URI: [pals_config:slot/alpha_b](https://w3id.org/pals-config/slot/alpha_b)
 Alias: alpha_b
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: alpha_b
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [TwissParamGroup](../classes/TwissParamGroup.md) |
-| Slot URI | [pals:alpha_b](https://pals-project.readthedocs.io/alpha_b) |
 
 ### Cardinality and Requirements
 
@@ -75,7 +74,7 @@ Alias: alpha_b
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -84,8 +83,9 @@ Alias: alpha_b
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:alpha_b |
-| native | pals:alpha_b |
+| self | pals_config:alpha_b |
+| native | pals_config:alpha_b |
+| close | pals:alpha_b |
 
 
 
@@ -96,12 +96,13 @@ Alias: alpha_b
 ```yaml
 name: alpha_b
 description: Twiss alpha parameter in the vertical plane.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 aliases:
 - alpha_y
 - alphay
+close_mappings:
+- pals:alpha_b
 rank: 1000
-slot_uri: pals:alpha_b
 alias: alpha_b
 owner: TwissParamGroup
 domain_of:

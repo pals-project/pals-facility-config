@@ -4,26 +4,30 @@
 
 
 
-URI: [pals:class/HasElectricMultipoleP](https://pals-project.readthedocs.io/class/HasElectricMultipoleP)
+URI: [pals_config:class/HasElectricMultipoleP](https://w3id.org/pals-config/class/HasElectricMultipoleP)
 
 
 ```mermaid
 erDiagram
 ElectricMultipoleParamGroup {
-
+    string id  
 }
 HasElectricMultipoleP {
 
 }
 MultipoleParameterGroup {
     float Bn  
+    float BnL  
     float Bs  
+    float BsL  
     float En  
     float EnL  
     float Es  
     float EsL  
     float Kn  
+    float KnL  
     float Ks  
+    float KsL  
     integer order  
     float tilt  
 }
@@ -82,7 +86,7 @@ HasElectricMultipoleP ||--|o ElectricMultipoleParamGroup : "ElectricMultipoleP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -91,8 +95,8 @@ HasElectricMultipoleP ||--|o ElectricMultipoleParamGroup : "ElectricMultipoleP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasElectricMultipoleP |
-| native | pals:HasElectricMultipoleP |
+| self | pals_config:HasElectricMultipoleP |
+| native | pals_config:HasElectricMultipoleP |
 
 
 
@@ -108,7 +112,7 @@ HasElectricMultipoleP ||--|o ElectricMultipoleParamGroup : "ElectricMultipoleP"
 <details>
 ```yaml
 name: HasElectricMultipoleP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   ElectricMultipoleP:
@@ -116,7 +120,7 @@ attributes:
     description: A mixin for electric multipole parameters that are aligned with PALS
       ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasElectricMultipoleP
@@ -131,7 +135,7 @@ attributes:
 <details>
 ```yaml
 name: HasElectricMultipoleP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   ElectricMultipoleP:
@@ -139,7 +143,7 @@ attributes:
     description: A mixin for electric multipole parameters that are aligned with PALS
       ElectricMultipoleP (Electric Multipole Parameters) for interoperability with
       the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: ElectricMultipoleP
     owner: HasElectricMultipoleP

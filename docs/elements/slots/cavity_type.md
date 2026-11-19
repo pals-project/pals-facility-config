@@ -9,7 +9,7 @@ _Cavity type_
 
 
 
-URI: [pals:cavity_type](https://pals-project.readthedocs.io/cavity_type)
+URI: [pals_config:slot/cavity_type](https://w3id.org/pals-config/slot/cavity_type)
 Alias: cavity_type
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: cavity_type
 | --- | --- |
 | Range | [CavityTypeEnum](../enums/CavityTypeEnum.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:cavity_type](https://pals-project.readthedocs.io/cavity_type) |
 
 ### Cardinality and Requirements
 
@@ -69,7 +68,7 @@ Alias: cavity_type
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +77,9 @@ Alias: cavity_type
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:cavity_type |
-| native | pals:cavity_type |
+| self | pals_config:cavity_type |
+| native | pals_config:cavity_type |
+| close | pals:cavity_type |
 
 
 
@@ -90,9 +90,10 @@ Alias: cavity_type
 ```yaml
 name: cavity_type
 description: Cavity type
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:cavity_type
 rank: 1000
-slot_uri: pals:cavity_type
 alias: cavity_type
 owner: RFParamGroup
 domain_of:

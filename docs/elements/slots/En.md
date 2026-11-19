@@ -9,7 +9,7 @@ _Normal component of the field._
 
 
 
-URI: [pals:slot/En](https://pals-project.readthedocs.io/slot/En)
+URI: [pals_config:slot/En](https://w3id.org/pals-config/slot/En)
 Alias: En
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: En
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component.<br>Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both.<br>Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
+| [MultipoleParameterGroup](../classes/MultipoleParameterGroup.md) | A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components. |  no  |
 
 
 
@@ -68,7 +68,7 @@ Alias: En
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -77,8 +77,8 @@ Alias: En
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:En |
-| native | pals:En |
+| self | pals_config:En |
+| native | pals_config:En |
 | broad | pals:EnN |
 
 
@@ -90,7 +90,7 @@ Alias: En
 ```yaml
 name: En
 description: Normal component of the field.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 broad_mappings:
 - pals:EnN
 rank: 1000

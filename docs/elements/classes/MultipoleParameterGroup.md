@@ -3,30 +3,30 @@
 # Class: MultipoleParameterGroup 
 
 
-_A single order's electric (or magnetic) multipole component._
-
-_Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both._
-
-_Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components._
+_A single order's electric (or magnetic) multipole component. Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins to represent individual multipole components._
 
 
 
 
 
-URI: [pals:class/MultipoleParameterGroup](https://pals-project.readthedocs.io/class/MultipoleParameterGroup)
+URI: [pals_config:class/MultipoleParameterGroup](https://w3id.org/pals-config/class/MultipoleParameterGroup)
 
 
 ```mermaid
 erDiagram
 MultipoleParameterGroup {
     float Bn  
+    float BnL  
     float Bs  
+    float BsL  
     float En  
     float EnL  
     float Es  
     float EsL  
     float Kn  
+    float KnL  
     float Ks  
+    float KsL  
     integer order  
     float tilt  
 }
@@ -51,8 +51,12 @@ MultipoleParameterGroup {
 | [EsL](../slots/EsL.md) | 0..1 <br/> [Float](../types/Float.md) | Length-integrated skew component. | direct |
 | [Bn](../slots/Bn.md) | 0..1 <br/> [Float](../types/Float.md) | Normal component of the magnetic field. | direct |
 | [Bs](../slots/Bs.md) | 0..1 <br/> [Float](../types/Float.md) | Skew component of the magnetic field. | direct |
+| [BnL](../slots/BnL.md) | 0..1 <br/> [Float](../types/Float.md) | Length-integrated normal component of the magnetic field. | direct |
+| [BsL](../slots/BsL.md) | 0..1 <br/> [Float](../types/Float.md) | Length-integrated skew component of the magnetic field. | direct |
 | [Kn](../slots/Kn.md) | 0..1 <br/> [Float](../types/Float.md) | Normalized normal component. | direct |
 | [Ks](../slots/Ks.md) | 0..1 <br/> [Float](../types/Float.md) | Normalized skew component. | direct |
+| [KnL](../slots/KnL.md) | 0..1 <br/> [Float](../types/Float.md) | Length-integrated normalized normal component. | direct |
+| [KsL](../slots/KsL.md) | 0..1 <br/> [Float](../types/Float.md) | Length-integrated normalized skew component. | direct |
 
 
 
@@ -75,7 +79,7 @@ MultipoleParameterGroup {
 
 | Rule Applied | Preconditions | Postconditions | Elseconditions |
 |--------------|---------------|----------------|----------------|
-| slot_conditions |```{'Es': {'value_presence': 'PRESENT'}}``` |```{'Bn': {'value_presence': 'ABSENT'}, 'Bs': {'value_presence': 'ABSENT'}, 'Kn': {'value_presence': 'ABSENT'}, 'Ks': {'value_presence': 'ABSENT'}}``` | |
+| slot_conditions |```{'Es': {'value_presence': 'PRESENT'}}``` |```{'Bn': {'value_presence': 'ABSENT'}, 'Bs': {'value_presence': 'ABSENT'}, 'BnL': {'value_presence': 'ABSENT'}, 'BsL': {'value_presence': 'ABSENT'}, 'Kn': {'value_presence': 'ABSENT'}, 'Ks': {'value_presence': 'ABSENT'}, 'KnL': {'value_presence': 'ABSENT'}, 'KsL': {'value_presence': 'ABSENT'}}``` | |
 
 
 
@@ -83,7 +87,7 @@ MultipoleParameterGroup {
 
 | Rule Applied | Preconditions | Postconditions | Elseconditions |
 |--------------|---------------|----------------|----------------|
-| slot_conditions |```{'En': {'value_presence': 'PRESENT'}}``` |```{'Bn': {'value_presence': 'ABSENT'}, 'Bs': {'value_presence': 'ABSENT'}, 'Kn': {'value_presence': 'ABSENT'}, 'Ks': {'value_presence': 'ABSENT'}}``` | |
+| slot_conditions |```{'En': {'value_presence': 'PRESENT'}}``` |```{'Bn': {'value_presence': 'ABSENT'}, 'Bs': {'value_presence': 'ABSENT'}, 'BnL': {'value_presence': 'ABSENT'}, 'BsL': {'value_presence': 'ABSENT'}, 'Kn': {'value_presence': 'ABSENT'}, 'Ks': {'value_presence': 'ABSENT'}, 'KnL': {'value_presence': 'ABSENT'}, 'KsL': {'value_presence': 'ABSENT'}}``` | |
 
 
 
@@ -91,7 +95,7 @@ MultipoleParameterGroup {
 
 | Rule Applied | Preconditions | Postconditions | Elseconditions |
 |--------------|---------------|----------------|----------------|
-| slot_conditions |```{'EnL': {'value_presence': 'PRESENT'}}``` |```{'Bn': {'value_presence': 'ABSENT'}, 'Bs': {'value_presence': 'ABSENT'}, 'Kn': {'value_presence': 'ABSENT'}, 'Ks': {'value_presence': 'ABSENT'}}``` | |
+| slot_conditions |```{'EnL': {'value_presence': 'PRESENT'}}``` |```{'Bn': {'value_presence': 'ABSENT'}, 'Bs': {'value_presence': 'ABSENT'}, 'BnL': {'value_presence': 'ABSENT'}, 'BsL': {'value_presence': 'ABSENT'}, 'Kn': {'value_presence': 'ABSENT'}, 'Ks': {'value_presence': 'ABSENT'}, 'KnL': {'value_presence': 'ABSENT'}, 'KsL': {'value_presence': 'ABSENT'}}``` | |
 
 
 
@@ -99,7 +103,7 @@ MultipoleParameterGroup {
 
 | Rule Applied | Preconditions | Postconditions | Elseconditions |
 |--------------|---------------|----------------|----------------|
-| slot_conditions |```{'EsL': {'value_presence': 'PRESENT'}}``` |```{'Bn': {'value_presence': 'ABSENT'}, 'Bs': {'value_presence': 'ABSENT'}, 'Kn': {'value_presence': 'ABSENT'}, 'Ks': {'value_presence': 'ABSENT'}}``` | |
+| slot_conditions |```{'EsL': {'value_presence': 'PRESENT'}}``` |```{'Bn': {'value_presence': 'ABSENT'}, 'Bs': {'value_presence': 'ABSENT'}, 'BnL': {'value_presence': 'ABSENT'}, 'BsL': {'value_presence': 'ABSENT'}, 'Kn': {'value_presence': 'ABSENT'}, 'Ks': {'value_presence': 'ABSENT'}, 'KnL': {'value_presence': 'ABSENT'}, 'KsL': {'value_presence': 'ABSENT'}}``` | |
 
 
 
@@ -135,6 +139,38 @@ MultipoleParameterGroup {
 
 
 
+### 
+
+| Rule Applied | Preconditions | Postconditions | Elseconditions |
+|--------------|---------------|----------------|----------------|
+| slot_conditions |```{'BnL': {'value_presence': 'PRESENT'}}``` |```{'En': {'value_presence': 'ABSENT'}, 'Es': {'value_presence': 'ABSENT'}, 'EnL': {'value_presence': 'ABSENT'}, 'EsL': {'value_presence': 'ABSENT'}}``` | |
+
+
+
+### 
+
+| Rule Applied | Preconditions | Postconditions | Elseconditions |
+|--------------|---------------|----------------|----------------|
+| slot_conditions |```{'BsL': {'value_presence': 'PRESENT'}}``` |```{'En': {'value_presence': 'ABSENT'}, 'Es': {'value_presence': 'ABSENT'}, 'EnL': {'value_presence': 'ABSENT'}, 'EsL': {'value_presence': 'ABSENT'}}``` | |
+
+
+
+### 
+
+| Rule Applied | Preconditions | Postconditions | Elseconditions |
+|--------------|---------------|----------------|----------------|
+| slot_conditions |```{'KnL': {'value_presence': 'PRESENT'}}``` |```{'En': {'value_presence': 'ABSENT'}, 'Es': {'value_presence': 'ABSENT'}, 'EnL': {'value_presence': 'ABSENT'}, 'EsL': {'value_presence': 'ABSENT'}}``` | |
+
+
+
+### 
+
+| Rule Applied | Preconditions | Postconditions | Elseconditions |
+|--------------|---------------|----------------|----------------|
+| slot_conditions |```{'KsL': {'value_presence': 'PRESENT'}}``` |```{'En': {'value_presence': 'ABSENT'}, 'Es': {'value_presence': 'ABSENT'}, 'EnL': {'value_presence': 'ABSENT'}, 'EsL': {'value_presence': 'ABSENT'}}``` | |
+
+
+
 
 
 
@@ -153,7 +189,7 @@ MultipoleParameterGroup {
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -162,8 +198,8 @@ MultipoleParameterGroup {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:MultipoleParameterGroup |
-| native | pals:MultipoleParameterGroup |
+| self | pals_config:MultipoleParameterGroup |
+| native | pals_config:MultipoleParameterGroup |
 
 
 
@@ -179,19 +215,16 @@ MultipoleParameterGroup {
 <details>
 ```yaml
 name: MultipoleParameterGroup
-description: 'A single order''s electric (or magnetic) multipole component.
-
-  Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles
-  should be present, not both.
-
-  Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins
-  to represent individual multipole components.'
-from_schema: https://w3id.org/accelerator-core
+description: A single order's electric (or magnetic) multipole component. Only the
+  fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should
+  be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and
+  MagneticMultipoleP mixins to represent individual multipole components.
+from_schema: https://w3id.org/pals-config
 attributes:
   order:
     name: order
     description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - MultipoleParameterGroup
@@ -200,17 +233,19 @@ attributes:
   tilt:
     name: tilt
     description: Tilt of the Nth multipole.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:tilt
     rank: 1000
     domain_of:
     - MultipoleParameterGroup
     range: float
+    unit:
+      ucum_code: rad
   En:
     name: En
     description: Normal component of the field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EnN
     rank: 1000
@@ -220,7 +255,7 @@ attributes:
   Es:
     name: Es
     description: Skew component of the field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EsN
     rank: 1000
@@ -230,7 +265,7 @@ attributes:
   EnL:
     name: EnL
     description: Length-integrated normal component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EnNL
     rank: 1000
@@ -240,7 +275,7 @@ attributes:
   EsL:
     name: EsL
     description: Length-integrated skew component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EsNL
     rank: 1000
@@ -250,7 +285,7 @@ attributes:
   Bn:
     name: Bn
     description: Normal component of the magnetic field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:BnN
     rank: 1000
@@ -260,9 +295,29 @@ attributes:
   Bs:
     name: Bs
     description: Skew component of the magnetic field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:BsN
+    rank: 1000
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  BnL:
+    name: BnL
+    description: Length-integrated normal component of the magnetic field.
+    from_schema: https://w3id.org/pals-config
+    broad_mappings:
+    - pals:BnNL
+    rank: 1000
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  BsL:
+    name: BsL
+    description: Length-integrated skew component of the magnetic field.
+    from_schema: https://w3id.org/pals-config
+    broad_mappings:
+    - pals:BsNL
     rank: 1000
     domain_of:
     - MultipoleParameterGroup
@@ -270,7 +325,7 @@ attributes:
   Kn:
     name: Kn
     description: Normalized normal component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:KnN
     rank: 1000
@@ -280,9 +335,29 @@ attributes:
   Ks:
     name: Ks
     description: Normalized skew component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:KsN
+    rank: 1000
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  KnL:
+    name: KnL
+    description: Length-integrated normalized normal component.
+    from_schema: https://w3id.org/pals-config
+    broad_mappings:
+    - pals:KnNL
+    rank: 1000
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  KsL:
+    name: KsL
+    description: Length-integrated normalized skew component.
+    from_schema: https://w3id.org/pals-config
+    broad_mappings:
+    - pals:KsNL
     rank: 1000
     domain_of:
     - MultipoleParameterGroup
@@ -301,13 +376,25 @@ rules:
       Bs:
         name: Bs
         value_presence: ABSENT
+      BnL:
+        name: BnL
+        value_presence: ABSENT
+      BsL:
+        name: BsL
+        value_presence: ABSENT
       Kn:
         name: Kn
         value_presence: ABSENT
       Ks:
         name: Ks
         value_presence: ABSENT
-  description: If Es is present, then Bn, Bs, Kn, Ks should NOT be present
+      KnL:
+        name: KnL
+        value_presence: ABSENT
+      KsL:
+        name: KsL
+        value_presence: ABSENT
+  description: If Es is present, magnetic representations should NOT be present
 - preconditions:
     slot_conditions:
       En:
@@ -321,13 +408,25 @@ rules:
       Bs:
         name: Bs
         value_presence: ABSENT
+      BnL:
+        name: BnL
+        value_presence: ABSENT
+      BsL:
+        name: BsL
+        value_presence: ABSENT
       Kn:
         name: Kn
         value_presence: ABSENT
       Ks:
         name: Ks
         value_presence: ABSENT
-  description: If En is present, then Bn, Bs, Kn, Ks should NOT be present
+      KnL:
+        name: KnL
+        value_presence: ABSENT
+      KsL:
+        name: KsL
+        value_presence: ABSENT
+  description: If En is present, magnetic representations should NOT be present
 - preconditions:
     slot_conditions:
       EnL:
@@ -341,13 +440,25 @@ rules:
       Bs:
         name: Bs
         value_presence: ABSENT
+      BnL:
+        name: BnL
+        value_presence: ABSENT
+      BsL:
+        name: BsL
+        value_presence: ABSENT
       Kn:
         name: Kn
         value_presence: ABSENT
       Ks:
         name: Ks
         value_presence: ABSENT
-  description: If EnL is present, then Bn, Bs, Kn, Ks should NOT be present
+      KnL:
+        name: KnL
+        value_presence: ABSENT
+      KsL:
+        name: KsL
+        value_presence: ABSENT
+  description: If EnL is present, magnetic representations should NOT be present
 - preconditions:
     slot_conditions:
       EsL:
@@ -361,13 +472,25 @@ rules:
       Bs:
         name: Bs
         value_presence: ABSENT
+      BnL:
+        name: BnL
+        value_presence: ABSENT
+      BsL:
+        name: BsL
+        value_presence: ABSENT
       Kn:
         name: Kn
         value_presence: ABSENT
       Ks:
         name: Ks
         value_presence: ABSENT
-  description: If EsL is present, then Bn, Bs, Kn, Ks should NOT be present
+      KnL:
+        name: KnL
+        value_presence: ABSENT
+      KsL:
+        name: KsL
+        value_presence: ABSENT
+  description: If EsL is present, magnetic representations should NOT be present
 - preconditions:
     slot_conditions:
       Bn:
@@ -448,6 +571,86 @@ rules:
         name: EsL
         value_presence: ABSENT
   description: If Ks is present, then En, Es, EnL, EsL should NOT be present
+- preconditions:
+    slot_conditions:
+      BnL:
+        name: BnL
+        value_presence: PRESENT
+  postconditions:
+    slot_conditions:
+      En:
+        name: En
+        value_presence: ABSENT
+      Es:
+        name: Es
+        value_presence: ABSENT
+      EnL:
+        name: EnL
+        value_presence: ABSENT
+      EsL:
+        name: EsL
+        value_presence: ABSENT
+  description: If BnL is present, then En, Es, EnL, EsL should NOT be present
+- preconditions:
+    slot_conditions:
+      BsL:
+        name: BsL
+        value_presence: PRESENT
+  postconditions:
+    slot_conditions:
+      En:
+        name: En
+        value_presence: ABSENT
+      Es:
+        name: Es
+        value_presence: ABSENT
+      EnL:
+        name: EnL
+        value_presence: ABSENT
+      EsL:
+        name: EsL
+        value_presence: ABSENT
+  description: If BsL is present, then En, Es, EnL, EsL should NOT be present
+- preconditions:
+    slot_conditions:
+      KnL:
+        name: KnL
+        value_presence: PRESENT
+  postconditions:
+    slot_conditions:
+      En:
+        name: En
+        value_presence: ABSENT
+      Es:
+        name: Es
+        value_presence: ABSENT
+      EnL:
+        name: EnL
+        value_presence: ABSENT
+      EsL:
+        name: EsL
+        value_presence: ABSENT
+  description: If KnL is present, then En, Es, EnL, EsL should NOT be present
+- preconditions:
+    slot_conditions:
+      KsL:
+        name: KsL
+        value_presence: PRESENT
+  postconditions:
+    slot_conditions:
+      En:
+        name: En
+        value_presence: ABSENT
+      Es:
+        name: Es
+        value_presence: ABSENT
+      EnL:
+        name: EnL
+        value_presence: ABSENT
+      EsL:
+        name: EsL
+        value_presence: ABSENT
+  description: If KsL is present, then En, Es, EnL, EsL should NOT be present
 
 ```
 </details>
@@ -457,19 +660,16 @@ rules:
 <details>
 ```yaml
 name: MultipoleParameterGroup
-description: 'A single order''s electric (or magnetic) multipole component.
-
-  Only the fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles
-  should be present, not both.
-
-  Not a mixin, but a class used in the ElectricMultipoleP and MagneticMultipoleP mixins
-  to represent individual multipole components.'
-from_schema: https://w3id.org/accelerator-core
+description: A single order's electric (or magnetic) multipole component. Only the
+  fields supporting Electric Multipoles  OR the fields for Magnetic Multipoles should
+  be present, not both. Not a mixin, but a class used in the ElectricMultipoleP and
+  MagneticMultipoleP mixins to represent individual multipole components.
+from_schema: https://w3id.org/pals-config
 attributes:
   order:
     name: order
     description: Multipole order N (0 = dipole, 1 = quadrupole, etc.)
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: order
     owner: MultipoleParameterGroup
@@ -480,7 +680,7 @@ attributes:
   tilt:
     name: tilt
     description: Tilt of the Nth multipole.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:tilt
     rank: 1000
@@ -489,10 +689,12 @@ attributes:
     domain_of:
     - MultipoleParameterGroup
     range: float
+    unit:
+      ucum_code: rad
   En:
     name: En
     description: Normal component of the field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EnN
     rank: 1000
@@ -504,7 +706,7 @@ attributes:
   Es:
     name: Es
     description: Skew component of the field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EsN
     rank: 1000
@@ -516,7 +718,7 @@ attributes:
   EnL:
     name: EnL
     description: Length-integrated normal component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EnNL
     rank: 1000
@@ -528,7 +730,7 @@ attributes:
   EsL:
     name: EsL
     description: Length-integrated skew component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:EsNL
     rank: 1000
@@ -540,7 +742,7 @@ attributes:
   Bn:
     name: Bn
     description: Normal component of the magnetic field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:BnN
     rank: 1000
@@ -552,7 +754,7 @@ attributes:
   Bs:
     name: Bs
     description: Skew component of the magnetic field.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:BsN
     rank: 1000
@@ -561,10 +763,34 @@ attributes:
     domain_of:
     - MultipoleParameterGroup
     range: float
+  BnL:
+    name: BnL
+    description: Length-integrated normal component of the magnetic field.
+    from_schema: https://w3id.org/pals-config
+    broad_mappings:
+    - pals:BnNL
+    rank: 1000
+    alias: BnL
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  BsL:
+    name: BsL
+    description: Length-integrated skew component of the magnetic field.
+    from_schema: https://w3id.org/pals-config
+    broad_mappings:
+    - pals:BsNL
+    rank: 1000
+    alias: BsL
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
   Kn:
     name: Kn
     description: Normalized normal component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:KnN
     rank: 1000
@@ -576,11 +802,35 @@ attributes:
   Ks:
     name: Ks
     description: Normalized skew component.
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     broad_mappings:
     - pals:KsN
     rank: 1000
     alias: Ks
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  KnL:
+    name: KnL
+    description: Length-integrated normalized normal component.
+    from_schema: https://w3id.org/pals-config
+    broad_mappings:
+    - pals:KnNL
+    rank: 1000
+    alias: KnL
+    owner: MultipoleParameterGroup
+    domain_of:
+    - MultipoleParameterGroup
+    range: float
+  KsL:
+    name: KsL
+    description: Length-integrated normalized skew component.
+    from_schema: https://w3id.org/pals-config
+    broad_mappings:
+    - pals:KsNL
+    rank: 1000
+    alias: KsL
     owner: MultipoleParameterGroup
     domain_of:
     - MultipoleParameterGroup
@@ -599,13 +849,25 @@ rules:
       Bs:
         name: Bs
         value_presence: ABSENT
+      BnL:
+        name: BnL
+        value_presence: ABSENT
+      BsL:
+        name: BsL
+        value_presence: ABSENT
       Kn:
         name: Kn
         value_presence: ABSENT
       Ks:
         name: Ks
         value_presence: ABSENT
-  description: If Es is present, then Bn, Bs, Kn, Ks should NOT be present
+      KnL:
+        name: KnL
+        value_presence: ABSENT
+      KsL:
+        name: KsL
+        value_presence: ABSENT
+  description: If Es is present, magnetic representations should NOT be present
 - preconditions:
     slot_conditions:
       En:
@@ -619,13 +881,25 @@ rules:
       Bs:
         name: Bs
         value_presence: ABSENT
+      BnL:
+        name: BnL
+        value_presence: ABSENT
+      BsL:
+        name: BsL
+        value_presence: ABSENT
       Kn:
         name: Kn
         value_presence: ABSENT
       Ks:
         name: Ks
         value_presence: ABSENT
-  description: If En is present, then Bn, Bs, Kn, Ks should NOT be present
+      KnL:
+        name: KnL
+        value_presence: ABSENT
+      KsL:
+        name: KsL
+        value_presence: ABSENT
+  description: If En is present, magnetic representations should NOT be present
 - preconditions:
     slot_conditions:
       EnL:
@@ -639,13 +913,25 @@ rules:
       Bs:
         name: Bs
         value_presence: ABSENT
+      BnL:
+        name: BnL
+        value_presence: ABSENT
+      BsL:
+        name: BsL
+        value_presence: ABSENT
       Kn:
         name: Kn
         value_presence: ABSENT
       Ks:
         name: Ks
         value_presence: ABSENT
-  description: If EnL is present, then Bn, Bs, Kn, Ks should NOT be present
+      KnL:
+        name: KnL
+        value_presence: ABSENT
+      KsL:
+        name: KsL
+        value_presence: ABSENT
+  description: If EnL is present, magnetic representations should NOT be present
 - preconditions:
     slot_conditions:
       EsL:
@@ -659,13 +945,25 @@ rules:
       Bs:
         name: Bs
         value_presence: ABSENT
+      BnL:
+        name: BnL
+        value_presence: ABSENT
+      BsL:
+        name: BsL
+        value_presence: ABSENT
       Kn:
         name: Kn
         value_presence: ABSENT
       Ks:
         name: Ks
         value_presence: ABSENT
-  description: If EsL is present, then Bn, Bs, Kn, Ks should NOT be present
+      KnL:
+        name: KnL
+        value_presence: ABSENT
+      KsL:
+        name: KsL
+        value_presence: ABSENT
+  description: If EsL is present, magnetic representations should NOT be present
 - preconditions:
     slot_conditions:
       Bn:
@@ -746,6 +1044,86 @@ rules:
         name: EsL
         value_presence: ABSENT
   description: If Ks is present, then En, Es, EnL, EsL should NOT be present
+- preconditions:
+    slot_conditions:
+      BnL:
+        name: BnL
+        value_presence: PRESENT
+  postconditions:
+    slot_conditions:
+      En:
+        name: En
+        value_presence: ABSENT
+      Es:
+        name: Es
+        value_presence: ABSENT
+      EnL:
+        name: EnL
+        value_presence: ABSENT
+      EsL:
+        name: EsL
+        value_presence: ABSENT
+  description: If BnL is present, then En, Es, EnL, EsL should NOT be present
+- preconditions:
+    slot_conditions:
+      BsL:
+        name: BsL
+        value_presence: PRESENT
+  postconditions:
+    slot_conditions:
+      En:
+        name: En
+        value_presence: ABSENT
+      Es:
+        name: Es
+        value_presence: ABSENT
+      EnL:
+        name: EnL
+        value_presence: ABSENT
+      EsL:
+        name: EsL
+        value_presence: ABSENT
+  description: If BsL is present, then En, Es, EnL, EsL should NOT be present
+- preconditions:
+    slot_conditions:
+      KnL:
+        name: KnL
+        value_presence: PRESENT
+  postconditions:
+    slot_conditions:
+      En:
+        name: En
+        value_presence: ABSENT
+      Es:
+        name: Es
+        value_presence: ABSENT
+      EnL:
+        name: EnL
+        value_presence: ABSENT
+      EsL:
+        name: EsL
+        value_presence: ABSENT
+  description: If KnL is present, then En, Es, EnL, EsL should NOT be present
+- preconditions:
+    slot_conditions:
+      KsL:
+        name: KsL
+        value_presence: PRESENT
+  postconditions:
+    slot_conditions:
+      En:
+        name: En
+        value_presence: ABSENT
+      Es:
+        name: Es
+        value_presence: ABSENT
+      EnL:
+        name: EnL
+        value_presence: ABSENT
+      EsL:
+        name: EsL
+        value_presence: ABSENT
+  description: If KsL is present, then En, Es, EnL, EsL should NOT be present
 
 ```
 </details>

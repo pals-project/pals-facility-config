@@ -7,7 +7,7 @@ _The type of cavity, which determines the field configuration and mode structure
 
 
 
-URI: [pals:enum/CavityTypeEnum](https://pals-project.readthedocs.io/enum/CavityTypeEnum)
+URI: [pals_config:enum/CavityTypeEnum](https://w3id.org/pals-config/enum/CavityTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
@@ -42,7 +42,7 @@ URI: [pals:enum/CavityTypeEnum](https://pals-project.readthedocs.io/enum/CavityT
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -56,7 +56,7 @@ URI: [pals:enum/CavityTypeEnum](https://pals-project.readthedocs.io/enum/CavityT
 name: CavityTypeEnum
 description: The type of cavity, which determines the field configuration and mode
   structure.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   STANDING_WAVE:

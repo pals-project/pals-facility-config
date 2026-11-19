@@ -8,8 +8,9 @@ import pytest
 import yaml
 
 
-BOOSTER = Path(__file__).resolve().parents[1] / "examples" / "Booster"
-spec = importlib.util.spec_from_file_location("update_twiss", BOOSTER.parent / "update_twiss.py")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+BOOSTER = REPO_ROOT / "examples"
+spec = importlib.util.spec_from_file_location("update_twiss", REPO_ROOT / "src/translators/update_twiss.py")
 updater = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = updater
 spec.loader.exec_module(updater)
@@ -31,6 +32,12 @@ def test_reordered_partial_columns_and_extra_columns(tmp_path):
 def test_merge_preserves_existing_fields_and_group_id():
     document = {
         "kind": "PALSAccelerator",
+        "created_date": "2026-01-01",
+        "change_log": [{
+            "change_date": "2026-01-01",
+            "instance_version": "0.0.0",
+            "summary": "Test fixture creation.",
+        }],
         "facility": {"components": [{
             "id": "inst:BEGINNING_B1",
             "kind": "BeginningEle",
@@ -65,10 +72,10 @@ def test_malformed_tables_are_rejected(tmp_path, text, message):
 
 
 def test_booster_table_preserves_beginning_optics():
-    document = yaml.safe_load((BOOSTER / "booster_narad_skeleton_palsparserpy.yaml").read_text())
+    document = yaml.safe_load((REPO_ROOT / ".local/translation/skeletons/booster_narad_skeleton_palsparserpy.yaml").read_text())
     beginning = document["facility"]["components"][0]
     original = dict(beginning["TwissP"])
-    rows = updater.read_twiss_table(BOOSTER / "booster_twiss.dat")
+    rows = updater.read_twiss_table(REPO_ROOT / "src/translators/resources/booster_twiss.dat")
     updater.add_twiss_data(document, rows)
     for name, value in original.items():
         if name not in rows[0].twiss:
@@ -87,6 +94,12 @@ def test_partial_overlap_repeated_names_and_missing_values(tmp_path):
     )
     document = {
         "kind": "PALSAccelerator",
+        "created_date": "2026-01-01",
+        "change_log": [{
+            "change_date": "2026-01-01",
+            "instance_version": "0.0.0",
+            "summary": "Test fixture creation.",
+        }],
         "facility": {"components": [
             {"id": "inst:MARK", "kind": "Marker",
              "TwissP": {"id": "inst:first", "beta_b": 10.0, "dbeta_a_dpz": 23.0}},

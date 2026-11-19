@@ -9,7 +9,7 @@ _Reference bend strength = 1/radius_ref_
 
 
 
-URI: [pals:g_ref](https://pals-project.readthedocs.io/g_ref)
+URI: [pals_config:slot/g_ref](https://w3id.org/pals-config/slot/g_ref)
 Alias: g_ref
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: g_ref
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element.<br>This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
+| [BendParamGroup](../classes/BendParamGroup.md) | Mixin for bend parameters, which can be used to describe the bending properties of an accelerator element. This mixin is aligned with PALS BendP for interoperability with the Particle Accelerator Language Standard (PALS). |  no  |
 
 
 
@@ -37,7 +37,6 @@ Alias: g_ref
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [BendParamGroup](../classes/BendParamGroup.md) |
-| Slot URI | [pals:g_ref](https://pals-project.readthedocs.io/g_ref) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: g_ref
 | --- | --- |
 | Owner | [BendParamGroup](../classes/BendParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `1/m`
+
+</details>
 
 
 
@@ -69,7 +74,7 @@ Alias: g_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +83,9 @@ Alias: g_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:g_ref |
-| native | pals:g_ref |
+| self | pals_config:g_ref |
+| native | pals_config:g_ref |
+| close | pals:g_ref |
 
 
 
@@ -90,14 +96,17 @@ Alias: g_ref
 ```yaml
 name: g_ref
 description: Reference bend strength = 1/radius_ref
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:g_ref
 rank: 1000
-slot_uri: pals:g_ref
 alias: g_ref
 owner: BendParamGroup
 domain_of:
 - BendParamGroup
 range: float
+unit:
+  ucum_code: 1/m
 
 ```
 </details>

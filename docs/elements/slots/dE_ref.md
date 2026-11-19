@@ -9,7 +9,7 @@ _Reference energy gain._
 
 
 
-URI: [pals:dE_ref](https://pals-project.readthedocs.io/dE_ref)
+URI: [pals_config:slot/dE_ref](https://w3id.org/pals-config/slot/dE_ref)
 Alias: dE_ref
 
 <!-- no inheritance hierarchy -->
@@ -37,7 +37,6 @@ Alias: dE_ref
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [RFParamGroup](../classes/RFParamGroup.md) |
-| Slot URI | [pals:dE_ref](https://pals-project.readthedocs.io/dE_ref) |
 
 ### Cardinality and Requirements
 
@@ -49,6 +48,12 @@ Alias: dE_ref
 | --- | --- |
 | Owner | [RFParamGroup](../classes/RFParamGroup.md) |
 
+
+<details>
+<summary>Additional Constraints</summary>
+**Unit:** `eV`
+
+</details>
 
 
 
@@ -69,7 +74,7 @@ Alias: dE_ref
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -78,8 +83,9 @@ Alias: dE_ref
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:dE_ref |
-| native | pals:dE_ref |
+| self | pals_config:dE_ref |
+| native | pals_config:dE_ref |
+| close | pals:dE_ref |
 
 
 
@@ -90,14 +96,17 @@ Alias: dE_ref
 ```yaml
 name: dE_ref
 description: Reference energy gain.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:dE_ref
 rank: 1000
-slot_uri: pals:dE_ref
 alias: dE_ref
 owner: RFParamGroup
 domain_of:
 - RFParamGroup
 range: float
+unit:
+  ucum_code: eV
 
 ```
 </details>

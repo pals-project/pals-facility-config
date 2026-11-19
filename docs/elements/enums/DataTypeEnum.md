@@ -7,15 +7,16 @@ _Data types for parameter values._
 
 
 
-URI: [pals:enum/DataTypeEnum](https://pals-project.readthedocs.io/enum/DataTypeEnum)
+URI: [pals_config:enum/DataTypeEnum](https://w3id.org/pals-config/enum/DataTypeEnum)
 
 ## Permissible Values
 | Value | Meaning | Description |
 | --- | --- | --- |
-| String | xsd:string | string data type |
-| Integer | xsd:integer | integer data type |
-| Float | xsd:float | floating-point data type |
-| Boolean | xsd:boolean | boolean data type |
+| String | None | string data type |
+| Integer | None | integer data type |
+| Float | None | floating-point data type |
+| Boolean | None | boolean data type |
+| FloatArray | None | An array of floating-point values. |
 
 
 
@@ -45,7 +46,7 @@ URI: [pals:enum/DataTypeEnum](https://pals-project.readthedocs.io/enum/DataTypeE
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -58,25 +59,32 @@ URI: [pals:enum/DataTypeEnum](https://pals-project.readthedocs.io/enum/DataTypeE
 ```yaml
 name: DataTypeEnum
 description: Data types for parameter values.
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 rank: 1000
 permissible_values:
   String:
     text: String
     description: string data type
-    meaning: xsd:string
+    exact_mappings:
+    - xsd:string
   Integer:
     text: Integer
     description: integer data type
-    meaning: xsd:integer
+    exact_mappings:
+    - xsd:integer
   Float:
     text: Float
     description: floating-point data type
-    meaning: xsd:float
+    exact_mappings:
+    - xsd:float
   Boolean:
     text: Boolean
     description: boolean data type
-    meaning: xsd:boolean
+    exact_mappings:
+    - xsd:boolean
+  FloatArray:
+    text: FloatArray
+    description: An array of floating-point values.
 
 ```
 </details>

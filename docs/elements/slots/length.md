@@ -9,7 +9,7 @@ _Length of the element (arc length for bends)._
 
 
 
-URI: [pals:length](https://pals-project.readthedocs.io/length)
+URI: [pals_config:slot/length](https://w3id.org/pals-config/slot/length)
 Alias: length
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: length
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md) | Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis. <br>Corresponds to PALS's ungrouped element parameters `length` and `s_position`.<br>One (or both) `length` or `s_position` must be present. |  no  |
+| [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md) | Mixin for an element's extent and position along the longitudinal (beam-direction, "s") axis.  Corresponds to PALS's ungrouped element parameters `length` and `s_position`. One (or both) `length` or `s_position` must be present. |  no  |
 | [BeamLine](../classes/BeamLine.md) | PALS element for an ordered sequence of beamline elements defining a beam path. |  yes  |
 
 
@@ -38,7 +38,6 @@ Alias: length
 | --- | --- |
 | Range | [Float](../types/Float.md) |
 | Domain Of | [LongitudinalPlacementParamGroup](../classes/LongitudinalPlacementParamGroup.md), [BeamLine](../classes/BeamLine.md) |
-| Slot URI | [pals:length](https://pals-project.readthedocs.io/length) |
 
 ### Cardinality and Requirements
 
@@ -63,7 +62,7 @@ Alias: length
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -72,8 +71,9 @@ Alias: length
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:length |
-| native | pals:length |
+| self | pals_config:length |
+| native | pals_config:length |
+| close | pals:length |
 
 
 
@@ -84,9 +84,10 @@ Alias: length
 ```yaml
 name: length
 description: Length of the element (arc length for bends).
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
+close_mappings:
+- pals:length
 rank: 1000
-slot_uri: pals:length
 alias: length
 domain_of:
 - LongitudinalPlacementParamGroup

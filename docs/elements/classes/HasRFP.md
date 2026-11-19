@@ -4,7 +4,7 @@
 
 
 
-URI: [pals:class/HasRFP](https://pals-project.readthedocs.io/class/HasRFP)
+URI: [pals_config:class/HasRFP](https://w3id.org/pals-config/class/HasRFP)
 
 
 ```mermaid
@@ -17,12 +17,14 @@ RFParamGroup {
     CavityTypeEnum cavity_type  
     float dE_ref  
     float frequency  
+    float gradient  
     integer harmon  
     float multipass_phase  
     integer num_cells  
     float phase  
     float voltage  
     ZeroPhaseEnum zero_phase  
+    string id  
 }
 
 HasRFP ||--|o RFParamGroup : "RFP"
@@ -76,7 +78,7 @@ HasRFP ||--|o RFParamGroup : "RFP"
 ### Schema Source
 
 
-* from schema: https://w3id.org/accelerator-core
+* from schema: https://w3id.org/pals-config
 
 
 
@@ -85,8 +87,8 @@ HasRFP ||--|o RFParamGroup : "RFP"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | pals:HasRFP |
-| native | pals:HasRFP |
+| self | pals_config:HasRFP |
+| native | pals_config:HasRFP |
 
 
 
@@ -102,14 +104,14 @@ HasRFP ||--|o RFParamGroup : "RFP"
 <details>
 ```yaml
 name: HasRFP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   RFP:
     name: RFP
     description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters)
       for interoperability with the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     domain_of:
     - HasRFP
@@ -124,14 +126,14 @@ attributes:
 <details>
 ```yaml
 name: HasRFP
-from_schema: https://w3id.org/accelerator-core
+from_schema: https://w3id.org/pals-config
 mixin: true
 attributes:
   RFP:
     name: RFP
     description: A mixin for RF parameters that are aligned with PALS RFP (RF Parameters)
       for interoperability with the Particle Accelerator Language Standard (PALS).
-    from_schema: https://w3id.org/accelerator-core
+    from_schema: https://w3id.org/pals-config
     rank: 1000
     alias: RFP
     owner: HasRFP
