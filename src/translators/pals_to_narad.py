@@ -17,7 +17,6 @@ so the generated models remain synchronized with the schema.
 from __future__ import annotations
 
 import argparse
-from datetime import date
 import warnings
 from collections import Counter
 from copy import deepcopy
@@ -556,15 +555,6 @@ def build_document(source_path: Path) -> dict[str, Any]:
     document = {
         "description": f"Control-system-neutral NARAD skeleton generated from {source_path.name}.",
         "kind": "PALSAccelerator",
-        "version": "0.1.0",
-        "created_date": date.today().isoformat(),
-        "change_log": [
-            {
-                "change_date": date.today().isoformat(),
-                "instance_version": "0.1.0",
-                "summary": "Initial PALS-to-NARAD translation.",
-            }
-        ],
         "notes": notes,
         "facility": {
             "components": components,
@@ -574,10 +564,9 @@ def build_document(source_path: Path) -> dict[str, Any]:
             "component_relations": relations,
         },
     }
-    validated = narad_model.PALSAccelerator.model_validate(document)
-    return order_document_components(
-        validated.model_dump(mode="json", exclude_none=True)
-    )
+    validated_facility = narad_model.Facility.model_validate(document["facility"])
+    document["facility"] = validated_facility.model_dump(mode="json", exclude_none=True)
+    return order_document_components(document)
 
 
 def parse_args() -> argparse.Namespace:

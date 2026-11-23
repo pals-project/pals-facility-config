@@ -133,7 +133,10 @@ def add_twiss_data(document: dict[str, Any], rows: list[TwissRow]) -> tuple[int,
             twiss_count += 1
 
     # Catch unsupported parameter groups or malformed values before overwriting a file.
-    narad_model.PALSAccelerator.model_validate(document)
+    if "created_date" in document and "change_log" in document:
+        narad_model.PALSAccelerator.model_validate(document)
+    else:
+        narad_model.Facility.model_validate(document["facility"])
     return s_count, twiss_count
 
 

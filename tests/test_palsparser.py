@@ -142,6 +142,10 @@ def test_translator_derives_multipass_and_reports_unsupported_elements(
     document = yaml.safe_load(output.read_text(encoding="utf-8"))
     facility = document["facility"]
 
+    assert "version" not in document
+    assert "created_date" not in document
+    assert "change_log" not in document
+
     assert facility["beamlines"][0]["multipass"] is True
     solenoid = next(
         component

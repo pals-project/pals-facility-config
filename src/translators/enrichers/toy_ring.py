@@ -16,6 +16,7 @@ from typing import Any
 import yaml
 
 from narad.datamodel import narad_pydantic as narad_model
+from translators.final_instance import initialize_final_instance
 from translators.palsparserpy_to_narad import component_functions
 from translators.yaml_order import order_document_components
 
@@ -94,6 +95,10 @@ EPICS_SIGNAL_DEFAULTS = {
 TOY_RING_DOCUMENT_ENRICHMENT = {
     "facility_identifiers": [{"identifier_type": "LOCAL", "identifier_value": "EIC_TOY_RING"}],
     "description": "Hypothetical EIC toy ring enriched with fictional EPICS controls.",
+    "initial_change_summary": (
+        "Initial toy-ring NARAD instance generated from PALS and enriched with "
+        "fictional EPICS signal metadata."
+    ),
     "notes": ["EPICS PV names are made up for this example; they do not describe operational EIC controls."],
 }
 
@@ -204,7 +209,9 @@ def generate_epics_signals(
     return list(signals_by_id.values()), bindings
 
 
-def enrich_document(skeleton: dict[str, Any]) -> dict[str, Any]:
+def enrich_document(
+    skeleton: dict[str, Any], existing_document: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Return a toy-ring-enriched copy of a signal-free NARAD skeleton."""
     document = deepcopy(skeleton)
     facility = document["facility"]
@@ -220,6 +227,11 @@ def enrich_document(skeleton: dict[str, Any]) -> dict[str, Any]:
     )
     document["description"] = TOY_RING_DOCUMENT_ENRICHMENT["description"]
     document.setdefault("notes", []).extend(TOY_RING_DOCUMENT_ENRICHMENT["notes"])
+    initialize_final_instance(
+        document,
+        summary=TOY_RING_DOCUMENT_ENRICHMENT["initial_change_summary"],
+        existing_document=existing_document,
+    )
     validated = narad_model.PALSAccelerator.model_validate(document)
     return order_document_components(
         validated.model_dump(mode="json", exclude_none=True)
@@ -254,7 +266,11 @@ def main() -> None:
     args = parse_args()
     with args.input.open(encoding="utf-8") as stream:
         skeleton = yaml.safe_load(stream)
-    document = enrich_document(skeleton)
+    existing_document = None
+    if args.output.exists():
+        with args.output.open(encoding="utf-8") as stream:
+            existing_document = yaml.safe_load(stream)
+    document = enrich_document(skeleton, existing_document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8") as stream:
         yaml.safe_dump(document, stream, sort_keys=False, allow_unicode=True, width=100)

@@ -74,9 +74,10 @@ def test_occurrences_share_pvs_and_unrelated_elements_are_ignored():
 def test_full_example_is_reproducible_and_preserves_skeleton():
     skeleton = yaml.safe_load(generator.DEFAULT_INPUT.read_text())
     original = deepcopy(skeleton)
-    enriched = generator.enrich_document(skeleton)
+    existing = yaml.safe_load(generator.DEFAULT_OUTPUT.read_text())
+    enriched = generator.enrich_document(skeleton, existing)
     assert skeleton == original
-    assert enriched == yaml.safe_load(generator.DEFAULT_OUTPUT.read_text())
+    assert enriched == existing
     facility = enriched["facility"]
     assert len(facility["signals"]) == len(facility["signal_bindings"]) == 2304
     component_ids = {c["id"] for c in facility["components"]}

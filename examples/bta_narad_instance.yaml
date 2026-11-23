@@ -1,12 +1,22 @@
 kind: PALSAccelerator
 description: NARAD representation of the BtA beamline enriched with ADO controls.
-version: 0.1.0
+affiliation:
+  id: brookhaven-national-laboratory
+  name: Brookhaven National Laboratory
+  identifiers:
+  - identifier_type: ROR
+    identifier_value: https://ror.org/02ex6cf31
+version: 0.0.1
 schema_version: 0.0.1
-created_date: '2026-11-19'
+created_date: '2026-10-09'
+updated_date: '2026-11-19'
 change_log:
+- change_date: '2026-10-09'
+  instance_version: 0.0.0
+  summary: Initial BtA NARAD instance generated from PALS and enriched with ADO device and signal metadata.
 - change_date: '2026-11-19'
-  instance_version: 0.1.0
-  summary: Initial PALS-to-NARAD translation.
+  instance_version: 0.0.1
+  summary: Updated the instance to reflect the latest NARAD schema.
 notes:
 - 'Translated from Bmad lattice file: bta.run_oct30.bmad'
 - Generated from a PALSParserPy-expanded lattice without control system enrichment.

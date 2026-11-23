@@ -83,6 +83,11 @@ remain directly under `examples/`.
 Reproducible skeletons are written to the ignored
 `.local/translation/skeletons/` workspace.
 
+Skeletons are intermediate facility payloads and intentionally do not carry
+instance versions, creation dates, or change logs. The facility enricher owns
+that lifecycle metadata and creates the tracked final instance at version
+`0.0.0` with a facility-specific initial change-log entry.
+
 ```console
 uv run python src/translators/palsparserpy_to_narad.py \
   -input examples/pals_inputs/bta.pals.yaml

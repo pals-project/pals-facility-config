@@ -16,6 +16,7 @@ from typing import Any, Callable
 import yaml
 
 from narad.datamodel import narad_pydantic as narad_model
+from translators.final_instance import initialize_final_instance
 from translators.palsparserpy_to_narad import component_functions
 from translators.yaml_order import order_document_components
 
@@ -260,10 +261,24 @@ ADO_SIGNAL_DEFAULTS = {
 }
 
 BOOSTER_DOCUMENT_ENRICHMENT = {
+    "affiliation": {
+        "id": "brookhaven-national-laboratory",
+        "name": "Brookhaven National Laboratory",
+        "identifiers": [
+            {
+                "identifier_type": "ROR",
+                "identifier_value": "https://ror.org/02ex6cf31",
+            }
+        ],
+    },
     "facility_identifiers": [
         {"identifier_type": "LOCAL", "identifier_value": "BOOSTER"},
     ],
     "description": "NARAD representation of the Booster beamline enriched with ADO controls.",
+    "initial_change_summary": (
+        "Initial Booster NARAD instance generated from PALS and enriched with "
+        "ADO device and signal metadata."
+    ),
     "notes": [
         "Enriched with Booster BPM, corrector, quadrupole, sextupole, and main-dipole ADO signal naming rules.",
     ],
@@ -416,7 +431,9 @@ def add_polarity_metadata(components: list[dict[str, Any]]) -> None:
             normalize_parameter_groups(component)
 
 
-def enrich_document(skeleton: dict[str, Any]) -> dict[str, Any]:
+def enrich_document(
+    skeleton: dict[str, Any], existing_document: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Return a Booster-enriched copy of a signal-free NARAD skeleton."""
     document = deepcopy(skeleton)
     facility = document["facility"]
@@ -432,7 +449,13 @@ def enrich_document(skeleton: dict[str, Any]) -> dict[str, Any]:
         deepcopy(BOOSTER_DOCUMENT_ENRICHMENT["facility_identifiers"])
     )
     document["description"] = BOOSTER_DOCUMENT_ENRICHMENT["description"]
+    document["affiliation"] = deepcopy(BOOSTER_DOCUMENT_ENRICHMENT["affiliation"])
     document.setdefault("notes", []).extend(BOOSTER_DOCUMENT_ENRICHMENT["notes"])
+    initialize_final_instance(
+        document,
+        summary=BOOSTER_DOCUMENT_ENRICHMENT["initial_change_summary"],
+        existing_document=existing_document,
+    )
     validated = narad_model.PALSAccelerator.model_validate(document)
     return order_document_components(
         validated.model_dump(mode="json", exclude_none=True)
@@ -467,7 +490,11 @@ def main() -> None:
     args = parse_args()
     with args.input.open(encoding="utf-8") as stream:
         skeleton = yaml.safe_load(stream)
-    document = enrich_document(skeleton)
+    existing_document = None
+    if args.output.exists():
+        with args.output.open(encoding="utf-8") as stream:
+            existing_document = yaml.safe_load(stream)
+    document = enrich_document(skeleton, existing_document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8") as stream:
         yaml.safe_dump(document, stream, sort_keys=False, allow_unicode=True, width=100)
