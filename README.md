@@ -74,8 +74,7 @@ uv run python -c "import palsparserpy; print(palsparserpy.__file__)"
 uv run pytest
 ```
 
-For example, generate a PALSParserPy-based NARAD skeleton and then the enriched
-BtA instance with:
+## PALS-to-NARAD Workflow
 
 Translator code and facility enrichment rules are kept in `src/translators/`.
 PALS inputs are tracked in `examples/pals_inputs/`, while final NARAD instances
@@ -93,6 +92,11 @@ instance versions, creation dates, or change logs. The facility enricher owns
 that lifecycle metadata and creates the tracked final instance at version
 `0.0.0` with a facility-specific initial change-log entry.
 
+### BtA example
+
+Generate the PALSParserPy-based NARAD skeleton, add the available Twiss data,
+and create the enriched BtA instance with:
+
 ```console
 uv run python src/translators/palsparserpy_to_narad.py \
   -input examples/pals_inputs/bta.pals.yaml
@@ -101,6 +105,8 @@ uv run python src/translators/update_twiss.py \
   --input .local/translation/skeletons/bta_narad_skeleton_palsparserpy.yaml
 uv run python src/translators/enrichers/bta.py
 ```
+
+### Toy ring example
 
 Generate the hypothetical EIC toy ring instance with fictional EPICS PVs using:
 
@@ -117,6 +123,8 @@ status, current setpoint, current readback, and minimum/maximum allowed setpoint
 signals (`Current-SP.DRVL` / `Current-SP.DRVH`, current in A); each BPM
 gets X and Y position readbacks in mm. Use `--input` and `--output` to override
 the default paths.
+
+### Twiss-table importer
 
 `src/translators/update_twiss.py` also works with Booster and other NARAD YAML files:
 
