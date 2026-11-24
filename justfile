@@ -79,9 +79,7 @@ clean: _clean_project
 site: gen-project gen-doc
 
 # Deploy documentation site to Github Pages
-[group('deployment')]
-deploy: site
-  mkd-gh-deploy
+# DEPRECATED - CI/CD Github Pages generates the site automatically, so this deploy is no longer needed.
 
 # Run all tests
 [group('model development')]
