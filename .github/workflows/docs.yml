@@ -1,0 +1,107 @@
+# Builds the schema documentation with `just gen-doc` + MkDocs (Material theme).
+#   - Pull requests into main: generate and build the docs to check they work. Nothing is
+#     committed back to the repo; the built site is attached to the run as an artifact.
+#   - Push to main (i.e. when a PR is merged): build again and publish to GitHub Pages at
+#     https://pals-project.github.io/pals-facility-config/
+# docs/elements/ is generated in CI only and is git-ignored.
+name: docs
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up uv (cached on uv.lock)
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.11"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Set up just
+        uses: extractions/setup-just@v3
+
+      - name: Install dependencies
+        run: uv sync --group dev
+
+      - name: Generate schema docs
+        run: just gen-doc
+
+      - name: Check generated docs
+        run: |
+          set -eu
+          # gen-doc exits 0 even when it produces nothing useful, so assert the outputs.
+          test -f docs/elements/index.md || { echo "::error::docs/elements/index.md missing"; exit 1; }
+          test -s docs/schema/narad.yaml || { echo "::error::docs/schema/narad.yaml missing or empty"; exit 1; }
+          for d in classes slots enums types schemas; do
+            n=$(find "docs/elements/$d" -name '*.md' 2>/dev/null | wc -l)
+            if [ "$n" -eq 0 ]; then
+              echo "::error::no pages generated in docs/elements/$d"
+              exit 1
+            fi
+            printf '  %-9s %s pages\n' "$d" "$n"
+          done
+
+      - name: Check for case-insensitive filename collisions (linkml#632)
+        run: |
+          set -eu
+          # Two elements of the same type differing only in case overwrite each other on
+          # macOS/Windows. Linux writes both, so catch the pair here.
+          DUPES=$(find docs/elements -type f | tr '[:upper:]' '[:lower:]' | sort | uniq -d)
+          if [ -n "$DUPES" ]; then
+            echo "::error::generated doc paths collide case-insensitively; rename the schema elements (linkml/linkml#632)"
+            echo "$DUPES"
+            exit 1
+          fi
+
+      - name: Build site
+        run: uv run mkdocs build --strict --site-dir public
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+
+      - name: Upload PR preview artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-preview-pr-${{ github.event.number }}
+          path: public
+          retention-days: 14
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - run: echo "Published to ${{ steps.deployment.outputs.page_url }}"

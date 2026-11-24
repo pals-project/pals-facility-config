@@ -72,16 +72,11 @@ update: _update-template _update-linkml
 [group('project management')]
 clean: _clean_project
   rm -rf tmp
-  rm -rf {{docdir}}/*.md
+  rm -rf {{docdir}} {{distrib_schema_path}}
 
 # (Re-)Generate project and documentation locally
 [group('model development')]
 site: gen-project gen-doc
-
-# Deploy documentation site to Github Pages
-[group('deployment')]
-deploy: site
-  mkd-gh-deploy
 
 # Run all tests
 [group('model development')]
@@ -274,12 +269,14 @@ _clean_project:
     #!{{shebang}}
     import shutil, pathlib
     # remove the generated project files
-    for d in pathlib.Path("{{dest}}").iterdir():
+    dest = pathlib.Path("{{dest}}")
+    for d in (dest.iterdir() if dest.is_dir() else []):
         if d.is_dir():
             print(f'removing "{d}"')
             shutil.rmtree(d, ignore_errors=True)
     # remove the generated python data model
-    for d in pathlib.Path("{{pymodel}}").iterdir():
+    pymodel = pathlib.Path("{{pymodel}}")
+    for d in (pymodel.iterdir() if pymodel.is_dir() else []):
         if d.name == "__init__.py":
             continue
         print(f'removing "{d}"')
