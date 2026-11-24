@@ -72,14 +72,11 @@ update: _update-template _update-linkml
 [group('project management')]
 clean: _clean_project
   rm -rf tmp
-  rm -rf {{docdir}} docs/schema
+  rm -rf {{docdir}} {{distrib_schema_path}}
 
 # (Re-)Generate project and documentation locally
 [group('model development')]
 site: gen-project gen-doc
-
-# Deploy documentation site to Github Pages
-# DEPRECATED - CI/CD Github Pages generates the site automatically, so this deploy is no longer needed.
 
 # Run all tests
 [group('model development')]
