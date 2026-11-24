@@ -1,22 +1,23 @@
 ---
-site_name: "linkml-tutorial-2025"
+site_name: "PALS Facility Configuration"
 theme:
   # https://www.mkdocs.org/user-guide/configuration/#theme
   name: material
-  icon:
-    logo: material/book-open-page-variant
+  logo: assets/pals-logo-dark.webp
   # palette:
   #  scheme: slate
   #  primary: cyan
   features:
     - content.tabs.link
-    - header.autohide      # maximum screen space during scrolling
-    - navigation.expand    # optimize user experience
-    - navigation.instant   # optimize user experience
-    - navigation.instant.progress
-    - navigation.tracking  # update address bar
-    - search.suggest       # suggest good completions
-    - content.code.copy    # enable copy to clipboard
+    - content.code.copy
+    - navigation.top
+    - navigation.prune
+    - navigation.indexes
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+  font:
+    text: Figtree
 
 # extra css/js see https://www.mkdocs.org/user-guide/customizing-your-theme/
 extra_css: []
@@ -28,17 +29,36 @@ plugins:
       execute: false
   - mermaid2:
       version: 11.4.1
+      # Palette for the generated class diagrams. Mermaid bakes these into the
+      # SVG at render time, so they cannot follow Material's light/dark toggle — the
+      # values below are chosen to read on either background: a light Sky Blue card with
+      # Cadet Blue text, the same way Mermaid's stock lavender works in both schemes.
+      arguments:
+        theme: base
+        themeVariables:
+          # No double quotes here: the plugin injects this value into a JS object
+          # literal verbatim, so an embedded quote produces a syntax error and
+          # silently kills every diagram on the page.
+          fontFamily: 'Figtree, sans-serif'
+          primaryColor: '#e7f6f8'        # Sky Blue — node fill
+          primaryTextColor: '#1a204c'    # Cadet Blue — node text
+          primaryBorderColor: '#085a9b'  # Energy Blue — node border
+          lineColor: '#085a9b'           # Energy Blue — relationship lines
+          secondaryColor: '#ffbe2e'      # Energy Yellow — accent
+          tertiaryColor: '#ffffff'
   - mkdocs_pymdownx_material_extras:
     # https://pypi.org/project/mkdocs-pymdownx-material-extras
 
 markdown_extensions:
+  - pymdownx.highlight
   - pymdownx.superfences:
       # https://mkdocs-mermaid2.readthedocs.io/en/latest/superfences
       # custom code highlighting rules
       custom_fences:
         - name: mermaid
           # disable code highlighting to display diagrams
-          format: !!python/name:pymdownx.superfences.fence_code_format
+          #format: !!python/name:pymdownx.superfences.fence_code_format
+          format: !!python/name:mermaid2.fence_mermaid_custom
           class: mermaid
 
   # TODO rebuild docs on schema change (https://github.com/dalito/linkml-project-copier/issues/39)
@@ -47,18 +67,18 @@ markdown_extensions:
   #       - gen_pages.py  # or any other name or path
 
 watch:
-  - src/dmlinkml/schema
+  - src/narad/schema/
 
-nav:
-  - Home: index.md
-  - Schema: elements/index.md
-  - About: about.md
+#nav:
+#  - Home: index.md
+#  - Schema: elements/index.md
+#  - About: about.md
 
 exclude_docs: |
   /templates-linkml/
 
-site_url: https://github.com/MOAT-AI/NARAD-DataServices
-repo_url: https://github.com/MOAT-AI/NARAD-DataServices
+site_url: https://pals-project.github.io/pals-facility-config/
+repo_url: https://github.com/pals-project/pals-facility-config
 
 # Uncomment this block to enable use of Google Analytics.
 # Replace the property value with your own ID.
