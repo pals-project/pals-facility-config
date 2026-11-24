@@ -1,6 +1,6 @@
 PALS:
   notes:
-    - "Translated from Bmad lattice file: /Users/weijianlin/Documents/Booster/julia/booster_PP1000_current_controls_flat.bmad"
+    - "Translated from Bmad lattice file: booster_PP1000_current_controls_flat.bmad"
 
   extension_labels:
     names:
