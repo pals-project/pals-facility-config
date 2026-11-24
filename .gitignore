@@ -13,6 +13,7 @@ build/
 /project/
 /src/narad/datamodel/
 /docs/schema/
+/docs/elements/
 
 # Intermediate files written by src/run_pipeline.py and the gen-* just recipes
 *.resolved.yaml
