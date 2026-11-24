@@ -29,7 +29,7 @@ plugins:
       execute: false
   - mermaid2:
       version: 11.4.1
-      # Palette for the generated class diagrams. Mermaid bakes these into the
+      # Palette for the generated ER diagrams. Mermaid bakes these into the
       # SVG at render time, so they cannot follow Material's light/dark toggle — the
       # values below are chosen to read on either background: a light Sky Blue card with
       # Cadet Blue text, the same way Mermaid's stock lavender works in both schemes.
