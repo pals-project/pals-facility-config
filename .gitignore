@@ -12,8 +12,6 @@ build/
 # Generated from the LinkML schema; regenerate with `just gen-project` / `just gen-python` / `just gen-doc`
 /project/
 /src/narad/datamodel/
-/docs/schema/
-/docs/elements/
 
 # Intermediate files written by src/run_pipeline.py and the gen-* just recipes
 *.resolved.yaml
@@ -59,10 +57,7 @@ htmlcov/
 # These pages are produced by `just gen-doc` and rebuilt by CI on Linux; they are not
 # tracked. See linkml/linkml#632: on case-insensitive filesystems (macOS) a locally
 # generated tree can differ from the Linux one, so checking it in produces spurious diffs.
-# Note the pattern covers subdirectories (classes/, slots/, ...), which a `*.md` glob
-# would miss now that --subfolder-type-separation is enabled.
-/docs/elements/**
-!/docs/elements/.gitkeep
+/docs/elements/
 
 # The merged (imports-resolved) schema, written by `just gen-doc` via gen-yaml.
 # Not tracked: gen-yaml stamps a `generation_date` into it, so the file differs on
