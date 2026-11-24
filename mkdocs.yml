@@ -61,14 +61,6 @@ markdown_extensions:
           format: !!python/name:mermaid2.fence_mermaid_custom
           class: mermaid
 
-  # TODO rebuild docs on schema change (https://github.com/dalito/linkml-project-copier/issues/39)
-  # - gen-files:
-  #     scripts:
-  #       - gen_pages.py  # or any other name or path
-
-watch:
-  - src/narad/schema/
-
 #nav:
 #  - Home: index.md
 #  - Schema: elements/index.md
