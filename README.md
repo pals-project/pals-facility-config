@@ -82,6 +82,17 @@ remain directly under `examples/`.
 Reproducible skeletons are written to the ignored
 `.local/translation/skeletons/` workspace.
 
+The generated Python data model is also not tracked. Before running the
+translators, generate it locally from `src/narad/schema/narad.yaml` with:
+
+```console
+just gen-python
+```
+
+This creates `src/narad/datamodel/narad_pydantic.py`, which the translators use
+for NARAD model construction and validation. The generated `datamodel/`
+directory is ignored and should be regenerated whenever the schema changes.
+
 [![PALS-to-NARAD workflow: translate a PALS lattice into a NARAD skeleton, optionally add Twiss data, and enrich it into a final NARAD instance](pals_narad_workflow.png)](pals_narad_workflow.png)
 
 *PALS-to-NARAD translation and validation workflow. Click the diagram to view
